@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI khả năng mà Application Load Balancer (ALB) có nhưng Network Load Balancer (NLB) thì không.",
+      "promptEn": "Pick TWO things an Application Load Balancer (ALB) can do that a Network Load Balancer (NLB) cannot.",
+      "options": [
+        "Định tuyến theo đường dẫn URL hoặc hostname",
+        "Định tuyến theo HTTP header và query string",
+        "Cân bằng tải cho traffic UDP",
+        "Xử lý hàng triệu request mỗi giây với độ trễ cực thấp",
+        "Cung cấp một IP tĩnh cho mỗi AZ"
+      ],
+      "optionsEn": [
+        "Route on URL path or hostname",
+        "Route on HTTP headers and query strings",
+        "Load balance UDP traffic",
+        "Handle millions of requests per second at ultra-low latency",
+        "Provide a static IP per Availability Zone"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "ALB làm việc ở tầng 7 nên đọc được nội dung HTTP — path, host, header, query. NLB ở tầng 4: nhanh hơn, có IP tĩnh, hỗ trợ TCP/UDP, nhưng mù hoàn toàn với nội dung HTTP.",
+      "explanationEn": "ALB works at layer 7, so it can read the HTTP request — path, host, headers, query. NLB is layer 4: faster, static IPs, TCP/UDP, and completely blind to HTTP.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thành phần bắt buộc phải cấu hình để Auto Scaling Group thay thế được một instance hỏng.",
+      "promptEn": "Pick TWO things that must be configured for an Auto Scaling Group to replace an unhealthy instance.",
+      "options": [
+        "Một Reserved Instance cho mỗi instance trong nhóm",
+        "Health check (EC2 hoặc ELB) để ASG biết instance hỏng",
+        "Stickiness bật trên target group",
+        "Một scaling policy dựa trên CloudWatch metric",
+        "Một Launch Template mô tả instance cần tạo"
+      ],
+      "optionsEn": [
+        "A Reserved Instance for every instance in the group",
+        "A health check (EC2 or ELB) so the ASG knows the instance is unhealthy",
+        "Stickiness enabled on the target group",
+        "A CloudWatch-metric scaling policy",
+        "A Launch Template describing the instance to create"
+      ],
+      "answers": [
+        1,
+        4
+      ],
+      "explanation": "Thay thế instance hỏng là hành vi mặc định của ASG và chỉ cần hai thứ: biết phải tạo cái gì (Launch Template) và biết khi nào cần tạo (health check). Scaling policy là để thay đổi SỐ LƯỢNG, không liên quan tới việc thay thế.",
+      "explanationEn": "Replacing an unhealthy instance is default ASG behaviour and needs only two things: knowing what to build (the Launch Template) and knowing when (the health check). A scaling policy changes the *count*, which is a different job.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Loại load balancer nào cung cấp IP tĩnh cho mỗi AZ và hỗ trợ cả TCP lẫn UDP?",
+      "promptEn": "Which load balancer type gives you a static IP per Availability Zone and supports both TCP and UDP?",
+      "answer": "Network Load Balancer",
+      "answerEn": "Network Load Balancer",
+      "accept": [
+        "network load balancer",
+        "nlb",
+        "network load balancer nlb",
+        "aws nlb"
+      ],
+      "explanation": "Network Load Balancer. Nhu cầu 'IP tĩnh' hoặc 'gán Elastic IP cho load balancer' trong đề thi gần như luôn dẫn tới NLB.",
+      "explanationEn": "The Network Load Balancer. Any exam requirement for a static IP or an Elastic IP on the load balancer points here.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng nào của ELB đảm bảo một người dùng luôn được gửi tới cùng một backend trong suốt phiên làm việc?",
+      "promptEn": "Which ELB feature keeps sending one user to the same backend instance for the whole session?",
+      "answer": "Stickiness",
+      "answerEn": "Stickiness",
+      "accept": [
+        "stickiness",
+        "sticky sessions",
+        "session affinity",
+        "sticky session"
+      ],
+      "explanation": "Stickiness (session affinity), cài đặt ở cấp target group bằng cookie. Đánh đổi: tải phân bổ kém đều hơn, nên chỉ dùng khi ứng dụng còn giữ state trên server.",
+      "explanationEn": "Stickiness, also called session affinity — a target-group setting driven by a cookie. The trade-off is a less even spread of load, so use it only while the app still keeps state on the server.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi loại load balancer với dấu hiệu nhận biết trong đề thi.",
+      "promptEn": "Match each load balancer to the phrase that gives it away in an exam question.",
+      "pairs": [
+        {
+          "left": "Application Load Balancer",
+          "leftEn": "Application Load Balancer",
+          "right": "HTTP/HTTPS, định tuyến theo path hoặc host, microservice và container",
+          "rightEn": "HTTP/HTTPS, routing on path or host, microservices and containers"
+        },
+        {
+          "left": "Network Load Balancer",
+          "leftEn": "Network Load Balancer",
+          "right": "TCP/UDP, IP tĩnh, hàng triệu request mỗi giây, độ trễ cực thấp",
+          "rightEn": "TCP/UDP, static IP, millions of requests per second, ultra-low latency"
+        },
+        {
+          "left": "Gateway Load Balancer",
+          "leftEn": "Gateway Load Balancer",
+          "right": "Đưa traffic qua thiết bị bảo mật của bên thứ ba (firewall, IDS/IPS)",
+          "rightEn": "Sends traffic through third-party security appliances (firewall, IDS/IPS)"
+        },
+        {
+          "left": "Classic Load Balancer",
+          "leftEn": "Classic Load Balancer",
+          "right": "Thế hệ cũ, đã bị khai tử — không chọn cho thiết kế mới",
+          "rightEn": "The old generation, now retired — never the answer for a new design"
+        }
+      ],
+      "explanation": "Đề SAA-C03 chọn load balancer bằng giao thức trước, rồi mới tới tính năng. Thấy 'UDP' hay 'IP tĩnh' là NLB; thấy 'path-based routing' là ALB.",
+      "explanationEn": "SAA-C03 picks a load balancer by protocol first and features second. 'UDP' or 'static IP' means NLB; 'path-based routing' means ALB.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự những gì xảy ra khi ASG mở rộng quy mô do CPU tăng cao.",
+      "promptEn": "Put what happens when an ASG scales out on high CPU into the right order.",
+      "items": [
+        {
+          "text": "CloudWatch alarm kích hoạt khi CPU trung bình vượt ngưỡng",
+          "textEn": "A CloudWatch alarm fires when average CPU crosses the threshold"
+        },
+        {
+          "text": "ASG khởi chạy instance mới từ Launch Template",
+          "textEn": "The ASG launches a new instance from the Launch Template"
+        },
+        {
+          "text": "Instance mới được đăng ký vào target group của load balancer",
+          "textEn": "The new instance is registered with the load balancer's target group"
+        },
+        {
+          "text": "Load balancer bắt đầu gửi traffic sau khi health check đạt",
+          "textEn": "The load balancer starts sending traffic once the health check passes"
+        }
+      ],
+      "explanation": "Bước cuối cùng lý giải vì sao cần warm-up: instance vừa lên chưa nhận traffic cho tới khi health check đạt, nên mở rộng quy mô không bao giờ là tức thì.",
+      "explanationEn": "That last step is why warm-up matters: a freshly launched instance takes no traffic until its health check passes, so scaling out is never instant.",
+      "id": "d6"
+    }
+  ]
+}

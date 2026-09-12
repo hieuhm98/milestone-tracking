@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điểm khác biệt ĐÚNG giữa Secrets Manager và SSM Parameter Store.",
+      "promptEn": "Pick TWO genuine differences between Secrets Manager and SSM Parameter Store.",
+      "options": [
+        "Secrets Manager có tính phí cho mỗi secret, Parameter Store bậc standard miễn phí",
+        "Parameter Store không mã hoá được giá trị",
+        "Parameter Store chỉ lưu được số, không lưu được chuỗi",
+        "Secrets Manager không tích hợp với RDS",
+        "Secrets Manager tự xoay vòng (rotate) secret bằng Lambda"
+      ],
+      "optionsEn": [
+        "Secrets Manager charges per secret; Parameter Store standard tier is free",
+        "Parameter Store cannot encrypt values",
+        "Parameter Store can only store numbers, not strings",
+        "Secrets Manager does not integrate with RDS",
+        "Secrets Manager rotates secrets automatically using Lambda"
+      ],
+      "answers": [
+        0,
+        4
+      ],
+      "explanation": "Xoay vòng tự động là lý do duy nhất thực sự đáng để trả tiền cho Secrets Manager. Parameter Store mã hoá được bằng KMS (SecureString) và lưu chuỗi bình thường — nó chỉ không tự xoay vòng.",
+      "explanationEn": "Automatic rotation is the one reason genuinely worth paying Secrets Manager for. Parameter Store encrypts with KMS (SecureString) and stores strings perfectly well — it just does not rotate them.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI dịch vụ bảo vệ ứng dụng khỏi tấn công ở tầng 7 (HTTP).",
+      "promptEn": "Pick TWO services that defend an application at layer 7 (HTTP).",
+      "options": [
+        "AWS WAF",
+        "AWS Shield Advanced",
+        "Amazon Inspector",
+        "Amazon Macie",
+        "Amazon GuardDuty"
+      ],
+      "optionsEn": [
+        "AWS WAF",
+        "AWS Shield Advanced",
+        "Amazon Inspector",
+        "Amazon Macie",
+        "Amazon GuardDuty"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "WAF lọc request HTTP theo rule (SQL injection, XSS, giới hạn tốc độ); Shield Advanced chống DDoS và bao gồm cả WAF. GuardDuty là phát hiện mối đe doạ, Inspector quét lỗ hổng, Macie tìm dữ liệu nhạy cảm — cả ba đều PHÁT HIỆN chứ không CHẶN.",
+      "explanationEn": "WAF filters HTTP requests by rule (SQL injection, XSS, rate limits); Shield Advanced covers DDoS and includes WAF. GuardDuty is threat detection, Inspector is vulnerability scanning, Macie finds sensitive data — all three *detect* rather than *block*.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào của AWS tự động tìm và phân loại dữ liệu nhạy cảm như số thẻ tín dụng trong S3?",
+      "promptEn": "Which AWS service automatically discovers and classifies sensitive data such as credit card numbers in S3?",
+      "answer": "Amazon Macie",
+      "answerEn": "Amazon Macie",
+      "accept": [
+        "macie",
+        "amazon macie",
+        "aws macie"
+      ],
+      "explanation": "Amazon Macie. Dấu hiệu trong đề: 'tìm PII trong S3', 'phát hiện dữ liệu nhạy cảm bị lưu nhầm chỗ'.",
+      "explanationEn": "Amazon Macie. The tells: 'find PII in S3', 'detect sensitive data stored where it should not be'.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào phân tích VPC Flow Logs, CloudTrail và DNS log bằng machine learning để phát hiện hành vi bất thường?",
+      "promptEn": "Which service analyses VPC Flow Logs, CloudTrail and DNS logs with machine learning to spot malicious behaviour?",
+      "answer": "Amazon GuardDuty",
+      "answerEn": "Amazon GuardDuty",
+      "accept": [
+        "guardduty",
+        "amazon guardduty",
+        "aws guardduty",
+        "guard duty"
+      ],
+      "explanation": "Amazon GuardDuty. Bật bằng một cú nhấp, không cần cài agent — đó là điểm phân biệt với Inspector (quét lỗ hổng, cần agent SSM).",
+      "explanationEn": "Amazon GuardDuty. One click to enable and no agent to install — which is what separates it from Inspector, whose vulnerability scanning needs the SSM agent.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ bảo mật với việc nó làm.",
+      "promptEn": "Match each security service to what it does.",
+      "pairs": [
+        {
+          "left": "AWS KMS",
+          "leftEn": "AWS KMS",
+          "right": "Tạo, lưu và kiểm soát khoá mã hoá cho gần như mọi dịch vụ AWS",
+          "rightEn": "Creates, stores and controls encryption keys for nearly every AWS service"
+        },
+        {
+          "left": "AWS WAF",
+          "leftEn": "AWS WAF",
+          "right": "Lọc request HTTP độc hại — SQL injection, XSS, giới hạn tốc độ",
+          "rightEn": "Filters malicious HTTP requests — SQL injection, XSS, rate limiting"
+        },
+        {
+          "left": "Amazon GuardDuty",
+          "leftEn": "Amazon GuardDuty",
+          "right": "Phát hiện mối đe doạ bằng ML trên log, không cần agent",
+          "rightEn": "Detects threats with ML over logs, with no agent to install"
+        },
+        {
+          "left": "Amazon Inspector",
+          "leftEn": "Amazon Inspector",
+          "right": "Quét EC2, container image và Lambda tìm lỗ hổng CVE đã biết",
+          "rightEn": "Scans EC2, container images and Lambda for known CVEs"
+        }
+      ],
+      "explanation": "Phân biệt quan trọng nhất trong nhóm này: WAF CHẶN tấn công đang diễn ra; GuardDuty và Inspector chỉ BÁO CÁO. Đề thi hỏi 'ngăn chặn' thì đáp án là WAF hoặc Shield.",
+      "explanationEn": "The distinction that matters most here: WAF *blocks* an attack in progress; GuardDuty and Inspector only *report*. When a question says 'prevent', the answer is WAF or Shield.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các lớp phòng thủ mà một request độc hại phải vượt qua, ngoài cùng trước.",
+      "promptEn": "Order the defensive layers a malicious request meets, outermost first.",
+      "items": [
+        {
+          "text": "AWS Shield — hấp thụ tấn công DDoS ở tầng mạng tại edge",
+          "textEn": "AWS Shield — absorbs network-layer DDoS at the edge"
+        },
+        {
+          "text": "AWS WAF — lọc request HTTP độc hại theo rule",
+          "textEn": "AWS WAF — filters malicious HTTP requests by rule"
+        },
+        {
+          "text": "Network ACL — cho phép hoặc từ chối ở cấp subnet",
+          "textEn": "The Network ACL — allows or denies at subnet level"
+        },
+        {
+          "text": "Security Group — cho phép ở cấp instance",
+          "textEn": "The Security Group — allows at instance level"
+        }
+      ],
+      "explanation": "Đây là phòng thủ theo chiều sâu: mỗi lớp lọc bớt một phần, và lớp càng ngoài thì càng rẻ để chặn. Chặn DDoS ở edge rẻ hơn nhiều so với để nó tới tận instance.",
+      "explanationEn": "This is defence in depth: each layer removes some of the traffic, and the further out you block, the cheaper it is. Stopping a DDoS at the edge costs far less than letting it reach the instance.",
+      "id": "d6"
+    }
+  ]
+}

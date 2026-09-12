@@ -13,6 +13,8 @@
 //     languages and carry exactly one non-empty reason per option
 //   - lessons.json (optional) covers every article section exactly once, in
 //     order, and only references question ids that exist
+//   - drills.json (optional) holds well-formed typed drills whose ids do not
+//     collide with any question id in the same topic
 //
 // Exits non-zero if anything fails, so it can gate a commit or a build.
 
@@ -22,6 +24,14 @@ import path from "node:path";
 const CONTENT_DIR = path.join(process.cwd(), "knowledge-content");
 const KNOWN_GROUPS = new Set(["it-fundamentals", "ba", "po", "pm", "req", "dev"]);
 const prefix = process.argv[2] ?? "";
+const DRILL_TYPES = new Set(["multi", "recall", "match", "order"]);
+
+/** Mirrors `normalizeAnswer` in lib/drills.ts — keep the two in step. */
+const normalizeAnswer = (raw) =>
+  String(raw)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 
 const problems = [];
 const fail = (slug, msg) => problems.push(`${slug}: ${msg}`);
@@ -42,6 +52,8 @@ const slugs = readdirSync(CONTENT_DIR, { withFileTypes: true })
 let topicsWithLessons = 0;
 let totalQuestions = 0;
 let totalLessons = 0;
+let topicsWithDrills = 0;
+let totalDrills = 0;
 
 for (const slug of slugs) {
   const dir = path.join(CONTENT_DIR, slug);
@@ -148,6 +160,160 @@ for (const slug of slugs) {
 
   totalQuestions += questions.length;
 
+  // ---------------------------------------------------------------- drills.json
+  //
+  // Optional, and deliberately separate from questions.json: the exam, the
+  // mini-lesson player and the Daily Quick Test all assume one stem / one key /
+  // one index, and lessons.json must account for every question in the bank.
+  // Drills are neither, so they live alongside rather than inside.
+  if (existsSync(at("drills.json"))) {
+    let drills = [];
+
+    try {
+      ({ drills } = readJson(at("drills.json")));
+    } catch (err) {
+      fail(slug, `drills.json unreadable (${err.message})`);
+      drills = [];
+    }
+
+    if (!Array.isArray(drills)) {
+      fail(slug, "drills.json has no drills array");
+      drills = [];
+    }
+
+    const drillIds = new Set();
+
+    drills.forEach((d, i) => {
+      const where = `drills[${i}]${d?.id ? ` (${d.id})` : ""}`;
+      const nonEmpty = (v) => typeof v === "string" && v.trim() !== "";
+
+      if (!d?.id) {
+        fail(slug, `${where} has no id`);
+      } else if (drillIds.has(d.id)) {
+        fail(slug, `${where} duplicate id`);
+      } else if (questionIds.has(d.id)) {
+        // Recall stats are keyed `${slug}#${id}` across both banks, so a drill
+        // that reuses a question's id would silently share its history.
+        fail(slug, `${where} id collides with a question id in questions.json`);
+      } else {
+        drillIds.add(d.id);
+      }
+
+      for (const field of ["prompt", "promptEn", "explanation", "explanationEn"]) {
+        if (!nonEmpty(d?.[field])) fail(slug, `${where} missing "${field}"`);
+      }
+
+      if (!DRILL_TYPES.has(d?.type)) {
+        fail(slug, `${where} unknown type "${d?.type}" (expected ${[...DRILL_TYPES].join(", ")})`);
+
+        return;
+      }
+
+      if (d.type === "multi") {
+        if (!Array.isArray(d.options) || !Array.isArray(d.optionsEn)) {
+          fail(slug, `${where} options/optionsEn must both be arrays`);
+
+          return;
+        }
+
+        if (d.options.length !== d.optionsEn.length) {
+          fail(slug, `${where} options (${d.options.length}) and optionsEn (${d.optionsEn.length}) differ in length`);
+        }
+
+        if (d.options.length < 4) fail(slug, `${where} needs at least 4 options`);
+
+        if (d.options.some((o) => !nonEmpty(o)) || d.optionsEn.some((o) => !nonEmpty(o))) {
+          fail(slug, `${where} has an empty option`);
+        }
+
+        if (!Array.isArray(d.answers) || d.answers.length < 2) {
+          fail(slug, `${where} needs at least 2 answers — otherwise it is a plain question`);
+
+          return;
+        }
+
+        if (new Set(d.answers).size !== d.answers.length) fail(slug, `${where} answers contains a duplicate index`);
+
+        d.answers.forEach((n) => {
+          if (!Number.isInteger(n) || n < 0 || n >= d.options.length) {
+            fail(slug, `${where} answer ${n} is out of range 0..${d.options.length - 1}`);
+          }
+        });
+
+        // "Pick 4 of 4" is not a question. There must be a wrong answer to avoid.
+        if (d.answers.length >= d.options.length) {
+          fail(slug, `${where} marks every option correct — there is nothing to get wrong`);
+        }
+      }
+
+      if (d.type === "recall") {
+        for (const field of ["answer", "answerEn"]) {
+          if (!nonEmpty(d?.[field])) fail(slug, `${where} missing "${field}"`);
+        }
+
+        if (!Array.isArray(d.accept) || d.accept.length === 0 || d.accept.some((a) => !nonEmpty(a))) {
+          fail(slug, `${where} needs a non-empty "accept" array`);
+
+          return;
+        }
+
+        // The answer shown after grading must itself be accepted, or the drill
+        // marks the learner wrong for typing exactly what it then shows them.
+        const accepted = new Set(d.accept.map(normalizeAnswer));
+
+        for (const field of ["answer", "answerEn"]) {
+          if (nonEmpty(d[field]) && !accepted.has(normalizeAnswer(d[field]))) {
+            fail(slug, `${where} "${field}" (${d[field]}) is not in "accept"`);
+          }
+        }
+      }
+
+      if (d.type === "match") {
+        if (!Array.isArray(d.pairs) || d.pairs.length < 3) {
+          fail(slug, `${where} needs at least 3 pairs`);
+
+          return;
+        }
+
+        if (d.pairs.length > 5) fail(slug, `${where} has ${d.pairs.length} pairs — more than 5 is unplayable on a phone`);
+
+        d.pairs.forEach((pair, pi) => {
+          for (const field of ["left", "leftEn", "right", "rightEn"]) {
+            if (!nonEmpty(pair?.[field])) fail(slug, `${where} pairs[${pi}] missing "${field}"`);
+          }
+        });
+
+        for (const side of ["left", "right"]) {
+          const values = d.pairs.map((pair) => pair?.[side]);
+
+          if (new Set(values).size !== values.length) {
+            fail(slug, `${where} has two identical "${side}" values — the pairing would be ambiguous`);
+          }
+        }
+      }
+
+      if (d.type === "order") {
+        if (!Array.isArray(d.items) || d.items.length < 3) {
+          fail(slug, `${where} needs at least 3 items`);
+
+          return;
+        }
+
+        if (d.items.length > 6) fail(slug, `${where} has ${d.items.length} items — more than 6 is unplayable on a clock`);
+
+        d.items.forEach((item, ii) => {
+          for (const field of ["text", "textEn"]) {
+            if (!nonEmpty(item?.[field])) fail(slug, `${where} items[${ii}] missing "${field}"`);
+          }
+        });
+      }
+    });
+
+    totalDrills += drills.length;
+
+    if (drills.length > 0) topicsWithDrills += 1;
+  }
+
   // -------------------------------------------------------------- lessons.json
   if (!existsSync(at("lessons.json"))) continue;
 
@@ -231,7 +397,8 @@ for (const slug of slugs) {
 
 console.log(
   `Checked ${slugs.length} topic(s): ${totalQuestions} questions, ` +
-    `${topicsWithLessons} with lessons (${totalLessons} mini-lessons).`
+    `${topicsWithLessons} with lessons (${totalLessons} mini-lessons), ` +
+    `${topicsWithDrills} with drills (${totalDrills} drills).`
 );
 
 if (problems.length > 0) {

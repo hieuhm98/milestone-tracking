@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI dấu hiệu trong đề thi cho thấy đáp án là Amazon Redshift.",
+      "promptEn": "Pick TWO phrases in a question that point to Amazon Redshift.",
+      "options": [
+        "Truy vấn quan hệ đồ thị giữa các thực thể",
+        "Lưu session của người dùng web",
+        "Truy vấn SQL phức tạp phục vụ business intelligence",
+        "Độ trễ dưới 10 ms cho hàng triệu người dùng đồng thời",
+        "Phân tích OLAP trên hàng petabyte dữ liệu lịch sử"
+      ],
+      "optionsEn": [
+        "Querying graph relationships between entities",
+        "Storing web user sessions",
+        "Complex SQL queries powering business intelligence",
+        "Single-digit millisecond latency for millions of concurrent users",
+        "OLAP analytics across petabytes of historical data"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "Redshift là data warehouse: OLAP, cột, petabyte, BI. Độ trễ mili-giây ở quy mô lớn là DynamoDB; session là ElastiCache; đồ thị là Neptune.",
+      "explanationEn": "Redshift is the data warehouse: OLAP, columnar, petabyte-scale, BI. Millisecond latency at scale is DynamoDB; sessions are ElastiCache; graphs are Neptune.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điểm khác biệt giữa MemoryDB for Redis và ElastiCache for Redis.",
+      "promptEn": "Pick TWO differences between MemoryDB for Redis and ElastiCache for Redis.",
+      "options": [
+        "MemoryDB ghi transaction log đa AZ nên không mất dữ liệu khi failover",
+        "ElastiCache hỗ trợ nhiều engine hơn MemoryDB",
+        "MemoryDB rẻ hơn ElastiCache",
+        "MemoryDB bền dữ liệu, dùng được làm database chính",
+        "MemoryDB chỉ chạy trong bộ nhớ, không có replica"
+      ],
+      "optionsEn": [
+        "MemoryDB writes a multi-AZ transaction log, so failover loses no data",
+        "ElastiCache supports more engines than MemoryDB",
+        "MemoryDB is cheaper than ElastiCache",
+        "MemoryDB is durable and can serve as a primary database",
+        "MemoryDB is memory-only, with no replicas"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "MemoryDB là 'Redis nhưng bền' — nhanh như in-memory mà vẫn an toàn như database. Đổi lại nó ĐẮT hơn ElastiCache. Phương án nói ElastiCache hỗ trợ nhiều engine hơn đúng về mặt kỹ thuật (ElastiCache có cả Memcached) nhưng không phải khác biệt được hỏi ở đây.",
+      "explanationEn": "MemoryDB is 'Redis, but durable' — in-memory speed with database safety. The trade is that it costs *more* than ElastiCache. The option about ElastiCache supporting more engines is technically true (it also has Memcached) but is not the distinction this question is about.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Database được quản lý nào của AWS chuyên cho dữ liệu dạng đồ thị và quan hệ nhiều-nhiều?",
+      "promptEn": "Which managed AWS database is purpose-built for graph data and many-to-many relationships?",
+      "answer": "Amazon Neptune",
+      "answerEn": "Amazon Neptune",
+      "accept": [
+        "neptune",
+        "amazon neptune",
+        "aws neptune"
+      ],
+      "explanation": "Amazon Neptune. Dấu hiệu trong đề: mạng xã hội, công cụ gợi ý, phát hiện gian lận, đồ thị tri thức.",
+      "explanationEn": "Amazon Neptune. The tells in a question: social networks, recommendation engines, fraud detection, knowledge graphs.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Database chuỗi thời gian được quản lý của AWS, dùng cho dữ liệu IoT và metric, tên là gì?",
+      "promptEn": "What is AWS's managed time-series database, used for IoT and metric data?",
+      "answer": "Amazon Timestream",
+      "answerEn": "Amazon Timestream",
+      "accept": [
+        "timestream",
+        "amazon timestream",
+        "aws timestream"
+      ],
+      "explanation": "Amazon Timestream. Thấy 'dữ liệu cảm biến theo thời gian' hay 'hàng nghìn tỷ sự kiện mỗi ngày có dấu thời gian' là nó.",
+      "explanationEn": "Amazon Timestream. 'Sensor readings over time' or 'trillions of time-stamped events per day' means this one.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi database chuyên dụng với loại dữ liệu nó phục vụ.",
+      "promptEn": "Match each purpose-built database to the data it serves.",
+      "pairs": [
+        {
+          "left": "Amazon Neptune",
+          "leftEn": "Amazon Neptune",
+          "right": "Đồ thị — mạng xã hội, gợi ý, phát hiện gian lận",
+          "rightEn": "Graphs — social networks, recommendations, fraud detection"
+        },
+        {
+          "left": "Amazon DocumentDB",
+          "leftEn": "Amazon DocumentDB",
+          "right": "Tài liệu JSON, tương thích MongoDB",
+          "rightEn": "JSON documents, MongoDB-compatible"
+        },
+        {
+          "left": "Amazon QLDB",
+          "leftEn": "Amazon QLDB",
+          "right": "Sổ cái bất biến, có thể kiểm chứng bằng mật mã — lịch sử giao dịch tài chính",
+          "rightEn": "An immutable, cryptographically verifiable ledger — financial transaction history"
+        },
+        {
+          "left": "Amazon Keyspaces",
+          "leftEn": "Amazon Keyspaces",
+          "right": "Dữ liệu wide-column, tương thích Apache Cassandra",
+          "rightEn": "Wide-column data, Apache Cassandra-compatible"
+        }
+      ],
+      "explanation": "Cách nhớ nhanh nhất là ghép với sản phẩm tương thích: DocumentDB ↔ MongoDB, Keyspaces ↔ Cassandra, Neptune ↔ Neo4j, QLDB ↔ sổ cái blockchain nhưng tập trung.",
+      "explanationEn": "The fastest way to remember these is by their compatible product: DocumentDB is MongoDB, Keyspaces is Cassandra, Neptune is graph like Neo4j, and QLDB is a centralised ledger.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp bốn lựa chọn lưu trữ theo độ trễ đọc điển hình, thấp nhất trước.",
+      "promptEn": "Order these four stores by typical read latency, lowest first.",
+      "items": [
+        {
+          "text": "ElastiCache — đọc trong bộ nhớ, micro-giây",
+          "textEn": "ElastiCache — in-memory reads, microseconds"
+        },
+        {
+          "text": "DynamoDB — đọc theo khoá, một chữ số mili-giây",
+          "textEn": "DynamoDB — key-based reads, single-digit milliseconds"
+        },
+        {
+          "text": "Amazon RDS — truy vấn quan hệ, hàng chục mili-giây",
+          "textEn": "Amazon RDS — relational queries, tens of milliseconds"
+        },
+        {
+          "text": "Amazon Athena — quét dữ liệu trên S3, hàng giây",
+          "textEn": "Amazon Athena — scanning data in S3, seconds"
+        }
+      ],
+      "explanation": "Thang này lý giải các kiến trúc nhiều tầng: cache đứng trước database, database đứng trước data lake. Mỗi bậc chậm hơn nhưng rẻ hơn và chứa được nhiều hơn.",
+      "explanationEn": "This ladder explains layered architectures: a cache in front of a database, a database in front of a data lake. Each step is slower but cheaper and holds far more.",
+      "id": "d6"
+    }
+  ]
+}

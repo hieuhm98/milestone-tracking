@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về RDS Multi-AZ.",
+      "promptEn": "Pick TWO statements that are true about RDS Multi-AZ.",
+      "options": [
+        "Là cơ chế đảm bảo tính sẵn sàng, không phải để tăng hiệu năng",
+        "Bản standby đồng bộ (synchronous) và không phục vụ đọc",
+        "Bạn phải tự đổi connection string khi failover",
+        "Chỉ hoạt động trong phạm vi một Availability Zone",
+        "Bản standby có thể nhận truy vấn đọc để giảm tải"
+      ],
+      "optionsEn": [
+        "It exists for availability, not for performance",
+        "The standby is synchronous and serves no read traffic",
+        "You must change the connection string yourself when it fails over",
+        "It works within a single Availability Zone",
+        "The standby can take read queries to offload the primary"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "Multi-AZ = sẵn sàng; Read Replica = hiệu năng. Standby của Multi-AZ đồng bộ và hoàn toàn thụ động, và failover tự động vì DNS endpoint được trỏ lại — ứng dụng không phải đổi gì.",
+      "explanationEn": "Multi-AZ is availability; Read Replicas are performance. The Multi-AZ standby is synchronous and entirely passive, and failover is automatic because the DNS endpoint is repointed — the application changes nothing.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều đúng về Aurora so với RDS thường.",
+      "promptEn": "Pick TWO things that are true of Aurora compared with plain RDS.",
+      "options": [
+        "Lưu trữ tự nhân 6 bản qua 3 Availability Zone",
+        "Rẻ hơn RDS ở mọi khối lượng công việc",
+        "Hỗ trợ mọi engine mà RDS hỗ trợ, kể cả Oracle và SQL Server",
+        "Chỉ chạy được ở chế độ serverless",
+        "Storage tự động lớn dần tới 128 TB mà không cần can thiệp"
+      ],
+      "optionsEn": [
+        "Storage is replicated six ways across three Availability Zones",
+        "It is cheaper than RDS for every workload",
+        "It supports every engine RDS supports, including Oracle and SQL Server",
+        "It only runs in serverless mode",
+        "Storage grows automatically up to 128 TB with no intervention"
+      ],
+      "answers": [
+        0,
+        4
+      ],
+      "explanation": "Aurora chỉ tương thích MySQL và PostgreSQL — không có Oracle hay SQL Server. Aurora đắt hơn RDS khoảng 20% tính trên instance, đổi lại hiệu năng và độ bền cao hơn nhiều.",
+      "explanationEn": "Aurora is MySQL- and PostgreSQL-compatible only — no Oracle, no SQL Server. It costs roughly 20% more per instance than RDS, buying considerably more performance and durability.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Engine ElastiCache nào hỗ trợ replica, Multi-AZ failover và lưu bền dữ liệu?",
+      "promptEn": "Which ElastiCache engine supports replicas, Multi-AZ failover and persistence?",
+      "answer": "Redis",
+      "answerEn": "Redis",
+      "accept": [
+        "redis",
+        "elasticache for redis",
+        "elasticache redis",
+        "amazon elasticache for redis"
+      ],
+      "explanation": "Redis. Memcached thì đơn giản hơn: đa luồng, phân mảnh được, nhưng không replica, không bền, không failover — mất node là mất cache.",
+      "explanationEn": "Redis. Memcached is the simpler one: multi-threaded and shardable, but with no replication, no persistence and no failover — lose the node and you lose the cache.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng RDS nào gom connection lại, giúp database chịu được hàng nghìn kết nối từ Lambda mà không sập?",
+      "promptEn": "Which RDS feature pools connections so the database survives thousands of Lambda connections?",
+      "answer": "RDS Proxy",
+      "answerEn": "RDS Proxy",
+      "accept": [
+        "rds proxy",
+        "amazon rds proxy",
+        "aws rds proxy",
+        "proxy"
+      ],
+      "explanation": "RDS Proxy. Đề thi mô tả 'Lambda mở quá nhiều kết nối tới RDS' gần như luôn dẫn tới RDS Proxy, vì nó cũng rút ngắn thời gian failover.",
+      "explanationEn": "RDS Proxy. A question describing Lambda exhausting RDS connections almost always lands here — and it shortens failover time as a bonus.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi tính năng database với vấn đề nó giải quyết.",
+      "promptEn": "Match each database feature to the problem it solves.",
+      "pairs": [
+        {
+          "left": "RDS Multi-AZ",
+          "leftEn": "RDS Multi-AZ",
+          "right": "Chịu được sự cố mất nguyên một Availability Zone",
+          "rightEn": "Surviving the loss of an entire Availability Zone"
+        },
+        {
+          "left": "RDS Read Replica",
+          "leftEn": "RDS Read Replica",
+          "right": "Giảm tải truy vấn đọc và báo cáo khỏi database chính",
+          "rightEn": "Taking read and reporting queries off the primary"
+        },
+        {
+          "left": "ElastiCache",
+          "leftEn": "ElastiCache",
+          "right": "Loại bỏ hoàn toàn các truy vấn đọc lặp đi lặp lại",
+          "rightEn": "Removing repeated identical reads from the database entirely"
+        },
+        {
+          "left": "Aurora Global Database",
+          "leftEn": "Aurora Global Database",
+          "right": "Đọc với độ trễ thấp ở nhiều châu lục và khôi phục thảm hoạ liên vùng",
+          "rightEn": "Low-latency reads on other continents and cross-Region disaster recovery"
+        }
+      ],
+      "explanation": "Bốn công cụ này giải bốn bài toán khác nhau, và đề thi đo xem bạn có phân biệt được không: sẵn sàng, tải đọc, độ trễ lặp lại, và phạm vi địa lý.",
+      "explanationEn": "Four tools for four different problems, and the exam is testing whether you can tell them apart: availability, read load, repeated-read latency, and geography.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng trình tự của mẫu caching Lazy Loading (cache-aside).",
+      "promptEn": "Put the Lazy Loading (cache-aside) pattern into the right order.",
+      "items": [
+        {
+          "text": "Ứng dụng hỏi ElastiCache trước khi hỏi database",
+          "textEn": "The application asks ElastiCache before it asks the database"
+        },
+        {
+          "text": "Cache miss — dữ liệu không có trong cache",
+          "textEn": "A cache miss — the data is not in the cache"
+        },
+        {
+          "text": "Ứng dụng truy vấn database để lấy dữ liệu",
+          "textEn": "The application queries the database for the data"
+        },
+        {
+          "text": "Ứng dụng ghi dữ liệu vào cache rồi trả về cho người dùng",
+          "textEn": "The application writes the data into the cache and returns it"
+        }
+      ],
+      "explanation": "Lazy Loading chỉ cache những gì thực sự được đọc, nên không lãng phí bộ nhớ — đổi lại lần đọc đầu tiên luôn chậm và dữ liệu có thể cũ. Write-Through thì ngược lại.",
+      "explanationEn": "Lazy Loading only ever caches what is actually read, so it wastes no memory — at the cost of a slow first read and possibly stale data. Write-Through is the opposite trade.",
+      "id": "d6"
+    }
+  ]
+}

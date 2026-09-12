@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều ĐÚNG về ECS Fargate so với ECS launch type EC2.",
+      "promptEn": "Pick TWO things that are true of ECS Fargate compared with the EC2 launch type.",
+      "options": [
+        "Bạn tự chọn loại instance để tối ưu chi phí",
+        "Bạn phải tự chạy ECS agent trên mỗi máy chủ",
+        "Bạn có quyền SSH vào máy chủ chạy container",
+        "Bạn trả tiền theo vCPU và bộ nhớ mà task yêu cầu",
+        "Bạn không phải cấp phát hay vá lỗi bất kỳ EC2 instance nào"
+      ],
+      "optionsEn": [
+        "You choose the instance type to optimise cost",
+        "You must run the ECS agent on each host yourself",
+        "You can SSH into the host running the container",
+        "You pay for the vCPU and memory the task requests",
+        "You never provision or patch an EC2 instance"
+      ],
+      "answers": [
+        3,
+        4
+      ],
+      "explanation": "Fargate là serverless: không có máy chủ để chọn, để vá, hay để SSH vào. Ba phương án còn lại đều mô tả launch type EC2, nơi bạn sở hữu và quản lý cả cụm máy chủ.",
+      "explanationEn": "Fargate is serverless: there is no host to pick, patch or SSH into. The other three all describe the EC2 launch type, where the cluster of hosts is yours to run.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về IAM role trong ECS.",
+      "promptEn": "Pick TWO statements that are true about IAM roles in ECS.",
+      "options": [
+        "Task Role cấp quyền cho code bên trong container gọi dịch vụ AWS",
+        "Fargate không dùng IAM role nào cả",
+        "Một task definition chỉ được gắn tối đa một role duy nhất",
+        "EC2 Instance Role cấp quyền cho ứng dụng trong container",
+        "Task Execution Role cho ECS quyền kéo image từ ECR và ghi log"
+      ],
+      "optionsEn": [
+        "The Task Role grants the code inside the container access to AWS services",
+        "Fargate uses no IAM roles at all",
+        "A task definition can carry at most one role",
+        "The EC2 Instance Role grants permissions to the application in the container",
+        "The Task Execution Role lets ECS pull the image from ECR and write logs"
+      ],
+      "answers": [
+        0,
+        4
+      ],
+      "explanation": "Hai role, hai mục đích khác nhau, và đề thi rất hay bẫy chỗ này. Task Role là quyền của ỨNG DỤNG; Task Execution Role là quyền của BẢN THÂN ECS để khởi động task. Instance Role chỉ dành cho ECS agent trên host, không phải cho ứng dụng.",
+      "explanationEn": "Two roles, two different jobs, and the exam leans on the distinction. The Task Role is the *application's* permissions; the Task Execution Role is *ECS's own* permissions to start the task. The Instance Role is for the ECS agent on the host, never for the app.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ registry được quản lý nào của AWS dùng để lưu Docker image?",
+      "promptEn": "Which managed AWS registry service stores Docker images?",
+      "answer": "Amazon ECR",
+      "answerEn": "Amazon ECR",
+      "accept": [
+        "ecr",
+        "amazon ecr",
+        "elastic container registry",
+        "amazon elastic container registry",
+        "aws ecr"
+      ],
+      "explanation": "Amazon ECR (Elastic Container Registry). Tích hợp sẵn với IAM để phân quyền và quét lỗ hổng image tự động.",
+      "explanationEn": "Amazon ECR (Elastic Container Registry). It integrates with IAM for access control and scans images for vulnerabilities automatically.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào của AWS nhận thẳng source code hoặc container image rồi tự dựng, triển khai, cân bằng tải và tự scale mà không cần cấu hình hạ tầng?",
+      "promptEn": "Which AWS service takes source code or a container image and builds, deploys, load balances and auto-scales it with no infrastructure configuration at all?",
+      "answer": "AWS App Runner",
+      "answerEn": "AWS App Runner",
+      "accept": [
+        "app runner",
+        "aws app runner",
+        "apprunner"
+      ],
+      "explanation": "AWS App Runner. Đề thi mô tả 'muốn chạy web app container mà không muốn học ECS hay Kubernetes' là đang nói tới App Runner.",
+      "explanationEn": "AWS App Runner. When a question says the team wants a containerised web app running without learning ECS or Kubernetes, this is the answer.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ container với đặc điểm phân biệt nó.",
+      "promptEn": "Match each container service to the trait that sets it apart.",
+      "pairs": [
+        {
+          "left": "Amazon ECS",
+          "leftEn": "Amazon ECS",
+          "right": "Bộ điều phối container riêng của AWS — đơn giản nhất nếu chỉ ở trong AWS",
+          "rightEn": "AWS's own container orchestrator — the simplest option if you stay on AWS"
+        },
+        {
+          "left": "Amazon EKS",
+          "leftEn": "Amazon EKS",
+          "right": "Kubernetes được quản lý — chọn khi cần chuẩn K8s hoặc chạy đa cloud",
+          "rightEn": "Managed Kubernetes — pick it when you need standard K8s or multi-cloud"
+        },
+        {
+          "left": "AWS Fargate",
+          "leftEn": "AWS Fargate",
+          "right": "Chế độ compute serverless dùng được cho cả ECS lẫn EKS — không có máy chủ",
+          "rightEn": "A serverless compute mode for both ECS and EKS — no servers at all"
+        },
+        {
+          "left": "Amazon ECR",
+          "leftEn": "Amazon ECR",
+          "right": "Kho chứa image, không chạy container nào cả",
+          "rightEn": "An image registry — it runs no containers itself"
+        }
+      ],
+      "explanation": "Lưu ý Fargate KHÔNG phải đối thủ của ECS hay EKS: nó là cách chạy bên dưới cả hai. Đề thi thường hỏi 'ECS trên EC2 hay ECS trên Fargate', không phải 'ECS hay Fargate'.",
+      "explanationEn": "Note that Fargate is not a rival to ECS or EKS: it is a way of running underneath either. The exam asks 'ECS on EC2 or ECS on Fargate', never 'ECS or Fargate'.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước đưa một container lên chạy trên ECS Fargate.",
+      "promptEn": "Put the steps to get a container running on ECS Fargate into order.",
+      "items": [
+        {
+          "text": "Build image và push lên Amazon ECR",
+          "textEn": "Build the image and push it to Amazon ECR"
+        },
+        {
+          "text": "Viết task definition trỏ tới image, kèm CPU, RAM và IAM role",
+          "textEn": "Write a task definition pointing at the image, with CPU, memory and IAM roles"
+        },
+        {
+          "text": "Tạo ECS service để giữ số lượng task mong muốn luôn chạy",
+          "textEn": "Create an ECS service to keep the desired number of tasks running"
+        },
+        {
+          "text": "Gắn service vào ALB target group để nhận traffic",
+          "textEn": "Attach the service to an ALB target group so it receives traffic"
+        }
+      ],
+      "explanation": "Task definition là bản thiết kế, task là một bản chạy của nó, service là thứ giữ cho số bản chạy luôn đúng như mong muốn. Ba khái niệm này bị hỏi rất nhiều.",
+      "explanationEn": "The task definition is the blueprint, a task is one running copy of it, and the service is what keeps the right number of copies alive. The exam asks about these three constantly.",
+      "id": "d6"
+    }
+  ]
+}

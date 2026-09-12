@@ -16,6 +16,8 @@ import {
   type CourseMerge,
   type CourseSnapshot,
   type ExamProgress,
+  type BlitzProgress,
+  blitzCourse,
 } from "@/lib/progress";
 import { GROUPS, DEFAULT_GROUP, GROUP_ACCENT } from "@/lib/groups";
 import { cn } from "@/lib/utils";
@@ -73,6 +75,24 @@ export default function ProgressPage() {
         ),
     [progress]
   );
+
+  // Tracks with at least one Blitz run, best score first — the record is the point.
+  const blitzRows = useMemo(() => {
+    const best = new Map<string, BlitzProgress>();
+
+    for (const [key, run] of Object.entries(progress.blitz)) {
+      if (run.runs === 0) continue;
+
+      const course = blitzCourse(key);
+      const existing = best.get(course);
+
+      if (!existing || run.bestScore > existing.bestScore) best.set(course, run);
+    }
+
+    return GROUPS.map((group) => ({ group, run: best.get(group.id) })).filter(
+      (row): row is { group: (typeof GROUPS)[number]; run: BlitzProgress } => Boolean(row.run)
+    );
+  }, [progress]);
 
   // Only topics with something recorded — the full catalogue lives on /knowledge.
   const startedTopics = useMemo(() => {
@@ -203,6 +223,9 @@ export default function ProgressPage() {
     // Exam gain is a jump in the best score, not a count, so it reads "+12% thi".
     if (gain.examBestPct > 0) parts.push(`+${gain.examBestPct}% ${pick("thi", "exam")}`);
 
+    // Blitz gain is a jump in points, so it reads "+340 Blitz".
+    if (gain.blitzBestScore > 0) parts.push(`+${gain.blitzBestScore} Blitz`);
+
     return (
       <span className={cellClass}>
         {cellLabel(pick("Sau khi nhập", "After import"))}
@@ -305,6 +328,37 @@ export default function ProgressPage() {
                   </div>
                   <span className="text-xs text-zinc-500 tabular-nums shrink-0">
                     {exam.bestPct}% · {exam.attempts} {t("exam.attempts").toLowerCase()}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* Blitz */}
+      {blitzRows.length > 0 && (
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold">{t("blitz.navTitle")}</h2>
+          <div className="space-y-2">
+            {blitzRows.map(({ group, run }) => {
+              const accent = GROUP_ACCENT[group.accent];
+
+              return (
+                <Link
+                  key={group.id}
+                  href="/practice/blitz"
+                  className="card flex flex-wrap items-center gap-x-3 gap-y-2 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+                >
+                  <span className={cn("text-lg shrink-0", accent.text)}>{group.icon}</span>
+                  <span className="flex-1 min-w-0 basis-full sm:basis-auto text-sm font-medium truncate">
+                    {pick(group.label, group.labelEn)}
+                  </span>
+                  <span className={cn("text-lg font-bold tabular-nums shrink-0", accent.text)}>
+                    {run.bestScore}
+                  </span>
+                  <span className="text-xs text-zinc-500 tabular-nums shrink-0">
+                    {run.bestCombo}🔥 · {run.runs} {t("blitz.runs")}
                   </span>
                 </Link>
               );

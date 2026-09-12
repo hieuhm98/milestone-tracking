@@ -19,6 +19,7 @@ const KNOWLEDGE_NAV = [
 ];
 
 const PRACTICE_NAV = [
+  { href: "/practice/blitz", label: "nav.blitz", icon: "⚡" },
   { href: "/practice/questions", label: "nav.exercises", icon: "✐" },
   { href: "/practice/sql", label: "nav.sqlPractice", icon: "▤" },
 ];

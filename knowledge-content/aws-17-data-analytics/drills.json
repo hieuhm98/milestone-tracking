@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều ĐÚNG về Amazon Athena.",
+      "promptEn": "Pick TWO things that are true about Amazon Athena.",
+      "options": [
+        "Cần cấp phát trước một cụm máy chủ",
+        "Lưu dữ liệu trong kho lưu trữ riêng của nó",
+        "Tính tiền theo số TB dữ liệu quét được mỗi truy vấn",
+        "Chỉ đọc được file định dạng CSV",
+        "Chạy SQL trực tiếp trên dữ liệu nằm trong S3, không cần nạp vào đâu cả"
+      ],
+      "optionsEn": [
+        "Requires a cluster to be provisioned first",
+        "Stores the data in its own storage layer",
+        "Charges per terabyte of data scanned by each query",
+        "Can only read CSV files",
+        "Runs SQL directly over data sitting in S3, with nothing to load"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "Athena là serverless và tính theo dữ liệu QUÉT — đó là lý do chuyển sang Parquet và phân vùng dữ liệu giúp giảm chi phí tới 90%. Nó đọc được CSV, JSON, ORC, Parquet, Avro.",
+      "explanationEn": "Athena is serverless and bills on data *scanned* — which is why converting to Parquet and partitioning cuts costs by up to 90%. It reads CSV, JSON, ORC, Parquet and Avro.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI việc AWS Glue làm.",
+      "promptEn": "Pick TWO things AWS Glue does.",
+      "options": [
+        "Trực quan hoá dữ liệu thành dashboard cho người dùng nghiệp vụ",
+        "Chạy job ETL serverless để biến đổi dữ liệu",
+        "Dùng crawler dò lược đồ và điền vào Data Catalog",
+        "Lưu trữ dữ liệu thô với chi phí thấp",
+        "Chạy truy vấn OLAP trên petabyte dữ liệu"
+      ],
+      "optionsEn": [
+        "Turns data into dashboards for business users",
+        "Runs serverless ETL jobs that transform data",
+        "Uses crawlers to infer schemas and populate the Data Catalog",
+        "Stores raw data cheaply",
+        "Runs OLAP queries across petabytes"
+      ],
+      "answers": [
+        1,
+        2
+      ],
+      "explanation": "Glue là ETL + catalog. Dashboard là QuickSight, lưu trữ rẻ là S3, OLAP petabyte là Redshift. Glue Data Catalog chính là lược đồ mà Athena và Redshift Spectrum đọc.",
+      "explanationEn": "Glue is ETL plus catalog. Dashboards are QuickSight, cheap storage is S3, petabyte OLAP is Redshift. The Glue Data Catalog is the schema that Athena and Redshift Spectrum read.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào của AWS dùng để tạo dashboard và báo cáo trực quan cho người dùng nghiệp vụ?",
+      "promptEn": "Which AWS service builds dashboards and visual reports for business users?",
+      "answer": "Amazon QuickSight",
+      "answerEn": "Amazon QuickSight",
+      "accept": [
+        "quicksight",
+        "amazon quicksight",
+        "aws quicksight"
+      ],
+      "explanation": "Amazon QuickSight. Đây là tầng BI cuối cùng: dữ liệu đi từ S3 → Glue → Athena/Redshift → QuickSight.",
+      "explanationEn": "Amazon QuickSight. It is the final BI layer: data flows S3 to Glue to Athena or Redshift and finally to QuickSight.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào nhận dữ liệu streaming rồi tự động nạp vào S3, Redshift hoặc OpenSearch mà không cần viết consumer?",
+      "promptEn": "Which service takes streaming data and loads it into S3, Redshift or OpenSearch with no consumer code to write?",
+      "answer": "Kinesis Data Firehose",
+      "answerEn": "Kinesis Data Firehose",
+      "accept": [
+        "firehose",
+        "kinesis data firehose",
+        "kinesis firehose",
+        "data firehose",
+        "amazon data firehose"
+      ],
+      "explanation": "Kinesis Data Firehose. Khác với Data Streams, Firehose hoàn toàn được quản lý, gần thời gian thực (tối thiểu 60 giây) và KHÔNG lưu dữ liệu lại để phát lại.",
+      "explanationEn": "Kinesis Data Firehose. Unlike Data Streams it is fully managed, near real time (a 60-second minimum buffer) and stores nothing for replay.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ phân tích với vai trò của nó trong một data lake.",
+      "promptEn": "Match each analytics service to its role in a data lake.",
+      "pairs": [
+        {
+          "left": "Amazon S3",
+          "leftEn": "Amazon S3",
+          "right": "Tầng lưu trữ — dữ liệu thô sống ở đây",
+          "rightEn": "The storage layer — raw data lives here"
+        },
+        {
+          "left": "AWS Glue",
+          "leftEn": "AWS Glue",
+          "right": "ETL và catalog — dọn dẹp dữ liệu và mô tả lược đồ của nó",
+          "rightEn": "ETL and catalog — cleans the data and describes its schema"
+        },
+        {
+          "left": "Amazon Athena",
+          "leftEn": "Amazon Athena",
+          "right": "Truy vấn SQL đặc biệt (ad-hoc) ngay tại chỗ, không cần nạp dữ liệu",
+          "rightEn": "Ad-hoc SQL queries in place, with nothing to load"
+        },
+        {
+          "left": "Amazon QuickSight",
+          "leftEn": "Amazon QuickSight",
+          "right": "Dashboard cho người dùng nghiệp vụ không viết SQL",
+          "rightEn": "Dashboards for business users who write no SQL"
+        }
+      ],
+      "explanation": "Bốn dịch vụ này là kiến trúc data lake chuẩn của AWS, và đề thi vẽ đúng chuỗi này: lưu trữ → catalog → truy vấn → trực quan hoá.",
+      "explanationEn": "These four are AWS's standard data-lake architecture, and the exam draws exactly this chain: store, catalog, query, visualise.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự một pipeline phân tích điển hình trên AWS.",
+      "promptEn": "Put a typical AWS analytics pipeline into order.",
+      "items": [
+        {
+          "text": "Kinesis Data Firehose nhận dữ liệu streaming và ghi vào S3",
+          "textEn": "Kinesis Data Firehose ingests the stream and writes it to S3"
+        },
+        {
+          "text": "Glue crawler dò lược đồ và điền vào Data Catalog",
+          "textEn": "A Glue crawler infers the schema and fills the Data Catalog"
+        },
+        {
+          "text": "Athena chạy SQL trên dữ liệu trong S3 theo lược đồ đó",
+          "textEn": "Athena runs SQL over the S3 data using that schema"
+        },
+        {
+          "text": "QuickSight hiển thị kết quả thành dashboard",
+          "textEn": "QuickSight renders the results as a dashboard"
+        }
+      ],
+      "explanation": "Ingest → catalog → query → visualise. Nhớ đúng bốn bước này là trả lời được phần lớn câu hỏi kiến trúc dữ liệu trong đề SAA-C03.",
+      "explanationEn": "Ingest, catalog, query, visualise. Those four steps answer most of the data-architecture questions on the SAA-C03 paper.",
+      "id": "d6"
+    }
+  ]
+}

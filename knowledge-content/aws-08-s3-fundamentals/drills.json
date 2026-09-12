@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều ĐÚNG về versioning trên S3.",
+      "promptEn": "Pick TWO things that are true about S3 versioning.",
+      "options": [
+        "Chỉ áp dụng cho object được tải lên sau khi bật",
+        "Bật rồi thì chỉ có thể tạm dừng, không thể tắt hẳn",
+        "Là điều kiện bắt buộc để dùng S3 Transfer Acceleration",
+        "Xoá một object chỉ tạo ra delete marker, dữ liệu vẫn còn",
+        "Làm giảm chi phí lưu trữ vì chỉ lưu phần chênh lệch"
+      ],
+      "optionsEn": [
+        "It only applies to objects uploaded after it was enabled",
+        "Once enabled it can only be suspended, never switched off",
+        "It is required before you can use S3 Transfer Acceleration",
+        "Deleting an object only adds a delete marker; the data is still there",
+        "It lowers storage cost because only deltas are stored"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Versioning là một chiều: bật → suspend, không bao giờ về lại trạng thái chưa bật. Object có trước khi bật mang version ID là null nhưng vẫn được versioning bảo vệ từ lúc đó. S3 lưu TOÀN BỘ mỗi version, nên chi phí tăng chứ không giảm.",
+      "explanationEn": "Versioning is one-way: enabled then suspended, never back to un-versioned. Objects that predate it carry a null version ID but are protected from then on. S3 stores every version in full, so cost goes up, not down.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Dữ liệu được truy cập vài lần mỗi năm nhưng phải lấy ra trong vài mili-giây khi cần. Chọn HAI storage class phù hợp.",
+      "promptEn": "Data is read a few times a year but must come back in milliseconds when it is. Pick TWO suitable storage classes.",
+      "options": [
+        "S3 Standard-IA",
+        "S3 One Zone-IA",
+        "S3 Glacier Flexible Retrieval",
+        "S3 Glacier Deep Archive",
+        "S3 Intelligent-Tiering Archive Access tier"
+      ],
+      "optionsEn": [
+        "S3 Standard-IA",
+        "S3 One Zone-IA",
+        "S3 Glacier Flexible Retrieval",
+        "S3 Glacier Deep Archive",
+        "S3 Intelligent-Tiering Archive Access tier"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "Standard-IA và One Zone-IA đều trả dữ liệu tức thì; khác nhau ở chỗ One Zone-IA chỉ nằm trong một AZ nên rẻ hơn 20% nhưng mất AZ là mất dữ liệu. Mọi lớp Glacier đều cần thời gian khôi phục tính bằng phút tới giờ.",
+      "explanationEn": "Standard-IA and One Zone-IA both return data instantly; the difference is that One Zone-IA lives in a single AZ, 20% cheaper but gone if that AZ is. Every Glacier tier needs a restore measured in minutes to hours.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng nào của S3 dùng edge location của CloudFront để tăng tốc tải file lên từ nơi xa?",
+      "promptEn": "Which S3 feature uses CloudFront edge locations to speed up uploads from far away?",
+      "answer": "S3 Transfer Acceleration",
+      "answerEn": "S3 Transfer Acceleration",
+      "accept": [
+        "s3 transfer acceleration",
+        "transfer acceleration",
+        "s3ta",
+        "transfer accelerate"
+      ],
+      "explanation": "S3 Transfer Acceleration. Dữ liệu đi vào edge location gần nhất rồi chạy trên mạng backbone của AWS tới bucket — nhanh hơn hẳn đi thẳng qua internet công cộng.",
+      "explanationEn": "S3 Transfer Acceleration. The upload enters the nearest edge location and then rides AWS's backbone to the bucket, rather than crossing the public internet the whole way.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Cơ chế nào của S3 tự động chuyển object sang lớp lưu trữ rẻ hơn hoặc xoá chúng sau một số ngày?",
+      "promptEn": "Which S3 mechanism automatically moves objects to a cheaper class, or deletes them, after a set number of days?",
+      "answer": "Lifecycle Rules",
+      "answerEn": "Lifecycle Rules",
+      "accept": [
+        "lifecycle rules",
+        "lifecycle rule",
+        "lifecycle",
+        "s3 lifecycle",
+        "lifecycle policy",
+        "lifecycle configuration"
+      ],
+      "explanation": "Lifecycle Rules. Gồm transition action (đổi lớp) và expiration action (xoá), và áp dụng được riêng cho version cũ — đó là cách kiểm soát chi phí khi bật versioning.",
+      "explanationEn": "Lifecycle Rules — transition actions to change class and expiration actions to delete, and they can target noncurrent versions separately, which is how you keep versioning's cost under control.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi storage class của S3 với trường hợp dùng đúng.",
+      "promptEn": "Match each S3 storage class to the job it is right for.",
+      "pairs": [
+        {
+          "left": "S3 Standard",
+          "leftEn": "S3 Standard",
+          "right": "Dữ liệu nóng, truy cập thường xuyên — website, ứng dụng đang chạy",
+          "rightEn": "Hot data accessed constantly — websites and live applications"
+        },
+        {
+          "left": "S3 Intelligent-Tiering",
+          "leftEn": "S3 Intelligent-Tiering",
+          "right": "Mẫu truy cập không đoán trước được — để S3 tự chuyển lớp",
+          "rightEn": "Access patterns you cannot predict — let S3 move it for you"
+        },
+        {
+          "left": "S3 Glacier Flexible Retrieval",
+          "leftEn": "S3 Glacier Flexible Retrieval",
+          "right": "Lưu trữ dài hạn, chấp nhận chờ vài phút tới vài giờ để lấy ra",
+          "rightEn": "Long-term archive where a few minutes to hours to restore is fine"
+        },
+        {
+          "left": "S3 Glacier Deep Archive",
+          "leftEn": "S3 Glacier Deep Archive",
+          "right": "Rẻ nhất tuyệt đối — hồ sơ tuân thủ, chờ được 12 giờ",
+          "rightEn": "The absolute cheapest — compliance records you can wait 12 hours for"
+        }
+      ],
+      "explanation": "Cách chọn: hỏi 'bao lâu đọc một lần' và 'chờ được bao lâu'. Hai câu đó xác định gần như mọi tình huống trong đề thi.",
+      "explanationEn": "The decision is two questions: how often is it read, and how long can you wait for it. Those two settle nearly every exam scenario.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp các storage class của S3 từ đắt nhất tới rẻ nhất (tính trên GB lưu trữ).",
+      "promptEn": "Order these S3 storage classes from most to least expensive per GB stored.",
+      "items": [
+        {
+          "text": "S3 Standard",
+          "textEn": "S3 Standard"
+        },
+        {
+          "text": "S3 Standard-IA",
+          "textEn": "S3 Standard-IA"
+        },
+        {
+          "text": "S3 Glacier Flexible Retrieval",
+          "textEn": "S3 Glacier Flexible Retrieval"
+        },
+        {
+          "text": "S3 Glacier Deep Archive",
+          "textEn": "S3 Glacier Deep Archive"
+        }
+      ],
+      "explanation": "Giá lưu trữ giảm dần đúng bằng mức độ khó lấy dữ liệu ra. Nhớ rằng lớp càng rẻ thì phí LẤY RA càng đắt — dữ liệu đọc thường xuyên để ở Glacier có thể tốn hơn để ở Standard.",
+      "explanationEn": "Storage price falls in exact step with how hard the data is to get back. Remember the retrieval fee moves the other way — frequently read data can cost *more* in Glacier than in Standard.",
+      "id": "d6"
+    }
+  ]
+}

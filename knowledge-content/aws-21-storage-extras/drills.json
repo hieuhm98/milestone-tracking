@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều ĐÚNG về AWS Snowball Edge.",
+      "promptEn": "Pick TWO things that are true about AWS Snowball Edge.",
+      "options": [
+        "Chỉ dùng được để đưa dữ liệu RA khỏi AWS",
+        "Dùng để chuyển hàng chục tới hàng trăm TB khi băng thông mạng không đủ",
+        "Là kết nối mạng riêng tốc độ cao tới AWS",
+        "Chạy được compute (EC2, Lambda) ngay tại chỗ trước khi gửi thiết bị đi",
+        "Đồng bộ dữ liệu liên tục theo thời gian thực với S3"
+      ],
+      "optionsEn": [
+        "It can only be used to move data OUT of AWS",
+        "It moves tens to hundreds of TB when network bandwidth is not enough",
+        "It is a high-speed private network link to AWS",
+        "It can run compute (EC2, Lambda) on site before the device ships",
+        "It continuously syncs data with S3 in real time"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Snowball là chuyển dữ liệu OFFLINE bằng thiết bị vật lý, và bản Edge còn chạy được compute tại chỗ. Đường mạng riêng là Direct Connect; đồng bộ liên tục là DataSync. Snowball đi được cả hai chiều.",
+      "explanationEn": "Snowball is *offline* transfer on a physical device, and the Edge variant also runs compute on site. A private network link is Direct Connect; continuous sync is DataSync. Snowball works in both directions.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI trường hợp AWS DataSync là lựa chọn đúng.",
+      "promptEn": "Pick TWO situations where AWS DataSync is the right choice.",
+      "options": [
+        "Chuyển dữ liệu giữa các dịch vụ lưu trữ AWS mà giữ nguyên metadata và quyền",
+        "Đồng bộ hàng triệu file từ NAS on-premises lên S3 qua mạng",
+        "Chuyển 500 TB khi chỉ có đường truyền 10 Mbps",
+        "Cho ứng dụng on-premises mount S3 như một ổ đĩa mạng",
+        "Nhận file từ đối tác qua giao thức SFTP"
+      ],
+      "optionsEn": [
+        "Moving data between AWS storage services while preserving metadata and permissions",
+        "Syncing millions of files from an on-premises NAS to S3 over the network",
+        "Moving 500 TB when the only link is 10 Mbps",
+        "Letting an on-premises app mount S3 as a network drive",
+        "Receiving files from partners over SFTP"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "DataSync là đồng bộ ONLINE và giữ nguyên metadata — đó là điểm bán hàng chính của nó. Băng thông quá nhỏ thì dùng Snowball; mount như ổ đĩa là Storage Gateway; SFTP là AWS Transfer Family.",
+      "explanationEn": "DataSync is *online* sync that preserves metadata — its main selling point. Too little bandwidth means Snowball; mounting as a drive is Storage Gateway; SFTP is AWS Transfer Family.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào cho ứng dụng on-premises truy cập lưu trữ trên AWS như thể nó nằm ngay tại chỗ?",
+      "promptEn": "Which service lets on-premises applications use AWS storage as though it were local?",
+      "answer": "AWS Storage Gateway",
+      "answerEn": "AWS Storage Gateway",
+      "accept": [
+        "storage gateway",
+        "aws storage gateway",
+        "file gateway",
+        "aws file gateway"
+      ],
+      "explanation": "AWS Storage Gateway. Có ba dạng: File Gateway (NFS/SMB → S3), Volume Gateway (iSCSI → EBS snapshot), Tape Gateway (VTL → Glacier).",
+      "explanationEn": "AWS Storage Gateway. It comes in three shapes: File Gateway (NFS/SMB to S3), Volume Gateway (iSCSI to EBS snapshots) and Tape Gateway (a virtual tape library backed by Glacier).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Hệ thống file được quản lý nào của AWS dành cho tính toán hiệu năng cao và machine learning, tích hợp sẵn với S3?",
+      "promptEn": "Which managed AWS file system targets high-performance computing and machine learning, with built-in S3 integration?",
+      "answer": "Amazon FSx for Lustre",
+      "answerEn": "Amazon FSx for Lustre",
+      "accept": [
+        "fsx for lustre",
+        "amazon fsx for lustre",
+        "lustre",
+        "fsx lustre"
+      ],
+      "explanation": "Amazon FSx for Lustre. Dấu hiệu trong đề: HPC, huấn luyện ML, xử lý video, cần throughput hàng trăm GB/s.",
+      "explanationEn": "Amazon FSx for Lustre. The tells: HPC, ML training, video processing, hundreds of GB/s of throughput.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ lưu trữ mở rộng với bài toán nó giải.",
+      "promptEn": "Match each extended storage service to the problem it solves.",
+      "pairs": [
+        {
+          "left": "AWS Snowball Edge",
+          "leftEn": "AWS Snowball Edge",
+          "right": "Chuyển hàng trăm TB offline khi mạng không kham nổi",
+          "rightEn": "Moving hundreds of TB offline when the network cannot cope"
+        },
+        {
+          "left": "AWS DataSync",
+          "leftEn": "AWS DataSync",
+          "right": "Đồng bộ online, giữ nguyên metadata và quyền của file",
+          "rightEn": "Online sync that preserves file metadata and permissions"
+        },
+        {
+          "left": "AWS Storage Gateway",
+          "leftEn": "AWS Storage Gateway",
+          "right": "Cầu nối hybrid — ứng dụng cũ dùng lưu trữ AWS như ổ đĩa tại chỗ",
+          "rightEn": "The hybrid bridge — legacy apps use AWS storage as a local disk"
+        },
+        {
+          "left": "AWS Transfer Family",
+          "leftEn": "AWS Transfer Family",
+          "right": "Nhận file từ đối tác qua SFTP/FTPS/FTP thẳng vào S3",
+          "rightEn": "Receiving partner files over SFTP/FTPS/FTP straight into S3"
+        }
+      ],
+      "explanation": "Câu hỏi phân biệt: dữ liệu đi ONLINE hay OFFLINE, và MỘT LẦN hay LIÊN TỤC? Hai câu đó chọn ra đúng dịch vụ trong gần như mọi tình huống.",
+      "explanationEn": "The questions that separate them: is the data moving online or offline, and once or continuously? Those two settle nearly every scenario.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp các cách đưa dữ liệu lên AWS theo lượng dữ liệu phù hợp, ít nhất trước.",
+      "promptEn": "Order these ways of getting data into AWS by the volume they suit, smallest first.",
+      "items": [
+        {
+          "text": "Tải trực tiếp qua internet — vài GB",
+          "textEn": "Direct upload over the internet — a few GB"
+        },
+        {
+          "text": "AWS DataSync qua mạng — vài TB",
+          "textEn": "AWS DataSync over the network — a few TB"
+        },
+        {
+          "text": "AWS Snowball Edge — hàng chục tới hàng trăm TB",
+          "textEn": "AWS Snowball Edge — tens to hundreds of TB"
+        },
+        {
+          "text": "AWS Snowmobile — hàng chục petabyte",
+          "textEn": "AWS Snowmobile — tens of petabytes"
+        }
+      ],
+      "explanation": "Đề thi thường cho sẵn dung lượng và băng thông rồi hỏi cách nhanh nhất. Mẹo: tính thử thời gian truyền qua mạng — quá một tuần thì gần như chắc chắn đáp án là Snow Family.",
+      "explanationEn": "The exam usually gives you a volume and a bandwidth and asks for the fastest route. The trick is to do the division — if the transfer takes more than about a week, the answer is almost certainly a Snow device.",
+      "id": "d6"
+    }
+  ]
+}

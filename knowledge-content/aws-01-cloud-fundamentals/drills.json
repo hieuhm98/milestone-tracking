@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI dịch vụ có phạm vi toàn cầu (global), không gắn với một Region cụ thể.",
+      "promptEn": "Pick TWO AWS services that are global in scope rather than Region-scoped.",
+      "options": [
+        "Amazon EC2",
+        "Amazon RDS",
+        "IAM",
+        "Amazon VPC",
+        "CloudFront"
+      ],
+      "optionsEn": [
+        "Amazon EC2",
+        "Amazon RDS",
+        "IAM",
+        "Amazon VPC",
+        "CloudFront"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "IAM và CloudFront (cùng với Route 53 và WAF) là dịch vụ global — user, role, distribution bạn tạo ra dùng được ở mọi Region. EC2, RDS và VPC đều gắn với một Region: một VPC không bao giờ trải qua hai Region.",
+      "explanationEn": "IAM and CloudFront (along with Route 53 and WAF) are global — a user, role or distribution you create works everywhere. EC2, RDS and VPC are all Region-scoped: a VPC never spans two Regions.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Theo mô hình Shared Responsibility, chọn HAI việc thuộc trách nhiệm của KHÁCH HÀNG.",
+      "promptEn": "Under the Shared Responsibility Model, pick TWO things the CUSTOMER is responsible for.",
+      "options": [
+        "Vá lỗi hệ điều hành khách (guest OS) trên EC2",
+        "Tiêu huỷ ổ đĩa hỏng",
+        "An ninh vật lý của data center",
+        "Vá lỗi hypervisor",
+        "Cấu hình Security Group và IAM policy"
+      ],
+      "optionsEn": [
+        "Patching the guest OS on an EC2 instance",
+        "Disposing of failed disks",
+        "Physical security of the data centre",
+        "Patching the hypervisor",
+        "Configuring Security Groups and IAM policies"
+      ],
+      "answers": [
+        0,
+        4
+      ],
+      "explanation": "AWS lo an ninh CỦA đám mây (phần cứng, data center, hypervisor); bạn lo an ninh TRONG đám mây (OS khách, dữ liệu, network config, IAM). Ranh giới hay bị hỏi nhất là EC2: AWS chỉ quản phần dưới hypervisor.",
+      "explanationEn": "AWS secures the cloud itself (hardware, data centres, the hypervisor); you secure what you put in it (guest OS, your data, network config, IAM). The boundary the exam asks about most is EC2: AWS manages nothing above the hypervisor.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Khối hạ tầng nào của AWS là một hoặc nhiều data center có điện và mạng dự phòng, cách ly khỏi các khối cùng loại trong cùng một Region?",
+      "promptEn": "Which AWS building block is one or more data centres with redundant power and networking, isolated from the others in the same Region?",
+      "answer": "Availability Zone",
+      "answerEn": "Availability Zone",
+      "accept": [
+        "availability zone",
+        "availability zones",
+        "az",
+        "azs",
+        "vung san sang"
+      ],
+      "explanation": "Availability Zone (AZ). Một Region có từ 3 AZ trở lên, nối với nhau bằng đường mạng riêng độ trễ thấp. Triển khai qua nhiều AZ là cách rẻ nhất để đạt tính sẵn sàng cao.",
+      "explanationEn": "An Availability Zone (AZ). A Region holds three or more, linked by low-latency private networking. Spreading across AZs is the cheapest high availability you can buy.",
+      "hint": "Không phải Region — nhỏ hơn một bậc.",
+      "hintEn": "Not the Region — one level smaller.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Loại vị trí nào của AWS lưu cache nội dung gần người dùng và phục vụ CloudFront, nhưng không chạy EC2 instance?",
+      "promptEn": "Which AWS location type caches content close to users and serves CloudFront, but never runs EC2 instances?",
+      "answer": "Edge Location",
+      "answerEn": "Edge Location",
+      "accept": [
+        "edge location",
+        "edge locations",
+        "edge",
+        "pop",
+        "point of presence",
+        "diem bien"
+      ],
+      "explanation": "Edge Location (còn gọi là Point of Presence). Có hàng trăm edge location — nhiều hơn hẳn số Region — và chúng chỉ làm nhiệm vụ cache/định tuyến cho CloudFront, Route 53, Global Accelerator.",
+      "explanationEn": "An Edge Location, also called a Point of Presence. There are hundreds of them — far more than Regions — and they only cache and route for CloudFront, Route 53 and Global Accelerator.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi đơn vị hạ tầng AWS với định nghĩa đúng của nó.",
+      "promptEn": "Match each AWS infrastructure unit to what it actually is.",
+      "pairs": [
+        {
+          "left": "Region",
+          "leftEn": "Region",
+          "right": "Một khu vực địa lý chứa từ 3 Availability Zone trở lên",
+          "rightEn": "A geographic area containing three or more Availability Zones"
+        },
+        {
+          "left": "Availability Zone",
+          "leftEn": "Availability Zone",
+          "right": "Một hoặc nhiều data center có điện/mạng dự phòng, cách ly lỗi với AZ khác",
+          "rightEn": "One or more data centres with redundant power, fault-isolated from the other AZs"
+        },
+        {
+          "left": "Edge Location",
+          "leftEn": "Edge Location",
+          "right": "Điểm cache gần người dùng cuối, dùng cho CloudFront — không chạy EC2",
+          "rightEn": "A cache close to end users, used by CloudFront — no EC2 runs here"
+        },
+        {
+          "left": "Local Zone",
+          "leftEn": "Local Zone",
+          "right": "Phần mở rộng của Region đặt sát khu dân cư lớn để đạt độ trễ một chữ số mili-giây",
+          "rightEn": "An extension of a Region placed near a large population for single-digit millisecond latency"
+        }
+      ],
+      "explanation": "Bốn tầng này là bộ khung địa lý của AWS. Nhớ thứ tự bao nhau: Region chứa AZ; Edge Location và Local Zone nằm ngoài mô hình đó và phục vụ mục đích độ trễ.",
+      "explanationEn": "These four are the geography of AWS. Remember what contains what: a Region holds AZs; Edge Locations and Local Zones sit outside that nesting and exist purely for latency.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp theo mức độ BẠN phải tự quản lý, nhiều nhất trước.",
+      "promptEn": "Order these by how much of the stack YOU have to manage, most first.",
+      "items": [
+        {
+          "text": "On-premises — bạn quản mọi thứ, kể cả nhà máy điện và tủ rack",
+          "textEn": "On-premises — you manage everything, down to the racks and power"
+        },
+        {
+          "text": "IaaS (EC2) — AWS lo phần cứng, bạn lo hệ điều hành trở lên",
+          "textEn": "IaaS (EC2) — AWS handles the hardware, you handle the OS and up"
+        },
+        {
+          "text": "PaaS (Elastic Beanstalk) — bạn chỉ đưa code, AWS lo nền tảng",
+          "textEn": "PaaS (Elastic Beanstalk) — you supply code, AWS runs the platform"
+        },
+        {
+          "text": "SaaS (Amazon WorkMail) — bạn chỉ dùng ứng dụng đã hoàn chỉnh",
+          "textEn": "SaaS (Amazon WorkMail) — you just use the finished application"
+        }
+      ],
+      "explanation": "Đây là thang trách nhiệm. Càng xuống dưới bạn càng bớt việc nhưng cũng bớt quyền kiểm soát — và đó chính là câu hỏi đánh đổi mà đề thi hay đặt ra.",
+      "explanationEn": "This is the responsibility ladder. Each step down is less work and less control — which is exactly the trade-off the exam keeps asking you to make.",
+      "id": "d6"
+    }
+  ]
+}

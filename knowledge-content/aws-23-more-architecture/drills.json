@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về IMDSv2 so với IMDSv1.",
+      "promptEn": "Pick TWO statements that are true of IMDSv2 compared with IMDSv1.",
+      "options": [
+        "IMDSv2 loại bỏ hoàn toàn nhu cầu dùng IAM role",
+        "IMDSv2 mã hoá metadata khi lưu trên đĩa",
+        "IMDSv2 phòng được tấn công SSRF vốn khai thác được IMDSv1",
+        "IMDSv2 bắt buộc lấy token bằng request PUT trước khi đọc metadata",
+        "IMDSv2 chạy ở một địa chỉ IP khác với IMDSv1"
+      ],
+      "optionsEn": [
+        "IMDSv2 removes the need for IAM roles entirely",
+        "IMDSv2 encrypts metadata at rest on disk",
+        "IMDSv2 defends against the SSRF attacks that IMDSv1 was vulnerable to",
+        "IMDSv2 requires a token fetched with a PUT request before metadata can be read",
+        "IMDSv2 listens on a different IP address from IMDSv1"
+      ],
+      "answers": [
+        2,
+        3
+      ],
+      "explanation": "Yêu cầu token theo phiên là toàn bộ điểm khác biệt: một lỗ hổng SSRF chỉ tạo được request GET, nên không lấy được token, nên không đọc được credential. Cả hai phiên bản đều ở 169.254.169.254.",
+      "explanationEn": "The session token requirement is the entire difference: an SSRF hole can only produce a GET, so it cannot obtain a token and therefore cannot read the credentials. Both versions live at 169.254.169.254.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thứ dùng để CHẶN một địa chỉ IP cụ thể.",
+      "promptEn": "Pick TWO things you can use to BLOCK one specific IP address.",
+      "options": [
+        "AWS WAF với IP set rule",
+        "Network ACL với rule deny",
+        "Route table với route blackhole tới IP đó",
+        "Stickiness trên target group",
+        "Security Group với rule deny"
+      ],
+      "optionsEn": [
+        "AWS WAF with an IP set rule",
+        "A Network ACL with a deny rule",
+        "A route table with a blackhole route to that IP",
+        "Stickiness on the target group",
+        "A Security Group with a deny rule"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "Security Group KHÔNG có rule deny — đây là bẫy phổ biến nhất trong toàn bộ đề thi. Muốn chặn một IP thì dùng NACL (tầng 4, cấp subnet) hoặc WAF (tầng 7, theo request HTTP).",
+      "explanationEn": "Security Groups have no deny rules — the single most common trap on the whole paper. To block an IP you need a NACL (layer 4, subnet level) or WAF (layer 7, per HTTP request).",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tuỳ chọn EC2 nào đặt các instance sát nhau trong cùng một AZ để đạt độ trễ mạng thấp nhất cho HPC?",
+      "promptEn": "Which EC2 option packs instances close together in one AZ for the lowest network latency, for HPC?",
+      "answer": "Cluster Placement Group",
+      "answerEn": "Cluster Placement Group",
+      "accept": [
+        "cluster placement group",
+        "cluster placement",
+        "placement group cluster",
+        "cluster placement groups"
+      ],
+      "explanation": "Cluster Placement Group. Đánh đổi: độ trễ thấp nhất và băng thông cao nhất, nhưng mọi instance nằm cùng một rack nên hỏng là hỏng cả cụm. Cần chịu lỗi thì dùng Spread Placement Group.",
+      "explanationEn": "A Cluster Placement Group. The trade: the lowest latency and highest bandwidth, but every instance shares a rack, so a failure takes them all. For fault tolerance, use a Spread Placement Group.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Địa chỉ IP nào mà EC2 instance gọi tới để đọc metadata và credential tạm thời của mình?",
+      "promptEn": "Which IP address does an EC2 instance call to read its own metadata and temporary credentials?",
+      "answer": "169.254.169.254",
+      "answerEn": "169.254.169.254",
+      "accept": [
+        "169 254 169 254",
+        "169.254.169.254",
+        "http 169 254 169 254"
+      ],
+      "explanation": "169.254.169.254 — địa chỉ link-local. Đây là con số bị hỏi thẳng trong đề, và cũng là địa chỉ mà mọi cuộc tấn công SSRF nhắm tới.",
+      "explanationEn": "169.254.169.254, a link-local address. The exam asks for this number outright, and it is also the address every SSRF attack aims at.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi lớp bảo vệ mạng với cấp độ nó hoạt động.",
+      "promptEn": "Match each network protection to the level it works at.",
+      "pairs": [
+        {
+          "left": "Security Group",
+          "leftEn": "Security Group",
+          "right": "Cấp instance (ENI) — chỉ allow, stateful",
+          "rightEn": "Instance level, on the ENI — allow only, stateful"
+        },
+        {
+          "left": "Network ACL",
+          "leftEn": "Network ACL",
+          "right": "Cấp subnet — có cả allow lẫn deny, stateless",
+          "rightEn": "Subnet level — allow and deny, stateless"
+        },
+        {
+          "left": "AWS WAF",
+          "leftEn": "AWS WAF",
+          "right": "Tầng 7 — lọc nội dung request HTTP trên ALB, CloudFront hoặc API Gateway",
+          "rightEn": "Layer 7 — filters HTTP request content on ALB, CloudFront or API Gateway"
+        },
+        {
+          "left": "AWS Shield",
+          "leftEn": "AWS Shield",
+          "right": "Tầng mạng tại edge — hấp thụ tấn công DDoS thể tích lớn",
+          "rightEn": "The network layer at the edge — absorbs volumetric DDoS"
+        }
+      ],
+      "explanation": "Bốn lớp này bị hỏi cùng nhau rất nhiều. Điểm mấu chốt để trả lời đúng: chỉ NACL và WAF mới CHẶN được thứ gì đó; Security Group chỉ biết cho phép.",
+      "explanationEn": "These four are examined together constantly. The key to getting them right: only NACLs and WAF can *block* anything; a Security Group only knows how to allow.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự một kiến trúc event-driven nới lỏng liên kết.",
+      "promptEn": "Put a loosely coupled, event-driven architecture into the right order.",
+      "items": [
+        {
+          "text": "Người dùng đặt hàng qua API Gateway",
+          "textEn": "A user places an order through API Gateway"
+        },
+        {
+          "text": "Lambda ghi đơn hàng và publish sự kiện lên SNS topic",
+          "textEn": "Lambda records the order and publishes an event to an SNS topic"
+        },
+        {
+          "text": "SNS fan-out sang nhiều SQS queue — kho, thanh toán, email",
+          "textEn": "SNS fans the event out to several SQS queues — inventory, billing, email"
+        },
+        {
+          "text": "Mỗi worker đọc queue của mình và xử lý theo tốc độ riêng",
+          "textEn": "Each worker reads its own queue and processes at its own pace"
+        }
+      ],
+      "explanation": "Giá trị của mẫu này nằm ở bước cuối: dịch vụ email sập cũng không làm hỏng đơn hàng — message nằm chờ trong queue cho tới khi nó sống lại.",
+      "explanationEn": "The value of this pattern is in the last step: if the email service dies, the order is unaffected — its messages simply wait in the queue until it comes back.",
+      "id": "d6"
+    }
+  ]
+}

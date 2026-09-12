@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về cách IAM đánh giá quyền.",
+      "promptEn": "Pick TWO statements that are true about how IAM evaluates permissions.",
+      "options": [
+        "Root user không bị ảnh hưởng bởi explicit Deny",
+        "Một explicit Deny luôn thắng mọi Allow",
+        "Mặc định mọi thứ bị từ chối cho tới khi có Allow rõ ràng",
+        "Permissions boundary tự nó cấp quyền",
+        "Một Allow trong identity policy ghi đè được Deny trong SCP"
+      ],
+      "optionsEn": [
+        "The root user is unaffected by an explicit Deny",
+        "An explicit Deny always beats any Allow",
+        "Everything is denied by default until something explicitly allows it",
+        "A permissions boundary grants permissions by itself",
+        "An Allow in an identity policy can override a Deny in an SCP"
+      ],
+      "answers": [
+        1,
+        2
+      ],
+      "explanation": "Hai quy tắc nền của IAM: implicit deny (không cho phép = cấm) và explicit deny thắng tuyệt đối. SCP và permissions boundary chỉ GIỚI HẠN quyền, không bao giờ cấp quyền — muốn dùng được vẫn phải có Allow trong identity policy.",
+      "explanationEn": "The two rules everything else rests on: implicit deny (not allowed means denied) and explicit deny always wins. SCPs and permissions boundaries only ever *limit* permissions — they never grant, so an identity policy Allow is still required.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Một ứng dụng chạy trên EC2 cần đọc file từ S3. Chọn HAI việc nên làm.",
+      "promptEn": "An application on EC2 needs to read files from S3. Pick TWO things you should do.",
+      "options": [
+        "Xoá mọi access key dài hạn khỏi instance",
+        "Nhúng access key vào AMI để mọi instance dùng chung",
+        "Tạo IAM role có quyền s3:GetObject và gắn qua instance profile",
+        "Tạo một IAM user riêng cho mỗi instance",
+        "Lưu access key trong User Data lúc khởi động"
+      ],
+      "optionsEn": [
+        "Remove any long-lived access keys from the instance",
+        "Bake the access keys into the AMI so every instance shares them",
+        "Create an IAM role with s3:GetObject and attach it via the instance profile",
+        "Create one IAM user per instance",
+        "Put the access keys in User Data at launch"
+      ],
+      "answers": [
+        0,
+        2
+      ],
+      "explanation": "IAM role là câu trả lời chuẩn cho mọi câu hỏi dạng 'dịch vụ AWS cần gọi dịch vụ AWS khác': credential là tạm thời, tự xoay vòng, không bao giờ nằm trên đĩa. Mọi phương án còn lại đều là access key dài hạn nằm ở nơi có thể đọc được.",
+      "explanationEn": "An IAM role is the answer to every 'AWS service needs to call another AWS service' question: the credentials are temporary, rotate themselves, and never touch disk. Every other option is a long-lived key sitting somewhere readable.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Công cụ IAM nào cho bạn xem, với một user, những dịch vụ AWS họ có quyền và lần cuối họ thực sự dùng?",
+      "promptEn": "Which IAM tool shows, for one user, the AWS services they have permission for and when they last actually used each one?",
+      "answer": "Access Advisor",
+      "answerEn": "Access Advisor",
+      "accept": [
+        "access advisor",
+        "iam access advisor",
+        "last accessed",
+        "access advisor tab"
+      ],
+      "explanation": "Access Advisor. Đây là công cụ để thu hẹp quyền theo nguyên tắc least privilege: quyền chưa dùng trong 90 ngày gần như chắc chắn là quyền thừa.",
+      "explanationEn": "Access Advisor. It is the tool for tightening least privilege: a permission unused for 90 days is almost certainly a permission that should not be there.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Báo cáo tải về được ở cấp tài khoản, liệt kê mọi user cùng trạng thái mật khẩu, access key và MFA của họ, tên là gì?",
+      "promptEn": "Which downloadable account-level report lists every user with the state of their password, access keys and MFA device?",
+      "answer": "Credentials Report",
+      "answerEn": "Credentials Report",
+      "accept": [
+        "credentials report",
+        "credential report",
+        "iam credentials report",
+        "iam credential report"
+      ],
+      "explanation": "Credentials Report — file CSV ở cấp tài khoản. Access Advisor nhìn theo chiều một user; Credentials Report nhìn theo chiều toàn bộ tài khoản. Đề thi hay đặt hai cái này cạnh nhau.",
+      "explanationEn": "The Credentials Report — a CSV at account level. Access Advisor looks down at one user; the Credentials Report looks across the whole account. The exam likes to offer both.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi khái niệm IAM với mô tả đúng.",
+      "promptEn": "Match each IAM concept to what it is.",
+      "pairs": [
+        {
+          "left": "IAM User",
+          "leftEn": "IAM User",
+          "right": "Một danh tính lâu dài cho một con người, có mật khẩu và/hoặc access key",
+          "rightEn": "A long-lived identity for one human, with a password and/or access keys"
+        },
+        {
+          "left": "IAM Group",
+          "leftEn": "IAM Group",
+          "right": "Một tập hợp user để gắn policy chung — không thể đăng nhập, không lồng nhau được",
+          "rightEn": "A collection of users to attach policies to — cannot log in, cannot nest"
+        },
+        {
+          "left": "IAM Role",
+          "leftEn": "IAM Role",
+          "right": "Danh tính không có credential cố định, được 'mượn' để lấy credential tạm thời",
+          "rightEn": "An identity with no permanent credentials, assumed to get temporary ones"
+        },
+        {
+          "left": "IAM Policy",
+          "leftEn": "IAM Policy",
+          "right": "Tài liệu JSON gồm Effect, Action, Resource — thứ thực sự cấp hoặc cấm quyền",
+          "rightEn": "A JSON document of Effect, Action and Resource — the thing that actually grants or denies"
+        }
+      ],
+      "explanation": "Bốn khái niệm này hay bị trộn lẫn. Điểm phân biệt then chốt: Group không phải danh tính (không đăng nhập được), còn Role thì có nhưng không mang credential cố định.",
+      "explanationEn": "These four get muddled constantly. The distinctions that matter: a Group is not an identity (it cannot log in), while a Role is one but carries no permanent credentials.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước cấp quyền S3 cho một EC2 instance theo cách an toàn.",
+      "promptEn": "Put the steps to give an EC2 instance access to S3 the right way into order.",
+      "items": [
+        {
+          "text": "Tạo IAM policy cho phép các action S3 cần thiết",
+          "textEn": "Create an IAM policy allowing the S3 actions the app needs"
+        },
+        {
+          "text": "Tạo IAM role cho dịch vụ EC2 và gắn policy đó vào role",
+          "textEn": "Create an IAM role for the EC2 service and attach that policy to it"
+        },
+        {
+          "text": "Gắn role vào instance thông qua instance profile",
+          "textEn": "Attach the role to the instance via its instance profile"
+        },
+        {
+          "text": "SDK trên instance tự lấy credential tạm thời từ IMDS",
+          "textEn": "The SDK on the instance picks up temporary credentials from IMDS automatically"
+        }
+      ],
+      "explanation": "Bước cuối cùng là lý do khiến role thắng access key: ứng dụng không cần biết gì về credential, và credential tự hết hạn.",
+      "explanationEn": "That last step is why a role beats an access key: the application never has to know anything about credentials, and the credentials expire on their own.",
+      "id": "d6"
+    }
+  ]
+}

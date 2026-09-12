@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về Service Control Policy (SCP).",
+      "promptEn": "Pick TWO statements that are true about Service Control Policies (SCPs).",
+      "options": [
+        "SCP cấp quyền cho user trong các tài khoản thành viên",
+        "SCP thay thế hoàn toàn IAM policy trong tài khoản thành viên",
+        "SCP chỉ giới hạn quyền tối đa, không bao giờ tự cấp quyền",
+        "SCP không áp dụng cho tài khoản quản lý (management account)",
+        "SCP chỉ áp dụng được cho từng user riêng lẻ"
+      ],
+      "optionsEn": [
+        "An SCP grants permissions to users in member accounts",
+        "An SCP replaces IAM policies entirely in member accounts",
+        "An SCP only caps the maximum permissions; it never grants any",
+        "An SCP does not apply to the organisation's management account",
+        "An SCP can only be applied to individual users"
+      ],
+      "answers": [
+        2,
+        3
+      ],
+      "explanation": "SCP là trần quyền, không phải nguồn quyền: muốn user làm được việc gì thì vẫn phải có IAM policy cho phép VÀ SCP không cấm. Management account miễn nhiễm với SCP — đây là chi tiết bị hỏi thẳng.",
+      "explanationEn": "An SCP is a ceiling, not a source: a user still needs an IAM policy allowing the action *and* an SCP that does not forbid it. The management account is immune to SCPs — a detail the exam asks directly.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI lý do dùng AWS Organizations.",
+      "promptEn": "Pick TWO reasons to use AWS Organizations.",
+      "options": [
+        "Tự động mã hoá mọi S3 bucket trong tổ chức",
+        "Thay thế IAM role trong từng tài khoản",
+        "Gộp hoá đơn của nhiều tài khoản và hưởng chiết khấu theo khối lượng",
+        "Cho phép dùng chung một VPC giữa các tài khoản mà không cần cấu hình gì",
+        "Áp dụng rào chắn bảo mật cho toàn bộ tài khoản bằng SCP"
+      ],
+      "optionsEn": [
+        "Automatically encrypting every S3 bucket in the organisation",
+        "Replacing IAM roles inside each account",
+        "Consolidated billing across accounts, with volume discounts",
+        "Automatically sharing one VPC across accounts with no configuration",
+        "Organisation-wide security guardrails through SCPs"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "Hai giá trị cốt lõi của Organizations là gộp hoá đơn và rào chắn bằng SCP. Chia sẻ tài nguyên giữa các tài khoản là việc của AWS RAM, và nó vẫn cần cấu hình.",
+      "explanationEn": "The two core benefits are consolidated billing and SCP guardrails. Sharing resources between accounts is AWS RAM's job, and it still has to be configured.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào phát ra credential TẠM THỜI khi một danh tính assume một IAM role?",
+      "promptEn": "Which service issues the TEMPORARY credentials when an identity assumes an IAM role?",
+      "answer": "AWS STS",
+      "answerEn": "AWS STS",
+      "accept": [
+        "sts",
+        "aws sts",
+        "security token service",
+        "aws security token service"
+      ],
+      "explanation": "AWS STS (Security Token Service). Mọi role assumption, mọi federation và mọi credential của Cognito Identity Pool đều đi qua STS.",
+      "explanationEn": "AWS STS, the Security Token Service. Every role assumption, every federation and every Cognito Identity Pool credential passes through it.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào cho nhân viên đăng nhập một lần rồi truy cập nhiều tài khoản AWS, thay cho AWS SSO cũ?",
+      "promptEn": "Which service gives staff one sign-in across many AWS accounts, replacing the old AWS SSO?",
+      "answer": "IAM Identity Center",
+      "answerEn": "IAM Identity Center",
+      "accept": [
+        "iam identity center",
+        "identity center",
+        "aws iam identity center",
+        "aws sso",
+        "iam identity centre"
+      ],
+      "explanation": "IAM Identity Center (trước là AWS SSO). Đây là câu trả lời chuẩn cho 'nhân viên cần truy cập nhiều tài khoản AWS' — không phải tạo IAM user ở từng tài khoản.",
+      "explanationEn": "IAM Identity Center, formerly AWS SSO. It is the standard answer to 'staff need access to several AWS accounts' — never creating an IAM user in each one.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ danh tính với đối tượng người dùng của nó.",
+      "promptEn": "Match each identity service to the people it is for.",
+      "pairs": [
+        {
+          "left": "IAM Identity Center",
+          "leftEn": "IAM Identity Center",
+          "right": "Nhân viên nội bộ cần truy cập nhiều tài khoản AWS",
+          "rightEn": "Internal staff who need access to several AWS accounts"
+        },
+        {
+          "left": "Amazon Cognito",
+          "leftEn": "Amazon Cognito",
+          "right": "Người dùng cuối của ứng dụng web hoặc di động của bạn",
+          "rightEn": "End users of your own web or mobile application"
+        },
+        {
+          "left": "AWS Directory Service",
+          "leftEn": "AWS Directory Service",
+          "right": "Tổ chức đã có Microsoft Active Directory tại chỗ",
+          "rightEn": "An organisation that already runs Microsoft Active Directory on-premises"
+        },
+        {
+          "left": "AWS RAM",
+          "leftEn": "AWS RAM",
+          "right": "Chia sẻ subnet, Transit Gateway hay license giữa các tài khoản",
+          "rightEn": "Sharing subnets, Transit Gateways or licences between accounts"
+        }
+      ],
+      "explanation": "Câu hỏi phân biệt then chốt: người dùng là NHÂN VIÊN của bạn hay KHÁCH HÀNG của bạn? Nhân viên → Identity Center; khách hàng → Cognito.",
+      "explanationEn": "The question that separates them: are these your *staff* or your *customers*? Staff means Identity Center; customers mean Cognito.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước để một user ở tài khoản A truy cập S3 bucket ở tài khoản B.",
+      "promptEn": "Put the steps for a user in account A to reach an S3 bucket in account B into order.",
+      "items": [
+        {
+          "text": "Tài khoản B tạo IAM role có trust policy tin tưởng tài khoản A",
+          "textEn": "Account B creates an IAM role whose trust policy trusts account A"
+        },
+        {
+          "text": "Tài khoản A cấp cho user quyền sts:AssumeRole với role đó",
+          "textEn": "Account A grants the user sts:AssumeRole on that role"
+        },
+        {
+          "text": "User gọi STS AssumeRole và nhận credential tạm thời",
+          "textEn": "The user calls STS AssumeRole and receives temporary credentials"
+        },
+        {
+          "text": "User dùng credential tạm thời đó để gọi S3 ở tài khoản B",
+          "textEn": "The user calls S3 in account B with those temporary credentials"
+        }
+      ],
+      "explanation": "Truy cập cross-account luôn cần HAI phía đồng ý: bên sở hữu tài nguyên tin tưởng bên kia (trust policy), và bên kia cho phép user của mình assume role (IAM policy).",
+      "explanationEn": "Cross-account access always needs both sides to agree: the resource owner trusts the other account (the trust policy), and that account lets its user assume the role (an IAM policy).",
+      "id": "d6"
+    }
+  ]
+}

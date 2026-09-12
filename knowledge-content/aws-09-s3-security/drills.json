@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phương thức mã hoá S3 trong đó BẠN quản lý khoá, không phải AWS tự sinh và tự giữ.",
+      "promptEn": "Pick TWO S3 encryption methods where YOU manage the key rather than AWS creating and holding it.",
+      "options": [
+        "S3 Bucket Keys",
+        "SSE-C (khoá do khách hàng cung cấp theo từng request)",
+        "SSE-S3",
+        "Mã hoá mặc định của bucket",
+        "SSE-KMS với customer managed key"
+      ],
+      "optionsEn": [
+        "S3 Bucket Keys",
+        "SSE-C (customer-provided key on every request)",
+        "SSE-S3",
+        "Bucket default encryption",
+        "SSE-KMS with a customer managed key"
+      ],
+      "answers": [
+        1,
+        4
+      ],
+      "explanation": "SSE-KMS với CMK cho bạn quyền kiểm soát, audit và xoay vòng khoá; SSE-C thì bạn gửi khoá kèm mỗi request và AWS không lưu lại gì. SSE-S3 là khoá do AWS quản hoàn toàn. S3 Bucket Keys không phải phương thức mã hoá — nó chỉ giảm chi phí gọi KMS.",
+      "explanationEn": "SSE-KMS with a customer managed key gives you control, audit and rotation; with SSE-C you send the key with every request and AWS keeps nothing. SSE-S3 is entirely AWS-managed. S3 Bucket Keys is not an encryption method at all — it just cuts the KMS call cost.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI cách cấp quyền đọc TẠM THỜI một object S3 riêng tư cho người không có tài khoản AWS.",
+      "promptEn": "Pick TWO ways to give someone with no AWS account TEMPORARY read access to one private S3 object.",
+      "options": [
+        "Đổi ACL của object thành public-read",
+        "Gửi cho họ access key của một IAM user",
+        "Bật Block Public Access rồi thêm bucket policy public",
+        "Tạo pre-signed URL cho object đó",
+        "Đưa object qua CloudFront với signed URL"
+      ],
+      "optionsEn": [
+        "Change the object's ACL to public-read",
+        "Send them an IAM user's access keys",
+        "Turn on Block Public Access and add a public bucket policy",
+        "Generate a pre-signed URL for the object",
+        "Serve it through CloudFront with a signed URL"
+      ],
+      "answers": [
+        3,
+        4
+      ],
+      "explanation": "Pre-signed URL và CloudFront signed URL đều có hạn dùng và không đòi hỏi người nhận có tài khoản AWS. Đổi ACL thành public-read thì ai cũng đọc được và vĩnh viễn; gửi access key thì trao quyền của cả IAM user đó.",
+      "explanationEn": "A pre-signed URL and a CloudFront signed URL both expire and need no AWS account on the other end. A public-read ACL is permanent and open to everyone; handing over access keys hands over that whole IAM user.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Cơ chế nào của S3 khoá object lại theo mô hình WORM để không ai — kể cả root — xoá được trong một khoảng thời gian?",
+      "promptEn": "Which S3 mechanism locks an object under WORM rules so nobody — not even root — can delete it for a set period?",
+      "answer": "S3 Object Lock",
+      "answerEn": "S3 Object Lock",
+      "accept": [
+        "s3 object lock",
+        "object lock",
+        "s3 objectlock"
+      ],
+      "explanation": "S3 Object Lock, ở chế độ Compliance thì ngay cả tài khoản root cũng không gỡ được cho tới khi hết hạn. Governance mode thì cho phép user có quyền đặc biệt ghi đè.",
+      "explanationEn": "S3 Object Lock. In Compliance mode not even the root account can remove it before the retention expires; Governance mode lets a specially privileged user override.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Loại VPC endpoint nào cho phép EC2 trong private subnet gọi S3 mà không cần NAT Gateway và không mất phí?",
+      "promptEn": "Which VPC endpoint type lets EC2 in a private subnet reach S3 with no NAT Gateway and no charge?",
+      "answer": "Gateway Endpoint",
+      "answerEn": "Gateway Endpoint",
+      "accept": [
+        "gateway endpoint",
+        "vpc gateway endpoint",
+        "s3 gateway endpoint",
+        "gateway vpc endpoint"
+      ],
+      "explanation": "Gateway Endpoint — chỉ có cho S3 và DynamoDB, hoạt động bằng cách thêm route vào route table, và miễn phí. Mọi dịch vụ khác dùng Interface Endpoint (PrivateLink) và có tính phí.",
+      "explanationEn": "A Gateway Endpoint — available only for S3 and DynamoDB, implemented as a route-table entry, and free. Everything else uses an Interface Endpoint (PrivateLink), which is charged.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi cơ chế kiểm soát truy cập S3 với phạm vi của nó.",
+      "promptEn": "Match each S3 access-control mechanism to its scope.",
+      "pairs": [
+        {
+          "left": "Bucket Policy",
+          "leftEn": "Bucket Policy",
+          "right": "JSON gắn vào bucket — cách chính để cấp quyền cross-account",
+          "rightEn": "JSON attached to the bucket — the main way to grant cross-account access"
+        },
+        {
+          "left": "IAM Policy",
+          "leftEn": "IAM Policy",
+          "right": "Gắn vào user/role, nói identity đó được làm gì với S3",
+          "rightEn": "Attached to a user or role, saying what that identity may do in S3"
+        },
+        {
+          "left": "Block Public Access",
+          "leftEn": "Block Public Access",
+          "right": "Công tắc chặn trên cùng, thắng mọi policy cho phép public",
+          "rightEn": "The master switch that overrides any policy trying to make data public"
+        },
+        {
+          "left": "Pre-signed URL",
+          "leftEn": "Pre-signed URL",
+          "right": "Quyền tạm thời cho một object, mang theo quyền của người tạo ra URL",
+          "rightEn": "Temporary access to one object, carrying the permissions of whoever signed it"
+        }
+      ],
+      "explanation": "Thứ tự thắng thua: Block Public Access chặn trước tiên, rồi explicit Deny, rồi mới tới Allow ở bucket policy hoặc IAM policy.",
+      "explanationEn": "The order of battle: Block Public Access wins first, then any explicit Deny, and only then an Allow from a bucket policy or an IAM policy.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước để phục vụ file S3 riêng tư qua CloudFront một cách an toàn.",
+      "promptEn": "Put the steps for serving a private S3 file securely through CloudFront into order.",
+      "items": [
+        {
+          "text": "Bật Block Public Access trên bucket để không ai vào thẳng được",
+          "textEn": "Turn on Block Public Access so nobody can reach the bucket directly"
+        },
+        {
+          "text": "Tạo CloudFront distribution với Origin Access Control (OAC)",
+          "textEn": "Create a CloudFront distribution with Origin Access Control (OAC)"
+        },
+        {
+          "text": "Thêm bucket policy chỉ cho phép OAC đó đọc object",
+          "textEn": "Add a bucket policy allowing only that OAC to read the objects"
+        },
+        {
+          "text": "Phát hành signed URL hoặc signed cookie cho người dùng hợp lệ",
+          "textEn": "Issue signed URLs or signed cookies to the users who are allowed in"
+        }
+      ],
+      "explanation": "Đây là mẫu chuẩn của đề thi cho 'phân phối nội dung riêng tư': bucket đóng hoàn toàn, CloudFront là cửa duy nhất, và chữ ký quyết định ai qua được cửa đó.",
+      "explanationEn": "This is the exam's canonical private-content pattern: the bucket is sealed, CloudFront is the only door, and the signature decides who gets through it.",
+      "id": "d6"
+    }
+  ]
+}

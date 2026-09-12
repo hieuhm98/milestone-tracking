@@ -5,6 +5,16 @@ import { useLang } from "@/context/lang";
 
 const CARDS = [
   {
+    href: "/practice/blitz",
+    icon: "⚡",
+    accent: "text-orange-700 dark:text-orange-300",
+    title: { vi: "Blitz — Đấu tốc độ", en: "Blitz — Timed Run" },
+    desc: {
+      vi: "60 giây, điểm nhân theo chuỗi đúng, và một kỷ lục để phá. Gồm cả dạng chọn nhiều đáp án, tự gõ tên dịch vụ, ghép cặp và sắp thứ tự.",
+      en: "60 seconds, a multiplier that compounds while you're right, and a record to beat. Includes choose‑several, type‑the‑service, matching and ordering.",
+    },
+  },
+  {
     href: "/practice/questions",
     icon: "✎",
     accent: "text-blue-700 dark:text-blue-300",
@@ -34,13 +44,13 @@ export default function PracticeHomePage() {
         <h1 className="text-2xl font-bold">{pick("Luyện tập", "Practice")}</h1>
         <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
           {pick(
-            "Rèn kỹ năng thực hành: giải bài tập thiết kế và viết truy vấn SQL.",
-            "Sharpen hands‑on skills: work through design exercises and write SQL queries."
+            "Rèn kỹ năng thực hành: đấu tốc độ có tính giờ, giải bài tập thiết kế và viết truy vấn SQL.",
+            "Sharpen hands‑on skills: run the timed blitz, work through design exercises, and write SQL queries."
           )}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {CARDS.map((c) => (
           <Link
             key={c.href}

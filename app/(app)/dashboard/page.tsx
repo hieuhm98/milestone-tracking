@@ -37,6 +37,16 @@ const CARDS = [
     },
   },
   {
+    href: "/practice/blitz",
+    icon: "⚡",
+    accent: "text-orange-700 dark:text-orange-300",
+    title: { vi: "Blitz — Đấu tốc độ", en: "Blitz — Timed Run" },
+    desc: {
+      vi: "60 giây tính giờ, điểm nhân theo chuỗi đúng, kỷ lục để phá — kèm dạng chọn nhiều đáp án, tự gõ, ghép cặp và sắp thứ tự.",
+      en: "A 60-second clock, a combo multiplier and a record to beat — with choose-several, type-the-answer, matching and ordering.",
+    },
+  },
+  {
     href: "/exam",
     icon: "◎",
     accent: "text-rose-700 dark:text-rose-300",

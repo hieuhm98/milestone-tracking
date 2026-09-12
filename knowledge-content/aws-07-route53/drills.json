@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều Alias record làm được mà CNAME thì không.",
+      "promptEn": "Pick TWO things an Alias record can do that a CNAME cannot.",
+      "options": [
+        "Trỏ tại zone apex (ví dụ example.com, không có www)",
+        "Trỏ tới một hostname bất kỳ ngoài AWS",
+        "Không tính phí cho truy vấn trỏ tới tài nguyên AWS",
+        "Cho phép bạn tự đặt TTL tuỳ ý",
+        "Hoạt động với mọi loại record, kể cả MX"
+      ],
+      "optionsEn": [
+        "Point at the zone apex (example.com, with no www)",
+        "Point at any arbitrary hostname outside AWS",
+        "Cost nothing for queries that resolve to an AWS resource",
+        "Let you set whatever TTL you like",
+        "Work for every record type, including MX"
+      ],
+      "answers": [
+        0,
+        2
+      ],
+      "explanation": "Đây là lý do Alias gần như luôn là đáp án đúng khi đích đến là tài nguyên AWS: CNAME không được phép tồn tại ở zone apex theo chuẩn DNS, còn Alias thì được và lại miễn phí. Đổi lại, TTL do AWS quản và Alias chỉ trỏ tới tài nguyên AWS.",
+      "explanationEn": "This is why Alias is nearly always right when the target is an AWS resource: DNS forbids a CNAME at the zone apex, Alias is allowed there, and it is free. The trade is that AWS owns the TTL and Alias only points at AWS resources.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI routing policy của Route 53 phù hợp để chuyển hướng người dùng khỏi một Region đang gặp sự cố.",
+      "promptEn": "Pick TWO Route 53 routing policies suited to steering users away from a Region that is failing.",
+      "options": [
+        "Failover",
+        "Simple",
+        "Multivalue answer",
+        "Latency-based",
+        "Weighted với trọng số bằng nhau"
+      ],
+      "optionsEn": [
+        "Failover",
+        "Simple",
+        "Multivalue answer",
+        "Latency-based",
+        "Weighted with equal weights"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "Failover chuyển hẳn sang bản dự phòng khi health check hỏng; Latency-based cũng bỏ qua endpoint không khoẻ và định tuyến sang Region nhanh nhất còn sống. Simple KHÔNG hỗ trợ health check — đó là điểm bẫy phổ biến nhất.",
+      "explanationEn": "Failover swaps to the standby when a health check fails; latency-based also skips unhealthy endpoints and routes to the fastest surviving Region. Simple routing supports no health checks at all — that is the trap.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Loại hosted zone nào của Route 53 chỉ phân giải được từ bên trong một hoặc nhiều VPC?",
+      "promptEn": "Which Route 53 hosted zone type resolves only from inside one or more VPCs?",
+      "answer": "Private Hosted Zone",
+      "answerEn": "Private Hosted Zone",
+      "accept": [
+        "private hosted zone",
+        "private hosted zones",
+        "private zone",
+        "route 53 private hosted zone"
+      ],
+      "explanation": "Private Hosted Zone. Dùng cho tên nội bộ như db.internal — bên ngoài internet hỏi sẽ không nhận được gì.",
+      "explanationEn": "A Private Hosted Zone. It serves internal names like db.internal — the public internet gets nothing back.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Giá trị nào trên một DNS record quyết định resolver được cache câu trả lời bao lâu?",
+      "promptEn": "Which value on a DNS record decides how long a resolver may cache the answer?",
+      "answer": "TTL",
+      "answerEn": "TTL",
+      "accept": [
+        "ttl",
+        "time to live",
+        "time-to-live",
+        "record ttl"
+      ],
+      "explanation": "TTL (Time To Live), tính bằng giây. TTL thấp giúp đổi record nhanh nhưng tốn nhiều truy vấn hơn — hạ TTL trước khi làm migration là mẹo kinh điển.",
+      "explanationEn": "TTL (Time To Live), in seconds. A low TTL makes changes propagate fast but costs more queries — lowering it before a migration is the classic move.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi routing policy của Route 53 với mục đích của nó.",
+      "promptEn": "Match each Route 53 routing policy to what it is for.",
+      "pairs": [
+        {
+          "left": "Weighted",
+          "leftEn": "Weighted",
+          "right": "Chia traffic theo tỷ lệ phần trăm — canary và blue/green",
+          "rightEn": "Split traffic by percentage — canary releases and blue/green"
+        },
+        {
+          "left": "Latency-based",
+          "leftEn": "Latency-based",
+          "right": "Gửi người dùng tới Region cho độ trễ mạng thấp nhất",
+          "rightEn": "Send each user to the Region with the lowest network latency"
+        },
+        {
+          "left": "Failover",
+          "leftEn": "Failover",
+          "right": "Chuyển sang bản dự phòng khi health check của bản chính hỏng",
+          "rightEn": "Swap to a standby when the primary's health check fails"
+        },
+        {
+          "left": "Geolocation",
+          "leftEn": "Geolocation",
+          "right": "Trả lời khác nhau theo quốc gia người dùng — nội dung và tuân thủ pháp lý",
+          "rightEn": "Answer differently by the user's country — content and legal compliance"
+        }
+      ],
+      "explanation": "Phân biệt hay bị nhầm nhất: Latency-based chọn theo TỐC ĐỘ đo được, còn Geolocation chọn theo VỊ TRÍ người dùng. Đề thi nói 'yêu cầu pháp lý theo quốc gia' là Geolocation, nói 'trải nghiệm nhanh nhất' là Latency.",
+      "explanationEn": "The distinction that trips people: latency-based picks on measured *speed*, geolocation picks on the user's *location*. 'Legal requirement per country' means geolocation; 'fastest experience' means latency.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước phân giải DNS cho example.com.",
+      "promptEn": "Put the DNS resolution steps for example.com into order.",
+      "items": [
+        {
+          "text": "Trình duyệt hỏi resolver đệ quy (thường của ISP)",
+          "textEn": "The browser asks the recursive resolver, usually the ISP's"
+        },
+        {
+          "text": "Resolver hỏi root name server để biết ai quản .com",
+          "textEn": "The resolver asks a root name server who handles .com"
+        },
+        {
+          "text": "Resolver hỏi TLD server .com để biết name server của example.com",
+          "textEn": "The resolver asks the .com TLD server for example.com's name servers"
+        },
+        {
+          "text": "Route 53 (authoritative) trả về địa chỉ IP cuối cùng",
+          "textEn": "Route 53, the authoritative server, returns the final IP address"
+        }
+      ],
+      "explanation": "Route 53 nằm ở bước cuối: nó là name server có thẩm quyền cho zone của bạn. TTL quyết định mỗi bước trong chuỗi này được bỏ qua trong bao lâu ở lần hỏi tiếp theo.",
+      "explanationEn": "Route 53 sits at the last step: it is the authoritative name server for your zone. TTL is what decides how much of this chain gets skipped next time.",
+      "id": "d6"
+    }
+  ]
+}

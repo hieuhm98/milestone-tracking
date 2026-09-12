@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI trụ cột của AWS Well-Architected Framework.",
+      "promptEn": "Pick TWO pillars of the AWS Well-Architected Framework.",
+      "options": [
+        "Portability",
+        "Interoperability",
+        "Sustainability",
+        "Operational Excellence",
+        "Scalability"
+      ],
+      "optionsEn": [
+        "Portability",
+        "Interoperability",
+        "Sustainability",
+        "Operational Excellence",
+        "Scalability"
+      ],
+      "answers": [
+        2,
+        3
+      ],
+      "explanation": "Sáu trụ cột là: Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization và Sustainability (thêm năm 2021). Scalability, Portability và Interoperability nghe hợp lý nhưng không phải trụ cột.",
+      "explanationEn": "The six pillars are Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization and Sustainability (added in 2021). Scalability, Portability and Interoperability all sound plausible but are not pillars.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI nguyên tắc thiết kế chung của Well-Architected Framework.",
+      "promptEn": "Pick TWO general design principles of the Well-Architected Framework.",
+      "options": [
+        "Tự động hoá để thử nghiệm kiến trúc dễ dàng hơn",
+        "Luôn chọn instance lớn nhất để tránh phải mở rộng sau này",
+        "Ưu tiên máy chủ vật lý vì dễ dự đoán chi phí hơn",
+        "Ngừng đoán nhu cầu năng lực — mở rộng theo nhu cầu thực tế",
+        "Tập trung mọi dịch vụ vào một Region để đơn giản hoá"
+      ],
+      "optionsEn": [
+        "Automate to make architectural experimentation easier",
+        "Always pick the biggest instance so you never have to scale later",
+        "Prefer physical servers because their costs are more predictable",
+        "Stop guessing capacity — scale with actual demand",
+        "Concentrate everything in one Region to keep things simple"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "Ba phương án sai đều là tư duy on-premises: mua dư phòng, tập trung một chỗ, và ưu tiên phần cứng cố định. Toàn bộ framework được xây để đi ngược lại đúng ba thói quen đó.",
+      "explanationEn": "The three wrong options are all on-premises thinking: over-provision, centralise, prefer fixed hardware. The framework exists to push against exactly those three habits.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Công cụ miễn phí nào của AWS kiểm tra tài khoản của bạn theo các best practice về chi phí, hiệu năng, bảo mật, khả năng chịu lỗi và hạn mức?",
+      "promptEn": "Which free AWS tool checks your account against best practices for cost, performance, security, fault tolerance and service limits?",
+      "answer": "AWS Trusted Advisor",
+      "answerEn": "AWS Trusted Advisor",
+      "accept": [
+        "trusted advisor",
+        "aws trusted advisor"
+      ],
+      "explanation": "AWS Trusted Advisor. Tài khoản Basic chỉ xem được một phần kiểm tra; muốn đủ bộ thì cần gói Business hoặc Enterprise Support.",
+      "explanationEn": "AWS Trusted Advisor. A Basic account sees only a subset of the checks; the full set needs a Business or Enterprise Support plan.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Trụ cột nào của Well-Architected Framework được thêm vào năm 2021, tập trung vào tác động môi trường?",
+      "promptEn": "Which Well-Architected pillar was added in 2021 and focuses on environmental impact?",
+      "answer": "Sustainability",
+      "answerEn": "Sustainability",
+      "accept": [
+        "sustainability",
+        "sustainability pillar",
+        "tinh ben vung",
+        "ben vung"
+      ],
+      "explanation": "Sustainability. Nội dung xoay quanh việc giảm tài nguyên lãng phí: chọn Region hiệu quả, dùng instance đúng kích cỡ, dùng serverless và lưu trữ phân tầng.",
+      "explanationEn": "Sustainability. Its content is about wasting fewer resources: efficient Region choice, right-sized instances, serverless, and tiered storage.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi trụ cột Well-Architected với câu hỏi cốt lõi của nó.",
+      "promptEn": "Match each Well-Architected pillar to its core question.",
+      "pairs": [
+        {
+          "left": "Reliability",
+          "leftEn": "Reliability",
+          "right": "Hệ thống có tự phục hồi khi một thành phần hỏng không?",
+          "rightEn": "Does the system recover by itself when a component fails?"
+        },
+        {
+          "left": "Performance Efficiency",
+          "leftEn": "Performance Efficiency",
+          "right": "Ta có đang dùng đúng loại tài nguyên cho khối lượng công việc này không?",
+          "rightEn": "Are we using the right resource types for this workload?"
+        },
+        {
+          "left": "Cost Optimization",
+          "leftEn": "Cost Optimization",
+          "right": "Ta có đang trả tiền cho thứ mình không dùng không?",
+          "rightEn": "Are we paying for anything we are not using?"
+        },
+        {
+          "left": "Operational Excellence",
+          "leftEn": "Operational Excellence",
+          "right": "Ta có vận hành, giám sát và cải tiến hệ thống một cách có kỷ luật không?",
+          "rightEn": "Do we run, observe and improve the system with discipline?"
+        }
+      ],
+      "explanation": "Đề thi hiếm khi hỏi thẳng tên trụ cột, nhưng mỗi câu hỏi tình huống đều nghiêng về một trụ cột. Nhận ra trụ cột nào đang được hỏi thường loại được ngay hai phương án.",
+      "explanationEn": "The exam rarely names a pillar outright, but every scenario leans on one. Spotting which pillar a question is about usually eliminates two options immediately.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự cách tiếp cận một câu hỏi tình huống trong đề SAA-C03.",
+      "promptEn": "Put the right way to approach an SAA-C03 scenario question into order.",
+      "items": [
+        {
+          "text": "Đọc câu hỏi cuối cùng trước để biết đề thực sự hỏi gì",
+          "textEn": "Read the final sentence first to see what is actually being asked"
+        },
+        {
+          "text": "Tìm từ khoá ràng buộc: 'chi phí thấp nhất', 'ít thao tác vận hành nhất', 'độ trễ thấp nhất'",
+          "textEn": "Find the constraint words: 'most cost-effective', 'least operational overhead', 'lowest latency'"
+        },
+        {
+          "text": "Loại ngay các phương án bất khả thi về mặt kỹ thuật",
+          "textEn": "Eliminate the options that are technically impossible"
+        },
+        {
+          "text": "Trong các phương án còn khả thi, chọn cái khớp với ràng buộc",
+          "textEn": "Among the workable options, pick the one that matches the constraint"
+        }
+      ],
+      "explanation": "Bước thứ hai là bước quyết định: thường có hai phương án đều CHẠY ĐƯỢC, và từ khoá ràng buộc là thứ duy nhất phân biệt chúng.",
+      "explanationEn": "The second step is the decisive one: two options usually both *work*, and the constraint word is the only thing separating them.",
+      "id": "d6"
+    }
+  ]
+}

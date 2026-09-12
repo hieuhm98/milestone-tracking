@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều ĐÚNG về AWS Global Accelerator so với CloudFront.",
+      "promptEn": "Pick TWO things that are true of AWS Global Accelerator compared with CloudFront.",
+      "options": [
+        "Cache nội dung tĩnh ở edge location giống CloudFront",
+        "Chỉ hoạt động với traffic HTTP và HTTPS",
+        "Yêu cầu chứng chỉ ACM ở us-east-1",
+        "Cung cấp hai IP anycast tĩnh làm điểm vào cố định",
+        "Không cache nội dung — chỉ định tuyến traffic qua mạng AWS"
+      ],
+      "optionsEn": [
+        "It caches static content at edge locations, like CloudFront",
+        "It only works with HTTP and HTTPS traffic",
+        "It requires an ACM certificate in us-east-1",
+        "It gives you two static anycast IPs as a fixed entry point",
+        "It caches nothing — it only routes traffic over the AWS network"
+      ],
+      "answers": [
+        3,
+        4
+      ],
+      "explanation": "Đây là cặp hay bị nhầm nhất. CloudFront CACHE nội dung và chỉ làm HTTP/HTTPS; Global Accelerator không cache, làm được mọi giao thức TCP/UDP, và cho IP tĩnh. Nội dung tĩnh → CloudFront; ứng dụng non-HTTP hoặc cần IP tĩnh → Global Accelerator.",
+      "explanationEn": "This is the pair people confuse most. CloudFront *caches* and is HTTP/HTTPS only; Global Accelerator caches nothing, handles any TCP/UDP protocol, and hands you static IPs. Static content means CloudFront; a non-HTTP app or a static-IP requirement means Global Accelerator.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI cách giới hạn ai xem được nội dung qua CloudFront.",
+      "promptEn": "Pick TWO ways to restrict who can view content through CloudFront.",
+      "options": [
+        "Signed cookie cho nhiều file cùng lúc",
+        "Signed URL cho từng file riêng lẻ",
+        "Đặt TTL bằng 0 trên cache policy",
+        "Tạo invalidation cho /*",
+        "Bật compression trên distribution"
+      ],
+      "optionsEn": [
+        "Signed cookies, covering many files at once",
+        "Signed URLs, one file at a time",
+        "Setting the cache policy TTL to 0",
+        "Creating an invalidation for /*",
+        "Enabling compression on the distribution"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "Signed URL dùng khi cấp quyền cho từng file (một video mua lẻ); signed cookie dùng khi cấp quyền cho cả thư viện (gói đăng ký). TTL, invalidation và compression đều là chuyện cache, không phải kiểm soát truy cập.",
+      "explanationEn": "Signed URLs are for one file at a time (a single purchased video); signed cookies are for a whole library (a subscription). TTL, invalidation and compression are cache concerns, not access control.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng nào của CloudFront cho phép chỉ CloudFront đọc được S3 bucket, còn truy cập trực tiếp thì bị chặn?",
+      "promptEn": "Which CloudFront feature lets only CloudFront read an S3 bucket while direct access is blocked?",
+      "answer": "Origin Access Control",
+      "answerEn": "Origin Access Control",
+      "accept": [
+        "origin access control",
+        "oac",
+        "cloudfront oac",
+        "origin access control oac"
+      ],
+      "explanation": "Origin Access Control (OAC) — bản thay thế hiện đại cho Origin Access Identity (OAI) cũ. Đề thi mới đều dùng OAC.",
+      "explanationEn": "Origin Access Control (OAC) — the modern replacement for the older Origin Access Identity (OAI). Current exam questions use OAC.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Region nào bắt buộc phải chứa chứng chỉ ACM để dùng được cho CloudFront?",
+      "promptEn": "Which Region must hold an ACM certificate before CloudFront can use it?",
+      "answer": "us-east-1",
+      "answerEn": "us-east-1",
+      "accept": [
+        "us east 1",
+        "us-east-1",
+        "useast1",
+        "n virginia",
+        "northern virginia",
+        "us east 1 n virginia"
+      ],
+      "explanation": "us-east-1 (N. Virginia). Đây là chi tiết bị hỏi thẳng trong đề thi: chứng chỉ ở Region khác sẽ không hiện ra trong danh sách chọn của CloudFront.",
+      "explanationEn": "us-east-1 (N. Virginia). The exam asks this outright: a certificate in any other Region simply will not appear in CloudFront's picker.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ edge của AWS với việc nó làm.",
+      "promptEn": "Match each AWS edge service to what it actually does.",
+      "pairs": [
+        {
+          "left": "CloudFront",
+          "leftEn": "CloudFront",
+          "right": "Cache nội dung HTTP ở edge để giảm độ trễ và tải cho origin",
+          "rightEn": "Caches HTTP content at the edge, cutting latency and origin load"
+        },
+        {
+          "left": "Global Accelerator",
+          "leftEn": "Global Accelerator",
+          "right": "IP anycast tĩnh, định tuyến mọi giao thức qua backbone AWS — không cache",
+          "rightEn": "Static anycast IPs routing any protocol over the AWS backbone — no caching"
+        },
+        {
+          "left": "CloudFront Functions",
+          "leftEn": "CloudFront Functions",
+          "right": "JavaScript siêu nhẹ chạy dưới 1 ms để sửa header hoặc redirect",
+          "rightEn": "Sub-millisecond JavaScript for header rewrites and redirects"
+        },
+        {
+          "left": "Lambda@Edge",
+          "leftEn": "Lambda@Edge",
+          "right": "Lambda đầy đủ ở edge — gọi được API bên ngoài, chạy tới vài giây",
+          "rightEn": "A full Lambda at the edge — can call external APIs, runs for seconds"
+        }
+      ],
+      "explanation": "Phân biệt CloudFront Functions và Lambda@Edge: Functions nhanh, rẻ, chỉ thao tác header/URL; Lambda@Edge chậm hơn nhưng gọi được mạng và truy cập được body của request.",
+      "explanationEn": "CloudFront Functions versus Lambda@Edge: Functions are fast, cheap and limited to header and URL manipulation; Lambda@Edge is slower but can reach the network and see the request body.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng đường đi của một request tới CloudFront khi nội dung chưa có trong cache.",
+      "promptEn": "Put a CloudFront request on a cache miss into the right order.",
+      "items": [
+        {
+          "text": "Người dùng phân giải tên miền và được trả về edge location gần nhất",
+          "textEn": "The user resolves the domain and gets the nearest edge location"
+        },
+        {
+          "text": "Edge location kiểm tra cache và không tìm thấy nội dung (cache miss)",
+          "textEn": "The edge location checks its cache and finds nothing — a cache miss"
+        },
+        {
+          "text": "CloudFront lấy nội dung từ origin qua mạng backbone của AWS",
+          "textEn": "CloudFront fetches from the origin over the AWS backbone"
+        },
+        {
+          "text": "Edge lưu nội dung lại theo TTL và trả về cho người dùng",
+          "textEn": "The edge caches it for the TTL and returns it to the user"
+        }
+      ],
+      "explanation": "Bước cuối là toàn bộ giá trị của CloudFront: người dùng tiếp theo ở cùng khu vực được phục vụ ngay tại edge, origin không phải làm gì cả.",
+      "explanationEn": "That last step is the entire value of CloudFront: the next user in that region is served at the edge and the origin never hears about it.",
+      "id": "d6"
+    }
+  ]
+}

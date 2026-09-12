@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về EBS volume.",
+      "promptEn": "Pick TWO statements that are true about EBS volumes.",
+      "options": [
+        "Bị khoá trong một Availability Zone duy nhất",
+        "Là ổ đĩa mạng, không phải đĩa gắn trực tiếp vào máy chủ",
+        "Là object storage giống S3",
+        "Có thể gắn vào instance ở bất kỳ AZ nào trong Region",
+        "Mất toàn bộ dữ liệu khi instance bị stop"
+      ],
+      "optionsEn": [
+        "They are locked to a single Availability Zone",
+        "They are network drives, not disks physically attached to the host",
+        "They are object storage, like S3",
+        "They can attach to an instance in any AZ in the Region",
+        "They lose all data when the instance is stopped"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "EBS là ổ mạng gắn vào một AZ — đó là lý do bạn phải tạo snapshot rồi khôi phục để chuyển volume sang AZ khác. Dữ liệu KHÔNG mất khi stop (đó là Instance Store).",
+      "explanationEn": "EBS is a network drive pinned to one AZ — which is why moving a volume to another AZ means snapshot then restore. Data survives a stop; the storage that does not is Instance Store.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI loại lưu trữ có thể được nhiều EC2 instance ở NHIỀU AZ mount cùng lúc.",
+      "promptEn": "Pick TWO storage options that many EC2 instances across MULTIPLE AZs can mount at the same time.",
+      "options": [
+        "S3 Glacier Deep Archive",
+        "EC2 Instance Store",
+        "Amazon FSx for Windows File Server",
+        "Amazon EFS",
+        "Một EBS gp3 volume"
+      ],
+      "optionsEn": [
+        "S3 Glacier Deep Archive",
+        "EC2 Instance Store",
+        "Amazon FSx for Windows File Server",
+        "Amazon EFS",
+        "A gp3 EBS volume"
+      ],
+      "answers": [
+        2,
+        3
+      ],
+      "explanation": "EFS (NFS, Linux) và FSx for Windows (SMB) là file system dùng chung, tự trải qua nhiều AZ. EBS chỉ gắn một instance một AZ (Multi-Attach io1/io2 vẫn trong cùng một AZ), Instance Store thì gắn cứng vào một host.",
+      "explanationEn": "EFS (NFS, Linux) and FSx for Windows (SMB) are shared file systems that span AZs by design. EBS attaches to one instance in one AZ — even io1/io2 Multi-Attach stays inside a single AZ — and Instance Store is welded to one host.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Loại lưu trữ EC2 nào gắn vật lý vào máy chủ, cho IOPS cao nhất, và mất sạch dữ liệu khi instance stop?",
+      "promptEn": "Which EC2 storage is physically attached to the host, gives the highest IOPS, and loses all its data when the instance stops?",
+      "answer": "Instance Store",
+      "answerEn": "Instance Store",
+      "accept": [
+        "instance store",
+        "ec2 instance store",
+        "instance storage",
+        "ephemeral storage",
+        "ephemeral"
+      ],
+      "explanation": "Instance Store. Dùng cho cache, buffer, scratch space và dữ liệu tạm — bất cứ thứ gì mất đi cũng không sao. Đề thi mô tả 'IOPS cực cao' + 'dữ liệu tạm' là đang nói về nó.",
+      "explanationEn": "Instance Store. It is for cache, buffers, scratch space — anything you can afford to lose. When the exam says 'extremely high IOPS' and 'temporary data', this is what it means.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Bạn tạo ra cái gì để sao chép một EBS volume sang Availability Zone hoặc Region khác?",
+      "promptEn": "What do you create in order to copy an EBS volume to another Availability Zone or Region?",
+      "answer": "Snapshot",
+      "answerEn": "Snapshot",
+      "accept": [
+        "snapshot",
+        "snapshots",
+        "ebs snapshot",
+        "ebs snapshots"
+      ],
+      "explanation": "Snapshot. Snapshot được lưu trong S3 và là con đường duy nhất đưa một EBS volume vượt ra khỏi AZ của nó.",
+      "explanationEn": "A snapshot. Snapshots live in S3 and are the only route an EBS volume has out of its own AZ.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi loại EBS volume với trường hợp dùng đúng của nó.",
+      "promptEn": "Match each EBS volume type to the job it is right for.",
+      "pairs": [
+        {
+          "left": "gp3",
+          "leftEn": "gp3",
+          "right": "SSD đa dụng — ổ boot và phần lớn workload thông thường",
+          "rightEn": "General-purpose SSD — boot volumes and most ordinary workloads"
+        },
+        {
+          "left": "io2 Block Express",
+          "leftEn": "io2 Block Express",
+          "right": "IOPS cao nhất và độ bền cao nhất — database trọng yếu",
+          "rightEn": "The highest IOPS and durability — mission-critical databases"
+        },
+        {
+          "left": "st1",
+          "leftEn": "st1",
+          "right": "HDD tối ưu throughput — big data, xử lý log tuần tự",
+          "rightEn": "Throughput-optimised HDD — big data, sequential log processing"
+        },
+        {
+          "left": "sc1",
+          "leftEn": "sc1",
+          "right": "HDD lạnh nhất, rẻ nhất — dữ liệu truy cập rất thưa",
+          "rightEn": "The coldest, cheapest HDD — data you touch very rarely"
+        }
+      ],
+      "explanation": "Quy tắc nhanh: cần boot được thì phải là SSD (gp hoặc io); st1 và sc1 là HDD, KHÔNG dùng làm ổ boot được.",
+      "explanationEn": "The quick rule: a boot volume must be SSD (gp or io). st1 and sc1 are HDD and cannot boot at all.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp bốn loại lưu trữ theo độ trễ, thấp nhất trước.",
+      "promptEn": "Order these four storage options by latency, lowest first.",
+      "items": [
+        {
+          "text": "EC2 Instance Store — đĩa NVMe gắn thẳng vào host",
+          "textEn": "EC2 Instance Store — NVMe attached directly to the host"
+        },
+        {
+          "text": "EBS gp3 — ổ mạng trong cùng một AZ",
+          "textEn": "EBS gp3 — a network drive inside one AZ"
+        },
+        {
+          "text": "Amazon EFS — file system dùng chung qua NFS",
+          "textEn": "Amazon EFS — a shared file system over NFS"
+        },
+        {
+          "text": "Amazon S3 — object storage truy cập qua HTTP API",
+          "textEn": "Amazon S3 — object storage reached over an HTTP API"
+        }
+      ],
+      "explanation": "Càng xa CPU thì độ trễ càng lớn nhưng khả năng chia sẻ và độ bền càng cao. Đó là đánh đổi duy nhất cần nhớ khi chọn lưu trữ.",
+      "explanationEn": "The further from the CPU, the higher the latency but the better the sharing and durability. That single trade-off is the whole storage decision.",
+      "id": "d6"
+    }
+  ]
+}

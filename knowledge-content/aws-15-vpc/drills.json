@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điểm khác biệt ĐÚNG giữa Network ACL và Security Group.",
+      "promptEn": "Pick TWO genuine differences between a Network ACL and a Security Group.",
+      "options": [
+        "NACL có cả rule allow và deny, Security Group chỉ có allow",
+        "NACL gắn vào instance, Security Group gắn vào subnet",
+        "NACL đánh giá mọi rule rồi mới quyết định, Security Group dừng ở rule đầu tiên",
+        "NACL là stateless, Security Group là stateful",
+        "NACL chỉ lọc traffic đi ra, Security Group chỉ lọc traffic đi vào"
+      ],
+      "optionsEn": [
+        "A NACL has both allow and deny rules; a Security Group has allow only",
+        "A NACL attaches to an instance; a Security Group attaches to a subnet",
+        "A NACL evaluates every rule before deciding; a Security Group stops at the first",
+        "A NACL is stateless; a Security Group is stateful",
+        "A NACL filters only outbound traffic; a Security Group only inbound"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "Hai khác biệt thật là stateful/stateless và allow-only/allow-deny. Phương án nói NACL gắn vào instance đã đảo ngược sự thật: NACL gắn vào SUBNET, còn Security Group gắn vào INSTANCE (chính xác là vào ENI).",
+      "explanationEn": "The two real differences are stateful versus stateless and allow-only versus allow-and-deny. The option claiming a NACL attaches to an instance has it backwards: a NACL attaches to a *subnet*, a Security Group to an *instance* — strictly, to its ENI.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều ĐÚNG về VPC Peering.",
+      "promptEn": "Pick TWO things that are true about VPC Peering.",
+      "options": [
+        "Chỉ hoạt động trong cùng một Region",
+        "Không có tính bắc cầu — A↔B và B↔C không tạo ra A↔C",
+        "Hỗ trợ tối đa 5 kết nối peering cho mỗi VPC",
+        "Tự động thêm route vào route table của cả hai bên",
+        "Dải CIDR của hai VPC không được chồng lấn nhau"
+      ],
+      "optionsEn": [
+        "It only works within a single Region",
+        "It is not transitive — A↔B and B↔C do not give you A↔C",
+        "Each VPC supports at most 5 peering connections",
+        "It updates both sides' route tables automatically",
+        "The two VPCs must not have overlapping CIDR ranges"
+      ],
+      "answers": [
+        1,
+        4
+      ],
+      "explanation": "Không bắc cầu và không chồng CIDR là hai giới hạn cốt lõi — và cũng là lý do Transit Gateway tồn tại khi bạn có nhiều hơn vài VPC. Route phải TỰ thêm, và peering hoạt động qua cả Region lẫn tài khoản khác nhau.",
+      "explanationEn": "Non-transitive and no overlapping CIDRs are the two core limits — and precisely why Transit Gateway exists once you have more than a few VPCs. Routes must be added *manually*, and peering works across Regions and accounts.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Thành phần nào cho phép EC2 trong private subnet gọi ra internet mà internet không gọi vào được?",
+      "promptEn": "Which component lets EC2 in a private subnet reach the internet while the internet cannot reach in?",
+      "answer": "NAT Gateway",
+      "answerEn": "NAT Gateway",
+      "accept": [
+        "nat gateway",
+        "nat",
+        "natgateway",
+        "managed nat gateway",
+        "nat gw"
+      ],
+      "explanation": "NAT Gateway. Nó nằm trong PUBLIC subnet và private subnet trỏ default route vào nó. NAT Instance là bản tự quản cũ, gần như không còn là đáp án đúng nữa.",
+      "explanationEn": "A NAT Gateway. It sits in a *public* subnet, and the private subnet points its default route at it. A NAT Instance is the old self-managed version and is rarely the right answer now.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng nào ghi lại metadata của mọi luồng traffic IP đi vào và ra khỏi network interface trong VPC?",
+      "promptEn": "Which feature records metadata for every IP traffic flow in and out of the network interfaces in a VPC?",
+      "answer": "VPC Flow Logs",
+      "answerEn": "VPC Flow Logs",
+      "accept": [
+        "vpc flow logs",
+        "flow logs",
+        "flow log",
+        "vpc flow log"
+      ],
+      "explanation": "VPC Flow Logs. Ghi metadata (IP nguồn/đích, port, ACCEPT/REJECT) chứ KHÔNG ghi nội dung packet — đây là điểm bẫy quen thuộc khi đề hỏi về debug kết nối.",
+      "explanationEn": "VPC Flow Logs. They record metadata — source and destination IP, port, ACCEPT or REJECT — and never packet contents, which is the trap when a question is about debugging connectivity.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi tuỳ chọn kết nối hybrid với đặc điểm của nó.",
+      "promptEn": "Match each hybrid connectivity option to its defining trait.",
+      "pairs": [
+        {
+          "left": "Site-to-Site VPN",
+          "leftEn": "Site-to-Site VPN",
+          "right": "Dựng nhanh trong vài giờ, chạy trên internet công cộng, có mã hoá",
+          "rightEn": "Set up in hours, runs over the public internet, encrypted"
+        },
+        {
+          "left": "Direct Connect",
+          "leftEn": "Direct Connect",
+          "right": "Đường vật lý riêng — băng thông ổn định, mất hàng tuần tới hàng tháng để có",
+          "rightEn": "A private physical link — consistent bandwidth, weeks to months to provision"
+        },
+        {
+          "left": "Transit Gateway",
+          "leftEn": "Transit Gateway",
+          "right": "Trung tâm hình sao nối hàng trăm VPC và mạng on-premises, có bắc cầu",
+          "rightEn": "A hub connecting hundreds of VPCs and on-premises networks, transitively"
+        },
+        {
+          "left": "VPC Peering",
+          "leftEn": "VPC Peering",
+          "right": "Nối một-một giữa hai VPC, không bắc cầu, không tính phí quản lý",
+          "rightEn": "A one-to-one link between two VPCs, non-transitive, no hourly hub charge"
+        }
+      ],
+      "explanation": "Dấu hiệu trong đề: 'cần ngay' → VPN; 'băng thông ổn định, độ trễ thấp' → Direct Connect; 'hàng chục VPC' → Transit Gateway.",
+      "explanationEn": "The exam's tells: 'needed quickly' means VPN; 'consistent bandwidth and low latency' means Direct Connect; 'dozens of VPCs' means Transit Gateway.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng đường đi của gói tin từ internet tới EC2 trong public subnet.",
+      "promptEn": "Put a packet's path from the internet to an EC2 instance in a public subnet into order.",
+      "items": [
+        {
+          "text": "Gói tin đi vào VPC qua Internet Gateway",
+          "textEn": "The packet enters the VPC through the Internet Gateway"
+        },
+        {
+          "text": "Route table của subnet chuyển gói tin về đúng subnet",
+          "textEn": "The subnet's route table directs it to the right subnet"
+        },
+        {
+          "text": "Network ACL của subnet duyệt rule inbound",
+          "textEn": "The subnet's Network ACL evaluates its inbound rules"
+        },
+        {
+          "text": "Security Group của instance duyệt rule inbound rồi cho vào",
+          "textEn": "The instance's Security Group evaluates its inbound rules and lets it in"
+        }
+      ],
+      "explanation": "Thứ tự này quan trọng khi debug: NACL chặn ở cấp subnet TRƯỚC khi Security Group được xem tới, nên một NACL sai cấu hình sẽ làm mọi rule Security Group trở nên vô nghĩa.",
+      "explanationEn": "This order matters when debugging: the NACL blocks at subnet level *before* the Security Group is ever consulted, so a misconfigured NACL makes every Security Group rule irrelevant.",
+      "id": "d6"
+    }
+  ]
+}

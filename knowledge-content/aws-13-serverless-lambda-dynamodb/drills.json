@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI giới hạn ĐÚNG của AWS Lambda.",
+      "promptEn": "Pick TWO limits that are genuinely true of AWS Lambda.",
+      "options": [
+        "Không giới hạn dung lượng lưu tạm trong /tmp",
+        "Kích thước payload đồng bộ tối đa 50 MB",
+        "Thời gian chạy tối đa 15 phút cho một lần gọi",
+        "Thời gian chạy tối đa 5 phút cho một lần gọi",
+        "Bộ nhớ cấu hình được từ 128 MB tới 10.240 MB"
+      ],
+      "optionsEn": [
+        "Unlimited scratch space in /tmp",
+        "A 50 MB maximum synchronous payload",
+        "A maximum run time of 15 minutes per invocation",
+        "A maximum run time of 5 minutes per invocation",
+        "Memory configurable from 128 MB to 10,240 MB"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "15 phút và 10 GB RAM là hai con số bị hỏi thẳng. Payload đồng bộ tối đa 6 MB, và /tmp mặc định 512 MB (cấu hình lên tới 10 GB). Việc chạy quá 15 phút là lý do đề thi chuyển bạn sang ECS Fargate hoặc Step Functions.",
+      "explanationEn": "15 minutes and 10 GB of RAM are both asked outright. The synchronous payload cap is 6 MB, and /tmp defaults to 512 MB (configurable to 10 GB). Needing more than 15 minutes is the exam's cue to move you to ECS Fargate or Step Functions.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI trường hợp DynamoDB là lựa chọn đúng hơn RDS.",
+      "promptEn": "Pick TWO situations where DynamoDB is the better choice than RDS.",
+      "options": [
+        "Cần giao dịch ACID trên nhiều bảng có quan hệ",
+        "Cần chạy báo cáo với nhiều JOIN phức tạp",
+        "Truy vấn luôn theo một khoá đã biết trước, không cần JOIN",
+        "Cần chuyển một ứng dụng dùng SQL sẵn có mà không sửa code",
+        "Cần độ trễ ổn định dưới 10 ms ở quy mô bất kỳ"
+      ],
+      "optionsEn": [
+        "ACID transactions across many related tables are required",
+        "Reports with several complex JOINs have to run",
+        "Queries always go by a known key and never need a JOIN",
+        "An existing SQL application must move without code changes",
+        "Single-digit millisecond latency is needed at any scale"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "DynamoDB nhanh và scale vô hạn nhưng chỉ khi bạn biết trước khoá truy vấn. Cần JOIN, cần truy vấn linh hoạt, hoặc cần giữ nguyên SQL cũ thì câu trả lời luôn là RDS hoặc Aurora.",
+      "explanationEn": "DynamoDB is fast and scales without limit, but only when you know the access key in advance. JOINs, ad-hoc queries or keeping existing SQL all point back to RDS or Aurora.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng nào của Lambda giữ sẵn các execution environment đã khởi tạo để loại bỏ độ trễ cold start?",
+      "promptEn": "Which Lambda feature keeps initialised execution environments warm to remove cold-start latency?",
+      "answer": "Provisioned Concurrency",
+      "answerEn": "Provisioned Concurrency",
+      "accept": [
+        "provisioned concurrency",
+        "lambda provisioned concurrency",
+        "provisioned concurrency lambda"
+      ],
+      "explanation": "Provisioned Concurrency. Bạn trả tiền để giữ sẵn môi trường, nên chỉ dùng cho API nhạy cảm với độ trễ — đề thi mô tả 'cold start không chấp nhận được' là đang trỏ tới đây.",
+      "explanationEn": "Provisioned Concurrency. You pay to keep environments warm, so it is for latency-sensitive APIs — 'cold starts are unacceptable' in a question means this.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng nào của DynamoDB phát ra luồng các thay đổi trên bảng để Lambda xử lý theo thời gian thực?",
+      "promptEn": "Which DynamoDB feature emits a stream of table changes for Lambda to process in real time?",
+      "answer": "DynamoDB Streams",
+      "answerEn": "DynamoDB Streams",
+      "accept": [
+        "dynamodb streams",
+        "dynamo db streams",
+        "ddb streams",
+        "dynamodb stream"
+      ],
+      "explanation": "DynamoDB Streams. Đây là nền của mọi kiến trúc event-driven quanh DynamoDB: bảng thay đổi → stream → Lambda → gửi email, cập nhật index, đồng bộ sang hệ thống khác.",
+      "explanationEn": "DynamoDB Streams. It is the foundation of every event-driven pattern around DynamoDB: the table changes, the stream fires, Lambda reacts — sending mail, updating an index, syncing another system.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thành phần serverless với vai trò của nó trong một REST API.",
+      "promptEn": "Match each serverless component to its role in a REST API.",
+      "pairs": [
+        {
+          "left": "API Gateway",
+          "leftEn": "API Gateway",
+          "right": "Cửa vào HTTP — xác thực, throttle, định tuyến request",
+          "rightEn": "The HTTP front door — authentication, throttling and request routing"
+        },
+        {
+          "left": "AWS Lambda",
+          "leftEn": "AWS Lambda",
+          "right": "Nơi chạy logic nghiệp vụ, chỉ tính tiền khi thực sự chạy",
+          "rightEn": "Where the business logic runs, billed only while it actually runs"
+        },
+        {
+          "left": "Amazon DynamoDB",
+          "leftEn": "Amazon DynamoDB",
+          "right": "Lưu trữ bền vững với độ trễ mili-giây, không cần quản máy chủ",
+          "rightEn": "Durable millisecond-latency storage with no servers to manage"
+        },
+        {
+          "left": "Amazon Cognito",
+          "leftEn": "Amazon Cognito",
+          "right": "Đăng ký, đăng nhập và phát token JWT cho người dùng cuối",
+          "rightEn": "Sign-up, sign-in and JWT tokens for end users"
+        }
+      ],
+      "explanation": "Bốn dịch vụ này là kiến trúc serverless kinh điển mà đề SAA-C03 vẽ đi vẽ lại. Nhớ đúng vai của từng cái là trả lời được phần lớn câu hỏi serverless.",
+      "explanationEn": "These four are the canonical serverless architecture the SAA-C03 paper draws over and over. Knowing which does what answers most serverless questions on its own.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự sự kiện khi ảnh được tải lên S3 và cần tạo thumbnail.",
+      "promptEn": "Put the events in order when an image is uploaded to S3 and a thumbnail must be made.",
+      "items": [
+        {
+          "text": "Người dùng PUT một ảnh vào S3 bucket",
+          "textEn": "A user PUTs an image into the S3 bucket"
+        },
+        {
+          "text": "S3 phát ra event notification cho s3:ObjectCreated:*",
+          "textEn": "S3 emits an event notification for s3:ObjectCreated:*"
+        },
+        {
+          "text": "Lambda được gọi với event chứa tên bucket và key",
+          "textEn": "Lambda is invoked with an event carrying the bucket name and key"
+        },
+        {
+          "text": "Lambda tải ảnh xuống, tạo thumbnail và ghi lại vào S3",
+          "textEn": "Lambda downloads the image, makes the thumbnail and writes it back to S3"
+        }
+      ],
+      "explanation": "Đây là mẫu event-driven đơn giản nhất và bị hỏi nhiều nhất. Lưu ý Lambda nhận được KEY của object chứ không nhận cả file — nó phải tự gọi GetObject.",
+      "explanationEn": "The simplest and most frequently examined event-driven pattern. Note that Lambda receives the object *key*, not the file itself — it has to call GetObject for the bytes.",
+      "id": "d6"
+    }
+  ]
+}

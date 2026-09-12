@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI việc AWS CloudTrail ghi lại mà CloudWatch thì không.",
+      "promptEn": "Pick TWO things AWS CloudTrail records that CloudWatch does not.",
+      "options": [
+        "Mức sử dụng CPU của EC2 instance theo thời gian",
+        "Log ứng dụng do EC2 agent đẩy lên",
+        "Lịch sử thay đổi cấu hình được thực hiện qua AWS API",
+        "Ai đã gọi API nào, từ IP nào, vào lúc nào",
+        "Độ sâu hàng đợi SQS"
+      ],
+      "optionsEn": [
+        "EC2 CPU utilisation over time",
+        "Application logs pushed by an agent on EC2",
+        "The history of configuration changes made through the AWS API",
+        "Who called which API, from which IP, and when",
+        "SQS queue depth"
+      ],
+      "answers": [
+        2,
+        3
+      ],
+      "explanation": "CloudTrail trả lời 'AI đã làm GÌ' — nhật ký kiểm toán các lời gọi API. CloudWatch trả lời 'hệ thống đang hoạt động thế nào' — metric và log. Ba phương án còn lại đều là CloudWatch.",
+      "explanationEn": "CloudTrail answers 'who did what' — an audit log of API calls. CloudWatch answers 'how is the system behaving' — metrics and logs. The other three are all CloudWatch.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI trường hợp dùng Amazon EventBridge.",
+      "promptEn": "Pick TWO valid uses of Amazon EventBridge.",
+      "options": [
+        "Chạy một Lambda theo lịch cron mỗi đêm lúc 2 giờ sáng",
+        "Quét lỗ hổng bảo mật trên EC2 instance",
+        "Lưu trữ log ứng dụng trong 90 ngày",
+        "Kích hoạt workflow khi trạng thái EC2 instance chuyển sang stopped",
+        "Vẽ dashboard hiển thị độ trễ p99"
+      ],
+      "optionsEn": [
+        "Run a Lambda on a cron schedule every night at 2am",
+        "Scan EC2 instances for security vulnerabilities",
+        "Retain application logs for 90 days",
+        "Trigger a workflow when an EC2 instance enters the stopped state",
+        "Draw a dashboard showing p99 latency"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "EventBridge làm hai việc: lịch chạy định kỳ và định tuyến sự kiện theo mẫu. Lưu log là CloudWatch Logs, dashboard là CloudWatch Dashboards, quét lỗ hổng là Amazon Inspector.",
+      "explanationEn": "EventBridge does two jobs: scheduled rules and pattern-matched event routing. Log retention is CloudWatch Logs, dashboards are CloudWatch Dashboards, and vulnerability scanning is Amazon Inspector.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào ghi lại cấu hình tài nguyên theo thời gian và đánh giá chúng theo các rule tuân thủ?",
+      "promptEn": "Which service records resource configuration over time and evaluates it against compliance rules?",
+      "answer": "AWS Config",
+      "answerEn": "AWS Config",
+      "accept": [
+        "aws config",
+        "config",
+        "amazon config"
+      ],
+      "explanation": "AWS Config. Phân biệt với CloudTrail: CloudTrail nói ai đã đổi, AWS Config nói cấu hình HIỆN TẠI là gì và nó có tuân thủ không.",
+      "explanationEn": "AWS Config. Against CloudTrail: CloudTrail says who changed it, AWS Config says what the configuration *is now* and whether it complies.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào theo dấu một request đi qua nhiều microservice để tìm ra đâu là nút thắt cổ chai?",
+      "promptEn": "Which service traces one request across many microservices to find the bottleneck?",
+      "answer": "AWS X-Ray",
+      "answerEn": "AWS X-Ray",
+      "accept": [
+        "x ray",
+        "xray",
+        "aws x ray",
+        "aws xray"
+      ],
+      "explanation": "AWS X-Ray. Đề thi mô tả 'không biết dịch vụ nào gây chậm trong kiến trúc microservice' là đang trỏ tới X-Ray.",
+      "explanationEn": "AWS X-Ray. A question describing a microservices architecture where nobody knows which service is slow points here.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ giám sát với câu hỏi nó trả lời.",
+      "promptEn": "Match each observability service to the question it answers.",
+      "pairs": [
+        {
+          "left": "CloudWatch",
+          "leftEn": "CloudWatch",
+          "right": "Hệ thống của tôi đang hoạt động thế nào? (metric, log, alarm)",
+          "rightEn": "How is my system performing? (metrics, logs, alarms)"
+        },
+        {
+          "left": "CloudTrail",
+          "leftEn": "CloudTrail",
+          "right": "Ai đã gọi API nào, khi nào, từ đâu?",
+          "rightEn": "Who called which API, when, and from where?"
+        },
+        {
+          "left": "AWS Config",
+          "leftEn": "AWS Config",
+          "right": "Cấu hình tài nguyên hiện tại là gì và có tuân thủ không?",
+          "rightEn": "What is this resource configured as now, and does it comply?"
+        },
+        {
+          "left": "AWS X-Ray",
+          "leftEn": "AWS X-Ray",
+          "right": "Trong chuỗi microservice, bước nào làm request chậm lại?",
+          "rightEn": "In this chain of microservices, which step made the request slow?"
+        }
+      ],
+      "explanation": "Bốn dịch vụ này bị hỏi cùng nhau rất thường xuyên. Nhớ theo câu hỏi mà mỗi cái trả lời thì gần như không thể nhầm.",
+      "explanationEn": "These four come up together constantly. Remembering the question each one answers makes them almost impossible to confuse.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước để cảnh báo khi CPU của EC2 vượt 80%.",
+      "promptEn": "Put the steps for alerting when EC2 CPU passes 80% into order.",
+      "items": [
+        {
+          "text": "EC2 đẩy metric CPUUtilization lên CloudWatch mỗi 5 phút",
+          "textEn": "EC2 publishes the CPUUtilization metric to CloudWatch every 5 minutes"
+        },
+        {
+          "text": "CloudWatch Alarm so metric với ngưỡng 80%",
+          "textEn": "A CloudWatch Alarm compares the metric against the 80% threshold"
+        },
+        {
+          "text": "Alarm chuyển sang trạng thái ALARM và kích hoạt action",
+          "textEn": "The alarm moves into ALARM state and fires its action"
+        },
+        {
+          "text": "SNS topic gửi email hoặc SMS tới đội trực",
+          "textEn": "An SNS topic sends an email or SMS to the on-call team"
+        }
+      ],
+      "explanation": "Lưu ý bước đầu: metric cơ bản của EC2 là 5 phút một lần. Muốn 1 phút phải bật detailed monitoring và trả thêm tiền — đây là chi tiết bị hỏi thẳng.",
+      "explanationEn": "Note the first step: basic EC2 metrics arrive every 5 minutes. One-minute granularity needs detailed monitoring and costs extra — the exam asks this outright.",
+      "id": "d6"
+    }
+  ]
+}

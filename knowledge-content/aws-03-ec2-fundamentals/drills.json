@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về Security Group.",
+      "promptEn": "Pick TWO statements that are true about Security Groups.",
+      "options": [
+        "Có tính stateful — traffic trả về được tự động cho phép",
+        "Rule được duyệt theo số thứ tự, gặp match đầu tiên thì dừng",
+        "Chỉ chứa rule allow, không có rule deny",
+        "Có thể chứa rule deny để chặn một IP cụ thể",
+        "Là stateless, phải mở cả chiều vào và chiều ra"
+      ],
+      "optionsEn": [
+        "They are stateful — return traffic is allowed automatically",
+        "Rules are evaluated in numbered order, first match wins",
+        "They contain allow rules only, never deny rules",
+        "They can hold a deny rule to block one specific IP",
+        "They are stateless, so you must open both directions"
+      ],
+      "answers": [
+        0,
+        2
+      ],
+      "explanation": "Stateful + chỉ allow là hai đặc điểm định nghĩa Security Group, và cũng là điểm phân biệt nó với NACL (stateless, có allow lẫn deny, duyệt theo số thứ tự). Muốn CHẶN một IP thì phải dùng NACL.",
+      "explanationEn": "Stateful and allow-only are the two defining traits, and exactly what separates a Security Group from a NACL (stateless, both allow and deny, evaluated in numbered order). To *block* one IP you need a NACL.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI hình thức mua EC2 yêu cầu cam kết 1 hoặc 3 năm để đổi lấy giảm giá.",
+      "promptEn": "Pick TWO EC2 purchasing options that require a 1- or 3-year commitment in exchange for a discount.",
+      "options": [
+        "On-Demand Instances",
+        "Reserved Instances",
+        "Spot Instances",
+        "Savings Plans",
+        "Dedicated Host theo giờ"
+      ],
+      "optionsEn": [
+        "On-Demand Instances",
+        "Reserved Instances",
+        "Spot Instances",
+        "Savings Plans",
+        "Dedicated Host billed hourly"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Reserved Instances khoá theo loại instance; Savings Plans khoá theo mức chi tiêu $/giờ nên linh hoạt hơn. On-Demand không cam kết gì, Spot cũng vậy — Spot đổi giá rẻ lấy rủi ro bị thu hồi.",
+      "explanationEn": "Reserved Instances lock to an instance type; Savings Plans lock to a dollars-per-hour spend, which is the more flexible of the two. On-Demand commits to nothing, and neither does Spot — Spot trades the discount for the risk of reclamation.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng nào của EC2 chạy một script khởi tạo ở LẦN ĐẦU TIÊN instance được khởi động?",
+      "promptEn": "Which EC2 feature runs a bootstrap script the very first time an instance boots?",
+      "answer": "User Data",
+      "answerEn": "User Data",
+      "accept": [
+        "user data",
+        "userdata",
+        "ec2 user data",
+        "instance user data"
+      ],
+      "explanation": "User Data. Script chỉ chạy một lần lúc launch đầu tiên và chạy với quyền root — dùng để cài package, kéo code, đăng ký instance vào cluster.",
+      "explanationEn": "User Data. The script runs once, on first launch, as root — installing packages, pulling code, registering the instance with a cluster.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Hình thức mua EC2 nào giảm tới 90% nhưng có thể bị AWS thu hồi chỉ với thông báo trước hai phút?",
+      "promptEn": "Which EC2 purchasing option is up to 90% cheaper but can be reclaimed by AWS with only a two-minute warning?",
+      "answer": "Spot Instances",
+      "answerEn": "Spot Instances",
+      "accept": [
+        "spot",
+        "spot instance",
+        "spot instances",
+        "ec2 spot",
+        "spot instances ec2"
+      ],
+      "explanation": "Spot Instances. Hai phút chính là lý do Spot chỉ hợp với workload chịu được gián đoạn: batch, CI, render, phân tích dữ liệu — không bao giờ dùng cho database.",
+      "explanationEn": "Spot Instances. Those two minutes are why Spot only suits interruptible work: batch, CI, rendering, data analysis — never a database.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi chữ cái đầu của họ instance EC2 với loại workload nó được tối ưu cho.",
+      "promptEn": "Match each EC2 instance family letter to the workload it is optimised for.",
+      "pairs": [
+        {
+          "left": "c",
+          "leftEn": "c",
+          "right": "CPU cao — batch, encoding, HPC, game server",
+          "rightEn": "High CPU — batch, encoding, HPC, game servers"
+        },
+        {
+          "left": "r",
+          "leftEn": "r",
+          "right": "RAM lớn — database in-memory, cache, phân tích dữ liệu lớn",
+          "rightEn": "Large RAM — in-memory databases, caching, big-data analytics"
+        },
+        {
+          "left": "i",
+          "leftEn": "i",
+          "right": "IOPS đĩa cao — NoSQL, data warehouse, xử lý log",
+          "rightEn": "High disk IOPS — NoSQL, data warehouse, log processing"
+        },
+        {
+          "left": "p",
+          "leftEn": "p",
+          "right": "GPU — huấn luyện machine learning, đồ hoạ, tính toán khoa học",
+          "rightEn": "GPU — machine learning training, graphics, scientific computing"
+        }
+      ],
+      "explanation": "Mẹo nhớ: c = compute, r = RAM, i = IOPS, p/g = GPU. Đề thi mô tả workload rồi hỏi họ instance, nên nhớ chữ cái là đủ.",
+      "explanationEn": "The memory aid: c = compute, r = RAM, i = IOPS, p/g = GPU. The exam describes a workload and asks for the family, so the letter is all you need.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp các kích thước instance EC2 từ nhỏ đến lớn.",
+      "promptEn": "Order these EC2 instance sizes from smallest to largest.",
+      "items": [
+        {
+          "text": "nano",
+          "textEn": "nano"
+        },
+        {
+          "text": "micro",
+          "textEn": "micro"
+        },
+        {
+          "text": "medium",
+          "textEn": "medium"
+        },
+        {
+          "text": "2xlarge",
+          "textEn": "2xlarge"
+        }
+      ],
+      "explanation": "Thang đầy đủ là nano → micro → small → medium → large → xlarge → 2xlarge → 4xlarge… Mỗi bậc thường gấp đôi tài nguyên bậc trước.",
+      "explanationEn": "The full ladder is nano → micro → small → medium → large → xlarge → 2xlarge → 4xlarge… Each step usually doubles the resources of the one before.",
+      "id": "d6"
+    }
+  ]
+}

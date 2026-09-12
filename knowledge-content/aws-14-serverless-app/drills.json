@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI việc Amazon Cognito User Pool làm.",
+      "promptEn": "Pick TWO things an Amazon Cognito User Pool does.",
+      "options": [
+        "Mã hoá dữ liệu lưu trong DynamoDB",
+        "Cấp credential AWS tạm thời để truy cập S3 hay DynamoDB trực tiếp",
+        "Quản lý đăng ký, đăng nhập và khôi phục mật khẩu cho người dùng cuối",
+        "Thay thế IAM cho nhân viên nội bộ truy cập AWS Console",
+        "Phát token JWT để API Gateway xác thực request"
+      ],
+      "optionsEn": [
+        "Encrypts data at rest in DynamoDB",
+        "Hands out temporary AWS credentials for direct S3 or DynamoDB access",
+        "Handles sign-up, sign-in and password recovery for end users",
+        "Replaces IAM for staff logging into the AWS Console",
+        "Issues JWT tokens that API Gateway can validate"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "User Pool = thư mục người dùng + phát JWT. Việc cấp credential AWS tạm thời là của Identity Pool, một nửa khác của Cognito. Nhân viên nội bộ thì dùng IAM Identity Center, không phải Cognito.",
+      "explanationEn": "A User Pool is a user directory that issues JWTs. Handing out temporary AWS credentials is the Identity *Pool*, Cognito's other half. Staff access to AWS belongs to IAM Identity Center, not Cognito.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI lý do dùng AWS Step Functions thay vì để các Lambda tự gọi lẫn nhau.",
+      "promptEn": "Pick TWO reasons to use AWS Step Functions instead of having Lambdas call each other.",
+      "options": [
+        "Quy trình chạy lâu hơn giới hạn 15 phút của một Lambda",
+        "Cần thấy trực quan trạng thái, retry và lỗi của từng bước",
+        "Loại bỏ hoàn toàn nhu cầu viết Lambda",
+        "Chi phí luôn rẻ hơn gọi Lambda trực tiếp",
+        "Tự động mã hoá payload giữa các bước"
+      ],
+      "optionsEn": [
+        "The workflow runs longer than a single Lambda's 15-minute limit",
+        "You need visible per-step state, retries and failures",
+        "It removes the need to write Lambdas at all",
+        "It always costs less than invoking Lambda directly",
+        "It encrypts the payload between steps automatically"
+      ],
+      "answers": [
+        0,
+        1
+      ],
+      "explanation": "Step Functions giải hai bài toán: điều phối quy trình dài (Standard Workflow chạy tới 1 năm) và khả năng quan sát. Nó KHÔNG rẻ hơn — bạn trả tiền theo state transition — và vẫn cần Lambda để làm việc thật.",
+      "explanationEn": "Step Functions solves two problems: orchestrating long workflows (a Standard Workflow runs for up to a year) and observability. It is not cheaper — you pay per state transition — and you still write the Lambdas that do the work.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Framework nào của AWS dùng template YAML rút gọn để định nghĩa và triển khai ứng dụng serverless?",
+      "promptEn": "Which AWS framework uses a shorthand YAML template to define and deploy serverless applications?",
+      "answer": "AWS SAM",
+      "answerEn": "AWS SAM",
+      "accept": [
+        "sam",
+        "aws sam",
+        "serverless application model",
+        "aws serverless application model"
+      ],
+      "explanation": "AWS SAM (Serverless Application Model). Template SAM được biên dịch thành CloudFormation, nên mọi thứ CloudFormation làm được thì SAM cũng dùng được.",
+      "explanationEn": "AWS SAM, the Serverless Application Model. A SAM template compiles down to CloudFormation, so anything CloudFormation can do remains available.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Thành phần nào của Cognito cấp credential AWS TẠM THỜI để ứng dụng di động gọi thẳng S3 hoặc DynamoDB?",
+      "promptEn": "Which part of Cognito hands out TEMPORARY AWS credentials so a mobile app can call S3 or DynamoDB directly?",
+      "answer": "Identity Pool",
+      "answerEn": "Identity Pool",
+      "accept": [
+        "identity pool",
+        "identity pools",
+        "cognito identity pool",
+        "federated identities"
+      ],
+      "explanation": "Identity Pool (trước gọi là Federated Identities). Mẹo phân biệt: User Pool trả lời 'bạn là ai', Identity Pool trả lời 'bạn được làm gì trên AWS'.",
+      "explanationEn": "An Identity Pool, formerly Federated Identities. The distinction: a User Pool answers 'who are you', an Identity Pool answers 'what may you do in AWS'.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ với vai trò của nó trong ứng dụng serverless.",
+      "promptEn": "Match each service to its role in a serverless application.",
+      "pairs": [
+        {
+          "left": "Step Functions",
+          "leftEn": "Step Functions",
+          "right": "Điều phối nhiều bước thành một quy trình có trạng thái và retry",
+          "rightEn": "Orchestrates many steps into one workflow with state and retries"
+        },
+        {
+          "left": "EventBridge",
+          "leftEn": "EventBridge",
+          "right": "Bus sự kiện định tuyến theo mẫu, kèm lịch chạy định kỳ (cron)",
+          "rightEn": "An event bus routing on patterns, with scheduled cron rules"
+        },
+        {
+          "left": "Cognito User Pool",
+          "leftEn": "Cognito User Pool",
+          "right": "Thư mục người dùng cuối, phát JWT sau khi đăng nhập",
+          "rightEn": "An end-user directory issuing JWTs after sign-in"
+        },
+        {
+          "left": "AWS SAM",
+          "leftEn": "AWS SAM",
+          "right": "Công cụ hạ tầng dạng code để đóng gói và triển khai stack serverless",
+          "rightEn": "The infrastructure-as-code tool that packages and deploys the stack"
+        }
+      ],
+      "explanation": "EventBridge và Step Functions hay bị nhầm: EventBridge phản ứng với sự kiện rời rạc; Step Functions điều phối một quy trình có thứ tự rõ ràng.",
+      "explanationEn": "EventBridge and Step Functions get confused: EventBridge reacts to discrete events; Step Functions drives a workflow with a defined order.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng đường đi của một request trong API serverless có xác thực.",
+      "promptEn": "Put an authenticated serverless API request into the right order.",
+      "items": [
+        {
+          "text": "Người dùng đăng nhập vào Cognito User Pool và nhận JWT",
+          "textEn": "The user signs in to the Cognito User Pool and receives a JWT"
+        },
+        {
+          "text": "Ứng dụng gọi API Gateway kèm JWT trong header Authorization",
+          "textEn": "The app calls API Gateway with the JWT in the Authorization header"
+        },
+        {
+          "text": "API Gateway xác thực token rồi gọi Lambda",
+          "textEn": "API Gateway validates the token and invokes Lambda"
+        },
+        {
+          "text": "Lambda dùng IAM role của nó để đọc/ghi DynamoDB",
+          "textEn": "Lambda uses its own IAM role to read or write DynamoDB"
+        }
+      ],
+      "explanation": "Chú ý bước cuối: Lambda KHÔNG dùng danh tính của người dùng để gọi DynamoDB — nó dùng execution role của chính nó. Phân quyền theo từng người dùng phải viết trong code.",
+      "explanationEn": "Note the last step: Lambda does not use the *user's* identity to reach DynamoDB — it uses its own execution role. Per-user authorisation has to be written in the code.",
+      "id": "d6"
+    }
+  ]
+}

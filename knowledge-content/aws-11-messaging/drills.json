@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI điều CHỈ đúng với SQS FIFO queue, không đúng với Standard queue.",
+      "promptEn": "Pick TWO things true ONLY of an SQS FIFO queue, not a Standard queue.",
+      "options": [
+        "Đảm bảo mỗi message được xử lý đúng một lần (exactly-once)",
+        "Throughput gần như không giới hạn",
+        "Message được giữ tối đa 14 ngày",
+        "Đảm bảo thứ tự message trong cùng một message group",
+        "Message có thể được giao nhiều lần và sai thứ tự"
+      ],
+      "optionsEn": [
+        "Guarantees exactly-once processing",
+        "Offers nearly unlimited throughput",
+        "Messages are retained for up to 14 days",
+        "Guarantees message order within a message group",
+        "Messages may arrive out of order and more than once"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "FIFO đổi throughput lấy hai đảm bảo: đúng thứ tự và exactly-once. Standard thì ngược lại — throughput vô hạn nhưng at-least-once và không đảm bảo thứ tự. Giữ 14 ngày là đặc điểm chung của cả hai.",
+      "explanationEn": "FIFO trades throughput for two guarantees: ordering and exactly-once. Standard is the reverse — unlimited throughput, at-least-once delivery, no ordering. The 14-day retention belongs to both.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI dấu hiệu trong đề thi cho thấy câu trả lời là Kinesis Data Streams chứ không phải SQS.",
+      "promptEn": "Pick TWO phrases in an exam question that point to Kinesis Data Streams rather than SQS.",
+      "options": [
+        "Cần phát lại (replay) dữ liệu của vài ngày trước",
+        "Cần dead-letter queue cho message xử lý lỗi",
+        "Cần decouple hai microservice bằng hàng đợi",
+        "Nhiều consumer khác nhau cùng đọc lại một luồng dữ liệu",
+        "Mỗi message chỉ được một worker xử lý rồi xoá đi"
+      ],
+      "optionsEn": [
+        "Data from a few days ago has to be replayed",
+        "A dead-letter queue is needed for failed messages",
+        "Two microservices need decoupling with a queue",
+        "Several different consumers each read the same stream",
+        "Each message is processed by one worker and then deleted"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "Kinesis là LUỒNG dữ liệu: dữ liệu nằm lại trong shard, nhiều consumer đọc độc lập và đọc lại được. SQS là HÀNG ĐỢI: message được một consumer lấy rồi xoá, không replay, không nhiều consumer độc lập.",
+      "explanationEn": "Kinesis is a *stream*: data stays in the shard, many consumers read it independently, and it can be replayed. SQS is a *queue*: one consumer takes a message and deletes it — no replay, no independent consumers.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Khoảng thời gian nào khiến message trở nên vô hình với các consumer khác sau khi một consumer đã nhận nó?",
+      "promptEn": "Which SQS period makes a message invisible to other consumers after one consumer has received it?",
+      "answer": "Visibility Timeout",
+      "answerEn": "Visibility Timeout",
+      "accept": [
+        "visibility timeout",
+        "message visibility timeout",
+        "sqs visibility timeout",
+        "visibilitytimeout"
+      ],
+      "explanation": "Visibility Timeout, mặc định 30 giây. Nếu consumer xử lý lâu hơn khoảng này mà chưa xoá message, message xuất hiện lại và bị xử lý lần thứ hai — đó là nguyên nhân số một của lỗi trùng lặp trong SQS.",
+      "explanationEn": "The Visibility Timeout, 30 seconds by default. If a consumer takes longer than that without deleting the message, it reappears and gets processed twice — the number-one cause of duplicate processing in SQS.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Mẫu kiến trúc nào gửi một message tới SNS topic để nhiều SQS queue cùng nhận được một bản sao?",
+      "promptEn": "Which architecture pattern sends one message to an SNS topic so several SQS queues each get a copy?",
+      "answer": "Fan-out",
+      "answerEn": "Fan-out",
+      "accept": [
+        "fan out",
+        "fanout",
+        "fan out pattern",
+        "sns fan out",
+        "fan-out pattern"
+      ],
+      "explanation": "Mẫu Fan-out: SNS → nhiều SQS. Đây là cách chuẩn để một sự kiện kích hoạt nhiều hệ thống xử lý độc lập, mỗi hệ thống có hàng đợi riêng và tốc độ riêng.",
+      "explanationEn": "The fan-out pattern: SNS to many SQS queues. It is the standard way one event triggers several independent processors, each with its own queue and its own pace.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi dịch vụ messaging với dấu hiệu nhận biết của nó.",
+      "promptEn": "Match each messaging service to the phrase that identifies it.",
+      "pairs": [
+        {
+          "left": "Amazon SQS",
+          "leftEn": "Amazon SQS",
+          "right": "Hàng đợi — một message, một consumer, xử lý xong thì xoá",
+          "rightEn": "A queue — one message, one consumer, deleted once handled"
+        },
+        {
+          "left": "Amazon SNS",
+          "leftEn": "Amazon SNS",
+          "right": "Pub/sub — một message đẩy tới mọi subscriber cùng lúc",
+          "rightEn": "Pub/sub — one message pushed to every subscriber at once"
+        },
+        {
+          "left": "Kinesis Data Streams",
+          "leftEn": "Kinesis Data Streams",
+          "right": "Luồng dữ liệu lưu lại được, nhiều consumer đọc và phát lại được",
+          "rightEn": "A retained stream that many consumers read and can replay"
+        },
+        {
+          "left": "Amazon MQ",
+          "leftEn": "Amazon MQ",
+          "right": "Broker chuẩn MQTT/AMQP để chuyển ứng dụng cũ lên cloud mà không sửa code",
+          "rightEn": "A managed MQTT/AMQP broker for lifting legacy apps to the cloud unchanged"
+        }
+      ],
+      "explanation": "Amazon MQ gần như luôn xuất hiện cùng cụm từ 'ứng dụng hiện có dùng giao thức chuẩn' — nếu đề không nói tới migration ứng dụng cũ thì đáp án là SQS hoặc SNS.",
+      "explanationEn": "Amazon MQ almost always appears alongside 'an existing application using open protocols' — if the question is not about migrating a legacy app, the answer is SQS or SNS.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng vòng đời của một message trong SQS.",
+      "promptEn": "Put the life of an SQS message into order.",
+      "items": [
+        {
+          "text": "Producer gửi message vào queue",
+          "textEn": "A producer sends the message to the queue"
+        },
+        {
+          "text": "Consumer gọi ReceiveMessage và message trở nên vô hình",
+          "textEn": "A consumer calls ReceiveMessage and the message goes invisible"
+        },
+        {
+          "text": "Consumer xử lý xong công việc",
+          "textEn": "The consumer finishes doing the work"
+        },
+        {
+          "text": "Consumer gọi DeleteMessage để xoá hẳn message",
+          "textEn": "The consumer calls DeleteMessage to remove it for good"
+        }
+      ],
+      "explanation": "Bước cuối là bước hay bị quên: SQS KHÔNG tự xoá message. Không gọi DeleteMessage thì hết visibility timeout message sẽ quay lại queue.",
+      "explanationEn": "That last step is the one people forget: SQS does not delete anything by itself. Skip DeleteMessage and the message returns to the queue when the visibility timeout expires.",
+      "id": "d6"
+    }
+  ]
+}

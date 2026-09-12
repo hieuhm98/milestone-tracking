@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về RPO và RTO.",
+      "promptEn": "Pick TWO statements that are true about RPO and RTO.",
+      "options": [
+        "RTO là thời gian bạn chấp nhận hệ thống ngừng hoạt động",
+        "RPO càng nhỏ thì chi phí càng rẻ",
+        "RTO và RPO luôn phải bằng nhau",
+        "RPO là lượng dữ liệu bạn chấp nhận mất, tính ngược về quá khứ từ lúc sự cố",
+        "RPO đo bằng tiền, RTO đo bằng số người dùng bị ảnh hưởng"
+      ],
+      "optionsEn": [
+        "RTO is how long you can afford the system to be down",
+        "A smaller RPO is cheaper",
+        "RTO and RPO must always be equal",
+        "RPO is how much data you can afford to lose, measured backwards from the incident",
+        "RPO is measured in money and RTO in affected users"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "RPO nhìn về quá khứ (mất bao nhiêu dữ liệu), RTO nhìn về tương lai (mất bao lâu để phục hồi). Cả hai càng nhỏ thì càng ĐẮT — đó chính là đánh đổi mà bốn chiến lược DR thể hiện.",
+      "explanationEn": "RPO looks backwards (how much data is lost), RTO looks forwards (how long recovery takes). Making either smaller costs *more* — which is exactly the trade-off the four DR strategies represent.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI đặc điểm của chiến lược DR Pilot Light.",
+      "promptEn": "Pick TWO characteristics of the Pilot Light DR strategy.",
+      "options": [
+        "Toàn bộ hệ thống chạy song song ở quy mô đầy đủ",
+        "Phần lõi quan trọng nhất (thường là database) luôn chạy sẵn",
+        "RTO tính bằng giây",
+        "Chỉ có backup nằm trong S3, không có gì đang chạy",
+        "Tầng ứng dụng chỉ được khởi động khi xảy ra thảm hoạ"
+      ],
+      "optionsEn": [
+        "The whole system runs in parallel at full scale",
+        "The critical core, usually the database, is always running",
+        "The RTO is measured in seconds",
+        "Only backups sit in S3, with nothing running",
+        "The application tier is only started when disaster strikes"
+      ],
+      "answers": [
+        1,
+        4
+      ],
+      "explanation": "Pilot Light = 'ngọn lửa mồi': database luôn sống và đồng bộ, phần còn lại nằm chờ. Chạy song song đầy đủ là Multi-Site Active/Active; chỉ có backup là Backup & Restore.",
+      "explanationEn": "Pilot Light is the pilot flame: the database stays alive and replicating while everything else waits. Full parallel operation is Multi-Site Active/Active; backups alone are Backup and Restore.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Dịch vụ nào của AWS di chuyển database sang AWS với thời gian ngừng hoạt động gần như bằng không?",
+      "promptEn": "Which AWS service migrates databases to AWS with almost no downtime?",
+      "answer": "AWS DMS",
+      "answerEn": "AWS DMS",
+      "accept": [
+        "dms",
+        "aws dms",
+        "database migration service",
+        "aws database migration service"
+      ],
+      "explanation": "AWS DMS (Database Migration Service). Ghép với Schema Conversion Tool (SCT) khi chuyển giữa hai engine khác nhau, ví dụ Oracle sang Aurora PostgreSQL.",
+      "explanationEn": "AWS DMS, the Database Migration Service. Pair it with the Schema Conversion Tool (SCT) when the engines differ, such as Oracle to Aurora PostgreSQL.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Chiến lược migration nào trong 7 R's có nghĩa là chuyển ứng dụng lên cloud gần như nguyên trạng, không sửa code?",
+      "promptEn": "Which of the 7 Rs means moving an application to the cloud essentially unchanged, with no code edits?",
+      "answer": "Rehost",
+      "answerEn": "Rehost",
+      "accept": [
+        "rehost",
+        "rehosting",
+        "lift and shift",
+        "lift-and-shift",
+        "rehost lift and shift"
+      ],
+      "explanation": "Rehost, còn gọi là 'lift and shift'. Nhanh nhất và rủi ro thấp nhất, nhưng không tận dụng được gì của cloud — đó là lý do nó thường là bước đầu chứ không phải đích đến.",
+      "explanationEn": "Rehost, also called lift and shift. It is the fastest and lowest-risk route but gains none of the cloud's benefits — which is why it is usually a first step rather than a destination.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi chiến lược DR với RTO điển hình của nó.",
+      "promptEn": "Match each DR strategy to its typical RTO.",
+      "pairs": [
+        {
+          "left": "Backup & Restore",
+          "leftEn": "Backup & Restore",
+          "right": "Nhiều giờ tới nhiều ngày — rẻ nhất, phải dựng lại mọi thứ",
+          "rightEn": "Hours to days — the cheapest, and everything must be rebuilt"
+        },
+        {
+          "left": "Pilot Light",
+          "leftEn": "Pilot Light",
+          "right": "Hàng chục phút — database sẵn sàng, ứng dụng cần khởi động",
+          "rightEn": "Tens of minutes — the database is ready, the app has to start"
+        },
+        {
+          "left": "Warm Standby",
+          "leftEn": "Warm Standby",
+          "right": "Vài phút — hệ thống thu nhỏ đang chạy, chỉ cần mở rộng quy mô",
+          "rightEn": "Minutes — a scaled-down system is running and only needs to grow"
+        },
+        {
+          "left": "Multi-Site Active/Active",
+          "leftEn": "Multi-Site Active/Active",
+          "right": "Gần như bằng không — cả hai Region đều đang phục vụ traffic",
+          "rightEn": "Near zero — both Regions are already serving traffic"
+        }
+      ],
+      "explanation": "Bốn chiến lược này là một thang đánh đổi thẳng giữa chi phí và thời gian phục hồi. Đề thi cho ngân sách hoặc RTO rồi hỏi chiến lược — hai đầu mút thường là bẫy.",
+      "explanationEn": "The four strategies form a straight trade between cost and recovery time. The exam gives you a budget or an RTO and asks for the strategy — the two extremes are usually the traps.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp bốn chiến lược DR từ rẻ nhất tới đắt nhất.",
+      "promptEn": "Order the four DR strategies from cheapest to most expensive.",
+      "items": [
+        {
+          "text": "Backup & Restore",
+          "textEn": "Backup & Restore"
+        },
+        {
+          "text": "Pilot Light",
+          "textEn": "Pilot Light"
+        },
+        {
+          "text": "Warm Standby",
+          "textEn": "Warm Standby"
+        },
+        {
+          "text": "Multi-Site Active/Active",
+          "textEn": "Multi-Site Active/Active"
+        }
+      ],
+      "explanation": "Chi phí tăng đúng theo chiều RTO giảm. Đây là một trong những thang dễ nhớ nhất trong đề SAA-C03, và cũng là một trong những thang bị hỏi nhiều nhất.",
+      "explanationEn": "Cost rises in exact step with falling RTO. It is one of the easiest ladders in SAA-C03 to remember, and one of the most frequently examined.",
+      "id": "d6"
+    }
+  ]
+}

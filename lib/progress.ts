@@ -83,6 +83,26 @@ export interface ExamProgress {
   updatedAt: string;
 }
 
+/**
+ * One track's Blitz record, keyed by **`${group}:${seconds}`** rather than by
+ * group alone — a 60-second best and a 180-second best are not comparable
+ * numbers, and folding them into one field would mean every longer run
+ * permanently beat every shorter one.
+ */
+export interface BlitzProgress {
+  runs: number;
+  /** Best score ever posted on this track at this duration. */
+  bestScore: number;
+  /** Longest correct streak, and most correct answers, in any single run. */
+  bestCombo: number;
+  bestCorrect: number;
+  /** The most recent run. */
+  lastScore: number;
+  lastCorrect: number;
+  lastAnswered: number;
+  updatedAt: string;
+}
+
 export interface ProgressData {
   version: number;
   updatedAt: string;
@@ -94,6 +114,8 @@ export interface ProgressData {
   recall: Record<string, RecallStat>;
   /** Final-exam results, keyed by **group id** (see `lib/groups.ts`). */
   exams: Record<string, ExamProgress>;
+  /** Blitz records, keyed by `blitzKey(group, seconds)`. */
+  blitz: Record<string, BlitzProgress>;
 }
 
 /** A check test at or above this score marks the mini-lesson complete. */
@@ -108,6 +130,7 @@ export function emptyProgress(): ProgressData {
     lessons: {},
     recall: {},
     exams: {},
+    blitz: {},
   };
 }
 
@@ -236,6 +259,25 @@ export function normalize(raw: unknown): ProgressData {
     }
   }
 
+  const blitz: Record<string, BlitzProgress> = {};
+
+  if (isRecord(raw.blitz)) {
+    for (const [key, value] of Object.entries(raw.blitz)) {
+      if (!isRecord(value)) continue;
+
+      blitz[key] = {
+        runs: num(value.runs),
+        bestScore: num(value.bestScore),
+        bestCombo: num(value.bestCombo),
+        bestCorrect: num(value.bestCorrect),
+        lastScore: num(value.lastScore),
+        lastCorrect: num(value.lastCorrect),
+        lastAnswered: num(value.lastAnswered),
+        updatedAt: isoOr(value.updatedAt, epoch),
+      };
+    }
+  }
+
   return {
     version: PROGRESS_VERSION,
     updatedAt: isoOr(raw.updatedAt, epoch),
@@ -244,6 +286,7 @@ export function normalize(raw: unknown): ProgressData {
     lessons,
     recall,
     exams,
+    blitz,
   };
 }
 
@@ -306,6 +349,12 @@ export function mergeProgress(a: ProgressData, b: ProgressData): ProgressData {
     exams[group] = mergeExam(exams[group], incoming);
   }
 
+  const blitz: Record<string, BlitzProgress> = { ...a.blitz };
+
+  for (const [key, incoming] of Object.entries(b.blitz)) {
+    blitz[key] = mergeBlitz(blitz[key], incoming);
+  }
+
   return {
     version: PROGRESS_VERSION,
     updatedAt: a.updatedAt >= b.updatedAt ? a.updatedAt : b.updatedAt,
@@ -314,6 +363,7 @@ export function mergeProgress(a: ProgressData, b: ProgressData): ProgressData {
     lessons,
     recall,
     exams,
+    blitz,
   };
 }
 
@@ -356,6 +406,21 @@ export function courseOf(key: string, groups: TopicGroups): string {
   return groups[keySlug(key)] ?? UNKNOWN_COURSE;
 }
 
+/**
+ * Blitz records are keyed by `${group}:${seconds}`, so unlike every other key
+ * in the store the course is the prefix rather than a slug that has to be
+ * looked up in the catalogue.
+ */
+export function blitzKey(group: string, seconds: number): string {
+  return `${group}:${seconds}`;
+}
+
+export function blitzCourse(key: string): string {
+  const colon = key.indexOf(":");
+
+  return colon === -1 ? key : key.slice(0, colon);
+}
+
 /** What one course holds in a snapshot — the unit the import preview compares. */
 export interface CourseSnapshot {
   course: string;
@@ -366,6 +431,8 @@ export interface CourseSnapshot {
   lessonsCompleted: number;
   /** Best final-exam score for this course (0-100); 0 when never sat. */
   examBestPct: number;
+  /** Best Blitz score for this course, across every duration; 0 when never run. */
+  blitzBestScore: number;
 }
 
 export function courseSnapshots(data: ProgressData, groups: TopicGroups): Map<string, CourseSnapshot> {
@@ -383,6 +450,7 @@ export function courseSnapshots(data: ProgressData, groups: TopicGroups): Map<st
       answered: 0,
       lessonsCompleted: 0,
       examBestPct: 0,
+      blitzBestScore: 0,
     };
 
     out.set(course, fresh);
@@ -423,6 +491,16 @@ export function courseSnapshots(data: ProgressData, groups: TopicGroups): Map<st
     if (exam.updatedAt > snap.updatedAt) snap.updatedAt = exam.updatedAt;
   }
 
+  // Blitz keys carry their course as a prefix, so they bucket directly too —
+  // and the per-duration records of one track all fold into that track's row.
+  for (const [key, run] of Object.entries(data.blitz)) {
+    const snap = bucket(blitzCourse(key));
+
+    snap.blitzBestScore = Math.max(snap.blitzBestScore, run.bestScore);
+
+    if (run.updatedAt > snap.updatedAt) snap.updatedAt = run.updatedAt;
+  }
+
   return out;
 }
 
@@ -436,6 +514,8 @@ export interface CourseGain {
   lessonsCompleted: number;
   /** Points the import adds to this course's best exam score. */
   examBestPct: number;
+  /** Points the import adds to this course's best Blitz score. */
+  blitzBestScore: number;
 }
 
 export interface CourseDiff {
@@ -568,6 +648,49 @@ function mergeExam(a: ExamProgress | undefined, b: ExamProgress): ExamProgress {
   };
 }
 
+/**
+ * Which of two Blitz records is the later one. Same reasoning as `laterExam`:
+ * two records can share a millisecond, and breaking that tie by argument order
+ * would make `mergeImport(a, b)` disagree with `mergeImport(b, a)`.
+ */
+function laterBlitz(a: BlitzProgress, b: BlitzProgress): BlitzProgress {
+  if (a.updatedAt !== b.updatedAt) return a.updatedAt > b.updatedAt ? a : b;
+
+  if (a.runs !== b.runs) return a.runs > b.runs ? a : b;
+
+  if (a.lastScore !== b.lastScore) return a.lastScore > b.lastScore ? a : b;
+
+  if (a.lastCorrect !== b.lastCorrect) return a.lastCorrect > b.lastCorrect ? a : b;
+
+  if (a.lastAnswered !== b.lastAnswered) return a.lastAnswered > b.lastAnswered ? a : b;
+
+  return a;
+}
+
+/**
+ * Two records of the same track+duration. Every "best" is monotonic; only the
+ * "last run" fields follow recency, and a record with no runs means that side
+ * never played, so its zeroed last-run fields must not overwrite a real result.
+ */
+function mergeBlitz(a: BlitzProgress | undefined, b: BlitzProgress): BlitzProgress {
+  if (!a) return b;
+
+  const newer = laterBlitz(a, b);
+  const older = newer === a ? b : a;
+  const lastFrom = newer.runs > 0 ? newer : older;
+
+  return {
+    runs: Math.max(a.runs, b.runs),
+    bestScore: Math.max(a.bestScore, b.bestScore),
+    bestCombo: Math.max(a.bestCombo, b.bestCombo),
+    bestCorrect: Math.max(a.bestCorrect, b.bestCorrect),
+    lastScore: lastFrom.lastScore,
+    lastCorrect: lastFrom.lastCorrect,
+    lastAnswered: lastFrom.lastAnswered,
+    updatedAt: newer.updatedAt,
+  };
+}
+
 function mergeRecall(a: RecallStat, b: RecallStat): RecallStat {
   return {
     seen: Math.max(a.seen, b.seen),
@@ -616,6 +739,7 @@ export function diffCourses(
         answered: (end?.answered ?? 0) - (a?.answered ?? 0),
         lessonsCompleted: (end?.lessonsCompleted ?? 0) - (a?.lessonsCompleted ?? 0),
         examBestPct: (end?.examBestPct ?? 0) - (a?.examBestPct ?? 0),
+        blitzBestScore: (end?.blitzBestScore ?? 0) - (a?.blitzBestScore ?? 0),
       },
     };
   });
@@ -627,7 +751,8 @@ export function isUnchanged(gain: CourseGain): boolean {
     gain.topics === 0 &&
     gain.answered === 0 &&
     gain.lessonsCompleted === 0 &&
-    gain.examBestPct === 0
+    gain.examBestPct === 0 &&
+    gain.blitzBestScore === 0
   );
 }
 
@@ -648,6 +773,7 @@ export function mergeImport(local: ProgressData, imported: ProgressData, groups:
     lessons: union(local.lessons, imported.lessons, mergeLesson),
     recall: union(local.recall, imported.recall, mergeRecall),
     exams: union(local.exams, imported.exams, (x, y) => mergeExam(x, y)),
+    blitz: union(local.blitz, imported.blitz, (x, y) => mergeBlitz(x, y)),
   };
 
   return { data, courses: diffCourses(local, imported, data, groups), newReviews: added.length };
@@ -752,6 +878,67 @@ export function recordExam(prev: ProgressData, group: string, result: ExamResult
     recall: applyRecall(prev.recall, result.answered, now),
     exams: { ...prev.exams, [group]: exam },
   };
+}
+
+/** One finished Blitz run. */
+export interface BlitzResult {
+  /** How long the clock was set to, in seconds — part of the record's key. */
+  seconds: number;
+  score: number;
+  answered: number;
+  correct: number;
+  bestCombo: number;
+  /** Per-question outcomes, so a run also sharpens the review ranking. */
+  answers: AnsweredQuestion[];
+}
+
+/**
+ * Record a finished Blitz run.
+ *
+ * Like an exam sitting, a run is also logged as a review entry — it feeds the
+ * study streak and the review-accuracy figure, because from the progress
+ * store's point of view that is exactly what it is: a review session that
+ * happened to be timed and scored.
+ *
+ * A run with nothing answered (started, then abandoned before the first answer)
+ * still counts as a run but cannot lower any best, since every best is a max.
+ */
+export function recordBlitz(prev: ProgressData, group: string, result: BlitzResult): ProgressData {
+  const now = new Date().toISOString();
+  const key = blitzKey(group, result.seconds);
+  const existing = prev.blitz[key];
+
+  const record: BlitzProgress = {
+    runs: (existing?.runs ?? 0) + 1,
+    bestScore: Math.max(existing?.bestScore ?? 0, result.score),
+    bestCombo: Math.max(existing?.bestCombo ?? 0, result.bestCombo),
+    bestCorrect: Math.max(existing?.bestCorrect ?? 0, result.correct),
+    lastScore: result.score,
+    lastCorrect: result.correct,
+    lastAnswered: result.answered,
+    updatedAt: now,
+  };
+
+  const reviews =
+    result.answered > 0
+      ? [{ at: now, total: result.answered, correct: result.correct, groups: [group] }, ...prev.reviews].slice(
+          0,
+          MAX_REVIEWS
+        )
+      : prev.reviews;
+
+  return {
+    ...prev,
+    updatedAt: now,
+    reviews,
+    recall: applyRecall(prev.recall, result.answers, now),
+    blitz: { ...prev.blitz, [key]: record },
+  };
+}
+
+/** The best score posted on a track at a given duration, or 0. */
+export function blitzBest(data: ProgressData, group: string, seconds: number): BlitzProgress | undefined {
+  return data.blitz[blitzKey(group, seconds)];
 }
 
 export function recordReview(prev: ProgressData, entry: Omit<ReviewEntry, "at">): ProgressData {
@@ -893,6 +1080,9 @@ export interface OverallStats {
   lessonsStarted: number;
   examsTaken: number;
   examsPassed: number;
+  blitzRuns: number;
+  /** Highest Blitz score posted on any track at any duration. */
+  blitzBestScore: number;
   streak: number;
   activeDays: number;
 }
@@ -916,6 +1106,7 @@ export function overallStats(data: ProgressData): OverallStats {
 
   const lessons = Object.values(data.lessons);
   const exams = Object.values(data.exams);
+  const blitz = Object.values(data.blitz);
 
   const days = new Set<string>();
   data.reviews.forEach((r) => days.add(dayKey(r.at)));
@@ -924,6 +1115,7 @@ export function overallStats(data: ProgressData): OverallStats {
   });
   lessons.forEach((l) => days.add(dayKey(l.updatedAt)));
   exams.forEach((e) => days.add(dayKey(e.updatedAt)));
+  blitz.forEach((b) => days.add(dayKey(b.updatedAt)));
 
   // Walk back from today (or yesterday, so an evening-only habit isn't punished
   // before the day is over) counting consecutive active days.
@@ -949,6 +1141,8 @@ export function overallStats(data: ProgressData): OverallStats {
     lessonsStarted: lessons.length,
     examsTaken: exams.reduce((sum, e) => sum + e.attempts, 0),
     examsPassed: exams.filter((e) => e.passed).length,
+    blitzRuns: blitz.reduce((sum, b) => sum + b.runs, 0),
+    blitzBestScore: blitz.reduce((best, b) => Math.max(best, b.bestScore), 0),
     streak,
     activeDays: days.size,
   };

@@ -26,6 +26,9 @@ import {
   type AnsweredQuestion,
 } from "@/lib/progress";
 import { lessonVocab, unseenVocabCount, vocabRound, type VocabItem } from "@/lib/vocab";
+import { courseTopics, topicGroup } from "@/lib/courses";
+import { useVocabStep } from "@/lib/useVocabStep";
+import { getGroup } from "@/lib/groups";
 import { cn } from "@/lib/utils";
 
 /** How many earlier-lesson questions each phase mixes in. */
@@ -61,6 +64,8 @@ export default function LessonPlayerPage() {
   const [vocabPct, setVocabPct] = useState<number | null>(null);
   // Bumped per vocabulary round so LessonTest remounts with fresh state.
   const [vocabRoundNo, setVocabRoundNo] = useState(0);
+  // The learner's choice to include the English step at all (per browser).
+  const [vocabOn, setVocabOn] = useVocabStep();
 
   const key = lessonKey(slug, lessonId);
   const topic = topics.find((tp) => tp.slug === slug) ?? null;
@@ -200,10 +205,15 @@ export default function LessonPlayerPage() {
       update((prev) => recordLessonPhase(prev, key, "check", pct, answered));
       // The English step comes after the IT result is already recorded, so
       // skipping or failing it can never cost the lesson its completion.
-      setPhase(vocabQs.length > 0 ? "vocab" : "done");
+      setPhase(vocabOn && vocabQs.length > 0 ? "vocab" : "done");
     },
-    [key, update, vocabQs.length]
+    [key, update, vocabQs.length, vocabOn]
   );
+
+  // Switching English off mid-round ends the round; nothing half-answered is recorded.
+  useEffect(() => {
+    if (!vocabOn && phase === "vocab") setPhase("done");
+  }, [vocabOn, phase]);
 
   const finishVocab = useCallback(
     (answered: AnsweredQuestion[], pct: number) => {
@@ -238,14 +248,17 @@ export default function LessonPlayerPage() {
       <div className="text-center py-20">
         <p className="text-zinc-500">{pick("Không tìm thấy bài học.", "Mini-lesson not found.")}</p>
         <Link href="/learn" className="text-blue-600 dark:text-blue-400 text-sm mt-2 inline-block">
-          {pick("← Lộ trình học", "← Study path")}
+          {pick("← Khoá học của tôi", "← My courses")}
         </Link>
       </div>
     );
   }
 
   const position = topic.lessons.findIndex((l) => l.id === lesson.id) + 1;
-  const upcoming = nextLesson(topics, slug, lesson.id);
+  // "Next lesson" stays inside the course: finishing AWS should not roll into DSA.
+  const course = getGroup(topicGroup(topic));
+  const courseHref = course ? `/learn/course/${course.id}` : "/learn";
+  const upcoming = nextLesson(courseTopics(topics, topicGroup(topic)), slug, lesson.id);
   const passed = checkPct !== null && checkPct >= PASS_PCT;
   const unseenWords = unseenVocabCount(wordsInLesson, slug, progress);
   const bilingual = dual && Boolean(topicData?.contentEn);
@@ -255,8 +268,8 @@ export default function LessonPlayerPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 text-xs text-zinc-500">
-          <Link href="/learn" className="hover:text-zinc-700 dark:hover:text-zinc-300">
-            {pick("Lộ trình học", "Study path")}
+          <Link href={courseHref} className="hover:text-zinc-700 dark:hover:text-zinc-300 shrink-0">
+            {course ? pick(course.label, course.labelEn) : pick("Khoá học của tôi", "My courses")}
           </Link>
           <span>›</span>
           <Link href={`/learn/${slug}`} className="hover:text-zinc-700 dark:hover:text-zinc-300 truncate">
@@ -264,10 +277,43 @@ export default function LessonPlayerPage() {
           </Link>
         </div>
         <h1 className="text-2xl font-bold mt-1">{pick(lesson.title, lesson.titleEn)}</h1>
-        <p className="text-xs text-zinc-500 mt-1">
-          {pick("Bài", "Lesson")} {position}/{topic.lessons.length}
-          {state?.completed && <span className="text-green-600 dark:text-green-400 ml-2">✓ {pick("đã hoàn thành", "completed")}</span>}
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 mt-1">
+          <p className="text-xs text-zinc-500">
+            {pick("Bài", "Lesson")} {position}/{topic.lessons.length}
+            {state?.completed && <span className="text-green-600 dark:text-green-400 ml-2">✓ {pick("đã hoàn thành", "completed")}</span>}
+          </p>
+
+          {wordsInLesson.length > 0 && (
+            <button
+              type="button"
+              role="switch"
+              aria-checked={vocabOn}
+              onClick={() => setVocabOn(!vocabOn)}
+              title={pick(
+                "Bật/tắt bước từ vựng tiếng Anh ở cuối mỗi bài nhỏ. Áp dụng cho mọi bài.",
+                "Turn the English vocabulary step at the end of each mini-lesson on or off. Applies to every lesson."
+              )}
+              className="flex items-center gap-2 py-1.5 -my-1.5 text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+            >
+              <span>{pick("Từ vựng tiếng Anh", "English vocabulary")}</span>
+              <span
+                aria-hidden
+                className={cn(
+                  "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors",
+                  vocabOn ? "bg-blue-600" : "bg-zinc-300 dark:bg-zinc-700"
+                )}
+              >
+                <span
+                  className={cn(
+                    "inline-block h-4 w-4 rounded-full bg-white shadow transition-transform",
+                    vocabOn ? "translate-x-[18px]" : "translate-x-0.5"
+                  )}
+                />
+              </span>
+              <span className="w-6 text-left font-medium">{vocabOn ? pick("Bật", "On") : pick("Tắt", "Off")}</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Phase rail */}
@@ -277,7 +323,9 @@ export default function LessonPlayerPage() {
           ...(warmupQs.length > 0 ? [["warmup", pick("Khởi động", "Warm-up")] as [Phase, string]] : []),
           ["read", pick("Đọc", "Read")] as [Phase, string],
           ["check", pick("Kiểm tra", "Check")] as [Phase, string],
-          ...(wordsInLesson.length > 0 ? [["vocab", pick("Từ vựng", "Vocabulary")] as [Phase, string]] : []),
+          ...(vocabOn && wordsInLesson.length > 0
+            ? [["vocab", pick("Từ vựng", "Vocabulary")] as [Phase, string]]
+            : []),
         ].map(([id, label], i) => {
           const order: Phase[] = ["warmup", "read", "check", "vocab", "done"];
           const done = order.indexOf(phase) > order.indexOf(id);
@@ -408,7 +456,20 @@ export default function LessonPlayerPage() {
             )}
           </div>
 
-          {wordsInLesson.length > 0 && (
+          {wordsInLesson.length > 0 && !vocabOn && (
+            <p className="text-xs text-zinc-500">
+              {pick("Bước từ vựng tiếng Anh đang tắt.", "The English vocabulary step is off.")}{" "}
+              <button
+                type="button"
+                onClick={() => setVocabOn(true)}
+                className="py-2 -my-2 text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                {pick("Bật lại", "Turn it on")}
+              </button>
+            </p>
+          )}
+
+          {wordsInLesson.length > 0 && vocabOn && (
             <div className="card flex flex-wrap items-center justify-between gap-3">
               <div className="text-sm min-w-0">
                 <div className="font-medium">
@@ -444,8 +505,8 @@ export default function LessonPlayerPage() {
                 {pick("Bài tiếp theo", "Next lesson")}: {pick(upcoming.lesson.title, upcoming.lesson.titleEn)} →
               </Link>
             ) : (
-              <Link href="/learn" className="btn-primary text-sm px-4 py-2">
-                {pick("Hoàn thành lộ trình 🎉", "Path complete 🎉")}
+              <Link href={courseHref} className="btn-primary text-sm px-4 py-2">
+                {pick("Hoàn thành khoá học 🎉", "Course complete 🎉")}
               </Link>
             )}
             <button

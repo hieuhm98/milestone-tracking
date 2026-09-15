@@ -15,6 +15,16 @@ const CARDS = [
     },
   },
   {
+    href: "/practice/english",
+    icon: "Ⓐ",
+    accent: "text-sky-700 dark:text-sky-300",
+    title: { vi: "Luyện tiếng Anh", en: "English Practice" },
+    desc: {
+      vi: "Chọn từ vựng từ mọi khoá học — theo khoá, chủ đề, bài nhỏ hoặc từng từ — rồi luyện nghĩa của từ trong ngữ cảnh.",
+      en: "Pick vocabulary from every course — by course, topic, lesson or single word — then practise each word's meaning in context.",
+    },
+  },
+  {
     href: "/practice/questions",
     icon: "✎",
     accent: "text-blue-700 dark:text-blue-300",

@@ -10,10 +10,10 @@ const CARDS = [
     href: "/learn",
     icon: "◐",
     accent: "text-indigo-700 dark:text-indigo-300",
-    title: { vi: "Lộ trình học", en: "Study path" },
+    title: { vi: "Khoá học của tôi", en: "My courses" },
     desc: {
-      vi: "Từng bài nhỏ 5–10 phút: kiểm tra khởi động → đọc → kiểm tra lại, có ôn tập kiến thức cũ xen kẽ.",
-      en: "5–10 minute mini-lessons: warm-up test → read → check test, with earlier material mixed back in.",
+      vi: "Mỗi khoá học có tiến độ riêng. Bài nhỏ 5–10 phút: kiểm tra khởi động → đọc → kiểm tra lại.",
+      en: "Every course tracks its own progress. 5–10 minute lessons: warm-up test → read → check test.",
     },
   },
   {

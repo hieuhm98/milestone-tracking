@@ -33,7 +33,7 @@ export default function LearnTopicPage() {
       <div className="text-center py-20">
         <p className="text-zinc-500">{pick("Chủ đề này chưa chia bài nhỏ.", "This topic has no mini-lessons yet.")}</p>
         <Link href="/learn" className="text-blue-600 dark:text-blue-400 text-sm mt-2 inline-block">
-          {pick("← Lộ trình học", "← Study path")}
+          {pick("← Khoá học của tôi", "← My courses")}
         </Link>
       </div>
     );
@@ -47,8 +47,11 @@ export default function LearnTopicPage() {
   return (
     <div className="max-w-3xl space-y-6">
       <div>
-        <Link href="/learn" className="inline-block py-2 -my-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
-          {pick("← Lộ trình học", "← Study path")}
+        <Link
+          href={group ? `/learn/course/${group.id}` : "/learn"}
+          className="inline-block py-2 -my-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+        >
+          ← {group ? pick(group.label, group.labelEn) : pick("Khoá học của tôi", "My courses")}
         </Link>
         <div className="flex items-center gap-2 mt-1">
           <span className="text-xl">{group?.icon ?? "◉"}</span>

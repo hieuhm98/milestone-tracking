@@ -2,30 +2,22 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
-import {
-  flattenLessons,
-  lessonKey,
-  rankTopics,
-  resumeLesson,
-  type LessonTopic,
-  type TopicBucket,
-} from "@/lib/lessons";
-import { GROUPS, DEFAULT_GROUP, GROUP_ACCENT } from "@/lib/groups";
+import CourseCard from "@/components/learn/CourseCard";
+import { catalogueOrder, coursesInProgress, summarizeCourses } from "@/lib/courses";
+import { GROUP_COVER } from "@/lib/groups";
+import { type LessonTopic } from "@/lib/lessons";
 import { cn } from "@/lib/utils";
 
-type SortMode = "progress" | "curriculum";
+type Filter = "all" | "in-progress" | "not-started" | "completed";
 
 export default function StudyPathPage() {
   const { t, pick } = useLang();
   const { progress, ready } = useProgress();
   const [topics, setTopics] = useState<LessonTopic[]>([]);
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState<Set<string>>(new Set());
-  const [sort, setSort] = useState<SortMode>("progress");
-  const [track, setTrack] = useState<string>("all");
+  const [filter, setFilter] = useState<Filter>("all");
 
   useEffect(() => {
     fetch("/api/lessons")
@@ -35,239 +27,132 @@ export default function StudyPathPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  const flat = useMemo(() => flattenLessons(topics), [topics]);
-  const completed = useMemo(
-    () => new Set(Object.entries(progress.lessons).filter(([, v]) => v.completed).map(([k]) => k)),
-    [progress.lessons]
-  );
-
-  // The list is sorted around the learner: live work first, the obvious next
-  // topic under it, finished work last. "Curriculum" restores the authored order
-  // for anyone who wants to browse the course as designed.
-  const ranked = useMemo(() => rankTopics(topics, progress), [topics, progress]);
-  const ordered = useMemo(() => {
-    const base = sort === "progress" ? ranked : ranked.slice().sort((a, b) => {
-      const ai = topics.indexOf(a.topic);
-      const bi = topics.indexOf(b.topic);
-
-      return ai - bi;
-    });
-
-    return track === "all" ? base : base.filter((r) => (r.topic.group ?? DEFAULT_GROUP) === track);
-  }, [ranked, sort, track, topics]);
-
-  // "Continue" resumes where the learner left off, not the globally first gap.
-  const nextUp = useMemo(() => resumeLesson(topics, progress), [topics, progress]);
-
-  // Open the topic being resumed, once the data has arrived.
-  useEffect(() => {
-    if (nextUp) setOpen(new Set([nextUp.topic.slug]));
-  }, [nextUp?.topic.slug]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  function toggle(slug: string) {
-    setOpen((prev) => {
-      const next = new Set(prev);
-      next.has(slug) ? next.delete(slug) : next.add(slug);
-
-      return next;
-    });
-  }
+  const courses = useMemo(() => catalogueOrder(summarizeCourses(topics, progress)), [topics, progress]);
+  const active = useMemo(() => coursesInProgress(courses), [courses]);
 
   if (loading || !ready) return <div className="text-zinc-500 text-sm p-8">{t("common.loading")}</div>;
 
-  const donePct = flat.length > 0 ? Math.round((completed.size / flat.length) * 100) : 0;
-  const bucketLabel: Record<TopicBucket, string> = {
-    "in-progress": pick("Đang học", "In progress"),
-    "not-started": pick("Chưa bắt đầu", "Not started"),
-    completed: pick("Đã xong", "Completed"),
-  };
-  const tracks = GROUPS.filter((g) => topics.some((tp) => (tp.group ?? DEFAULT_GROUP) === g.id));
+  const lessonTotal = courses.reduce((sum, c) => sum + c.lessonCount, 0);
+  const lessonDone = courses.reduce((sum, c) => sum + c.doneCount, 0);
+  const coursesDone = courses.filter((c) => c.status === "completed").length;
+  const shown = filter === "all" ? courses : courses.filter((c) => c.status === filter);
+  const current = active[0];
+
+  const filters: { id: Filter; label: string; count: number }[] = [
+    { id: "all", label: pick("Tất cả", "All"), count: courses.length },
+    { id: "in-progress", label: pick("Đang học", "In progress"), count: active.length },
+    {
+      id: "not-started",
+      label: pick("Chưa bắt đầu", "Not started"),
+      count: courses.filter((c) => c.status === "not-started").length,
+    },
+    { id: "completed", label: pick("Đã xong", "Completed"), count: coursesDone },
+  ];
 
   return (
-    <div className="max-w-4xl space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">{pick("Lộ trình học", "Study path")}</h1>
-        <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
-          {pick(
-            "Mỗi chủ đề được chia thành các bài nhỏ 5–10 phút, mỗi bài có một bài kiểm tra khởi động trước và một bài kiểm tra sau — cả hai đều ôn lại kiến thức cũ.",
-            "Every topic is split into 5–10 minute mini-lessons, each with a warm-up test before and a check test after — both mixing in what you learned earlier."
-          )}
-        </p>
-      </div>
-
-      {/* Overall progress + next up */}
-      <div className="card space-y-4">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <div className="text-xs text-zinc-500">{pick("Đã hoàn thành", "Completed")}</div>
-            <div className="text-2xl font-bold">
-              {completed.size}
-              <span className="text-base font-normal text-zinc-500">/{flat.length}</span>
-              <span className="text-sm font-normal text-zinc-500 ml-2">{pick("bài nhỏ", "mini-lessons")}</span>
-            </div>
-          </div>
-          <div className="text-2xl font-bold text-zinc-500">{donePct}%</div>
-        </div>
-
-        <div className="h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
-          <div className="h-full bg-blue-500 rounded-full transition-all" style={{ width: `${donePct}%` }} />
-        </div>
-
-        {nextUp && (
-          <Link
-            href={`/learn/${nextUp.topic.slug}/${nextUp.lesson.id}`}
-            className="flex items-center gap-3 p-3 -m-1 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
-          >
-            <span className="text-lg shrink-0">▶</span>
-            <div className="min-w-0 flex-1">
-              <div className="text-xs text-blue-700 dark:text-blue-300">{pick("Học tiếp", "Continue")}</div>
-              <div className="text-sm font-medium truncate">{pick(nextUp.lesson.title, nextUp.lesson.titleEn)}</div>
-              <div className="text-xs text-zinc-500 truncate">{pick(nextUp.topic.title, nextUp.topic.titleEn)}</div>
-            </div>
-            <span className="text-sm text-blue-600 dark:text-blue-400 shrink-0">→</span>
-          </Link>
-        )}
-      </div>
-
-      {/* Track filter + sort */}
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          onClick={() => setTrack("all")}
-          className={cn(
-            "px-3 py-2 sm:py-1.5 rounded-full text-xs font-medium border transition-colors",
-            track === "all"
-              ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100"
-              : "border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-          )}
-        >
-          {pick("Tất cả", "All tracks")}
-        </button>
-
-        {tracks.map((g) => (
-          <button
-            key={g.id}
-            type="button"
-            onClick={() => setTrack(g.id)}
-            className={cn(
-              "px-3 py-2 sm:py-1.5 rounded-full text-xs font-medium border transition-colors",
-              track === g.id
-                ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100"
-                : "border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+    <div className="max-w-6xl space-y-8">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold">{pick("Khoá học của tôi", "My courses")}</h1>
+          <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1 max-w-2xl">
+            {pick(
+              "Mỗi khoá gồm nhiều chủ đề, mỗi chủ đề chia thành các bài nhỏ 5–10 phút với bài kiểm tra khởi động và bài kiểm tra cuối.",
+              "Each course is a set of topics, and every topic is split into 5–10 minute lessons with a warm-up test before and a check after."
             )}
-          >
-            <span className="mr-1">{g.icon}</span>
-            {pick(g.label, g.labelEn)}
-          </button>
-        ))}
+          </p>
+        </div>
 
-        <button
-          type="button"
-          onClick={() => setSort((s) => (s === "progress" ? "curriculum" : "progress"))}
-          className="ml-auto px-3 py-2 sm:py-1.5 rounded-full text-xs font-medium border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-        >
-          {sort === "progress"
-            ? pick("Sắp theo: tiến độ của bạn", "Sorted by: your progress")
-            : pick("Sắp theo: thứ tự khoá học", "Sorted by: curriculum")}
-        </button>
+        <dl className="flex gap-6 text-sm">
+          <div>
+            <dt className="text-xs text-zinc-500">{pick("Khoá học", "Courses")}</dt>
+            <dd className="font-semibold">
+              {coursesDone}
+              <span className="text-zinc-500 font-normal">/{courses.length}</span>
+            </dd>
+          </div>
+          <div>
+            <dt className="text-xs text-zinc-500">{pick("Bài nhỏ", "Lessons")}</dt>
+            <dd className="font-semibold">
+              {lessonDone}
+              <span className="text-zinc-500 font-normal">/{lessonTotal}</span>
+            </dd>
+          </div>
+        </dl>
       </div>
 
-      {/* Topics */}
-      <div className="space-y-3">
-        {ordered.map((entry, idx) => {
-          const topic = entry.topic;
-          const group = GROUPS.find((g) => g.id === (topic.group ?? DEFAULT_GROUP));
-          const accent = GROUP_ACCENT[group?.accent ?? "blue"];
-          const isOpen = open.has(topic.slug);
-          // Only the progress view groups by bucket, and only at each boundary.
-          const heading =
-            sort === "progress" && (idx === 0 || ordered[idx - 1].bucket !== entry.bucket)
-              ? bucketLabel[entry.bucket]
-              : null;
-
-          return (
-            <div key={topic.slug} className="space-y-3">
-              {heading && (
-                <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500 pt-2 first:pt-0">
-                  {heading}
+      {/* Pick up where you left off — the single most useful thing on the page. */}
+      {current?.resume && (
+        <section className="overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col sm:flex-row">
+          <div
+            className={cn(
+              "sm:w-48 h-20 sm:h-auto shrink-0 bg-gradient-to-br flex items-center justify-center text-5xl text-white/85",
+              GROUP_COVER[current.group.accent]
+            )}
+            aria-hidden
+          >
+            {current.group.icon}
+          </div>
+          <div className="flex-1 min-w-0 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="text-xs font-medium text-zinc-500">
+                {pick("Học tiếp", "Continue learning")} · {pick(current.group.label, current.group.labelEn)}
+              </div>
+              <div className="font-semibold mt-0.5 truncate">
+                {pick(current.resume.lesson.title, current.resume.lesson.titleEn)}
+              </div>
+              <div className="text-xs text-zinc-500 truncate">
+                {pick(current.resume.topic.title, current.resume.topic.titleEn)}
+              </div>
+              <div className="mt-3 flex items-center gap-3">
+                <div className="h-1.5 flex-1 max-w-xs rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+                  <div className="h-full rounded-full bg-blue-500" style={{ width: `${current.pct}%` }} />
                 </div>
-              )}
-
-              <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden">
-                <button
-                  type="button"
-                  onClick={() => toggle(topic.slug)}
-                  aria-expanded={isOpen}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors"
-                >
-                  <span className="text-lg shrink-0">{group?.icon ?? "◉"}</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold truncate">{pick(topic.title, topic.titleEn)}</div>
-                    <div className="mt-1.5 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden max-w-xs">
-                      <div
-                        className={cn("h-full rounded-full", accent.bar)}
-                        style={{ width: `${(entry.done / entry.total) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                  <span className="text-xs font-mono text-zinc-500 shrink-0">
-                    {entry.done}/{entry.total}
-                  </span>
-                  <ChevronDown
-                    className={cn("w-5 h-5 text-zinc-500 shrink-0 transition-transform", isOpen && "rotate-180")}
-                  />
-                </button>
-
-                {isOpen && (
-                  <ul className="border-t border-zinc-200 dark:border-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800">
-                    {topic.lessons.map((lesson, i) => {
-                      const state = progress.lessons[lessonKey(topic.slug, lesson.id)];
-                      const isDone = state?.completed ?? false;
-                      const isNext = nextUp?.topic.slug === topic.slug && nextUp?.lesson.id === lesson.id;
-
-                      return (
-                        <li key={lesson.id}>
-                          <Link
-                            href={`/learn/${topic.slug}/${lesson.id}`}
-                            className={cn(
-                              "flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors",
-                              isNext && "bg-blue-50 dark:bg-blue-950/30"
-                            )}
-                          >
-                            <span
-                              className={cn(
-                                "w-6 h-6 rounded-full border flex items-center justify-center text-xs shrink-0",
-                                isDone
-                                  ? "bg-green-100 dark:bg-green-900/50 border-green-300 dark:border-green-700 text-green-700 dark:text-green-300"
-                                  : "border-zinc-300 dark:border-zinc-700 text-zinc-500"
-                              )}
-                            >
-                              {isDone ? "✓" : i + 1}
-                            </span>
-                            <span className="flex-1 min-w-0 truncate">{pick(lesson.title, lesson.titleEn)}</span>
-                            {lesson.recap && (
-                              <span className="text-xs text-zinc-500 shrink-0">{pick("ôn tập", "recap")}</span>
-                            )}
-                            {state && state.bestCheckPct > 0 && (
-                              <span className="text-xs font-mono text-zinc-500 shrink-0">{state.bestCheckPct}%</span>
-                            )}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </section>
+                <span className="text-xs text-zinc-500">{current.pct}%</span>
+              </div>
             </div>
-          );
-        })}
+            <Link
+              href={`/learn/${current.resume.topic.slug}/${current.resume.lesson.id}`}
+              className="btn-primary text-sm px-4 py-2 text-center shrink-0"
+            >
+              {pick("Học tiếp", "Resume")} →
+            </Link>
+          </div>
+        </section>
+      )}
 
-        {ordered.length === 0 && (
-          <p className="text-sm text-zinc-500 p-4">
-            {pick("Không có chủ đề nào trong nhóm này.", "No topics in this track yet.")}
+      <section className="space-y-4">
+        <div className="flex flex-wrap items-center gap-2">
+          <h2 className="text-lg font-semibold mr-2">{pick("Tất cả khoá học", "All courses")}</h2>
+          {filters.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setFilter(f.id)}
+              aria-pressed={filter === f.id}
+              className={cn(
+                "px-3 py-2 sm:py-1.5 rounded-full text-xs font-medium border transition-colors",
+                filter === f.id
+                  ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100"
+                  : "border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+              )}
+            >
+              {f.label} <span className="opacity-60">{f.count}</span>
+            </button>
+          ))}
+        </div>
+
+        {shown.length > 0 ? (
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {shown.map((course) => (
+              <CourseCard key={course.group.id} course={course} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-zinc-500 py-8 text-center">
+            {pick("Không có khoá học nào ở mục này.", "No courses here yet.")}
           </p>
         )}
-      </div>
+      </section>
     </div>
   );
 }

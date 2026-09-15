@@ -170,3 +170,16 @@ export const GROUP_ACCENT: Record<Group["accent"], { badge: string; bar: string;
     text: "text-indigo-600 dark:text-indigo-400",
   },
 };
+
+// Course cover art for the study-path cards: a gradient per accent. Literal
+// strings for the same JIT reason as GROUP_ACCENT.
+export const GROUP_COVER: Record<Group["accent"], string> = {
+  blue: "from-blue-500 via-blue-600 to-sky-700",
+  emerald: "from-emerald-500 via-emerald-600 to-teal-700",
+  amber: "from-amber-400 via-amber-500 to-orange-600",
+  rose: "from-rose-500 via-rose-600 to-pink-700",
+  violet: "from-violet-500 via-violet-600 to-purple-700",
+  orange: "from-orange-500 via-orange-600 to-red-600",
+  cyan: "from-cyan-500 via-cyan-600 to-blue-700",
+  indigo: "from-indigo-500 via-indigo-600 to-violet-700",
+};

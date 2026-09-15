@@ -1,0 +1,342 @@
+[
+  {
+    "id": "q1",
+    "question": "Đoạn code sau trả về gì?\n`[6, 4, 15, 10].sort();`",
+    "questionEn": "What does this code return?\n`[6, 4, 15, 10].sort();`",
+    "options": [
+      "`[4, 6, 10, 15]`",
+      "`[15, 10, 6, 4]`",
+      "`[10, 15, 4, 6]`",
+      "`[6, 4, 15, 10]`, vì sort cần comparator mới chạy"
+    ],
+    "optionsEn": [
+      "`[4, 6, 10, 15]`",
+      "`[15, 10, 6, 4]`",
+      "`[10, 15, 4, 6]`",
+      "`[6, 4, 15, 10]`, because sort needs a comparator to run"
+    ],
+    "answer": 2,
+    "explanation": "Không có comparator, `sort` chuyển các số thành chuỗi và so sánh theo mã ký tự. `\"10\"` và `\"15\"` bắt đầu bằng `\"1\"`, đứng trước `\"4\"` và `\"6\"`. Muốn sắp xếp số đúng phải truyền `(a, b) => a - b`.",
+    "explanationEn": "Without a comparator, `sort` converts the numbers to strings and compares character codes. `\"10\"` and `\"15\"` start with `\"1\"`, which comes before `\"4\"` and `\"6\"`. Sorting numbers correctly needs `(a, b) => a - b`."
+  },
+  {
+    "id": "q2",
+    "question": "Khi comparator `compare(a, b)` trả về một số ÂM, hàm sort hiểu điều gì?",
+    "questionEn": "When a comparator `compare(a, b)` returns a NEGATIVE number, what does the sort take it to mean?",
+    "options": [
+      "`a` phải đứng trước `b`",
+      "`a` phải đứng sau `b`",
+      "`a` và `b` bằng nhau, giữ nguyên thứ tự",
+      "Hai phần tử không so sánh được và bị bỏ qua"
+    ],
+    "optionsEn": [
+      "`a` should come before `b`",
+      "`a` should come after `b`",
+      "`a` and `b` are equal, keep their order",
+      "The two elements cannot be compared and are skipped"
+    ],
+    "answer": 0,
+    "explanation": "Âm nghĩa là `a` trước `b`, dương nghĩa là `a` sau `b`, còn 0 nghĩa là bằng nhau. Vì vậy `a - b` sắp xếp tăng dần và `b - a` sắp xếp giảm dần.",
+    "explanationEn": "Negative means `a` before `b`, positive means `a` after `b`, and 0 means equal. That is why `a - b` sorts ascending and `b - a` sorts descending."
+  },
+  {
+    "id": "q3",
+    "question": "Comparator sau có vấn đề gì?\n`nums.sort((a, b) => a > b);`",
+    "questionEn": "What is wrong with this comparator?\n`nums.sort((a, b) => a > b);`",
+    "options": [
+      "Không có gì sai, đây là cách chuẩn để sắp xếp tăng dần",
+      "Nó sắp xếp giảm dần thay vì tăng dần",
+      "Nó ném lỗi TypeError vì comparator phải trả về số",
+      "Nó chỉ trả về `true`/`false` (1/0), không bao giờ âm, nên kết quả không đáng tin"
+    ],
+    "optionsEn": [
+      "Nothing, this is the standard way to sort ascending",
+      "It sorts descending instead of ascending",
+      "It throws a TypeError because a comparator must return a number",
+      "It only returns `true`/`false` (1/0), never negative, so the result is unreliable"
+    ],
+    "answer": 3,
+    "explanation": "Boolean bị ép thành 1 hoặc 0. Hàm sort không bao giờ nhận được tín hiệu \"a đứng trước b\", nên nó không phân biệt được \"nhỏ hơn\" với \"bằng nhau\". Code có thể trông chạy đúng trên mảng nhỏ nhưng sai trên input khác hoặc engine khác. Hãy dùng `a - b`.",
+    "explanationEn": "The boolean is coerced to 1 or 0. The sort never receives an \"a before b\" signal, so it cannot tell \"less than\" from \"equal\". It may look right on a small array and be wrong on other inputs or engines. Use `a - b`."
+  },
+  {
+    "id": "q4",
+    "question": "Đoạn code sau in ra gì?\n`const a = [3, 1, 2];\nconst b = a.sort((x, y) => x - y);\nconsole.log(a === b, a);`",
+    "questionEn": "What does this code log?\n`const a = [3, 1, 2];\nconst b = a.sort((x, y) => x - y);\nconsole.log(a === b, a);`",
+    "options": [
+      "`false [3, 1, 2]`",
+      "`true [1, 2, 3]`",
+      "`false [1, 2, 3]`",
+      "`true [3, 1, 2]`"
+    ],
+    "optionsEn": [
+      "`false [3, 1, 2]`",
+      "`true [1, 2, 3]`",
+      "`false [1, 2, 3]`",
+      "`true [3, 1, 2]`"
+    ],
+    "answer": 1,
+    "explanation": "`sort` sắp xếp tại chỗ và trả về chính mảng đó, nên `a` và `b` là cùng một tham chiếu và `a` đã bị thay đổi. Muốn giữ mảng gốc, dùng `a.toSorted(...)` hoặc `[...a].sort(...)`.",
+    "explanationEn": "`sort` sorts in place and returns the same array, so `a` and `b` are the same reference and `a` has been changed. To keep the original, use `a.toSorted(...)` or `[...a].sort(...)`."
+  },
+  {
+    "id": "q5",
+    "question": "Sau lượt (pass) đầu tiên của bubble sort (sắp xếp tăng dần), điều gì chắc chắn đúng?",
+    "questionEn": "After the first pass of bubble sort (ascending), what is guaranteed?",
+    "options": [
+      "Phần tử nhỏ nhất nằm ở index 0",
+      "Nửa trái của mảng đã được sắp xếp",
+      "Phần tử lớn nhất nằm ở vị trí cuối cùng của mảng",
+      "Không có cặp phần tử kề nhau nào sai thứ tự"
+    ],
+    "optionsEn": [
+      "The smallest element is at index 0",
+      "The left half of the array is sorted",
+      "The largest element is in the last position",
+      "No adjacent pair is out of order"
+    ],
+    "answer": 2,
+    "explanation": "Khi lượt quét gặp giá trị lớn nhất, nó bị swap liên tục sang phải cho đến cuối mảng — \"nổi bọt\" lên trên. Phần tử nhỏ nhất chỉ di chuyển sang trái một bước mỗi lượt, nên chưa chắc đã về index 0.",
+    "explanationEn": "Once the pass reaches the largest value, it keeps getting swapped right until it hits the end — it bubbles up. The smallest element moves left only one step per pass, so it is not necessarily at index 0 yet."
+  },
+  {
+    "id": "q6",
+    "question": "Bubble sort CÓ cờ `swapped` để dừng sớm được chạy trên một mảng ĐÃ sắp xếp gồm n phần tử. Độ phức tạp thời gian là gì?",
+    "questionEn": "Bubble sort WITH a `swapped` early-exit flag runs on an ALREADY sorted array of n elements. What is its time complexity?",
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "optionsEn": [
+      "O(1)",
+      "O(n)",
+      "O(n log n)",
+      "O(n²)"
+    ],
+    "answer": 1,
+    "explanation": "Lượt đầu tiên làm n − 1 phép so sánh và không swap lần nào, nên cờ báo dừng ngay: O(n). Không có cờ, thuật toán vẫn chạy đủ mọi lượt và tốn O(n²) kể cả trên mảng đã sắp xếp.",
+    "explanationEn": "The first pass makes n − 1 comparisons and no swaps, so the flag stops it right away: O(n). Without the flag it still runs every pass and costs O(n²) even on sorted input."
+  },
+  {
+    "id": "q7",
+    "question": "Mảng trông thế nào sau lượt đầu tiên của bubble sort (tăng dần)?\n`bubbleSort([4, 2, 5, 1, 3]);`",
+    "questionEn": "What does the array look like after the first pass of bubble sort (ascending)?\n`bubbleSort([4, 2, 5, 1, 3]);`",
+    "options": [
+      "`[1, 2, 3, 4, 5]`",
+      "`[2, 4, 5, 1, 3]`",
+      "`[1, 4, 2, 5, 3]`",
+      "`[2, 4, 1, 3, 5]`"
+    ],
+    "optionsEn": [
+      "`[1, 2, 3, 4, 5]`",
+      "`[2, 4, 5, 1, 3]`",
+      "`[1, 4, 2, 5, 3]`",
+      "`[2, 4, 1, 3, 5]`"
+    ],
+    "answer": 3,
+    "explanation": "So sánh từng cặp kề nhau: 4,2 → swap `[2, 4, 5, 1, 3]`; 4,5 → giữ nguyên; 5,1 → swap `[2, 4, 1, 5, 3]`; 5,3 → swap `[2, 4, 1, 3, 5]`. Giá trị lớn nhất 5 đã về cuối.",
+    "explanationEn": "Compare each adjacent pair: 4,2 → swap `[2, 4, 5, 1, 3]`; 4,5 → keep; 5,1 → swap `[2, 4, 1, 5, 3]`; 5,3 → swap `[2, 4, 1, 3, 5]`. The largest value 5 has reached the end."
+  },
+  {
+    "id": "q8",
+    "question": "Selection sort (tăng dần) chạy trên `[5, 3, 4, 1, 2]`. Mảng trông thế nào sau HAI lượt của vòng lặp ngoài?",
+    "questionEn": "Selection sort (ascending) runs on `[5, 3, 4, 1, 2]`. What does the array look like after TWO outer-loop passes?",
+    "options": [
+      "`[1, 2, 4, 5, 3]`",
+      "`[1, 2, 3, 4, 5]`",
+      "`[3, 4, 1, 2, 5]`",
+      "`[1, 3, 4, 5, 2]`"
+    ],
+    "optionsEn": [
+      "`[1, 2, 4, 5, 3]`",
+      "`[1, 2, 3, 4, 5]`",
+      "`[3, 4, 1, 2, 5]`",
+      "`[1, 3, 4, 5, 2]`"
+    ],
+    "answer": 0,
+    "explanation": "Lượt 1: nhỏ nhất là 1, swap với 5 → `[1, 3, 4, 5, 2]`. Lượt 2: nhỏ nhất trong phần còn lại là 2, swap với 3 → `[1, 2, 4, 5, 3]`. `[3, 4, 1, 2, 5]` là kết quả sau một lượt bubble sort, không phải selection sort.",
+    "explanationEn": "Pass 1: the minimum is 1, swapped with 5 → `[1, 3, 4, 5, 2]`. Pass 2: the minimum of the rest is 2, swapped with 3 → `[1, 2, 4, 5, 3]`. `[3, 4, 1, 2, 5]` is what one bubble sort pass gives, not selection sort."
+  },
+  {
+    "id": "q9",
+    "question": "Vì sao selection sort vẫn là O(n²) ngay cả khi input đã được sắp xếp sẵn?",
+    "questionEn": "Why is selection sort still O(n²) even when the input is already sorted?",
+    "options": [
+      "Vì nó luôn swap mọi cặp phần tử kề nhau",
+      "Vì nó tạo một mảng phụ kích thước n ở mỗi lượt",
+      "Vì mỗi lượt vẫn phải quét hết phần chưa sắp xếp mới biết chắc giá trị nhỏ nhất",
+      "Vì nó dùng đệ quy sâu n tầng"
+    ],
+    "optionsEn": [
+      "Because it always swaps every adjacent pair",
+      "Because it creates an extra array of size n on every pass",
+      "Because every pass must scan the whole unsorted part to be sure of the minimum",
+      "Because it recurses n levels deep"
+    ],
+    "answer": 2,
+    "explanation": "Selection sort không có cách nào biết phần còn lại đã sắp xếp: nó luôn làm (n-1) + (n-2) + … + 1 = n(n-1)/2 phép so sánh. Nó không thích nghi (not adaptive), khác với bubble sort có dừng sớm và insertion sort.",
+    "explanationEn": "Selection sort has no way to notice the rest is already sorted: it always makes (n-1) + (n-2) + … + 1 = n(n-1)/2 comparisons. It is not adaptive, unlike bubble sort with early exit and insertion sort."
+  },
+  {
+    "id": "q10",
+    "question": "Mỗi lần ghi vào bộ nhớ lưu trữ rất đắt (ví dụ flash có số chu kỳ ghi giới hạn). Trong ba thuật toán cơ bản, thuật toán nào đảm bảo tối đa n − 1 lần swap?",
+    "questionEn": "Every write to storage is very expensive (e.g. flash with limited write cycles). Which elementary sort guarantees at most n − 1 swaps?",
+    "options": [
+      "Bubble sort có dừng sớm",
+      "Insertion sort",
+      "Bubble sort không có dừng sớm",
+      "Selection sort"
+    ],
+    "optionsEn": [
+      "Bubble sort with early exit",
+      "Insertion sort",
+      "Bubble sort without early exit",
+      "Selection sort"
+    ],
+    "answer": 3,
+    "explanation": "Selection sort làm nhiều nhất một swap cho mỗi lượt vòng ngoài, tức tối đa n − 1 swap. Bubble sort và insertion sort có thể thực hiện khoảng n²/2 lần swap hoặc dịch trên mảng sắp xếp ngược — bằng số nghịch thế.",
+    "explanationEn": "Selection sort does at most one swap per outer pass, so at most n − 1 swaps. Bubble sort and insertion sort can perform about n²/2 swaps or shifts on reversed input — one per inversion."
+  },
+  {
+    "id": "q11",
+    "question": "Insertion sort (tăng dần) chạy trên `[5, 3, 4, 1, 2]`. Mảng trông thế nào ngay sau khi phần tử ở index 3 (giá trị 1) được chèn vào?",
+    "questionEn": "Insertion sort (ascending) runs on `[5, 3, 4, 1, 2]`. What does the array look like right after the element at index 3 (value 1) is inserted?",
+    "options": [
+      "`[1, 2, 3, 4, 5]`",
+      "`[1, 3, 4, 5, 2]`",
+      "`[3, 4, 1, 5, 2]`",
+      "`[1, 5, 3, 4, 2]`"
+    ],
+    "optionsEn": [
+      "`[1, 2, 3, 4, 5]`",
+      "`[1, 3, 4, 5, 2]`",
+      "`[3, 4, 1, 5, 2]`",
+      "`[1, 5, 3, 4, 2]`"
+    ],
+    "answer": 1,
+    "explanation": "Trước bước đó phần trái đã là `[3, 4, 5]`. Chèn 1: dịch 5, 4, 3 sang phải và đặt 1 vào index 0 → `[1, 3, 4, 5, 2]`. Giá trị 2 ở cuối chưa được xử lý.",
+    "explanationEn": "Before that step the left part is already `[3, 4, 5]`. Inserting 1 shifts 5, 4 and 3 right and puts 1 at index 0 → `[1, 3, 4, 5, 2]`. The 2 at the end has not been processed yet."
+  },
+  {
+    "id": "q12",
+    "question": "Một ứng dụng nhận điểm số từng cái một qua mạng và phải luôn giữ danh sách điểm đã sắp xếp sau mỗi lần nhận. Thuật toán cơ bản nào phù hợp nhất?",
+    "questionEn": "An app receives scores one at a time over the network and must keep the list sorted after each arrival. Which elementary sort fits best?",
+    "options": [
+      "Insertion sort, vì nó là thuật toán online: chèn từng phần tử mới vào phần đã sắp xếp",
+      "Selection sort, vì nó ít swap nhất",
+      "Bubble sort, vì nó đẩy giá trị lớn nhất về cuối",
+      "Chạy lại selection sort trên toàn bộ danh sách sau mỗi lần nhận"
+    ],
+    "optionsEn": [
+      "Insertion sort, because it is online: each new item is inserted into the sorted part",
+      "Selection sort, because it makes the fewest swaps",
+      "Bubble sort, because it pushes the largest value to the end",
+      "Re-run selection sort over the whole list after every arrival"
+    ],
+    "answer": 0,
+    "explanation": "Insertion sort xử lý input theo từng phần tử và luôn giữ phần trái đã sắp xếp, nên mỗi điểm mới chỉ cần một bước chèn O(k), với k là số phần tử lớn hơn nó. Selection sort phải thấy toàn bộ dữ liệu còn lại mới chọn được giá trị nhỏ nhất, và chạy lại O(n²) mỗi lần là lãng phí.",
+    "explanationEn": "Insertion sort consumes input one item at a time and always keeps a sorted left part, so each new score needs just one O(k) insertion step, where k is how many items are larger. Selection sort must see all remaining data to pick a minimum, and re-running an O(n²) sort each time is wasteful."
+  },
+  {
+    "id": "q13",
+    "question": "Cài đặt insertion sort sau có lỗi. Với input `[3, 1]`, nó trả về gì?\n`function insertionSort(arr) {\n  for (let i = 1; i < arr.length; i++) {\n    const current = arr[i];\n    let j = i - 1;\n    while (j > 0 && arr[j] > current) {\n      arr[j + 1] = arr[j];\n      j--;\n    }\n    arr[j + 1] = current;\n  }\n  return arr;\n}`",
+    "questionEn": "This insertion sort has a bug. What does it return for the input `[3, 1]`?\n`function insertionSort(arr) {\n  for (let i = 1; i < arr.length; i++) {\n    const current = arr[i];\n    let j = i - 1;\n    while (j > 0 && arr[j] > current) {\n      arr[j + 1] = arr[j];\n      j--;\n    }\n    arr[j + 1] = current;\n  }\n  return arr;\n}`",
+    "options": [
+      "`[1, 3]` — code vẫn đúng",
+      "`[1, 1]` — giá trị 3 bị ghi đè",
+      "`[3, 1]` — điều kiện `j > 0` không bao giờ so sánh với index 0",
+      "Vòng lặp vô hạn vì `j` không bao giờ giảm"
+    ],
+    "optionsEn": [
+      "`[1, 3]` — the code is still correct",
+      "`[1, 1]` — the 3 gets overwritten",
+      "`[3, 1]` — the `j > 0` condition never compares against index 0",
+      "An infinite loop, because `j` never decreases"
+    ],
+    "answer": 2,
+    "explanation": "Với i = 1 thì j = 0, nên `j > 0` sai ngay và vòng while không chạy; `arr[1] = 1` ghi lại đúng giá trị cũ. Phần tử ở index 0 không bao giờ được so sánh. Điều kiện đúng là `j >= 0`.",
+    "explanationEn": "At i = 1, j = 0, so `j > 0` is false immediately and the while loop never runs; `arr[1] = 1` just rewrites the same value. Index 0 is never compared. The correct condition is `j >= 0`."
+  },
+  {
+    "id": "q14",
+    "question": "Một mảng n phần tử gần như đã sắp xếp, chỉ có k nghịch thế (cặp sai thứ tự). Độ phức tạp thời gian của insertion sort trên mảng này là gì?",
+    "questionEn": "An array of n elements is nearly sorted, with only k inversions (out-of-order pairs). What is insertion sort's time complexity on it?",
+    "options": [
+      "O(n²) bất kể k",
+      "O(k log n)",
+      "O(n log n)",
+      "O(n + k)"
+    ],
+    "optionsEn": [
+      "O(n²) regardless of k",
+      "O(k log n)",
+      "O(n log n)",
+      "O(n + k)"
+    ],
+    "answer": 3,
+    "explanation": "Mỗi phần tử tốn ít nhất một phép so sánh (phần n), và mỗi lần dịch loại bỏ đúng một nghịch thế (phần k). Khi k nhỏ, thuật toán gần như tuyến tính; khi mảng sắp xếp ngược, k ≈ n²/2 và quay về O(n²).",
+    "explanationEn": "Each element costs at least one comparison (the n part), and each shift removes exactly one inversion (the k part). With small k it is nearly linear; on reversed input k ≈ n²/2 and it is back to O(n²)."
+  },
+  {
+    "id": "q15",
+    "question": "Danh sách nhân viên đã được sắp xếp theo tên. Sau đó bạn sắp xếp lại theo phòng ban. Vì sao cần thuật toán sắp xếp ỔN ĐỊNH (stable) cho lần thứ hai?",
+    "questionEn": "A list of employees is already sorted by name. You then sort it by department. Why does the second sort need to be STABLE?",
+    "options": [
+      "Để trong mỗi phòng ban, nhân viên vẫn giữ thứ tự theo tên từ lần sắp xếp trước",
+      "Để lần sắp xếp thứ hai chạy trong O(n)",
+      "Để thuật toán không tốn thêm bộ nhớ phụ",
+      "Để các phòng ban trùng tên bị gộp lại thành một"
+    ],
+    "optionsEn": [
+      "So that within each department, employees keep the name order from the first sort",
+      "So that the second sort runs in O(n)",
+      "So that the algorithm uses no extra memory",
+      "So that departments with the same name get merged into one"
+    ],
+    "answer": 0,
+    "explanation": "Sort ổn định giữ nguyên thứ tự tương đối của các phần tử có khoá bằng nhau. Nhân viên cùng phòng ban có khoá bằng nhau, nên họ giữ thứ tự theo tên. Tính ổn định không liên quan đến tốc độ hay bộ nhớ: insertion sort ổn định và O(1) bộ nhớ, TimSort ổn định nhưng tốn O(n).",
+    "explanationEn": "A stable sort keeps the relative order of elements with equal keys. Employees in the same department have equal keys, so they stay in name order. Stability is unrelated to speed or memory: insertion sort is stable with O(1) space, TimSort is stable with O(n)."
+  },
+  {
+    "id": "q16",
+    "question": "Các thuật toán sắp xếp lai (hybrid) như TimSort chuyển sang thuật toán O(n²) nào khi xử lý các đoạn nhỏ, và vì sao?",
+    "questionEn": "Which O(n²) algorithm do hybrid sorts such as TimSort switch to for small pieces, and why?",
+    "options": [
+      "Selection sort, vì nó ít swap nhất",
+      "Insertion sort, vì chi phí phụ thấp và rất nhanh với đoạn nhỏ hoặc gần sắp xếp",
+      "Bubble sort, vì nó dễ song song hoá",
+      "Không thuật toán nào, vì O(n²) luôn chậm hơn O(n log n)"
+    ],
+    "optionsEn": [
+      "Selection sort, because it makes the fewest swaps",
+      "Insertion sort, because its low overhead makes it very fast on small or nearly sorted pieces",
+      "Bubble sort, because it is easy to parallelise",
+      "None, because O(n²) is always slower than O(n log n)"
+    ],
+    "answer": 1,
+    "explanation": "Big O mô tả xu hướng khi n lớn; với vài chục phần tử, hằng số nhỏ và vòng lặp đơn giản của insertion sort thắng chi phí đệ quy và cấp phát của merge sort hay quick sort. TimSort dùng binary insertion sort để tạo các run ngắn, và nó còn ổn định, thích nghi.",
+    "explanationEn": "Big O describes the trend for large n; for a few dozen elements, insertion sort's tiny constants and simple loop beat the recursion and allocation overhead of merge sort or quick sort. TimSort uses binary insertion sort to build short runs, and it is stable and adaptive too."
+  },
+  {
+    "id": "q17",
+    "question": "Bạn cần sắp xếp 100.000 số ngẫu nhiên trong JavaScript. Lựa chọn nào hợp lý nhất?",
+    "questionEn": "You need to sort 100,000 random numbers in JavaScript. Which choice is most sensible?",
+    "options": [
+      "Bubble sort có dừng sớm, vì best case là O(n)",
+      "Insertion sort, vì nó ổn định",
+      "`arr.sort()` không có comparator, vì nó nhanh nhất",
+      "`arr.sort((a, b) => a - b)`, vì nó O(n log n) và so sánh số đúng cách"
+    ],
+    "optionsEn": [
+      "Bubble sort with early exit, because its best case is O(n)",
+      "Insertion sort, because it is stable",
+      "`arr.sort()` with no comparator, because it is fastest",
+      "`arr.sort((a, b) => a - b)`, because it is O(n log n) and compares numbers correctly"
+    ],
+    "answer": 3,
+    "explanation": "Dữ liệu ngẫu nhiên nên best case của bubble sort không áp dụng: các thuật toán O(n²) cần cỡ 5 × 10⁹ phép so sánh, còn O(n log n) chỉ khoảng 1,7 triệu. `sort()` không comparator lại so sánh theo chuỗi và cho kết quả sai với số.",
+    "explanationEn": "The data is random, so bubble sort's best case does not apply: the O(n²) sorts need around 5 × 10⁹ comparisons, while O(n log n) needs about 1.7 million. `sort()` without a comparator compares as strings and gives the wrong order for numbers."
+  }
+]

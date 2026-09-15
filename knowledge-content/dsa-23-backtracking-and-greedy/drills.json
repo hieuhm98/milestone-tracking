@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về backtracking.",
+      "promptEn": "Pick TWO statements that are true about backtracking.",
+      "options": [
+        "Backtracking luôn chạy trong thời gian đa thức nếu cắt tỉa tốt",
+        "Khi ghi một đáp án hoàn chỉnh phải lưu bản sao của path, không phải chính path",
+        "Hoán vị nên dùng start index để tránh lặp",
+        "Cắt tỉa loại bỏ nhánh ngay khi nó không thể dẫn tới lời giải hợp lệ",
+        "Backtracking chỉ đi một đường duy nhất từ gốc tới lá"
+      ],
+      "optionsEn": [
+        "Backtracking always runs in polynomial time if the pruning is good",
+        "When recording a complete answer you must store a copy of the path, not the path itself",
+        "Permutations should use a start index to avoid repeats",
+        "Pruning abandons a branch as soon as it cannot lead to a valid solution",
+        "Backtracking follows a single path from the root to one leaf"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Path là mảng dùng chung, bị push/pop liên tục, nên phải sao chép khi ghi kết quả; cắt tỉa là thứ khiến backtracking nhanh hơn vét cạn thô. Dù cắt tỉa, backtracking vẫn thường là hàm mũ; hoán vị cần mảng `used`; còn đi một đường duy nhất là đặc điểm của greedy.",
+      "explanationEn": "The path is a shared array that is pushed and popped constantly, so it must be copied when recorded; pruning is what makes backtracking faster than raw brute force. Even with pruning it is usually exponential; permutations need a `used` array; and following a single path is what greedy does.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI bài toán mà một quy tắc greedy đơn giản cho kết quả tối ưu.",
+      "promptEn": "Pick TWO problems where a simple greedy rule gives an optimal answer.",
+      "options": [
+        "Đổi tiền ít đồng nhất với mệnh giá `{1, 3, 4}`",
+        "0/1 knapsack, lấy theo tỉ lệ giá trị/khối lượng",
+        "Chọn nhiều khoảng không chồng lấn nhất, sort theo thời điểm kết thúc",
+        "Liệt kê mọi lời giải của N-Queens",
+        "Fractional knapsack, lấy theo tỉ lệ giá trị/khối lượng"
+      ],
+      "optionsEn": [
+        "Fewest coins with denominations `{1, 3, 4}`",
+        "0/1 knapsack, taking items by value/weight ratio",
+        "Maximum non-overlapping intervals, sorting by end time",
+        "Listing every N-Queens solution",
+        "Fractional knapsack, taking items by value/weight ratio"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "Lập lịch theo thời điểm kết thúc và fractional knapsack theo tỉ lệ đều chứng minh được bằng lập luận hoán đổi. Đổi tiền `{1, 3, 4}` cho 6 và 0/1 knapsack là hai phản ví dụ kinh điển cần DP; liệt kê mọi lời giải N-Queens là việc của backtracking.",
+      "explanationEn": "End-time interval scheduling and ratio-based fractional knapsack are both provable with an exchange argument. Coins `{1, 3, 4}` for 6 and 0/1 knapsack are the classic counterexamples that need DP; listing every N-Queens solution is a backtracking job.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Ba bước lặp lại trong mỗi vòng của backtracking là chọn, khám phá và bước gì?",
+      "promptEn": "The three steps repeated in every backtracking loop are choose, explore and what?",
+      "answer": "un-choose",
+      "answerEn": "un-choose",
+      "accept": [
+        "un-choose",
+        "unchoose",
+        "un choose",
+        "huỷ chọn",
+        "hủy chọn",
+        "undo",
+        "undo the choice",
+        "backtrack"
+      ],
+      "explanation": "Huỷ chọn (un-choose): hoàn tác thay đổi trên trạng thái dùng chung, ví dụ `path.pop()` và `used[i] = false`, để nhánh anh em tiếp theo bắt đầu từ trạng thái sạch.",
+      "explanationEn": "Un-choose: undo the change to the shared state, e.g. `path.pop()` and `used[i] = false`, so the next sibling branch starts clean.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tên kỹ thuật chứng minh greedy đúng bằng cách thay lựa chọn tham lam vào một lời giải tối ưu bất kỳ và chỉ ra kết quả không tệ hơn là gì?",
+      "promptEn": "What is the proof technique that shows a greedy algorithm is correct by swapping the greedy choice into any optimal solution and showing it is no worse?",
+      "answer": "exchange argument",
+      "answerEn": "exchange argument",
+      "accept": [
+        "exchange argument",
+        "exchange",
+        "lập luận hoán đổi",
+        "lap luan hoan doi",
+        "hoán đổi",
+        "exchange proof"
+      ],
+      "explanation": "Lập luận hoán đổi (exchange argument). Với lập lịch khoảng: thay cuộc họp đầu tiên của lịch tối ưu bằng cuộc kết thúc sớm nhất, lịch vẫn hợp lệ và giữ nguyên số lượng.",
+      "explanationEn": "The exchange argument. For interval scheduling: replace the first meeting of an optimal schedule with the earliest-ending one, and the schedule stays valid with the same size.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi bài toán với kỹ thuật phù hợp nhất.",
+      "promptEn": "Match each problem to the technique that fits it best.",
+      "pairs": [
+        {
+          "left": "Sinh mọi hoán vị của một mảng",
+          "leftEn": "Generate every permutation of an array",
+          "right": "Backtracking với mảng `used`",
+          "rightEn": "Backtracking with a `used` array"
+        },
+        {
+          "left": "Nhiều cuộc họp không chồng lấn nhất",
+          "leftEn": "Maximum non-overlapping meetings",
+          "right": "Greedy: sort theo thời điểm kết thúc",
+          "rightEn": "Greedy: sort by end time"
+        },
+        {
+          "left": "Số đồng xu ít nhất với mệnh giá tuỳ ý",
+          "leftEn": "Fewest coins for arbitrary denominations",
+          "right": "Quy hoạch động theo từng số tiền con",
+          "rightEn": "Dynamic programming over every sub-amount"
+        },
+        {
+          "left": "Có tới được chỉ số cuối trong jump game không",
+          "leftEn": "Can you reach the last index in jump game",
+          "right": "Greedy: theo dõi tầm với xa nhất",
+          "rightEn": "Greedy: track the farthest reach"
+        }
+      ],
+      "explanation": "Liệt kê mọi thứ → backtracking; có quy tắc cục bộ chứng minh được → greedy; tối ưu với bài toán con trùng lặp và không có quy tắc an toàn → DP.",
+      "explanationEn": "List everything → backtracking; a provably safe local rule → greedy; an optimum with overlapping subproblems and no safe rule → DP.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước trong một vòng lặp của hàm backtracking (ví dụ sinh hoán vị).",
+      "promptEn": "Put the steps of one loop iteration of a backtracking function (e.g. permutations) into order.",
+      "items": [
+        {
+          "text": "Bỏ qua lựa chọn không hợp lệ (ví dụ phần tử đã dùng)",
+          "textEn": "Skip an invalid choice (e.g. an element already used)"
+        },
+        {
+          "text": "Chọn: đánh dấu đã dùng và push vào path",
+          "textEn": "Choose: mark it used and push it onto the path"
+        },
+        {
+          "text": "Khám phá: gọi đệ quy cho vị trí tiếp theo",
+          "textEn": "Explore: recurse for the next position"
+        },
+        {
+          "text": "Huỷ chọn: pop khỏi path và bỏ đánh dấu",
+          "textEn": "Un-choose: pop it from the path and unmark it"
+        }
+      ],
+      "explanation": "Kiểm tra ràng buộc trước khi chọn là cắt tỉa; huỷ chọn sau khi lời gọi đệ quy trả về giữ cho trạng thái dùng chung đúng với nhánh kế tiếp.",
+      "explanationEn": "Checking the constraint before choosing is the pruning; un-choosing after the recursive call returns keeps the shared state correct for the next branch.",
+      "id": "d6"
+    }
+  ]
+}

@@ -1,0 +1,352 @@
+[
+  {
+    "id": "q1",
+    "question": "Một lần GET cache mất 2 ms, một query database mất 50 ms, và hit ratio là 90%. Với cache-aside (lần miss vẫn tốn một lần GET cache trước), độ trễ hiệu dụng trung bình là bao nhiêu?",
+    "questionEn": "A cache GET takes 2 ms, a database query takes 50 ms, and the hit ratio is 90%. With cache-aside (a miss still pays for the cache GET first), what is the average effective latency?",
+    "options": ["5,0 ms", "7,0 ms", "6,8 ms", "26,0 ms"],
+    "optionsEn": ["5.0 ms", "7.0 ms", "6.8 ms", "26.0 ms"],
+    "answer": 1,
+    "explanation": "0,9 × 2 + 0,1 × (2 + 50) = 1,8 + 5,2 = 7,0 ms. Con số 6,8 ms là kết quả khi quên rằng lần miss vẫn phải trả chi phí hỏi cache trước khi xuống DB.",
+    "explanationEn": "0.9 × 2 + 0.1 × (2 + 50) = 1.8 + 5.2 = 7.0 ms. The 6.8 ms figure is what you get if you forget that a miss still pays for asking the cache before going to the DB."
+  },
+  {
+    "id": "q2",
+    "question": "Một team muốn đặt Redis trước một bảng mà mỗi dòng được ghi thường xuyên gần bằng số lần đọc, và nghiệp vụ yêu cầu mọi lần đọc phải thấy ngay lần ghi mới nhất. Lời khuyên tốt nhất của kiến trúc sư là gì?",
+    "questionEn": "A team wants to put Redis in front of a table whose rows are written about as often as they are read, and the business requires every read to reflect the latest write. What is the best architectural advice?",
+    "options": [
+      "Thêm cache với TTL 1 giờ để giảm tải DB",
+      "Dùng write-behind để việc ghi nhanh hơn",
+      "Đặt CDN phía trước API đọc bảng đó",
+      "Không thêm cache; tối ưu query và index ở DB"
+    ],
+    "optionsEn": [
+      "Add a cache with a 1-hour TTL to offload the DB",
+      "Use write-behind so that writes become faster",
+      "Put a CDN in front of the API that reads the table",
+      "Skip the cache; optimise the query and indexes in the DB"
+    ],
+    "answer": 3,
+    "explanation": "Cache chỉ đáng giá khi đọc áp đảo ghi và nghiệp vụ chấp nhận độ cũ có giới hạn. Ở đây hit ratio sẽ thấp và yêu cầu nhất quán mạnh mâu thuẫn với bản chất eventually consistent của cache. Write-behind còn thêm rủi ro mất dữ liệu.",
+    "explanationEn": "A cache pays off only when reads dominate writes and bounded staleness is acceptable. Here the hit ratio would be low and the strong-consistency requirement contradicts a cache's eventually consistent nature. Write-behind would add data-loss risk on top."
+  },
+  {
+    "id": "q3",
+    "question": "Một response đã được lưu với `max-age` dài. Ở tầng nào việc vô hiệu hoá nó là khó nhất?",
+    "questionEn": "A response has been stored with a long `max-age`. At which layer is it hardest to invalidate?",
+    "options": [
+      "Cache của trình duyệt người dùng",
+      "Cache phân tán như Redis",
+      "Cache LRU in-process trong service",
+      "Buffer pool của database"
+    ],
+    "optionsEn": [
+      "The user's browser cache",
+      "A distributed cache such as Redis",
+      "An in-process LRU cache in the service",
+      "The database buffer pool"
+    ],
+    "answer": 0,
+    "explanation": "Bạn không thể gửi lệnh xoá tới trình duyệt của người dùng; bản đã lưu sẽ được dùng tới khi hết hạn. Vì vậy asset ở tầng này nên dùng URL có phiên bản, còn HTML dùng `no-cache` hoặc TTL ngắn.",
+    "explanationEn": "You cannot send a delete to a user's browser; the stored copy is used until it expires. That is why assets at this layer use versioned URLs, and HTML uses `no-cache` or a short TTL."
+  },
+  {
+    "id": "q4",
+    "question": "Trong hệ thống cache-aside, khi cập nhật một sản phẩm, trình tự nào an toàn nhất?",
+    "questionEn": "In a cache-aside system, which sequence is safest when updating a product?",
+    "options": [
+      "Xoá key trong cache, rồi cập nhật DB",
+      "Ghi giá trị mới vào cache, rồi cập nhật DB",
+      "Cập nhật DB và commit, rồi xoá key trong cache",
+      "Cập nhật DB và commit, rồi ghi đè giá trị mới vào cache"
+    ],
+    "optionsEn": [
+      "Delete the cache key, then update the DB",
+      "Write the new value to the cache, then update the DB",
+      "Update and commit the DB, then delete the cache key",
+      "Update and commit the DB, then overwrite the cache with the new value"
+    ],
+    "answer": 2,
+    "explanation": "Xoá trước khi commit cho phép một reader đồng thời nạp lại dòng cũ vào cache. Ghi đè sau commit có thể bị hai writer đồng thời làm đảo thứ tự, để lại giá trị cũ hơn. Xoá sau commit là idempotent: lần đọc tiếp theo nạp đúng giá trị DB đang có.",
+    "explanationEn": "Deleting before the commit lets a concurrent reader reload the old row into the cache. Overwriting after the commit can be reordered by two concurrent writers, leaving the older value. Deleting after commit is idempotent: the next read loads whatever the DB holds."
+  },
+  {
+    "id": "q5",
+    "question": "Một nền tảng video phải đếm lượt xem với hàng trăm nghìn lượt tăng mỗi giây. Mất khoảng một giây dữ liệu đếm khi node cache sập là chấp nhận được, nhưng DB không chịu nổi một lệnh ghi cho mỗi lượt xem. Pattern nào phù hợp nhất?",
+    "questionEn": "A video platform counts views at hundreds of thousands of increments per second. Losing about a second of counts if a cache node crashes is acceptable, but the DB cannot take one write per view. Which pattern fits best?",
+    "options": [
+      "Cache-aside, xoá key sau mỗi lượt xem",
+      "Write-through, ghi đồng bộ xuống DB mỗi lượt",
+      "Write-behind, gom lô rồi đẩy xuống DB bất đồng bộ",
+      "Read-through với loader nạp số đếm từ DB"
+    ],
+    "optionsEn": [
+      "Cache-aside, deleting the key after every view",
+      "Write-through, synchronously writing the DB on every view",
+      "Write-behind, batching and flushing to the DB asynchronously",
+      "Read-through with a loader that reads the count from the DB"
+    ],
+    "answer": 2,
+    "explanation": "Write-behind xác nhận ngay khi ghi vào cache và đẩy xuống DB theo lô, nên DB chỉ nhận vài lệnh ghi mỗi giây. Cái giá là có thể mất phần chưa kịp đẩy — chấp nhận được với lượt xem, không bao giờ với tiền. Write-through vẫn ghi DB mỗi lượt.",
+    "explanationEn": "Write-behind acknowledges as soon as the cache is written and flushes to the DB in batches, so the DB sees only a few writes per second. The price is losing unflushed data — fine for view counts, never for money. Write-through still hits the DB on every view."
+  },
+  {
+    "id": "q6",
+    "question": "Cụm Redis dùng cho cache-aside được thay mới sau sự cố và khởi động với bộ nhớ trống. Ngay sau đó CPU của database lên 100% và API bị timeout, dù lưu lượng không đổi. Nguyên nhân khả dĩ nhất là gì?",
+    "questionEn": "The Redis cluster used for cache-aside is replaced after an incident and starts with empty memory. Right afterwards database CPU hits 100% and the API times out, although traffic is unchanged. What is the most likely cause?",
+    "options": [
+      "Cache nguội: mọi request đều miss và dồn thẳng vào DB",
+      "Write-behind làm mất các lệnh ghi chưa được đẩy xuống DB",
+      "TTL đặt quá dài nên dữ liệu trong cache đã cũ",
+      "Eviction policy LFU loại bỏ nhầm các key nóng"
+    ],
+    "optionsEn": [
+      "A cold cache: every request misses and goes straight to the DB",
+      "Write-behind lost writes that had not been flushed to the DB",
+      "The TTL is too long, so cached data has gone stale",
+      "The LFU eviction policy removed the hot keys by mistake"
+    ],
+    "answer": 0,
+    "explanation": "DB đã được định cỡ cho lưu lượng còn lại sau cache (ví dụ 5% lần miss). Cache trống biến 100% request thành miss. Cách phòng: warm-up cache trước khi chuyển lưu lượng, cache có replica, và rate limit hoặc gộp request trước DB.",
+    "explanationEn": "The DB was sized for the traffic left after the cache (say 5% misses). An empty cache turns 100% of requests into misses. Defences: warm the cache before shifting traffic, replicate the cache, and rate limit or coalesce requests in front of the DB."
+  },
+  {
+    "id": "q7",
+    "question": "Một job lúc 02:00 mỗi đêm nạp 2 triệu key sản phẩm vào cache, tất cả với `EX 3600`. Đúng 03:00 mỗi ngày DB lại tăng tải đột biến. Cách sửa tốt nhất là gì?",
+    "questionEn": "A job at 02:00 every night loads 2 million product keys into the cache, all with `EX 3600`. At exactly 03:00 every day the DB load spikes. What is the best fix?",
+    "options": [
+      "Tăng TTL lên 24 giờ cho mọi key",
+      "Đổi eviction policy từ LRU sang LFU",
+      "Giảm TTL xuống 60 giây để dữ liệu tươi hơn",
+      "Cộng thêm jitter ngẫu nhiên vào TTL của mỗi key"
+    ],
+    "optionsEn": [
+      "Raise the TTL to 24 hours for every key",
+      "Switch the eviction policy from LRU to LFU",
+      "Lower the TTL to 60 seconds for fresher data",
+      "Add random jitter to each key's TTL"
+    ],
+    "answer": 3,
+    "explanation": "Các key được nạp cùng lúc với cùng TTL nên hết hạn cùng lúc — một cache avalanche nhỏ. Jitter trải thời điểm hết hạn ra. TTL 24 giờ vẫn khiến chúng hết hạn đồng loạt, chỉ là vào ngày hôm sau; TTL 60 s làm mọi thứ tệ hơn.",
+    "explanationEn": "Keys loaded together with the same TTL expire together — a small cache avalanche. Jitter spreads the expiry times. A 24-hour TTL still expires them all at once, just a day later; a 60 s TTL makes it worse."
+  },
+  {
+    "id": "q8",
+    "question": "Vì sao với cache-aside, khi ghi dữ liệu người ta thường `DEL` key thay vì `SET` giá trị mới vào cache?",
+    "questionEn": "With cache-aside, why do writers usually `DEL` the key rather than `SET` the new value into the cache?",
+    "options": [
+      "Vì `DEL` luôn nhanh hơn `SET` trên mọi cache store",
+      "Vì hai writer đồng thời có thể `SET` sai thứ tự và để lại giá trị cũ; xoá thì idempotent",
+      "Vì `SET` không thể kèm TTL khi ghi đè một key đã có",
+      "Vì xoá key giải phóng bộ nhớ và giảm tần suất eviction"
+    ],
+    "optionsEn": [
+      "Because `DEL` is always faster than `SET` on every cache store",
+      "Because two concurrent writers can `SET` out of order and leave an old value; deleting is idempotent",
+      "Because `SET` cannot carry a TTL when overwriting an existing key",
+      "Because deleting frees memory and reduces how often eviction runs"
+    ],
+    "answer": 1,
+    "explanation": "Writer A và B commit vào DB theo thứ tự A rồi B, nhưng lệnh `SET` của B có thể tới cache trước của A — cache giữ giá trị của A trong khi DB giữ của B. Xoá không có vấn đề thứ tự: lần đọc sau luôn nạp giá trị hiện tại của DB.",
+    "explanationEn": "Writers A and B commit to the DB in the order A then B, but B's `SET` can reach the cache before A's — the cache holds A's value while the DB holds B's. Deletes have no ordering problem: the next read always loads the DB's current value."
+  },
+  {
+    "id": "q9",
+    "question": "Bảng `products` được cập nhật bởi admin tool, một job import và một ứng dụng legacy chạy SQL trực tiếp mà team không sửa được. Cache sản phẩm liên tục bị cũ. Thiết kế invalidation nào đáng tin cậy nhất?",
+    "questionEn": "The `products` table is updated by an admin tool, an import job, and a legacy app that runs SQL directly and cannot be changed. The product cache keeps going stale. Which invalidation design is most reliable?",
+    "options": [
+      "Đọc change log của DB bằng CDC (ví dụ Debezium) và invalidate key từ một consumer",
+      "Yêu cầu từng team tự thêm lệnh `DEL` vào code ghi của họ",
+      "Bỏ TTL để key chỉ bị xoá khi có lệnh `DEL` tường minh",
+      "Chuyển sang write-behind để mọi lệnh ghi đi qua cache"
+    ],
+    "optionsEn": [
+      "Tail the DB change log with CDC (e.g. Debezium) and invalidate keys from a consumer",
+      "Ask each team to add a `DEL` call to their own write code",
+      "Remove the TTL so keys are only deleted by an explicit `DEL`",
+      "Move to write-behind so that every write goes through the cache"
+    ],
+    "answer": 0,
+    "explanation": "CDC bắt được mọi thay đổi đã commit, bất kể ai ghi, nên invalidation không phụ thuộc vào việc từng writer nhớ xoá cache. Ứng dụng legacy không sửa được nên không thể thêm `DEL` hay ép nó ghi qua cache. Bỏ TTL chỉ khiến dữ liệu cũ tồn tại mãi.",
+    "explanationEn": "CDC captures every committed change regardless of who wrote it, so invalidation no longer depends on each writer remembering to delete. The legacy app cannot be changed, so it cannot add a `DEL` or be forced through the cache. Removing the TTL just makes stale data live forever."
+  },
+  {
+    "id": "q10",
+    "question": "Hai request chạy đồng thời trên hệ thống cache-aside theo đúng thứ tự dưới đây. Kết quả là gì?\n`A: GET product:42 -> miss\nA: SELECT -> price 100 (old)\nB: UPDATE price = 120, commit\nB: DEL product:42\nA: SET product:42 = 100, EX 600`",
+    "questionEn": "Two requests run concurrently on a cache-aside system in exactly this order. What is the result?\n`A: GET product:42 -> miss\nA: SELECT -> price 100 (old)\nB: UPDATE price = 120, commit\nB: DEL product:42\nA: SET product:42 = 100, EX 600`",
+    "options": [
+      "Cache giữ 120 vì lệnh `DEL` của B chạy sau `SELECT` của A",
+      "Cache trống vì `DEL` của B xoá luôn lệnh `SET` sắp tới",
+      "Lệnh `SET` của A bị Redis từ chối vì key vừa bị xoá",
+      "Cache giữ giá 100 cũ tới khi hết TTL, dù DB đã là 120"
+    ],
+    "optionsEn": [
+      "The cache holds 120 because B's `DEL` ran after A's `SELECT`",
+      "The cache is empty because B's `DEL` also cancels the upcoming `SET`",
+      "Redis rejects A's `SET` because the key was just deleted",
+      "The cache holds the old price 100 until the TTL expires, although the DB says 120"
+    ],
+    "answer": 3,
+    "explanation": "Đây là race condition kinh điển của cache-aside: A đọc giá trị cũ trước khi B ghi, rồi ghi nó vào cache sau khi B đã xoá. Một `SET` thường không biết gì về lần xoá trước đó; cần TTL ngắn, xoá kép có trễ hoặc lease/version check để hạn chế.",
+    "explanationEn": "This is the classic cache-aside race: A reads the old value before B's write and stores it after B's delete. A plain `SET` knows nothing about the earlier delete; a short TTL, delayed double delete or leases/version checks are needed to limit it."
+  },
+  {
+    "id": "q11",
+    "question": "Một hệ thống đặt vé máy bay hiển thị số ghế trống trên trang tìm kiếm (lưu lượng rất lớn) và dùng cùng con số đó khi khách bấm thanh toán. Thiết kế nào hợp lý nhất?",
+    "questionEn": "A flight booking system shows seats available on its search page (very high traffic) and uses the same number when a customer checks out. Which design is most sensible?",
+    "options": [
+      "Cache số ghế với TTL 10 phút và dùng giá trị cache cho cả tìm kiếm lẫn thanh toán",
+      "Cache số ghế với TTL ngắn cho trang tìm kiếm, nhưng kiểm tra và trừ ghế trong transaction DB khi thanh toán",
+      "Không cache gì cả; mọi lượt tìm kiếm đều đọc trực tiếp từ DB primary",
+      "Dùng write-behind cho việc trừ ghế để thanh toán phản hồi nhanh hơn"
+    ],
+    "optionsEn": [
+      "Cache seat counts with a 10-minute TTL and use the cached value for both search and checkout",
+      "Cache seat counts with a short TTL for search, but check and decrement seats in a DB transaction at checkout",
+      "Cache nothing; every search reads directly from the primary DB",
+      "Use write-behind for seat decrements so checkout responds faster"
+    ],
+    "answer": 1,
+    "explanation": "Số hơi cũ trên trang tìm kiếm là chấp nhận được; con số dùng để quyết định bán vé thì phải đọc từ nguồn sự thật trong transaction. Dùng cache cho thanh toán sẽ bán vượt ghế, write-behind còn có thể mất lệnh trừ ghế, còn không cache thì đè bẹp DB.",
+    "explanationEn": "A slightly stale number on the search page is acceptable; the number that decides a sale must come from the source of truth inside a transaction. Using the cache for checkout oversells, write-behind can even lose decrements, and caching nothing crushes the DB."
+  },
+  {
+    "id": "q12",
+    "question": "Key `home:feed` nhận khoảng 5.000 request/giây, TTL 5 phút, query dựng lại mất 800 ms. Cứ mỗi 5 phút, DB lại nhận hàng nghìn query giống hệt nhau trong chưa tới một giây và CPU chạm 100%. Đây là vấn đề gì?",
+    "questionEn": "The key `home:feed` gets about 5,000 requests per second, has a 5-minute TTL, and takes an 800 ms query to rebuild. Every 5 minutes the DB receives thousands of identical queries within a second and CPU hits 100%. What is this?",
+    "options": [
+      "Cache penetration do request cho key không tồn tại",
+      "Hot key làm bão hoà một shard cache",
+      "Cache stampede khi một key nóng hết hạn",
+      "Eviction churn vì cache quá nhỏ"
+    ],
+    "optionsEn": [
+      "Cache penetration from requests for missing keys",
+      "A hot key saturating one cache shard",
+      "A cache stampede when a hot key expires",
+      "Eviction churn because the cache is too small"
+    ],
+    "answer": 2,
+    "explanation": "Mọi request tới trong 800 ms dựng lại đều miss và cùng chạy query — đó là stampede (dogpile). Chữa bằng single flight, lock có thời hạn, stale-while-revalidate hoặc làm mới sớm theo xác suất. Nhịp đúng bằng TTL là dấu hiệu nhận biết.",
+    "explanationEn": "Every request arriving during the 800 ms rebuild misses and runs the query — a stampede (dogpile). Cure it with single flight, a lock with expiry, stale-while-revalidate or probabilistic early refresh. A rhythm exactly matching the TTL is the giveaway."
+  },
+  {
+    "id": "q13",
+    "question": "Một bot gửi request tới `/users/{id}` với các ID ngẫu nhiên không tồn tại. Hit ratio cho người dùng thật vẫn tốt, nhưng DB bị quá tải bởi các query trả về 0 dòng. Cách phòng phù hợp nhất là gì?",
+    "questionEn": "A bot calls `/users/{id}` with random IDs that do not exist. The hit ratio for real users is still good, but the DB is overloaded by queries returning zero rows. What is the most fitting defence?",
+    "options": [
+      "Tăng TTL của các key người dùng đang có",
+      "Cache kết quả rỗng với TTL ngắn và dùng Bloom filter để loại ID không thể tồn tại",
+      "Thêm jitter vào TTL để các key không hết hạn cùng lúc",
+      "Chuyển từ cache-aside sang write-through"
+    ],
+    "optionsEn": [
+      "Raise the TTL of existing user keys",
+      "Cache empty results with a short TTL and use a Bloom filter to reject impossible IDs",
+      "Add jitter to TTLs so keys do not expire together",
+      "Move from cache-aside to write-through"
+    ],
+    "answer": 1,
+    "explanation": "Đây là cache penetration: key không có trong DB nên cũng không bao giờ vào cache, và mọi lần đều xuống DB. Negative caching chặn các lần lặp lại, Bloom filter chặn cả ID chưa từng thấy. TTL dài hay jitter không giúp gì cho key không tồn tại.",
+    "explanationEn": "This is cache penetration: keys that are not in the DB never get cached either, so every attempt reaches the DB. Negative caching stops repeats, and a Bloom filter stops even never-seen IDs. Longer TTLs or jitter do nothing for keys that do not exist."
+  },
+  {
+    "id": "q14",
+    "question": "Trong một đợt flash sale, key `item:9001` làm băng thông mạng của một shard Redis chạm trần trong khi các shard khác gần như rảnh. Kết hợp nào giải quyết tốt nhất?",
+    "questionEn": "During a flash sale, the key `item:9001` maxes out the network of one Redis shard while the other shards sit almost idle. Which combination solves it best?",
+    "options": [
+      "Cache L1 in-process với TTL vài giây và nhân bản key thành nhiều bản để đọc ngẫu nhiên",
+      "Tăng TTL của key lên 24 giờ và bật eviction policy LFU",
+      "Cache kết quả rỗng và thêm Bloom filter trước cụm Redis",
+      "Chuyển key đó sang write-behind để giảm số lệnh ghi"
+    ],
+    "optionsEn": [
+      "An in-process L1 cache with a few seconds of TTL, plus replicating the key into copies read at random",
+      "Raise the key's TTL to 24 hours and enable the LFU eviction policy",
+      "Cache empty results and add a Bloom filter in front of the Redis cluster",
+      "Move that key to write-behind to reduce the number of writes"
+    ],
+    "answer": 0,
+    "explanation": "Vấn đề là lượng đọc dồn vào một shard. L1 in-process hấp thụ phần lớn lượt đọc ngay trong service, còn các bản sao `item:9001#0..#N` trải phần còn lại ra nhiều shard. TTL, LFU hay Bloom filter không thay đổi việc mọi lượt đọc đổ về cùng một chỗ.",
+    "explanationEn": "The problem is read volume concentrated on one shard. An in-process L1 absorbs most reads inside the service, and copies such as `item:9001#0..#N` spread the rest across shards. TTLs, LFU or a Bloom filter do not change the fact that every read lands in the same place."
+  },
+  {
+    "id": "q15",
+    "question": "Dashboard cache cho thấy: số lần evict mỗi giây cao và đều đặn, các key bị evict lại được yêu cầu chỉ sau vài giây, hit ratio kẹt ở 60%, TTL trung bình 30 phút. Chẩn đoán hợp lý nhất là gì?",
+    "questionEn": "The cache dashboard shows evictions per second high and steady, evicted keys requested again within seconds, the hit ratio stuck at 60%, and an average TTL of 30 minutes. What is the most reasonable diagnosis?",
+    "options": [
+      "TTL quá dài nên dữ liệu trong cache bị cũ",
+      "Một cache stampede xảy ra mỗi khi key hết hạn",
+      "Ứng dụng nên chuyển từ cache-aside sang write-through",
+      "Cache quá nhỏ so với working set nên liên tục bị churn"
+    ],
+    "optionsEn": [
+      "The TTL is too long, so cached data is stale",
+      "A cache stampede occurs every time a key expires",
+      "The application should move from cache-aside to write-through",
+      "The cache is too small for the working set, so it keeps churning"
+    ],
+    "answer": 3,
+    "explanation": "Key bị loại vì hết chỗ chứ không phải vì hết hạn, rồi lại được cần ngay — dấu hiệu kinh điển của cache nhỏ hơn working set. Tăng bộ nhớ (hoặc giảm kích thước value) sẽ nâng hit ratio. Độ cũ và stampede không gây ra eviction.",
+    "explanationEn": "Keys are removed for lack of space, not expiry, and are needed again straight away — the classic sign of a cache smaller than the working set. More memory (or smaller values) will lift the hit ratio. Staleness and stampedes do not cause evictions."
+  },
+  {
+    "id": "q16",
+    "question": "Một API trả về các header dưới đây. Ở lần request tiếp theo tới cùng URL, trình duyệt sẽ làm gì?\n`HTTP/1.1 200 OK\nCache-Control: no-cache\nETag: \"a1b2c3\"`",
+    "questionEn": "An API responds with the headers below. On the next request to the same URL, what does the browser do?\n`HTTP/1.1 200 OK\nCache-Control: no-cache\nETag: \"a1b2c3\"`",
+    "options": [
+      "Không lưu response và luôn tải lại toàn bộ nội dung",
+      "Dùng bản đã lưu mà không liên hệ server cho tới khi đóng tab",
+      "Gửi `If-None-Match: \"a1b2c3\"` và nhận `304 Not Modified` nếu nội dung không đổi",
+      "Chỉ CDN được lưu response, trình duyệt thì không"
+    ],
+    "optionsEn": [
+      "It does not store the response and always downloads the full body again",
+      "It uses the stored copy without contacting the server until the tab closes",
+      "It sends `If-None-Match: \"a1b2c3\"` and gets `304 Not Modified` if nothing changed",
+      "Only a CDN may store the response, not the browser"
+    ],
+    "answer": 2,
+    "explanation": "`no-cache` nghĩa là được lưu nhưng phải revalidate trước mỗi lần dùng. Với ETag, trình duyệt gửi request có điều kiện; nếu khớp, server trả 304 không có body. Không lưu gì cả là ý nghĩa của `no-store`.",
+    "explanationEn": "`no-cache` means the response may be stored but must be revalidated before each use. With an ETag the browser sends a conditional request; if it matches, the server returns 304 with no body. Storing nothing at all is what `no-store` means."
+  },
+  {
+    "id": "q17",
+    "question": "Endpoint `/api/me` trả về hồ sơ và email của người dùng đang đăng nhập, và toàn bộ API nằm sau một CDN. Header nào phù hợp nhất cho response này?",
+    "questionEn": "The `/api/me` endpoint returns the signed-in user's profile and email, and the whole API sits behind a CDN. Which header fits this response best?",
+    "options": [
+      "`Cache-Control: private, no-store`",
+      "`Cache-Control: public, max-age=60`",
+      "`Cache-Control: public, s-maxage=300`",
+      "`Cache-Control: max-age=31536000, immutable`"
+    ],
+    "optionsEn": [
+      "`Cache-Control: private, no-store`",
+      "`Cache-Control: public, max-age=60`",
+      "`Cache-Control: public, s-maxage=300`",
+      "`Cache-Control: max-age=31536000, immutable`"
+    ],
+    "answer": 0,
+    "explanation": "Dữ liệu riêng của người dùng không bao giờ được nằm trong cache dùng chung: `private` cấm CDN lưu, `no-store` cấm lưu ở bất cứ đâu. `public` hoặc `s-maxage` có thể khiến CDN trả hồ sơ của người này cho người khác — sự cố lộ dữ liệu kinh điển.",
+    "explanationEn": "Per-user data must never sit in a shared cache: `private` forbids the CDN from storing it and `no-store` forbids storing it anywhere. `public` or `s-maxage` could make the CDN serve one user's profile to another — a classic data-leak incident."
+  },
+  {
+    "id": "q18",
+    "question": "Một SPA phục vụ `/static/app.js` với `Cache-Control: max-age=86400`. Sau mỗi lần deploy, nhiều người dùng vẫn chạy JS cũ tới cả ngày và gặp lỗi gọi API mới. Cách sửa bền vững nhất là gì?",
+    "questionEn": "A SPA serves `/static/app.js` with `Cache-Control: max-age=86400`. After every deploy many users keep running the old JS for up to a day and hit errors calling the new API. What is the most durable fix?",
+    "options": [
+      "Gửi lệnh invalidation CDN cho `/*` sau mỗi lần deploy",
+      "Đặt tên file có hash nội dung với `max-age=31536000, immutable`, và `index.html` dùng `no-cache`",
+      "Đổi header của mọi asset thành `no-store` để luôn tải bản mới",
+      "Giảm `max-age` của `app.js` xuống 60 giây"
+    ],
+    "optionsEn": [
+      "Send a CDN invalidation for `/*` after every deploy",
+      "Use content-hashed file names with `max-age=31536000, immutable`, and serve `index.html` with `no-cache`",
+      "Change every asset's header to `no-store` so the latest is always downloaded",
+      "Lower the `max-age` of `app.js` to 60 seconds"
+    ],
+    "answer": 1,
+    "explanation": "Purge CDN không chạm được tới cache trình duyệt. Tên file có hash khiến mỗi bản build là một URL mới, nên cache được một năm mà không bao giờ cũ; `index.html` được revalidate nên luôn trỏ tới bundle mới. `no-store` hay TTL 60 s chỉ đổi hiệu năng lấy một vấn đề nhỏ hơn.",
+    "explanationEn": "A CDN purge cannot reach browser caches. Hashed file names make every build a new URL, so it can be cached for a year without ever being stale; `index.html` is revalidated, so it always points at the new bundle. `no-store` or a 60 s TTL just trade performance for a smaller version of the problem."
+  }
+]

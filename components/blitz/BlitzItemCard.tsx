@@ -6,6 +6,7 @@ import { localizeQuestion } from "@/components/knowledge/QuizBlock";
 import { localizeDrill, type Drill, type DrillResponse } from "@/lib/drills";
 import { type BlitzItem } from "@/lib/blitz";
 import { cn } from "@/lib/utils";
+import QuestionText from "@/components/knowledge/QuestionText";
 
 interface Props {
   item: BlitzItem;
@@ -145,7 +146,7 @@ export default function BlitzItemCard({ item, locked, response, onSubmit }: Prop
 function Prompt({ text, note }: { text: string; note?: string }) {
   return (
     <div className="space-y-1.5">
-      <p className="text-base sm:text-lg font-medium leading-snug text-zinc-900 dark:text-zinc-100">{text}</p>
+      <p className="text-base sm:text-lg font-medium leading-snug text-zinc-900 dark:text-zinc-100"><QuestionText text={text} /></p>
       {note && <p className="text-xs font-medium text-blue-600 dark:text-blue-400">{note}</p>}
     </div>
   );
@@ -657,7 +658,7 @@ function OrderCard({ keyId, prompt, items, locked, response, onSubmit }: OrderPr
               className="flex items-start gap-2 text-xs px-3 py-2 rounded-lg bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300"
             >
               <span className="shrink-0 font-bold">{i + 1}.</span>
-              <span className="min-w-0">{text}</span>
+              <span className="min-w-0"><QuestionText text={text} /></span>
             </li>
           ))}
         </ol>

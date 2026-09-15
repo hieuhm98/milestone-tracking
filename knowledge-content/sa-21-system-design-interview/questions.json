@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Bạn được giao đề \"Thiết kế Instagram\" trong 45 phút. Việc nên làm đầu tiên là gì?",
+    "questionEn": "You are asked to \"Design Instagram\" in 45 minutes. What should you do first?",
+    "options": [
+      "Vẽ ngay sơ đồ microservices với Kafka và Kubernetes để thể hiện kinh nghiệm",
+      "Hỏi làm rõ tính năng cốt lõi, quy mô và yêu cầu phi chức năng, rồi chốt phạm vi",
+      "Thiết kế schema database đầy đủ cho mọi bảng trước khi làm gì khác",
+      "Chọn ngay loại database vì đó là quyết định khó thay đổi nhất"
+    ],
+    "optionsEn": [
+      "Immediately draw a microservices diagram with Kafka and Kubernetes to show experience",
+      "Ask clarifying questions on core features, scale and non-functional needs, then fix the scope",
+      "Design the complete database schema for every table before anything else",
+      "Pick the database right away because it is the hardest decision to change"
+    ],
+    "answer": 1,
+    "explanation": "Đề bài cố tình mơ hồ. Yêu cầu và phạm vi quyết định mọi thứ phía sau — quy mô, mức nhất quán, tính năng nào nằm ngoài phạm vi. Vẽ hộp hay chọn database trước khi biết yêu cầu dễ dẫn tới thiết kế tốt cho một bài toán sai.",
+    "explanationEn": "The prompt is vague on purpose. Requirements and scope drive everything that follows — scale, consistency, which features are out. Drawing boxes or choosing a database before knowing them tends to produce a good design for the wrong problem."
+  },
+  {
+    "id": "q2",
+    "question": "Trong các yêu cầu sau cho một ứng dụng mạng xã hội, đâu là yêu cầu phi chức năng?",
+    "questionEn": "Which of these requirements for a social app is non-functional?",
+    "options": [
+      "Người dùng có thể theo dõi người dùng khác",
+      "Người dùng có thể đăng ảnh kèm chú thích",
+      "Người dùng có thể thả tim một bài viết",
+      "Feed phải tải xong dưới 300 ms ở p99 với 200 M DAU"
+    ],
+    "optionsEn": [
+      "Users can follow other users",
+      "Users can upload a photo with a caption",
+      "Users can like a post",
+      "The feed must load in under 300 ms at p99 for 200 M DAU"
+    ],
+    "answer": 3,
+    "explanation": "Yêu cầu chức năng mô tả hệ thống làm gì (theo dõi, đăng ảnh, thả tim). Yêu cầu phi chức năng mô tả hệ thống phải làm tốt tới mức nào: độ trễ, quy mô, tính sẵn sàng, nhất quán. Chính các con số này quyết định kiến trúc.",
+    "explanationEn": "Functional requirements describe what the system does (follow, upload, like). Non-functional ones describe how well it must do it: latency, scale, availability, consistency. Those numbers are what shape the architecture."
+  },
+  {
+    "id": "q3",
+    "question": "Bạn hỏi \"hệ thống có bao nhiêu người dùng?\" và người phỏng vấn đáp \"bạn tự quyết\". Cách xử lý tốt nhất là gì?",
+    "questionEn": "You ask \"how many users will this have?\" and the interviewer replies \"you decide\". What is the best move?",
+    "options": [
+      "Nêu một giả định cụ thể (ví dụ 50 M DAU, đọc:ghi 10:1), ghi lên bảng rồi thiết kế theo nó",
+      "Thiết kế cho quy mô lớn nhất có thể để không bao giờ sai",
+      "Bỏ qua phần ước lượng vì không có số liệu thật",
+      "Tiếp tục hỏi cho tới khi người phỏng vấn đưa ra con số"
+    ],
+    "optionsEn": [
+      "State a concrete assumption (e.g. 50 M DAU, 10:1 read/write), write it down and design to it",
+      "Design for the largest scale imaginable so you can never be wrong",
+      "Skip the estimation step because there are no real figures",
+      "Keep asking until the interviewer gives you a number"
+    ],
+    "answer": 0,
+    "explanation": "Người phỏng vấn đang xem bạn có dám ra quyết định hợp lý không. Một giả định được nói rõ cho phép tính QPS, dung lượng, và có thể điều chỉnh sau. Thiết kế cho quy mô vô hạn là over-engineering; bỏ ước lượng thì mất căn cứ cho mọi lựa chọn.",
+    "explanationEn": "The interviewer is checking whether you can make a reasonable call. A stated assumption lets you compute QPS and storage and can be revised later. Designing for infinite scale is over-engineering; skipping estimates removes the basis for every choice."
+  },
+  {
+    "id": "q4",
+    "question": "Một dịch vụ nhận 50 triệu lượt ghi mỗi ngày, phân bố tương đối đều. QPS ghi trung bình xấp xỉ bao nhiêu?",
+    "questionEn": "A service receives 50 million writes per day, spread fairly evenly. What is the average write QPS, approximately?",
+    "options": [
+      "Khoảng 58 lượt/giây",
+      "Khoảng 580 lượt/giây",
+      "Khoảng 5.800 lượt/giây",
+      "Khoảng 2.000 lượt/giây"
+    ],
+    "optionsEn": [
+      "About 58 per second",
+      "About 580 per second",
+      "About 5,800 per second",
+      "About 2,000 per second"
+    ],
+    "answer": 1,
+    "explanation": "50.000.000 / 86.400 ≈ 579, tức khoảng 580 lượt/giây. Mẹo nhẩm: 1 M/ngày ≈ 11,6/giây, nên 50 M ≈ 580. Cao điểm thường giả định gấp 2–3 lần, tức khoảng 1.200–1.700/giây.",
+    "explanationEn": "50,000,000 / 86,400 ≈ 579, so about 580 per second. Shortcut: 1 M/day ≈ 11.6/s, so 50 M ≈ 580. Peak is usually assumed at 2–3× that, roughly 1,200–1,700/s."
+  },
+  {
+    "id": "q5",
+    "question": "Hệ thống tạo 10 triệu bản ghi mới mỗi ngày, mỗi bản ghi khoảng 1 KB, cần lưu 5 năm. Dung lượng thô (chưa tính bản sao) xấp xỉ bao nhiêu?",
+    "questionEn": "A system creates 10 million new records a day, about 1 KB each, kept for 5 years. Roughly how much raw storage (before replication)?",
+    "options": [
+      "Khoảng 1,8 TB",
+      "Khoảng 3,65 TB",
+      "Khoảng 18 TB",
+      "Khoảng 180 TB"
+    ],
+    "optionsEn": [
+      "About 1.8 TB",
+      "About 3.65 TB",
+      "About 18 TB",
+      "About 180 TB"
+    ],
+    "answer": 2,
+    "explanation": "10 M × 1 KB = 10 GB/ngày; × 365 = 3.650 GB/năm; × 5 = 18.250 GB ≈ 18 TB. Với 3 bản sao là khoảng 55 TB — đủ lớn để phải tính tới phân mảnh thay vì một node database.",
+    "explanationEn": "10 M × 1 KB = 10 GB/day; × 365 = 3,650 GB/year; × 5 = 18,250 GB ≈ 18 TB. With 3 replicas that is about 55 TB — enough to plan for partitioning rather than one database node."
+  },
+  {
+    "id": "q6",
+    "question": "API feed dùng `GET /feed?offset=40&limit=20`. Người dùng phàn nàn rằng khi lướt xuống, họ thấy lại bài đã xem. Thiết kế nào khắc phục đúng gốc rễ?",
+    "questionEn": "A feed API uses `GET /feed?offset=40&limit=20`. Users complain they see posts again as they scroll down. Which design fixes the root cause?",
+    "options": [
+      "Phân trang bằng cursor: trả về `nextCursor` là vị trí (score/ID) của mục cuối đã xem",
+      "Tăng `limit` lên 200 để người dùng ít phải tải trang tiếp theo",
+      "Cache mỗi trang offset trong Redis với TTL 1 giờ",
+      "Chuyển feed sang GraphQL để client tự chọn trường"
+    ],
+    "optionsEn": [
+      "Cursor pagination: return a `nextCursor` holding the position (score/ID) of the last item seen",
+      "Raise `limit` to 200 so users rarely need to load the next page",
+      "Cache each offset page in Redis with a one-hour TTL",
+      "Move the feed to GraphQL so the client picks its fields"
+    ],
+    "answer": 0,
+    "explanation": "Khi có bài mới chen lên đầu, mọi phần tử bị đẩy xuống, nên offset 40 giờ trỏ vào những bài đã thấy. Cursor neo theo mục cuối cùng đã xem (\"lấy những bài cũ hơn X\"), nên không bị ảnh hưởng bởi dữ liệu mới. Tăng limit hay cache chỉ che triệu chứng.",
+    "explanationEn": "When new posts arrive at the top, everything shifts down, so offset 40 now points at posts already shown. A cursor anchors on the last item seen (\"give me posts older than X\") and is unaffected by new data. A bigger limit or a cache only hides the symptom."
+  },
+  {
+    "id": "q7",
+    "question": "Sau khi bạn vẽ xong thiết kế tổng quan, người phỏng vấn hỏi: \"Nếu traffic tăng gấp 10 thì cái gì gãy trước?\" Câu trả lời nào tốt nhất?",
+    "questionEn": "After you finish the high-level design, the interviewer asks: \"If traffic grows 10×, what breaks first?\" Which response is best?",
+    "options": [
+      "\"Chuyển toàn bộ sang multi-region active-active là giải quyết được mọi thứ.\"",
+      "\"Thiết kế dùng dịch vụ cloud nên sẽ tự mở rộng, không có gì gãy.\"",
+      "\"Thêm server ứng dụng là đủ vì chúng không có trạng thái.\"",
+      "\"Dùng ước lượng: ghi lên DB primary tăng từ ~1.200 lên ~12.000/s, vượt sức một node — cần shard theo user ID, đổi lại truy vấn liên user thành scatter-gather.\""
+    ],
+    "optionsEn": [
+      "\"Moving everything to active-active multi-region solves all of it.\"",
+      "\"The design uses cloud services, so it scales automatically and nothing breaks.\"",
+      "\"Adding app servers is enough because they are stateless.\"",
+      "\"Using the estimates: writes to the DB primary go from ~1,200 to ~12,000/s, beyond one node — shard by user ID, at the cost of scatter-gather for cross-user queries.\""
+    ],
+    "answer": 3,
+    "explanation": "Câu trả lời tốt dùng lại con số đã ước lượng để chỉ ra thành phần cụ thể bị nghẽn, đưa ra cách khắc phục và nói rõ cái giá. Service không trạng thái dễ nhân bản; điểm nghẽn thường là tầng có trạng thái (database). Multi-region hay \"cloud tự lo\" là né câu hỏi.",
+    "explanationEn": "A strong answer reuses the estimates to name the specific component that saturates, proposes a fix and states its cost. Stateless services scale out easily; the bottleneck is usually the stateful tier (the database). Multi-region or \"the cloud handles it\" dodges the question."
+  },
+  {
+    "id": "q8",
+    "question": "URL shortener cần đủ mã cho 365 tỉ link (100 M/ngày trong 10 năm). Dùng bảng chữ base62 [0-9a-zA-Z], mã cần tối thiểu bao nhiêu ký tự?",
+    "questionEn": "A URL shortener needs codes for 365 billion links (100 M/day for 10 years). Using a base62 alphabet [0-9a-zA-Z], what is the minimum code length?",
+    "options": [
+      "5 ký tự",
+      "6 ký tự",
+      "7 ký tự",
+      "8 ký tự"
+    ],
+    "optionsEn": [
+      "5 characters",
+      "6 characters",
+      "7 characters",
+      "8 characters"
+    ],
+    "answer": 2,
+    "explanation": "62^6 ≈ 56,8 tỉ — nhỏ hơn 365 tỉ, không đủ. 62^7 ≈ 3,52 nghìn tỉ — dư gần 10 lần. Vậy cần 7 ký tự. 62^5 chỉ khoảng 916 triệu.",
+    "explanationEn": "62^6 ≈ 56.8 billion — less than 365 billion, not enough. 62^7 ≈ 3.52 trillion — nearly 10× headroom. So 7 characters. 62^5 is only about 916 million."
+  },
+  {
+    "id": "q9",
+    "question": "Đội sản phẩm của URL shortener bán gói thống kê số lượt click cho từng link, kể cả click lặp lại từ cùng một trình duyệt. Nên trả mã redirect nào?",
+    "questionEn": "A URL shortener's product team sells per-link click analytics, including repeat clicks from the same browser. Which redirect status should it return?",
+    "options": [
+      "`301 Moved Permanently`, vì trình duyệt cache lại và giảm tải cho server",
+      "`302 Found`, vì mỗi click đều quay lại server nên được ghi nhận",
+      "`200 OK` kèm trang HTML tự chuyển hướng sau 5 giây",
+      "`304 Not Modified`, để trình duyệt dùng bản đã lưu"
+    ],
+    "optionsEn": [
+      "`301 Moved Permanently`, since browsers cache it and server load drops",
+      "`302 Found`, since every click comes back through the server and gets counted",
+      "`200 OK` with an HTML page that redirects after 5 seconds",
+      "`304 Not Modified`, so the browser uses its stored copy"
+    ],
+    "answer": 1,
+    "explanation": "301 là redirect vĩnh viễn nên trình duyệt được phép cache: click lặp lại đi thẳng tới đích mà không chạm server, thống kê bị thiếu. 302 là tạm thời nên mỗi click đều đi qua hệ thống. Đánh đổi là tải cao hơn — giải quyết bằng cache ở tầng redirect.",
+    "explanationEn": "A 301 is permanent, so browsers may cache it: repeat clicks go straight to the target without touching the server and analytics undercount. A 302 is temporary, so every click passes through. The cost is more load, handled by caching in the redirect tier."
+  },
+  {
+    "id": "q10",
+    "question": "URL shortener sinh mã bằng bộ đếm tăng dần rồi mã hoá base62 trực tiếp (…aZ3k, aZ3l, aZ3m…). Bảo mật báo rằng có người đã tải về hàng loạt link riêng tư. Nguyên nhân và cách sửa phù hợp nhất?",
+    "questionEn": "A URL shortener generates codes from an incrementing counter encoded straight to base62 (…aZ3k, aZ3l, aZ3m…). Security reports that someone scraped many private links. Most likely cause and best fix?",
+    "options": [
+      "Mã tuần tự nên dò lần lượt được; áp một phép xáo trộn đảo ngược được lên số trước khi mã hoá base62",
+      "Base62 là mã hoá yếu; chuyển sang base64 để mã khó đọc hơn",
+      "Bộ đếm là điểm lỗi đơn; chuyển sang hash MD5 của URL dài",
+      "Mã quá ngắn; tăng lên 11 ký tự bằng Snowflake ID"
+    ],
+    "optionsEn": [
+      "Sequential codes are enumerable; apply a reversible scramble to the number before base62 encoding",
+      "Base62 is weak encryption; switch to base64 so codes are harder to read",
+      "The counter is a single point of failure; switch to an MD5 hash of the long URL",
+      "The codes are too short; lengthen them to 11 characters with Snowflake IDs"
+    ],
+    "answer": 0,
+    "explanation": "Base62 chỉ là cách viết số, không phải mã hoá bảo mật. Với mã tuần tự, biết một mã là đoán được mã kế tiếp. Xáo trộn số (ví dụ một hoán vị/cipher đảo ngược được) giữ nguyên tính không trùng của bộ đếm nhưng làm mã trông ngẫu nhiên. Snowflake ID vẫn có thứ tự theo thời gian.",
+    "explanationEn": "Base62 is just a way of writing a number, not encryption. With sequential codes, knowing one reveals the next. Scrambling the number (a reversible permutation or cipher) keeps the counter's uniqueness but makes codes look random. Snowflake IDs are still time-ordered."
+  },
+  {
+    "id": "q11",
+    "question": "Rate limiter dùng fixed window counter, giới hạn 100 request mỗi phút đồng hồ. Trong một khoảng 2 giây, tối đa bao nhiêu request có thể được cho qua?",
+    "questionEn": "A rate limiter uses a fixed window counter limited to 100 requests per clock minute. In a 2-second span, what is the maximum number of requests that can be allowed?",
+    "options": [
+      "100 request",
+      "101 request",
+      "150 request",
+      "200 request"
+    ],
+    "optionsEn": [
+      "100 requests",
+      "101 requests",
+      "150 requests",
+      "200 requests"
+    ],
+    "answer": 3,
+    "explanation": "100 request lúc 12:00:59 dùng hết cửa sổ 12:00; lúc 12:01:00 bộ đếm reset, thêm 100 request nữa hợp lệ. Tổng 200 trong hai giây — gấp đôi giới hạn. Sliding window log hoặc sliding window counter khắc phục lỗ hổng ranh giới này.",
+    "explanationEn": "100 requests at 12:00:59 use up the 12:00 window; at 12:01:00 the counter resets and 100 more are legal. That is 200 in two seconds — double the limit. A sliding window log or sliding window counter closes this boundary gap."
+  },
+  {
+    "id": "q12",
+    "question": "Rate limiter được viết như dưới đây. Sau một đợt deploy có nhiều tiến trình bị kill, vài user bị trả 429 vĩnh viễn. Nguyên nhân khả dĩ nhất?\n`const n = await redis.incr(key);\n\nif (n === 1) {\n  await redis.expire(key, 60);\n}\n\nreturn n <= 100;`",
+    "questionEn": "A rate limiter is written as below. After a deploy that killed many processes, some users get 429 forever. Most likely cause?\n`const n = await redis.incr(key);\n\nif (n === 1) {\n  await redis.expire(key, 60);\n}\n\nreturn n <= 100;`",
+    "options": [
+      "`INCR` không nguyên tử nên nhiều tiến trình đếm trùng nhau",
+      "`EXPIRE` đặt lại bộ đếm về 0 mỗi lần được gọi",
+      "Tiến trình chết giữa `INCR` và `EXPIRE` nên key không có TTL và không bao giờ reset",
+      "Redis tự xoá key không có TTL khi thiếu bộ nhớ"
+    ],
+    "optionsEn": [
+      "`INCR` is not atomic, so several processes double-count",
+      "`EXPIRE` resets the counter to zero every time it runs",
+      "A process died between `INCR` and `EXPIRE`, so the key has no TTL and never resets",
+      "Redis deletes keys without a TTL whenever memory runs low"
+    ],
+    "answer": 2,
+    "explanation": "Từng lệnh Redis là nguyên tử, nhưng hai lệnh gọi riêng thì không. Nếu tiến trình chết sau `INCR` đầu tiên, key tồn tại mãi không TTL và tiếp tục tăng. Sửa bằng một Lua script (hoặc MULTI/EXEC) chạy cả hai thao tác cùng lúc. `EXPIRE` chỉ đặt TTL, không đổi giá trị.",
+    "explanationEn": "Each Redis command is atomic, but two separate calls are not. If the process dies after the first `INCR`, the key lives forever without a TTL and keeps growing. Fix it with one Lua script (or MULTI/EXEC) that does both. `EXPIRE` only sets a TTL; it does not change the value."
+  },
+  {
+    "id": "q13",
+    "question": "Sliding window counter, giới hạn 100 request/phút. Phút trước có 60 request, phút hiện tại đã có 50, và ta đang ở mốc 40 % của phút hiện tại. Ước lượng số request trong 60 giây gần nhất và quyết định?",
+    "questionEn": "Sliding window counter, limit 100 requests/minute. The previous minute had 60 requests, the current minute has 50 so far, and we are 40 % into the current minute. What is the estimated count for the last 60 seconds, and the decision?",
+    "options": [
+      "Ước lượng 110, từ chối",
+      "Ước lượng 86, cho qua",
+      "Ước lượng 74, cho qua",
+      "Ước lượng 104, từ chối"
+    ],
+    "optionsEn": [
+      "Estimate 110, reject",
+      "Estimate 86, allow",
+      "Estimate 74, allow",
+      "Estimate 104, reject"
+    ],
+    "answer": 1,
+    "explanation": "Cửa sổ 60 giây gần nhất còn chồng lên 60 % của phút trước: 50 + 60 × 0,6 = 86 < 100, nên cho qua. Nhân với 0,4 (phần đã trôi qua) là nhầm trọng số; cộng thẳng 60 + 50 = 110 chính là cách fixed window tính quá tay.",
+    "explanationEn": "The last 60 seconds still overlap 60 % of the previous minute: 50 + 60 × 0.6 = 86 < 100, so allow. Multiplying by 0.4 (the elapsed part) uses the wrong weight; adding 60 + 50 = 110 ignores the overlap entirely."
+  },
+  {
+    "id": "q14",
+    "question": "Ứng dụng chat cần server đẩy tin mới xuống client ngay lập tức, và client cũng gửi tin liên tục qua cùng kênh. Giao thức nào phù hợp nhất cho kết nối chính?",
+    "questionEn": "A chat app needs the server to push new messages to clients instantly, while clients also send messages frequently over the same channel. Which protocol best fits the primary connection?",
+    "options": [
+      "WebSocket, với long polling làm phương án dự phòng",
+      "HTTP polling mỗi 5 giây từ client",
+      "Server-Sent Events cho cả chiều gửi lẫn chiều nhận",
+      "Webhook từ server gọi ngược về điện thoại của người dùng"
+    ],
+    "optionsEn": [
+      "WebSocket, with long polling as a fallback",
+      "HTTP polling from the client every 5 seconds",
+      "Server-Sent Events for both sending and receiving",
+      "Webhooks from the server calling back to the user's phone"
+    ],
+    "answer": 0,
+    "explanation": "WebSocket là kênh song công toàn phần trên một kết nối TCP, độ trễ thấp theo cả hai chiều. Polling tốn tài nguyên và trễ tới 5 giây. SSE chỉ đẩy một chiều từ server. Điện thoại không có endpoint công khai để nhận webhook — khi offline thì dùng APNs/FCM.",
+    "explanationEn": "WebSocket is a full-duplex channel over one TCP connection, low latency both ways. Polling wastes resources and adds up to 5 s of delay. SSE only pushes server-to-client. Phones have no public endpoint to receive webhooks — offline delivery uses APNs/FCM."
+  },
+  {
+    "id": "q15",
+    "question": "Người dùng ứng dụng chat trên mạng di động chập chờn thấy cùng một tin nhắn xuất hiện hai lần ở phía người nhận. Client tự gửi lại khi không nhận được ack trong 3 giây. Cách sửa đúng nhất?",
+    "questionEn": "Chat users on flaky mobile networks see the same message appear twice for the recipient. The client resends if it gets no ack within 3 seconds. What is the right fix?",
+    "options": [
+      "Tắt cơ chế gửi lại để đảm bảo mỗi tin chỉ gửi đúng một lần",
+      "Tăng thời gian chờ ack lên 30 giây",
+      "Chuyển message store sang database có transaction ACID",
+      "Client gắn `clientMsgId` duy nhất cho mỗi tin; server khử trùng theo ID đó trước khi lưu và phát"
+    ],
+    "optionsEn": [
+      "Disable resends so each message is sent exactly once",
+      "Raise the ack timeout to 30 seconds",
+      "Move the message store to a database with ACID transactions",
+      "The client tags each message with a unique `clientMsgId`; the server dedupes on it before storing and fanning out"
+    ],
+    "answer": 3,
+    "explanation": "Tin đã được lưu nhưng ack bị mất, nên client gửi lại. Gửi lại là cần thiết để không mất tin (at-least-once); điều còn thiếu là tính idempotent. Khử trùng theo ID do client sinh biến at-least-once thành \"hiệu quả đúng một lần\". Tắt gửi lại sẽ làm mất tin; tăng timeout chỉ giảm tần suất.",
+    "explanationEn": "The message was stored but the ack was lost, so the client resent it. Resending is required to avoid loss (at-least-once); what is missing is idempotency. Deduping on a client-generated ID turns at-least-once into effectively-once. Disabling resends loses messages; a longer timeout only makes it rarer."
+  },
+  {
+    "id": "q16",
+    "question": "Bảng tin nhắn trong Cassandra có khoá như dưới đây. Vì sao thêm cột `bucket` (số ngày kể từ epoch) vào partition key?\n`PRIMARY KEY ((conversation_id, bucket), message_id)`",
+    "questionEn": "A Cassandra messages table has the key below. Why add the `bucket` column (days since epoch) to the partition key?\n`PRIMARY KEY ((conversation_id, bucket), message_id)`",
+    "options": [
+      "Để Cassandra hỗ trợ transaction giữa nhiều hội thoại",
+      "Để tin nhắn tự động bị xoá sau một ngày",
+      "Để giới hạn kích thước mỗi partition, tránh một nhóm sôi nổi tạo partition nóng phình to mãi",
+      "Để có thể truy vấn tin nhắn theo nội dung"
+    ],
+    "optionsEn": [
+      "So Cassandra can run transactions across conversations",
+      "So messages are deleted automatically after one day",
+      "To bound each partition's size so one busy group cannot grow an ever-larger hot partition",
+      "So messages can be queried by their content"
+    ],
+    "answer": 2,
+    "explanation": "Nếu chỉ partition theo `conversation_id`, mọi tin của một nhóm nằm trong một partition tăng mãi, gây chậm đọc, compaction nặng và phân bố tải lệch. Bucket theo thời gian chia nó thành các partition có giới hạn; đọc lịch sử chỉ cần đi lùi qua các bucket. Xoá tự động là việc của TTL, không phải bucket.",
+    "explanationEn": "Partitioning by `conversation_id` alone puts all of a group's messages in one ever-growing partition, hurting reads, compaction and load balance. A time bucket splits it into bounded partitions; reading history just walks back through buckets. Automatic deletion is TTL's job, not the bucket's."
+  },
+  {
+    "id": "q17",
+    "question": "News feed dùng fan-out khi ghi. Một ca sĩ có 50 M follower đăng bài và worker chèn được 10.000 feed/giây; follower của cô ấy phải chờ gần 1,5 giờ mới thấy bài. Thiết kế nào là câu trả lời chuẩn?",
+    "questionEn": "A news feed uses fan-out on write. A singer with 50 M followers posts, and workers insert 10,000 feeds per second; followers wait almost 1.5 hours to see it. Which design is the standard answer?",
+    "options": [
+      "Chuyển toàn bộ hệ thống sang fan-out khi đọc cho mọi người dùng",
+      "Hybrid: push cho tài khoản thường, pull bài của tài khoản vượt ngưỡng follower rồi trộn lúc đọc",
+      "Tăng số worker lên 1.000 lần để fan-out xong trong vài giây",
+      "Giới hạn mỗi tài khoản tối đa 5.000 follower"
+    ],
+    "optionsEn": [
+      "Switch the whole system to fan-out on read for every user",
+      "Hybrid: push for normal accounts, pull posts from accounts above a follower threshold and merge at read time",
+      "Scale workers 1,000× so the fan-out finishes in seconds",
+      "Cap every account at 5,000 followers"
+    ],
+    "answer": 1,
+    "explanation": "50.000.000 / 10.000 = 5.000 s ≈ 83 phút. Pull cho mọi người làm đọc chậm với phần lớn người dùng; nhân worker 1.000 lần rất tốn và vẫn dồn tải lên cache. Hybrid giữ đọc nhanh cho số đông và chỉ trộn bài của vài người nổi tiếng lúc đọc. Giới hạn follower là thay đổi sản phẩm, không phải thiết kế.",
+    "explanationEn": "50,000,000 / 10,000 = 5,000 s ≈ 83 min. Pull for everyone makes reads slow for most users; 1,000× workers is expensive and still hammers the cache. Hybrid keeps reads fast for the majority and merges a few celebrities' posts at read time. Capping followers changes the product, not the design."
+  },
+  {
+    "id": "q18",
+    "question": "Mạng xã hội có 20 M bài đăng mỗi ngày, trung bình mỗi tác giả có 200 follower, dùng fan-out khi ghi. Số lượt chèn vào feed trung bình mỗi giây xấp xỉ bao nhiêu?",
+    "questionEn": "A social network gets 20 M posts a day, each author has 200 followers on average, and it uses fan-out on write. Roughly how many feed inserts per second on average?",
+    "options": [
+      "Khoảng 46.000/giây",
+      "Khoảng 4.600/giây",
+      "Khoảng 230/giây",
+      "Khoảng 460.000/giây"
+    ],
+    "optionsEn": [
+      "About 46,000/s",
+      "About 4,600/s",
+      "About 230/s",
+      "About 460,000/s"
+    ],
+    "answer": 0,
+    "explanation": "20 M × 200 = 4 tỉ lượt chèn/ngày; 4.000.000.000 / 86.400 ≈ 46.300/giây. 230/giây là tốc độ đăng bài (20 M / 86.400), chưa nhân với số follower. Con số này cho thấy fan-out cần queue và worker pool riêng.",
+    "explanationEn": "20 M × 200 = 4 billion inserts/day; 4,000,000,000 / 86,400 ≈ 46,300/s. 230/s is the posting rate (20 M / 86,400) before multiplying by followers. The number shows fan-out needs its own queue and worker pool."
+  },
+  {
+    "id": "q19",
+    "question": "Đề bài: công cụ nội bộ cho 2.000 nhân viên, khoảng 50 QPS lúc cao điểm, dữ liệu dưới 100 GB. Ứng viên đề xuất 12 microservice, Kafka, Kubernetes đa cụm và shard database. Người phỏng vấn nhận xét gì nhiều khả năng nhất?",
+    "questionEn": "Prompt: an internal tool for 2,000 employees, about 50 QPS at peak, under 100 GB of data. The candidate proposes 12 microservices, Kafka, multi-cluster Kubernetes and a sharded database. What is the interviewer's most likely feedback?",
+    "options": [
+      "Thiết kế tốt vì đã sẵn sàng cho mọi quy mô trong tương lai",
+      "Thiếu một service mesh để quản lý 12 microservice",
+      "Over-engineering: thiết kế không khớp với ước lượng; một ứng dụng đơn giản với PostgreSQL có replica là đủ, kèm ngưỡng khi nào cần mở rộng",
+      "Nên thay Kafka bằng RabbitMQ để giảm độ trễ"
+    ],
+    "optionsEn": [
+      "A good design because it is ready for any future scale",
+      "It lacks a service mesh to manage the 12 microservices",
+      "Over-engineering: the design ignores the estimates; a simple app on PostgreSQL with a replica is enough, plus the thresholds that would trigger scaling",
+      "Kafka should be replaced by RabbitMQ to reduce latency"
+    ],
+    "answer": 2,
+    "explanation": "50 QPS và 100 GB vừa thoải mái trên một database và vài instance ứng dụng. Mỗi thành phần thêm vào là thêm chi phí vận hành và điểm lỗi. Người phỏng vấn muốn thấy thiết kế tỉ lệ với con số và biết khi nào mới cần bước tiếp theo — chứ không phải danh sách công nghệ.",
+    "explanationEn": "50 QPS and 100 GB fit comfortably on one database and a few app instances. Every extra component adds operating cost and failure points. The interviewer wants a design proportional to the numbers and a sense of when the next step is needed — not a list of technologies."
+  }
+]

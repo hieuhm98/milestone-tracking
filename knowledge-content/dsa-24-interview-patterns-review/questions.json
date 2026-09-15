@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Đề bài cho mảng có tối đa n = 100.000 phần tử và giới hạn 1 giây (máy làm khoảng 10⁸ phép toán/giây). Lời giải của bạn nên nhắm tới độ phức tạp nào?",
+    "questionEn": "A problem gives an array of up to n = 100,000 items with a 1-second limit (the machine does about 10⁸ operations per second). What complexity should your solution aim for?",
+    "options": [
+      "O(n³) là đủ vì 10⁵ vẫn là số nhỏ",
+      "O(2ⁿ) nếu dùng thêm pruning",
+      "O(n log n) hoặc tốt hơn",
+      "O(n²) vì chỉ khoảng 10⁷ phép toán"
+    ],
+    "optionsEn": [
+      "O(n³) is fine because 10⁵ is still small",
+      "O(2ⁿ) as long as you add pruning",
+      "O(n log n) or better",
+      "O(n²) because it is only about 10⁷ operations"
+    ],
+    "answer": 2,
+    "explanation": "n² = 10¹⁰ phép toán, tức khoảng 100 giây — quá chậm (không phải 10⁷). n log n ≈ 1,7 × 10⁶ chạy xong trong tích tắc. Với n cỡ 10⁵–10⁶, hãy nghĩ tới sắp xếp, heap, binary search, hash map hoặc sliding window.",
+    "explanationEn": "n² = 10¹⁰ operations, around 100 seconds — far too slow (it is not 10⁷). n log n ≈ 1.7 × 10⁶ finishes instantly. For n around 10⁵–10⁶, think sorting, heaps, binary search, hash maps or a sliding window."
+  },
+  {
+    "id": "q2",
+    "question": "Đề bài có ràng buộc n ≤ 20 và hỏi về các tập con của input. Ràng buộc nhỏ bất thường này gợi ý điều gì?",
+    "questionEn": "A problem has the constraint n ≤ 20 and asks about subsets of the input. What does this unusually small limit suggest?",
+    "options": [
+      "Duyệt mọi tập con (backtracking hoặc bitmask) với O(n · 2ⁿ) là chấp nhận được",
+      "Bắt buộc phải có lời giải O(log n)",
+      "Nên dùng trie để lưu các tập con",
+      "Đề bài chắc chắn cần Dijkstra"
+    ],
+    "optionsEn": [
+      "Enumerating every subset (backtracking or bitmask) in O(n · 2ⁿ) is acceptable",
+      "An O(log n) solution is required",
+      "A trie should be used to store the subsets",
+      "The problem certainly needs Dijkstra"
+    ],
+    "answer": 0,
+    "explanation": "2²⁰ ≈ 10⁶, nên n · 2ⁿ ≈ 2 × 10⁷ phép toán — vừa đủ nhanh. Người ra đề chọn n nhỏ như vậy chính là để cho phép lời giải hàm mũ; nếu lời giải đa thức tồn tại, họ thường cho n lớn hơn nhiều.",
+    "explanationEn": "2²⁰ ≈ 10⁶, so n · 2ⁿ ≈ 2 × 10⁷ operations — fast enough. Setters pick an n this small precisely to allow an exponential solution; if a polynomial one were expected, n would usually be far larger."
+  },
+  {
+    "id": "q3",
+    "question": "Một bộ lập lịch liên tục nhận công việc mới, và mỗi lần rảnh phải lấy ra công việc có độ ưu tiên cao nhất. Cấu trúc dữ liệu nào phù hợp nhất?",
+    "questionEn": "A scheduler keeps receiving new jobs, and whenever it is free it must take the job with the highest priority. Which data structure fits best?",
+    "options": [
+      "Một mảng được sắp xếp lại bằng `sort` sau mỗi lần thêm",
+      "Một hash map từ id sang công việc",
+      "Một queue FIFO",
+      "Một binary heap (priority queue)"
+    ],
+    "optionsEn": [
+      "An array re-sorted with `sort` after every insert",
+      "A hash map from id to job",
+      "A FIFO queue",
+      "A binary heap (priority queue)"
+    ],
+    "answer": 3,
+    "explanation": "Heap cho chèn O(log n) và lấy phần tử lớn nhất O(log n). Sắp xếp lại mảng mỗi lần chèn tốn O(n log n); hash map không có thứ tự nên tìm max là O(n); queue FIFO trả về theo thứ tự đến chứ không theo độ ưu tiên.",
+    "explanationEn": "A heap gives O(log n) insert and O(log n) extract-max. Re-sorting an array on every insert costs O(n log n); a hash map is unordered so finding the max is O(n); a FIFO queue returns jobs by arrival order, not priority."
+  },
+  {
+    "id": "q4",
+    "question": "\"Tìm độ dài chuỗi con liên tiếp dài nhất chứa không quá k ký tự khác nhau.\" Pattern nào nên thử đầu tiên?",
+    "questionEn": "\"Find the length of the longest contiguous substring containing at most k distinct characters.\" Which pattern should you try first?",
+    "options": [
+      "Backtracking qua mọi chuỗi con",
+      "Sliding window kèm hash map đếm ký tự",
+      "Binary search trên mảng ký tự đã sắp xếp",
+      "Topological sort trên các ký tự"
+    ],
+    "optionsEn": [
+      "Backtracking over every substring",
+      "A sliding window with a hash map counting characters",
+      "Binary search on the sorted characters",
+      "A topological sort of the characters"
+    ],
+    "answer": 1,
+    "explanation": "\"Liên tiếp\" + \"dài nhất\" là tín hiệu kinh điển của sliding window. Nới mép phải, và khi số ký tự khác nhau vượt k thì thu mép trái. Mỗi index vào/ra cửa sổ tối đa một lần: O(n). Sắp xếp sẽ phá mất tính liên tiếp.",
+    "explanationEn": "\"Contiguous\" plus \"longest\" is the textbook sliding-window signal. Grow the right edge and shrink the left edge whenever distinct characters exceed k. Each index enters and leaves the window at most once: O(n). Sorting would destroy contiguity."
+  },
+  {
+    "id": "q5",
+    "question": "Lời gọi `pairWithSum([1, 2, 4, 7, 11], 9)` trả về gì?\n`function pairWithSum(sorted, target) {\n  let left = 0, right = sorted.length - 1;\n  while (left < right) {\n    const sum = sorted[left] + sorted[right];\n    if (sum === target) return [left, right];\n    if (sum < target) left++;\n    else right--;\n  }\n  return null;\n}`",
+    "questionEn": "What does `pairWithSum([1, 2, 4, 7, 11], 9)` return?\n`function pairWithSum(sorted, target) {\n  let left = 0, right = sorted.length - 1;\n  while (left < right) {\n    const sum = sorted[left] + sorted[right];\n    if (sum === target) return [left, right];\n    if (sum < target) left++;\n    else right--;\n  }\n  return null;\n}`",
+    "options": [
+      "`[2, 7]`",
+      "`null`",
+      "`[1, 3]`",
+      "`[0, 3]`"
+    ],
+    "optionsEn": [
+      "`[2, 7]`",
+      "`null`",
+      "`[1, 3]`",
+      "`[0, 3]`"
+    ],
+    "answer": 2,
+    "explanation": "(0,4): 1 + 11 = 12 > 9 nên right = 3. (0,3): 1 + 7 = 8 < 9 nên left = 1. (1,3): 2 + 7 = 9 → trả về các index [1, 3]. Hàm trả về index, không phải giá trị [2, 7].",
+    "explanationEn": "(0,4): 1 + 11 = 12 > 9, so right = 3. (0,3): 1 + 7 = 8 < 9, so left = 1. (1,3): 2 + 7 = 9 → returns the indices [1, 3]. The function returns indices, not the values [2, 7]."
+  },
+  {
+    "id": "q6",
+    "question": "Một bạn dùng `pairWithSum` (two pointers) cho mảng CHƯA sắp xếp và nhận kết quả sai. Nhận định nào đúng?",
+    "questionEn": "A colleague runs `pairWithSum` (two pointers) on an UNSORTED array and gets wrong results. Which assessment is correct?",
+    "options": [
+      "Two pointers dựa vào thứ tự đã sắp xếp; hãy dùng hash map (O(n)) hoặc sort trước (O(n log n))",
+      "Chỉ cần đổi `left < right` thành `left <= right` là đúng",
+      "Two pointers đúng với mọi mảng; lỗi nằm ở target",
+      "Phải chuyển sang lời giải O(2ⁿ) vì mảng chưa sắp xếp"
+    ],
+    "optionsEn": [
+      "Two pointers relies on sorted order; use a hash map (O(n)) or sort first (O(n log n))",
+      "Changing `left < right` to `left <= right` fixes it",
+      "Two pointers works on any array; the bug is in the target",
+      "It must switch to an O(2ⁿ) solution because the array is unsorted"
+    ],
+    "answer": 0,
+    "explanation": "Việc tăng left khi tổng nhỏ chỉ đúng khi phần tử bên phải lớn hơn — tức mảng phải được sắp xếp. Với mảng chưa sắp xếp, hash map (Two Sum) cho O(n) time và O(n) space; sort trước cho O(n log n) nhưng có thể làm mất index gốc. `left <= right` còn cho phép dùng một phần tử hai lần.",
+    "explanationEn": "Moving left when the sum is too small is only valid if elements to the right are larger — that is, the array is sorted. For unsorted input a hash map (Two Sum) gives O(n) time and O(n) space; sorting first gives O(n log n) but can lose the original indices. `left <= right` would also let one element pair with itself."
+  },
+  {
+    "id": "q7",
+    "question": "Độ phức tạp time và space của hàm sau là gì?\n`function twoSum(nums, target) {\n  const indexOf = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const need = target - nums[i];\n    if (indexOf.has(need)) return [indexOf.get(need), i];\n    indexOf.set(nums[i], i);\n  }\n  return null;\n}`",
+    "questionEn": "What are the time and space complexity of this function?\n`function twoSum(nums, target) {\n  const indexOf = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const need = target - nums[i];\n    if (indexOf.has(need)) return [indexOf.get(need), i];\n    indexOf.set(nums[i], i);\n  }\n  return null;\n}`",
+    "options": [
+      "O(n²) time, O(1) space",
+      "O(n log n) time, O(n) space",
+      "O(n) time, O(1) space",
+      "O(n) time, O(n) space"
+    ],
+    "optionsEn": [
+      "O(n²) time, O(1) space",
+      "O(n log n) time, O(n) space",
+      "O(n) time, O(1) space",
+      "O(n) time, O(n) space"
+    ],
+    "answer": 3,
+    "explanation": "Một vòng lặp, mỗi bước `has`/`get`/`set` trên Map là O(1) trung bình → O(n) time. Map có thể chứa tới n phần tử → O(n) space. Đây là trade-off điển hình: đổi bộ nhớ lấy tốc độ so với cách thử mọi cặp O(n²).",
+    "explanationEn": "One loop, and each `has`/`get`/`set` on a Map is O(1) on average → O(n) time. The Map can hold up to n entries → O(n) space. It is the classic trade: memory for speed versus the O(n²) check-every-pair approach."
+  },
+  {
+    "id": "q8",
+    "question": "Điều kiện nào là BẮT BUỘC để áp dụng \"binary search trên đáp án\" (ví dụ tìm tốc độ nhỏ nhất để hoàn thành trong h giờ)?",
+    "questionEn": "Which condition is REQUIRED to apply \"binary search on the answer\" (e.g. finding the smallest speed that finishes within h hours)?",
+    "options": [
+      "Mảng input phải được sắp xếp tăng dần",
+      "Tính khả thi phải đơn điệu: nếu x thoả mãn thì mọi giá trị lớn hơn x cũng thoả mãn",
+      "Đáp án phải là một luỹ thừa của 2",
+      "Input phải có không quá 20 phần tử"
+    ],
+    "optionsEn": [
+      "The input array must be sorted ascending",
+      "Feasibility must be monotonic: if x works, every value larger than x works too",
+      "The answer must be a power of two",
+      "The input must have at most 20 items"
+    ],
+    "answer": 1,
+    "explanation": "Ta binary search trên khoảng đáp án, không phải trên mảng — nên input không cần sắp xếp (các đống chuối có thể theo thứ tự bất kỳ). Điều cần là dãy \"khả thi?\" có dạng N N N Y Y Y, để tìm được chữ Y đầu tiên bằng cách chia đôi.",
+    "explanationEn": "We binary search over the range of answers, not over an array — so the input need not be sorted (the piles can be in any order). What matters is that the \"feasible?\" sequence looks like N N N Y Y Y, so the first Y can be found by halving."
+  },
+  {
+    "id": "q9",
+    "question": "Cần tìm 10 số lớn nhất trong một luồng 10⁶ số và bộ nhớ hạn chế. Cách nào tốt nhất?",
+    "questionEn": "You need the 10 largest numbers from a stream of 10⁶ numbers with limited memory. Which approach is best?",
+    "options": [
+      "Lưu toàn bộ vào mảng rồi sort: O(n log n) time, O(n) space",
+      "Dựng một max-heap chứa mọi số rồi pop 10 lần",
+      "Giữ min-heap kích thước 10; phần tử nào lớn hơn đỉnh heap thì thay vào: O(n log k) time, O(k) space",
+      "Dùng hash map đếm tần suất của từng số"
+    ],
+    "optionsEn": [
+      "Store everything in an array and sort: O(n log n) time, O(n) space",
+      "Build a max-heap of all numbers and pop 10 times",
+      "Keep a min-heap of size 10, replacing the top when a larger number arrives: O(n log k) time, O(k) space",
+      "Use a hash map to count the frequency of each number"
+    ],
+    "answer": 2,
+    "explanation": "Min-heap kích thước k giữ k số lớn nhất đã gặp; đỉnh là số nhỏ nhất trong nhóm nên biết ngay phải loại số nào. Chỉ tốn O(k) bộ nhớ và O(log k) mỗi phần tử. Hai cách sort và max-heap đều phải giữ toàn bộ n số.",
+    "explanationEn": "A size-k min-heap holds the k largest seen so far; its top is the smallest of them, so you instantly know which one to evict. It needs only O(k) memory and O(log k) per item. Sorting and the full max-heap both have to hold all n numbers."
+  },
+  {
+    "id": "q10",
+    "question": "Cho một mê cung dạng lưới (0 = ô trống, 1 = tường). Cần số bước di chuyển ÍT NHẤT từ ô bắt đầu đến đích, mỗi bước đi sang ô kề cạnh. Nên dùng gì?",
+    "questionEn": "Given a grid maze (0 = open, 1 = wall), you need the MINIMUM number of moves from start to goal, each move going to an adjacent cell. What should you use?",
+    "options": [
+      "BFS từ ô bắt đầu, đánh dấu ô đã thăm khi đưa vào queue",
+      "DFS đệ quy và trả về đường đi đầu tiên tìm được",
+      "Topological sort các ô",
+      "Sắp xếp các ô theo khoảng cách Manhattan rồi đi tham lam"
+    ],
+    "optionsEn": [
+      "BFS from the start, marking cells visited when they are enqueued",
+      "Recursive DFS returning the first path it finds",
+      "A topological sort of the cells",
+      "Sort cells by Manhattan distance and walk greedily"
+    ],
+    "answer": 0,
+    "explanation": "Mọi bước có cùng chi phí nên đồ thị là không trọng số: BFS mở rộng theo từng lớp khoảng cách, nên lần đầu chạm đích chính là đường ngắn nhất, O(rows · cols). DFS tìm được một đường nhưng không đảm bảo ngắn nhất; greedy theo Manhattan có thể kẹt sau tường; lưới có chu trình nên không topological sort được.",
+    "explanationEn": "Every move costs the same, so the graph is unweighted: BFS expands in layers of distance, so the first time it reaches the goal is the shortest path, O(rows · cols). DFS finds a path but not necessarily the shortest; Manhattan greedy can get stuck behind walls; a grid has cycles so it cannot be topologically sorted."
+  },
+  {
+    "id": "q11",
+    "question": "Có n môn học và danh sách cặp [môn, môn tiên quyết]. Cần đưa ra một thứ tự học hợp lệ, hoặc báo không thể nếu có vòng phụ thuộc. Thuật toán nào phù hợp?",
+    "questionEn": "There are n courses and a list of [course, prerequisite] pairs. You must output a valid study order, or report it is impossible if dependencies form a cycle. Which algorithm fits?",
+    "options": [
+      "Dijkstra từ môn đầu tiên",
+      "Binary search trên số môn học",
+      "Kruskal để dựng cây khung nhỏ nhất",
+      "Topological sort (thuật toán Kahn hoặc DFS)"
+    ],
+    "optionsEn": [
+      "Dijkstra from the first course",
+      "Binary search on the number of courses",
+      "Kruskal to build a minimum spanning tree",
+      "Topological sort (Kahn's algorithm or DFS)"
+    ],
+    "answer": 3,
+    "explanation": "Phụ thuộc/thứ tự là tín hiệu của topological sort trên đồ thị có hướng, O(V + E). Với Kahn: nếu số node được lấy ra ít hơn n thì còn node nằm trong chu trình, tức không có thứ tự hợp lệ. Dijkstra tìm đường ngắn nhất, Kruskal nối đồ thị vô hướng với chi phí nhỏ nhất.",
+    "explanationEn": "Dependencies/order is the signal for topological sort on a directed graph, O(V + E). With Kahn's algorithm, if fewer than n nodes are output, some remain in a cycle and no valid order exists. Dijkstra finds shortest paths; Kruskal connects an undirected graph at minimum cost."
+  },
+  {
+    "id": "q12",
+    "question": "Với các mệnh giá `[1, 3, 4]` và số tiền 6, thuật toán greedy \"luôn lấy đồng lớn nhất có thể\" cho kết quả thế nào so với đáp án tối ưu?",
+    "questionEn": "With coins `[1, 3, 4]` and amount 6, how does the greedy \"always take the largest coin that fits\" compare with the optimal answer?",
+    "options": [
+      "Greedy dùng 2 đồng, tối ưu cũng là 2 đồng",
+      "Greedy dùng 3 đồng (4+1+1), tối ưu là 2 đồng (3+3)",
+      "Greedy dùng 6 đồng (1 × 6), tối ưu là 2 đồng",
+      "Greedy không tìm được lời giải nào"
+    ],
+    "optionsEn": [
+      "Greedy uses 2 coins, and the optimum is also 2 coins",
+      "Greedy uses 3 coins (4+1+1), the optimum is 2 coins (3+3)",
+      "Greedy uses 6 coins (1 × 6), the optimum is 2 coins",
+      "Greedy finds no solution at all"
+    ],
+    "answer": 1,
+    "explanation": "Greedy lấy 4 trước, còn 2 chỉ trả được bằng 1 + 1 → 3 đồng. DP xét mọi lựa chọn cho từng số tiền con và tìm ra 3 + 3 → 2 đồng. Đây là phản ví dụ kinh điển: khi không chứng minh được lựa chọn tham lam an toàn, hãy dùng DP, O(amount × số mệnh giá).",
+    "explanationEn": "Greedy takes 4 first, and the remaining 2 can only be paid as 1 + 1 → 3 coins. DP considers every choice for every sub-amount and finds 3 + 3 → 2 coins. It is the classic counterexample: when the greedy choice cannot be proven safe, use DP, O(amount × number of coins)."
+  },
+  {
+    "id": "q13",
+    "question": "Với một binary heap có n phần tử, thao tác nào KHÔNG phải O(log n) hay O(1)?",
+    "questionEn": "For a binary heap with n items, which operation is NOT O(log n) or O(1)?",
+    "options": [
+      "Chèn một phần tử mới (bubble up)",
+      "Lấy ra phần tử ở đỉnh (sink down)",
+      "Tìm xem một giá trị bất kỳ có nằm trong heap không",
+      "Xem phần tử ở đỉnh mà không lấy ra"
+    ],
+    "optionsEn": [
+      "Inserting a new item (bubble up)",
+      "Extracting the top item (sink down)",
+      "Checking whether an arbitrary value is in the heap",
+      "Peeking at the top item without removing it"
+    ],
+    "answer": 2,
+    "explanation": "Heap chỉ đảm bảo cha ≥ con (hoặc ≤), không sắp xếp giữa các nhánh, nên tìm một giá trị bất kỳ phải quét toàn bộ: O(n). Chèn và lấy đỉnh đi theo chiều cao cây O(log n); xem đỉnh là O(1).",
+    "explanationEn": "A heap only guarantees parent ≥ child (or ≤); it does not order siblings or branches, so finding an arbitrary value means scanning everything: O(n). Insert and extract follow the tree height, O(log n); peek is O(1)."
+  },
+  {
+    "id": "q14",
+    "question": "Bạn cần sắp xếp một danh sách đơn hàng, đảm bảo O(n log n) ngay cả trong trường hợp tệ nhất VÀ giữ nguyên thứ tự tương đối của các đơn có cùng key (stable). Chọn thuật toán nào?",
+    "questionEn": "You must sort a list of orders with an O(n log n) guarantee even in the worst case AND keep equal keys in their original relative order (stable). Which algorithm do you pick?",
+    "options": [
+      "Merge sort",
+      "Quick sort",
+      "Heap sort",
+      "Insertion sort"
+    ],
+    "optionsEn": [
+      "Merge sort",
+      "Quick sort",
+      "Heap sort",
+      "Insertion sort"
+    ],
+    "answer": 0,
+    "explanation": "Merge sort là O(n log n) ở mọi trường hợp và stable, đổi lại tốn O(n) bộ nhớ phụ. Quick sort tệ nhất O(n²) và không stable; heap sort O(n log n) nhưng không stable; insertion sort stable nhưng O(n²).",
+    "explanationEn": "Merge sort is O(n log n) in every case and stable, at the cost of O(n) extra space. Quick sort is O(n²) worst case and unstable; heap sort is O(n log n) but unstable; insertion sort is stable but O(n²)."
+  },
+  {
+    "id": "q15",
+    "question": "Một mạng xã hội có 10⁶ người dùng (đỉnh) và khoảng 3 × 10⁶ quan hệ bạn bè (cạnh). Nên biểu diễn đồ thị như thế nào?",
+    "questionEn": "A social network has 10⁶ users (vertices) and about 3 × 10⁶ friendships (edges). How should the graph be represented?",
+    "options": [
+      "Adjacency matrix, vì kiểm tra cạnh là O(1)",
+      "Một mảng các cạnh, sắp xếp lại sau mỗi lần thêm",
+      "Adjacency matrix nén thành chuỗi bit",
+      "Adjacency list, vì tốn O(V + E) bộ nhớ thay vì O(V²)"
+    ],
+    "optionsEn": [
+      "An adjacency matrix, because checking an edge is O(1)",
+      "A flat array of edges, re-sorted after every insert",
+      "An adjacency matrix compressed into a bit string",
+      "An adjacency list, because it uses O(V + E) memory instead of O(V²)"
+    ],
+    "answer": 3,
+    "explanation": "Matrix cần V² = 10¹² ô — kể cả nén thành bit vẫn cỡ 125 GB. Đồ thị này rất thưa (E ≪ V²), nên adjacency list chỉ cần O(V + E) ≈ vài triệu mục, và duyệt hàng xóm của một đỉnh là O(deg) thay vì O(V).",
+    "explanationEn": "A matrix needs V² = 10¹² cells — even as bits that is about 125 GB. The graph is very sparse (E ≪ V²), so an adjacency list needs only O(V + E) ≈ a few million entries, and iterating a vertex's neighbours is O(deg) instead of O(V)."
+  },
+  {
+    "id": "q16",
+    "question": "Đoạn code sau in ra gì?\n`const a = 13; // 1101\nconst b = 6;  // 0110\nconsole.log(a & b, a ^ b);`",
+    "questionEn": "What does this code print?\n`const a = 13; // 1101\nconst b = 6;  // 0110\nconsole.log(a & b, a ^ b);`",
+    "options": [
+      "`15 11`",
+      "`4 11`",
+      "`4 15`",
+      "`19 7`"
+    ],
+    "optionsEn": [
+      "`15 11`",
+      "`4 11`",
+      "`4 15`",
+      "`19 7`"
+    ],
+    "answer": 1,
+    "explanation": "AND giữ bit mà cả hai đều là 1: 1101 & 0110 = 0100 = 4. XOR giữ bit khác nhau: 1101 ^ 0110 = 1011 = 11. Còn OR sẽ là 1111 = 15, và 19 là phép cộng thường.",
+    "explanationEn": "AND keeps bits set in both: 1101 & 0110 = 0100 = 4. XOR keeps bits that differ: 1101 ^ 0110 = 1011 = 11. OR would be 1111 = 15, and 19 is ordinary addition."
+  },
+  {
+    "id": "q17",
+    "question": "Hàm kiểm tra luỹ thừa của 2 sau có lỗi gì?\n`function isPowerOfTwo(n) {\n  return (n & (n - 1)) === 0;\n}`",
+    "questionEn": "What is wrong with this power-of-two check?\n`function isPowerOfTwo(n) {\n  return (n & (n - 1)) === 0;\n}`",
+    "options": [
+      "Nó trả về `true` cho `0`, vốn không phải luỹ thừa của 2; cần thêm điều kiện `n > 0`",
+      "Nó trả về `false` cho `8`",
+      "Phải dùng `|` thay vì `&`",
+      "Hàm chạy O(n) vì phải duyệt từng bit"
+    ],
+    "optionsEn": [
+      "It returns `true` for `0`, which is not a power of two; it needs an `n > 0` check",
+      "It returns `false` for `8`",
+      "It should use `|` instead of `&`",
+      "It runs in O(n) because it walks every bit"
+    ],
+    "answer": 0,
+    "explanation": "0 & (−1) = 0 nên hàm nhận 0 là luỹ thừa của 2. Với 8: 1000 & 0111 = 0 → đúng. Mẹo `n & (n - 1)` xoá bit 1 thấp nhất trong O(1); luỹ thừa của 2 có đúng một bit 1 nên kết quả bằng 0. Phiên bản đúng: `n > 0 && (n & (n - 1)) === 0`.",
+    "explanationEn": "0 & (−1) = 0, so the function accepts 0 as a power of two. For 8: 1000 & 0111 = 0 → correct. The `n & (n - 1)` trick clears the lowest set bit in O(1); a power of two has exactly one set bit, so the result is 0. The correct version is `n > 0 && (n & (n - 1)) === 0`."
+  },
+  {
+    "id": "q18",
+    "question": "Người phỏng vấn vừa đọc xong đề bài. Việc NÊN làm đầu tiên là gì?",
+    "questionEn": "The interviewer has just finished reading the problem. What should you do first?",
+    "options": [
+      "Bắt tay viết ngay lời giải tối ưu nhất bạn nghĩ ra để tiết kiệm thời gian",
+      "Phân tích time và space của một lời giải bạn chưa viết",
+      "Hỏi làm rõ: kích thước input, đã sắp xếp chưa, có trùng lặp/số âm không, input rỗng thì trả về gì",
+      "Viết test cho các edge case trước khi hiểu đề"
+    ],
+    "optionsEn": [
+      "Start coding the most optimal solution you can think of to save time",
+      "Analyse the time and space of a solution you have not written yet",
+      "Ask clarifying questions: input size, sorted or not, duplicates or negatives, what to return for empty input",
+      "Write tests for edge cases before understanding the problem"
+    ],
+    "answer": 2,
+    "explanation": "Làm rõ đề là bước 1 của checklist: ràng buộc quyết định độ phức tạp mục tiêu, còn các chi tiết như đã sắp xếp hay có số âm quyết định pattern nào dùng được. Nhảy vào code ngay dễ giải sai bài; sau đó mới đến ví dụ, brute force, tối ưu, code, test và phân tích.",
+    "explanationEn": "Clarifying is step 1 of the checklist: constraints set the target complexity, and details like sortedness or negatives decide which patterns apply. Jumping straight into code risks solving the wrong problem; examples, brute force, optimisation, code, tests and analysis follow."
+  }
+]

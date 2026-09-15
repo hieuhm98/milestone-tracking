@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI tính chất mà một hàm băm tốt cho hash table PHẢI có.",
+      "promptEn": "Pick TWO properties a good hash table hash function MUST have.",
+      "options": [
+        "An toàn về mật mã như SHA-256",
+        "Trả về index ngẫu nhiên để rải key",
+        "Tất định: cùng key luôn ra cùng index",
+        "Luôn trả về 0 để chạy thật nhanh",
+        "Rải key đều ra các index"
+      ],
+      "optionsEn": [
+        "Cryptographically secure like SHA-256",
+        "Returns a random index to spread keys out",
+        "Deterministic: the same key always gives the same index",
+        "Always returns 0 so it runs as fast as possible",
+        "Distributes keys uniformly across the indices"
+      ],
+      "answers": [2, 4],
+      "explanation": "Ba tiêu chí là nhanh, phân bố đều và tất định. Index ngẫu nhiên làm mất dữ liệu, trả về hằng số biến bảng thành list O(n), còn hàm băm mật mã thì chậm một cách có chủ đích và không cần cho cấu trúc dữ liệu.",
+      "explanationEn": "The three criteria are fast, uniform and deterministic. A random index loses your data, a constant index turns the table into an O(n) list, and cryptographic hashes are deliberately slow and unnecessary for a data structure.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về linear probing so với separate chaining.",
+      "promptEn": "Pick TWO statements that are true about linear probing compared with separate chaining.",
+      "options": [
+        "Linear probing lưu nhiều cặp trong mỗi ô",
+        "Linear probing không thể chứa nhiều cặp hơn số ô của bảng",
+        "Linear probing xoá được bằng cách chỉ làm trống ô",
+        "Linear probing bị primary clustering: các dải ô đầy làm chậm việc dò",
+        "Separate chaining ngừng hoạt động khi load factor vượt 1"
+      ],
+      "optionsEn": [
+        "Linear probing stores several pairs in each slot",
+        "Linear probing cannot hold more pairs than the table has slots",
+        "Linear probing can delete by simply emptying the slot",
+        "Linear probing suffers primary clustering: runs of full slots slow down probes",
+        "Separate chaining stops working once the load factor exceeds 1"
+      ],
+      "answers": [1, 3],
+      "explanation": "Probing chỉ có một cặp mỗi ô, nên n không thể vượt m, và các dải ô đầy dài dần gây clustering. Xoá cần tombstone để không cắt đứt chuỗi dò. Chaining vẫn chạy với α > 1, chỉ là bucket dài hơn.",
+      "explanationEn": "Probing holds one pair per slot, so n can never exceed m, and runs of full slots grow into clusters. Deletion needs a tombstone so probe chains stay intact. Chaining still works with α > 1; its buckets just get longer.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tỉ số n / m (số cặp đã lưu chia cho số ô) của một hash table gọi là gì?",
+      "promptEn": "What is the ratio n / m (stored pairs divided by slots) of a hash table called?",
+      "answer": "Load factor",
+      "answerEn": "Load factor",
+      "accept": [
+        "load factor",
+        "loadfactor",
+        "alpha",
+        "hệ số tải",
+        "he so tai"
+      ],
+      "explanation": "Load factor (hệ số tải), ký hiệu α. Khi α vượt ngưỡng (khoảng 0,75 với chaining), bảng tăng kích thước và rehash mọi key để giữ thao tác O(1).",
+      "explanationEn": "The load factor, written α. Once α passes a threshold (about 0.75 for chaining), the table grows and rehashes every key to keep operations O(1).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Chiến lược xử lý xung đột nào lưu ở mỗi ô một bucket (array hoặc linked list) chứa mọi cặp băm vào ô đó?",
+      "promptEn": "Which collision strategy stores a bucket (an array or linked list) in each slot holding every pair that hashed there?",
+      "answer": "Separate chaining",
+      "answerEn": "Separate chaining",
+      "accept": [
+        "separate chaining",
+        "chaining",
+        "seperate chaining",
+        "chained hashing"
+      ],
+      "explanation": "Separate chaining. Chiến lược còn lại là open addressing, với dạng đơn giản nhất là linear probing: mỗi ô một cặp, xung đột thì dò sang ô trống kế tiếp.",
+      "explanationEn": "Separate chaining. The alternative is open addressing, whose simplest form is linear probing: one pair per slot, and a collision walks to the next empty slot.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thao tác của hash table (separate chaining, n cặp, m ô) với độ phức tạp thời gian đúng.",
+      "promptEn": "Match each hash table operation (separate chaining, n pairs, m slots) to its time complexity.",
+      "pairs": [
+        {
+          "left": "get với hàm băm tốt (trung bình)",
+          "leftEn": "get with a good hash (average)",
+          "right": "O(1)",
+          "rightEn": "O(1)"
+        },
+        {
+          "left": "get khi mọi key băm vào cùng một ô",
+          "leftEn": "get when every key hashes to the same slot",
+          "right": "O(n)",
+          "rightEn": "O(n)"
+        },
+        {
+          "left": "keys() — liệt kê mọi key",
+          "leftEn": "keys() — listing every key",
+          "right": "O(n + m)",
+          "rightEn": "O(n + m)"
+        },
+        {
+          "left": "Băm một chuỗi dài k mà không giới hạn độ dài",
+          "leftEn": "Hashing a string of length k with no length cap",
+          "right": "O(k)",
+          "rightEn": "O(k)"
+        }
+      ],
+      "explanation": "Với hàm băm tốt, bucket ngắn nên get là O(1); hàm băm tệ dồn mọi thứ vào một bucket O(n). keys() phải đi qua mọi ô và mọi cặp. Hàm băm duyệt từng ký tự nên tốn O(k) — trừ khi độ dài được giới hạn.",
+      "explanationEn": "A good hash keeps buckets short, so get is O(1); a terrible hash piles everything into one O(n) bucket. keys() visits every slot and every pair. A hash that walks each character costs O(k) unless the length is capped.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của `set(key, value)` trong một hash table separate chaining có resize.",
+      "promptEn": "Put the steps of `set(key, value)` in a resizing separate-chaining hash table into order.",
+      "items": [
+        {
+          "text": "Băm key để lấy index",
+          "textEn": "Hash the key to get an index"
+        },
+        {
+          "text": "Nếu ô đó chưa có bucket thì tạo một bucket rỗng",
+          "textEn": "If that slot has no bucket yet, create an empty one"
+        },
+        {
+          "text": "Duyệt bucket; nếu key đã tồn tại thì cập nhật value và dừng",
+          "textEn": "Scan the bucket; if the key already exists, update its value and stop"
+        },
+        {
+          "text": "Nếu không, push cặp mới và tăng bộ đếm số cặp",
+          "textEn": "Otherwise push the new pair and increment the pair count"
+        },
+        {
+          "text": "Nếu load factor vượt ngưỡng, cấp phát array lớn hơn và rehash mọi cặp",
+          "textEn": "If the load factor exceeds the threshold, allocate a larger array and rehash every pair"
+        }
+      ],
+      "explanation": "Cập nhật key đã có phải xảy ra trước khi push để tránh key trùng lặp, và kiểm tra load factor đến sau cùng vì nó phụ thuộc vào số cặp vừa tăng.",
+      "explanationEn": "Updating an existing key must come before pushing so keys never duplicate, and the load factor check comes last because it depends on the count that was just incremented.",
+      "id": "d6"
+    }
+  ]
+}

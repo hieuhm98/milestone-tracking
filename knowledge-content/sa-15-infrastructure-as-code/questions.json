@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Điều nào KHÔNG phải là lợi ích mà Infrastructure as Code mang lại?",
+    "questionEn": "Which of these is NOT a benefit that Infrastructure as Code provides?",
+    "options": [
+      "Dựng lại một môi trường giống hệt từ code sau khi mất account",
+      "Mọi thay đổi hạ tầng đi qua pull request có người duyệt và diff",
+      "Tự động backup dữ liệu nằm trong các database nó tạo ra",
+      "Xem trước chính xác cái gì sẽ thay đổi trước khi áp dụng"
+    ],
+    "optionsEn": [
+      "Rebuilding an identical environment from code after losing an account",
+      "Every infrastructure change going through a reviewed pull request with a diff",
+      "Automatically backing up the data inside the databases it creates",
+      "Previewing exactly what will change before applying it"
+    ],
+    "answer": 2,
+    "explanation": "IaC tái tạo được *hạ tầng* (database instance, cấu hình), nhưng dữ liệu bên trong thì không — backup và restore dữ liệu vẫn là việc riêng. Ba lựa chọn còn lại là những lợi ích cốt lõi: tái tạo được, review được và xem trước thay đổi.",
+    "explanationEn": "IaC recreates the *infrastructure* (the database instance, its settings) but not the data inside it — backup and restore remain a separate concern. The other three are core benefits: reproducibility, review and change previews."
+  },
+  {
+    "id": "q2",
+    "question": "Một bước CI chạy lệnh sau mỗi lần merge vào main. Sau 4 lần merge, account có 12 instance thay vì 3. Script này thiếu tính chất nào mà một công cụ declarative như Terraform có sẵn?\n`aws ec2 run-instances \\\n  --image-id ami-0abc1234 \\\n  --instance-type t3.micro \\\n  --count 3`",
+    "questionEn": "A CI step runs this command on every merge to main. After 4 merges the account has 12 instances instead of 3. Which property, built into a declarative tool like Terraform, is this script missing?\n`aws ec2 run-instances \\\n  --image-id ami-0abc1234 \\\n  --instance-type t3.micro \\\n  --count 3`",
+    "options": [
+      "Tính lũy đẳng — chạy lại phải hội tụ về cùng trạng thái mong muốn",
+      "Tính song song — các instance phải được tạo cùng một lúc",
+      "Tính bất biến — instance không bao giờ được sửa tại chỗ",
+      "Tính di động — cùng một script phải chạy được trên nhiều cloud"
+    ],
+    "optionsEn": [
+      "Idempotency — re-running must converge on the same desired state",
+      "Parallelism — the instances must be created at the same time",
+      "Immutability — instances must never be modified in place",
+      "Portability — the same script must run on several clouds"
+    ],
+    "answer": 0,
+    "explanation": "Lệnh imperative nói 'tạo thêm 3', nên mỗi lần chạy lại cộng thêm 3. Công cụ declarative nói 'phải có 3', so sánh với state và thực tế, và lần chạy thứ hai không làm gì. Đó là idempotency — điều kiện để IaC chạy an toàn trong pipeline.",
+    "explanationEn": "The imperative command says 'create 3 more', so every re-run adds 3. A declarative tool says 'there should be 3', compares with state and reality, and the second run does nothing. That is idempotency — the precondition for running IaC safely in a pipeline."
+  },
+  {
+    "id": "q3",
+    "question": "Một team vận hành 60 server bằng cách SSH vào vá package và sửa config. Sau hai năm, không có hai server nào giống nhau và rollback một lần nâng cấp lỗi mất nhiều giờ. Hướng thiết kế nào giải quyết gốc rễ vấn đề?",
+    "questionEn": "A team runs 60 servers by SSHing in to patch packages and edit config. After two years no two servers are alike and rolling back a bad upgrade takes hours. Which design direction fixes the root cause?",
+    "options": [
+      "Viết thêm runbook chi tiết cho từng lần SSH vào sửa server",
+      "Bật thêm CloudWatch alarm cho mỗi server để phát hiện lỗi sớm hơn",
+      "Chạy một script Bash hằng đêm để đồng bộ file config giữa các server",
+      "Bake cấu hình vào image có version rồi thay instance thay vì vá tại chỗ"
+    ],
+    "optionsEn": [
+      "Write more detailed runbooks for every SSH maintenance session",
+      "Add CloudWatch alarms per server to detect failures sooner",
+      "Run a nightly Bash script that syncs config files across servers",
+      "Bake configuration into versioned images and replace instances instead of patching"
+    ],
+    "answer": 3,
+    "explanation": "Vấn đề gốc là hạ tầng mutable trôi thành snowflake. Hạ tầng immutable (build image, thay instance) làm mọi server giống hệt nhau theo cấu trúc, và rollback chỉ là deploy lại image trước. Runbook, alarm hay script đồng bộ chỉ chữa triệu chứng.",
+    "explanationEn": "The root problem is mutable infrastructure drifting into snowflakes. Immutable infrastructure (build an image, replace instances) makes servers identical by construction, and rollback is just redeploying the previous image. Runbooks, alarms and sync scripts treat symptoms."
+  },
+  {
+    "id": "q4",
+    "question": "Không có `depends_on` nào trong đoạn cấu hình sau. Làm sao Terraform biết phải tạo VPC trước subnet?\n`resource \"aws_vpc\" \"main\" {\n  cidr_block = \"10.0.0.0/16\"\n}\n\nresource \"aws_subnet\" \"app\" {\n  vpc_id     = aws_vpc.main.id\n  cidr_block = \"10.0.1.0/24\"\n}`",
+    "questionEn": "There is no `depends_on` in this configuration. How does Terraform know to create the VPC before the subnet?\n`resource \"aws_vpc\" \"main\" {\n  cidr_block = \"10.0.0.0/16\"\n}\n\nresource \"aws_subnet\" \"app\" {\n  vpc_id     = aws_vpc.main.id\n  cidr_block = \"10.0.1.0/24\"\n}`",
+    "options": [
+      "Nó tạo resource theo thứ tự xuất hiện từ trên xuống trong file",
+      "Tham chiếu `aws_vpc.main.id` tạo một phụ thuộc ngầm trong dependency graph",
+      "Provider AWS có sẵn danh sách thứ tự cố định cho mọi loại resource",
+      "Nó thử tạo subnet trước và tự thử lại khi API báo lỗi"
+    ],
+    "optionsEn": [
+      "It creates resources in top-to-bottom order of the file",
+      "The reference `aws_vpc.main.id` creates an implicit dependency in the dependency graph",
+      "The AWS provider ships a fixed ordering list for every resource type",
+      "It tries the subnet first and retries when the API returns an error"
+    ],
+    "answer": 1,
+    "explanation": "Terraform đọc các tham chiếu giữa block để dựng dependency graph, tạo theo thứ tự phụ thuộc và chạy song song những node độc lập. Thứ tự trong file không có ý nghĩa; `depends_on` chỉ cần cho phụ thuộc ẩn không thể hiện qua tham chiếu.",
+    "explanationEn": "Terraform reads references between blocks to build a dependency graph, creates in dependency order and runs independent nodes in parallel. File order is irrelevant; `depends_on` is only needed for hidden dependencies not expressed by a reference."
+  },
+  {
+    "id": "q5",
+    "question": "Một PR chỉ đổi một thuộc tính của database production. Plan trong CI in ra đoạn sau. Người review nên làm gì?\n`-/+ resource \"aws_db_instance\" \"main\" {\n      ~ identifier = \"orders\" -> \"orders-db\" # forces replacement\n    }\n\nPlan: 1 to add, 0 to change, 1 to destroy.`",
+    "questionEn": "A PR changes a single attribute on the production database. The CI plan prints the following. What should the reviewer do?\n`-/+ resource \"aws_db_instance\" \"main\" {\n      ~ identifier = \"orders\" -> \"orders-db\" # forces replacement\n    }\n\nPlan: 1 to add, 0 to change, 1 to destroy.`",
+    "options": [
+      "Duyệt, vì `-/+` nghĩa là Terraform sửa tại chỗ mà không có downtime",
+      "Duyệt, vì Terraform sẽ tự rollback nếu việc tạo database mới bị lỗi",
+      "Chặn PR: database sẽ bị xoá rồi tạo lại, mất dữ liệu nếu không có kế hoạch",
+      "Chạy `terraform fmt` rồi plan lại để cảnh báo biến mất"
+    ],
+    "optionsEn": [
+      "Approve, because `-/+` means Terraform updates in place without downtime",
+      "Approve, because Terraform rolls back automatically if creating the new database fails",
+      "Block the PR: the database will be destroyed and recreated, losing data without a plan",
+      "Run `terraform fmt` and plan again so the warning goes away"
+    ],
+    "answer": 2,
+    "explanation": "`-/+` cùng 'forces replacement' nghĩa là xoá rồi tạo mới — với database là mất dữ liệu. Terraform không có rollback tự động. Đây là lý do review plan chứ không chỉ review code, và vì sao nên dùng `prevent_destroy` và `deletion_protection` cho database.",
+    "explanationEn": "`-/+` with 'forces replacement' means destroy then create — for a database, data loss. Terraform has no automatic rollback. This is why you review the plan, not just the code, and why databases deserve `prevent_destroy` and `deletion_protection`."
+  },
+  {
+    "id": "q6",
+    "question": "Pipeline chạy `terraform plan` khi mở PR và `terraform apply` sau khi merge. Team muốn đảm bảo lần apply thực hiện đúng những thay đổi đã được duyệt, không hơn không kém. Cách nào đúng?",
+    "questionEn": "A pipeline runs `terraform plan` on the PR and `terraform apply` after merge. The team wants the apply to execute exactly the changes that were reviewed, nothing more. Which approach is right?",
+    "options": [
+      "Lưu plan bằng `terraform plan -out=tfplan` rồi chạy `terraform apply tfplan`",
+      "Chạy `terraform apply -auto-approve` ngay sau khi merge để rút ngắn thời gian",
+      "Chạy `terraform validate` trước apply để chắc chắn không có gì thay đổi",
+      "Chạy `terraform init -upgrade` trước apply để lấy provider mới nhất"
+    ],
+    "optionsEn": [
+      "Save the plan with `terraform plan -out=tfplan`, then run `terraform apply tfplan`",
+      "Run `terraform apply -auto-approve` straight after merge to shorten the gap",
+      "Run `terraform validate` before apply to be sure nothing changed",
+      "Run `terraform init -upgrade` before apply to get the newest providers"
+    ],
+    "answer": 0,
+    "explanation": "Plan đã lưu là chính xác tập thay đổi đã duyệt; `apply tfplan` thực hiện đúng nó và từ chối nếu state đã thay đổi kể từ lúc plan (stale plan). `-auto-approve` sẽ tính lại một plan mới chưa ai xem; `validate` không gọi API cloud; `-upgrade` còn có thể đổi cả phiên bản provider.",
+    "explanationEn": "A saved plan is exactly the reviewed change set; `apply tfplan` executes it and refuses if state changed since planning (stale plan). `-auto-approve` computes a fresh plan nobody saw; `validate` never calls cloud APIs; `-upgrade` could even change provider versions."
+  },
+  {
+    "id": "q7",
+    "question": "`var.users` đang là `[\"an\", \"binh\", \"chi\"]`. Ai đó xoá `\"an\"` khỏi đầu danh sách. Plan tiếp theo sẽ làm gì?\n`resource \"aws_iam_user\" \"this\" {\n  count = length(var.users)\n  name  = var.users[count.index]\n}`",
+    "questionEn": "`var.users` is `[\"an\", \"binh\", \"chi\"]`. Someone removes `\"an\"` from the front of the list. What will the next plan do?\n`resource \"aws_iam_user\" \"this\" {\n  count = length(var.users)\n  name  = var.users[count.index]\n}`",
+    "options": [
+      "Chỉ xoá user `an` và giữ nguyên hai user còn lại",
+      "Báo lỗi vì `count` không được phép giảm sau khi đã tạo resource",
+      "Không làm gì, vì `count` chỉ được tính một lần lúc tạo resource",
+      "Đổi `this[0]` thành binh, `this[1]` thành chi và xoá `this[2]`"
+    ],
+    "optionsEn": [
+      "Delete only user `an` and leave the other two untouched",
+      "Fail because `count` may not decrease after resources exist",
+      "Do nothing, because `count` is only evaluated when resources are created",
+      "Change `this[0]` to binh, `this[1]` to chi and destroy `this[2]`"
+    ],
+    "answer": 3,
+    "explanation": "`count` định danh theo vị trí, nên mọi phần tử sau phần tử bị xoá đều lệch index: Terraform muốn sửa hoặc thay thế những user không liên quan. `for_each = toset(var.users)` dùng key ổn định, nên chỉ `this[\"an\"]` bị xoá.",
+    "explanationEn": "`count` addresses by position, so every element after the removed one shifts index: Terraform wants to modify or replace unrelated users. `for_each = toset(var.users)` uses stable keys, so only `this[\"an\"]` would be destroyed."
+  },
+  {
+    "id": "q8",
+    "question": "Mật khẩu master của RDS được truyền vào qua một variable có `sensitive = true`, và không hiện ra trong output của `terraform plan`. Trong buổi security review, phát biểu nào chính xác?",
+    "questionEn": "The RDS master password is passed in through a variable marked `sensitive = true`, and it does not appear in `terraform plan` output. In a security review, which statement is accurate?",
+    "options": [
+      "Mật khẩu được Terraform tự mã hoá bằng KMS trước khi lưu vào state",
+      "Mật khẩu vẫn nằm dạng plain text trong state, nên state phải được bảo vệ như một secret",
+      "Mật khẩu không bao giờ được ghi vào state khi variable được đánh dấu sensitive",
+      "Chỉ có file `.terraform.lock.hcl` là chứa mật khẩu nên cần giữ file đó bí mật"
+    ],
+    "optionsEn": [
+      "Terraform encrypts the password with KMS itself before writing it to state",
+      "The password is still stored in plain text in state, so state must be protected like a secret",
+      "The password is never written to state when the variable is marked sensitive",
+      "Only the `.terraform.lock.hcl` file contains the password, so that file must be kept secret"
+    ],
+    "answer": 1,
+    "explanation": "`sensitive` chỉ che giá trị trên màn hình CLI. State ghi lại thuộc tính của resource, kể cả mật khẩu, dạng plain text. Vì vậy backend phải mã hoá, IAM phải chặt, và state không bao giờ vào Git. Lock file chỉ ghi phiên bản và hash của provider.",
+    "explanationEn": "`sensitive` only masks the value on the CLI. State records resource attributes, passwords included, in plain text. So the backend must be encrypted, IAM tight, and state never in Git. The lock file only records provider versions and hashes."
+  },
+  {
+    "id": "q9",
+    "question": "Ba kỹ sư cùng chạy Terraform cho một môi trường từ laptop của mình, mỗi người giữ `terraform.tfstate` riêng trên máy. Họ liên tục gặp resource bị tạo trùng và lỗi 'already exists'. Cách sửa đúng là gì?",
+    "questionEn": "Three engineers run Terraform for the same environment from their laptops, each keeping their own `terraform.tfstate` locally. They keep hitting duplicate resources and 'already exists' errors. What is the right fix?",
+    "options": [
+      "Commit file `terraform.tfstate` vào Git để mọi người pull về trước khi chạy",
+      "Mỗi kỹ sư dùng một CLI workspace riêng cho cùng môi trường đó",
+      "Chuyển sang remote backend dùng chung, có mã hoá và state locking",
+      "Chạy `terraform refresh` trên từng laptop trước mỗi lần apply"
+    ],
+    "optionsEn": [
+      "Commit `terraform.tfstate` to Git so everyone pulls before running",
+      "Give each engineer their own CLI workspace for that same environment",
+      "Move to a shared remote backend with encryption and state locking",
+      "Run `terraform refresh` on each laptop before every apply"
+    ],
+    "answer": 2,
+    "explanation": "Một môi trường phải có đúng một state, nằm ở nơi dùng chung và được khoá khi apply. Commit state vào Git làm lộ secret và không có lock; workspace riêng tạo thêm state, không phải một state chung; refresh không gộp được các state khác nhau.",
+    "explanationEn": "One environment needs exactly one state, stored centrally and locked during applies. Committing state to Git leaks secrets and has no locking; per-person workspaces create more states, not one shared state; refresh cannot merge divergent states."
+  },
+  {
+    "id": "q10",
+    "question": "Một job CI apply bị huỷ giữa chừng khi runner mất kết nối. Từ đó mọi job Terraform đều lỗi với 'Error acquiring the state lock'. Bước đầu tiên hợp lý là gì?",
+    "questionEn": "A CI apply job was cancelled mid-run when its runner lost connectivity. Since then every Terraform job fails with 'Error acquiring the state lock'. What is the sensible first step?",
+    "options": [
+      "Xác nhận không còn tiến trình nào đang chạy, rồi dùng `terraform force-unlock` với lock ID",
+      "Xoá object state trong bucket S3 để Terraform tạo một state mới sạch sẽ",
+      "Thêm `-lock=false` vĩnh viễn vào mọi lệnh apply trong pipeline",
+      "Chuyển backend về local, apply, rồi chuyển ngược lại remote backend"
+    ],
+    "optionsEn": [
+      "Confirm no process is still running, then use `terraform force-unlock` with the lock ID",
+      "Delete the state object in the S3 bucket so Terraform starts with a clean state",
+      "Add `-lock=false` permanently to every apply command in the pipeline",
+      "Switch the backend to local, apply, then switch back to the remote backend"
+    ],
+    "answer": 0,
+    "explanation": "Job bị kill không kịp nhả lock. `force-unlock` giải phóng nó — nhưng chỉ sau khi chắc chắn không ai đang apply. Xoá state khiến Terraform quên mọi resource (và sẽ tạo trùng); tắt lock vĩnh viễn hay đổi backend tạm thời đều mở cửa cho hỏng state.",
+    "explanationEn": "The killed job never released its lock. `force-unlock` frees it — but only once you are sure nobody is applying. Deleting state makes Terraform forget every resource (and create duplicates); disabling locking or juggling backends invites state corruption."
+  },
+  {
+    "id": "q11",
+    "question": "Platform team duy trì một module `ecs-service` được 30 product team dùng qua `source = \"git::https://git.acme.io/modules/ecs-service.git\"`. Họ đổi tên một variable và làm hỏng pipeline của 12 team trong một buổi sáng. Thay đổi quy trình nào ngăn chuyện này?",
+    "questionEn": "A platform team maintains an `ecs-service` module that 30 product teams consume via `source = \"git::https://git.acme.io/modules/ecs-service.git\"`. They rename a variable and break 12 teams' pipelines in one morning. Which process change prevents this?",
+    "options": [
+      "Gộp toàn bộ module vào repo của từng product team để mỗi team tự sửa",
+      "Cấm đổi tên variable và chỉ được phép thêm output mới vào module",
+      "Yêu cầu các team chạy `terraform init -upgrade` mỗi ngày để luôn cập nhật",
+      "Gắn version tag cho module, coi input/output là API, và để team pin `?ref=v1.4.0`"
+    ],
+    "optionsEn": [
+      "Copy the whole module into every product team's repo so each team edits its own",
+      "Forbid renaming variables and only ever allow adding new outputs",
+      "Require teams to run `terraform init -upgrade` daily so they stay current",
+      "Tag module versions, treat inputs/outputs as an API, and have teams pin `?ref=v1.4.0`"
+    ],
+    "answer": 3,
+    "explanation": "Module là một API: input và output là hợp đồng. Đánh version (semver) và cho người dùng pin phiên bản giúp breaking change đi kèm major version và được nâng cấp có chủ đích. Copy module tạo 30 bản fork; cấm đổi tên thì quá cứng; `-upgrade` hằng ngày lại càng dễ vỡ.",
+    "explanationEn": "A module is an API: inputs and outputs are the contract. Versioning (semver) and letting consumers pin means breaking changes ship as a major version and are adopted deliberately. Copying creates 30 forks; banning renames is too rigid; daily `-upgrade` breaks things faster."
+  },
+  {
+    "id": "q12",
+    "question": "Trong một sự cố, một kỹ sư mở thêm cổng 8443 trên security group bằng console. Hôm sau, `terraform plan` hiện một thay đổi `~` sẽ xoá rule đó. Team quyết định rule này phải được giữ lại. Nên làm gì?",
+    "questionEn": "During an incident an engineer opened port 8443 on a security group via the console. The next day `terraform plan` shows a `~` change that would remove that rule. The team decides the rule must stay. What should they do?",
+    "options": [
+      "Chạy `terraform apply` rồi mở lại cổng bằng console một lần nữa",
+      "Thêm rule vào code Terraform qua PR để plan không còn thay đổi nào",
+      "Chạy `terraform apply -refresh-only` và coi như drift đã được xử lý xong",
+      "Thêm `depends_on` vào security group để Terraform bỏ qua rule mới"
+    ],
+    "optionsEn": [
+      "Run `terraform apply`, then reopen the port in the console again",
+      "Add the rule to the Terraform code through a PR so the plan shows no changes",
+      "Run `terraform apply -refresh-only` and consider the drift resolved",
+      "Add `depends_on` to the security group so Terraform ignores the new rule"
+    ],
+    "answer": 1,
+    "explanation": "Khi thực tế là đúng, hãy đưa code về khớp với thực tế; plan sạch xác nhận drift đã hết. `-refresh-only` chỉ cập nhật state — code vẫn khác nên lần plan sau lại đòi xoá rule. Mở lại bằng console chỉ tạo lại drift; `depends_on` không liên quan.",
+    "explanationEn": "When reality is right, make the code match it; a clean plan confirms the drift is gone. `-refresh-only` only updates state — the code still differs, so the next plan tries to remove the rule again. Reopening via console just recreates drift; `depends_on` is unrelated."
+  },
+  {
+    "id": "q13",
+    "question": "Bạn chuyển `aws_instance.web` vào một module mới tên `web`. Plan cho thấy instance cũ bị destroy và một instance mới được tạo, dù cấu hình không đổi. Cách sửa đúng là gì?",
+    "questionEn": "You move `aws_instance.web` into a new module called `web`. The plan shows the old instance destroyed and a new one created, even though the configuration is identical. What is the right fix?",
+    "options": [
+      "Thêm block `moved` với `from = aws_instance.web` và `to = module.web.aws_instance.this`",
+      "Thêm `lifecycle { create_before_destroy = true }` vào instance trong module",
+      "Chạy `terraform apply` vì instance mới giống hệt nên không có rủi ro gì",
+      "Thêm block `import` trỏ tới ID của chính instance đang chạy vào địa chỉ cũ"
+    ],
+    "optionsEn": [
+      "Add a `moved` block with `from = aws_instance.web` and `to = module.web.aws_instance.this`",
+      "Add `lifecycle { create_before_destroy = true }` to the instance in the module",
+      "Run `terraform apply`, since the new instance is identical so there is no risk",
+      "Add an `import` block pointing the running instance's ID at the old address"
+    ],
+    "answer": 0,
+    "explanation": "Chuyển vào module làm đổi địa chỉ resource, nên Terraform hiểu là 'xoá cái cũ, tạo cái mới'. Block `moved` báo rằng đối tượng chỉ đổi địa chỉ, và plan thành không thay đổi. `create_before_destroy` vẫn thay instance; apply thẳng thì mất disk local và IP.",
+    "explanationEn": "Moving into a module changes the resource address, so Terraform reads it as 'destroy old, create new'. A `moved` block says the object only changed address, and the plan becomes a no-op. `create_before_destroy` still replaces the instance; applying loses local disk and IPs."
+  },
+  {
+    "id": "q14",
+    "question": "Công ty yêu cầu dev và prod nằm ở hai AWS account khác nhau, chỉ nhóm SRE được apply lên prod. Một kỹ sư đề xuất dùng chung một thư mục Terraform với `terraform workspace select dev|prod`. Đánh giá nào đúng?",
+    "questionEn": "The company requires dev and prod in separate AWS accounts, with only the SRE group allowed to apply to prod. An engineer proposes one Terraform directory with `terraform workspace select dev|prod`. Which assessment is right?",
+    "options": [
+      "Phù hợp, vì mỗi workspace có credential và backend riêng biệt theo mặc định",
+      "Phù hợp, vì workspace ngăn không cho apply nhầm sang môi trường khác",
+      "Không phù hợp: workspace dùng chung backend và credential; nên tách thư mục mỗi môi trường với backend, account riêng",
+      "Không phù hợp: Terraform không thể quản lý hạ tầng nằm ở nhiều AWS account"
+    ],
+    "optionsEn": [
+      "Fine, because each workspace gets its own credentials and backend by default",
+      "Fine, because workspaces prevent applying to the wrong environment",
+      "Not suitable: workspaces share a backend and credentials; use a directory per environment with its own backend and account",
+      "Not suitable: Terraform cannot manage infrastructure spread across AWS accounts"
+    ],
+    "answer": 2,
+    "explanation": "CLI workspace chỉ tạo thêm state trong cùng backend, dùng cùng credential — chính tài liệu HashiCorp nói nó không hợp cho deployment cần credential và kiểm soát truy cập riêng. Thư mục riêng cho mỗi môi trường (hoặc một nền tảng như Terragrunt/HCP Terraform) cho backend, role và quyền tách biệt.",
+    "explanationEn": "CLI workspaces only add states in the same backend with the same credentials — HashiCorp's own docs say they are unsuitable for deployments needing separate credentials and access controls. A directory per environment (or a platform such as Terragrunt/HCP Terraform) gives separate backends, roles and permissions."
+  },
+  {
+    "id": "q15",
+    "question": "Ansible được gọi là 'agentless'. Điều đó nghĩa là gì trong thực tế?",
+    "questionEn": "Ansible is called 'agentless'. What does that mean in practice?",
+    "options": [
+      "Máy đích kéo cấu hình định kỳ từ một Ansible server trung tâm",
+      "Ansible gọi thẳng API của cloud nên không bao giờ đăng nhập vào máy",
+      "Ansible chỉ quản lý được container, không quản lý được VM hay server",
+      "Control node kết nối qua SSH (WinRM với Windows) và chạy module bằng Python trên máy đích"
+    ],
+    "optionsEn": [
+      "Target machines periodically pull configuration from a central Ansible server",
+      "Ansible calls cloud APIs directly and so never logs in to machines",
+      "Ansible can only manage containers, not VMs or servers",
+      "The control node connects over SSH (WinRM for Windows) and runs modules with Python on the target"
+    ],
+    "answer": 3,
+    "explanation": "Không cần cài daemon trên máy đích: Ansible push qua SSH, đẩy module sang và chạy bằng Python có sẵn. Mô hình agent kéo cấu hình định kỳ là của Puppet/Chef. Ansible có module gọi API cloud, nhưng thế mạnh chính là cấu hình bên trong máy.",
+    "explanationEn": "No daemon on the target: Ansible pushes over SSH, ships modules and runs them with the target's Python. Agents pulling configuration on a schedule is the Puppet/Chef model. Ansible does have cloud API modules, but its core strength is configuring inside machines."
+  },
+  {
+    "id": "q16",
+    "question": "Playbook sau được chạy thành công, rồi chạy lại lần hai mà không có gì thay đổi trong template. Ở lần chạy thứ hai, điều gì xảy ra?\n`tasks:\n  - name: Deploy site config\n    ansible.builtin.template:\n      src: site.conf.j2\n      dest: /etc/nginx/conf.d/site.conf\n    notify: Reload nginx\nhandlers:\n  - name: Reload nginx\n    ansible.builtin.service:\n      name: nginx\n      state: reloaded`",
+    "questionEn": "This playbook ran successfully, then runs a second time with nothing changed in the template. On the second run, what happens?\n`tasks:\n  - name: Deploy site config\n    ansible.builtin.template:\n      src: site.conf.j2\n      dest: /etc/nginx/conf.d/site.conf\n    notify: Reload nginx\nhandlers:\n  - name: Reload nginx\n    ansible.builtin.service:\n      name: nginx\n      state: reloaded`",
+    "options": [
+      "Task báo `changed` vì file luôn được ghi lại, và nginx được reload",
+      "Task báo `ok`, không có thay đổi nên handler không chạy và nginx không bị reload",
+      "Task báo `ok` nhưng handler vẫn luôn chạy ở cuối mỗi playbook",
+      "Playbook lỗi vì file đích đã tồn tại từ lần chạy trước"
+    ],
+    "optionsEn": [
+      "The task reports `changed` because the file is always rewritten, and nginx reloads",
+      "The task reports `ok`; with no change the handler does not run and nginx is not reloaded",
+      "The task reports `ok` but handlers always run at the end of every playbook",
+      "The playbook fails because the destination file already exists from the last run"
+    ],
+    "answer": 1,
+    "explanation": "Module `template` lũy đẳng: nội dung giống hệt thì báo `ok`. Handler chỉ chạy khi được một task có trạng thái `changed` notify, nên chạy lại playbook không gây reload vô ích. Đó là cách Ansible đạt kết quả giống IaC declarative dù task chạy theo thứ tự.",
+    "explanationEn": "The `template` module is idempotent: identical content reports `ok`. Handlers only run when notified by a task that reports `changed`, so re-running causes no needless reload. That is how Ansible gets declarative-like results despite ordered tasks."
+  },
+  {
+    "id": "q17",
+    "question": "Một startup chỉ dùng AWS, đội ngũ toàn developer TypeScript, không muốn tự vận hành backend lưu state và muốn stack tự rollback khi deploy lỗi. Công cụ IaC nào phù hợp nhất?",
+    "questionEn": "An AWS-only startup, staffed entirely by TypeScript developers, does not want to run a state backend and wants stacks to roll back automatically on a failed deploy. Which IaC tool fits best?",
+    "options": [
+      "AWS CDK viết bằng TypeScript, tổng hợp ra CloudFormation",
+      "Terraform với S3 backend và state locking bằng lock file",
+      "Ansible playbook gọi các module của AWS để tạo resource",
+      "Pulumi với state lưu trong một bucket S3 tự quản lý"
+    ],
+    "optionsEn": [
+      "AWS CDK in TypeScript, synthesising CloudFormation",
+      "Terraform with an S3 backend and lock-file state locking",
+      "Ansible playbooks calling AWS modules to create resources",
+      "Pulumi with state kept in a self-managed S3 bucket"
+    ],
+    "answer": 0,
+    "explanation": "CDK cho developer viết TypeScript, còn state và rollback do CloudFormation lo. Terraform và Pulumi self-managed đều bắt team vận hành backend và không tự rollback; Ansible không phải công cụ provisioning declarative có state.",
+    "explanationEn": "CDK lets developers write TypeScript while CloudFormation owns state and rollback. Terraform and self-managed Pulumi both require running a backend and do not roll back; Ansible is not a declarative, stateful provisioning tool."
+  },
+  {
+    "id": "q18",
+    "question": "Phát biểu nào về giấy phép Terraform và OpenTofu là chính xác?",
+    "questionEn": "Which statement about Terraform and OpenTofu licensing is accurate?",
+    "options": [
+      "OpenTofu là bản thương mại trả phí của Terraform do HashiCorp phát hành",
+      "Terraform vẫn dùng MPL 2.0, còn OpenTofu mới là bản chuyển sang BSL",
+      "Năm 2023 HashiCorp chuyển Terraform sang BSL; OpenTofu là fork cộng đồng từ bản MPL cuối, thuộc Linux Foundation",
+      "Giấy phép BSL cấm mọi công ty dùng Terraform để quản lý hạ tầng nội bộ"
+    ],
+    "optionsEn": [
+      "OpenTofu is HashiCorp's paid commercial edition of Terraform",
+      "Terraform still uses MPL 2.0, while OpenTofu is the one that moved to BSL",
+      "In 2023 HashiCorp moved Terraform to the BSL; OpenTofu is a community fork of the last MPL version under the Linux Foundation",
+      "The BSL forbids any company from using Terraform to manage its own infrastructure"
+    ],
+    "answer": 2,
+    "explanation": "Tháng 8/2023 các bản Terraform mới chuyển từ MPL 2.0 sang BSL 1.1. Cộng đồng fork bản MPL cuối thành OpenTofu (Linux Foundation), gần như tương thích trực tiếp. BSL chủ yếu hạn chế sản phẩm cạnh tranh; dùng nội bộ thông thường không bị cấm.",
+    "explanationEn": "In August 2023 new Terraform releases moved from MPL 2.0 to BSL 1.1. The community forked the last MPL version as OpenTofu (Linux Foundation), largely drop-in compatible. The BSL mainly restricts competing products; ordinary internal use is not forbidden."
+  }
+]

@@ -1,0 +1,2165 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "v1",
+      "lessonId": "l1",
+      "word": "atomically",
+      "pos": "adv",
+      "ipa": "/əˈtɒm.ɪ.kli/",
+      "question": "Trong câu \"Clients speak a simple protocol (RESP) over TCP, default port 6379, and every value is a real data structure — string, hash, list, set, sorted set, stream — with server-side commands that operate on it atomically.\", từ \"atomically\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Clients speak a simple protocol (RESP) over TCP, default port 6379, and every value is a real data structure — string, hash, list, set, sorted set, stream — with server-side commands that operate on it atomically.\", what does \"atomically\" (adverb) mean?",
+      "options": [
+        "một cách nguyên tử, trọn vẹn",
+        "một cách song song, đồng thời",
+        "một cách tự động, định kỳ",
+        "ở cấp độ vật lý hạt nhân"
+      ],
+      "optionsEn": [
+        "as one indivisible step",
+        "in parallel, at the same time",
+        "automatically, on a schedule",
+        "at the level of nuclear physics"
+      ],
+      "answer": 0,
+      "explanation": "atomically /əˈtɒm.ɪ.kli/ (trạng từ): một cách nguyên tử, trọn vẹn. Thao tác \"atomically\" thì hoặc chạy trọn vẹn, hoặc không chạy; không client nào thấy trạng thái nửa chừng.",
+      "explanationEn": "atomically /əˈtɒm.ɪ.kli/ (adverb): as one indivisible step. An operation done atomically either completes fully or not at all; no client sees a half-finished state."
+    },
+    {
+      "id": "v2",
+      "lessonId": "l1",
+      "word": "durability",
+      "pos": "n",
+      "ipa": "/ˌdjʊə.rəˈbɪl.ə.ti/",
+      "question": "Trong câu \"It is not your system of record: RAM is expensive and durability is configurable, not guaranteed.\", từ \"durability\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It is not your system of record: RAM is expensive and durability is configurable, not guaranteed.\", what does \"durability\" (noun) mean?",
+      "options": [
+        "độ sẵn sàng của hệ thống",
+        "độ bền của dữ liệu",
+        "độ bền vật lý của đồ vật",
+        "tốc độ xử lý dữ liệu"
+      ],
+      "optionsEn": [
+        "the system being reachable",
+        "data surviving crashes and restarts",
+        "physical toughness of an object",
+        "the speed of processing data"
+      ],
+      "answer": 1,
+      "explanation": "durability /ˌdjʊə.rəˈbɪl.ə.ti/ (danh từ): độ bền của dữ liệu. Trong cơ sở dữ liệu, \"durability\" là chữ D trong ACID: dữ liệu đã ghi thì không bị mất.",
+      "explanationEn": "durability /ˌdjʊə.rəˈbɪl.ə.ti/ (noun): data surviving crashes and restarts. In databases, durability is the D in ACID: once written, data is not lost."
+    },
+    {
+      "id": "v3",
+      "lessonId": "l1",
+      "word": "configurable",
+      "pos": "adj",
+      "ipa": "/kənˈfɪɡ.ər.ə.bəl/",
+      "question": "Trong câu \"It is not your system of record: RAM is expensive and durability is configurable, not guaranteed.\", từ \"configurable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It is not your system of record: RAM is expensive and durability is configurable, not guaranteed.\", what does \"configurable\" (adjective) mean?",
+      "options": [
+        "được bảo đảm tuyệt đối",
+        "không thể thay đổi",
+        "tuỳ chỉnh được",
+        "có thể mở rộng quy mô"
+      ],
+      "optionsEn": [
+        "absolutely guaranteed",
+        "impossible to change",
+        "set by configuration",
+        "able to scale out"
+      ],
+      "answer": 2,
+      "explanation": "configurable /kənˈfɪɡ.ər.ə.bəl/ (tính từ): tuỳ chỉnh được. \"X is configurable\" = người vận hành tự chọn mức X qua cấu hình, không phải mặc định cố định.",
+      "explanationEn": "configurable /kənˈfɪɡ.ər.ə.bəl/ (adjective): set by configuration. \"X is configurable\" means operators choose the level of X through settings rather than a fixed default."
+    },
+    {
+      "id": "v4",
+      "lessonId": "l1",
+      "word": "interchangeable",
+      "pos": "adj",
+      "ipa": "/ˌɪn.təˈtʃeɪn.dʒə.bəl/",
+      "question": "Trong câu \"For application code they are interchangeable today.\", từ \"interchangeable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"For application code they are interchangeable today.\", what does \"interchangeable\" (adjective) mean?",
+      "options": [
+        "không tương thích với nhau",
+        "phụ thuộc lẫn nhau",
+        "cạnh tranh với nhau",
+        "có thể thay thế cho nhau"
+      ],
+      "optionsEn": [
+        "not compatible with each other",
+        "dependent on each other",
+        "competing with each other",
+        "able to be swapped for each other"
+      ],
+      "answer": 3,
+      "explanation": "interchangeable /ˌɪn.təˈtʃeɪn.dʒə.bəl/ (tính từ): có thể thay thế cho nhau. Hai thứ \"interchangeable\" thì đổi cái này sang cái kia mà code không cần sửa.",
+      "explanationEn": "interchangeable /ˌɪn.təˈtʃeɪn.dʒə.bəl/ (adjective): able to be swapped for each other. Two interchangeable things can replace each other without changing the code."
+    },
+    {
+      "id": "v5",
+      "lessonId": "l1",
+      "word": "alongside",
+      "pos": "prep",
+      "ipa": "/əˌlɒŋˈsaɪd/",
+      "question": "Trong câu \"On AWS, ElastiCache and MemoryDB offer Valkey alongside Redis OSS.\", từ \"alongside\" (giới từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"On AWS, ElastiCache and MemoryDB offer Valkey alongside Redis OSS.\", what does \"alongside\" (preposition) mean?",
+      "options": [
+        "thay cho, thay vì",
+        "sau khi, kế tiếp",
+        "cùng với",
+        "chống lại, đối đầu"
+      ],
+      "optionsEn": [
+        "instead of",
+        "after, following",
+        "together with",
+        "against, opposing"
+      ],
+      "answer": 2,
+      "explanation": "alongside /əˌlɒŋˈsaɪd/ (giới từ): cùng với. \"Offer A alongside B\" = cung cấp A cùng lúc với B, người dùng chọn cái nào cũng được.",
+      "explanationEn": "alongside /əˌlɒŋˈsaɪd/ (preposition): together with. \"Offer A alongside B\" means providing both at the same time, so users can pick either."
+    },
+    {
+      "id": "v6",
+      "lessonId": "l1",
+      "word": "fork",
+      "pos": "v",
+      "ipa": "/fɔːk/",
+      "question": "Trong câu \"The Linux Foundation forked the last BSD release (7.2.4) as Valkey, which is command-compatible; Redis 8 (2025) added AGPLv3 as another option.\", từ \"fork\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The Linux Foundation forked the last BSD release (7.2.4) as Valkey, which is command-compatible; Redis 8 (2025) added AGPLv3 as another option.\", what does \"fork\" (verb) mean?",
+      "options": [
+        "tách nhánh thành dự án riêng",
+        "rẽ nhánh (con đường)",
+        "gộp mã nguồn vào nhánh chính",
+        "xoá một bản phát hành cũ"
+      ],
+      "optionsEn": [
+        "to copy code into a new project",
+        "to split into two roads",
+        "to merge code into the main branch",
+        "to delete an old release"
+      ],
+      "answer": 0,
+      "explanation": "fork /fɔːk/ (động từ): tách nhánh thành dự án riêng. \"Fork a project\" = sao chép mã nguồn để phát triển độc lập; ở phần sau \"fork()\" còn là tạo tiến trình con.",
+      "explanationEn": "fork /fɔːk/ (verb): to copy code into a new project. \"Fork a project\" means copying its code to develop it independently; later, fork() also means creating a child process."
+    },
+    {
+      "id": "v7",
+      "lessonId": "l1",
+      "word": "multiplex",
+      "pos": "v",
+      "ipa": "/ˈmʌl.tɪ.pleks/",
+      "question": "Trong câu \"An event loop (epoll on Linux) multiplexes thousands of sockets; each ready command is executed to completion, then the next one runs.\", từ \"multiplex\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"An event loop (epoll on Linux) multiplexes thousands of sockets; each ready command is executed to completion, then the next one runs.\", what does \"multiplex\" (verb) mean?",
+      "options": [
+        "nhân bản thành nhiều bản sao",
+        "chia nhỏ thành nhiều gói tin",
+        "mã hoá nhiều kết nối",
+        "ghép nhiều kênh vào một"
+      ],
+      "optionsEn": [
+        "to make many identical copies",
+        "to split into many packets",
+        "to encrypt many connections",
+        "to combine many channels"
+      ],
+      "answer": 3,
+      "explanation": "multiplex /ˈmʌl.tɪ.pleks/ (động từ): ghép nhiều kênh vào một. Một luồng \"multiplexes\" nhiều socket: nó theo dõi tất cả và xử lý socket nào sẵn sàng.",
+      "explanationEn": "multiplex /ˈmʌl.tɪ.pleks/ (verb): to combine many channels. One thread that multiplexes many sockets watches all of them and serves whichever is ready."
+    },
+    {
+      "id": "v8",
+      "lessonId": "l1",
+      "word": "completion",
+      "pos": "n",
+      "ipa": "/kəmˈpliː.ʃən/",
+      "question": "Trong câu \"An event loop (epoll on Linux) multiplexes thousands of sockets; each ready command is executed to completion, then the next one runs.\", từ \"completion\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"An event loop (epoll on Linux) multiplexes thousands of sockets; each ready command is executed to completion, then the next one runs.\", what does \"completion\" (noun) mean?",
+      "options": [
+        "sự gián đoạn giữa chừng",
+        "sự hoàn tất, làm xong",
+        "sự bắt đầu thực thi",
+        "sự hoàn thiện, trau chuốt"
+      ],
+      "optionsEn": [
+        "an interruption midway",
+        "being finished",
+        "the start of execution",
+        "the act of polishing"
+      ],
+      "answer": 1,
+      "explanation": "completion /kəmˈpliː.ʃən/ (danh từ): sự hoàn tất, làm xong. \"Run to completion\" = chạy đến khi xong hẳn rồi mới chuyển sang việc khác.",
+      "explanationEn": "completion /kəmˈpliː.ʃən/ (noun): being finished. \"Run to completion\" means running until fully finished before switching to anything else."
+    },
+    {
+      "id": "v9",
+      "lessonId": "l1",
+      "word": "bottleneck",
+      "pos": "n",
+      "ipa": "/ˈbɒt.əl.nek/",
+      "question": "Trong câu \"This is fast because there are no locks or context switches and the real bottleneck is network and memory, not CPU.\", từ \"bottleneck\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"This is fast because there are no locks or context switches and the real bottleneck is network and memory, not CPU.\", what does \"bottleneck\" (noun) mean?",
+      "options": [
+        "điểm nghẽn hiệu năng",
+        "cổ chai (phần hẹp của chai)",
+        "lỗ hổng bảo mật",
+        "bộ nhớ đệm tạm thời"
+      ],
+      "optionsEn": [
+        "the limiting factor",
+        "the narrow neck of a bottle",
+        "a security weakness",
+        "a temporary memory buffer"
+      ],
+      "answer": 0,
+      "explanation": "bottleneck /ˈbɒt.əl.nek/ (danh từ): điểm nghẽn hiệu năng. Tăng CPU không giúp gì nếu \"bottleneck\" nằm ở mạng; hãy tối ưu chỗ nghẽn thật.",
+      "explanationEn": "bottleneck /ˈbɒt.əl.nek/ (noun): the limiting factor. Adding CPU does not help if the bottleneck is the network; optimise the real limit."
+    },
+    {
+      "id": "v10",
+      "lessonId": "l1",
+      "word": "by construction",
+      "pos": "phrase",
+      "ipa": "/baɪ kənˈstrʌk.ʃən/",
+      "question": "Trong câu \"And every command is atomic by construction.\", từ \"by construction\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"And every command is atomic by construction.\", what does \"by construction\" (phrase) mean?",
+      "options": [
+        "nhờ công trình xây dựng",
+        "nhờ chính thiết kế",
+        "nhờ cấu hình thêm",
+        "theo từng trường hợp riêng"
+      ],
+      "optionsEn": [
+        "thanks to a building project",
+        "guaranteed by how it is designed",
+        "thanks to extra configuration",
+        "case by case"
+      ],
+      "answer": 1,
+      "explanation": "by construction /baɪ kənˈstrʌk.ʃən/ (cụm từ): nhờ chính thiết kế. \"X by construction\" = tính chất X có sẵn nhờ thiết kế, không cần thêm cơ chế nào.",
+      "explanationEn": "by construction /baɪ kənˈstrʌk.ʃən/ (phrase): guaranteed by how it is designed. \"X by construction\" means the property follows from the design itself, with no extra mechanism."
+    },
+    {
+      "id": "v11",
+      "lessonId": "l1",
+      "word": "the flip side",
+      "pos": "phrase",
+      "ipa": "/ðə flɪp saɪd/",
+      "question": "Trong câu \"The flip side: one slow command blocks every client.\", từ \"the flip side\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The flip side: one slow command blocks every client.\", what does \"the flip side\" (phrase) mean?",
+      "options": [
+        "mặt sau của tờ giấy",
+        "lợi ích bất ngờ",
+        "mặt trái",
+        "phương án dự phòng"
+      ],
+      "optionsEn": [
+        "the back of a sheet",
+        "an unexpected benefit",
+        "the downside",
+        "the backup option"
+      ],
+      "answer": 2,
+      "explanation": "the flip side /ðə flɪp saɪd/ (cụm từ): mặt trái. \"The flip side\" dùng để nêu cái giá phải trả của một ưu điểm vừa nhắc.",
+      "explanationEn": "the flip side /ðə flɪp saɪd/ (phrase): the downside. \"The flip side\" introduces the cost of an advantage just mentioned."
+    },
+    {
+      "id": "v12",
+      "lessonId": "l1",
+      "word": "interleave",
+      "pos": "v",
+      "ipa": "/ˌɪn.təˈliːv/",
+      "question": "Trong câu \"Batching tools: pipelining sends many commands in one round trip (not atomic); MULTI/EXEC runs queued commands without interleaving (no rollback); Lua scripts (EVAL) or Redis 7 Functions run read-modify-write logic atomically.\", từ \"interleave\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Batching tools: pipelining sends many commands in one round trip (not atomic); MULTI/EXEC runs queued commands without interleaving (no rollback); Lua scripts (EVAL) or Redis 7 Functions run read-modify-write logic atomically.\", what does \"interleave\" (verb) mean?",
+      "options": [
+        "sắp xếp theo thứ tự",
+        "hoàn tác thao tác",
+        "rời đi, bỏ dở",
+        "xen kẽ nhau"
+      ],
+      "optionsEn": [
+        "to sort into order",
+        "to undo an operation",
+        "to leave unfinished",
+        "to mix together"
+      ],
+      "answer": 3,
+      "explanation": "interleave /ˌɪn.təˈliːv/ (động từ): xen kẽ nhau. \"Without interleaving\" = không có lệnh của client khác chen vào giữa các lệnh trong hàng đợi.",
+      "explanationEn": "interleave /ˌɪn.təˈliːv/ (verb): to mix together. \"Without interleaving\" means no other client's command slips in between the queued ones."
+    },
+    {
+      "id": "v13",
+      "lessonId": "l1",
+      "word": "round trip",
+      "pos": "phrase",
+      "ipa": "/ˈraʊnd trɪp/",
+      "question": "Trong câu \"Batching tools: pipelining sends many commands in one round trip (not atomic); MULTI/EXEC runs queued commands without interleaving (no rollback); Lua scripts (EVAL) or Redis 7 Functions run read-modify-write logic atomically.\", từ \"round trip\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Batching tools: pipelining sends many commands in one round trip (not atomic); MULTI/EXEC runs queued commands without interleaving (no rollback); Lua scripts (EVAL) or Redis 7 Functions run read-modify-write logic atomically.\", what does \"round trip\" (phrase) mean?",
+      "options": [
+        "chuyến du lịch khứ hồi",
+        "một vòng lặp vô hạn",
+        "một lượt gửi và nhận",
+        "một lần khởi động lại"
+      ],
+      "optionsEn": [
+        "a return journey for travel",
+        "an endless loop",
+        "one request and its reply",
+        "a single restart"
+      ],
+      "answer": 2,
+      "explanation": "round trip /ˈraʊnd trɪp/ (cụm từ): một lượt gửi và nhận. Mỗi \"round trip\" tốn độ trễ mạng, nên gom nhiều lệnh vào một lượt sẽ nhanh hơn.",
+      "explanationEn": "round trip /ˈraʊnd trɪp/ (phrase): one request and its reply. Each round trip costs network latency, so batching commands into one is faster."
+    },
+    {
+      "id": "v14",
+      "lessonId": "l1",
+      "word": "affordably",
+      "pos": "adv",
+      "ipa": "/əˈfɔː.də.bli/",
+      "question": "Trong câu \"The data does not fit in RAM affordably\", từ \"affordably\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The data does not fit in RAM affordably\", what does \"affordably\" (adverb) mean?",
+      "options": [
+        "với chi phí hợp lý",
+        "một cách an toàn",
+        "một cách nhanh chóng",
+        "với dung lượng tối đa"
+      ],
+      "optionsEn": [
+        "at a reasonable cost",
+        "in a safe way",
+        "in a quick way",
+        "at maximum capacity"
+      ],
+      "answer": 0,
+      "explanation": "affordably /əˈfɔː.də.bli/ (trạng từ): với chi phí hợp lý. RAM đắt, nên dữ liệu quá lớn thì không \"fit in RAM affordably\" (không vừa túi tiền).",
+      "explanationEn": "affordably /əˈfɔː.də.bli/ (adverb): at a reasonable cost. RAM is costly, so very large data cannot fit in RAM affordably."
+    },
+    {
+      "id": "v15",
+      "lessonId": "l2",
+      "word": "convention",
+      "pos": "n",
+      "ipa": "/kənˈven.ʃən/",
+      "question": "Trong câu \"The keyspace is a flat dictionary; the convention is colon-separated names like user:42:profile.\", từ \"convention\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The keyspace is a flat dictionary; the convention is colon-separated names like user:42:profile.\", what does \"convention\" (noun) mean?",
+      "options": [
+        "hội nghị lớn",
+        "quy định bắt buộc",
+        "giao thức mạng",
+        "quy ước chung"
+      ],
+      "optionsEn": [
+        "a large conference",
+        "a mandatory rule",
+        "a network protocol",
+        "a common practice"
+      ],
+      "answer": 3,
+      "explanation": "convention /kənˈven.ʃən/ (danh từ): quy ước chung. \"Naming convention\" = quy ước đặt tên mà mọi người tự nguyện tuân theo, Redis không ép buộc.",
+      "explanationEn": "convention /kənˈven.ʃən/ (noun): a common practice. A naming convention is a practice people follow voluntarily; Redis does not enforce it."
+    },
+    {
+      "id": "v16",
+      "lessonId": "l2",
+      "word": "flat",
+      "pos": "adj",
+      "ipa": "/flæt/",
+      "question": "Trong câu \"The keyspace is a flat dictionary; the convention is colon-separated names like user:42:profile.\", từ \"flat\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The keyspace is a flat dictionary; the convention is colon-separated names like user:42:profile.\", what does \"flat\" (adjective) mean?",
+      "options": [
+        "bằng phẳng (bề mặt)",
+        "không phân cấp",
+        "cố định, không đổi",
+        "nhỏ gọn, ít dữ liệu"
+      ],
+      "optionsEn": [
+        "level and smooth (a surface)",
+        "having no nested levels",
+        "fixed, not changing",
+        "small, holding little data"
+      ],
+      "answer": 1,
+      "explanation": "flat /flæt/ (tính từ): không phân cấp. \"Flat namespace\" = mọi key cùng một cấp; dấu \":\" chỉ là quy ước, không tạo thư mục thật.",
+      "explanationEn": "flat /flæt/ (adjective): having no nested levels. A flat namespace puts all keys on one level; colons are just convention, not real folders."
+    },
+    {
+      "id": "v17",
+      "lessonId": "l2",
+      "word": "smell",
+      "pos": "n",
+      "ipa": "/smel/",
+      "question": "Trong câu \"Strings are binary-safe up to 512 MB, though values beyond a few KB are a smell.\", từ \"smell\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Strings are binary-safe up to 512 MB, though values beyond a few KB are a smell.\", what does \"smell\" (noun) mean?",
+      "options": [
+        "dấu hiệu thiết kế có vấn đề",
+        "mùi (cảm nhận bằng mũi)",
+        "lỗi cú pháp rõ ràng",
+        "giới hạn cứng của hệ thống"
+      ],
+      "optionsEn": [
+        "a sign of a design problem",
+        "an odour sensed by the nose",
+        "an obvious syntax error",
+        "a hard system limit"
+      ],
+      "answer": 0,
+      "explanation": "smell /smel/ (danh từ): dấu hiệu thiết kế có vấn đề. Trong lập trình, \"code smell\" là dấu hiệu cảnh báo chứ chưa hẳn là lỗi.",
+      "explanationEn": "smell /smel/ (noun): a sign of a design problem. In programming, a \"code smell\" is a warning sign rather than a definite bug."
+    },
+    {
+      "id": "v18",
+      "lessonId": "l2",
+      "word": "concurrent",
+      "pos": "adj",
+      "ipa": "/kənˈkʌr.ənt/",
+      "question": "Trong câu \"INCR beats \"read, add one, write back\" in application code: the increment happens on the single thread, so concurrent clients never lose an update.\", từ \"concurrent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"INCR beats \"read, add one, write back\" in application code: the increment happens on the single thread, so concurrent clients never lose an update.\", what does \"concurrent\" (adjective) mean?",
+      "options": [
+        "liên tiếp, lần lượt",
+        "chạy đồng thời",
+        "đã ngắt kết nối",
+        "được ưu tiên cao"
+      ],
+      "optionsEn": [
+        "one after another",
+        "running at the same time",
+        "already disconnected",
+        "given high priority"
+      ],
+      "answer": 1,
+      "explanation": "concurrent /kənˈkʌr.ənt/ (tính từ): chạy đồng thời. \"Concurrent clients\" = nhiều client thao tác cùng lúc; dễ gây mất cập nhật nếu không nguyên tử.",
+      "explanationEn": "concurrent /kənˈkʌr.ənt/ (adjective): running at the same time. Concurrent clients act at the same time, which can lose updates without atomic operations."
+    },
+    {
+      "id": "v19",
+      "lessonId": "l2",
+      "word": "increment",
+      "pos": "n",
+      "ipa": "/ˈɪŋ.krə.mənt/",
+      "question": "Trong câu \"INCR beats \"read, add one, write back\" in application code: the increment happens on the single thread, so concurrent clients never lose an update.\", từ \"increment\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"INCR beats \"read, add one, write back\" in application code: the increment happens on the single thread, so concurrent clients never lose an update.\", what does \"increment\" (noun) mean?",
+      "options": [
+        "phép giảm giá trị",
+        "khoản lương tăng thêm",
+        "phép tăng thêm",
+        "phép so sánh giá trị"
+      ],
+      "optionsEn": [
+        "a decrease by a set amount",
+        "a rise in salary",
+        "an increase by a set amount",
+        "a comparison of values"
+      ],
+      "answer": 2,
+      "explanation": "increment /ˈɪŋ.krə.mənt/ (danh từ): phép tăng thêm. Động từ \"increment\" = tăng lên; ngược lại là \"decrement\" (giảm đi).",
+      "explanationEn": "increment /ˈɪŋ.krə.mənt/ (noun): an increase by a set amount. The verb \"increment\" means to increase; the opposite is \"decrement\"."
+    },
+    {
+      "id": "v20",
+      "lessonId": "l2",
+      "word": "ideal",
+      "pos": "adj",
+      "ipa": "/aɪˈdɪəl/",
+      "question": "Trong câu \"Hash — a map of fields inside one key, ideal for objects updated field by field.\", từ \"ideal\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Hash — a map of fields inside one key, ideal for objects updated field by field.\", what does \"ideal\" (adjective) mean?",
+      "options": [
+        "bắt buộc phải dùng",
+        "chỉ mang tính lý thuyết",
+        "kém hiệu quả",
+        "lý tưởng, rất phù hợp"
+      ],
+      "optionsEn": [
+        "required to use",
+        "purely theoretical",
+        "inefficient",
+        "perfectly suited"
+      ],
+      "answer": 3,
+      "explanation": "ideal /aɪˈdɪəl/ (tính từ): lý tưởng, rất phù hợp. \"Ideal for X\" = cực kỳ phù hợp cho X; đồng nghĩa \"well suited for\".",
+      "explanationEn": "ideal /aɪˈdɪəl/ (adjective): perfectly suited. \"Ideal for X\" means extremely well suited for X."
+    },
+    {
+      "id": "v21",
+      "lessonId": "l2",
+      "word": "sequence",
+      "pos": "n",
+      "ipa": "/ˈsiː.kwəns/",
+      "question": "Trong câu \"List — ordered sequence; O(1) push/pop at both ends, O(N) index access in the middle.\", từ \"sequence\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"List — ordered sequence; O(1) push/pop at both ends, O(N) index access in the middle.\", what does \"sequence\" (noun) mean?",
+      "options": [
+        "tập hợp không thứ tự",
+        "cảnh phim liên tục",
+        "dãy phần tử theo thứ tự",
+        "bảng tra cứu khoá"
+      ],
+      "optionsEn": [
+        "an unordered collection",
+        "a continuous film scene",
+        "a series of items in order",
+        "a key lookup table"
+      ],
+      "answer": 2,
+      "explanation": "sequence /ˈsiː.kwəns/ (danh từ): dãy phần tử theo thứ tự. \"Ordered sequence\" nhấn mạnh thứ tự các phần tử được giữ nguyên.",
+      "explanationEn": "sequence /ˈsiː.kwəns/ (noun): a series of items in order. \"Ordered sequence\" stresses that the items keep their order."
+    },
+    {
+      "id": "v22",
+      "lessonId": "l2",
+      "word": "membership",
+      "pos": "n",
+      "ipa": "/ˈmem.bə.ʃɪp/",
+      "question": "Trong câu \"Set — unordered unique members; O(1) add/remove/membership plus set algebra.\", từ \"membership\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Set — unordered unique members; O(1) add/remove/membership plus set algebra.\", what does \"membership\" (noun) mean?",
+      "options": [
+        "việc kiểm tra thuộc tập",
+        "tư cách hội viên câu lạc bộ",
+        "việc đếm số phần tử",
+        "việc sắp xếp phần tử"
+      ],
+      "optionsEn": [
+        "checking if it belongs",
+        "being a member of a club",
+        "counting the items",
+        "sorting the items"
+      ],
+      "answer": 0,
+      "explanation": "membership /ˈmem.bə.ʃɪp/ (danh từ): việc kiểm tra thuộc tập. \"Membership test\" trong cấu trúc dữ liệu = kiểm tra một giá trị có nằm trong tập hay không.",
+      "explanationEn": "membership /ˈmem.bə.ʃɪp/ (noun): checking if it belongs. In data structures, a membership test checks whether a value is in the set."
+    },
+    {
+      "id": "v23",
+      "lessonId": "l2",
+      "word": "compact",
+      "pos": "adj",
+      "ipa": "/kəmˈpækt/",
+      "question": "Trong câu \"Small collections use a compact listpack encoding and convert to full hash tables/skiplists past a size threshold — so many small hashes use far less memory than many separate string keys.\", từ \"compact\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Small collections use a compact listpack encoding and convert to full hash tables/skiplists past a size threshold — so many small hashes use far less memory than many separate string keys.\", what does \"compact\" (adjective) mean?",
+      "options": [
+        "được nén mất dữ liệu",
+        "hợp đồng, thoả thuận",
+        "rời rạc, phân tán",
+        "gọn, chiếm ít chỗ"
+      ],
+      "optionsEn": [
+        "compressed with data loss",
+        "an agreement, a pact",
+        "scattered, spread out",
+        "taking up little space"
+      ],
+      "answer": 3,
+      "explanation": "compact /kəmˈpækt/ (tính từ): gọn, chiếm ít chỗ. \"Compact encoding\" = cách mã hoá tiết kiệm bộ nhớ, thường đổi lại tốc độ khi dữ liệu lớn.",
+      "explanationEn": "compact /kəmˈpækt/ (adjective): taking up little space. A compact encoding saves memory, usually trading speed once data grows."
+    },
+    {
+      "id": "v24",
+      "lessonId": "l2",
+      "word": "threshold",
+      "pos": "n",
+      "ipa": "/ˈθreʃ.həʊld/",
+      "question": "Trong câu \"Small collections use a compact listpack encoding and convert to full hash tables/skiplists past a size threshold — so many small hashes use far less memory than many separate string keys.\", từ \"threshold\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Small collections use a compact listpack encoding and convert to full hash tables/skiplists past a size threshold — so many small hashes use far less memory than many separate string keys.\", what does \"threshold\" (noun) mean?",
+      "options": [
+        "ngưỡng cửa ra vào",
+        "ngưỡng giới hạn",
+        "dung lượng tối đa",
+        "giá trị trung bình"
+      ],
+      "optionsEn": [
+        "the sill of a doorway",
+        "a cut-off level",
+        "the maximum capacity",
+        "the average value"
+      ],
+      "answer": 1,
+      "explanation": "threshold /ˈθreʃ.həʊld/ (danh từ): ngưỡng giới hạn. \"Past a threshold\" = vượt quá ngưỡng thì hành vi thay đổi (ở đây là đổi cách mã hoá).",
+      "explanationEn": "threshold /ˈθreʃ.həʊld/ (noun): a cut-off level. \"Past a threshold\" means behaviour changes once a limit is exceeded (here, the encoding)."
+    },
+    {
+      "id": "v25",
+      "lessonId": "l2",
+      "word": "floating-point",
+      "pos": "adj",
+      "ipa": "/ˌfləʊ.tɪŋ ˈpɔɪnt/",
+      "question": "Trong câu \"A sorted set (ZSET) holds unique members with a floating-point score, ordered by score.\", từ \"floating-point\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A sorted set (ZSET) holds unique members with a floating-point score, ordered by score.\", what does \"floating-point\" (adjective) mean?",
+      "options": [
+        "số thực dấu phẩy động",
+        "số nguyên không dấu",
+        "giá trị trôi nổi, thay đổi",
+        "điểm tựa cố định"
+      ],
+      "optionsEn": [
+        "a real decimal number",
+        "an unsigned whole number",
+        "a value that drifts around",
+        "a fixed reference point"
+      ],
+      "answer": 0,
+      "explanation": "floating-point /ˌfləʊ.tɪŋ ˈpɔɪnt/ (tính từ): số thực dấu phẩy động. \"Floating-point score\" = điểm là số thực như 1500.5, không chỉ số nguyên.",
+      "explanationEn": "floating-point /ˌfləʊ.tɪŋ ˈpɔɪnt/ (adjective): a real decimal number. A floating-point score can be a real number like 1500.5, not only an integer."
+    },
+    {
+      "id": "v26",
+      "lessonId": "l2",
+      "word": "pair",
+      "pos": "v",
+      "ipa": "/peə/",
+      "question": "Trong câu \"It pairs a skiplist (ordered traversal) with a hash table (O(1) score lookup), so ZADD, ZREM and ZRANK are O(log N) and range reads O(log N + M).\", từ \"pair\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It pairs a skiplist (ordered traversal) with a hash table (O(1) score lookup), so ZADD, ZREM and ZRANK are O(log N) and range reads O(log N + M).\", what does \"pair\" (verb) mean?",
+      "options": [
+        "so sánh hai thứ",
+        "kết hợp theo cặp",
+        "tách thành hai phần",
+        "ghép nối thiết bị Bluetooth"
+      ],
+      "optionsEn": [
+        "to compare two things",
+        "to combine two things together",
+        "to split into two parts",
+        "to link a Bluetooth device"
+      ],
+      "answer": 1,
+      "explanation": "pair /peə/ (động từ): kết hợp theo cặp. \"Pair A with B\" = dùng A cùng B để bổ sung ưu điểm cho nhau.",
+      "explanationEn": "pair /peə/ (verb): to combine two things together. \"Pair A with B\" means using them together so each covers the other's weakness."
+    },
+    {
+      "id": "v27",
+      "lessonId": "l2",
+      "word": "traversal",
+      "pos": "n",
+      "ipa": "/trəˈvɜː.səl/",
+      "question": "Trong câu \"It pairs a skiplist (ordered traversal) with a hash table (O(1) score lookup), so ZADD, ZREM and ZRANK are O(log N) and range reads O(log N + M).\", từ \"traversal\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It pairs a skiplist (ordered traversal) with a hash table (O(1) score lookup), so ZADD, ZREM and ZRANK are O(log N) and range reads O(log N + M).\", what does \"traversal\" (noun) mean?",
+      "options": [
+        "việc băng qua địa hình",
+        "việc xoá toàn bộ phần tử",
+        "việc duyệt tuần tự",
+        "việc tra cứu trực tiếp"
+      ],
+      "optionsEn": [
+        "crossing over terrain",
+        "removing all elements",
+        "visiting items in turn",
+        "a direct lookup"
+      ],
+      "answer": 2,
+      "explanation": "traversal /trəˈvɜː.səl/ (danh từ): việc duyệt tuần tự. Động từ \"traverse\" = duyệt; \"ordered traversal\" = duyệt theo thứ tự đã sắp.",
+      "explanationEn": "traversal /trəˈvɜː.səl/ (noun): visiting items in turn. The verb is \"traverse\"; an ordered traversal visits items in sorted order."
+    },
+    {
+      "id": "v28",
+      "lessonId": "l2",
+      "word": "basis",
+      "pos": "n",
+      "ipa": "/ˈbeɪ.sɪs/",
+      "question": "Trong câu \"A timestamp score turns a sorted set into a time index — the basis of delayed-job queues and sliding-window rate limiters.\", từ \"basis\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A timestamp score turns a sorted set into a time index — the basis of delayed-job queues and sliding-window rate limiters.\", what does \"basis\" (noun) mean?",
+      "options": [
+        "giới hạn trên",
+        "kết quả cuối cùng",
+        "ngoại lệ hiếm gặp",
+        "nền tảng, cơ sở"
+      ],
+      "optionsEn": [
+        "the upper limit",
+        "the final result",
+        "a rare exception",
+        "the foundation"
+      ],
+      "answer": 3,
+      "explanation": "basis /ˈbeɪ.sɪs/ (danh từ): nền tảng, cơ sở. \"The basis of X\" = nền tảng để xây dựng X; cụm quen thuộc: \"on a daily basis\" (hằng ngày).",
+      "explanationEn": "basis /ˈbeɪ.sɪs/ (noun): the foundation. \"The basis of X\" is what X is built on; compare \"on a daily basis\"."
+    },
+    {
+      "id": "v29",
+      "lessonId": "l3",
+      "word": "invalidation",
+      "pos": "n",
+      "ipa": "/ɪnˌvæl.ɪˈdeɪ.ʃən/",
+      "question": "Trong câu \"Fine for invalidation broadcasts and live notifications.\", từ \"invalidation\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Fine for invalidation broadcasts and live notifications.\", what does \"invalidation\" (noun) mean?",
+      "options": [
+        "việc xác thực người dùng",
+        "sự tàn tật, mất sức",
+        "việc huỷ bản đệm cũ",
+        "việc sao lưu dữ liệu"
+      ],
+      "optionsEn": [
+        "verifying a user's identity",
+        "a disability or illness",
+        "marking cache as stale",
+        "backing up data"
+      ],
+      "answer": 2,
+      "explanation": "invalidation /ɪnˌvæl.ɪˈdeɪ.ʃən/ (danh từ): việc huỷ bản đệm cũ. \"Cache invalidation\" = báo cho các node rằng bản đệm đã cũ, cần xoá hoặc tải lại.",
+      "explanationEn": "invalidation /ɪnˌvæl.ɪˈdeɪ.ʃən/ (noun): marking cache as stale. Cache invalidation tells nodes a cached copy is stale and must be dropped or reloaded."
+    },
+    {
+      "id": "v30",
+      "lessonId": "l3",
+      "word": "broadcast",
+      "pos": "v",
+      "ipa": "/ˈbrɔːd.kɑːst/",
+      "question": "Trong câu \"Redis 7 added sharded pub/sub (SPUBLISH/SSUBSCRIBE) so cluster messages are not broadcast to every node.\", từ \"broadcast\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Redis 7 added sharded pub/sub (SPUBLISH/SSUBSCRIBE) so cluster messages are not broadcast to every node.\", what does \"broadcast\" (verb) mean?",
+      "options": [
+        "phát tới mọi nơi nhận",
+        "phát sóng truyền hình",
+        "gửi tới một nơi nhận",
+        "lưu trữ lâu dài"
+      ],
+      "optionsEn": [
+        "to send to every receiver",
+        "to air on television",
+        "to send to one receiver",
+        "to store long-term"
+      ],
+      "answer": 0,
+      "explanation": "broadcast /ˈbrɔːd.kɑːst/ (động từ): phát tới mọi nơi nhận. Quá khứ của \"broadcast\" vẫn là \"broadcast\"; trái nghĩa gần là \"unicast\" (gửi một đích).",
+      "explanationEn": "broadcast /ˈbrɔːd.kɑːst/ (verb): to send to every receiver. The past form of \"broadcast\" is also \"broadcast\"; the opposite idea is unicast."
+    },
+    {
+      "id": "v31",
+      "lessonId": "l3",
+      "word": "pending",
+      "pos": "adj",
+      "ipa": "/ˈpen.dɪŋ/",
+      "question": "Trong câu \"Each group keeps a Pending Entries List (PEL) of delivered-but-unacked entries, giving at-least-once processing.\", từ \"pending\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each group keeps a Pending Entries List (PEL) of delivered-but-unacked entries, giving at-least-once processing.\", what does \"pending\" (adjective) mean?",
+      "options": [
+        "đã hết hạn",
+        "bị treo lơ lửng (vật)",
+        "đã được xác nhận",
+        "đang chờ xử lý, chưa xong"
+      ],
+      "optionsEn": [
+        "already expired",
+        "hanging in the air (object)",
+        "already confirmed",
+        "waiting to be completed"
+      ],
+      "answer": 3,
+      "explanation": "pending /ˈpen.dɪŋ/ (tính từ): đang chờ xử lý, chưa xong. \"Pending\" = còn treo, chưa hoàn tất; ví dụ \"pending requests\", \"pending approval\".",
+      "explanationEn": "pending /ˈpen.dɪŋ/ (adjective): waiting to be completed. \"Pending\" means not yet finished, as in \"pending requests\" or \"pending approval\"."
+    },
+    {
+      "id": "v32",
+      "lessonId": "l3",
+      "word": "suit",
+      "pos": "v",
+      "ipa": "/suːt/",
+      "question": "Trong câu \"Streams suit moderate volumes when you already run Redis; for long retention and very high throughput see Kafka in topic 11.\", từ \"suit\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Streams suit moderate volumes when you already run Redis; for long retention and very high throughput see Kafka in topic 11.\", what does \"suit\" (verb) mean?",
+      "options": [
+        "bộ com-lê (quần áo)",
+        "phù hợp với",
+        "kiện ra toà",
+        "vượt quá khả năng"
+      ],
+      "optionsEn": [
+        "a set of formal clothes",
+        "to be right for",
+        "to take to court",
+        "to be too much for"
+      ],
+      "answer": 1,
+      "explanation": "suit /suːt/ (động từ): phù hợp với. \"X suits Y\" = X hợp với Y; tính từ liên quan: \"suitable\" (phù hợp).",
+      "explanationEn": "suit /suːt/ (verb): to be right for. \"X suits Y\" means X is right for Y; related adjective: \"suitable\"."
+    },
+    {
+      "id": "v33",
+      "lessonId": "l3",
+      "word": "moderate",
+      "pos": "adj",
+      "ipa": "/ˈmɒd.ər.ət/",
+      "question": "Trong câu \"Streams suit moderate volumes when you already run Redis; for long retention and very high throughput see Kafka in topic 11.\", từ \"moderate\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Streams suit moderate volumes when you already run Redis; for long retention and very high throughput see Kafka in topic 11.\", what does \"moderate\" (adjective) mean?",
+      "options": [
+        "vừa phải",
+        "cực kỳ lớn",
+        "ôn hoà (chính trị)",
+        "không ổn định"
+      ],
+      "optionsEn": [
+        "medium-sized",
+        "extremely large",
+        "not extreme (in politics)",
+        "not stable"
+      ],
+      "answer": 0,
+      "explanation": "moderate /ˈmɒd.ər.ət/ (tính từ): vừa phải. \"Moderate volumes\" = lưu lượng vừa phải; động từ \"moderate\" lại có nghĩa kiểm duyệt.",
+      "explanationEn": "moderate /ˈmɒd.ər.ət/ (adjective): medium-sized. \"Moderate volumes\" are medium-sized loads; the verb \"moderate\" means to supervise content."
+    },
+    {
+      "id": "v34",
+      "lessonId": "l3",
+      "word": "retention",
+      "pos": "n",
+      "ipa": "/rɪˈten.ʃən/",
+      "question": "Trong câu \"Streams suit moderate volumes when you already run Redis; for long retention and very high throughput see Kafka in topic 11.\", từ \"retention\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Streams suit moderate volumes when you already run Redis; for long retention and very high throughput see Kafka in topic 11.\", what does \"retention\" (noun) mean?",
+      "options": [
+        "việc giữ chân khách hàng",
+        "việc lưu giữ lâu dài",
+        "việc nén dữ liệu",
+        "việc phục hồi sau lỗi"
+      ],
+      "optionsEn": [
+        "keeping customers loyal",
+        "keeping data over time",
+        "compressing data",
+        "recovering after failure"
+      ],
+      "answer": 1,
+      "explanation": "retention /rɪˈten.ʃən/ (danh từ): việc lưu giữ lâu dài. \"Retention period\" = khoảng thời gian dữ liệu được giữ lại trước khi xoá.",
+      "explanationEn": "retention /rɪˈten.ʃən/ (noun): keeping data over time. A retention period is how long data is kept before deletion."
+    },
+    {
+      "id": "v35",
+      "lessonId": "l3",
+      "word": "throughput",
+      "pos": "n",
+      "ipa": "/ˈθruː.pʊt/",
+      "question": "Trong câu \"Streams suit moderate volumes when you already run Redis; for long retention and very high throughput see Kafka in topic 11.\", từ \"throughput\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Streams suit moderate volumes when you already run Redis; for long retention and very high throughput see Kafka in topic 11.\", what does \"throughput\" (noun) mean?",
+      "options": [
+        "độ trễ mỗi yêu cầu",
+        "dung lượng lưu trữ",
+        "thông lượng xử lý",
+        "băng thông tối đa lý thuyết"
+      ],
+      "optionsEn": [
+        "delay per request",
+        "storage capacity",
+        "work handled per unit of time",
+        "theoretical maximum bandwidth"
+      ],
+      "answer": 2,
+      "explanation": "throughput /ˈθruː.pʊt/ (danh từ): thông lượng xử lý. \"High throughput\" = xử lý được nhiều thông điệp/yêu cầu mỗi giây; khác với \"latency\" (độ trễ).",
+      "explanationEn": "throughput /ˈθruː.pʊt/ (noun): work handled per unit of time. High throughput means many messages per second; it differs from latency, the delay of each."
+    },
+    {
+      "id": "v36",
+      "lessonId": "l3",
+      "word": "discard",
+      "pos": "v",
+      "ipa": "/dɪˈskɑːd/",
+      "question": "Trong câu \"Gotcha: a plain SET on an existing key discards its TTL unless you pass EX/PX/KEEPTTL; INCR and HSET keep it.\", từ \"discard\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Gotcha: a plain SET on an existing key discards its TTL unless you pass EX/PX/KEEPTTL; INCR and HSET keep it.\", what does \"discard\" (verb) mean?",
+      "options": [
+        "giữ nguyên",
+        "gia hạn thêm",
+        "sao chép sang",
+        "loại bỏ, vứt bỏ"
+      ],
+      "optionsEn": [
+        "to keep unchanged",
+        "to extend further",
+        "to copy over",
+        "to throw away"
+      ],
+      "answer": 3,
+      "explanation": "discard /dɪˈskɑːd/ (động từ): loại bỏ, vứt bỏ. \"Discard changes\" = bỏ các thay đổi; ở đây SET âm thầm bỏ mất TTL cũ.",
+      "explanationEn": "discard /dɪˈskɑːd/ (verb): to throw away. \"Discard changes\" means dropping them; here SET silently drops the old TTL."
+    },
+    {
+      "id": "v37",
+      "lessonId": "l3",
+      "word": "gotcha",
+      "pos": "n",
+      "ipa": "/ˈɡɒtʃ.ə/",
+      "question": "Trong câu \"Gotcha: a plain SET on an existing key discards its TTL unless you pass EX/PX/KEEPTTL; INCR and HSET keep it.\", từ \"gotcha\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Gotcha: a plain SET on an existing key discards its TTL unless you pass EX/PX/KEEPTTL; INCR and HSET keep it.\", what does \"gotcha\" (noun) mean?",
+      "options": [
+        "tính năng mới nổi bật",
+        "lời chào thân mật",
+        "cái bẫy dễ mắc",
+        "lỗi phần cứng"
+      ],
+      "optionsEn": [
+        "a notable new feature",
+        "a friendly greeting",
+        "a hidden trap",
+        "a hardware fault"
+      ],
+      "answer": 2,
+      "explanation": "gotcha /ˈɡɒtʃ.ə/ (danh từ): cái bẫy dễ mắc. \"Gotcha\" (từ \"got you\") = chi tiết bất ngờ khiến người dùng mắc lỗi.",
+      "explanationEn": "gotcha /ˈɡɒtʃ.ə/ (noun): a hidden trap. \"Gotcha\" (from \"got you\") is a surprising detail that trips people up."
+    },
+    {
+      "id": "v38",
+      "lessonId": "l3",
+      "word": "lazily",
+      "pos": "adv",
+      "ipa": "/ˈleɪ.zɪ.li/",
+      "question": "Trong câu \"Expired keys are removed lazily (when accessed) and actively (a background cycle samples keys with TTLs and deletes expired ones).\", từ \"lazily\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Expired keys are removed lazily (when accessed) and actively (a background cycle samples keys with TTLs and deletes expired ones).\", what does \"lazily\" (adverb) mean?",
+      "options": [
+        "chỉ khi cần đến",
+        "một cách lười biếng",
+        "ngay lập tức",
+        "theo lịch cố định"
+      ],
+      "optionsEn": [
+        "only when actually needed",
+        "in an idle, unwilling way",
+        "immediately",
+        "on a fixed schedule"
+      ],
+      "answer": 0,
+      "explanation": "lazily /ˈleɪ.zɪ.li/ (trạng từ): chỉ khi cần đến. Trong kỹ thuật, \"lazy\" = trì hoãn công việc tới khi cần, như \"lazy loading\".",
+      "explanationEn": "lazily /ˈleɪ.zɪ.li/ (adverb): only when actually needed. In engineering, \"lazy\" means deferring work until needed, as in lazy loading."
+    },
+    {
+      "id": "v39",
+      "lessonId": "l3",
+      "word": "reclaim",
+      "pos": "v",
+      "ipa": "/rɪˈkleɪm/",
+      "question": "Trong câu \"Memory is reclaimed promptly, not instantly.\", từ \"reclaim\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Memory is reclaimed promptly, not instantly.\", what does \"reclaim\" (verb) mean?",
+      "options": [
+        "đòi lại (quyền, tài sản)",
+        "cấp phát mới",
+        "khai hoang đất",
+        "thu hồi lại (tài nguyên)"
+      ],
+      "optionsEn": [
+        "to demand back property",
+        "to allocate fresh",
+        "to make land usable",
+        "to recover for reuse"
+      ],
+      "answer": 3,
+      "explanation": "reclaim /rɪˈkleɪm/ (động từ): thu hồi lại (tài nguyên). \"Reclaim memory\" = lấy lại bộ nhớ đã giải phóng để dùng tiếp.",
+      "explanationEn": "reclaim /rɪˈkleɪm/ (verb): to recover for reuse. \"Reclaim memory\" means getting freed memory back for reuse."
+    },
+    {
+      "id": "v40",
+      "lessonId": "l3",
+      "word": "promptly",
+      "pos": "adv",
+      "ipa": "/ˈprɒmpt.li/",
+      "question": "Trong câu \"Memory is reclaimed promptly, not instantly.\", từ \"promptly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Memory is reclaimed promptly, not instantly.\", what does \"promptly\" (adverb) mean?",
+      "options": [
+        "ngay tức khắc",
+        "khá nhanh",
+        "đúng giờ hẹn",
+        "theo lời nhắc"
+      ],
+      "optionsEn": [
+        "at the exact same moment",
+        "quickly, without undue delay",
+        "exactly on time",
+        "following a prompt"
+      ],
+      "answer": 1,
+      "explanation": "promptly /ˈprɒmpt.li/ (trạng từ): khá nhanh. Câu phân biệt \"promptly\" (sớm) với \"instantly\" (tức thì): có độ trễ nhỏ.",
+      "explanationEn": "promptly /ˈprɒmpt.li/ (adverb): quickly, without undue delay. The sentence contrasts promptly (soon) with instantly (at once): a small delay exists."
+    },
+    {
+      "id": "v41",
+      "lessonId": "l3",
+      "word": "jitter",
+      "pos": "n",
+      "ipa": "/ˈdʒɪt.ə/",
+      "question": "Trong câu \"Keys written together with the same TTL also expire together — add jitter (stampede handling is topic 10).\", từ \"jitter\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Keys written together with the same TTL also expire together — add jitter (stampede handling is topic 10).\", what does \"jitter\" (noun) mean?",
+      "options": [
+        "độ lệch ngẫu nhiên nhỏ",
+        "sự rung lắc do lo lắng",
+        "độ trễ cố định",
+        "bộ đếm thời gian"
+      ],
+      "optionsEn": [
+        "random variation",
+        "nervous shaking",
+        "a fixed delay",
+        "a timer"
+      ],
+      "answer": 0,
+      "explanation": "jitter /ˈdʒɪt.ə/ (danh từ): độ lệch ngẫu nhiên nhỏ. \"Add jitter\" = cộng thêm vài giây ngẫu nhiên vào TTL để key không hết hạn cùng lúc.",
+      "explanationEn": "jitter /ˈdʒɪt.ə/ (noun): random variation. \"Add jitter\" means adding a few random seconds so keys do not expire at once."
+    },
+    {
+      "id": "v42",
+      "lessonId": "l3",
+      "word": "stampede",
+      "pos": "n",
+      "ipa": "/stæmˈpiːd/",
+      "question": "Trong câu \"Keys written together with the same TTL also expire together — add jitter (stampede handling is topic 10).\", từ \"stampede\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Keys written together with the same TTL also expire together — add jitter (stampede handling is topic 10).\", what does \"stampede\" (noun) mean?",
+      "options": [
+        "đàn thú chạy tán loạn",
+        "cơn dồn dập yêu cầu",
+        "sự sụt giảm lưu lượng",
+        "sự cố mất điện"
+      ],
+      "optionsEn": [
+        "animals fleeing in panic",
+        "a rush of requests",
+        "a drop in traffic",
+        "a power outage"
+      ],
+      "answer": 1,
+      "explanation": "stampede /stæmˈpiːd/ (danh từ): cơn dồn dập yêu cầu. \"Cache stampede\" = nhiều request cùng lúc bị miss cache và dồn vào database.",
+      "explanationEn": "stampede /stæmˈpiːd/ (noun): a rush of requests. A cache stampede is many requests missing the cache at once and hitting the database."
+    },
+    {
+      "id": "v43",
+      "lessonId": "l3",
+      "word": "cap",
+      "pos": "v",
+      "ipa": "/kæp/",
+      "question": "Trong câu \"maxmemory caps the dataset; maxmemory-policy decides what happens at the limit.\", từ \"cap\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"maxmemory caps the dataset; maxmemory-policy decides what happens at the limit.\", what does \"cap\" (verb) mean?",
+      "options": [
+        "đậy nắp lại",
+        "tăng gấp đôi",
+        "đặt mức trần",
+        "sao lưu định kỳ"
+      ],
+      "optionsEn": [
+        "to put a lid on",
+        "to double",
+        "to set an upper limit on",
+        "to back up regularly"
+      ],
+      "answer": 2,
+      "explanation": "cap /kæp/ (động từ): đặt mức trần. \"Cap X at N\" = không cho X vượt quá N; danh từ \"cap\" = mức trần.",
+      "explanationEn": "cap /kæp/ (verb): to set an upper limit on. \"Cap X at N\" means X may not exceed N; the noun \"cap\" is the ceiling."
+    },
+    {
+      "id": "v44",
+      "lessonId": "l3",
+      "word": "fragmentation",
+      "pos": "n",
+      "ipa": "/ˌfræɡ.menˈteɪ.ʃən/",
+      "question": "Trong câu \"Keep maxmemory below physical RAM to leave room for fragmentation, replication buffers and fork copy-on-write; watch evicted_keys and mem_fragmentation_ratio in INFO, and find big keys with redis-cli --bigkeys.\", từ \"fragmentation\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Keep maxmemory below physical RAM to leave room for fragmentation, replication buffers and fork copy-on-write; watch evicted_keys and mem_fragmentation_ratio in INFO, and find big keys with redis-cli --bigkeys.\", what does \"fragmentation\" (noun) mean?",
+      "options": [
+        "sự rò rỉ bộ nhớ",
+        "sự nén bộ nhớ",
+        "sự chia rẽ nhóm",
+        "sự phân mảnh"
+      ],
+      "optionsEn": [
+        "memory never freed",
+        "memory being compressed",
+        "a group splitting apart",
+        "memory split into gaps"
+      ],
+      "answer": 3,
+      "explanation": "fragmentation /ˌfræɡ.menˈteɪ.ʃən/ (danh từ): sự phân mảnh. Phân mảnh làm bộ nhớ thực dùng lớn hơn dữ liệu; \"fragment\" = mảnh vỡ.",
+      "explanationEn": "fragmentation /ˌfræɡ.menˈteɪ.ʃən/ (noun): memory split into gaps. Fragmentation makes real memory use exceed the data size; a \"fragment\" is a broken piece."
+    },
+    {
+      "id": "v45",
+      "lessonId": "l4",
+      "word": "snapshot",
+      "pos": "n",
+      "ipa": "/ˈsnæp.ʃɒt/",
+      "question": "Trong câu \"RDB — Redis fork()s and the child writes a compact point-in-time snapshot.\", từ \"snapshot\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDB — Redis fork()s and the child writes a compact point-in-time snapshot.\", what does \"snapshot\" (noun) mean?",
+      "options": [
+        "bức ảnh chụp nhanh",
+        "nhật ký thay đổi liên tục",
+        "bản chụp tại một thời điểm",
+        "bản tóm tắt thống kê"
+      ],
+      "optionsEn": [
+        "a quick photograph",
+        "a continuous change log",
+        "a state copy at a moment",
+        "a statistical summary"
+      ],
+      "answer": 2,
+      "explanation": "snapshot /ˈsnæp.ʃɒt/ (danh từ): bản chụp tại một thời điểm. \"Point-in-time snapshot\" = bản sao dữ liệu đúng tại một thời điểm, thay đổi sau đó không có.",
+      "explanationEn": "snapshot /ˈsnæp.ʃɒt/ (noun): a state copy at a moment. A point-in-time snapshot copies data as of one moment; later changes are not in it."
+    },
+    {
+      "id": "v46",
+      "lessonId": "l4",
+      "word": "duplicate",
+      "pos": "v",
+      "ipa": "/ˈdjuː.plɪ.keɪt/",
+      "question": "Trong câu \"Copy-on-write duplicates pages modified meanwhile, so a write-heavy instance can need up to ~2× memory during BGSAVE.\", từ \"duplicate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Copy-on-write duplicates pages modified meanwhile, so a write-heavy instance can need up to ~2× memory during BGSAVE.\", what does \"duplicate\" (verb) mean?",
+      "options": [
+        "tạo bản sao",
+        "xoá bản trùng lặp",
+        "ghi đè lên",
+        "nén lại"
+      ],
+      "optionsEn": [
+        "to make a copy of",
+        "to remove repeats",
+        "to overwrite",
+        "to compress"
+      ],
+      "answer": 0,
+      "explanation": "duplicate /ˈdjuː.plɪ.keɪt/ (động từ): tạo bản sao. Động từ \"duplicate\" /-keɪt/ khác danh từ/tính từ \"duplicate\" /-kət/ (bản trùng).",
+      "explanationEn": "duplicate /ˈdjuː.plɪ.keɪt/ (verb): to make a copy of. The verb ends in /-keɪt/; the noun and adjective \"duplicate\" end in /-kət/."
+    },
+    {
+      "id": "v47",
+      "lessonId": "l4",
+      "word": "meanwhile",
+      "pos": "adv",
+      "ipa": "/ˈmiːn.waɪl/",
+      "question": "Trong câu \"Copy-on-write duplicates pages modified meanwhile, so a write-heavy instance can need up to ~2× memory during BGSAVE.\", từ \"meanwhile\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Copy-on-write duplicates pages modified meanwhile, so a write-heavy instance can need up to ~2× memory during BGSAVE.\", what does \"meanwhile\" (adverb) mean?",
+      "options": [
+        "sau đó rất lâu",
+        "trước đó",
+        "tuy nhiên",
+        "trong lúc đó"
+      ],
+      "optionsEn": [
+        "long afterwards",
+        "beforehand",
+        "however",
+        "in the meantime"
+      ],
+      "answer": 3,
+      "explanation": "meanwhile /ˈmiːn.waɪl/ (trạng từ): trong lúc đó. \"Meanwhile\" = trong lúc việc kia đang diễn ra (ở đây: lúc tiến trình con đang ghi snapshot).",
+      "explanationEn": "meanwhile /ˈmiːn.waɪl/ (adverb): in the meantime. \"Meanwhile\" means while the other thing is happening (here, while the child writes)."
+    },
+    {
+      "id": "v48",
+      "lessonId": "l4",
+      "word": "append",
+      "pos": "v",
+      "ipa": "/əˈpend/",
+      "question": "Trong câu \"AOF — every write command is appended to a log and replayed on start.\", từ \"append\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"AOF — every write command is appended to a log and replayed on start.\", what does \"append\" (verb) mean?",
+      "options": [
+        "chèn vào đầu",
+        "nối thêm vào cuối",
+        "đính kèm tài liệu",
+        "xoá khỏi cuối"
+      ],
+      "optionsEn": [
+        "to insert at the start",
+        "to add to the end",
+        "to attach a document",
+        "to remove from the end"
+      ],
+      "answer": 1,
+      "explanation": "append /əˈpend/ (động từ): nối thêm vào cuối. \"Append-only file\" (AOF) = tệp chỉ ghi nối thêm, không sửa phần đã ghi.",
+      "explanationEn": "append /əˈpend/ (verb): to add to the end. An append-only file only adds to the end and never edits earlier content."
+    },
+    {
+      "id": "v49",
+      "lessonId": "l4",
+      "word": "replay",
+      "pos": "v",
+      "ipa": "/ˌriːˈpleɪ/",
+      "question": "Trong câu \"AOF — every write command is appended to a log and replayed on start.\", từ \"replay\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"AOF — every write command is appended to a log and replayed on start.\", what does \"replay\" (verb) mean?",
+      "options": [
+        "chạy lại thao tác",
+        "phát lại video",
+        "trả lời tin nhắn",
+        "hoàn tác thao tác"
+      ],
+      "optionsEn": [
+        "to re-run operations",
+        "to play a video again",
+        "to answer a message",
+        "to undo operations"
+      ],
+      "answer": 0,
+      "explanation": "replay /ˌriːˈpleɪ/ (động từ): chạy lại thao tác. \"Replay the log\" = thực thi lại từng lệnh trong nhật ký để dựng lại dữ liệu.",
+      "explanationEn": "replay /ˌriːˈpleɪ/ (verb): to re-run operations. \"Replay the log\" means re-executing each logged command to rebuild the data."
+    },
+    {
+      "id": "v50",
+      "lessonId": "l4",
+      "word": "compact",
+      "pos": "v",
+      "ipa": "/kəmˈpækt/",
+      "question": "Trong câu \"The log is compacted by background rewrite; with aof-use-rdb-preamble yes (default) its base is RDB format for fast loading.\", từ \"compact\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The log is compacted by background rewrite; with aof-use-rdb-preamble yes (default) its base is RDB format for fast loading.\", what does \"compact\" (verb) mean?",
+      "options": [
+        "mở rộng thêm",
+        "thu gọn lại",
+        "nén đất cho chặt",
+        "chia nhỏ ra"
+      ],
+      "optionsEn": [
+        "to enlarge",
+        "to shrink, remove waste",
+        "to press soil down firmly",
+        "to split up"
+      ],
+      "answer": 1,
+      "explanation": "compact /kəmˈpækt/ (động từ): thu gọn lại. \"Log compaction\" = viết lại nhật ký chỉ giữ trạng thái cuối, bỏ các lệnh thừa.",
+      "explanationEn": "compact /kəmˈpækt/ (verb): to shrink, remove waste. Log compaction rewrites a log to keep only the final state, dropping redundant commands."
+    },
+    {
+      "id": "v51",
+      "lessonId": "l4",
+      "word": "durable",
+      "pos": "adj",
+      "ipa": "/ˈdjʊə.rə.bəl/",
+      "question": "Trong câu \"Need every write durable with Redis semantics?\", từ \"durable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Need every write durable with Redis semantics?\", what does \"durable\" (adjective) mean?",
+      "options": [
+        "chắc chắn (vật liệu)",
+        "tạm thời, dễ mất",
+        "bền, không mất",
+        "được mã hoá"
+      ],
+      "optionsEn": [
+        "tough (of materials)",
+        "temporary, easily lost",
+        "safe from loss",
+        "encrypted"
+      ],
+      "answer": 2,
+      "explanation": "durable /ˈdjʊə.rə.bəl/ (tính từ): bền, không mất. \"Durable write\" = lần ghi đã xác nhận thì không mất kể cả khi máy sập.",
+      "explanationEn": "durable /ˈdjʊə.rə.bəl/ (adjective): safe from loss. A durable write, once acknowledged, is not lost even if the machine crashes."
+    },
+    {
+      "id": "v52",
+      "lessonId": "l4",
+      "word": "semantics",
+      "pos": "n",
+      "ipa": "/sɪˈmæn.tɪks/",
+      "question": "Trong câu \"Need every write durable with Redis semantics?\", từ \"semantics\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Need every write durable with Redis semantics?\", what does \"semantics\" (noun) mean?",
+      "options": [
+        "ngữ nghĩa học (ngôn ngữ)",
+        "cú pháp câu lệnh",
+        "giao diện đồ hoạ",
+        "cách hoạt động"
+      ],
+      "optionsEn": [
+        "the study of word meaning",
+        "the syntax of commands",
+        "the graphical interface",
+        "defined behaviour"
+      ],
+      "answer": 3,
+      "explanation": "semantics /sɪˈmæn.tɪks/ (danh từ): cách hoạt động. \"With Redis semantics\" = các lệnh hoạt động giống hệt Redis.",
+      "explanationEn": "semantics /sɪˈmæn.tɪks/ (noun): defined behaviour. \"With Redis semantics\" means the commands behave exactly as in Redis."
+    },
+    {
+      "id": "v53",
+      "lessonId": "l4",
+      "word": "backlog",
+      "pos": "n",
+      "ipa": "/ˈbæk.lɒɡ/",
+      "question": "Trong câu \"A primary streams writes to replicas (REPLICAOF host port): a full RDB sync first, then the command stream, with partial resync from a backlog after brief disconnects.\", từ \"backlog\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A primary streams writes to replicas (REPLICAOF host port): a full RDB sync first, then the command stream, with partial resync from a backlog after brief disconnects.\", what does \"backlog\" (noun) mean?",
+      "options": [
+        "danh sách việc tồn đọng",
+        "bản sao lưu đầy đủ",
+        "bộ đệm lưu các lệnh gần đây",
+        "nhật ký lỗi"
+      ],
+      "optionsEn": [
+        "a pile of unfinished tasks",
+        "a full backup copy",
+        "a buffer of recent commands",
+        "an error log"
+      ],
+      "answer": 2,
+      "explanation": "backlog /ˈbæk.lɒɡ/ (danh từ): bộ đệm lưu các lệnh gần đây. Ở đây \"backlog\" là bộ đệm lệnh gần nhất; trong Agile, \"product backlog\" là danh sách việc cần làm.",
+      "explanationEn": "backlog /ˈbæk.lɒɡ/ (noun): a buffer of recent commands. Here a backlog is a buffer of recent commands; in Agile, a product backlog is a to-do list."
+    },
+    {
+      "id": "v54",
+      "lessonId": "l4",
+      "word": "asynchronous",
+      "pos": "adj",
+      "ipa": "/eɪˈsɪŋ.krə.nəs/",
+      "question": "Trong câu \"Replication is asynchronous: the client is acknowledged before replicas get the write, so failover can lose recent writes.\", từ \"asynchronous\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Replication is asynchronous: the client is acknowledged before replicas get the write, so failover can lose recent writes.\", what does \"asynchronous\" (adjective) mean?",
+      "options": [
+        "bất đồng bộ",
+        "đồng bộ, chờ nhau",
+        "không liên tục",
+        "song song hoàn toàn"
+      ],
+      "optionsEn": [
+        "not waiting for the other side",
+        "waiting for the other side",
+        "not continuous",
+        "fully parallel"
+      ],
+      "answer": 0,
+      "explanation": "asynchronous /eɪˈsɪŋ.krə.nəs/ (tính từ): bất đồng bộ. Sao chép \"asynchronous\" = trả lời client trước, gửi sang replica sau, nên có thể mất dữ liệu.",
+      "explanationEn": "asynchronous /eɪˈsɪŋ.krə.nəs/ (adjective): not waiting for the other side. Asynchronous replication replies first and ships to replicas later, so data can be lost."
+    },
+    {
+      "id": "v55",
+      "lessonId": "l4",
+      "word": "acknowledge",
+      "pos": "v",
+      "ipa": "/əkˈnɒl.ɪdʒ/",
+      "question": "Trong câu \"Replication is asynchronous: the client is acknowledged before replicas get the write, so failover can lose recent writes.\", từ \"acknowledge\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Replication is asynchronous: the client is acknowledged before replicas get the write, so failover can lose recent writes.\", what does \"acknowledge\" (verb) mean?",
+      "options": [
+        "thừa nhận lỗi",
+        "từ chối yêu cầu",
+        "gửi lại lần nữa",
+        "xác nhận đã nhận"
+      ],
+      "optionsEn": [
+        "to admit a mistake",
+        "to reject a request",
+        "to send again",
+        "to confirm receipt"
+      ],
+      "answer": 3,
+      "explanation": "acknowledge /əkˈnɒl.ɪdʒ/ (động từ): xác nhận đã nhận. Viết tắt \"ack\" = xác nhận; \"acknowledged write\" là lần ghi đã báo thành công.",
+      "explanationEn": "acknowledge /əkˈnɒl.ɪdʒ/ (verb): to confirm receipt. Short form \"ack\"; an acknowledged write is one reported as successful."
+    },
+    {
+      "id": "v56",
+      "lessonId": "l4",
+      "word": "narrow",
+      "pos": "v",
+      "ipa": "/ˈnær.əʊ/",
+      "question": "Trong câu \"WAIT 1 100 narrows the window but does not make Redis strongly consistent; min-replicas-to-write makes a primary refuse writes when too few replicas are connected.\", từ \"narrow\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"WAIT 1 100 narrows the window but does not make Redis strongly consistent; min-replicas-to-write makes a primary refuse writes when too few replicas are connected.\", what does \"narrow\" (verb) mean?",
+      "options": [
+        "mở rộng ra",
+        "thu hẹp lại",
+        "đóng hẳn lại",
+        "làm chậm lại"
+      ],
+      "optionsEn": [
+        "to make wider",
+        "to make smaller",
+        "to shut completely",
+        "to slow down"
+      ],
+      "answer": 1,
+      "explanation": "narrow /ˈnær.əʊ/ (động từ): thu hẹp lại. \"Narrow the window\" = giảm khoảng thời gian có thể xảy ra rủi ro, nhưng không loại bỏ.",
+      "explanationEn": "narrow /ˈnær.əʊ/ (verb): to make smaller. \"Narrow the window\" shrinks the risky time period without removing it."
+    },
+    {
+      "id": "v57",
+      "lessonId": "l4",
+      "word": "consistent",
+      "pos": "adj",
+      "ipa": "/kənˈsɪs.tənt/",
+      "question": "Trong câu \"WAIT 1 100 narrows the window but does not make Redis strongly consistent; min-replicas-to-write makes a primary refuse writes when too few replicas are connected.\", từ \"consistent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"WAIT 1 100 narrows the window but does not make Redis strongly consistent; min-replicas-to-write makes a primary refuse writes when too few replicas are connected.\", what does \"consistent\" (adjective) mean?",
+      "options": [
+        "nhất quán",
+        "kiên định (tính cách)",
+        "có sẵn liên tục",
+        "được phân mảnh"
+      ],
+      "optionsEn": [
+        "in agreement",
+        "steady in character",
+        "always available",
+        "split into shards"
+      ],
+      "answer": 0,
+      "explanation": "consistent /kənˈsɪs.tənt/ (tính từ): nhất quán. \"Strongly consistent\" = mọi lần đọc thấy ngay lần ghi mới nhất; ngược lại là \"eventually consistent\".",
+      "explanationEn": "consistent /kənˈsɪs.tənt/ (adjective): in agreement. Strongly consistent means every read sees the latest write; contrast \"eventually consistent\"."
+    },
+    {
+      "id": "v58",
+      "lessonId": "l4",
+      "word": "isolated",
+      "pos": "adj",
+      "ipa": "/ˈaɪ.sə.leɪ.tɪd/",
+      "question": "Trong câu \"An isolated old primary can still accept writes that are discarded when it rejoins — min-replicas-to-write limits that.\", từ \"isolated\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"An isolated old primary can still accept writes that are discarded when it rejoins — min-replicas-to-write limits that.\", what does \"isolated\" (adjective) mean?",
+      "options": [
+        "được bảo mật riêng",
+        "bị cô lập",
+        "hiếm gặp, đơn lẻ",
+        "đã tắt nguồn"
+      ],
+      "optionsEn": [
+        "privately secured",
+        "cut off",
+        "rare, one-off",
+        "powered off"
+      ],
+      "answer": 1,
+      "explanation": "isolated /ˈaɪ.sə.leɪ.tɪd/ (tính từ): bị cô lập. Node \"isolated\" do phân vùng mạng vẫn chạy nhưng không thấy các node khác.",
+      "explanationEn": "isolated /ˈaɪ.sə.leɪ.tɪd/ (adjective): cut off. A node isolated by a network partition keeps running but cannot see the others."
+    },
+    {
+      "id": "v59",
+      "lessonId": "l4",
+      "word": "hard-code",
+      "pos": "v",
+      "ipa": "/ˌhɑːdˈkəʊd/",
+      "question": "Trong câu \"Run at least 3 Sentinels in independent failure domains; clients must be Sentinel-aware instead of hard-coding the primary.\", từ \"hard-code\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Run at least 3 Sentinels in independent failure domains; clients must be Sentinel-aware instead of hard-coding the primary.\", what does \"hard-code\" (verb) mean?",
+      "options": [
+        "mã hoá dữ liệu",
+        "cấu hình động",
+        "viết cứng vào mã",
+        "lập trình khó hiểu"
+      ],
+      "optionsEn": [
+        "to encrypt data",
+        "to configure dynamically",
+        "to fix a value in code",
+        "to write confusing code"
+      ],
+      "answer": 2,
+      "explanation": "hard-code /ˌhɑːdˈkəʊd/ (động từ): viết cứng vào mã. Giá trị \"hard-coded\" không đổi được khi chạy; nên đọc từ cấu hình hoặc service discovery.",
+      "explanationEn": "hard-code /ˌhɑːdˈkəʊd/ (verb): to fix a value in code. Hard-coded values cannot change at runtime; read them from config or discovery instead."
+    },
+    {
+      "id": "v60",
+      "lessonId": "l4",
+      "word": "independent",
+      "pos": "adj",
+      "ipa": "/ˌɪn.dɪˈpen.dənt/",
+      "question": "Trong câu \"Run at least 3 Sentinels in independent failure domains; clients must be Sentinel-aware instead of hard-coding the primary.\", từ \"independent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Run at least 3 Sentinels in independent failure domains; clients must be Sentinel-aware instead of hard-coding the primary.\", what does \"independent\" (adjective) mean?",
+      "options": [
+        "phụ thuộc lẫn nhau",
+        "tự do về chính trị",
+        "được kết nối chặt",
+        "độc lập"
+      ],
+      "optionsEn": [
+        "relying on one another",
+        "politically self-governing",
+        "tightly connected",
+        "not affected by one another"
+      ],
+      "answer": 3,
+      "explanation": "independent /ˌɪn.dɪˈpen.dənt/ (tính từ): độc lập. \"Independent failure domains\" = sự cố ở vùng này không kéo sập vùng kia (ví dụ khác AZ).",
+      "explanationEn": "independent /ˌɪn.dɪˈpen.dənt/ (adjective): not affected by one another. Independent failure domains fail separately, such as different Availability Zones."
+    },
+    {
+      "id": "v61",
+      "lessonId": "l5",
+      "word": "availability",
+      "pos": "n",
+      "ipa": "/əˌveɪ.ləˈbɪl.ə.ti/",
+      "question": "Trong câu \"Sentinel improves availability, not write capacity.\", từ \"availability\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Sentinel improves availability, not write capacity.\", what does \"availability\" (noun) mean?",
+      "options": [
+        "sự có hàng trong kho",
+        "độ bền dữ liệu",
+        "độ sẵn sàng",
+        "tốc độ ghi dữ liệu"
+      ],
+      "optionsEn": [
+        "goods being in stock",
+        "data surviving crashes",
+        "staying up and serving",
+        "the speed of writing data"
+      ],
+      "answer": 2,
+      "explanation": "availability /əˌveɪ.ləˈbɪl.ə.ti/ (danh từ): độ sẵn sàng. \"High availability\" (HA) = hệ thống vẫn phục vụ khi một thành phần hỏng.",
+      "explanationEn": "availability /əˌveɪ.ləˈbɪl.ə.ti/ (noun): staying up and serving. High availability (HA) means the system keeps serving when a component fails."
+    },
+    {
+      "id": "v62",
+      "lessonId": "l5",
+      "word": "capacity",
+      "pos": "n",
+      "ipa": "/kəˈpæs.ə.ti/",
+      "question": "Trong câu \"Sentinel improves availability, not write capacity.\", từ \"capacity\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Sentinel improves availability, not write capacity.\", what does \"capacity\" (noun) mean?",
+      "options": [
+        "sức chứa tối đa",
+        "năng lực cá nhân",
+        "độ trễ tối thiểu",
+        "số bản sao"
+      ],
+      "optionsEn": [
+        "maximum load",
+        "a person's ability",
+        "the minimum delay",
+        "the number of copies"
+      ],
+      "answer": 0,
+      "explanation": "capacity /kəˈpæs.ə.ti/ (danh từ): sức chứa tối đa. \"Write capacity\" = lượng ghi tối đa hệ thống chịu được; thêm replica không tăng nó.",
+      "explanationEn": "capacity /kəˈpæs.ə.ti/ (noun): maximum load. Write capacity is the most writes a system can take; adding replicas does not raise it."
+    },
+    {
+      "id": "v63",
+      "lessonId": "l5",
+      "word": "shard",
+      "pos": "v",
+      "ipa": "/ʃɑːd/",
+      "question": "Trong câu \"Redis Cluster shards data across primaries:\", từ \"shard\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Redis Cluster shards data across primaries:\", what does \"shard\" (verb) mean?",
+      "options": [
+        "nhân bản dữ liệu y hệt",
+        "làm vỡ thành mảnh",
+        "nén dữ liệu lại",
+        "chia dữ liệu ra nhiều máy"
+      ],
+      "optionsEn": [
+        "to copy data identically",
+        "to break into pieces",
+        "to compress data",
+        "to split data across nodes"
+      ],
+      "answer": 3,
+      "explanation": "shard /ʃɑːd/ (động từ): chia dữ liệu ra nhiều máy. \"Shard\" (danh từ) = một phần dữ liệu; \"sharding\" giúp tăng dung lượng ghi.",
+      "explanationEn": "shard /ʃɑːd/ (verb): to split data across nodes. The noun \"shard\" is one partition of data; sharding raises write capacity."
+    },
+    {
+      "id": "v64",
+      "lessonId": "l5",
+      "word": "gossip",
+      "pos": "v",
+      "ipa": "/ˈɡɒs.ɪp/",
+      "question": "Trong câu \"Nodes gossip on the cluster bus (data port + 10000, e.g. 16379).\", từ \"gossip\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Nodes gossip on the cluster bus (data port + 10000, e.g. 16379).\", what does \"gossip\" (verb) mean?",
+      "options": [
+        "nói chuyện phiếm, buôn chuyện",
+        "trao đổi trạng thái ngang hàng",
+        "gửi lệnh từ máy chủ trung tâm",
+        "chặn kết nối lạ"
+      ],
+      "optionsEn": [
+        "to chat about others",
+        "to share state peer to peer",
+        "to send central commands",
+        "to block unknown connections"
+      ],
+      "answer": 1,
+      "explanation": "gossip /ˈɡɒs.ɪp/ (động từ): trao đổi trạng thái ngang hàng. \"Gossip protocol\" = các node tự lan truyền thông tin cho nhau, không cần máy chủ trung tâm.",
+      "explanationEn": "gossip /ˈɡɒs.ɪp/ (verb): to share state peer to peer. A gossip protocol spreads information node to node with no central server."
+    },
+    {
+      "id": "v65",
+      "lessonId": "l5",
+      "word": "co-locate",
+      "pos": "v",
+      "ipa": "/ˌkəʊ.ləʊˈkeɪt/",
+      "question": "Trong câu \"Use hash tags: only the part inside {} is hashed, so {user:42}:cart and {user:42}:profile co-locate.\", từ \"co-locate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Use hash tags: only the part inside {} is hashed, so {user:42}:cart and {user:42}:profile co-locate.\", what does \"co-locate\" (verb) mean?",
+      "options": [
+        "nằm cùng một chỗ",
+        "tách ra hai nơi",
+        "đổi tên cho nhau",
+        "hết hạn cùng lúc"
+      ],
+      "optionsEn": [
+        "to sit in the same place",
+        "to split into two places",
+        "to swap names",
+        "to expire together"
+      ],
+      "answer": 0,
+      "explanation": "co-locate /ˌkəʊ.ləʊˈkeɪt/ (động từ): nằm cùng một chỗ. Key \"co-locate\" nằm cùng slot nên dùng được trong lệnh nhiều key.",
+      "explanationEn": "co-locate /ˌkəʊ.ləʊˈkeɪt/ (verb): to sit in the same place. Keys that co-locate share a slot, so multi-key commands can use them."
+    },
+    {
+      "id": "v66",
+      "lessonId": "l5",
+      "word": "ownership",
+      "pos": "n",
+      "ipa": "/ˈəʊ.nə.ʃɪp/",
+      "question": "Trong câu \"Release must check ownership atomically — a bare DEL could remove a lock that expired and was taken by someone else:\", từ \"ownership\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Release must check ownership atomically — a bare DEL could remove a lock that expired and was taken by someone else:\", what does \"ownership\" (noun) mean?",
+      "options": [
+        "quyền truy cập đọc",
+        "quyền sở hữu",
+        "thời hạn còn lại",
+        "giấy phép phần mềm"
+      ],
+      "optionsEn": [
+        "permission to read",
+        "who owns it",
+        "the remaining time",
+        "a software licence"
+      ],
+      "answer": 1,
+      "explanation": "ownership /ˈəʊ.nə.ʃɪp/ (danh từ): quyền sở hữu. \"Check ownership\" = kiểm tra khoá có đúng là của mình (qua token) trước khi xoá.",
+      "explanationEn": "ownership /ˈəʊ.nə.ʃɪp/ (noun): who owns it. \"Check ownership\" means verifying the lock is yours (by token) before deleting it."
+    },
+    {
+      "id": "v67",
+      "lessonId": "l5",
+      "word": "bare",
+      "pos": "adj",
+      "ipa": "/beə/",
+      "question": "Trong câu \"Release must check ownership atomically — a bare DEL could remove a lock that expired and was taken by someone else:\", từ \"bare\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Release must check ownership atomically — a bare DEL could remove a lock that expired and was taken by someone else:\", what does \"bare\" (adjective) mean?",
+      "options": [
+        "trần trụi, không mặc gì",
+        "bị cấm dùng",
+        "đơn thuần, trơn",
+        "chậm chạp"
+      ],
+      "optionsEn": [
+        "without clothing",
+        "forbidden to use",
+        "plain, alone",
+        "slow"
+      ],
+      "answer": 2,
+      "explanation": "bare /beə/ (tính từ): đơn thuần, trơn. \"A bare DEL\" = lệnh DEL đơn thuần, không kiểm tra token; tương tự \"bare minimum\".",
+      "explanationEn": "bare /beə/ (adjective): plain, alone. \"A bare DEL\" is a plain DEL with no token check; compare \"the bare minimum\"."
+    },
+    {
+      "id": "v68",
+      "lessonId": "l5",
+      "word": "holder",
+      "pos": "n",
+      "ipa": "/ˈhəʊl.də/",
+      "question": "Trong câu \"Process pauses — a GC pause longer than the TTL leaves the holder believing it still owns the lock.\", từ \"holder\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Process pauses — a GC pause longer than the TTL leaves the holder believing it still owns the lock.\", what does \"holder\" (noun) mean?",
+      "options": [
+        "giá đỡ, cái kẹp",
+        "người phát hành",
+        "người chờ đợi",
+        "bên đang giữ"
+      ],
+      "optionsEn": [
+        "a stand or clip",
+        "the one issuing",
+        "the one waiting",
+        "the one holding"
+      ],
+      "answer": 3,
+      "explanation": "holder /ˈhəʊl.də/ (danh từ): bên đang giữ. \"Lock holder\" = tiến trình đang giữ khoá; \"account holder\" = chủ tài khoản.",
+      "explanationEn": "holder /ˈhəʊl.də/ (noun): the one holding. A lock holder is the process holding the lock; an account holder owns an account."
+    },
+    {
+      "id": "v69",
+      "lessonId": "l5",
+      "word": "distort",
+      "pos": "v",
+      "ipa": "/dɪˈstɔːt/",
+      "question": "Trong câu \"Clock jumps distort expiry.\", từ \"distort\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Clock jumps distort expiry.\", what does \"distort\" (verb) mean?",
+      "options": [
+        "làm méo hình ảnh",
+        "làm chậm lại",
+        "làm sai lệch",
+        "đồng bộ lại"
+      ],
+      "optionsEn": [
+        "to warp a picture",
+        "to slow down",
+        "to make inaccurate",
+        "to resynchronise"
+      ],
+      "answer": 2,
+      "explanation": "distort /dɪˈstɔːt/ (động từ): làm sai lệch. \"Distort\" = làm sai sự thật/kết quả; đồng hồ nhảy khiến thời điểm hết hạn bị tính sai.",
+      "explanationEn": "distort /dɪˈstɔːt/ (verb): to make inaccurate. \"Distort\" means making something inaccurate; clock jumps miscompute expiry."
+    },
+    {
+      "id": "v70",
+      "lessonId": "l5",
+      "word": "expiry",
+      "pos": "n",
+      "ipa": "/ɪkˈspaɪə.ri/",
+      "question": "Trong câu \"Clock jumps distort expiry.\", từ \"expiry\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Clock jumps distort expiry.\", what does \"expiry\" (noun) mean?",
+      "options": [
+        "sự hết hạn",
+        "sự gia hạn",
+        "sự kinh nghiệm",
+        "sự khởi tạo"
+      ],
+      "optionsEn": [
+        "the end of a valid period",
+        "an extension of time",
+        "practical experience",
+        "the creation of something"
+      ],
+      "answer": 0,
+      "explanation": "expiry /ɪkˈspaɪə.ri/ (danh từ): sự hết hạn. \"Expiry\" (Anh-Anh) ≈ \"expiration\" (Anh-Mỹ); \"expiry date\" = ngày hết hạn.",
+      "explanationEn": "expiry /ɪkˈspaɪə.ri/ (noun): the end of a valid period. \"Expiry\" (British) matches \"expiration\" (American); \"expiry date\" is the end date."
+    },
+    {
+      "id": "v71",
+      "lessonId": "l5",
+      "word": "dispute",
+      "pos": "v",
+      "ipa": "/dɪˈspjuːt/",
+      "question": "Trong câu \"It helps with failover but is disputed (Kleppmann's critique vs antirez's reply) because it still assumes bounded pauses and clock drift.\", từ \"dispute\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It helps with failover but is disputed (Kleppmann's critique vs antirez's reply) because it still assumes bounded pauses and clock drift.\", what does \"dispute\" (verb) mean?",
+      "options": [
+        "đồng thuận hoàn toàn",
+        "phân phối rộng rãi",
+        "đơn giản hoá",
+        "tranh cãi, bị phản bác"
+      ],
+      "optionsEn": [
+        "to fully agree on",
+        "to distribute widely",
+        "to simplify",
+        "to argue over"
+      ],
+      "answer": 3,
+      "explanation": "dispute /dɪˈspjuːt/ (động từ): tranh cãi, bị phản bác. \"Be disputed\" = bị giới chuyên môn tranh luận, chưa có kết luận thống nhất.",
+      "explanationEn": "dispute /dɪˈspjuːt/ (verb): to argue over. \"Be disputed\" means experts argue about it with no agreed conclusion."
+    },
+    {
+      "id": "v72",
+      "lessonId": "l5",
+      "word": "critique",
+      "pos": "n",
+      "ipa": "/krɪˈtiːk/",
+      "question": "Trong câu \"It helps with failover but is disputed (Kleppmann's critique vs antirez's reply) because it still assumes bounded pauses and clock drift.\", từ \"critique\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It helps with failover but is disputed (Kleppmann's critique vs antirez's reply) because it still assumes bounded pauses and clock drift.\", what does \"critique\" (noun) mean?",
+      "options": [
+        "lời khen ngợi",
+        "bài phê bình",
+        "nhà phê bình",
+        "bản hướng dẫn"
+      ],
+      "optionsEn": [
+        "a word of praise",
+        "a critical analysis",
+        "a person who criticises",
+        "a how-to guide"
+      ],
+      "answer": 1,
+      "explanation": "critique /krɪˈtiːk/ (danh từ): bài phê bình. \"Critique\" là bài phân tích; người viết là \"critic\"; động từ \"criticise\".",
+      "explanationEn": "critique /krɪˈtiːk/ (noun): a critical analysis. A critique is the analysis; the writer is a \"critic\"; the verb is \"criticise\"."
+    },
+    {
+      "id": "v73",
+      "lessonId": "l5",
+      "word": "bounded",
+      "pos": "adj",
+      "ipa": "/ˈbaʊn.dɪd/",
+      "question": "Trong câu \"It helps with failover but is disputed (Kleppmann's critique vs antirez's reply) because it still assumes bounded pauses and clock drift.\", từ \"bounded\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It helps with failover but is disputed (Kleppmann's critique vs antirez's reply) because it still assumes bounded pauses and clock drift.\", what does \"bounded\" (adjective) mean?",
+      "options": [
+        "có giới hạn",
+        "bị trói buộc",
+        "không giới hạn",
+        "nhảy vọt"
+      ],
+      "optionsEn": [
+        "having a limit",
+        "tied up",
+        "without any limit",
+        "leaping forward"
+      ],
+      "answer": 0,
+      "explanation": "bounded /ˈbaʊn.dɪd/ (tính từ): có giới hạn. \"Bounded pauses\" = giả định khoảng dừng không bao giờ vượt quá một mức đã biết.",
+      "explanationEn": "bounded /ˈbaʊn.dɪd/ (adjective): having a limit. \"Bounded pauses\" assumes pauses never exceed a known amount."
+    },
+    {
+      "id": "v74",
+      "lessonId": "l5",
+      "word": "drift",
+      "pos": "n",
+      "ipa": "/drɪft/",
+      "question": "Trong câu \"It helps with failover but is disputed (Kleppmann's critique vs antirez's reply) because it still assumes bounded pauses and clock drift.\", từ \"drift\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It helps with failover but is disputed (Kleppmann's critique vs antirez's reply) because it still assumes bounded pauses and clock drift.\", what does \"drift\" (noun) mean?",
+      "options": [
+        "sự trôi dạt trên nước",
+        "độ lệch dần dần",
+        "bước nhảy đột ngột",
+        "sự đồng bộ chính xác"
+      ],
+      "optionsEn": [
+        "floating along on water",
+        "a gradual deviation",
+        "a sudden jump",
+        "exact synchronisation"
+      ],
+      "answer": 1,
+      "explanation": "drift /drɪft/ (danh từ): độ lệch dần dần. \"Clock drift\" = đồng hồ các máy chạy lệch nhau dần; \"configuration drift\" = cấu hình lệch dần.",
+      "explanationEn": "drift /drɪft/ (noun): a gradual deviation. Clock drift is machines' clocks slowly diverging; compare \"configuration drift\"."
+    },
+    {
+      "id": "v75",
+      "lessonId": "l5",
+      "word": "issue",
+      "pos": "v",
+      "ipa": "/ˈɪʃ.uː/",
+      "question": "Trong câu \"For correctness (money, stock), the protected resource must check a fencing token — an increasing number issued with the lock; storage rejects any token older than one already seen — or use etcd/ZooKeeper or database constraints.\", từ \"issue\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"For correctness (money, stock), the protected resource must check a fencing token — an increasing number issued with the lock; storage rejects any token older than one already seen — or use etcd/ZooKeeper or database constraints.\", what does \"issue\" (verb) mean?",
+      "options": [
+        "vấn đề cần giải quyết",
+        "thu hồi lại",
+        "cấp phát, phát hành",
+        "kiểm tra lại"
+      ],
+      "optionsEn": [
+        "a problem to solve",
+        "to take back",
+        "to hand out",
+        "to check again"
+      ],
+      "answer": 2,
+      "explanation": "issue /ˈɪʃ.uː/ (động từ): cấp phát, phát hành. \"Issue a token/certificate\" = cấp token/chứng chỉ; danh từ \"issue\" lại là vấn đề.",
+      "explanationEn": "issue /ˈɪʃ.uː/ (verb): to hand out. \"Issue a token or certificate\" means handing it out; the noun \"issue\" means a problem."
+    },
+    {
+      "id": "v76",
+      "lessonId": "l5",
+      "word": "constraint",
+      "pos": "n",
+      "ipa": "/kənˈstreɪnt/",
+      "question": "Trong câu \"For correctness (money, stock), the protected resource must check a fencing token — an increasing number issued with the lock; storage rejects any token older than one already seen — or use etcd/ZooKeeper or database constraints.\", từ \"constraint\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"For correctness (money, stock), the protected resource must check a fencing token — an increasing number issued with the lock; storage rejects any token older than one already seen — or use etcd/ZooKeeper or database constraints.\", what does \"constraint\" (noun) mean?",
+      "options": [
+        "sự ép buộc người khác",
+        "chỉ mục tìm kiếm",
+        "bản sao dự phòng",
+        "ràng buộc dữ liệu"
+      ],
+      "optionsEn": [
+        "forcing someone to act",
+        "a search index",
+        "a backup copy",
+        "a rule data must obey"
+      ],
+      "answer": 3,
+      "explanation": "constraint /kənˈstreɪnt/ (danh từ): ràng buộc dữ liệu. \"Database constraints\" như UNIQUE, CHECK, FOREIGN KEY giúp từ chối dữ liệu sai.",
+      "explanationEn": "constraint /kənˈstreɪnt/ (noun): a rule data must obey. Database constraints such as UNIQUE, CHECK and FOREIGN KEY reject invalid data."
+    },
+    {
+      "id": "v77",
+      "lessonId": "l6",
+      "word": "stateless",
+      "pos": "adj",
+      "ipa": "/ˈsteɪt.ləs/",
+      "question": "Trong câu \"Stateless app servers store SET session:<id> <json> EX 1800, refreshing the TTL on activity.\", từ \"stateless\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Stateless app servers store SET session:<id> <json> EX 1800, refreshing the TTL on activity.\", what does \"stateless\" (adjective) mean?",
+      "options": [
+        "không có quốc tịch",
+        "không có dữ liệu nào",
+        "không lưu trạng thái",
+        "đã ngừng hoạt động"
+      ],
+      "optionsEn": [
+        "without a nationality",
+        "holding no data at all",
+        "keeping no local state",
+        "no longer running"
+      ],
+      "answer": 2,
+      "explanation": "stateless /ˈsteɪt.ləs/ (tính từ): không lưu trạng thái. Server \"stateless\" để trạng thái ở nơi chung (Redis), nên dễ thêm bớt máy.",
+      "explanationEn": "stateless /ˈsteɪt.ləs/ (adjective): keeping no local state. Stateless servers keep state in a shared store like Redis, so scaling is easy."
+    },
+    {
+      "id": "v78",
+      "lessonId": "l6",
+      "word": "refresh",
+      "pos": "v",
+      "ipa": "/rɪˈfreʃ/",
+      "question": "Trong câu \"Stateless app servers store SET session:<id> <json> EX 1800, refreshing the TTL on activity.\", từ \"refresh\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Stateless app servers store SET session:<id> <json> EX 1800, refreshing the TTL on activity.\", what does \"refresh\" (verb) mean?",
+      "options": [
+        "đặt lại từ đầu",
+        "làm mát, giải khát",
+        "tải lại trang web",
+        "xoá bỏ hẳn"
+      ],
+      "optionsEn": [
+        "to reset afresh",
+        "to cool and revive",
+        "to reload a web page",
+        "to delete entirely"
+      ],
+      "answer": 0,
+      "explanation": "refresh /rɪˈfreʃ/ (động từ): đặt lại từ đầu. \"Refresh the TTL\" = đặt lại thời gian sống mỗi khi người dùng còn hoạt động (sliding session).",
+      "explanationEn": "refresh /rɪˈfreʃ/ (verb): to reset afresh. \"Refresh the TTL\" resets the lifetime whenever the user is active (a sliding session)."
+    },
+    {
+      "id": "v79",
+      "lessonId": "l6",
+      "word": "instance",
+      "pos": "n",
+      "ipa": "/ˈɪn.stəns/",
+      "question": "Trong câu \"Every instance behind the load balancer sees the same session.\", từ \"instance\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Every instance behind the load balancer sees the same session.\", what does \"instance\" (noun) mean?",
+      "options": [
+        "ví dụ minh hoạ",
+        "phiên đăng nhập",
+        "bộ cân bằng tải",
+        "máy chủ đang chạy"
+      ],
+      "optionsEn": [
+        "an example case",
+        "a login session",
+        "a load balancer",
+        "a running server"
+      ],
+      "answer": 3,
+      "explanation": "instance /ˈɪn.stəns/ (danh từ): máy chủ đang chạy. \"Instance\" trong hạ tầng = một bản chạy của ứng dụng; \"for instance\" = ví dụ.",
+      "explanationEn": "instance /ˈɪn.stəns/ (noun): a running server. In infrastructure an instance is one running copy; \"for instance\" means \"for example\"."
+    },
+    {
+      "id": "v80",
+      "lessonId": "l6",
+      "word": "crash",
+      "pos": "v",
+      "ipa": "/kræʃ/",
+      "question": "Trong câu \"The script makes INCR + EXPIRE atomic; two separate calls could leave a counter without a TTL if the app crashed between them.\", từ \"crash\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The script makes INCR + EXPIRE atomic; two separate calls could leave a counter without a TTL if the app crashed between them.\", what does \"crash\" (verb) mean?",
+      "options": [
+        "đâm va (xe cộ)",
+        "bị sập",
+        "chạy chậm lại",
+        "khởi động lại"
+      ],
+      "optionsEn": [
+        "to collide (vehicles)",
+        "to fail suddenly",
+        "to run slowly",
+        "to restart"
+      ],
+      "answer": 1,
+      "explanation": "crash /kræʃ/ (động từ): bị sập. \"The app crashed\" = ứng dụng chết đột ngột; \"crash-safe\" = an toàn khi sập.",
+      "explanationEn": "crash /kræʃ/ (verb): to fail suddenly. \"The app crashed\" means it died unexpectedly; \"crash-safe\" means safe if that happens."
+    },
+    {
+      "id": "v81",
+      "lessonId": "l6",
+      "word": "sliding",
+      "pos": "adj",
+      "ipa": "/ˈslaɪ.dɪŋ/",
+      "question": "Trong câu \"A sliding window uses a sorted set per user: ZREMRANGEBYSCORE old timestamps, ZADD now, ZCARD.\", từ \"sliding\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A sliding window uses a sorted set per user: ZREMRANGEBYSCORE old timestamps, ZADD now, ZCARD.\", what does \"sliding\" (adjective) mean?",
+      "options": [
+        "trượt theo thời gian",
+        "cố định theo khung giờ",
+        "cửa trượt (kiến trúc)",
+        "giảm dần đều"
+      ],
+      "optionsEn": [
+        "moving forward with time",
+        "fixed to set time blocks",
+        "a sliding door (building)",
+        "steadily decreasing"
+      ],
+      "answer": 0,
+      "explanation": "sliding /ˈslaɪ.dɪŋ/ (tính từ): trượt theo thời gian. \"Sliding window\" luôn xét N giây gần nhất, khác \"fixed window\" chia theo mốc cố định.",
+      "explanationEn": "sliding /ˈslaɪ.dɪŋ/ (adjective): moving forward with time. A sliding window always covers the last N seconds, unlike a fixed window with set boundaries."
+    },
+    {
+      "id": "v82",
+      "lessonId": "l6",
+      "word": "opaque",
+      "pos": "adj",
+      "ipa": "/əʊˈpeɪk/",
+      "question": "Trong câu \"Memcached is multi-threaded and stores opaque strings with no persistence or replication; choose it only for a simple, huge string cache.\", từ \"opaque\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Memcached is multi-threaded and stores opaque strings with no persistence or replication; choose it only for a simple, huge string cache.\", what does \"opaque\" (adjective) mean?",
+      "options": [
+        "mờ đục, không trong suốt",
+        "không đọc được bên trong",
+        "được mã hoá mạnh",
+        "rất ngắn gọn"
+      ],
+      "optionsEn": [
+        "not letting light through",
+        "with hidden structure",
+        "strongly encrypted",
+        "very short"
+      ],
+      "answer": 1,
+      "explanation": "opaque /əʊˈpeɪk/ (tính từ): không đọc được bên trong. \"Opaque value\" = hệ thống chỉ lưu và trả nguyên khối, không hiểu nội dung bên trong.",
+      "explanationEn": "opaque /əʊˈpeɪk/ (adjective): with hidden structure. An opaque value is stored and returned as a blob without the system understanding it."
+    },
+    {
+      "id": "v83",
+      "lessonId": "l6",
+      "word": "hardening",
+      "pos": "n",
+      "ipa": "/ˈhɑː.dən.ɪŋ/",
+      "question": "Trong câu \"Hardening: never expose 6379 publicly, enable ACLs and TLS (Redis 6+), keep protected-mode yes, and watch SLOWLOG GET, evictions and replication lag.\", từ \"hardening\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Hardening: never expose 6379 publicly, enable ACLs and TLS (Redis 6+), keep protected-mode yes, and watch SLOWLOG GET, evictions and replication lag.\", what does \"hardening\" (noun) mean?",
+      "options": [
+        "việc làm cứng vật liệu",
+        "việc tăng hiệu năng",
+        "việc gia cố bảo mật",
+        "việc sao lưu dữ liệu"
+      ],
+      "optionsEn": [
+        "making a material harder",
+        "making a system faster",
+        "making a system more secure",
+        "making data backups"
+      ],
+      "answer": 2,
+      "explanation": "hardening /ˈhɑː.dən.ɪŋ/ (danh từ): việc gia cố bảo mật. \"Security hardening\" = giảm bề mặt tấn công: tắt cổng thừa, bật xác thực, mã hoá.",
+      "explanationEn": "hardening /ˈhɑː.dən.ɪŋ/ (noun): making a system more secure. Security hardening shrinks the attack surface: close ports, enable auth and encryption."
+    },
+    {
+      "id": "v84",
+      "lessonId": "l6",
+      "word": "expose",
+      "pos": "v",
+      "ipa": "/ɪkˈspəʊz/",
+      "question": "Trong câu \"Hardening: never expose 6379 publicly, enable ACLs and TLS (Redis 6+), keep protected-mode yes, and watch SLOWLOG GET, evictions and replication lag.\", từ \"expose\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Hardening: never expose 6379 publicly, enable ACLs and TLS (Redis 6+), keep protected-mode yes, and watch SLOWLOG GET, evictions and replication lag.\", what does \"expose\" (verb) mean?",
+      "options": [
+        "phơi sáng ảnh",
+        "tố cáo, vạch trần",
+        "chặn truy cập",
+        "để lộ ra ngoài"
+      ],
+      "optionsEn": [
+        "to let light onto film",
+        "to reveal wrongdoing",
+        "to block access",
+        "to make reachable"
+      ],
+      "answer": 3,
+      "explanation": "expose /ɪkˈspəʊz/ (động từ): để lộ ra ngoài. \"Expose a port\" = mở cổng cho bên ngoài truy cập; Redis không nên lộ ra Internet.",
+      "explanationEn": "expose /ɪkˈspəʊz/ (verb): to make reachable. \"Expose a port\" makes it reachable from outside; Redis should never face the Internet."
+    },
+    {
+      "id": "v85",
+      "lessonId": "l6",
+      "word": "lag",
+      "pos": "n",
+      "ipa": "/læɡ/",
+      "question": "Trong câu \"Hardening: never expose 6379 publicly, enable ACLs and TLS (Redis 6+), keep protected-mode yes, and watch SLOWLOG GET, evictions and replication lag.\", từ \"lag\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Hardening: never expose 6379 publicly, enable ACLs and TLS (Redis 6+), keep protected-mode yes, and watch SLOWLOG GET, evictions and replication lag.\", what does \"lag\" (noun) mean?",
+      "options": [
+        "giật hình khi chơi game",
+        "lỗi mất dữ liệu",
+        "độ tụt lại phía sau",
+        "tốc độ tối đa"
+      ],
+      "optionsEn": [
+        "stuttering in a video game",
+        "a data-loss error",
+        "how far it falls behind",
+        "the top speed"
+      ],
+      "answer": 2,
+      "explanation": "lag /læɡ/ (danh từ): độ tụt lại phía sau. \"Replication lag\" = replica tụt sau primary bao lâu; lag lớn thì failover mất nhiều dữ liệu hơn.",
+      "explanationEn": "lag /læɡ/ (noun): how far it falls behind. Replication lag is how far a replica trails the primary; large lag means more loss on failover."
+    },
+    {
+      "id": "v86",
+      "lessonId": "l7",
+      "word": "latency",
+      "pos": "n",
+      "ipa": "/ˈleɪ.tən.si/",
+      "question": "Trong câu \"Redis keeps data structures in RAM and runs commands one at a time, giving atomic operations and sub-millisecond latency.\", từ \"latency\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Redis keeps data structures in RAM and runs commands one at a time, giving atomic operations and sub-millisecond latency.\", what does \"latency\" (noun) mean?",
+      "options": [
+        "độ trễ phản hồi",
+        "thông lượng mỗi giây",
+        "trạng thái tiềm ẩn",
+        "dung lượng bộ nhớ"
+      ],
+      "optionsEn": [
+        "the delay before a response",
+        "work done per second",
+        "a hidden, dormant state",
+        "the amount of memory"
+      ],
+      "answer": 0,
+      "explanation": "latency /ˈleɪ.tən.si/ (danh từ): độ trễ phản hồi. \"Low latency\" = phản hồi nhanh; đo bằng mili giây hoặc phân vị như p99.",
+      "explanationEn": "latency /ˈleɪ.tən.si/ (noun): the delay before a response. Low latency means fast responses, measured in milliseconds or percentiles like p99."
+    },
+    {
+      "id": "v87",
+      "lessonId": "l7",
+      "word": "deliberate",
+      "pos": "adj",
+      "ipa": "/dɪˈlɪb.ər.ət/",
+      "question": "Trong câu \"TTLs plus a deliberate eviction policy make a bounded cache; noeviction protects data stores.\", từ \"deliberate\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"TTLs plus a deliberate eviction policy make a bounded cache; noeviction protects data stores.\", what does \"deliberate\" (adjective) mean?",
+      "options": [
+        "vô tình, ngẫu nhiên",
+        "mặc định sẵn có",
+        "vội vàng, gấp gáp",
+        "có chủ đích"
+      ],
+      "optionsEn": [
+        "accidental, by chance",
+        "the built-in default",
+        "hasty, rushed",
+        "done on purpose"
+      ],
+      "answer": 3,
+      "explanation": "deliberate /dɪˈlɪb.ər.ət/ (tính từ): có chủ đích. Tính từ đọc /-ət/, còn động từ \"deliberate\" /-eɪt/ = cân nhắc.",
+      "explanationEn": "deliberate /dɪˈlɪb.ər.ət/ (adjective): done on purpose. The adjective ends in /-ət/; the verb \"deliberate\" /-eɪt/ means to think carefully."
+    },
+    {
+      "id": "v88",
+      "lessonId": "l7",
+      "word": "trade against",
+      "pos": "phrase",
+      "ipa": "/treɪd əˈɡenst/",
+      "question": "Trong câu \"RDB and AOF trade recovery point against cost; async replication means failover may lose recent writes.\", từ \"trade against\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDB and AOF trade recovery point against cost; async replication means failover may lose recent writes.\", what does \"trade against\" (phrase) mean?",
+      "options": [
+        "buôn bán với đối thủ",
+        "đánh đổi",
+        "chống lại hoàn toàn",
+        "cộng dồn lại"
+      ],
+      "optionsEn": [
+        "to do business with rivals",
+        "to give up one for another",
+        "to fully oppose",
+        "to add together"
+      ],
+      "answer": 1,
+      "explanation": "trade against /treɪd əˈɡenst/ (cụm từ): đánh đổi. \"Trade A against B\" = được A thì mất B; danh từ liên quan: \"trade-off\" (sự đánh đổi).",
+      "explanationEn": "trade against /treɪd əˈɡenst/ (phrase): to give up one for another. \"Trade A against B\" means gaining one at the cost of the other; noun: \"trade-off\"."
+    },
+    {
+      "id": "v89",
+      "lessonId": "l7",
+      "word": "natural fit",
+      "pos": "phrase",
+      "ipa": "/ˈnætʃ.ər.əl fɪt/",
+      "question": "Trong câu \"Sessions, leaderboards, rate limiters and efficiency locks are natural fits within those limits.\", từ \"natural fit\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Sessions, leaderboards, rate limiters and efficiency locks are natural fits within those limits.\", what does \"natural fit\" (phrase) mean?",
+      "options": [
+        "sự phù hợp tự nhiên",
+        "kích cỡ quần áo vừa",
+        "giải pháp tạm thời",
+        "trường hợp ngoại lệ"
+      ],
+      "optionsEn": [
+        "an obviously suitable choice",
+        "clothing of the right size",
+        "a temporary workaround",
+        "an unusual exception"
+      ],
+      "answer": 0,
+      "explanation": "natural fit /ˈnætʃ.ər.əl fɪt/ (cụm từ): sự phù hợp tự nhiên. \"X is a natural fit for Y\" = X hợp với Y một cách hiển nhiên, không cần gượng ép.",
+      "explanationEn": "natural fit /ˈnætʃ.ər.əl fɪt/ (phrase): an obviously suitable choice. \"X is a natural fit for Y\" means X suits Y obviously, without forcing it."
+    },
+    {
+      "id": "v90",
+      "lessonId": "l7",
+      "word": "uniqueness",
+      "pos": "n",
+      "ipa": "/juˈniːk.nəs/",
+      "question": "Trong câu \"Each data type maps to a need: counters, objects, queues, uniqueness, rankings, event logs.\", từ \"uniqueness\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each data type maps to a need: counters, objects, queues, uniqueness, rankings, event logs.\", what does \"uniqueness\" (noun) mean?",
+      "options": [
+        "tính đặc sắc, độc đáo",
+        "tính không trùng lặp",
+        "tính thứ tự",
+        "tính bền vững"
+      ],
+      "optionsEn": [
+        "being special and remarkable",
+        "having no duplicates",
+        "being in order",
+        "being durable"
+      ],
+      "answer": 1,
+      "explanation": "uniqueness /juˈniːk.nəs/ (danh từ): tính không trùng lặp. \"Enforce uniqueness\" = bảo đảm không có giá trị trùng; Set trong Redis làm việc này.",
+      "explanationEn": "uniqueness /juˈniːk.nəs/ (noun): having no duplicates. \"Enforce uniqueness\" means ensuring no duplicate values; a Redis Set does that."
+    }
+  ]
+}

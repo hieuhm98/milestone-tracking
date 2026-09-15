@@ -1,0 +1,342 @@
+[
+  {
+    "id": "q1",
+    "question": "Lợi ích chính của multi-stage build đối với image production là gì?",
+    "questionEn": "What is the main benefit of a multi-stage build for a production image?",
+    "options": [
+      "Nó cho phép một container chạy nhiều process song song",
+      "Nó tự động quét CVE ở mỗi stage trước khi build tiếp",
+      "Toolchain và dev dependency ở lại stage build, image cuối chỉ chứa thứ cần để chạy",
+      "Nó chia image thành nhiều file để pull song song nhanh hơn"
+    ],
+    "optionsEn": [
+      "It lets one container run several processes side by side",
+      "It automatically scans each stage for CVEs before continuing",
+      "Toolchains and dev dependencies stay in the build stage; the final image holds only what runs",
+      "It splits the image into several files so pulls run in parallel"
+    ],
+    "answer": 2,
+    "explanation": "Chỉ stage cuối trở thành image; các stage trước bị bỏ đi, chỉ những artifact được `COPY --from` mới đi tiếp. Kết quả là image nhỏ hơn, ít CVE hơn và ít công cụ cho kẻ tấn công. Multi-stage không liên quan tới quét lỗ hổng hay số process.",
+    "explanationEn": "Only the last stage becomes the image; earlier stages are discarded and only artifacts pulled with `COPY --from` survive. The result is a smaller image with fewer CVEs and fewer tools for an attacker. Multi-stage has nothing to do with scanning or process count."
+  },
+  {
+    "id": "q2",
+    "question": "Với Dockerfile sau, image cuối cùng chứa những gì?\n`FROM golang:1.23 AS build\nWORKDIR /src\nCOPY . .\nRUN CGO_ENABLED=0 go build -o /out/api .\n\nFROM gcr.io/distroless/static-debian12:nonroot\nCOPY --from=build /out/api /api\nENTRYPOINT [\"/api\"]`",
+    "questionEn": "Given this Dockerfile, what does the final image contain?\n`FROM golang:1.23 AS build\nWORKDIR /src\nCOPY . .\nRUN CGO_ENABLED=0 go build -o /out/api .\n\nFROM gcr.io/distroless/static-debian12:nonroot\nCOPY --from=build /out/api /api\nENTRYPOINT [\"/api\"]`",
+    "options": [
+      "Base distroless static cùng binary `/api`, không có mã nguồn Go hay compiler",
+      "Toàn bộ image `golang:1.23` cộng thêm binary `/api`",
+      "Mã nguồn trong `/src` cùng binary, nhưng không có compiler",
+      "Chỉ binary `/api`, không có CA certificate hay user nào"
+    ],
+    "optionsEn": [
+      "The distroless static base plus the `/api` binary, with no Go source or compiler",
+      "The whole `golang:1.23` image plus the `/api` binary",
+      "The source in `/src` plus the binary, but no compiler",
+      "Only the `/api` binary, with no CA certificates or users at all"
+    ],
+    "answer": 0,
+    "explanation": "Stage `build` bị bỏ đi; image cuối là base distroless static (có CA certificate, tzdata và user `nonroot`) cộng đúng một file được copy sang. Chỉ `scratch` mới thật sự rỗng.",
+    "explanationEn": "The `build` stage is discarded; the final image is the distroless static base (which carries CA certificates, tzdata and the `nonroot` user) plus the one copied file. Only `scratch` is truly empty."
+  },
+  {
+    "id": "q3",
+    "question": "Một team đóng gói service Go biên dịch thành binary tĩnh. Security yêu cầu bề mặt tấn công nhỏ nhất, không có shell, không chạy bằng root, nhưng vẫn gọi được HTTPS ra ngoài. Base image nào hợp lý nhất?",
+    "questionEn": "A team packages a Go service compiled into a static binary. Security wants the smallest attack surface, no shell and no root, but the service must still call HTTPS endpoints. Which runtime base fits best?",
+    "options": [
+      "`ubuntu:24.04` với user được tạo bằng `useradd`",
+      "`alpine` vì nó chỉ nặng vài MB",
+      "`scratch` không thêm gì, vì binary đã tĩnh",
+      "`gcr.io/distroless/static-debian12:nonroot`"
+    ],
+    "optionsEn": [
+      "`ubuntu:24.04` with a user created via `useradd`",
+      "`alpine`, because it is only a few MB",
+      "`scratch` with nothing added, since the binary is static",
+      "`gcr.io/distroless/static-debian12:nonroot`"
+    ],
+    "answer": 3,
+    "explanation": "Distroless static không có shell hay package manager, đã có CA certificate cho HTTPS và user `nonroot` sẵn. Alpine vẫn có shell; Ubuntu nặng và nhiều package; `scratch` rỗng hoàn toàn nên thiếu CA certificate và sẽ lỗi khi gọi HTTPS trừ khi tự copy vào.",
+    "explanationEn": "Distroless static has no shell or package manager, and already ships CA certificates for HTTPS and a `nonroot` user. Alpine still has a shell; Ubuntu is large; bare `scratch` lacks CA certificates, so TLS calls fail unless you copy them in yourself."
+  },
+  {
+    "id": "q4",
+    "question": "Build Docker của một app Node mất 4 phút, mỗi lần sửa một dòng code đều cài lại toàn bộ dependency, và scanner phát hiện file `.env` nằm trong image. Dockerfile có `COPY . .` ngay sau `WORKDIR`, rồi mới `RUN npm ci`. Cách sửa tốt nhất là gì?",
+    "questionEn": "A Node app's Docker build takes 4 minutes, every one-line code change reinstalls all dependencies, and a scanner finds a `.env` file inside the image. The Dockerfile does `COPY . .` right after `WORKDIR`, then `RUN npm ci`. What is the best fix?",
+    "options": [
+      "Chuyển sang base `alpine` để build nhanh hơn",
+      "Thêm `.dockerignore` loại `.git`, `node_modules`, `.env`, và copy `package*.json` rồi `npm ci` trước khi `COPY . .`",
+      "Thêm `rm .env` vào cuối Dockerfile và dùng `--no-cache` khi build",
+      "Đổi `npm ci` thành `npm install` để tận dụng cache của npm"
+    ],
+    "optionsEn": [
+      "Switch to an `alpine` base so the build runs faster",
+      "Add a `.dockerignore` excluding `.git`, `node_modules`, `.env`, and copy `package*.json` and run `npm ci` before `COPY . .`",
+      "Add `rm .env` at the end of the Dockerfile and build with `--no-cache`",
+      "Replace `npm ci` with `npm install` to reuse npm's cache"
+    ],
+    "answer": 1,
+    "explanation": "`.dockerignore` giữ `.env` và thư mục lớn ngoài build context; copy manifest trước giúp layer `npm ci` chỉ bị build lại khi dependency đổi. `rm` ở layer sau không xoá file khỏi layer trước, còn `--no-cache` làm build chậm hơn.",
+    "explanationEn": "`.dockerignore` keeps `.env` and heavy directories out of the build context; copying the manifests first means the `npm ci` layer only rebuilds when dependencies change. An `rm` in a later layer does not remove the file from the earlier one, and `--no-cache` makes builds slower."
+  },
+  {
+    "id": "q5",
+    "question": "Review bảo mật phát hiện một API container chạy bằng root, với `-v /var/run/docker.sock:/var/run/docker.sock` \"để tiện debug\". Tổ hợp thay đổi nào giảm rủi ro nhiều nhất mà không đổi chức năng của API?",
+    "questionEn": "A security review finds an API container running as root with `-v /var/run/docker.sock:/var/run/docker.sock` \"for easier debugging\". Which set of changes reduces risk the most without changing what the API does?",
+    "options": [
+      "Giữ socket nhưng mount ở chế độ `:ro`, và chuyển sang base Alpine",
+      "Thêm `--privileged` để AppArmor quản lý container chặt hơn",
+      "Bỏ mount socket, đặt `USER` non-root, chạy với `--read-only`, `--cap-drop ALL` và `no-new-privileges`",
+      "Đổi port publish từ 80 sang 8080 và bật restart policy `always`"
+    ],
+    "optionsEn": [
+      "Keep the socket but mount it `:ro`, and move to an Alpine base",
+      "Add `--privileged` so AppArmor manages the container more tightly",
+      "Remove the socket mount, set a non-root `USER`, run with `--read-only`, `--cap-drop ALL` and `no-new-privileges`",
+      "Publish on 8080 instead of 80 and enable the `always` restart policy"
+    ],
+    "answer": 2,
+    "explanation": "Truy cập Docker socket tương đương root trên host — mount `:ro` không giúp gì vì API của socket vẫn tạo được container privileged. Non-root cùng read-only filesystem, bỏ capability và `no-new-privileges` giới hạn thiệt hại khi bị xâm nhập. `--privileged` thì tắt gần hết cơ chế cô lập.",
+    "explanationEn": "Docker socket access equals root on the host — `:ro` does not help, because the socket's API can still start a privileged container. Non-root plus a read-only filesystem, dropped capabilities and `no-new-privileges` limit the blast radius of a compromise. `--privileged` switches off almost all isolation."
+  },
+  {
+    "id": "q6",
+    "question": "Vì sao đoạn Dockerfile sau bị coi là rò rỉ secret, dù token không nằm trong source code?\n`ARG NPM_TOKEN\nENV NPM_TOKEN=$NPM_TOKEN\nRUN npm ci`",
+    "questionEn": "Why is this Dockerfile snippet considered a secret leak, even though the token is not in the source code?\n`ARG NPM_TOKEN\nENV NPM_TOKEN=$NPM_TOKEN\nRUN npm ci`",
+    "options": [
+      "Giá trị được ghi vào metadata của image, ai pull image cũng xem được qua `docker inspect` hoặc `docker history`",
+      "`ARG` bị gửi lên Docker Hub dưới dạng plain text mỗi khi build",
+      "`npm ci` in token ra log build, và log được lưu trong layer cuối",
+      "Biến `ENV` chỉ tồn tại lúc build nên npm không đọc được, buộc phải hard-code token"
+    ],
+    "optionsEn": [
+      "The value is recorded in image metadata, so anyone who pulls the image can read it via `docker inspect` or `docker history`",
+      "`ARG` values are uploaded to Docker Hub in plain text on every build",
+      "`npm ci` prints the token to the build log, which is stored in the final layer",
+      "`ENV` only exists at build time so npm cannot read it, forcing a hard-coded token"
+    ],
+    "answer": 0,
+    "explanation": "`ENV` được lưu trong config của image và tồn tại cả lúc chạy; giá trị `ARG` dùng trong lệnh cũng hiện trong lịch sử build. Cách đúng là `RUN --mount=type=secret`, secret chỉ được mount cho đúng bước đó và không vào layer nào.",
+    "explanationEn": "`ENV` is stored in the image config and persists at runtime; `ARG` values used by instructions also show up in build history. The right tool is `RUN --mount=type=secret`, which mounts the secret for that one step and never writes it to a layer."
+  },
+  {
+    "id": "q7",
+    "question": "CI cần dùng file `.npmrc` chứa token để cài package private lúc build image. Image được push lên registry mà nhiều team pull được. Cách nào đúng?",
+    "questionEn": "CI needs an `.npmrc` containing a token to install private packages while building an image. The image is pushed to a registry that many teams can pull from. Which approach is correct?",
+    "options": [
+      "`COPY .npmrc` rồi `RUN npm ci && rm .npmrc` trong cùng một Dockerfile",
+      "Truyền token bằng `--build-arg` và xoá biến bằng `ENV NPM_TOKEN=` ở cuối",
+      "Commit `.npmrc` vào repo nhưng thêm nó vào `.gitignore` sau khi build",
+      "`RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm ci` và build với `--secret id=npmrc,src=...`"
+    ],
+    "optionsEn": [
+      "`COPY .npmrc` then `RUN npm ci && rm .npmrc` in the same Dockerfile",
+      "Pass the token with `--build-arg` and clear it with `ENV NPM_TOKEN=` at the end",
+      "Commit `.npmrc` to the repo but add it to `.gitignore` after the build",
+      "`RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm ci` and build with `--secret id=npmrc,src=...`"
+    ],
+    "answer": 3,
+    "explanation": "BuildKit secret mount đưa file vào đúng một bước `RUN` và không ghi vào layer. `COPY` rồi `rm` để lại bytes trong layer của lệnh `COPY`; build-arg bị ghi lại trong lịch sử; commit vào repo thì đã lộ rồi.",
+    "explanationEn": "A BuildKit secret mount exposes the file to one `RUN` step and never writes it to a layer. `COPY` then `rm` leaves the bytes in the `COPY` layer; build args are recorded in history; committing it to the repo has already leaked it."
+  },
+  {
+    "id": "q8",
+    "question": "Mỗi lần deploy, `docker stop` mất đúng 10 giây và các request đang xử lý bị cắt ngang, dù app có handler cho `SIGTERM`. Dockerfile kết thúc bằng dòng sau. Nguyên nhân khả dĩ nhất?\n`CMD npm start`",
+    "questionEn": "On every deploy, `docker stop` takes exactly 10 seconds and in-flight requests are cut off, even though the app has a `SIGTERM` handler. The Dockerfile ends with the line below. Most likely cause?\n`CMD npm start`",
+    "options": [
+      "Healthcheck đang fail nên Docker từ chối stop container một cách êm",
+      "Shell form khiến `/bin/sh` làm PID 1 và `SIGTERM` không tới được process Node, nên sau 10 giây nó bị `SIGKILL`",
+      "Restart policy `unless-stopped` khởi động lại container ngay trong lúc đang stop",
+      "Giới hạn `--cpus` quá thấp làm handler `SIGTERM` chạy quá chậm"
+    ],
+    "optionsEn": [
+      "The healthcheck is failing, so Docker refuses to stop the container gracefully",
+      "Shell form makes `/bin/sh` PID 1 and `SIGTERM` never reaches the Node process, so it is `SIGKILL`ed after 10 seconds",
+      "The `unless-stopped` restart policy restarts the container in the middle of stopping",
+      "A low `--cpus` limit makes the `SIGTERM` handler run too slowly"
+    ],
+    "answer": 1,
+    "explanation": "Đúng 10 giây là thời gian chờ mặc định của `docker stop` trước khi gửi `SIGKILL` — dấu hiệu signal không tới được app. Shell form chạy qua `/bin/sh -c`, và npm là một lớp bọc nữa. Dùng exec form `CMD [\"node\", \"server.js\"]` hoặc `--init`.",
+    "explanationEn": "Exactly 10 seconds is `docker stop`'s default grace period before `SIGKILL` — the tell-tale sign that the signal never reached the app. Shell form runs via `/bin/sh -c`, and npm adds another wrapper. Use exec form `CMD [\"node\", \"server.js\"]` or `--init`."
+  },
+  {
+    "id": "q9",
+    "question": "Một container chạy bằng `docker run --restart unless-stopped` (không có Compose, Swarm hay Kubernetes) có `HEALTHCHECK` và chuyển sang trạng thái `unhealthy`. Docker sẽ làm gì?",
+    "questionEn": "A container started with `docker run --restart unless-stopped` (no Compose, Swarm or Kubernetes) has a `HEALTHCHECK` and turns `unhealthy`. What does Docker do?",
+    "options": [
+      "Chỉ ghi nhận trạng thái `unhealthy`; container vẫn chạy tiếp cho tới khi process tự thoát",
+      "Restart container ngay vì restart policy áp dụng cho trạng thái unhealthy",
+      "Gửi `SIGTERM` rồi tạo container mới từ cùng image",
+      "Ngắt container khỏi network cho tới khi healthcheck đạt trở lại"
+    ],
+    "optionsEn": [
+      "It only records the `unhealthy` status; the container keeps running until its process exits",
+      "It restarts the container immediately, because restart policies apply to unhealthy status",
+      "It sends `SIGTERM` and then creates a new container from the same image",
+      "It disconnects the container from its networks until the healthcheck passes again"
+    ],
+    "answer": 0,
+    "explanation": "Restart policy chỉ phản ứng khi process thoát. Docker thuần chỉ báo cáo health; Swarm mới thay task unhealthy, Compose dùng nó cho `depends_on`, còn Kubernetes dùng liveness probe riêng. Muốn tự hồi phục trên một host, hãy để app tự thoát hoặc dùng orchestrator.",
+    "explanationEn": "Restart policies only react to the process exiting. Plain Docker merely reports health; Swarm replaces unhealthy tasks, Compose uses it for `depends_on`, and Kubernetes relies on its own liveness probes. For self-healing on one host, let the app exit or use an orchestrator."
+  },
+  {
+    "id": "q10",
+    "question": "Một worker liên tục restart. `docker inspect` cho thấy `\"ExitCode\": 137` và `\"OOMKilled\": true`. Container được chạy với `--memory 256m --cpus 0.5`. Chẩn đoán đúng nhất là gì?",
+    "questionEn": "A worker keeps restarting. `docker inspect` shows `\"ExitCode\": 137` and `\"OOMKilled\": true`. It runs with `--memory 256m --cpus 0.5`. What is the best diagnosis?",
+    "options": [
+      "Giới hạn CPU 0.5 quá thấp nên kernel kill process khi nó dùng quá quota",
+      "App tự gọi `process.exit(137)` sau khi bắt được lỗi",
+      "Process dùng vượt giới hạn bộ nhớ 256 MB của cgroup và bị kernel OOM-kill bằng SIGKILL",
+      "`docker stop` hết thời gian chờ 10 giây do app không xử lý `SIGTERM`"
+    ],
+    "optionsEn": [
+      "The 0.5 CPU limit is too low, so the kernel kills the process when it exceeds its quota",
+      "The app calls `process.exit(137)` itself after catching an error",
+      "The process exceeded its 256 MB cgroup memory limit and was OOM-killed by the kernel with SIGKILL",
+      "`docker stop` hit its 10-second timeout because the app ignores `SIGTERM`"
+    ],
+    "answer": 2,
+    "explanation": "137 = 128 + 9 (SIGKILL), và `OOMKilled: true` xác nhận nguyên nhân là bộ nhớ. Giới hạn CPU chỉ throttle chứ không kill. Hãy nâng limit hoặc giảm heap của runtime xuống dưới limit (ví dụ `--max-old-space-size` cho Node).",
+    "explanationEn": "137 = 128 + 9 (SIGKILL), and `OOMKilled: true` confirms memory is the cause. CPU limits throttle, they never kill. Raise the limit or cap the runtime's heap below it (for example `--max-old-space-size` for Node)."
+  },
+  {
+    "id": "q11",
+    "question": "Một service chạy lâu dài trên một VM. Nó phải tự khởi động lại khi crash và khi VM reboot, nhưng nếu ops chủ động `docker stop` để bảo trì thì phải giữ nguyên trạng thái dừng kể cả sau khi daemon khởi động lại. Chọn restart policy nào?",
+    "questionEn": "A long-running service on one VM must come back after a crash and after the VM reboots, but if ops deliberately `docker stop` it for maintenance it must stay stopped, even across a daemon restart. Which restart policy?",
+    "options": [
+      "`always`",
+      "`on-failure:5`",
+      "`no`",
+      "`unless-stopped`"
+    ],
+    "optionsEn": [
+      "`always`",
+      "`on-failure:5`",
+      "`no`",
+      "`unless-stopped`"
+    ],
+    "answer": 3,
+    "explanation": "`unless-stopped` restart sau mọi lần thoát và khi daemon khởi động, trừ khi container đã được stop thủ công. `always` sẽ bật lại container đã stop thủ công khi daemon khởi động lại; `on-failure` bỏ qua các lần thoát với code 0; `no` không bao giờ restart.",
+    "explanationEn": "`unless-stopped` restarts after any exit and on daemon start, unless the container was stopped manually. `always` brings a manually stopped container back when the daemon restarts; `on-failure` ignores exit code 0; `no` never restarts."
+  },
+  {
+    "id": "q12",
+    "question": "Ổ đĩa của một Docker host đầy 100%. `du` cho thấy thư mục `/var/lib/docker/containers/` chiếm 180 GB, chủ yếu là các file `*-json.log`. Nguyên nhân gốc và cách sửa bền vững là gì?",
+    "questionEn": "A Docker host's disk is 100% full. `du` shows `/var/lib/docker/containers/` using 180 GB, mostly `*-json.log` files. What is the root cause and the lasting fix?",
+    "options": [
+      "Volume chưa được xoá; chạy `docker volume prune` hằng tuần",
+      "Driver mặc định `json-file` không xoay vòng log; đặt `max-size`/`max-file` trong `daemon.json` (hoặc dùng driver `local`) rồi tạo lại container",
+      "Image cũ tích tụ; chạy `docker image prune -a` bằng cron",
+      "App ghi log vào file trong container; mount `/var/log` ra một bind mount"
+    ],
+    "optionsEn": [
+      "Volumes were never removed; run `docker volume prune` weekly",
+      "The default `json-file` driver does not rotate; set `max-size`/`max-file` in `daemon.json` (or use the `local` driver) and recreate the containers",
+      "Old images pile up; run `docker image prune -a` from cron",
+      "The app writes log files inside the container; bind-mount `/var/log` out"
+    ],
+    "answer": 1,
+    "explanation": "Các file `*-json.log` chính là output stdout/stderr do driver `json-file` ghi, và mặc định nó không giới hạn kích thước. Cấu hình trong `daemon.json` chỉ áp dụng cho container tạo mới, nên phải tạo lại container. Prune volume hay image không đụng tới các file này.",
+    "explanationEn": "The `*-json.log` files are stdout/stderr captured by the `json-file` driver, which has no size limit by default. Settings in `daemon.json` only apply to newly created containers, so they must be recreated. Pruning volumes or images does not touch these files."
+  },
+  {
+    "id": "q13",
+    "question": "Một image được Trivy quét sạch lúc build cách đây 3 tháng và vẫn đang chạy production, chưa build lại. Kiến trúc sư nên đề xuất quy trình nào?",
+    "questionEn": "An image passed a Trivy scan at build time three months ago and still runs in production without a rebuild. Which process should the architect recommend?",
+    "options": [
+      "Quét lại liên tục các image trong registry và tự động rebuild trên base image đã vá khi có CVE mới",
+      "Không cần làm gì: image bất biến nên kết quả quét lúc build vẫn còn đúng",
+      "Chạy `apt-get upgrade` bên trong container đang chạy mỗi tuần",
+      "Chuyển image sang tag `:latest` để lần pull sau tự nhận bản vá"
+    ],
+    "optionsEn": [
+      "Continuously rescan images in the registry and automatically rebuild on a patched base when new CVEs appear",
+      "Nothing: images are immutable, so the build-time scan result still holds",
+      "Run `apt-get upgrade` inside the running container every week",
+      "Move the image to the `:latest` tag so the next pull picks up patches"
+    ],
+    "answer": 0,
+    "explanation": "Image không đổi nhưng cơ sở dữ liệu CVE thì liên tục có mục mới, nên image \"sạch\" hôm qua có thể có lỗ hổng hôm nay. Vá trong container đang chạy phá tính bất biến và mất khi container được tạo lại; `:latest` chỉ là tag có thể thay đổi, không phải quy trình vá.",
+    "explanationEn": "The image does not change, but CVE databases keep gaining entries, so yesterday's clean image can be vulnerable today. Patching a running container breaks immutability and is lost on recreation; `:latest` is just a mutable tag, not a patching process."
+  },
+  {
+    "id": "q14",
+    "question": "Vì sao nên ký image bằng cosign và deploy theo digest (`@sha256:...`) thay vì chỉ theo tag như `:v1.4.2`?",
+    "questionEn": "Why should images be signed with cosign and deployed by digest (`@sha256:...`) rather than only by a tag such as `:v1.4.2`?",
+    "options": [
+      "Digest giúp image pull nhanh hơn vì registry bỏ qua bước tra cứu tag",
+      "Tag chỉ dùng được với Docker Hub, còn registry private yêu cầu digest",
+      "Chữ ký cosign sẽ nén image lại, và chỉ digest mới trỏ được tới bản đã nén",
+      "Tag có thể bị trỏ sang image khác, còn digest là hash nội dung; chữ ký gắn với digest chứng minh đúng image do pipeline build ra"
+    ],
+    "optionsEn": [
+      "Digests make pulls faster because the registry skips the tag lookup",
+      "Tags only work with Docker Hub, while private registries require digests",
+      "A cosign signature compresses the image, and only the digest can point to the compressed copy",
+      "Tags can be moved to a different image while a digest is a content hash; a signature bound to the digest proves this exact image came from the pipeline"
+    ],
+    "answer": 3,
+    "explanation": "Digest được tính từ nội dung nên không thể trỏ sang image khác, còn tag có thể bị push đè. Ký theo digest và xác minh lúc deploy (ví dụ bằng admission policy) đảm bảo thứ chạy chính là thứ CI đã build và quét.",
+    "explanationEn": "A digest is derived from content, so it cannot point to anything else, whereas a tag can be overwritten by a later push. Signing the digest and verifying at deploy time (e.g. with an admission policy) guarantees that what runs is exactly what CI built and scanned."
+  },
+  {
+    "id": "q15",
+    "question": "Khi `docker compose up`, service `api` thường crash vì không kết nối được Postgres, dù đã khai báo như dưới. Cách sửa trong Compose là gì?\n`services:\n  api:\n    image: api:1.0\n    depends_on:\n      - db\n  db:\n    image: postgres:16`",
+    "questionEn": "On `docker compose up`, the `api` service often crashes because it cannot reach Postgres, despite the declaration below. What is the Compose fix?\n`services:\n  api:\n    image: api:1.0\n    depends_on:\n      - db\n  db:\n    image: postgres:16`",
+    "options": [
+      "Thêm `links: [db]` cho `api` để Compose tạo DNS cho `db`",
+      "Đổi thứ tự khai báo để `db` nằm trên `api` trong file",
+      "Thêm `healthcheck` dùng `pg_isready` cho `db` và đổi `depends_on` sang `condition: service_healthy`",
+      "Đặt `restart: always` cho `db` để nó khởi động nhanh hơn"
+    ],
+    "optionsEn": [
+      "Add `links: [db]` to `api` so Compose creates DNS for `db`",
+      "Reorder the file so `db` is declared above `api`",
+      "Give `db` a `healthcheck` using `pg_isready` and change `depends_on` to `condition: service_healthy`",
+      "Set `restart: always` on `db` so it starts faster"
+    ],
+    "answer": 2,
+    "explanation": "`depends_on` dạng danh sách chỉ đảm bảo container `db` được start trước, không chờ Postgres sẵn sàng nhận kết nối. `service_healthy` chờ healthcheck đạt. DNS theo tên service đã có sẵn trên network mặc định, và thứ tự trong file không quan trọng. App vẫn nên tự retry.",
+    "explanationEn": "The list form of `depends_on` only ensures the `db` container is started first, not that Postgres accepts connections. `service_healthy` waits for the healthcheck to pass. Service-name DNS already exists on the default network, and file order is irrelevant. The app should still retry."
+  },
+  {
+    "id": "q16",
+    "question": "Một startup đang chạy stack bằng Docker Compose trên một VM. Họ muốn mở rộng ra 3 VM, có rolling deploy không downtime và tự thay container khi một node chết. Khuyến nghị hợp lý nhất là gì?",
+    "questionEn": "A startup runs its stack with Docker Compose on one VM. It now wants to spread across 3 VMs, with zero-downtime rolling deploys and automatic replacement of containers when a node dies. What is the most sensible recommendation?",
+    "options": [
+      "Chạy cùng file `compose.yaml` trên cả 3 VM và đặt DNS round-robin phía trước",
+      "Chuyển sang một orchestrator như Kubernetes (hoặc ECS trên AWS), vì Compose chỉ quản lý container trên một host",
+      "Thêm `deploy.replicas: 3` vào Compose để nó tự phân bổ ra 3 VM",
+      "Giữ một VM nhưng dùng `restart: always` để đạt tính sẵn sàng cao"
+    ],
+    "optionsEn": [
+      "Run the same `compose.yaml` on all 3 VMs behind round-robin DNS",
+      "Move to an orchestrator such as Kubernetes (or ECS on AWS), since Compose only manages containers on a single host",
+      "Add `deploy.replicas: 3` to Compose so it spreads the containers over 3 VMs",
+      "Stay on one VM and use `restart: always` for high availability"
+    ],
+    "answer": 1,
+    "explanation": "Lập lịch đa host, tự phục hồi giữa các node và rolling update là việc của orchestrator. `replicas` trong Compose chỉ chạy nhiều bản sao trên cùng host; ba bản Compose độc lập không phối hợp deploy hay failover; một VM thì vẫn là điểm lỗi duy nhất.",
+    "explanationEn": "Multi-host scheduling, cross-node self-healing and rolling updates are orchestration. Compose `replicas` only runs several copies on the same host; three independent Compose installs do not coordinate deploys or failover; a single VM remains a single point of failure."
+  },
+  {
+    "id": "q17",
+    "question": "Một app lưu session người dùng và file upload trên filesystem cục bộ của container. Sau khi scale lên 3 container sau load balancer, người dùng liên tục bị đăng xuất và ảnh lúc có lúc không. App đang vi phạm yếu tố twelve-factor nào rõ nhất?",
+    "questionEn": "An app keeps user sessions and uploaded files on the container's local filesystem. After scaling to 3 containers behind a load balancer, users are logged out repeatedly and images appear only sometimes. Which twelve-factor principle is most clearly violated?",
+    "options": [
+      "Processes — process phải stateless, state phải nằm ở backing service như Redis hoặc object storage",
+      "Port binding — app phải tự publish port thay vì dựa vào load balancer",
+      "Codebase — mỗi container phải build từ một repo riêng",
+      "Admin processes — upload phải chạy như tác vụ một lần"
+    ],
+    "optionsEn": [
+      "Processes — processes must be stateless, with state in backing services such as Redis or object storage",
+      "Port binding — the app must publish its own port instead of relying on a load balancer",
+      "Codebase — each container must be built from its own repository",
+      "Admin processes — uploads must run as one-off tasks"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi request có thể rơi vào container khác, nên state cục bộ không nhất quán và mất khi container bị thay. Đưa session vào Redis và file vào object storage (như S3) để container nào cũng phục vụ được, đồng thời scale out (Concurrency) và thay container tự do (Disposability).",
+    "explanationEn": "Each request may land on a different container, so local state is inconsistent and disappears when a container is replaced. Moving sessions to Redis and files to object storage (such as S3) lets any container serve any request, which is also what makes scaling out and disposability work."
+  }
+]

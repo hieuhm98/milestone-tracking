@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Hai thành phần bắt buộc của một hàm đệ quy đúng là gì?",
+    "questionEn": "What are the two essential parts of a correct recursive function?",
+    "options": [
+      "Một vòng lặp `for` và một biến đếm",
+      "Một closure và một mảng kết quả ở scope ngoài",
+      "Một base case và một input khác đi, tiến dần về base case ở mỗi lần gọi",
+      "Một lệnh `try/catch` và một giới hạn độ sâu tối đa"
+    ],
+    "optionsEn": [
+      "A `for` loop and a counter variable",
+      "A closure and a result array in an outer scope",
+      "A base case and a different input that moves toward the base case on each call",
+      "A `try/catch` block and a maximum depth limit"
+    ],
+    "answer": 2,
+    "explanation": "Base case là điều kiện dừng; input khác đi đảm bảo mỗi lời gọi tiến gần hơn tới điều kiện đó. Thiếu một trong hai, hàm sẽ gọi mãi cho đến khi tràn stack. Closure và mảng ngoài chỉ là một mẫu (helper method), không bắt buộc.",
+    "explanationEn": "The base case is the stopping condition; the different input guarantees each call gets closer to it. Without either, the function calls itself until the stack overflows. A closure with an outer array is just one pattern (helper method), not a requirement."
+  },
+  {
+    "id": "q2",
+    "question": "Hàm `a` gọi `b`, và `b` gọi `c`. Các frame bị pop khỏi call stack theo thứ tự nào?",
+    "questionEn": "Function `a` calls `b`, and `b` calls `c`. In what order are the frames popped off the call stack?",
+    "options": [
+      "`c`, rồi `b`, rồi `a`",
+      "`a`, rồi `b`, rồi `c`",
+      "`b`, rồi `c`, rồi `a`",
+      "Cả ba được pop cùng lúc khi `a` kết thúc"
+    ],
+    "optionsEn": [
+      "`c`, then `b`, then `a`",
+      "`a`, then `b`, then `c`",
+      "`b`, then `c`, then `a`",
+      "All three are popped together when `a` finishes"
+    ],
+    "answer": 0,
+    "explanation": "Call stack là LIFO: `c` được push sau cùng nên kết thúc và bị pop đầu tiên. `b` đang chờ `c` trả về, còn `a` đang chờ `b`, nên thứ tự là c → b → a.",
+    "explanationEn": "The call stack is LIFO: `c` was pushed last, so it finishes and is popped first. `b` is waiting for `c` to return and `a` is waiting for `b`, giving c → b → a."
+  },
+  {
+    "id": "q3",
+    "question": "Lời gọi `countDown(2)` in ra gì?\n`function countDown(num) {\n  if (num <= 0) {\n    console.log('All done!');\n    return;\n  }\n  console.log(num);\n  countDown(num - 1);\n}`",
+    "questionEn": "What does `countDown(2)` print?\n`function countDown(num) {\n  if (num <= 0) {\n    console.log('All done!');\n    return;\n  }\n  console.log(num);\n  countDown(num - 1);\n}`",
+    "options": [
+      "2, 1, 0, All done!",
+      "1, 2, All done!",
+      "All done!, 2, 1",
+      "2, 1, All done!"
+    ],
+    "optionsEn": [
+      "2, 1, 0, All done!",
+      "1, 2, All done!",
+      "All done!, 2, 1",
+      "2, 1, All done!"
+    ],
+    "answer": 3,
+    "explanation": "`countDown(2)` in 2 rồi gọi `countDown(1)`, in 1 rồi gọi `countDown(0)`. Với 0, base case chạy ngay: in \"All done!\" và return — số 0 không bao giờ được in. Lệnh in nằm trước lời gọi đệ quy nên thứ tự là giảm dần.",
+    "explanationEn": "`countDown(2)` prints 2 and calls `countDown(1)`, which prints 1 and calls `countDown(0)`. At 0 the base case runs immediately: it prints \"All done!\" and returns — 0 itself is never printed. The log comes before the recursive call, so the order is descending."
+  },
+  {
+    "id": "q4",
+    "question": "`sumRange(4)` trả về gì?\n`function sumRange(num) {\n  if (num === 1) return 1;\n  return num + sumRange(num - 1);\n}`",
+    "questionEn": "What does `sumRange(4)` return?\n`function sumRange(num) {\n  if (num === 1) return 1;\n  return num + sumRange(num - 1);\n}`",
+    "options": [
+      "24",
+      "10",
+      "4",
+      "9"
+    ],
+    "optionsEn": [
+      "24",
+      "10",
+      "4",
+      "9"
+    ],
+    "answer": 1,
+    "explanation": "Khi stack tháo cuộn: sumRange(1) = 1, sumRange(2) = 2 + 1 = 3, sumRange(3) = 3 + 3 = 6, sumRange(4) = 4 + 6 = 10. 24 là kết quả của phép nhân (factorial), không phải phép cộng.",
+    "explanationEn": "As the stack unwinds: sumRange(1) = 1, sumRange(2) = 2 + 1 = 3, sumRange(3) = 3 + 3 = 6, sumRange(4) = 4 + 6 = 10. 24 would be the product (factorial), not the sum."
+  },
+  {
+    "id": "q5",
+    "question": "Phiên bản lỗi sau trả về gì khi gọi `sumRange(3)`?\n`function sumRange(num) {\n  if (num === 1) return 1;\n  num + sumRange(num - 1);\n}`",
+    "questionEn": "What does this buggy version return for `sumRange(3)`?\n`function sumRange(num) {\n  if (num === 1) return 1;\n  num + sumRange(num - 1);\n}`",
+    "options": [
+      "6",
+      "1",
+      "`undefined`",
+      "Ném `RangeError` vì tràn stack"
+    ],
+    "optionsEn": [
+      "6",
+      "1",
+      "`undefined`",
+      "It throws `RangeError` from a stack overflow"
+    ],
+    "answer": 2,
+    "explanation": "Các lời gọi đệ quy vẫn chạy và chạm base case, nên không tràn stack. Nhưng `sumRange(3)` tính biểu thức rồi bỏ đi mà không return, nên hàm trả về `undefined`. Kết quả từ lời gọi con chỉ tới được nơi gọi nếu có `return`.",
+    "explanationEn": "The recursive calls still run and reach the base case, so there is no overflow. But `sumRange(3)` evaluates the expression and throws it away without returning, so the function returns `undefined`. A child call's result only reaches its caller through `return`."
+  },
+  {
+    "id": "q6",
+    "question": "Khi chạy `factorial(5)`, ở điểm sâu nhất có bao nhiêu frame `factorial` cùng nằm trên call stack?\n`function factorial(num) {\n  if (num <= 1) return 1;\n  return num * factorial(num - 1);\n}`",
+    "questionEn": "While running `factorial(5)`, how many `factorial` frames are on the call stack at the deepest point?\n`function factorial(num) {\n  if (num <= 1) return 1;\n  return num * factorial(num - 1);\n}`",
+    "options": [
+      "5",
+      "1",
+      "6",
+      "120"
+    ],
+    "optionsEn": [
+      "5",
+      "1",
+      "6",
+      "120"
+    ],
+    "answer": 0,
+    "explanation": "factorial(5), (4), (3), (2) đều đang chờ, và factorial(1) nằm trên đỉnh để chạy base case: tổng cộng 5 frame. Không có lời gọi factorial(0) vì base case là `num <= 1`. 120 là giá trị trả về, không phải độ sâu.",
+    "explanationEn": "factorial(5), (4), (3) and (2) are all waiting, with factorial(1) on top running the base case: 5 frames in total. There is no factorial(0) call because the base case is `num <= 1`. 120 is the return value, not the depth."
+  },
+  {
+    "id": "q7",
+    "question": "Điều gì xảy ra khi gọi `factorial(3)`?\n`function factorial(num) {\n  if (num === 1) console.log(1);\n  return num * factorial(num - 1);\n}`",
+    "questionEn": "What happens when you call `factorial(3)`?\n`function factorial(num) {\n  if (num === 1) console.log(1);\n  return num * factorial(num - 1);\n}`",
+    "options": [
+      "In ra 1 rồi trả về 6",
+      "In ra 1 rồi trả về `undefined`",
+      "Không in gì và trả về 0",
+      "In ra 1, rồi cuối cùng ném `RangeError: Maximum call stack size exceeded`"
+    ],
+    "optionsEn": [
+      "It prints 1 and then returns 6",
+      "It prints 1 and then returns `undefined`",
+      "It prints nothing and returns 0",
+      "It prints 1, then eventually throws `RangeError: Maximum call stack size exceeded`"
+    ],
+    "answer": 3,
+    "explanation": "Base case chỉ in mà không return, nên khi num = 1 hàm vẫn tiếp tục gọi factorial(0), factorial(-1), … Input không bao giờ chạm 1 lần nữa, stack lớn dần đến giới hạn và engine ném RangeError.",
+    "explanationEn": "The base case logs but does not return, so at num = 1 the function keeps calling factorial(0), factorial(-1), … The input never hits 1 again, the stack grows to its limit, and the engine throws a RangeError."
+  },
+  {
+    "id": "q8",
+    "question": "Hàm sau chạy đúng với `factorial(5)`. Chuyện gì xảy ra với `factorial(0)`, và sửa thế nào?\n`function factorial(num) {\n  if (num === 1) return 1;\n  return num * factorial(num - 1);\n}`",
+    "questionEn": "This function works for `factorial(5)`. What happens with `factorial(0)`, and what is the fix?\n`function factorial(num) {\n  if (num === 1) return 1;\n  return num * factorial(num - 1);\n}`",
+    "options": [
+      "Trả về 0; không cần sửa gì",
+      "Đệ quy mãi qua các số âm đến khi tràn stack; sửa base case thành `num <= 1`",
+      "Trả về 1 vì 0! = 1 theo định nghĩa",
+      "Trả về `undefined`; thêm `return` trước lời gọi đệ quy"
+    ],
+    "optionsEn": [
+      "It returns 0; no fix is needed",
+      "It recurses through negative numbers until the stack overflows; change the base case to `num <= 1`",
+      "It returns 1 because 0! = 1 by definition",
+      "It returns `undefined`; add `return` before the recursive call"
+    ],
+    "answer": 1,
+    "explanation": "Input đi 0, -1, -2, … nên không bao giờ bằng 1 — base case không thể chạm tới. Base case phòng thủ `num <= 1` bắt được cả 0 (và trả về đúng 0! = 1) lẫn số âm. Code không tự biết định nghĩa toán học của 0!.",
+    "explanationEn": "The input goes 0, -1, -2, … and never equals 1 — the base case is unreachable. A defensive `num <= 1` catches 0 (correctly returning 0! = 1) as well as negatives. The code does not know the mathematical definition of 0! on its own."
+  },
+  {
+    "id": "q9",
+    "question": "Độ phức tạp thời gian của hàm sau là gì (theo `e` = exponent)?\n`function power(base, exponent) {\n  if (exponent === 0) return 1;\n  return base * power(base, exponent - 1);\n}`",
+    "questionEn": "What is the time complexity of this function (in terms of `e` = exponent)?\n`function power(base, exponent) {\n  if (exponent === 0) return 1;\n  return base * power(base, exponent - 1);\n}`",
+    "options": [
+      "O(e)",
+      "O(log e)",
+      "O(2ᵉ)",
+      "O(base · e)"
+    ],
+    "optionsEn": [
+      "O(e)",
+      "O(log e)",
+      "O(2ᵉ)",
+      "O(base · e)"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi lời gọi giảm exponent đi 1 và chỉ gọi đệ quy một lần, nên có e + 1 lời gọi, mỗi lời gọi O(1): O(e). Giá trị của base không ảnh hưởng số lời gọi. Muốn O(log e) thì phải chia đôi exponent.",
+    "explanationEn": "Each call lowers the exponent by 1 and makes a single recursive call, so there are e + 1 calls of O(1) work: O(e). The value of base does not change the number of calls. Getting O(log e) requires halving the exponent."
+  },
+  {
+    "id": "q10",
+    "question": "Độ phức tạp KHÔNG GIAN (auxiliary) của `sumRange(n)` là gì?\n`function sumRange(num) {\n  if (num === 1) return 1;\n  return num + sumRange(num - 1);\n}`",
+    "questionEn": "What is the (auxiliary) SPACE complexity of `sumRange(n)`?\n`function sumRange(num) {\n  if (num === 1) return 1;\n  return num + sumRange(num - 1);\n}`",
+    "options": [
+      "O(1), vì hàm không tạo mảng hay object nào",
+      "O(log n)",
+      "O(n), vì có tới n frame cùng chờ trên call stack",
+      "O(n²)"
+    ],
+    "optionsEn": [
+      "O(1), because it creates no arrays or objects",
+      "O(log n)",
+      "O(n), because up to n frames wait on the call stack at once",
+      "O(n²)"
+    ],
+    "answer": 2,
+    "explanation": "Không gian của đệ quy là số frame tối đa cùng tồn tại. Ở điểm sâu nhất sumRange(n) … sumRange(1) đều nằm trên stack, mỗi frame O(1): tổng O(n). Phiên bản dùng vòng lặp mới đạt O(1).",
+    "explanationEn": "A recursive function's space is the maximum number of frames alive at once. At the deepest point sumRange(n) … sumRange(1) are all on the stack, each O(1): O(n) total. Only the loop version achieves O(1)."
+  },
+  {
+    "id": "q11",
+    "question": "Trong mẫu helper method recursion, vì sao mảng `result` được khai báo ở hàm ngoài thay vì bên trong hàm `helper`?",
+    "questionEn": "In the helper method recursion pattern, why is the `result` array declared in the outer function rather than inside `helper`?",
+    "options": [
+      "Vì JavaScript không cho khai báo mảng bên trong hàm lồng nhau",
+      "Vì biến ở hàm ngoài được lưu trên heap nên không gây tràn stack",
+      "Vì như vậy hàm đệ quy chạy nhanh hơn O(n)",
+      "Vì khai báo trong `helper` sẽ tạo mảng mới ở mỗi lời gọi; ở scope ngoài thì mọi lời gọi dùng chung một mảng"
+    ],
+    "optionsEn": [
+      "Because JavaScript does not allow declaring arrays inside nested functions",
+      "Because outer variables live on the heap, so they cannot overflow the stack",
+      "Because it makes the recursion faster than O(n)",
+      "Because declaring it in `helper` would create a fresh array on every call; in the outer scope every call shares one array"
+    ],
+    "answer": 3,
+    "explanation": "Mỗi lời gọi hàm có biến cục bộ riêng, nên `const result = []` trong helper sẽ bị tạo lại và mất dữ liệu đã gom. Đặt ở hàm ngoài (được gọi một lần), closure cho mọi lời gọi helper cùng push vào một mảng.",
+    "explanationEn": "Every call gets its own local variables, so `const result = []` inside helper would be recreated and lose what was collected. In the outer function (called once), the closure lets every helper call push into the same array."
+  },
+  {
+    "id": "q12",
+    "question": "Khi viết pure recursion trên chuỗi, cách nào lấy được chuỗi bỏ ký tự đầu của `str`?",
+    "questionEn": "When writing pure recursion on a string, which gives you `str` without its first character?",
+    "options": [
+      "`str.shift()`",
+      "`str.slice(1)`",
+      "`str.splice(0, 1)`",
+      "`delete str[0]`"
+    ],
+    "optionsEn": [
+      "`str.shift()`",
+      "`str.slice(1)`",
+      "`str.splice(0, 1)`",
+      "`delete str[0]`"
+    ],
+    "answer": 1,
+    "explanation": "Chuỗi là immutable: không thể sửa tại chỗ, và chuỗi không có `shift` hay `splice` (đó là method của mảng). `slice`, `substring` trả về một chuỗi mới ngắn hơn. `delete str[0]` không làm thay đổi chuỗi.",
+    "explanationEn": "Strings are immutable: they cannot be changed in place, and they have no `shift` or `splice` (those are array methods). `slice` and `substring` return a new, shorter string. `delete str[0]` leaves the string unchanged."
+  },
+  {
+    "id": "q13",
+    "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function collectOdds(arr) {\n  if (arr.length === 0) return [];\n  const rest = collectOdds(arr.slice(1));\n  if (arr[0] % 2 !== 0) rest.unshift(arr[0]);\n  return rest;\n}`",
+    "questionEn": "What is the time complexity of this function?\n`function collectOdds(arr) {\n  if (arr.length === 0) return [];\n  const rest = collectOdds(arr.slice(1));\n  if (arr[0] % 2 !== 0) rest.unshift(arr[0]);\n  return rest;\n}`",
+    "options": [
+      "O(n), vì mỗi phần tử chỉ có một lời gọi",
+      "O(log n), vì mảng ngắn dần sau mỗi lời gọi",
+      "O(n²), vì mỗi lời gọi đều có thao tác O(n) như `slice` và `unshift`",
+      "O(2ⁿ), vì hàm vừa đệ quy vừa có câu lệnh if"
+    ],
+    "optionsEn": [
+      "O(n), because there is one call per element",
+      "O(log n), because the array shrinks after every call",
+      "O(n²), because every call does O(n) work such as `slice` and `unshift`",
+      "O(2ⁿ), because the function both recurses and branches with an if"
+    ],
+    "answer": 2,
+    "explanation": "Có n lời gọi, nhưng mỗi lời gọi sao chép mảng bằng `slice` (O(n)) và có thể dịch mảng bằng `unshift` (O(n)). Tổng (n-1) + (n-2) + … ≈ n²/2 = O(n²). Mảng chỉ ngắn đi 1 mỗi lần, không chia đôi, nên không phải log n; và chỉ có một lời gọi đệ quy nên không phải 2ⁿ.",
+    "explanationEn": "There are n calls, but each copies the array with `slice` (O(n)) and may shift it with `unshift` (O(n)). The total (n-1) + (n-2) + … ≈ n²/2 = O(n²). The array shrinks by one, not by half, so it is not log n; and there is only one recursive call, so it is not 2ⁿ."
+  },
+  {
+    "id": "q14",
+    "question": "Một hàm đệ quy xử lý mảng bằng cách gọi `f(arr.slice(1))` và bị O(n²). Thay đổi nào đưa nó về O(n) thời gian?",
+    "questionEn": "A recursive function processes an array by calling `f(arr.slice(1))` and runs in O(n²). Which change brings it down to O(n) time?",
+    "options": [
+      "Truyền thêm một tham số index `i` và gọi `f(arr, i + 1)` thay vì cắt mảng",
+      "Thay `arr.slice(1)` bằng `[...arr].slice(1)`",
+      "Thay `slice` bằng `concat` để ghép kết quả",
+      "Bọc hàm trong một hàm ngoài theo mẫu helper method mà vẫn giữ `slice`"
+    ],
+    "optionsEn": [
+      "Pass an index parameter `i` and call `f(arr, i + 1)` instead of slicing",
+      "Replace `arr.slice(1)` with `[...arr].slice(1)`",
+      "Replace `slice` with `concat` to combine results",
+      "Wrap it in an outer function using the helper method pattern while keeping `slice`"
+    ],
+    "answer": 0,
+    "explanation": "Với index, mỗi lời gọi chỉ đọc `arr[i]` trong O(1) và không sao chép gì: n lời gọi × O(1) = O(n). Spread và concat cũng là sao chép O(n); còn helper method chỉ đổi nơi giữ kết quả, `slice` vẫn O(n) mỗi lần.",
+    "explanationEn": "With an index each call just reads `arr[i]` in O(1) and copies nothing: n calls × O(1) = O(n). Spread and concat are O(n) copies too, and the helper method only changes where results are kept — `slice` is still O(n) per call."
+  },
+  {
+    "id": "q15",
+    "question": "`productOfArray([])` nên trả về gì để phép nhân đệ quy cho kết quả đúng với mọi mảng?\n`function productOfArray(arr, i = 0) {\n  if (i === arr.length) return ???;\n  return arr[i] * productOfArray(arr, i + 1);\n}`",
+    "questionEn": "What should the base case return so this recursive product is correct for every array?\n`function productOfArray(arr, i = 0) {\n  if (i === arr.length) return ???;\n  return arr[i] * productOfArray(arr, i + 1);\n}`",
+    "options": [
+      "`0`",
+      "`arr[0]`",
+      "`undefined`",
+      "`1`"
+    ],
+    "optionsEn": [
+      "`0`",
+      "`arr[0]`",
+      "`undefined`",
+      "`1`"
+    ],
+    "answer": 3,
+    "explanation": "Base case được nhân vào mọi kết quả, nên nó phải là phần tử đơn vị của phép nhân: 1. Trả về 0 khiến mọi tích bằng 0; `undefined` cho ra NaN; `arr[0]` sai vì tại đây i đã đi hết mảng. (Với tổng thì base case là 0.)",
+    "explanationEn": "The base case gets multiplied into every result, so it must be the multiplicative identity: 1. Returning 0 makes every product 0; `undefined` produces NaN; `arr[0]` is wrong because i has already run past the end. (For a sum the base case would be 0.)"
+  },
+  {
+    "id": "q16",
+    "question": "Độ phức tạp thời gian của hàm sau là gì (theo `e` = exponent)?\n`function fastPower(base, e) {\n  if (e === 0) return 1;\n  const half = fastPower(base, Math.floor(e / 2));\n  return e % 2 === 0 ? half * half : half * half * base;\n}`",
+    "questionEn": "What is the time complexity of this function (in terms of `e` = exponent)?\n`function fastPower(base, e) {\n  if (e === 0) return 1;\n  const half = fastPower(base, Math.floor(e / 2));\n  return e % 2 === 0 ? half * half : half * half * base;\n}`",
+    "options": [
+      "O(e)",
+      "O(log e)",
+      "O(e²)",
+      "O(2ᵉ)"
+    ],
+    "optionsEn": [
+      "O(e)",
+      "O(log e)",
+      "O(e²)",
+      "O(2ᵉ)"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi lời gọi chia đôi e và chỉ gọi đệ quy MỘT lần (kết quả lưu vào `half` rồi dùng lại), nên có khoảng log₂(e) lời gọi: O(log e) thời gian và O(log e) stack. Nếu viết `fastPower(...) * fastPower(...)` thành hai lời gọi, cây đệ quy sẽ quay lại O(e).",
+    "explanationEn": "Each call halves e and makes only ONE recursive call (the result is stored in `half` and reused), so there are about log₂(e) calls: O(log e) time and O(log e) stack. Writing `fastPower(...) * fastPower(...)` as two calls would turn it back into O(e)."
+  },
+  {
+    "id": "q17",
+    "question": "Phát biểu nào về tail call optimization (TCO) trong JavaScript là ĐÚNG?",
+    "questionEn": "Which statement about tail call optimization (TCO) in JavaScript is TRUE?",
+    "options": [
+      "Mọi hàm đệ quy trong Node.js đều tự động được TCO nên không bao giờ tràn stack",
+      "`return num * factorial(num - 1)` là một tail call",
+      "ES2015 có quy định proper tail calls, nhưng hầu hết engine (như V8) không cài đặt nên không nên dựa vào nó",
+      "TCO biến mọi thuật toán O(2ⁿ) thành O(n)"
+    ],
+    "optionsEn": [
+      "Every recursive function in Node.js is automatically tail-call optimized, so it never overflows",
+      "`return num * factorial(num - 1)` is a tail call",
+      "ES2015 specifies proper tail calls, but most engines (such as V8) do not implement them, so you should not rely on it",
+      "TCO turns any O(2ⁿ) algorithm into O(n)"
+    ],
+    "answer": 2,
+    "explanation": "Chỉ JavaScriptCore của Safari cài đặt proper tail calls; V8 (Chrome, Node.js) và Firefox thì không. `num * factorial(num - 1)` không phải tail call vì phép nhân còn chờ sau lời gọi. TCO chỉ tiết kiệm stack frame, không giảm số lời gọi.",
+    "explanationEn": "Only Safari's JavaScriptCore implements proper tail calls; V8 (Chrome, Node.js) and Firefox do not. `num * factorial(num - 1)` is not a tail call because the multiplication is still pending after the call. TCO saves stack frames; it does not reduce the number of calls."
+  },
+  {
+    "id": "q18",
+    "question": "Bạn cần cộng dồn qua một chuỗi có thể dài 1.000.000 phần tử trong Node.js. Bản đệ quy O(n) ném `RangeError: Maximum call stack size exceeded`. Cách xử lý tốt nhất là gì?",
+    "questionEn": "You need to accumulate over a chain that can be 1,000,000 items long in Node.js. The O(n) recursive version throws `RangeError: Maximum call stack size exceeded`. What is the best fix?",
+    "options": [
+      "Viết lại bằng vòng lặp (hoặc stack tường minh) để dùng O(1) stack",
+      "Viết lại dưới dạng tail call để V8 tự tối ưu",
+      "Bọc lời gọi đệ quy trong `try/catch` và gọi lại khi gặp lỗi",
+      "Chuyển sang pure recursion dùng `slice` để tránh mutate input"
+    ],
+    "optionsEn": [
+      "Rewrite it as a loop (or with an explicit stack) so it uses O(1) call stack",
+      "Rewrite it as a tail call so V8 optimizes it",
+      "Wrap the recursive call in `try/catch` and retry on error",
+      "Switch to pure recursion with `slice` to avoid mutating the input"
+    ],
+    "answer": 0,
+    "explanation": "Độ sâu 1.000.000 vượt xa giới hạn stack, và V8 không có TCO nên viết tail call cũng không giúp gì. `try/catch` không làm stack nhỏ đi; pure recursion với `slice` vẫn sâu như cũ và còn thành O(n²). Vòng lặp không tốn thêm frame nào.",
+    "explanationEn": "A depth of 1,000,000 is far past the stack limit, and V8 has no TCO, so a tail call does not help. `try/catch` does not shrink the stack; pure recursion with `slice` is just as deep and becomes O(n²) too. A loop adds no frames at all."
+  }
+]

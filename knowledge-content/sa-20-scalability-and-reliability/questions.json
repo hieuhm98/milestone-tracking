@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Hệ thống của bạn chịu được gấp 5 lần tải khi thêm server, nhưng mỗi đêm vẫn chạy 40 instance dù traffic chỉ còn 5%. Thuộc tính nào đang thiếu?",
+    "questionEn": "Your system handles 5x the load when you add servers, yet it runs 40 instances every night while traffic drops to 5%. Which property is missing?",
+    "options": [
+      "Khả năng mở rộng (scalability)",
+      "Tính sẵn sàng (availability)",
+      "Tính co giãn (elasticity)",
+      "Độ tin cậy (reliability)"
+    ],
+    "optionsEn": [
+      "Scalability",
+      "Availability",
+      "Elasticity",
+      "Reliability"
+    ],
+    "answer": 2,
+    "explanation": "Hệ thống đã scalable vì thêm tài nguyên thì chịu được tải lớn hơn. Thứ còn thiếu là elasticity: năng lực tự động tăng VÀ giảm theo tải, để không trả tiền cho 40 instance lúc rảnh.",
+    "explanationEn": "The system is already scalable, because adding resources handles more load. What is missing is elasticity: capacity that follows load both up AND down automatically, so you do not pay for 40 idle instances."
+  },
+  {
+    "id": "q2",
+    "question": "Một app Node.js lưu session trong bộ nhớ process, chạy 4 instance sau load balancer. Mỗi lần autoscaling scale-in, một nhóm người dùng bị đăng xuất. Cách sửa đúng về kiến trúc là gì?",
+    "questionEn": "A Node.js app keeps sessions in process memory and runs 4 instances behind a load balancer. Every autoscaling scale-in logs a group of users out. What is the architecturally correct fix?",
+    "options": [
+      "Bật sticky session trên load balancer",
+      "Chuyển session ra một store dùng chung như Redis hoặc dùng token có chữ ký",
+      "Tắt scale-in và giữ cố định số instance tối đa",
+      "Scale dọc thành một instance lớn duy nhất"
+    ],
+    "optionsEn": [
+      "Enable sticky sessions on the load balancer",
+      "Move sessions to a shared store such as Redis, or use signed tokens",
+      "Disable scale-in and keep the maximum instance count fixed",
+      "Scale up to one single large instance"
+    ],
+    "answer": 1,
+    "explanation": "Service phải stateless để instance nào bị gỡ cũng không ảnh hưởng người dùng. Sticky session vẫn làm mất session khi instance chết; tắt scale-in tốn tiền; một instance lớn lại tạo ra SPOF.",
+    "explanationEn": "The service must be stateless so removing any instance does not affect users. Sticky sessions still lose sessions when an instance dies, disabling scale-in wastes money, and one big instance creates a SPOF."
+  },
+  {
+    "id": "q3",
+    "question": "Database PostgreSQL primary đang ở 85% CPU, đội cần giải pháp trong tuần này và không có thời gian sửa code. Lựa chọn thực tế nhất trước mắt là gì?",
+    "questionEn": "A PostgreSQL primary sits at 85% CPU; the team needs relief this week and has no time for code changes. What is the most practical immediate option?",
+    "options": [
+      "Shard database theo user_id",
+      "Chuyển toàn bộ sang một NoSQL database",
+      "Thêm các app server phía trước database",
+      "Scale dọc primary lên instance lớn hơn"
+    ],
+    "optionsEn": [
+      "Shard the database by user_id",
+      "Migrate everything to a NoSQL database",
+      "Add more app servers in front of the database",
+      "Scale the primary up to a larger instance"
+    ],
+    "answer": 3,
+    "explanation": "Scale dọc không cần sửa code và là cách cứu cháy nhanh cho database primary — thứ khó scale ngang nhất. Sharding và đổi database là dự án dài; thêm app server chỉ đẩy thêm tải vào chính database đang nghẽn.",
+    "explanationEn": "Scaling up needs no code change and is the quick relief for a database primary, the hardest thing to scale out. Sharding and switching databases are long projects; more app servers only push more load onto the database that is already the bottleneck."
+  },
+  {
+    "id": "q4",
+    "question": "Endpoint health check của mọi instance đều truy vấn database. Database failover mất 20 giây, và trong lúc đó toàn bộ website trả 503 kể cả các trang không cần database. Nguyên nhân gốc là gì?",
+    "questionEn": "Every instance's health check endpoint queries the database. A database failover takes 20 seconds, and during it the whole site returns 503, even pages that do not need the database. What is the root cause?",
+    "options": [
+      "Deep health check khiến load balancer loại cả fleet cùng lúc",
+      "Load balancer dùng thuật toán round robin thay vì least connections",
+      "Connection draining được đặt quá ngắn",
+      "Các instance không được trải trên nhiều AZ"
+    ],
+    "optionsEn": [
+      "A deep health check made the load balancer eject the whole fleet at once",
+      "The load balancer used round robin instead of least connections",
+      "Connection draining was configured too short",
+      "The instances were not spread across multiple AZs"
+    ],
+    "answer": 0,
+    "explanation": "Khi health check phụ thuộc database, database chập chờn làm mọi instance cùng fail check và LB gỡ hết. Health check của LB nên nông (process có phục vụ được không); sức khoẻ dependency báo qua metric và phản hồi suy giảm.",
+    "explanationEn": "When the health check depends on the database, a database blip fails every instance's check together and the LB removes them all. The LB check should be shallow (can this process serve?); dependency health belongs in metrics and degraded responses."
+  },
+  {
+    "id": "q5",
+    "question": "Một request đi tuần tự qua load balancer (99,99%), API (99,9%) và database (99,9%), mọi thành phần đều bắt buộc. Availability xấp xỉ của cả chuỗi là bao nhiêu?",
+    "questionEn": "A request passes in series through a load balancer (99.99%), an API (99.9%) and a database (99.9%); every component is required. What is the approximate availability of the chain?",
+    "options": [
+      "99,99% — bằng thành phần tốt nhất",
+      "99,9% — bằng thành phần yếu nhất",
+      "Khoảng 99,8% — thấp hơn cả thành phần yếu nhất",
+      "Khoảng 99,95% — trung bình cộng của ba thành phần"
+    ],
+    "optionsEn": [
+      "99.99% — equal to the best component",
+      "99.9% — equal to the weakest component",
+      "About 99.8% — lower than even the weakest component",
+      "About 99.95% — the average of the three components"
+    ],
+    "answer": 2,
+    "explanation": "Thành phần nối tiếp thì nhân availability: 0,9999 × 0,999 × 0,999 ≈ 0,9979, tức khoảng 99,8%. Mỗi dependency bắt buộc thêm vào đều kéo tổng xuống dưới cả mắt xích yếu nhất.",
+    "explanationEn": "Components in series multiply: 0.9999 × 0.999 × 0.999 ≈ 0.9979, about 99.8%. Every required dependency you add pulls the total below even the weakest link."
+  },
+  {
+    "id": "q6",
+    "question": "Đội có ba replica của service trên ba AZ và tính availability là 1 − (0,01)³. Một lần đẩy config lỗi đã làm sập cả ba cùng lúc. Giả định nào trong phép tính đã sai?",
+    "questionEn": "A team runs three replicas of a service in three AZs and computes availability as 1 − (0.01)³. One bad config push took all three down at once. Which assumption in the math was wrong?",
+    "options": [
+      "Mỗi replica có availability 99%",
+      "Ba AZ đủ để đạt N+1",
+      "Load balancer không phải là SPOF",
+      "Các sự cố của replica độc lập với nhau"
+    ],
+    "optionsEn": [
+      "Each replica has 99% availability",
+      "Three AZs are enough for N+1",
+      "The load balancer is not a SPOF",
+      "The replicas' failures are independent of each other"
+    ],
+    "answer": 3,
+    "explanation": "Công thức song song chỉ đúng khi các sự cố độc lập. Replica dùng chung config, code và thời điểm deploy thì chung một miền lỗi — vì vậy cần triển khai thay đổi theo từng đợt nhỏ và giới hạn blast radius.",
+    "explanationEn": "The parallel formula only holds when failures are independent. Replicas that share config, code and deploy timing share a failure domain — which is why changes should roll out in small waves with a limited blast radius."
+  },
+  {
+    "id": "q7",
+    "question": "Cấu hình nginx sau có hành vi gì khi `10.0.1.10` trả lỗi kết nối 3 lần trong 30 giây?\n`upstream api {\n  least_conn;\n  server 10.0.1.10:8080 max_fails=3 fail_timeout=30s;\n  server 10.0.1.11:8080 max_fails=3 fail_timeout=30s;\n  server 10.0.1.12:8080 backup;\n}`",
+    "questionEn": "How does this nginx config behave when `10.0.1.10` fails 3 connection attempts within 30 seconds?\n`upstream api {\n  least_conn;\n  server 10.0.1.10:8080 max_fails=3 fail_timeout=30s;\n  server 10.0.1.11:8080 max_fails=3 fail_timeout=30s;\n  server 10.0.1.12:8080 backup;\n}`",
+    "options": [
+      "nginx gỡ vĩnh viễn server đó cho tới khi reload cấu hình",
+      "Server đó bị coi là không khả dụng trong 30 giây; traffic dồn sang `10.0.1.11`",
+      "Traffic lập tức chuyển hết sang server `backup`",
+      "nginx bắt đầu gửi request `GET /healthz` chủ động tới server đó"
+    ],
+    "optionsEn": [
+      "nginx removes that server permanently until the config is reloaded",
+      "That server is considered unavailable for 30 seconds; traffic goes to `10.0.1.11`",
+      "All traffic immediately switches to the `backup` server",
+      "nginx starts sending active `GET /healthz` probes to that server"
+    ],
+    "answer": 1,
+    "explanation": "Đây là passive health check: `max_fails` lần lỗi trong `fail_timeout` thì server bị tạm loại trong `fail_timeout`. Server `backup` chỉ nhận traffic khi mọi server chính đều không khả dụng; active health check là tính năng của NGINX Plus.",
+    "explanationEn": "This is a passive health check: `max_fails` failures within `fail_timeout` mark the server unavailable for `fail_timeout`. The `backup` server only gets traffic when all primary servers are unavailable; active health checks are an NGINX Plus feature."
+  },
+  {
+    "id": "q8",
+    "question": "Một service chạy trên 3 AZ, peak cần tổng cộng 60 instance. Đội muốn chịu được mất trọn một AZ mà không phụ thuộc autoscaling trong lúc sự cố. Cần cấp sẵn bao nhiêu instance mỗi AZ?",
+    "questionEn": "A service runs in 3 AZs and needs 60 instances in total at peak. The team wants to survive losing a whole AZ without relying on autoscaling during the incident. How many instances should be pre-provisioned per AZ?",
+    "options": [
+      "30 mỗi AZ — hai AZ còn lại gánh đủ 60",
+      "20 mỗi AZ — autoscaling sẽ bù phần thiếu",
+      "40 mỗi AZ — để có 2N",
+      "60 mỗi AZ — mỗi AZ tự gánh toàn bộ peak"
+    ],
+    "optionsEn": [
+      "30 per AZ — the remaining two AZs carry the full 60",
+      "20 per AZ — autoscaling will cover the gap",
+      "40 per AZ — to achieve 2N",
+      "60 per AZ — each AZ carries the full peak alone"
+    ],
+    "answer": 0,
+    "explanation": "Static stability: khi mất một AZ, hai AZ còn lại phải gánh đủ peak mà không cần thay đổi gì, nên mỗi AZ cần 50% peak = 30, tổng 150%. Autoscaling có thể bị chậm hoặc hỏng đúng lúc sự cố lớn; 60 mỗi AZ là thừa.",
+    "explanationEn": "Static stability: after losing one AZ, the other two must carry peak without any change, so each AZ needs 50% of peak = 30, 150% in total. Autoscaling may be slow or impaired during exactly that kind of incident; 60 per AZ is overkill."
+  },
+  {
+    "id": "q9",
+    "question": "Backup database chạy mỗi 6 giờ và việc restore mất khoảng 2 giờ. Nếu site chính mất hoàn toàn, RPO và RTO xấu nhất là bao nhiêu?",
+    "questionEn": "Database backups run every 6 hours and a restore takes about 2 hours. If the primary site is lost completely, what are the worst-case RPO and RTO?",
+    "options": [
+      "RPO 2 giờ, RTO 6 giờ",
+      "RPO 8 giờ, RTO 8 giờ",
+      "RPO 0, RTO 2 giờ",
+      "RPO 6 giờ, RTO khoảng 2 giờ"
+    ],
+    "optionsEn": [
+      "RPO 2 hours, RTO 6 hours",
+      "RPO 8 hours, RTO 8 hours",
+      "RPO 0, RTO 2 hours",
+      "RPO 6 hours, RTO about 2 hours"
+    ],
+    "answer": 3,
+    "explanation": "RPO đo lượng dữ liệu mất: tối đa là khoảng cách giữa hai lần backup, 6 giờ. RTO đo thời gian ngừng dịch vụ: ít nhất là thời gian restore, khoảng 2 giờ (thực tế còn cộng thời gian phát hiện và ra quyết định).",
+    "explanationEn": "RPO measures data loss: at worst the gap between backups, 6 hours. RTO measures downtime: at least the restore time, about 2 hours (in practice plus the time to detect and decide)."
+  },
+  {
+    "id": "q10",
+    "question": "Một hệ thống thanh toán cần RTO dưới 10 phút và RPO vài giây khi mất cả region, nhưng ngân sách không cho phép chạy production đầy đủ ở hai region. Chiến lược DR nào phù hợp nhất?",
+    "questionEn": "A payments system needs an RTO under 10 minutes and an RPO of seconds if a whole region is lost, but the budget does not allow full production in two regions. Which DR strategy fits best?",
+    "options": [
+      "Backup & restore sang region khác",
+      "Pilot light với app server tắt",
+      "Warm standby thu nhỏ, scale lên khi failover",
+      "Multi-site active-active"
+    ],
+    "optionsEn": [
+      "Backup & restore to another region",
+      "Pilot light with the app servers turned off",
+      "A scaled-down warm standby, scaled up on failover",
+      "Multi-site active-active"
+    ],
+    "answer": 2,
+    "explanation": "Warm standby có dữ liệu replicate liên tục (RPO vài giây) và một bản sao đang chạy sẵn nên failover tính bằng phút. Backup & restore mất hàng giờ; pilot light thường mất hàng chục phút; active-active vượt ngân sách.",
+    "explanationEn": "Warm standby replicates data continuously (RPO of seconds) and already runs a working copy, so failover takes minutes. Backup & restore takes hours, pilot light typically tens of minutes, and active-active exceeds the budget."
+  },
+  {
+    "id": "q11",
+    "question": "Database có replica đồng bộ ở AZ khác và replica bất đồng bộ ở region khác. Một lập trình viên lỡ chạy `DELETE FROM orders;` trên production. Cơ chế nào thực sự cứu được dữ liệu?",
+    "questionEn": "A database has a synchronous replica in another AZ and an async replica in another region. A developer accidentally runs `DELETE FROM orders;` on production. Which mechanism actually saves the data?",
+    "options": [
+      "Failover sang replica đồng bộ ở AZ khác",
+      "Point-in-time recovery từ backup về thời điểm trước lệnh xoá",
+      "Promote replica bất đồng bộ ở region khác",
+      "Tăng số lượng read replica"
+    ],
+    "optionsEn": [
+      "Fail over to the synchronous replica in the other AZ",
+      "Point-in-time recovery from backups to just before the delete",
+      "Promote the async replica in the other region",
+      "Increase the number of read replicas"
+    ],
+    "answer": 1,
+    "explanation": "Replication sao chép trung thành cả lỗi logic: lệnh xoá tới replica đồng bộ ngay lập tức và tới replica bất đồng bộ sau vài giây. Chỉ backup có point-in-time recovery (hoặc bản sao bất biến) mới quay lại được trạng thái trước lệnh xoá.",
+    "explanationEn": "Replication faithfully copies logical errors too: the delete reaches the sync replica instantly and the async one seconds later. Only backups with point-in-time recovery (or immutable copies) can return to the state before the delete."
+  },
+  {
+    "id": "q12",
+    "question": "Mỗi tầng dưới đây tự retry tối đa 3 lần (tính cả lần đầu) khi gặp lỗi. Database bị quá tải và mọi lời gọi đều fail. Một lần bấm của người dùng có thể tạo ra tối đa bao nhiêu lần gọi tới database?\n`client -> API -> order-service -> database`",
+    "questionEn": "Each layer below makes up to 3 attempts (including the first) on error. The database is overloaded and every call fails. How many database calls can one user click generate at most?\n`client -> API -> order-service -> database`",
+    "options": [
+      "27",
+      "9",
+      "3",
+      "12"
+    ],
+    "optionsEn": [
+      "27",
+      "9",
+      "3",
+      "12"
+    ],
+    "answer": 0,
+    "explanation": "Retry nhân lên qua các tầng: 3 × 3 × 3 = 27 lần gọi vào đúng database đang quá tải. Vì vậy chỉ nên retry ở một tầng, giới hạn số lần, dùng backoff kèm jitter và retry budget.",
+    "explanationEn": "Retries multiply across layers: 3 × 3 × 3 = 27 calls into the very database that is already overloaded. That is why you retry at one layer only, cap attempts, and use backoff with jitter and a retry budget."
+  },
+  {
+    "id": "q13",
+    "question": "Vì sao nên thêm jitter (độ trễ ngẫu nhiên) vào exponential backoff khi retry?",
+    "questionEn": "Why add jitter (random delay) to exponential backoff when retrying?",
+    "options": [
+      "Để đảm bảo request retry luôn thành công ở lần thứ hai",
+      "Để thao tác không idempotent trở nên an toàn khi retry",
+      "Để giảm tổng số lần retry xuống còn một",
+      "Để hàng nghìn client không retry cùng một nhịp và dội tải đồng loạt"
+    ],
+    "optionsEn": [
+      "To guarantee that a retried request always succeeds on the second try",
+      "To make non-idempotent operations safe to retry",
+      "To reduce the total number of retries to one",
+      "So thousands of clients do not retry in lockstep and hit the service in synchronized waves"
+    ],
+    "answer": 3,
+    "explanation": "Không có jitter, mọi client lỗi cùng lúc sẽ retry cùng lúc sau 100 ms, 200 ms, 400 ms… tạo ra các đợt sóng tải (thundering herd). Jitter trải đều các lần retry. Nó không làm thao tác không idempotent an toàn — việc đó cần idempotency key.",
+    "explanationEn": "Without jitter, clients that failed together retry together after 100 ms, 200 ms, 400 ms…, creating waves of load (a thundering herd). Jitter spreads retries out. It does not make non-idempotent operations safe — that needs idempotency keys."
+  },
+  {
+    "id": "q14",
+    "question": "Trong một đợt flash sale, API nhận gấp 3 lần năng lực. Đội đang cân nhắc cách phản ứng khi quá tải. Cách nào giữ được nhiều giao dịch thành công nhất?",
+    "questionEn": "During a flash sale, an API receives 3x its capacity. The team is deciding how to react to overload. Which approach keeps the most transactions succeeding?",
+    "options": [
+      "Nhận hết request vào một hàng đợi không giới hạn để không mất request nào",
+      "Tăng timeout của mọi request lên 120 giây",
+      "Từ chối nhanh phần vượt ngưỡng bằng `503` + `Retry-After`, ưu tiên giữ checkout",
+      "Tắt health check để load balancer không gỡ instance nào"
+    ],
+    "optionsEn": [
+      "Accept every request into an unbounded queue so none are lost",
+      "Raise every request timeout to 120 seconds",
+      "Reject the excess fast with `503` + `Retry-After`, prioritising checkout",
+      "Disable health checks so the load balancer never removes an instance"
+    ],
+    "answer": 2,
+    "explanation": "Load shedding từ chối sớm và rẻ để phần việc còn lại hoàn thành trong hạn. Hàng đợi không giới hạn và timeout dài khiến server bận xử lý những request người dùng đã bỏ đi, nên gần như mọi request đều chậm hoặc fail.",
+    "explanationEn": "Load shedding rejects early and cheaply so the remaining work finishes in time. An unbounded queue and long timeouts keep servers busy with requests users have already abandoned, so nearly every request ends up slow or failing."
+  },
+  {
+    "id": "q15",
+    "question": "Một worker service dùng hàng đợi trong bộ nhớ không giới hạn. Khi tải tăng, CPU ở 100%, bộ nhớ tăng đều, và gần như mọi request đều timeout phía client dù server vẫn đang \"làm việc\". Vấn đề cốt lõi là gì?",
+    "questionEn": "A worker service uses an unbounded in-memory queue. Under rising load, CPU is at 100%, memory grows steadily, and nearly every request times out on the client even though the server is \"working\". What is the core problem?",
+    "options": [
+      "Thiếu sticky session trên load balancer",
+      "Không có backpressure: server nhận việc vượt năng lực và xử lý những request đã quá hạn",
+      "Health check quá nông nên không phát hiện được lỗi",
+      "RPO của hàng đợi quá lớn"
+    ],
+    "optionsEn": [
+      "The load balancer lacks sticky sessions",
+      "No backpressure: the server accepts more work than it can do and processes already-expired requests",
+      "The health check is too shallow to detect the problem",
+      "The queue's RPO is too large"
+    ],
+    "answer": 1,
+    "explanation": "Hàng đợi không giới hạn nuốt mọi thứ, độ trễ tăng tới khi request nằm trong queue lâu hơn timeout của client, và server tốn CPU cho việc không ai còn chờ. Cần queue có giới hạn, từ chối khi đầy và bỏ request đã quá deadline.",
+    "explanationEn": "An unbounded queue swallows everything, latency climbs until requests wait longer than the client timeout, and the server burns CPU on work nobody is waiting for. It needs a bounded queue, rejection when full, and dropping requests past their deadline."
+  },
+  {
+    "id": "q16",
+    "question": "Một đồng nghiệp đề xuất đặt mục tiêu autoscaling CPU ở 90% để tiết kiệm chi phí. Rủi ro chính về hiệu năng là gì?",
+    "questionEn": "A colleague proposes setting the autoscaling CPU target to 90% to save money. What is the main performance risk?",
+    "options": [
+      "Độ trễ tăng phi tuyến gần mức sử dụng cao — khoảng 10 lần thời gian phục vụ ở 90%, và không còn chỗ cho đột biến",
+      "Instance sẽ bị cloud provider throttle khi vượt 80% CPU",
+      "Autoscaling không thể đọc metric CPU trên 80%",
+      "Độ trễ giảm vì CPU được dùng hiệu quả hơn"
+    ],
+    "optionsEn": [
+      "Latency grows non-linearly near high utilisation — about 10x the service time at 90% — with no room for spikes",
+      "The cloud provider will throttle instances above 80% CPU",
+      "Autoscaling cannot read CPU metrics above 80%",
+      "Latency drops because the CPU is used more efficiently"
+    ],
+    "answer": 0,
+    "explanation": "Theo mô hình hàng đợi, R ≈ S / (1 − U): ở 50% là 2S, ở 90% là 10S. Thêm vào đó, instance mới mất vài phút để khởi động nên cần headroom. Mục tiêu thường nằm quanh 50–70%.",
+    "explanationEn": "In a queueing model R ≈ S / (1 − U): 2S at 50%, 10S at 90%. On top of that, new instances take minutes to boot, so you need headroom. Targets usually sit around 50–70%."
+  },
+  {
+    "id": "q17",
+    "question": "Mỗi năm vào 20:00 ngày sale 11.11, traffic tăng gấp 8 lần chỉ trong 2 phút. Target tracking autoscaling phản ứng chậm vì instance mất 4 phút để sẵn sàng, và 10 phút đầu luôn có lỗi. Giải pháp phù hợp nhất là gì?",
+    "questionEn": "Every year at 20:00 on the 11.11 sale, traffic jumps 8x within 2 minutes. Target-tracking autoscaling lags because instances take 4 minutes to become ready, and the first 10 minutes always have errors. What is the best fix?",
+    "options": [
+      "Giảm ngưỡng target tracking từ 60% xuống 55%",
+      "Chuyển sang step scaling với bước nhỏ hơn",
+      "Tăng thời gian cooldown của autoscaling",
+      "Scheduled scaling trước giờ sale kết hợp load shedding làm lưới an toàn"
+    ],
+    "optionsEn": [
+      "Lower the target-tracking threshold from 60% to 55%",
+      "Switch to step scaling with smaller steps",
+      "Increase the autoscaling cooldown period",
+      "Scheduled scaling ahead of the sale, with load shedding as a safety net"
+    ],
+    "answer": 3,
+    "explanation": "Autoscaling phản ứng không kịp với đợt tăng vọt nhanh hơn thời gian khởi động instance. Sự kiện đã biết trước thì scale trước theo lịch (pre-warm), và giữ load shedding cho phần vượt dự báo. Chỉnh ngưỡng hay cooldown không giải quyết độ trễ khởi động.",
+    "explanationEn": "Reactive autoscaling cannot keep up with a spike faster than instance boot time. For a known event, scale ahead on a schedule (pre-warm) and keep load shedding for anything beyond the forecast. Tweaking thresholds or cooldowns does not fix boot latency."
+  },
+  {
+    "id": "q18",
+    "question": "Đội lần đầu chạy chaos experiment: kill ngẫu nhiên instance của service checkout. Việc nào nên làm TRƯỚC khi gây lỗi?",
+    "questionEn": "A team is running its first chaos experiment: randomly killing instances of the checkout service. What should be done BEFORE injecting the fault?",
+    "options": [
+      "Tắt alarm để tránh làm phiền on-call trong lúc thí nghiệm",
+      "Định nghĩa steady state bằng metric nghiệp vụ, đặt giả thuyết, giới hạn blast radius và điều kiện dừng",
+      "Chạy ngay trên 100% traffic production để có kết quả thực tế nhất",
+      "Tăng gấp đôi số instance để chắc chắn thí nghiệm không gây ảnh hưởng"
+    ],
+    "optionsEn": [
+      "Silence alarms so on-call is not disturbed during the experiment",
+      "Define steady state with a business metric, state a hypothesis, limit the blast radius and set stop conditions",
+      "Run it straight on 100% of production traffic for the most realistic results",
+      "Double the instance count to make sure the experiment has no impact"
+    ],
+    "answer": 1,
+    "explanation": "Chaos engineering là thí nghiệm có kiểm soát: cần steady state đo được (ví dụ số đơn thành công mỗi phút), một giả thuyết để kiểm chứng, blast radius nhỏ và điều kiện dừng gắn với alarm. Tắt alarm hay nhân đôi instance làm mất ý nghĩa thí nghiệm.",
+    "explanationEn": "Chaos engineering is a controlled experiment: it needs a measurable steady state (e.g. successful orders per minute), a hypothesis to test, a small blast radius and stop conditions tied to alarms. Silencing alarms or doubling instances defeats the purpose."
+  }
+]

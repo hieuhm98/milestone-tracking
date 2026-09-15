@@ -15,6 +15,8 @@
 //     order, and only references question ids that exist
 //   - drills.json (optional) holds well-formed typed drills whose ids do not
 //     collide with any question id in the same topic
+//   - vocab.json (optional) holds English-vocabulary questions, each tied to a
+//     real lesson, with ids that collide with no question or drill id
 //
 // Exits non-zero if anything fails, so it can gate a commit or a build.
 
@@ -22,14 +24,18 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 const CONTENT_DIR = path.join(process.cwd(), "knowledge-content");
-const KNOWN_GROUPS = new Set(["it-fundamentals", "ba", "po", "pm", "req", "dev"]);
+const KNOWN_GROUPS = new Set(["it-fundamentals", "ba", "po", "pm", "req", "dev", "dsa", "sa"]);
 const prefix = process.argv[2] ?? "";
 const DRILL_TYPES = new Set(["multi", "recall", "match", "order"]);
+const VOCAB_POS = new Set(["n", "v", "adj", "adv", "prep", "conj", "phrase"]);
 
 /** Mirrors `normalizeAnswer` in lib/drills.ts — keep the two in step. */
+const SUPERSCRIPTS = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9", "ⁿ": "n" };
+
 const normalizeAnswer = (raw) =>
   String(raw)
     .toLowerCase()
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹ⁿ]/g, (ch) => ` ${SUPERSCRIPTS[ch]}`)
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 
@@ -54,6 +60,8 @@ let totalQuestions = 0;
 let totalLessons = 0;
 let topicsWithDrills = 0;
 let totalDrills = 0;
+let topicsWithVocab = 0;
+let totalVocab = 0;
 
 for (const slug of slugs) {
   const dir = path.join(CONTENT_DIR, slug);
@@ -108,6 +116,7 @@ for (const slug of slugs) {
   }
 
   const questionIds = new Set();
+  const drillIds = new Set();
 
   questions.forEach((q, i) => {
     const where = `questions[${i}]${q?.id ? ` (${q.id})` : ""}`;
@@ -181,7 +190,6 @@ for (const slug of slugs) {
       drills = [];
     }
 
-    const drillIds = new Set();
 
     drills.forEach((d, i) => {
       const where = `drills[${i}]${d?.id ? ` (${d.id})` : ""}`;
@@ -315,7 +323,11 @@ for (const slug of slugs) {
   }
 
   // -------------------------------------------------------------- lessons.json
-  if (!existsSync(at("lessons.json"))) continue;
+  if (!existsSync(at("lessons.json"))) {
+    if (existsSync(at("vocab.json"))) fail(slug, "vocab.json needs a lessons.json to attach its words to");
+
+    continue;
+  }
 
   let lessons = [];
   try {
@@ -393,12 +405,83 @@ for (const slug of slugs) {
   if (unused.length > 0) {
     fail(slug, `questions never used by any lesson: ${unused.join(", ")}`);
   }
+
+  // ---------------------------------------------------------------- vocab.json
+  //
+  // Optional English-vocabulary questions, asked after a lesson's check. Same
+  // one-stem/one-key shape as questions.json, plus the lesson they belong to.
+  if (!existsSync(at("vocab.json"))) continue;
+
+  let items = [];
+
+  try {
+    ({ items } = readJson(at("vocab.json")));
+  } catch (err) {
+    fail(slug, `vocab.json unreadable (${err.message})`);
+    continue;
+  }
+
+  if (!Array.isArray(items)) {
+    fail(slug, "vocab.json has no items array");
+    continue;
+  }
+
+  const vocabIds = new Set();
+  const nonEmpty = (v) => typeof v === "string" && v.trim() !== "";
+
+  items.forEach((v, i) => {
+    const where = `vocab[${i}]${v?.id ? ` (${v.id})` : ""}`;
+
+    if (!v?.id) {
+      fail(slug, `${where} has no id`);
+    } else if (vocabIds.has(v.id)) {
+      fail(slug, `${where} duplicate id`);
+    } else if (questionIds.has(v.id) || drillIds.has(v.id)) {
+      // Recall is keyed `${slug}#${id}` across every bank in the topic.
+      fail(slug, `${where} id collides with a question or drill id`);
+    } else {
+      vocabIds.add(v.id);
+    }
+
+    if (!lessonIds.has(v?.lessonId)) fail(slug, `${where} references unknown lesson "${v?.lessonId}"`);
+
+    for (const field of ["word", "question", "questionEn", "explanation", "explanationEn"]) {
+      if (!nonEmpty(v?.[field])) fail(slug, `${where} missing "${field}"`);
+    }
+
+    if (v?.pos !== undefined && !VOCAB_POS.has(v.pos)) fail(slug, `${where} unknown pos "${v.pos}"`);
+
+    if (!Array.isArray(v?.options) || !Array.isArray(v?.optionsEn)) {
+      fail(slug, `${where} options/optionsEn must both be arrays`);
+
+      return;
+    }
+
+    if (v.options.length !== v.optionsEn.length) {
+      fail(slug, `${where} options (${v.options.length}) and optionsEn (${v.optionsEn.length}) differ in length`);
+    }
+
+    if (v.options.length < 2) fail(slug, `${where} needs at least 2 options`);
+
+    if (v.options.some((o) => !nonEmpty(o)) || v.optionsEn.some((o) => !nonEmpty(o))) {
+      fail(slug, `${where} has an empty option`);
+    }
+
+    if (!Number.isInteger(v.answer) || v.answer < 0 || v.answer >= v.options.length) {
+      fail(slug, `${where} answer ${v.answer} is out of range 0..${v.options.length - 1}`);
+    }
+  });
+
+  totalVocab += items.length;
+
+  if (items.length > 0) topicsWithVocab += 1;
 }
 
 console.log(
   `Checked ${slugs.length} topic(s): ${totalQuestions} questions, ` +
     `${topicsWithLessons} with lessons (${totalLessons} mini-lessons), ` +
-    `${topicsWithDrills} with drills (${totalDrills} drills).`
+    `${topicsWithDrills} with drills (${totalDrills} drills), ` +
+    `${topicsWithVocab} with vocabulary (${totalVocab} words).`
 );
 
 if (problems.length > 0) {

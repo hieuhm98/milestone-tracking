@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về `Array.prototype.sort` của JavaScript.",
+      "promptEn": "Pick TWO statements that are true about JavaScript's `Array.prototype.sort`.",
+      "options": [
+        "Nó trả về một mảng mới và giữ nguyên mảng gốc",
+        "Comparator `(a, b) => a > b` là cách chuẩn để sắp xếp số tăng dần",
+        "Không có comparator, các phần tử được so sánh như chuỗi",
+        "Comparator phải trả về phần tử lớn hơn trong hai phần tử",
+        "Từ ES2019, đặc tả yêu cầu sort phải ổn định (stable)"
+      ],
+      "optionsEn": [
+        "It returns a new array and leaves the original untouched",
+        "The comparator `(a, b) => a > b` is the standard way to sort numbers ascending",
+        "Without a comparator, elements are compared as strings",
+        "The comparator must return the larger of the two elements",
+        "Since ES2019 the specification requires the sort to be stable"
+      ],
+      "answers": [2, 4],
+      "explanation": "Mặc định sort so sánh theo chuỗi (nên `[6, 4, 15, 10]` thành `[10, 15, 4, 6]`), và từ ES2019 nó phải ổn định. `sort` sửa trực tiếp mảng gốc (dùng `toSorted()` để lấy bản sao), còn comparator phải trả về số âm / dương / 0 chứ không phải boolean hay một phần tử.",
+      "explanationEn": "By default sort compares as strings (so `[6, 4, 15, 10]` becomes `[10, 15, 4, 6]`), and since ES2019 it must be stable. `sort` mutates the original (use `toSorted()` for a copy), and a comparator returns a negative / positive / zero number, not a boolean or an element.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI trường hợp chạy trong thời gian O(n).",
+      "promptEn": "Pick TWO cases that run in O(n) time.",
+      "options": [
+        "Selection sort trên một mảng đã sắp xếp",
+        "Insertion sort trên một mảng đã sắp xếp",
+        "Bubble sort không có cờ dừng sớm trên một mảng đã sắp xếp",
+        "Bubble sort có cờ `swapped` trên một mảng đã sắp xếp",
+        "Insertion sort trên một mảng sắp xếp ngược"
+      ],
+      "optionsEn": [
+        "Selection sort on an already sorted array",
+        "Insertion sort on an already sorted array",
+        "Bubble sort without an early-exit flag on an already sorted array",
+        "Bubble sort with a `swapped` flag on an already sorted array",
+        "Insertion sort on a reverse-sorted array"
+      ],
+      "answers": [1, 3],
+      "explanation": "Insertion sort và bubble sort có dừng sớm là thuật toán thích nghi: trên mảng đã sắp xếp chúng chỉ quét một lượt. Selection sort luôn quét hết phần còn lại, bubble sort không có cờ vẫn chạy đủ mọi lượt, và mảng sắp xếp ngược là worst case O(n²) của insertion sort.",
+      "explanationEn": "Insertion sort and bubble sort with early exit are adaptive: on sorted input they make a single pass. Selection sort always scans the rest, bubble sort without the flag still runs every pass, and reversed input is insertion sort's O(n²) worst case.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Selection sort thực hiện TỐI ĐA bao nhiêu lần swap trên một mảng n phần tử? (viết theo n)",
+      "promptEn": "What is the MAXIMUM number of swaps selection sort performs on an array of n elements? (answer in terms of n)",
+      "answer": "n - 1",
+      "answerEn": "n - 1",
+      "accept": [
+        "n - 1",
+        "n-1",
+        "n minus 1",
+        "n minus one",
+        "o(n - 1)"
+      ],
+      "explanation": "n − 1. Mỗi lượt vòng ngoài swap nhiều nhất một lần, và chỉ cần n − 1 lượt vì phần tử cuối tự đúng chỗ. Số phép so sánh thì vẫn luôn là n(n-1)/2, nên thời gian vẫn O(n²).",
+      "explanationEn": "n − 1. Each outer pass swaps at most once, and only n − 1 passes are needed because the last element falls into place. The comparisons are still always n(n-1)/2, so the time is still O(n²).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Thuật ngữ nào chỉ một thuật toán xử lý input từng phần tử khi chúng đến, không cần thấy toàn bộ dữ liệu trước — tính chất mà insertion sort có?",
+      "promptEn": "What term describes an algorithm that processes input item by item as it arrives, without seeing all the data first — a property insertion sort has?",
+      "answer": "Online",
+      "answerEn": "Online",
+      "accept": [
+        "online",
+        "online algorithm",
+        "thuat toan online",
+        "thuật toán online",
+        "online sorting",
+        "online sort"
+      ],
+      "explanation": "Online. Insertion sort luôn giữ phần trái đã sắp xếp, nên mỗi giá trị mới chỉ cần chèn vào đúng chỗ. Selection sort thì không online vì phải thấy mọi phần tử còn lại mới biết giá trị nhỏ nhất.",
+      "explanationEn": "Online. Insertion sort always keeps a sorted left part, so each new value just needs inserting into place. Selection sort is not online because it must see every remaining element to know the minimum.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thuật toán hoặc kỹ thuật với cách nó hoạt động.",
+      "promptEn": "Match each algorithm or technique to how it works.",
+      "pairs": [
+        {
+          "left": "Bubble sort",
+          "leftEn": "Bubble sort",
+          "right": "Swap các cặp kề nhau sai thứ tự để giá trị lớn nhất nổi về cuối mỗi lượt",
+          "rightEn": "Swaps out-of-order adjacent pairs so the largest value bubbles to the end each pass"
+        },
+        {
+          "left": "Selection sort",
+          "leftEn": "Selection sort",
+          "right": "Tìm giá trị nhỏ nhất trong phần còn lại rồi swap nó về đầu phần đó",
+          "rightEn": "Finds the minimum of the remaining part and swaps it to the front of that part"
+        },
+        {
+          "left": "Insertion sort",
+          "leftEn": "Insertion sort",
+          "right": "Dịch các phần tử lớn hơn sang phải để chèn phần tử tiếp theo vào phần trái đã sắp xếp",
+          "rightEn": "Shifts larger elements right to insert the next element into the sorted left part"
+        },
+        {
+          "left": "Cờ dừng sớm (early exit)",
+          "leftEn": "Early-exit flag",
+          "right": "Dừng thuật toán khi một lượt quét hoàn tất mà không có lần swap nào",
+          "rightEn": "Stops the algorithm when a full pass completes without a single swap"
+        }
+      ],
+      "explanation": "Hình dung vùng đã sắp xếp: bubble sort mở rộng từ bên phải, selection sort và insertion sort mở rộng từ bên trái. Cờ dừng sớm là thứ đưa best case của bubble sort về O(n).",
+      "explanationEn": "Picture the sorted region: bubble sort grows it from the right, selection and insertion sort grow it from the left. The early-exit flag is what gives bubble sort its O(n) best case.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của một lượt trong insertion sort.",
+      "promptEn": "Put the steps of one insertion sort iteration into the right order.",
+      "items": [
+        {
+          "text": "Lưu phần tử tại index i vào biến current",
+          "textEn": "Save the element at index i into current"
+        },
+        {
+          "text": "Đặt j = i - 1 để trỏ vào cuối phần đã sắp xếp",
+          "textEn": "Set j = i - 1 to point at the end of the sorted part"
+        },
+        {
+          "text": "Khi j >= 0 và arr[j] > current, dịch arr[j] sang arr[j + 1] rồi giảm j",
+          "textEn": "While j >= 0 and arr[j] > current, shift arr[j] into arr[j + 1] and decrement j"
+        },
+        {
+          "text": "Ghi current vào arr[j + 1]",
+          "textEn": "Write current into arr[j + 1]"
+        },
+        {
+          "text": "Tăng i và lặp lại với phần tử tiếp theo",
+          "textEn": "Increment i and repeat with the next element"
+        }
+      ],
+      "explanation": "Phải lưu current trước, vì bước dịch sẽ ghi đè lên vị trí i. Khi vòng while dừng, j + 1 chính là chỗ trống dành cho current.",
+      "explanationEn": "current must be saved first, because the shifting overwrites position i. When the while loop stops, j + 1 is exactly the gap left for current.",
+      "id": "d6"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu là yêu cầu phi chức năng (NFR).",
+      "promptEn": "Pick TWO statements that are non-functional requirements (NFRs).",
+      "options": [
+        "Người dùng xuất được báo cáo doanh thu ra file CSV",
+        "Sau khi region chính sập, dịch vụ khôi phục trong 15 phút và mất tối đa 1 phút dữ liệu",
+        "Quản trị viên khoá được tài khoản người dùng",
+        "Hệ thống gửi email xác nhận khi đơn hàng được giao",
+        "Tìm kiếm sản phẩm trả kết quả với p99 dưới 500 ms ở 1.000 request/s"
+      ],
+      "optionsEn": [
+        "Users can export the revenue report as a CSV file",
+        "After the primary region fails, service is restored within 15 minutes with at most 1 minute of data loss",
+        "Administrators can lock a user account",
+        "The system sends a confirmation email when an order is delivered",
+        "Product search returns results with p99 under 500 ms at 1,000 requests/s"
+      ],
+      "answers": [1, 4],
+      "explanation": "RTO/RPO sau sự cố và độ trễ dưới tải là các thuộc tính chất lượng đo được — hệ thống làm việc TỐT tới đâu. Xuất CSV, khoá tài khoản và gửi email là hành vi, tức yêu cầu chức năng.",
+      "explanationEn": "RTO/RPO after a failure and latency under load are measurable quality attributes — how WELL the system works. Exporting a CSV, locking an account and sending an email are behaviours, so they are functional requirements.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thực hành đúng khi làm việc với Architecture Decision Record (ADR).",
+      "promptEn": "Pick TWO good practices for Architecture Decision Records (ADRs).",
+      "options": [
+        "Ghi cả hệ quả tiêu cực của quyết định, không chỉ lợi ích",
+        "Gộp mọi quyết định của một quý vào một ADR dài cho dễ quản lý",
+        "Sửa trực tiếp ADR đã accepted mỗi khi quyết định thay đổi",
+        "Lưu ADR trong repo cạnh code và review chúng trong pull request",
+        "Chỉ viết ADR sau khi dự án kết thúc để tổng kết"
+      ],
+      "optionsEn": [
+        "Record the negative consequences of a decision, not just the benefits",
+        "Bundle every decision of a quarter into one long ADR for easier management",
+        "Edit an accepted ADR in place whenever the decision changes",
+        "Keep ADRs in the repo next to the code and review them in pull requests",
+        "Write ADRs only after the project ends, as a retrospective"
+      ],
+      "answers": [0, 3],
+      "explanation": "ADR tốt ngắn gọn, mỗi hồ sơ một quyết định, ghi rõ cái giá phải trả, và được quản lý phiên bản cùng code. ADR đã accepted là bất biến — thay đổi thì viết ADR mới supersede — và viết ngay lúc quyết định, khi bối cảnh còn rõ.",
+      "explanationEn": "Good ADRs are short, one decision each, state the price paid, and are versioned with the code. Accepted ADRs are immutable — a change gets a new superseding ADR — and they are written at decision time, while the context is still fresh.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Mô hình sơ đồ kiến trúc của Simon Brown với bốn mức phóng to (context, container, component, code) tên là gì?",
+      "promptEn": "What is the name of Simon Brown's architecture diagramming model with four zoom levels (context, container, component, code)?",
+      "answer": "C4",
+      "answerEn": "C4 model",
+      "accept": [
+        "c4",
+        "c4 model",
+        "mô hình c4",
+        "c4 diagram",
+        "c4 diagrams"
+      ],
+      "explanation": "C4 — Context, Containers, Components, Code. Mức 1 và 2 là nơi phần lớn buổi review giải pháp diễn ra; mức Code hiếm khi được vẽ tay.",
+      "explanationEn": "C4 — Context, Containers, Components, Code. Levels 1 and 2 are where most solution reviews happen; the code level is rarely drawn by hand.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Một ngày có bao nhiêu giây? (con số chính xác, dùng để quy đổi request/ngày sang request/giây)",
+      "promptEn": "How many seconds are in one day? (the exact figure used to convert requests/day into requests/second)",
+      "answer": "86400",
+      "answerEn": "86400",
+      "accept": [
+        "86400",
+        "86,400",
+        "86.400",
+        "86 400"
+      ],
+      "explanation": "86.400 giây — làm tròn thành 10⁵ khi tính nhẩm. Vì vậy 1 triệu request/ngày chỉ khoảng 12 request/giây trung bình.",
+      "explanationEn": "86,400 seconds — round it to 10⁵ for mental maths. That is why 1 million requests/day is only about 12 requests/second on average.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi vai trò kiến trúc sư với phạm vi chính của họ.",
+      "promptEn": "Match each architect role to its main scope.",
+      "pairs": [
+        {
+          "left": "Software architect",
+          "leftEn": "Software architect",
+          "right": "Cấu trúc bên trong một ứng dụng: module, pattern, quy ước code",
+          "rightEn": "The inside of one application: modules, patterns, code conventions"
+        },
+        {
+          "left": "Solutions Architect",
+          "leftEn": "Solutions Architect",
+          "right": "Một giải pháp trải qua nhiều hệ thống và đội, từ yêu cầu tới quyết định",
+          "rightEn": "One solution across several systems and teams, from requirements to decisions"
+        },
+        {
+          "left": "Enterprise architect",
+          "leftEn": "Enterprise architect",
+          "right": "Toàn bộ danh mục hệ thống: capability map, roadmap nhiều năm, tiêu chuẩn",
+          "rightEn": "The whole portfolio: capability maps, multi-year roadmaps, standards"
+        },
+        {
+          "left": "Cloud architect",
+          "leftEn": "Cloud architect",
+          "right": "Nền tảng cloud: landing zone, cấu trúc account và network, guardrail",
+          "rightEn": "The cloud platform: landing zones, account and network structure, guardrails"
+        }
+      ],
+      "explanation": "Phân biệt theo phạm vi và độ sâu: enterprise nhìn rộng nhất, software đi sâu nhất, SA ở giữa, còn cloud architect sở hữu nền tảng mà mọi giải pháp chạy lên.",
+      "explanationEn": "The split is by breadth and depth: enterprise is widest, software goes deepest, the SA sits in between, and the cloud architect owns the platform every solution lands on.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước trong vòng lặp kiến trúc của một Solutions Architect.",
+      "promptEn": "Put the steps of a Solutions Architect's architecture loop into order.",
+      "items": [
+        {
+          "text": "Hiểu mục tiêu kinh doanh, các bên liên quan, FR/NFR và ràng buộc",
+          "textEn": "Understand business drivers, stakeholders, FR/NFR and constraints"
+        },
+        {
+          "text": "Khám phá 2–3 phương án, làm spike cho những ẩn số rủi ro nhất",
+          "textEn": "Explore 2–3 candidate designs, with spikes for the riskiest unknowns"
+        },
+        {
+          "text": "Phân tích đánh đổi, quyết định và ghi lại bằng ADR",
+          "textEn": "Analyse trade-offs, decide and record it in an ADR"
+        },
+        {
+          "text": "Truyền đạt bằng sơ đồ C4 và review với các bên liên quan",
+          "textEn": "Communicate with C4 diagrams and review with stakeholders"
+        },
+        {
+          "text": "Dẫn dắt quá trình xây dựng và đo đạc trên production để tiến hoá thiết kế",
+          "textEn": "Guide the build and measure in production to evolve the design"
+        }
+      ],
+      "explanation": "Hiểu trước, rồi mới khám phá, quyết định, truyền đạt và dẫn dắt. Bước cuối quay lại bước đầu: số đo thật trên production kiểm chứng lại các giả định ban đầu.",
+      "explanationEn": "Understand first, then explore, decide, communicate and guide. The last step feeds back into the first: real production measurements re-test the original assumptions.",
+      "id": "d6"
+    }
+  ]
+}

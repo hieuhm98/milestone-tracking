@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Redis thực thi lệnh trên một luồng duy nhất nhưng vẫn phục vụ hơn 100 nghìn thao tác mỗi giây. Lý do chính là gì?",
+    "questionEn": "Redis executes commands on a single thread yet serves 100k+ operations per second. What is the main reason?",
+    "options": [
+      "Nó thực thi lệnh song song trên nhiều luồng với lock chi tiết cho từng key",
+      "Nó biên dịch mỗi lệnh thành mã máy trước khi chạy",
+      "Dữ liệu nằm trong RAM, không có lock hay context switch, và nút thắt thật là mạng chứ không phải CPU",
+      "Nó ghi mọi lệnh xuống đĩa đồng bộ nên không phải chờ bộ nhớ"
+    ],
+    "optionsEn": [
+      "It executes commands in parallel on many threads with fine-grained per-key locks",
+      "It compiles each command to machine code before running it",
+      "Data lives in RAM, there are no locks or context switches, and the real bottleneck is network, not CPU",
+      "It writes every command to disk synchronously so it never waits on memory"
+    ],
+    "answer": 2,
+    "explanation": "Mỗi lệnh chỉ là vài thao tác trên RAM, nên CPU hiếm khi là giới hạn. Một luồng loại bỏ hoàn toàn chi phí lock và context switch. Từ Redis 6, I/O threads có thể song song hoá đọc/ghi socket, nhưng phần thực thi lệnh vẫn đơn luồng.",
+    "explanationEn": "Each command is a handful of RAM operations, so CPU is rarely the limit. One thread removes lock and context-switch overhead entirely. Since Redis 6, I/O threads can parallelise socket reads/writes, but command execution stays single-threaded."
+  },
+  {
+    "id": "q2",
+    "question": "Cứ vài phút, độ trễ p99 của MỌI client gọi Redis lại vọt lên vài giây. `SLOWLOG GET` cho thấy lệnh sau từ một cron job trên instance có 30 triệu key. Nguyên nhân và cách sửa?\n`KEYS session:*`",
+    "questionEn": "Every few minutes, p99 latency for ALL Redis clients jumps to several seconds. `SLOWLOG GET` shows this command from a cron job on an instance with 30 million keys. Cause and fix?\n`KEYS session:*`",
+    "options": [
+      "`KEYS` duyệt O(N) toàn bộ keyspace và chặn main thread — thay bằng `SCAN` với cursor",
+      "Băng thông mạng bị bão hoà — bật thêm `io-threads` là đủ",
+      "Chính sách eviction sai — đổi sang `allkeys-lru`",
+      "AOF đang dùng `appendfsync always` — đổi sang `everysec`"
+    ],
+    "optionsEn": [
+      "`KEYS` walks the whole keyspace in O(N) and blocks the main thread — replace it with cursor-based `SCAN`",
+      "Network bandwidth is saturated — enabling more `io-threads` is enough",
+      "The eviction policy is wrong — switch to `allkeys-lru`",
+      "AOF uses `appendfsync always` — switch to `everysec`"
+    ],
+    "answer": 0,
+    "explanation": "Vì chỉ có một luồng thực thi, một lệnh O(N) trên 30 triệu key chặn mọi client khác cho tới khi xong. `SCAN` trả về từng lô nhỏ, xen kẽ với lệnh của client khác. I/O threads không giúp được vì phần bị chặn là thực thi lệnh.",
+    "explanationEn": "With a single execution thread, an O(N) command over 30 million keys blocks every other client until it finishes. `SCAN` returns small batches that interleave with other clients' commands. I/O threads do not help because the blocked part is command execution."
+  },
+  {
+    "id": "q3",
+    "question": "Một ví điện tử lưu số dư trong Redis. Cần: đọc số dư, chỉ trừ tiền nếu đủ, và không để hai request đồng thời cùng trừ vượt số dư. Cách nào đúng?",
+    "questionEn": "A wallet keeps balances in Redis. It must read the balance, deduct only if it is sufficient, and never let two concurrent requests overdraw it. Which approach is correct?",
+    "options": [
+      "Pipelining lệnh `GET` và `DECRBY` trong một round trip",
+      "`MULTI`, `GET`, rồi quyết định trong code ứng dụng giữa chừng trước khi `EXEC`",
+      "Gọi `GET` rồi `DECRBY` riêng lẻ và retry khi lỗi mạng",
+      "Một Lua script đọc số dư, so sánh và trừ ngay trên server"
+    ],
+    "optionsEn": [
+      "Pipeline `GET` and `DECRBY` in one round trip",
+      "`MULTI`, `GET`, then decide in application code midway before `EXEC`",
+      "Call `GET` then `DECRBY` separately and retry on network errors",
+      "A Lua script that reads, compares and deducts on the server"
+    ],
+    "answer": 3,
+    "explanation": "Lua script chạy atomic trên server nên logic đọc–so sánh–ghi không bị xen ngang. Pipelining không atomic; trong `MULTI` các lệnh chỉ được xếp hàng, kết quả `GET` chưa có cho tới `EXEC` nên không thể rẽ nhánh theo nó; hai lệnh rời rạc có race condition.",
+    "explanationEn": "A Lua script runs atomically on the server, so the read-compare-write cannot be interleaved. Pipelining is not atomic; inside `MULTI` commands are only queued and the `GET` result is not available until `EXEC`, so you cannot branch on it; two separate calls race."
+  },
+  {
+    "id": "q4",
+    "question": "Chạy lần lượt ba lệnh sau. Ngay sau đó, `TTL page:views` trả về gì?\n`SET page:views 10 EX 60\nINCR page:views\nSET page:views 0`",
+    "questionEn": "These three commands run in order. What does `TTL page:views` return right afterwards?\n`SET page:views 10 EX 60\nINCR page:views\nSET page:views 0`",
+    "options": [
+      "Khoảng 60",
+      "-1",
+      "-2",
+      "0"
+    ],
+    "optionsEn": [
+      "About 60",
+      "-1",
+      "-2",
+      "0"
+    ],
+    "answer": 1,
+    "explanation": "`INCR` giữ nguyên TTL, nhưng một lệnh `SET` thường (không có `EX`/`PX`/`KEEPTTL`) ghi đè giá trị và xoá TTL. Key vẫn tồn tại nhưng không còn hạn nên `TTL` trả -1; -2 chỉ xuất hiện khi key không tồn tại.",
+    "explanationEn": "`INCR` keeps the TTL, but a plain `SET` (no `EX`/`PX`/`KEEPTTL`) overwrites the value and discards the TTL. The key exists with no expiry, so `TTL` returns -1; -2 would mean the key does not exist."
+  },
+  {
+    "id": "q5",
+    "question": "Hồ sơ người dùng có khoảng 20 field; field `last_seen` được cập nhật vài lần mỗi phút, các field khác hiếm khi đổi. Nên mô hình hoá trong Redis thế nào?",
+    "questionEn": "A user profile has about 20 fields; `last_seen` is updated several times a minute while the rest rarely change. How should it be modelled in Redis?",
+    "options": [
+      "Một string chứa JSON, đọc về, sửa và ghi lại toàn bộ mỗi lần cập nhật",
+      "Một list, mỗi phần tử là một field theo thứ tự cố định",
+      "Hai mươi key string riêng lẻ như `user:42:last_seen` cho mỗi field",
+      "Một hash `user:42`, cập nhật riêng field bằng `HSET user:42 last_seen …`"
+    ],
+    "optionsEn": [
+      "One string holding JSON, read, modified and fully rewritten on each update",
+      "A list, one element per field in a fixed order",
+      "Twenty separate string keys like `user:42:last_seen`, one per field",
+      "A hash `user:42`, updating the single field with `HSET user:42 last_seen …`"
+    ],
+    "answer": 3,
+    "explanation": "Hash cho phép đọc/ghi từng field một cách atomic mà không phải ghi lại cả object, và hash nhỏ được lưu bằng listpack rất tiết kiệm bộ nhớ. JSON trong string gây race khi đọc–sửa–ghi; hai mươi key rời tốn nhiều overhead hơn và khó gắn TTL chung.",
+    "explanationEn": "A hash lets you read or write one field atomically without rewriting the whole object, and small hashes use the memory-efficient listpack encoding. JSON in a string races on read-modify-write; twenty separate keys cost more overhead and are harder to expire together."
+  },
+  {
+    "id": "q6",
+    "question": "Một game có 10 triệu người chơi cần hiển thị top 100 theo thời gian thực và cho mỗi người chơi xem thứ hạng của mình ngay sau khi điểm thay đổi. Thiết kế Redis nào phù hợp nhất?",
+    "questionEn": "A game with 10 million players must show a real-time top 100 and let each player see their own rank right after their score changes. Which Redis design fits best?",
+    "options": [
+      "Một list, ứng dụng sắp xếp lại và ghi đè sau mỗi lần cộng điểm",
+      "Một hash player → score, đọc bằng `HGETALL` rồi sắp xếp trong ứng dụng",
+      "Một sorted set: `ZINCRBY` khi cộng điểm, `ZRANGE … REV` cho top 100, `ZREVRANK` cho thứ hạng",
+      "Một set người chơi và gọi `SORT` trên toàn bộ set mỗi lần xem"
+    ],
+    "optionsEn": [
+      "A list the application re-sorts and rewrites after every score change",
+      "A hash of player → score, read with `HGETALL` and sorted in the application",
+      "A sorted set: `ZINCRBY` on score changes, `ZRANGE … REV` for the top 100, `ZREVRANK` for rank",
+      "A set of players with `SORT` run over the whole set on every view"
+    ],
+    "answer": 2,
+    "explanation": "Sorted set giữ member luôn được sắp theo score bằng skiplist, nên cập nhật và tra hạng đều O(log N), đọc top 100 là O(log N + 100). Mọi phương án khác đều phải sắp xếp hoặc truyền toàn bộ 10 triệu phần tử, vừa chậm vừa chặn main thread.",
+    "explanationEn": "A sorted set keeps members ordered by score in a skiplist, so updates and rank lookups are O(log N) and the top 100 is O(log N + 100). Every other option sorts or transfers all 10 million entries, which is slow and blocks the main thread."
+  },
+  {
+    "id": "q7",
+    "question": "Dịch vụ billing phải xử lý mọi sự kiện đơn hàng kể cả khi nó bị dừng 10 phút để deploy; mỗi sự kiện chỉ do một trong nhiều worker xử lý, và sự kiện của worker bị crash phải được worker khác nhận lại. Đội đã dùng Redis. Chọn gì?",
+    "questionEn": "A billing service must process every order event even when it is down for 10 minutes during a deploy; each event is handled by one of several workers, and events held by a crashed worker must be picked up by another. The team already runs Redis. What should they use?",
+    "options": [
+      "Redis Streams với consumer group, `XACK` sau khi xử lý và `XAUTOCLAIM` cho entry bị treo",
+      "Pub/Sub thường với một channel `orders` mà mọi worker subscribe",
+      "Sharded pub/sub (`SPUBLISH`) để phân tán tải qua các shard",
+      "Keyspace notifications trên các key đơn hàng"
+    ],
+    "optionsEn": [
+      "Redis Streams with a consumer group, `XACK` after processing and `XAUTOCLAIM` for stuck entries",
+      "Classic Pub/Sub on an `orders` channel that every worker subscribes to",
+      "Sharded pub/sub (`SPUBLISH`) to spread load across shards",
+      "Keyspace notifications on the order keys"
+    ],
+    "answer": 0,
+    "explanation": "Streams lưu entry nên consumer offline đọc bù được; consumer group chia mỗi entry cho một worker; PEL giữ entry chưa ack để worker khác claim lại. Mọi dạng pub/sub (kể cả sharded và keyspace notifications) đều fire-and-forget: không ai nghe là mất.",
+    "explanationEn": "Streams store entries so an offline consumer catches up; a consumer group hands each entry to one worker; the PEL keeps unacked entries so another worker can claim them. Every pub/sub flavour (sharded and keyspace notifications included) is fire-and-forget: if nobody is listening, the message is gone."
+  },
+  {
+    "id": "q8",
+    "question": "Một node Redis chỉ dùng làm cache chạm ngưỡng `maxmemory`, và ứng dụng bắt đầu nhận lỗi sau cho mọi lệnh ghi. Nguyên nhân khả dĩ nhất?\n`OOM command not allowed when used memory > 'maxmemory'.`",
+    "questionEn": "A Redis node used purely as a cache reaches `maxmemory`, and the application starts getting this error on every write. Most likely cause?\n`OOM command not allowed when used memory > 'maxmemory'.`",
+    "options": [
+      "`maxmemory-samples` đặt quá thấp nên Redis không tìm được key để loại",
+      "`maxmemory-policy` vẫn là giá trị mặc định `noeviction`",
+      "AOF đang bật với `appendfsync always`",
+      "Replica chưa đồng bộ xong nên primary từ chối ghi"
+    ],
+    "optionsEn": [
+      "`maxmemory-samples` is set too low so Redis cannot find keys to evict",
+      "`maxmemory-policy` is still the default `noeviction`",
+      "AOF is enabled with `appendfsync always`",
+      "A replica has not finished syncing so the primary refuses writes"
+    ],
+    "answer": 1,
+    "explanation": "Mặc định Redis không loại key nào mà trả lỗi OOM cho lệnh ghi. Một cache thuần nên dùng `allkeys-lru` hoặc `allkeys-lfu`. Lưu ý: `volatile-*` cũng gây lỗi này nếu các key không có TTL. `maxmemory-samples` chỉ ảnh hưởng độ chính xác của LRU/LFU.",
+    "explanationEn": "By default Redis evicts nothing and returns OOM errors for writes. A pure cache should use `allkeys-lru` or `allkeys-lfu`. Note that `volatile-*` produces the same error when keys have no TTL. `maxmemory-samples` only affects how accurate the LRU/LFU approximation is."
+  },
+  {
+    "id": "q9",
+    "question": "Vì hạn chế ngân sách, một instance Redis phải chứa cả key cache (luôn có TTL) lẫn các list hàng đợi job (không có TTL) tuyệt đối không được bị loại. Chọn `maxmemory-policy` nào?",
+    "questionEn": "Due to budget limits, one Redis instance must hold both cache keys (always with a TTL) and job-queue lists (no TTL) that must never be evicted. Which `maxmemory-policy` should it use?",
+    "options": [
+      "`allkeys-lru`",
+      "`allkeys-random`",
+      "`noeviction`",
+      "`volatile-lfu`"
+    ],
+    "optionsEn": [
+      "`allkeys-lru`",
+      "`allkeys-random`",
+      "`noeviction`",
+      "`volatile-lfu`"
+    ],
+    "answer": 3,
+    "explanation": "`volatile-*` chỉ loại key có TTL, nên cache bị loại còn hàng đợi an toàn. `allkeys-*` có thể xoá mất job. `noeviction` giữ được hàng đợi nhưng khi đầy thì mọi lệnh ghi (cả cache lẫn enqueue) đều lỗi. Tốt nhất vẫn là tách hai instance.",
+    "explanationEn": "`volatile-*` evicts only keys with a TTL, so cache entries go and the queues stay safe. `allkeys-*` could delete jobs. `noeviction` keeps the queues but, once full, every write — cache and enqueue alike — fails. Separate instances remain the better design."
+  },
+  {
+    "id": "q10",
+    "question": "Redis xoá các key đã hết hạn bằng cách nào?",
+    "questionEn": "How does Redis remove keys whose TTL has passed?",
+    "options": [
+      "Chỉ khi có client truy cập vào key đó",
+      "Mỗi key có một timer riêng xoá nó chính xác tại thời điểm hết hạn",
+      "Lười khi key bị truy cập, cộng với một chu kỳ nền lấy mẫu các key có TTL và xoá key đã hết hạn",
+      "Chỉ trong lúc tạo snapshot RDB hoặc rewrite AOF"
+    ],
+    "optionsEn": [
+      "Only when a client accesses that key",
+      "Each key has its own timer that deletes it exactly at expiry",
+      "Lazily when accessed, plus a background cycle that samples keys with TTLs and deletes expired ones",
+      "Only while creating an RDB snapshot or rewriting the AOF"
+    ],
+    "answer": 2,
+    "explanation": "Chỉ xoá lười sẽ để key không ai đọc chiếm bộ nhớ mãi; timer cho từng key thì quá tốn với hàng triệu key. Redis kết hợp hai cách, nên bộ nhớ được thu hồi nhanh nhưng không tức thì.",
+    "explanationEn": "Lazy deletion alone would leave never-read keys holding memory forever, and a timer per key is too expensive with millions of keys. Redis combines both approaches, so memory is reclaimed promptly but not instantly."
+  },
+  {
+    "id": "q11",
+    "question": "Một hệ thống lưu giỏ hàng trong Redis chấp nhận mất tối đa khoảng 1 giây lệnh ghi khi server mất điện, nhưng vẫn cần thông lượng ghi cao. Cấu hình persistence nào phù hợp?",
+    "questionEn": "A system stores shopping carts in Redis. It can lose at most about 1 second of writes on a power failure but still needs high write throughput. Which persistence setup fits?",
+    "options": [
+      "Chỉ RDB với `save 300 100`",
+      "AOF với `appendfsync everysec`",
+      "AOF với `appendfsync always`",
+      "Tắt persistence và dựa vào một replica"
+    ],
+    "optionsEn": [
+      "RDB only with `save 300 100`",
+      "AOF with `appendfsync everysec`",
+      "AOF with `appendfsync always`",
+      "Persistence off, relying on one replica"
+    ],
+    "answer": 1,
+    "explanation": "`everysec` (mặc định) fsync mỗi giây: mất tối đa ~1 giây với chi phí thấp. `always` an toàn hơn nhưng fsync mỗi lệnh ghi làm giảm mạnh thông lượng. RDB có thể mất vài phút. Replica bất đồng bộ và cùng mất điện thì không bảo vệ gì.",
+    "explanationEn": "`everysec` (the default) fsyncs once a second: at most ~1 second lost at low cost. `always` is safer but an fsync per write cuts throughput sharply. RDB can lose minutes. An async replica does not protect against losing recent writes, nor against a shared power failure."
+  },
+  {
+    "id": "q12",
+    "question": "Instance Redis 20 GB chạy trên máy 32 GB, tải ghi rất nặng. Mỗi lần snapshot, log báo lỗi sau hoặc tiến trình bị OOM killer giết. Nguyên nhân gốc?\n`Can't save in background: fork: Cannot allocate memory`",
+    "questionEn": "A 20 GB Redis instance runs on a 32 GB host under heavy writes. On every snapshot the log shows this error, or the process is killed by the OOM killer. Root cause?\n`Can't save in background: fork: Cannot allocate memory`",
+    "options": [
+      "`BGSAVE` fork tiến trình con; copy-on-write nhân bản các trang bị ghi nên bộ nhớ có thể gần gấp đôi — cần chừa headroom và đặt `vm.overcommit_memory = 1`",
+      "File AOF đã quá lớn nên không thể mở để ghi thêm",
+      "Có quá nhiều kết nối client chiếm hết file descriptor",
+      "Replication backlog quá nhỏ nên replica liên tục full sync"
+    ],
+    "optionsEn": [
+      "`BGSAVE` forks a child; copy-on-write duplicates written pages so memory can nearly double — leave headroom and set `vm.overcommit_memory = 1`",
+      "The AOF file is too large to be opened for appending",
+      "Too many client connections exhaust file descriptors",
+      "The replication backlog is too small so replicas keep doing full syncs"
+    ],
+    "answer": 0,
+    "explanation": "Fork ban đầu chia sẻ trang nhớ, nhưng mỗi trang bị sửa trong lúc snapshot phải được sao chép. Với tải ghi nặng, 20 GB có thể cần thêm gần 20 GB. Kernel với overcommit mặc định có thể từ chối fork. Đó là lý do đặt `maxmemory` thấp hơn nhiều so với RAM vật lý.",
+    "explanationEn": "A fork initially shares pages, but every page modified during the snapshot must be copied. Under heavy writes, 20 GB can need close to another 20 GB. With default overcommit the kernel may refuse the fork. This is why `maxmemory` should sit well below physical RAM."
+  },
+  {
+    "id": "q13",
+    "question": "Client nhận `OK` cho một lệnh ghi. Hai giây sau primary crash, Sentinel promote một replica thành primary mới — và lệnh ghi đó không còn. Giải thích đúng nhất?",
+    "questionEn": "A client receives `OK` for a write. Two seconds later the primary crashes, Sentinel promotes a replica — and the write is gone. What is the best explanation?",
+    "options": [
+      "Quorum của Sentinel cấu hình sai nên đã chọn nhầm replica",
+      "Snapshot RDB trên primary bị xoá trong quá trình failover",
+      "Replica đã loại key đó do chính sách eviction",
+      "Replication bất đồng bộ: primary xác nhận với client trước khi replica nhận được lệnh ghi"
+    ],
+    "optionsEn": [
+      "Sentinel's quorum was misconfigured so it picked the wrong replica",
+      "The primary's RDB snapshot was deleted during failover",
+      "The replica evicted the key under its eviction policy",
+      "Replication is asynchronous: the primary acknowledged the client before the replica received the write"
+    ],
+    "answer": 3,
+    "explanation": "Đây là hành vi thiết kế của Redis, không phải lỗi cấu hình. `WAIT` và `min-replicas-to-write` thu hẹp khoảng hở nhưng không biến Redis thành nhất quán mạnh. Nếu mọi lệnh ghi đã xác nhận phải bền, dùng database hoặc dịch vụ như MemoryDB.",
+    "explanationEn": "This is Redis working as designed, not a misconfiguration. `WAIT` and `min-replicas-to-write` narrow the window but do not make Redis strongly consistent. If every acknowledged write must survive, use a database or a service such as MemoryDB."
+  },
+  {
+    "id": "q14",
+    "question": "Trên Redis Cluster, lệnh sau thất bại với lỗi `CROSSSLOT`. Cách sửa đúng là gì?\n`MSET user:42:name Linh user:42:plan pro`",
+    "questionEn": "On Redis Cluster, this command fails with a `CROSSSLOT` error. What is the correct fix?\n`MSET user:42:name Linh user:42:plan pro`",
+    "options": [
+      "Dùng hash tag: `{user:42}:name` và `{user:42}:plan` để hai key rơi vào cùng slot",
+      "Gọi `SELECT 1` để chuyển sang database khác rồi thử lại",
+      "Bọc lệnh trong `MULTI`/`EXEC` để nó thành atomic",
+      "Gửi lại lệnh tới node được nêu trong phản hồi `MOVED`"
+    ],
+    "optionsEn": [
+      "Use hash tags: `{user:42}:name` and `{user:42}:plan` so both keys land in the same slot",
+      "Run `SELECT 1` to switch database and retry",
+      "Wrap the command in `MULTI`/`EXEC` to make it atomic",
+      "Resend the command to the node named in the `MOVED` reply"
+    ],
+    "answer": 0,
+    "explanation": "Lệnh nhiều key trong cluster chỉ chạy khi mọi key cùng slot. Với hash tag, chỉ phần trong `{}` được băm nên hai key cùng slot. Cluster chỉ có database 0; `MULTI` cũng bị cùng ràng buộc; hai key khác slot có thể nằm trên hai node nên không có node nào nhận được cả hai.",
+    "explanationEn": "Multi-key commands in a cluster only run when every key is in the same slot. With hash tags only the part inside `{}` is hashed, so both keys share a slot. Cluster has only database 0; `MULTI` has the same constraint; two keys in different slots may live on different nodes, so no single node can serve both."
+  },
+  {
+    "id": "q15",
+    "question": "Trong Redis Cluster, một client gửi `GET cart:9` tới node không sở hữu slot của key đó (slot không đang di chuyển). Điều gì xảy ra?",
+    "questionEn": "In Redis Cluster, a client sends `GET cart:9` to a node that does not own that key's slot (the slot is not being migrated). What happens?",
+    "options": [
+      "Node đó âm thầm chuyển tiếp request tới node đúng và trả kết quả",
+      "Node đó trả `nil` như thể key không tồn tại",
+      "Node trả `MOVED <slot> <host:port>`; client gửi lại tới node đúng và cập nhật bảng slot",
+      "Node trả lỗi `CROSSSLOT` và client phải dùng hash tag"
+    ],
+    "optionsEn": [
+      "The node silently forwards the request to the right node and returns the result",
+      "The node returns `nil` as if the key did not exist",
+      "The node replies `MOVED <slot> <host:port>`; the client retries there and updates its slot map",
+      "The node returns `CROSSSLOT` and the client must use hash tags"
+    ],
+    "answer": 2,
+    "explanation": "Redis Cluster không proxy request. Client hiểu cluster lưu bảng slot → node và đi theo `MOVED` (slot thuộc node khác lâu dài) hoặc `ASK` (slot đang được di chuyển, chỉ chuyển hướng một lần). `CROSSSLOT` chỉ dành cho lệnh nhiều key.",
+    "explanationEn": "Redis Cluster does not proxy requests. Cluster-aware clients cache a slot → node map and follow `MOVED` (the slot lives elsewhere) or `ASK` (the slot is mid-migration, redirect once). `CROSSSLOT` is only for multi-key commands."
+  },
+  {
+    "id": "q16",
+    "question": "Một job thanh toán lấy khoá bằng `SET lock:pay:77 <token> NX PX 30000`. Worker A bị GC pause 40 giây, khoá hết hạn, worker B lấy khoá và trừ tiền; A tỉnh dậy và cũng trừ tiền. Cách sửa nào đảm bảo tính đúng đắn?",
+    "questionEn": "A payment job takes a lock with `SET lock:pay:77 <token> NX PX 30000`. Worker A hits a 40-second GC pause, the lock expires, worker B takes it and charges; A wakes up and charges too. Which fix guarantees correctness?",
+    "options": [
+      "Tăng TTL của khoá lên 5 phút để GC pause không vượt quá",
+      "Phát fencing token tăng dần kèm khoá và để tầng lưu trữ thanh toán từ chối token cũ",
+      "Chuyển sang Redlock trên 5 primary độc lập",
+      "Nhả khoá sớm hơn bằng một lệnh `DEL` ngay sau khi trừ tiền"
+    ],
+    "optionsEn": [
+      "Raise the lock TTL to 5 minutes so a GC pause cannot exceed it",
+      "Issue an increasing fencing token with the lock and have the payment store reject stale tokens",
+      "Switch to Redlock across 5 independent primaries",
+      "Release the lock sooner with a `DEL` right after charging"
+    ],
+    "answer": 1,
+    "explanation": "Mọi khoá dựa trên thời hạn đều có thể hết hạn khi người giữ đang bị dừng — TTL dài hơn chỉ đẩy vấn đề đi xa, Redlock cũng giả định pause có giới hạn. Fencing token để chính tài nguyên từ chối người giữ khoá cũ, nên đúng đắn bất kể thời gian pause.",
+    "explanationEn": "Any lease-based lock can expire while its holder is paused — a longer TTL only moves the problem, and Redlock also assumes bounded pauses. A fencing token makes the resource itself reject the stale holder, which stays correct regardless of pause length."
+  },
+  {
+    "id": "q17",
+    "question": "Vì sao nên nhả khoá Redis bằng script Lua này thay vì chỉ gọi `DEL lock:invoice:77`?\n`if redis.call(\"GET\", KEYS[1]) == ARGV[1] then\n  return redis.call(\"DEL\", KEYS[1])\nend\nreturn 0`",
+    "questionEn": "Why release a Redis lock with this Lua script instead of simply calling `DEL lock:invoice:77`?\n`if redis.call(\"GET\", KEYS[1]) == ARGV[1] then\n  return redis.call(\"DEL\", KEYS[1])\nend\nreturn 0`",
+    "options": [
+      "`DEL` là O(N) nên chậm hơn nhiều so với Lua",
+      "`DEL` không xoá được key đang có TTL",
+      "Lua tự động gia hạn khoá nếu job chưa xong",
+      "Nó chỉ xoá khi token còn khớp, tránh xoá nhầm khoá đã hết hạn và đang thuộc client khác"
+    ],
+    "optionsEn": [
+      "`DEL` is O(N) and much slower than Lua",
+      "`DEL` cannot delete a key that has a TTL",
+      "The Lua script automatically extends the lock if the job is not done",
+      "It deletes only if the token still matches, so it never removes a lock that expired and now belongs to another client"
+    ],
+    "answer": 3,
+    "explanation": "Nếu khoá của bạn đã hết hạn và client khác vừa lấy nó, `DEL` trần sẽ xoá khoá của họ. So sánh token rồi xoá phải atomic — `GET` rồi `DEL` bằng hai lệnh riêng vẫn có race — nên dùng Lua. `DEL` trên string là O(1) và xoá được key có TTL.",
+    "explanationEn": "If your lock expired and another client just acquired it, a bare `DEL` deletes their lock. The token check and delete must be atomic — `GET` then `DEL` as two calls still races — hence Lua. `DEL` on a string is O(1) and works on keys with TTLs."
+  },
+  {
+    "id": "q18",
+    "question": "Rate limiter dưới đây chạy tốt vài tuần, rồi một số user bị chặn vĩnh viễn dù không gửi request nào nữa. Nguyên nhân khả dĩ nhất?\n`const count = await redis.incr(key);\nif (count === 1) {\n  await redis.expire(key, 60);\n}`",
+    "questionEn": "The rate limiter below works for weeks, then some users are blocked forever even after they stop sending requests. Most likely cause?\n`const count = await redis.incr(key);\nif (count === 1) {\n  await redis.expire(key, 60);\n}`",
+    "options": [
+      "App crash hoặc timeout giữa `INCR` và `EXPIRE` để lại bộ đếm không có TTL — gộp hai lệnh vào một Lua script",
+      "`INCR` không atomic nên hai request đồng thời cùng nhận `count === 1`",
+      "`EXPIRE` đặt lại bộ đếm về 0 mỗi lần gọi",
+      "Chính sách `noeviction` ngăn Redis xoá key đã hết hạn"
+    ],
+    "optionsEn": [
+      "An app crash or timeout between `INCR` and `EXPIRE` left a counter with no TTL — combine both in one Lua script",
+      "`INCR` is not atomic so two concurrent requests both see `count === 1`",
+      "`EXPIRE` resets the counter to 0 each time it is called",
+      "The `noeviction` policy stops Redis from deleting expired keys"
+    ],
+    "answer": 0,
+    "explanation": "Hai lệnh riêng lẻ không atomic với nhau: nếu lệnh `EXPIRE` không bao giờ tới, key sống mãi và bộ đếm cứ tăng. `INCR` bản thân là atomic; `EXPIRE` không đổi giá trị; hết hạn theo TTL không liên quan tới chính sách eviction.",
+    "explanationEn": "Two separate commands are not atomic together: if `EXPIRE` never arrives, the key lives forever and the counter keeps climbing. `INCR` itself is atomic; `EXPIRE` does not change the value; TTL expiry is unrelated to the eviction policy."
+  },
+  {
+    "id": "q19",
+    "question": "Mười app server phi trạng thái đứng sau load balancer. Session phải hết hạn sau 30 phút không hoạt động và vẫn còn khi một node lưu trữ session gặp sự cố. Thiết kế nào phù hợp?",
+    "questionEn": "Ten stateless app servers sit behind a load balancer. Sessions must expire after 30 minutes of inactivity and survive the failure of one session-storage node. Which design fits?",
+    "options": [
+      "Lưu session trong bộ nhớ từng app server và bật sticky session trên load balancer",
+      "Một node Memcached duy nhất với thời hạn 1800 giây",
+      "Redis có replica và failover tự động; `SET session:<id> … EX 1800` và làm mới TTL khi có hoạt động",
+      "Một channel Redis Pub/Sub cho mỗi session để các server đồng bộ với nhau"
+    ],
+    "optionsEn": [
+      "Keep sessions in each app server's memory with sticky sessions on the load balancer",
+      "A single Memcached node with an 1800-second expiry",
+      "Redis with a replica and automatic failover; `SET session:<id> … EX 1800`, refreshing the TTL on activity",
+      "One Redis Pub/Sub channel per session so servers sync with each other"
+    ],
+    "answer": 2,
+    "explanation": "Kho session dùng chung giữ app server phi trạng thái; TTL làm mới theo hoạt động cho hết hạn khi không hoạt động; replica + failover (Sentinel hoặc ElastiCache Multi-AZ) chịu được mất một node. Sticky session mất session khi server chết; Memcached một node không có replication; Pub/Sub không lưu gì.",
+    "explanationEn": "A shared session store keeps app servers stateless; a TTL refreshed on activity gives idle expiry; a replica with failover (Sentinel or ElastiCache Multi-AZ) survives losing a node. Sticky sessions die with their server; a single Memcached node has no replication; Pub/Sub stores nothing."
+  }
+]

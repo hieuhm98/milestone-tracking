@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI bài toán giải trực tiếp được bằng hai con trỏ xuất phát từ hai đầu và tiến vào giữa.",
+      "promptEn": "Pick TWO problems that are solved directly with two pointers starting at both ends and moving inward.",
+      "options": [
+        "Tìm tổng lớn nhất của k phần tử liên tiếp",
+        "Tìm một cặp có tổng bằng target trong mảng đã sắp xếp",
+        "Đếm số lần mỗi từ xuất hiện trong một đoạn văn",
+        "Kiểm tra hai chuỗi có phải anagram của nhau không",
+        "Kiểm tra một chuỗi có phải palindrome không"
+      ],
+      "optionsEn": [
+        "Find the largest sum of k consecutive elements",
+        "Find a pair summing to a target in a sorted array",
+        "Count how often each word appears in a paragraph",
+        "Check whether two strings are anagrams",
+        "Check whether a string is a palindrome"
+      ],
+      "answers": [1, 4],
+      "explanation": "Tìm cặp trong mảng đã sắp xếp và kiểm tra palindrome đều so sánh phần tử ở hai đầu rồi thu hẹp vào trong, O(n) time, O(1) space. Tổng k phần tử liên tiếp là sliding window; đếm từ và anagram là frequency counter.",
+      "explanationEn": "A pair in a sorted array and a palindrome check both compare the two ends and close inward, O(n) time, O(1) space. The sum of k consecutive elements is a sliding window; counting words and anagrams are frequency counters.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về sliding window.",
+      "promptEn": "Pick TWO statements that are true about sliding windows.",
+      "options": [
+        "Chỉ dùng được khi mảng đã được sắp xếp",
+        "Cửa sổ kích thước thay đổi luôn là O(n²) vì có while nằm trong for",
+        "Nó áp dụng cho các đoạn con liên tiếp (subarray / substring)",
+        "Cửa sổ thu hẹp theo tổng có thể sai khi mảng chứa số âm",
+        "Nó luôn cần một Map để lưu các phần tử trong cửa sổ"
+      ],
+      "optionsEn": [
+        "It only works when the array is sorted",
+        "A variable-size window is always O(n²) because a while sits inside a for",
+        "It applies to contiguous ranges (subarrays / substrings)",
+        "A window that shrinks based on a sum can be wrong when the array has negative numbers",
+        "It always needs a Map to store the elements in the window"
+      ],
+      "answers": [2, 3],
+      "explanation": "Sliding window làm việc với đoạn liên tiếp và không cần dữ liệu đã sắp xếp. Cửa sổ thay đổi vẫn O(n) vì mỗi chỉ số vào và ra tối đa một lần. Logic thu hẹp theo tổng giả định các giá trị không âm. Map chỉ cần khi phải theo dõi nội dung cửa sổ, như bài chuỗi con không lặp ký tự.",
+      "explanationEn": "Sliding windows work on contiguous ranges and need no sorting. A variable window is still O(n) because each index enters and leaves at most once. Shrinking by sum assumes non-negative values. A Map is only needed when you must track the window's contents, as in the no-repeat substring problem.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Mẫu giải thuật nào dùng object hoặc Map để đếm số lần mỗi giá trị xuất hiện, nhằm tránh vòng lặp lồng nhau?",
+      "promptEn": "Which problem-solving pattern uses an object or Map to count how often each value appears, to avoid nested loops?",
+      "answer": "Frequency counter",
+      "answerEn": "Frequency counter",
+      "accept": [
+        "frequency counter",
+        "frequency counters",
+        "frequency count",
+        "frequency counter pattern",
+        "bo dem tan suat",
+        "bộ đếm tần suất",
+        "dem tan suat",
+        "đếm tần suất"
+      ],
+      "explanation": "Frequency counter (bộ đếm tần suất). Nó đổi O(n) bộ nhớ lấy thời gian O(n) thay vì O(n²) — ví dụ `same` và kiểm tra anagram.",
+      "explanationEn": "Frequency counter. It spends O(n) memory to get O(n) time instead of O(n²) — for example `same` and the anagram check.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tìm cặp có tổng bằng target trong mảng CHƯA sắp xếp bằng cách sắp xếp trước rồi dùng hai con trỏ. Độ phức tạp thời gian tổng cộng là gì?",
+      "promptEn": "You find a pair summing to a target in an UNSORTED array by sorting first and then using two pointers. What is the total time complexity?",
+      "answer": "O(n log n)",
+      "answerEn": "O(n log n)",
+      "accept": [
+        "O(n log n)",
+        "n log n",
+        "nlogn",
+        "o(nlogn)",
+        "o nlogn",
+        "O(nlog n)",
+        "linearithmic"
+      ],
+      "explanation": "O(n log n). Quét hai con trỏ chỉ O(n), nhưng bước sắp xếp là O(n log n) và chiếm ưu thế. Nếu được dùng O(n) bộ nhớ, Set cho lời giải O(n).",
+      "explanationEn": "O(n log n). The two-pointer scan is only O(n), but the sort is O(n log n) and dominates. If O(n) memory is allowed, a Set gives an O(n) solution.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi bài toán với mẫu giải thuật phù hợp nhất.",
+      "promptEn": "Match each problem to the pattern that fits it best.",
+      "pairs": [
+        {
+          "left": "Kiểm tra hai chuỗi có phải anagram",
+          "leftEn": "Check whether two strings are anagrams",
+          "right": "Frequency counter",
+          "rightEn": "Frequency counter"
+        },
+        {
+          "left": "Đếm số giá trị khác nhau trong mảng đã sắp xếp với O(1) bộ nhớ",
+          "leftEn": "Count distinct values in a sorted array with O(1) memory",
+          "right": "Multiple pointers",
+          "rightEn": "Multiple pointers"
+        },
+        {
+          "left": "Chuỗi con dài nhất không có ký tự lặp",
+          "leftEn": "Longest substring with no repeated characters",
+          "right": "Sliding window",
+          "rightEn": "Sliding window"
+        },
+        {
+          "left": "Tìm chỉ số của một giá trị trong mảng đã sắp xếp",
+          "leftEn": "Find the index of a value in a sorted array",
+          "right": "Divide and conquer (binary search)",
+          "rightEn": "Divide and conquer (binary search)"
+        }
+      ],
+      "explanation": "Anagram là so sánh số đếm; đếm giá trị khác nhau tại chỗ dùng con trỏ chậm/nhanh; \"chuỗi con\" liên tiếp là tín hiệu của sliding window; dữ liệu đã sắp xếp cộng \"tìm\" là binary search, O(log n).",
+      "explanationEn": "Anagrams compare counts; counting distinct values in place uses slow/fast pointers; a contiguous \"substring\" signals a sliding window; sorted data plus \"find\" is binary search, O(log n).",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của `maxSubarraySum(arr, k)` dạng sliding window.",
+      "promptEn": "Put the steps of the sliding-window `maxSubarraySum(arr, k)` into order.",
+      "items": [
+        {
+          "text": "Trả về null nếu k lớn hơn độ dài mảng",
+          "textEn": "Return null if k is larger than the array length"
+        },
+        {
+          "text": "Cộng k phần tử đầu tiên để có tổng của cửa sổ đầu",
+          "textEn": "Add the first k elements to get the first window's sum"
+        },
+        {
+          "text": "Gán maxSum bằng tổng của cửa sổ đầu",
+          "textEn": "Set maxSum to the first window's sum"
+        },
+        {
+          "text": "Với i từ k đến cuối mảng: cộng arr[i] và trừ arr[i - k]",
+          "textEn": "For i from k to the end: add arr[i] and subtract arr[i - k]"
+        },
+        {
+          "text": "Cập nhật maxSum nếu tổng cửa sổ hiện tại lớn hơn",
+          "textEn": "Update maxSum if the current window sum is larger"
+        },
+        {
+          "text": "Trả về maxSum",
+          "textEn": "Return maxSum"
+        }
+      ],
+      "explanation": "Kiểm tra biên trước, dựng cửa sổ đầu tiên một lần (O(k)), rồi trượt với O(1) việc mỗi bước. Khởi tạo maxSum bằng cửa sổ đầu thay vì 0 để đúng cả với mảng toàn số âm.",
+      "explanationEn": "Guard first, build the first window once (O(k)), then slide with O(1) work per step. Seeding maxSum with the first window instead of 0 keeps it correct for all-negative arrays.",
+      "id": "d6"
+    }
+  ]
+}

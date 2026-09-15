@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Thuộc tính nào định nghĩa rõ nhất một kiến trúc microservices?",
+    "questionEn": "Which property most clearly defines a microservices architecture?",
+    "options": [
+      "Mỗi service được viết bằng một ngôn ngữ lập trình khác nhau",
+      "Mỗi service triển khai độc lập được và sở hữu dữ liệu của riêng nó",
+      "Mỗi service có ít hơn một nghìn dòng code",
+      "Các service chỉ được giao tiếp với nhau qua message queue"
+    ],
+    "optionsEn": [
+      "Each service is written in a different programming language",
+      "Each service is independently deployable and owns its own data",
+      "Each service has fewer than a thousand lines of code",
+      "Services may only talk to each other through a message queue"
+    ],
+    "answer": 1,
+    "explanation": "Triển khai độc lập và sở hữu dữ liệu là cốt lõi. Đa ngôn ngữ chỉ là tuỳ chọn, kích thước code không phải tiêu chí, còn giao tiếp đồng bộ qua REST hay gRPC vẫn hoàn toàn hợp lệ.",
+    "explanationEn": "Independent deployability and data ownership are the core. Multiple languages are optional, code size is not a criterion, and synchronous REST or gRPC calls are perfectly valid."
+  },
+  {
+    "id": "q2",
+    "question": "Một hệ thống có 12 service, nhưng mỗi lần release phải deploy cả 12 cùng lúc và tất cả đọc ghi chung một schema PostgreSQL. Hệ thống này thực chất là gì?",
+    "questionEn": "A system has 12 services, but every release must deploy all 12 together and they all read and write one shared PostgreSQL schema. What is this system really?",
+    "options": [
+      "Một modular monolith được thiết kế tốt",
+      "Một service mesh",
+      "Một kiến trúc hướng sự kiện",
+      "Một distributed monolith"
+    ],
+    "optionsEn": [
+      "A well-designed modular monolith",
+      "A service mesh",
+      "An event-driven architecture",
+      "A distributed monolith"
+    ],
+    "answer": 3,
+    "explanation": "Deploy đồng loạt và dùng chung schema nghĩa là không có sự độc lập nào, nhưng vẫn phải trả chi phí gọi qua mạng. Đó là distributed monolith — tệ hơn cả monolith thông thường. Modular monolith là một đơn vị triển khai duy nhất, không phải 12.",
+    "explanationEn": "Lockstep deploys and a shared schema mean no independence at all, while still paying for network calls. That is a distributed monolith — worse than a plain monolith. A modular monolith is one deployment unit, not twelve."
+  },
+  {
+    "id": "q3",
+    "question": "Một startup có 6 kỹ sư đang xây MVP cho một domain hoàn toàn mới, yêu cầu còn thay đổi hằng tuần. Kiến trúc nào hợp lý nhất?",
+    "questionEn": "A startup with 6 engineers is building an MVP for a brand-new domain whose requirements change weekly. Which architecture makes the most sense?",
+    "options": [
+      "Modular monolith với ranh giới module rõ ràng, tách service sau khi cần",
+      "Microservices, mỗi thực thể dữ liệu là một service",
+      "Microservices tách theo tầng: UI service, logic service, data service",
+      "Event sourcing và CQRS cho toàn bộ hệ thống ngay từ đầu"
+    ],
+    "optionsEn": [
+      "A modular monolith with clear module boundaries, splitting services later when needed",
+      "Microservices with one service per data entity",
+      "Microservices split by layer: UI service, logic service, data service",
+      "Event sourcing and CQRS across the whole system from day one"
+    ],
+    "answer": 0,
+    "explanation": "Đội nhỏ, domain mới, ranh giới chưa rõ: một ranh giới sai nằm vắt qua mạng rất đắt để sửa. Modular monolith giữ tốc độ và vẫn chuẩn bị cho việc tách sau. Tách theo tầng hay theo thực thể đều tạo ra các service phải thay đổi cùng nhau.",
+    "explanationEn": "A small team, a new domain and unclear boundaries: a wrong boundary across a network is expensive to fix. A modular monolith keeps velocity and still prepares for a later split. Splitting by layer or by entity creates services that must change together."
+  },
+  {
+    "id": "q4",
+    "question": "Khi tách một hệ thống thương mại điện tử, cách phân rã nào tốt nhất?",
+    "questionEn": "When decomposing an e-commerce system, which decomposition is best?",
+    "options": [
+      "Một database service chung mà mọi service khác gọi vào để đọc ghi",
+      "Tách theo tầng kỹ thuật: presentation, business logic, data access",
+      "Tách theo năng lực nghiệp vụ như catalog, ordering, shipping, mỗi cái sở hữu dữ liệu riêng",
+      "Mỗi bảng trong database hiện tại trở thành một service"
+    ],
+    "optionsEn": [
+      "One shared database service that every other service calls to read and write",
+      "Split by technical layer: presentation, business logic, data access",
+      "Split by business capability such as catalog, ordering and shipping, each owning its data",
+      "Turn every table in the current database into its own service"
+    ],
+    "answer": 2,
+    "explanation": "Bounded context theo năng lực nghiệp vụ cho gắn kết cao bên trong và lỏng lẻo bên ngoài. Tách theo tầng khiến mọi tính năng phải sửa nhiều service; một service mỗi bảng tạo ra nanoservice gọi qua lại liên tục; database service chung giữ nguyên sự ràng buộc về schema.",
+    "explanationEn": "Bounded contexts by business capability give high cohesion inside and loose coupling outside. Layer splits make every feature touch several services; one service per table creates chatty nanoservices; a shared database service keeps the schema coupling."
+  },
+  {
+    "id": "q5",
+    "question": "Trong Kubernetes, service `orders` gọi `http://payments` (cùng namespace). Cơ chế nào đưa request tới đúng Pod?",
+    "questionEn": "In Kubernetes, the `orders` service calls `http://payments` (same namespace). What mechanism gets the request to a Pod?",
+    "options": [
+      "Tên DNS của Service phân giải ra ClusterIP, kube-proxy chuyển kết nối tới các Pod đang ready",
+      "Mỗi Pod đọc danh sách IP của Pod khác từ biến môi trường cố định lúc build",
+      "Ứng dụng tự truy vấn etcd để lấy IP của các Pod",
+      "Ingress controller định tuyến mọi lưu lượng nội bộ giữa các service"
+    ],
+    "optionsEn": [
+      "The Service's DNS name resolves to a ClusterIP and kube-proxy forwards connections to ready Pods",
+      "Each Pod reads other Pods' IPs from environment variables fixed at build time",
+      "The application queries etcd directly for the Pod IPs",
+      "The ingress controller routes all internal traffic between services"
+    ],
+    "answer": 0,
+    "explanation": "Đây là server-side discovery với third-party registration: Kubernetes tự đưa Pod đạt readiness probe vào endpoints của Service. Ứng dụng không bao giờ truy cập etcd, và Ingress dành cho lưu lượng từ ngoài vào.",
+    "explanationEn": "This is server-side discovery with third-party registration: Kubernetes adds Pods that pass their readiness probe to the Service's endpoints. Applications never talk to etcd, and Ingress is for traffic coming from outside."
+  },
+  {
+    "id": "q6",
+    "question": "Một gRPC service chạy 3 replica sau một ClusterIP Service. Một Pod dùng 90% CPU trong khi hai Pod còn lại gần như rảnh. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "A gRPC service runs 3 replicas behind a ClusterIP Service. One Pod sits at 90% CPU while the other two are almost idle. Most likely cause?",
+    "options": [
+      "Readiness probe của hai Pod kia đang thất bại liên tục",
+      "HorizontalPodAutoscaler đặt ngưỡng CPU quá cao",
+      "Kết nối HTTP/2 sống lâu được cân bằng theo kết nối, không theo từng request",
+      "TTL của bản ghi DNS trong CoreDNS được đặt quá thấp"
+    ],
+    "optionsEn": [
+      "The other two Pods' readiness probes keep failing",
+      "The HorizontalPodAutoscaler CPU threshold is set too high",
+      "Long-lived HTTP/2 connections are balanced per connection, not per request",
+      "The CoreDNS record TTL is set too low"
+    ],
+    "answer": 2,
+    "explanation": "kube-proxy cân bằng ở tầng kết nối L4. gRPC ghép mọi request lên một kết nối HTTP/2 sống lâu, nên client dính vào một Pod. Cách sửa là cân bằng tải gRPC phía client hoặc một proxy L7 như service mesh. Nếu readiness thất bại, Pod sẽ bị loại hẳn chứ không chỉ rảnh.",
+    "explanationEn": "kube-proxy balances at the L4 connection level. gRPC multiplexes every request over one long-lived HTTP/2 connection, so a client sticks to one Pod. Fix it with client-side gRPC load balancing or an L7 proxy such as a mesh. Failing readiness would remove Pods entirely."
+  },
+  {
+    "id": "q7",
+    "question": "Checkout gọi đồng bộ lần lượt email, loyalty và analytics sau khi tạo đơn. Mỗi khi loyalty service sập, khách không đặt được hàng. Thiết kế lại thế nào là tốt nhất?",
+    "questionEn": "After creating an order, checkout synchronously calls email, loyalty and analytics in turn. Whenever the loyalty service is down, customers cannot place orders. What is the best redesign?",
+    "options": [
+      "Thêm retry năm lần cho lời gọi tới loyalty service",
+      "Checkout phát event OrderPlaced; email, loyalty và analytics tiêu thụ bất đồng bộ",
+      "Tăng timeout của lời gọi loyalty lên 30 giây",
+      "Gộp code của loyalty service vào trong checkout"
+    ],
+    "optionsEn": [
+      "Add five retries to the loyalty service call",
+      "Checkout publishes an OrderPlaced event that email, loyalty and analytics consume asynchronously",
+      "Raise the loyalty call timeout to 30 seconds",
+      "Merge the loyalty service code into checkout"
+    ],
+    "answer": 1,
+    "explanation": "Đây là các tác dụng phụ, không phải thứ người dùng cần chờ. Event loại bỏ ràng buộc thời gian: loyalty sập thì event chờ trong broker và được xử lý khi nó hồi phục. Retry và timeout dài chỉ làm checkout chậm hơn mà vẫn hỏng.",
+    "explanationEn": "These are side effects, not something the user waits for. An event removes the temporal coupling: if loyalty is down, the event waits in the broker and is processed when it recovers. Retries and long timeouts only make checkout slower and still broken."
+  },
+  {
+    "id": "q8",
+    "question": "Đoạn code gọi payment service dưới đây có vấn đề nghiêm trọng nhất là gì?\n`for (let i = 0; i < 5; i++) {\n  try {\n    return await chargeCard(order);\n  } catch (err) {\n    await sleep(1000);\n  }\n}`",
+    "questionEn": "What is the most serious problem with this code that calls the payment service?\n`for (let i = 0; i < 5; i++) {\n  try {\n    return await chargeCard(order);\n  } catch (err) {\n    await sleep(1000);\n  }\n}`",
+    "options": [
+      "Thời gian chờ 1 giây quá ngắn so với payment service",
+      "Nên dùng vòng lặp while thay cho for",
+      "Năm lần thử là quá ít cho một dịch vụ quan trọng",
+      "Retry mọi lỗi của thao tác trừ tiền không idempotent, với độ trễ cố định không có jitter"
+    ],
+    "optionsEn": [
+      "The 1-second wait is too short for a payment service",
+      "It should use a while loop instead of a for loop",
+      "Five attempts are too few for a critical service",
+      "It retries every error on a non-idempotent charge, with a fixed delay and no jitter"
+    ],
+    "answer": 3,
+    "explanation": "Nếu request đầu tiên thực ra đã trừ tiền nhưng phản hồi bị timeout, retry sẽ trừ tiền lần nữa — cần idempotency key. Nó cũng retry cả lỗi 400 vĩnh viễn, và độ trễ cố định khiến mọi client retry cùng nhịp. Kiểu vòng lặp không quan trọng.",
+    "explanationEn": "If the first request actually charged the card but the response timed out, a retry charges again — it needs an idempotency key. It also retries permanent 400 errors, and a fixed delay makes all clients retry in lockstep. The loop style is irrelevant."
+  },
+  {
+    "id": "q9",
+    "question": "Request đi qua API gateway → BFF → orders service → inventory service. Gateway, BFF và orders mỗi tầng đều cấu hình tối đa 3 lần thử khi gọi tầng dưới. Inventory đang sập. Một request của người dùng sinh ra tối đa bao nhiêu lời gọi tới inventory?",
+    "questionEn": "A request flows API gateway → BFF → orders service → inventory service. The gateway, the BFF and orders are each configured to make up to 3 attempts when calling the next layer. Inventory is down. At most how many calls reach inventory for one user request?",
+    "options": [
+      "9",
+      "27",
+      "12",
+      "81"
+    ],
+    "optionsEn": [
+      "9",
+      "27",
+      "12",
+      "81"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi lần thử của gateway gây 3 lần thử ở BFF, mỗi lần đó gây 3 lần gọi của orders: 3 × 3 × 3 = 27. Đây là bão retry — chỉ nên retry ở một tầng và giới hạn bằng retry budget.",
+    "explanationEn": "Each gateway attempt causes 3 BFF attempts, each of which causes 3 calls from orders: 3 × 3 × 3 = 27. That is a retry storm — retry at one layer and cap it with a retry budget."
+  },
+  {
+    "id": "q10",
+    "question": "Service gợi ý sản phẩm (không quan trọng) bắt đầu phản hồi sau 10 giây. Mọi thread của trang sản phẩm bị treo chờ nó và toàn bộ website ngừng phản hồi. Kết hợp nào ngăn được sự cố này?",
+    "questionEn": "The (non-critical) recommendations service starts taking 10 seconds to respond. Every product-page thread blocks waiting on it and the whole website stops responding. Which combination prevents this?",
+    "options": [
+      "Timeout ngắn, circuit breaker, bulkhead riêng cho lời gọi gợi ý và fallback về gợi ý mặc định",
+      "Thêm nhiều replica cho service trang sản phẩm",
+      "Retry lời gọi gợi ý nhiều lần hơn với độ trễ ngắn hơn",
+      "Tăng thread pool của trang sản phẩm lên 1000 thread"
+    ],
+    "optionsEn": [
+      "A short timeout, a circuit breaker, a dedicated bulkhead for recommendation calls and a fallback to default recommendations",
+      "Add more replicas of the product-page service",
+      "Retry recommendation calls more often with shorter delays",
+      "Raise the product-page thread pool to 1000 threads"
+    ],
+    "answer": 0,
+    "explanation": "Đây là lỗi dây chuyền do dependency chậm. Timeout giải phóng thread, circuit breaker thất bại nhanh, bulkhead giới hạn tài nguyên mà dependency đó chiếm được, fallback giữ trang vẫn dùng được. Thêm replica hay thread chỉ cho thêm chỗ để bị treo; retry còn làm tệ hơn.",
+    "explanationEn": "This is a cascading failure from a slow dependency. Timeouts free threads, the circuit breaker fails fast, the bulkhead caps what that dependency can consume, and the fallback keeps the page usable. More replicas or threads just give more places to block; retries make it worse."
+  },
+  {
+    "id": "q11",
+    "question": "Một circuit breaker đang ở trạng thái OPEN. Hết thời gian chờ (wait duration), điều gì xảy ra?",
+    "questionEn": "A circuit breaker is in the OPEN state. When its wait duration elapses, what happens?",
+    "options": [
+      "Nó quay về CLOSED ngay và cho toàn bộ lưu lượng đi qua",
+      "Nó giữ OPEN cho tới khi có người reset thủ công",
+      "Nó chuyển sang HALF-OPEN và cho một số ít lời gọi thử đi qua",
+      "Nó bị vô hiệu hoá và mọi lời gọi bỏ qua cơ chế bảo vệ"
+    ],
+    "optionsEn": [
+      "It returns to CLOSED immediately and lets all traffic through",
+      "It stays OPEN until someone resets it manually",
+      "It moves to HALF-OPEN and lets a small number of trial calls through",
+      "It becomes disabled and all calls bypass the protection"
+    ],
+    "answer": 2,
+    "explanation": "HALF-OPEN là bước thăm dò: nếu các lời gọi thử thành công thì về CLOSED, thất bại thì quay lại OPEN. Mở lại ngay toàn bộ lưu lượng có thể đánh sập một dependency vừa mới hồi phục.",
+    "explanationEn": "HALF-OPEN is a probe: if the trial calls succeed it closes, if they fail it opens again. Sending full traffic immediately could knock over a dependency that has only just recovered."
+  },
+  {
+    "id": "q12",
+    "question": "Vì sao microservices thường dùng saga thay cho two-phase commit (2PC) cho các thao tác trải trên nhiều service?",
+    "questionEn": "Why do microservices usually use sagas instead of two-phase commit (2PC) for operations spanning several services?",
+    "options": [
+      "2PC chỉ hỗ trợ tối đa hai service tham gia",
+      "Saga cung cấp isolation mạnh hơn 2PC",
+      "2PC chỉ chạy được trên cơ sở dữ liệu NoSQL",
+      "2PC giữ lock xuyên service, bị treo khi coordinator hỏng, và nhiều broker hay NoSQL không hỗ trợ"
+    ],
+    "optionsEn": [
+      "2PC supports at most two participating services",
+      "Sagas provide stronger isolation than 2PC",
+      "2PC only works on NoSQL databases",
+      "2PC holds locks across services, blocks when the coordinator fails, and many brokers and NoSQL stores do not support it"
+    ],
+    "answer": 3,
+    "explanation": "Chữ two trong 2PC là hai pha (prepare, commit), không phải hai bên tham gia. Saga đổi lấy availability bằng cách hy sinh isolation — trạng thái trung gian nhìn thấy được — nên nó yếu hơn, không mạnh hơn.",
+    "explanationEn": "The two in 2PC is two phases (prepare, commit), not two participants. A saga buys availability by giving up isolation — intermediate states are visible — so it is weaker, not stronger."
+  },
+  {
+    "id": "q13",
+    "question": "Một saga đặt tour du lịch: đặt vé máy bay thành công, giữ phòng khách sạn thành công, thuê xe thất bại vĩnh viễn. Saga nên làm gì?",
+    "questionEn": "A trip-booking saga: the flight booking succeeds, the hotel reservation succeeds, the car rental fails permanently. What should the saga do?",
+    "options": [
+      "Rollback một database transaction bao trùm cả ba service",
+      "Chạy các giao dịch bù theo thứ tự ngược: huỷ khách sạn rồi huỷ vé máy bay",
+      "Retry thuê xe vô hạn cho tới khi thành công",
+      "Giữ nguyên vé máy bay và khách sạn, chỉ đánh dấu đơn là thất bại"
+    ],
+    "optionsEn": [
+      "Roll back one database transaction that spans all three services",
+      "Run compensating transactions in reverse order: cancel the hotel, then cancel the flight",
+      "Retry the car rental forever until it succeeds",
+      "Keep the flight and hotel and just mark the order as failed"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi bước đã commit cục bộ nên không có transaction chung để rollback. Saga hoàn tác bằng các hành động nghiệp vụ bù, theo thứ tự ngược. Retry vô hạn một lỗi vĩnh viễn không bao giờ kết thúc, còn bỏ mặc thì để lại dữ liệu không nhất quán.",
+    "explanationEn": "Each step already committed locally, so there is no shared transaction to roll back. The saga undoes work with compensating business actions, in reverse order. Retrying a permanent failure never ends, and doing nothing leaves inconsistent data."
+  },
+  {
+    "id": "q14",
+    "question": "Quy trình mở khoản vay gồm 8 bước qua 6 service, thay đổi thường xuyên, và bộ phận tuân thủ cần xem mỗi hồ sơ đang ở bước nào. Cách phối hợp saga nào phù hợp nhất?",
+    "questionEn": "A loan-origination process has 8 steps across 6 services, changes often, and compliance must see which step each application is at. Which saga coordination fits best?",
+    "options": [
+      "Orchestration với một state machine trung tâm như Step Functions hoặc Temporal",
+      "Choreography, mỗi service lắng nghe và phát event của riêng mình",
+      "Two-phase commit giữa sáu database",
+      "Một chuỗi gọi REST đồng bộ từ service đầu tiên"
+    ],
+    "optionsEn": [
+      "Orchestration with a central state machine such as Step Functions or Temporal",
+      "Choreography, each service listening for and emitting its own events",
+      "Two-phase commit across the six databases",
+      "One synchronous REST call chain starting from the first service"
+    ],
+    "answer": 0,
+    "explanation": "Nhiều bước, hay thay đổi, và cần nhìn thấy trạng thái từng hồ sơ là đúng điểm mạnh của orchestration: luồng và trạng thái nằm một chỗ. Choreography với 8 bước trở nên ngầm định và khó lần theo; 2PC và chuỗi gọi đồng bộ dài đều mong manh.",
+    "explanationEn": "Many steps, frequent change and per-application visibility are exactly where orchestration shines: flow and state live in one place. Choreography across 8 steps becomes implicit and hard to trace; 2PC and a long synchronous chain are both fragile."
+  },
+  {
+    "id": "q15",
+    "question": "Một dashboard cần dữ liệu từ orders, customers và shipping service. Mỗi lần tải trang gọi ba service rồi join trong bộ nhớ, rất chậm. Hướng giải quyết theo tinh thần microservices là gì?",
+    "questionEn": "A dashboard needs data from the orders, customers and shipping services. Every page load calls all three and joins in memory, which is slow. What is the microservices-friendly fix?",
+    "options": [
+      "Cho dashboard quyền đọc trực tiếp vào database của ba service",
+      "Gọi ba service tuần tự thay vì song song để giảm tải",
+      "Dựng một read model (projection) cập nhật từ event của ba service, theo CQRS",
+      "Dùng two-phase commit để đọc nhất quán từ ba database"
+    ],
+    "optionsEn": [
+      "Give the dashboard direct read access to the three services' databases",
+      "Call the three services sequentially instead of in parallel to reduce load",
+      "Build a read model (projection) fed by the three services' events, CQRS-style",
+      "Use two-phase commit to read consistently from the three databases"
+    ],
+    "answer": 2,
+    "explanation": "Projection gộp sẵn dữ liệu cho truy vấn, được cập nhật bởi event, nên trang chỉ đọc một chỗ. Cái giá là nhất quán cuối cùng. Đọc thẳng database của service khác phá vỡ database per service; gọi tuần tự còn chậm hơn.",
+    "explanationEn": "A projection pre-joins data for the query and is updated by events, so the page reads from one place. The cost is eventual consistency. Reading other services' databases breaks database per service; sequential calls are even slower."
+  },
+  {
+    "id": "q16",
+    "question": "Đâu là một chi phí thực sự của event sourcing?",
+    "questionEn": "Which is a genuine cost of event sourcing?",
+    "options": [
+      "Không thể audit lại lịch sử thay đổi",
+      "Không thể dựng lại read model khi cần",
+      "Bắt buộc phải dùng two-phase commit",
+      "Schema của event phải được quản lý phiên bản mãi mãi và stream dài cần snapshot"
+    ],
+    "optionsEn": [
+      "The change history cannot be audited",
+      "Read models cannot be rebuilt when needed",
+      "It requires two-phase commit",
+      "Event schemas must be versioned forever and long streams need snapshots"
+    ],
+    "answer": 3,
+    "explanation": "Event đã lưu thì không bao giờ sửa, nên code phải đọc được mọi phiên bản cũ; replay stream dài thì chậm nên cần snapshot. Audit đầy đủ và dựng lại read model bằng replay chính là lợi ích của event sourcing.",
+    "explanationEn": "Stored events never change, so code must read every old version, and replaying long streams is slow, hence snapshots. A full audit trail and rebuilding read models by replay are the benefits of event sourcing."
+  },
+  {
+    "id": "q17",
+    "question": "Cấu hình Istio dưới đây làm gì?\n`kind: DestinationRule\nspec:\n  host: payments.shop.svc.cluster.local\n  trafficPolicy:\n    outlierDetection:\n      consecutive5xxErrors: 5\n      interval: 10s\n      baseEjectionTime: 30s`",
+    "questionEn": "What does this Istio configuration do?\n`kind: DestinationRule\nspec:\n  host: payments.shop.svc.cluster.local\n  trafficPolicy:\n    outlierDetection:\n      consecutive5xxErrors: 5\n      interval: 10s\n      baseEjectionTime: 30s`",
+    "options": [
+      "Tạm loại một instance payments khỏi cân bằng tải khi nó trả 5 lỗi 5xx liên tiếp",
+      "Retry mỗi request tới payments tối đa 5 lần, cách nhau 10 giây",
+      "Giới hạn payments ở 5 request mỗi 10 giây cho mỗi client",
+      "Khởi động lại Pod payments sau 5 lần health check thất bại"
+    ],
+    "optionsEn": [
+      "Temporarily ejects a payments instance from load balancing after it returns 5 consecutive 5xx errors",
+      "Retries each request to payments up to 5 times, 10 seconds apart",
+      "Rate-limits payments to 5 requests every 10 seconds per client",
+      "Restarts the payments Pod after 5 failed health checks"
+    ],
+    "answer": 0,
+    "explanation": "Outlier detection là dạng circuit breaking theo từng instance: proxy đẩy host lỗi ra khỏi pool, bắt đầu với 30 giây. Retry được cấu hình trong VirtualService, còn khởi động lại Pod là việc của liveness probe trong Kubernetes.",
+    "explanationEn": "Outlier detection is per-instance circuit breaking: the proxy ejects the failing host from the pool, starting at 30 seconds. Retries are configured in a VirtualService, and restarting Pods is the job of a Kubernetes liveness probe."
+  },
+  {
+    "id": "q18",
+    "question": "Một tổ chức có 60 service viết bằng Java, Go, Node.js và Python. Họ cần mTLS giữa mọi service, chính sách retry đồng nhất và metric thống nhất mà không sửa code ứng dụng. Giải pháp nào phù hợp nhất?",
+    "questionEn": "An organisation runs 60 services written in Java, Go, Node.js and Python. It needs mTLS between all services, uniform retry policies and consistent metrics without changing application code. Which solution fits best?",
+    "options": [
+      "Một API gateway đặt trước toàn bộ hệ thống",
+      "Một thư viện resilience riêng cho từng ngôn ngữ",
+      "Một message broker cho mọi giao tiếp giữa các service",
+      "Một service mesh như Istio hoặc Linkerd"
+    ],
+    "optionsEn": [
+      "One API gateway in front of the whole system",
+      "A separate resilience library for each language",
+      "A message broker for all service-to-service communication",
+      "A service mesh such as Istio or Linkerd"
+    ],
+    "answer": 3,
+    "explanation": "Mesh xử lý lưu lượng east-west giữa các service ở tầng proxy, độc lập ngôn ngữ, không sửa code. API gateway lo lưu lượng north-south từ client vào; thư viện theo ngôn ngữ đòi sửa code ở cả 60 service và khó đồng nhất.",
+    "explanationEn": "A mesh handles east-west traffic between services at the proxy layer, language-agnostic and with no code changes. An API gateway handles north-south traffic from clients; per-language libraries require code changes in all 60 services and drift apart."
+  },
+  {
+    "id": "q19",
+    "question": "Một ngân hàng muốn chuyển core monolith 15 năm tuổi sang microservices mà vẫn liên tục phục vụ khách hàng. Cách tiếp cận nào ít rủi ro nhất?",
+    "questionEn": "A bank wants to move a 15-year-old core monolith to microservices while continuously serving customers. Which approach carries the least risk?",
+    "options": [
+      "Viết lại toàn bộ hệ thống rồi chuyển đổi một lần vào cuối tuần",
+      "Tách database trước, để monolith đọc ghi thẳng vào bảng của service mới",
+      "Strangler fig: đặt router phía trước, tách dần từng năng lực kèm dữ liệu và chuyển route",
+      "Đóng băng mọi tính năng mới trong một năm để tái cấu trúc"
+    ],
+    "optionsEn": [
+      "Rewrite the whole system and cut over in one weekend",
+      "Split the database first and let the monolith read and write the new services' tables directly",
+      "Strangler fig: put a router in front, extract one capability with its data at a time and switch its routes",
+      "Freeze all new features for a year to restructure"
+    ],
+    "answer": 2,
+    "explanation": "Strangler fig chuyển đổi từng bước nhỏ, có thể quay lui, luôn có hệ thống chạy được. Big-bang rewrite là rủi ro kinh điển; để monolith ghi vào bảng của service mới tạo ra distributed monolith; đóng băng tính năng hiếm khi được nghiệp vụ chấp nhận.",
+    "explanationEn": "The strangler fig migrates in small, reversible steps with a working system at all times. A big-bang rewrite is the classic high-risk move; letting the monolith write the new services' tables creates a distributed monolith; a feature freeze is rarely acceptable to the business."
+  }
+]

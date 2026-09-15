@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI signal mà tiến trình KHÔNG thể bắt, chặn hay bỏ qua.",
+      "promptEn": "Pick TWO signals that a process can NOT catch, block or ignore.",
+      "options": [
+        "SIGTERM",
+        "SIGKILL",
+        "SIGHUP",
+        "SIGINT",
+        "SIGSTOP"
+      ],
+      "optionsEn": [
+        "SIGTERM",
+        "SIGKILL",
+        "SIGHUP",
+        "SIGINT",
+        "SIGSTOP"
+      ],
+      "answers": [
+        1,
+        4
+      ],
+      "explanation": "SIGKILL (kết thúc) và SIGSTOP (tạm dừng) do kernel xử lý trực tiếp, tiến trình không có cơ hội can thiệp. Vì vậy tắt êm phải dựa vào SIGTERM: nền tảng gửi SIGTERM trước, và chỉ dùng SIGKILL khi hết grace period.",
+      "explanationEn": "SIGKILL (terminate) and SIGSTOP (pause) are handled by the kernel directly; the process gets no say. That is why graceful shutdown relies on SIGTERM: platforms send it first and fall back to SIGKILL only when the grace period runs out.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Một dịch vụ báo \"No space left on device\". Chọn HAI nguyên nhân có thể gây ra lỗi này.",
+      "promptEn": "A service reports \"No space left on device\". Pick TWO causes that can produce this error.",
+      "options": [
+        "Filesystem đã hết inode vì có quá nhiều file nhỏ",
+        "Load average cao hơn số core CPU",
+        "Soft limit `nofile` của tiến trình quá thấp",
+        "Phân vùng thực sự đầy, kể cả do file đã xoá nhưng vẫn đang được mở",
+        "Cột `free` trong `free -h` gần bằng 0"
+      ],
+      "optionsEn": [
+        "The filesystem has run out of inodes because of too many small files",
+        "Load average is higher than the number of CPU cores",
+        "The process's `nofile` soft limit is too low",
+        "The partition is genuinely full, including by a deleted file that is still open",
+        "The `free` column in `free -h` is close to zero"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "ENOSPC xảy ra khi hết block dữ liệu hoặc hết inode. File đã xoá mà còn mở vẫn giữ block nên vẫn tính là đầy. Giới hạn `nofile` gây lỗi 'Too many open files', còn load và page cache không liên quan tới dung lượng đĩa.",
+      "explanationEn": "ENOSPC happens when a filesystem runs out of data blocks or out of inodes. A deleted-but-open file still holds its blocks, so it still counts. A low `nofile` limit gives 'Too many open files', and load or page cache have nothing to do with disk space.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Container kết thúc vì bị `SIGKILL` (ví dụ do OOM killer) sẽ báo exit code nào?",
+      "promptEn": "What exit code does a container report when it was terminated by `SIGKILL` (for example by the OOM killer)?",
+      "answer": "137",
+      "answerEn": "137",
+      "accept": [
+        "137",
+        "exit 137",
+        "exit code 137",
+        "code 137"
+      ],
+      "explanation": "137 = 128 + 9, với 9 là số hiệu của SIGKILL. Tương tự, 143 = 128 + 15 là SIGTERM.",
+      "explanationEn": "137 = 128 + 9, where 9 is SIGKILL's number. Likewise, 143 = 128 + 15 means SIGTERM.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Lệnh hiện đại nào (thay thế netstat) liệt kê các socket TCP đang lắng nghe kèm tiến trình sở hữu? Gõ lệnh cùng cờ.",
+      "promptEn": "Which modern command (the netstat replacement) lists listening TCP sockets with their owning process? Type the command with its flags.",
+      "answer": "ss -tlnp",
+      "answerEn": "ss -tlnp",
+      "accept": [
+        "ss -tlnp",
+        "ss -ltnp",
+        "ss -lntp",
+        "ss -tnlp",
+        "ss -ltpn",
+        "ss -tulpn",
+        "ss -tulnp",
+        "ss -lnpt",
+        "ss"
+      ],
+      "explanation": "`ss -tlnp`: `-t` TCP, `-l` đang lắng nghe, `-n` hiển thị số thay vì tên, `-p` tiến trình. Rất hữu ích để thấy dịch vụ bind vào `127.0.0.1` hay `0.0.0.0`.",
+      "explanationEn": "`ss -tlnp`: `-t` TCP, `-l` listening, `-n` numeric instead of names, `-p` process. It shows at a glance whether a service is bound to `127.0.0.1` or `0.0.0.0`.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi đường dẫn với thứ nằm ở đó.",
+      "promptEn": "Match each path to what lives there.",
+      "pairs": [
+        {
+          "left": "/etc",
+          "leftEn": "/etc",
+          "right": "Cấu hình hệ thống và dịch vụ, ví dụ unit file và nginx.conf",
+          "rightEn": "System and service configuration, such as unit files and nginx.conf"
+        },
+        {
+          "left": "/var/lib",
+          "leftEn": "/var/lib",
+          "right": "Dữ liệu trạng thái bền của dịch vụ, ví dụ file database",
+          "rightEn": "Persistent service state, such as database files"
+        },
+        {
+          "left": "/proc",
+          "leftEn": "/proc",
+          "right": "Filesystem ảo phơi bày tiến trình và kernel, không nằm trên đĩa",
+          "rightEn": "A virtual filesystem exposing processes and the kernel, not on disk"
+        },
+        {
+          "left": "/sys/fs/cgroup",
+          "leftEn": "/sys/fs/cgroup",
+          "right": "Cây cgroup v2 chứa giới hạn như memory.max và cpu.max",
+          "rightEn": "The cgroup v2 tree holding limits such as memory.max and cpu.max"
+        }
+      ],
+      "explanation": "Biết chỗ của từng thứ giúp thiết kế image và volume: cấu hình trong `/etc` có thể đóng vào image, trạng thái trong `/var/lib` nên nằm trên volume riêng, còn `/proc` và `/sys` là cửa sổ nhìn vào kernel.",
+      "explanationEn": "Knowing where things live shapes image and volume design: config in `/etc` can be baked into an image, state in `/var/lib` belongs on its own volume, and `/proc` and `/sys` are windows into the kernel.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước đưa một dịch vụ systemd mới vào hoạt động.",
+      "promptEn": "Put the steps to bring a new systemd service into production into order.",
+      "items": [
+        {
+          "text": "Tạo system user riêng, không có login shell, cho dịch vụ",
+          "textEn": "Create a dedicated system user with no login shell for the service"
+        },
+        {
+          "text": "Viết unit file vào /etc/systemd/system/ với User=, Restart= và LimitNOFILE=",
+          "textEn": "Write the unit file in /etc/systemd/system/ with User=, Restart= and LimitNOFILE="
+        },
+        {
+          "text": "Chạy systemctl daemon-reload để systemd đọc unit mới",
+          "textEn": "Run systemctl daemon-reload so systemd reads the new unit"
+        },
+        {
+          "text": "Chạy systemctl enable --now để khởi động ngay và cả khi boot",
+          "textEn": "Run systemctl enable --now to start it now and at every boot"
+        },
+        {
+          "text": "Kiểm tra bằng systemctl status và journalctl -u",
+          "textEn": "Verify with systemctl status and journalctl -u"
+        }
+      ],
+      "explanation": "Unit tham chiếu tới user nên user phải có trước; systemd chỉ biết unit mới sau khi reload; `enable --now` gộp start và enable để dịch vụ sống sót qua reboot; cuối cùng xác nhận bằng status và log.",
+      "explanationEn": "The unit references the user, so the user must exist first; systemd only knows the new unit after a reload; `enable --now` combines start and enable so the service survives reboots; finally confirm with status and logs.",
+      "id": "d6"
+    }
+  ]
+}

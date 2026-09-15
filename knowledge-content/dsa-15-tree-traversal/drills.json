@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về bộ nhớ phụ của BFS và DFS.",
+      "promptEn": "Pick TWO statements that are true about the auxiliary space of BFS and DFS.",
+      "options": [
+        "BFS trên cây nhị phân hoàn hảo cần O(n) bộ nhớ phụ",
+        "DFS đệ quy trên cây cân bằng cần O(n) call stack",
+        "BFS trên cây lệch (mỗi node một con) cần O(n) bộ nhớ phụ",
+        "DFS đệ quy tốn O(h) bộ nhớ phụ, với h là chiều cao cây",
+        "Duyệt in-order tốn O(n²) thời gian trên BST lệch"
+      ],
+      "optionsEn": [
+        "BFS on a perfect binary tree needs O(n) auxiliary space",
+        "Recursive DFS on a balanced tree needs an O(n) call stack",
+        "BFS on a skewed tree (one child per node) needs O(n) auxiliary space",
+        "Recursive DFS uses O(h) auxiliary space, where h is the tree height",
+        "In-order traversal takes O(n²) time on a skewed BST"
+      ],
+      "answers": [0, 3],
+      "explanation": "BFS giữ tối đa một tầng (O(w)) — tầng cuối của cây hoàn hảo chứa khoảng n/2 node. DFS giữ một đường đi từ root tới lá (O(h)) — cây cân bằng chỉ cao O(log n). Cây lệch có độ rộng 1 nên BFS chỉ O(1), và mọi cách duyệt đều O(n) thời gian bất kể hình dạng.",
+      "explanationEn": "BFS holds at most one level (O(w)) — a perfect tree's last level has about n/2 nodes. DFS holds one root-to-leaf path (O(h)) — a balanced tree is only O(log n) tall. A skewed tree has width 1 so BFS is O(1), and every traversal is O(n) time whatever the shape.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI bài toán mà post-order là lựa chọn tự nhiên.",
+      "promptEn": "Pick TWO tasks for which post-order is the natural choice.",
+      "options": [
+        "Liệt kê giá trị của BST theo thứ tự tăng dần",
+        "Serialize cây để dựng lại đúng hình dạng",
+        "Tính chiều cao hoặc kích thước của từng cây con",
+        "Tìm node khớp nông nhất trong cây",
+        "Xoá / giải phóng mọi node của cây, con trước cha"
+      ],
+      "optionsEn": [
+        "List a BST's values in ascending order",
+        "Serialize a tree so its exact shape can be rebuilt",
+        "Compute the height or size of every subtree",
+        "Find the shallowest matching node in a tree",
+        "Delete / free every node of a tree, children before parents"
+      ],
+      "answers": [2, 4],
+      "explanation": "Post-order (L → R → N) chỉ xử lý node khi cả hai con đã xong — đúng thứ cần cho chiều cao/kích thước và cho việc xoá con trước cha. Thứ tự tăng dần của BST là in-order, serialize dùng pre-order, còn node nông nhất là việc của BFS.",
+      "explanationEn": "Post-order (L → R → N) handles a node only after both children are done — exactly what height/size needs, and what deleting children before parents needs. Ascending BST order is in-order, serializing uses pre-order, and the shallowest match is a job for BFS.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Thứ tự DFS nào trên một BST in ra các giá trị theo thứ tự tăng dần?",
+      "promptEn": "Which DFS order on a BST outputs its values in ascending order?",
+      "answer": "In-order",
+      "answerEn": "In-order",
+      "accept": [
+        "In-order",
+        "inorder",
+        "in order",
+        "in-order traversal",
+        "inorder traversal",
+        "in order traversal",
+        "lnr",
+        "l n r",
+        "left node right",
+        "dfs in-order",
+        "dfs inorder"
+      ],
+      "explanation": "In-order (L → N → R). Trong BST, cây con trái nhỏ hơn node và cây con phải lớn hơn, nên thăm trái – node – phải cho ra dãy tăng dần trong O(n).",
+      "explanationEn": "In-order (L → N → R). In a BST the left subtree is smaller than the node and the right subtree larger, so visiting left – node – right yields ascending values in O(n).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "BFS dùng cấu trúc dữ liệu nào để giữ các node đang chờ được thăm?",
+      "promptEn": "Which data structure does BFS use to hold the nodes waiting to be visited?",
+      "answer": "Hàng đợi (queue)",
+      "answerEn": "Queue",
+      "accept": [
+        "Hàng đợi (queue)",
+        "Queue",
+        "hàng đợi",
+        "hang doi",
+        "hang doi queue",
+        "a queue",
+        "fifo queue",
+        "fifo"
+      ],
+      "explanation": "Queue (FIFO). Con được thêm vào cuối và node được lấy ra từ đầu, nên các node được xử lý theo đúng thứ tự phát hiện — tức là theo từng tầng.",
+      "explanationEn": "A queue (FIFO). Children join at the back and nodes leave from the front, so nodes are processed in the order they were discovered — which is level by level.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi cách duyệt với mô tả và công dụng điển hình.",
+      "promptEn": "Match each traversal to its description and typical use.",
+      "pairs": [
+        {
+          "left": "Pre-order",
+          "leftEn": "Pre-order",
+          "right": "Node → Trái → Phải; dùng để sao chép hoặc serialize cây",
+          "rightEn": "Node → Left → Right; used to copy or serialize a tree"
+        },
+        {
+          "left": "In-order",
+          "leftEn": "In-order",
+          "right": "Trái → Node → Phải; cho giá trị BST theo thứ tự tăng dần",
+          "rightEn": "Left → Node → Right; gives a BST's values in ascending order"
+        },
+        {
+          "left": "Post-order",
+          "leftEn": "Post-order",
+          "right": "Trái → Phải → Node; dùng để xoá cây hoặc tính chiều cao",
+          "rightEn": "Left → Right → Node; used to delete a tree or compute its height"
+        },
+        {
+          "left": "BFS",
+          "leftEn": "BFS",
+          "right": "Theo từng tầng với queue; tìm node khớp nông nhất",
+          "rightEn": "Level by level with a queue; finds the shallowest match"
+        }
+      ],
+      "explanation": "Ba thứ tự DFS chỉ khác nhau ở vị trí của node so với hai cây con; BFS là họ còn lại, đi theo độ sâu thay vì theo nhánh.",
+      "explanationEn": "The three DFS orders differ only in where the node sits relative to its two subtrees; BFS is the other family, moving by depth instead of by branch.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của BFS trên cây nhị phân.",
+      "promptEn": "Put the steps of BFS on a binary tree into order.",
+      "items": [
+        {
+          "text": "Tạo queue và mảng kết quả, đưa root vào queue",
+          "textEn": "Create a queue and a result array, and put the root in the queue"
+        },
+        {
+          "text": "Khi queue còn phần tử, lấy node ở đầu queue ra",
+          "textEn": "While the queue is not empty, dequeue the node at the front"
+        },
+        {
+          "text": "Push giá trị của node đó vào mảng kết quả",
+          "textEn": "Push that node's value into the result array"
+        },
+        {
+          "text": "Nếu có con trái, đưa con trái vào cuối queue",
+          "textEn": "If it has a left child, enqueue the left child"
+        },
+        {
+          "text": "Nếu có con phải, đưa con phải vào cuối queue",
+          "textEn": "If it has a right child, enqueue the right child"
+        }
+      ],
+      "explanation": "Đưa con trái vào trước con phải giữ cho mỗi tầng được đọc từ trái sang phải; vòng lặp kết thúc khi queue rỗng, lúc đó mọi node đã được thăm đúng một lần.",
+      "explanationEn": "Enqueuing the left child before the right keeps each level reading left to right; the loop ends when the queue is empty, by which point every node has been visited exactly once.",
+      "id": "d6"
+    }
+  ]
+}

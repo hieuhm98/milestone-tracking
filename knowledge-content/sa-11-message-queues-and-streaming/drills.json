@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thiết lập giúp một topic Kafka không mất dữ liệu đã được xác nhận khi một broker chết.",
+      "promptEn": "Pick TWO settings that keep a Kafka topic from losing acknowledged data when one broker dies.",
+      "options": [
+        "Producer dùng acks=0 để ghi nhanh hơn",
+        "replication.factor=3 kết hợp min.insync.replicas=2",
+        "Tăng số partition lên gấp đôi",
+        "Producer dùng acks=all",
+        "Consumer commit offset trước khi xử lý"
+      ],
+      "optionsEn": [
+        "Producer uses acks=0 to write faster",
+        "replication.factor=3 combined with min.insync.replicas=2",
+        "Double the number of partitions",
+        "Producer uses acks=all",
+        "Consumers commit offsets before processing"
+      ],
+      "answers": [1, 3],
+      "id": "d1",
+      "explanation": "Độ bền đến từ bộ ba RF=3, min.insync.replicas=2 và acks=all: lần ghi chỉ được xác nhận khi ít nhất hai replica có dữ liệu. acks=0 không chờ xác nhận nào; số partition liên quan tới song song chứ không phải độ bền; commit trước khi xử lý là at-most-once phía consumer.",
+      "explanationEn": "Durability comes from the trio RF=3, min.insync.replicas=2 and acks=all: a write is acknowledged only once at least two replicas hold it. acks=0 waits for no acknowledgement, partition count is about parallelism rather than durability, and committing before processing is at-most-once on the consumer side."
+    },
+    {
+      "type": "multi",
+      "prompt": "Consumer nhận message từ broker at-least-once và ghi vào database. Chọn HAI việc giúp nó an toàn trước message trùng.",
+      "promptEn": "A consumer receives messages from an at-least-once broker and writes to a database. Pick TWO things that make it safe against duplicates.",
+      "options": [
+        "Khử trùng theo event ID do producer tạo, trong cùng transaction với thao tác ghi",
+        "Commit offset trước khi ghi database",
+        "Tăng visibility timeout lên 12 giờ để không bao giờ giao lại",
+        "Dùng receipt handle của broker làm khoá khử trùng",
+        "Viết thao tác dạng upsert hoặc ghi có điều kiện theo version"
+      ],
+      "optionsEn": [
+        "Deduplicate on a producer-generated event ID in the same transaction as the write",
+        "Commit the offset before writing to the database",
+        "Raise the visibility timeout to 12 hours so nothing is ever redelivered",
+        "Use the broker's receipt handle as the dedup key",
+        "Write the operation as an upsert or a version-conditional update"
+      ],
+      "answers": [0, 4],
+      "id": "d2",
+      "explanation": "Hai cách chuẩn là làm thao tác vốn idempotent (upsert, ghi có điều kiện) hoặc khử trùng nguyên tử theo ID ổn định. Commit trước là đổi trùng lặp lấy mất dữ liệu; timeout dài không ngăn được giao lại khi consumer crash; receipt handle thay đổi sau mỗi lần nhận.",
+      "explanationEn": "The two standard tools are making the write naturally idempotent (upsert, conditional update) or deduplicating atomically on a stable ID. Committing first trades duplicates for data loss, a long timeout does not prevent redelivery after a crash, and a receipt handle changes on every receive."
+    },
+    {
+      "type": "recall",
+      "prompt": "Cổng mặc định mà Kafka broker lắng nghe client là cổng nào?",
+      "promptEn": "Which default port does a Kafka broker listen on for clients?",
+      "answer": "9092",
+      "answerEn": "9092",
+      "accept": ["9092", "port 9092", "cổng 9092", "tcp 9092"],
+      "id": "d3",
+      "explanation": "9092. Để so sánh: RabbitMQ AMQP dùng 5672 (TLS 5671) và giao diện quản trị 15672.",
+      "explanationEn": "9092. For comparison, RabbitMQ AMQP uses 5672 (TLS 5671) and its management UI 15672."
+    },
+    {
+      "type": "recall",
+      "prompt": "Tên pattern ghi event vào một bảng trong cùng transaction với thay đổi nghiệp vụ, rồi để một relay publish sau, nhằm giải quyết vấn đề ghi kép là gì?",
+      "promptEn": "What is the pattern that writes an event to a table in the same transaction as the business change and lets a relay publish it later, solving the dual-write problem?",
+      "answer": "Transactional outbox",
+      "answerEn": "Transactional outbox",
+      "accept": ["transactional outbox", "outbox", "outbox pattern", "transactional outbox pattern"],
+      "id": "d4",
+      "explanation": "Transactional outbox. Relay có thể là polling publisher hoặc CDC (ví dụ Debezium); vì relay có thể publish lại, phía nhận vẫn phải idempotent.",
+      "explanationEn": "Transactional outbox. The relay can be a polling publisher or CDC (for example Debezium); because the relay may republish, the receiving side must still be idempotent."
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi loại exchange RabbitMQ với cách nó định tuyến.",
+      "promptEn": "Match each RabbitMQ exchange type to how it routes.",
+      "pairs": [
+        {
+          "left": "direct",
+          "leftEn": "direct",
+          "right": "Routing key phải khớp chính xác binding key",
+          "rightEn": "The routing key must exactly equal the binding key"
+        },
+        {
+          "left": "fanout",
+          "leftEn": "fanout",
+          "right": "Bỏ qua routing key, sao chép tới mọi queue đã bind",
+          "rightEn": "Ignores the routing key and copies to every bound queue"
+        },
+        {
+          "left": "topic",
+          "leftEn": "topic",
+          "right": "Khớp mẫu với * là một từ và # là không hoặc nhiều từ",
+          "rightEn": "Pattern match where * is one word and # is zero or more words"
+        },
+        {
+          "left": "headers",
+          "leftEn": "headers",
+          "right": "Định tuyến theo giá trị header của message thay cho key",
+          "rightEn": "Routes on message header values instead of the key"
+        }
+      ],
+      "id": "d5",
+      "explanation": "Topic exchange là loại linh hoạt nhất cho event có cấu trúc như order.eu.created; fanout là pub/sub thuần; default exchange không tên thực chất là một direct exchange bind theo tên queue.",
+      "explanationEn": "The topic exchange is the most flexible for structured keys like order.eu.created, fanout is plain pub/sub, and the nameless default exchange is really a direct exchange bound by queue name."
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự vòng đời một message trong SQS khi xử lý lỗi liên tục cho tới khi vào DLQ.",
+      "promptEn": "Put the life of an SQS message that keeps failing, until it reaches the DLQ, into order.",
+      "items": [
+        {
+          "text": "Producer gửi message vào queue chính",
+          "textEn": "The producer sends the message to the main queue"
+        },
+        {
+          "text": "Consumer nhận message và nó bị ẩn trong thời gian visibility timeout",
+          "textEn": "A consumer receives it and the message is hidden for the visibility timeout"
+        },
+        {
+          "text": "Xử lý thất bại, message không bị xoá",
+          "textEn": "Processing fails and the message is not deleted"
+        },
+        {
+          "text": "Hết visibility timeout, message hiện lại và được nhận lại",
+          "textEn": "The visibility timeout expires and the message is received again"
+        },
+        {
+          "text": "Số lần nhận vượt maxReceiveCount, redrive policy chuyển nó sang DLQ",
+          "textEn": "Its receive count exceeds maxReceiveCount and the redrive policy moves it to the DLQ"
+        }
+      ],
+      "id": "d6",
+      "explanation": "SQS không có lệnh nack: 'thất bại' đơn giản là không xoá message. Chính visibility timeout tạo ra việc giao lại, và bộ đếm số lần nhận quyết định khi nào message bị coi là poison và chuyển sang DLQ.",
+      "explanationEn": "SQS has no nack: 'failing' simply means not deleting the message. The visibility timeout is what causes redelivery, and the receive count decides when the message is treated as poison and moved to the DLQ."
+    }
+  ]
+}

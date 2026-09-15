@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thực hành đúng với nguyên tắc zero trust.",
+      "promptEn": "Pick TWO practices that follow zero trust principles.",
+      "options": [
+        "Tin mọi request đến từ bên trong VPC vì đã qua firewall",
+        "Dùng mTLS với danh tính workload cho traffic giữa các service",
+        "Cho người đã đăng nhập VPN truy cập mọi hệ thống nội bộ",
+        "Coi IP allow-list là bằng chứng danh tính đủ tin cậy",
+        "Xác thực và phân quyền cho từng request, kể cả request nội bộ"
+      ],
+      "optionsEn": [
+        "Trust every request from inside the VPC because it passed the firewall",
+        "Use mTLS with workload identity for service-to-service traffic",
+        "Let anyone logged into the VPN reach every internal system",
+        "Treat an IP allow-list as reliable proof of identity",
+        "Authenticate and authorise every request, including internal ones"
+      ],
+      "answers": [1, 4],
+      "explanation": "Zero trust bỏ niềm tin dựa trên vị trí mạng: mọi request đều phải được xác minh danh tính và quyền, và service chứng minh danh tính cho nhau bằng mTLS. VPC, VPN và IP allow-list đều là những dạng tin theo vị trí mạng.",
+      "explanationEn": "Zero trust removes trust based on network location: every request must have its identity and permissions verified, and services prove identity to each other with mTLS. The VPC, the VPN and IP allow-lists are all forms of location-based trust.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI biện pháp giúp giảm rủi ro chuỗi cung ứng phần mềm cho image container.",
+      "promptEn": "Pick TWO measures that reduce software supply-chain risk for container images.",
+      "options": [
+        "Ký image và xác minh chữ ký ở bước admission trước khi deploy",
+        "Luôn deploy tag `latest` để nhận bản vá nhanh nhất",
+        "Lưu access key admin của cloud trong biến CI để pipeline chạy nhanh",
+        "Tắt quét dependency vì làm build chậm",
+        "Sinh SBOM cho mỗi image và lưu cùng artifact"
+      ],
+      "optionsEn": [
+        "Sign images and verify signatures at admission before deploying",
+        "Always deploy the `latest` tag to get patches fastest",
+        "Store cloud admin access keys in CI variables so the pipeline runs fast",
+        "Disable dependency scanning because it slows the build",
+        "Generate an SBOM for each image and store it with the artifact"
+      ],
+      "answers": [0, 4],
+      "explanation": "Ký và xác minh đảm bảo chỉ image đã qua pipeline mới chạy; SBOM cho biết image chứa gì khi có CVE mới. Tag `latest` có thể bị đẩy đè, key admin dài hạn trong CI biến pipeline thành mục tiêu hấp dẫn, và bỏ quét là bỏ một lớp kiểm soát.",
+      "explanationEn": "Signing and verifying ensures only images that went through the pipeline run; an SBOM tells you what an image contains when a new CVE lands. The `latest` tag can be overwritten, long-lived admin keys in CI make the pipeline a prime target, and skipping scans removes a control.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "HashiCorp Vault lắng nghe ở port mặc định nào?",
+      "promptEn": "Which default port does HashiCorp Vault listen on?",
+      "answer": "8200",
+      "answerEn": "8200",
+      "accept": ["8200", "port 8200", "tcp 8200"],
+      "explanation": "8200 cho API và UI của Vault (8201 dùng cho giao tiếp giữa các node trong cluster).",
+      "explanationEn": "8200 serves Vault's API and UI (8201 is used for cluster communication between nodes).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Kỹ thuật dùng master key trong KMS để mã hoá các data key, còn dữ liệu được mã hoá cục bộ bằng data key, gọi là gì?",
+      "promptEn": "What is the technique called where a KMS master key encrypts data keys, while the data itself is encrypted locally with the data key?",
+      "answer": "Envelope encryption",
+      "answerEn": "Envelope encryption",
+      "accept": ["envelope encryption", "envelope", "mã hoá phong bì", "mã hóa phong bì"],
+      "explanation": "Envelope encryption. Dữ liệu lớn không bao giờ đi tới KMS, mỗi object có data key riêng, và xoay vòng master key không cần mã hoá lại toàn bộ dữ liệu.",
+      "explanationEn": "Envelope encryption. Bulk data never travels to the KMS, each object gets its own data key, and rotating the master key does not require re-encrypting all the data.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi mối đe doạ STRIDE với biện pháp chính phù hợp.",
+      "promptEn": "Match each STRIDE threat to its main mitigation.",
+      "pairs": [
+        {
+          "left": "Spoofing",
+          "leftEn": "Spoofing",
+          "right": "Xác thực mạnh: MFA, mTLS",
+          "rightEn": "Strong authentication: MFA, mTLS"
+        },
+        {
+          "left": "Repudiation",
+          "leftEn": "Repudiation",
+          "right": "Audit log chống sửa đổi",
+          "rightEn": "Tamper-evident audit logs"
+        },
+        {
+          "left": "Denial of service",
+          "leftEn": "Denial of service",
+          "right": "Rate limiting và bảo vệ ở edge",
+          "rightEn": "Rate limiting and edge protection"
+        },
+        {
+          "left": "Elevation of privilege",
+          "leftEn": "Elevation of privilege",
+          "right": "Phân quyền mặc định từ chối, theo từng object",
+          "rightEn": "Deny-by-default, per-object authorisation"
+        }
+      ],
+      "explanation": "Mỗi chữ cái STRIDE vi phạm một thuộc tính: Spoofing phá xác thực, Repudiation phá khả năng chống chối bỏ, Denial of service phá tính sẵn sàng, Elevation of privilege phá phân quyền. Biện pháp đi theo đúng thuộc tính bị vi phạm.",
+      "explanationEn": "Each STRIDE letter violates one property: Spoofing breaks authentication, Repudiation breaks non-repudiation, Denial of service breaks availability, Elevation of privilege breaks authorisation. The mitigation follows the property that is violated.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước mã hoá một object bằng envelope encryption.",
+      "promptEn": "Put the steps of encrypting an object with envelope encryption into order.",
+      "items": [
+        {
+          "text": "Ứng dụng gọi KMS GenerateDataKey với master key",
+          "textEn": "The application calls KMS GenerateDataKey with the master key"
+        },
+        {
+          "text": "KMS trả về data key dạng plaintext và bản đã mã hoá",
+          "textEn": "The KMS returns the data key in plaintext and in encrypted form"
+        },
+        {
+          "text": "Ứng dụng mã hoá dữ liệu cục bộ bằng data key plaintext",
+          "textEn": "The application encrypts the data locally with the plaintext data key"
+        },
+        {
+          "text": "Lưu ciphertext cùng data key đã mã hoá",
+          "textEn": "Store the ciphertext together with the encrypted data key"
+        },
+        {
+          "text": "Xoá data key plaintext khỏi bộ nhớ",
+          "textEn": "Wipe the plaintext data key from memory"
+        }
+      ],
+      "explanation": "Master key không bao giờ rời KMS và dữ liệu lớn không bao giờ đi tới KMS. Muốn giải mã, ứng dụng gửi data key đã mã hoá cho KMS — đó là điểm mà policy và audit được áp dụng.",
+      "explanationEn": "The master key never leaves the KMS and bulk data never goes to it. To decrypt, the application sends the encrypted data key back to the KMS — that is where policy and audit are applied.",
+      "id": "d6"
+    }
+  ]
+}

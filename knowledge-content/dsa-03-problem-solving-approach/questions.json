@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Định nghĩa nào mô tả đúng nhất **thuật toán** (algorithm)?",
+    "questionEn": "Which definition best describes an **algorithm**?",
+    "options": [
+      "Một chương trình viết bằng một ngôn ngữ lập trình cụ thể",
+      "Một cấu trúc dữ liệu dùng để lưu trữ và truy xuất thông tin",
+      "Một quy trình hay chuỗi các bước để hoàn thành một nhiệm vụ cụ thể",
+      "Một công thức toán học luôn chạy trong thời gian O(1)"
+    ],
+    "optionsEn": [
+      "A program written in one specific programming language",
+      "A data structure used to store and retrieve information",
+      "A process or set of steps to accomplish a certain task",
+      "A mathematical formula that always runs in O(1) time"
+    ],
+    "answer": 2,
+    "explanation": "Thuật toán là chuỗi các bước, độc lập với ngôn ngữ: cùng một thuật toán có thể viết bằng JavaScript, Python hay pseudocode. Nó không phải cấu trúc dữ liệu, và phần lớn thuật toán không phải O(1).",
+    "explanationEn": "An algorithm is a sequence of steps, independent of language: the same algorithm can be written in JavaScript, Python or pseudocode. It is not a data structure, and most algorithms are not O(1)."
+  },
+  {
+    "id": "q2",
+    "question": "Hai hướng chính giúp bạn giải bài thuật toán giỏi hơn là gì?",
+    "questionEn": "What are the two main ways to get better at solving algorithm problems?",
+    "options": [
+      "Có một kế hoạch giải bài lặp lại được, và thành thạo các pattern giải bài phổ biến",
+      "Học thuộc lời giải của thật nhiều bài, và gõ phím nhanh hơn",
+      "Học thêm nhiều ngôn ngữ lập trình, và nhiều framework",
+      "Chỉ luyện các bài khó nhất, và bỏ qua các bài dễ"
+    ],
+    "optionsEn": [
+      "Have a repeatable plan for solving problems, and master common problem-solving patterns",
+      "Memorise the solutions to as many problems as possible, and type faster",
+      "Learn more programming languages, and more frameworks",
+      "Practise only the hardest problems, and skip the easy ones"
+    ],
+    "answer": 0,
+    "explanation": "Một kế hoạch (quy trình 5 bước) giúp bạn không bao giờ bế tắc trước trang trắng; các pattern (frequency counter, multiple pointers, sliding window…) cho bạn công cụ để áp dụng. Học thuộc lời giải không giúp được khi gặp bài lạ.",
+    "explanationEn": "A plan (the 5-step process) means you are never stuck staring at a blank page; patterns (frequency counter, multiple pointers, sliding window…) give you tools to apply. Memorised solutions do not help when the problem is new."
+  },
+  {
+    "id": "q3",
+    "question": "Khi đang viết ví dụ (bước 2), bạn nhận ra đề bài không nói rõ phần tử trùng lặp được xử lý thế nào. Bạn nên làm gì?",
+    "questionEn": "While writing examples (step 2) you realise the prompt does not say how duplicates should be handled. What should you do?",
+    "options": [
+      "Tự chọn một cách xử lý và không nhắc đến nữa",
+      "Bắt đầu code ngay, gặp lỗi thì sửa sau",
+      "Nhảy thẳng sang bước refactor để tiết kiệm thời gian",
+      "Quay lại bước hiểu đề và hỏi làm rõ trước khi đi tiếp"
+    ],
+    "optionsEn": [
+      "Pick a behaviour yourself and never mention it",
+      "Start coding right away and fix bugs later",
+      "Jump straight to refactoring to save time",
+      "Loop back to understanding the problem and ask a clarifying question before moving on"
+    ],
+    "answer": 3,
+    "explanation": "Quy trình không đi thẳng một chiều: ví dụ làm lộ ra chỗ chưa hiểu thì quay lại bước 1. Tự ý chọn mà không nói ra là tự đổi đề — một lỗi phỏng vấn phổ biến.",
+    "explanationEn": "The process is not strictly linear: when examples expose a gap in understanding, you loop back to step 1. Silently choosing a behaviour is changing the problem — a common interview mistake."
+  },
+  {
+    "id": "q4",
+    "question": "Câu hỏi nào KHÔNG thuộc năm câu hỏi của bước \"Hiểu bài toán\"?",
+    "questionEn": "Which question is NOT one of the five questions of \"Understand the problem\"?",
+    "options": [
+      "Tôi có diễn đạt lại bài toán bằng lời của mình được không?",
+      "Tôi sẽ dùng thuật toán sắp xếp nào để đạt O(n log n)?",
+      "Input đi vào bài toán là gì?",
+      "Output có xác định được từ input không — đã đủ thông tin chưa?"
+    ],
+    "optionsEn": [
+      "Can I restate the problem in my own words?",
+      "Which sorting algorithm will I use to reach O(n log n)?",
+      "What are the inputs that go into the problem?",
+      "Can the outputs be determined from the inputs — do I have enough information?"
+    ],
+    "answer": 1,
+    "explanation": "Năm câu hỏi là: diễn đạt lại, input, output, đủ thông tin chưa, và đặt tên dữ liệu. Chọn thuật toán và tối ưu Big O thuộc về các bước sau (giải và nhìn lại), không phải lúc còn đang hiểu đề.",
+    "explanationEn": "The five are: restate, inputs, outputs, enough information, and labelling the data. Choosing an algorithm and chasing a Big O belong to later steps (solving and looking back), not to understanding."
+  },
+  {
+    "id": "q5",
+    "question": "Đoạn code sau in ra gì, và nó cho thấy cần hỏi thêm gì cho bài \"cộng hai số\"?\n`console.log(0.1 + 0.2 === 0.3);`",
+    "questionEn": "What does this print, and what does it tell you to ask about \"add two numbers\"?\n`console.log(0.1 + 0.2 === 0.3);`",
+    "options": [
+      "`true` — JavaScript cộng số thực luôn chính xác, không cần hỏi gì",
+      "Ném lỗi — không được so sánh số thực bằng `===`",
+      "`false` — cần hỏi input có thể là số thực không và yêu cầu độ chính xác thế nào",
+      "`0.3` — JavaScript tự làm tròn kết quả phép cộng"
+    ],
+    "optionsEn": [
+      "`true` — JavaScript float addition is always exact, nothing to ask",
+      "It throws — floats cannot be compared with `===`",
+      "`false` — you need to ask whether inputs can be floats and what precision is required",
+      "`0.3` — JavaScript rounds the result of addition automatically"
+    ],
+    "answer": 2,
+    "explanation": "`0.1 + 0.2` là `0.30000000000000004` do biểu diễn số thực dấu phẩy động, nên phép so sánh ra `false`. Kể cả đề tầm thường cũng giấu câu hỏi về kiểu input (số nguyên hay số thực) và độ chính xác.",
+    "explanationEn": "`0.1 + 0.2` is `0.30000000000000004` because of floating-point representation, so the comparison is `false`. Even a trivial prompt hides questions about input type (integers or floats) and precision."
+  },
+  {
+    "id": "q6",
+    "question": "Hàm `add` được gọi với một chuỗi. Kết quả là gì?\n`function add(a, b) {\n  return a + b;\n}\nadd(\"2\", 3);`",
+    "questionEn": "The `add` function is called with a string. What is the result?\n`function add(a, b) {\n  return a + b;\n}\nadd(\"2\", 3);`",
+    "options": [
+      "`\"23\"`",
+      "`5`",
+      "`NaN`",
+      "Ném `TypeError`"
+    ],
+    "optionsEn": [
+      "`\"23\"`",
+      "`5`",
+      "`NaN`",
+      "It throws a `TypeError`"
+    ],
+    "answer": 0,
+    "explanation": "Khi một toán hạng là chuỗi, `+` thực hiện nối chuỗi, nên kết quả là `\"23\"`. Đó là lý do phải hỏi input có thể sai kiểu không và nên xử lý (ép kiểu, ném lỗi) thế nào.",
+    "explanationEn": "When either operand is a string, `+` concatenates, so the result is `\"23\"`. That is why you ask whether inputs can have the wrong type and how to handle it (coerce or throw)."
+  },
+  {
+    "id": "q7",
+    "question": "Thứ tự nên dùng khi khám phá ví dụ cụ thể là gì?",
+    "questionEn": "In what order should you explore concrete examples?",
+    "options": [
+      "Không hợp lệ → rỗng → phức tạp → đơn giản",
+      "Phức tạp → đơn giản → không hợp lệ → rỗng",
+      "Rỗng → đơn giản → không hợp lệ → phức tạp",
+      "Đơn giản → phức tạp → rỗng → không hợp lệ"
+    ],
+    "optionsEn": [
+      "Invalid → empty → complex → simple",
+      "Complex → simple → invalid → empty",
+      "Empty → simple → invalid → complex",
+      "Simple → complex → empty → invalid"
+    ],
+    "answer": 3,
+    "explanation": "Bắt đầu với ví dụ đơn giản để thấy hành vi cơ bản, lên dần ví dụ phức tạp để buộc ra quyết định, rồi mới xét input rỗng và input không hợp lệ — hai nhóm edge case hay bị bỏ quên nhất.",
+    "explanationEn": "Start simple to see the basic behaviour, progress to complex cases that force decisions, then cover empty inputs and invalid inputs — the two edge-case groups most often forgotten."
+  },
+  {
+    "id": "q8",
+    "question": "Điều nào KHÔNG phải là lợi ích của việc viết ví dụ cụ thể trước khi code?",
+    "questionEn": "Which is NOT a benefit of writing concrete examples before coding?",
+    "options": [
+      "Giúp hiểu bài toán tốt hơn",
+      "Đảm bảo lời giải bạn viết ra sẽ có Big O tối ưu",
+      "Cung cấp sẵn test case để kiểm tra lời giải sau này",
+      "Gỡ sự mơ hồ, ví dụ chữ hoa và chữ thường có được tính chung không"
+    ],
+    "optionsEn": [
+      "It helps you understand the problem better",
+      "It guarantees your solution will have the optimal Big O",
+      "It gives you ready-made test cases to check the solution later",
+      "It resolves ambiguity, e.g. whether upper and lower case count together"
+    ],
+    "answer": 1,
+    "explanation": "Ví dụ giúp hiểu đề, gỡ mơ hồ và trở thành sanity check / unit test. Chúng nói về hành vi đúng, không nói gì về hiệu năng — tối ưu Big O là việc của bước nhìn lại.",
+    "explanationEn": "Examples build understanding, remove ambiguity and become sanity checks / unit tests. They describe correct behaviour, not performance — improving Big O is the job of looking back."
+  },
+  {
+    "id": "q9",
+    "question": "Theo đặc tả đã chốt cho `charCount` (không phân biệt hoa thường, chỉ đếm chữ cái và chữ số, chỉ các key có mặt), `charCount(\"Hi, Hi!\")` trả về gì?",
+    "questionEn": "Under the spec agreed for `charCount` (case-insensitive, only letters and digits, only present keys), what does `charCount(\"Hi, Hi!\")` return?",
+    "options": [
+      "`{ H: 2, i: 2, \",\": 1, \"!\": 1 }`",
+      "`{ h: 2, i: 2, \" \": 1 }`",
+      "`{ h: 2, i: 2 }`",
+      "`{ h: 1, H: 1, i: 2 }`"
+    ],
+    "optionsEn": [
+      "`{ H: 2, i: 2, \",\": 1, \"!\": 1 }`",
+      "`{ h: 2, i: 2, \" \": 1 }`",
+      "`{ h: 2, i: 2 }`",
+      "`{ h: 1, H: 1, i: 2 }`"
+    ],
+    "answer": 2,
+    "explanation": "Dấu phẩy, dấu cách và dấu chấm than bị bỏ qua; hai chữ `H` được chuyển thành `h` nên đếm được 2; `i` xuất hiện 2 lần. Các phương án khác vi phạm quy tắc về chữ hoa hoặc đếm cả ký tự không phải chữ-số.",
+    "explanationEn": "The comma, space and exclamation mark are ignored; both `H` characters become `h`, giving 2; `i` appears twice. The other options break the case rule or count non-alphanumeric characters."
+  },
+  {
+    "id": "q10",
+    "question": "Lợi ích chính của bước \"Chia nhỏ vấn đề\" (viết các bước ra trước khi code) là gì?",
+    "questionEn": "What is the main benefit of \"Break it down\" (writing the steps out before coding)?",
+    "options": [
+      "Buộc bạn nghĩ về logic trước cú pháp, bắt hiểu lầm sớm và cho người phỏng vấn cơ hội chỉnh hướng",
+      "Làm code chạy nhanh hơn vì pseudocode được trình biên dịch tối ưu",
+      "Là yêu cầu bắt buộc của JavaScript trước khi khai báo hàm",
+      "Tự động giảm độ phức tạp thời gian của lời giải"
+    ],
+    "optionsEn": [
+      "It forces you to think about logic before syntax, catches misunderstandings early and lets the interviewer correct you",
+      "It makes the code faster because pseudocode is optimised by the compiler",
+      "JavaScript requires it before a function can be declared",
+      "It automatically lowers the time complexity of the solution"
+    ],
+    "answer": 0,
+    "explanation": "Pseudocode không được chạy và không đổi Big O. Giá trị của nó là tách phần suy nghĩ khỏi phần cú pháp, để lỗi khái niệm lộ ra khi còn rẻ sửa — và trong phỏng vấn, để người phỏng vấn thấy kế hoạch trước khi bạn code sai hướng.",
+    "explanationEn": "Pseudocode is never executed and does not change Big O. Its value is separating thinking from syntax so conceptual errors surface while cheap to fix — and, in interviews, letting the interviewer see the plan before you code the wrong thing."
+  },
+  {
+    "id": "q11",
+    "question": "Thứ tự đúng của kỹ thuật \"giải một bài toán đơn giản hơn\" là gì?",
+    "questionEn": "What is the correct order of the \"solve a simpler problem\" technique?",
+    "options": [
+      "Viết lời giải đơn giản → tìm chỗ khó → refactor → bỏ qua chỗ khó",
+      "Bỏ qua chỗ khó → nộp lời giải → tìm chỗ khó → viết lại từ đầu",
+      "Tìm chỗ khó → viết lời giải hoàn chỉnh → bỏ qua chỗ khó → kiểm tra",
+      "Tìm chỗ khó cốt lõi → tạm bỏ qua nó → viết lời giải đơn giản → đưa chỗ khó trở lại"
+    ],
+    "optionsEn": [
+      "Write a simplified solution → find the difficulty → refactor → ignore the difficulty",
+      "Ignore the difficulty → submit → find the difficulty → rewrite from scratch",
+      "Find the difficulty → write the full solution → ignore the difficulty → test",
+      "Find the core difficulty → temporarily ignore it → write a simplified solution → incorporate the difficulty back"
+    ],
+    "answer": 3,
+    "explanation": "Phải biết chỗ khó là gì thì mới tạm gác nó lại được; có lời giải đơn giản chạy được rồi mới đưa chỗ khó vào. Với `charCount`, chỗ khó là chữ hoa/thường và việc lọc ký tự chữ-số.",
+    "explanationEn": "You must know what the difficulty is before you can set it aside, and you need a working simplified solution before folding it back in. For `charCount`, the difficulty is case and filtering alphanumeric characters."
+  },
+  {
+    "id": "q12",
+    "question": "Phiên bản đơn giản hoá đếm MỌI ký tự và phân biệt hoa thường. `charCountSimple(\"aA a\")` trả về gì?\n`function charCountSimple(str) {\n  const result = {};\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i];\n    if (result[char] > 0) result[char]++;\n    else result[char] = 1;\n  }\n  return result;\n}`",
+    "questionEn": "The simplified version counts EVERY character, case-sensitively. What does `charCountSimple(\"aA a\")` return?\n`function charCountSimple(str) {\n  const result = {};\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i];\n    if (result[char] > 0) result[char]++;\n    else result[char] = 1;\n  }\n  return result;\n}`",
+    "options": [
+      "`{ a: 3 }`",
+      "`{ a: 2, A: 1, \" \": 1 }`",
+      "`{ a: 3, \" \": 1 }`",
+      "`{ a: 2, A: 1 }`"
+    ],
+    "optionsEn": [
+      "`{ a: 3 }`",
+      "`{ a: 2, A: 1, \" \": 1 }`",
+      "`{ a: 3, \" \": 1 }`",
+      "`{ a: 2, A: 1 }`"
+    ],
+    "answer": 1,
+    "explanation": "Không có bước chuyển chữ thường hay lọc ký tự, nên `a` và `A` là hai key khác nhau và dấu cách cũng được đếm. Đó chính là phần \"chỗ khó\" đã được tạm bỏ qua, sẽ đưa trở lại ở phiên bản tiếp theo.",
+    "explanationEn": "There is no lowercasing or filtering, so `a` and `A` are different keys and the space is counted too. That is exactly the difficulty that was temporarily ignored, to be added back in the next version."
+  },
+  {
+    "id": "q13",
+    "question": "Giải xong, bạn chạy lại `charCount(\"\")` và `charCount(\"Hi!\")` rồi so với bảng ví dụ ở bước 2. Việc này ứng với câu hỏi refactor nào?",
+    "questionEn": "After solving, you run `charCount(\"\")` and `charCount(\"Hi!\")` again and compare with the step 2 examples table. Which refactoring question is this?",
+    "options": [
+      "Có hiểu được code chỉ trong một cái liếc không?",
+      "Có cải thiện hiệu năng được không?",
+      "Có kiểm tra được kết quả không?",
+      "Người khác đã giải bài này thế nào?"
+    ],
+    "optionsEn": [
+      "Can you understand it at a glance?",
+      "Can you improve the performance?",
+      "Can you check the result?",
+      "How have other people solved this problem?"
+    ],
+    "answer": 2,
+    "explanation": "Chạy lại các ví dụ đã chuẩn bị — nhất là input rỗng và edge case — chính là kiểm tra kết quả. Đó là lý do ví dụ ở bước 2 có giá trị gấp đôi: vừa giúp hiểu đề, vừa là test.",
+    "explanationEn": "Re-running the prepared examples — especially empty inputs and edge cases — is checking the result. That is why step 2 examples pay off twice: they build understanding and they are your tests."
+  },
+  {
+    "id": "q14",
+    "question": "`charCount` bản đã refactor chỉ lưu chữ cái viết thường a–z và chữ số 0–9. Auxiliary space của nó theo độ dài chuỗi n là gì?",
+    "questionEn": "The refactored `charCount` only stores lowercase letters a–z and digits 0–9. What is its auxiliary space in terms of the string length n?",
+    "options": [
+      "O(1), vì object có tối đa 36 key dù chuỗi dài bao nhiêu",
+      "O(n), vì mỗi ký tự tạo ra một key mới",
+      "O(n²), vì có một vòng lặp và một phép so sánh bên trong",
+      "O(log n), vì số key tăng chậm dần"
+    ],
+    "optionsEn": [
+      "O(1), because the object holds at most 36 keys however long the string is",
+      "O(n), because every character creates a new key",
+      "O(n²), because there is a loop with a comparison inside",
+      "O(log n), because the number of keys grows ever more slowly"
+    ],
+    "answer": 0,
+    "explanation": "Bộ nhớ là O(k) với k là số key khác nhau, và k bị chặn bởi 36 nên thực chất là O(1). Nếu đếm mọi ký tự Unicode thì k có thể tăng đến n và space thành O(n). Thời gian vẫn là O(n).",
+    "explanationEn": "Space is O(k) for k distinct keys, and k is capped at 36, so it is effectively O(1). If every Unicode character were counted, k could grow to n and space would be O(n). Time is still O(n)."
+  },
+  {
+    "id": "q15",
+    "question": "Một bạn refactor `charCount` như sau. `charCount(\"aa\")` trả về gì?\n`function charCount(str) {\n  const result = {};\n  for (const char of str) {\n    const key = char.toLowerCase();\n    result[key] = result[key] + 1;\n  }\n  return result;\n}`",
+    "questionEn": "Someone refactors `charCount` like this. What does `charCount(\"aa\")` return?\n`function charCount(str) {\n  const result = {};\n  for (const char of str) {\n    const key = char.toLowerCase();\n    result[key] = result[key] + 1;\n  }\n  return result;\n}`",
+    "options": [
+      "`{ a: 2 }`",
+      "`{ a: 1 }`",
+      "Ném `TypeError` vì `result.a` chưa tồn tại",
+      "`{ a: NaN }`"
+    ],
+    "optionsEn": [
+      "`{ a: 2 }`",
+      "`{ a: 1 }`",
+      "It throws a `TypeError` because `result.a` does not exist yet",
+      "`{ a: NaN }`"
+    ],
+    "answer": 3,
+    "explanation": "Lần đầu `result.a` là `undefined`, và `undefined + 1` là `NaN`; `NaN + 1` vẫn là `NaN`. Đọc thuộc tính không tồn tại không ném lỗi. Bản đúng là `(result[key] || 0) + 1` — refactor xong luôn phải kiểm tra lại kết quả.",
+    "explanationEn": "The first time, `result.a` is `undefined`, and `undefined + 1` is `NaN`; `NaN + 1` stays `NaN`. Reading a missing property does not throw. The correct form is `(result[key] || 0) + 1` — always re-check the result after a refactor."
+  },
+  {
+    "id": "q16",
+    "question": "Độ phức tạp của lời giải brute force cho bài số lớn thứ hai là gì?\n`function secondLargestSort(nums) {\n  const unique = [...new Set(nums)].sort((a, b) => b - a);\n\n  return unique.length >= 2 ? unique[1] : null;\n}`",
+    "questionEn": "What is the complexity of this brute-force second-largest solution?\n`function secondLargestSort(nums) {\n  const unique = [...new Set(nums)].sort((a, b) => b - a);\n\n  return unique.length >= 2 ? unique[1] : null;\n}`",
+    "options": [
+      "O(n) time, O(1) space",
+      "O(n log n) time, O(n) space",
+      "O(n²) time, O(1) space",
+      "O(log n) time, O(n) space"
+    ],
+    "optionsEn": [
+      "O(n) time, O(1) space",
+      "O(n log n) time, O(n) space",
+      "O(n²) time, O(1) space",
+      "O(log n) time, O(n) space"
+    ],
+    "answer": 1,
+    "explanation": "Tạo `Set` và spread là O(n), sắp xếp là O(n log n) nên tổng thời gian là O(n log n). `Set` và mảng mới giữ tối đa n phần tử nên space là O(n). Nhìn lại cho thấy chỉ cần hai giá trị lớn nhất, nên một lần duyệt O(n) time, O(1) space là đủ.",
+    "explanationEn": "Building the `Set` and spreading it is O(n), sorting is O(n log n), so time is O(n log n). The `Set` and the new array hold up to n items, so space is O(n). Looking back shows only the top two values matter, so one O(n) time, O(1) space pass is enough."
+  },
+  {
+    "id": "q17",
+    "question": "Có một lỗi nhỏ: điều kiện đầu dùng `>=` thay vì `>`. Đoạn code in ra gì?\n`let first = -Infinity, second = -Infinity;\nfor (const x of [5, 5, 3]) {\n  if (x >= first) {\n    second = first;\n    first = x;\n  } else if (x < first && x > second) {\n    second = x;\n  }\n}\nconsole.log(second);`",
+    "questionEn": "There is a small bug: the first condition uses `>=` instead of `>`. What does this print?\n`let first = -Infinity, second = -Infinity;\nfor (const x of [5, 5, 3]) {\n  if (x >= first) {\n    second = first;\n    first = x;\n  } else if (x < first && x > second) {\n    second = x;\n  }\n}\nconsole.log(second);`",
+    "options": [
+      "`3`",
+      "`-Infinity`",
+      "`5`",
+      "`null`"
+    ],
+    "optionsEn": [
+      "`3`",
+      "`-Infinity`",
+      "`5`",
+      "`null`"
+    ],
+    "answer": 2,
+    "explanation": "x = 5: first = 5, second = -Infinity. x = 5 lần hai: `5 >= 5` đúng nên second = 5. x = 3: `3 > 5` sai nên không đổi. Kết quả `5`, trái với ví dụ đã chốt (`[5, 5, 3]` → `3`). Chạy tay với ví dụ có phần tử trùng bắt được lỗi này ngay.",
+    "explanationEn": "x = 5: first = 5, second = -Infinity. Second 5: `5 >= 5` is true, so second = 5. x = 3: `3 > 5` is false, nothing changes. It prints `5`, contradicting the agreed example (`[5, 5, 3]` → `3`). A dry run with a duplicate example catches this immediately."
+  },
+  {
+    "id": "q18",
+    "question": "Trong buổi phỏng vấn, ngay sau khi nghe đề, việc nào nên làm đầu tiên?",
+    "questionEn": "In an interview, right after hearing the problem, what should you do first?",
+    "options": [
+      "Diễn đạt lại đề và hỏi làm rõ về input, output và edge case",
+      "Gõ ngay lời giải tối ưu nhất mà bạn nghĩ ra để tiết kiệm thời gian",
+      "Im lặng suy nghĩ cho đến khi có lời giải hoàn chỉnh trong đầu",
+      "Hỏi người phỏng vấn đáp án để kiểm tra hướng đi"
+    ],
+    "optionsEn": [
+      "Restate the problem and ask clarifying questions about inputs, outputs and edge cases",
+      "Immediately type the most optimal solution you can think of to save time",
+      "Think in silence until the complete solution is in your head",
+      "Ask the interviewer for the answer to check your direction"
+    ],
+    "answer": 0,
+    "explanation": "Hiểu đề là bước 1, và trong phỏng vấn nó diễn ra thành tiếng. Lao vào code ngay và giả định input luôn hợp lệ là hai lỗi phổ biến nhất; im lặng khiến người phỏng vấn không thấy được tư duy và không thể gợi ý.",
+    "explanationEn": "Understanding is step 1, and in an interview it happens out loud. Coding immediately and assuming valid input are the two most common mistakes; silence hides your reasoning and prevents the interviewer from giving hints."
+  }
+]

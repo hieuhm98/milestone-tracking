@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về độ phức tạp.",
+      "promptEn": "Pick TWO statements about complexity that are true.",
+      "options": [
+        "Tra cứu trong hash map là O(1) ngay cả trong trường hợp tệ nhất",
+        "Dựng binary heap từ n phần tử bằng heapify là O(n)",
+        "Quick sort là O(n log n) trong trường hợp tệ nhất",
+        "BFS trên đồ thị biểu diễn bằng adjacency list là O(V + E)",
+        "Binary search trên mảng chưa sắp xếp vẫn là O(log n) và cho kết quả đúng"
+      ],
+      "optionsEn": [
+        "A hash map lookup is O(1) even in the worst case",
+        "Building a binary heap from n items with heapify is O(n)",
+        "Quick sort is O(n log n) in the worst case",
+        "BFS on a graph stored as an adjacency list is O(V + E)",
+        "Binary search on an unsorted array is still O(log n) and correct"
+      ],
+      "answers": [1, 3],
+      "explanation": "Heapify từ dưới lên là O(n) vì phần lớn node nằm gần lá và chỉ sink down vài bước; BFS thăm mỗi đỉnh và mỗi cạnh một lần. Hash map O(1) chỉ là trung bình (tệ nhất O(n) khi va chạm dồn), quick sort tệ nhất O(n²), còn binary search cần mảng đã sắp xếp mới đúng.",
+      "explanationEn": "Bottom-up heapify is O(n) because most nodes sit near the leaves and sink only a few steps; BFS visits every vertex and edge once. Hash map O(1) is only the average (O(n) worst case when collisions pile up), quick sort's worst case is O(n²), and binary search is only correct on sorted data.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI bài toán mà heap (priority queue) là lựa chọn tự nhiên.",
+      "promptEn": "Pick TWO problems where a heap (priority queue) is the natural choice.",
+      "options": [
+        "Tìm k điểm gần gốc toạ độ nhất trong một triệu điểm",
+        "Kiểm tra các dấu ngoặc trong chuỗi có hợp lệ không",
+        "Tìm độ dài chuỗi con dài nhất không lặp ký tự",
+        "Liên tục gộp hai sợi dây ngắn nhất cho đến khi chỉ còn một sợi",
+        "Liệt kê mọi hoán vị của một chuỗi"
+      ],
+      "optionsEn": [
+        "Find the k points closest to the origin among a million points",
+        "Check whether the brackets in a string are balanced",
+        "Find the length of the longest substring without repeating characters",
+        "Repeatedly join the two shortest ropes until only one remains",
+        "List every permutation of a string"
+      ],
+      "answers": [0, 3],
+      "explanation": "Top-k và \"liên tục lấy phần tử nhỏ nhất\" là tín hiệu của heap: heap kích thước k cho O(n log k), và gộp dây cần lấy hai phần tử nhỏ nhất rồi đẩy tổng vào lại, mỗi lần O(log n). Ngoặc hợp lệ dùng stack, chuỗi con không lặp dùng sliding window, hoán vị dùng backtracking.",
+      "explanationEn": "Top-k and \"repeatedly take the smallest\" are heap signals: a size-k heap gives O(n log k), and joining ropes needs the two smallest out and their sum back in, O(log n) each time. Balanced brackets use a stack, the longest unique substring uses a sliding window, and permutations use backtracking.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Kiểu duyệt DFS nào trên binary search tree cho ra các key theo thứ tự tăng dần?",
+      "promptEn": "Which DFS traversal of a binary search tree outputs the keys in ascending order?",
+      "answer": "In-order",
+      "answerEn": "In-order",
+      "accept": [
+        "in-order",
+        "inorder",
+        "in order",
+        "in-order traversal",
+        "inorder traversal",
+        "in-order dfs",
+        "duyet in-order"
+      ],
+      "explanation": "In-order: trái → node → phải. Vì mọi key bên trái nhỏ hơn node và mọi key bên phải lớn hơn, thứ tự này chính là thứ tự tăng dần, O(n) time.",
+      "explanationEn": "In-order: left → node → right. Since every key on the left is smaller and every key on the right is larger, this order is exactly ascending, in O(n) time.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Thuật toán nào sắp xếp các đỉnh của đồ thị có hướng không chu trình sao cho mọi điều kiện tiên quyết đứng trước công việc phụ thuộc vào nó?",
+      "promptEn": "Which algorithm orders the vertices of a directed acyclic graph so that every prerequisite comes before the task that depends on it?",
+      "answer": "Topological sort",
+      "answerEn": "Topological sort",
+      "accept": [
+        "topological sort",
+        "topological sorting",
+        "topological order",
+        "topological ordering",
+        "topo sort",
+        "toposort",
+        "kahn's algorithm",
+        "kahn",
+        "sap xep to po"
+      ],
+      "explanation": "Topological sort, O(V + E). Thuật toán Kahn liên tục lấy các đỉnh có in-degree bằng 0; nếu không lấy hết được mọi đỉnh thì đồ thị có chu trình.",
+      "explanationEn": "Topological sort, O(V + E). Kahn's algorithm keeps removing vertices with in-degree 0; if it cannot remove them all, the graph has a cycle.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi tín hiệu trong đề bài với pattern nên thử đầu tiên.",
+      "promptEn": "Match each problem signal to the pattern to try first.",
+      "pairs": [
+        {
+          "left": "Mảng đã sắp xếp, tìm cặp có tổng bằng target",
+          "leftEn": "Sorted array, find a pair adding up to a target",
+          "right": "Two pointers",
+          "rightEn": "Two pointers"
+        },
+        {
+          "left": "Chuỗi con liên tiếp dài nhất thoả một điều kiện",
+          "leftEn": "Longest contiguous substring meeting a condition",
+          "right": "Sliding window",
+          "rightEn": "Sliding window"
+        },
+        {
+          "left": "Số bước ít nhất để thoát mê cung dạng lưới",
+          "leftEn": "Fewest moves to escape a grid maze",
+          "right": "BFS",
+          "rightEn": "BFS"
+        },
+        {
+          "left": "Đếm số cách leo n bậc thang, mỗi lần 1 hoặc 2 bậc",
+          "leftEn": "Count the ways to climb n stairs taking 1 or 2 steps",
+          "right": "Quy hoạch động (DP)",
+          "rightEn": "Dynamic programming"
+        }
+      ],
+      "explanation": "Sắp xếp → two pointers; liên tiếp + dài nhất → sliding window; đường ngắn nhất không trọng số → BFS; đếm số cách với bài toán con lặp lại (ways(n) = ways(n−1) + ways(n−2)) → DP.",
+      "explanationEn": "Sorted → two pointers; contiguous + longest → sliding window; unweighted shortest path → BFS; counting ways with repeating subproblems (ways(n) = ways(n−1) + ways(n−2)) → DP.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp các bước giải một bài phỏng vấn theo đúng thứ tự.",
+      "promptEn": "Put the steps for tackling an interview problem into order.",
+      "items": [
+        {
+          "text": "Hỏi làm rõ: ràng buộc, input đặc biệt, kết quả mong muốn",
+          "textEn": "Clarify: constraints, special inputs, expected output"
+        },
+        {
+          "text": "Làm tay một ví dụ thường và một edge case",
+          "textEn": "Work a normal example and an edge case by hand"
+        },
+        {
+          "text": "Nêu lời giải brute force và độ phức tạp của nó",
+          "textEn": "State a brute-force solution and its complexity"
+        },
+        {
+          "text": "Tối ưu: tìm nút thắt và ánh xạ tín hiệu sang pattern",
+          "textEn": "Optimise: find the bottleneck and map signals to a pattern"
+        },
+        {
+          "text": "Viết code với tên biến rõ ràng",
+          "textEn": "Write the code with clear names"
+        },
+        {
+          "text": "Chạy thử các ví dụ qua code và nêu time lẫn space",
+          "textEn": "Trace the examples through the code and state time and space"
+        }
+      ],
+      "explanation": "Hiểu đề và ràng buộc trước quyết định mọi thứ phía sau; brute force cho bạn một điểm xuất phát có thể cải thiện; test và phân tích độ phức tạp là bước người phỏng vấn luôn chờ đợi ở cuối.",
+      "explanationEn": "Understanding the problem and its constraints first shapes everything after; the brute force gives a baseline to improve on; testing and stating the complexity is the step interviewers always expect at the end.",
+      "id": "d6"
+    }
+  ]
+}

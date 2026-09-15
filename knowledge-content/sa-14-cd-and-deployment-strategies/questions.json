@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Khác biệt cốt lõi giữa continuous delivery và continuous deployment là gì?",
+    "questionEn": "What is the core difference between continuous delivery and continuous deployment?",
+    "options": [
+      "Continuous delivery tự động deploy lên production, còn continuous deployment cần approve thủ công",
+      "Với continuous delivery mọi thay đổi đều sẵn sàng release nhưng con người quyết định deploy lên production; với continuous deployment nó tự động lên",
+      "Continuous delivery chỉ lo build artifact, còn continuous deployment lo phần chạy test",
+      "Hai thuật ngữ là một; khác biệt chỉ nằm ở công cụ CI/CD được dùng"
+    ],
+    "optionsEn": [
+      "Continuous delivery deploys to production automatically, while continuous deployment needs a manual approval",
+      "In continuous delivery every change is releasable but a human triggers the production deploy; in continuous deployment it ships automatically",
+      "Continuous delivery only builds artifacts, while continuous deployment is the part that runs the tests",
+      "They are synonyms; the only difference is which CI/CD tool is used"
+    ],
+    "answer": 1,
+    "explanation": "Cả hai đều yêu cầu mọi thay đổi pass pipeline luôn ở trạng thái deploy được. Continuous delivery giữ lại một quyết định của con người trước production; continuous deployment bỏ luôn bước đó, nên đòi hỏi monitoring và rollback tự động mạnh hơn. Đảo ngược hai định nghĩa là cái bẫy kinh điển.",
+    "explanationEn": "Both require every green change to be deployable. Continuous delivery keeps a human decision before production; continuous deployment removes it, so it demands stronger monitoring and automated rollback. The swapped definition is the classic trap."
+  },
+  {
+    "id": "q2",
+    "question": "Một team build lại Docker image riêng cho staging và production từ cùng một commit, với build argument khác nhau. Một bug xuất hiện trên production nhưng không tái hiện được ở staging. Thay đổi nào giải quyết gốc rễ vấn đề?",
+    "questionEn": "A team rebuilds a separate Docker image for staging and for production from the same commit, with different build arguments. A bug appears in production but cannot be reproduced in staging. Which change fixes the root cause?",
+    "options": [
+      "Thêm nhiều test end-to-end hơn vào môi trường staging",
+      "Chuyển chiến lược deploy production sang Recreate",
+      "Build image một lần, promote đúng image digest đó qua các môi trường và inject cấu hình lúc deploy",
+      "Gắn tag `latest` riêng cho từng môi trường để dễ phân biệt"
+    ],
+    "optionsEn": [
+      "Add more end-to-end tests to the staging environment",
+      "Switch the production deployment strategy to Recreate",
+      "Build the image once, promote that exact digest through environments and inject config at deploy time",
+      "Tag a separate `latest` image per environment to tell them apart"
+    ],
+    "answer": 2,
+    "explanation": "Build lại cho từng môi trường nghĩa là production chạy một binary chưa từng được test. 'Build once, promote the same artifact' đảm bảo thứ được test chính là thứ lên production; khác biệt duy nhất nên là cấu hình. Tag `latest` còn làm mất khả năng truy vết.",
+    "explanationEn": "Rebuilding per environment means production runs a binary that was never tested. Build once and promote the same artifact guarantees what was tested is what ships; configuration should be the only difference. A `latest` tag makes traceability even worse."
+  },
+  {
+    "id": "q3",
+    "question": "Phát biểu nào minh hoạ đúng ý 'deploy ≠ release'?",
+    "questionEn": "Which statement best illustrates 'deploy ≠ release'?",
+    "options": [
+      "Code mới có thể đang chạy trên production nhưng hành vi mới vẫn ẩn cho tới khi một feature flag bật nó lên",
+      "Deploy luôn diễn ra vào ban đêm, còn release diễn ra vào giờ hành chính",
+      "Deploy là việc của team dev, còn release là việc của team QA trên staging",
+      "Deploy tạo ra artifact trong registry, còn release chạy artifact đó trên server"
+    ],
+    "optionsEn": [
+      "New code can be running in production while the new behaviour stays hidden until a feature flag turns it on",
+      "Deploys always happen at night, while releases happen during business hours",
+      "Deploying is the dev team's job, while releasing is QA's job on staging",
+      "Deploying creates the artifact in the registry, while releasing runs it on servers"
+    ],
+    "answer": 0,
+    "explanation": "Deploy là đưa code lên hạ tầng; release là để người dùng thấy hành vi mới. Tách chúng bằng dark launch và feature flag giúp deploy thường xuyên mà rủi ro thấp, vì bật/tắt tính năng không cần deploy lại. Build artifact là việc của CI, không phải định nghĩa của deploy.",
+    "explanationEn": "Deploying puts code on infrastructure; releasing exposes new behaviour to users. Separating them with dark launches and feature flags keeps frequent deploys low-risk, because turning a feature on or off needs no redeploy. Building the artifact is CI's job, not the meaning of deploy."
+  },
+  {
+    "id": "q4",
+    "question": "Deployment có 4 replica với cấu hình sau. Rolling update sẽ diễn ra thế nào?\n`strategy:\n  type: RollingUpdate\n  rollingUpdate:\n    maxSurge: 1\n    maxUnavailable: 0`",
+    "questionEn": "A Deployment has 4 replicas and this configuration. How does the rolling update proceed?\n`strategy:\n  type: RollingUpdate\n  rollingUpdate:\n    maxSurge: 1\n    maxUnavailable: 0`",
+    "options": [
+      "Xoá cả 4 pod cũ trước, rồi tạo 4 pod mới cùng lúc",
+      "Có thể có tối đa 2 pod không sẵn sàng tại mỗi thời điểm",
+      "Tạo đủ 8 pod rồi chuyển Service sang 4 pod mới trong một lần",
+      "Tối đa 5 pod tồn tại, không bao giờ ít hơn 4 pod ready; một pod mới phải ready trước khi một pod cũ bị xoá"
+    ],
+    "optionsEn": [
+      "All 4 old pods are deleted first, then 4 new pods are created at once",
+      "Up to 2 pods may be unavailable at any moment",
+      "All 8 pods are created, then the Service switches to the 4 new pods in one step",
+      "At most 5 pods exist and never fewer than 4 are ready; one new pod must be ready before an old one is removed"
+    ],
+    "answer": 3,
+    "explanation": "`maxSurge: 1` cho phép vượt số replica thêm 1 pod (tổng 5); `maxUnavailable: 0` cấm giảm dưới 4 pod ready. Vì vậy rollout đi từng pod một và không mất capacity, đổi lại chậm hơn. Xoá hết rồi tạo lại là Recreate; tạo đủ bộ mới rồi chuyển là blue-green.",
+    "explanationEn": "`maxSurge: 1` allows one pod above the replica count (5 total); `maxUnavailable: 0` forbids dropping below 4 ready pods. The rollout goes one pod at a time with no lost capacity, at the cost of speed. Delete-all-then-create is Recreate; a full new set then a switch is blue-green."
+  },
+  {
+    "id": "q5",
+    "question": "Trong mỗi lần rolling update, lỗi 5xx tăng vọt trong khoảng 40 giây mỗi khi một pod mới xuất hiện rồi tự hết. Ứng dụng cần khoảng 40 giây để khởi động xong và Deployment không khai báo readiness probe. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "During every rolling update, 5xx errors spike for about 40 seconds each time a new pod appears, then disappear. The app needs about 40 seconds to finish starting and the Deployment defines no readiness probe. What is the most likely cause?",
+    "options": [
+      "`maxSurge` quá cao khiến cluster hết CPU trong lúc rollout",
+      "Service dùng loại ClusterIP thay vì LoadBalancer",
+      "Không có readiness probe nên pod nhận traffic ngay khi container chạy, trước khi ứng dụng sẵn sàng",
+      "Image mới bị kéo từ registry quá chậm"
+    ],
+    "optionsEn": [
+      "`maxSurge` is too high, so the cluster runs out of CPU during the rollout",
+      "The Service uses ClusterIP instead of LoadBalancer",
+      "With no readiness probe, the pod receives traffic as soon as the container starts, before the app is ready",
+      "The new image is pulled from the registry too slowly"
+    ],
+    "answer": 2,
+    "explanation": "Rolling update chỉ an toàn khi readiness probe phản ánh đúng sự thật. Không có probe, Kubernetes coi pod là ready ngay khi container khởi động, đưa nó vào endpoint của Service và đồng thời tiếp tục xoá pod cũ. Pull image chậm chỉ làm pod xuất hiện muộn, không gây lỗi cho request.",
+    "explanationEn": "A rolling update is only safe when readiness probes are honest. Without one, Kubernetes treats the pod as ready as soon as the container starts, adds it to the Service endpoints and carries on deleting old pods. A slow image pull only delays the pod; it does not fail requests."
+  },
+  {
+    "id": "q6",
+    "question": "Một service thanh toán cần: rollback trong vài giây, mọi người dùng luôn thấy cùng một version (không trộn v1/v2), và ngân sách chấp nhận gấp đôi capacity trong lúc release. Chiến lược nào phù hợp nhất?",
+    "questionEn": "A payment service needs: rollback within seconds, every user always seeing the same version (no v1/v2 mix), and a budget that accepts double capacity during a release. Which strategy fits best?",
+    "options": [
+      "Rolling update với `maxUnavailable: 25%`",
+      "Blue-green, chuyển traffic ở load balancer",
+      "Canary bắt đầu từ 5% traffic",
+      "Recreate vào khung giờ ít người dùng"
+    ],
+    "optionsEn": [
+      "A rolling update with `maxUnavailable: 25%`",
+      "Blue-green, switching traffic at the load balancer",
+      "A canary starting at 5% of traffic",
+      "Recreate during a low-traffic window"
+    ],
+    "answer": 1,
+    "explanation": "Blue-green đổi toàn bộ traffic trong một lần chuyển nguyên tử và rollback bằng cách chuyển ngược lại khi môi trường cũ vẫn chạy — đúng với chi phí gấp đôi đã được chấp nhận. Rolling và canary đều có giai đoạn hai version cùng phục vụ; Recreate có downtime và rollback chậm.",
+    "explanationEn": "Blue-green moves all traffic in one atomic switch and rolls back by switching back while the old environment still runs — exactly what the accepted double cost buys. Rolling and canary both have a period where two versions serve traffic; Recreate has downtime and slow rollback."
+  },
+  {
+    "id": "q7",
+    "question": "Một service quản trị nội bộ chỉ nhận khoảng 30 request mỗi giờ. Team chạy canary 5% trong 10 phút, không thấy lỗi nào và promote lên 100% — rồi sự cố xảy ra. Vấn đề chính của quy trình là gì?",
+    "questionEn": "An internal admin service receives about 30 requests per hour. The team ran a 5% canary for 10 minutes, saw no errors and promoted to 100% — then an incident followed. What was the main flaw in the process?",
+    "options": [
+      "Lẽ ra phải dùng tỉ lệ canary 1% để giảm blast radius hơn nữa",
+      "Canary chỉ hoạt động khi có service mesh như Istio",
+      "Lẽ ra phải so sánh metric của canary với số liệu của ngày hôm trước",
+      "Canary gần như không nhận được request nào nên phân tích không có tín hiệu thống kê"
+    ],
+    "optionsEn": [
+      "They should have used a 1% canary to shrink the blast radius further",
+      "Canaries only work when a service mesh such as Istio is present",
+      "They should have compared canary metrics with the previous day's numbers",
+      "The canary received almost no requests, so the analysis had no statistical signal"
+    ],
+    "answer": 3,
+    "explanation": "5% của 30 request/giờ trong 10 phút là khoảng 0,25 request — 'không có lỗi' chẳng chứng minh được gì. Với traffic thấp, cần bước dài hơn, traffic tổng hợp hoặc chiến lược khác. Giảm tỉ lệ còn tệ hơn; mesh chỉ giúp chia chính xác; và nên so với baseline chạy cùng lúc, không phải hôm qua.",
+    "explanationEn": "5% of 30 requests/hour for 10 minutes is about a quarter of a request — 'no errors' proves nothing. Low traffic needs longer steps, synthetic traffic or a different strategy. A smaller share is worse; a mesh only makes splits precise; and the comparison should be against a concurrent baseline, not yesterday."
+  },
+  {
+    "id": "q8",
+    "question": "Rollout sau chạy trên cluster KHÔNG có service mesh hay traffic router, với `replicas: 10`. Ở bước đầu tiên, phần traffic thực sự tới version mới là bao nhiêu?\n`strategy:\n  canary:\n    steps:\n      - setWeight: 5\n      - pause: { duration: 10m }`",
+    "questionEn": "This Rollout runs on a cluster with NO service mesh or traffic router, with `replicas: 10`. At the first step, how much traffic actually reaches the new version?\n`strategy:\n  canary:\n    steps:\n      - setWeight: 5\n      - pause: { duration: 10m }`",
+    "options": [
+      "Khoảng 10%, vì trọng số bị xấp xỉ theo số pod và canary có ít nhất một pod trên mười",
+      "Chính xác 5%, vì Argo Rollouts tự chia traffic ở tầng L7",
+      "0%, vì không có traffic router thì canary không nhận traffic cho tới khi promote",
+      "100%, vì không có router thì mọi pod đều được thay ngay"
+    ],
+    "optionsEn": [
+      "About 10%, because weight is approximated by pod count and the canary gets at least one pod out of ten",
+      "Exactly 5%, because Argo Rollouts splits traffic at L7 by itself",
+      "0%, because without a traffic router the canary gets no traffic until promotion",
+      "100%, because without a router every pod is replaced immediately"
+    ],
+    "answer": 0,
+    "explanation": "Không có mesh hay ingress hỗ trợ chia trọng số, Service phân tải đều giữa các pod, nên tỉ lệ traffic bằng tỉ lệ pod. Không thể chạy nửa pod, nên 5% của 10 replica thành một pod ≈ 10%. Muốn tỉ lệ chính xác cần Istio, Linkerd, ingress controller hoặc Gateway API.",
+    "explanationEn": "Without a mesh or a weight-aware ingress, the Service spreads load evenly across pods, so the traffic share equals the pod share. There is no half pod, so 5% of 10 replicas becomes one pod ≈ 10%. Exact percentages need Istio, Linkerd, an ingress controller or Gateway API."
+  },
+  {
+    "id": "q9",
+    "question": "Team viết lại service tìm kiếm trên một engine mới. Họ muốn kiểm chứng độ trễ và độ đúng của kết quả dưới tải production thật, nhưng không một người dùng nào được thấy kết quả của engine mới. Endpoint chỉ đọc dữ liệu. Chọn chiến lược nào?",
+    "questionEn": "A team rewrote the search service on a new engine. They want to verify latency and result correctness under real production load, but no user may see the new engine's results. The endpoint is read-only. Which strategy?",
+    "options": [
+      "Canary 5% với phân tích metric tự động",
+      "Blue-green, chuyển sang engine mới ngoài giờ cao điểm",
+      "Shadow deployment: mirror request sang engine mới và bỏ response của nó",
+      "A/B test chia 50/50 theo user"
+    ],
+    "optionsEn": [
+      "A 5% canary with automated metric analysis",
+      "Blue-green, switching to the new engine off-peak",
+      "Shadow deployment: mirror requests to the new engine and discard its responses",
+      "An A/B test split 50/50 per user"
+    ],
+    "answer": 2,
+    "explanation": "Chỉ shadow cho tải thật mà người dùng không thấy gì: response của bản shadow bị bỏ, chỉ metric và diff được ghi lại. Canary, blue-green và A/B đều cho một phần người dùng thấy version mới. Endpoint chỉ đọc nên cái bẫy lớn nhất của shadow — side effect bị nhân đôi — không xảy ra.",
+    "explanationEn": "Only shadowing gives real load with no user seeing anything: the shadow's responses are dropped and only metrics and diffs are kept. Canary, blue-green and A/B all show the new version to some users. The endpoint is read-only, so shadowing's biggest trap — duplicated side effects — does not apply."
+  },
+  {
+    "id": "q10",
+    "question": "Codebase có hơn 300 feature flag, nhiều cái thuộc tính năng đã ra mắt từ năm trước. Một sự cố vừa xảy ra vì một flag cũ vô tình bật lại nhánh code đã chết. Cách làm tốt nhất từ nay về sau?",
+    "questionEn": "A codebase has over 300 feature flags, many for features launched a year ago. An incident just happened because an old flag accidentally re-enabled a dead code path. What is the best practice going forward?",
+    "options": [
+      "Ngừng dùng feature flag và quay về release branch dài hạn",
+      "Coi release toggle là tạm thời: mỗi flag có người sở hữu và hạn xoá, xoá flag cùng nhánh code cũ sau khi rollout xong",
+      "Chuyển toàn bộ flag thành ops toggle để giữ lại lâu dài",
+      "Viết test cho mọi tổ hợp bật/tắt của cả 300 flag"
+    ],
+    "optionsEn": [
+      "Stop using feature flags and go back to long-lived release branches",
+      "Treat release toggles as temporary: give each flag an owner and expiry, delete the flag and the old branch once rolled out",
+      "Convert every flag to an ops toggle so they can be kept long-term",
+      "Write tests for every on/off combination of all 300 flags"
+    ],
+    "answer": 1,
+    "explanation": "Đây là nợ flag. Release toggle phải có vòng đời ngắn và được dọn đi; chỉ kill switch và permission toggle mới sống lâu. Test mọi tổ hợp của 300 flag là 2^300 trường hợp — bất khả thi; bỏ flag thì mất khả năng tách deploy khỏi release.",
+    "explanationEn": "This is flag debt. Release toggles must be short-lived and cleaned up; only kill switches and permission toggles live long. Testing every combination of 300 flags is 2^300 cases — impossible; dropping flags loses the separation of deploy from release."
+  },
+  {
+    "id": "q11",
+    "question": "Cần thêm cột `tenant_id` NOT NULL vào một bảng lớn, đang chịu tải cao, không được có downtime và app deploy theo kiểu rolling. Thứ tự nào đúng?",
+    "questionEn": "You must add a NOT NULL `tenant_id` column to a large, busy table with no downtime, and the app deploys with rolling updates. Which order is correct?",
+    "options": [
+      "Deploy code đọc `tenant_id` → thêm cột NOT NULL → backfill dữ liệu",
+      "Thêm cột NOT NULL có default trong cùng lần deploy với code mới",
+      "Backfill dữ liệu → thêm cột nullable → thêm ràng buộc NOT NULL → deploy code ghi cột",
+      "Thêm cột nullable → deploy code ghi cột → backfill theo batch → thêm ràng buộc NOT NULL"
+    ],
+    "optionsEn": [
+      "Deploy code reading `tenant_id` → add the NOT NULL column → backfill the data",
+      "Add the NOT NULL column with a default in the same deploy as the new code",
+      "Backfill the data → add a nullable column → add the NOT NULL constraint → deploy code writing the column",
+      "Add a nullable column → deploy code writing it → backfill in batches → add the NOT NULL constraint"
+    ],
+    "answer": 3,
+    "explanation": "Expand–contract: thay đổi bổ sung trước (cột nullable, pod cũ vẫn chạy được), code mới bắt đầu ghi, backfill các dòng cũ theo batch, và chỉ thêm ràng buộc khi mọi dòng đã có giá trị. Không thể backfill một cột chưa tồn tại; thêm NOT NULL trước khi code ghi cột sẽ làm insert từ pod cũ thất bại.",
+    "explanationEn": "Expand–contract: additive change first (nullable column, old pods still work), new code starts writing, old rows are backfilled in batches, and the constraint comes only once every row has a value. You cannot backfill a column that does not exist yet; NOT NULL before the code writes it breaks inserts from old pods."
+  },
+  {
+    "id": "q12",
+    "question": "Pipeline chạy migration dưới đây rồi bắt đầu rolling update của app v2 (v2 dùng tên cột mới). Chuyện gì xảy ra trong lúc rollout?\n`ALTER TABLE orders\n  RENAME COLUMN total TO amount_cents;`",
+    "questionEn": "The pipeline runs the migration below and then starts a rolling update of app v2 (v2 uses the new column name). What happens during the rollout?\n`ALTER TABLE orders\n  RENAME COLUMN total TO amount_cents;`",
+    "options": [
+      "Các pod v1 vẫn đang chạy truy vấn cột `total` không còn tồn tại và trả lỗi cho tới khi bị thay hết",
+      "Không có gì xảy ra, vì database tự giữ alias cho tên cột cũ",
+      "Chỉ các pod v2 lỗi, vì migration chưa được commit khi chúng khởi động",
+      "Rolling update tự dừng lại vì Kubernetes phát hiện schema thay đổi"
+    ],
+    "optionsEn": [
+      "The v1 pods still running query the no-longer-existing `total` column and fail until they are all replaced",
+      "Nothing, because the database keeps an alias for the old column name",
+      "Only v2 pods fail, because the migration is not committed when they start",
+      "The rolling update pauses automatically because Kubernetes detects the schema change"
+    ],
+    "answer": 0,
+    "explanation": "Rename là thay đổi phá vỡ tương thích thực hiện trong một bước. Trong rolling update, v1 và v2 dùng chung database, nên v1 lỗi ngay khi migration chạy; rollback về v1 cũng lỗi nốt. Cách đúng là expand–contract: thêm cột mới, ghi cả hai, backfill, chuyển đọc, rồi mới xoá cột cũ.",
+    "explanationEn": "A rename is a breaking change done in one step. During a rolling update v1 and v2 share the database, so v1 fails as soon as the migration runs — and rolling back to v1 fails too. The right way is expand–contract: add the new column, write both, backfill, switch reads, then drop the old one."
+  },
+  {
+    "id": "q13",
+    "question": "App v2 có lỗi và team chạy `kubectl rollout undo` về v1 thành công. Điều nào dưới đây lệnh đó KHÔNG thể hoàn tác?",
+    "questionEn": "App v2 is faulty and the team successfully runs `kubectl rollout undo` back to v1. Which of these can that command NOT undo?",
+    "options": [
+      "Image container mà các pod đang chạy",
+      "Biến môi trường khai báo trong pod template",
+      "Email chào mừng v2 đã gửi đi và các dòng dữ liệu v2 đã ghi theo định dạng mới",
+      "Số lượng container và resource request trong pod template"
+    ],
+    "optionsEn": [
+      "The container image the pods are running",
+      "Environment variables declared in the pod template",
+      "Welcome emails v2 already sent and rows v2 already wrote in its new format",
+      "The number of containers and resource requests in the pod template"
+    ],
+    "answer": 2,
+    "explanation": "`rollout undo` chỉ đưa pod template về revision trước — image, env, resource đều nằm trong đó. Side effect ra thế giới bên ngoài (email, thanh toán, message đã tiêu thụ) và dữ liệu đã ghi thì không quay lại được; đó là lý do cần định dạng tương thích ngược và expand–contract.",
+    "explanationEn": "`rollout undo` only restores the previous pod template revision — image, env and resources all live there. External side effects (emails, payments, consumed messages) and data already written cannot be reverted; that is why backward-compatible formats and expand–contract matter."
+  },
+  {
+    "id": "q14",
+    "question": "Pipeline của một team mất 50 phút và chính sách là 'chỉ roll forward, không bao giờ rollback'. Checkout vừa hỏng sau một lần deploy. Cải tiến nào đáng làm nhất?",
+    "questionEn": "A team's pipeline takes 50 minutes and its policy is 'roll forward only, never roll back'. Checkout just broke after a deploy. Which improvement matters most?",
+    "options": [
+      "Thêm một môi trường staging thứ hai trước production",
+      "Cấm deploy vào thứ Sáu để giảm số sự cố",
+      "Yêu cầu hai người review mỗi pull request trước khi merge",
+      "Giữ artifact trước luôn deploy được và coi rollback (hoặc tắt flag) là phản ứng đầu tiên, tìm nguyên nhân gốc sau"
+    ],
+    "optionsEn": [
+      "Add a second staging environment before production",
+      "Ban Friday deploys to reduce incidents",
+      "Require two reviewers on every pull request before merge",
+      "Keep the previous artifact deployable and make rollback (or a flag off) the first response, finding the root cause afterwards"
+    ],
+    "answer": 3,
+    "explanation": "Roll forward với pipeline 50 phút nghĩa là ít nhất 50 phút sự cố. Ưu tiên là khôi phục dịch vụ (giảm thời gian phục hồi) bằng đường lùi nhanh nhất có sẵn. Các phương án khác có thể giảm xác suất lỗi nhưng không rút ngắn thời gian hỏng khi lỗi đã xảy ra.",
+    "explanationEn": "Rolling forward through a 50-minute pipeline means at least 50 minutes of outage. The priority is restoring service (recovery time) via the fastest available way back. The other options may lower the chance of failure but do nothing to shorten an outage once it happens."
+  },
+  {
+    "id": "q15",
+    "question": "Đội bảo mật phản đối việc pipeline CI lưu kubeconfig quyền cluster-admin của 30 cluster để chạy `kubectl apply`. Thiết kế nào giải quyết tốt nhất mối lo này?",
+    "questionEn": "The security team objects that the CI pipeline stores cluster-admin kubeconfigs for 30 clusters in order to run `kubectl apply`. Which design best addresses this concern?",
+    "options": [
+      "Mã hoá các kubeconfig bằng KMS và giải mã chúng trong từng job CI",
+      "GitOps kiểu pull: agent trong mỗi cluster kéo trạng thái mong muốn từ Git, CI chỉ cần quyền ghi vào config repo",
+      "Chuyển sang chạy `kubectl apply` thủ công từ laptop của kỹ sư trực",
+      "Mở API server của mọi cluster ra internet để CI không cần VPN"
+    ],
+    "optionsEn": [
+      "Encrypt the kubeconfigs with KMS and decrypt them inside each CI job",
+      "Pull-based GitOps: an agent in each cluster pulls desired state from Git, so CI only needs write access to the config repo",
+      "Switch to running `kubectl apply` manually from the on-call engineer's laptop",
+      "Expose every cluster's API server to the internet so CI needs no VPN"
+    ],
+    "answer": 1,
+    "explanation": "Với GitOps kiểu pull, credential của cluster không bao giờ rời khỏi cluster và API server không cần mở cho CI. Mọi thay đổi còn là commit đã review nên audit được. Mã hoá bằng KMS vẫn để CI giữ quyền admin lúc chạy; deploy từ laptop và mở API server đều làm tình hình tệ hơn.",
+    "explanationEn": "With pull-based GitOps, cluster credentials never leave the cluster and the API server need not be reachable from CI. Every change is also a reviewed commit, so it is auditable. KMS encryption still hands CI admin rights at run time; laptop deploys and exposed API servers make things worse."
+  },
+  {
+    "id": "q16",
+    "question": "Git khai báo Deployment `checkout` có 6 replica (không có HPA). Application Argo CD dùng policy dưới đây. Một kỹ sư chạy `kubectl scale deployment checkout --replicas=20`. Điều gì xảy ra?\n`syncPolicy:\n  automated:\n    prune: true\n    selfHeal: true`",
+    "questionEn": "Git declares the `checkout` Deployment with 6 replicas (no HPA). The Argo CD Application uses the policy below. An engineer runs `kubectl scale deployment checkout --replicas=20`. What happens?\n`syncPolicy:\n  automated:\n    prune: true\n    selfHeal: true`",
+    "options": [
+      "Argo CD phát hiện drift so với Git và đưa Deployment về lại 6 replica",
+      "Argo CD commit số 20 ngược vào Git để hai bên khớp nhau",
+      "Argo CD xoá Deployment vì `prune: true`",
+      "Không có gì xảy ra cho tới lần commit tiếp theo vào repo"
+    ],
+    "optionsEn": [
+      "Argo CD detects drift from Git and brings the Deployment back to 6 replicas",
+      "Argo CD commits 20 back to Git so both sides match",
+      "Argo CD deletes the Deployment because of `prune: true`",
+      "Nothing happens until the next commit to the repo"
+    ],
+    "answer": 0,
+    "explanation": "`selfHeal: true` khiến Argo CD hoàn tác thay đổi thủ công trong cluster để khớp với Git — Git là nguồn sự thật, không phải ngược lại. `prune` chỉ xoá resource đã bị bỏ khỏi Git. Muốn đổi số replica lâu dài, hãy sửa trong Git.",
+    "explanationEn": "`selfHeal: true` makes Argo CD revert manual changes in the cluster to match Git — Git is the source of truth, not the other way round. `prune` only deletes resources removed from Git. To change replicas permanently, change them in Git."
+  },
+  {
+    "id": "q17",
+    "question": "Một platform team phục vụ 40 team phát triển trên 12 cluster Kubernetes. Các team muốn tự xem trạng thái sync, diff và lịch sử deploy trên một giao diện web tập trung có SSO. Lựa chọn phù hợp nhất?",
+    "questionEn": "A platform team serves 40 development teams across 12 Kubernetes clusters. The teams want to see sync status, diffs and deploy history themselves in one central web UI with SSO. Which choice fits best?",
+    "options": [
+      "Flux trên từng cluster, các team dùng CLI để kiểm tra",
+      "Một Jenkins job chạy `kubectl apply` cho mỗi cluster",
+      "Argo CD dạng hub quản lý cả 12 cluster, dùng ApplicationSet và RBAC theo project",
+      "Terraform apply trên mỗi merge, xem kết quả trong log CI"
+    ],
+    "optionsEn": [
+      "Flux on each cluster, with teams checking status through the CLI",
+      "A Jenkins job running `kubectl apply` against each cluster",
+      "Argo CD as a hub managing all 12 clusters, with ApplicationSets and per-project RBAC",
+      "Terraform apply on each merge, with results read from CI logs"
+    ],
+    "answer": 2,
+    "explanation": "Argo CD mạnh ở web UI, xem diff, SSO/RBAC và mô hình hub-and-spoke cho nhiều cluster — đúng yêu cầu tự phục vụ. Flux vẫn là GitOps tốt nhưng thiên về CLI/CRD theo từng cluster. Jenkins đẩy `kubectl apply` là push-based; Terraform không phải công cụ deploy workload hằng ngày.",
+    "explanationEn": "Argo CD's strengths are its web UI, diff view, SSO/RBAC and a hub-and-spoke model for many clusters — exactly the self-service requirement. Flux is sound GitOps but CLI/CRD-first per cluster. A Jenkins `kubectl apply` job is push-based; Terraform is not a day-to-day workload deploy tool."
+  },
+  {
+    "id": "q18",
+    "question": "Sau khi bắt buộc chia nhỏ mọi thay đổi, deployment frequency của team tăng gấp ba. Change failure rate giữ nguyên, còn thời gian phục hồi sau deploy lỗi giảm từ 4 giờ xuống 30 phút. Kết luận nào đúng theo nghiên cứu DORA?",
+    "questionEn": "After mandating small changes, a team's deployment frequency tripled. Change failure rate stayed flat and recovery time from failed deployments fell from 4 hours to 30 minutes. Which conclusion fits the DORA research?",
+    "options": [
+      "Đáng lo ngại, vì deploy nhiều hơn chắc chắn làm hệ thống kém ổn định hơn",
+      "Nên dùng các chỉ số này để xếp hạng hiệu suất từng kỹ sư",
+      "Không kết luận được gì, vì code coverage mới là chỉ số chính của DORA",
+      "Đó là cải thiện thật: thông lượng tăng trong khi độ ổn định giữ vững hoặc tốt hơn, đúng với việc tốc độ và ổn định cùng tăng"
+    ],
+    "optionsEn": [
+      "Worrying, because more deploys necessarily make the system less stable",
+      "The metrics should now be used to rank individual engineers",
+      "Nothing can be concluded, because code coverage is DORA's main metric",
+      "A genuine improvement: throughput rose while stability held or improved, consistent with speed and stability rising together"
+    ],
+    "answer": 3,
+    "explanation": "DORA cho thấy batch nhỏ cải thiện cả thông lượng (deployment frequency, lead time) lẫn độ ổn định (change failure rate, thời gian phục hồi) — chúng không đánh đổi nhau. Các chỉ số mô tả hệ thống của team, không dùng để xếp hạng cá nhân; code coverage không nằm trong bộ chỉ số DORA.",
+    "explanationEn": "DORA shows small batches improve both throughput (deployment frequency, lead time) and stability (change failure rate, recovery time) — they do not trade off. The metrics describe a team's system and are not for ranking individuals; code coverage is not a DORA metric."
+  }
+]

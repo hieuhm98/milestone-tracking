@@ -1,0 +1,1349 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "v1",
+      "lessonId": "l1",
+      "word": "unreadable",
+      "pos": "adj",
+      "ipa": "/ʌnˈriː.də.bəl/",
+      "question": "Trong câu \"Encryption is the process of turning readable data (plaintext) into an unreadable form (ciphertext) using a key.\", từ \"unreadable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Encryption is the process of turning readable data (plaintext) into an unreadable form (ciphertext) using a key.\", what does \"unreadable\" (adjective) mean?",
+      "options": [
+        "có thể chỉnh sửa",
+        "đã bị xóa",
+        "được nén nhỏ",
+        "không thể đọc hiểu được"
+      ],
+      "optionsEn": [
+        "editable",
+        "deleted",
+        "compressed",
+        "impossible to read or understand"
+      ],
+      "answer": 3,
+      "explanation": "unreadable /ʌnˈriː.də.bəl/ (tính từ): không đọc được. Mã hóa biến dữ liệu đọc được (readable) thành dạng không đọc được nếu không có khóa. Tiền tố \"un-\" = không.",
+      "explanationEn": "unreadable /ʌnˈriː.də.bəl/ (adjective): impossible to read. Encryption turns readable data into a form nobody can read without the key. Prefix \"un-\" = not."
+    },
+    {
+      "id": "v2",
+      "lessonId": "l1",
+      "word": "ciphertext",
+      "pos": "n",
+      "ipa": "/ˈsaɪ.fɚ.tekst/",
+      "question": "Trong câu \"Encryption is the process of turning readable data (plaintext) into an unreadable form (ciphertext) using a key.\", từ \"ciphertext\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Encryption is the process of turning readable data (plaintext) into an unreadable form (ciphertext) using a key.\", what does \"ciphertext\" (noun) mean?",
+      "options": [
+        "văn bản gốc chưa mã hóa",
+        "bản mã (dữ liệu đã được mã hóa)",
+        "mật khẩu người dùng",
+        "chữ ký số"
+      ],
+      "optionsEn": [
+        "original unencrypted text",
+        "data after it has been encrypted",
+        "a user password",
+        "a digital signature"
+      ],
+      "answer": 1,
+      "explanation": "ciphertext /ˈsaɪ.fɚ.tekst/ (danh từ): bản mã. \"Cipher\" = mật mã; ciphertext là dữ liệu sau khi mã hóa, ngược với plaintext (bản rõ).",
+      "explanationEn": "ciphertext /ˈsaɪ.fɚ.tekst/ (noun): encrypted data. A \"cipher\" is a code; ciphertext is the result of encryption, the opposite of plaintext."
+    },
+    {
+      "id": "v3",
+      "lessonId": "l1",
+      "word": "context",
+      "pos": "n",
+      "ipa": "/ˈkɑːn.tekst/",
+      "question": "Trong câu \"In AWS there are two encryption contexts you must clearly distinguish for the exam: at rest and in transit.\", từ \"context\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"In AWS there are two encryption contexts you must clearly distinguish for the exam: at rest and in transit.\", what does \"context\" (noun) mean?",
+      "options": [
+        "bối cảnh, tình huống sử dụng",
+        "thuật toán",
+        "chứng chỉ",
+        "mức giá"
+      ],
+      "optionsEn": [
+        "the situation in which something happens",
+        "an algorithm",
+        "a certificate",
+        "a price level"
+      ],
+      "answer": 0,
+      "explanation": "context /ˈkɑːn.tekst/ (danh từ): bối cảnh. Hai bối cảnh mã hóa là dữ liệu lưu trữ (at rest) và dữ liệu đang truyền (in transit). Lưu ý: trong KMS, \"encryption context\" còn là một tính năng riêng (cặp key-value).",
+      "explanationEn": "context /ˈkɑːn.tekst/ (noun): the situation around something. The two encryption contexts are data at rest and data in transit. Note: in KMS, \"encryption context\" is also a specific feature (key-value pairs)."
+    },
+    {
+      "id": "v4",
+      "lessonId": "l1",
+      "word": "eavesdropping",
+      "pos": "n",
+      "ipa": "/ˈiːvzˌdrɑː.pɪŋ/",
+      "question": "Trong câu \"Encryption in transit protects data moving across the network using TLS/SSL. Prevents eavesdropping and man-in-the-middle attacks.\", từ \"eavesdropping\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Encryption in transit protects data moving across the network using TLS/SSL. Prevents eavesdropping and man-in-the-middle attacks.\", what does \"eavesdropping\" (noun) mean?",
+      "options": [
+        "sự làm ngập lưu lượng",
+        "sự dò mật khẩu",
+        "sự nghe lén",
+        "sự xóa dữ liệu"
+      ],
+      "optionsEn": [
+        "flooding with traffic",
+        "guessing passwords",
+        "secretly listening to others' communication",
+        "deleting data"
+      ],
+      "answer": 2,
+      "explanation": "eavesdropping /ˈiːvzˌdrɑː.pɪŋ/ (danh từ): sự nghe lén. TLS mã hóa dữ liệu trên đường truyền nên kẻ nghe lén chỉ thấy bản mã. Động từ: eavesdrop.",
+      "explanationEn": "eavesdropping /ˈiːvzˌdrɑː.pɪŋ/ (noun): secretly listening in. TLS encrypts traffic, so an eavesdropper sees only ciphertext. Verb: eavesdrop."
+    },
+    {
+      "id": "v5",
+      "lessonId": "l1",
+      "word": "algorithm",
+      "pos": "n",
+      "ipa": "/ˈæl.ɡə.rɪ.ðəm/",
+      "question": "Trong câu \"Two families of encryption algorithms: symmetric and asymmetric.\", từ \"algorithm\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Two families of encryption algorithms: symmetric and asymmetric.\", what does \"algorithm\" (noun) mean?",
+      "options": [
+        "thuật toán (quy trình tính toán từng bước)",
+        "thiết bị phần cứng",
+        "định dạng tệp",
+        "giấy phép phần mềm"
+      ],
+      "optionsEn": [
+        "a step-by-step procedure for a calculation",
+        "a hardware device",
+        "a file format",
+        "a software licence"
+      ],
+      "answer": 0,
+      "explanation": "algorithm /ˈæl.ɡə.rɪ.ðəm/ (danh từ): thuật toán. Vd. AES-256 là thuật toán mã hóa đối xứng, RSA là thuật toán bất đối xứng.",
+      "explanationEn": "algorithm /ˈæl.ɡə.rɪ.ðəm/ (noun): a step-by-step procedure. E.g. AES-256 is a symmetric encryption algorithm; RSA is asymmetric."
+    },
+    {
+      "id": "v6",
+      "lessonId": "l1",
+      "word": "symmetric",
+      "pos": "adj",
+      "ipa": "/sɪˈmet.rɪk/",
+      "question": "Trong câu \"Symmetric: a single key encrypts & decrypts; fast, used for large volumes of data.\", từ \"symmetric\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Symmetric: a single key encrypts & decrypts; fast, used for large volumes of data.\", what does \"symmetric\" (adjective) mean?",
+      "options": [
+        "bất đối xứng (dùng cặp khóa)",
+        "đối xứng (dùng cùng một khóa)",
+        "ngẫu nhiên",
+        "tuần tự"
+      ],
+      "optionsEn": [
+        "using a key pair",
+        "using the same key for both sides",
+        "random",
+        "sequential"
+      ],
+      "answer": 1,
+      "explanation": "symmetric /sɪˈmet.rɪk/ (tính từ): đối xứng. Mã hóa đối xứng dùng một khóa cho cả mã hóa và giải mã. Trái nghĩa: asymmetric.",
+      "explanationEn": "symmetric /sɪˈmet.rɪk/ (adjective): the same on both sides. Symmetric encryption uses one key to both encrypt and decrypt. Opposite: asymmetric."
+    },
+    {
+      "id": "v7",
+      "lessonId": "l1",
+      "word": "handshake",
+      "pos": "n",
+      "ipa": "/ˈhænd.ʃeɪk/",
+      "question": "Trong câu \"Asymmetric: public/private key pair, slower; typical use: TLS handshake, digital signatures.\", từ \"handshake\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Asymmetric: public/private key pair, slower; typical use: TLS handshake, digital signatures.\", what does \"handshake\" (noun) mean?",
+      "options": [
+        "bước ngắt kết nối",
+        "bước sao lưu dữ liệu",
+        "bước bắt tay (trao đổi ban đầu để thiết lập kết nối)",
+        "bước nén dữ liệu"
+      ],
+      "optionsEn": [
+        "closing a connection",
+        "backing up data",
+        "the first exchange that sets up a secure connection",
+        "compressing data"
+      ],
+      "answer": 2,
+      "explanation": "handshake /ˈhænd.ʃeɪk/ (danh từ): nghĩa đen là cái bắt tay; trong mạng là bước client và server trao đổi để thống nhất khóa trước khi truyền dữ liệu.",
+      "explanationEn": "handshake /ˈhænd.ʃeɪk/ (noun): literally shaking hands; in networking, the opening exchange where client and server agree on keys before sending data."
+    },
+    {
+      "id": "v8",
+      "lessonId": "l1",
+      "word": "repeatedly",
+      "pos": "adv",
+      "ipa": "/rɪˈpiː.t̬ɪd.li/",
+      "question": "Trong câu \"The exam repeatedly asks which service fits key management, secret rotation, DDoS protection, or threat detection.\", từ \"repeatedly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The exam repeatedly asks which service fits key management, secret rotation, DDoS protection, or threat detection.\", what does \"repeatedly\" (adverb) mean?",
+      "options": [
+        "hiếm khi",
+        "chỉ một lần",
+        "không rõ ràng",
+        "lặp đi lặp lại nhiều lần"
+      ],
+      "optionsEn": [
+        "rarely",
+        "only once",
+        "unclearly",
+        "again and again"
+      ],
+      "answer": 3,
+      "explanation": "repeatedly /rɪˈpiː.t̬ɪd.li/ (trạng từ): nhiều lần. Đề thi hỏi đi hỏi lại việc chọn đúng dịch vụ bảo mật. Động từ: repeat.",
+      "explanationEn": "repeatedly /rɪˈpiː.t̬ɪd.li/ (adverb): many times. The exam asks again and again which security service fits. Verb: repeat."
+    },
+    {
+      "id": "v9",
+      "lessonId": "l1",
+      "word": "threat",
+      "pos": "n",
+      "ipa": "/θret/",
+      "question": "Trong câu \"The exam repeatedly asks which service fits application-layer filtering, threat detection, or vulnerability scanning.\", từ \"threat\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The exam repeatedly asks which service fits application-layer filtering, threat detection, or vulnerability scanning.\", what does \"threat\" (noun) mean?",
+      "options": [
+        "lỗi đánh máy",
+        "hóa đơn",
+        "yêu cầu hỗ trợ",
+        "mối đe dọa"
+      ],
+      "optionsEn": [
+        "a typo",
+        "a bill",
+        "a support request",
+        "something that may cause harm"
+      ],
+      "answer": 3,
+      "explanation": "threat /θret/ (danh từ): mối đe dọa. \"Threat detection\" = phát hiện mối đe dọa (hoạt động độc hại) — việc của GuardDuty. Động từ: threaten.",
+      "explanationEn": "threat /θret/ (noun): a possible danger. \"Threat detection\" = finding malicious activity — GuardDuty's job. Verb: threaten."
+    },
+    {
+      "id": "v10",
+      "lessonId": "l1",
+      "word": "score",
+      "pos": "v",
+      "ipa": "/skɔːr/",
+      "question": "Trong câu \"Knowing exactly \"what each service does\" is the key to scoring.\", từ \"score\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Knowing exactly \"what each service does\" is the key to scoring.\", what does \"score\" (verb) mean?",
+      "options": [
+        "gian lận",
+        "ghi điểm, đạt điểm cao",
+        "thi trượt",
+        "ôn tập lại"
+      ],
+      "optionsEn": [
+        "to cheat",
+        "to get points or marks",
+        "to fail an exam",
+        "to revise"
+      ],
+      "answer": 1,
+      "explanation": "score /skɔːr/ (động từ): ghi điểm. \"The key to scoring\" = chìa khóa để đạt điểm trong bài thi. Danh từ \"a score\" = điểm số.",
+      "explanationEn": "score /skɔːr/ (verb): to gain points. \"The key to scoring\" = the secret to getting marks on the exam. Noun: a score."
+    },
+    {
+      "id": "v11",
+      "lessonId": "l2",
+      "word": "editable",
+      "pos": "adj",
+      "ipa": "/ˈed.ɪ.t̬ə.bəl/",
+      "question": "Trong câu \"AWS-managed keys: created by AWS for a service; visible, but the policy is not editable.\", từ \"editable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"AWS-managed keys: created by AWS for a service; visible, but the policy is not editable.\", what does \"editable\" (adjective) mean?",
+      "options": [
+        "có thể xóa",
+        "có thể sao chép",
+        "có thể chỉnh sửa",
+        "có thể chia sẻ"
+      ],
+      "optionsEn": [
+        "able to be deleted",
+        "able to be copied",
+        "able to be changed",
+        "able to be shared"
+      ],
+      "answer": 2,
+      "explanation": "editable /ˈed.ɪ.t̬ə.bəl/ (tính từ): có thể chỉnh sửa. Với AWS-managed key, bạn xem được key policy nhưng không sửa được. Động từ: edit.",
+      "explanationEn": "editable /ˈed.ɪ.t̬ə.bəl/ (adjective): able to be changed. With AWS-managed keys you can see the key policy but cannot change it. Verb: edit."
+    },
+    {
+      "id": "v12",
+      "lessonId": "l2",
+      "word": "yearly",
+      "pos": "adj",
+      "ipa": "/ˈjɪr.li/",
+      "question": "Trong câu \"Customer-managed keys support automatic yearly rotation.\", từ \"yearly\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Customer-managed keys support automatic yearly rotation.\", what does \"yearly\" (adjective) mean?",
+      "options": [
+        "hằng năm",
+        "hằng tháng",
+        "hằng tuần",
+        "hằng giờ"
+      ],
+      "optionsEn": [
+        "happening once a year",
+        "happening once a month",
+        "happening once a week",
+        "happening every hour"
+      ],
+      "answer": 0,
+      "explanation": "yearly /ˈjɪr.li/ (tính từ/trạng từ): hằng năm. \"Automatic yearly rotation\" = KMS tự tạo key material mới mỗi năm một lần. Đồng nghĩa: annual.",
+      "explanationEn": "yearly /ˈjɪr.li/ (adjective/adverb): once a year. \"Automatic yearly rotation\" = KMS creates new key material once every year. Synonym: annual."
+    },
+    {
+      "id": "v13",
+      "lessonId": "l2",
+      "word": "delegation",
+      "pos": "n",
+      "ipa": "/ˌdel.əˈɡeɪ.ʃən/",
+      "question": "Trong câu \"Access control combines a key policy + IAM policy + grants (temporary delegation).\", từ \"delegation\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Access control combines a key policy + IAM policy + grants (temporary delegation).\", what does \"delegation\" (noun) mean?",
+      "options": [
+        "sự thu hồi quyền",
+        "sự ủy quyền (giao quyền cho người khác)",
+        "sự kiểm toán",
+        "sự mã hóa lại"
+      ],
+      "optionsEn": [
+        "taking permissions away",
+        "giving your authority to someone else",
+        "auditing",
+        "re-encryption"
+      ],
+      "answer": 1,
+      "explanation": "delegation /ˌdel.əˈɡeɪ.ʃən/ (danh từ): sự ủy quyền. Grant trong KMS giao tạm quyền dùng khóa cho một principal khác. Động từ: delegate.",
+      "explanationEn": "delegation /ˌdel.əˈɡeɪ.ʃən/ (noun): passing authority to another. A KMS grant temporarily hands key-usage rights to another principal. Verb: delegate."
+    },
+    {
+      "id": "v14",
+      "lessonId": "l2",
+      "word": "key material",
+      "pos": "phrase",
+      "ipa": "/ˈkiː məˌtɪr.i.əl/",
+      "question": "Trong câu \"With automatic rotation, KMS generates new key material once per year, transparently to the application.\", từ \"key material\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"With automatic rotation, KMS generates new key material once per year, transparently to the application.\", what does \"key material\" (phrase) mean?",
+      "options": [
+        "dữ liệu bí mật cấu thành khóa mã hóa",
+        "tài liệu hướng dẫn dùng khóa",
+        "thiết bị phần cứng giữ khóa",
+        "tên hiển thị của khóa"
+      ],
+      "optionsEn": [
+        "the secret bits that make up an encryption key",
+        "a user guide for keys",
+        "the hardware device holding a key",
+        "the display name of a key"
+      ],
+      "answer": 0,
+      "explanation": "key material /ˈkiː məˌtɪr.i.əl/ (cụm từ): phần dữ liệu bí mật thực sự dùng để mã hóa. Khi xoay vòng, key ID giữ nguyên nhưng key material mới được tạo. \"Material\" thường nghĩa là vật liệu.",
+      "explanationEn": "key material /ˈkiː məˌtɪr.i.əl/ (phrase): the actual secret bits used for encryption. On rotation the key ID stays the same but new key material is created. \"Material\" usually means a substance."
+    },
+    {
+      "id": "v15",
+      "lessonId": "l2",
+      "word": "transparently",
+      "pos": "adv",
+      "ipa": "/trænˈsper.ənt.li/",
+      "question": "Trong câu \"KMS generates new key material once per year, transparently to the application.\", từ \"transparently\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"KMS generates new key material once per year, transparently to the application.\", what does \"transparently\" (adverb) mean?",
+      "options": [
+        "một cách thủ công",
+        "một cách gián đoạn",
+        "một cách \"trong suốt\" (ứng dụng không nhận thấy, không phải sửa gì)",
+        "một cách chậm trễ"
+      ],
+      "optionsEn": [
+        "by hand",
+        "with interruptions",
+        "without the application noticing or needing changes",
+        "with delays"
+      ],
+      "answer": 2,
+      "explanation": "transparently /trænˈsper.ənt.li/ (trạng từ): trong IT nghĩa là diễn ra \"trong suốt\" — ứng dụng vẫn chạy bình thường, không cần biết hay thay đổi code. Tính từ: transparent.",
+      "explanationEn": "transparently /trænˈsper.ənt.li/ (adverb): in IT, happening without the application noticing or needing any code change. Adjective: transparent."
+    },
+    {
+      "id": "v16",
+      "lessonId": "l2",
+      "word": "envelope encryption",
+      "pos": "phrase",
+      "ipa": "/ˈen.və.loʊp ɪnˈkrɪp.ʃən/",
+      "question": "Trong câu \"Envelope Encryption – used for data larger than 4KB.\", từ \"envelope encryption\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Envelope Encryption – used for data larger than 4KB.\", what does \"envelope encryption\" (phrase) mean?",
+      "options": [
+        "mã hóa toàn bộ ổ đĩa bằng phần cứng",
+        "mã hóa chỉ khi dữ liệu truyền qua mạng",
+        "băm mật khẩu một chiều",
+        "mã hóa dữ liệu bằng data key, rồi mã hóa data key bằng khóa KMS"
+      ],
+      "optionsEn": [
+        "encrypting a whole disk in hardware",
+        "encrypting data only while in transit",
+        "one-way hashing of passwords",
+        "encrypting data with a data key, then encrypting that key with a KMS key"
+      ],
+      "answer": 3,
+      "explanation": "envelope encryption /ˈen.və.loʊp ɪnˈkrɪp.ʃən/ (cụm từ): \"envelope\" = phong bì. Data key mã hóa dữ liệu, rồi data key được \"bỏ vào phong bì\" bằng cách mã hóa với khóa KMS.",
+      "explanationEn": "envelope encryption /ˈen.və.loʊp ɪnˈkrɪp.ʃən/ (phrase): an \"envelope\" wraps something. A data key encrypts the data, then the data key itself is \"put in an envelope\" by encrypting it with a KMS key."
+    },
+    {
+      "id": "v17",
+      "lessonId": "l2",
+      "word": "wipe",
+      "pos": "v",
+      "ipa": "/waɪp/",
+      "question": "Trong câu \"Use the plaintext data key to encrypt the large data client-side, then wipe the plaintext data key from memory.\", từ \"wipe\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Use the plaintext data key to encrypt the large data client-side, then wipe the plaintext data key from memory.\", what does \"wipe\" (verb) mean?",
+      "options": [
+        "lưu lại",
+        "sao chép",
+        "xóa sạch",
+        "gửi đi"
+      ],
+      "optionsEn": [
+        "to save",
+        "to copy",
+        "to remove completely",
+        "to send"
+      ],
+      "answer": 2,
+      "explanation": "wipe /waɪp/ (động từ): lau, xóa sạch. \"Wipe the key from memory\" = xóa hẳn data key bản rõ khỏi bộ nhớ để không bị lộ.",
+      "explanationEn": "wipe /waɪp/ (verb): to clean, erase completely. \"Wipe the key from memory\" = fully remove the plaintext data key so it cannot leak."
+    },
+    {
+      "id": "v18",
+      "lessonId": "l2",
+      "word": "unwrap",
+      "pos": "v",
+      "ipa": "/ʌnˈræp/",
+      "question": "Trong câu \"To decrypt: call Decrypt so KMS unwraps the data key, then decrypt the data locally.\", từ \"unwrap\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"To decrypt: call Decrypt so KMS unwraps the data key, then decrypt the data locally.\", what does \"unwrap\" (verb) mean?",
+      "options": [
+        "bọc thêm một lớp",
+        "gỡ lớp bọc (giải mã khóa đã được mã hóa)",
+        "tạo khóa mới",
+        "xoay vòng khóa"
+      ],
+      "optionsEn": [
+        "to add another layer",
+        "to remove the wrapping (decrypt an encrypted key)",
+        "to create a new key",
+        "to rotate a key"
+      ],
+      "answer": 1,
+      "explanation": "unwrap /ʌnˈræp/ (động từ): mở gói, gỡ lớp bọc. KMS giải mã data key đã mã hóa để bạn dùng nó giải mã dữ liệu. Trái nghĩa: wrap.",
+      "explanationEn": "unwrap /ʌnˈræp/ (verb): to remove the wrapping. KMS decrypts the encrypted data key so you can use it to decrypt the data. Opposite: wrap."
+    },
+    {
+      "id": "v19",
+      "lessonId": "l3",
+      "word": "installation",
+      "pos": "n",
+      "ipa": "/ˌɪn.stəˈleɪ.ʃən/",
+      "question": "Trong câu \"ACM integrates directly with ELB (ALB/NLB), CloudFront, API Gateway – no manual certificate installation needed.\", từ \"installation\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ACM integrates directly with ELB (ALB/NLB), CloudFront, API Gateway – no manual certificate installation needed.\", what does \"installation\" (noun) mean?",
+      "options": [
+        "sự cài đặt",
+        "sự gia hạn",
+        "sự thu hồi",
+        "sự mua bán"
+      ],
+      "optionsEn": [
+        "the act of setting something up for use",
+        "renewal",
+        "revocation",
+        "purchase"
+      ],
+      "answer": 0,
+      "explanation": "installation /ˌɪn.stəˈleɪ.ʃən/ (danh từ): sự cài đặt. ACM tự gắn chứng chỉ vào ELB/CloudFront nên không cần cài tay. Động từ: install.",
+      "explanationEn": "installation /ˌɪn.stəˈleɪ.ʃən/ (noun): setting something up. ACM attaches certificates to ELB/CloudFront itself, so no manual installation. Verb: install."
+    },
+    {
+      "id": "v20",
+      "lessonId": "l3",
+      "word": "elsewhere",
+      "pos": "adv",
+      "ipa": "/ˈels.wer/",
+      "question": "Trong câu \"Imported certificates (bought elsewhere then imported): ACM stores them but does NOT auto-renew.\", từ \"elsewhere\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Imported certificates (bought elsewhere then imported): ACM stores them but does NOT auto-renew.\", what does \"elsewhere\" (adverb) mean?",
+      "options": [
+        "ở ngay đây",
+        "trên mạng nội bộ",
+        "miễn phí",
+        "ở nơi khác"
+      ],
+      "optionsEn": [
+        "right here",
+        "on the internal network",
+        "for free",
+        "in another place"
+      ],
+      "answer": 3,
+      "explanation": "elsewhere /ˈels.wer/ (trạng từ): ở nơi khác. \"Bought elsewhere\" = mua từ nhà cung cấp chứng chỉ khác, không phải ACM.",
+      "explanationEn": "elsewhere /ˈels.wer/ (adverb): in a different place. \"Bought elsewhere\" = purchased from another certificate provider, not ACM."
+    },
+    {
+      "id": "v21",
+      "lessonId": "l3",
+      "word": "import",
+      "pos": "v",
+      "ipa": "/ɪmˈpɔːrt/",
+      "question": "Trong câu \"Imported certificates (bought elsewhere then imported): ACM stores them but does NOT auto-renew.\", từ \"import\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Imported certificates (bought elsewhere then imported): ACM stores them but does NOT auto-renew.\", what does \"import\" (verb) mean?",
+      "options": [
+        "xuất ra",
+        "gia hạn",
+        "nhập vào (đưa từ bên ngoài vào hệ thống)",
+        "xóa bỏ"
+      ],
+      "optionsEn": [
+        "to send out",
+        "to renew",
+        "to bring in from outside into a system",
+        "to delete"
+      ],
+      "answer": 2,
+      "explanation": "import /ɪmˈpɔːrt/ (động từ): nhập vào. Chứng chỉ mua ngoài phải được import vào ACM. Trái nghĩa: export. Danh từ \"import\" /ˈɪm.pɔːrt/ nhấn âm 1.",
+      "explanationEn": "import /ɪmˈpɔːrt/ (verb): to bring in. A certificate bought outside must be imported into ACM. Opposite: export. The noun /ˈɪm.pɔːrt/ is stressed on the 1st syllable."
+    },
+    {
+      "id": "v22",
+      "lessonId": "l3",
+      "word": "renew",
+      "pos": "v",
+      "ipa": "/rɪˈnuː/",
+      "question": "Trong câu \"ACM stores imported certificates but does NOT auto-renew – you must re-import before expiry.\", từ \"renew\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ACM stores imported certificates but does NOT auto-renew – you must re-import before expiry.\", what does \"renew\" (verb) mean?",
+      "options": [
+        "hủy bỏ",
+        "gia hạn",
+        "thu nhỏ",
+        "chia sẻ"
+      ],
+      "optionsEn": [
+        "to cancel",
+        "to extend the valid period of something",
+        "to shrink",
+        "to share"
+      ],
+      "answer": 1,
+      "explanation": "renew /rɪˈnuː/ (động từ): gia hạn, làm mới. \"Auto-renew\" = tự động gia hạn trước khi hết hạn; ACM chỉ làm vậy với chứng chỉ do chính nó cấp. Danh từ: renewal.",
+      "explanationEn": "renew /rɪˈnuː/ (verb): to extend or make new again. \"Auto-renew\" = automatically extend before expiry; ACM does this only for certificates it issued. Noun: renewal."
+    },
+    {
+      "id": "v23",
+      "lessonId": "l3",
+      "word": "expiry",
+      "pos": "n",
+      "ipa": "/ɪkˈspaɪr.i/",
+      "question": "Trong câu \"ACM stores imported certificates but does NOT auto-renew – you must re-import before expiry.\", từ \"expiry\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ACM stores imported certificates but does NOT auto-renew – you must re-import before expiry.\", what does \"expiry\" (noun) mean?",
+      "options": [
+        "sự kích hoạt",
+        "sự thanh toán",
+        "sự đăng ký",
+        "sự hết hạn"
+      ],
+      "optionsEn": [
+        "activation",
+        "payment",
+        "registration",
+        "the end of the period when something is valid"
+      ],
+      "answer": 3,
+      "explanation": "expiry /ɪkˈspaɪr.i/ (danh từ): sự hết hạn. \"Before expiry\" = trước khi chứng chỉ hết hạn. Đồng nghĩa: expiration; động từ: expire.",
+      "explanationEn": "expiry /ɪkˈspaɪr.i/ (noun): the end of validity. \"Before expiry\" = before the certificate runs out. Synonym: expiration; verb: expire."
+    },
+    {
+      "id": "v24",
+      "lessonId": "l3",
+      "word": "parameter",
+      "pos": "n",
+      "ipa": "/pəˈræm.ə.t̬ɚ/",
+      "question": "Trong câu \"Parameter Store is best for app config and environment parameters.\", từ \"parameter\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Parameter Store is best for app config and environment parameters.\", what does \"parameter\" (noun) mean?",
+      "options": [
+        "tham số (giá trị cấu hình)",
+        "người dùng",
+        "máy chủ",
+        "sự kiện"
+      ],
+      "optionsEn": [
+        "a value used to configure how something runs",
+        "a user",
+        "a server",
+        "an event"
+      ],
+      "answer": 0,
+      "explanation": "parameter /pəˈræm.ə.t̬ɚ/ (danh từ): tham số. \"Environment parameters\" = các giá trị cấu hình theo môi trường (vd. URL database của dev/prod).",
+      "explanationEn": "parameter /pəˈræm.ə.t̬ɚ/ (noun): a setting value. \"Environment parameters\" are configuration values per environment (e.g. the dev/prod database URL)."
+    },
+    {
+      "id": "v25",
+      "lessonId": "l3",
+      "word": "periodic",
+      "pos": "adj",
+      "ipa": "/ˌpɪr.iˈɑː.dɪk/",
+      "question": "Trong câu \"Secrets Manager is best for DB passwords needing periodic rotation.\", từ \"periodic\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Secrets Manager is best for DB passwords needing periodic rotation.\", what does \"periodic\" (adjective) mean?",
+      "options": [
+        "ngẫu nhiên",
+        "định kỳ, theo chu kỳ",
+        "chỉ một lần",
+        "khẩn cấp"
+      ],
+      "optionsEn": [
+        "random",
+        "happening at regular intervals",
+        "one-time",
+        "urgent"
+      ],
+      "answer": 1,
+      "explanation": "periodic /ˌpɪr.iˈɑː.dɪk/ (tính từ): định kỳ. \"Periodic rotation\" = đổi mật khẩu đều đặn (vd. 30 ngày) — điểm mạnh của Secrets Manager. Danh từ: period.",
+      "explanationEn": "periodic /ˌpɪr.iˈɑː.dɪk/ (adjective): happening at regular intervals. \"Periodic rotation\" = changing passwords regularly (e.g. every 30 days) — Secrets Manager's strength. Noun: period."
+    },
+    {
+      "id": "v26",
+      "lessonId": "l3",
+      "word": "rule of thumb",
+      "pos": "phrase",
+      "ipa": "/ˌruːl əv ˈθʌm/",
+      "question": "Trong câu \"Exam rule of thumb: need automatic database password rotation → choose Secrets Manager.\", từ \"rule of thumb\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Exam rule of thumb: need automatic database password rotation → choose Secrets Manager.\", what does \"rule of thumb\" (phrase) mean?",
+      "options": [
+        "nguyên tắc kinh nghiệm đơn giản, dễ áp dụng",
+        "quy định pháp lý bắt buộc",
+        "công thức toán học chính xác",
+        "điều khoản trong hợp đồng"
+      ],
+      "optionsEn": [
+        "a simple practical rule based on experience",
+        "a mandatory legal regulation",
+        "an exact mathematical formula",
+        "a contract clause"
+      ],
+      "answer": 0,
+      "explanation": "rule of thumb /ˌruːl əv ˈθʌm/ (thành ngữ): quy tắc kinh nghiệm, cách nhớ nhanh không cần tuyệt đối chính xác. \"Thumb\" = ngón tay cái.",
+      "explanationEn": "rule of thumb /ˌruːl əv ˈθʌm/ (idiom): a practical rule from experience, not an exact law. \"Thumb\" is the short thick finger."
+    },
+    {
+      "id": "v27",
+      "lessonId": "l4",
+      "word": "mandate",
+      "pos": "n",
+      "ipa": "/ˈmæn.deɪt/",
+      "question": "Trong câu \"Choose CloudHSM when you have a compliance mandate for a dedicated HSM or you must be the sole controller of the keys.\", từ \"mandate\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Choose CloudHSM when you have a compliance mandate for a dedicated HSM or you must be the sole controller of the keys.\", what does \"mandate\" (noun) mean?",
+      "options": [
+        "gợi ý tùy chọn",
+        "ngân sách",
+        "yêu cầu bắt buộc (chính thức)",
+        "lịch trình"
+      ],
+      "optionsEn": [
+        "an optional suggestion",
+        "a budget",
+        "an official requirement",
+        "a schedule"
+      ],
+      "answer": 2,
+      "explanation": "mandate /ˈmæn.deɪt/ (danh từ): yêu cầu bắt buộc, lệnh. \"Compliance mandate\" = quy định tuân thủ buộc phải dùng HSM riêng. Tính từ: mandatory.",
+      "explanationEn": "mandate /ˈmæn.deɪt/ (noun): an official order or requirement. A \"compliance mandate\" is a rule that forces you to use a dedicated HSM. Adjective: mandatory."
+    },
+    {
+      "id": "v28",
+      "lessonId": "l4",
+      "word": "sole",
+      "pos": "adj",
+      "ipa": "/soʊl/",
+      "question": "Trong câu \"Choose CloudHSM when you have a compliance mandate for a dedicated HSM or you must be the sole controller of the keys.\", từ \"sole\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Choose CloudHSM when you have a compliance mandate for a dedicated HSM or you must be the sole controller of the keys.\", what does \"sole\" (adjective) mean?",
+      "options": [
+        "phụ",
+        "tạm thời",
+        "chung",
+        "duy nhất"
+      ],
+      "optionsEn": [
+        "secondary",
+        "temporary",
+        "shared",
+        "only, the one and only"
+      ],
+      "answer": 3,
+      "explanation": "sole /soʊl/ (tính từ): duy nhất. \"Sole controller of the keys\" = chỉ bạn kiểm soát khóa, AWS không truy cập được. Danh từ \"sole\" = đế giày.",
+      "explanationEn": "sole /soʊl/ (adjective): only one. \"Sole controller of the keys\" = only you control them; AWS cannot access them. As a noun, \"sole\" is the bottom of a shoe."
+    },
+    {
+      "id": "v29",
+      "lessonId": "l4",
+      "word": "flood",
+      "pos": "n",
+      "ipa": "/flʌd/",
+      "question": "Trong câu \"Shield Standard: free, automatic protection against L3/L4 attacks (SYN flood, UDP reflection).\", từ \"flood\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Shield Standard: free, automatic protection against L3/L4 attacks (SYN flood, UDP reflection).\", what does \"flood\" (noun) mean?",
+      "options": [
+        "việc nghe lén đường truyền",
+        "việc giả mạo danh tính",
+        "việc rò rỉ dữ liệu",
+        "việc gửi ồ ạt lượng lớn yêu cầu làm ngập hệ thống"
+      ],
+      "optionsEn": [
+        "listening in on traffic",
+        "faking an identity",
+        "leaking data",
+        "sending a huge amount of traffic to overwhelm a system"
+      ],
+      "answer": 3,
+      "explanation": "flood /flʌd/ (danh từ): nghĩa gốc là lũ lụt; trong bảo mật là tấn công gửi dồn dập gói tin (vd. SYN flood) làm quá tải máy chủ. Động từ: flood.",
+      "explanationEn": "flood /flʌd/ (noun): literally a lot of water; in security, an attack that sends a huge number of packets (e.g. SYN flood) to overload a server. Verb: flood."
+    },
+    {
+      "id": "v30",
+      "lessonId": "l4",
+      "word": "reflection",
+      "pos": "n",
+      "ipa": "/rɪˈflek.ʃən/",
+      "question": "Trong câu \"Shield Standard: free, automatic protection against L3/L4 attacks (SYN flood, UDP reflection).\", từ \"reflection\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Shield Standard: free, automatic protection against L3/L4 attacks (SYN flood, UDP reflection).\", what does \"reflection\" (noun) mean?",
+      "options": [
+        "kỹ thuật dội lưu lượng qua máy chủ trung gian về phía nạn nhân",
+        "kỹ thuật mã hóa gói tin",
+        "kỹ thuật nén dữ liệu",
+        "kỹ thuật sao lưu từ xa"
+      ],
+      "optionsEn": [
+        "bouncing traffic off other servers toward the victim",
+        "encrypting packets",
+        "compressing data",
+        "remote backup"
+      ],
+      "answer": 0,
+      "explanation": "reflection /rɪˈflek.ʃən/ (danh từ): sự phản xạ. \"UDP reflection\" = kẻ tấn công giả IP nạn nhân để các máy chủ khác gửi phản hồi dồn về nạn nhân. Nghĩa khác: sự suy ngẫm.",
+      "explanationEn": "reflection /rɪˈflek.ʃən/ (noun): bouncing back. In \"UDP reflection\", attackers fake the victim's IP so other servers send their replies to the victim. Other meaning: careful thought."
+    },
+    {
+      "id": "v31",
+      "lessonId": "l4",
+      "word": "refund",
+      "pos": "v",
+      "ipa": "/rɪˈfʌnd/",
+      "question": "Trong câu \"Shield Advanced adds cost protection (refunds scaling costs from DDoS).\", từ \"refund\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Shield Advanced adds cost protection (refunds scaling costs from DDoS).\", what does \"refund\" (verb) mean?",
+      "options": [
+        "tính thêm phí",
+        "ước tính chi phí",
+        "hoàn lại tiền",
+        "trả trước"
+      ],
+      "optionsEn": [
+        "to charge extra",
+        "to estimate cost",
+        "to give money back",
+        "to pay in advance"
+      ],
+      "answer": 2,
+      "explanation": "refund /rɪˈfʌnd/ (động từ): hoàn tiền. Shield Advanced hoàn lại chi phí tăng do auto scaling khi bị DDoS. Danh từ \"a refund\" /ˈriː.fʌnd/.",
+      "explanationEn": "refund /rɪˈfʌnd/ (verb): to pay money back. Shield Advanced gives back the extra scaling costs caused by a DDoS attack. Noun: a refund /ˈriː.fʌnd/."
+    },
+    {
+      "id": "v32",
+      "lessonId": "l4",
+      "word": "injection",
+      "pos": "n",
+      "ipa": "/ɪnˈdʒek.ʃən/",
+      "question": "Trong câu \"SQL injection and Cross-Site Scripting (XSS) – block common web attacks.\", từ \"injection\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"SQL injection and Cross-Site Scripting (XSS) – block common web attacks.\", what does \"injection\" (noun) mean?",
+      "options": [
+        "sự xóa bảng dữ liệu",
+        "sự chèn mã độc vào dữ liệu đầu vào",
+        "sự sao chép cơ sở dữ liệu",
+        "sự nén truy vấn"
+      ],
+      "optionsEn": [
+        "deleting a data table",
+        "inserting malicious code into input data",
+        "copying a database",
+        "compressing a query"
+      ],
+      "answer": 1,
+      "explanation": "injection /ɪnˈdʒek.ʃən/ (danh từ): nghĩa gốc là mũi tiêm; \"SQL injection\" = chèn câu lệnh SQL độc hại qua ô nhập liệu. Động từ: inject.",
+      "explanationEn": "injection /ɪnˈdʒek.ʃən/ (noun): literally a shot with a needle; \"SQL injection\" = slipping malicious SQL into an input field. Verb: inject."
+    },
+    {
+      "id": "v33",
+      "lessonId": "l4",
+      "word": "defend",
+      "pos": "v",
+      "ipa": "/dɪˈfend/",
+      "question": "Trong câu \"Rate-based rules – limit requests per IP over a time window (defends against brute-force, L7 floods).\", từ \"defend\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rate-based rules – limit requests per IP over a time window (defends against brute-force, L7 floods).\", what does \"defend\" (verb) mean?",
+      "options": [
+        "phòng thủ, bảo vệ chống lại",
+        "tấn công",
+        "cho phép",
+        "ghi lại"
+      ],
+      "optionsEn": [
+        "to protect against an attack",
+        "to attack",
+        "to allow",
+        "to record"
+      ],
+      "answer": 0,
+      "explanation": "defend /dɪˈfend/ (động từ): phòng thủ. \"Defends against brute-force\" = chống lại việc dò thử liên tục. Danh từ: defense (Anh-Anh: defence).",
+      "explanationEn": "defend /dɪˈfend/ (verb): to protect. \"Defends against brute-force\" = protects against repeated guessing attempts. Noun: defense (UK: defence)."
+    },
+    {
+      "id": "v34",
+      "lessonId": "l4",
+      "word": "brute-force",
+      "pos": "adj",
+      "ipa": "/ˌbruːtˈfɔːrs/",
+      "question": "Trong câu \"Rate-based rules – limit requests per IP over a time window (defends against brute-force, L7 floods).\", từ \"brute-force\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rate-based rules – limit requests per IP over a time window (defends against brute-force, L7 floods).\", what does \"brute-force\" (adjective) mean?",
+      "options": [
+        "lừa người dùng bấm vào liên kết giả",
+        "nghe lén trên đường truyền",
+        "dò thử mọi khả năng liên tục (vd. đoán mật khẩu)",
+        "chèn mã vào trang web"
+      ],
+      "optionsEn": [
+        "tricking users into clicking fake links",
+        "listening in on traffic",
+        "trying every possibility again and again (e.g. guessing passwords)",
+        "inserting code into a web page"
+      ],
+      "answer": 2,
+      "explanation": "brute-force /ˌbruːtˈfɔːrs/ (tính từ/danh từ): \"brute force\" = sức mạnh thô bạo; tấn công brute-force thử hàng loạt mật khẩu cho tới khi đúng. Rate-based rule chặn IP gửi quá nhiều request.",
+      "explanationEn": "brute-force /ˌbruːtˈfɔːrs/ (adjective/noun): \"brute force\" = raw strength; a brute-force attack tries huge numbers of passwords until one works. Rate-based rules block IPs sending too many requests."
+    },
+    {
+      "id": "v35",
+      "lessonId": "l4",
+      "word": "blacklist",
+      "pos": "v",
+      "ipa": "/ˈblæk.lɪst/",
+      "question": "Trong câu \"IP sets – whitelist/blacklist by IP address.\", từ \"blacklist\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"IP sets – whitelist/blacklist by IP address.\", what does \"blacklist\" (verb) mean?",
+      "options": [
+        "đưa vào danh sách cho phép",
+        "gắn nhãn phân loại",
+        "đếm số lượng",
+        "đưa vào danh sách chặn"
+      ],
+      "optionsEn": [
+        "to put on a list of allowed items",
+        "to tag",
+        "to count",
+        "to put on a list of blocked items"
+      ],
+      "answer": 3,
+      "explanation": "blacklist /ˈblæk.lɪst/ (động từ/danh từ): đưa vào danh sách đen (chặn). Ngược lại: whitelist (cho phép). Hiện nay hay dùng thay thế: denylist / allowlist.",
+      "explanationEn": "blacklist /ˈblæk.lɪst/ (verb/noun): to put on a block list. Opposite: whitelist (allow). Modern alternatives: denylist / allowlist."
+    },
+    {
+      "id": "v36",
+      "lessonId": "l4",
+      "word": "consistently",
+      "pos": "adv",
+      "ipa": "/kənˈsɪs.tənt.li/",
+      "question": "Trong câu \"Firewall Manager applies WAF rules, Shield, Security Groups, and Network Firewall consistently.\", từ \"consistently\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Firewall Manager applies WAF rules, Shield, Security Groups, and Network Firewall consistently.\", what does \"consistently\" (adverb) mean?",
+      "options": [
+        "một cách ngẫu nhiên",
+        "một cách nhất quán, đồng bộ",
+        "thỉnh thoảng",
+        "riêng lẻ từng nơi"
+      ],
+      "optionsEn": [
+        "randomly",
+        "in the same way every time and everywhere",
+        "occasionally",
+        "separately in each place"
+      ],
+      "answer": 1,
+      "explanation": "consistently /kənˈsɪs.tənt.li/ (trạng từ): nhất quán. Firewall Manager áp cùng một bộ quy tắc cho mọi tài khoản. Tính từ: consistent.",
+      "explanationEn": "consistently /kənˈsɪs.tənt.li/ (adverb): in the same way. Firewall Manager applies the same rules to every account. Adjective: consistent."
+    },
+    {
+      "id": "v37",
+      "lessonId": "l4",
+      "word": "newly",
+      "pos": "adv",
+      "ipa": "/ˈnuː.li/",
+      "question": "Trong câu \"Firewall Manager automatically applies policies to newly created resources.\", từ \"newly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Firewall Manager automatically applies policies to newly created resources.\", what does \"newly\" (adverb) mean?",
+      "options": [
+        "đã lâu",
+        "tạm thời",
+        "mới, vừa mới",
+        "sai cách"
+      ],
+      "optionsEn": [
+        "long ago",
+        "temporarily",
+        "recently",
+        "wrongly"
+      ],
+      "answer": 2,
+      "explanation": "newly /ˈnuː.li/ (trạng từ): mới đây. \"Newly created resources\" = tài nguyên vừa được tạo cũng tự động được áp chính sách. Tính từ: new.",
+      "explanationEn": "newly /ˈnuː.li/ (adverb): recently. \"Newly created resources\" = resources just created also get the policies automatically. Adjective: new."
+    },
+    {
+      "id": "v38",
+      "lessonId": "l4",
+      "word": "standardization",
+      "pos": "n",
+      "ipa": "/ˌstæn.dɚ.dəˈzeɪ.ʃən/",
+      "question": "Trong câu \"Use Firewall Manager when you need organization-wide security standardization.\", từ \"standardization\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Use Firewall Manager when you need organization-wide security standardization.\", what does \"standardization\" (noun) mean?",
+      "options": [
+        "sự chuẩn hóa, thống nhất theo một chuẩn",
+        "sự phân quyền",
+        "sự tối giản",
+        "sự tùy biến riêng"
+      ],
+      "optionsEn": [
+        "making things follow one common standard",
+        "delegating permissions",
+        "minimizing",
+        "custom personalization"
+      ],
+      "answer": 0,
+      "explanation": "standardization /ˌstæn.dɚ.dəˈzeɪ.ʃən/ (danh từ): sự chuẩn hóa. \"Organization-wide security standardization\" = mọi tài khoản dùng chung một chuẩn bảo mật. Động từ: standardize.",
+      "explanationEn": "standardization /ˌstæn.dɚ.dəˈzeɪ.ʃən/ (noun): making things uniform. \"Organization-wide security standardization\" = every account follows the same security baseline. Verb: standardize."
+    },
+    {
+      "id": "v39",
+      "lessonId": "l5",
+      "word": "finding",
+      "pos": "n",
+      "ipa": "/ˈfaɪn.dɪŋ/",
+      "question": "Trong câu \"GuardDuty produces findings (e.g. communication with malicious IPs, crypto-mining, anomalous access).\", từ \"finding\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"GuardDuty produces findings (e.g. communication with malicious IPs, crypto-mining, anomalous access).\", what does \"finding\" (noun) mean?",
+      "options": [
+        "hóa đơn dịch vụ",
+        "kết quả phát hiện (vấn đề được tìm ra)",
+        "yêu cầu hỗ trợ",
+        "bản vá phần mềm"
+      ],
+      "optionsEn": [
+        "a service bill",
+        "a problem or result discovered by analysis",
+        "a support request",
+        "a software patch"
+      ],
+      "answer": 1,
+      "explanation": "finding /ˈfaɪn.dɪŋ/ (danh từ): điều phát hiện được. Mỗi \"finding\" của GuardDuty mô tả một mối đe dọa cụ thể. Động từ: find.",
+      "explanationEn": "finding /ˈfaɪn.dɪŋ/ (noun): something discovered. Each GuardDuty \"finding\" describes one specific threat. Verb: find."
+    },
+    {
+      "id": "v40",
+      "lessonId": "l5",
+      "word": "produce",
+      "pos": "v",
+      "ipa": "/prəˈduːs/",
+      "question": "Trong câu \"GuardDuty produces findings (e.g. communication with malicious IPs, crypto-mining, anomalous access).\", từ \"produce\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"GuardDuty produces findings (e.g. communication with malicious IPs, crypto-mining, anomalous access).\", what does \"produce\" (verb) mean?",
+      "options": [
+        "xóa đi",
+        "chặn lại",
+        "tiêu thụ",
+        "tạo ra"
+      ],
+      "optionsEn": [
+        "to remove",
+        "to block",
+        "to consume",
+        "to create or generate"
+      ],
+      "answer": 3,
+      "explanation": "produce /prəˈduːs/ (động từ): tạo ra, sản xuất. GuardDuty phân tích log rồi tạo ra các finding. Danh từ: product, production.",
+      "explanationEn": "produce /prəˈduːs/ (verb): to create. GuardDuty analyzes logs and generates findings. Nouns: product, production."
+    },
+    {
+      "id": "v41",
+      "lessonId": "l5",
+      "word": "malicious",
+      "pos": "adj",
+      "ipa": "/məˈlɪʃ.əs/",
+      "question": "Trong câu \"GuardDuty produces findings (e.g. communication with malicious IPs, crypto-mining, anomalous access).\", từ \"malicious\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"GuardDuty produces findings (e.g. communication with malicious IPs, crypto-mining, anomalous access).\", what does \"malicious\" (adjective) mean?",
+      "options": [
+        "đáng tin cậy",
+        "độc hại, có ý xấu",
+        "nội bộ",
+        "không hoạt động"
+      ],
+      "optionsEn": [
+        "trustworthy",
+        "intending to cause harm",
+        "internal",
+        "inactive"
+      ],
+      "answer": 1,
+      "explanation": "malicious /məˈlɪʃ.əs/ (tính từ): độc hại. \"Malicious IPs\" = địa chỉ IP đã biết là của kẻ tấn công. Danh từ: malice; liên quan: malware.",
+      "explanationEn": "malicious /məˈlɪʃ.əs/ (adjective): meant to do harm. \"Malicious IPs\" are addresses known to belong to attackers. Noun: malice; related: malware."
+    },
+    {
+      "id": "v42",
+      "lessonId": "l5",
+      "word": "anomalous",
+      "pos": "adj",
+      "ipa": "/əˈnɑː.mə.ləs/",
+      "question": "Trong câu \"GuardDuty produces findings (e.g. communication with malicious IPs, crypto-mining, anomalous access).\", từ \"anomalous\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"GuardDuty produces findings (e.g. communication with malicious IPs, crypto-mining, anomalous access).\", what does \"anomalous\" (adjective) mean?",
+      "options": [
+        "hợp lệ",
+        "định kỳ",
+        "bất thường, khác thường",
+        "được mã hóa"
+      ],
+      "optionsEn": [
+        "valid",
+        "regular",
+        "different from what is normal",
+        "encrypted"
+      ],
+      "answer": 2,
+      "explanation": "anomalous /əˈnɑː.mə.ləs/ (tính từ): bất thường. \"Anomalous access\" = truy cập khác thói quen (vd. đăng nhập từ quốc gia lạ). Danh từ: anomaly.",
+      "explanationEn": "anomalous /əˈnɑː.mə.ləs/ (adjective): not normal. \"Anomalous access\" = access unlike usual behavior (e.g. a login from an unusual country). Noun: anomaly."
+    },
+    {
+      "id": "v43",
+      "lessonId": "l5",
+      "word": "automated",
+      "pos": "adj",
+      "ipa": "/ˈɑː.t̬ə.meɪ.t̬ɪd/",
+      "question": "Trong câu \"Findings can trigger EventBridge → Lambda for automated response.\", từ \"automated\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Findings can trigger EventBridge → Lambda for automated response.\", what does \"automated\" (adjective) mean?",
+      "options": [
+        "được tự động hóa",
+        "thủ công",
+        "bị trì hoãn",
+        "chỉ một phần"
+      ],
+      "optionsEn": [
+        "done automatically by machines or code",
+        "manual",
+        "delayed",
+        "partial"
+      ],
+      "answer": 0,
+      "explanation": "automated /ˈɑː.t̬ə.meɪ.t̬ɪd/ (tính từ): tự động hóa. \"Automated response\" = Lambda tự xử lý (vd. cô lập instance) mà không cần người can thiệp. Danh từ: automation.",
+      "explanationEn": "automated /ˈɑː.t̬ə.meɪ.t̬ɪd/ (adjective): done automatically. \"Automated response\" = Lambda reacts (e.g. isolates an instance) with no human needed. Noun: automation."
+    },
+    {
+      "id": "v44",
+      "lessonId": "l5",
+      "word": "exposure",
+      "pos": "n",
+      "ipa": "/ɪkˈspoʊ.ʒɚ/",
+      "question": "Trong câu \"Inspector finds CVEs (known software vulnerabilities) and network exposure (ports unintentionally open to the Internet).\", từ \"exposure\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Inspector finds CVEs (known software vulnerabilities) and network exposure (ports unintentionally open to the Internet).\", what does \"exposure\" (noun) mean?",
+      "options": [
+        "sự bảo vệ",
+        "sự tắc nghẽn",
+        "sự cập nhật",
+        "sự phơi bày, để lộ ra bên ngoài"
+      ],
+      "optionsEn": [
+        "protection",
+        "congestion",
+        "updating",
+        "being left open or visible to outside risk"
+      ],
+      "answer": 3,
+      "explanation": "exposure /ɪkˈspoʊ.ʒɚ/ (danh từ): sự phơi bày. \"Network exposure\" = cổng mạng bị mở ra Internet, dễ bị tấn công. Động từ: expose.",
+      "explanationEn": "exposure /ɪkˈspoʊ.ʒɚ/ (noun): being exposed. \"Network exposure\" = ports left open to the Internet, open to attack. Verb: expose."
+    },
+    {
+      "id": "v45",
+      "lessonId": "l5",
+      "word": "unintentionally",
+      "pos": "adv",
+      "ipa": "/ˌʌn.ɪnˈten.ʃən.əl.i/",
+      "question": "Trong câu \"Inspector finds network exposure (ports unintentionally open to the Internet).\", từ \"unintentionally\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Inspector finds network exposure (ports unintentionally open to the Internet).\", what does \"unintentionally\" (adverb) mean?",
+      "options": [
+        "vô tình, không cố ý",
+        "cố ý",
+        "tạm thời",
+        "định kỳ"
+      ],
+      "optionsEn": [
+        "by accident, without meaning to",
+        "on purpose",
+        "temporarily",
+        "periodically"
+      ],
+      "answer": 0,
+      "explanation": "unintentionally /ˌʌn.ɪnˈten.ʃən.əl.i/ (trạng từ): vô tình. Cổng bị mở ra Internet do cấu hình sai chứ không phải cố ý. Trái nghĩa: intentionally.",
+      "explanationEn": "unintentionally /ˌʌn.ɪnˈten.ʃən.əl.i/ (adverb): by accident. Ports are open to the Internet because of a misconfiguration, not on purpose. Opposite: intentionally."
+    },
+    {
+      "id": "v46",
+      "lessonId": "l5",
+      "word": "active",
+      "pos": "adj",
+      "ipa": "/ˈæk.tɪv/",
+      "question": "Trong câu \"Inspector finds vulnerabilities, GuardDuty detects active attack behavior.\", từ \"active\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Inspector finds vulnerabilities, GuardDuty detects active attack behavior.\", what does \"active\" (adjective) mean?",
+      "options": [
+        "đã kết thúc",
+        "chỉ là tiềm ẩn",
+        "đang diễn ra",
+        "giả định"
+      ],
+      "optionsEn": [
+        "already finished",
+        "only potential",
+        "happening right now",
+        "hypothetical"
+      ],
+      "answer": 2,
+      "explanation": "active /ˈæk.tɪv/ (tính từ): đang hoạt động, đang diễn ra. Inspector tìm lỗ hổng tiềm ẩn; GuardDuty phát hiện tấn công đang xảy ra. Danh từ: activity.",
+      "explanationEn": "active /ˈæk.tɪv/ (adjective): happening now. Inspector finds potential weaknesses; GuardDuty detects attacks that are in progress. Noun: activity."
+    },
+    {
+      "id": "v47",
+      "lessonId": "l5",
+      "word": "classify",
+      "pos": "v",
+      "ipa": "/ˈklæs.ə.faɪ/",
+      "question": "Trong câu \"Macie uses Machine Learning to discover and classify sensitive data / PII in S3.\", từ \"classify\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Macie uses Machine Learning to discover and classify sensitive data / PII in S3.\", what does \"classify\" (verb) mean?",
+      "options": [
+        "xóa bỏ",
+        "sao lưu",
+        "nén lại",
+        "phân loại"
+      ],
+      "optionsEn": [
+        "to delete",
+        "to back up",
+        "to compress",
+        "to sort into groups or categories"
+      ],
+      "answer": 3,
+      "explanation": "classify /ˈklæs.ə.faɪ/ (động từ): phân loại. Macie xếp dữ liệu vào nhóm (thẻ tín dụng, hộ chiếu...). Danh từ: classification; \"classified\" còn nghĩa là tuyệt mật.",
+      "explanationEn": "classify /ˈklæs.ə.faɪ/ (verb): to sort into categories. Macie groups data by type (credit cards, passports...). Noun: classification; \"classified\" can also mean secret."
+    },
+    {
+      "id": "v48",
+      "lessonId": "l5",
+      "word": "personally identifiable information",
+      "pos": "phrase",
+      "ipa": "/ˈpɝː.sən.əl.i aɪˌden.t̬əˈfaɪ.ə.bəl ˌɪn.fɚˈmeɪ.ʃən/",
+      "question": "Trong câu \"Macie uses Machine Learning to discover and classify sensitive data / PII (personally identifiable information) in S3.\", từ \"personally identifiable information\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Macie uses Machine Learning to discover and classify sensitive data / PII (personally identifiable information) in S3.\", what does \"personally identifiable information\" (phrase) mean?",
+      "options": [
+        "thông tin thống kê ẩn danh",
+        "thông tin có thể xác định danh tính một người",
+        "thông tin cấu hình hệ thống",
+        "thông tin công khai của công ty"
+      ],
+      "optionsEn": [
+        "anonymous statistics",
+        "information that can identify a specific person",
+        "system configuration data",
+        "a company's public information"
+      ],
+      "answer": 1,
+      "explanation": "personally identifiable information /ˈpɝː.sən.əl.i aɪˌden.t̬əˈfaɪ.ə.bəl ˌɪn.fɚˈmeɪ.ʃən/ (cụm từ, viết tắt PII): thông tin nhận dạng cá nhân như tên, số CMND, số thẻ. \"Identifiable\" = có thể nhận dạng.",
+      "explanationEn": "personally identifiable information /ˈpɝː.sən.əl.i aɪˌden.t̬əˈfaɪ.ə.bəl ˌɪn.fɚˈmeɪ.ʃən/ (phrase, PII): data that can identify a person, such as name, ID number or card number. \"Identifiable\" = able to be identified."
+    },
+    {
+      "id": "v49",
+      "lessonId": "l5",
+      "word": "recognize",
+      "pos": "v",
+      "ipa": "/ˈrek.əɡ.naɪz/",
+      "question": "Trong câu \"Macie automatically recognizes credit card numbers, ID/passport numbers, personal information, and alerts you.\", từ \"recognize\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Macie automatically recognizes credit card numbers, ID/passport numbers, personal information, and alerts you.\", what does \"recognize\" (verb) mean?",
+      "options": [
+        "nhận ra, nhận diện",
+        "che giấu",
+        "tạo ra",
+        "xóa bỏ"
+      ],
+      "optionsEn": [
+        "to identify something you see",
+        "to hide",
+        "to create",
+        "to delete"
+      ],
+      "answer": 0,
+      "explanation": "recognize /ˈrek.əɡ.naɪz/ (động từ): nhận ra. Macie tự nhận diện dữ liệu nhạy cảm trong S3. Danh từ: recognition.",
+      "explanationEn": "recognize /ˈrek.əɡ.naɪz/ (verb): to identify. Macie automatically spots sensitive data in S3. Noun: recognition."
+    },
+    {
+      "id": "v50",
+      "lessonId": "l5",
+      "word": "alert",
+      "pos": "v",
+      "ipa": "/əˈlɝːt/",
+      "question": "Trong câu \"Macie automatically recognizes credit card numbers, ID/passport numbers, personal information, and alerts you.\", từ \"alert\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Macie automatically recognizes credit card numbers, ID/passport numbers, personal information, and alerts you.\", what does \"alert\" (verb) mean?",
+      "options": [
+        "hỏi ý kiến",
+        "chặn truy cập",
+        "cảnh báo, báo cho biết",
+        "cảm ơn"
+      ],
+      "optionsEn": [
+        "to ask for an opinion",
+        "to block access",
+        "to warn or notify about a problem",
+        "to thank"
+      ],
+      "answer": 2,
+      "explanation": "alert /əˈlɝːt/ (động từ): cảnh báo. \"Alerts you\" = thông báo cho bạn khi tìm thấy dữ liệu nhạy cảm. Danh từ \"an alert\" = cảnh báo; tính từ \"alert\" = tỉnh táo.",
+      "explanationEn": "alert /əˈlɝːt/ (verb): to warn. \"Alerts you\" = notifies you when sensitive data is found. Noun: an alert; adjective: alert (watchful)."
+    },
+    {
+      "id": "v51",
+      "lessonId": "l6",
+      "word": "confuse",
+      "pos": "v",
+      "ipa": "/kənˈfjuːz/",
+      "question": "Trong câu \"Shield = DDoS (Standard free, L3/L4); WAF = L7 filtering (SQLi/XSS/rate-based/geo). Don't confuse the two.\", từ \"confuse\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Shield = DDoS (Standard free, L3/L4); WAF = L7 filtering (SQLi/XSS/rate-based/geo). Don't confuse the two.\", what does \"confuse\" (verb) mean?",
+      "options": [
+        "kết hợp",
+        "nhầm lẫn (cái này với cái kia)",
+        "so sánh",
+        "thay thế"
+      ],
+      "optionsEn": [
+        "to combine",
+        "to mix up one thing with another",
+        "to compare",
+        "to replace"
+      ],
+      "answer": 1,
+      "explanation": "confuse /kənˈfjuːz/ (động từ): nhầm lẫn. \"Don't confuse the two\" = đừng nhầm Shield (chống DDoS) với WAF (lọc tầng 7). Danh từ: confusion.",
+      "explanationEn": "confuse /kənˈfjuːz/ (verb): to mix up. \"Don't confuse the two\" = don't mix up Shield (DDoS) and WAF (Layer 7 filtering). Noun: confusion."
+    },
+    {
+      "id": "v52",
+      "lessonId": "l6",
+      "word": "discovery",
+      "pos": "n",
+      "ipa": "/dɪˈskʌv.ɚ.i/",
+      "question": "Trong câu \"GuardDuty = threat detection; Inspector = vulnerability scanning (CVEs); Macie = PII discovery in S3.\", từ \"discovery\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"GuardDuty = threat detection; Inspector = vulnerability scanning (CVEs); Macie = PII discovery in S3.\", what does \"discovery\" (noun) mean?",
+      "options": [
+        "sự xóa bỏ",
+        "sự mã hóa",
+        "sự sao chép",
+        "sự tìm ra, phát hiện"
+      ],
+      "optionsEn": [
+        "removal",
+        "encryption",
+        "copying",
+        "finding something that was unknown"
+      ],
+      "answer": 3,
+      "explanation": "discovery /dɪˈskʌv.ɚ.i/ (danh từ): sự phát hiện. \"PII discovery\" = tìm ra dữ liệu cá nhân nằm trong S3. Động từ: discover.",
+      "explanationEn": "discovery /dɪˈskʌv.ɚ.i/ (noun): finding something. \"PII discovery\" = locating personal data stored in S3. Verb: discover."
+    },
+    {
+      "id": "v53",
+      "lessonId": "l6",
+      "word": "defense",
+      "pos": "n",
+      "ipa": "/dɪˈfens/",
+      "question": "Trong câu \"Attack defense: Shield for DDoS (L3/L4), WAF for Layer 7 filtering, Firewall Manager for centralized multi-account management.\", từ \"defense\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Attack defense: Shield for DDoS (L3/L4), WAF for Layer 7 filtering, Firewall Manager for centralized multi-account management.\", what does \"defense\" (noun) mean?",
+      "options": [
+        "sự tấn công",
+        "sự điều tra",
+        "sự báo cáo",
+        "sự phòng thủ, bảo vệ"
+      ],
+      "optionsEn": [
+        "an attack",
+        "an investigation",
+        "reporting",
+        "protection against attack"
+      ],
+      "answer": 3,
+      "explanation": "defense /dɪˈfens/ (danh từ, Anh-Anh: defence): sự phòng thủ. \"Attack defense\" = các dịch vụ chống tấn công. Động từ: defend.",
+      "explanationEn": "defense /dɪˈfens/ (noun, UK: defence): protection. \"Attack defense\" = the services that protect against attacks. Verb: defend."
+    },
+    {
+      "id": "v54",
+      "lessonId": "l6",
+      "word": "unlike",
+      "pos": "prep",
+      "ipa": "/ʌnˈlaɪk/",
+      "question": "Trong câu \"CloudHSM = dedicated single-tenant HSM, FIPS 140-2 Level 3, you fully control the keys (unlike multi-tenant KMS).\", từ \"unlike\" (giới từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"CloudHSM = dedicated single-tenant HSM, FIPS 140-2 Level 3, you fully control the keys (unlike multi-tenant KMS).\", what does \"unlike\" (preposition) mean?",
+      "options": [
+        "giống như",
+        "thay vì",
+        "không giống, khác với",
+        "bao gồm"
+      ],
+      "optionsEn": [
+        "similar to",
+        "instead of",
+        "different from",
+        "including"
+      ],
+      "answer": 2,
+      "explanation": "unlike /ʌnˈlaɪk/ (giới từ): khác với. \"Unlike multi-tenant KMS\" = khác với KMS dùng chung hạ tầng nhiều khách hàng. Trái nghĩa: like.",
+      "explanationEn": "unlike /ʌnˈlaɪk/ (preposition): different from. \"Unlike multi-tenant KMS\" = in contrast to KMS, which shares infrastructure among customers. Opposite: like."
+    },
+    {
+      "id": "v55",
+      "lessonId": "l6",
+      "word": "requirement",
+      "pos": "n",
+      "ipa": "/rɪˈkwaɪr.mənt/",
+      "question": "Trong câu \"CloudHSM is for dedicated, single-tenant HSM requirements where you fully control the keys.\", từ \"requirement\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"CloudHSM is for dedicated, single-tenant HSM requirements where you fully control the keys.\", what does \"requirement\" (noun) mean?",
+      "options": [
+        "lợi ích",
+        "yêu cầu, điều kiện cần có",
+        "giới hạn giá",
+        "tài liệu tham khảo"
+      ],
+      "optionsEn": [
+        "a benefit",
+        "something that is needed or demanded",
+        "a price limit",
+        "a reference document"
+      ],
+      "answer": 1,
+      "explanation": "requirement /rɪˈkwaɪr.mənt/ (danh từ): yêu cầu. \"HSM requirements\" = các yêu cầu bắt buộc phải có HSM riêng. Động từ: require.",
+      "explanationEn": "requirement /rɪˈkwaɪr.mənt/ (noun): something needed. \"HSM requirements\" = situations that demand a dedicated HSM. Verb: require."
+    },
+    {
+      "id": "v56",
+      "lessonId": "l6",
+      "word": "central",
+      "pos": "adj",
+      "ipa": "/ˈsen.trəl/",
+      "question": "Trong câu \"KMS is the central key management service; envelope encryption is how you encrypt data larger than 4KB.\", từ \"central\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"KMS is the central key management service; envelope encryption is how you encrypt data larger than 4KB.\", what does \"central\" (adjective) mean?",
+      "options": [
+        "trung tâm, chính yếu",
+        "phụ trợ",
+        "cục bộ",
+        "lỗi thời"
+      ],
+      "optionsEn": [
+        "main and most important, at the center",
+        "auxiliary",
+        "local",
+        "outdated"
+      ],
+      "answer": 0,
+      "explanation": "central /ˈsen.trəl/ (tính từ): trung tâm, chủ chốt. \"Central key management service\" = dịch vụ quản lý khóa chính mà hầu hết dịch vụ AWS dùng. Động từ: centralize.",
+      "explanationEn": "central /ˈsen.trəl/ (adjective): main, at the center. The \"central key management service\" is the main key service most AWS services use. Verb: centralize."
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Mảng nào dưới đây biểu diễn một max heap HỢP LỆ?",
+    "questionEn": "Which array represents a VALID max heap?",
+    "options": [
+      "`[50, 30, 40, 35, 10, 20]`",
+      "`[50, 40, 30, 10, 20, 35]`",
+      "`[50, 30, 40, 10, 20, 35]`",
+      "`[10, 20, 30, 40, 50, 60]`"
+    ],
+    "optionsEn": [
+      "`[50, 30, 40, 35, 10, 20]`",
+      "`[50, 40, 30, 10, 20, 35]`",
+      "`[50, 30, 40, 10, 20, 35]`",
+      "`[10, 20, 30, 40, 50, 60]`"
+    ],
+    "answer": 2,
+    "explanation": "Kiểm tra từng cha với con ở 2i + 1 và 2i + 2. Ở `[50, 30, 40, 10, 20, 35]`: 50 ≥ 30, 40; 30 ≥ 10, 20; 40 ≥ 35 — hợp lệ. Hai mảng đặt 35 dưới một node cha bằng 30 (ở index 3 hoặc index 5) đều vi phạm, còn mảng tăng dần là một min heap.",
+    "explanationEn": "Check each parent against its children at 2i + 1 and 2i + 2. In `[50, 30, 40, 10, 20, 35]`: 50 ≥ 30, 40; 30 ≥ 10, 20; 40 ≥ 35 — valid. The arrays where 35 sits under a parent of 30 (at index 3 or index 5) break the rule, and the ascending array is a min heap."
+  },
+  {
+    "id": "q2",
+    "question": "Trong một max heap, điều nào được ĐẢM BẢO?",
+    "questionEn": "In a max heap, which of these is GUARANTEED?",
+    "options": [
+      "Mọi node cha ≥ các con của nó, nhưng con trái có thể lớn hơn hoặc nhỏ hơn con phải",
+      "Con trái luôn nhỏ hơn con phải",
+      "Mọi giá trị ở cây con trái đều nhỏ hơn mọi giá trị ở cây con phải",
+      "Duyệt in-order sẽ trả về các giá trị theo thứ tự giảm dần"
+    ],
+    "optionsEn": [
+      "Every parent is ≥ its children, but a left child may be larger or smaller than its right sibling",
+      "The left child is always smaller than the right child",
+      "Every value in the left subtree is smaller than every value in the right subtree",
+      "An in-order traversal returns the values in descending order"
+    ],
+    "answer": 0,
+    "explanation": "Tính chất heap chỉ ràng buộc cha với con. Giữa anh em và giữa hai cây con không có thứ tự nào, nên cũng không có kiểu duyệt nào cho ra dãy đã sắp xếp — đó là quy tắc của BST, không phải heap.",
+    "explanationEn": "The heap property only relates a parent to its children. Siblings and separate subtrees have no ordering, so no traversal yields sorted output — that ordering belongs to a BST, not a heap."
+  },
+  {
+    "id": "q3",
+    "question": "Phát biểu nào mô tả đúng tính chất HÌNH DẠNG (shape property) của binary heap?",
+    "questionEn": "Which statement correctly describes the SHAPE property of a binary heap?",
+    "options": [
+      "Mọi node có đúng 0 hoặc 2 con",
+      "Mọi lá phải nằm ở cùng một độ sâu",
+      "Chiều cao cây con trái và phải chênh nhau không quá 1 ở mọi node",
+      "Mọi tầng đều kín trừ tầng cuối, và tầng cuối được lấp từ trái sang phải"
+    ],
+    "optionsEn": [
+      "Every node has exactly 0 or 2 children",
+      "All leaves must be at the same depth",
+      "Left and right subtree heights differ by at most 1 at every node",
+      "Every level is full except possibly the last, which is filled left to right"
+    ],
+    "answer": 3,
+    "explanation": "Heap là cây đầy đủ (complete tree). Nhờ không có lỗ hổng, heap lưu được trong mảng và chiều cao luôn là ⌊log₂ n⌋. 'Mọi node có 0 hoặc 2 con' là full tree, còn chênh lệch chiều cao ≤ 1 là điều kiện cân bằng của AVL.",
+    "explanationEn": "A heap is a complete tree. Having no gaps is what lets it live in an array and keeps its height at ⌊log₂ n⌋. 'Every node has 0 or 2 children' describes a full tree, and a height difference ≤ 1 is the AVL balance condition."
+  },
+  {
+    "id": "q4",
+    "question": "Heap được lưu trong mảng bắt đầu từ index 0. Node ở index 4 có con trái và con phải ở index nào?",
+    "questionEn": "A heap is stored in a 0-indexed array. At which indices are the left and right children of the node at index 4?",
+    "options": [
+      "8 và 9",
+      "9 và 10",
+      "5 và 6",
+      "10 và 11"
+    ],
+    "optionsEn": [
+      "8 and 9",
+      "9 and 10",
+      "5 and 6",
+      "10 and 11"
+    ],
+    "answer": 1,
+    "explanation": "Con trái ở 2n + 1 = 9, con phải ở 2n + 2 = 10. Công thức 2n và 2n + 1 chỉ đúng khi mảng bắt đầu từ index 1.",
+    "explanationEn": "Left child at 2n + 1 = 9, right child at 2n + 2 = 10. The formulas 2n and 2n + 1 only apply when the array is 1-indexed."
+  },
+  {
+    "id": "q5",
+    "question": "Trong heap lưu bằng mảng bắt đầu từ index 0, node cha của phần tử ở index 11 nằm ở index nào?",
+    "questionEn": "In a 0-indexed array heap, at which index is the parent of the element at index 11?",
+    "options": [
+      "6",
+      "4",
+      "5",
+      "10"
+    ],
+    "optionsEn": [
+      "6",
+      "4",
+      "5",
+      "10"
+    ],
+    "answer": 2,
+    "explanation": "Cha = Math.floor((11 - 1) / 2) = 5. Kiểm tra ngược: con của 5 là 2·5 + 1 = 11 và 2·5 + 2 = 12.",
+    "explanationEn": "Parent = Math.floor((11 - 1) / 2) = 5. Check it backwards: the children of 5 are 2·5 + 1 = 11 and 2·5 + 2 = 12."
+  },
+  {
+    "id": "q6",
+    "question": "Vì sao binary heap có thể lưu trong một mảng thường mà không cần node có con trỏ `left`/`right`?",
+    "questionEn": "Why can a binary heap be stored in a plain array without nodes that have `left`/`right` pointers?",
+    "options": [
+      "Vì cây luôn đầy đủ nên mảng không có lỗ hổng, vị trí cha/con suy ra được bằng phép tính index",
+      "Vì mảng JavaScript luôn nhanh hơn object trong mọi trường hợp",
+      "Vì các node anh em đã được sắp xếp nên index mã hoá luôn thứ tự",
+      "Vì heap không bao giờ có quá hai tầng"
+    ],
+    "optionsEn": [
+      "Because the tree is always complete, the array has no gaps and parent/child positions follow from index arithmetic",
+      "Because JavaScript arrays are faster than objects in every case",
+      "Because siblings are sorted, so the index encodes the ordering",
+      "Because a heap never has more than two levels"
+    ],
+    "answer": 0,
+    "explanation": "Tính chất hình dạng là chìa khoá: đọc cây theo từng tầng từ trái sang phải cho ra một dãy liền mạch, nên con luôn ở 2i + 1, 2i + 2 và cha ở ⌊(i − 1)/2⌋. Một BST lệch sẽ để lại vô số ô trống nếu lưu kiểu này.",
+    "explanationEn": "The shape property is the key: reading the tree level by level, left to right, gives a contiguous sequence, so children are always at 2i + 1, 2i + 2 and the parent at ⌊(i − 1)/2⌋. A lopsided BST stored this way would leave huge holes."
+  },
+  {
+    "id": "q7",
+    "question": "Chèn 45 vào max heap `[50, 30, 40, 10, 20]` bằng push rồi bubble up. Mảng kết quả là gì?",
+    "questionEn": "Insert 45 into the max heap `[50, 30, 40, 10, 20]` using push then bubble up. What is the resulting array?",
+    "options": [
+      "`[50, 30, 40, 10, 20, 45]`",
+      "`[45, 30, 50, 10, 20, 40]`",
+      "`[50, 45, 30, 10, 20, 40]`",
+      "`[50, 30, 45, 10, 20, 40]`"
+    ],
+    "optionsEn": [
+      "`[50, 30, 40, 10, 20, 45]`",
+      "`[45, 30, 50, 10, 20, 40]`",
+      "`[50, 45, 30, 10, 20, 40]`",
+      "`[50, 30, 45, 10, 20, 40]`"
+    ],
+    "answer": 3,
+    "explanation": "45 được push vào index 5; cha là index 2 (40), 45 > 40 nên đổi chỗ. Giờ 45 ở index 2, cha là index 0 (50), 45 < 50 nên dừng. Kết quả `[50, 30, 45, 10, 20, 40]`.",
+    "explanationEn": "45 is pushed to index 5; its parent is index 2 (40), and 45 > 40, so they swap. Now 45 is at index 2 with parent index 0 (50); 45 < 50, so it stops. Result: `[50, 30, 45, 10, 20, 40]`."
+  },
+  {
+    "id": "q8",
+    "question": "Gọi extractMax trên max heap `[50, 30, 45, 10, 20, 40]`. Hàm trả về 50; mảng còn lại là gì?",
+    "questionEn": "Call extractMax on the max heap `[50, 30, 45, 10, 20, 40]`. It returns 50; what is the remaining array?",
+    "options": [
+      "`[40, 30, 45, 10, 20]`",
+      "`[45, 30, 40, 10, 20]`",
+      "`[45, 40, 30, 10, 20]`",
+      "`[30, 45, 40, 10, 20]`"
+    ],
+    "optionsEn": [
+      "`[40, 30, 45, 10, 20]`",
+      "`[45, 30, 40, 10, 20]`",
+      "`[45, 40, 30, 10, 20]`",
+      "`[30, 45, 40, 10, 20]`"
+    ],
+    "answer": 1,
+    "explanation": "Pop 40 và đặt lên root: `[40, 30, 45, 10, 20]`. Hai con là 30 và 45, con lớn hơn là 45 lớn hơn 40, nên đổi: `[45, 30, 40, 10, 20]`. 40 giờ ở index 2, con ở index 5 và 6 đã vượt khỏi mảng nên dừng.",
+    "explanationEn": "Pop 40 and place it at the root: `[40, 30, 45, 10, 20]`. Its children are 30 and 45; the larger one, 45, beats 40, so swap: `[45, 30, 40, 10, 20]`. 40 is now at index 2, whose children at 5 and 6 are out of bounds, so it stops."
+  },
+  {
+    "id": "q9",
+    "question": "Khi sink down trong max heap, nếu cả hai con đều lớn hơn phần tử hiện tại, vì sao phải đổi chỗ với con LỚN HƠN?",
+    "questionEn": "During sink down in a max heap, when both children are larger than the current element, why must you swap with the LARGER child?",
+    "options": [
+      "Để node được đưa lên làm cha lớn hơn cả node anh em cũ của nó, giữ đúng tính chất heap",
+      "Để cây giữ nguyên tính chất hình dạng đầy đủ",
+      "Vì con lớn hơn luôn nằm ở bên trái",
+      "Để giảm độ phức tạp từ O(n) xuống O(log n)"
+    ],
+    "optionsEn": [
+      "So the node promoted to parent is larger than its former sibling, keeping the heap property intact",
+      "So the tree keeps its complete shape",
+      "Because the larger child is always on the left",
+      "To reduce the complexity from O(n) to O(log n)"
+    ],
+    "answer": 0,
+    "explanation": "Nếu đưa con nhỏ hơn lên, nó sẽ trở thành cha của con lớn hơn — một vi phạm mới. Hoán đổi không làm thay đổi hình dạng cây, con lớn hơn có thể nằm bên nào cũng được, và số tầng phải đi vẫn là O(log n) dù chọn con nào.",
+    "explanationEn": "Promote the smaller child and it becomes the parent of the larger one — a fresh violation. Swaps never change the tree's shape, the larger child can be on either side, and the number of levels walked is O(log n) whichever child you pick."
+  },
+  {
+    "id": "q10",
+    "question": "Cài đặt extractMax sau có lỗi gì khi heap chỉ còn ĐÚNG MỘT phần tử?\n`extractMax() {\n  const max = this.values[0];\n  const end = this.values.pop();\n  this.values[0] = end;\n  this.sinkDown();\n  return max;\n}`",
+    "questionEn": "What goes wrong with this extractMax when the heap holds EXACTLY ONE element?\n`extractMax() {\n  const max = this.values[0];\n  const end = this.values.pop();\n  this.values[0] = end;\n  this.sinkDown();\n  return max;\n}`",
+    "options": [
+      "Ném TypeError vì `pop()` trả về `undefined`",
+      "Trả về `undefined` thay vì giá trị lớn nhất",
+      "Giá trị vừa lấy ra bị ghi lại vào index 0, nên heap không bao giờ rỗng",
+      "`sinkDown` lặp vô hạn vì không có con nào"
+    ],
+    "optionsEn": [
+      "It throws a TypeError because `pop()` returns `undefined`",
+      "It returns `undefined` instead of the maximum",
+      "The removed value is written back into index 0, so the heap never empties",
+      "`sinkDown` loops forever because there are no children"
+    ],
+    "answer": 2,
+    "explanation": "`pop()` trả về chính phần tử duy nhất và làm mảng rỗng, rồi `this.values[0] = end` đặt nó trở lại. Hàm vẫn trả về đúng max nhưng heap vẫn còn một phần tử. Cách sửa: chỉ gán vào root và sink down khi `values.length > 0` sau khi pop.",
+    "explanationEn": "`pop()` returns the only element and empties the array, then `this.values[0] = end` puts it right back. The function still returns the right max, but the heap keeps one element. The fix: only assign the root and sink down if `values.length > 0` after the pop."
+  },
+  {
+    "id": "q11",
+    "question": "Priority queue dùng min heap, số nhỏ hơn = ưu tiên cao hơn. Sau khi chạy đoạn code, lần `dequeue()` THỨ HAI trả về `val` nào?\n`pq.enqueue('fix typo', 4);\npq.enqueue('server down', 1);\npq.enqueue('review PR', 3);\npq.enqueue('coffee', 2);\npq.dequeue();\npq.dequeue();`",
+    "questionEn": "A priority queue uses a min heap where a lower number means higher priority. What `val` does the SECOND `dequeue()` return?\n`pq.enqueue('fix typo', 4);\npq.enqueue('server down', 1);\npq.enqueue('review PR', 3);\npq.enqueue('coffee', 2);\npq.dequeue();\npq.dequeue();`",
+    "options": [
+      "'review PR'",
+      "'coffee'",
+      "'fix typo'",
+      "'server down'"
+    ],
+    "optionsEn": [
+      "'review PR'",
+      "'coffee'",
+      "'fix typo'",
+      "'server down'"
+    ],
+    "answer": 1,
+    "explanation": "Thứ tự thêm vào không quan trọng; heap trả về theo priority tăng dần: 'server down' (1), rồi 'coffee' (2), rồi 'review PR' (3), cuối cùng 'fix typo' (4).",
+    "explanationEn": "Insertion order does not matter; the heap serves by ascending priority number: 'server down' (1), then 'coffee' (2), then 'review PR' (3), and finally 'fix typo' (4)."
+  },
+  {
+    "id": "q12",
+    "question": "Một priority queue lưu bằng mảng KHÔNG sắp xếp: enqueue thì push, dequeue thì quét toàn bộ để tìm phần tử ưu tiên cao nhất. Chi phí dequeue của cách này so với binary heap là gì?",
+    "questionEn": "A priority queue stored as an UNSORTED array: enqueue pushes, and dequeue scans everything for the highest priority. How does its dequeue cost compare with a binary heap's?",
+    "options": [
+      "O(1) so với O(log n)",
+      "O(log n) so với O(1)",
+      "O(n) so với O(n)",
+      "O(n) so với O(log n)"
+    ],
+    "optionsEn": [
+      "O(1) versus O(log n)",
+      "O(log n) versus O(1)",
+      "O(n) versus O(n)",
+      "O(n) versus O(log n)"
+    ],
+    "answer": 3,
+    "explanation": "Quét mảng không sắp xếp là O(n) mỗi lần dequeue (cộng thêm việc xoá phần tử khỏi giữa mảng). Heap chỉ cần đưa phần tử cuối lên root và sink down: O(log n). Enqueue của mảng là O(1), của heap là O(log n) — heap cân bằng cả hai thao tác.",
+    "explanationEn": "Scanning an unsorted array is O(n) per dequeue (plus removing the item from the middle). The heap just moves the last element to the root and sinks it down: O(log n). The array's enqueue is O(1) and the heap's is O(log n) — the heap balances the two."
+  },
+  {
+    "id": "q13",
+    "question": "Bạn cần 100 giá trị LỚN NHẤT từ một luồng 10 triệu số mà không muốn giữ hết chúng trong bộ nhớ. Cách nào phù hợp nhất?",
+    "questionEn": "You need the 100 LARGEST values from a stream of 10 million numbers without keeping them all in memory. Which approach fits best?",
+    "options": [
+      "Giữ một min heap kích thước 100; khi vượt 100 thì pop phần tử nhỏ nhất — O(n log k)",
+      "Đưa cả 10 triệu số vào một max heap rồi extractMax 100 lần",
+      "Lưu hết các số vào mảng, sắp xếp rồi lấy 100 phần tử cuối",
+      "Giữ một max heap kích thước 100; khi vượt 100 thì pop phần tử lớn nhất"
+    ],
+    "optionsEn": [
+      "Keep a min heap of size 100; when it exceeds 100, pop the smallest — O(n log k)",
+      "Push all 10 million numbers into a max heap, then extractMax 100 times",
+      "Store every number in an array, sort it and take the last 100",
+      "Keep a max heap of size 100; when it exceeds 100, pop the largest"
+    ],
+    "answer": 0,
+    "explanation": "Root của min heap là phần tử nhỏ nhất trong top-k hiện tại, tức ứng viên cần loại đầu tiên. Chỉ tốn O(k) bộ nhớ và O(n log k) thời gian. Max heap toàn bộ hay sắp xếp đều cần O(n) bộ nhớ, còn max heap kích thước k lại vứt đi chính các số lớn nhất.",
+    "explanationEn": "The min heap's root is the smallest of the current top k, exactly the one to evict first. It needs only O(k) memory and O(n log k) time. A full max heap or sorting both need O(n) memory, and a size-k max heap throws away the very largest values."
+  },
+  {
+    "id": "q14",
+    "question": "Một max heap đang có 1000 phần tử. Chèn thêm một giá trị lớn hơn tất cả. Bubble up cần TỐI ĐA khoảng bao nhiêu lần hoán đổi?",
+    "questionEn": "A max heap holds 1000 elements. You insert a value larger than all of them. At MOST roughly how many swaps does bubble up make?",
+    "options": [
+      "1000",
+      "500",
+      "9",
+      "1"
+    ],
+    "optionsEn": [
+      "1000",
+      "500",
+      "9",
+      "1"
+    ],
+    "answer": 2,
+    "explanation": "Giá trị mới vào index 1000, ở độ sâu ⌊log₂ 1001⌋ = 9, và leo lên một tầng mỗi lần đổi cho tới root: 9 lần. Đó là lý do insert là O(log n) — kể cả trong worst case.",
+    "explanationEn": "The new value lands at index 1000, at depth ⌊log₂ 1001⌋ = 9, and climbs one level per swap up to the root: 9 swaps. That is why insert is O(log n) — even in the worst case."
+  },
+  {
+    "id": "q15",
+    "question": "Độ phức tạp thời gian để kiểm tra một giá trị bất kỳ có nằm trong binary heap hay không là gì?",
+    "questionEn": "What is the time complexity of checking whether an arbitrary value is in a binary heap?",
+    "options": [
+      "O(log n), vì chiều cao của heap là log n",
+      "O(n), vì anh em và các cây con không có thứ tự nên không loại được nửa nào",
+      "O(1), vì root luôn chứa giá trị cần tìm",
+      "O(n log n), vì mỗi bước phải bubble up"
+    ],
+    "optionsEn": [
+      "O(log n), because the heap's height is log n",
+      "O(n), because siblings and subtrees are unordered, so no half can be ruled out",
+      "O(1), because the root always holds the value",
+      "O(n log n), because each step has to bubble up"
+    ],
+    "answer": 1,
+    "explanation": "Heap chỉ biết cha ≥ con, nên giá trị cần tìm có thể nằm ở cây con bất kỳ — phải quét gần như toàn bộ. Chiều cao log n chỉ giúp các thao tác đi theo một đường từ root xuống lá (insert, extract). Cần tìm kiếm nhanh thì dùng hash map hoặc BST cân bằng.",
+    "explanationEn": "A heap only knows parent ≥ child, so the target could be in any subtree — you may have to scan almost everything. The log n height only helps operations that follow one root-to-leaf path (insert, extract). For fast lookup use a hash map or a balanced BST."
+  },
+  {
+    "id": "q16",
+    "question": "Chèn lần lượt các số đã sắp xếp 1, 2, 3, …, n vào (a) một BST không tự cân bằng và (b) một max heap. Worst case mỗi thao tác của từng cấu trúc là gì?",
+    "questionEn": "Insert the sorted numbers 1, 2, 3, …, n into (a) a non-self-balancing BST and (b) a max heap. What is the worst case per operation for each?",
+    "options": [
+      "Cả hai đều O(n) vì input đã sắp xếp",
+      "Cả hai đều O(log n) vì đều là cây nhị phân",
+      "Heap bị suy biến thành chuỗi O(n), còn BST vẫn O(log n)",
+      "BST suy biến thành chuỗi O(n), còn heap luôn đầy đủ nên vẫn O(log n)"
+    ],
+    "optionsEn": [
+      "Both are O(n) because the input is sorted",
+      "Both are O(log n) because both are binary trees",
+      "The heap degenerates into an O(n) chain while the BST stays O(log n)",
+      "The BST degenerates into an O(n) chain, while the heap stays complete and O(log n)"
+    ],
+    "answer": 3,
+    "explanation": "Input tăng dần làm mọi node BST mới đi sang phải, tạo thành linked list. Heap luôn thêm vào vị trí trống kế tiếp của tầng cuối nên cây luôn đầy đủ, cao ⌊log₂ n⌋; thứ tự input không làm hỏng hình dạng.",
+    "explanationEn": "Ascending input sends every new BST node to the right, producing a linked list. A heap always fills the next free slot on the last level, so it stays complete with height ⌊log₂ n⌋; input order cannot ruin its shape."
+  },
+  {
+    "id": "q17",
+    "question": "Xây max heap từ một mảng n phần tử bằng cách gọi siftDown lần lượt từ index `Math.floor(n / 2) - 1` lùi về 0. Tổng thời gian là bao nhiêu?",
+    "questionEn": "Build a max heap from an n-element array by calling siftDown on each index from `Math.floor(n / 2) - 1` back to 0. What is the total time?",
+    "options": [
+      "O(n), vì phần lớn node nằm gần đáy và chỉ chìm xuống vài tầng",
+      "O(n log n), vì mỗi lần trong n/2 lần gọi tốn O(log n)",
+      "O(log n), vì chỉ root mới chìm xuống",
+      "O(n²), vì mỗi node có thể phải so sánh với mọi node khác"
+    ],
+    "optionsEn": [
+      "O(n), because most nodes are near the bottom and sink only a few levels",
+      "O(n log n), because each of the n/2 calls costs O(log n)",
+      "O(log n), because only the root sinks",
+      "O(n²), because each node may be compared with every other node"
+    ],
+    "answer": 0,
+    "explanation": "O(n log n) là một chặn trên đúng nhưng không sát. Khoảng n/4 node chìm tối đa 1 tầng, n/8 node tối đa 2 tầng, …; tổng n · (1/4 + 2/8 + 3/16 + …) ≤ n. Còn chèn lần lượt n phần tử vào heap rỗng mới là O(n log n).",
+    "explanationEn": "O(n log n) is a true upper bound but not a tight one. About n/4 nodes sink at most 1 level, n/8 at most 2, …; the total n · (1/4 + 2/8 + 3/16 + …) ≤ n. It is inserting n elements one by one into an empty heap that costs O(n log n)."
+  },
+  {
+    "id": "q18",
+    "question": "Phát biểu nào về heap sort là ĐÚNG?",
+    "questionEn": "Which statement about heap sort is TRUE?",
+    "options": [
+      "Ổn định (stable) và cần O(n) bộ nhớ phụ giống merge sort",
+      "Worst case O(n²) giống quick sort khi chọn pivot tệ",
+      "Worst case O(n log n), bộ nhớ phụ O(1), nhưng không ổn định",
+      "Chạy O(n) vì bước heapify chỉ tốn O(n)"
+    ],
+    "optionsEn": [
+      "It is stable and needs O(n) extra memory, like merge sort",
+      "Its worst case is O(n²), like quick sort with a bad pivot",
+      "Worst case O(n log n) with O(1) extra space, but not stable",
+      "It runs in O(n) because heapify only costs O(n)"
+    ],
+    "answer": 2,
+    "explanation": "Heapify là O(n), nhưng sau đó còn n − 1 lần đổi root về cuối và sift down O(log n): tổng O(n log n) trong mọi trường hợp. Sắp xếp diễn ra ngay trong mảng nên bộ nhớ phụ O(1), còn các lần hoán đổi xa có thể đảo thứ tự các khoá bằng nhau nên không ổn định.",
+    "explanationEn": "Heapify is O(n), but it is followed by n − 1 root-to-end swaps each with an O(log n) sift down: O(n log n) in every case. It sorts inside the array, so extra space is O(1), and long-distance swaps can reorder equal keys, so it is not stable."
+  }
+]

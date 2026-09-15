@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Phát biểu nào về các method `indexOf`, `includes`, `find` và `findIndex` của mảng JavaScript là ĐÚNG?",
+    "questionEn": "Which statement about the JavaScript array methods `indexOf`, `includes`, `find` and `findIndex` is TRUE?",
+    "options": [
+      "`includes` tự động dùng binary search nếu mảng đã được sắp xếp",
+      "`find` là O(1) vì nó nhận một callback thay vì một giá trị",
+      "Cả bốn đều duyệt từ đầu mảng, nên worst case là O(n) kể cả với mảng đã sắp xếp",
+      "`indexOf` là O(log n) vì engine lập chỉ mục sẵn cho mảng"
+    ],
+    "optionsEn": [
+      "`includes` automatically uses binary search when the array is sorted",
+      "`find` is O(1) because it takes a callback instead of a value",
+      "All four scan from the start, so they are O(n) worst case even on a sorted array",
+      "`indexOf` is O(log n) because the engine pre-indexes arrays"
+    ],
+    "answer": 2,
+    "explanation": "Các method này không biết gì về thứ tự dữ liệu: chúng kiểm tra lần lượt từng phần tử và dừng ở lần khớp đầu tiên. Worst case (không tìm thấy hoặc nằm cuối) là O(n). Muốn O(log n) trên mảng đã sắp xếp, bạn phải tự viết binary search.",
+    "explanationEn": "These methods know nothing about the order of the data: they check elements one by one and stop at the first hit. The worst case (missing or last) is O(n). To get O(log n) on sorted data you have to write binary search yourself."
+  },
+  {
+    "id": "q2",
+    "question": "Độ phức tạp thời gian của linear search trên mảng n phần tử ở best / average / worst case là gì?",
+    "questionEn": "What is the best / average / worst case time complexity of linear search on an array of n elements?",
+    "options": [
+      "O(1) / O(n) / O(n)",
+      "O(1) / O(log n) / O(n)",
+      "O(n) / O(n) / O(n)",
+      "O(1) / O(n / 2) / O(n²)"
+    ],
+    "optionsEn": [
+      "O(1) / O(n) / O(n)",
+      "O(1) / O(log n) / O(n)",
+      "O(n) / O(n) / O(n)",
+      "O(1) / O(n / 2) / O(n²)"
+    ],
+    "answer": 0,
+    "explanation": "Best case: phần tử cần tìm nằm đầu mảng, một lần kiểm tra. Average: khoảng n/2 lần kiểm tra, bỏ hằng số còn O(n). Worst: nằm cuối hoặc không có, phải xem hết n phần tử. O(n / 2) không phải cách viết Big O đã rút gọn.",
+    "explanationEn": "Best case: the target is first, one check. Average: about n/2 checks, which drops the constant to O(n). Worst: the target is last or missing, so all n elements are checked. O(n / 2) is not a simplified Big O."
+  },
+  {
+    "id": "q3",
+    "question": "Đoạn code sau in ra gì?\n`const arr = [1, NaN, 3];\nconsole.log(arr.indexOf(NaN), arr.includes(NaN));`",
+    "questionEn": "What does this code print?\n`const arr = [1, NaN, 3];\nconsole.log(arr.indexOf(NaN), arr.includes(NaN));`",
+    "options": [
+      "`1 true`",
+      "`-1 false`",
+      "`1 false`",
+      "`-1 true`"
+    ],
+    "optionsEn": [
+      "`1 true`",
+      "`-1 false`",
+      "`1 false`",
+      "`-1 true`"
+    ],
+    "answer": 3,
+    "explanation": "`indexOf` so sánh bằng `===`, mà `NaN !== NaN`, nên nó không bao giờ tìm thấy `NaN` và trả về -1. `includes` dùng SameValueZero, coi `NaN` bằng `NaN`, nên trả về true.",
+    "explanationEn": "`indexOf` compares with `===`, and `NaN !== NaN`, so it never finds `NaN` and returns -1. `includes` uses SameValueZero, which treats `NaN` as equal to `NaN`, so it returns true."
+  },
+  {
+    "id": "q4",
+    "question": "Hàm `binarySearch` chuẩn (khoảng đóng, `left <= right`) được gọi như sau. Kết quả là gì?\n`binarySearch([5, 1, 9, 3, 7], 3);`",
+    "questionEn": "The standard `binarySearch` (inclusive range, `left <= right`) is called like this. What is the result?\n`binarySearch([5, 1, 9, 3, 7], 3);`",
+    "options": [
+      "`3`, vì 3 nằm ở index 3",
+      "`-1`, vì mảng chưa sắp xếp nên thuật toán loại nhầm nửa chứa 3",
+      "`1`, vì binary search trả về index trong mảng sau khi sắp xếp",
+      "Ném lỗi vì mảng chưa được sắp xếp"
+    ],
+    "optionsEn": [
+      "`3`, because 3 is at index 3",
+      "`-1`, because the array is unsorted so it discards the half holding 3",
+      "`1`, because binary search returns the index in the sorted array",
+      "It throws an error because the array is not sorted"
+    ],
+    "answer": 1,
+    "explanation": "mid = 2, arr[2] = 9 > 3 nên right = 1; mid = 0, arr[0] = 5 > 3 nên right = -1; khoảng rỗng, trả về -1. Binary search không kiểm tra dữ liệu có sắp xếp hay không — trên mảng chưa sắp xếp nó lặng lẽ cho kết quả sai.",
+    "explanationEn": "mid = 2, arr[2] = 9 > 3 so right = 1; mid = 0, arr[0] = 5 > 3 so right = -1; the range is empty and it returns -1. Binary search never checks that the data is sorted — on an unsorted array it silently gives wrong answers."
+  },
+  {
+    "id": "q5",
+    "question": "Chạy binary search (khoảng đóng, `mid = Math.floor((left + right) / 2)`) tìm 15 trong mảng dưới đây. Dãy giá trị `arr[mid]` được so sánh là gì?\n`[1, 3, 4, 6, 8, 9, 11, 12, 15, 16, 17, 18, 19]`",
+    "questionEn": "Run binary search (inclusive range, `mid = Math.floor((left + right) / 2)`) for 15 in the array below. Which sequence of `arr[mid]` values is compared?\n`[1, 3, 4, 6, 8, 9, 11, 12, 15, 16, 17, 18, 19]`",
+    "options": [
+      "9, 16, 12, 15",
+      "11, 17, 15",
+      "11, 16, 12, 15",
+      "8, 12, 16, 15"
+    ],
+    "optionsEn": [
+      "9, 16, 12, 15",
+      "11, 17, 15",
+      "11, 16, 12, 15",
+      "8, 12, 16, 15"
+    ],
+    "answer": 2,
+    "explanation": "L=0, R=12: mid=6 → 11 < 15, L=7. L=7, R=12: mid=9 → 16 > 15, R=8. L=7, R=8: mid=7 → 12 < 15, L=8. L=8, R=8: mid=8 → 15, tìm thấy. Bốn lần so sánh thay vì chín lần của linear search.",
+    "explanationEn": "L=0, R=12: mid=6 → 11 < 15, L=7. L=7, R=12: mid=9 → 16 > 15, R=8. L=7, R=8: mid=7 → 12 < 15, L=8. L=8, R=8: mid=8 → 15, found. Four comparisons instead of linear search's nine."
+  },
+  {
+    "id": "q6",
+    "question": "Một mảng đã sắp xếp có 1.000.000 phần tử. Binary search cần tối đa khoảng bao nhiêu lần so sánh?",
+    "questionEn": "A sorted array holds 1,000,000 elements. At most roughly how many comparisons does binary search need?",
+    "options": [
+      "Khoảng 20",
+      "Khoảng 1.000",
+      "Khoảng 500.000",
+      "Khoảng 100"
+    ],
+    "optionsEn": [
+      "About 20",
+      "About 1,000",
+      "About 500,000",
+      "About 100"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi bước chia đôi số ứng viên, nên cần tối đa ⌊log₂ n⌋ + 1 lần so sánh. log₂(1.000.000) ≈ 19,9, tức khoảng 20. Dữ liệu tăng gấp đôi chỉ thêm một bước.",
+    "explanationEn": "Each step halves the candidates, so it needs at most ⌊log₂ n⌋ + 1 comparisons. log₂(1,000,000) ≈ 19.9, so about 20. Doubling the data adds just one step."
+  },
+  {
+    "id": "q7",
+    "question": "Lời gọi `search([7], 7)` trả về gì?\n`function search(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  while (left < right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}`",
+    "questionEn": "What does `search([7], 7)` return?\n`function search(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  while (left < right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}`",
+    "options": [
+      "`0`",
+      "Lặp vô hạn",
+      "`undefined`",
+      "`-1`, vì thân vòng lặp không chạy lần nào"
+    ],
+    "optionsEn": [
+      "`0`",
+      "An infinite loop",
+      "`undefined`",
+      "`-1`, because the loop body never runs"
+    ],
+    "answer": 3,
+    "explanation": "left = right = 0 nên `left < right` sai ngay từ đầu, hàm trả về -1 dù 7 có trong mảng. Với khoảng đóng (`right = arr.length - 1`), điều kiện phải là `left <= right` để khoảng một phần tử vẫn được kiểm tra.",
+    "explanationEn": "left = right = 0, so `left < right` is false from the start and the function returns -1 even though 7 is there. With an inclusive range (`right = arr.length - 1`) the condition must be `left <= right` so a one-element range is still checked."
+  },
+  {
+    "id": "q8",
+    "question": "Lời gọi `search([5], 3)` với hàm sau sẽ thế nào?\n`function search(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid;\n  }\n  return -1;\n}`",
+    "questionEn": "What happens when this function is called as `search([5], 3)`?\n`function search(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid;\n  }\n  return -1;\n}`",
+    "options": [
+      "Trả về `-1` sau một vòng lặp",
+      "Lặp vô hạn, vì `right = mid` không làm khoảng co lại",
+      "Trả về `0`",
+      "Ném lỗi truy cập ngoài mảng"
+    ],
+    "optionsEn": [
+      "It returns `-1` after one iteration",
+      "It loops forever, because `right = mid` does not shrink the range",
+      "It returns `0`",
+      "It throws an out-of-bounds error"
+    ],
+    "answer": 1,
+    "explanation": "left = right = mid = 0, arr[0] = 5 > 3 nên right = mid = 0 — không có gì thay đổi, `left <= right` vẫn đúng mãi. Template khoảng đóng phải dùng `right = mid - 1`; `right = mid` chỉ đi với template nửa mở `left < right`.",
+    "explanationEn": "left = right = mid = 0, arr[0] = 5 > 3 so right = mid = 0 — nothing changes and `left <= right` stays true forever. The inclusive template needs `right = mid - 1`; `right = mid` belongs to the half-open template with `left < right`."
+  },
+  {
+    "id": "q9",
+    "question": "Binary search viết đệ quy (truyền `left`, `right` làm tham số, không slice mảng) có độ phức tạp KHÔNG GIAN phụ trợ là gì?",
+    "questionEn": "What is the auxiliary SPACE complexity of recursive binary search (passing `left` and `right` as arguments, no slicing)?",
+    "options": [
+      "O(1), vì không tạo mảng mới",
+      "O(log n), vì có tối đa khoảng log n lời gọi cùng nằm trên call stack",
+      "O(n), vì mỗi lời gọi giữ một bản sao của mảng",
+      "O(n log n)"
+    ],
+    "optionsEn": [
+      "O(1), because no new array is created",
+      "O(log n), because up to about log n calls wait on the call stack",
+      "O(n), because every call holds a copy of the array",
+      "O(n log n)"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi lời gọi chia đôi khoảng tìm kiếm nên độ sâu đệ quy khoảng log n, và mỗi frame chưa trả về chiếm bộ nhớ trên call stack: O(log n). Bản vòng lặp chỉ cần O(1). Mảng không bị sao chép vì chỉ truyền tham chiếu và index.",
+    "explanationEn": "Each call halves the range, so the recursion is about log n deep, and every pending frame occupies call-stack memory: O(log n). The iterative version needs only O(1). The array is not copied because only a reference and indices are passed."
+  },
+  {
+    "id": "q10",
+    "question": "Hàm `binarySearch` chuẩn (dừng ngay khi `arr[mid] === target`) được gọi như sau. Kết quả là gì?\n`binarySearch([2, 4, 4, 4, 7], 4);`",
+    "questionEn": "The standard `binarySearch` (returns as soon as `arr[mid] === target`) is called like this. What is the result?\n`binarySearch([2, 4, 4, 4, 7], 4);`",
+    "options": [
+      "`1`, vị trí của số 4 đầu tiên",
+      "`3`, vị trí của số 4 cuối cùng",
+      "`2`, vị trí số 4 mà `mid` rơi vào đầu tiên",
+      "`-1`, vì binary search không xử lý được phần tử trùng"
+    ],
+    "optionsEn": [
+      "`1`, the position of the first 4",
+      "`3`, the position of the last 4",
+      "`2`, the position of the 4 that `mid` lands on first",
+      "`-1`, because binary search cannot handle duplicates"
+    ],
+    "answer": 2,
+    "explanation": "mid = Math.floor((0 + 4) / 2) = 2 và arr[2] = 4, nên hàm trả về 2 ngay. Muốn lấy lần xuất hiện đầu tiên phải dùng lower bound: khi `arr[mid] >= target` thì gán `right = mid` và tiếp tục thu hẹp về bên trái.",
+    "explanationEn": "mid = Math.floor((0 + 4) / 2) = 2 and arr[2] = 4, so it returns 2 immediately. To get the first occurrence use lower bound: when `arr[mid] >= target`, set `right = mid` and keep narrowing to the left."
+  },
+  {
+    "id": "q11",
+    "question": "Naive string search đếm số lần pattern dài m xuất hiện trong text dài n. Độ phức tạp thời gian worst case là gì?",
+    "questionEn": "Naive string search counts how often a pattern of length m appears in a text of length n. What is its worst-case time complexity?",
+    "options": [
+      "O(n · m)",
+      "O(n + m)",
+      "O(n)",
+      "O(m log n)"
+    ],
+    "optionsEn": [
+      "O(n · m)",
+      "O(n + m)",
+      "O(n)",
+      "O(m log n)"
+    ],
+    "answer": 0,
+    "explanation": "Có n - m + 1 vị trí bắt đầu, mỗi vị trí có thể so sánh tới m ký tự trước khi hỏng — ví dụ text `aaaaaaaaab` với pattern `aaab`. Tổng O(n · m). O(n + m) là độ phức tạp của KMP.",
+    "explanationEn": "There are n - m + 1 start positions and each may compare up to m characters before failing — for example text `aaaaaaaaab` with pattern `aaab`. That is O(n · m). O(n + m) is KMP's complexity."
+  },
+  {
+    "id": "q12",
+    "question": "Hàm `naiveSearch` thử pattern ở mọi vị trí bắt đầu và đếm mọi lần khớp hoàn toàn. Lời gọi sau trả về gì?\n`naiveSearch('aaaa', 'aa');`",
+    "questionEn": "`naiveSearch` tries the pattern at every start position and counts every full match. What does this call return?\n`naiveSearch('aaaa', 'aa');`",
+    "options": [
+      "`2`",
+      "`1`",
+      "`4`",
+      "`3`"
+    ],
+    "optionsEn": [
+      "`2`",
+      "`1`",
+      "`4`",
+      "`3`"
+    ],
+    "answer": 3,
+    "explanation": "Các vị trí bắt đầu là 0, 1, 2 (n - m + 1 = 3) và `aa` khớp ở cả ba. Các lần khớp chồng lên nhau (overlapping) vẫn được đếm, nên kết quả là 3, không phải 2.",
+    "explanationEn": "The start positions are 0, 1 and 2 (n - m + 1 = 3), and `aa` matches at all three. Overlapping matches still count, so the answer is 3, not 2."
+  },
+  {
+    "id": "q13",
+    "question": "Trước khi duyệt text, KMP tính trước điều gì từ pattern?",
+    "questionEn": "Before scanning the text, what does KMP precompute from the pattern?",
+    "options": [
+      "Bảng tần suất xuất hiện của từng ký tự trong pattern",
+      "Với mỗi tiền tố của pattern, độ dài tiền tố thực sự dài nhất đồng thời là hậu tố của nó",
+      "Mã băm (hash) của mọi chuỗi con dài m trong text",
+      "Bản sắp xếp của pattern để có thể binary search"
+    ],
+    "optionsEn": [
+      "A frequency table of every character in the pattern",
+      "For each prefix of the pattern, the length of its longest proper prefix that is also a suffix",
+      "A hash of every length-m substring of the text",
+      "A sorted copy of the pattern so it can be binary searched"
+    ],
+    "answer": 1,
+    "explanation": "Đó là bảng LPS (prefix function / failure function). Khi gặp ký tự không khớp sau khi đã khớp j ký tự, KMP biết pattern có thể tiếp tục từ index `lps[j - 1]` mà không cần lùi con trỏ trên text. Hash các chuỗi con là ý tưởng của Rabin–Karp.",
+    "explanationEn": "That is the LPS table (prefix function / failure function). On a mismatch after j matched characters, KMP knows the pattern can resume from index `lps[j - 1]` without moving the text pointer back. Hashing substrings is the Rabin–Karp idea."
+  },
+  {
+    "id": "q14",
+    "question": "Bảng LPS (longest proper prefix which is also a suffix) của pattern `aabaaab` là gì?",
+    "questionEn": "What is the LPS (longest proper prefix which is also a suffix) table of the pattern `aabaaab`?",
+    "options": [
+      "`[0, 1, 0, 1, 2, 3, 3]`",
+      "`[0, 0, 0, 1, 2, 2, 3]`",
+      "`[0, 1, 0, 1, 2, 2, 3]`",
+      "`[0, 1, 0, 1, 2, 2, 0]`"
+    ],
+    "optionsEn": [
+      "`[0, 1, 0, 1, 2, 3, 3]`",
+      "`[0, 0, 0, 1, 2, 2, 3]`",
+      "`[0, 1, 0, 1, 2, 2, 3]`",
+      "`[0, 1, 0, 1, 2, 2, 0]`"
+    ],
+    "answer": 2,
+    "explanation": "`a`→0, `aa`→1, `aab`→0, `aaba`→1, `aabaa`→2 (`aa`). Với `aabaaa`, `aab` ≠ `aaa` nên lùi về và được `aa`→2. Cuối cùng `aabaaab` có `aab` vừa là tiền tố vừa là hậu tố→3.",
+    "explanationEn": "`a`→0, `aa`→1, `aab`→0, `aaba`→1, `aabaa`→2 (`aa`). For `aabaaa`, `aab` ≠ `aaa`, so it falls back and gets `aa`→2. Finally `aabaaab` has `aab` as both prefix and suffix→3."
+  },
+  {
+    "id": "q15",
+    "question": "Độ phức tạp thời gian và không gian của KMP khi tìm pattern dài m trong text dài n là gì?",
+    "questionEn": "What are the time and space complexities of KMP searching for a pattern of length m in a text of length n?",
+    "options": [
+      "O(n + m) thời gian, O(m) không gian",
+      "O(n · m) thời gian, O(1) không gian",
+      "O(n + m) thời gian, O(n) không gian",
+      "O(n log m) thời gian, O(m) không gian"
+    ],
+    "optionsEn": [
+      "O(n + m) time, O(m) space",
+      "O(n · m) time, O(1) space",
+      "O(n + m) time, O(n) space",
+      "O(n log m) time, O(m) space"
+    ],
+    "answer": 0,
+    "explanation": "Dựng bảng LPS tốn O(m) thời gian và O(m) bộ nhớ. Khi duyệt text, con trỏ i chỉ tiến lên n lần, và tổng số lần lùi của j không vượt quá số lần j tăng (≤ n), nên phần tìm kiếm là O(n). Không cần lưu thêm gì tỉ lệ với n.",
+    "explanationEn": "Building the LPS table takes O(m) time and O(m) memory. While scanning, i moves forward n times and the total number of j fall-backs cannot exceed the number of j increments (≤ n), so the search is O(n). Nothing proportional to n is stored."
+  },
+  {
+    "id": "q16",
+    "question": "KMP tìm pattern `lolol` (LPS = `[0, 0, 1, 2, 3]`). Đã khớp `lolo` (j = 4) thì ký tự tiếp theo của text không khớp `pattern[4]`. Sau lần lùi đầu tiên, j bằng bao nhiêu?",
+    "questionEn": "KMP is searching for `lolol` (LPS = `[0, 0, 1, 2, 3]`). It has matched `lolo` (j = 4) when the next text character does not match `pattern[4]`. What is j after the first fall-back?",
+    "options": [
+      "`0`",
+      "`4`",
+      "`1`",
+      "`2`"
+    ],
+    "optionsEn": [
+      "`0`",
+      "`4`",
+      "`1`",
+      "`2`"
+    ],
+    "answer": 3,
+    "explanation": "j = lps[j - 1] = lps[3] = 2: phần đã khớp `lolo` có `lo` vừa là tiền tố vừa là hậu tố, nên pattern tiếp tục so sánh từ index 2 mà không đọc lại text. Nếu vẫn không khớp thì lùi tiếp j = lps[1] = 0.",
+    "explanationEn": "j = lps[j - 1] = lps[3] = 2: the matched part `lolo` has `lo` as both prefix and suffix, so comparison resumes at pattern index 2 without re-reading the text. If that still mismatches, it falls back again to j = lps[1] = 0."
+  },
+  {
+    "id": "q17",
+    "question": "Bạn có một mảng 1.000.000 số CHƯA sắp xếp và chỉ cần tìm MỘT giá trị đúng một lần. Cách nào hợp lý nhất?",
+    "questionEn": "You have an UNSORTED array of 1,000,000 numbers and need to find ONE value exactly once. What is the most sensible approach?",
+    "options": [
+      "Sắp xếp mảng rồi dùng binary search, vì O(log n) nhanh hơn O(n)",
+      "Dùng linear search, vì chỉ riêng việc sắp xếp đã tốn O(n log n)",
+      "Dùng binary search trực tiếp trên mảng chưa sắp xếp",
+      "Dựng bảng LPS cho mảng rồi dùng KMP"
+    ],
+    "optionsEn": [
+      "Sort, then binary search, because O(log n) beats O(n)",
+      "Use linear search, because sorting alone already costs O(n log n)",
+      "Run binary search directly on the unsorted array",
+      "Build an LPS table for the array and use KMP"
+    ],
+    "answer": 1,
+    "explanation": "Một lần tìm: linear search là O(n), còn sắp xếp + binary search là O(n log n + log n), chậm hơn. Sắp xếp trước chỉ đáng khi có rất nhiều lần tìm. Binary search trên mảng chưa sắp xếp cho kết quả sai, và KMP dành cho tìm chuỗi con.",
+    "explanationEn": "For a single lookup, linear search is O(n), while sort + binary search is O(n log n + log n), which is slower. Sorting first only pays off with many lookups. Binary search on unsorted data gives wrong answers, and KMP is for substring search."
+  },
+  {
+    "id": "q18",
+    "question": "Một hệ thống quét log dài 10⁷ ký tự để đếm số lần một chuỗi 10⁴ ký tự xuất hiện. Input có thể bị kẻ xấu tạo ra để làm chậm hệ thống. Thuật toán nào phù hợp nhất?",
+    "questionEn": "A system scans a 10⁷-character log to count occurrences of a 10⁴-character string. Inputs may be crafted by an attacker to slow it down. Which algorithm fits best?",
+    "options": [
+      "Naive string search, vì nó dùng O(1) bộ nhớ",
+      "Binary search trên chuỗi log",
+      "KMP, vì worst case được đảm bảo là O(n + m)",
+      "Linear search trên mảng các ký tự"
+    ],
+    "optionsEn": [
+      "Naive string search, because it uses O(1) memory",
+      "Binary search over the log string",
+      "KMP, because its worst case is guaranteed O(n + m)",
+      "Linear search over the array of characters"
+    ],
+    "answer": 2,
+    "explanation": "Với input xấu (như `aaa…ab`), naive search có thể tốn tới n · m ≈ 10¹¹ phép so sánh. KMP đảm bảo O(n + m) ≈ 10⁷ bất kể input, đổi lại O(m) bộ nhớ cho bảng LPS. Binary search không áp dụng được vì log không phải dữ liệu đã sắp xếp, còn linear search chỉ tìm một ký tự đơn lẻ.",
+    "explanationEn": "With hostile input (such as `aaa…ab`) naive search can take up to n · m ≈ 10¹¹ comparisons. KMP guarantees O(n + m) ≈ 10⁷ regardless of input, at the cost of O(m) memory for the LPS table. Binary search does not apply because a log is not sorted data, and linear search only finds a single element."
+  }
+]

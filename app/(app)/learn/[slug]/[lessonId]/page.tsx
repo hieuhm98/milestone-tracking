@@ -18,7 +18,14 @@ import {
   type Lesson,
   type LessonTopic,
 } from "@/lib/lessons";
-import { PASS_PCT, rankForReview, recordLessonPhase, type AnsweredQuestion } from "@/lib/progress";
+import {
+  PASS_PCT,
+  rankForReview,
+  recordLessonPhase,
+  recordVocab,
+  type AnsweredQuestion,
+} from "@/lib/progress";
+import { lessonVocab, unseenVocabCount, vocabRound, type VocabItem } from "@/lib/vocab";
 import { cn } from "@/lib/utils";
 
 /** How many earlier-lesson questions each phase mixes in. */
@@ -27,12 +34,13 @@ const CHECK_REVIEW = 2;
 /** Questions drawn from the whole topic for a recap lesson's check. */
 const RECAP_CHECK = 5;
 
-type Phase = "warmup" | "read" | "check" | "done";
+type Phase = "warmup" | "read" | "check" | "vocab" | "done";
 
 interface TopicData {
   content: string;
   contentEn?: string | null;
   questions: Question[];
+  vocab?: VocabItem[];
 }
 
 export default function LessonPlayerPage() {
@@ -49,11 +57,25 @@ export default function LessonPlayerPage() {
   const [built, setBuilt] = useState(false);
   const [warmupQs, setWarmupQs] = useState<TestQuestion[]>([]);
   const [checkQs, setCheckQs] = useState<TestQuestion[]>([]);
+  const [vocabQs, setVocabQs] = useState<TestQuestion[]>([]);
+  const [vocabPct, setVocabPct] = useState<number | null>(null);
+  // Bumped per vocabulary round so LessonTest remounts with fresh state.
+  const [vocabRoundNo, setVocabRoundNo] = useState(0);
 
   const key = lessonKey(slug, lessonId);
   const topic = topics.find((tp) => tp.slug === slug) ?? null;
   const lesson: Lesson | null = topic?.lessons.find((l) => l.id === lessonId) ?? null;
   const state = progress.lessons[key];
+  const wordsInLesson = useMemo(
+    () => (topicData?.vocab && lesson ? lessonVocab(topicData.vocab, lesson.id) : []),
+    [topicData, lesson]
+  );
+
+  const toVocabQuestions = useCallback(
+    (items: VocabItem[]): TestQuestion[] =>
+      items.map((item) => ({ ...item, slug, key: questionKey(slug, item.id) })),
+    [slug]
+  );
 
   // Curriculum map + this topic's content and questions.
   useEffect(() => {
@@ -62,7 +84,7 @@ export default function LessonPlayerPage() {
     async function load() {
       const [map, data] = await Promise.all([
         fetch("/api/lessons").then((r) => r.json()).catch(() => []),
-        fetch(`/api/knowledge/${slug}`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+        fetch(`/api/knowledge/${slug}?vocab=1`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
       ]);
 
       if (cancelled) return;
@@ -147,6 +169,7 @@ export default function LessonPlayerPage() {
 
       setWarmupQs(warmReview);
       setCheckQs([...checkOwn, ...checkReview]);
+      setVocabQs(toVocabQuestions(vocabRound(lessonVocab(topicData!.vocab ?? [], activeLesson.id), slug, progress)));
       // Nothing to recall yet: open straight on the reading phase.
       if (warmReview.length === 0) setPhase("read");
       setBuilt(true);
@@ -175,10 +198,30 @@ export default function LessonPlayerPage() {
     (answered: AnsweredQuestion[], pct: number) => {
       setCheckPct(pct);
       update((prev) => recordLessonPhase(prev, key, "check", pct, answered));
+      // The English step comes after the IT result is already recorded, so
+      // skipping or failing it can never cost the lesson its completion.
+      setPhase(vocabQs.length > 0 ? "vocab" : "done");
+    },
+    [key, update, vocabQs.length]
+  );
+
+  const finishVocab = useCallback(
+    (answered: AnsweredQuestion[], pct: number) => {
+      setVocabPct(pct);
+      update((prev) => recordVocab(prev, answered));
       setPhase("done");
     },
-    [key, update]
+    [update]
   );
+
+  // Another round of this lesson's words. `progress` already holds the last
+  // round's answers, so unseen words come first and the whole lesson gets covered.
+  const startVocabRound = useCallback(() => {
+    setVocabQs(toVocabQuestions(vocabRound(wordsInLesson, slug, progress)));
+    setVocabPct(null);
+    setVocabRoundNo((n) => n + 1);
+    setPhase("vocab");
+  }, [toVocabQuestions, wordsInLesson, slug, progress]);
 
   const body = useMemo(() => {
     if (!topicData || !lesson) return "";
@@ -204,6 +247,7 @@ export default function LessonPlayerPage() {
   const position = topic.lessons.findIndex((l) => l.id === lesson.id) + 1;
   const upcoming = nextLesson(topics, slug, lesson.id);
   const passed = checkPct !== null && checkPct >= PASS_PCT;
+  const unseenWords = unseenVocabCount(wordsInLesson, slug, progress);
   const bilingual = dual && Boolean(topicData?.contentEn);
 
   return (
@@ -233,8 +277,9 @@ export default function LessonPlayerPage() {
           ...(warmupQs.length > 0 ? [["warmup", pick("Khởi động", "Warm-up")] as [Phase, string]] : []),
           ["read", pick("Đọc", "Read")] as [Phase, string],
           ["check", pick("Kiểm tra", "Check")] as [Phase, string],
+          ...(wordsInLesson.length > 0 ? [["vocab", pick("Từ vựng", "Vocabulary")] as [Phase, string]] : []),
         ].map(([id, label], i) => {
-          const order: Phase[] = ["warmup", "read", "check", "done"];
+          const order: Phase[] = ["warmup", "read", "check", "vocab", "done"];
           const done = order.indexOf(phase) > order.indexOf(id);
           const active = phase === id;
 
@@ -317,6 +362,28 @@ export default function LessonPlayerPage() {
         )
       )}
 
+      {built && phase === "vocab" && vocabQs.length > 0 && (
+        <div className="space-y-3">
+          <LessonTest
+            key={vocabRoundNo}
+            questions={vocabQs}
+            heading={pick("Từ vựng tiếng Anh", "English vocabulary")}
+            blurb={pick(
+              `Nghĩa của các từ tiếng Anh dùng trong bài này (${wordsInLesson.length} từ, mỗi lượt ${vocabQs.length}). Không tính vào điểm bài học.`,
+              `The meaning of English words used in this lesson (${wordsInLesson.length} words, ${vocabQs.length} per round). Does not count towards the lesson score.`
+            )}
+            ctaLabel={pick("Xem kết quả →", "See result →")}
+            onFinish={finishVocab}
+          />
+          <button
+            onClick={() => setPhase("done")}
+            className="inline-block py-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+          >
+            {pick("Bỏ qua phần từ vựng →", "Skip vocabulary →")}
+          </button>
+        </div>
+      )}
+
       {phase === "done" && (
         <div className="space-y-4">
           <div
@@ -341,6 +408,33 @@ export default function LessonPlayerPage() {
             )}
           </div>
 
+          {wordsInLesson.length > 0 && (
+            <div className="card flex flex-wrap items-center justify-between gap-3">
+              <div className="text-sm min-w-0">
+                <div className="font-medium">
+                  {pick("Từ vựng tiếng Anh", "English vocabulary")}
+                  {vocabPct !== null && <span className="ml-2 text-zinc-500">{vocabPct}%</span>}
+                </div>
+                <p className="text-xs text-zinc-500 mt-0.5">
+                  {unseenWords > 0
+                    ? pick(
+                        `Còn ${unseenWords}/${wordsInLesson.length} từ chưa luyện trong bài này.`,
+                        `${unseenWords} of ${wordsInLesson.length} words in this lesson not practised yet.`
+                      )
+                    : pick(
+                        `Đã luyện cả ${wordsInLesson.length} từ — lượt tiếp theo ưu tiên từ bạn hay sai.`,
+                        `All ${wordsInLesson.length} words practised — the next round favours the ones you miss.`
+                      )}
+                </p>
+              </div>
+              <button onClick={startVocabRound} className="btn-secondary text-sm">
+                {vocabPct === null
+                  ? pick("Luyện từ vựng", "Practise words")
+                  : pick("Thêm một lượt từ", "Another round of words")}
+              </button>
+            </div>
+          )}
+
           <div className="flex flex-wrap gap-2">
             {upcoming ? (
               <Link
@@ -358,6 +452,7 @@ export default function LessonPlayerPage() {
               onClick={() => {
                 setPhase("read");
                 setCheckPct(null);
+                setVocabPct(null);
                 setBuilt(false);
               }}
               className="btn-secondary text-sm"

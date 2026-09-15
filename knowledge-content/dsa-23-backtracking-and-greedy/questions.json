@@ -1,0 +1,342 @@
+[
+  {
+    "id": "q1",
+    "question": "Điểm khác biệt cốt lõi giữa backtracking và greedy là gì?",
+    "questionEn": "What is the core difference between backtracking and greedy?",
+    "options": [
+      "Backtracking luôn chạy O(n log n), còn greedy luôn tốn hàm mũ",
+      "Greedy dùng đệ quy, còn backtracking bắt buộc phải viết bằng vòng lặp",
+      "Backtracking hoàn tác lựa chọn để thử phương án khác; greedy chốt một lựa chọn mỗi bước và không xem lại",
+      "Greedy liệt kê mọi lời giải, còn backtracking chỉ trả về một lời giải tối ưu"
+    ],
+    "optionsEn": [
+      "Backtracking always runs in O(n log n), while greedy is always exponential",
+      "Greedy uses recursion, while backtracking must be written with loops",
+      "Backtracking undoes choices to try alternatives; greedy commits to one choice per step and never revisits it",
+      "Greedy lists every solution, while backtracking returns only one optimal solution"
+    ],
+    "answer": 2,
+    "explanation": "Backtracking duyệt cây không gian trạng thái theo chiều sâu, cắt nhánh chết và quay lại thử nhánh khác — vét cạn nên luôn đúng nhưng thường hàm mũ. Greedy chỉ đi một đường từ gốc tới lá: nhanh, nhưng chỉ đúng khi bài toán có greedy-choice property.",
+    "explanationEn": "Backtracking walks the state-space tree depth-first, cutting dead branches and returning to try others — exhaustive, so always correct but usually exponential. Greedy walks a single root-to-leaf path: fast, but only correct when the problem has the greedy-choice property."
+  },
+  {
+    "id": "q2",
+    "question": "Hàm sau trả về gì khi gọi `subsets([1, 2])`?\n`function subsets(nums) {\n  const result = [];\n  const path = [];\n  function bt(start) {\n    result.push(path);\n    for (let i = start; i < nums.length; i++) {\n      path.push(nums[i]); bt(i + 1); path.pop();\n    }\n  }\n  bt(0);\n  return result;\n}`",
+    "questionEn": "What does this return for `subsets([1, 2])`?\n`function subsets(nums) {\n  const result = [];\n  const path = [];\n  function bt(start) {\n    result.push(path);\n    for (let i = start; i < nums.length; i++) {\n      path.push(nums[i]); bt(i + 1); path.pop();\n    }\n  }\n  bt(0);\n  return result;\n}`",
+    "options": [
+      "`[[], [], [], []]` — bốn tham chiếu tới cùng một mảng đã rỗng",
+      "`[[], [1], [1, 2], [2]]`",
+      "`[[1, 2]]`",
+      "`[[], [1], [2]]`"
+    ],
+    "optionsEn": [
+      "`[[], [], [], []]` — four references to the same, now empty, array",
+      "`[[], [1], [1, 2], [2]]`",
+      "`[[1, 2]]`",
+      "`[[], [1], [2]]`"
+    ],
+    "answer": 0,
+    "explanation": "`result.push(path)` lưu tham chiếu chứ không phải bản sao. Hàm ghi lại 4 lần (4 tập con) nhưng cả 4 phần tử đều trỏ tới cùng `path`, và sau khi mọi `pop()` chạy xong thì `path` rỗng. Sửa bằng `result.push([...path])`.",
+    "explanationEn": "`result.push(path)` stores a reference, not a copy. It records 4 times (4 subsets), but all 4 entries point at the same `path`, which is empty once every `pop()` has run. Fix it with `result.push([...path])`."
+  },
+  {
+    "id": "q3",
+    "question": "Trong khuôn mẫu backtracking, vì sao phải có bước \"huỷ chọn\" (ví dụ `path.pop()`) sau lời gọi đệ quy?",
+    "questionEn": "In the backtracking template, why is the \"un-choose\" step (e.g. `path.pop()`) needed after the recursive call?",
+    "options": [
+      "Để giải phóng stack frame, tránh stack overflow",
+      "Để biến thời gian chạy từ hàm mũ thành đa thức",
+      "Để sort lại input sau mỗi lời gọi",
+      "Để trạng thái dùng chung trở lại như trước khi chọn, nhánh anh em kế tiếp không bị lẫn lựa chọn cũ"
+    ],
+    "optionsEn": [
+      "To free the stack frame and avoid a stack overflow",
+      "To turn an exponential running time into a polynomial one",
+      "To re-sort the input after each call",
+      "To restore the shared state so the next sibling branch does not inherit the old choice"
+    ],
+    "answer": 3,
+    "explanation": "Mọi nhánh cùng dùng chung một `path` (và các biến như `used`, các Set). Nếu không hoàn tác, lựa chọn của nhánh vừa khám phá sẽ rò rỉ sang nhánh sau và sinh ra kết quả sai. Stack frame tự được giải phóng khi hàm trả về; huỷ chọn không thay đổi độ phức tạp.",
+    "explanationEn": "Every branch shares one `path` (and helpers like `used` or the constraint sets). Without undoing, the choice from the branch just explored leaks into the next one and produces wrong results. Stack frames are released automatically on return, and un-choosing does not change the complexity."
+  },
+  {
+    "id": "q4",
+    "question": "Độ phức tạp thời gian để sinh (và sao chép) mọi tập con của n phần tử phân biệt là gì?",
+    "questionEn": "What is the time complexity of generating (and copying) every subset of n distinct elements?",
+    "options": [
+      "O(n²)",
+      "O(n · 2ⁿ)",
+      "O(n · n!)",
+      "O(2n)"
+    ],
+    "optionsEn": [
+      "O(n²)",
+      "O(n · 2ⁿ)",
+      "O(n · n!)",
+      "O(2n)"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi phần tử có hai trạng thái (có/không) nên có 2ⁿ tập con; sao chép mỗi tập vào kết quả tốn tối đa O(n). O(n · n!) là của hoán vị, nơi thứ tự có ý nghĩa.",
+    "explanationEn": "Each element is either in or out, so there are 2ⁿ subsets; copying each into the result costs up to O(n). O(n · n!) belongs to permutations, where order matters."
+  },
+  {
+    "id": "q5",
+    "question": "Với hàm `subsets` dùng start index dưới đây, tập con thứ NĂM được ghi vào `result` khi gọi `subsets([1, 2, 3])` là gì?\n`function backtrack(start) {\n  result.push([...path]);\n  for (let i = start; i < nums.length; i++) {\n    path.push(nums[i]);\n    backtrack(i + 1);\n    path.pop();\n  }\n}`",
+    "questionEn": "Using this start-index `subsets` helper, which subset is the FIFTH one recorded in `result` for `subsets([1, 2, 3])`?\n`function backtrack(start) {\n  result.push([...path]);\n  for (let i = start; i < nums.length; i++) {\n    path.push(nums[i]);\n    backtrack(i + 1);\n    path.pop();\n  }\n}`",
+    "options": [
+      "`[2]`",
+      "`[1, 2, 3]`",
+      "`[1, 3]`",
+      "`[2, 3]`"
+    ],
+    "optionsEn": [
+      "`[2]`",
+      "`[1, 2, 3]`",
+      "`[1, 3]`",
+      "`[2, 3]`"
+    ],
+    "answer": 2,
+    "explanation": "Duyệt theo chiều sâu nên thứ tự là `[]`, `[1]`, `[1,2]`, `[1,2,3]`, rồi quay lui bỏ 3 và 2, thử 3 sau 1: `[1,3]`. Sau đó mới tới `[2]`, `[2,3]`, `[3]`.",
+    "explanationEn": "The walk is depth-first, so the order is `[]`, `[1]`, `[1,2]`, `[1,2,3]`, then it backtracks past 3 and 2 and tries 3 after 1: `[1,3]`. Only then come `[2]`, `[2,3]` and `[3]`."
+  },
+  {
+    "id": "q6",
+    "question": "Trong code sinh hoán vị, một bạn thay mảng `used` bằng start index (`for (let i = start; …)` và gọi `backtrack(i + 1)`), vẫn ghi kết quả khi `path.length === nums.length`. Với `[1, 2, 3]` hàm giờ trả về gì?",
+    "questionEn": "In the permutations code, a colleague replaces the `used` array with a start index (`for (let i = start; …)` and `backtrack(i + 1)`), still recording when `path.length === nums.length`. What does it now return for `[1, 2, 3]`?",
+    "options": [
+      "Chỉ `[[1, 2, 3]]` — start index chỉ cho phép thứ tự tăng dần của chỉ số",
+      "Vẫn đủ 6 hoán vị",
+      "Tám tập con",
+      "Vòng lặp vô hạn"
+    ],
+    "optionsEn": [
+      "Only `[[1, 2, 3]]` — a start index only allows indices in increasing order",
+      "All 6 permutations, unchanged",
+      "The eight subsets",
+      "An infinite loop"
+    ],
+    "answer": 0,
+    "explanation": "Start index buộc mỗi phần tử chỉ được chọn sau các phần tử đứng trước nó — đó là cách tránh lặp cho tập con và tổ hợp, nơi thứ tự không quan trọng. Chỉ có một cách chọn đủ 3 phần tử theo thứ tự chỉ số tăng dần. Hoán vị cần xét lại mọi phần tử chưa dùng ở mỗi vị trí, nên phải dùng `used`.",
+    "explanationEn": "A start index forces each element to be picked only after the ones before it — that is how subsets and combinations avoid repeats when order does not matter. There is just one way to pick all 3 in increasing index order. Permutations must reconsider every unused element at every position, hence `used`."
+  },
+  {
+    "id": "q7",
+    "question": "Mảng `[1, 2, 3, 4, 5]` có bao nhiêu hoán vị?",
+    "questionEn": "How many permutations does `[1, 2, 3, 4, 5]` have?",
+    "options": [
+      "25",
+      "32",
+      "60",
+      "120"
+    ],
+    "optionsEn": [
+      "25",
+      "32",
+      "60",
+      "120"
+    ],
+    "answer": 3,
+    "explanation": "5! = 5 · 4 · 3 · 2 · 1 = 120: vị trí đầu có 5 lựa chọn, vị trí hai còn 4, và cứ thế. 32 = 2⁵ là số tập con; 25 = 5² không liên quan tới bài toán này.",
+    "explanationEn": "5! = 5 · 4 · 3 · 2 · 1 = 120: 5 options for the first slot, 4 for the second, and so on. 32 = 2⁵ is the number of subsets; 25 = 5² has nothing to do with this problem."
+  },
+  {
+    "id": "q8",
+    "question": "Trong combination sum (mỗi số được dùng lại nhiều lần), lời gọi đệ quy là `backtrack(i, remaining - sorted[i])` chứ không phải `backtrack(i + 1, …)` hay `backtrack(0, …)`. Vì sao?",
+    "questionEn": "In combination sum (numbers may be reused), the recursive call is `backtrack(i, remaining - sorted[i])`, not `backtrack(i + 1, …)` or `backtrack(0, …)`. Why?",
+    "options": [
+      "`i` giúp thuật toán chạy O(n) thay vì hàm mũ",
+      "`i` cho phép dùng lại chính số đó, nhưng không quay về số nhỏ hơn nên không sinh cả `[2, 3]` lẫn `[3, 2]`",
+      "`i + 1` sẽ gây stack overflow với mọi input",
+      "`0` và `i` cho kết quả giống hệt nhau; chọn `i` chỉ vì dễ đọc"
+    ],
+    "optionsEn": [
+      "`i` makes the algorithm O(n) instead of exponential",
+      "`i` allows reusing the same number, but never going back to smaller ones, so it cannot emit both `[2, 3]` and `[3, 2]`",
+      "`i + 1` would overflow the stack for every input",
+      "`0` and `i` give identical results; `i` is only for readability"
+    ],
+    "answer": 1,
+    "explanation": "`i + 1` cấm dùng lại số hiện tại (sẽ mất `[2, 2, 3]`). `0` cho phép quay lại số trước, nên cùng một tổ hợp xuất hiện theo nhiều thứ tự. `i` là điểm cân bằng: được lặp lại, nhưng các số trong path luôn không giảm.",
+    "explanationEn": "`i + 1` forbids reusing the current number (losing `[2, 2, 3]`). `0` allows going back to earlier numbers, so the same combination appears in several orders. `i` is the balance: repetition allowed, but the path stays non-decreasing."
+  },
+  {
+    "id": "q9",
+    "question": "Để sinh tập con không trùng từ `[1, 2, 2]` (đã sort), code dùng `if (i > start && sorted[i] === sorted[i - 1]) continue;`. Nếu đổi `i > start` thành `i > 0` thì sao?",
+    "questionEn": "To generate unique subsets of `[1, 2, 2]` (sorted), the code uses `if (i > start && sorted[i] === sorted[i - 1]) continue;`. What happens if `i > start` becomes `i > 0`?",
+    "options": [
+      "Không đổi gì — hai điều kiện tương đương",
+      "Kết quả lại bị trùng `[2]`",
+      "Hàm chạy vô hạn",
+      "Mất các tập con hợp lệ như `[2, 2]` và `[1, 2, 2]`"
+    ],
+    "optionsEn": [
+      "Nothing changes — the two conditions are equivalent",
+      "The result contains `[2]` twice again",
+      "The function loops forever",
+      "Valid subsets like `[2, 2]` and `[1, 2, 2]` are lost"
+    ],
+    "answer": 3,
+    "explanation": "Ta chỉ muốn bỏ giá trị trùng ở CÙNG một tầng (nhánh anh em). Với `i > 0`, số 2 thứ hai bị bỏ cả khi nó là lựa chọn ở tầng sâu hơn ngay sau số 2 thứ nhất (i === start), nên không bao giờ tạo được `[2, 2]` hay `[1, 2, 2]`.",
+    "explanationEn": "We only want to skip a repeated value at the SAME level (among siblings). With `i > 0`, the second 2 is skipped even when it is the first choice at a deeper level right after the first 2 (i === start), so `[2, 2]` and `[1, 2, 2]` can never be built."
+  },
+  {
+    "id": "q10",
+    "question": "Trong N-Queens, hai ô `(r1, c1)` và `(r2, c2)` nằm trên cùng một đường chéo dạng `/` khi nào?",
+    "questionEn": "In N-Queens, when are the squares `(r1, c1)` and `(r2, c2)` on the same `/` diagonal?",
+    "options": [
+      "Khi `r1 + c1 === r2 + c2`",
+      "Khi `r1 - c1 === r2 - c2`",
+      "Khi `r1 * c1 === r2 * c2`",
+      "Khi `c1 === c2`"
+    ],
+    "optionsEn": [
+      "When `r1 + c1 === r2 + c2`",
+      "When `r1 - c1 === r2 - c2`",
+      "When `r1 * c1 === r2 * c2`",
+      "When `c1 === c2`"
+    ],
+    "answer": 0,
+    "explanation": "Đi dọc đường chéo `/` thì hàng tăng 1 và cột giảm 1, nên tổng `row + col` giữ nguyên. Đường chéo `\\` giữ nguyên hiệu `row − col`; `c1 === c2` là cùng cột. Lưu ba giá trị này trong Set cho phép kiểm tra xung đột O(1).",
+    "explanationEn": "Moving along a `/` diagonal adds 1 to the row and subtracts 1 from the column, so `row + col` stays constant. A `\\` diagonal keeps `row − col` constant; `c1 === c2` is the same column. Storing these three values in Sets gives O(1) conflict checks."
+  },
+  {
+    "id": "q11",
+    "question": "Hai tính chất nào cho phép một thuật toán greedy chắc chắn đúng?",
+    "questionEn": "Which two properties make a greedy algorithm guaranteed to be correct?",
+    "options": [
+      "Input đã được sort và không có phần tử trùng",
+      "Bài toán con trùng lặp và độ sâu đệ quy nhỏ",
+      "Tính chất lựa chọn tham lam và cấu trúc con tối ưu",
+      "Đồ thị không có chu trình và trọng số không âm"
+    ],
+    "optionsEn": [
+      "The input is sorted and has no duplicates",
+      "Overlapping subproblems and a small recursion depth",
+      "The greedy-choice property and optimal substructure",
+      "An acyclic graph and non-negative weights"
+    ],
+    "answer": 2,
+    "explanation": "Greedy-choice property: tồn tại lời giải tối ưu bắt đầu bằng lựa chọn tham lam. Optimal substructure: phần còn lại là bài toán cùng dạng nhỏ hơn. Bài toán con trùng lặp là dấu hiệu của DP, không phải điều kiện của greedy.",
+    "explanationEn": "Greedy-choice property: some optimal solution starts with the greedy choice. Optimal substructure: what remains is a smaller instance of the same problem. Overlapping subproblems signal DP; they are not a greedy requirement."
+  },
+  {
+    "id": "q12",
+    "question": "Bạn cần chọn được nhiều cuộc họp không chồng lấn nhất từ một danh sách `[start, end]`. Nên sort theo tiêu chí nào trước khi duyệt tham lam?",
+    "questionEn": "You must pick the maximum number of non-overlapping meetings from a list of `[start, end]`. What should you sort by before the greedy pass?",
+    "options": [
+      "Thời điểm bắt đầu tăng dần",
+      "Thời điểm kết thúc tăng dần",
+      "Độ dài cuộc họp tăng dần",
+      "Độ dài cuộc họp giảm dần"
+    ],
+    "optionsEn": [
+      "Start time, ascending",
+      "End time, ascending",
+      "Duration, ascending",
+      "Duration, descending"
+    ],
+    "answer": 1,
+    "explanation": "Cuộc họp kết thúc sớm nhất để lại nhiều thời gian nhất cho phần còn lại (chứng minh bằng lập luận hoán đổi). Bắt đầu sớm nhất sai với `[0,10], [1,2], [3,4]`; ngắn nhất sai với `[0,5], [4,7], [6,11]`.",
+    "explanationEn": "The meeting that ends first leaves the most time for the rest (provable with an exchange argument). Earliest start fails on `[0,10], [1,2], [3,4]`; shortest duration fails on `[0,5], [4,7], [6,11]`."
+  },
+  {
+    "id": "q13",
+    "question": "Hàm sau trả về bao nhiêu khoảng với input `[[1, 2], [2, 3], [3, 4], [1, 3]]`?\n`function maxNonOverlapping(intervals) {\n  const sorted = [...intervals].sort((a, b) => a[1] - b[1]);\n  const chosen = [];\n  let lastEnd = -Infinity;\n  for (const [start, end] of sorted) {\n    if (start >= lastEnd) {\n      chosen.push([start, end]);\n      lastEnd = end;\n    }\n  }\n  return chosen;\n}`",
+    "questionEn": "How many intervals does this return for `[[1, 2], [2, 3], [3, 4], [1, 3]]`?\n`function maxNonOverlapping(intervals) {\n  const sorted = [...intervals].sort((a, b) => a[1] - b[1]);\n  const chosen = [];\n  let lastEnd = -Infinity;\n  for (const [start, end] of sorted) {\n    if (start >= lastEnd) {\n      chosen.push([start, end]);\n      lastEnd = end;\n    }\n  }\n  return chosen;\n}`",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "optionsEn": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "answer": 0,
+    "explanation": "Sau khi sort theo end: `[1,2]`, `[2,3]`, `[1,3]`, `[3,4]`. Chọn `[1,2]` (lastEnd 2), chọn `[2,3]` vì 2 >= 2 (lastEnd 3), bỏ `[1,3]` vì 1 < 3, chọn `[3,4]`. Kết quả 3 khoảng — điều kiện `>=` cho phép hai khoảng chạm nhau.",
+    "explanationEn": "Sorted by end: `[1,2]`, `[2,3]`, `[1,3]`, `[3,4]`. Take `[1,2]` (lastEnd 2), take `[2,3]` since 2 >= 2 (lastEnd 3), skip `[1,3]` since 1 < 3, take `[3,4]`. That is 3 intervals — the `>=` lets touching intervals both count."
+  },
+  {
+    "id": "q14",
+    "question": "`canJump([2, 0, 0, 1])` trả về gì?\n`function canJump(nums) {\n  let farthest = 0;\n  for (let i = 0; i < nums.length; i++) {\n    if (i > farthest) return false;\n    farthest = Math.max(farthest, i + nums[i]);\n  }\n  return true;\n}`",
+    "questionEn": "What does `canJump([2, 0, 0, 1])` return?\n`function canJump(nums) {\n  let farthest = 0;\n  for (let i = 0; i < nums.length; i++) {\n    if (i > farthest) return false;\n    farthest = Math.max(farthest, i + nums[i]);\n  }\n  return true;\n}`",
+    "options": [
+      "`true`, vì phần tử cuối là 1",
+      "`true`, vì từ vị trí 0 nhảy được 2 bước",
+      "`false`, vì dừng ngay ở vị trí 1",
+      "`false`, vì vị trí 3 vượt quá tầm với xa nhất là 2"
+    ],
+    "optionsEn": [
+      "`true`, because the last element is 1",
+      "`true`, because index 0 can jump 2 steps",
+      "`false`, because it stops at index 1",
+      "`false`, because index 3 lies beyond the farthest reach of 2"
+    ],
+    "answer": 3,
+    "explanation": "i = 0: farthest = 2. i = 1 và i = 2: 1 + 0 và 2 + 0 không vượt 2. i = 3: 3 > 2 nên trả về false. Thuật toán tham lam này là O(n) thời gian và O(1) bộ nhớ.",
+    "explanationEn": "i = 0: farthest = 2. i = 1 and i = 2: 1 + 0 and 2 + 0 do not exceed 2. i = 3: 3 > 2, so it returns false. This greedy runs in O(n) time and O(1) space."
+  },
+  {
+    "id": "q15",
+    "question": "Với mệnh giá `{1, 3, 4}` và số tiền 6, greedy \"luôn lấy đồng lớn nhất còn vừa\" dùng bao nhiêu đồng, và tối ưu là bao nhiêu?",
+    "questionEn": "With coins `{1, 3, 4}` and amount 6, how many coins does the \"always take the largest coin that fits\" greedy use, and what is optimal?",
+    "options": [
+      "Greedy 2 đồng, tối ưu 2 đồng",
+      "Greedy 2 đồng, tối ưu 3 đồng",
+      "Greedy 3 đồng, tối ưu 2 đồng",
+      "Greedy 6 đồng, tối ưu 2 đồng"
+    ],
+    "optionsEn": [
+      "Greedy 2 coins, optimal 2 coins",
+      "Greedy 2 coins, optimal 3 coins",
+      "Greedy 3 coins, optimal 2 coins",
+      "Greedy 6 coins, optimal 2 coins"
+    ],
+    "answer": 2,
+    "explanation": "Greedy lấy 4, còn 2, rồi 1 + 1: tổng 3 đồng. Tối ưu là 3 + 3: 2 đồng. Lựa chọn tham lam (lấy 4) chặn đường tới tối ưu, nên greedy-choice property không đúng; bài này cần DP với O(amount · k) thời gian.",
+    "explanationEn": "Greedy takes 4, leaving 2, then 1 + 1: 3 coins. Optimal is 3 + 3: 2 coins. The greedy choice (taking 4) blocks the optimum, so the greedy-choice property fails; this needs DP in O(amount · k) time."
+  },
+  {
+    "id": "q16",
+    "question": "Bài toán nào phù hợp nhất với backtracking?",
+    "questionEn": "Which problem is the best fit for backtracking?",
+    "options": [
+      "Chọn nhiều cuộc họp không chồng lấn nhất",
+      "Sinh mọi chuỗi ngoặc hợp lệ gồm n cặp `()`",
+      "Tính số đồng xu ít nhất với mệnh giá tuỳ ý",
+      "Tìm đường đi ngắn nhất trên đồ thị trọng số không âm"
+    ],
+    "optionsEn": [
+      "Choosing the maximum number of non-overlapping meetings",
+      "Generating every valid string of n pairs of `()`",
+      "Computing the fewest coins for arbitrary denominations",
+      "Finding the shortest path in a graph with non-negative weights"
+    ],
+    "answer": 1,
+    "explanation": "\"Sinh mọi …\" là tín hiệu của backtracking: thêm `(` hoặc `)` rồi cắt nhánh khi số `)` vượt số `(`. Lập lịch cuộc họp là greedy, số đồng xu ít nhất là DP, còn đường đi ngắn nhất trọng số không âm là Dijkstra (một thuật toán greedy).",
+    "explanationEn": "\"Generate every …\" signals backtracking: add `(` or `)` and prune when `)` would outnumber `(`. Meeting scheduling is greedy, fewest coins is DP, and non-negative shortest path is Dijkstra (itself a greedy algorithm)."
+  },
+  {
+    "id": "q17",
+    "question": "Phát biểu nào về greedy theo tỉ lệ giá trị/khối lượng cho bài toán ba lô là ĐÚNG?",
+    "questionEn": "Which statement about greedy by value/weight ratio for knapsack problems is TRUE?",
+    "options": [
+      "Nó tối ưu cho cả fractional knapsack lẫn 0/1 knapsack",
+      "Nó không tối ưu cho cả hai phiên bản",
+      "Nó tối ưu cho 0/1 knapsack nhưng không tối ưu cho fractional knapsack",
+      "Nó tối ưu cho fractional knapsack nhưng có thể sai với 0/1 knapsack"
+    ],
+    "optionsEn": [
+      "It is optimal for both fractional and 0/1 knapsack",
+      "It is optimal for neither version",
+      "It is optimal for 0/1 knapsack but not for fractional knapsack",
+      "It is optimal for fractional knapsack but can be wrong for 0/1 knapsack"
+    ],
+    "answer": 3,
+    "explanation": "Khi được cắt món đồ, lấy theo tỉ lệ cao nhất luôn tối ưu. Khi không được cắt: sức chứa 50, các món (10, 60), (20, 100), (30, 120) — greedy lấy hai món đầu được 160, còn tối ưu là hai món sau với 220. 0/1 knapsack cần DP.",
+    "explanationEn": "When items can be split, taking the highest ratio first is always optimal. When they cannot: capacity 50, items (10, 60), (20, 100), (30, 120) — greedy takes the first two for 160, while the optimum is the last two for 220. 0/1 knapsack needs DP."
+  }
+]

@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI biểu thức rút gọn thành O(n).",
+      "promptEn": "Pick TWO expressions that simplify to O(n).",
+      "options": [
+        "O(n² + n)",
+        "O(1000n + 50)",
+        "O(500)",
+        "O(n log n)",
+        "O(3n + log n)"
+      ],
+      "optionsEn": [
+        "O(n² + n)",
+        "O(1000n + 50)",
+        "O(500)",
+        "O(n log n)",
+        "O(3n + log n)"
+      ],
+      "answers": [1, 4],
+      "explanation": "Bỏ hằng số và giữ số hạng tăng nhanh nhất: 1000n + 50 → n, và 3n + log n → n vì n tăng nhanh hơn log n. n² + n rút gọn thành n², hằng số 500 thành O(1), còn n log n tăng nhanh hơn n nên không rút gọn được.",
+      "explanationEn": "Drop constants and keep the fastest-growing term: 1000n + 50 → n, and 3n + log n → n because n outgrows log n. n² + n simplifies to n², the constant 500 to O(1), and n log n grows faster than n so it cannot shrink to it.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI hàm có auxiliary space O(1).",
+      "promptEn": "Pick TWO functions that use O(1) auxiliary space.",
+      "options": [
+        "Hàm tạo mảng mới chứa mỗi phần tử nhân đôi",
+        "Hàm đệ quy sumTo(n) gọi sumTo(n - 1) cho đến 0",
+        "Hàm duyệt mảng và cộng dồn vào một biến total",
+        "Hàm lưu mọi phần tử đã gặp vào một Set để tìm trùng lặp",
+        "Hàm duyệt mảng và giữ lại giá trị lớn nhất đã gặp"
+      ],
+      "optionsEn": [
+        "A function that builds a new array with every element doubled",
+        "A recursive sumTo(n) that calls sumTo(n - 1) down to 0",
+        "A function that loops over an array adding into one total variable",
+        "A function that stores every element seen in a Set to find duplicates",
+        "A function that loops over an array keeping the largest value seen"
+      ],
+      "answers": [2, 4],
+      "explanation": "Cộng dồn vào total và giữ giá trị lớn nhất chỉ cần vài biến cố định. Mảng mới và Set lớn dần theo n (O(n)), còn đệ quy sâu n tầng giữ n stack frame trên call stack (O(n)).",
+      "explanationEn": "Summing into a total and tracking the maximum need only a fixed handful of variables. The new array and the Set grow with n (O(n)), and recursion n levels deep keeps n frames on the call stack (O(n)).",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Một thuật toán chia đôi phần việc còn lại sau mỗi bước (như binary search). Độ phức tạp thời gian của nó là gì?",
+      "promptEn": "An algorithm halves the remaining work at every step (like binary search). What is its time complexity?",
+      "answer": "O(log n)",
+      "answerEn": "O(log n)",
+      "accept": [
+        "O(log n)",
+        "log n",
+        "o(logn)",
+        "logn",
+        "O(log2 n)",
+        "log2 n",
+        "logarithmic",
+        "logarit"
+      ],
+      "explanation": "O(log n). Logarit cơ số 2 đếm số lần chia đôi n cho đến khi còn 1 — một triệu phần tử chỉ cần khoảng 20 bước.",
+      "explanationEn": "O(log n). A base-2 logarithm counts how many times n can be halved down to 1 — a million items take only about 20 steps.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Thuật ngữ nào chỉ bộ nhớ mà thuật toán cấp phát thêm, KHÔNG tính phần bộ nhớ của input?",
+      "promptEn": "What is the term for the memory an algorithm allocates on top of its input, NOT counting the input itself?",
+      "answer": "Auxiliary space",
+      "answerEn": "Auxiliary space",
+      "accept": [
+        "auxiliary space",
+        "auxiliary space complexity",
+        "aux space",
+        "khong gian phu tro",
+        "không gian phụ trợ"
+      ],
+      "explanation": "Auxiliary space (không gian phụ trợ). Khi nói \"space complexity\" mà không nói gì thêm, người ta thường ngầm hiểu là auxiliary space.",
+      "explanationEn": "Auxiliary space. When people say \"space complexity\" without qualification, auxiliary space is what they usually mean.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi đoạn code với độ phức tạp thời gian đúng.",
+      "promptEn": "Match each piece of code to its time complexity.",
+      "pairs": [
+        {
+          "left": "return n * (n + 1) / 2",
+          "leftEn": "return n * (n + 1) / 2",
+          "right": "O(1)",
+          "rightEn": "O(1)"
+        },
+        {
+          "left": "for (let i = 1; i < n; i *= 2)",
+          "leftEn": "for (let i = 1; i < n; i *= 2)",
+          "right": "O(log n)",
+          "rightEn": "O(log n)"
+        },
+        {
+          "left": "Hai vòng for từ 0 đến n đặt nối tiếp nhau",
+          "leftEn": "Two for loops from 0 to n, one after the other",
+          "right": "O(n)",
+          "rightEn": "O(n)"
+        },
+        {
+          "left": "Hai vòng for từ 0 đến n lồng nhau",
+          "leftEn": "Two for loops from 0 to n, one nested inside the other",
+          "right": "O(n²)",
+          "rightEn": "O(n²)"
+        }
+      ],
+      "explanation": "Công thức không phụ thuộc n; nhân đôi i cho đến n mất log n bước; vòng lặp nối tiếp thì cộng (O(2n) = O(n)); vòng lặp lồng nhau thì nhân (O(n · n)).",
+      "explanationEn": "The formula ignores n; doubling i up to n takes log n steps; sequential loops add (O(2n) = O(n)); nested loops multiply (O(n · n)).",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Sắp xếp các độ phức tạp từ tăng CHẬM nhất (nhanh nhất) đến tăng NHANH nhất (chậm nhất).",
+      "promptEn": "Order these complexities from slowest-growing (fastest) to fastest-growing (slowest).",
+      "items": [
+        {
+          "text": "O(1)",
+          "textEn": "O(1)"
+        },
+        {
+          "text": "O(log n)",
+          "textEn": "O(log n)"
+        },
+        {
+          "text": "O(n)",
+          "textEn": "O(n)"
+        },
+        {
+          "text": "O(n log n)",
+          "textEn": "O(n log n)"
+        },
+        {
+          "text": "O(n²)",
+          "textEn": "O(n²)"
+        },
+        {
+          "text": "O(2ⁿ)",
+          "textEn": "O(2ⁿ)"
+        }
+      ],
+      "explanation": "Với n = 1000: 1, ~10, 1.000, ~10.000, 1.000.000, và 2ⁿ ≈ 10³⁰¹. Mỗi bậc thang là một khoảng cách rất lớn khi n tăng.",
+      "explanationEn": "At n = 1000: 1, ~10, 1,000, ~10,000, 1,000,000, and 2ⁿ ≈ 10³⁰¹. Every rung is a huge gap once n grows.",
+      "id": "d6"
+    }
+  ]
+}

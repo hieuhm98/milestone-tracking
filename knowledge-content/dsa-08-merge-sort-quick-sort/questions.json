@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Với n = 1.000.000, một thuật toán sắp xếp O(n²) làm nhiều phép so sánh hơn một thuật toán O(n log n) khoảng bao nhiêu lần?",
+    "questionEn": "For n = 1,000,000, roughly how many times more comparisons does an O(n²) sort make than an O(n log n) sort?",
+    "options": [
+      "Khoảng 20 lần",
+      "Khoảng 1.000 lần",
+      "Khoảng 50.000 lần",
+      "Khoảng 10¹² lần"
+    ],
+    "optionsEn": [
+      "About 20 times",
+      "About 1,000 times",
+      "About 50,000 times",
+      "About 10¹² times"
+    ],
+    "answer": 2,
+    "explanation": "n² = 10¹², còn n log₂ n ≈ 10⁶ × 20 = 2 × 10⁷. Tỉ lệ là 10¹² / (2 × 10⁷) = 50.000. Đó là khác biệt giữa vài phút (thậm chí vài giờ) và vài mili-giây.",
+    "explanationEn": "n² = 10¹², while n log₂ n ≈ 10⁶ × 20 = 2 × 10⁷. The ratio is 10¹² / (2 × 10⁷) = 50,000. That is the gap between minutes (or hours) and milliseconds."
+  },
+  {
+    "id": "q2",
+    "question": "Hàm `merge` trộn một mảng đã sắp xếp dài n với một mảng đã sắp xếp dài m thành một mảng mới. Độ phức tạp thời gian và bộ nhớ của nó là gì?",
+    "questionEn": "The `merge` helper combines a sorted array of length n and a sorted array of length m into a new array. What are its time and space complexity?",
+    "options": [
+      "Thời gian O(n + m), bộ nhớ O(n + m)",
+      "Thời gian O(n · m), bộ nhớ O(n + m)",
+      "Thời gian O((n + m) log(n + m)), bộ nhớ O(1)",
+      "Thời gian O(n + m), bộ nhớ O(1)"
+    ],
+    "optionsEn": [
+      "O(n + m) time, O(n + m) space",
+      "O(n · m) time, O(n + m) space",
+      "O((n + m) log(n + m)) time, O(1) space",
+      "O(n + m) time, O(1) space"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi bước so sánh đẩy đúng một phần tử vào kết quả và dịch một con trỏ, nên có n + m bước. Mảng kết quả mới chứa n + m phần tử nên bộ nhớ cũng là O(n + m). Không có vòng lặp lồng nhau nào nên không phải O(n · m).",
+    "explanationEn": "Each step pushes exactly one element and advances one pointer, so there are n + m steps. The new result array holds n + m elements, so space is O(n + m) too. There is no nested loop, so it is not O(n · m)."
+  },
+  {
+    "id": "q3",
+    "question": "Hàm `merge` sau có bug. `merge([1, 5], [2, 3, 10])` trả về gì?\n`function merge(a, b) {\n  const res = [];\n  let i = 0;\n  let j = 0;\n  while (i < a.length && j < b.length) {\n    if (a[i] <= b[j]) res.push(a[i++]);\n    else res.push(b[j++]);\n  }\n  return res;\n}`",
+    "questionEn": "This `merge` has a bug. What does `merge([1, 5], [2, 3, 10])` return?\n`function merge(a, b) {\n  const res = [];\n  let i = 0;\n  let j = 0;\n  while (i < a.length && j < b.length) {\n    if (a[i] <= b[j]) res.push(a[i++]);\n    else res.push(b[j++]);\n  }\n  return res;\n}`",
+    "options": [
+      "`[1, 2, 3, 5, 10]`",
+      "`[1, 2, 3]`",
+      "`[1, 5, 2, 3, 10]`",
+      "`[1, 2, 3, 5]`"
+    ],
+    "optionsEn": [
+      "`[1, 2, 3, 5, 10]`",
+      "`[1, 2, 3]`",
+      "`[1, 5, 2, 3, 10]`",
+      "`[1, 2, 3, 5]`"
+    ],
+    "answer": 3,
+    "explanation": "Vòng lặp lấy 1, 2, 3, 5 rồi dừng vì mảng `a` đã hết. Hàm thiếu các vòng lặp chép phần còn lại, nên số 10 của mảng `b` bị mất. Cần thêm hai vòng `while` sau vòng chính.",
+    "explanationEn": "The loop takes 1, 2, 3, 5 and stops because `a` is exhausted. The function never copies the leftovers, so the 10 from `b` is lost. Two more `while` loops after the main one fix it."
+  },
+  {
+    "id": "q4",
+    "question": "Điều gì xảy ra khi gọi `mergeSort([7, 3])` với phiên bản sau?\n`function mergeSort(arr) {\n  if (arr.length === 0) return arr;\n  const mid = Math.floor(arr.length / 2);\n  const left = mergeSort(arr.slice(0, mid));\n  const right = mergeSort(arr.slice(mid));\n  return merge(left, right);\n}`",
+    "questionEn": "What happens when you call `mergeSort([7, 3])` with this version?\n`function mergeSort(arr) {\n  if (arr.length === 0) return arr;\n  const mid = Math.floor(arr.length / 2);\n  const left = mergeSort(arr.slice(0, mid));\n  const right = mergeSort(arr.slice(mid));\n  return merge(left, right);\n}`",
+    "options": [
+      "Trả về `[3, 7]` như bình thường",
+      "Ném `RangeError: Maximum call stack size exceeded`",
+      "Trả về `[7, 3]` không sắp xếp",
+      "Trả về mảng rỗng `[]`"
+    ],
+    "optionsEn": [
+      "Returns `[3, 7]` as usual",
+      "Throws `RangeError: Maximum call stack size exceeded`",
+      "Returns `[7, 3]` unsorted",
+      "Returns an empty array `[]`"
+    ],
+    "answer": 1,
+    "explanation": "Với mảng một phần tử `[7]`, `mid` là 0, nên `arr.slice(mid)` lại là `[7]` — cùng kích thước. `mergeSort([7])` gọi lại chính nó mãi và tràn stack. Base case đúng phải là `arr.length <= 1`.",
+    "explanationEn": "For the one-element array `[7]`, `mid` is 0, so `arr.slice(mid)` is `[7]` again — the same size. `mergeSort([7])` calls itself forever and overflows the stack. The correct base case is `arr.length <= 1`."
+  },
+  {
+    "id": "q5",
+    "question": "Lý do nào giải thích đúng nhất vì sao merge sort là O(n log n)?",
+    "questionEn": "Which reason best explains why merge sort is O(n log n)?",
+    "options": [
+      "Mỗi phần tử được so sánh với log n phần tử khác được chọn ngẫu nhiên",
+      "Hàm merge tốn O(log n) và được gọi n lần",
+      "Chia đôi tạo ra log n tầng, và các lần trộn ở mỗi tầng cộng lại tốn O(n)",
+      "Có n tầng đệ quy, mỗi tầng tốn O(log n)"
+    ],
+    "optionsEn": [
+      "Each element is compared with log n randomly chosen others",
+      "The merge helper costs O(log n) and is called n times",
+      "Halving creates log n levels, and the merges on each level add up to O(n)",
+      "There are n levels of recursion, each costing O(log n)"
+    ],
+    "answer": 2,
+    "explanation": "Chia n làm đôi liên tục đến kích thước 1 mất log n lần, nên cây đệ quy có log n tầng. Ở mỗi tầng, tổng kích thước các mảnh là n, nên các lần trộn cộng lại tốn O(n). Tổng: T(n) = 2T(n/2) + O(n) = O(n log n).",
+    "explanationEn": "Halving n down to size 1 takes log n steps, so the recursion tree has log n levels. On every level the pieces add up to n elements, so the merges together cost O(n). Total: T(n) = 2T(n/2) + O(n) = O(n log n)."
+  },
+  {
+    "id": "q6",
+    "question": "Độ phức tạp bộ nhớ phụ (auxiliary space) của merge sort tiêu chuẩn trên mảng là gì?",
+    "questionEn": "What is the auxiliary space complexity of standard merge sort on an array?",
+    "options": [
+      "O(n), cho các mảng tạm khi trộn",
+      "O(1), vì chỉ dùng vài con trỏ",
+      "O(log n), chỉ cho call stack",
+      "O(n log n), vì mỗi tầng tạo n phần tử mới"
+    ],
+    "optionsEn": [
+      "O(n), for the merge buffers",
+      "O(1), because it only uses a few pointers",
+      "O(log n), for the call stack only",
+      "O(n log n), because every level creates n new elements"
+    ],
+    "answer": 0,
+    "explanation": "Trộn cần mảng tạm chứa tối đa n phần tử; call stack chỉ sâu O(log n) nên bị lấn át. Dù tổng số lần cấp phát theo thời gian có thể là n log n, tại mỗi thời điểm lượng bộ nhớ phụ đang sống chỉ là O(n) — và space complexity đo mức cao nhất tại một thời điểm.",
+    "explanationEn": "Merging needs buffers holding up to n elements; the O(log n) call stack is dominated by that. Although total allocations over time can reach n log n, the live extra memory at any moment is only O(n) — and space complexity measures the peak at one time."
+  },
+  {
+    "id": "q7",
+    "question": "Merge sort nhận vào một mảng ĐÃ sắp xếp sẵn gồm n phần tử. Độ phức tạp thời gian là gì?",
+    "questionEn": "Merge sort receives an array of n elements that is ALREADY sorted. What is the time complexity?",
+    "options": [
+      "O(n), vì mỗi lần trộn chỉ cần chép lại",
+      "O(1), vì không cần hoán đổi phần tử nào",
+      "O(n²), vì đây là worst case của merge sort",
+      "O(n log n), vì nó vẫn chia và trộn đầy đủ"
+    ],
+    "optionsEn": [
+      "O(n), because each merge just copies",
+      "O(1), because no elements need swapping",
+      "O(n²), because this is merge sort's worst case",
+      "O(n log n), because it still splits and merges in full"
+    ],
+    "answer": 3,
+    "explanation": "Merge sort không nhìn vào thứ tự input: nó luôn chia đôi đến base case rồi trộn lại qua đủ log n tầng. Vì vậy best, average và worst case đều là O(n log n). Insertion sort mới là thuật toán tận dụng được input gần như đã sắp xếp (O(n)).",
+    "explanationEn": "Merge sort ignores input order: it always halves down to the base case and merges back through all log n levels. So best, average and worst cases are all O(n log n). Insertion sort is the one that exploits nearly sorted input (O(n))."
+  },
+  {
+    "id": "q8",
+    "question": "Với hàm pivot chọn phần tử đầu làm pivot (như trong bài), lời gọi sau trả về gì?\n`const arr = [4, 8, 2, 1, 5, 7, 6, 3];\npivot(arr);`",
+    "questionEn": "With the first-element pivot helper from this topic, what does this call return?\n`const arr = [4, 8, 2, 1, 5, 7, 6, 3];\npivot(arr);`",
+    "options": [
+      "0",
+      "3",
+      "4",
+      "7"
+    ],
+    "optionsEn": [
+      "0",
+      "3",
+      "4",
+      "7"
+    ],
+    "answer": 1,
+    "explanation": "Pivot là 4. Hàm trả về chỉ số cuối cùng của pivot, bằng số giá trị nhỏ hơn pivot. Có ba giá trị nhỏ hơn 4 (2, 1, 3), nên pivot nằm ở chỉ số 3 và hàm trả về 3.",
+    "explanationEn": "The pivot is 4. The helper returns the pivot's final index, which equals the number of values smaller than it. Three values are smaller than 4 (2, 1, 3), so the pivot ends at index 3 and the helper returns 3."
+  },
+  {
+    "id": "q9",
+    "question": "Sau khi hàm pivot chạy xong trên một đoạn, điều gì được ĐẢM BẢO?",
+    "questionEn": "After the pivot helper finishes on a range, what is GUARANTEED?",
+    "options": [
+      "Pivot ở đúng vị trí cuối cùng; bên trái đều nhỏ hơn, bên phải đều lớn hơn hoặc bằng pivot",
+      "Cả hai phía của pivot đều đã được sắp xếp",
+      "Pivot luôn nằm ở giữa đoạn",
+      "Mảng được chia thành hai nửa có kích thước bằng nhau"
+    ],
+    "optionsEn": [
+      "The pivot is at its final index; everything left is smaller, everything right is greater or equal",
+      "Both sides of the pivot are already sorted",
+      "The pivot always ends in the middle of the range",
+      "The array is split into two halves of equal size"
+    ],
+    "answer": 0,
+    "explanation": "Phân hoạch chỉ đảm bảo vị trí của pivot và phía của từng phần tử; thứ tự bên trong mỗi phía là tuỳ ý — đó là lý do phải đệ quy tiếp. Pivot chỉ rơi vào giữa khi nó gần trung vị, và kích thước hai phía phụ thuộc vào giá trị pivot.",
+    "explanationEn": "Partitioning only fixes the pivot's position and which side each element is on; the order inside each side is arbitrary — which is why we recurse. The pivot lands in the middle only if it is near the median, and the side sizes depend on its value."
+  },
+  {
+    "id": "q10",
+    "question": "`quickSort([4, 6, 9, 1, 2, 5, 3])` gọi pivot trên toàn mảng và nhận về chỉ số 3. Sau đó hai lời gọi đệ quy xử lý các đoạn chỉ số nào?",
+    "questionEn": "`quickSort([4, 6, 9, 1, 2, 5, 3])` calls pivot on the whole array and gets index 3 back. Which index ranges do the two recursive calls handle?",
+    "options": [
+      "0..3 và 3..6",
+      "0..3 và 4..6",
+      "0..2 và 4..6",
+      "0..2 và 3..6"
+    ],
+    "optionsEn": [
+      "0..3 and 3..6",
+      "0..3 and 4..6",
+      "0..2 and 4..6",
+      "0..2 and 3..6"
+    ],
+    "answer": 2,
+    "explanation": "Sau phân hoạch mảng là [3, 1, 2, 4, 9, 5, 6]: pivot 4 đã nằm cố định ở chỉ số 3. quickSort gọi `(left, pivotIndex - 1)` = 0..2 và `(pivotIndex + 1, right)` = 4..6, loại pivot ra khỏi cả hai phía.",
+    "explanationEn": "After partitioning the array is [3, 1, 2, 4, 9, 5, 6]: the pivot 4 is fixed at index 3. quickSort calls `(left, pivotIndex - 1)` = 0..2 and `(pivotIndex + 1, right)` = 4..6, leaving the pivot out of both."
+  },
+  {
+    "id": "q11",
+    "question": "Vì sao quick sort trung bình chỉ cần O(log n) bộ nhớ phụ, trong khi merge sort cần O(n)?",
+    "questionEn": "Why does quick sort need only O(log n) extra space on average, while merge sort needs O(n)?",
+    "options": [
+      "Vì quick sort không dùng đệ quy",
+      "Vì quick sort nén dữ liệu trước khi sắp xếp",
+      "Vì quick sort chỉ sắp xếp một nửa mảng",
+      "Vì quick sort hoán đổi phần tử ngay trong mảng gốc; chỉ call stack tốn bộ nhớ"
+    ],
+    "optionsEn": [
+      "Because quick sort does not use recursion",
+      "Because quick sort compresses the data before sorting",
+      "Because quick sort only sorts half of the array",
+      "Because quick sort swaps elements inside the original array; only the call stack uses memory"
+    ],
+    "answer": 3,
+    "explanation": "Quick sort là thuật toán tại chỗ (in place): phân hoạch chỉ hoán đổi phần tử, không tạo mảng tạm. Bộ nhớ phụ duy nhất là call stack, sâu O(log n) khi pivot chia đều. Merge sort phải có mảng tạm O(n) để trộn.",
+    "explanationEn": "Quick sort is in place: partitioning only swaps elements and never builds a buffer. Its only extra memory is the call stack, O(log n) deep when pivots split evenly. Merge sort needs an O(n) buffer to merge."
+  },
+  {
+    "id": "q12",
+    "question": "Quick sort luôn chọn phần tử ĐẦU TIÊN làm pivot. Input nào gây ra worst case O(n²)?",
+    "questionEn": "Quick sort always picks the FIRST element as the pivot. Which input triggers the O(n²) worst case?",
+    "options": [
+      "Một mảng các số ngẫu nhiên khác nhau",
+      "Một mảng đã được sắp xếp tăng dần",
+      "Một mảng có đúng hai phần tử",
+      "Một mảng có trung vị nằm ở vị trí đầu"
+    ],
+    "optionsEn": [
+      "An array of distinct random numbers",
+      "An array already sorted in ascending order",
+      "An array with exactly two elements",
+      "An array whose median sits in the first position"
+    ],
+    "answer": 1,
+    "explanation": "Với mảng đã sắp xếp, pivot đầu tiên luôn là giá trị nhỏ nhất, nên mỗi lần phân hoạch chỉ tách ra một phần tử. Có n tầng với (n-1) + (n-2) + … + 1 = n(n-1)/2 phép so sánh: O(n²). Nếu trung vị ở đầu thì ngược lại, đó là trường hợp tốt.",
+    "explanationEn": "On sorted input the first element is always the minimum, so each partition peels off just one element. That gives n levels and (n-1) + (n-2) + … + 1 = n(n-1)/2 comparisons: O(n²). A median in the first position is the good case, not the bad one."
+  },
+  {
+    "id": "q13",
+    "question": "`quickSort` (pivot là phần tử đầu, không tối ưu gì thêm) sắp xếp một mảng ĐÃ sắp xếp gồm n phần tử. Độ sâu tối đa của call stack là bao nhiêu?",
+    "questionEn": "`quickSort` (first-element pivot, no extra optimisation) sorts an ALREADY sorted array of n elements. What is the maximum call stack depth?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(1)",
+      "O(n log n)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(log n)",
+      "O(1)",
+      "O(n log n)"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi lời gọi chỉ bớt đi một phần tử (phía trái rỗng, phía phải có n-1), nên chuỗi lời gọi lồng nhau dài n. Stack O(n) — với mảng lớn trong JavaScript có thể ném RangeError. Đệ quy vào phía nhỏ hơn và lặp ở phía lớn hơn sẽ giới hạn stack ở O(log n).",
+    "explanationEn": "Each call removes only one element (left side empty, right side n-1), so the chain of nested calls is n long. That is O(n) stack — in JavaScript a large array can throw a RangeError. Recursing into the smaller side and looping on the larger bounds the stack at O(log n)."
+  },
+  {
+    "id": "q14",
+    "question": "Chọn pivot NGẪU NHIÊN mang lại điều gì cho quick sort?",
+    "questionEn": "What does choosing a RANDOM pivot give quick sort?",
+    "options": [
+      "Đảm bảo worst case là O(n log n) với mọi lần chạy",
+      "Biến quick sort thành thuật toán stable",
+      "Thời gian kỳ vọng O(n log n) với mọi input; O(n²) vẫn có thể nhưng cực kỳ khó xảy ra",
+      "Giảm bộ nhớ phụ xuống O(1)"
+    ],
+    "optionsEn": [
+      "A guaranteed O(n log n) worst case on every run",
+      "It makes quick sort stable",
+      "Expected O(n log n) time on every input; O(n²) remains possible but astronomically unlikely",
+      "It reduces extra space to O(1)"
+    ],
+    "answer": 2,
+    "explanation": "Pivot ngẫu nhiên khiến không có input cụ thể nào (như mảng đã sắp xếp) luôn gây ra trường hợp xấu. Worst case lý thuyết vẫn là O(n²) nếu gặp xui liên tục, nhưng xác suất nhỏ không đáng kể. Nó không ảnh hưởng đến tính stable hay call stack.",
+    "explanationEn": "A random pivot means no particular input (such as sorted data) reliably triggers the bad case. The theoretical worst case is still O(n²) with repeated bad luck, but the probability is negligible. It changes neither stability nor the call stack."
+  },
+  {
+    "id": "q15",
+    "question": "Quick sort dùng hàm pivot với phép so sánh `arr[i] < pivotValue` để sắp xếp một mảng n phần tử đều bằng 7. Chuyện gì xảy ra và cách khắc phục là gì?",
+    "questionEn": "Quick sort uses a pivot helper with the test `arr[i] < pivotValue` to sort an array of n elements that are all 7. What happens, and what is the fix?",
+    "options": [
+      "O(n), vì không có phần tử nào cần hoán đổi; không cần sửa",
+      "O(n log n) như bình thường; không cần sửa",
+      "Lặp vô hạn; đổi `<` thành `<=`",
+      "O(n²), vì mọi phần tử bị đẩy sang một phía; dùng three-way partition"
+    ],
+    "optionsEn": [
+      "O(n), because nothing needs swapping; no fix needed",
+      "O(n log n) as usual; no fix needed",
+      "An infinite loop; change `<` to `<=`",
+      "O(n²), because every element goes to one side; use a three-way partition"
+    ],
+    "answer": 3,
+    "explanation": "Không phần tử nào nhỏ hơn 7, nên pivot ở lại chỉ số đầu và cả n-1 phần tử còn lại dồn sang phải — giống hệt mảng đã sắp xếp, O(n²). Three-way partition gom mọi giá trị bằng pivot vào giữa và không đệ quy vào chúng, nên mảng toàn giá trị trùng chỉ tốn O(n).",
+    "explanationEn": "Nothing is smaller than 7, so the pivot stays at the first index and all n-1 other elements pile onto the right — just like sorted input, O(n²). A three-way partition groups every value equal to the pivot in the middle and never recurses into them, so all-duplicate input costs O(n)."
+  },
+  {
+    "id": "q16",
+    "question": "Danh sách nhân viên đã được sắp xếp theo tên. Bạn cần sắp xếp theo phòng ban sao cho trong cùng phòng ban, tên vẫn giữ thứ tự A–Z. Nên dùng thuật toán nào?",
+    "questionEn": "A list of employees is already sorted by name. You need to sort it by department so that within each department the names stay in A–Z order. Which algorithm should you use?",
+    "options": [
+      "Quick sort với pivot ngẫu nhiên",
+      "Merge sort với `<=` trong hàm merge",
+      "Quick sort với pivot là phần tử đầu",
+      "Cái nào cũng được, vì cả hai đều O(n log n)"
+    ],
+    "optionsEn": [
+      "Quick sort with a random pivot",
+      "Merge sort with `<=` in the merge helper",
+      "Quick sort with a first-element pivot",
+      "Either one, since both are O(n log n)"
+    ],
+    "answer": 1,
+    "explanation": "Yêu cầu giữ thứ tự tương đối của các phần tử bằng nhau chính là tính stable. Merge sort lấy từ nửa trái khi hai khoá bằng nhau nên stable; quick sort không stable dù chọn pivot kiểu gì. Big O giống nhau không có nghĩa là hành vi giống nhau.",
+    "explanationEn": "Keeping equal elements in their original relative order is exactly stability. Merge sort takes from the left half on ties, so it is stable; quick sort is unstable whatever the pivot choice. The same Big O does not mean the same behaviour."
+  },
+  {
+    "id": "q17",
+    "question": "Bạn cần sắp xếp một singly linked list có 1 triệu node. Lựa chọn nào hợp lý nhất?",
+    "questionEn": "You need to sort a singly linked list with 1 million nodes. Which choice makes the most sense?",
+    "options": [
+      "Merge sort, vì trộn chỉ cần nối lại các node và duyệt tuần tự",
+      "Quick sort, vì nó cần truy cập ngẫu nhiên theo chỉ số",
+      "Bubble sort, vì linked list không hỗ trợ đệ quy",
+      "Binary search từng node vào đúng vị trí"
+    ],
+    "optionsEn": [
+      "Merge sort, because merging only relinks nodes and walks sequentially",
+      "Quick sort, because it needs random access by index",
+      "Bubble sort, because linked lists do not support recursion",
+      "Binary search each node into its correct position"
+    ],
+    "answer": 0,
+    "explanation": "Merge sort chỉ cần tách danh sách và trộn bằng cách đổi con trỏ `next`, không cần mảng phụ hay truy cập theo chỉ số — O(n log n). Linked list không có truy cập ngẫu nhiên O(1), nên phân hoạch kiểu mảng và binary search đều kém hiệu quả; bubble sort là O(n²).",
+    "explanationEn": "Merge sort just splits the list and merges by rewiring `next` pointers, with no buffer and no index access — O(n log n). Linked lists lack O(1) random access, so array-style partitioning and binary search are inefficient, and bubble sort is O(n²)."
+  },
+  {
+    "id": "q18",
+    "question": "Dùng hàm pivot phần tử đầu trong bài, `quickSort` sắp xếp `[3, 5a, 5b, 1]` (5a và 5b có cùng giá trị 5). Kết quả là gì?",
+    "questionEn": "Using the first-element pivot helper from this topic, `quickSort` sorts `[3, 5a, 5b, 1]` (5a and 5b both have value 5). What is the result?",
+    "options": [
+      "`[1, 3, 5a, 5b]`, vì quick sort là stable",
+      "`[3, 1, 5a, 5b]`, vì pivot không di chuyển",
+      "`[1, 5a, 3, 5b]`, vì pivot bị bỏ qua",
+      "`[1, 3, 5b, 5a]`, vì một lần hoán đổi đã đảo thứ tự hai số 5"
+    ],
+    "optionsEn": [
+      "`[1, 3, 5a, 5b]`, because quick sort is stable",
+      "`[3, 1, 5a, 5b]`, because the pivot never moves",
+      "`[1, 5a, 3, 5b]`, because the pivot is skipped",
+      "`[1, 3, 5b, 5a]`, because one swap reversed the two 5s"
+    ],
+    "answer": 3,
+    "explanation": "Pivot là 3. Chỉ có 1 nhỏ hơn 3: swapIdx thành 1 và hoán đổi chỉ số 1 với 3, ra [3, 1, 5b, 5a] — 5a bị ném ra sau 5b. Đặt pivot vào chỉ số 1 được [1, 3, 5b, 5a]; đoạn [5b, 5a] không đổi. Đây là minh chứng quick sort không stable.",
+    "explanationEn": "The pivot is 3. Only 1 is smaller: swapIdx becomes 1 and indices 1 and 3 swap, giving [3, 1, 5b, 5a] — 5a is thrown behind 5b. Placing the pivot at index 1 gives [1, 3, 5b, 5a]; the [5b, 5a] range stays as is. This is why quick sort is unstable."
+  }
+]

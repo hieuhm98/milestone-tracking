@@ -19,6 +19,7 @@ import {
   topicBreakdown,
 } from "@/lib/exam";
 import { cn } from "@/lib/utils";
+import QuestionText from "@/components/knowledge/QuestionText";
 
 interface TrackTopic {
   slug: string;
@@ -431,11 +432,11 @@ export default function ExamRunner({ group, topics }: Props) {
               <BilingualPair
                 labels
                 className="flex-1 min-w-0"
-                en={<p className="font-medium leading-relaxed">{enQs[idx].question}</p>}
-                vi={<p className="font-medium leading-relaxed">{viQs[idx].question}</p>}
+                en={<p className="font-medium leading-relaxed"><QuestionText text={enQs[idx].question} /></p>}
+                vi={<p className="font-medium leading-relaxed"><QuestionText text={viQs[idx].question} /></p>}
               />
             ) : (
-              <p className="flex-1 min-w-0 font-medium leading-relaxed">{current.question}</p>
+              <p className="flex-1 min-w-0 font-medium leading-relaxed"><QuestionText text={current.question} /></p>
             )}
           </div>
 
@@ -469,7 +470,7 @@ export default function ExamRunner({ group, topics }: Props) {
                       vi={<span className="text-zinc-600 dark:text-zinc-400">{viQs[idx].options[i]}</span>}
                     />
                   ) : (
-                    <span>{opt}</span>
+                    <span><QuestionText text={opt} /></span>
                   )}
                 </button>
               );
@@ -625,14 +626,14 @@ export default function ExamRunner({ group, topics }: Props) {
                     className="flex-1"
                     en={
                       <p className="text-sm font-medium">
-                        <span className="text-zinc-500 mr-1">{i + 1}.</span> {enQs[i].question}
+                        <span className="text-zinc-500 mr-1">{i + 1}.</span> <QuestionText text={enQs[i].question} />
                       </p>
                     }
-                    vi={<p className="text-sm font-medium">{viQs[i].question}</p>}
+                    vi={<p className="text-sm font-medium"><QuestionText text={viQs[i].question} /></p>}
                   />
                 ) : (
                   <p className="text-sm font-medium">
-                    <span className="text-zinc-500 mr-1">{i + 1}.</span> {q.question}
+                    <span className="text-zinc-500 mr-1">{i + 1}.</span> <QuestionText text={q.question} />
                   </p>
                 )}
               </div>
@@ -679,7 +680,7 @@ export default function ExamRunner({ group, topics }: Props) {
                                 vi={<span className="opacity-80">{viQs[i].options[oi]}</span>}
                               />
                             ) : (
-                              <span>{opt}</span>
+                              <span><QuestionText text={opt} /></span>
                             )}
                           </div>
                           {isCorrectOpt && <span className="shrink-0">{t("quiz.correctLabel")}</span>}
@@ -703,20 +704,20 @@ export default function ExamRunner({ group, topics }: Props) {
                       en={
                         <>
                           <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                          {enQs[i].explanation}
+                          <QuestionText text={enQs[i].explanation} />
                         </>
                       }
                       vi={
                         <>
                           <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                          {viQs[i].explanation}
+                          <QuestionText text={viQs[i].explanation} />
                         </>
                       }
                     />
                   ) : (
                     <>
                       <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                      {q.explanation}
+                      <QuestionText text={q.explanation} />
                     </>
                   )}
                 </div>

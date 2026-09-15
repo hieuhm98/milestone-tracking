@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về binary heap.",
+      "promptEn": "Pick TWO statements that are true about binary heaps.",
+      "options": [
+        "Trong max heap, con trái luôn nhỏ hơn con phải",
+        "Heap có thể suy biến thành chuỗi nếu chèn input đã sắp xếp",
+        "Root của min heap luôn là giá trị nhỏ nhất",
+        "Duyệt in-order một min heap cho ra dãy tăng dần",
+        "Heap luôn là cây đầy đủ, nên lưu được trong mảng không có lỗ hổng"
+      ],
+      "optionsEn": [
+        "In a max heap, the left child is always smaller than the right child",
+        "A heap can degenerate into a chain if you insert sorted input",
+        "The root of a min heap is always the smallest value",
+        "An in-order traversal of a min heap yields ascending order",
+        "A heap is always a complete tree, so it fits in an array with no gaps"
+      ],
+      "answers": [2, 4],
+      "explanation": "Tính chất heap đặt giá trị cực trị ở root, còn tính chất hình dạng giữ cây luôn đầy đủ nên mảng liền mạch. Anh em không có thứ tự, không kiểu duyệt nào cho ra dãy đã sắp xếp, và thứ tự input không làm cây suy biến được.",
+      "explanationEn": "The heap property puts the extreme value at the root, and the shape property keeps the tree complete so the array is contiguous. Siblings are unordered, no traversal yields sorted output, and input order cannot make the tree degenerate.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thao tác trên binary heap có độ phức tạp thời gian O(log n).",
+      "promptEn": "Pick TWO binary heap operations whose time complexity is O(log n).",
+      "options": [
+        "Xem (peek) giá trị lớn nhất trong max heap",
+        "Chèn một giá trị mới",
+        "Tìm xem một giá trị bất kỳ có trong heap không",
+        "Lấy ra (extract) root",
+        "Xây heap từ mảng n phần tử bằng heapify từ dưới lên"
+      ],
+      "optionsEn": [
+        "Peek at the maximum of a max heap",
+        "Insert a new value",
+        "Check whether an arbitrary value is in the heap",
+        "Extract the root",
+        "Build a heap from an n-element array with bottom-up heapify"
+      ],
+      "answers": [1, 3],
+      "explanation": "Insert (bubble up) và extract (sink down) đều đi theo một đường giữa root và lá, bị chặn bởi chiều cao log n. Peek là O(1), tìm kiếm là O(n) vì anh em không có thứ tự, còn heapify từ dưới lên là O(n).",
+      "explanationEn": "Insert (bubble up) and extract (sink down) each follow one path between root and leaf, bounded by the log n height. Peek is O(1), search is O(n) because siblings are unordered, and bottom-up heapify is O(n).",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Sau khi push một giá trị vào cuối mảng heap, thao tác hoán đổi nó với cha cho tới khi đúng vị trí gọi là gì?",
+      "promptEn": "After pushing a value onto the end of the heap array, what is the operation that swaps it with its parent until it is in place called?",
+      "answer": "Bubble up",
+      "answerEn": "Bubble up",
+      "accept": [
+        "bubble up",
+        "bubbleup",
+        "bubbling up",
+        "sift up",
+        "siftup",
+        "percolate up",
+        "heapify up",
+        "trickle up",
+        "up heap",
+        "upheap",
+        "swim"
+      ],
+      "explanation": "Bubble up (còn gọi là sift up, percolate up, heapify up). Chiều ngược lại, dùng khi extract root, là sink down / sift down.",
+      "explanationEn": "Bubble up (also called sift up, percolate up, heapify up). The opposite direction, used when extracting the root, is sink down / sift down.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của việc xây heap từ một mảng n phần tử bằng heapify từ dưới lên (siftDown từ node cha cuối cùng về root) là gì?",
+      "promptEn": "What is the time complexity of building a heap from an n-element array with bottom-up heapify (siftDown from the last parent back to the root)?",
+      "answer": "O(n)",
+      "answerEn": "O(n)",
+      "accept": [
+        "O(n)",
+        "n",
+        "on",
+        "linear",
+        "linear time",
+        "tuyen tinh",
+        "tuyến tính"
+      ],
+      "explanation": "O(n). Phần lớn node nằm gần đáy nên chỉ chìm vài tầng; tổng n · (1/4 + 2/8 + 3/16 + …) ≤ n. Chèn lần lượt từng phần tử thì tốn O(n log n).",
+      "explanationEn": "O(n). Most nodes sit near the bottom and sink only a few levels; the total n · (1/4 + 2/8 + 3/16 + …) ≤ n. Inserting the elements one by one would cost O(n log n).",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi vị trí trong heap lưu bằng mảng (bắt đầu từ index 0) với công thức đúng.",
+      "promptEn": "Match each position in a 0-indexed array heap to its formula.",
+      "pairs": [
+        {
+          "left": "Con trái của index i",
+          "leftEn": "Left child of index i",
+          "right": "2i + 1",
+          "rightEn": "2i + 1"
+        },
+        {
+          "left": "Con phải của index i",
+          "leftEn": "Right child of index i",
+          "right": "2i + 2",
+          "rightEn": "2i + 2"
+        },
+        {
+          "left": "Cha của index i",
+          "leftEn": "Parent of index i",
+          "right": "Math.floor((i - 1) / 2)",
+          "rightEn": "Math.floor((i - 1) / 2)"
+        },
+        {
+          "left": "Node không phải lá cuối cùng trong heap n phần tử",
+          "leftEn": "Last non-leaf node in an n-element heap",
+          "right": "Math.floor(n / 2) - 1",
+          "rightEn": "Math.floor(n / 2) - 1"
+        }
+      ],
+      "explanation": "Ba công thức đầu dùng để di chuyển trong heap khi bubble up và sink down. Công thức cuối là điểm bắt đầu của heapify từ dưới lên: mọi index sau nó đều là lá.",
+      "explanationEn": "The first three formulas navigate the heap during bubble up and sink down. The last is where bottom-up heapify starts: every index after it is a leaf.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của extractMax trên max heap.",
+      "promptEn": "Put the steps of extractMax on a max heap into order.",
+      "items": [
+        {
+          "text": "Lưu lại giá trị ở root (giá trị lớn nhất)",
+          "textEn": "Save the value at the root (the maximum)"
+        },
+        {
+          "text": "Pop phần tử cuối mảng và đặt nó vào index 0",
+          "textEn": "Pop the last element of the array and place it at index 0"
+        },
+        {
+          "text": "So sánh nó với các con và tìm con lớn hơn",
+          "textEn": "Compare it with its children and find the larger child"
+        },
+        {
+          "text": "Nếu con đó lớn hơn thì hoán đổi và tiếp tục từ index của con",
+          "textEn": "If that child is larger, swap and continue from the child's index"
+        },
+        {
+          "text": "Dừng khi không còn con nào lớn hơn, rồi trả về giá trị đã lưu",
+          "textEn": "Stop when no child is larger, then return the saved maximum"
+        }
+      ],
+      "explanation": "Đưa phần tử cuối lên root giữ cây luôn đầy đủ; sink down sau đó khôi phục tính chất heap trong O(log n). Nhớ kiểm tra trường hợp heap chỉ còn một phần tử trước khi đặt lại root.",
+      "explanationEn": "Moving the last element to the root keeps the tree complete; the sink down that follows restores the heap property in O(log n). Remember to handle a one-element heap before writing the root back.",
+      "id": "d6"
+    }
+  ]
+}

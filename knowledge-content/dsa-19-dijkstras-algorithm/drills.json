@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thứ trạng thái mà Dijkstra phải duy trì trong lúc chạy.",
+      "promptEn": "Pick TWO pieces of state Dijkstra must maintain while it runs.",
+      "options": [
+        "Một stack chứa các đỉnh theo thứ tự DFS",
+        "Bảng distances: khoảng cách ngắn nhất đã biết từ nguồn tới mỗi đỉnh",
+        "Số bậc (degree) của mỗi đỉnh",
+        "Bảng previous: đỉnh liền trước trên đường tốt nhất đã biết",
+        "Một bản sao của đồ thị đã sắp xếp theo trọng số cạnh"
+      ],
+      "optionsEn": [
+        "A stack of vertices in DFS order",
+        "A distances table: the best known distance from the source to each vertex",
+        "The degree of every vertex",
+        "A previous table: the vertex before each one on the best known path",
+        "A copy of the graph sorted by edge weight"
+      ],
+      "answers": [1, 3],
+      "explanation": "distances cho chi phí, previous cho lộ trình, cùng với một min priority queue để chọn đỉnh gần nhất. Dijkstra không cần stack, số bậc hay bản sao đồ thị đã sắp xếp.",
+      "explanationEn": "distances gives the cost, previous gives the route, alongside a min priority queue to pick the closest vertex. Dijkstra needs no stack, no degrees and no sorted copy of the graph.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI tình huống mà Dijkstra KHÔNG phải là lựa chọn đúng.",
+      "promptEn": "Pick TWO situations where Dijkstra is NOT the right choice.",
+      "options": [
+        "Tìm đường lái xe ngắn nhất với số km trên mỗi đoạn đường",
+        "Tìm chuyến bay rẻ nhất khi giá vé luôn dương",
+        "Đồ thị có cạnh trọng số âm, ví dụ khoản hoàn tiền",
+        "Định tuyến gói tin theo chi phí đường truyền không âm",
+        "Cần phát hiện đồ thị có chu trình âm hay không"
+      ],
+      "optionsEn": [
+        "Finding the shortest driving route with km on each road",
+        "Finding the cheapest flight route when fares are always positive",
+        "A graph with negative edge weights, such as refunds",
+        "Routing packets by non-negative link cost",
+        "Detecting whether a graph has a negative cycle"
+      ],
+      "answers": [2, 4],
+      "explanation": "Cạnh âm phá vỡ bước chốt khoảng cách tham lam, và Dijkstra không có cách phát hiện chu trình âm — cả hai trường hợp đều cần Bellman–Ford. Quãng đường, giá vé dương và chi phí đường truyền đều không âm nên Dijkstra phù hợp.",
+      "explanationEn": "Negative edges break the greedy finalisation step, and Dijkstra has no way to detect negative cycles — both call for Bellman–Ford. Distances, positive fares and link costs are all non-negative, so Dijkstra fits.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của Dijkstra khi dùng binary heap (V đỉnh, E cạnh) là gì?",
+      "promptEn": "What is the time complexity of Dijkstra with a binary heap (V vertices, E edges)?",
+      "answer": "O((V + E) log V)",
+      "answerEn": "O((V + E) log V)",
+      "accept": [
+        "O((V + E) log V)",
+        "(V + E) log V",
+        "(v+e) log v",
+        "o((v+e)logv)",
+        "O((E + V) log V)",
+        "O(E log V)",
+        "E log V",
+        "elogv"
+      ],
+      "explanation": "O((V + E) log V). Mỗi đỉnh được lấy ra một lần, mỗi cạnh có thể gây một lần enqueue, và mỗi thao tác heap tốn O(log V). Với đồ thị liên thông thường viết gọn là O(E log V).",
+      "explanationEn": "O((V + E) log V). Each vertex is extracted once, each edge may cause one enqueue, and every heap operation costs O(log V). For a connected graph it is often written as O(E log V).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Thao tác kiểm tra `distances[u] + weight < distances[v]` rồi cập nhật khoảng cách của v được gọi là gì?",
+      "promptEn": "What is the name of the step that checks `distances[u] + weight < distances[v]` and updates v's distance?",
+      "answer": "Relaxation",
+      "answerEn": "Relaxation",
+      "accept": [
+        "relaxation",
+        "relax",
+        "edge relaxation",
+        "relaxing",
+        "relaxing an edge",
+        "relax edge",
+        "noi long"
+      ],
+      "explanation": "Relaxation (nới lỏng cạnh). Nếu đi qua u tới v rẻ hơn khoảng cách đang lưu, ta cập nhật distances[v], đặt previous[v] = u và enqueue v.",
+      "explanationEn": "Relaxation. If reaching v through u is cheaper than the stored distance, update distances[v], set previous[v] = u, and enqueue v.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi cách cài đặt priority queue với tổng độ phức tạp của Dijkstra.",
+      "promptEn": "Match each priority queue implementation to Dijkstra's overall time complexity.",
+      "pairs": [
+        {
+          "left": "Binary heap",
+          "leftEn": "Binary heap",
+          "right": "O((V + E) log V)",
+          "rightEn": "O((V + E) log V)"
+        },
+        {
+          "left": "Không dùng queue, quét mảng distances tìm min",
+          "leftEn": "No queue, scan the distances array for the minimum",
+          "right": "O(V²)",
+          "rightEn": "O(V²)"
+        },
+        {
+          "left": "Fibonacci heap",
+          "leftEn": "Fibonacci heap",
+          "right": "O(E + V log V)",
+          "rightEn": "O(E + V log V)"
+        },
+        {
+          "left": "Mảng sort lại sau mỗi lần enqueue",
+          "leftEn": "Array re-sorted after every enqueue",
+          "right": "O(E · E log E)",
+          "rightEn": "O(E · E log E)"
+        }
+      ],
+      "explanation": "Priority queue quyết định hiệu năng. Binary heap là lựa chọn thực tế; quét mảng hợp với đồ thị dày; Fibonacci heap tốt nhất về lý thuyết nhưng hằng số lớn; sort lại cả mảng mỗi lần thêm là chậm nhất.",
+      "explanationEn": "The priority queue decides performance. A binary heap is the practical choice; the array scan suits dense graphs; a Fibonacci heap is best in theory but has large constants; re-sorting on every insert is the slowest.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Trên đồ thị ví dụ (A–B 4, A–C 2, B–E 3, C–D 2, C–F 4, D–E 3, D–F 1, E–F 1), xếp các đỉnh theo đúng thứ tự Dijkstra thăm khi xuất phát từ A (hoà nhau thì đỉnh vào queue trước ra trước).",
+      "promptEn": "In the example graph (A–B 4, A–C 2, B–E 3, C–D 2, C–F 4, D–E 3, D–F 1, E–F 1), put the vertices in the order Dijkstra visits them starting from A (ties go to the vertex enqueued first).",
+      "items": [
+        {
+          "text": "A (0)",
+          "textEn": "A (0)"
+        },
+        {
+          "text": "C (2)",
+          "textEn": "C (2)"
+        },
+        {
+          "text": "B (4)",
+          "textEn": "B (4)"
+        },
+        {
+          "text": "D (4)",
+          "textEn": "D (4)"
+        },
+        {
+          "text": "F (5)",
+          "textEn": "F (5)"
+        },
+        {
+          "text": "E (6)",
+          "textEn": "E (6)"
+        }
+      ],
+      "explanation": "Các đỉnh được thăm theo khoảng cách không giảm: 0, 2, 4, 4, 5, 6. B và D cùng 4, B vào queue trước nên ra trước. F giảm từ 6 xuống 5 nhờ D, còn E giảm từ 7 xuống 6 nhờ F.",
+      "explanationEn": "Vertices are visited in non-decreasing distance: 0, 2, 4, 4, 5, 6. B and D tie at 4, and B was enqueued first. F drops from 6 to 5 via D, and E drops from 7 to 6 via F.",
+      "id": "d6"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Một key nóng duy nhất liên tục gây cache stampede mỗi khi hết hạn. Chọn HAI biện pháp giải quyết trực tiếp vấn đề này.",
+      "promptEn": "A single hot key causes a cache stampede every time it expires. Pick TWO measures that directly address this.",
+      "options": [
+        "Cache kết quả rỗng cho các ID không tồn tại",
+        "Chỉ cho một request dựng lại dữ liệu nhờ lock có thời hạn",
+        "Tăng maxmemory của cụm cache",
+        "Trả giá trị cũ trong khi một job nền làm mới key (stale-while-revalidate)",
+        "Đổi eviction policy từ LRU sang LFU"
+      ],
+      "optionsEn": [
+        "Cache empty results for IDs that do not exist",
+        "Let only one request rebuild the value using a lock with an expiry",
+        "Increase the cache cluster's maxmemory",
+        "Serve the stale value while a background job refreshes the key (stale-while-revalidate)",
+        "Switch the eviction policy from LRU to LFU"
+      ],
+      "answers": [1, 3],
+      "explanation": "Stampede là nhiều request cùng dựng lại một key. Lock bảo đảm chỉ một request làm việc đó, stale-while-revalidate cho các request khác một giá trị để trả trong lúc chờ. Negative caching chữa penetration; bộ nhớ và eviction policy không liên quan tới thời điểm hết hạn.",
+      "explanationEn": "A stampede is many requests rebuilding one key at once. A lock ensures only one does the work, and stale-while-revalidate gives the others something to serve meanwhile. Negative caching cures penetration; memory size and eviction policy have nothing to do with the expiry moment.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về HTTP caching header.",
+      "promptEn": "Pick TWO statements that are true about HTTP caching headers.",
+      "options": [
+        "`no-cache` cấm mọi cache lưu response",
+        "`s-maxage` chỉ áp dụng cho cache dùng chung như CDN hoặc proxy",
+        "`private` cho phép CDN lưu một bản riêng cho từng user",
+        "Response `304 Not Modified` gửi lại toàn bộ body",
+        "`no-store` nghĩa là response không được lưu ở bất cứ đâu"
+      ],
+      "optionsEn": [
+        "`no-cache` forbids every cache from storing the response",
+        "`s-maxage` applies only to shared caches such as a CDN or proxy",
+        "`private` lets a CDN store a separate copy for each user",
+        "A `304 Not Modified` response sends the full body again",
+        "`no-store` means the response must not be stored anywhere"
+      ],
+      "answers": [1, 4],
+      "explanation": "`s-maxage` ghi đè `max-age` cho cache dùng chung, và `no-store` mới là \"không lưu\". `no-cache` cho lưu nhưng phải revalidate; `private` chỉ cho trình duyệt lưu; 304 không có body — đó chính là điểm tiết kiệm của nó.",
+      "explanationEn": "`s-maxage` overrides `max-age` for shared caches, and `no-store` is the real \"do not store\". `no-cache` allows storing but requires revalidation; `private` allows only the browser to store; a 304 has no body — that is the whole saving.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Server trả mã trạng thái HTTP nào khi request có `If-None-Match` và ETag vẫn khớp với nội dung hiện tại?",
+      "promptEn": "Which HTTP status code does the server return when a request carries `If-None-Match` and the ETag still matches the current content?",
+      "answer": "304",
+      "answerEn": "304",
+      "accept": ["304", "304 not modified", "http 304", "not modified"],
+      "explanation": "304 Not Modified — response không có body, trình duyệt tiếp tục dùng bản đã lưu. Đây là cách `no-cache` vẫn nhanh: chỉ tốn một vòng request nhỏ, không tải lại nội dung.",
+      "explanationEn": "304 Not Modified — the response has no body and the browser keeps using its stored copy. This is how `no-cache` stays fast: one small round trip, no re-download.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Cấu trúc dữ liệu xác suất nào thường được đặt trước cache để loại ngay các key chắc chắn không tồn tại, chống cache penetration?",
+      "promptEn": "Which probabilistic data structure is often placed in front of a cache to reject keys that definitely do not exist, defending against cache penetration?",
+      "answer": "Bloom filter",
+      "answerEn": "Bloom filter",
+      "accept": ["bloom filter", "bloom filters", "bloom", "bloomfilter"],
+      "explanation": "Bloom filter. Nó có thể báo nhầm \"có thể tồn tại\" nhưng không bao giờ báo nhầm \"không tồn tại\", nên an toàn để chặn các ID bịa ra trước khi chúng chạm tới DB.",
+      "explanationEn": "A Bloom filter. It can wrongly say \"might exist\" but never wrongly says \"does not exist\", so it is safe for rejecting made-up IDs before they reach the DB.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi caching pattern với cách nó hoạt động.",
+      "promptEn": "Match each caching pattern to how it works.",
+      "pairs": [
+        {
+          "left": "Cache-aside",
+          "leftEn": "Cache-aside",
+          "right": "Ứng dụng tự đọc cache, khi miss thì query DB rồi ghi vào cache",
+          "rightEn": "The application reads the cache itself and, on a miss, queries the DB and fills the cache"
+        },
+        {
+          "left": "Read-through",
+          "leftEn": "Read-through",
+          "right": "Khi miss, chính tầng cache gọi loader để nạp dữ liệu từ DB",
+          "rightEn": "On a miss, the cache layer itself calls a loader to fetch from the DB"
+        },
+        {
+          "left": "Write-through",
+          "leftEn": "Write-through",
+          "right": "Ghi vào cache, cache ghi đồng bộ xuống DB rồi mới xác nhận",
+          "rightEn": "Writes go to the cache, which writes the DB synchronously before acknowledging"
+        },
+        {
+          "left": "Write-behind",
+          "leftEn": "Write-behind",
+          "right": "Cache xác nhận ngay và đẩy xuống DB bất đồng bộ theo lô",
+          "rightEn": "The cache acknowledges at once and flushes to the DB asynchronously in batches"
+        }
+      ],
+      "explanation": "Điểm phân biệt: ai nạp dữ liệu (ứng dụng hay cache) và việc ghi DB là đồng bộ hay bất đồng bộ. Chỉ write-behind có rủi ro mất dữ liệu khi node cache sập.",
+      "explanationEn": "The distinctions: who loads the data (the application or the cache) and whether the DB write is synchronous or asynchronous. Only write-behind risks losing data when a cache node dies.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của một lần đọc cache-aside bị miss.",
+      "promptEn": "Put the steps of a cache-aside read that misses into order.",
+      "items": [
+        {
+          "text": "Ứng dụng gửi lệnh GET key tới cache",
+          "textEn": "The application sends GET key to the cache"
+        },
+        {
+          "text": "Cache trả về miss",
+          "textEn": "The cache returns a miss"
+        },
+        {
+          "text": "Ứng dụng query database để lấy dữ liệu",
+          "textEn": "The application queries the database for the data"
+        },
+        {
+          "text": "Ứng dụng ghi giá trị vào cache kèm TTL",
+          "textEn": "The application stores the value in the cache with a TTL"
+        },
+        {
+          "text": "Ứng dụng trả giá trị cho bên gọi",
+          "textEn": "The application returns the value to the caller"
+        }
+      ],
+      "explanation": "Mọi bước đều do ứng dụng điều khiển — đó là định nghĩa của cache-aside. Lần đọc tiếp theo cho cùng key sẽ dừng ngay ở bước đầu với một hit.",
+      "explanationEn": "The application drives every step — that is what makes it cache-aside. The next read of the same key stops at the first step with a hit.",
+      "id": "d6"
+    }
+  ]
+}

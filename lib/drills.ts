@@ -95,9 +95,30 @@ export type DrillResponse = number[] | string;
 export function normalizeAnswer(raw: string): string {
   return raw
     .toLowerCase()
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹ⁿ]/g, (ch) => ` ${SUPERSCRIPTS[ch]}`)
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 }
+
+/**
+ * Superscripts become ordinary characters before punctuation is stripped.
+ * Dropping them outright made "O(n²)" normalise to "o n" — the same as "O(n)" —
+ * so a learner typing the wrong complexity was graded correct. Mapping them
+ * gives "o n 2", which is also what "O(n^2)" normalises to.
+ */
+const SUPERSCRIPTS: Record<string, string> = {
+  "⁰": "0",
+  "¹": "1",
+  "²": "2",
+  "³": "3",
+  "⁴": "4",
+  "⁵": "5",
+  "⁶": "6",
+  "⁷": "7",
+  "⁸": "8",
+  "⁹": "9",
+  "ⁿ": "n",
+};
 
 /** A localized drill, resolved to plain strings for the active language. */
 export interface LocalizedDrill {

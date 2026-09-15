@@ -1,0 +1,1925 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "v1",
+      "lessonId": "l1",
+      "word": "source of truth",
+      "pos": "phrase",
+      "ipa": "/sɔːs əv truːθ/",
+      "question": "Trong câu \"A cache is a faster, smaller copy of data whose source of truth lives somewhere slower.\", từ \"source of truth\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A cache is a faster, smaller copy of data whose source of truth lives somewhere slower.\", what does \"source of truth\" (phrase) mean?",
+      "options": [
+        "bản sao lưu dự phòng",
+        "kho dữ liệu tạm thời",
+        "nguồn dữ liệu gốc chuẩn",
+        "bản ghi nhật ký"
+      ],
+      "optionsEn": [
+        "a spare backup copy",
+        "a temporary data store",
+        "the authoritative original data",
+        "a record of past events"
+      ],
+      "answer": 2,
+      "explanation": "source of truth /sɔːs əv truːθ/ (cụm từ): nguồn dữ liệu gốc chuẩn. Mọi bản cache chỉ là bản sao; khi có mâu thuẫn thì \"source of truth\" (thường là database) mới là đúng.",
+      "explanationEn": "source of truth /sɔːs əv truːθ/ (phrase): the authoritative original data. Every cached copy is derived; when they disagree, the source of truth (usually the database) wins."
+    },
+    {
+      "id": "v2",
+      "lessonId": "l1",
+      "word": "trade",
+      "pos": "v",
+      "ipa": "/treɪd/",
+      "question": "Trong câu \"Caching trades freshness and complexity for latency, throughput and cost.\", từ \"trade\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Caching trades freshness and complexity for latency, throughput and cost.\", what does \"trade\" (verb) mean?",
+      "options": [
+        "đánh đổi",
+        "buôn bán",
+        "tách rời",
+        "bổ sung"
+      ],
+      "optionsEn": [
+        "to give up one thing to gain another",
+        "to buy and sell goods",
+        "to separate apart",
+        "to add on extra"
+      ],
+      "answer": 0,
+      "explanation": "trade /treɪd/ (động từ): đánh đổi. \"Trade X for Y\" = chấp nhận mất X để được Y; ở đây cache hy sinh độ mới của dữ liệu để lấy tốc độ.",
+      "explanationEn": "trade /treɪd/ (verb): to give up one thing to gain another. \"Trade X for Y\" means accepting the loss of X to gain Y; caching gives up freshness to gain speed."
+    },
+    {
+      "id": "v3",
+      "lessonId": "l1",
+      "word": "throughput",
+      "pos": "n",
+      "ipa": "/ˈθruːpʊt/",
+      "question": "Trong câu \"Caching trades freshness and complexity for latency, throughput and cost.\", từ \"throughput\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Caching trades freshness and complexity for latency, throughput and cost.\", what does \"throughput\" (noun) mean?",
+      "options": [
+        "độ trễ của một yêu cầu",
+        "dung lượng bộ nhớ còn trống",
+        "số lỗi trong một đơn vị thời gian",
+        "lượng xử lý trong một đơn vị thời gian"
+      ],
+      "optionsEn": [
+        "delay of a single request",
+        "amount of free memory left",
+        "errors counted per unit of time",
+        "work handled per unit of time"
+      ],
+      "answer": 3,
+      "explanation": "throughput /ˈθruːpʊt/ (danh từ): lượng xử lý trong một đơn vị thời gian. Throughput thường đo bằng số request mỗi giây; khác với latency là thời gian của từng request.",
+      "explanationEn": "throughput /ˈθruːpʊt/ (noun): work handled per unit of time. Throughput is usually measured in requests per second, unlike latency, which is the time of one request."
+    },
+    {
+      "id": "v4",
+      "lessonId": "l1",
+      "word": "aggregate",
+      "pos": "adj",
+      "ipa": "/ˈæɡrɪɡət/",
+      "question": "Trong câu \"Architects add a cache for one of three reasons: the source is slow (a 40 ms aggregate query), the source is expensive or rate-limited (a paid third-party API), or the source cannot take the load (a primary database at 80% CPU).\", từ \"aggregate\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Architects add a cache for one of three reasons: the source is slow (a 40 ms aggregate query), the source is expensive or rate-limited (a paid third-party API), or the source cannot take the load (a primary database at 80% CPU).\", what does \"aggregate\" (adjective) mean?",
+      "options": [
+        "đơn lẻ, chỉ một bản ghi",
+        "tổng hợp, gộp nhiều bản ghi",
+        "lồng nhau nhiều cấp",
+        "đã được đánh chỉ mục"
+      ],
+      "optionsEn": [
+        "touching only a single record",
+        "combining many records into totals",
+        "nested at several levels",
+        "already covered by an index"
+      ],
+      "answer": 1,
+      "explanation": "aggregate /ˈæɡrɪɡət/ (tính từ): tổng hợp, gộp nhiều bản ghi. \"Aggregate query\" là truy vấn tính tổng, đếm, trung bình... trên nhiều dòng nên thường chậm.",
+      "explanationEn": "aggregate /ˈæɡrɪɡət/ (adjective): combining many records into totals. An aggregate query computes sums, counts or averages over many rows, so it is often slow."
+    },
+    {
+      "id": "v5",
+      "lessonId": "l1",
+      "word": "justify",
+      "pos": "v",
+      "ipa": "/ˈdʒʌstɪfaɪ/",
+      "question": "Trong câu \"Rough latencies that justify the decision:\", từ \"justify\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rough latencies that justify the decision:\", what does \"justify\" (verb) mean?",
+      "options": [
+        "căn lề đều hai bên",
+        "biện minh, chứng minh là hợp lý",
+        "trì hoãn, để lại sau",
+        "đảo ngược, hủy bỏ"
+      ],
+      "optionsEn": [
+        "to align text on both sides",
+        "to show something is reasonable",
+        "to postpone until later",
+        "to reverse or cancel"
+      ],
+      "answer": 1,
+      "explanation": "justify /ˈdʒʌstɪfaɪ/ (động từ): biện minh, chứng minh là hợp lý. \"Justify a decision\" = đưa ra lý do cho quyết định; nghĩa \"căn đều văn bản\" chỉ dùng trong soạn thảo.",
+      "explanationEn": "justify /ˈdʒʌstɪfaɪ/ (verb): to show something is reasonable. \"Justify a decision\" means giving grounds for it; the text-alignment sense is only used in typesetting."
+    },
+    {
+      "id": "v6",
+      "lessonId": "l1",
+      "word": "gain",
+      "pos": "n",
+      "ipa": "/ɡeɪn/",
+      "question": "Trong câu \"A cache with a poor hit ratio adds a network hop and a failure mode for little gain.\", từ \"gain\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A cache with a poor hit ratio adds a network hop and a failure mode for little gain.\", what does \"gain\" (noun) mean?",
+      "options": [
+        "chi phí phát sinh",
+        "rủi ro tiềm ẩn",
+        "độ khuếch đại tín hiệu",
+        "lợi ích thu được"
+      ],
+      "optionsEn": [
+        "an extra expense incurred",
+        "a hidden danger",
+        "amplification of a signal",
+        "a benefit obtained"
+      ],
+      "answer": 3,
+      "explanation": "gain /ɡeɪn/ (danh từ): lợi ích thu được. \"For little gain\" = được lợi rất ít; hay gặp trong cụm \"not worth it for so little gain\".",
+      "explanationEn": "gain /ɡeɪn/ (noun): a benefit obtained. \"For little gain\" means with hardly any benefit; compare \"the gain is not worth the cost\"."
+    },
+    {
+      "id": "v7",
+      "lessonId": "l1",
+      "word": "hop",
+      "pos": "n",
+      "ipa": "/hɒp/",
+      "question": "Trong câu \"A cache with a poor hit ratio adds a network hop and a failure mode for little gain.\", từ \"hop\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A cache with a poor hit ratio adds a network hop and a failure mode for little gain.\", what does \"hop\" (noun) mean?",
+      "options": [
+        "một chặng truyền qua mạng",
+        "một cú nhảy lò cò",
+        "một gói tin bị mất",
+        "một cổng kết nối"
+      ],
+      "optionsEn": [
+        "one leg of a trip across a network",
+        "a small jump on one foot",
+        "a data packet that was lost",
+        "a connection port"
+      ],
+      "answer": 0,
+      "explanation": "hop /hɒp/ (danh từ): một chặng truyền qua mạng. \"Network hop\" = mỗi lần dữ liệu đi qua một máy/thiết bị trung gian, làm tăng độ trễ.",
+      "explanationEn": "hop /hɒp/ (noun): one leg of a trip across a network. A network hop is each pass through an intermediate machine or device, and each one adds latency."
+    },
+    {
+      "id": "v8",
+      "lessonId": "l1",
+      "word": "invalidate",
+      "pos": "v",
+      "ipa": "/ɪnˈvælɪdeɪt/",
+      "question": "Trong câu \"Each layer closer to the user saves more work but is harder to invalidate.\", từ \"invalidate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each layer closer to the user saves more work but is harder to invalidate.\", what does \"invalidate\" (verb) mean?",
+      "options": [
+        "kiểm tra tính hợp lệ",
+        "nạp lại vào bộ nhớ",
+        "làm mất hiệu lực (dữ liệu cũ)",
+        "mã hóa để bảo vệ"
+      ],
+      "optionsEn": [
+        "to check that data is valid",
+        "to load back into memory",
+        "to mark cached data as no longer valid",
+        "to encrypt for protection"
+      ],
+      "answer": 2,
+      "explanation": "invalidate /ɪnˈvælɪdeɪt/ (động từ): làm mất hiệu lực (dữ liệu cũ). \"Invalidate a cache\" = loại bỏ hoặc đánh dấu bản cache là cũ để lần đọc sau lấy lại từ nguồn.",
+      "explanationEn": "invalidate /ɪnˈvælɪdeɪt/ (verb): to mark cached data as no longer valid. To invalidate a cache is to remove or flag stale entries so the next read fetches from the source."
+    },
+    {
+      "id": "v9",
+      "lessonId": "l1",
+      "word": "diverge",
+      "pos": "v",
+      "ipa": "/daɪˈvɜːdʒ/",
+      "question": "Trong câu \"The browser is the hardest to invalidate (you cannot reach into it), a CDN needs a purge, in-process copies diverge between instances, and a distributed cache has one place to delete.\", từ \"diverge\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The browser is the hardest to invalidate (you cannot reach into it), a CDN needs a purge, in-process copies diverge between instances, and a distributed cache has one place to delete.\", what does \"diverge\" (verb) mean?",
+      "options": [
+        "hợp nhất lại làm một",
+        "sao chép sang nơi khác",
+        "trở nên khác nhau dần",
+        "bị xóa hoàn toàn"
+      ],
+      "optionsEn": [
+        "to merge into one",
+        "to be copied elsewhere",
+        "to become gradually different",
+        "to be erased completely"
+      ],
+      "answer": 2,
+      "explanation": "diverge /daɪˈvɜːdʒ/ (động từ): trở nên khác nhau dần. Trái nghĩa là \"converge\" (hội tụ); mỗi instance giữ bản cache riêng nên dữ liệu dễ lệch nhau.",
+      "explanationEn": "diverge /daɪˈvɜːdʒ/ (verb): to become gradually different. The opposite is \"converge\"; each instance holds its own copy, so the copies drift apart."
+    },
+    {
+      "id": "v10",
+      "lessonId": "l1",
+      "word": "purge",
+      "pos": "n",
+      "ipa": "/pɜːdʒ/",
+      "question": "Trong câu \"The browser is the hardest to invalidate (you cannot reach into it), a CDN needs a purge, in-process copies diverge between instances, and a distributed cache has one place to delete.\", từ \"purge\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The browser is the hardest to invalidate (you cannot reach into it), a CDN needs a purge, in-process copies diverge between instances, and a distributed cache has one place to delete.\", what does \"purge\" (noun) mean?",
+      "options": [
+        "việc xóa sạch nội dung đã lưu",
+        "việc tải trước nội dung",
+        "việc nén dữ liệu",
+        "cuộc thanh trừng chính trị"
+      ],
+      "optionsEn": [
+        "a clearing out of stored content",
+        "a preloading of content",
+        "a compression of data",
+        "a political removal of opponents"
+      ],
+      "answer": 0,
+      "explanation": "purge /pɜːdʒ/ (danh từ): việc xóa sạch nội dung đã lưu. Trong CDN, \"purge\" là yêu cầu xóa nội dung đã cache; nghĩa \"thanh trừng\" dùng trong chính trị.",
+      "explanationEn": "purge /pɜːdʒ/ (noun): a clearing out of stored content. In a CDN a purge is a request to wipe cached content; the political sense means removing opponents."
+    },
+    {
+      "id": "v11",
+      "lessonId": "l1",
+      "word": "rule of thumb",
+      "pos": "phrase",
+      "ipa": "/ruːl əv θʌm/",
+      "question": "Trong câu \"The rule of thumb: the further out a layer is, the shorter or more versioned its content must be.\", từ \"rule of thumb\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The rule of thumb: the further out a layer is, the shorter or more versioned its content must be.\", what does \"rule of thumb\" (phrase) mean?",
+      "options": [
+        "quy định bắt buộc",
+        "công thức chính xác",
+        "ngoại lệ hiếm gặp",
+        "nguyên tắc kinh nghiệm"
+      ],
+      "optionsEn": [
+        "a mandatory regulation",
+        "an exact formula",
+        "a rare exception",
+        "a practical guideline from experience"
+      ],
+      "answer": 3,
+      "explanation": "rule of thumb /ruːl əv θʌm/ (cụm từ): nguyên tắc kinh nghiệm. \"As a rule of thumb\" = theo kinh nghiệm chung, không phải quy tắc tuyệt đối.",
+      "explanationEn": "rule of thumb /ruːl əv θʌm/ (phrase): a practical guideline from experience. \"As a rule of thumb\" means as a general guide based on practice, not a strict law."
+    },
+    {
+      "id": "v12",
+      "lessonId": "l1",
+      "word": "personalise",
+      "pos": "v",
+      "ipa": "/ˈpɜːsənəlaɪz/",
+      "question": "Trong câu \"Never put personalised data in a shared layer without making the user part of the cache key.\", từ \"personalise\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Never put personalised data in a shared layer without making the user part of the cache key.\", what does \"personalise\" (verb) mean?",
+      "options": [
+        "ẩn danh hóa thông tin",
+        "cá nhân hóa theo từng người",
+        "chia sẻ công khai",
+        "chuẩn hóa định dạng"
+      ],
+      "optionsEn": [
+        "to make information anonymous",
+        "to tailor to an individual user",
+        "to share with the public",
+        "to standardise a format"
+      ],
+      "answer": 1,
+      "explanation": "personalise /ˈpɜːsənəlaɪz/ (động từ): cá nhân hóa theo từng người. \"Personalised data\" là dữ liệu riêng từng người dùng; cache chung sẽ làm lộ dữ liệu cho người khác.",
+      "explanationEn": "personalise /ˈpɜːsənəlaɪz/ (verb): to tailor to an individual user. Personalised data belongs to one user; caching it in a shared layer leaks it to others. (US: personalize.)"
+    },
+    {
+      "id": "v13",
+      "lessonId": "l2",
+      "word": "default",
+      "pos": "adj",
+      "ipa": "/dɪˈfɔːlt/",
+      "question": "Trong câu \"Cache-aside is the default pattern: the application owns the logic, and the cache is a passive key-value store.\", từ \"default\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Cache-aside is the default pattern: the application owns the logic, and the cache is a passive key-value store.\", what does \"default\" (adjective) mean?",
+      "options": [
+        "lỗi thời, không còn dùng",
+        "mặc định, dùng khi không chọn gì khác",
+        "nâng cao, dành cho chuyên gia",
+        "vỡ nợ, không trả được nợ"
+      ],
+      "optionsEn": [
+        "outdated and no longer used",
+        "used unless another choice is made",
+        "advanced, meant for experts",
+        "failing to repay a debt"
+      ],
+      "answer": 1,
+      "explanation": "default /dɪˈfɔːlt/ (tính từ): mặc định, dùng khi không chọn gì khác. \"The default pattern\" = lựa chọn thông thường đầu tiên; nghĩa \"vỡ nợ\" dùng trong tài chính.",
+      "explanationEn": "default /dɪˈfɔːlt/ (adjective): used unless another choice is made. \"The default pattern\" is the usual first choice; the financial sense means failing to repay a loan."
+    },
+    {
+      "id": "v14",
+      "lessonId": "l2",
+      "word": "passive",
+      "pos": "adj",
+      "ipa": "/ˈpæsɪv/",
+      "question": "Trong câu \"Cache-aside is the default pattern: the application owns the logic, and the cache is a passive key-value store.\", từ \"passive\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Cache-aside is the default pattern: the application owns the logic, and the cache is a passive key-value store.\", what does \"passive\" (adjective) mean?",
+      "options": [
+        "chủ động, tự khởi xướng",
+        "bền vững, lưu lâu dài",
+        "bị động (thể ngữ pháp)",
+        "thụ động, không tự hành động"
+      ],
+      "optionsEn": [
+        "taking action on its own",
+        "durable, kept for a long time",
+        "the grammatical passive voice",
+        "not acting on its own"
+      ],
+      "answer": 3,
+      "explanation": "passive /ˈpæsɪv/ (tính từ): thụ động, không tự hành động. Cache thụ động chỉ lưu và trả dữ liệu khi được gọi; ứng dụng mới là bên đọc DB và ghi cache.",
+      "explanationEn": "passive /ˈpæsɪv/ (adjective): not acting on its own. A passive cache only stores and returns values when asked; the application does the loading."
+    },
+    {
+      "id": "v15",
+      "lessonId": "l2",
+      "word": "overwhelm",
+      "pos": "v",
+      "ipa": "/ˌəʊvəˈwelm/",
+      "question": "Trong câu \"Weaknesses: the first request per key is slow (a cold cache after failover can overwhelm the DB), and application code must handle every miss and invalidation correctly.\", từ \"overwhelm\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Weaknesses: the first request per key is slow (a cold cache after failover can overwhelm the DB), and application code must handle every miss and invalidation correctly.\", what does \"overwhelm\" (verb) mean?",
+      "options": [
+        "làm quá tải",
+        "làm chậm lại đôi chút",
+        "làm hỏng dữ liệu",
+        "làm cảm động sâu sắc"
+      ],
+      "optionsEn": [
+        "to hit with more load than it can handle",
+        "to slow down slightly",
+        "to corrupt stored data",
+        "to affect someone emotionally"
+      ],
+      "answer": 0,
+      "explanation": "overwhelm /ˌəʊvəˈwelm/ (động từ): làm quá tải. \"Overwhelm the database\" = dồn quá nhiều yêu cầu khiến DB không xử lý nổi.",
+      "explanationEn": "overwhelm /ˌəʊvəˈwelm/ (verb): to hit with more load than it can handle. To overwhelm the database is to send more requests than it can process."
+    },
+    {
+      "id": "v16",
+      "lessonId": "l2",
+      "word": "synchronously",
+      "pos": "adv",
+      "ipa": "/ˈsɪŋkrənəsli/",
+      "question": "Trong câu \"App writes to the cache; the cache synchronously writes the DB, then acknowledges\", từ \"synchronously\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"App writes to the cache; the cache synchronously writes the DB, then acknowledges\", what does \"synchronously\" (adverb) mean?",
+      "options": [
+        "bất đồng bộ, chạy ngầm sau đó",
+        "song song trên nhiều luồng",
+        "đồng bộ, chờ xong mới tiếp tục",
+        "định kỳ theo lịch cố định"
+      ],
+      "optionsEn": [
+        "later in the background",
+        "in parallel on many threads",
+        "waiting for completion before moving on",
+        "periodically on a fixed schedule"
+      ],
+      "answer": 2,
+      "explanation": "synchronously /ˈsɪŋkrənəsli/ (trạng từ): đồng bộ, chờ xong mới tiếp tục. Ghi đồng bộ nghĩa là bên gọi phải chờ DB ghi xong; trái nghĩa là \"asynchronously\".",
+      "explanationEn": "synchronously /ˈsɪŋkrənəsli/ (adverb): waiting for completion before moving on. Writing synchronously means the caller waits until the DB write finishes; the opposite is \"asynchronously\"."
+    },
+    {
+      "id": "v17",
+      "lessonId": "l2",
+      "word": "acknowledge",
+      "pos": "v",
+      "ipa": "/əkˈnɒlɪdʒ/",
+      "question": "Trong câu \"App writes to the cache; the cache synchronously writes the DB, then acknowledges\", từ \"acknowledge\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"App writes to the cache; the cache synchronously writes the DB, then acknowledges\", what does \"acknowledge\" (verb) mean?",
+      "options": [
+        "từ chối yêu cầu",
+        "gửi lại yêu cầu",
+        "xác nhận đã nhận/xử lý",
+        "thừa nhận lỗi lầm"
+      ],
+      "optionsEn": [
+        "to refuse a request",
+        "to resend a request",
+        "to confirm receipt or completion",
+        "to admit a mistake"
+      ],
+      "answer": 2,
+      "explanation": "acknowledge /əkˈnɒlɪdʒ/ (động từ): xác nhận đã nhận/xử lý. Trong hệ thống, \"acknowledge\" (ack) là báo cho bên gửi biết thao tác đã thành công.",
+      "explanationEn": "acknowledge /əkˈnɒlɪdʒ/ (verb): to confirm receipt or completion. In systems, to acknowledge (ack) is to tell the sender the operation succeeded."
+    },
+    {
+      "id": "v18",
+      "lessonId": "l2",
+      "word": "flush",
+      "pos": "v",
+      "ipa": "/flʌʃ/",
+      "question": "Trong câu \"App writes to the cache; the cache acknowledges and flushes to the DB asynchronously, often batched\", từ \"flush\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"App writes to the cache; the cache acknowledges and flushes to the DB asynchronously, often batched\", what does \"flush\" (verb) mean?",
+      "options": [
+        "đẩy dữ liệu đệm xuống nơi lưu",
+        "xả nước bồn cầu",
+        "đọc dữ liệu từ đĩa",
+        "khóa dữ liệu lại"
+      ],
+      "optionsEn": [
+        "to push buffered data to storage",
+        "to clean a toilet with water",
+        "to read data from disk",
+        "to lock data in place"
+      ],
+      "answer": 0,
+      "explanation": "flush /flʌʃ/ (động từ): đẩy dữ liệu đệm xuống nơi lưu. \"Flush to disk/DB\" = ghi phần dữ liệu đang giữ tạm trong bộ nhớ xuống nơi lưu bền vững.",
+      "explanationEn": "flush /flʌʃ/ (verb): to push buffered data to storage. To flush to disk or DB is to write out data held temporarily in memory to durable storage."
+    },
+    {
+      "id": "v19",
+      "lessonId": "l2",
+      "word": "batch",
+      "pos": "v",
+      "ipa": "/bætʃ/",
+      "question": "Trong câu \"App writes to the cache; the cache acknowledges and flushes to the DB asynchronously, often batched\", từ \"batch\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"App writes to the cache; the cache acknowledges and flushes to the DB asynchronously, often batched\", what does \"batch\" (verb) mean?",
+      "options": [
+        "tách thành từng phần",
+        "sắp xếp theo thứ tự",
+        "nướng cả mẻ bánh",
+        "gộp thành từng lô"
+      ],
+      "optionsEn": [
+        "to split into separate parts",
+        "to sort into order",
+        "to bake a load of bread",
+        "to group into sets processed together"
+      ],
+      "answer": 3,
+      "explanation": "batch /bætʃ/ (động từ): gộp thành từng lô. Ghi theo lô (batched writes) giảm số lần gọi DB, đổi lại độ trễ trước khi dữ liệu được lưu.",
+      "explanationEn": "batch /bætʃ/ (verb): to group into sets processed together. Batched writes cut the number of DB calls at the cost of a delay before data is stored."
+    },
+    {
+      "id": "v20",
+      "lessonId": "l2",
+      "word": "expiry",
+      "pos": "n",
+      "ipa": "/ɪkˈspaɪəri/",
+      "question": "Trong câu \"Entries close to expiry are reloaded in the background\", từ \"expiry\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Entries close to expiry are reloaded in the background\", what does \"expiry\" (noun) mean?",
+      "options": [
+        "thời điểm tạo ra",
+        "thời điểm hết hạn",
+        "lần truy cập gần nhất",
+        "giai đoạn gia hạn"
+      ],
+      "optionsEn": [
+        "the moment of creation",
+        "the moment something runs out",
+        "the most recent access",
+        "a period of renewal"
+      ],
+      "answer": 1,
+      "explanation": "expiry /ɪkˈspaɪəri/ (danh từ): thời điểm hết hạn. \"Close to expiry\" = sắp hết hạn; động từ tương ứng là \"expire\".",
+      "explanationEn": "expiry /ɪkˈspaɪəri/ (noun): the moment something runs out. \"Close to expiry\" means about to run out; the related verb is \"expire\"."
+    },
+    {
+      "id": "v21",
+      "lessonId": "l2",
+      "word": "suit",
+      "pos": "v",
+      "ipa": "/suːt/",
+      "question": "Trong câu \"Write-behind suits high-volume counters, view counts or telemetry where losing a second of writes is acceptable — never payments or inventory.\", từ \"suit\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Write-behind suits high-volume counters, view counts or telemetry where losing a second of writes is acceptable — never payments or inventory.\", what does \"suit\" (verb) mean?",
+      "options": [
+        "thay thế cho",
+        "phù hợp với",
+        "bảo vệ khỏi",
+        "kiện ra tòa"
+      ],
+      "optionsEn": [
+        "to take the place of",
+        "to be right for",
+        "to guard against",
+        "to take legal action"
+      ],
+      "answer": 1,
+      "explanation": "suit /suːt/ (động từ): phù hợp với. \"X suits Y\" = X hợp với Y; danh từ \"suit\" còn nghĩa là bộ com-lê hoặc vụ kiện (lawsuit).",
+      "explanationEn": "suit /suːt/ (verb): to be right for. \"X suits Y\" means X is a good fit for Y; as a noun, suit can mean clothing or a lawsuit."
+    },
+    {
+      "id": "v22",
+      "lessonId": "l2",
+      "word": "inventory",
+      "pos": "n",
+      "ipa": "/ˈɪnvəntri/",
+      "question": "Trong câu \"Write-behind suits high-volume counters, view counts or telemetry where losing a second of writes is acceptable — never payments or inventory.\", từ \"inventory\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Write-behind suits high-volume counters, view counts or telemetry where losing a second of writes is acceptable — never payments or inventory.\", what does \"inventory\" (noun) mean?",
+      "options": [
+        "hóa đơn bán hàng",
+        "danh bạ khách hàng",
+        "bảng lương nhân viên",
+        "hàng tồn kho"
+      ],
+      "optionsEn": [
+        "a sales invoice",
+        "a list of customers",
+        "a staff payroll",
+        "stock of goods on hand"
+      ],
+      "answer": 3,
+      "explanation": "inventory /ˈɪnvəntri/ (danh từ): hàng tồn kho. Số lượng tồn kho phải chính xác, nên không được phép mất dữ liệu ghi như với write-behind.",
+      "explanationEn": "inventory /ˈɪnvəntri/ (noun): stock of goods on hand. Inventory counts must be exact, so losing writes, as write-behind can, is not acceptable."
+    },
+    {
+      "id": "v23",
+      "lessonId": "l2",
+      "word": "plain",
+      "pos": "adj",
+      "ipa": "/pleɪn/",
+      "question": "Trong câu \"On AWS, DynamoDB Accelerator (DAX) is a read-through/write-through cache for DynamoDB; ElastiCache is a plain store you use with cache-aside.\", từ \"plain\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"On AWS, DynamoDB Accelerator (DAX) is a read-through/write-through cache for DynamoDB; ElastiCache is a plain store you use with cache-aside.\", what does \"plain\" (adjective) mean?",
+      "options": [
+        "đơn giản, không kèm tính năng thêm",
+        "phức tạp, nhiều lớp logic",
+        "đắt đỏ, tốn chi phí",
+        "vùng đồng bằng"
+      ],
+      "optionsEn": [
+        "simple, with nothing extra added",
+        "complex, with many logic layers",
+        "costly to run",
+        "a large flat area of land"
+      ],
+      "answer": 0,
+      "explanation": "plain /pleɪn/ (tính từ): đơn giản, không kèm tính năng thêm. \"A plain store\" = kho chỉ lưu key-value, không tự đọc DB; danh từ \"plain\" nghĩa là đồng bằng.",
+      "explanationEn": "plain /pleɪn/ (adjective): simple, with nothing extra added. A plain store only holds key-values and never loads from the DB; the noun \"plain\" means flat land."
+    },
+    {
+      "id": "v24",
+      "lessonId": "l3",
+      "word": "upper bound",
+      "pos": "phrase",
+      "ipa": "/ˈʌpə baʊnd/",
+      "question": "Trong câu \"A TTL (time to live) is your upper bound on staleness and your safety net for invalidation bugs.\", từ \"upper bound\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A TTL (time to live) is your upper bound on staleness and your safety net for invalidation bugs.\", what does \"upper bound\" (phrase) mean?",
+      "options": [
+        "giới hạn dưới",
+        "giá trị trung bình",
+        "giới hạn trên",
+        "ngưỡng cảnh báo"
+      ],
+      "optionsEn": [
+        "the minimum limit",
+        "the average value",
+        "the maximum limit",
+        "an alert threshold"
+      ],
+      "answer": 2,
+      "explanation": "upper bound /ˈʌpə baʊnd/ (cụm từ): giới hạn trên. TTL là giới hạn trên: dữ liệu không bao giờ cũ hơn TTL; trái nghĩa là \"lower bound\".",
+      "explanationEn": "upper bound /ˈʌpə baʊnd/ (phrase): the maximum limit. A TTL is an upper bound: data is never staler than the TTL; the opposite is \"lower bound\"."
+    },
+    {
+      "id": "v25",
+      "lessonId": "l3",
+      "word": "safety net",
+      "pos": "phrase",
+      "ipa": "/ˈseɪfti net/",
+      "question": "Trong câu \"A TTL (time to live) is your upper bound on staleness and your safety net for invalidation bugs.\", từ \"safety net\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A TTL (time to live) is your upper bound on staleness and your safety net for invalidation bugs.\", what does \"safety net\" (phrase) mean?",
+      "options": [
+        "công cụ tìm lỗi tự động",
+        "tường lửa bảo mật mạng",
+        "biện pháp dự phòng khi có sự cố",
+        "lưới bảo hộ khi làm việc trên cao"
+      ],
+      "optionsEn": [
+        "a tool that finds bugs automatically",
+        "a network security firewall",
+        "a fallback that protects when things fail",
+        "a net that catches falling workers"
+      ],
+      "answer": 2,
+      "explanation": "safety net /ˈseɪfti net/ (cụm từ): biện pháp dự phòng khi có sự cố. Nghĩa bóng: nếu quên invalidate thì TTL vẫn đảm bảo dữ liệu cũ sẽ hết hạn.",
+      "explanationEn": "safety net /ˈseɪfti net/ (phrase): a fallback that protects when things fail. Figuratively: if invalidation is missed, the TTL still makes stale data expire eventually."
+    },
+    {
+      "id": "v26",
+      "lessonId": "l3",
+      "word": "explicitly",
+      "pos": "adv",
+      "ipa": "/ɪkˈsplɪsɪtli/",
+      "question": "Trong câu \"Always set one, even when you also invalidate explicitly.\", từ \"explicitly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Always set one, even when you also invalidate explicitly.\", what does \"explicitly\" (adverb) mean?",
+      "options": [
+        "một cách tường minh, chủ động",
+        "một cách ngầm định, tự động",
+        "một cách ngẫu nhiên",
+        "một cách tạm thời"
+      ],
+      "optionsEn": [
+        "clearly and deliberately",
+        "implicitly, without being stated",
+        "at random",
+        "for a short while only"
+      ],
+      "answer": 0,
+      "explanation": "explicitly /ɪkˈsplɪsɪtli/ (trạng từ): một cách tường minh, chủ động. Trái nghĩa là \"implicitly\"; ở đây là chủ động xóa key khi dữ liệu thay đổi.",
+      "explanationEn": "explicitly /ɪkˈsplɪsɪtli/ (adverb): clearly and deliberately. The opposite is \"implicitly\"; here it means deliberately deleting keys when data changes."
+    },
+    {
+      "id": "v27",
+      "lessonId": "l3",
+      "word": "tolerate",
+      "pos": "v",
+      "ipa": "/ˈtɒləreɪt/",
+      "question": "Trong câu \"Product descriptions might tolerate an hour; a stock count only seconds.\", từ \"tolerate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Product descriptions might tolerate an hour; a stock count only seconds.\", what does \"tolerate\" (verb) mean?",
+      "options": [
+        "yêu cầu bắt buộc",
+        "cập nhật liên tục",
+        "tính toán lại",
+        "chấp nhận được, chịu được"
+      ],
+      "optionsEn": [
+        "to strictly require",
+        "to update continuously",
+        "to calculate again",
+        "to accept without harm"
+      ],
+      "answer": 3,
+      "explanation": "tolerate /ˈtɒləreɪt/ (động từ): chấp nhận được, chịu được. \"Tolerate an hour\" = dữ liệu cũ một giờ vẫn chấp nhận được; danh từ là \"tolerance\".",
+      "explanationEn": "tolerate /ˈtɒləreɪt/ (verb): to accept without harm. \"Tolerate an hour\" means an hour of staleness is acceptable; the noun is \"tolerance\"."
+    },
+    {
+      "id": "v28",
+      "lessonId": "l3",
+      "word": "weigh",
+      "pos": "v",
+      "ipa": "/weɪ/",
+      "question": "Trong câu \"Weigh change rate against read rate.\", từ \"weigh\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Weigh change rate against read rate.\", what does \"weigh\" (verb) mean?",
+      "options": [
+        "cân khối lượng",
+        "cân nhắc, so sánh",
+        "cộng dồn lại",
+        "bỏ qua"
+      ],
+      "optionsEn": [
+        "to measure how heavy",
+        "to compare and consider",
+        "to add up together",
+        "to ignore"
+      ],
+      "answer": 1,
+      "explanation": "weigh /weɪ/ (động từ): cân nhắc, so sánh. \"Weigh X against Y\" = đặt X và Y lên bàn cân để quyết định; nghĩa đen là cân nặng.",
+      "explanationEn": "weigh /weɪ/ (verb): to compare and consider. \"Weigh X against Y\" means comparing them to decide; the literal sense is measuring weight."
+    },
+    {
+      "id": "v29",
+      "lessonId": "l3",
+      "word": "expire",
+      "pos": "v",
+      "ipa": "/ɪkˈspaɪə/",
+      "question": "Trong câu \"If 100,000 keys are loaded at the same moment with the same TTL (for example, a cache warm-up after deploy), they all expire at the same moment.\", từ \"expire\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"If 100,000 keys are loaded at the same moment with the same TTL (for example, a cache warm-up after deploy), they all expire at the same moment.\", what does \"expire\" (verb) mean?",
+      "options": [
+        "khởi động lại",
+        "hết hạn",
+        "được sao chép",
+        "qua đời"
+      ],
+      "optionsEn": [
+        "to start up again",
+        "to reach the end of its valid time",
+        "to be duplicated",
+        "to die"
+      ],
+      "answer": 1,
+      "explanation": "expire /ɪkˈspaɪə/ (động từ): hết hạn. \"Keys expire\" = key hết TTL và bị xóa; nghĩa \"qua đời\" rất trang trọng, ít dùng.",
+      "explanationEn": "expire /ɪkˈspaɪə/ (verb): to reach the end of its valid time. \"Keys expire\" means their TTL runs out and they are removed; the \"die\" sense is formal and rare."
+    },
+    {
+      "id": "v30",
+      "lessonId": "l3",
+      "word": "briefly",
+      "pos": "adv",
+      "ipa": "/ˈbriːfli/",
+      "question": "Trong câu \"Cache negative results briefly.\", từ \"briefly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Cache negative results briefly.\", what does \"briefly\" (adverb) mean?",
+      "options": [
+        "một cách tóm tắt",
+        "thật lâu dài",
+        "thật cẩn thận",
+        "trong thời gian ngắn"
+      ],
+      "optionsEn": [
+        "in a summarised way",
+        "for a long period",
+        "with great care",
+        "for a short time"
+      ],
+      "answer": 3,
+      "explanation": "briefly /ˈbriːfli/ (trạng từ): trong thời gian ngắn. \"Briefly\" có hai nghĩa: trong thời gian ngắn (ở đây) và nói ngắn gọn (\"briefly explain\").",
+      "explanationEn": "briefly /ˈbriːfli/ (adverb): for a short time. \"Briefly\" can mean for a short time (here) or in few words, as in \"briefly explain\"."
+    },
+    {
+      "id": "v31",
+      "lessonId": "l3",
+      "word": "concurrent",
+      "pos": "adj",
+      "ipa": "/kənˈkʌrənt/",
+      "question": "Trong câu \"Two concurrent writers can commit to the DB in one order and update the cache in the other, leaving the older value cached until TTL.\", từ \"concurrent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Two concurrent writers can commit to the DB in one order and update the cache in the other, leaving the older value cached until TTL.\", what does \"concurrent\" (adjective) mean?",
+      "options": [
+        "đồng thời, chạy cùng lúc",
+        "nối tiếp, lần lượt",
+        "cạnh tranh về giá",
+        "độc lập, tách biệt"
+      ],
+      "optionsEn": [
+        "running at the same time",
+        "one after another in turn",
+        "competing on price",
+        "isolated and separate"
+      ],
+      "answer": 0,
+      "explanation": "concurrent /kənˈkʌrənt/ (tính từ): đồng thời, chạy cùng lúc. \"Concurrent requests/writers\" = nhiều tác vụ xảy ra cùng lúc, dễ gây race condition.",
+      "explanationEn": "concurrent /kənˈkʌrənt/ (adjective): running at the same time. Concurrent requests or writers happen at the same time and can cause race conditions."
+    },
+    {
+      "id": "v32",
+      "lessonId": "l3",
+      "word": "commit",
+      "pos": "v",
+      "ipa": "/kəˈmɪt/",
+      "question": "Trong câu \"Two concurrent writers can commit to the DB in one order and update the cache in the other, leaving the older value cached until TTL.\", từ \"commit\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Two concurrent writers can commit to the DB in one order and update the cache in the other, leaving the older value cached until TTL.\", what does \"commit\" (verb) mean?",
+      "options": [
+        "hoàn tác thay đổi",
+        "cam kết, hứa hẹn",
+        "xác nhận lưu vĩnh viễn (giao dịch)",
+        "phạm (tội)"
+      ],
+      "optionsEn": [
+        "to undo changes",
+        "to pledge or promise",
+        "to make a transaction permanent",
+        "to carry out a crime"
+      ],
+      "answer": 2,
+      "explanation": "commit /kəˈmɪt/ (động từ): xác nhận lưu vĩnh viễn (giao dịch). \"Commit a transaction\" = chốt thay đổi vào DB; trái nghĩa là \"roll back\".",
+      "explanationEn": "commit /kəˈmɪt/ (verb): to make a transaction permanent. To commit a transaction is to make its changes permanent; the opposite is to roll back."
+    },
+    {
+      "id": "v33",
+      "lessonId": "l3",
+      "word": "idempotent",
+      "pos": "adj",
+      "ipa": "/ˌaɪdəmˈpəʊtənt/",
+      "question": "Trong câu \"Deleting is idempotent: the next read reloads whatever the DB now holds.\", từ \"idempotent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Deleting is idempotent: the next read reloads whatever the DB now holds.\", what does \"idempotent\" (adjective) mean?",
+      "options": [
+        "chỉ được phép chạy một lần",
+        "kết quả thay đổi mỗi lần chạy",
+        "lặp lại nhiều lần vẫn cho cùng kết quả",
+        "không thể hoàn tác"
+      ],
+      "optionsEn": [
+        "allowed to run only once",
+        "giving a new result each run",
+        "same result however often repeated",
+        "impossible to undo"
+      ],
+      "answer": 2,
+      "explanation": "idempotent /ˌaɪdəmˈpəʊtənt/ (tính từ): lặp lại nhiều lần vẫn cho cùng kết quả. Thao tác idempotent an toàn khi retry: xóa một key hai lần cũng giống xóa một lần.",
+      "explanationEn": "idempotent /ˌaɪdəmˈpəʊtənt/ (adjective): same result however often repeated. Idempotent operations are safe to retry: deleting a key twice equals deleting it once."
+    },
+    {
+      "id": "v34",
+      "lessonId": "l3",
+      "word": "backstop",
+      "pos": "n",
+      "ipa": "/ˈbækstɒp/",
+      "question": "Trong câu \"If the delete itself fails (network blip), the TTL is your backstop — or retry the delete from an outbox or a CDC consumer so it is guaranteed to happen.\", từ \"backstop\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"If the delete itself fails (network blip), the TTL is your backstop — or retry the delete from an outbox or a CDC consumer so it is guaranteed to happen.\", what does \"backstop\" (noun) mean?",
+      "options": [
+        "chốt chặn cuối cùng",
+        "điểm khởi đầu",
+        "lỗi phát sinh thêm",
+        "hàng rào sân bóng chày"
+      ],
+      "optionsEn": [
+        "a last line of defence",
+        "a starting point",
+        "an extra error caused",
+        "a fence behind a baseball field"
+      ],
+      "answer": 0,
+      "explanation": "backstop /ˈbækstɒp/ (danh từ): chốt chặn cuối cùng. Nghĩa bóng: thứ đỡ lại khi mọi cách khác thất bại, gần nghĩa với \"safety net\".",
+      "explanationEn": "backstop /ˈbækstɒp/ (noun): a last line of defence. Figuratively, what catches you when everything else fails; close in meaning to \"safety net\"."
+    },
+    {
+      "id": "v35",
+      "lessonId": "l3",
+      "word": "blip",
+      "pos": "n",
+      "ipa": "/blɪp/",
+      "question": "Trong câu \"If the delete itself fails (network blip), the TTL is your backstop — or retry the delete from an outbox or a CDC consumer so it is guaranteed to happen.\", từ \"blip\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"If the delete itself fails (network blip), the TTL is your backstop — or retry the delete from an outbox or a CDC consumer so it is guaranteed to happen.\", what does \"blip\" (noun) mean?",
+      "options": [
+        "sự cố kéo dài",
+        "bản cập nhật lớn",
+        "tiếng bíp trên màn hình radar",
+        "trục trặc ngắn, thoáng qua"
+      ],
+      "optionsEn": [
+        "a long-lasting outage",
+        "a major update",
+        "a beep on a radar screen",
+        "a brief, temporary glitch"
+      ],
+      "answer": 3,
+      "explanation": "blip /blɪp/ (danh từ): trục trặc ngắn, thoáng qua. \"Network blip\" = mạng chập chờn trong chốc lát rồi tự hồi phục.",
+      "explanationEn": "blip /blɪp/ (noun): a brief, temporary glitch. A network blip is a momentary disruption that recovers by itself."
+    },
+    {
+      "id": "v36",
+      "lessonId": "l3",
+      "word": "decouple",
+      "pos": "v",
+      "ipa": "/diːˈkʌpl/",
+      "question": "Trong câu \"Many services write the same data; decouples writers from cache keys\", từ \"decouple\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Many services write the same data; decouples writers from cache keys\", what does \"decouple\" (verb) mean?",
+      "options": [
+        "ghép nối chặt chẽ",
+        "tách rời sự phụ thuộc",
+        "nhân bản dữ liệu",
+        "tháo toa tàu"
+      ],
+      "optionsEn": [
+        "to tie parts closely together",
+        "to remove a dependency between parts",
+        "to replicate data",
+        "to unhitch a railway car"
+      ],
+      "answer": 1,
+      "explanation": "decouple /diːˈkʌpl/ (động từ): tách rời sự phụ thuộc. Decouple = để bên ghi không cần biết key cache nào bị ảnh hưởng; trái nghĩa là \"couple tightly\".",
+      "explanationEn": "decouple /diːˈkʌpl/ (verb): to remove a dependency between parts. Decoupling means writers need not know which cache keys are affected; the opposite is tight coupling."
+    },
+    {
+      "id": "v37",
+      "lessonId": "l4",
+      "word": "at best",
+      "pos": "phrase",
+      "ipa": "/æt best/",
+      "question": "Trong câu \"A cache sits outside the database transaction, so cache + DB is eventually consistent at best.\", từ \"at best\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A cache sits outside the database transaction, so cache + DB is eventually consistent at best.\", what does \"at best\" (phrase) mean?",
+      "options": [
+        "ít nhất, tối thiểu",
+        "cùng lắm, trong trường hợp tốt nhất",
+        "luôn luôn, chắc chắn",
+        "tệ nhất, xấu nhất"
+      ],
+      "optionsEn": [
+        "at the very minimum",
+        "in the most favourable case only",
+        "always, without doubt",
+        "in the worst case"
+      ],
+      "answer": 1,
+      "explanation": "at best /æt best/ (cụm từ): cùng lắm, trong trường hợp tốt nhất. \"At best\" = kết quả tốt nhất có thể cũng chỉ đến mức đó; trái nghĩa \"at worst\".",
+      "explanationEn": "at best /æt best/ (phrase): in the most favourable case only. \"At best\" means even the most favourable outcome goes no further; the opposite is \"at worst\"."
+    },
+    {
+      "id": "v38",
+      "lessonId": "l4",
+      "word": "race",
+      "pos": "n",
+      "ipa": "/reɪs/",
+      "question": "Trong câu \"Even correct cache-aside has a rare race:\", từ \"race\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Even correct cache-aside has a rare race:\", what does \"race\" (noun) mean?",
+      "options": [
+        "cuộc thi chạy",
+        "chủng tộc",
+        "lỗi cú pháp",
+        "tình trạng tranh chấp thứ tự"
+      ],
+      "optionsEn": [
+        "a running competition",
+        "a group of people by ancestry",
+        "a syntax error",
+        "a timing conflict between operations"
+      ],
+      "answer": 3,
+      "explanation": "race /reɪs/ (danh từ): tình trạng tranh chấp thứ tự. \"Race\" ở đây là \"race condition\": kết quả sai do các thao tác đồng thời xen kẽ không mong muốn.",
+      "explanationEn": "race /reɪs/ (noun): a timing conflict between operations. Here race is short for \"race condition\": a wrong result from concurrent steps interleaving badly."
+    },
+    {
+      "id": "v39",
+      "lessonId": "l4",
+      "word": "cap",
+      "pos": "v",
+      "ipa": "/kæp/",
+      "question": "Trong câu \"Short TTL — caps the damage window.\", từ \"cap\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Short TTL — caps the damage window.\", what does \"cap\" (verb) mean?",
+      "options": [
+        "giới hạn mức tối đa",
+        "mở rộng phạm vi",
+        "che giấu đi",
+        "đội mũ lên"
+      ],
+      "optionsEn": [
+        "to set a maximum on",
+        "to widen the range of",
+        "to hide from view",
+        "to put a hat on"
+      ],
+      "answer": 0,
+      "explanation": "cap /kæp/ (động từ): giới hạn mức tối đa. \"Cap the damage\" = không để thiệt hại vượt quá một mức; danh từ \"cap\" là mũ lưỡi trai hoặc mức trần.",
+      "explanationEn": "cap /kæp/ (verb): to set a maximum on. To cap the damage is to stop it going past a limit; the noun cap is a hat or a ceiling."
+    },
+    {
+      "id": "v40",
+      "lessonId": "l4",
+      "word": "bypass",
+      "pos": "v",
+      "ipa": "/ˈbaɪpɑːs/",
+      "question": "Trong câu \"Read-your-writes — after a user edits, read that user's data from the primary for a short period, or bypass the cache for them.\", từ \"bypass\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Read-your-writes — after a user edits, read that user's data from the primary for a short period, or bypass the cache for them.\", what does \"bypass\" (verb) mean?",
+      "options": [
+        "đi xuyên qua",
+        "làm đầy lại",
+        "đi vòng qua, bỏ qua",
+        "phẫu thuật bắc cầu"
+      ],
+      "optionsEn": [
+        "to pass straight through",
+        "to fill up again",
+        "to go around and skip",
+        "a heart surgery procedure"
+      ],
+      "answer": 2,
+      "explanation": "bypass /ˈbaɪpɑːs/ (động từ): đi vòng qua, bỏ qua. \"Bypass the cache\" = đọc thẳng từ database, không đi qua cache.",
+      "explanationEn": "bypass /ˈbaɪpɑːs/ (verb): to go around and skip. To bypass the cache is to read directly from the database without going through the cache."
+    },
+    {
+      "id": "v41",
+      "lessonId": "l4",
+      "word": "irreversible",
+      "pos": "adj",
+      "ipa": "/ˌɪrɪˈvɜːsəbl/",
+      "question": "Trong câu \"Don't cache it — for values that drive money or irreversible decisions, read the source of truth.\", từ \"irreversible\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Don't cache it — for values that drive money or irreversible decisions, read the source of truth.\", what does \"irreversible\" (adjective) mean?",
+      "options": [
+        "có thể hoàn tác",
+        "chưa được xác nhận",
+        "không thể đảo ngược",
+        "hai mặt như nhau"
+      ],
+      "optionsEn": [
+        "able to be undone",
+        "not yet confirmed",
+        "impossible to undo",
+        "usable on both sides"
+      ],
+      "answer": 2,
+      "explanation": "irreversible /ˌɪrɪˈvɜːsəbl/ (tính từ): không thể đảo ngược. Quyết định không thể đảo ngược (như trừ tiền) không nên dựa trên dữ liệu cache cũ.",
+      "explanationEn": "irreversible /ˌɪrɪˈvɜːsəbl/ (adjective): impossible to undo. Decisions that cannot be undone, such as charging money, should not rely on stale cache."
+    },
+    {
+      "id": "v42",
+      "lessonId": "l4",
+      "word": "harmless",
+      "pos": "adj",
+      "ipa": "/ˈhɑːmləs/",
+      "question": "Trong câu \"A stale avatar is harmless; a stale seat count oversells a flight.\", từ \"harmless\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A stale avatar is harmless; a stale seat count oversells a flight.\", what does \"harmless\" (adjective) mean?",
+      "options": [
+        "vô hại",
+        "nguy hiểm",
+        "vô dụng",
+        "vô danh"
+      ],
+      "optionsEn": [
+        "causing no damage",
+        "causing danger",
+        "having no use",
+        "having no name"
+      ],
+      "answer": 0,
+      "explanation": "harmless /ˈhɑːmləs/ (tính từ): vô hại. Hậu tố \"-less\" nghĩa là \"không có\": harm (tác hại) → harmless (vô hại).",
+      "explanationEn": "harmless /ˈhɑːmləs/ (adjective): causing no damage. The suffix \"-less\" means \"without\": harm becomes harmless."
+    },
+    {
+      "id": "v43",
+      "lessonId": "l4",
+      "word": "stale",
+      "pos": "adj",
+      "ipa": "/steɪl/",
+      "question": "Trong câu \"A stale avatar is harmless; a stale seat count oversells a flight.\", từ \"stale\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A stale avatar is harmless; a stale seat count oversells a flight.\", what does \"stale\" (adjective) mean?",
+      "options": [
+        "mới, vừa cập nhật",
+        "bị lỗi, hỏng",
+        "ôi thiu (thức ăn)",
+        "cũ, lỗi thời"
+      ],
+      "optionsEn": [
+        "freshly updated",
+        "broken or corrupt",
+        "no longer fresh to eat",
+        "out of date"
+      ],
+      "answer": 3,
+      "explanation": "stale /steɪl/ (tính từ): cũ, lỗi thời. \"Stale data\" = dữ liệu không còn khớp với nguồn; nghĩa gốc là bánh mì cũ, ôi.",
+      "explanationEn": "stale /steɪl/ (adjective): out of date. Stale data no longer matches the source; the original sense describes old, dry bread."
+    },
+    {
+      "id": "v44",
+      "lessonId": "l4",
+      "word": "stampede",
+      "pos": "n",
+      "ipa": "/stæmˈpiːd/",
+      "question": "Trong câu \"A cache stampede (thundering herd, dogpile) happens when a hot key expires and hundreds of concurrent requests miss at once, all run the same expensive query, and the database falls over.\", từ \"stampede\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A cache stampede (thundering herd, dogpile) happens when a hot key expires and hundreds of concurrent requests miss at once, all run the same expensive query, and the database falls over.\", what does \"stampede\" (noun) mean?",
+      "options": [
+        "sự rò rỉ dữ liệu",
+        "sự đổ xô ồ ạt cùng lúc",
+        "sự chậm trễ kéo dài",
+        "sự sao chép dữ liệu"
+      ],
+      "optionsEn": [
+        "a leak of data",
+        "a sudden rush all at once",
+        "a long-running delay",
+        "a copying of data"
+      ],
+      "answer": 1,
+      "explanation": "stampede /stæmˈpiːd/ (danh từ): sự đổ xô ồ ạt cùng lúc. Nghĩa gốc là đàn gia súc hoảng loạn chạy tán loạn; trong cache là hàng loạt request cùng lao vào DB.",
+      "explanationEn": "stampede /stæmˈpiːd/ (noun): a sudden rush all at once. Originally a panicked herd rushing together; in caching, many requests rushing to the DB at once."
+    },
+    {
+      "id": "v45",
+      "lessonId": "l4",
+      "word": "fall over",
+      "pos": "phrase",
+      "ipa": "/fɔːl ˈəʊvə/",
+      "question": "Trong câu \"A cache stampede (thundering herd, dogpile) happens when a hot key expires and hundreds of concurrent requests miss at once, all run the same expensive query, and the database falls over.\", từ \"fall over\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A cache stampede (thundering herd, dogpile) happens when a hot key expires and hundreds of concurrent requests miss at once, all run the same expensive query, and the database falls over.\", what does \"fall over\" (phrase) mean?",
+      "options": [
+        "chạy chậm lại",
+        "sập, ngừng hoạt động",
+        "khởi động lại",
+        "vấp ngã"
+      ],
+      "optionsEn": [
+        "to slow down",
+        "to crash and stop working",
+        "to restart itself",
+        "to trip and drop down"
+      ],
+      "answer": 1,
+      "explanation": "fall over /fɔːl ˈəʊvə/ (cụm từ): sập, ngừng hoạt động. Trong IT, \"the server falls over\" (khẩu ngữ) = máy chủ sập vì quá tải.",
+      "explanationEn": "fall over /fɔːl ˈəʊvə/ (phrase): to crash and stop working. In IT slang, \"the server falls over\" means it crashes under load."
+    },
+    {
+      "id": "v46",
+      "lessonId": "l4",
+      "word": "coalesce",
+      "pos": "v",
+      "ipa": "/ˌkəʊəˈles/",
+      "question": "Trong câu \"Request coalescing (single flight) — within one instance, concurrent misses for the same key share one in-flight promise.\", từ \"coalesce\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Request coalescing (single flight) — within one instance, concurrent misses for the same key share one in-flight promise.\", what does \"coalesce\" (verb) mean?",
+      "options": [
+        "chia nhỏ ra",
+        "xếp hàng chờ",
+        "hủy bỏ",
+        "gộp lại làm một"
+      ],
+      "optionsEn": [
+        "to break into pieces",
+        "to wait in a queue",
+        "to cancel",
+        "to merge into one"
+      ],
+      "answer": 3,
+      "explanation": "coalesce /ˌkəʊəˈles/ (động từ): gộp lại làm một. Request coalescing = nhiều request giống nhau được gộp để chỉ một lần truy vấn thật sự chạy.",
+      "explanationEn": "coalesce /ˌkəʊəˈles/ (verb): to merge into one. Request coalescing merges identical requests so only one real query runs."
+    },
+    {
+      "id": "v47",
+      "lessonId": "l4",
+      "word": "acquire",
+      "pos": "v",
+      "ipa": "/əˈkwaɪə/",
+      "question": "Trong câu \"Distributed lock / mutex — only the request that acquires a short lock rebuilds; others wait briefly and retry the cache, or serve the stale value.\", từ \"acquire\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Distributed lock / mutex — only the request that acquires a short lock rebuilds; others wait briefly and retry the cache, or serve the stale value.\", what does \"acquire\" (verb) mean?",
+      "options": [
+        "giành được, lấy được",
+        "giải phóng, nhả ra",
+        "từ chối nhận",
+        "mua lại (công ty)"
+      ],
+      "optionsEn": [
+        "to obtain or get hold of",
+        "to release or let go",
+        "to refuse to take",
+        "to buy another company"
+      ],
+      "answer": 0,
+      "explanation": "acquire /əˈkwaɪə/ (động từ): giành được, lấy được. \"Acquire a lock\" = giữ khóa; trái nghĩa là \"release a lock\".",
+      "explanationEn": "acquire /əˈkwaɪə/ (verb): to obtain or get hold of. To acquire a lock is to take hold of it; the opposite is to release it."
+    },
+    {
+      "id": "v48",
+      "lessonId": "l4",
+      "word": "approach",
+      "pos": "v",
+      "ipa": "/əˈprəʊtʃ/",
+      "question": "Trong câu \"Early (probabilistic) refresh — each reader, as expiry approaches, refreshes with a probability that grows toward 1, so usually just one request refreshes before the key expires.\", từ \"approach\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Early (probabilistic) refresh — each reader, as expiry approaches, refreshes with a probability that grows toward 1, so usually just one request refreshes before the key expires.\", what does \"approach\" (verb) mean?",
+      "options": [
+        "trôi qua",
+        "bị hoãn lại",
+        "đến gần",
+        "tiếp cận (một vấn đề)"
+      ],
+      "optionsEn": [
+        "to go by and be over",
+        "to be put off",
+        "to come nearer in time",
+        "to start dealing with a problem"
+      ],
+      "answer": 2,
+      "explanation": "approach /əˈprəʊtʃ/ (động từ): đến gần. \"As expiry approaches\" = khi thời điểm hết hạn đến gần; danh từ \"approach\" còn nghĩa là cách tiếp cận.",
+      "explanationEn": "approach /əˈprəʊtʃ/ (verb): to come nearer in time. \"As expiry approaches\" means as the expiry time draws near; the noun also means a method."
+    },
+    {
+      "id": "v49",
+      "lessonId": "l4",
+      "word": "caveat",
+      "pos": "n",
+      "ipa": "/ˈkæviæt/",
+      "question": "Trong câu \"The lock needs an expiry so a crashed holder cannot block rebuilds forever — lock caveats are covered in the Redis topic.\", từ \"caveat\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The lock needs an expiry so a crashed holder cannot block rebuilds forever — lock caveats are covered in the Redis topic.\", what does \"caveat\" (noun) mean?",
+      "options": [
+        "ưu điểm nổi bật",
+        "ví dụ minh họa",
+        "lưu ý, điểm cần cảnh giác",
+        "bản tóm tắt"
+      ],
+      "optionsEn": [
+        "a standout advantage",
+        "an illustrative example",
+        "a warning or limitation to note",
+        "a short summary"
+      ],
+      "answer": 2,
+      "explanation": "caveat /ˈkæviæt/ (danh từ): lưu ý, điểm cần cảnh giác. Hay dùng trong tài liệu: \"with one caveat\" = kèm một lưu ý quan trọng.",
+      "explanationEn": "caveat /ˈkæviæt/ (noun): a warning or limitation to note. Common in docs: \"with one caveat\" means with one important limitation to keep in mind."
+    },
+    {
+      "id": "v50",
+      "lessonId": "l5",
+      "word": "come up",
+      "pos": "phrase",
+      "ipa": "/kʌm ʌp/",
+      "question": "Trong câu \"Three related failure modes come up in every caching interview.\", từ \"come up\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Three related failure modes come up in every caching interview.\", what does \"come up\" (phrase) mean?",
+      "options": [
+        "được nhắc đến, xuất hiện",
+        "bị bỏ qua",
+        "đi lên tầng trên",
+        "được giải quyết"
+      ],
+      "optionsEn": [
+        "to be mentioned or arise",
+        "to be skipped over",
+        "to go to a higher floor",
+        "to be resolved"
+      ],
+      "answer": 0,
+      "explanation": "come up /kʌm ʌp/ (cụm từ): được nhắc đến, xuất hiện. \"Come up in an interview\" = được hỏi đến trong buổi phỏng vấn.",
+      "explanationEn": "come up /kʌm ʌp/ (phrase): to be mentioned or arise. \"Come up in an interview\" means to be raised or asked about during it."
+    },
+    {
+      "id": "v51",
+      "lessonId": "l5",
+      "word": "saturate",
+      "pos": "v",
+      "ipa": "/ˈsætʃəreɪt/",
+      "question": "Trong câu \"One key (a celebrity profile, a flash-sale item) gets so much traffic it saturates a single cache shard or its network\", từ \"saturate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"One key (a celebrity profile, a flash-sale item) gets so much traffic it saturates a single cache shard or its network\", what does \"saturate\" (verb) mean?",
+      "options": [
+        "làm trống, giải phóng",
+        "phân tán đều ra",
+        "ngâm ướt hoàn toàn",
+        "làm bão hòa, dùng hết công suất"
+      ],
+      "optionsEn": [
+        "to empty and free up",
+        "to spread out evenly",
+        "to soak completely",
+        "to use up all capacity"
+      ],
+      "answer": 3,
+      "explanation": "saturate /ˈsætʃəreɪt/ (động từ): làm bão hòa, dùng hết công suất. \"Saturate the network\" = lưu lượng chiếm hết băng thông, không còn chỗ cho yêu cầu khác.",
+      "explanationEn": "saturate /ˈsætʃəreɪt/ (verb): to use up all capacity. To saturate the network is to fill all its capacity, leaving no room for other traffic."
+    },
+    {
+      "id": "v52",
+      "lessonId": "l5",
+      "word": "replicate",
+      "pos": "v",
+      "ipa": "/ˈreplɪkeɪt/",
+      "question": "Trong câu \"L1 in-process cache with a 1–5 s TTL; replicate the key as item:42#0..#9 and read a random copy; pre-warm before the event\", từ \"replicate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"L1 in-process cache with a 1–5 s TTL; replicate the key as item:42#0..#9 and read a random copy; pre-warm before the event\", what does \"replicate\" (verb) mean?",
+      "options": [
+        "đổi tên cho khác đi",
+        "nhân bản thành nhiều bản",
+        "nén cho nhỏ lại",
+        "lặp lại thí nghiệm"
+      ],
+      "optionsEn": [
+        "to give a different name",
+        "to make several copies of",
+        "to compress into less space",
+        "to repeat an experiment"
+      ],
+      "answer": 1,
+      "explanation": "replicate /ˈreplɪkeɪt/ (động từ): nhân bản thành nhiều bản. Nhân bản hot key ra nhiều key để chia tải; danh từ là \"replication\" (sao chép dữ liệu).",
+      "explanationEn": "replicate /ˈreplɪkeɪt/ (verb): to make several copies of. Replicating a hot key into several keys spreads the load; the noun is \"replication\"."
+    },
+    {
+      "id": "v53",
+      "lessonId": "l5",
+      "word": "fraction",
+      "pos": "n",
+      "ipa": "/ˈfrækʃn/",
+      "question": "Trong câu \"A large fraction of keys expire together, or the cache cluster fails, so all traffic hits the DB\", từ \"fraction\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A large fraction of keys expire together, or the cache cluster fails, so all traffic hits the DB\", what does \"fraction\" (noun) mean?",
+      "options": [
+        "toàn bộ",
+        "một phần, tỉ lệ",
+        "số lượng nhỏ nhất",
+        "phân số (toán học)"
+      ],
+      "optionsEn": [
+        "the whole amount",
+        "a part or proportion",
+        "the smallest count",
+        "a number like one half"
+      ],
+      "answer": 1,
+      "explanation": "fraction /ˈfrækʃn/ (danh từ): một phần, tỉ lệ. \"A large fraction of\" = một phần lớn của; trong toán học \"fraction\" là phân số.",
+      "explanationEn": "fraction /ˈfrækʃn/ (noun): a part or proportion. \"A large fraction of\" means a big share of; in maths a fraction is a number such as 1/2."
+    },
+    {
+      "id": "v54",
+      "lessonId": "l5",
+      "word": "degraded",
+      "pos": "adj",
+      "ipa": "/dɪˈɡreɪdɪd/",
+      "question": "Trong câu \"TTL jitter; replicated/HA cache; rate limit or circuit breaker in front of the DB; serve stale or degraded responses\", từ \"degraded\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"TTL jitter; replicated/HA cache; rate limit or circuit breaker in front of the DB; serve stale or degraded responses\", what does \"degraded\" (adjective) mean?",
+      "options": [
+        "được nâng cấp",
+        "bị chặn hoàn toàn",
+        "bị hạ cấp bậc",
+        "bị giảm chất lượng"
+      ],
+      "optionsEn": [
+        "upgraded to better",
+        "fully blocked",
+        "lowered in rank",
+        "reduced in quality"
+      ],
+      "answer": 3,
+      "explanation": "degraded /dɪˈɡreɪdɪd/ (tính từ): bị giảm chất lượng. \"Degraded response\" = trả kết quả kém đầy đủ hơn nhưng vẫn phục vụ được (graceful degradation).",
+      "explanationEn": "degraded /dɪˈɡreɪdɪd/ (adjective): reduced in quality. A degraded response is less complete but still useful, as in \"graceful degradation\"."
+    },
+    {
+      "id": "v55",
+      "lessonId": "l5",
+      "word": "cousin",
+      "pos": "n",
+      "ipa": "/ˈkʌzn/",
+      "question": "Trong câu \"Big keys are a cousin: a 5 MB cached list costs serialisation and network time on every read.\", từ \"cousin\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Big keys are a cousin: a 5 MB cached list costs serialisation and network time on every read.\", what does \"cousin\" (noun) mean?",
+      "options": [
+        "vấn đề có liên quan, gần giống",
+        "nguyên nhân gốc rễ",
+        "giải pháp thay thế",
+        "anh chị em họ"
+      ],
+      "optionsEn": [
+        "a closely related issue",
+        "the root cause",
+        "an alternative solution",
+        "a child of your aunt or uncle"
+      ],
+      "answer": 0,
+      "explanation": "cousin /ˈkʌzn/ (danh từ): vấn đề có liên quan, gần giống. Nghĩa bóng: \"X is a cousin of Y\" = X gần giống, cùng họ với Y.",
+      "explanationEn": "cousin /ˈkʌzn/ (noun): a closely related issue. Figuratively, \"X is a cousin of Y\" means X is closely related to Y."
+    },
+    {
+      "id": "v56",
+      "lessonId": "l5",
+      "word": "reveal",
+      "pos": "v",
+      "ipa": "/rɪˈviːl/",
+      "question": "Trong câu \"Watch the metrics that reveal these failures: hit ratio, evictions per second, p99 cache latency, and DB QPS.\", từ \"reveal\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Watch the metrics that reveal these failures: hit ratio, evictions per second, p99 cache latency, and DB QPS.\", what does \"reveal\" (verb) mean?",
+      "options": [
+        "che giấu đi",
+        "gây ra",
+        "cho thấy, làm lộ ra",
+        "sửa chữa"
+      ],
+      "optionsEn": [
+        "to keep hidden",
+        "to bring about",
+        "to make visible or known",
+        "to repair"
+      ],
+      "answer": 2,
+      "explanation": "reveal /rɪˈviːl/ (động từ): cho thấy, làm lộ ra. \"Metrics reveal problems\" = số liệu giúp phát hiện vấn đề đang ẩn.",
+      "explanationEn": "reveal /rɪˈviːl/ (verb): to make visible or known. Metrics that reveal problems expose issues that would otherwise stay hidden."
+    },
+    {
+      "id": "v57",
+      "lessonId": "l5",
+      "word": "finite",
+      "pos": "adj",
+      "ipa": "/ˈfaɪnaɪt/",
+      "question": "Trong câu \"A cache is finite.\", từ \"finite\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A cache is finite.\", what does \"finite\" (adjective) mean?",
+      "options": [
+        "vô hạn",
+        "bất biến",
+        "có giới hạn",
+        "cuối cùng"
+      ],
+      "optionsEn": [
+        "without limits",
+        "never changing",
+        "having limits",
+        "final, last"
+      ],
+      "answer": 2,
+      "explanation": "finite /ˈfaɪnaɪt/ (tính từ): có giới hạn. Trái nghĩa là \"infinite\"; cache có dung lượng giới hạn nên phải loại bỏ bớt dữ liệu.",
+      "explanationEn": "finite /ˈfaɪnaɪt/ (adjective): having limits. The opposite is \"infinite\"; a cache has limited space, so it must evict data."
+    },
+    {
+      "id": "v58",
+      "lessonId": "l5",
+      "word": "eviction",
+      "pos": "n",
+      "ipa": "/ɪˈvɪkʃn/",
+      "question": "Trong câu \"When it fills, an eviction policy decides what to drop.\", từ \"eviction\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"When it fills, an eviction policy decides what to drop.\", what does \"eviction\" (noun) mean?",
+      "options": [
+        "sự loại bỏ khỏi bộ nhớ",
+        "sự nạp vào bộ nhớ",
+        "sự nén dữ liệu",
+        "sự đuổi người thuê nhà"
+      ],
+      "optionsEn": [
+        "removal of entries from memory",
+        "loading of entries into memory",
+        "compression of data",
+        "forcing a tenant out of a home"
+      ],
+      "answer": 0,
+      "explanation": "eviction /ɪˈvɪkʃn/ (danh từ): sự loại bỏ khỏi bộ nhớ. \"Eviction policy\" = quy tắc chọn key để xóa khi đầy; nghĩa gốc là đuổi người thuê nhà.",
+      "explanationEn": "eviction /ɪˈvɪkʃn/ (noun): removal of entries from memory. An eviction policy chooses which keys to drop when full; the original sense is removing a tenant."
+    },
+    {
+      "id": "v59",
+      "lessonId": "l5",
+      "word": "temporal",
+      "pos": "adj",
+      "ipa": "/ˈtempərəl/",
+      "question": "Trong câu \"LRU (least recently used) suits most workloads with temporal locality; LFU (least frequently used) suits stable popularity such as top-selling products; TTL-based eviction drops keys closest to expiry; FIFO or random are cheap but rarely best.\", từ \"temporal\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"LRU (least recently used) suits most workloads with temporal locality; LFU (least frequently used) suits stable popularity such as top-selling products; TTL-based eviction drops keys closest to expiry; FIFO or random are cheap but rarely best.\", what does \"temporal\" (adjective) mean?",
+      "options": [
+        "thuộc về không gian",
+        "thuộc về tần suất",
+        "thuộc về thế tục",
+        "thuộc về thời gian"
+      ],
+      "optionsEn": [
+        "relating to space",
+        "relating to frequency",
+        "relating to worldly affairs",
+        "relating to time"
+      ],
+      "answer": 3,
+      "explanation": "temporal /ˈtempərəl/ (tính từ): thuộc về thời gian. \"Temporal locality\" = dữ liệu vừa được dùng có khả năng sớm được dùng lại.",
+      "explanationEn": "temporal /ˈtempərəl/ (adjective): relating to time. \"Temporal locality\" means recently used data is likely to be used again soon."
+    },
+    {
+      "id": "v60",
+      "lessonId": "l5",
+      "word": "headroom",
+      "pos": "n",
+      "ipa": "/ˈhedruːm/",
+      "question": "Trong câu \"Size the cache for the working set, not the whole dataset: if 20% of products get 90% of reads, cache that 20% with headroom.\", từ \"headroom\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Size the cache for the working set, not the whole dataset: if 20% of products get 90% of reads, cache that 20% with headroom.\", what does \"headroom\" (noun) mean?",
+      "options": [
+        "phần thiếu hụt",
+        "phần dư phòng thêm",
+        "phần đã dùng hết",
+        "khoảng trống trên đầu"
+      ],
+      "optionsEn": [
+        "a shortfall of capacity",
+        "spare capacity kept in reserve",
+        "capacity fully used",
+        "space above your head"
+      ],
+      "answer": 1,
+      "explanation": "headroom /ˈhedruːm/ (danh từ): phần dư phòng thêm. \"With headroom\" = chừa thêm dung lượng để chịu được tăng tải bất ngờ.",
+      "explanationEn": "headroom /ˈhedruːm/ (noun): spare capacity kept in reserve. \"With headroom\" means leaving extra capacity to absorb unexpected growth."
+    },
+    {
+      "id": "v61",
+      "lessonId": "l5",
+      "word": "churn",
+      "pos": "n",
+      "ipa": "/tʃɜːn/",
+      "question": "Trong câu \"Steady evictions of keys that are then requested again (churn) mean the cache is too small.\", từ \"churn\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Steady evictions of keys that are then requested again (churn) mean the cache is too small.\", what does \"churn\" (noun) mean?",
+      "options": [
+        "sự ổn định lâu dài",
+        "sự xáo trộn liên tục ra vào",
+        "sự tăng trưởng đều",
+        "tỉ lệ khách hàng rời bỏ"
+      ],
+      "optionsEn": [
+        "long-term stability",
+        "constant turnover in and out",
+        "steady growth",
+        "the rate customers leave"
+      ],
+      "answer": 1,
+      "explanation": "churn /tʃɜːn/ (danh từ): sự xáo trộn liên tục ra vào. Trong cache, churn là key bị xóa rồi lại được nạp lại liên tục; trong kinh doanh là tỉ lệ khách rời bỏ.",
+      "explanationEn": "churn /tʃɜːn/ (noun): constant turnover in and out. In caching, churn is keys evicted then reloaded repeatedly; in business it is customer loss."
+    },
+    {
+      "id": "v62",
+      "lessonId": "l5",
+      "word": "pairing",
+      "pos": "n",
+      "ipa": "/ˈpeərɪŋ/",
+      "question": "Trong câu \"A common pairing is two-tier: a small in-process L1 with seconds of TTL for the hottest keys, a distributed L2 for everything else.\", từ \"pairing\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A common pairing is two-tier: a small in-process L1 with seconds of TTL for the hottest keys, a distributed L2 for everything else.\", what does \"pairing\" (noun) mean?",
+      "options": [
+        "sự chia tách",
+        "sự thay thế",
+        "sự ghép nối Bluetooth",
+        "sự kết hợp theo cặp"
+      ],
+      "optionsEn": [
+        "a splitting apart",
+        "a replacement",
+        "linking a Bluetooth device",
+        "a combination of two things"
+      ],
+      "answer": 3,
+      "explanation": "pairing /ˈpeərɪŋ/ (danh từ): sự kết hợp theo cặp. \"A common pairing\" = cách kết hợp hai thành phần thường gặp.",
+      "explanationEn": "pairing /ˈpeərɪŋ/ (noun): a combination of two things. \"A common pairing\" is a combination of two parts that is often used together."
+    },
+    {
+      "id": "v63",
+      "lessonId": "l6",
+      "word": "origin",
+      "pos": "n",
+      "ipa": "/ˈɒrɪdʒɪn/",
+      "question": "Trong câu \"The origin controls it with response headers.\", từ \"origin\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The origin controls it with response headers.\", what does \"origin\" (noun) mean?",
+      "options": [
+        "máy chủ gốc cung cấp nội dung",
+        "trình duyệt của người dùng",
+        "máy chủ trung gian",
+        "nguồn gốc xuất xứ"
+      ],
+      "optionsEn": [
+        "the server that owns the content",
+        "the user's web browser",
+        "an intermediate server",
+        "where something comes from"
+      ],
+      "answer": 0,
+      "explanation": "origin /ˈɒrɪdʒɪn/ (danh từ): máy chủ gốc cung cấp nội dung. Trong HTTP/CDN, \"origin\" là máy chủ gốc phía sau cache; nghĩa chung là nguồn gốc.",
+      "explanationEn": "origin /ˈɒrɪdʒɪn/ (noun): the server that owns the content. In HTTP and CDNs, the origin is the backend server behind caches; generally it means source."
+    },
+    {
+      "id": "v64",
+      "lessonId": "l6",
+      "word": "override",
+      "pos": "v",
+      "ipa": "/ˌəʊvəˈraɪd/",
+      "question": "Trong câu \"Overrides max-age for shared caches (CDN, proxy) only\", từ \"override\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Overrides max-age for shared caches (CDN, proxy) only\", what does \"override\" (verb) mean?",
+      "options": [
+        "sao chép y nguyên",
+        "bổ sung thêm vào",
+        "ghi đè, được ưu tiên hơn",
+        "cán qua (bằng xe)"
+      ],
+      "optionsEn": [
+        "to copy exactly",
+        "to add on top",
+        "to take priority over",
+        "to run over with a vehicle"
+      ],
+      "answer": 2,
+      "explanation": "override /ˌəʊvəˈraɪd/ (động từ): ghi đè, được ưu tiên hơn. \"X overrides Y\" = khi có X thì Y bị bỏ qua; cũng dùng cho ghi đè phương thức trong OOP.",
+      "explanationEn": "override /ˌəʊvəˈraɪd/ (verb): to take priority over. \"X overrides Y\" means Y is ignored when X is present; also used for methods in OOP."
+    },
+    {
+      "id": "v65",
+      "lessonId": "l6",
+      "word": "revalidate",
+      "pos": "v",
+      "ipa": "/riːˈvælɪdeɪt/",
+      "question": "Trong câu \"May store, but must revalidate with the origin before each use\", từ \"revalidate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"May store, but must revalidate with the origin before each use\", what does \"revalidate\" (verb) mean?",
+      "options": [
+        "xóa bỏ hoàn toàn",
+        "tải về toàn bộ",
+        "kiểm tra lại độ mới",
+        "đăng ký lại"
+      ],
+      "optionsEn": [
+        "to delete completely",
+        "to download in full",
+        "to check again that it is current",
+        "to register again"
+      ],
+      "answer": 2,
+      "explanation": "revalidate /riːˈvælɪdeɪt/ (động từ): kiểm tra lại độ mới. Revalidate = hỏi origin xem bản lưu còn dùng được không (thường nhận 304 nếu chưa đổi).",
+      "explanationEn": "revalidate /riːˈvælɪdeɪt/ (verb): to check again that it is current. To revalidate is to ask the origin whether a stored copy is still current, often getting 304."
+    },
+    {
+      "id": "v66",
+      "lessonId": "l6",
+      "word": "sensitive",
+      "pos": "adj",
+      "ipa": "/ˈsensətɪv/",
+      "question": "Trong câu \"Must not be stored anywhere (sensitive data)\", từ \"sensitive\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Must not be stored anywhere (sensitive data)\", what does \"sensitive\" (adjective) mean?",
+      "options": [
+        "nhạy cảm, cần bảo mật",
+        "công khai, ai cũng xem được",
+        "dễ hỏng, dễ vỡ",
+        "dễ xúc động"
+      ],
+      "optionsEn": [
+        "private and needing protection",
+        "public for anyone to see",
+        "fragile and easily broken",
+        "easily upset emotionally"
+      ],
+      "answer": 0,
+      "explanation": "sensitive /ˈsensətɪv/ (tính từ): nhạy cảm, cần bảo mật. \"Sensitive data\" = dữ liệu nhạy cảm như mật khẩu, thông tin tài chính.",
+      "explanationEn": "sensitive /ˈsensətɪv/ (adjective): private and needing protection. Sensitive data includes things like passwords and financial details."
+    },
+    {
+      "id": "v67",
+      "lessonId": "l6",
+      "word": "lifetime",
+      "pos": "n",
+      "ipa": "/ˈlaɪftaɪm/",
+      "question": "Trong câu \"Will never change during its freshness lifetime; skip revalidation on reload\", từ \"lifetime\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Will never change during its freshness lifetime; skip revalidation on reload\", what does \"lifetime\" (noun) mean?",
+      "options": [
+        "thời điểm được tạo",
+        "số lần truy cập",
+        "cả cuộc đời một người",
+        "khoảng thời gian còn hiệu lực"
+      ],
+      "optionsEn": [
+        "the moment it was made",
+        "the number of accesses",
+        "the length of a person's life",
+        "the period during which it stays valid"
+      ],
+      "answer": 3,
+      "explanation": "lifetime /ˈlaɪftaɪm/ (danh từ): khoảng thời gian còn hiệu lực. \"Freshness lifetime\" = khoảng thời gian bản cache còn được coi là mới.",
+      "explanationEn": "lifetime /ˈlaɪftaɪm/ (noun): the period during which it stays valid. The freshness lifetime is how long a cached response is considered fresh."
+    },
+    {
+      "id": "v68",
+      "lessonId": "l6",
+      "word": "fragment",
+      "pos": "v",
+      "ipa": "/fræɡˈment/",
+      "question": "Trong câu \"And be careful with Vary: User-Agent or Vary: Cookie: they fragment the cache into near-zero hit ratio.\", từ \"fragment\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"And be careful with Vary: User-Agent or Vary: Cookie: they fragment the cache into near-zero hit ratio.\", what does \"fragment\" (verb) mean?",
+      "options": [
+        "gộp lại làm một",
+        "chia nhỏ thành nhiều mảnh",
+        "làm đầy hoàn toàn",
+        "mảnh vỡ (danh từ)"
+      ],
+      "optionsEn": [
+        "to join into one",
+        "to break into many pieces",
+        "to fill up completely",
+        "a broken piece (noun)"
+      ],
+      "answer": 1,
+      "explanation": "fragment /fræɡˈment/ (động từ): chia nhỏ thành nhiều mảnh. Động từ nhấn âm tiết sau /fræɡˈment/; danh từ nhấn âm đầu /ˈfræɡmənt/.",
+      "explanationEn": "fragment /fræɡˈment/ (verb): to break into many pieces. The verb is stressed on the second syllable; the noun \"fragment\" is stressed on the first."
+    },
+    {
+      "id": "v69",
+      "lessonId": "l6",
+      "word": "shield",
+      "pos": "v",
+      "ipa": "/ʃiːld/",
+      "question": "Trong câu \"A CDN caches at edge locations close to users, cutting latency and shielding the origin.\", từ \"shield\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A CDN caches at edge locations close to users, cutting latency and shielding the origin.\", what does \"shield\" (verb) mean?",
+      "options": [
+        "làm lộ ra",
+        "che chắn, bảo vệ",
+        "kết nối trực tiếp",
+        "tấm khiên (danh từ)"
+      ],
+      "optionsEn": [
+        "to expose to view",
+        "to protect from harm",
+        "to connect directly",
+        "a piece of armour (noun)"
+      ],
+      "answer": 1,
+      "explanation": "shield /ʃiːld/ (động từ): che chắn, bảo vệ. \"Shield the origin\" = CDN đứng trước để origin không phải nhận hết lưu lượng.",
+      "explanationEn": "shield /ʃiːld/ (verb): to protect from harm. To shield the origin is to stand in front so it does not receive all the traffic."
+    },
+    {
+      "id": "v70",
+      "lessonId": "l6",
+      "word": "variant",
+      "pos": "n",
+      "ipa": "/ˈveəriənt/",
+      "question": "Trong câu \"Every header, cookie or query parameter you add multiplies the variants and lowers the hit ratio.\", từ \"variant\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Every header, cookie or query parameter you add multiplies the variants and lowers the hit ratio.\", what does \"variant\" (noun) mean?",
+      "options": [
+        "giá trị mặc định",
+        "biến số trong mã",
+        "lỗi chính tả",
+        "phiên bản biến thể"
+      ],
+      "optionsEn": [
+        "a default value",
+        "a variable in code",
+        "a spelling mistake",
+        "a different version of something"
+      ],
+      "answer": 3,
+      "explanation": "variant /ˈveəriənt/ (danh từ): phiên bản biến thể. Mỗi tổ hợp header/cookie khác nhau tạo một biến thể cache riêng, làm giảm hit ratio.",
+      "explanationEn": "variant /ˈveəriənt/ (noun): a different version of something. Each distinct header or cookie combination creates its own cached variant, lowering the hit ratio."
+    },
+    {
+      "id": "v71",
+      "lessonId": "l6",
+      "word": "take effect",
+      "pos": "phrase",
+      "ipa": "/teɪk ɪˈfekt/",
+      "question": "Trong câu \"On CloudFront, invalidations by path take effect within minutes, and beyond a free monthly allowance you pay per path, so wildcard or versioned approaches scale better.\", từ \"take effect\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"On CloudFront, invalidations by path take effect within minutes, and beyond a free monthly allowance you pay per path, so wildcard or versioned approaches scale better.\", what does \"take effect\" (phrase) mean?",
+      "options": [
+        "có hiệu lực",
+        "bị hủy bỏ",
+        "gây tác dụng phụ",
+        "được ghi nhận"
+      ],
+      "optionsEn": [
+        "to start to apply",
+        "to be cancelled",
+        "to cause side effects",
+        "to be recorded"
+      ],
+      "answer": 0,
+      "explanation": "take effect /teɪk ɪˈfekt/ (cụm từ): có hiệu lực. \"Take effect\" = bắt đầu có hiệu lực, ví dụ \"the change takes effect immediately\".",
+      "explanationEn": "take effect /teɪk ɪˈfekt/ (phrase): to start to apply. \"Take effect\" means to begin to apply, as in \"the change takes effect immediately\"."
+    },
+    {
+      "id": "v72",
+      "lessonId": "l6",
+      "word": "allowance",
+      "pos": "n",
+      "ipa": "/əˈlaʊəns/",
+      "question": "Trong câu \"On CloudFront, invalidations by path take effect within minutes, and beyond a free monthly allowance you pay per path, so wildcard or versioned approaches scale better.\", từ \"allowance\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"On CloudFront, invalidations by path take effect within minutes, and beyond a free monthly allowance you pay per path, so wildcard or versioned approaches scale better.\", what does \"allowance\" (noun) mean?",
+      "options": [
+        "khoản phí phạt",
+        "mức giảm giá",
+        "hạn mức được cho phép",
+        "tiền tiêu vặt"
+      ],
+      "optionsEn": [
+        "a penalty fee",
+        "a price discount",
+        "a permitted quota",
+        "pocket money for a child"
+      ],
+      "answer": 2,
+      "explanation": "allowance /əˈlaʊəns/ (danh từ): hạn mức được cho phép. \"Free monthly allowance\" = hạn mức miễn phí mỗi tháng; vượt quá thì phải trả tiền.",
+      "explanationEn": "allowance /əˈlaʊəns/ (noun): a permitted quota. A free monthly allowance is a free quota each month; usage beyond it is billed."
+    },
+    {
+      "id": "v73",
+      "lessonId": "l6",
+      "word": "tier",
+      "pos": "n",
+      "ipa": "/tɪə/",
+      "question": "Trong câu \"An extra regional caching tier in front of the origin, so edge misses from many locations collapse into one origin request (CloudFront Origin Shield; the same idea exists on other CDNs).\", từ \"tier\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"An extra regional caching tier in front of the origin, so edge misses from many locations collapse into one origin request (CloudFront Origin Shield; the same idea exists on other CDNs).\", what does \"tier\" (noun) mean?",
+      "options": [
+        "khu vực",
+        "gói cước",
+        "tầng, lớp",
+        "nước mắt"
+      ],
+      "optionsEn": [
+        "a geographic area",
+        "a price plan",
+        "a level or layer",
+        "a drop from the eye"
+      ],
+      "answer": 2,
+      "explanation": "tier /tɪə/ (danh từ): tầng, lớp. \"Tier\" = một tầng trong hệ nhiều tầng; cũng dùng cho gói giá (\"free tier\"). Đồng âm với \"tear\" (nước mắt).",
+      "explanationEn": "tier /tɪə/ (noun): a level or layer. A tier is one level in a layered system, also a price plan (\"free tier\"); it sounds like \"tear\"."
+    },
+    {
+      "id": "v74",
+      "lessonId": "l6",
+      "word": "fall back",
+      "pos": "phrase",
+      "ipa": "/fɔːl bæk/",
+      "question": "Trong câu \"If the origin sends no caching headers, the CDN falls back to its own default (CloudFront's default TTL is 24 hours) — always send explicit headers.\", từ \"fall back\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"If the origin sends no caching headers, the CDN falls back to its own default (CloudFront's default TTL is 24 hours) — always send explicit headers.\", what does \"fall back\" (phrase) mean?",
+      "options": [
+        "chuyển sang phương án dự phòng",
+        "thử lại lần nữa",
+        "báo lỗi và dừng",
+        "rút lui về phía sau"
+      ],
+      "optionsEn": [
+        "to use a backup option",
+        "to try once again",
+        "to raise an error and stop",
+        "to retreat backwards"
+      ],
+      "answer": 0,
+      "explanation": "fall back /fɔːl bæk/ (cụm từ): chuyển sang phương án dự phòng. \"Fall back to X\" = khi không có lựa chọn chính thì dùng X; danh từ là \"fallback\".",
+      "explanationEn": "fall back /fɔːl bæk/ (phrase): to use a backup option. \"Fall back to X\" means using X when the main option is missing; the noun is \"fallback\"."
+    },
+    {
+      "id": "v75",
+      "lessonId": "l6",
+      "word": "spike",
+      "pos": "n",
+      "ipa": "/spaɪk/",
+      "question": "Trong câu \"Measure CDN health by edge hit ratio and origin requests per second; a deploy that adds ?t=timestamp to every asset shows up as a collapse of the first and a spike in the second.\", từ \"spike\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Measure CDN health by edge hit ratio and origin requests per second; a deploy that adds ?t=timestamp to every asset shows up as a collapse of the first and a spike in the second.\", what does \"spike\" (noun) mean?",
+      "options": [
+        "sự sụt giảm dần",
+        "sự dao động nhẹ",
+        "cái gai nhọn",
+        "sự tăng vọt đột ngột"
+      ],
+      "optionsEn": [
+        "a gradual decline",
+        "a slight fluctuation",
+        "a sharp pointed object",
+        "a sudden sharp rise"
+      ],
+      "answer": 3,
+      "explanation": "spike /spaɪk/ (danh từ): sự tăng vọt đột ngột. \"A spike in traffic\" = lưu lượng tăng vọt trong thời gian ngắn.",
+      "explanationEn": "spike /spaɪk/ (noun): a sudden sharp rise. \"A spike in traffic\" is a sharp, short-lived jump in load."
+    },
+    {
+      "id": "v76",
+      "lessonId": "l7",
+      "word": "outnumber",
+      "pos": "v",
+      "ipa": "/ˌaʊtˈnʌmbə/",
+      "question": "Trong câu \"Cache when reads greatly outnumber writes and bounded staleness is acceptable; justify it with hit ratio and effective latency, not a hunch.\", từ \"outnumber\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Cache when reads greatly outnumber writes and bounded staleness is acceptable; justify it with hit ratio and effective latency, not a hunch.\", what does \"outnumber\" (verb) mean?",
+      "options": [
+        "ít hơn về số lượng",
+        "nhiều hơn về số lượng",
+        "bằng về số lượng",
+        "đánh số thứ tự"
+      ],
+      "optionsEn": [
+        "to be fewer in number than",
+        "to be greater in number than",
+        "to be equal in number to",
+        "to assign numbers to"
+      ],
+      "answer": 1,
+      "explanation": "outnumber /ˌaʊtˈnʌmbə/ (động từ): nhiều hơn về số lượng. Tiền tố \"out-\" nghĩa là vượt hơn: outnumber, outperform, outgrow.",
+      "explanationEn": "outnumber /ˌaʊtˈnʌmbə/ (verb): to be greater in number than. The prefix \"out-\" means exceeding: outnumber, outperform, outgrow."
+    },
+    {
+      "id": "v77",
+      "lessonId": "l7",
+      "word": "bounded",
+      "pos": "adj",
+      "ipa": "/ˈbaʊndɪd/",
+      "question": "Trong câu \"Cache when reads greatly outnumber writes and bounded staleness is acceptable; justify it with hit ratio and effective latency, not a hunch.\", từ \"bounded\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Cache when reads greatly outnumber writes and bounded staleness is acceptable; justify it with hit ratio and effective latency, not a hunch.\", what does \"bounded\" (adjective) mean?",
+      "options": [
+        "không giới hạn",
+        "có giới hạn xác định",
+        "được đảm bảo tuyệt đối",
+        "bị ràng buộc pháp lý"
+      ],
+      "optionsEn": [
+        "without any limit",
+        "kept within a known limit",
+        "absolutely guaranteed",
+        "legally obliged"
+      ],
+      "answer": 1,
+      "explanation": "bounded /ˈbaʊndɪd/ (tính từ): có giới hạn xác định. \"Bounded staleness\" = dữ liệu có thể cũ nhưng không quá một ngưỡng (ví dụ TTL).",
+      "explanationEn": "bounded /ˈbaʊndɪd/ (adjective): kept within a known limit. \"Bounded staleness\" means data may be old, but never past a known limit such as the TTL."
+    },
+    {
+      "id": "v78",
+      "lessonId": "l7",
+      "word": "hunch",
+      "pos": "n",
+      "ipa": "/hʌntʃ/",
+      "question": "Trong câu \"Cache when reads greatly outnumber writes and bounded staleness is acceptable; justify it with hit ratio and effective latency, not a hunch.\", từ \"hunch\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Cache when reads greatly outnumber writes and bounded staleness is acceptable; justify it with hit ratio and effective latency, not a hunch.\", what does \"hunch\" (noun) mean?",
+      "options": [
+        "số liệu đo đạc",
+        "lời khuyên chuyên gia",
+        "tư thế khom lưng",
+        "linh cảm, phỏng đoán"
+      ],
+      "optionsEn": [
+        "measured data",
+        "expert advice",
+        "a bent-over posture",
+        "a feeling not based on evidence"
+      ],
+      "answer": 3,
+      "explanation": "hunch /hʌntʃ/ (danh từ): linh cảm, phỏng đoán. \"Not a hunch\" = không dựa trên cảm tính mà phải dựa trên số liệu; động từ \"hunch\" là khom lưng.",
+      "explanationEn": "hunch /hʌntʃ/ (noun): a feeling not based on evidence. \"Not a hunch\" means rely on data rather than gut feeling; the verb \"hunch\" means to bend over."
+    },
+    {
+      "id": "v79",
+      "lessonId": "l7",
+      "word": "durability",
+      "pos": "n",
+      "ipa": "/ˌdjʊərəˈbɪləti/",
+      "question": "Trong câu \"Cache-aside, read-through, write-through, write-behind and refresh-ahead differ in who loads and writes data, and in their consistency and durability risks.\", từ \"durability\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Cache-aside, read-through, write-through, write-behind and refresh-ahead differ in who loads and writes data, and in their consistency and durability risks.\", what does \"durability\" (noun) mean?",
+      "options": [
+        "khả năng lưu bền, không mất dữ liệu",
+        "tốc độ đọc dữ liệu",
+        "khả năng mở rộng",
+        "độ bền vật lý của đồ vật"
+      ],
+      "optionsEn": [
+        "the guarantee that data is not lost",
+        "the speed of reading data",
+        "the ability to scale out",
+        "how long an object physically lasts"
+      ],
+      "answer": 0,
+      "explanation": "durability /ˌdjʊərəˈbɪləti/ (danh từ): khả năng lưu bền, không mất dữ liệu. Trong database, \"durability\" (chữ D trong ACID) = dữ liệu đã commit thì không bị mất.",
+      "explanationEn": "durability /ˌdjʊərəˈbɪləti/ (noun): the guarantee that data is not lost. In databases, durability (the D in ACID) means committed data is never lost."
+    },
+    {
+      "id": "v80",
+      "lessonId": "l7",
+      "word": "predictable",
+      "pos": "adj",
+      "ipa": "/prɪˈdɪktəbl/",
+      "question": "Trong câu \"Stampedes, hot keys, penetration and avalanches are predictable failure modes with standard defences.\", từ \"predictable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Stampedes, hot keys, penetration and avalanches are predictable failure modes with standard defences.\", what does \"predictable\" (adjective) mean?",
+      "options": [
+        "bất ngờ, khó lường",
+        "hiếm khi xảy ra",
+        "có thể đoán trước",
+        "không thể sửa"
+      ],
+      "optionsEn": [
+        "sudden and unexpected",
+        "seldom happening",
+        "able to be foreseen",
+        "impossible to fix"
+      ],
+      "answer": 2,
+      "explanation": "predictable /prɪˈdɪktəbl/ (tính từ): có thể đoán trước. Lỗi \"predictable\" nghĩa là biết trước sẽ xảy ra nên có thể chuẩn bị cách phòng.",
+      "explanationEn": "predictable /prɪˈdɪktəbl/ (adjective): able to be foreseen. Predictable failures can be anticipated, so defences can be prepared in advance."
+    }
+  ]
+}

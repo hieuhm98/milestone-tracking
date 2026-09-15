@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về trie.",
+      "promptEn": "Pick TWO statements that are true about tries.",
+      "options": [
+        "Tra cứu trong trie chậm dần khi số từ N tăng lên",
+        "Độ sâu của một node bằng độ dài tiền tố mà nó đại diện",
+        "Mọi node có `isEnd` = true đều là node lá",
+        "`search` phải kiểm tra cả đường đi lẫn cờ `isEnd`",
+        "Trie luôn tốn ít bộ nhớ hơn hash set chứa cùng các từ"
+      ],
+      "optionsEn": [
+        "Trie lookups get slower as the number of words N grows",
+        "A node's depth equals the length of the prefix it represents",
+        "Every node with `isEnd` = true is a leaf",
+        "`search` must check both that the path exists and the `isEnd` flag",
+        "A trie always uses less memory than a hash set of the same words"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Chi phí tra cứu là O(L), chỉ phụ thuộc độ dài chuỗi chứ không phụ thuộc N. `isEnd` có thể nằm ở node còn con (như `car` khi có `cart`), và thiếu kiểm tra `isEnd` thì `search` biến thành `startsWith`. Trie thường tốn bộ nhớ hơn hash set.",
+      "explanationEn": "Lookup cost is O(L), set by the string length, not N. `isEnd` can sit on a node that still has children (like `car` when `cart` exists), and without the `isEnd` check `search` turns into `startsWith`. Tries usually use more memory than a hash set.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI tình huống mà trie là lựa chọn tốt hơn hash set.",
+      "promptEn": "Pick TWO situations where a trie is a better choice than a hash set.",
+      "options": [
+        "Chỉ kiểm tra một email đã đăng ký hay chưa",
+        "Đếm tần suất xuất hiện của từng từ trong văn bản",
+        "Gợi ý từ sau mỗi phím người dùng gõ",
+        "Lưu cache kết quả API theo URL đầy đủ",
+        "Tìm mọi từ trong từ điển xuất hiện trên một lưới chữ (Word Search II)"
+      ],
+      "optionsEn": [
+        "Only checking whether an email is already registered",
+        "Counting how often each word appears in a text",
+        "Suggesting words after every keystroke",
+        "Caching API responses by their full URL",
+        "Finding every dictionary word that appears in a letter grid (Word Search II)"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "Cả autocomplete và Word Search II đều tiến từng ký tự một và cần bỏ ngay tiền tố không dẫn tới từ nào — đúng thứ trie làm tốt. Các tình huống còn lại chỉ cần khớp chính xác theo key, nơi hash set đơn giản và tiết kiệm bộ nhớ hơn.",
+      "explanationEn": "Autocomplete and Word Search II both advance one character at a time and need to abandon a dead prefix immediately — exactly what a trie does well. The other situations only need exact key matches, where a hash set is simpler and leaner.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của `search(word)` trong trie, với L là độ dài từ?",
+      "promptEn": "What is the time complexity of `search(word)` in a trie, where L is the word length?",
+      "answer": "O(L)",
+      "answerEn": "O(L)",
+      "accept": [
+        "O(L)",
+        "o l",
+        "O(m)",
+        "O(k)",
+        "o(length)",
+        "O(word length)",
+        "linear in word length"
+      ],
+      "explanation": "O(L): mỗi ký tự là một bước O(1) xuống cây, và số từ trong trie không ảnh hưởng. Insert, startsWith và delete cũng đều O(L).",
+      "explanationEn": "O(L): each character is one O(1) step down the tree, and the number of stored words does not matter. Insert, startsWith and delete are O(L) as well.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tên gọi khác của trie, phản ánh việc các từ chung phần đầu dùng chung node, là gì?",
+      "promptEn": "What is the other name for a trie, reflecting that words with a common beginning share nodes?",
+      "answer": "prefix tree",
+      "answerEn": "prefix tree",
+      "accept": [
+        "prefix tree",
+        "prefix-tree",
+        "prefixtree",
+        "cây tiền tố",
+        "cay tien to",
+        "digital tree"
+      ],
+      "explanation": "Prefix tree (cây tiền tố): mỗi node đại diện cho một tiền tố, và mọi từ bắt đầu bằng tiền tố đó nằm trong cây con của node ấy.",
+      "explanationEn": "Prefix tree: each node stands for one prefix, and every word starting with that prefix lives in its subtree.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi biến thể hoặc thành phần của trie với công dụng của nó.",
+      "promptEn": "Match each trie variant or component to what it is for.",
+      "pairs": [
+        {
+          "left": "Cờ isEnd",
+          "leftEn": "isEnd flag",
+          "right": "Phân biệt một từ hoàn chỉnh với một tiền tố đơn thuần",
+          "rightEn": "Tells a complete word apart from a mere prefix"
+        },
+        {
+          "left": "Radix tree",
+          "leftEn": "Radix tree",
+          "right": "Gộp chuỗi node một con thành một cạnh để tiết kiệm bộ nhớ",
+          "rightEn": "Merges single-child chains into one edge to save memory"
+        },
+        {
+          "left": "Trie nhị phân",
+          "leftEn": "Binary trie",
+          "right": "Lưu số theo từng bit để tìm XOR lớn nhất",
+          "rightEn": "Stores numbers bit by bit to find the maximum XOR"
+        },
+        {
+          "left": "Bộ đếm count ở node",
+          "leftEn": "Per-node count",
+          "right": "Trả lời số từ có một tiền tố trong O(P)",
+          "rightEn": "Answers how many words share a prefix in O(P)"
+        }
+      ],
+      "explanation": "Bốn thứ này hay xuất hiện cùng nhau trong phỏng vấn: `isEnd` là phần lõi của mọi trie, còn radix tree, trie nhị phân và bộ đếm là những cải tiến cho bộ nhớ, bài toán số học và truy vấn đếm.",
+      "explanationEn": "These four come up together in interviews: `isEnd` is the core of every trie, while radix trees, binary tries and counts are refinements for memory, numeric problems and counting queries.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của `autocomplete(prefix)` trong trie.",
+      "promptEn": "Put the steps of `autocomplete(prefix)` on a trie into order.",
+      "items": [
+        {
+          "text": "Bắt đầu từ node gốc",
+          "textEn": "Start at the root node"
+        },
+        {
+          "text": "Đi theo từng ký tự của tiền tố; nếu thiếu ký tự nào thì trả về danh sách rỗng",
+          "textEn": "Follow each prefix character; if one is missing, return an empty list"
+        },
+        {
+          "text": "Từ node tiền tố, bắt đầu DFS và ghép dần chuỗi đường đi",
+          "textEn": "From the prefix node, start a DFS while building the path string"
+        },
+        {
+          "text": "Ghi lại chuỗi hiện tại ở mỗi node có isEnd = true",
+          "textEn": "Record the current string at every node where isEnd is true"
+        },
+        {
+          "text": "Trả về danh sách kết quả (theo thứ tự từ điển nếu các con được sort)",
+          "textEn": "Return the results (in lexicographic order if children are sorted)"
+        }
+      ],
+      "explanation": "Hai giai đoạn: đi xuống O(P) tới node tiền tố, rồi DFS O(M) trên cây con. Các từ không có tiền tố đó không bao giờ bị chạm tới.",
+      "explanationEn": "Two phases: an O(P) walk down to the prefix node, then an O(M) DFS of its subtree. Words without that prefix are never touched.",
+      "id": "d6"
+    }
+  ]
+}

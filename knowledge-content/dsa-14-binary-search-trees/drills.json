@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về BST thường (không tự cân bằng) có n nút.",
+      "promptEn": "Pick TWO statements that are true about a plain (non-self-balancing) BST with n nodes.",
+      "options": [
+        "Find luôn là O(log n) dù dữ liệu được chèn theo thứ tự nào",
+        "Chèn dữ liệu đã sắp xếp tạo ra cây cao n − 1",
+        "Nút mới được chèn luôn trở thành gốc",
+        "Insert, find và remove đều tốn O(h), với h là chiều cao cây",
+        "Giá trị lớn nhất luôn là con phải trực tiếp của gốc"
+      ],
+      "optionsEn": [
+        "Find is always O(log n) whatever order the data was inserted in",
+        "Inserting sorted data produces a tree of height n − 1",
+        "A newly inserted node always becomes the root",
+        "Insert, find and remove all cost O(h), where h is the tree height",
+        "The maximum is always the root's direct right child"
+      ],
+      "answers": [1, 3],
+      "explanation": "Mọi thao tác chỉ đi một đường từ gốc, nên chi phí là O(h). Chiều cao phụ thuộc thứ tự chèn: dữ liệu đã sắp xếp tạo chuỗi cao n − 1, khiến O(log n) không được đảm bảo. Nút mới luôn thành lá, và giá trị lớn nhất là nút ngoài cùng bên phải, có thể nằm sâu nhiều tầng.",
+      "explanationEn": "Every operation walks a single root path, so it costs O(h). Height depends on insertion order: sorted data builds a chain of height n − 1, so O(log n) is not guaranteed. A new node always becomes a leaf, and the maximum is the rightmost node, which can be many levels deep.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI tình huống mà BST cân bằng phù hợp hơn hash table.",
+      "promptEn": "Pick TWO situations where a balanced BST is a better fit than a hash table.",
+      "options": [
+        "Chỉ cần kiểm tra một username đã tồn tại hay chưa",
+        "Đếm số lần xuất hiện của mỗi từ trong văn bản",
+        "Tìm giá nhỏ nhất lớn hơn hoặc bằng 100 đô trong tập giá luôn thay đổi",
+        "Tra cứu session theo session ID",
+        "Liệt kê mọi sự kiện trong một khoảng thời gian, theo thứ tự"
+      ],
+      "optionsEn": [
+        "Only checking whether a username already exists",
+        "Counting how often each word appears in a text",
+        "Finding the smallest price at or above $100 in a constantly changing set",
+        "Looking up a session by its session ID",
+        "Listing every event in a time range, in order"
+      ],
+      "answers": [2, 4],
+      "explanation": "Hash table thắng với tra cứu chính xác theo key (O(1) trung bình) nhưng không có thứ tự. Truy vấn ceiling (giá trị nhỏ nhất ≥ x) và truy vấn khoảng có thứ tự cần cấu trúc giữ thứ tự: BST cân bằng làm được trong O(log n) và O(log n + k).",
+      "explanationEn": "A hash table wins for exact-key lookups (O(1) average) but has no order. A ceiling query (smallest value ≥ x) and an ordered range query need an ordered structure: a balanced BST answers them in O(log n) and O(log n + k).",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Khi xoá một nút có hai con, ta thay giá trị của nó bằng giá trị nhỏ nhất trong cây con phải. Nút đó được gọi là gì?",
+      "promptEn": "When removing a node with two children, you replace its value with the smallest value in its right subtree. What is that node called?",
+      "answer": "in-order successor",
+      "answerEn": "in-order successor",
+      "accept": [
+        "in-order successor",
+        "inorder successor",
+        "in order successor",
+        "successor"
+      ],
+      "explanation": "In-order successor — nút đứng ngay sau trong thứ tự tăng dần. Nó không có con trái, nên xoá nó luôn là trường hợp 0 hoặc 1 con. Dùng in-order predecessor (lớn nhất trong cây con trái) cũng đúng.",
+      "explanationEn": "The in-order successor — the next node in ascending order. It has no left child, so deleting it is always a 0- or 1-child case. Using the in-order predecessor (largest in the left subtree) works too.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian trường hợp xấu nhất của find trong một BST thường (không cân bằng) có n nút là gì?",
+      "promptEn": "What is the worst-case time complexity of find in a plain (unbalanced) BST with n nodes?",
+      "answer": "O(n)",
+      "answerEn": "O(n)",
+      "accept": [
+        "O(n)",
+        "n",
+        "linear",
+        "tuyến tính",
+        "o n"
+      ],
+      "explanation": "O(n). Khi cây suy biến thành một chuỗi (ví dụ chèn dữ liệu đã sắp xếp), find có thể phải đi qua mọi nút. O(log n) chỉ là cam kết với cây tự cân bằng như AVL hay red-black.",
+      "explanationEn": "O(n). When the tree degenerates into a chain (for example after inserting sorted data), find may visit every node. O(log n) is only a guarantee for self-balancing trees such as AVL or red-black.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thuật ngữ về cây với định nghĩa đúng.",
+      "promptEn": "Match each tree term to its definition.",
+      "pairs": [
+        {
+          "left": "Leaf",
+          "leftEn": "Leaf",
+          "right": "Nút không có con nào",
+          "rightEn": "A node with no children"
+        },
+        {
+          "left": "Depth",
+          "leftEn": "Depth",
+          "right": "Số cạnh từ gốc xuống tới nút",
+          "rightEn": "The number of edges from the root down to the node"
+        },
+        {
+          "left": "Height",
+          "leftEn": "Height",
+          "right": "Số cạnh trên đường dài nhất từ nút xuống một lá",
+          "rightEn": "The number of edges on the longest path from the node down to a leaf"
+        },
+        {
+          "left": "Siblings",
+          "leftEn": "Siblings",
+          "right": "Các nút có cùng một cha",
+          "rightEn": "Nodes that share the same parent"
+        }
+      ],
+      "explanation": "Depth và height hay bị nhầm: depth đo từ gốc đi xuống tới nút, height đo từ nút đi xuống lá xa nhất. Chiều cao của cả cây là height của gốc, và cũng bằng depth lớn nhất.",
+      "explanationEn": "Depth and height get mixed up: depth is measured from the root down to the node, height from the node down to its farthest leaf. The tree's height is the root's height, which equals the greatest depth.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước chèn một giá trị vào BST (bản lặp).",
+      "promptEn": "Put the steps of inserting a value into a BST (iterative version) into order.",
+      "items": [
+        {
+          "text": "Tạo nút mới chứa giá trị",
+          "textEn": "Create a new node holding the value"
+        },
+        {
+          "text": "Nếu cây chưa có gốc, đặt nút mới làm gốc và dừng",
+          "textEn": "If the tree has no root, make the new node the root and stop"
+        },
+        {
+          "text": "Bắt đầu từ gốc, so sánh giá trị với nút hiện tại",
+          "textEn": "Start at the root and compare the value with the current node"
+        },
+        {
+          "text": "Chọn phía: nhỏ hơn sang trái, lớn hơn sang phải",
+          "textEn": "Pick a side: smaller goes left, larger goes right"
+        },
+        {
+          "text": "Nếu phía đó trống, gắn nút mới; nếu không, đi xuống và lặp lại",
+          "textEn": "If that side is empty, attach the new node; otherwise move down and repeat"
+        }
+      ],
+      "explanation": "Bước cuối lặp lại cho tới khi gặp chỗ trống, nên nút mới luôn trở thành một lá. Số vòng lặp bằng số tầng đi qua: O(h).",
+      "explanationEn": "The last step repeats until an empty spot is found, so the new node always becomes a leaf. The number of iterations equals the levels walked: O(h).",
+      "id": "d6"
+    }
+  ]
+}

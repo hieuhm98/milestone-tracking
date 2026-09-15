@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về read replica bất đồng bộ.",
+      "promptEn": "Pick TWO statements that are true about asynchronous read replicas.",
+      "options": [
+        "Chúng giúp scale workload đọc nhiều",
+        "Chúng tăng thông lượng ghi vì mọi replica đều nhận ghi",
+        "Chúng thay thế được backup vì luôn có bản sao dữ liệu",
+        "Chúng có thể trả dữ liệu cũ do replication lag",
+        "Chúng tự động đảm bảo read-your-writes cho mọi user"
+      ],
+      "optionsEn": [
+        "They help scale read-heavy workloads",
+        "They raise write throughput because every replica accepts writes",
+        "They can replace backups because a copy of the data always exists",
+        "They can return stale data because of replication lag",
+        "They automatically guarantee read-your-writes for every user"
+      ],
+      "answers": [0, 3],
+      "explanation": "Replica chỉ nhận lệnh đọc; mọi lệnh ghi vẫn đi qua một leader. Vì async nên replica luôn trễ một chút, và read-your-writes phải được thiết kế thêm. Replica cũng không phải backup: `DROP TABLE` lỡ tay sẽ được replicate ngay.",
+      "explanationEn": "Replicas take reads only; every write still goes through one leader. Being async, they always lag a little, and read-your-writes must be designed in. Nor are they backups: an accidental `DROP TABLE` replicates straight away.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI đặc điểm của một shard key tốt.",
+      "promptEn": "Pick TWO properties of a good shard key.",
+      "options": [
+        "Cardinality thấp để số shard ít và dễ quản lý",
+        "Cardinality cao, nhiều giá trị khác nhau",
+        "Tăng dần theo thời gian như timestamp tạo bản ghi",
+        "Có mặt trong phần lớn các query nóng",
+        "Thay đổi thường xuyên theo trạng thái nghiệp vụ"
+      ],
+      "optionsEn": [
+        "Low cardinality so there are few, manageable shards",
+        "High cardinality, with many distinct values",
+        "Monotonically increasing, like a creation timestamp",
+        "Present in most of the hot queries",
+        "Changing often as the business state changes"
+      ],
+      "answers": [1, 3],
+      "explanation": "Cardinality cao cho phép dữ liệu trải đều; có mặt trong query nóng giúp mỗi request chỉ chạm một shard. Key tăng dần dồn mọi lệnh ghi mới vào một shard, còn key hay đổi buộc phải dời dòng giữa các shard.",
+      "explanationEn": "High cardinality lets data spread; appearing in hot queries lets each request touch one shard. An increasing key piles every new write onto one shard, and a key that changes forces rows to move between shards.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "PostgreSQL lắng nghe ở port mặc định nào?",
+      "promptEn": "Which default port does PostgreSQL listen on?",
+      "answer": "5432",
+      "answerEn": "5432",
+      "accept": [
+        "5432",
+        "port 5432",
+        "tcp 5432"
+      ],
+      "explanation": "5432. Để so sánh: MySQL 3306, SQL Server 1433, MongoDB 27017, còn PgBouncer thường chạy ở 6432.",
+      "explanationEn": "5432. For comparison: MySQL 3306, SQL Server 1433, MongoDB 27017, and PgBouncer usually runs on 6432.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Trong PostgreSQL, lệnh nào chạy thật một câu query và in ra query plan kèm thời gian và số dòng thực tế?",
+      "promptEn": "In PostgreSQL, which command actually runs a query and prints its plan with real timings and row counts?",
+      "answer": "EXPLAIN ANALYZE",
+      "answerEn": "EXPLAIN ANALYZE",
+      "accept": [
+        "explain analyze",
+        "explain analyse",
+        "explain (analyze)",
+        "explain (analyze, buffers)"
+      ],
+      "explanation": "EXPLAIN ANALYZE. `EXPLAIN` đơn thuần chỉ cho ước lượng mà không chạy query; thêm ANALYZE thì query được thực thi thật — cẩn thận với `UPDATE`/`DELETE`, hãy bọc trong transaction rồi rollback.",
+      "explanationEn": "EXPLAIN ANALYZE. Plain `EXPLAIN` only shows estimates without running the query; adding ANALYZE really executes it — careful with `UPDATE`/`DELETE`, wrap them in a transaction and roll back.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi bất thường khi chạy đồng thời với mô tả đúng.",
+      "promptEn": "Match each concurrency anomaly to what happens.",
+      "pairs": [
+        {
+          "left": "Dirty read",
+          "leftEn": "Dirty read",
+          "right": "Đọc được thay đổi mà transaction khác chưa commit và sau đó rollback",
+          "rightEn": "Reading another transaction's change that is not committed and later rolled back"
+        },
+        {
+          "left": "Non-repeatable read",
+          "leftEn": "Non-repeatable read",
+          "right": "Đọc cùng một dòng hai lần và nhận hai giá trị khác nhau",
+          "rightEn": "Reading the same row twice and getting two different values"
+        },
+        {
+          "left": "Phantom read",
+          "leftEn": "Phantom read",
+          "right": "Chạy lại một query theo khoảng và thấy xuất hiện dòng mới",
+          "rightEn": "Re-running a range query and seeing new rows appear"
+        },
+        {
+          "left": "Write skew",
+          "leftEn": "Write skew",
+          "right": "Hai transaction đọc cùng dữ kiện, sửa hai dòng khác nhau và cùng phá vỡ một quy tắc",
+          "rightEn": "Two transactions read the same facts, update different rows and together break a rule"
+        }
+      ],
+      "explanation": "Read Committed chặn dirty read, Repeatable Read chặn thêm non-repeatable read, và theo chuẩn SQL chỉ Serializable mới chặn phantom. Write skew vẫn lọt qua snapshot isolation, nên cần Serializable hoặc khoá tường minh.",
+      "explanationEn": "Read Committed blocks dirty reads, Repeatable Read also blocks non-repeatable reads, and per the SQL standard only Serializable blocks phantoms. Write skew slips through snapshot isolation, so it needs Serializable or explicit locking.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự một lệnh COMMIT trên leader dùng replication đồng bộ tới một standby.",
+      "promptEn": "Put the steps of a COMMIT on a leader with synchronous replication to one standby into order.",
+      "items": [
+        {
+          "text": "Client gửi COMMIT tới leader",
+          "textEn": "The client sends COMMIT to the leader"
+        },
+        {
+          "text": "Leader ghi bản ghi commit vào WAL và flush xuống đĩa",
+          "textEn": "The leader writes the commit record to its WAL and flushes it to disk"
+        },
+        {
+          "text": "Leader stream bản ghi WAL sang standby đồng bộ",
+          "textEn": "The leader streams the WAL record to the synchronous standby"
+        },
+        {
+          "text": "Standby flush WAL và gửi xác nhận về leader",
+          "textEn": "The standby flushes the WAL and sends an acknowledgement back"
+        },
+        {
+          "text": "Leader báo commit thành công cho client",
+          "textEn": "The leader reports the commit as successful to the client"
+        }
+      ],
+      "explanation": "Client chỉ nhận được xác nhận sau khi standby đã giữ bản ghi, nên leader chết ngay sau đó cũng không mất commit. Đó là lý do replication đồng bộ cho RPO = 0 nhưng mỗi commit phải trả thêm một vòng mạng.",
+      "explanationEn": "The client is only acknowledged once the standby holds the record, so a leader crash right afterwards loses no commit. That is why synchronous replication gives RPO = 0 but every commit pays an extra network round trip.",
+      "id": "d6"
+    }
+  ]
+}

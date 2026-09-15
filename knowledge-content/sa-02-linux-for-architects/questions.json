@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "`ps` cho thấy hàng trăm tiến trình ở trạng thái `Z`, tất cả có cùng một PPID là worker manager của ứng dụng. Cách xử lý đúng là gì?",
+    "questionEn": "`ps` shows hundreds of processes in state `Z`, all with the same PPID — the application's worker manager. What is the right way to deal with them?",
+    "options": [
+      "Chạy `kill -9` lên từng PID zombie để giải phóng chúng",
+      "Tăng RAM cho máy vì zombie đang chiếm nhiều bộ nhớ",
+      "Sửa (hoặc restart) tiến trình cha vì nó không gọi `wait()` cho con",
+      "Tăng `ulimit -n` để có thêm chỗ cho tiến trình mới"
+    ],
+    "optionsEn": [
+      "Run `kill -9` on each zombie PID to release them",
+      "Add RAM, because the zombies are holding a lot of memory",
+      "Fix (or restart) the parent, because it never calls `wait()` on its children",
+      "Raise `ulimit -n` to make room for new processes"
+    ],
+    "answer": 2,
+    "explanation": "Zombie đã chết rồi nên không kill được và gần như không giữ bộ nhớ — nó chỉ chiếm một ô trong bảng tiến trình chờ cha đọc exit status. Nguyên nhân là tiến trình cha không gọi `wait()`; sửa cha, hoặc kill cha để PID 1 nhận nuôi và dọn các zombie.",
+    "explanationEn": "A zombie is already dead, so it cannot be killed and holds almost no memory — it is only a process-table slot waiting for its parent to read the exit status. The cause is a parent that never calls `wait()`; fix it, or kill it so PID 1 adopts and reaps the zombies."
+  },
+  {
+    "id": "q2",
+    "question": "Một container liên tục kết thúc với exit code 137. Log của ứng dụng dừng đột ngột, không có dòng nào về việc tắt dịch vụ. Giải thích khả dĩ nhất là gì?",
+    "questionEn": "A container keeps terminating with exit code 137. The application log stops abruptly with no shutdown message. What is the most likely explanation?",
+    "options": [
+      "Tiến trình bị `SIGKILL` — thường do OOM killer hoặc hết grace period",
+      "Ứng dụng nhận `SIGTERM` và tự thoát sạch sẽ",
+      "Ứng dụng bị lỗi segmentation fault khi truy cập bộ nhớ",
+      "Lệnh khởi động của container không tìm thấy file thực thi"
+    ],
+    "optionsEn": [
+      "The process received `SIGKILL` — usually the OOM killer or an expired grace period",
+      "The application received `SIGTERM` and exited cleanly on its own",
+      "The application hit a segmentation fault while accessing memory",
+      "The container's start command could not find its executable"
+    ],
+    "answer": 0,
+    "explanation": "Exit code khi chết vì signal là 128 + số hiệu signal: 137 = 128 + 9 (SIGKILL). SIGKILL không bắt được nên ứng dụng không kịp ghi log. SIGTERM cho 143, segfault (SIGSEGV) cho 139, còn 'command not found' là 127.",
+    "explanationEn": "A signal death reports 128 + the signal number: 137 = 128 + 9 (SIGKILL). SIGKILL cannot be caught, so the app gets no chance to log. SIGTERM gives 143, a segfault (SIGSEGV) gives 139, and 'command not found' is 127."
+  },
+  {
+    "id": "q3",
+    "question": "Mỗi lần deploy, API mất các request đang xử lý và `docker stop` luôn mất đúng 10 giây. Ứng dụng Node.js đã có handler `SIGTERM` để đóng server êm. Dockerfile kết thúc bằng dòng dưới. Nguyên nhân khả dĩ nhất?\n`CMD sh -c \"node server.js\"`",
+    "questionEn": "On every deploy the API drops in-flight requests, and `docker stop` always takes exactly 10 seconds. The Node.js app already has a `SIGTERM` handler that closes the server gracefully. The Dockerfile ends with the line below. Most likely cause?\n`CMD sh -c \"node server.js\"`",
+    "options": [
+      "Docker gửi `SIGKILL` ngay lập tức, không bao giờ gửi `SIGTERM`",
+      "Node.js không thể đăng ký handler cho `SIGTERM` trên Linux",
+      "10 giây là quá ngắn để Node.js khởi động xong server",
+      "Shell `sh` là PID 1 và không chuyển tiếp `SIGTERM` cho tiến trình node"
+    ],
+    "optionsEn": [
+      "Docker sends `SIGKILL` immediately and never sends `SIGTERM`",
+      "Node.js cannot register a handler for `SIGTERM` on Linux",
+      "10 seconds is too short for Node.js to finish starting the server",
+      "The `sh` shell is PID 1 and does not forward `SIGTERM` to the node process"
+    ],
+    "answer": 3,
+    "explanation": "Docker gửi SIGTERM cho PID 1 của container, ở đây là `sh`. Shell không chuyển tiếp signal và PID 1 không có hành vi mặc định nên SIGTERM bị bỏ qua; handler của node không bao giờ chạy, và sau 10 giây Docker gửi SIGKILL. Cho node làm PID 1 (CMD dạng exec) hoặc dùng init nhỏ như tini.",
+    "explanationEn": "Docker sends SIGTERM to the container's PID 1, which here is `sh`. The shell does not forward it and PID 1 has no default action, so the signal is ignored; node's handler never runs, and after 10 seconds Docker sends SIGKILL. Make node PID 1 (exec-form CMD) or use a tiny init such as tini."
+  },
+  {
+    "id": "q4",
+    "question": "Một dịch vụ lưu session thành file nhỏ bắt đầu báo lỗi \"No space left on device\", nhưng `df -h` cho thấy phân vùng mới dùng 40 %. Khả năng cao nhất là gì?",
+    "questionEn": "A service that stores sessions as small files starts failing with \"No space left on device\", yet `df -h` shows the partition only 40 % used. What is most likely?",
+    "options": [
+      "RAM đã đầy nên kernel không ghi được file mới",
+      "Filesystem đã hết inode do có hàng triệu file nhỏ — kiểm tra bằng `df -i`",
+      "Thư mục session thiếu quyền `w` cho user của dịch vụ",
+      "Thư mục `/proc` đã đầy và chặn mọi thao tác ghi"
+    ],
+    "optionsEn": [
+      "RAM is full, so the kernel cannot write new files",
+      "The filesystem ran out of inodes because of millions of small files — check with `df -i`",
+      "The session directory lacks `w` permission for the service user",
+      "The `/proc` directory is full and blocks every write"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi file cần một inode, và số inode của filesystem là cố định. Hàng triệu file nhỏ có thể dùng hết inode trong khi dung lượng còn nhiều; `df -i` sẽ báo 100 %. Thiếu quyền cho lỗi 'Permission denied' chứ không phải 'No space left', còn `/proc` là filesystem ảo không chiếm đĩa.",
+    "explanationEn": "Every file needs an inode, and a filesystem has a fixed number of them. Millions of small files can exhaust inodes while plenty of space remains; `df -i` would show 100 %. Missing permissions give 'Permission denied', not 'No space left', and `/proc` is a virtual filesystem that uses no disk."
+  },
+  {
+    "id": "q5",
+    "question": "Tiến trình chạy bằng user `metrics` (không thuộc group `orders`) cố đọc file sau. Kết quả là gì?\n`$ ls -l /etc/orders/orders.env\n-rw-r----- 1 orders orders 312 orders.env`",
+    "questionEn": "A process running as user `metrics` (not a member of group `orders`) tries to read the file below. What happens?\n`$ ls -l /etc/orders/orders.env\n-rw-r----- 1 orders orders 312 orders.env`",
+    "options": [
+      "Đọc được, vì mọi user đều có quyền đọc file trong `/etc`",
+      "Đọc và ghi được, vì owner có quyền `rw`",
+      "Bị từ chối, vì nhóm \"others\" không có quyền nào (`---`)",
+      "Đọc được, vì group có quyền `r` và áp dụng cho mọi user"
+    ],
+    "optionsEn": [
+      "It can read it, because every user may read files under `/etc`",
+      "It can read and write it, because the owner has `rw`",
+      "It is denied, because \"others\" have no permissions at all (`---`)",
+      "It can read it, because the group has `r` and that applies to everyone"
+    ],
+    "answer": 2,
+    "explanation": "Mode `640`: owner `orders` được rw, group `orders` được r, others không có gì. `metrics` không phải owner cũng không thuộc group nên rơi vào others và bị từ chối — đúng như mong muốn với một file chứa secret.",
+    "explanationEn": "Mode `640`: owner `orders` gets rw, group `orders` gets r, others get nothing. `metrics` is neither the owner nor in the group, so it falls into others and is denied — exactly what you want for a file holding secrets."
+  },
+  {
+    "id": "q6",
+    "question": "User `deploy` nhận \"Permission denied\" khi mở `/srv/app/config/app.json`, dù file có mode `644`. Thư mục `/srv/app/config` có mode `644` (`drw-r--r--`), owner là root. Vì sao?",
+    "questionEn": "User `deploy` gets \"Permission denied\" opening `/srv/app/config/app.json`, even though the file's mode is `644`. The directory `/srv/app/config` has mode `644` (`drw-r--r--`) and is owned by root. Why?",
+    "options": [
+      "Thư mục thiếu bit `x` nên không ai ngoài root đi xuyên qua nó được",
+      "File phải có mode `755` thì user khác mới đọc được",
+      "Muốn đọc file bên trong thì phải có quyền `w` trên thư mục",
+      "Thư mục đang bật sticky bit nên chặn user khác đọc file"
+    ],
+    "optionsEn": [
+      "The directory lacks the `x` bit, so nobody but root can traverse it",
+      "The file needs mode `755` before other users can read it",
+      "Reading a file inside requires `w` permission on the directory",
+      "The directory has the sticky bit set, which blocks other users from reading"
+    ],
+    "answer": 0,
+    "explanation": "Trên thư mục, `r` chỉ cho liệt kê tên, còn `x` mới cho đi vào và truy cập các mục bên trong. Không có `x` thì quyền trên file không còn ý nghĩa. Sửa bằng `chmod 755` cho thư mục (hoặc `750` kèm group phù hợp). `w` trên thư mục chỉ cần để tạo/xoá/đổi tên.",
+    "explanationEn": "On a directory, `r` only lets you list names; `x` is what lets you enter it and reach entries inside. Without `x`, the file's own permissions never come into play. Fix it with `chmod 755` on the directory (or `750` with the right group). `w` on a directory is only needed to create, delete or rename."
+  },
+  {
+    "id": "q7",
+    "question": "Dịch vụ dưới đây chạy một job, xử lý xong và thoát với exit code 0. systemd sẽ làm gì?\n`[Service]\nExecStart=/usr/bin/node /srv/jobs/run.js\nRestart=on-failure\nRestartSec=5`",
+    "questionEn": "The service below runs a job, finishes, and exits with code 0. What does systemd do?\n`[Service]\nExecStart=/usr/bin/node /srv/jobs/run.js\nRestart=on-failure\nRestartSec=5`",
+    "options": [
+      "Khởi động lại dịch vụ sau 5 giây",
+      "Khởi động lại dịch vụ ngay lập tức, bỏ qua `RestartSec`",
+      "Đánh dấu dịch vụ là `failed` vì tiến trình chính đã thoát",
+      "Không khởi động lại — thoát với code 0 không được coi là lỗi"
+    ],
+    "optionsEn": [
+      "Restart the service after 5 seconds",
+      "Restart the service immediately, ignoring `RestartSec`",
+      "Mark the service `failed` because the main process exited",
+      "Not restart it — an exit with code 0 is not a failure"
+    ],
+    "answer": 3,
+    "explanation": "`on-failure` chỉ khởi động lại khi thoát không sạch: exit code khác 0, bị kill bởi signal bất thường, hoặc timeout. Thoát với 0 là thành công, unit chuyển sang inactive. Muốn restart cả khi thoát sạch thì dùng `Restart=always`.",
+    "explanationEn": "`on-failure` restarts only after an unclean exit: a non-zero code, an unexpected signal, or a timeout. Exiting with 0 is success, so the unit simply goes inactive. To restart even after a clean exit, use `Restart=always`."
+  },
+  {
+    "id": "q8",
+    "question": "Kỹ sư cài một dịch vụ mới trên EC2, chạy `sudo systemctl start orders-api` và kiểm tra thấy hoạt động tốt. Sau lần bảo trì có reboot, dịch vụ không chạy; `systemctl status` báo `inactive (dead)` và `disabled`. Cách sửa đúng?",
+    "questionEn": "An engineer installs a new service on EC2, runs `sudo systemctl start orders-api`, and confirms it works. After a maintenance reboot the service is not running; `systemctl status` shows `inactive (dead)` and `disabled`. What is the right fix?",
+    "options": [
+      "Chạy `systemctl daemon-reload` để systemd nhớ dịch vụ",
+      "Chạy `systemctl enable --now orders-api` để dịch vụ chạy cả lúc boot",
+      "Thêm `Restart=always` vào unit để nó tự khởi động sau reboot",
+      "Thêm lệnh start vào `~/.bashrc` của user quản trị"
+    ],
+    "optionsEn": [
+      "Run `systemctl daemon-reload` so systemd remembers the service",
+      "Run `systemctl enable --now orders-api` so it also starts at boot",
+      "Add `Restart=always` to the unit so it comes back after a reboot",
+      "Add the start command to the admin user's `~/.bashrc`"
+    ],
+    "answer": 1,
+    "explanation": "`start` chỉ chạy dịch vụ cho phiên boot hiện tại; `enable` tạo liên kết để target (ví dụ `multi-user.target`) kéo nó lên khi boot. `Restart=` chỉ xử lý crash, không liên quan tới boot; `daemon-reload` chỉ nạp lại file unit; `.bashrc` chỉ chạy khi có người đăng nhập.",
+    "explanationEn": "`start` runs the service for the current boot only; `enable` creates the link so a target (such as `multi-user.target`) pulls it in at boot. `Restart=` handles crashes, not boot; `daemon-reload` only re-reads unit files; `.bashrc` runs only when someone logs in."
+  },
+  {
+    "id": "q9",
+    "question": "Lệnh nào hiển thị các log mức error trở lên của dịch vụ systemd `orders-api` trong một giờ qua?",
+    "questionEn": "Which command shows error-level (and more severe) logs from the systemd service `orders-api` for the last hour?",
+    "options": [
+      "`systemctl logs orders-api --last 1h --level error`",
+      "`dmesg -u orders-api --since 1h`",
+      "`journalctl -u orders-api --since \"1 hour ago\" -p err`",
+      "`tail -f /var/log/orders-api --errors`"
+    ],
+    "optionsEn": [
+      "`systemctl logs orders-api --last 1h --level error`",
+      "`dmesg -u orders-api --since 1h`",
+      "`journalctl -u orders-api --since \"1 hour ago\" -p err`",
+      "`tail -f /var/log/orders-api --errors`"
+    ],
+    "answer": 2,
+    "explanation": "`journalctl` truy vấn journal: `-u` lọc theo unit, `--since` lọc theo thời gian, `-p err` lấy mức err và nghiêm trọng hơn. `systemctl` không có lệnh con `logs`, `dmesg` chỉ đọc bộ đệm log của kernel, còn `tail` không có cờ `--errors`.",
+    "explanationEn": "`journalctl` queries the journal: `-u` filters by unit, `--since` by time, `-p err` keeps err and more severe. `systemctl` has no `logs` subcommand, `dmesg` only reads the kernel ring buffer, and `tail` has no `--errors` flag."
+  },
+  {
+    "id": "q10",
+    "question": "Auto Scaling group chạy `apt-get install -y nginx nodejs` trong user data mỗi khi scale-out. Một hôm instance mới hoạt động khác instance cũ vì repository đã có phiên bản mới. Hướng xử lý tốt nhất về mặt kiến trúc?",
+    "questionEn": "An Auto Scaling group runs `apt-get install -y nginx nodejs` in user data on every scale-out. One day new instances behave differently from old ones because the repository shipped newer versions. What is the best architectural fix?",
+    "options": [
+      "Đóng image (AMI) có phiên bản gói cố định, deploy image đó, và build lại định kỳ để vá lỗi",
+      "Tắt vĩnh viễn mọi bản cập nhật gói để phiên bản không bao giờ thay đổi",
+      "Chuyển sang base Alpine vì `apk` không bao giờ đổi phiên bản",
+      "Cho mọi instance cũ chạy `apt-get upgrade` mỗi giờ để luôn giống instance mới"
+    ],
+    "optionsEn": [
+      "Bake an AMI with pinned package versions, deploy that image, and rebuild it regularly for patches",
+      "Disable all package updates permanently so versions never change",
+      "Switch to an Alpine base because `apk` never changes versions",
+      "Have every old instance run `apt-get upgrade` hourly to match new ones"
+    ],
+    "answer": 0,
+    "explanation": "Cài 'bản mới nhất' lúc boot khiến fleet không tái lập được. Image đóng sẵn biến cấu hình thành một artifact có phiên bản, giống hệt nhau trên mọi instance; build lại định kỳ giữ được việc vá bảo mật. Tắt cập nhật vĩnh viễn để lại lỗ hổng, còn upgrade hàng giờ vẫn là thay đổi không kiểm soát trên production.",
+    "explanationEn": "Installing 'latest' at boot makes the fleet non-reproducible. A baked image turns the setup into a versioned artifact that is identical on every instance, and regular rebuilds keep security patches flowing. Freezing updates forever leaves vulnerabilities, and hourly upgrades are still uncontrolled change in production."
+  },
+  {
+    "id": "q11",
+    "question": "Một VM 4 core có load average 12 và phản hồi rất chậm. `top` hiển thị dòng dưới. Nguyên nhân khả dĩ nhất?\n`%Cpu(s):  5.0 us,  2.0 sy,  0.0 ni,  8.0 id, 85.0 wa,  0.0 st`",
+    "questionEn": "A 4-core VM has a load average of 12 and responds very slowly. `top` shows the line below. Most likely cause?\n`%Cpu(s):  5.0 us,  2.0 sy,  0.0 ni,  8.0 id, 85.0 wa,  0.0 st`",
+    "options": [
+      "Ứng dụng đang tính toán nặng — cần thêm core CPU",
+      "Tiến trình hết file descriptor nên không nhận thêm kết nối",
+      "Hypervisor đang lấy CPU cho máy ảo khác (steal time)",
+      "Tiến trình bị chặn chờ I/O đĩa — cần kiểm tra storage bằng `iostat -x`"
+    ],
+    "optionsEn": [
+      "The application is CPU-bound — it needs more cores",
+      "The process ran out of file descriptors and cannot accept connections",
+      "The hypervisor is taking CPU for other VMs (steal time)",
+      "Processes are blocked waiting on disk I/O — check storage with `iostat -x`"
+    ],
+    "answer": 3,
+    "explanation": "Trên Linux, load average tính cả tiến trình ngủ không thể ngắt (trạng thái D) đang chờ I/O. CPU người dùng chỉ 5 % nhưng `wa` 85 % nghĩa là CPU rảnh vì mọi thứ đang chờ đĩa. `st` bằng 0 loại trừ steal, ứng dụng nặng CPU sẽ có `us` cao chứ không phải `wa` cao, còn hết fd không làm tăng load.",
+    "explanationEn": "On Linux, load average also counts processes in uninterruptible sleep (state D) waiting on I/O. User CPU is only 5 % but `wa` is 85 %: the CPU is idle because everything is waiting on the disk. `st` at 0 rules out steal, a CPU-bound app would show high `us` rather than high `wa`, and running out of fds does not raise load."
+  },
+  {
+    "id": "q12",
+    "question": "Hệ thống giám sát cảnh báo \"bộ nhớ gần đầy\" trên server 16 GB dựa vào cột `free`. Bạn thấy kết quả dưới. Đánh giá đúng là gì?\n`$ free -h\n        total  used  free   buff/cache  available\nMem:     15Gi  5.1Gi 312Mi     10Gi       9.9Gi`",
+    "questionEn": "Monitoring raises \"memory almost full\" on a 16 GB server based on the `free` column. You see the output below. What is the correct assessment?\n`$ free -h\n        total  used  free   buff/cache  available\nMem:     15Gi  5.1Gi 312Mi     10Gi       9.9Gi`",
+    "options": [
+      "Server sắp bị OOM — cần nâng lên instance lớn hơn ngay",
+      "Bình thường — phần lớn là page cache thu hồi được; nên cảnh báo theo cột `available`",
+      "Có rò rỉ bộ nhớ trong kernel vì buff/cache quá lớn",
+      "Cần chạy lệnh xoá cache định kỳ để giữ cột `free` luôn cao"
+    ],
+    "optionsEn": [
+      "The server is about to OOM — upgrade to a bigger instance now",
+      "It is healthy — most of it is reclaimable page cache; alert on `available` instead",
+      "There is a kernel memory leak, since buff/cache is so large",
+      "Schedule a job that drops caches so the `free` column stays high"
+    ],
+    "answer": 1,
+    "explanation": "Linux dùng RAM nhàn rỗi làm page cache để tăng tốc đọc đĩa và trả lại ngay khi ứng dụng cần. Còn khoảng 9.9 GiB `available` nên server khoẻ. Xoá cache định kỳ chỉ làm I/O chậm hơn; cảnh báo nên dựa trên `available` (hoặc MemAvailable).",
+    "explanationEn": "Linux uses idle RAM as page cache to speed up disk reads and hands it back as soon as applications need it. About 9.9 GiB is `available`, so the server is healthy. Dropping caches only makes I/O slower; alerts should use `available` (MemAvailable)."
+  },
+  {
+    "id": "q13",
+    "question": "Một dịch vụ Java trên instance 4 GB thỉnh thoảng chết mà không có stack trace. `systemctl status` báo `status=9/KILL` và `journalctl -k` có dòng \"Out of memory: Killed process ... (java)\". Hành động phù hợp nhất?",
+    "questionEn": "A Java service on a 4 GB instance dies now and then with no stack trace. `systemctl status` shows `status=9/KILL` and `journalctl -k` contains \"Out of memory: Killed process ... (java)\". What is the most appropriate action?",
+    "options": [
+      "Tăng `LimitNOFILE` trong unit để JVM mở được nhiều file hơn",
+      "Thêm handler cho `SIGKILL` để JVM kịp ghi heap dump trước khi chết",
+      "Giới hạn heap JVM thấp hơn hẳn bộ nhớ khả dụng (hoặc thêm RAM) và theo dõi bộ nhớ",
+      "Đặt `Restart=always` và bỏ qua vì dịch vụ sẽ tự khởi động lại"
+    ],
+    "optionsEn": [
+      "Raise `LimitNOFILE` in the unit so the JVM can open more files",
+      "Add a `SIGKILL` handler so the JVM can write a heap dump before dying",
+      "Cap the JVM heap well below available memory (or add RAM) and monitor memory",
+      "Set `Restart=always` and ignore it, since the service will come back"
+    ],
+    "answer": 2,
+    "explanation": "Dấu vết cho thấy OOM killer của kernel đã gửi SIGKILL. Cách sửa là cân lại bộ nhớ: heap + metaspace + thread stack + phần của OS phải vừa với RAM (hoặc giới hạn cgroup). SIGKILL không thể bắt nên không có handler nào chạy được; restart liên tục chỉ che giấu việc mất request.",
+    "explanationEn": "The evidence says the kernel's OOM killer sent SIGKILL. The fix is to size memory: heap + metaspace + thread stacks + OS must fit in RAM (or the cgroup limit). SIGKILL cannot be caught, so no handler can run, and endless restarts only hide the dropped requests."
+  },
+  {
+    "id": "q14",
+    "question": "`df -h` báo phân vùng `/` 50 GB đã đầy 100 %, nhưng `du -sh /*` cộng lại chỉ khoảng 12 GB. Sáng nay có người chạy `rm` xoá một file log 38 GB của ứng dụng đang chạy. Chuyện gì đang xảy ra?",
+    "questionEn": "`df -h` shows the 50 GB `/` partition 100 % full, but `du -sh /*` only adds up to about 12 GB. This morning someone ran `rm` on a 38 GB log file of a running application. What is going on?",
+    "options": [
+      "Ứng dụng vẫn giữ file mở nên block chưa được giải phóng — tìm bằng `lsof +L1`, rồi restart hoặc truncate qua fd",
+      "Filesystem đã hết inode nên `df` báo đầy dù dữ liệu thực tế nhỏ",
+      "Filesystem bị hỏng sau lệnh `rm` và cần chạy `fsck` ngay",
+      "`du` không đếm file ẩn nên bỏ sót 38 GB dữ liệu"
+    ],
+    "optionsEn": [
+      "The app still holds the file open, so its blocks are not freed — find it with `lsof +L1`, then restart or truncate via the fd",
+      "The filesystem is out of inodes, so `df` reports full although data is small",
+      "The filesystem was corrupted by the `rm` and needs `fsck` right away",
+      "`du` does not count hidden files, so it misses the 38 GB"
+    ],
+    "answer": 0,
+    "explanation": "`rm` chỉ xoá tên file; inode và dữ liệu còn đó cho tới khi file descriptor cuối cùng đóng. `du` duyệt theo tên nên không thấy, còn `df` đếm block đã cấp phát nên thấy. Hết inode sẽ hiện trong `df -i`, không làm `df -h` báo 100 %.",
+    "explanationEn": "`rm` only removes the name; the inode and its data remain until the last file descriptor closes. `du` walks names, so it cannot see it; `df` counts allocated blocks, so it can. Inode exhaustion shows in `df -i` and does not make `df -h` report 100 %."
+  },
+  {
+    "id": "q15",
+    "question": "Một reverse proxy nginx bắt đầu ghi log dưới khi đạt khoảng 1 000 kết nối đồng thời. CPU và RAM vẫn thấp. Nguyên nhân gốc?\n`accept4() failed (24: Too many open files)`",
+    "questionEn": "An nginx reverse proxy starts logging the line below at around 1,000 concurrent connections. CPU and RAM are still low. Root cause?\n`accept4() failed (24: Too many open files)`",
+    "options": [
+      "Instance thiếu RAM nên kernel từ chối cấp bộ nhớ cho socket mới",
+      "Security group chưa mở đủ port cho số kết nối đó",
+      "Dải cổng ephemeral trên máy client đã bị dùng hết",
+      "Tiến trình chạm giới hạn file descriptor (`nofile`, thường 1024) — mỗi kết nối client và upstream tốn một fd"
+    ],
+    "optionsEn": [
+      "The instance is short of RAM, so the kernel refuses memory for new sockets",
+      "The security group does not open enough ports for that many connections",
+      "The ephemeral port range on the client machines is exhausted",
+      "The process hit its file descriptor limit (`nofile`, often 1024) — every client and upstream connection costs an fd"
+    ],
+    "answer": 3,
+    "explanation": "Lỗi 24 là `EMFILE`: tiến trình đã dùng hết số fd được phép. Proxy tốn khoảng hai fd cho mỗi request (phía client và phía upstream), nên 1 000 kết nối nhanh chóng chạm soft limit 1024. Nâng `nofile` ở nơi dịch vụ khởi động (ví dụ `LimitNOFILE=` trong unit). Security group chỉ lọc theo port đích, không giới hạn số kết nối.",
+    "explanationEn": "Error 24 is `EMFILE`: the process has used every fd it is allowed. A proxy spends roughly two fds per request (client side and upstream side), so 1,000 connections quickly hit a 1024 soft limit. Raise `nofile` where the service starts (e.g. `LimitNOFILE=` in the unit). Security groups filter by destination port; they do not cap connection counts."
+  },
+  {
+    "id": "q16",
+    "question": "Kỹ sư thêm `* soft nofile 65536` vào `/etc/security/limits.conf`, SSH lại, thấy `ulimit -n` báo 65536, rồi chạy `systemctl restart orders-api`. Nhưng `/proc/<pid>/limits` của dịch vụ vẫn báo 1024. Vì sao?",
+    "questionEn": "An engineer adds `* soft nofile 65536` to `/etc/security/limits.conf`, logs in again over SSH, sees `ulimit -n` report 65536, and runs `systemctl restart orders-api`. The service's `/proc/<pid>/limits` still shows 1024. Why?",
+    "options": [
+      "Thay đổi trong `limits.conf` chỉ có hiệu lực sau khi reboot toàn bộ máy",
+      "`limits.conf` áp dụng cho phiên đăng nhập qua PAM; dịch vụ systemd lấy giới hạn từ `LimitNOFILE=` trong unit",
+      "Giá trị `fs.file-max` của hệ thống thấp hơn 65536 nên bị cắt về 1024",
+      "Soft limit không bao giờ được vượt quá 4096 trên Linux"
+    ],
+    "optionsEn": [
+      "Changes to `limits.conf` only take effect after a full reboot",
+      "`limits.conf` applies to PAM login sessions; systemd services take their limit from `LimitNOFILE=` in the unit",
+      "The system's `fs.file-max` is below 65536, so the value is clamped to 1024",
+      "A soft limit can never exceed 4096 on Linux"
+    ],
+    "answer": 1,
+    "explanation": "Dịch vụ được systemd (PID 1) khởi động chứ không đi qua phiên đăng nhập, nên `pam_limits` và `limits.conf` không liên quan, kể cả sau reboot. Đặt `LimitNOFILE=65536` trong unit (hoặc drop-in qua `systemctl edit`), `daemon-reload` rồi restart.",
+    "explanationEn": "The service is started by systemd (PID 1), not through a login session, so `pam_limits` and `limits.conf` never apply — not even after a reboot. Set `LimitNOFILE=65536` in the unit (or a drop-in via `systemctl edit`), `daemon-reload`, then restart."
+  },
+  {
+    "id": "q17",
+    "question": "Một container được đặt memory limit 512 MiB. Host còn trống 8 GB RAM, nhưng container vẫn bị kill với exit code 137 khi xử lý file lớn. Tính năng kernel nào đang thực thi giới hạn này?",
+    "questionEn": "A container is given a 512 MiB memory limit. The host still has 8 GB of free RAM, yet the container is killed with exit code 137 while processing a large file. Which kernel feature is enforcing this?",
+    "options": [
+      "cgroups — memory controller của cgroup kích hoạt OOM kill khi group vượt `memory.max`",
+      "Mount namespace — nó giới hạn dung lượng file container được đọc",
+      "User namespace — nó ánh xạ root trong container thành user không có quyền",
+      "PID namespace — nó giới hạn số tiến trình và bộ nhớ của container"
+    ],
+    "optionsEn": [
+      "cgroups — the cgroup memory controller triggers an OOM kill when the group exceeds `memory.max`",
+      "The mount namespace — it limits how much file data the container can read",
+      "The user namespace — it maps root in the container to an unprivileged user",
+      "The PID namespace — it limits the container's process count and memory"
+    ],
+    "answer": 0,
+    "explanation": "Namespaces quyết định tiến trình **thấy** gì; cgroups quyết định nó **được dùng** bao nhiêu. Memory limit của container là giá trị trong cgroup, và khi group vượt giới hạn thì OOM killer chạy trong phạm vi group đó, bất kể host còn trống bao nhiêu.",
+    "explanationEn": "Namespaces decide what a process can **see**; cgroups decide how much it can **use**. A container memory limit is a cgroup value, and when the group exceeds it the OOM killer acts within that group, no matter how much RAM the host has free."
+  },
+  {
+    "id": "q18",
+    "question": "Trong buổi review kiến trúc, reviewer bảo mật nói: \"Chạy dữ liệu của hai khách hàng trong hai container trên cùng host không cô lập bằng hai VM riêng.\" Lập luận nào ủng hộ nhận định đó chính xác nhất?",
+    "questionEn": "In an architecture review, the security reviewer says: \"Running two customers' workloads in two containers on one host is not as isolated as two separate VMs.\" Which argument best supports that claim?",
+    "options": [
+      "Container không thể có địa chỉ IP và network stack riêng",
+      "Container luôn chạy bằng root và không có cách nào đổi user",
+      "Container dùng chung kernel của host; namespaces chỉ đổi góc nhìn, nên lỗ hổng kernel có thể vượt ranh giới",
+      "cgroups cho phép mọi container đọc bộ nhớ của container khác trên cùng host"
+    ],
+    "optionsEn": [
+      "Containers cannot have their own IP address and network stack",
+      "Containers always run as root and there is no way to change the user",
+      "Containers share the host kernel; namespaces only change the view, so a kernel exploit can cross the boundary",
+      "cgroups let any container read the memory of other containers on the same host"
+    ],
+    "answer": 2,
+    "explanation": "Mỗi VM có kernel riêng phía sau hypervisor; mọi container trên host gọi vào cùng một kernel. Namespaces và cgroups là cơ chế của chính kernel đó, nên một lỗi kernel có thể phá cả hai. Các phương án khác sai sự thật: net namespace cho container network riêng, có thể chạy non-root, và cgroups không cấp quyền đọc bộ nhớ.",
+    "explanationEn": "Each VM has its own kernel behind a hypervisor; every container on a host calls into the same kernel. Namespaces and cgroups are mechanisms of that kernel, so a kernel bug can defeat both. The other claims are false: net namespaces give containers their own network, containers can run as non-root, and cgroups grant no memory access."
+  }
+]

@@ -1,0 +1,1901 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "v1",
+      "lessonId": "l1",
+      "word": "starve",
+      "pos": "v",
+      "ipa": "/stɑːrv/",
+      "question": "Trong câu \"An architecture review asks harder questions: how big is the image and what is inside it, does it run as root, where are the secrets, what happens when it hangs or dies, can it starve the host, where do the logs go, and can we trust what we deploy?\", từ \"starve\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"An architecture review asks harder questions: how big is the image and what is inside it, does it run as root, where are the secrets, what happens when it hangs or dies, can it starve the host, where do the logs go, and can we trust what we deploy?\", what does \"starve\" (verb) mean?",
+      "options": [
+        "làm thiếu (tài nguyên)",
+        "làm quá tải (dữ liệu)",
+        "bỏ đói (người, vật)",
+        "làm chậm lại"
+      ],
+      "optionsEn": [
+        "to deprive of needed resources",
+        "to overload with data",
+        "to leave without food",
+        "to slow something down"
+      ],
+      "answer": 0,
+      "explanation": "starve /stɑːrv/ (động từ): làm thiếu (tài nguyên). \"Starve the host\" = chiếm hết CPU/RAM khiến máy chủ và các tiến trình khác thiếu tài nguyên; nghĩa gốc là \"bỏ đói\".",
+      "explanationEn": "starve /stɑːrv/ (verb): to deprive of needed resources. \"Starve the host\" means taking so much CPU or memory that other processes go without; the literal sense is \"to leave without food\"."
+    },
+    {
+      "id": "v2",
+      "lessonId": "l1",
+      "word": "immutable",
+      "pos": "adj",
+      "ipa": "/ɪˈmjuː.tə.bəl/",
+      "question": "Trong câu \"The guiding idea: a production image is an immutable, minimal, least-privilege artifact, built once and promoted unchanged through every environment.\", từ \"immutable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The guiding idea: a production image is an immutable, minimal, least-privilege artifact, built once and promoted unchanged through every environment.\", what does \"immutable\" (adjective) mean?",
+      "options": [
+        "dễ di chuyển",
+        "tạm thời, ngắn hạn",
+        "bất biến, không thay đổi",
+        "không thể đọc"
+      ],
+      "optionsEn": [
+        "easy to move",
+        "lasting a short time",
+        "unable to be changed",
+        "unable to be read"
+      ],
+      "answer": 2,
+      "explanation": "immutable /ɪˈmjuː.tə.bəl/ (tính từ): bất biến, không thay đổi. Ảnh container bất biến: muốn thay đổi thì build ảnh mới chứ không sửa ảnh cũ. Trái nghĩa: mutable.",
+      "explanationEn": "immutable /ɪˈmjuː.tə.bəl/ (adjective): unable to be changed. An immutable image is never edited in place; you build a new one instead. Opposite: mutable."
+    },
+    {
+      "id": "v3",
+      "lessonId": "l1",
+      "word": "promote",
+      "pos": "v",
+      "ipa": "/prəˈmoʊt/",
+      "question": "Trong câu \"The guiding idea: a production image is an immutable, minimal, least-privilege artifact, built once and promoted unchanged through every environment.\", từ \"promote\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The guiding idea: a production image is an immutable, minimal, least-privilege artifact, built once and promoted unchanged through every environment.\", what does \"promote\" (verb) mean?",
+      "options": [
+        "thăng chức (nhân viên)",
+        "chuyển lên (môi trường tiếp theo)",
+        "quảng bá (sản phẩm)",
+        "sao lưu dự phòng"
+      ],
+      "optionsEn": [
+        "to raise to a higher job",
+        "to move on to the next stage",
+        "to advertise a product",
+        "to make a backup copy"
+      ],
+      "answer": 1,
+      "explanation": "promote /prəˈmoʊt/ (động từ): chuyển lên (môi trường tiếp theo). \"Promote an image\" = đưa cùng một ảnh từ dev lên staging rồi prod; nghĩa thường gặp khác là \"thăng chức\".",
+      "explanationEn": "promote /prəˈmoʊt/ (verb): to move on to the next stage. \"Promote an image\" means moving the same build from dev to staging to prod; the everyday sense is \"to give someone a higher job\"."
+    },
+    {
+      "id": "v4",
+      "lessonId": "l1",
+      "word": "differ",
+      "pos": "v",
+      "ipa": "/ˈdɪf.ər/",
+      "question": "Trong câu \"Only configuration differs.\", từ \"differ\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Only configuration differs.\", what does \"differ\" (verb) mean?",
+      "options": [
+        "bị trì hoãn",
+        "được chia sẻ",
+        "bị xóa bỏ",
+        "khác nhau"
+      ],
+      "optionsEn": [
+        "to be delayed",
+        "to be shared",
+        "to be removed",
+        "to be different"
+      ],
+      "answer": 3,
+      "explanation": "differ /ˈdɪf.ər/ (động từ): khác nhau. \"Differ\" = khác nhau; cụm hay gặp: \"differ from\" (khác với), \"differ in\" (khác ở điểm).",
+      "explanationEn": "differ /ˈdɪf.ər/ (verb): to be different. \"Differ\" means to be different; common patterns: \"differ from\" and \"differ in\"."
+    },
+    {
+      "id": "v5",
+      "lessonId": "l1",
+      "word": "dependency",
+      "pos": "n",
+      "ipa": "/dɪˈpen.dən.si/",
+      "question": "Trong câu \"A build needs compilers, dev dependencies and test tools; the running app needs none of them.\", từ \"dependency\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A build needs compilers, dev dependencies and test tools; the running app needs none of them.\", what does \"dependency\" (noun) mean?",
+      "options": [
+        "sự lệ thuộc (vào ai)",
+        "tệp cấu hình",
+        "công cụ biên dịch",
+        "thư viện phụ thuộc"
+      ],
+      "optionsEn": [
+        "reliance on a person",
+        "a settings file",
+        "a compiling tool",
+        "a package the code relies on"
+      ],
+      "answer": 3,
+      "explanation": "dependency /dɪˈpen.dən.si/ (danh từ): thư viện phụ thuộc. \"Dev dependencies\" = các thư viện chỉ cần khi phát triển/build; nghĩa chung là \"sự lệ thuộc\".",
+      "explanationEn": "dependency /dɪˈpen.dən.si/ (noun): a package the code relies on. \"Dev dependencies\" are packages needed only while building; the general sense is \"reliance on someone\"."
+    },
+    {
+      "id": "v6",
+      "lessonId": "l1",
+      "word": "artifact",
+      "pos": "n",
+      "ipa": "/ˈɑːr.tɪ.fækt/",
+      "question": "Trong câu \"A multi-stage build has several FROM lines; only the last stage becomes the image, and it copies just the artifacts it needs with COPY --from=.\", từ \"artifact\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A multi-stage build has several FROM lines; only the last stage becomes the image, and it copies just the artifacts it needs with COPY --from=.\", what does \"artifact\" (noun) mean?",
+      "options": [
+        "cổ vật (khảo cổ)",
+        "sản phẩm đầu ra (của build)",
+        "lỗi hiển thị hình ảnh",
+        "mã nguồn gốc"
+      ],
+      "optionsEn": [
+        "an old historical object",
+        "a file produced by a build",
+        "a visual display glitch",
+        "original source code"
+      ],
+      "answer": 1,
+      "explanation": "artifact /ˈɑːr.tɪ.fækt/ (danh từ): sản phẩm đầu ra (của build). Trong phần mềm, \"artifact\" là tệp sinh ra từ build (binary, thư mục dist...); nghĩa thường là \"cổ vật\".",
+      "explanationEn": "artifact /ˈɑːr.tɪ.fækt/ (noun): a file produced by a build. In software, an artifact is an output of a build such as a binary or a dist folder; the everyday sense is \"an old historical object\"."
+    },
+    {
+      "id": "v7",
+      "lessonId": "l1",
+      "word": "stage",
+      "pos": "n",
+      "ipa": "/steɪdʒ/",
+      "question": "Trong câu \"docker build --target build . stops at a named stage (useful for running tests in CI).\", từ \"stage\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"docker build --target build . stops at a named stage (useful for running tests in CI).\", what does \"stage\" (noun) mean?",
+      "options": [
+        "giai đoạn, bước",
+        "sân khấu",
+        "tầng, lớp",
+        "nhánh mã"
+      ],
+      "optionsEn": [
+        "a step in a process",
+        "a raised platform for shows",
+        "a layer or level",
+        "a branch of code"
+      ],
+      "answer": 0,
+      "explanation": "stage /steɪdʒ/ (danh từ): giai đoạn, bước. \"Build stage\" = một giai đoạn trong Dockerfile nhiều giai đoạn; nghĩa khác của \"stage\" là \"sân khấu\".",
+      "explanationEn": "stage /steɪdʒ/ (noun): a step in a process. A build stage is one phase of a multi-stage Dockerfile; another sense of \"stage\" is \"a platform for shows\"."
+    },
+    {
+      "id": "v8",
+      "lessonId": "l1",
+      "word": "discard",
+      "pos": "v",
+      "ipa": "/dɪˈskɑːrd/",
+      "question": "Trong câu \"The toolchain, source and dev dependencies stay in the discarded stage: a smaller image, fewer CVEs, fewer tools for an attacker.\", từ \"discard\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The toolchain, source and dev dependencies stay in the discarded stage: a smaller image, fewer CVEs, fewer tools for an attacker.\", what does \"discard\" (verb) mean?",
+      "options": [
+        "nén lại",
+        "giữ lại",
+        "loại bỏ, vứt đi",
+        "mã hóa"
+      ],
+      "optionsEn": [
+        "to compress",
+        "to keep",
+        "to throw away",
+        "to encrypt"
+      ],
+      "answer": 2,
+      "explanation": "discard /dɪˈskɑːrd/ (động từ): loại bỏ, vứt đi. \"Discarded stage\" = giai đoạn bị bỏ đi, không có trong ảnh cuối. Cụm: \"discard changes\" (hủy thay đổi).",
+      "explanationEn": "discard /dɪˈskɑːrd/ (verb): to throw away. A discarded stage is thrown away and not part of the final image. Collocation: \"discard changes\"."
+    },
+    {
+      "id": "v9",
+      "lessonId": "l1",
+      "word": "attacker",
+      "pos": "n",
+      "ipa": "/əˈtæk.ər/",
+      "question": "Trong câu \"The toolchain, source and dev dependencies stay in the discarded stage: a smaller image, fewer CVEs, fewer tools for an attacker.\", từ \"attacker\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The toolchain, source and dev dependencies stay in the discarded stage: a smaller image, fewer CVEs, fewer tools for an attacker.\", what does \"attacker\" (noun) mean?",
+      "options": [
+        "người kiểm thử",
+        "kẻ tấn công",
+        "người quản trị",
+        "người dùng cuối"
+      ],
+      "optionsEn": [
+        "a person who tests",
+        "a person who attacks",
+        "a person who administers",
+        "a person who uses the app"
+      ],
+      "answer": 1,
+      "explanation": "attacker /əˈtæk.ər/ (danh từ): kẻ tấn công. Ít công cụ trong ảnh thì kẻ tấn công có ít thứ để lợi dụng. Cụm: \"attack surface\" (bề mặt tấn công).",
+      "explanationEn": "attacker /əˈtæk.ər/ (noun): a person who attacks. Fewer tools in the image leave an attacker less to abuse. Related: \"attack surface\"."
+    },
+    {
+      "id": "v10",
+      "lessonId": "l1",
+      "word": "independent",
+      "pos": "adj",
+      "ipa": "/ˌɪn.dɪˈpen.dənt/",
+      "question": "Trong câu \"BuildKit, the default builder since Docker Engine 23.0, skips stages the target does not need and builds independent stages in parallel.\", từ \"independent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"BuildKit, the default builder since Docker Engine 23.0, skips stages the target does not need and builds independent stages in parallel.\", what does \"independent\" (adjective) mean?",
+      "options": [
+        "bắt buộc, cần thiết",
+        "tuần tự, nối tiếp",
+        "riêng tư, bí mật",
+        "độc lập, không phụ thuộc"
+      ],
+      "optionsEn": [
+        "required, necessary",
+        "coming one after another",
+        "private, secret",
+        "not relying on another"
+      ],
+      "answer": 3,
+      "explanation": "independent /ˌɪn.dɪˈpen.dənt/ (tính từ): độc lập, không phụ thuộc. \"Independent stages\" = các giai đoạn không cần kết quả của nhau nên chạy song song được. Cụm: \"independent of\".",
+      "explanationEn": "independent /ˌɪn.dɪˈpen.dənt/ (adjective): not relying on another. Independent stages do not need each other's output, so they can run at once. Pattern: \"independent of\"."
+    },
+    {
+      "id": "v11",
+      "lessonId": "l1",
+      "word": "in parallel",
+      "pos": "phrase",
+      "ipa": "/ɪn ˈpær.ə.lel/",
+      "question": "Trong câu \"BuildKit, the default builder since Docker Engine 23.0, skips stages the target does not need and builds independent stages in parallel.\", từ \"in parallel\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"BuildKit, the default builder since Docker Engine 23.0, skips stages the target does not need and builds independent stages in parallel.\", what does \"in parallel\" (phrase) mean?",
+      "options": [
+        "lần lượt từng cái",
+        "theo hàng thẳng",
+        "song song, cùng lúc",
+        "ở chế độ nền"
+      ],
+      "optionsEn": [
+        "one at a time",
+        "in a straight line",
+        "at the same time",
+        "in the background"
+      ],
+      "answer": 2,
+      "explanation": "in parallel /ɪn ˈpær.ə.lel/ (cụm từ): song song, cùng lúc. \"In parallel\" = đồng thời; trái nghĩa: \"in sequence / sequentially\" (tuần tự).",
+      "explanationEn": "in parallel /ɪn ˈpær.ə.lel/ (phrase): at the same time. \"In parallel\" means simultaneously; opposite: \"in sequence\"."
+    },
+    {
+      "id": "v12",
+      "lessonId": "l1",
+      "word": "extreme",
+      "pos": "adj",
+      "ipa": "/ɪkˈstriːm/",
+      "question": "Trong câu \"A static Go binary shows the extreme end:\", từ \"extreme\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A static Go binary shows the extreme end:\", what does \"extreme\" (adjective) mean?",
+      "options": [
+        "cực đoan, tận cùng",
+        "phổ biến nhất",
+        "an toàn nhất",
+        "đơn giản nhất"
+      ],
+      "optionsEn": [
+        "furthest from the centre",
+        "most common",
+        "safest",
+        "simplest"
+      ],
+      "answer": 0,
+      "explanation": "extreme /ɪkˈstriːm/ (tính từ): cực đoan, tận cùng. \"The extreme end\" = đầu mút xa nhất của một dải lựa chọn (ở đây: ảnh nhỏ nhất có thể).",
+      "explanationEn": "extreme /ɪkˈstriːm/ (adjective): furthest from the centre. \"The extreme end\" is the far end of a range of options (here, the smallest possible image)."
+    },
+    {
+      "id": "v13",
+      "lessonId": "l1",
+      "word": "roughly",
+      "pos": "adv",
+      "ipa": "/ˈrʌf.li/",
+      "question": "Trong câu \"The result is roughly the binary, CA certificates and a nonroot user (UID 65532).\", từ \"roughly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The result is roughly the binary, CA certificates and a nonroot user (UID 65532).\", what does \"roughly\" (adverb) mean?",
+      "options": [
+        "xấp xỉ, đại khái",
+        "một cách thô bạo",
+        "hoàn toàn chính xác",
+        "hiếm khi"
+      ],
+      "optionsEn": [
+        "approximately",
+        "in a violent way",
+        "exactly",
+        "rarely"
+      ],
+      "answer": 0,
+      "explanation": "roughly /ˈrʌf.li/ (trạng từ): xấp xỉ, đại khái. \"Roughly\" = khoảng, gần như; nghĩa khác là \"thô bạo, mạnh tay\" (treat roughly).",
+      "explanationEn": "roughly /ˈrʌf.li/ (adverb): approximately. \"Roughly\" means approximately; another sense is \"in a violent way\", as in \"treat roughly\"."
+    },
+    {
+      "id": "v14",
+      "lessonId": "l1",
+      "word": "rule of thumb",
+      "pos": "phrase",
+      "ipa": "/ˌruːl əv ˈθʌm/",
+      "question": "Trong câu \"Rule of thumb: slim for interpreted runtimes, distroless or scratch for static binaries, Alpine only once you have tested musl.\", từ \"rule of thumb\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rule of thumb: slim for interpreted runtimes, distroless or scratch for static binaries, Alpine only once you have tested musl.\", what does \"rule of thumb\" (phrase) mean?",
+      "options": [
+        "luật bắt buộc",
+        "phép đo chính xác",
+        "quy tắc kinh nghiệm",
+        "mẹo đoán mò"
+      ],
+      "optionsEn": [
+        "a strict law",
+        "an exact measurement",
+        "a practical guideline",
+        "a random guess"
+      ],
+      "answer": 2,
+      "explanation": "rule of thumb /ˌruːl əv ˈθʌm/ (cụm từ): quy tắc kinh nghiệm. \"Rule of thumb\" = nguyên tắc dựa trên kinh nghiệm, đúng trong đa số trường hợp, không phải luật cứng.",
+      "explanationEn": "rule of thumb /ˌruːl əv ˈθʌm/ (phrase): a practical guideline. A rule of thumb is a guideline from experience that works most of the time, not a strict rule."
+    },
+    {
+      "id": "v15",
+      "lessonId": "l1",
+      "word": "interpreted",
+      "pos": "adj",
+      "ipa": "/ɪnˈtɜːr.prə.tɪd/",
+      "question": "Trong câu \"Rule of thumb: slim for interpreted runtimes, distroless or scratch for static binaries, Alpine only once you have tested musl.\", từ \"interpreted\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rule of thumb: slim for interpreted runtimes, distroless or scratch for static binaries, Alpine only once you have tested musl.\", what does \"interpreted\" (adjective) mean?",
+      "options": [
+        "được phiên dịch (lời nói)",
+        "được thông dịch (khi chạy)",
+        "được biên dịch sẵn",
+        "được nén sẵn"
+      ],
+      "optionsEn": [
+        "translated from speech",
+        "executed by an interpreter",
+        "compiled in advance",
+        "compressed in advance"
+      ],
+      "answer": 1,
+      "explanation": "interpreted /ɪnˈtɜːr.prə.tɪd/ (tính từ): được thông dịch (khi chạy). \"Interpreted runtimes\" (Node, Python) chạy mã qua trình thông dịch; từ gốc \"interpret\" còn nghĩa \"phiên dịch\".",
+      "explanationEn": "interpreted /ɪnˈtɜːr.prə.tɪd/ (adjective): executed by an interpreter. Interpreted runtimes such as Node or Python run code through an interpreter; \"interpret\" also means \"to translate speech\"."
+    },
+    {
+      "id": "v16",
+      "lessonId": "l2",
+      "word": "bust",
+      "pos": "v",
+      "ipa": "/bʌst/",
+      "question": "Trong câu \"Without a .dockerignore that includes .git, node_modules and .env: slow builds, a cache busted by any file change under COPY . ., and secrets copied into the image.\", từ \"bust\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Without a .dockerignore that includes .git, node_modules and .env: slow builds, a cache busted by any file change under COPY . ., and secrets copied into the image.\", what does \"bust\" (verb) mean?",
+      "options": [
+        "làm vỡ, đập nát",
+        "làm đầy bộ nhớ",
+        "làm chậm bản build",
+        "làm mất hiệu lực (cache)"
+      ],
+      "optionsEn": [
+        "to break into pieces",
+        "to fill up memory",
+        "to slow a build down",
+        "to invalidate a cache"
+      ],
+      "answer": 3,
+      "explanation": "bust /bʌst/ (động từ): làm mất hiệu lực (cache). \"Cache busting\" = làm cache không dùng lại được; nghĩa đời thường của \"bust\" là \"làm vỡ\".",
+      "explanationEn": "bust /bʌst/ (verb): to invalidate a cache. \"Cache busting\" makes a cache unusable; the everyday sense of \"bust\" is \"to break\"."
+    },
+    {
+      "id": "v17",
+      "lessonId": "l2",
+      "word": "reproducibility",
+      "pos": "n",
+      "ipa": "/ˌriː.prəˌduː.səˈbɪl.ə.ti/",
+      "question": "Trong câu \"Reproducibility rules reviewers check:\", từ \"reproducibility\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reproducibility rules reviewers check:\", what does \"reproducibility\" (noun) mean?",
+      "options": [
+        "khả năng mở rộng",
+        "khả năng đọc hiểu",
+        "khả năng khôi phục",
+        "khả năng tái tạo y hệt"
+      ],
+      "optionsEn": [
+        "ability to grow in size",
+        "ability to be understood",
+        "ability to recover data",
+        "ability to recreate identically"
+      ],
+      "answer": 3,
+      "explanation": "reproducibility /ˌriː.prəˌduː.səˈbɪl.ə.ti/ (danh từ): khả năng tái tạo y hệt. \"Reproducible build\" = build lại bất cứ lúc nào cũng ra cùng kết quả; gốc từ \"reproduce\" (tái tạo).",
+      "explanationEn": "reproducibility /ˌriː.prəˌduː.səˈbɪl.ə.ti/ (noun): ability to recreate identically. A reproducible build gives the same result every time it is rebuilt; from \"reproduce\"."
+    },
+    {
+      "id": "v18",
+      "lessonId": "l2",
+      "word": "mutable",
+      "pos": "adj",
+      "ipa": "/ˈmjuː.tə.bəl/",
+      "question": "Trong câu \"Never deploy :latest — it is a mutable pointer.\", từ \"mutable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Never deploy :latest — it is a mutable pointer.\", what does \"mutable\" (adjective) mean?",
+      "options": [
+        "không thể xóa",
+        "có thể thay đổi",
+        "được mã hóa",
+        "bị tắt tiếng"
+      ],
+      "optionsEn": [
+        "unable to be deleted",
+        "able to be changed",
+        "encrypted",
+        "silenced"
+      ],
+      "answer": 1,
+      "explanation": "mutable /ˈmjuː.tə.bəl/ (tính từ): có thể thay đổi. Tag \":latest\" có thể trỏ sang ảnh khác bất cứ lúc nào nên nó \"mutable\". Trái nghĩa: immutable.",
+      "explanationEn": "mutable /ˈmjuː.tə.bəl/ (adjective): able to be changed. The \":latest\" tag can be moved to another image at any time, so it is mutable. Opposite: immutable."
+    },
+    {
+      "id": "v19",
+      "lessonId": "l2",
+      "word": "pin",
+      "pos": "v",
+      "ipa": "/pɪn/",
+      "question": "Trong câu \"Pin base images by digest (FROM node:22-bookworm-slim@sha256:…) and let Renovate/Dependabot bump it.\", từ \"pin\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Pin base images by digest (FROM node:22-bookworm-slim@sha256:…) and let Renovate/Dependabot bump it.\", what does \"pin\" (verb) mean?",
+      "options": [
+        "cố định (phiên bản)",
+        "ghim (bằng kim)",
+        "đánh dấu yêu thích",
+        "xóa khỏi danh sách"
+      ],
+      "optionsEn": [
+        "to fix to an exact version",
+        "to attach with a needle",
+        "to mark as a favourite",
+        "to remove from a list"
+      ],
+      "answer": 0,
+      "explanation": "pin /pɪn/ (động từ): cố định (phiên bản). \"Pin a version\" = khóa chính xác một phiên bản để build không tự thay đổi; nghĩa gốc là \"ghim\".",
+      "explanationEn": "pin /pɪn/ (verb): to fix to an exact version. \"Pin a version\" means locking to one exact version so builds do not drift; the literal sense is \"to attach with a pin\"."
+    },
+    {
+      "id": "v20",
+      "lessonId": "l2",
+      "word": "digest",
+      "pos": "n",
+      "ipa": "/ˈdaɪ.dʒest/",
+      "question": "Trong câu \"Pin base images by digest (FROM node:22-bookworm-slim@sha256:…) and let Renovate/Dependabot bump it.\", từ \"digest\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Pin base images by digest (FROM node:22-bookworm-slim@sha256:…) and let Renovate/Dependabot bump it.\", what does \"digest\" (noun) mean?",
+      "options": [
+        "bản tóm tắt tin tức",
+        "nhãn tên dễ nhớ",
+        "mã băm (định danh nội dung)",
+        "tệp nhật ký"
+      ],
+      "optionsEn": [
+        "a summary of news",
+        "a readable name label",
+        "a content hash identifier",
+        "a log file"
+      ],
+      "answer": 2,
+      "explanation": "digest /ˈdaɪ.dʒest/ (danh từ): mã băm (định danh nội dung). Digest (vd sha256:...) là mã băm của nội dung ảnh, không thể dời như tag; nghĩa khác: \"bản tin tóm tắt\".",
+      "explanationEn": "digest /ˈdaɪ.dʒest/ (noun): a content hash identifier. A digest such as sha256:... is a hash of the image content and cannot be moved like a tag; another sense is \"a news summary\"."
+    },
+    {
+      "id": "v21",
+      "lessonId": "l2",
+      "word": "bump",
+      "pos": "v",
+      "ipa": "/bʌmp/",
+      "question": "Trong câu \"Pin base images by digest (FROM node:22-bookworm-slim@sha256:…) and let Renovate/Dependabot bump it.\", từ \"bump\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Pin base images by digest (FROM node:22-bookworm-slim@sha256:…) and let Renovate/Dependabot bump it.\", what does \"bump\" (verb) mean?",
+      "options": [
+        "va vào, đụng phải",
+        "nâng (lên phiên bản mới)",
+        "hạ xuống bản cũ",
+        "đẩy lên kho mã"
+      ],
+      "optionsEn": [
+        "to knock against",
+        "to raise to a newer version",
+        "to roll back a version",
+        "to push to a repository"
+      ],
+      "answer": 1,
+      "explanation": "bump /bʌmp/ (động từ): nâng (lên phiên bản mới). \"Bump a version\" = tăng số phiên bản; nghĩa đời thường là \"va, đụng\".",
+      "explanationEn": "bump /bʌmp/ (verb): to raise to a newer version. \"Bump a version\" means increasing the version number; the everyday sense is \"to knock against something\"."
+    },
+    {
+      "id": "v22",
+      "lessonId": "l2",
+      "word": "strict",
+      "pos": "adj",
+      "ipa": "/strɪkt/",
+      "question": "Trong câu \"Use lockfiles with strict installs (npm ci, go mod download).\", từ \"strict\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Use lockfiles with strict installs (npm ci, go mod download).\", what does \"strict\" (adjective) mean?",
+      "options": [
+        "nhanh chóng",
+        "tùy chọn",
+        "song song",
+        "nghiêm ngặt, chặt chẽ"
+      ],
+      "optionsEn": [
+        "done quickly",
+        "optional",
+        "done at the same time",
+        "following rules exactly"
+      ],
+      "answer": 3,
+      "explanation": "strict /strɪkt/ (tính từ): nghiêm ngặt, chặt chẽ. \"Strict install\" chỉ cài đúng phiên bản trong lockfile. Cụm: \"strict mode\", \"strictly required\".",
+      "explanationEn": "strict /strɪkt/ (adjective): following rules exactly. A strict install uses exactly the versions in the lockfile. Collocations: \"strict mode\", \"strictly required\"."
+    },
+    {
+      "id": "v23",
+      "lessonId": "l2",
+      "word": "by default",
+      "pos": "phrase",
+      "ipa": "/baɪ dɪˈfɔːlt/",
+      "question": "Trong câu \"By default the container process runs as root (UID 0) — the same UID 0 as the host unless user namespaces are enabled.\", từ \"by default\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"By default the container process runs as root (UID 0) — the same UID 0 as the host unless user namespaces are enabled.\", what does \"by default\" (phrase) mean?",
+      "options": [
+        "do lỗi gây ra",
+        "theo yêu cầu",
+        "theo mặc định",
+        "trong mọi trường hợp"
+      ],
+      "optionsEn": [
+        "because of an error",
+        "when requested",
+        "unless set otherwise",
+        "in every case"
+      ],
+      "answer": 2,
+      "explanation": "by default /baɪ dɪˈfɔːlt/ (cụm từ): theo mặc định. \"By default\" = khi không cấu hình gì khác. Cụm: \"default value\", \"default setting\".",
+      "explanationEn": "by default /baɪ dɪˈfɔːlt/ (phrase): unless set otherwise. \"By default\" describes what happens when nothing else is configured. Related: \"default value\"."
+    },
+    {
+      "id": "v24",
+      "lessonId": "l2",
+      "word": "escape",
+      "pos": "n",
+      "ipa": "/ɪˈskeɪp/",
+      "question": "Trong câu \"A kernel escape, a writable host mount or a mounted Docker socket then means host root.\", từ \"escape\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A kernel escape, a writable host mount or a mounted Docker socket then means host root.\", what does \"escape\" (noun) mean?",
+      "options": [
+        "sự thoát ra (khỏi cô lập)",
+        "sự bỏ trốn (tù nhân)",
+        "phím thoát (Esc)",
+        "ký tự thoát chuỗi"
+      ],
+      "optionsEn": [
+        "a break out of isolation",
+        "a flight from prison",
+        "the Esc keyboard key",
+        "a string escape character"
+      ],
+      "answer": 0,
+      "explanation": "escape /ɪˈskeɪp/ (danh từ): sự thoát ra (khỏi cô lập). \"Container escape\" = tiến trình phá vỡ cô lập để chạm tới máy chủ; \"escape\" còn nghĩa \"bỏ trốn\".",
+      "explanationEn": "escape /ɪˈskeɪp/ (noun): a break out of isolation. A container escape is a process breaking out of isolation to reach the host; \"escape\" also means \"a flight from prison\"."
+    },
+    {
+      "id": "v25",
+      "lessonId": "l2",
+      "word": "harden",
+      "pos": "v",
+      "ipa": "/ˈhɑːr.dən/",
+      "question": "Trong câu \"Then harden the runtime:\", từ \"harden\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Then harden the runtime:\", what does \"harden\" (verb) mean?",
+      "options": [
+        "gia cố bảo mật",
+        "làm cứng lại (vật liệu)",
+        "làm chạy nhanh hơn",
+        "làm khó sử dụng"
+      ],
+      "optionsEn": [
+        "to make more secure",
+        "to make physically firm",
+        "to make faster",
+        "to make harder to use"
+      ],
+      "answer": 0,
+      "explanation": "harden /ˈhɑːr.dən/ (động từ): gia cố bảo mật. \"Harden a system\" = giảm bề mặt tấn công bằng cấu hình chặt; nghĩa gốc là \"làm cứng\".",
+      "explanationEn": "harden /ˈhɑːr.dən/ (verb): to make more secure. \"Harden a system\" means tightening its configuration to reduce risk; the literal sense is \"to make firm\"."
+    },
+    {
+      "id": "v26",
+      "lessonId": "l2",
+      "word": "effectively",
+      "pos": "adv",
+      "ipa": "/ɪˈfek.tɪv.li/",
+      "question": "Trong câu \"both are effectively root on the host.\", từ \"effectively\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"both are effectively root on the host.\", what does \"effectively\" (adverb) mean?",
+      "options": [
+        "một cách hiệu quả",
+        "một cách chính thức",
+        "về thực chất, coi như",
+        "một cách tạm thời"
+      ],
+      "optionsEn": [
+        "in a successful way",
+        "in an official way",
+        "in practice, essentially",
+        "in a temporary way"
+      ],
+      "answer": 2,
+      "explanation": "effectively /ɪˈfek.tɪv.li/ (trạng từ): về thực chất, coi như. Ở đây \"effectively\" = \"trên thực tế là, coi như là\"; nghĩa khác phổ biến là \"một cách hiệu quả\".",
+      "explanationEn": "effectively /ɪˈfek.tɪv.li/ (adverb): in practice, essentially. Here \"effectively\" means \"in practice\"; the other common sense is \"in a successful way\"."
+    },
+    {
+      "id": "v27",
+      "lessonId": "l2",
+      "word": "unprivileged",
+      "pos": "adj",
+      "ipa": "/ʌnˈprɪv.əl.ɪdʒd/",
+      "question": "Trong câu \"Rootless Docker or userns-remap go further by mapping container root to an unprivileged host UID.\", từ \"unprivileged\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rootless Docker or userns-remap go further by mapping container root to an unprivileged host UID.\", what does \"unprivileged\" (adjective) mean?",
+      "options": [
+        "không được xác thực",
+        "không có quyền đặc biệt",
+        "không bị giới hạn",
+        "không được chia sẻ"
+      ],
+      "optionsEn": [
+        "not authenticated",
+        "lacking special permissions",
+        "not restricted",
+        "not shared"
+      ],
+      "answer": 1,
+      "explanation": "unprivileged /ʌnˈprɪv.əl.ɪdʒd/ (tính từ): không có quyền đặc biệt. \"Unprivileged user\" = người dùng thường, không có quyền quản trị. Trái nghĩa: privileged.",
+      "explanationEn": "unprivileged /ʌnˈprɪv.əl.ɪdʒd/ (adjective): lacking special permissions. An unprivileged user is an ordinary account without admin rights. Opposite: privileged."
+    },
+    {
+      "id": "v28",
+      "lessonId": "l2",
+      "word": "additive",
+      "pos": "adj",
+      "ipa": "/ˈæd.ə.tɪv/",
+      "question": "Trong câu \"Layers are additive and metadata is readable by anyone who can pull the image:\", từ \"additive\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Layers are additive and metadata is readable by anyone who can pull the image:\", what does \"additive\" (adjective) mean?",
+      "options": [
+        "có thể thay thế",
+        "phụ gia (thực phẩm)",
+        "tùy chọn, không bắt buộc",
+        "cộng dồn, chồng thêm"
+      ],
+      "optionsEn": [
+        "able to be replaced",
+        "added to food",
+        "optional, not required",
+        "adding on top of earlier parts"
+      ],
+      "answer": 3,
+      "explanation": "additive /ˈæd.ə.tɪv/ (tính từ): cộng dồn, chồng thêm. Layer \"additive\": mỗi lớp chỉ thêm lên trên, xóa tệp ở lớp sau không xóa dữ liệu ở lớp trước. Danh từ \"additive\" còn là \"chất phụ gia\".",
+      "explanationEn": "additive /ˈæd.ə.tɪv/ (adjective): adding on top of earlier parts. Additive layers only add on top, so deleting a file later does not remove earlier bytes. As a noun, \"additive\" also means \"a food additive\"."
+    },
+    {
+      "id": "v29",
+      "lessonId": "l2",
+      "word": "forward",
+      "pos": "v",
+      "ipa": "/ˈfɔːr.wərd/",
+      "question": "Trong câu \"For private Git dependencies, RUN --mount=type=ssh with docker build --ssh default forwards the SSH agent instead of copying a key.\", từ \"forward\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"For private Git dependencies, RUN --mount=type=ssh with docker build --ssh default forwards the SSH agent instead of copying a key.\", what does \"forward\" (verb) mean?",
+      "options": [
+        "tiến lên phía trước",
+        "lưu trữ lại",
+        "chặn lại",
+        "chuyển tiếp"
+      ],
+      "optionsEn": [
+        "to move ahead physically",
+        "to store for later",
+        "to block",
+        "to pass on to another place"
+      ],
+      "answer": 3,
+      "explanation": "forward /ˈfɔːr.wərd/ (động từ): chuyển tiếp. \"Forward the SSH agent\" = chuyển tiếp kết nối tới agent thay vì sao chép khóa. Cụm: \"forward a port\", \"forward an email\".",
+      "explanationEn": "forward /ˈfɔːr.wərd/ (verb): to pass on to another place. \"Forward the SSH agent\" passes access through instead of copying a key. Collocations: \"forward a port\", \"forward an email\"."
+    },
+    {
+      "id": "v30",
+      "lessonId": "l2",
+      "word": "bake",
+      "pos": "v",
+      "ipa": "/beɪk/",
+      "question": "Trong câu \"Runtime — inject, never bake:\", từ \"bake\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Runtime — inject, never bake:\", what does \"bake\" (verb) mean?",
+      "options": [
+        "nướng (bánh)",
+        "đóng cứng (vào ảnh)",
+        "mã hóa bí mật",
+        "xoay vòng khóa"
+      ],
+      "optionsEn": [
+        "to cook in an oven",
+        "to build permanently into",
+        "to encrypt a secret",
+        "to rotate a key"
+      ],
+      "answer": 1,
+      "explanation": "bake /beɪk/ (động từ): đóng cứng (vào ảnh). \"Bake into the image\" = ghi cố định vào ảnh lúc build; nghĩa gốc là \"nướng bánh\".",
+      "explanationEn": "bake /beɪk/ (verb): to build permanently into. \"Bake into the image\" means fixing something into it at build time; the literal sense is \"to cook in an oven\"."
+    },
+    {
+      "id": "v31",
+      "lessonId": "l2",
+      "word": "inject",
+      "pos": "v",
+      "ipa": "/ɪnˈdʒekt/",
+      "question": "Trong câu \"On AWS, an ECS task definition references Secrets Manager or SSM ARNs and injects them at start.\", từ \"inject\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"On AWS, an ECS task definition references Secrets Manager or SSM ARNs and injects them at start.\", what does \"inject\" (verb) mean?",
+      "options": [
+        "đưa vào (lúc chạy)",
+        "tiêm (thuốc)",
+        "xóa khỏi bộ nhớ",
+        "ghi vào tệp log"
+      ],
+      "optionsEn": [
+        "to supply at runtime",
+        "to give a drug by needle",
+        "to remove from memory",
+        "to write to a log"
+      ],
+      "answer": 0,
+      "explanation": "inject /ɪnˈdʒekt/ (động từ): đưa vào (lúc chạy). \"Inject secrets\" = cấp bí mật cho container khi khởi động; nghĩa y khoa là \"tiêm\". Cụm: \"dependency injection\".",
+      "explanationEn": "inject /ɪnˈdʒekt/ (verb): to supply at runtime. \"Inject secrets\" means supplying them when the container starts; the medical sense is \"to give by needle\". Related: \"dependency injection\"."
+    },
+    {
+      "id": "v32",
+      "lessonId": "l3",
+      "word": "deadlock",
+      "pos": "v",
+      "ipa": "/ˈded.lɒk/",
+      "question": "Trong câu \"A running process is not a working service — it may be deadlocked or still warming up.\", từ \"deadlock\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A running process is not a working service — it may be deadlocked or still warming up.\", what does \"deadlock\" (verb) mean?",
+      "options": [
+        "bị tắt đột ngột",
+        "bị khóa tài khoản",
+        "bị kẹt chờ lẫn nhau",
+        "bị quá tải bộ nhớ"
+      ],
+      "optionsEn": [
+        "to be stopped suddenly",
+        "to be locked out of an account",
+        "to be stuck waiting on each other",
+        "to be out of memory"
+      ],
+      "answer": 2,
+      "explanation": "deadlock /ˈded.lɒk/ (động từ): bị kẹt chờ lẫn nhau. \"Deadlock\" = các luồng chờ khóa của nhau mãi mãi, tiến trình còn sống nhưng không làm gì được.",
+      "explanationEn": "deadlock /ˈded.lɒk/ (verb): to be stuck waiting on each other. In a deadlock, threads wait on each other's locks forever, so the process is alive but does no work."
+    },
+    {
+      "id": "v33",
+      "lessonId": "l3",
+      "word": "warm up",
+      "pos": "phrase",
+      "ipa": "/wɔːrm ʌp/",
+      "question": "Trong câu \"A running process is not a working service — it may be deadlocked or still warming up.\", từ \"warm up\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A running process is not a working service — it may be deadlocked or still warming up.\", what does \"warm up\" (phrase) mean?",
+      "options": [
+        "khởi động (thể dục)",
+        "khởi động, làm nóng máy",
+        "bị quá nhiệt",
+        "tắt dần"
+      ],
+      "optionsEn": [
+        "to exercise before sport",
+        "to get ready after starting",
+        "to overheat",
+        "to shut down slowly"
+      ],
+      "answer": 1,
+      "explanation": "warm up /wɔːrm ʌp/ (cụm từ): khởi động, làm nóng máy. \"Warm up\" ở đây = giai đoạn nạp cache, kết nối trước khi phục vụ được; nghĩa khác là \"khởi động trước khi tập\".",
+      "explanationEn": "warm up /wɔːrm ʌp/ (phrase): to get ready after starting. \"Warm up\" here is the phase of loading caches and connections before serving; it also means \"to exercise before sport\"."
+    },
+    {
+      "id": "v34",
+      "lessonId": "l3",
+      "word": "plain",
+      "pos": "adj",
+      "ipa": "/pleɪn/",
+      "question": "Trong câu \"Plain Docker only reports health — it does not restart an unhealthy container.\", từ \"plain\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Plain Docker only reports health — it does not restart an unhealthy container.\", what does \"plain\" (adjective) mean?",
+      "options": [
+        "rõ ràng, dễ hiểu",
+        "đồng bằng",
+        "xấu xí, giản dị",
+        "đơn thuần, không thêm gì"
+      ],
+      "optionsEn": [
+        "easy to understand",
+        "a flat area of land",
+        "not attractive",
+        "basic, with nothing added"
+      ],
+      "answer": 3,
+      "explanation": "plain /pleɪn/ (tính từ): đơn thuần, không thêm gì. \"Plain Docker\" = Docker trơn, không kèm Compose/Swarm/Kubernetes. Cụm: \"plain text\" (văn bản thuần).",
+      "explanationEn": "plain /pleɪn/ (adjective): basic, with nothing added. \"Plain Docker\" means Docker alone, without Compose, Swarm or Kubernetes. Related: \"plain text\"."
+    },
+    {
+      "id": "v35",
+      "lessonId": "l3",
+      "word": "in favour of",
+      "pos": "phrase",
+      "ipa": "/ɪn ˈfeɪ.vər əv/",
+      "question": "Trong câu \"and Kubernetes ignores HEALTHCHECK in favour of its own probes (topic 7).\", từ \"in favour of\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"and Kubernetes ignores HEALTHCHECK in favour of its own probes (topic 7).\", what does \"in favour of\" (phrase) mean?",
+      "options": [
+        "để ủng hộ ai đó",
+        "nhằm tiết kiệm chi phí",
+        "để dùng thứ khác thay thế",
+        "cùng lúc với"
+      ],
+      "optionsEn": [
+        "to show support for someone",
+        "to save money",
+        "choosing something else instead",
+        "at the same time as"
+      ],
+      "answer": 2,
+      "explanation": "in favour of /ɪn ˈfeɪ.vər əv/ (cụm từ): để dùng thứ khác thay thế. \"Ignore X in favour of Y\" = bỏ X để dùng Y; nghĩa khác: \"be in favour of\" = ủng hộ.",
+      "explanationEn": "in favour of /ɪn ˈfeɪ.vər əv/ (phrase): choosing something else instead. \"Ignore X in favour of Y\" means using Y instead of X; \"be in favour of\" also means \"to support\"."
+    },
+    {
+      "id": "v36",
+      "lessonId": "l3",
+      "word": "probe",
+      "pos": "n",
+      "ipa": "/proʊb/",
+      "question": "Trong câu \"and Kubernetes ignores HEALTHCHECK in favour of its own probes (topic 7).\", từ \"probe\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"and Kubernetes ignores HEALTHCHECK in favour of its own probes (topic 7).\", what does \"probe\" (noun) mean?",
+      "options": [
+        "phép kiểm tra định kỳ",
+        "cuộc điều tra",
+        "tàu thăm dò vũ trụ",
+        "cảnh báo lỗi"
+      ],
+      "optionsEn": [
+        "a repeated automated check",
+        "an official investigation",
+        "an unmanned spacecraft",
+        "an error alert"
+      ],
+      "answer": 0,
+      "explanation": "probe /proʊb/ (danh từ): phép kiểm tra định kỳ. Kubernetes dùng liveness/readiness probe để kiểm tra container; \"probe\" còn nghĩa \"tàu thăm dò\" hay \"cuộc điều tra\".",
+      "explanationEn": "probe /proʊb/ (noun): a repeated automated check. Kubernetes uses liveness and readiness probes to check containers; \"probe\" also means \"a space probe\" or \"an investigation\"."
+    },
+    {
+      "id": "v37",
+      "lessonId": "l3",
+      "word": "blip",
+      "pos": "n",
+      "ipa": "/blɪp/",
+      "question": "Trong câu \"Keep the endpoint cheap: checking every dependency turns one DB blip into a fleet-wide \"unhealthy\".\", từ \"blip\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Keep the endpoint cheap: checking every dependency turns one DB blip into a fleet-wide \"unhealthy\".\", what does \"blip\" (noun) mean?",
+      "options": [
+        "sự trục trặc thoáng qua",
+        "sự cố kéo dài",
+        "đốm sáng trên radar",
+        "bản vá nhỏ"
+      ],
+      "optionsEn": [
+        "a brief temporary problem",
+        "a long lasting outage",
+        "a dot on a radar",
+        "a small patch"
+      ],
+      "answer": 0,
+      "explanation": "blip /blɪp/ (danh từ): sự trục trặc thoáng qua. \"A DB blip\" = cơ sở dữ liệu trục trặc vài giây; nghĩa gốc là \"đốm sáng / tiếng bíp trên radar\".",
+      "explanationEn": "blip /blɪp/ (noun): a brief temporary problem. \"A DB blip\" is a database hiccup lasting seconds; the original sense is \"a dot or beep on a radar\"."
+    },
+    {
+      "id": "v38",
+      "lessonId": "l3",
+      "word": "graceful",
+      "pos": "adj",
+      "ipa": "/ˈɡreɪs.fəl/",
+      "question": "Trong câu \"Graceful shutdown: docker stop sends SIGTERM, waits 10 seconds (-t to change), then SIGKILL.\", từ \"graceful\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Graceful shutdown: docker stop sends SIGTERM, waits 10 seconds (-t to change), then SIGKILL.\", what does \"graceful\" (adjective) mean?",
+      "options": [
+        "duyên dáng, uyển chuyển",
+        "đột ngột, cưỡng bức",
+        "êm, có trật tự",
+        "chậm chạp"
+      ],
+      "optionsEn": [
+        "moving in an elegant way",
+        "sudden and forced",
+        "orderly, without losing work",
+        "very slow"
+      ],
+      "answer": 2,
+      "explanation": "graceful /ˈɡreɪs.fəl/ (tính từ): êm, có trật tự. \"Graceful shutdown\" = dừng có trật tự: xử lý xong request rồi mới thoát; nghĩa đời thường là \"duyên dáng\".",
+      "explanationEn": "graceful /ˈɡreɪs.fəl/ (adjective): orderly, without losing work. A graceful shutdown finishes in-flight work before exiting; the everyday sense is \"elegant\"."
+    },
+    {
+      "id": "v39",
+      "lessonId": "l3",
+      "word": "trap",
+      "pos": "n",
+      "ipa": "/træp/",
+      "question": "Trong câu \"Two traps make apps miss SIGTERM:\", từ \"trap\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Two traps make apps miss SIGTERM:\", what does \"trap\" (noun) mean?",
+      "options": [
+        "bẫy thú (săn bắn)",
+        "cái bẫy, lỗi dễ mắc",
+        "ngắt phần cứng",
+        "lỗi cú pháp"
+      ],
+      "optionsEn": [
+        "a device to catch animals",
+        "a hidden common mistake",
+        "a hardware interrupt",
+        "a syntax error"
+      ],
+      "answer": 1,
+      "explanation": "trap /træp/ (danh từ): cái bẫy, lỗi dễ mắc. Ở đây \"trap\" = lỗi dễ mắc phải (gần nghĩa \"pitfall\"); nghĩa gốc là \"bẫy thú\".",
+      "explanationEn": "trap /træp/ (noun): a hidden common mistake. Here \"trap\" means an easy mistake, close to \"pitfall\"; the literal sense is \"a device to catch animals\"."
+    },
+    {
+      "id": "v40",
+      "lessonId": "l3",
+      "word": "reap",
+      "pos": "v",
+      "ipa": "/riːp/",
+      "question": "Trong câu \"Handle it in code or run with docker run --init (tini forwards signals and reaps zombies).\", từ \"reap\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Handle it in code or run with docker run --init (tini forwards signals and reaps zombies).\", what does \"reap\" (verb) mean?",
+      "options": [
+        "gặt (lúa)",
+        "khởi động lại",
+        "theo dõi",
+        "dọn dẹp (tiến trình đã chết)"
+      ],
+      "optionsEn": [
+        "to cut and gather crops",
+        "to restart",
+        "to monitor",
+        "to clean up dead processes"
+      ],
+      "answer": 3,
+      "explanation": "reap /riːp/ (động từ): dọn dẹp (tiến trình đã chết). \"Reap zombies\" = thu dọn tiến trình con đã kết thúc; nghĩa gốc là \"gặt hái\". Thành ngữ: \"reap the benefits\".",
+      "explanationEn": "reap /riːp/ (verb): to clean up dead processes. \"Reap zombies\" means collecting finished child processes; the literal sense is \"to harvest\". Idiom: \"reap the benefits\"."
+    },
+    {
+      "id": "v41",
+      "lessonId": "l3",
+      "word": "delay",
+      "pos": "n",
+      "ipa": "/dɪˈleɪ/",
+      "question": "Trong câu \"Docker adds a growing delay between restarts (doubling from 100 ms), so a crash loop shows Restarting in docker ps.\", từ \"delay\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Docker adds a growing delay between restarts (doubling from 100 ms), so a crash loop shows Restarting in docker ps.\", what does \"delay\" (noun) mean?",
+      "options": [
+        "giới hạn số lần",
+        "thông báo lỗi",
+        "bộ đếm thời gian",
+        "khoảng trễ, thời gian chờ"
+      ],
+      "optionsEn": [
+        "a limit on attempts",
+        "an error message",
+        "a timer device",
+        "a period of waiting"
+      ],
+      "answer": 3,
+      "explanation": "delay /dɪˈleɪ/ (danh từ): khoảng trễ, thời gian chờ. \"A growing delay\" = khoảng chờ tăng dần giữa các lần khởi động lại (exponential backoff).",
+      "explanationEn": "delay /dɪˈleɪ/ (noun): a period of waiting. \"A growing delay\" is a wait that increases between restarts, known as exponential backoff."
+    },
+    {
+      "id": "v42",
+      "lessonId": "l3",
+      "word": "consume",
+      "pos": "v",
+      "ipa": "/kənˈsuːm/",
+      "question": "Trong câu \"Without resource limits, one container can consume all host memory and CPU:\", từ \"consume\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Without resource limits, one container can consume all host memory and CPU:\", what does \"consume\" (verb) mean?",
+      "options": [
+        "ăn, uống",
+        "tiêu thụ, dùng hết",
+        "giải phóng",
+        "chia sẻ"
+      ],
+      "optionsEn": [
+        "to eat or drink",
+        "to use up",
+        "to release",
+        "to share"
+      ],
+      "answer": 1,
+      "explanation": "consume /kənˈsuːm/ (động từ): tiêu thụ, dùng hết. \"Consume memory/CPU\" = sử dụng tài nguyên; cụm: \"resource consumption\". Nghĩa khác: \"ăn uống\".",
+      "explanationEn": "consume /kənˈsuːm/ (verb): to use up. \"Consume memory or CPU\" means using those resources; related: \"resource consumption\". It can also mean \"to eat or drink\"."
+    },
+    {
+      "id": "v43",
+      "lessonId": "l3",
+      "word": "cap",
+      "pos": "n",
+      "ipa": "/kæp/",
+      "question": "Trong câu \"--memory is a hard cgroup cap.\", từ \"cap\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"--memory is a hard cgroup cap.\", what does \"cap\" (noun) mean?",
+      "options": [
+        "mức trần, giới hạn trên",
+        "mũ lưỡi trai",
+        "nắp chai",
+        "mức sàn, giới hạn dưới"
+      ],
+      "optionsEn": [
+        "an upper limit",
+        "a soft hat",
+        "a bottle lid",
+        "a lower limit"
+      ],
+      "answer": 0,
+      "explanation": "cap /kæp/ (danh từ): mức trần, giới hạn trên. \"A hard cap\" = giới hạn trên tuyệt đối không được vượt; \"cap\" còn nghĩa \"mũ lưỡi trai\" hay \"nắp\".",
+      "explanationEn": "cap /kæp/ (noun): an upper limit. \"A hard cap\" is an absolute upper limit; \"cap\" also means \"a hat\" or \"a lid\"."
+    },
+    {
+      "id": "v44",
+      "lessonId": "l3",
+      "word": "exceed",
+      "pos": "v",
+      "ipa": "/ɪkˈsiːd/",
+      "question": "Trong câu \"Exceed it and the process is OOM-killed\", từ \"exceed\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Exceed it and the process is OOM-killed\", what does \"exceed\" (verb) mean?",
+      "options": [
+        "giảm xuống",
+        "đạt tới đúng",
+        "vượt quá",
+        "bỏ qua"
+      ],
+      "optionsEn": [
+        "to go below",
+        "to reach exactly",
+        "to go beyond",
+        "to ignore"
+      ],
+      "answer": 2,
+      "explanation": "exceed /ɪkˈsiːd/ (động từ): vượt quá. \"Exceed a limit\" = vượt quá giới hạn. Danh từ: \"excess\" (phần vượt).",
+      "explanationEn": "exceed /ɪkˈsiːd/ (verb): to go beyond. \"Exceed a limit\" means going beyond it. Noun: \"excess\"."
+    },
+    {
+      "id": "v45",
+      "lessonId": "l3",
+      "word": "throttle",
+      "pos": "v",
+      "ipa": "/ˈθrɒt.əl/",
+      "question": "Trong câu \"the container is throttled, not killed.\", từ \"throttle\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"the container is throttled, not killed.\", what does \"throttle\" (verb) mean?",
+      "options": [
+        "bóp cổ",
+        "bóp, hạn chế tốc độ",
+        "tắt hẳn",
+        "tăng tốc"
+      ],
+      "optionsEn": [
+        "to choke by the neck",
+        "to limit the speed",
+        "to stop completely",
+        "to speed up"
+      ],
+      "answer": 1,
+      "explanation": "throttle /ˈθrɒt.əl/ (động từ): bóp, hạn chế tốc độ. CPU bị \"throttle\" = bị hãm tốc độ chứ không bị dừng. Cụm: \"API throttling\". Nghĩa gốc: \"bóp cổ\".",
+      "explanationEn": "throttle /ˈθrɒt.əl/ (verb): to limit the speed. A throttled CPU is slowed, not stopped. Related: \"API throttling\". The literal sense is \"to choke\"."
+    },
+    {
+      "id": "v46",
+      "lessonId": "l3",
+      "word": "contention",
+      "pos": "n",
+      "ipa": "/kənˈten.ʃən/",
+      "question": "Trong câu \"is only a relative weight under contention.\", từ \"contention\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"is only a relative weight under contention.\", what does \"contention\" (noun) mean?",
+      "options": [
+        "luận điểm, quan điểm",
+        "sự hợp tác",
+        "sự nhàn rỗi",
+        "sự tranh chấp (tài nguyên)"
+      ],
+      "optionsEn": [
+        "an argument or claim",
+        "working together",
+        "being idle",
+        "competition for a resource"
+      ],
+      "answer": 3,
+      "explanation": "contention /kənˈten.ʃən/ (danh từ): sự tranh chấp (tài nguyên). \"Under contention\" = khi nhiều container cùng tranh CPU; nghĩa khác: \"luận điểm\" (my contention is...).",
+      "explanationEn": "contention /kənˈten.ʃən/ (noun): competition for a resource. \"Under contention\" means when several containers compete for CPU; another sense is \"a claim\", as in \"my contention is\"."
+    },
+    {
+      "id": "v47",
+      "lessonId": "l4",
+      "word": "stream",
+      "pos": "n",
+      "ipa": "/striːm/",
+      "question": "Trong câu \"The daemon passes both streams to a logging driver.\", từ \"stream\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The daemon passes both streams to a logging driver.\", what does \"stream\" (noun) mean?",
+      "options": [
+        "dòng suối",
+        "kênh truyền hình",
+        "luồng dữ liệu",
+        "tệp lưu trữ"
+      ],
+      "optionsEn": [
+        "a small river",
+        "a TV channel",
+        "a flow of data",
+        "a stored file"
+      ],
+      "answer": 2,
+      "explanation": "stream /striːm/ (danh từ): luồng dữ liệu. \"Both streams\" = hai luồng stdout và stderr; nghĩa gốc là \"dòng suối\". Cụm: \"event stream\".",
+      "explanationEn": "stream /striːm/ (noun): a flow of data. \"Both streams\" are stdout and stderr; the literal sense is \"a small river\". Related: \"event stream\"."
+    },
+    {
+      "id": "v48",
+      "lessonId": "l4",
+      "word": "outage",
+      "pos": "n",
+      "ipa": "/ˈaʊ.tɪdʒ/",
+      "question": "Trong câu \"The classic outage: a chatty container fills the host disk because json-file never rotated.\", từ \"outage\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The classic outage: a chatty container fills the host disk because json-file never rotated.\", what does \"outage\" (noun) mean?",
+      "options": [
+        "sự cố ngừng dịch vụ",
+        "sự nâng cấp",
+        "sự rò rỉ dữ liệu",
+        "sự mở rộng"
+      ],
+      "optionsEn": [
+        "a period of service failure",
+        "a planned upgrade",
+        "a leak of data",
+        "an expansion"
+      ],
+      "answer": 0,
+      "explanation": "outage /ˈaʊ.tɪdʒ/ (danh từ): sự cố ngừng dịch vụ. \"Outage\" = khoảng thời gian hệ thống ngừng hoạt động. Cụm: \"power outage\", \"cause an outage\".",
+      "explanationEn": "outage /ˈaʊ.tɪdʒ/ (noun): a period of service failure. An outage is a time when a system is down. Collocations: \"power outage\", \"cause an outage\"."
+    },
+    {
+      "id": "v49",
+      "lessonId": "l4",
+      "word": "chatty",
+      "pos": "adj",
+      "ipa": "/ˈtʃæt.i/",
+      "question": "Trong câu \"The classic outage: a chatty container fills the host disk because json-file never rotated.\", từ \"chatty\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The classic outage: a chatty container fills the host disk because json-file never rotated.\", what does \"chatty\" (adjective) mean?",
+      "options": [
+        "ghi log quá nhiều",
+        "hay nói chuyện (người)",
+        "phản hồi chậm",
+        "hay bị lỗi"
+      ],
+      "optionsEn": [
+        "producing too much output",
+        "fond of talking",
+        "slow to respond",
+        "failing often"
+      ],
+      "answer": 0,
+      "explanation": "chatty /ˈtʃæt.i/ (tính từ): ghi log quá nhiều. Container \"chatty\" = in ra rất nhiều log; nghĩa gốc là \"nói nhiều\". Cụm: \"chatty API\" (gọi mạng quá nhiều).",
+      "explanationEn": "chatty /ˈtʃæt.i/ (adjective): producing too much output. A chatty container writes lots of logs; the literal sense is \"talkative\". Related: \"chatty API\"."
+    },
+    {
+      "id": "v50",
+      "lessonId": "l4",
+      "word": "rotate",
+      "pos": "v",
+      "ipa": "/roʊˈteɪt/",
+      "question": "Trong câu \"The classic outage: a chatty container fills the host disk because json-file never rotated.\", từ \"rotate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The classic outage: a chatty container fills the host disk because json-file never rotated.\", what does \"rotate\" (verb) mean?",
+      "options": [
+        "quay tròn",
+        "nén thành tệp zip",
+        "xoay vòng (tệp log)",
+        "sao chép sang máy khác"
+      ],
+      "optionsEn": [
+        "to turn around a centre",
+        "to zip into an archive",
+        "to replace old files in cycle",
+        "to copy to another host"
+      ],
+      "answer": 2,
+      "explanation": "rotate /roʊˈteɪt/ (động từ): xoay vòng (tệp log). \"Log rotation\" = đóng tệp log cũ, mở tệp mới và xóa bớt tệp cũ; nghĩa gốc là \"quay\". Cụm: \"rotate keys\".",
+      "explanationEn": "rotate /roʊˈteɪt/ (verb): to replace old files in cycle. \"Log rotation\" closes old log files, starts new ones and deletes the oldest; the literal sense is \"to turn\". Related: \"rotate keys\"."
+    },
+    {
+      "id": "v51",
+      "lessonId": "l4",
+      "word": "afterwards",
+      "pos": "adv",
+      "ipa": "/ˈæf.tər.wərdz/",
+      "question": "Trong câu \"Fix it daemon-wide in /etc/docker/daemon.json (applies to containers created afterwards):\", từ \"afterwards\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Fix it daemon-wide in /etc/docker/daemon.json (applies to containers created afterwards):\", what does \"afterwards\" (adverb) mean?",
+      "options": [
+        "trước đó",
+        "sau đó, về sau",
+        "ngay lập tức",
+        "đồng thời"
+      ],
+      "optionsEn": [
+        "at an earlier time",
+        "at a later time",
+        "right away",
+        "at the same time"
+      ],
+      "answer": 1,
+      "explanation": "afterwards /ˈæf.tər.wərdz/ (trạng từ): sau đó, về sau. \"Created afterwards\" = được tạo sau khi đổi cấu hình; container cũ không bị ảnh hưởng.",
+      "explanationEn": "afterwards /ˈæf.tər.wərdz/ (adverb): at a later time. \"Created afterwards\" means created after the change; existing containers are not affected."
+    },
+    {
+      "id": "v52",
+      "lessonId": "l4",
+      "word": "stall",
+      "pos": "v",
+      "ipa": "/stɔːl/",
+      "question": "Trong câu \"By default logging is blocking: a slow remote driver stalls the app's writes;\", từ \"stall\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"By default logging is blocking: a slow remote driver stalls the app's writes;\", what does \"stall\" (verb) mean?",
+      "options": [
+        "bán hàng ở quầy",
+        "làm tăng tốc",
+        "làm sai lệch",
+        "làm đình trệ"
+      ],
+      "optionsEn": [
+        "to sell at a booth",
+        "to make go faster",
+        "to make inaccurate",
+        "to make stop progressing"
+      ],
+      "answer": 3,
+      "explanation": "stall /stɔːl/ (động từ): làm đình trệ. \"Stall the writes\" = làm việc ghi bị treo lại; danh từ \"stall\" còn nghĩa \"quầy hàng\". Cụm: \"the engine stalled\".",
+      "explanationEn": "stall /stɔːl/ (verb): to make stop progressing. \"Stall the writes\" means making them stop moving; the noun \"stall\" also means \"a market booth\". Related: \"the engine stalled\"."
+    },
+    {
+      "id": "v53",
+      "lessonId": "l4",
+      "word": "gate",
+      "pos": "v",
+      "ipa": "/ɡeɪt/",
+      "question": "Trong câu \"Scan in CI to gate the build and rescan images already in the registry: a clean image today has new CVEs tomorrow.\", từ \"gate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Scan in CI to gate the build and rescan images already in the registry: a clean image today has new CVEs tomorrow.\", what does \"gate\" (verb) mean?",
+      "options": [
+        "rào cổng lại",
+        "tăng tốc bản build",
+        "ghi lại kết quả",
+        "chặn nếu không đạt điều kiện"
+      ],
+      "optionsEn": [
+        "to put a fence around",
+        "to speed up a build",
+        "to record a result",
+        "to block unless checks pass"
+      ],
+      "answer": 3,
+      "explanation": "gate /ɡeɪt/ (động từ): chặn nếu không đạt điều kiện. \"Gate the build\" = bản build chỉ đi tiếp khi vượt qua bước quét; danh từ \"gate\" là \"cổng\". Cụm: \"quality gate\".",
+      "explanationEn": "gate /ɡeɪt/ (verb): to block unless checks pass. \"Gate the build\" means it only proceeds if the scan passes; the noun \"gate\" is \"an entrance\". Related: \"quality gate\"."
+    },
+    {
+      "id": "v54",
+      "lessonId": "l4",
+      "word": "cure",
+      "pos": "n",
+      "ipa": "/kjʊr/",
+      "question": "Trong câu \"The cure is usually rebuilding on a patched base, which is why small bases and automated rebuilds beat triaging hundreds of findings.\", từ \"cure\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The cure is usually rebuilding on a patched base, which is why small bases and automated rebuilds beat triaging hundreds of findings.\", what does \"cure\" (noun) mean?",
+      "options": [
+        "thuốc chữa bệnh",
+        "cách khắc phục",
+        "nguyên nhân gốc",
+        "triệu chứng"
+      ],
+      "optionsEn": [
+        "a medical treatment",
+        "a way to fix a problem",
+        "the root cause",
+        "a sign of a problem"
+      ],
+      "answer": 1,
+      "explanation": "cure /kjʊr/ (danh từ): cách khắc phục. \"The cure\" ở đây = giải pháp khắc phục lỗ hổng; nghĩa gốc là \"phương thuốc chữa bệnh\".",
+      "explanationEn": "cure /kjʊr/ (noun): a way to fix a problem. \"The cure\" here is the fix for vulnerabilities; the original sense is \"a medical treatment\"."
+    },
+    {
+      "id": "v55",
+      "lessonId": "l4",
+      "word": "patched",
+      "pos": "adj",
+      "ipa": "/pætʃt/",
+      "question": "Trong câu \"The cure is usually rebuilding on a patched base, which is why small bases and automated rebuilds beat triaging hundreds of findings.\", từ \"patched\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The cure is usually rebuilding on a patched base, which is why small bases and automated rebuilds beat triaging hundreds of findings.\", what does \"patched\" (adjective) mean?",
+      "options": [
+        "đã được vá lỗi",
+        "đã được may vá (vải)",
+        "đã bị lỗi thời",
+        "đã bị xóa"
+      ],
+      "optionsEn": [
+        "updated with fixes",
+        "mended with cloth",
+        "out of date",
+        "already deleted"
+      ],
+      "answer": 0,
+      "explanation": "patched /pætʃt/ (tính từ): đã được vá lỗi. \"Patched base\" = ảnh nền đã cập nhật bản vá bảo mật. Cụm: \"security patch\", \"patch a bug\".",
+      "explanationEn": "patched /pætʃt/ (adjective): updated with fixes. A patched base image includes the latest security fixes. Collocations: \"security patch\", \"patch a bug\"."
+    },
+    {
+      "id": "v56",
+      "lessonId": "l4",
+      "word": "triage",
+      "pos": "v",
+      "ipa": "/ˈtriː.ɑːʒ/",
+      "question": "Trong câu \"The cure is usually rebuilding on a patched base, which is why small bases and automated rebuilds beat triaging hundreds of findings.\", từ \"triage\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The cure is usually rebuilding on a patched base, which is why small bases and automated rebuilds beat triaging hundreds of findings.\", what does \"triage\" (verb) mean?",
+      "options": [
+        "sửa lỗi ngay",
+        "bỏ qua hết",
+        "phân loại theo mức ưu tiên",
+        "sao lưu dữ liệu"
+      ],
+      "optionsEn": [
+        "to fix at once",
+        "to ignore entirely",
+        "to sort by urgency",
+        "to back up data"
+      ],
+      "answer": 2,
+      "explanation": "triage /ˈtriː.ɑːʒ/ (động từ): phân loại theo mức ưu tiên. \"Triage findings\" = xem xét và xếp ưu tiên từng lỗi; gốc từ y khoa (phân loại bệnh nhân cấp cứu).",
+      "explanationEn": "triage /ˈtriː.ɑːʒ/ (verb): to sort by urgency. \"Triage findings\" means reviewing and prioritising each issue; the term comes from emergency medicine."
+    },
+    {
+      "id": "v57",
+      "lessonId": "l4",
+      "word": "finding",
+      "pos": "n",
+      "ipa": "/ˈfaɪn.dɪŋ/",
+      "question": "Trong câu \"The cure is usually rebuilding on a patched base, which is why small bases and automated rebuilds beat triaging hundreds of findings.\", từ \"finding\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The cure is usually rebuilding on a patched base, which is why small bases and automated rebuilds beat triaging hundreds of findings.\", what does \"finding\" (noun) mean?",
+      "options": [
+        "sự tìm kiếm",
+        "kết quả phát hiện (lỗi)",
+        "bằng chứng tòa án",
+        "khoản tài trợ"
+      ],
+      "optionsEn": [
+        "the act of searching",
+        "an issue found by a check",
+        "evidence in court",
+        "a sum of money given"
+      ],
+      "answer": 1,
+      "explanation": "finding /ˈfaɪn.dɪŋ/ (danh từ): kết quả phát hiện (lỗi). \"Findings\" = các vấn đề mà công cụ quét/kiểm toán phát hiện. Cụm: \"audit findings\", \"key findings\".",
+      "explanationEn": "finding /ˈfaɪn.dɪŋ/ (noun): an issue found by a check. \"Findings\" are the issues a scan or audit reports. Collocations: \"audit findings\", \"key findings\"."
+    },
+    {
+      "id": "v58",
+      "lessonId": "l4",
+      "word": "land",
+      "pos": "v",
+      "ipa": "/lænd/",
+      "question": "Trong câu \"When a Log4Shell-style CVE lands, you query SBOMs instead of pulling every image.\", từ \"land\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"When a Log4Shell-style CVE lands, you query SBOMs instead of pulling every image.\", what does \"land\" (verb) mean?",
+      "options": [
+        "hạ cánh (máy bay)",
+        "bị sửa xong",
+        "được gộp mã",
+        "xuất hiện, ập đến"
+      ],
+      "optionsEn": [
+        "to come down to the ground",
+        "to be fixed",
+        "to be merged",
+        "to appear or arrive"
+      ],
+      "answer": 3,
+      "explanation": "land /lænd/ (động từ): xuất hiện, ập đến. \"A CVE lands\" = một lỗ hổng mới được công bố; nghĩa gốc là \"hạ cánh\".",
+      "explanationEn": "land /lænd/ (verb): to appear or arrive. \"A CVE lands\" means a new vulnerability is announced; the literal sense is \"to come down to the ground\"."
+    },
+    {
+      "id": "v59",
+      "lessonId": "l4",
+      "word": "unmodified",
+      "pos": "adj",
+      "ipa": "/ʌnˈmɒd.ɪ.faɪd/",
+      "question": "Trong câu \"Signing proves the image came from your pipeline unmodified.\", từ \"unmodified\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Signing proves the image came from your pipeline unmodified.\", what does \"unmodified\" (adjective) mean?",
+      "options": [
+        "không được ký",
+        "không được nén",
+        "nguyên vẹn, không bị sửa",
+        "không được kiểm tra"
+      ],
+      "optionsEn": [
+        "not signed",
+        "not compressed",
+        "not changed",
+        "not checked"
+      ],
+      "answer": 2,
+      "explanation": "unmodified /ʌnˈmɒd.ɪ.faɪd/ (tính từ): nguyên vẹn, không bị sửa. \"Unmodified\" = không bị chỉnh sửa; chữ ký số chứng minh ảnh còn nguyên vẹn. Gốc: \"modify\".",
+      "explanationEn": "unmodified /ʌnˈmɒd.ɪ.faɪd/ (adjective): not changed. \"Unmodified\" means not altered; a signature proves the image is intact. Root: \"modify\"."
+    },
+    {
+      "id": "v60",
+      "lessonId": "l4",
+      "word": "de facto",
+      "pos": "adj",
+      "ipa": "/ˌdeɪ ˈfæk.toʊ/",
+      "question": "Trong câu \"Sigstore cosign is the de facto standard and supports keyless signing bound to the CI's OIDC identity:\", từ \"de facto\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Sigstore cosign is the de facto standard and supports keyless signing bound to the CI's OIDC identity:\", what does \"de facto\" (adjective) mean?",
+      "options": [
+        "trên thực tế (không chính thức)",
+        "theo luật định",
+        "đã lỗi thời",
+        "đang thử nghiệm"
+      ],
+      "optionsEn": [
+        "existing in practice",
+        "set by official law",
+        "no longer used",
+        "still experimental"
+      ],
+      "answer": 0,
+      "explanation": "de facto /ˌdeɪ ˈfæk.toʊ/ (tính từ): trên thực tế (không chính thức). \"De facto standard\" = chuẩn mọi người thực tế dùng dù không ai ban hành chính thức. Đối lập: \"de jure\".",
+      "explanationEn": "de facto /ˌdeɪ ˈfæk.toʊ/ (adjective): existing in practice. A de facto standard is what everyone actually uses, even without official approval. Contrast: \"de jure\"."
+    },
+    {
+      "id": "v61",
+      "lessonId": "l4",
+      "word": "enforce",
+      "pos": "v",
+      "ipa": "/ɪnˈfɔːrs/",
+      "question": "Trong câu \"Sign the pushed image by digest and deploy by digest, because tags can be moved; enforce verification at deploy time (e.g. a Kubernetes admission policy).\", từ \"enforce\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Sign the pushed image by digest and deploy by digest, because tags can be moved; enforce verification at deploy time (e.g. a Kubernetes admission policy).\", what does \"enforce\" (verb) mean?",
+      "options": [
+        "bắt buộc thực thi",
+        "đề xuất, gợi ý",
+        "tạm hoãn",
+        "gỡ bỏ"
+      ],
+      "optionsEn": [
+        "to make sure a rule is obeyed",
+        "to suggest a rule",
+        "to postpone a rule",
+        "to remove a rule"
+      ],
+      "answer": 0,
+      "explanation": "enforce /ɪnˈfɔːrs/ (động từ): bắt buộc thực thi. \"Enforce a policy\" = bắt buộc áp dụng chính sách, vi phạm thì chặn. Danh từ: \"enforcement\".",
+      "explanationEn": "enforce /ɪnˈfɔːrs/ (verb): to make sure a rule is obeyed. \"Enforce a policy\" means blocking anything that breaks it. Noun: \"enforcement\"."
+    },
+    {
+      "id": "v62",
+      "lessonId": "l4",
+      "word": "supersede",
+      "pos": "v",
+      "ipa": "/ˌsuː.pərˈsiːd/",
+      "question": "Trong câu \"Docker Content Trust (Notary v1) is the older approach, largely superseded by cosign and Notation.\", từ \"supersede\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Docker Content Trust (Notary v1) is the older approach, largely superseded by cosign and Notation.\", what does \"supersede\" (verb) mean?",
+      "options": [
+        "bổ sung cho",
+        "sao chép từ",
+        "thay thế (cái cũ)",
+        "cạnh tranh với"
+      ],
+      "optionsEn": [
+        "to add to",
+        "to copy from",
+        "to take the place of",
+        "to compete with"
+      ],
+      "answer": 2,
+      "explanation": "supersede /ˌsuː.pərˈsiːd/ (động từ): thay thế (cái cũ). \"Be superseded by\" = bị thay thế bởi thứ mới hơn. Cụm hay gặp trong tài liệu: \"this API is superseded by...\".",
+      "explanationEn": "supersede /ˌsuː.pərˈsiːd/ (verb): to take the place of. \"Be superseded by\" means being replaced by something newer, common in docs: \"this API is superseded by...\"."
+    },
+    {
+      "id": "v63",
+      "lessonId": "l5",
+      "word": "end of life",
+      "pos": "phrase",
+      "ipa": "/ˌend əv ˈlaɪf/",
+      "question": "Trong câu \"Python docker-compose v1 reached end of life in 2023\", từ \"end of life\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Python docker-compose v1 reached end of life in 2023\", what does \"end of life\" (phrase) mean?",
+      "options": [
+        "cuối cuộc đời (người)",
+        "ngừng hỗ trợ",
+        "bản phát hành đầu",
+        "đạt độ ổn định"
+      ],
+      "optionsEn": [
+        "the end of a person's life",
+        "no longer supported",
+        "the first release",
+        "reached stability"
+      ],
+      "answer": 1,
+      "explanation": "end of life /ˌend əv ˈlaɪf/ (cụm từ): ngừng hỗ trợ. \"Reach end of life (EOL)\" = hết hạn hỗ trợ, không còn bản vá; nghĩa đen là \"cuối đời\".",
+      "explanationEn": "end of life /ˌend əv ˈlaɪf/ (phrase): no longer supported. \"Reach end of life (EOL)\" means no more support or patches; the literal sense is \"the end of a life\"."
+    },
+    {
+      "id": "v64",
+      "lessonId": "l5",
+      "word": "obsolete",
+      "pos": "adj",
+      "ipa": "/ˌɒb.səˈliːt/",
+      "question": "Trong câu \"the top-level version: key is obsolete.\", từ \"obsolete\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"the top-level version: key is obsolete.\", what does \"obsolete\" (adjective) mean?",
+      "options": [
+        "bắt buộc phải có",
+        "bị ẩn đi",
+        "mới được thêm",
+        "lỗi thời, không còn dùng"
+      ],
+      "optionsEn": [
+        "required to exist",
+        "hidden from view",
+        "recently added",
+        "no longer in use"
+      ],
+      "answer": 3,
+      "explanation": "obsolete /ˌɒb.səˈliːt/ (tính từ): lỗi thời, không còn dùng. \"Obsolete\" = đã lỗi thời. Gần nghĩa: \"deprecated\" (không khuyến khích dùng, sắp bỏ).",
+      "explanationEn": "obsolete /ˌɒb.səˈliːt/ (adjective): no longer in use. \"Obsolete\" means no longer used. Close term: \"deprecated\" (discouraged and due for removal)."
+    },
+    {
+      "id": "v65",
+      "lessonId": "l5",
+      "word": "expose",
+      "pos": "v",
+      "ipa": "/ɪkˈspoʊz/",
+      "question": "Trong câu \"Only api publishes a port, so Postgres is not exposed.\", từ \"expose\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Only api publishes a port, so Postgres is not exposed.\", what does \"expose\" (verb) mean?",
+      "options": [
+        "vạch trần (bí mật)",
+        "chiếu sáng (ảnh)",
+        "tắt đi",
+        "để lộ ra (bên ngoài)"
+      ],
+      "optionsEn": [
+        "to reveal a scandal",
+        "to let light onto film",
+        "to switch off",
+        "to make reachable from outside"
+      ],
+      "answer": 3,
+      "explanation": "expose /ɪkˈspoʊz/ (động từ): để lộ ra (bên ngoài). \"Not exposed\" = không truy cập được từ bên ngoài. Cụm: \"expose a port\", \"exposed to attacks\".",
+      "explanationEn": "expose /ɪkˈspoʊz/ (verb): to make reachable from outside. \"Not exposed\" means unreachable from outside. Collocations: \"expose a port\", \"exposed to attacks\"."
+    },
+    {
+      "id": "v66",
+      "lessonId": "l5",
+      "word": "retry",
+      "pos": "v",
+      "ipa": "/ˌriːˈtraɪ/",
+      "question": "Trong câu \"Apps should still retry connections.\", từ \"retry\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Apps should still retry connections.\", what does \"retry\" (verb) mean?",
+      "options": [
+        "từ chối",
+        "thử lại",
+        "đóng lại",
+        "mã hóa"
+      ],
+      "optionsEn": [
+        "to refuse",
+        "to attempt again",
+        "to close",
+        "to encrypt"
+      ],
+      "answer": 1,
+      "explanation": "retry /ˌriːˈtraɪ/ (động từ): thử lại. \"Retry connections\" = kết nối lại khi thất bại. Cụm: \"retry with backoff\", \"retry logic\".",
+      "explanationEn": "retry /ˌriːˈtraɪ/ (verb): to attempt again. \"Retry connections\" means trying again after a failure. Collocations: \"retry with backoff\", \"retry logic\"."
+    },
+    {
+      "id": "v67",
+      "lessonId": "l5",
+      "word": "merge",
+      "pos": "v",
+      "ipa": "/mɜːrdʒ/",
+      "question": "Trong câu \"is merged automatically (dev bind mounts);\", từ \"merge\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"is merged automatically (dev bind mounts);\", what does \"merge\" (verb) mean?",
+      "options": [
+        "gộp, hợp nhất",
+        "tách ra",
+        "ghi đè hoàn toàn",
+        "sáp nhập công ty"
+      ],
+      "optionsEn": [
+        "to combine into one",
+        "to split apart",
+        "to fully overwrite",
+        "to join two companies"
+      ],
+      "answer": 0,
+      "explanation": "merge /mɜːrdʒ/ (động từ): gộp, hợp nhất. Tệp override được gộp vào tệp chính. Cụm: \"merge a branch\", \"merge conflict\"; trong kinh doanh là \"sáp nhập\".",
+      "explanationEn": "merge /mɜːrdʒ/ (verb): to combine into one. The override file is combined with the main file. Collocations: \"merge a branch\", \"merge conflict\"; in business, \"to join companies\"."
+    },
+    {
+      "id": "v68",
+      "lessonId": "l5",
+      "word": "rolling",
+      "pos": "adj",
+      "ipa": "/ˈroʊ.lɪŋ/",
+      "question": "Trong câu \"Not enough for: multiple hosts, cross-node self-healing, rolling deploys, autoscaling — that is orchestration (Kubernetes, topic 6; ECS on AWS).\", từ \"rolling\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Not enough for: multiple hosts, cross-node self-healing, rolling deploys, autoscaling — that is orchestration (Kubernetes, topic 6; ECS on AWS).\", what does \"rolling\" (adjective) mean?",
+      "options": [
+        "lăn tròn",
+        "diễn ra một lần",
+        "cuốn chiếu, lần lượt",
+        "nhấp nhô (đồi)"
+      ],
+      "optionsEn": [
+        "turning over and over",
+        "happening all at once",
+        "replacing parts one by one",
+        "gently rising and falling"
+      ],
+      "answer": 2,
+      "explanation": "rolling /ˈroʊ.lɪŋ/ (tính từ): cuốn chiếu, lần lượt. \"Rolling deploy\" = thay dần từng bản sao, không dừng toàn bộ dịch vụ. Cụm: \"rolling update\".",
+      "explanationEn": "rolling /ˈroʊ.lɪŋ/ (adjective): replacing parts one by one. A rolling deploy replaces instances one at a time without full downtime. Related: \"rolling update\"."
+    },
+    {
+      "id": "v69",
+      "lessonId": "l5",
+      "word": "orchestration",
+      "pos": "n",
+      "ipa": "/ˌɔːr.kəˈstreɪ.ʃən/",
+      "question": "Trong câu \"Not enough for: multiple hosts, cross-node self-healing, rolling deploys, autoscaling — that is orchestration (Kubernetes, topic 6; ECS on AWS).\", từ \"orchestration\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Not enough for: multiple hosts, cross-node self-healing, rolling deploys, autoscaling — that is orchestration (Kubernetes, topic 6; ECS on AWS).\", what does \"orchestration\" (noun) mean?",
+      "options": [
+        "phối khí (âm nhạc)",
+        "điều phối (hệ thống)",
+        "giám sát nhật ký",
+        "đóng gói ứng dụng"
+      ],
+      "optionsEn": [
+        "arranging music for players",
+        "automated coordination of services",
+        "monitoring of logs",
+        "packaging of apps"
+      ],
+      "answer": 1,
+      "explanation": "orchestration /ˌɔːr.kəˈstreɪ.ʃən/ (danh từ): điều phối (hệ thống). \"Container orchestration\" = tự động lên lịch, mở rộng, tự phục hồi container trên nhiều máy; gốc âm nhạc là \"phối khí\".",
+      "explanationEn": "orchestration /ˌɔːr.kəˈstreɪ.ʃən/ (noun): automated coordination of services. Container orchestration automates scheduling, scaling and healing across hosts; in music it means \"arranging for an orchestra\"."
+    },
+    {
+      "id": "v70",
+      "lessonId": "l5",
+      "word": "checklist",
+      "pos": "n",
+      "ipa": "/ˈtʃek.lɪst/",
+      "question": "Trong câu \"The Twelve-Factor App (Heroku, 2011) is a checklist for apps that fit containers.\", từ \"checklist\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The Twelve-Factor App (Heroku, 2011) is a checklist for apps that fit containers.\", what does \"checklist\" (noun) mean?",
+      "options": [
+        "bảng xếp hạng",
+        "danh sách đen",
+        "bảng giá",
+        "danh sách mục cần kiểm tra"
+      ],
+      "optionsEn": [
+        "a ranked list",
+        "a list of banned items",
+        "a list of prices",
+        "a list of items to verify"
+      ],
+      "answer": 3,
+      "explanation": "checklist /ˈtʃek.lɪst/ (danh từ): danh sách mục cần kiểm tra. \"Checklist\" = danh sách các điểm cần đáp ứng/kiểm tra lần lượt. Cụm: \"go through a checklist\".",
+      "explanationEn": "checklist /ˈtʃek.lɪst/ (noun): a list of items to verify. A checklist is a list of points to verify one by one. Collocation: \"go through a checklist\"."
+    },
+    {
+      "id": "v71",
+      "lessonId": "l5",
+      "word": "fit",
+      "pos": "v",
+      "ipa": "/fɪt/",
+      "question": "Trong câu \"The Twelve-Factor App (Heroku, 2011) is a checklist for apps that fit containers.\", từ \"fit\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The Twelve-Factor App (Heroku, 2011) is a checklist for apps that fit containers.\", what does \"fit\" (verb) mean?",
+      "options": [
+        "vừa vặn (quần áo)",
+        "lắp đặt",
+        "phù hợp với",
+        "chứa bên trong"
+      ],
+      "optionsEn": [
+        "to be the right size",
+        "to install a part",
+        "to be suitable for",
+        "to hold inside"
+      ],
+      "answer": 2,
+      "explanation": "fit /fɪt/ (động từ): phù hợp với. \"Apps that fit containers\" = ứng dụng hợp với mô hình container; nghĩa khác: \"vừa (quần áo)\". Cụm: \"a good fit\".",
+      "explanationEn": "fit /fɪt/ (verb): to be suitable for. \"Apps that fit containers\" suit the container model; another sense is \"to be the right size\". Related: \"a good fit\"."
+    },
+    {
+      "id": "v72",
+      "lessonId": "l5",
+      "word": "violate",
+      "pos": "v",
+      "ipa": "/ˈvaɪ.ə.leɪt/",
+      "question": "Trong câu \"Most often violated: config baked into images, processes keeping sessions on local disk, disposability ignored by apps that miss SIGTERM, and logs written to files.\", từ \"violate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Most often violated: config baked into images, processes keeping sessions on local disk, disposability ignored by apps that miss SIGTERM, and logs written to files.\", what does \"violate\" (verb) mean?",
+      "options": [
+        "vi phạm",
+        "tuân thủ",
+        "sửa đổi",
+        "giải thích"
+      ],
+      "optionsEn": [
+        "to break a rule",
+        "to follow a rule",
+        "to change a rule",
+        "to explain a rule"
+      ],
+      "answer": 0,
+      "explanation": "violate /ˈvaɪ.ə.leɪt/ (động từ): vi phạm. \"Violate a principle/policy\" = làm trái nguyên tắc. Danh từ: \"violation\".",
+      "explanationEn": "violate /ˈvaɪ.ə.leɪt/ (verb): to break a rule. \"Violate a principle or policy\" means breaking it. Noun: \"violation\"."
+    },
+    {
+      "id": "v73",
+      "lessonId": "l5",
+      "word": "disposability",
+      "pos": "n",
+      "ipa": "/dɪˌspoʊ.zəˈbɪl.ə.ti/",
+      "question": "Trong câu \"Most often violated: config baked into images, processes keeping sessions on local disk, disposability ignored by apps that miss SIGTERM, and logs written to files.\", từ \"disposability\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Most often violated: config baked into images, processes keeping sessions on local disk, disposability ignored by apps that miss SIGTERM, and logs written to files.\", what does \"disposability\" (noun) mean?",
+      "options": [
+        "tính dễ bỏ đi và thay thế",
+        "tính dùng một lần (đồ nhựa)",
+        "tính dễ mở rộng",
+        "tính sẵn sàng cao"
+      ],
+      "optionsEn": [
+        "ease of stopping and replacing",
+        "being single-use plastic",
+        "ease of scaling up",
+        "being highly available"
+      ],
+      "answer": 0,
+      "explanation": "disposability /dɪˌspoʊ.zəˈbɪl.ə.ti/ (danh từ): tính dễ bỏ đi và thay thế. Trong twelve-factor, \"disposability\" = tiến trình khởi động nhanh, tắt êm, có thể hủy bất cứ lúc nào; gốc từ \"disposable\" (dùng một lần).",
+      "explanationEn": "disposability /dɪˌspoʊ.zəˈbɪl.ə.ti/ (noun): ease of stopping and replacing. In twelve-factor, disposability means processes start fast and stop cleanly so they can be killed anytime; from \"disposable\"."
+    },
+    {
+      "id": "v74",
+      "lessonId": "l5",
+      "word": "one-off",
+      "pos": "adj",
+      "ipa": "/ˌwʌn ˈɒf/",
+      "question": "Trong câu \"Migrations run as one-off containers from the same image\", từ \"one-off\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Migrations run as one-off containers from the same image\", what does \"one-off\" (adjective) mean?",
+      "options": [
+        "chạy liên tục",
+        "bị tắt nhầm",
+        "chạy một lần rồi thôi",
+        "chạy theo lịch"
+      ],
+      "optionsEn": [
+        "running all the time",
+        "stopped by mistake",
+        "happening only once",
+        "running on a schedule"
+      ],
+      "answer": 2,
+      "explanation": "one-off /ˌwʌn ˈɒf/ (tính từ): chạy một lần rồi thôi. \"One-off container\" = container chạy một tác vụ rồi thoát (vd migration). Cụm: \"a one-off job\".",
+      "explanationEn": "one-off /ˌwʌn ˈɒf/ (adjective): happening only once. A one-off container runs a single task and exits, such as a migration. Collocation: \"a one-off job\"."
+    },
+    {
+      "id": "v75",
+      "lessonId": "l6",
+      "word": "readiness",
+      "pos": "n",
+      "ipa": "/ˈred.i.nəs/",
+      "question": "Trong câu \"Compose is single-host; depends_on needs service_healthy to wait for readiness.\", từ \"readiness\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Compose is single-host; depends_on needs service_healthy to wait for readiness.\", what does \"readiness\" (noun) mean?",
+      "options": [
+        "sự nhanh nhẹn",
+        "trạng thái sẵn sàng",
+        "sự đọc hiểu",
+        "sự sẵn lòng"
+      ],
+      "optionsEn": [
+        "the quality of being quick",
+        "the state of being prepared",
+        "the act of reading",
+        "willingness to help"
+      ],
+      "answer": 1,
+      "explanation": "readiness /ˈred.i.nəs/ (danh từ): trạng thái sẵn sàng. \"Wait for readiness\" = đợi dịch vụ sẵn sàng nhận request. Cụm: \"readiness probe\".",
+      "explanationEn": "readiness /ˈred.i.nəs/ (noun): the state of being prepared. \"Wait for readiness\" means waiting until a service can accept requests. Related: \"readiness probe\"."
+    },
+    {
+      "id": "v76",
+      "lessonId": "l6",
+      "word": "rather than",
+      "pos": "phrase",
+      "ipa": "/ˈræð.ər ðæn/",
+      "question": "Trong câu \"CPU limits throttle rather than kill.\", từ \"rather than\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"CPU limits throttle rather than kill.\", what does \"rather than\" (phrase) mean?",
+      "options": [
+        "nhanh hơn",
+        "cũng như",
+        "sau khi",
+        "thay vì"
+      ],
+      "optionsEn": [
+        "faster than",
+        "as well as",
+        "after doing",
+        "instead of"
+      ],
+      "answer": 3,
+      "explanation": "rather than /ˈræð.ər ðæn/ (cụm từ): thay vì. \"X rather than Y\" = làm X chứ không làm Y. Cụm tương đương: \"instead of\".",
+      "explanationEn": "rather than /ˈræð.ər ðæn/ (phrase): instead of. \"X rather than Y\" means doing X and not Y. Equivalent: \"instead of\"."
+    },
+    {
+      "id": "v77",
+      "lessonId": "l6",
+      "word": "credential",
+      "pos": "n",
+      "ipa": "/krəˈden.ʃəl/",
+      "question": "Trong câu \"Non-root users, runtime hardening and BuildKit secret mounts limit damage and keep credentials out of layers.\", từ \"credential\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Non-root users, runtime hardening and BuildKit secret mounts limit damage and keep credentials out of layers.\", what does \"credential\" (noun) mean?",
+      "options": [
+        "bằng cấp, trình độ",
+        "tệp cấu hình",
+        "nhật ký truy cập",
+        "thông tin xác thực"
+      ],
+      "optionsEn": [
+        "a formal qualification",
+        "a settings file",
+        "an access log",
+        "a password, key or token"
+      ],
+      "answer": 3,
+      "explanation": "credential /krəˈden.ʃəl/ (danh từ): thông tin xác thực. \"Credentials\" = mật khẩu, khóa, token dùng để xác thực; nghĩa khác: \"bằng cấp, chứng chỉ\" của một người.",
+      "explanationEn": "credential /krəˈden.ʃəl/ (noun): a password, key or token. \"Credentials\" are passwords, keys or tokens for authentication; another sense is \"a person's qualifications\"."
+    },
+    {
+      "id": "v78",
+      "lessonId": "l6",
+      "word": "predictable",
+      "pos": "adj",
+      "ipa": "/prɪˈdɪk.tə.bəl/",
+      "question": "Trong câu \"Healthchecks, signal-aware shutdown, restart policies and resource limits make failure predictable.\", từ \"predictable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Healthchecks, signal-aware shutdown, restart policies and resource limits make failure predictable.\", what does \"predictable\" (adjective) mean?",
+      "options": [
+        "hiếm khi xảy ra",
+        "có thể đoán trước",
+        "không thể tránh",
+        "dễ sửa chữa"
+      ],
+      "optionsEn": [
+        "seldom happening",
+        "able to be foreseen",
+        "unable to be avoided",
+        "easy to repair"
+      ],
+      "answer": 1,
+      "explanation": "predictable /prɪˈdɪk.tə.bəl/ (tính từ): có thể đoán trước. \"Make failure predictable\" = khi hỏng thì hỏng theo cách đã biết trước và xử lý được. Danh từ: \"predictability\".",
+      "explanationEn": "predictable /prɪˈdɪk.tə.bəl/ (adjective): able to be foreseen. \"Make failure predictable\" means failures happen in known, manageable ways. Noun: \"predictability\"."
+    },
+    {
+      "id": "v79",
+      "lessonId": "l6",
+      "word": "supply chain",
+      "pos": "phrase",
+      "ipa": "/səˈplaɪ tʃeɪn/",
+      "question": "Trong câu \"Logs go to stdout through a rotating or shipping driver; scanning, SBOMs and signing secure the supply chain.\", từ \"supply chain\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Logs go to stdout through a rotating or shipping driver; scanning, SBOMs and signing secure the supply chain.\", what does \"supply chain\" (phrase) mean?",
+      "options": [
+        "chuỗi cung ứng (phần mềm)",
+        "chuỗi cửa hàng",
+        "đường ống dữ liệu",
+        "kho lưu trữ mã"
+      ],
+      "optionsEn": [
+        "the path software takes to deploy",
+        "a group of shops",
+        "a data processing pipeline",
+        "a code repository"
+      ],
+      "answer": 0,
+      "explanation": "supply chain /səˈplaɪ tʃeɪn/ (cụm từ): chuỗi cung ứng (phần mềm). \"Software supply chain\" = mọi thứ từ mã nguồn, thư viện, build tới triển khai. Cụm: \"supply chain attack\".",
+      "explanationEn": "supply chain /səˈplaɪ tʃeɪn/ (phrase): the path software takes to deploy. The software supply chain covers source, dependencies, builds and deployment. Related: \"supply chain attack\"."
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+[
+  {
+    "id": "q1",
+    "question": "Điều gì định nghĩa một stack với tư cách là kiểu dữ liệu trừu tượng (ADT)?",
+    "questionEn": "What defines a stack as an abstract data type (ADT)?",
+    "options": [
+      "Việc nó phải được lưu trong một array liền mạch",
+      "Việc nó phải được xây bằng singly linked list",
+      "Các thao tác nó cung cấp (push, pop, peek) và quy tắc LIFO của chúng",
+      "Việc nó cho phép truy cập mọi phần tử theo index trong O(1)"
+    ],
+    "optionsEn": [
+      "The fact that it must be stored in one contiguous array",
+      "The fact that it must be built from a singly linked list",
+      "The operations it offers (push, pop, peek) and their LIFO behaviour",
+      "The fact that it allows O(1) access to any element by index"
+    ],
+    "answer": 2,
+    "explanation": "ADT được định nghĩa bởi hành vi, không phải cách lưu trữ. Array và linked list đều là cách hiện thực hợp lệ của cùng một stack; và stack chỉ lộ ra phần tử ở đỉnh, không cho truy cập tuỳ ý theo index.",
+    "explanationEn": "An ADT is defined by behaviour, not storage. An array and a linked list are both valid implementations of the same stack, and a stack only exposes its top, not arbitrary index access."
+  },
+  {
+    "id": "q2",
+    "question": "Một stack rỗng thực hiện lần lượt các thao tác sau. Các lệnh `pop` trả về những giá trị nào, theo thứ tự?\n`push(1); push(2); pop();\npush(3); push(4); pop(); pop();`",
+    "questionEn": "An empty stack performs these operations in order. What do the `pop` calls return, in order?\n`push(1); push(2); pop();\npush(3); push(4); pop(); pop();`",
+    "options": [
+      "2, 4, 3",
+      "1, 3, 4",
+      "2, 3, 4",
+      "4, 3, 1"
+    ],
+    "optionsEn": [
+      "2, 4, 3",
+      "1, 3, 4",
+      "2, 3, 4",
+      "4, 3, 1"
+    ],
+    "answer": 0,
+    "explanation": "Sau push(1), push(2), pop lấy phần tử mới nhất là 2. Stack còn [1]; push(3), push(4) thành [1, 3, 4]; pop lấy 4, rồi pop lấy 3. Phần tử 1 vẫn nằm dưới đáy.",
+    "explanationEn": "After push(1), push(2), pop takes the newest item, 2. The stack is [1]; push(3), push(4) make it [1, 3, 4]; pop takes 4, then pop takes 3. The 1 stays at the bottom."
+  },
+  {
+    "id": "q3",
+    "question": "Tình huống nào KHÔNG phù hợp tự nhiên với stack?",
+    "questionEn": "Which scenario is NOT a natural fit for a stack?",
+    "options": [
+      "Chức năng undo trong trình soạn thảo văn bản",
+      "Nút Back của trình duyệt",
+      "Kiểm tra một chuỗi ngoặc có cân bằng không",
+      "Máy in xử lý các lệnh in theo đúng thứ tự được gửi"
+    ],
+    "optionsEn": [
+      "The undo feature in a text editor",
+      "A browser's Back button",
+      "Checking whether a string of brackets is balanced",
+      "A printer handling print jobs in the order they were submitted"
+    ],
+    "answer": 3,
+    "explanation": "Undo, nút Back và kiểm tra ngoặc đều cần \"việc gần đây nhất\" trước — đúng LIFO. Lệnh in phải xử lý theo thứ tự đến, tức FIFO, nên đó là việc của queue.",
+    "explanationEn": "Undo, the Back button and bracket matching all need \"the most recent thing\" first — LIFO. Print jobs must be served in arrival order, which is FIFO, so that is a job for a queue."
+  },
+  {
+    "id": "q4",
+    "question": "Bạn dùng array của JavaScript làm stack. Cặp method nào giữ cả thêm và lấy ở O(1) (amortized)?",
+    "questionEn": "You use a JavaScript array as a stack. Which pair of methods keeps both adding and removing O(1) (amortized)?",
+    "options": [
+      "`unshift` để thêm, `shift` để lấy",
+      "`push` để thêm, `pop` để lấy",
+      "`push` để thêm, `shift` để lấy",
+      "`unshift` để thêm, `pop` để lấy"
+    ],
+    "optionsEn": [
+      "`unshift` to add, `shift` to remove",
+      "`push` to add, `pop` to remove",
+      "`push` to add, `shift` to remove",
+      "`unshift` to add, `pop` to remove"
+    ],
+    "answer": 1,
+    "explanation": "`push`/`pop` chỉ đụng tới cuối array nên không phần tử nào phải dịch chuyển. `unshift`/`shift` cũng là LIFO nhưng phải đánh lại index toàn bộ, O(n). Hai cặp trộn còn lại là FIFO, không phải stack.",
+    "explanationEn": "`push`/`pop` only touch the end of the array, so nothing has to move. `unshift`/`shift` is also LIFO but re-indexes everything, O(n). The two mixed pairs are FIFO, not a stack."
+  },
+  {
+    "id": "q5",
+    "question": "Khi cài đặt stack bằng singly linked list, vì sao ta push và pop ở head thay vì ở tail?",
+    "questionEn": "When implementing a stack with a singly linked list, why do we push and pop at the head instead of the tail?",
+    "options": [
+      "Vì node ở tail không có thuộc tính `value`",
+      "Vì thêm vào tail luôn tốn O(n) kể cả khi có con trỏ `last`",
+      "Vì xoá tail cần đi từ head để tìm node cuối mới, tốn O(n)",
+      "Vì head luôn là node có giá trị nhỏ nhất"
+    ],
+    "optionsEn": [
+      "Because the tail node has no `value` property",
+      "Because adding at the tail is always O(n), even with a `last` pointer",
+      "Because removing the tail requires walking from the head to find the new last node, O(n)",
+      "Because the head always holds the smallest value"
+    ],
+    "answer": 2,
+    "explanation": "Node trong singly linked list không biết node đứng trước nó. Thêm vào tail là O(1) nếu có `last`, nhưng xoá tail thì phải duyệt cả danh sách để cập nhật `last`. Ở head, cả thêm và xoá chỉ cần đổi vài con trỏ: O(1).",
+    "explanationEn": "A singly linked node does not know its predecessor. Adding at the tail is O(1) with a `last` pointer, but removing the tail means traversing the list to update `last`. At the head both insert and remove are a couple of pointer changes: O(1)."
+  },
+  {
+    "id": "q6",
+    "question": "Độ phức tạp thời gian để kiểm tra một giá trị có nằm trong stack hay không (chỉ dùng các thao tác của stack) là gì?",
+    "questionEn": "What is the time complexity of checking whether a value is somewhere in a stack (using stack operations only)?",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(log n)",
+      "O(n²)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(1)",
+      "O(log n)",
+      "O(n²)"
+    ],
+    "answer": 0,
+    "explanation": "Stack chỉ lộ ra phần tử ở đỉnh, nên trong worst case phải xem lần lượt cả n phần tử. Chỉ thêm, lấy và peek ở đỉnh mới là O(1); stack không được sắp xếp nên không có O(log n).",
+    "explanationEn": "A stack only exposes its top, so in the worst case you must look at all n items one by one. Only push, pop and peek at the top are O(1); a stack is not sorted, so there is no O(log n)."
+  },
+  {
+    "id": "q7",
+    "question": "Method `pop` sau của một stack dựa trên linked list có lỗi gì?\n`pop() {\n  if (!this.top) return null;\n  const removed = this.top;\n  this.top = removed.next;\n  return removed.value;\n}`",
+    "questionEn": "What is wrong with this `pop` method of a linked-list stack?\n`pop() {\n  if (!this.top) return null;\n  const removed = this.top;\n  this.top = removed.next;\n  return removed.value;\n}`",
+    "options": [
+      "Nó trả về node thay vì giá trị",
+      "Nó bị lỗi khi stack chỉ còn một node",
+      "Nó xoá node ở đáy thay vì ở đỉnh",
+      "Nó không giảm `size`, nên `size` ngày càng sai"
+    ],
+    "optionsEn": [
+      "It returns the node instead of the value",
+      "It crashes when the stack has exactly one node",
+      "It removes the bottom node instead of the top",
+      "It never decrements `size`, so `size` drifts out of sync"
+    ],
+    "answer": 3,
+    "explanation": "Logic con trỏ đúng: với một node, `removed.next` là null nên `top` thành null. Nhưng thiếu `this.size--`, nên sau mỗi lần pop, `size` vẫn giữ giá trị cũ và không còn khớp với số phần tử thật.",
+    "explanationEn": "The pointer logic is fine: with one node, `removed.next` is null so `top` becomes null. But `this.size--` is missing, so after every pop `size` keeps its old value and no longer matches the real count."
+  },
+  {
+    "id": "q8",
+    "question": "Một queue rỗng thực hiện lần lượt các thao tác sau. Phần tử nào đang ở đầu hàng (front) sau cùng?\n`enqueue('A'); enqueue('B'); enqueue('C');\ndequeue(); enqueue('D'); dequeue();`",
+    "questionEn": "An empty queue performs these operations in order. Which item is at the front at the end?\n`enqueue('A'); enqueue('B'); enqueue('C');\ndequeue(); enqueue('D'); dequeue();`",
+    "options": [
+      "D",
+      "C",
+      "B",
+      "A"
+    ],
+    "optionsEn": [
+      "D",
+      "C",
+      "B",
+      "A"
+    ],
+    "answer": 1,
+    "explanation": "FIFO: dequeue đầu tiên lấy A, hàng còn [B, C]; enqueue D thành [B, C, D]; dequeue thứ hai lấy B, còn [C, D]. Đầu hàng là C. Nếu nhầm với stack sẽ ra D.",
+    "explanationEn": "FIFO: the first dequeue removes A, leaving [B, C]; enqueue D gives [B, C, D]; the second dequeue removes B, leaving [C, D]. The front is C. Treating it as a stack would wrongly give D."
+  },
+  {
+    "id": "q9",
+    "question": "Vì sao `arr.shift()` trên array của JavaScript là O(n)?",
+    "questionEn": "Why is `arr.shift()` on a JavaScript array O(n)?",
+    "options": [
+      "Vì nó phải tìm phần tử nhỏ nhất trước khi xoá",
+      "Vì nó sao chép array sang một vùng nhớ mới rồi mới xoá",
+      "Vì mọi phần tử còn lại phải dịch sang trái một vị trí và được đánh lại index",
+      "Vì nó phải duyệt đến cuối array để cập nhật `length`"
+    ],
+    "optionsEn": [
+      "Because it must find the smallest element before removing it",
+      "Because it copies the array into new memory before removing",
+      "Because every remaining element must slide left one slot and be re-indexed",
+      "Because it walks to the end of the array to update `length`"
+    ],
+    "answer": 2,
+    "explanation": "Phần tử của array gắn với index. Xoá index 0 nghĩa là phần tử ở index 1 thành index 0, index 2 thành 1, v.v. — n−1 lần dịch chuyển. `pop` thì chỉ bỏ ô cuối nên là O(1).",
+    "explanationEn": "Array elements are tied to indices. Removing index 0 means index 1 becomes 0, index 2 becomes 1, and so on — n−1 moves. `pop` just drops the last slot, so it is O(1)."
+  },
+  {
+    "id": "q10",
+    "question": "`queue` là array có n phần tử và `process` là O(1). Độ phức tạp thời gian của đoạn code sau là gì?\n`while (queue.length > 0) {\n  const job = queue.shift();\n  process(job);\n}`",
+    "questionEn": "`queue` is an array of n items and `process` is O(1). What is the time complexity of this code?\n`while (queue.length > 0) {\n  const job = queue.shift();\n  process(job);\n}`",
+    "options": [
+      "O(n²)",
+      "O(n)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "optionsEn": [
+      "O(n²)",
+      "O(n)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "answer": 0,
+    "explanation": "Vòng lặp chạy n lần, và mỗi lần `shift` dịch chuyển mọi phần tử còn lại: (n−1) + (n−2) + … + 0 ≈ n²/2 = O(n²). Dùng head index hoặc linked list sẽ đưa về O(n).",
+    "explanationEn": "The loop runs n times and each `shift` moves every remaining element: (n−1) + (n−2) + … + 0 ≈ n²/2 = O(n²). A head index or a linked list brings it down to O(n)."
+  },
+  {
+    "id": "q11",
+    "question": "Trong một queue dựa trên singly linked list có con trỏ `first` và `last`, enqueue và dequeue nên diễn ra ở đâu để cả hai đều O(1)?",
+    "questionEn": "In a queue built on a singly linked list with `first` and `last` pointers, where should enqueue and dequeue happen so both are O(1)?",
+    "options": [
+      "Cả hai đều ở head",
+      "Enqueue ở head, dequeue ở tail",
+      "Cả hai đều ở tail",
+      "Enqueue ở tail, dequeue ở head"
+    ],
+    "optionsEn": [
+      "Both at the head",
+      "Enqueue at the head, dequeue at the tail",
+      "Both at the tail",
+      "Enqueue at the tail, dequeue at the head"
+    ],
+    "answer": 3,
+    "explanation": "Để là FIFO, hai thao tác phải ở hai đầu khác nhau. Xoá ở tail của singly linked list là O(n), nên đầu xoá phải là head; còn thêm vào tail là O(1) nhờ `last`. Cả hai ở cùng một đầu sẽ thành stack.",
+    "explanationEn": "To be FIFO the two operations must use opposite ends. Removing at the tail of a singly linked list is O(n), so removal must be at the head, while adding at the tail is O(1) thanks to `last`. Using one end for both would make a stack."
+  },
+  {
+    "id": "q12",
+    "question": "Queue dưới đây có `enqueue` gắn node mới sau `this.last` (nếu `last` khác null). Queue đang có đúng một phần tử; ta gọi `dequeue()` rồi `enqueue(5)`. Chuyện gì xảy ra?\n`dequeue() {\n  if (!this.first) return null;\n  const removed = this.first;\n  this.first = removed.next;\n  this.size--;\n  return removed.value;\n}`",
+    "questionEn": "This queue's `enqueue` attaches the new node after `this.last` (when `last` is not null). The queue holds exactly one item; we call `dequeue()` then `enqueue(5)`. What happens?\n`dequeue() {\n  if (!this.first) return null;\n  const removed = this.first;\n  this.first = removed.next;\n  this.size--;\n  return removed.value;\n}`",
+    "options": [
+      "Mọi thứ hoạt động bình thường, 5 nằm ở đầu hàng",
+      "5 bị gắn vào node đã xoá; `first` vẫn null nên queue trông như rỗng dù size là 1",
+      "`dequeue()` ném lỗi vì `removed.next` là null",
+      "`enqueue(5)` tạo ra một vòng lặp vô hạn trong danh sách"
+    ],
+    "optionsEn": [
+      "Everything works, 5 is at the front",
+      "5 is attached to the removed node; `first` stays null, so the queue looks empty while size is 1",
+      "`dequeue()` throws because `removed.next` is null",
+      "`enqueue(5)` creates an infinite cycle in the list"
+    ],
+    "answer": 1,
+    "explanation": "Khi phần tử cuối rời đi, `first` thành null nhưng `last` vẫn trỏ vào node cũ. `enqueue` thấy `last` khác null nên gắn node 5 vào sau node đã bị tách rời, không ai trỏ tới nó từ `first`. Cần thêm `if (!this.first) this.last = null;`.",
+    "explanationEn": "When the last item leaves, `first` becomes null but `last` still points at the old node. `enqueue` sees a non-null `last` and hangs node 5 off that detached node, unreachable from `first`. The fix is `if (!this.first) this.last = null;`."
+  },
+  {
+    "id": "q13",
+    "question": "Bạn cần tìm số bước ít nhất giữa hai người trong một mạng bạn bè (đồ thị không trọng số). Cấu trúc nào nên giữ các node đang chờ duyệt?",
+    "questionEn": "You need the fewest hops between two people in a friendship network (an unweighted graph). Which structure should hold the nodes waiting to be explored?",
+    "options": [
+      "Một stack",
+      "Một min-heap",
+      "Một queue",
+      "Một array đã sắp xếp"
+    ],
+    "optionsEn": [
+      "A stack",
+      "A min-heap",
+      "A queue",
+      "A sorted array"
+    ],
+    "answer": 2,
+    "explanation": "BFS dùng queue: nhờ FIFO, các node được xử lý theo thứ tự khoảng cách từ điểm xuất phát, nên lần đầu chạm đích là đường ngắn nhất. Stack cho ra DFS, không đảm bảo ngắn nhất; heap chỉ cần khi cạnh có trọng số.",
+    "explanationEn": "BFS uses a queue: FIFO order processes nodes by distance from the start, so the first time it reaches the target is the shortest path. A stack gives DFS, which does not guarantee shortest paths; a heap is only needed for weighted edges."
+  },
+  {
+    "id": "q14",
+    "question": "Cấu trúc nào hỗ trợ thêm và lấy phần tử ở CẢ HAI đầu, mỗi thao tác O(1)?",
+    "questionEn": "Which structure supports adding and removing at BOTH ends, each in O(1)?",
+    "options": [
+      "Deque, hiện thực bằng doubly linked list hoặc circular buffer",
+      "Array thường của JavaScript dùng `unshift`/`shift` và `push`/`pop`",
+      "Singly linked list chỉ có con trỏ `head`",
+      "Stack hiện thực bằng array"
+    ],
+    "optionsEn": [
+      "A deque, implemented as a doubly linked list or a circular buffer",
+      "A plain JavaScript array using `unshift`/`shift` and `push`/`pop`",
+      "A singly linked list with only a `head` pointer",
+      "A stack implemented with an array"
+    ],
+    "answer": 0,
+    "explanation": "Deque (double-ended queue) được thiết kế cho O(1) ở cả hai đầu. Array thường có `unshift`/`shift` là O(n); singly linked list chỉ có head thì thao tác ở tail là O(n); stack chỉ dùng một đầu.",
+    "explanationEn": "A deque (double-ended queue) is designed for O(1) at both ends. A plain array has O(n) `unshift`/`shift`; a singly linked list with only a head is O(n) at the tail; a stack uses only one end."
+  },
+  {
+    "id": "q15",
+    "question": "Trong circular buffer dung lượng 8, `head = 6` và `size = 4`. Phần tử ở cuối (back) nằm ở index nào?",
+    "questionEn": "In a circular buffer with capacity 8, `head = 6` and `size = 4`. At which index is the back element?",
+    "options": [
+      "9",
+      "2",
+      "5",
+      "1"
+    ],
+    "optionsEn": [
+      "9",
+      "2",
+      "5",
+      "1"
+    ],
+    "answer": 3,
+    "explanation": "Index cuối = (head + size − 1) % capacity = (6 + 4 − 1) % 8 = 9 % 8 = 1. Các phần tử chiếm index 6, 7, 0, 1. Quên phép `%` sẽ ra 9, vượt ngoài array; quên −1 sẽ ra 2, là ô trống kế tiếp.",
+    "explanationEn": "Back index = (head + size − 1) % capacity = (6 + 4 − 1) % 8 = 9 % 8 = 1. The items occupy indices 6, 7, 0, 1. Forgetting the `%` gives 9, outside the array; forgetting the −1 gives 2, the next free slot."
+  },
+  {
+    "id": "q16",
+    "question": "Với queue xây từ hai stack (inbox/outbox, chỉ refill khi outbox rỗng), phát biểu nào về chi phí `dequeue` là ĐÚNG?",
+    "questionEn": "For a queue built from two stacks (inbox/outbox, refilling only when the outbox is empty), which statement about the cost of `dequeue` is TRUE?",
+    "options": [
+      "Luôn là O(n) vì mỗi lần đều chuyển toàn bộ phần tử",
+      "O(1) amortized, dù một lần riêng lẻ có thể tốn O(n)",
+      "Luôn là O(1) trong worst case cho mọi lần gọi",
+      "O(log n) vì mỗi lần chuyển giảm một nửa số phần tử"
+    ],
+    "optionsEn": [
+      "Always O(n), because every call moves all the elements",
+      "O(1) amortized, although a single call can cost O(n)",
+      "Always O(1) in the worst case for every call",
+      "O(log n), because each transfer halves the elements"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi phần tử chỉ được push vào inbox, chuyển sang outbox và pop ra đúng một lần, nên m thao tác tốn tổng O(m): O(1) amortized. Nhưng lần dequeue kích hoạt việc chuyển thì riêng nó tốn O(n).",
+    "explanationEn": "Each element is pushed to the inbox, moved to the outbox and popped exactly once, so m operations cost O(m) in total: O(1) amortized. The one dequeue that triggers a transfer, however, costs O(n) on its own."
+  },
+  {
+    "id": "q17",
+    "question": "Một queue xây từ hai stack (inbox/outbox) bắt đầu rỗng. Sau các thao tác sau, hai stack chứa gì (đỉnh ở bên phải)?\n`enqueue(1); enqueue(2);\ndequeue();\nenqueue(3);`",
+    "questionEn": "A queue built from two stacks (inbox/outbox) starts empty. After these operations, what do the two stacks hold (top on the right)?\n`enqueue(1); enqueue(2);\ndequeue();\nenqueue(3);`",
+    "options": [
+      "inbox [3], outbox []",
+      "inbox [], outbox [3, 2]",
+      "inbox [3], outbox [2]",
+      "inbox [2, 3], outbox []"
+    ],
+    "optionsEn": [
+      "inbox [3], outbox []",
+      "inbox [], outbox [3, 2]",
+      "inbox [3], outbox [2]",
+      "inbox [2, 3], outbox []"
+    ],
+    "answer": 2,
+    "explanation": "Sau hai enqueue: inbox [1, 2]. Dequeue thấy outbox rỗng nên chuyển hết: outbox [2, 1], rồi pop trả về 1, còn outbox [2]. Enqueue(3) luôn push vào inbox: inbox [3]. Lần dequeue sau sẽ lấy 2 từ outbox trước — đúng FIFO.",
+    "explanationEn": "After two enqueues: inbox [1, 2]. Dequeue finds the outbox empty and moves everything: outbox [2, 1], then pop returns 1, leaving outbox [2]. Enqueue(3) always pushes to the inbox: inbox [3]. The next dequeue takes 2 from the outbox first — correct FIFO."
+  }
+]

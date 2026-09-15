@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thao tác có độ phức tạp thời gian O(n).",
+      "promptEn": "Pick TWO operations that take O(n) time.",
+      "options": [
+        "push lên stack dựa trên linked list",
+        "`arr.shift()` để dequeue từ queue dựa trên array",
+        "dequeue từ queue dựa trên linked list có `first`/`last`",
+        "Tìm xem một giá trị có nằm trong stack hay không",
+        "popBack trên deque dựa trên circular buffer"
+      ],
+      "optionsEn": [
+        "push onto a linked-list stack",
+        "`arr.shift()` to dequeue from an array-backed queue",
+        "dequeue from a linked-list queue with `first`/`last`",
+        "Searching a stack for whether it contains a value",
+        "popBack on a circular-buffer deque"
+      ],
+      "answers": [1, 3],
+      "explanation": "`shift` phải đánh lại index cho mọi phần tử còn lại, và tìm kiếm trong stack phải xem lần lượt từng phần tử. Push ở head của linked list, dequeue ở `first` và popBack trên ring buffer đều chỉ đổi vài con trỏ hoặc index: O(1).",
+      "explanationEn": "`shift` re-indexes every remaining element, and searching a stack must look at the items one by one. Pushing at a linked-list head, dequeuing at `first` and popBack on a ring buffer each change only a pointer or index: O(1).",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI tình huống nên dùng queue (FIFO).",
+      "promptEn": "Pick TWO situations that call for a queue (FIFO).",
+      "options": [
+        "Undo thao tác sửa gần nhất trong editor",
+        "Nút Back của trình duyệt",
+        "Hàng đợi máy in phục vụ lệnh in theo thứ tự gửi",
+        "Theo dõi các lời gọi hàm đệ quy đang chờ",
+        "Tập các node chờ duyệt trong BFS"
+      ],
+      "optionsEn": [
+        "Undoing the most recent edit in an editor",
+        "A browser's Back button",
+        "A print spooler serving jobs in the order they were sent",
+        "Tracking pending recursive function calls",
+        "The frontier of nodes waiting to be explored in BFS"
+      ],
+      "answers": [2, 4],
+      "explanation": "Hàng đợi máy in và frontier của BFS đều xử lý theo thứ tự đến — FIFO. Undo, nút Back và call stack đều cần phần tử gần đây nhất trước — LIFO, tức stack.",
+      "explanationEn": "A print spooler and the BFS frontier both serve items in arrival order — FIFO. Undo, the Back button and the call stack all need the most recent item first — LIFO, a stack.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Viết tắt bốn chữ cái nào mô tả quy tắc của stack: phần tử vào sau cùng được lấy ra đầu tiên?",
+      "promptEn": "Which four-letter acronym describes a stack's rule: the last item added is the first one removed?",
+      "answer": "LIFO",
+      "answerEn": "LIFO",
+      "accept": [
+        "LIFO",
+        "last in first out",
+        "last-in first-out",
+        "last in, first out",
+        "vào sau ra trước",
+        "vao sau ra truoc"
+      ],
+      "explanation": "LIFO — Last In, First Out (vào sau, ra trước). Queue thì ngược lại: FIFO — First In, First Out.",
+      "explanationEn": "LIFO — Last In, First Out. A queue is the opposite: FIFO — First In, First Out.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Với queue xây từ hai stack (chỉ refill outbox khi nó rỗng), chi phí amortized của mỗi lần dequeue là bao nhiêu?",
+      "promptEn": "For a queue built from two stacks (refilling the outbox only when it is empty), what is the amortized cost of each dequeue?",
+      "answer": "O(1)",
+      "answerEn": "O(1)",
+      "accept": [
+        "O(1)",
+        "1",
+        "o 1",
+        "amortized O(1)",
+        "O(1) amortized",
+        "constant",
+        "constant time",
+        "hằng số",
+        "hang so"
+      ],
+      "explanation": "O(1) amortized. Mỗi phần tử chỉ được push, chuyển sang outbox và pop đúng một lần, nên tổng chi phí của m thao tác là O(m) — dù một lần dequeue riêng lẻ có thể tốn O(n).",
+      "explanationEn": "O(1) amortized. Each element is pushed, moved to the outbox and popped exactly once, so m operations cost O(m) in total — even though a single dequeue can cost O(n).",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi bài toán với cấu trúc dữ liệu phù hợp nhất.",
+      "promptEn": "Match each problem to the data structure that fits it best.",
+      "pairs": [
+        {
+          "left": "Undo / redo trong trình soạn thảo",
+          "leftEn": "Undo / redo in an editor",
+          "right": "Stack (LIFO)",
+          "rightEn": "Stack (LIFO)"
+        },
+        {
+          "left": "Xử lý job chạy nền theo thứ tự đến",
+          "leftEn": "Processing background jobs in arrival order",
+          "right": "Queue (FIFO)",
+          "rightEn": "Queue (FIFO)"
+        },
+        {
+          "left": "Giá trị lớn nhất trong cửa sổ trượt",
+          "leftEn": "Sliding window maximum",
+          "right": "Deque",
+          "rightEn": "Deque"
+        },
+        {
+          "left": "Queue amortized O(1) chỉ dùng push/pop",
+          "leftEn": "An amortized O(1) queue using only push/pop",
+          "right": "Hai stack (inbox + outbox)",
+          "rightEn": "Two stacks (inbox + outbox)"
+        }
+      ],
+      "explanation": "Undo cần thao tác gần nhất trước (stack); job theo thứ tự đến là FIFO (queue); cửa sổ trượt cần thêm/bỏ ở cả hai đầu (monotonic deque); và đảo thứ tự hai lần qua inbox/outbox biến LIFO thành FIFO.",
+      "explanationEn": "Undo needs the most recent action first (stack); jobs in arrival order are FIFO (queue); a sliding window adds and drops at both ends (monotonic deque); and reversing twice through inbox/outbox turns LIFO into FIFO.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Sắp xếp các bước của `dequeue()` trong queue dựa trên linked list theo đúng thứ tự.",
+      "promptEn": "Put the steps of `dequeue()` in a linked-list queue in the correct order.",
+      "items": [
+        {
+          "text": "Nếu `first` là null, trả về null",
+          "textEn": "If `first` is null, return null"
+        },
+        {
+          "text": "Lưu `first` vào biến tạm `removed`",
+          "textEn": "Store `first` in a temporary variable `removed`"
+        },
+        {
+          "text": "Gán `first = removed.next`",
+          "textEn": "Set `first = removed.next`"
+        },
+        {
+          "text": "Nếu `first` giờ là null, gán `last = null`",
+          "textEn": "If `first` is now null, set `last = null`"
+        },
+        {
+          "text": "Giảm `size` đi 1",
+          "textEn": "Decrement `size` by 1"
+        },
+        {
+          "text": "Trả về `removed.value`",
+          "textEn": "Return `removed.value`"
+        }
+      ],
+      "explanation": "Kiểm tra rỗng trước, giữ tham chiếu tới node đầu trước khi dời `first`, reset `last` nếu queue vừa rỗng (tránh con trỏ `last` treo), cập nhật `size`, cuối cùng trả về giá trị đã lưu.",
+      "explanationEn": "Check for empty first, keep a reference to the front node before moving `first`, reset `last` if the queue just emptied (avoiding a stale `last`), update `size`, and finally return the saved value.",
+      "id": "d6"
+    }
+  ]
+}

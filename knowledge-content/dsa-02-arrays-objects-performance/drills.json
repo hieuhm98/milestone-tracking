@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thao tác mảng có độ phức tạp thời gian O(1).",
+      "promptEn": "Pick TWO array operations that run in O(1) time.",
+      "options": [
+        "arr.shift()",
+        "arr.pop()",
+        "arr.unshift(x)",
+        "arr.includes(x)",
+        "arr[i] với một index i cho trước"
+      ],
+      "optionsEn": [
+        "arr.shift()",
+        "arr.pop()",
+        "arr.unshift(x)",
+        "arr.includes(x)",
+        "arr[i] for a given index i"
+      ],
+      "answers": [1, 4],
+      "explanation": "Xoá ở cuối và truy cập theo index không làm phần tử nào dịch chỗ, nên là O(1). Thêm hoặc xoá ở đầu buộc mọi phần tử nhận index mới (O(n)), còn includes phải quét từng ô (O(n)).",
+      "explanationEn": "Removing from the end and accessing by index move no other element, so they are O(1). Adding or removing at the front gives every element a new index (O(n)), and includes has to scan slot by slot (O(n)).",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI lý do nên dùng Map thay vì object thường.",
+      "promptEn": "Pick TWO reasons to choose a Map over a plain object.",
+      "options": [
+        "Map tra cứu theo key nhanh hơn object một bậc Big O",
+        "Map chuyển sang JSON trực tiếp bằng JSON.stringify",
+        "Map dùng được object hoặc function làm key",
+        "Map tự sắp xếp key theo thứ tự bảng chữ cái",
+        "Map có size là O(1), còn đếm key của object là O(n)"
+      ],
+      "optionsEn": [
+        "Map looks up keys a whole Big O class faster than an object",
+        "Map serialises to JSON directly with JSON.stringify",
+        "Map can use objects or functions as keys",
+        "Map keeps its keys sorted alphabetically",
+        "Map has an O(1) size, while counting an object's keys is O(n)"
+      ],
+      "answers": [2, 4],
+      "explanation": "Map giữ nguyên mọi kiểu giá trị làm key (object thường ép key thành string) và có size O(1) thay vì Object.keys(obj).length O(n). Tra cứu của cả hai đều O(1) trung bình, Map giữ thứ tự thêm vào chứ không sắp xếp, và JSON.stringify(map) chỉ cho ra \"{}\".",
+      "explanationEn": "A Map keeps any value as a key (plain objects coerce keys to strings) and has an O(1) size instead of an O(n) Object.keys(obj).length. Both look up in O(1) on average, a Map keeps insertion order rather than sorting, and JSON.stringify(map) just gives \"{}\".",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của arr.sort((a, b) => a - b) với n phần tử là gì?",
+      "promptEn": "What is the time complexity of arr.sort((a, b) => a - b) on n elements?",
+      "answer": "O(n log n)",
+      "answerEn": "O(n log n)",
+      "accept": [
+        "O(n log n)",
+        "n log n",
+        "nlogn",
+        "o(nlogn)",
+        "n logn",
+        "nlog n",
+        "linearithmic",
+        "tuyen tinh logarit"
+      ],
+      "explanation": "O(n log n). sort là sắp xếp dựa trên so sánh (V8 dùng TimSort), và sắp xếp so sánh không thể nhanh hơn O(n log n) trong trường hợp tổng quát.",
+      "explanationEn": "O(n log n). sort is a comparison sort (V8 uses TimSort), and comparison sorting cannot beat O(n log n) in the general case.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Một tính chất của string trong JavaScript khiến mọi \"chỉnh sửa\" đều tạo ra chuỗi mới. Tính chất đó gọi là gì (một từ tiếng Anh)?",
+      "promptEn": "Which property of JavaScript strings means every \"edit\" creates a new string (one word)?",
+      "answer": "Immutable",
+      "answerEn": "Immutable",
+      "accept": [
+        "immutable",
+        "immutability",
+        "bat bien",
+        "bất biến",
+        "tinh bat bien",
+        "tính bất biến"
+      ],
+      "explanation": "Immutable (bất biến). Không thể sửa string tại chỗ, nên nối chuỗi lặp đi lặp lại sẽ sao chép; hãy gom các phần vào mảng rồi join một lần.",
+      "explanationEn": "Immutable. A string cannot be changed in place, so repeated concatenation copies; collect the parts in an array and join once.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thao tác với độ phức tạp thời gian đúng.",
+      "promptEn": "Match each operation to its time complexity.",
+      "pairs": [
+        {
+          "left": "set.has(x)",
+          "leftEn": "set.has(x)",
+          "right": "O(1) trung bình",
+          "rightEn": "O(1) average"
+        },
+        {
+          "left": "arr.unshift(x)",
+          "leftEn": "arr.unshift(x)",
+          "right": "O(n)",
+          "rightEn": "O(n)"
+        },
+        {
+          "left": "arr.sort((a, b) => a - b)",
+          "leftEn": "arr.sort((a, b) => a - b)",
+          "right": "O(n log n)",
+          "rightEn": "O(n log n)"
+        },
+        {
+          "left": "users.filter((u) => banned.includes(u.id))",
+          "leftEn": "users.filter((u) => banned.includes(u.id))",
+          "right": "O(n · m)",
+          "rightEn": "O(n · m)"
+        }
+      ],
+      "explanation": "Set tra cứu bằng băm; unshift đánh số lại mọi phần tử; sort là sắp xếp so sánh; còn includes O(m) nằm trong callback chạy n lần nên nhân lên thành O(n · m).",
+      "explanationEn": "A Set looks up by hashing; unshift re-indexes every element; sort is a comparison sort; and an O(m) includes inside a callback that runs n times multiplies to O(n · m).",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp các cách kiểm tra \"x có trong tập dữ liệu n phần tử không\" từ NHANH nhất đến CHẬM nhất (theo Big O).",
+      "promptEn": "Order these ways to check \"is x among n items\" from FASTEST to SLOWEST (by Big O).",
+      "items": [
+        {
+          "text": "set.has(x) trên một Set đã dựng sẵn — O(1)",
+          "textEn": "set.has(x) on a Set built earlier — O(1)"
+        },
+        {
+          "text": "Binary search trên mảng đã sắp xếp — O(log n)",
+          "textEn": "Binary search on an already sorted array — O(log n)"
+        },
+        {
+          "text": "arr.includes(x) trên mảng chưa sắp xếp — O(n)",
+          "textEn": "arr.includes(x) on an unsorted array — O(n)"
+        },
+        {
+          "text": "Sắp xếp mảng rồi mới binary search — O(n log n)",
+          "textEn": "Sort the array first, then binary search — O(n log n)"
+        },
+        {
+          "text": "Với mỗi phần tử, gọi arr.slice() rồi includes — O(n²)",
+          "textEn": "For every element, call arr.slice() then includes — O(n²)"
+        }
+      ],
+      "explanation": "Băm cho O(1); chia đôi mỗi bước cho O(log n); quét một lượt là O(n); sắp xếp trước tốn O(n log n) và lấn át phần tìm kiếm; còn sao chép và quét bên trong một vòng lặp là O(n²).",
+      "explanationEn": "Hashing gives O(1); halving each step gives O(log n); one scan is O(n); sorting first costs O(n log n), which dominates the search; and copying and scanning inside a loop is O(n²).",
+      "id": "d6"
+    }
+  ]
+}

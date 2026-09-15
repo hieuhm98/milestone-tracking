@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về cache và artifact trong CI.",
+      "promptEn": "Pick TWO statements that are true about caches and artifacts in CI.",
+      "options": [
+        "Artifact nên được key theo hash của lockfile",
+        "Mất cache chỉ khiến lần chạy chậm hơn, không được làm kết quả sai",
+        "Nên cache node_modules và bỏ qua npm ci khi cache trúng",
+        "Muốn chuyển output build từ job này sang job khác thì dùng artifact",
+        "Cache được giữ vĩnh viễn nên có thể thay cho registry"
+      ],
+      "optionsEn": [
+        "Artifacts should be keyed by the lockfile hash",
+        "Losing a cache only makes the run slower and must never make the result wrong",
+        "Cache node_modules and skip npm ci on a cache hit",
+        "To hand build output from one job to another, use an artifact",
+        "Caches are kept forever, so they can replace a registry"
+      ],
+      "answers": [1, 3],
+      "explanation": "Cache là thứ tăng tốc có thể vứt bỏ, key theo hash lockfile, và bị xoá khi lâu không dùng. Artifact là output bắt buộc của một lần chạy, dùng để chuyển giao giữa các job. Bỏ qua npm ci khi cache trúng khiến dependency cũ lọt vào build.",
+      "explanationEn": "A cache is a disposable speed-up keyed on the lockfile hash and evicted when unused. An artifact is a required output of a run, used to hand results between jobs. Skipping npm ci on a hit lets stale dependencies into the build.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI biện pháp giảm rủi ro chuỗi cung ứng trong pipeline.",
+      "promptEn": "Pick TWO measures that reduce supply-chain risk in a pipeline.",
+      "options": [
+        "Pin action bên thứ ba bằng full commit SHA",
+        "Deploy image theo tag latest để luôn có bản vá mới nhất",
+        "Dùng npm install thay cho npm ci để lấy version mới hơn",
+        "Lưu access key cloud trong YAML của workflow",
+        "Sinh SBOM và ký image bằng cosign"
+      ],
+      "optionsEn": [
+        "Pin third-party actions by full commit SHA",
+        "Deploy images by the latest tag to always get the newest patches",
+        "Use npm install instead of npm ci to pick up newer versions",
+        "Store cloud access keys in the workflow YAML",
+        "Generate an SBOM and sign the image with cosign"
+      ],
+      "answers": [0, 4],
+      "explanation": "SHA bất biến nên không bị ảnh hưởng khi tag bị trỏ lại; SBOM cho biết artifact chứa gì, chữ ký chứng minh nguồn gốc. Tag latest và npm install làm build không tái lập được, còn key trong YAML là lộ secret.",
+      "explanationEn": "A SHA is immutable, so repointed tags cannot affect it; an SBOM says what the artifact contains and a signature proves where it came from. The latest tag and npm install make builds non-reproducible, and keys in YAML are leaked secrets.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Event nào của GitHub Actions chạy trong ngữ cảnh repo gốc kèm secret cho PR từ fork, và là nguồn gốc của lỗ hổng \"pwn request\"?",
+      "promptEn": "Which GitHub Actions event runs in the base repo's context with secrets for fork PRs, and is the source of the \"pwn request\" vulnerability?",
+      "answer": "pull_request_target",
+      "answerEn": "pull_request_target",
+      "accept": [
+        "pull_request_target",
+        "pull request target",
+        "on pull_request_target"
+      ],
+      "explanation": "pull_request_target. Khác với pull_request (PR từ fork không có secret), nó chạy với secret của repo gốc — an toàn chỉ khi không checkout và chạy code của PR.",
+      "explanationEn": "pull_request_target. Unlike pull_request (fork PRs get no secrets), it runs with the base repo's secrets — safe only if it never checks out and runs the PR's code.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Viết tắt nào chỉ danh sách máy đọc được gồm mọi thành phần và phiên bản bên trong một artifact phần mềm?",
+      "promptEn": "Which acronym names the machine-readable list of every component and version inside a software artifact?",
+      "answer": "SBOM",
+      "answerEn": "SBOM",
+      "accept": [
+        "sbom",
+        "software bill of materials",
+        "bill of materials"
+      ],
+      "explanation": "SBOM (software bill of materials). Hai định dạng chuẩn là SPDX và CycloneDX; Syft và Trivy đều sinh được SBOM ngay trong CI.",
+      "explanationEn": "SBOM (software bill of materials). The two standard formats are SPDX and CycloneDX; Syft and Trivy can both generate one inside CI.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi khái niệm GitHub Actions với mô tả đúng.",
+      "promptEn": "Match each GitHub Actions concept to what it is.",
+      "pairs": [
+        {
+          "left": "Workflow",
+          "leftEn": "Workflow",
+          "right": "File YAML trong .github/workflows, được kích hoạt bởi event",
+          "rightEn": "A YAML file in .github/workflows, triggered by events"
+        },
+        {
+          "left": "Job",
+          "leftEn": "Job",
+          "right": "Nhóm step chạy trên một runner mới, mặc định song song với các nhóm khác",
+          "rightEn": "A group of steps on a fresh runner, parallel with the others by default"
+        },
+        {
+          "left": "Step",
+          "leftEn": "Step",
+          "right": "Một lệnh run hoặc một action uses, dùng chung workspace",
+          "rightEn": "One run command or uses action, sharing the workspace"
+        },
+        {
+          "left": "Runner",
+          "leftEn": "Runner",
+          "right": "Máy hosted hoặc self-hosted thực thi công việc",
+          "rightEn": "The hosted or self-hosted machine that executes the work"
+        }
+      ],
+      "explanation": "Workflow chứa job, job chứa step, và job chạy trên runner. Điểm hay bị nhầm: các step trong một job dùng chung ổ đĩa, còn các job thì không.",
+      "explanationEn": "A workflow holds jobs, a job holds steps, and a job runs on a runner. The common trap: steps in one job share a disk, separate jobs do not.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp các stage của một CI pipeline theo thứ tự rẻ và dễ fail nhất chạy trước.",
+      "promptEn": "Put these CI pipeline stages in order, cheapest and most failure-prone first.",
+      "items": [
+        {
+          "text": "Lint và type-check",
+          "textEn": "Lint and type-check"
+        },
+        {
+          "text": "Unit test",
+          "textEn": "Unit tests"
+        },
+        {
+          "text": "Build artifact",
+          "textEn": "Build the artifact"
+        },
+        {
+          "text": "Scan bảo mật dependency và image",
+          "textEn": "Security scan of dependencies and image"
+        },
+        {
+          "text": "Publish artifact có version lên registry",
+          "textEn": "Publish the versioned artifact to the registry"
+        }
+      ],
+      "explanation": "Fail fast: lỗi vặt bị bắt trong vài giây trước khi tốn phút cho test và build. Scan cần artifact đã build, và chỉ artifact đã qua mọi cổng kiểm soát mới được publish.",
+      "explanationEn": "Fail fast: trivial errors are caught in seconds before minutes are spent on tests and builds. Scanning needs the built artifact, and only an artifact that passed every gate gets published.",
+      "id": "d6"
+    }
+  ]
+}

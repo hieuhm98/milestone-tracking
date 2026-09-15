@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Mô tả nào đúng nhất về trách nhiệm cốt lõi của một Solutions Architect?",
+    "questionEn": "Which description best captures the core responsibility of a Solutions Architect?",
+    "options": [
+      "Viết phần lớn code lõi của hệ thống để đảm bảo chất lượng",
+      "Quản lý nhân sự và tiến độ của các đội phát triển",
+      "Biến bài toán kinh doanh thành giải pháp kỹ thuật trải qua nhiều hệ thống và bảo vệ được các quyết định",
+      "Định ra chiến lược công nghệ 5 năm cho toàn bộ tổ chức"
+    ],
+    "optionsEn": [
+      "Write most of the core code so that quality is guaranteed",
+      "Manage the people and the schedule of the development teams",
+      "Turn a business problem into a technical solution across systems and defend the decisions",
+      "Set the five-year technology strategy for the whole organisation"
+    ],
+    "answer": 2,
+    "explanation": "SA chịu trách nhiệm đầu-cuối cho một giải pháp: từ yêu cầu, phương án, đánh đổi tới quyết định và giao tiếp. Viết code lõi là việc của developer/tech lead, quản lý người là việc của engineering manager, còn chiến lược toàn tổ chức nhiều năm là phạm vi của enterprise architect.",
+    "explanationEn": "An SA owns one solution end to end: requirements, options, trade-offs, decisions and communication. Writing the core code belongs to developers and tech leads, managing people to an engineering manager, and multi-year organisation-wide strategy is the enterprise architect's scope."
+  },
+  {
+    "id": "q2",
+    "question": "Một tập đoàn có hơn 200 ứng dụng, nhiều cái trùng chức năng. Ban lãnh đạo muốn một capability map, một roadmap 3 năm để loại bỏ hệ thống trùng lặp và bộ tiêu chuẩn công nghệ chung. Vai trò nào phù hợp nhất để dẫn dắt việc này?",
+    "questionEn": "A group runs more than 200 applications, many with overlapping functions. Leadership wants a capability map, a three-year roadmap to retire duplicates and a shared set of technology standards. Which role is the best fit to lead this?",
+    "options": [
+      "Software architect của ứng dụng lớn nhất",
+      "Enterprise architect",
+      "Cloud architect phụ trách landing zone",
+      "Solutions Architect của dự án gần nhất"
+    ],
+    "optionsEn": [
+      "The software architect of the largest application",
+      "An enterprise architect",
+      "The cloud architect who owns the landing zone",
+      "The Solutions Architect of the most recent project"
+    ],
+    "answer": 1,
+    "explanation": "Capability map, roadmap nhiều năm và tiêu chuẩn cho toàn danh mục là phạm vi rộng nhất — đúng việc của enterprise architect. SA tập trung vào một giải pháp, software architect vào bên trong một hệ thống, cloud architect vào nền tảng cloud.",
+    "explanationEn": "Capability maps, multi-year roadmaps and portfolio-wide standards are the widest scope there is — the enterprise architect's job. An SA focuses on one solution, a software architect on the inside of one system, a cloud architect on the cloud platform."
+  },
+  {
+    "id": "q3",
+    "question": "Điểm khác biệt hữu ích nhất giữa software architect và Solutions Architect là gì?",
+    "questionEn": "What is the most useful distinction between a software architect and a Solutions Architect?",
+    "options": [
+      "Software architect chỉ làm on-premises, SA chỉ làm trên cloud",
+      "SA không cần hiểu kỹ thuật, còn software architect thì cần",
+      "Software architect chịu trách nhiệm chi phí, SA chịu trách nhiệm chất lượng code",
+      "Software architect đi sâu vào cấu trúc bên trong một hệ thống; SA nhìn một giải pháp trải qua nhiều hệ thống"
+    ],
+    "optionsEn": [
+      "Software architects only work on-premises, SAs only in the cloud",
+      "An SA does not need technical depth, a software architect does",
+      "The software architect owns cost, the SA owns code quality",
+      "A software architect goes deep into one system's internals; an SA spans one solution across several systems"
+    ],
+    "answer": 3,
+    "explanation": "Phân biệt theo phạm vi: software architect quyết module, pattern, cấu trúc bên trong một codebase; SA quyết những hệ thống nào tham gia và tích hợp ra sao. Cả hai đều cần chiều sâu kỹ thuật, và không vai trò nào bị giới hạn theo nơi chạy.",
+    "explanationEn": "The split is scope: a software architect decides modules, patterns and structure inside one codebase; an SA decides which systems take part and how they integrate. Both need technical depth, and neither role is defined by where things are hosted."
+  },
+  {
+    "id": "q4",
+    "question": "Phát biểu nào là yêu cầu chức năng (functional requirement)?",
+    "questionEn": "Which statement is a functional requirement?",
+    "options": [
+      "Khách hàng có thể huỷ đơn hàng trước khi đơn được giao cho đơn vị vận chuyển",
+      "API đặt hàng phải có độ trễ p95 dưới 300 ms ở 2.000 request/s",
+      "Hệ thống phải đạt availability 99,95% mỗi tháng",
+      "Dữ liệu khách hàng phải được mã hoá khi lưu trữ"
+    ],
+    "optionsEn": [
+      "A customer can cancel an order before it is handed to the courier",
+      "The ordering API must have p95 latency under 300 ms at 2,000 requests/s",
+      "The system must reach 99.95% monthly availability",
+      "Customer data must be encrypted at rest"
+    ],
+    "answer": 0,
+    "explanation": "Yêu cầu chức năng mô tả hệ thống LÀM GÌ — huỷ đơn là một hành vi. Độ trễ, availability và mã hoá mô tả hệ thống làm việc đó TỐT tới đâu hoặc AN TOÀN ra sao, nên là yêu cầu phi chức năng.",
+    "explanationEn": "A functional requirement says WHAT the system does — cancelling an order is a behaviour. Latency, availability and encryption say how WELL or how SAFELY it does things, so they are non-functional requirements."
+  },
+  {
+    "id": "q5",
+    "question": "Product owner viết: \"Trang thanh toán phải nhanh và luôn sẵn sàng.\" Cách viết lại nào hữu ích nhất cho kiến trúc sư?",
+    "questionEn": "The product owner writes: \"The checkout page must be fast and always available.\" Which rewrite is most useful to an architect?",
+    "options": [
+      "Trang thanh toán phải dùng cache và CDN để luôn nhanh",
+      "Trang thanh toán phải nhanh hơn trang của đối thủ",
+      "Ở đỉnh 3.000 request/s, checkout có p95 dưới 400 ms, lỗi dưới 0,1%, availability 99,95% mỗi tháng",
+      "Trang thanh toán phải chạy trên ít nhất ba server"
+    ],
+    "optionsEn": [
+      "The checkout page must use a cache and a CDN so it is always fast",
+      "The checkout page must be faster than the competitor's",
+      "At a peak of 3,000 requests/s, checkout has p95 under 400 ms, errors under 0.1%, 99.95% monthly availability",
+      "The checkout page must run on at least three servers"
+    ],
+    "answer": 2,
+    "explanation": "Một kịch bản thuộc tính chất lượng tốt có môi trường (đỉnh tải), kích thích và thước đo phản hồi kiểm thử được. Các phương án khác hoặc vẫn mơ hồ, hoặc nhảy thẳng vào giải pháp (cache, số server) thay vì phát biểu yêu cầu.",
+    "explanationEn": "A good quality attribute scenario has an environment (peak load), a stimulus and a testable response measure. The other rewrites are either still vague or jump straight to a solution (cache, server count) instead of stating the requirement."
+  },
+  {
+    "id": "q6",
+    "question": "Hợp đồng cam kết availability 99,95% cho mỗi tháng 30 ngày. Tổng thời gian downtime tối đa cho phép mỗi tháng xấp xỉ bao nhiêu?",
+    "questionEn": "A contract commits to 99.95% availability per 30-day month. Roughly how much total downtime is allowed each month?",
+    "options": [
+      "~4,3 phút",
+      "~21,6 phút",
+      "~43,2 phút",
+      "~4,4 giờ"
+    ],
+    "optionsEn": [
+      "~4.3 minutes",
+      "~21.6 minutes",
+      "~43.2 minutes",
+      "~4.4 hours"
+    ],
+    "answer": 1,
+    "explanation": "Một tháng 30 ngày có 43.200 phút; 0,05% của nó là 21,6 phút. 43,2 phút là mức 99,9%/tháng, 4,3 phút là 99,99%/tháng, còn khoảng 4,4 giờ là downtime cả NĂM ở mức 99,95%.",
+    "explanationEn": "A 30-day month has 43,200 minutes; 0.05% of that is 21.6 minutes. 43.2 minutes is 99.9% per month, 4.3 minutes is 99.99% per month, and about 4.4 hours is the downtime for a whole YEAR at 99.95%."
+  },
+  {
+    "id": "q7",
+    "question": "Trong buổi discovery, bạn nghe được: \"Theo quy định, dữ liệu thanh toán của khách hàng Việt Nam phải được lưu tại Việt Nam.\" Nên xếp phát biểu này vào loại nào?",
+    "questionEn": "During discovery you hear: \"By regulation, payment data of Vietnamese customers must be stored in Vietnam.\" How should you classify this statement?",
+    "options": [
+      "Yêu cầu chức năng, vì nó mô tả nơi lưu dữ liệu",
+      "Giả định, cần kiểm chứng bằng load test",
+      "Thuộc tính chất lượng có thể đánh đổi lấy chi phí thấp hơn",
+      "Ràng buộc — một điều kiện cố định mà mọi phương án thiết kế phải thoả mãn"
+    ],
+    "optionsEn": [
+      "A functional requirement, because it describes where data is stored",
+      "An assumption, to be verified with a load test",
+      "A quality attribute that can be traded for lower cost",
+      "A constraint — a fixed condition every design option must satisfy"
+    ],
+    "answer": 3,
+    "explanation": "Quy định pháp lý về nơi lưu dữ liệu là ràng buộc: nó không thương lượng được và loại bỏ ngay những phương án vi phạm. Coi ràng buộc như thứ có thể đánh đổi là một lỗi kinh điển; và load test không liên quan tới việc kiểm chứng một quy định.",
+    "explanationEn": "A legal data-residency rule is a constraint: it is not negotiable and immediately rules out options that break it. Treating a constraint as something tradeable is a classic mistake, and a load test has nothing to do with verifying a regulation."
+  },
+  {
+    "id": "q8",
+    "question": "Một startup có 4 engineer, cần ra MVP trong 3 tháng, nhu cầu thị trường chưa rõ, ngân sách vận hành hạn chế. Đề xuất kiến trúc nào hợp lý nhất?",
+    "questionEn": "A startup has 4 engineers, must ship an MVP in 3 months, faces uncertain demand and has a tight operations budget. Which architecture proposal is most sensible?",
+    "options": [
+      "Modular monolith trên managed service, ranh giới module rõ để tách sau nếu cần",
+      "Hai mươi microservice trên Kubernetes tự quản lý để sẵn sàng cho quy mô lớn",
+      "Triển khai active-active trên ba region ngay từ ngày đầu",
+      "Tự xây message broker và database riêng để tránh vendor lock-in"
+    ],
+    "optionsEn": [
+      "A modular monolith on managed services, with clear module boundaries to split later if needed",
+      "Twenty microservices on self-managed Kubernetes to be ready for massive scale",
+      "An active-active deployment across three regions from day one",
+      "Build our own message broker and database to avoid vendor lock-in"
+    ],
+    "answer": 0,
+    "explanation": "Với đội nhỏ, thời gian gấp và nhu cầu chưa chắc, điều cần tối ưu là tốc độ ra thị trường và ít gánh nặng vận hành. Microservices, multi-region hay tự xây hạ tầng đều trả giá lớn bằng độ phức tạp cho những vấn đề (quy mô, deploy độc lập giữa nhiều đội) mà startup chưa có.",
+    "explanationEn": "With a small team, a hard deadline and uncertain demand, the thing to optimise is time to market and low operational load. Microservices, multi-region or home-built infrastructure all pay heavily in complexity for problems — scale, independent deployment across many teams — the startup does not have yet."
+  },
+  {
+    "id": "q9",
+    "question": "Quyết định nào xứng đáng được đầu tư prototype và review kỹ nhất vì là \"cửa một chiều\" (khó đảo ngược)?",
+    "questionEn": "Which decision most deserves prototypes and a thorough review because it is a \"one-way door\" (hard to reverse)?",
+    "options": [
+      "Chọn thư viện logging cho một service",
+      "Chọn cỡ instance ban đầu cho môi trường staging",
+      "Chọn mô hình dữ liệu và database engine cho dữ liệu giao dịch lõi",
+      "Chọn màu sắc cho dashboard giám sát"
+    ],
+    "optionsEn": [
+      "Choosing the logging library for one service",
+      "Choosing the initial instance size for the staging environment",
+      "Choosing the data model and database engine for core transactional data",
+      "Choosing the colours of the monitoring dashboard"
+    ],
+    "answer": 2,
+    "explanation": "Dữ liệu lõi tích tụ theo thời gian, và đổi mô hình dữ liệu hay database engine sau này nghĩa là migration tốn kém, rủi ro. Thư viện logging, cỡ instance hay màu dashboard đều đổi được nhanh và rẻ — nên quyết nhanh.",
+    "explanationEn": "Core data accumulates over time, and changing its data model or database engine later means an expensive, risky migration. A logging library, an instance size or dashboard colours can all be changed quickly and cheaply — decide those fast."
+  },
+  {
+    "id": "q10",
+    "question": "Bạn được giao: \"Xây một nền tảng tích hợp cho đối tác.\" Trước khi chọn bất kỳ công nghệ nào, việc nên làm đầu tiên là gì?",
+    "questionEn": "You are asked to \"build an integration platform for partners\". Before choosing any technology, what should you do first?",
+    "options": [
+      "Vẽ sơ đồ deployment chi tiết trên AWS để ước lượng chi phí",
+      "Làm rõ mục tiêu kinh doanh, các bên liên quan, NFR có con số và các ràng buộc",
+      "Chọn API gateway phổ biến nhất rồi điều chỉnh yêu cầu cho phù hợp",
+      "Viết ADR cho quyết định dùng kiến trúc event-driven"
+    ],
+    "optionsEn": [
+      "Draw a detailed AWS deployment diagram to estimate cost",
+      "Clarify business drivers, stakeholders, NFRs with numbers and constraints",
+      "Pick the most popular API gateway and adapt the requirements to it",
+      "Write an ADR for the decision to use an event-driven architecture"
+    ],
+    "answer": 1,
+    "explanation": "Vòng lặp kiến trúc bắt đầu bằng bước hiểu vấn đề. Không có số lượng đối tác, lưu lượng, SLA hay ràng buộc bảo mật thì mọi sơ đồ, ADR hay lựa chọn sản phẩm đều chỉ là đoán — và chọn công cụ trước rồi uốn yêu cầu theo là làm ngược.",
+    "explanationEn": "The architecture loop starts with understanding. Without partner counts, volumes, SLAs or security constraints, any diagram, ADR or product choice is a guess — and picking the tool first and bending the requirements to fit is backwards."
+  },
+  {
+    "id": "q11",
+    "question": "Một năm trước, ADR-0007 (trạng thái Accepted) chọn tự vận hành Kafka. Nay đội quyết định chuyển sang một hàng đợi managed. Cách xử lý ADR đúng là gì?",
+    "questionEn": "A year ago ADR-0007 (status Accepted) chose to self-host Kafka. The team has now decided to move to a managed queue. What is the right way to handle the ADRs?",
+    "options": [
+      "Sửa nội dung ADR-0007 cho khớp quyết định mới để tránh gây nhầm lẫn",
+      "Xoá ADR-0007 khỏi repo vì nó không còn đúng",
+      "Chỉ ghi quyết định mới vào wiki, ADR là tài liệu lịch sử không cần cập nhật",
+      "Viết ADR mới supersede ADR-0007, đổi trạng thái ADR-0007 thành Superseded và liên kết hai chiều"
+    ],
+    "optionsEn": [
+      "Edit ADR-0007's content to match the new decision to avoid confusion",
+      "Delete ADR-0007 from the repo because it is no longer true",
+      "Record the new decision only in the wiki; ADRs are history and need no updates",
+      "Write a new ADR that supersedes ADR-0007, mark ADR-0007 as Superseded and link both ways"
+    ],
+    "answer": 3,
+    "explanation": "ADR đã accepted là bất biến. Lý do ta đổi ý là thông tin quý, nên giữ bản cũ, đánh dấu Superseded và trỏ tới ADR mới. Sửa hay xoá bản cũ sẽ làm mất lịch sử đó; tách quyết định sang wiki khiến nó rời xa code.",
+    "explanationEn": "Accepted ADRs are immutable. Why we changed our mind is valuable, so keep the old record, mark it Superseded and point to the new one. Editing or deleting the old record destroys that history; moving the decision to a wiki separates it from the code."
+  },
+  {
+    "id": "q12",
+    "question": "Đọc bản ADR sau. Mục quan trọng nào đang bị thiếu?\n`ADR-0012: Use DynamoDB for session storage\nStatus: Accepted\nContext:\n  Sessions are read on every request, 8,000 reads/s at peak.\n  Sessions expire after 30 minutes.\nDecision:\n  Store sessions in DynamoDB with a TTL attribute.`",
+    "questionEn": "Read this ADR. Which important section is missing?\n`ADR-0012: Use DynamoDB for session storage\nStatus: Accepted\nContext:\n  Sessions are read on every request, 8,000 reads/s at peak.\n  Sessions expire after 30 minutes.\nDecision:\n  Store sessions in DynamoDB with a TTL attribute.`",
+    "options": [
+      "Consequences — những gì ta được, những gì ta mất và rủi ro chấp nhận",
+      "Code mẫu hiện thực việc đọc/ghi session",
+      "Danh sách toàn bộ người tham gia cuộc họp",
+      "Sơ đồ C4 mức Code của service session"
+    ],
+    "optionsEn": [
+      "Consequences — what we gain, what we give up and which risks we accept",
+      "Sample code implementing the session reads and writes",
+      "The full list of meeting attendees",
+      "A C4 code-level diagram of the session service"
+    ],
+    "answer": 0,
+    "explanation": "Định dạng Nygard gồm Title, Status, Context, Decision, Consequences. Thiếu Consequences thì người đọc sau không biết đánh đổi đã chấp nhận (ví dụ TTL xoá bản ghi hết hạn không tức thì, nên ứng dụng vẫn phải tự kiểm tra thời hạn). Code mẫu, danh sách người họp hay sơ đồ mức Code không phải phần cốt lõi của ADR.",
+    "explanationEn": "Nygard's format is Title, Status, Context, Decision, Consequences. Without Consequences a later reader cannot see the accepted trade-offs (for example, TTL deletion is not immediate, so the app must still check expiry itself). Sample code, attendee lists or code-level diagrams are not core parts of an ADR."
+  },
+  {
+    "id": "q13",
+    "question": "Trong mô hình C4, \"container\" nghĩa là gì?",
+    "questionEn": "In the C4 model, what does \"container\" mean?",
+    "options": [
+      "Một Docker container đang chạy trong cluster",
+      "Một đơn vị chạy hoặc lưu dữ liệu riêng rẽ, như web app, API, database hay serverless function",
+      "Một nhóm class có chung package",
+      "Một hệ thống bên ngoài mà giải pháp phụ thuộc vào"
+    ],
+    "optionsEn": [
+      "A Docker container running in the cluster",
+      "A separately runnable or data-storing unit such as a web app, an API, a database or a serverless function",
+      "A group of classes sharing a package",
+      "An external system the solution depends on"
+    ],
+    "answer": 1,
+    "explanation": "Container trong C4 là đơn vị chạy/deploy hoặc lưu dữ liệu riêng rẽ; khái niệm này có trước Docker. Nhóm class thuộc mức Component/Code, còn hệ thống bên ngoài xuất hiện ở sơ đồ System Context.",
+    "explanationEn": "A C4 container is a separately runnable/deployable or data-storing unit; the term predates Docker. Groups of classes belong to the component or code level, and external systems appear on the System Context diagram."
+  },
+  {
+    "id": "q14",
+    "question": "Bạn cần giải thích cho giám đốc điều hành và cán bộ tuân thủ rằng hệ thống mới phục vụ ai và trao đổi dữ liệu với những hệ thống bên ngoài nào. Nên dùng sơ đồ C4 nào?",
+    "questionEn": "You must explain to the COO and the compliance officer who the new system serves and which external systems it exchanges data with. Which C4 diagram should you use?",
+    "options": [
+      "System Context",
+      "Container",
+      "Component",
+      "Code"
+    ],
+    "optionsEn": [
+      "System Context",
+      "Container",
+      "Component",
+      "Code"
+    ],
+    "answer": 0,
+    "explanation": "System Context thể hiện hệ thống như một ô duy nhất, cùng người dùng và các hệ thống bên ngoài — đúng câu hỏi \"phục vụ ai, nói chuyện với ai\" và dễ đọc với người không làm kỹ thuật. Container, Component và Code đi sâu vào bên trong, dành cho người làm kỹ thuật.",
+    "explanationEn": "System Context shows the system as one box with its users and external systems — exactly \"who does it serve, who does it talk to\", and readable by non-technical people. Container, component and code views zoom inside and are meant for technical audiences."
+  },
+  {
+    "id": "q15",
+    "question": "Bạn có 15 phút trình bày với CFO về đề xuất chuyển hệ thống lõi lên cloud. Cách mở đầu nào hiệu quả nhất?",
+    "questionEn": "You have 15 minutes with the CFO to present a proposal to move the core system to the cloud. Which opening works best?",
+    "options": [
+      "Giải thích chi tiết kiến trúc Kubernetes và service mesh sẽ dùng",
+      "Trình chiếu sơ đồ Container và Component của toàn bộ hệ thống",
+      "Nêu khuyến nghị, khoảng chi phí, rủi ro chính và các phương án thay thế ngay từ đầu",
+      "Kể lại lịch sử kỹ thuật của hệ thống hiện tại trong 10 năm qua"
+    ],
+    "optionsEn": [
+      "Explain the Kubernetes and service mesh architecture in detail",
+      "Show the Container and Component diagrams of the whole system",
+      "Lead with the recommendation, the cost range, the main risks and the alternatives",
+      "Walk through the technical history of the current system over ten years"
+    ],
+    "answer": 2,
+    "explanation": "CFO quan tâm kết quả, chi phí và rủi ro. Kết luận trước (bottom line up front) kèm các phương án cho họ thứ cần để ra quyết định; chi tiết kỹ thuật và lịch sử hệ thống dành cho người muốn đào sâu sau đó.",
+    "explanationEn": "A CFO cares about outcome, cost and risk. Bottom line up front, with the alternatives, gives them what they need to decide; technical detail and system history are for whoever wants to dig in afterwards."
+  },
+  {
+    "id": "q16",
+    "question": "Đội phát triển phản đối thiết kế của bạn: họ cho rằng thư viện ORM đã chọn không chịu nổi lưu lượng ghi dự kiến. Bạn không quản lý trực tiếp đội này. Cách xử lý tốt nhất?",
+    "questionEn": "The development team pushes back on your design: they believe the chosen ORM cannot handle the expected write volume. You do not manage this team. What is the best response?",
+    "options": [
+      "Giữ nguyên thiết kế vì kiến trúc sư chịu trách nhiệm quyết định cuối cùng",
+      "Nhờ quản lý cấp cao ra lệnh cho đội làm theo thiết kế",
+      "Để đội tự chọn thứ họ thích mà không cần ghi lại gì",
+      "Lắng nghe, cùng làm một spike đo tải ngắn, rồi quyết theo dữ liệu và ghi vào ADR"
+    ],
+    "optionsEn": [
+      "Keep the design because the architect has the final say",
+      "Ask senior management to order the team to follow the design",
+      "Let the team pick whatever they prefer without recording anything",
+      "Listen, run a short load-test spike together, then decide on the data and record it in an ADR"
+    ],
+    "answer": 3,
+    "explanation": "Kiến trúc sư gây ảnh hưởng mà không cần quyền lực: đội xây dựng có thể biết điều bạn không biết. Một spike có thời hạn biến tranh luận thành số đo, và ADR giữ lại lý do. Áp đặt làm mất niềm tin; bỏ mặc không ghi lại thì mất lịch sử quyết định.",
+    "explanationEn": "Architects influence without authority: the builders may know something you do not. A time-boxed spike turns an argument into a measurement, and the ADR keeps the reasoning. Imposing the design burns trust; letting it slide unrecorded loses the decision history."
+  },
+  {
+    "id": "q17",
+    "question": "Một API nhận 50 triệu request mỗi ngày, phân bố tương đối đều. Lưu lượng trung bình xấp xỉ bao nhiêu request/giây?",
+    "questionEn": "An API receives 50 million requests per day, spread fairly evenly. What is the average rate, roughly, in requests per second?",
+    "options": [
+      "~58",
+      "~580",
+      "~5.800",
+      "~50.000"
+    ],
+    "optionsEn": [
+      "~58",
+      "~580",
+      "~5,800",
+      "~50,000"
+    ],
+    "answer": 1,
+    "explanation": "Một ngày có 86.400 giây ≈ 10⁵. 50.000.000 / 86.400 ≈ 579, tức khoảng 580 request/s (quy tắc nhanh: 1 triệu/ngày ≈ 12/s, nhân 50 được ~600). Khi thiết kế vẫn phải cộng hệ số đỉnh 2–5 lần.",
+    "explanationEn": "A day has 86,400 seconds ≈ 10⁵. 50,000,000 / 86,400 ≈ 579, so about 580 requests/s (shortcut: 1 million/day ≈ 12/s, times 50 gives ~600). The design still needs a 2–5× peak factor on top."
+  },
+  {
+    "id": "q18",
+    "question": "Hệ thống ghi 5 triệu bản ghi mới mỗi ngày, mỗi bản ghi khoảng 2 KB, cần lưu 5 năm (chưa tính replication). Tổng dung lượng xấp xỉ?",
+    "questionEn": "A system writes 5 million new records a day, about 2 KB each, retained for 5 years (before replication). Roughly how much storage is that?",
+    "options": [
+      "~18 TB",
+      "~1,8 TB",
+      "~180 TB",
+      "~3,6 PB"
+    ],
+    "optionsEn": [
+      "~18 TB",
+      "~1.8 TB",
+      "~180 TB",
+      "~3.6 PB"
+    ],
+    "answer": 0,
+    "explanation": "5 triệu × 2 KB = 10 GB/ngày. 10 GB × 365 ≈ 3,65 TB/năm; nhân 5 năm ≈ 18 TB. Các phương án khác lệch 10 lần hoặc hơn — đúng kiểu lỗi nhầm đơn vị mà ước lượng nhanh giúp phát hiện.",
+    "explanationEn": "5 million × 2 KB = 10 GB/day. 10 GB × 365 ≈ 3.65 TB/year; over 5 years ≈ 18 TB. The other options are off by 10× or more — exactly the unit slip that quick estimation is meant to catch."
+  },
+  {
+    "id": "q19",
+    "question": "Mỗi request phải đi qua cả ba thành phần sau theo chuỗi đồng bộ, lỗi độc lập với nhau. Availability tổng hợp xấp xỉ bao nhiêu?\n`CDN        99.99%\nAPI        99.9%\nDatabase   99.95%`",
+    "questionEn": "Every request must pass through all three components below in a synchronous chain, failing independently. What is the composite availability, roughly?\n`CDN        99.99%\nAPI        99.9%\nDatabase   99.95%`",
+    "options": [
+      "99,99% — bằng thành phần tốt nhất",
+      "99,9% — bằng thành phần yếu nhất",
+      "~99,84% — tích của cả ba",
+      "~99,95% — trung bình của cả ba"
+    ],
+    "optionsEn": [
+      "99.99% — equal to the best component",
+      "99.9% — equal to the weakest component",
+      "~99.84% — the product of all three",
+      "~99.95% — the average of all three"
+    ],
+    "answer": 2,
+    "explanation": "Các thành phần nối tiếp thì nhân availability: 0,9999 × 0,999 × 0,9995 ≈ 0,9984. Kết quả luôn thấp hơn cả thành phần yếu nhất, nên chuỗi gọi đồng bộ càng dài thì hệ thống càng kém sẵn sàng.",
+    "explanationEn": "Components in series multiply: 0.9999 × 0.999 × 0.9995 ≈ 0.9984. The result is always lower than even the weakest component, which is why longer synchronous call chains make a system less available."
+  }
+]

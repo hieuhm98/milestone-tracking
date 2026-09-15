@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về class ES2015 trong JavaScript.",
+      "promptEn": "Pick TWO statements that are true about ES2015 classes in JavaScript.",
+      "options": [
+        "Gọi một class mà thiếu `new` vẫn chạy như một hàm bình thường",
+        "Thân class luôn chạy ở strict mode",
+        "Static method gọi được trên mọi instance của class",
+        "Một class có thể khai báo nhiều `constructor` với số tham số khác nhau",
+        "Instance method nằm trên prototype và được mọi instance dùng chung"
+      ],
+      "optionsEn": [
+        "Calling a class without `new` runs it like a normal function",
+        "A class body always runs in strict mode",
+        "Static methods can be called on any instance of the class",
+        "A class can declare several `constructor`s with different parameter counts",
+        "Instance methods live on the prototype and are shared by every instance"
+      ],
+      "answers": [1, 4],
+      "explanation": "Thân class là strict mode (vì thế `this` thành `undefined` khi method bị tách ra), và method nằm một lần trên prototype. Gọi class thiếu `new` ném `TypeError`, static method chỉ gọi trên class, và khai báo hai `constructor` là `SyntaxError` — JavaScript không có overloading.",
+      "explanationEn": "Class bodies are strict mode (which is why `this` becomes `undefined` for a detached method), and methods live once on the prototype. Calling a class without `new` throws a `TypeError`, static methods are called on the class only, and two `constructor`s is a `SyntaxError` — JavaScript has no overloading.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "`timer.tick` là instance method dùng `this`. Chọn HAI cách truyền nó cho `setTimeout` mà vẫn giữ đúng `this`.",
+      "promptEn": "`timer.tick` is an instance method that uses `this`. Pick TWO ways to pass it to `setTimeout` that keep `this` correct.",
+      "options": [
+        "`setTimeout(() => timer.tick(), 1000)`",
+        "`setTimeout(timer.tick, 1000)`",
+        "`setTimeout(timer.tick(), 1000)`",
+        "`setTimeout(timer.tick.bind(timer), 1000)`",
+        "`setTimeout(Timer.tick, 1000)`"
+      ],
+      "optionsEn": [
+        "`setTimeout(() => timer.tick(), 1000)`",
+        "`setTimeout(timer.tick, 1000)`",
+        "`setTimeout(timer.tick(), 1000)`",
+        "`setTimeout(timer.tick.bind(timer), 1000)`",
+        "`setTimeout(Timer.tick, 1000)`"
+      ],
+      "answers": [0, 3],
+      "explanation": "Arrow wrapper gọi method với `timer` đứng trước dấu chấm, còn `bind` tạo hàm mới có `this` cố định. Truyền `timer.tick` trần làm mất `this`, `timer.tick()` chạy ngay và truyền kết quả thay vì hàm, còn `Timer.tick` tìm một static method không tồn tại.",
+      "explanationEn": "The arrow wrapper calls the method with `timer` before the dot, and `bind` returns a new function with `this` fixed. Passing bare `timer.tick` loses `this`, `timer.tick()` runs immediately and passes its result instead of a function, and `Timer.tick` looks for a static method that does not exist.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Method đặc biệt nào tự động chạy khi tạo instance bằng `new`?",
+      "promptEn": "Which special method runs automatically when an instance is created with `new`?",
+      "answer": "constructor",
+      "answerEn": "constructor",
+      "accept": [
+        "constructor",
+        "the constructor",
+        "constructor method",
+        "constructor()",
+        "ham khoi tao",
+        "hàm khởi tạo"
+      ],
+      "explanation": "`constructor`. Tên phải chính xác như vậy; một method tên `init` sẽ không tự chạy. Bên trong nó, `this` là object mới vừa được tạo.",
+      "explanationEn": "`constructor`. The name must be exactly that; a method called `init` never runs on its own. Inside it, `this` is the freshly created object.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Từ khoá nào đặt một method lên chính class (gọi dạng `Student.enrollStudents()`) thay vì lên instance?",
+      "promptEn": "Which keyword puts a method on the class itself (called as `Student.enrollStudents()`) rather than on instances?",
+      "answer": "static",
+      "answerEn": "static",
+      "accept": [
+        "static",
+        "static method",
+        "static keyword",
+        "the static keyword"
+      ],
+      "explanation": "`static`. Static method thuộc về class, instance không nhìn thấy nó; bên trong nó `this` là class. Trong code cấu trúc dữ liệu, static hiếm khi dùng — thường chỉ để làm factory như `fromArray`.",
+      "explanationEn": "`static`. A static method belongs to the class and is invisible to instances; inside it `this` is the class. Data-structure code rarely needs one — typically only for a factory such as `fromArray`.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi nguyên lý hướng đối tượng với ví dụ đúng trong code cấu trúc dữ liệu.",
+      "promptEn": "Match each object-oriented principle to its example in data-structure code.",
+      "pairs": [
+        {
+          "left": "Trừu tượng hoá (abstraction)",
+          "leftEn": "Abstraction",
+          "right": "Người dùng chỉ gọi `push`/`pop`, không biết stack dùng array hay linked list",
+          "rightEn": "Callers only use `push`/`pop`, unaware whether the stack uses an array or a linked list"
+        },
+        {
+          "left": "Đóng gói (encapsulation)",
+          "leftEn": "Encapsulation",
+          "right": "Field `#head` là private, chỉ method của class mới thay đổi được",
+          "rightEn": "The `#head` field is private, so only the class's methods can change it"
+        },
+        {
+          "left": "Kế thừa (inheritance)",
+          "leftEn": "Inheritance",
+          "right": "`class MaxHeap extends Heap` dùng lại helper của class cha",
+          "rightEn": "`class MaxHeap extends Heap` reuses the parent class's helpers"
+        },
+        {
+          "left": "Đa hình (polymorphism)",
+          "leftEn": "Polymorphism",
+          "right": "Stack và queue cùng có `remove()`, nhưng mỗi cái lấy ra phần tử khác nhau",
+          "rightEn": "A stack and a queue both have `remove()`, but each takes out a different item"
+        }
+      ],
+      "explanation": "Abstraction giấu cách làm, encapsulation bảo vệ trạng thái bên trong, inheritance dùng lại code qua `extends`, còn polymorphism là cùng một lời gọi nhưng hành vi khác nhau tuỳ object.",
+      "explanationEn": "Abstraction hides how, encapsulation protects internal state, inheritance reuses code through `extends`, and polymorphism is one call behaving differently depending on the object.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự những gì xảy ra khi chạy `const s = new Student(\"Ada\", \"Lovelace\")`.",
+      "promptEn": "Put what happens when `const s = new Student(\"Ada\", \"Lovelace\")` runs into order.",
+      "items": [
+        {
+          "text": "Tạo một object rỗng mới",
+          "textEn": "A new empty object is created"
+        },
+        {
+          "text": "Nối prototype của object tới `Student.prototype`",
+          "textEn": "The object's prototype is linked to `Student.prototype`"
+        },
+        {
+          "text": "Chạy `constructor` với `this` trỏ vào object mới, gán `firstName` và `lastName`",
+          "textEn": "`constructor` runs with `this` pointing at the new object, setting `firstName` and `lastName`"
+        },
+        {
+          "text": "Trả object về và gán vào biến `s`",
+          "textEn": "The object is returned and stored in `s`"
+        }
+      ],
+      "explanation": "Vì prototype được nối trước khi constructor chạy, các method như `fullName` đã dùng được ngay trong constructor và trên `s` sau đó.",
+      "explanationEn": "Because the prototype is linked before the constructor runs, methods such as `fullName` are already usable inside the constructor and on `s` afterwards.",
+      "id": "d6"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import { recordReview } from "@/lib/progress";
 import { GROUPS, DEFAULT_GROUP, GROUP_ACCENT } from "@/lib/groups";
 import { cn } from "@/lib/utils";
 import { type Question, localizeQuestion } from "./QuizBlock";
+import QuestionText from "./QuestionText";
 
 interface StaticTopic {
   slug: string;
@@ -329,14 +330,14 @@ export default function ReviewSession() {
                       className="flex-1"
                       en={
                         <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                          <span className="text-zinc-500 mr-1">{i + 1}.</span>{enQs[i].question}
+                          <span className="text-zinc-500 mr-1">{i + 1}.</span><QuestionText text={enQs[i].question} />
                         </p>
                       }
-                      vi={<p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{viQs[i].question}</p>}
+                      vi={<p className="text-sm font-medium text-zinc-800 dark:text-zinc-200"><QuestionText text={viQs[i].question} /></p>}
                     />
                   ) : (
                     <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                      <span className="text-zinc-500 mr-1">{i + 1}.</span>{q.question}
+                      <span className="text-zinc-500 mr-1">{i + 1}.</span><QuestionText text={q.question} />
                     </p>
                   )}
                 </div>
@@ -369,7 +370,7 @@ export default function ReviewSession() {
                                   vi={<span className="opacity-80">{viQs[i].options[oi]}</span>}
                                 />
                               ) : (
-                                <span>{opt}</span>
+                                <span><QuestionText text={opt} /></span>
                               )}
                             </div>
                             {isCorrectOpt && <span className="shrink-0">✓</span>}
@@ -392,20 +393,20 @@ export default function ReviewSession() {
                         en={
                           <>
                             <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                            {enQs[i].explanation}
+                            <QuestionText text={enQs[i].explanation} />
                           </>
                         }
                         vi={
                           <>
                             <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                            {viQs[i].explanation}
+                            <QuestionText text={viQs[i].explanation} />
                           </>
                         }
                       />
                     ) : (
                       <>
                         <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                        {q.explanation}
+                        <QuestionText text={q.explanation} />
                       </>
                     )}
                   </div>
@@ -474,17 +475,17 @@ export default function ReviewSession() {
             labels
             en={
               <p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed">
-                {enQs[currentIdx].question}
+                <QuestionText text={enQs[currentIdx].question} />
               </p>
             }
             vi={
               <p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed">
-                {viQs[currentIdx].question}
+                <QuestionText text={viQs[currentIdx].question} />
               </p>
             }
           />
         ) : (
-          <p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed">{currentQ.question}</p>
+          <p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed"><QuestionText text={currentQ.question} /></p>
         )}
         <div className="space-y-2">
           {currentQ.options.map((opt, i) => {

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Vì sao đo thời gian chạy bằng `performance.now()` KHÔNG phải là cách tốt để so sánh hai thuật toán?",
+    "questionEn": "Why is timing code with `performance.now()` NOT a good way to compare two algorithms?",
+    "options": [
+      "Vì `performance.now()` chỉ chạy được trong trình duyệt, không chạy trong Node.js",
+      "Vì thời gian chạy luôn tỉ lệ thuận chính xác với số dòng code",
+      "Vì kết quả thay đổi theo máy và theo từng lần chạy, và chỉ phản ánh một kích thước input",
+      "Vì đo thời gian làm thuật toán chạy chậm đi gấp đôi"
+    ],
+    "optionsEn": [
+      "Because `performance.now()` only works in browsers, not in Node.js",
+      "Because running time is always exactly proportional to the number of lines",
+      "Because results vary by machine and by run, and only reflect one input size",
+      "Because timing the code makes the algorithm run twice as slowly"
+    ],
+    "answer": 2,
+    "explanation": "Máy khác nhau, JIT, garbage collection và tải nền làm con số dao động; thuật toán nhanh có thể chạy xong quá nhanh để đo chính xác; và một lần đo không cho biết điều gì xảy ra khi n tăng. Vì vậy ta đếm số phép toán và nhìn xu hướng.",
+    "explanationEn": "Different hardware, JIT warm-up, garbage collection and background load all make the number wobble; fast algorithms may be too quick to measure precisely; and one measurement says nothing about what happens as n grows. So we count operations and look at the trend."
+  },
+  {
+    "id": "q2",
+    "question": "Một hàm thực hiện khoảng `5n + 2` phép toán đơn giản. Nếu `n` tăng gấp đôi thì số phép toán thay đổi thế nào?",
+    "questionEn": "A function performs about `5n + 2` simple operations. If `n` doubles, what happens to the number of operations?",
+    "options": [
+      "Xấp xỉ tăng gấp đôi",
+      "Tăng gấp bốn",
+      "Không đổi",
+      "Chỉ tăng thêm 2"
+    ],
+    "optionsEn": [
+      "It roughly doubles",
+      "It quadruples",
+      "It stays the same",
+      "It only grows by 2"
+    ],
+    "answer": 0,
+    "explanation": "5(2n) + 2 = 10n + 2, xấp xỉ gấp đôi 5n + 2 khi n lớn. Đó chính là ý nghĩa của tăng trưởng tuyến tính O(n): số phép toán tăng tỉ lệ thuận với n.",
+    "explanationEn": "5(2n) + 2 = 10n + 2, roughly twice 5n + 2 for large n. That is exactly what linear growth, O(n), means: the work grows in proportion to n."
+  },
+  {
+    "id": "q3",
+    "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function addUpTo(n) {\n  return n * (n + 1) / 2;\n}`",
+    "questionEn": "What is the time complexity of this function?\n`function addUpTo(n) {\n  return n * (n + 1) / 2;\n}`",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(n²)",
+      "O(log n)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(1)",
+      "O(n²)",
+      "O(log n)"
+    ],
+    "answer": 1,
+    "explanation": "Hàm luôn làm đúng 3 phép toán (nhân, cộng, chia) bất kể n lớn cỡ nào, nên là O(1). Công thức tính kết quả n phần tử mà không cần duyệt qua chúng.",
+    "explanationEn": "It always does exactly 3 operations (a multiplication, an addition and a division) no matter how large n is, so it is O(1). The formula computes the sum of n numbers without visiting them."
+  },
+  {
+    "id": "q4",
+    "question": "Phát biểu nào về định nghĩa Big O là ĐÚNG?",
+    "questionEn": "Which statement about the definition of Big O is TRUE?",
+    "options": [
+      "Big O cho biết chính xác số mili-giây thuật toán sẽ chạy",
+      "Big O luôn mô tả trường hợp tốt nhất của thuật toán",
+      "Một thuật toán O(n) thì không thể được gọi là O(n²) dù chỉ về lý thuyết",
+      "Big O là chặn trên: số phép toán cuối cùng không vượt quá c · f(n) khi n đủ lớn"
+    ],
+    "optionsEn": [
+      "Big O tells you exactly how many milliseconds an algorithm will take",
+      "Big O always describes an algorithm's best case",
+      "An O(n) algorithm can never be called O(n²), even technically",
+      "Big O is an upper bound: operations eventually stay below c · f(n) for large n"
+    ],
+    "answer": 3,
+    "explanation": "Theo định nghĩa, O(f(n)) là chặn trên: tồn tại c và n₀ sao cho ops(n) ≤ c · f(n) với mọi n ≥ n₀. Vì là chặn trên nên thuật toán O(n) về lý thuyết cũng là O(n²), nhưng ta luôn nêu chặn sát nhất. Big O không đo thời gian thực và không gắn với best case.",
+    "explanationEn": "By definition O(f(n)) is an upper bound: there exist c and n₀ with ops(n) ≤ c · f(n) for all n ≥ n₀. Being an upper bound, an O(n) algorithm is technically also O(n²), though we always quote the tightest bound. Big O is not wall-clock time and is not tied to the best case."
+  },
+  {
+    "id": "q5",
+    "question": "Rút gọn biểu thức O(4n² + 1000n + 50).",
+    "questionEn": "Simplify O(4n² + 1000n + 50).",
+    "options": [
+      "O(4n²)",
+      "O(n² + n)",
+      "O(n²)",
+      "O(1000n)"
+    ],
+    "optionsEn": [
+      "O(4n²)",
+      "O(n² + n)",
+      "O(n²)",
+      "O(1000n)"
+    ],
+    "answer": 2,
+    "explanation": "Bỏ hằng số (4) và các số hạng tăng chậm hơn (1000n, 50). Dù 1000 trông lớn, khi n đủ lớn thì n² vượt xa 1000n, nên chỉ còn O(n²).",
+    "explanationEn": "Drop the constant (4) and the slower-growing terms (1000n, 50). However big 1000 looks, n² dwarfs 1000n once n is large enough, leaving O(n²)."
+  },
+  {
+    "id": "q6",
+    "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function f(arrA, arrB) {\n  for (const a of arrA) console.log(a);\n  for (const b of arrB) console.log(b);\n}`",
+    "questionEn": "What is the time complexity of this function?\n`function f(arrA, arrB) {\n  for (const a of arrA) console.log(a);\n  for (const b of arrB) console.log(b);\n}`",
+    "options": [
+      "O(a + b), với a và b là độ dài hai mảng",
+      "O(n)",
+      "O(a · b)",
+      "O(2n)"
+    ],
+    "optionsEn": [
+      "O(a + b), where a and b are the two array lengths",
+      "O(n)",
+      "O(a · b)",
+      "O(2n)"
+    ],
+    "answer": 0,
+    "explanation": "Hai vòng lặp nối tiếp nhau thì cộng. Vì là hai input khác nhau nên phải dùng hai biến: O(a + b). Không thể bỏ bớt biến nào vì không biết mảng nào lớn hơn; O(a · b) chỉ đúng khi hai vòng lặp lồng nhau.",
+    "explanationEn": "Sequential loops add. Because they are two different inputs they need two variables: O(a + b). Neither can be dropped since you don't know which is larger; O(a · b) would only apply if the loops were nested."
+  },
+  {
+    "id": "q7",
+    "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function logAtMost5(n) {\n  for (let i = 1; i <= Math.min(5, n); i++) {\n    console.log(i);\n  }\n}`",
+    "questionEn": "What is the time complexity of this function?\n`function logAtMost5(n) {\n  for (let i = 1; i <= Math.min(5, n); i++) {\n    console.log(i);\n  }\n}`",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(log n)",
+      "O(5n)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(1)",
+      "O(log n)",
+      "O(5n)"
+    ],
+    "answer": 1,
+    "explanation": "Vòng lặp chạy tối đa 5 lần dù n lớn đến đâu, nên số phép toán bị chặn bởi một hằng số: O(1). Nếu đổi `Math.min` thành `Math.max` thì vòng lặp tăng theo n và thành O(n).",
+    "explanationEn": "The loop runs at most 5 times however large n gets, so the work is bounded by a constant: O(1). Swap `Math.min` for `Math.max` and the loop grows with n, making it O(n)."
+  },
+  {
+    "id": "q8",
+    "question": "Độ phức tạp thời gian của đoạn code sau là gì?\n`for (let i = 0; i < n; i++) {\n  for (let j = 0; j < n; j++) {\n    console.log(i, j);\n  }\n}\nfor (let k = 0; k < n; k++) console.log(k);`",
+    "questionEn": "What is the time complexity of this code?\n`for (let i = 0; i < n; i++) {\n  for (let j = 0; j < n; j++) {\n    console.log(i, j);\n  }\n}\nfor (let k = 0; k < n; k++) console.log(k);`",
+    "options": [
+      "O(n)",
+      "O(n³)",
+      "O(2n)",
+      "O(n²)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(n³)",
+      "O(2n)",
+      "O(n²)"
+    ],
+    "answer": 3,
+    "explanation": "Hai vòng lặp lồng nhau cho O(n · n) = O(n²); vòng lặp phía sau nối tiếp nên cộng thêm O(n). Tổng O(n² + n), bỏ số hạng nhỏ còn O(n²).",
+    "explanationEn": "The nested loops give O(n · n) = O(n²); the following loop is sequential, so it adds O(n). That is O(n² + n), which drops the smaller term to O(n²)."
+  },
+  {
+    "id": "q9",
+    "question": "Thứ tự nào sắp xếp các độ phức tạp từ tăng CHẬM nhất đến tăng NHANH nhất?",
+    "questionEn": "Which ordering lists these complexities from SLOWEST-growing to FASTEST-growing?",
+    "options": [
+      "O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ)",
+      "O(1), O(n), O(log n), O(n log n), O(2ⁿ), O(n²)",
+      "O(log n), O(1), O(n), O(n²), O(n log n), O(2ⁿ)",
+      "O(1), O(log n), O(n log n), O(n), O(n²), O(2ⁿ)"
+    ],
+    "optionsEn": [
+      "O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ)",
+      "O(1), O(n), O(log n), O(n log n), O(2ⁿ), O(n²)",
+      "O(log n), O(1), O(n), O(n²), O(n log n), O(2ⁿ)",
+      "O(1), O(log n), O(n log n), O(n), O(n²), O(2ⁿ)"
+    ],
+    "answer": 0,
+    "explanation": "Hằng số < logarit < tuyến tính < tuyến tính-logarit < bậc hai < hàm mũ. Ví dụ với n = 1000: log n ≈ 10, n log n ≈ 10.000, n² = 1.000.000, còn 2ⁿ là con số khổng lồ.",
+    "explanationEn": "Constant < logarithmic < linear < linearithmic < quadratic < exponential. With n = 1000: log n ≈ 10, n log n ≈ 10,000, n² = 1,000,000, and 2ⁿ is astronomically large."
+  },
+  {
+    "id": "q10",
+    "question": "Input có n = 100.000 phần tử và máy làm được khoảng 10⁸ phép toán mỗi giây. Lời giải nào có khả năng chạy quá chậm?",
+    "questionEn": "The input has n = 100,000 items and the machine does about 10⁸ simple operations per second. Which solution is likely too slow?",
+    "options": [
+      "Một lời giải O(n)",
+      "Một lời giải O(n log n)",
+      "Một lời giải O(n²)",
+      "Một lời giải O(log n)"
+    ],
+    "optionsEn": [
+      "An O(n) solution",
+      "An O(n log n) solution",
+      "An O(n²) solution",
+      "An O(log n) solution"
+    ],
+    "answer": 2,
+    "explanation": "n² = 10¹⁰ phép toán, tức khoảng 100 giây — quá chậm. n log n ≈ 1,7 × 10⁶ và n = 10⁵ đều chạy xong trong tích tắc.",
+    "explanationEn": "n² = 10¹⁰ operations, around 100 seconds — far too slow. n log n ≈ 1.7 × 10⁶ and n = 10⁵ both finish in a blink."
+  },
+  {
+    "id": "q11",
+    "question": "Theo quy tắc kinh nghiệm, log₂(n) đo điều gì?",
+    "questionEn": "As a rule of thumb, what does log₂(n) measure?",
+    "options": [
+      "Số chữ số của n khi viết ở hệ thập phân",
+      "Số lần có thể chia n cho 2 cho đến khi được giá trị ≤ 1",
+      "Một nửa của n",
+      "Số lần nhân n với chính nó"
+    ],
+    "optionsEn": [
+      "The number of decimal digits in n",
+      "How many times you can divide n by 2 before reaching a value ≤ 1",
+      "Half of n",
+      "How many times n is multiplied by itself"
+    ],
+    "answer": 1,
+    "explanation": "log₂(8) = 3 vì 8 → 4 → 2 → 1 là ba lần chia đôi (và 2³ = 8). Vì thế thuật toán nào chia đôi phần việc còn lại sau mỗi bước sẽ là O(log n).",
+    "explanationEn": "log₂(8) = 3 because 8 → 4 → 2 → 1 takes three halvings (and 2³ = 8). That is why any algorithm that halves its remaining work each step is O(log n)."
+  },
+  {
+    "id": "q12",
+    "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function f(n) {\n  for (let i = 1; i < n; i *= 2) {\n    console.log(i);\n  }\n}`",
+    "questionEn": "What is the time complexity of this function?\n`function f(n) {\n  for (let i = 1; i < n; i *= 2) {\n    console.log(i);\n  }\n}`",
+    "options": [
+      "O(n)",
+      "O(n / 2)",
+      "O(1)",
+      "O(log n)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(n / 2)",
+      "O(1)",
+      "O(log n)"
+    ],
+    "answer": 3,
+    "explanation": "i nhận các giá trị 1, 2, 4, 8, … nên chỉ cần khoảng log₂(n) bước để vượt n. Nhân đôi cho đến n cũng giống chia đôi n cho đến 1: O(log n).",
+    "explanationEn": "i takes the values 1, 2, 4, 8, … so it needs only about log₂(n) steps to pass n. Doubling up to n is the mirror of halving n down to 1: O(log n)."
+  },
+  {
+    "id": "q13",
+    "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function f(n) {\n  for (let i = 0; i < n; i++) {\n    for (let j = 1; j < n; j *= 2) {\n      console.log(i, j);\n    }\n  }\n}`",
+    "questionEn": "What is the time complexity of this function?\n`function f(n) {\n  for (let i = 0; i < n; i++) {\n    for (let j = 1; j < n; j *= 2) {\n      console.log(i, j);\n    }\n  }\n}`",
+    "options": [
+      "O(n log n)",
+      "O(n²)",
+      "O(log n)",
+      "O(n + log n)"
+    ],
+    "optionsEn": [
+      "O(n log n)",
+      "O(n²)",
+      "O(log n)",
+      "O(n + log n)"
+    ],
+    "answer": 0,
+    "explanation": "Vòng ngoài chạy n lần; vòng trong nhân đôi j nên chạy log n lần. Lồng nhau thì nhân: O(n · log n). Đây cũng là dạng chi phí của merge sort: log n tầng, mỗi tầng O(n).",
+    "explanationEn": "The outer loop runs n times; the inner loop doubles j, so it runs log n times. Nested loops multiply: O(n · log n). It is the same shape as merge sort's cost: log n levels of O(n) work."
+  },
+  {
+    "id": "q14",
+    "question": "Độ phức tạp thời gian (xấp xỉ) của hàm Fibonacci đệ quy ngây thơ sau là gì?\n`function fib(n) {\n  if (n <= 1) return n;\n  return fib(n - 1) + fib(n - 2);\n}`",
+    "questionEn": "What is the (approximate) time complexity of this naive recursive Fibonacci?\n`function fib(n) {\n  if (n <= 1) return n;\n  return fib(n - 1) + fib(n - 2);\n}`",
+    "options": [
+      "O(n)",
+      "O(2ⁿ)",
+      "O(n²)",
+      "O(n log n)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(2ⁿ)",
+      "O(n²)",
+      "O(n log n)"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi lời gọi rẽ thành hai lời gọi, nên cây đệ quy gần như nhân đôi sau mỗi tầng và có độ sâu n: khoảng O(2ⁿ). Rất nhiều bài toán con bị tính lặp lại — chính là thứ memoization sẽ loại bỏ.",
+    "explanationEn": "Each call branches into two, so the call tree roughly doubles at each level and is n deep: about O(2ⁿ). The same subproblems are recomputed over and over — exactly what memoization removes."
+  },
+  {
+    "id": "q15",
+    "question": "Khi nói \"auxiliary space complexity\" (không gian phụ trợ), ta đang đo gì?",
+    "questionEn": "What does \"auxiliary space complexity\" measure?",
+    "options": [
+      "Tổng bộ nhớ của chương trình, bao gồm cả input",
+      "Dung lượng file mã nguồn của thuật toán",
+      "Bộ nhớ thuật toán cấp phát thêm khi chạy, không tính chính input",
+      "Bộ nhớ đệm (cache) của CPU mà thuật toán dùng"
+    ],
+    "optionsEn": [
+      "The program's total memory, including the input",
+      "The size of the algorithm's source file",
+      "The extra memory the algorithm allocates while running, not counting the input",
+      "The CPU cache the algorithm uses"
+    ],
+    "answer": 2,
+    "explanation": "Auxiliary space loại trừ phần bộ nhớ của input. Nếu tính cả input thì mọi hàm nhận vào một mảng đều tối thiểu O(n), khiến việc so sánh vô nghĩa. Khi nói \"space complexity\" mà không nói gì thêm, người ta thường ngầm hiểu là auxiliary space.",
+    "explanationEn": "Auxiliary space excludes the input. If the input counted, every function that takes an array would be at least O(n), which makes comparisons pointless. When people say \"space complexity\" without qualification, they usually mean auxiliary space."
+  },
+  {
+    "id": "q16",
+    "question": "Độ phức tạp KHÔNG GIAN (auxiliary) của hàm sau là gì?\n`function double(arr) {\n  const newArr = [];\n  for (let i = 0; i < arr.length; i++) {\n    newArr.push(2 * arr[i]);\n  }\n  return newArr;\n}`",
+    "questionEn": "What is the (auxiliary) SPACE complexity of this function?\n`function double(arr) {\n  const newArr = [];\n  for (let i = 0; i < arr.length; i++) {\n    newArr.push(2 * arr[i]);\n  }\n  return newArr;\n}`",
+    "options": [
+      "O(1), vì chỉ có hai biến `newArr` và `i`",
+      "O(log n)",
+      "O(n²)",
+      "O(n), vì mảng mới chứa n phần tử"
+    ],
+    "optionsEn": [
+      "O(1), because there are only two variables, `newArr` and `i`",
+      "O(log n)",
+      "O(n²)",
+      "O(n), because the new array holds n items"
+    ],
+    "answer": 3,
+    "explanation": "Số biến không phải là thứ cần đếm — kích thước dữ liệu mới là. `newArr` lớn dần đến n phần tử, nên bộ nhớ phụ là O(n). So sánh với hàm `sum` chỉ giữ một con số `total`: O(1).",
+    "explanationEn": "It is not the number of variables that counts but how much data they hold. `newArr` grows to n items, so the extra memory is O(n). Compare a `sum` function that keeps a single `total` number: O(1)."
+  },
+  {
+    "id": "q17",
+    "question": "Một bạn khẳng định hàm sau có space O(1) vì \"không tạo mảng nào\". Nhận định đúng là gì?\n`function sumTo(n) {\n  if (n === 0) return 0;\n  return n + sumTo(n - 1);\n}`",
+    "questionEn": "A colleague claims this function uses O(1) space because \"it creates no arrays\". What is the correct assessment?\n`function sumTo(n) {\n  if (n === 0) return 0;\n  return n + sumTo(n - 1);\n}`",
+    "options": [
+      "Sai — n lời gọi đệ quy cùng nằm chờ trên call stack nên space là O(n)",
+      "Đúng — chỉ có biến number nên space là O(1)",
+      "Sai — space là O(n²) vì mỗi lời gọi lại gọi tiếp",
+      "Sai — space là O(log n) vì đệ quy luôn tốn log n"
+    ],
+    "optionsEn": [
+      "Wrong — n recursive calls wait on the call stack at once, so space is O(n)",
+      "Right — there are only number variables, so space is O(1)",
+      "Wrong — space is O(n²) because each call makes another call",
+      "Wrong — space is O(log n) because recursion always costs log n"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi lời gọi chưa trả về giữ một stack frame. Ở điểm sâu nhất có sumTo(n), sumTo(n-1), …, sumTo(0) cùng nằm trên stack: O(n) bộ nhớ. Đệ quy chỉ tốn O(log n) khi nó chia đôi input mỗi lần, như binary search đệ quy.",
+    "explanationEn": "Every call that has not returned holds a stack frame. At the deepest point sumTo(n), sumTo(n-1), …, sumTo(0) are all on the stack: O(n) memory. Recursion only costs O(log n) space when it halves its input each call, as in recursive binary search."
+  },
+  {
+    "id": "q18",
+    "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function hasDuplicate(arr) {\n  for (let i = 0; i < arr.length; i++) {\n    if (arr.slice(i + 1).includes(arr[i])) return true;\n  }\n  return false;\n}`",
+    "questionEn": "What is the time complexity of this function?\n`function hasDuplicate(arr) {\n  for (let i = 0; i < arr.length; i++) {\n    if (arr.slice(i + 1).includes(arr[i])) return true;\n  }\n  return false;\n}`",
+    "options": [
+      "O(n), vì chỉ có một vòng lặp",
+      "O(n²), vì `slice` và `includes` đều là O(n) bên trong vòng lặp O(n)",
+      "O(n log n), vì mảng con ngắn dần",
+      "O(1), vì hàm có thể trả về sớm"
+    ],
+    "optionsEn": [
+      "O(n), because there is only one loop",
+      "O(n²), because `slice` and `includes` are each O(n) inside an O(n) loop",
+      "O(n log n), because the sub-array keeps shrinking",
+      "O(1), because the function can return early"
+    ],
+    "answer": 1,
+    "explanation": "`slice` sao chép và `includes` quét tuyến tính — cả hai là vòng lặp ẩn. Tổng (n-1) + (n-2) + … ≈ n²/2 = O(n²). Mảng con ngắn dần chỉ đổi hằng số, và trả về sớm chỉ giúp best case, không đổi worst case. Dùng `Set` sẽ đưa về O(n).",
+    "explanationEn": "`slice` copies and `includes` scans linearly — both are hidden loops. The total (n-1) + (n-2) + … ≈ n²/2 = O(n²). The shrinking sub-array only changes the constant, and returning early helps the best case, not the worst. A `Set` brings it down to O(n)."
+  }
+]

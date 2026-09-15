@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thuật toán KHÔNG dựa trên phép so sánh (non-comparison sort).",
+      "promptEn": "Pick TWO algorithms that are NOT comparison sorts.",
+      "options": [
+        "Merge sort",
+        "Counting sort",
+        "Heap sort",
+        "Quick sort",
+        "Radix sort"
+      ],
+      "optionsEn": [
+        "Merge sort",
+        "Counting sort",
+        "Heap sort",
+        "Quick sort",
+        "Radix sort"
+      ],
+      "answers": [1, 4],
+      "explanation": "Counting sort dùng giá trị làm chỉ số mảng đếm, radix sort dùng từng chữ số làm chỉ số bucket — không phép so sánh nào giữa hai phần tử. Merge, heap và quick sort đều quyết định bằng so sánh nên bị chặn dưới Ω(n log n).",
+      "explanationEn": "Counting sort uses values as indices into a counts array and radix sort uses each digit as a bucket index — no element is ever compared with another. Merge, heap and quick sort all decide by comparing, so the Ω(n log n) bound applies to them.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thuật toán ổn định (stable) theo cách cài đặt thông thường.",
+      "promptEn": "Pick TWO algorithms that are stable as typically implemented.",
+      "options": [
+        "Quick sort",
+        "Insertion sort",
+        "Heap sort",
+        "Merge sort",
+        "Selection sort"
+      ],
+      "optionsEn": [
+        "Quick sort",
+        "Insertion sort",
+        "Heap sort",
+        "Merge sort",
+        "Selection sort"
+      ],
+      "answers": [1, 3],
+      "explanation": "Insertion sort chỉ dịch các phần tử lớn hơn hẳn, còn merge sort lấy từ nửa trái khi hoà, nên key bằng nhau giữ thứ tự. Quick sort, heap sort và selection sort hoán đổi phần tử qua khoảng cách xa và có thể đảo thứ tự các key bằng nhau.",
+      "explanationEn": "Insertion sort only shifts strictly larger elements and merge sort takes from the left half on ties, so equal keys keep their order. Quick, heap and selection sort swap elements across long distances and can reorder equal keys.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Mọi comparison sort cần tối thiểu bao nhiêu phép so sánh ở trường hợp tệ nhất (viết theo Big O)?",
+      "promptEn": "What is the minimum worst-case number of comparisons any comparison sort needs (in Big O terms)?",
+      "answer": "O(n log n)",
+      "answerEn": "O(n log n)",
+      "accept": [
+        "O(n log n)",
+        "n log n",
+        "nlogn",
+        "o(nlogn)",
+        "Ω(n log n)",
+        "omega n log n",
+        "theta n log n"
+      ],
+      "explanation": "O(n log n) — chính xác hơn là Ω(n log n). Cây quyết định có ít nhất n! lá nên cao ít nhất log₂(n!) = Θ(n log n).",
+      "explanationEn": "O(n log n) — more precisely Ω(n log n). The decision tree has at least n! leaves, so its height is at least log₂(n!) = Θ(n log n).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của radix sort là gì, với n là số phần tử và k là số chữ số của số dài nhất?",
+      "promptEn": "What is radix sort's time complexity, with n elements and k the digit count of the longest number?",
+      "answer": "O(nk)",
+      "answerEn": "O(nk)",
+      "accept": [
+        "O(nk)",
+        "nk",
+        "o(n*k)",
+        "n*k",
+        "n k",
+        "O(kn)",
+        "kn",
+        "k*n"
+      ],
+      "explanation": "O(nk): k lượt, mỗi lượt duyệt cả n số và 10 bucket. Như nhau ở best, average và worst case.",
+      "explanationEn": "O(nk): k passes, each visiting all n numbers and 10 buckets. It is the same in the best, average and worst case.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thuật toán với độ phức tạp thời gian trong trường hợp TỆ NHẤT.",
+      "promptEn": "Match each algorithm to its WORST-case time complexity.",
+      "pairs": [
+        {
+          "left": "Quick sort",
+          "leftEn": "Quick sort",
+          "right": "O(n²)",
+          "rightEn": "O(n²)"
+        },
+        {
+          "left": "Merge sort",
+          "leftEn": "Merge sort",
+          "right": "O(n log n)",
+          "rightEn": "O(n log n)"
+        },
+        {
+          "left": "Counting sort",
+          "leftEn": "Counting sort",
+          "right": "O(n + k)",
+          "rightEn": "O(n + k)"
+        },
+        {
+          "left": "Radix sort",
+          "leftEn": "Radix sort",
+          "right": "O(nk)",
+          "rightEn": "O(nk)"
+        }
+      ],
+      "explanation": "Quick sort rơi vào O(n²) khi pivot liên tục chọn phải phần tử nhỏ nhất hoặc lớn nhất; merge sort luôn O(n log n); counting sort phụ thuộc khoảng giá trị k; radix sort phụ thuộc số chữ số k.",
+      "explanationEn": "Quick sort degrades to O(n²) when the pivot keeps landing on the smallest or largest element; merge sort is always O(n log n); counting sort depends on the value range k; radix sort depends on the digit count k.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Sắp xếp các bước của radix sort (LSD) theo đúng thứ tự.",
+      "promptEn": "Put the steps of LSD radix sort in the correct order.",
+      "items": [
+        {
+          "text": "Tìm số chữ số của số dài nhất bằng mostDigits",
+          "textEn": "Find the digit count of the longest number with mostDigits"
+        },
+        {
+          "text": "Bắt đầu vòng lặp với k = 0 (hàng đơn vị)",
+          "textEn": "Start the loop at k = 0 (the ones place)"
+        },
+        {
+          "text": "Tạo 10 bucket rỗng mới cho các chữ số 0–9",
+          "textEn": "Create 10 fresh empty buckets for digits 0–9"
+        },
+        {
+          "text": "Bỏ mỗi số vào bucket theo chữ số thứ k của nó",
+          "textEn": "Put each number into the bucket for its k-th digit"
+        },
+        {
+          "text": "Nối các bucket từ 0 đến 9 thành mảng mới",
+          "textEn": "Concatenate buckets 0 to 9 into the new array"
+        },
+        {
+          "text": "Trả về mảng sau lượt cuối cùng",
+          "textEn": "Return the array after the last pass"
+        }
+      ],
+      "explanation": "Số lượt được xác định trước; mỗi lượt tạo bucket mới, phân phối theo chữ số hiện tại rồi dựng lại mảng. Sau lượt ứng với chữ số cao nhất, mảng đã được sắp xếp.",
+      "explanationEn": "The number of passes is fixed up front; each pass creates fresh buckets, distributes by the current digit and rebuilds the array. After the pass for the highest digit, the array is sorted.",
+      "id": "d6"
+    }
+  ]
+}

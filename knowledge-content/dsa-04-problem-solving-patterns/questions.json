@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Ý tưởng cốt lõi của mẫu frequency counter là gì?",
+    "questionEn": "What is the core idea of the frequency counter pattern?",
+    "options": [
+      "Sắp xếp cả hai mảng rồi so sánh từng phần tử theo cùng chỉ số",
+      "Gom giá trị và số lần xuất hiện vào object / Map để tra cứu O(1) thay vì lồng vòng lặp",
+      "Dùng hai chỉ số tiến dần về phía nhau từ hai đầu mảng",
+      "Chia mảng làm đôi và chỉ tiếp tục với nửa có thể chứa đáp án"
+    ],
+    "optionsEn": [
+      "Sort both arrays, then compare the elements at the same indices",
+      "Collect values and their counts in an object / Map so lookups are O(1) instead of nested loops",
+      "Use two indices that move toward each other from both ends of the array",
+      "Split the array in half and continue only with the half that can hold the answer"
+    ],
+    "answer": 1,
+    "explanation": "Frequency counter đổi bộ nhớ lấy thời gian: một lượt đếm vào object / Map, sau đó mỗi câu hỏi \"giá trị này có không, mấy lần?\" là O(1). Nhờ vậy tránh được vòng lặp lồng nhau O(n²). Sắp xếp rồi so sánh là cách khác (O(n log n)); hai chỉ số là multiple pointers; chia đôi là chia để trị.",
+    "explanationEn": "A frequency counter trades memory for time: one pass counts into an object / Map, and afterwards every \"is this value there, how many times?\" question is O(1). That removes the O(n²) nested loop. Sort-and-compare is a different approach (O(n log n)); two indices is multiple pointers; halving is divide and conquer."
+  },
+  {
+    "id": "q2",
+    "question": "Độ phức tạp thời gian của hàm sau là gì (n là độ dài mảng)?\n`function same(a, b) {\n  if (a.length !== b.length) return false;\n  for (const x of a) {\n    const i = b.indexOf(x * x);\n    if (i === -1) return false;\n    b.splice(i, 1);\n  }\n  return true;\n}`",
+    "questionEn": "What is the time complexity of this function (n is the array length)?\n`function same(a, b) {\n  if (a.length !== b.length) return false;\n  for (const x of a) {\n    const i = b.indexOf(x * x);\n    if (i === -1) return false;\n    b.splice(i, 1);\n  }\n  return true;\n}`",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(2n)",
+      "O(n²)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(n log n)",
+      "O(2n)",
+      "O(n²)"
+    ],
+    "answer": 3,
+    "explanation": "Chỉ có một vòng for, nhưng bên trong `indexOf` quét mảng và `splice` dịch chuyển các phần tử — cả hai đều O(n). n lần lặp × O(n) mỗi lần = O(n²). Dùng frequency counter với Map sẽ đưa về O(n).",
+    "explanationEn": "There is only one visible for loop, but inside it `indexOf` scans the array and `splice` shifts elements — both O(n). n iterations × O(n) each = O(n²). A frequency counter with a Map brings it down to O(n)."
+  },
+  {
+    "id": "q3",
+    "question": "Lời gọi cuối cùng trả về gì?\n`function isAnagram(a, b) {\n  const count = {};\n  for (const c of a) count[c] = (count[c] || 0) + 1;\n  for (const c of b) {\n    if (!count[c]) return false;\n    count[c]--;\n  }\n  return true;\n}\nisAnagram('abc', 'ab');`",
+    "questionEn": "What does the last call return?\n`function isAnagram(a, b) {\n  const count = {};\n  for (const c of a) count[c] = (count[c] || 0) + 1;\n  for (const c of b) {\n    if (!count[c]) return false;\n    count[c]--;\n  }\n  return true;\n}\nisAnagram('abc', 'ab');`",
+    "options": [
+      "true",
+      "false",
+      "Ném ra TypeError",
+      "undefined"
+    ],
+    "optionsEn": [
+      "true",
+      "false",
+      "It throws a TypeError",
+      "undefined"
+    ],
+    "answer": 0,
+    "explanation": "Vòng thứ hai chỉ duyệt 'a' và 'b', cả hai đều còn số đếm, nên hàm trả về true — một bug. Chữ 'c' chưa dùng không bao giờ bị kiểm tra. Cách sửa: kiểm tra `a.length !== b.length` ngay đầu hàm; khi hai độ dài bằng nhau thì không thể còn số đếm dư.",
+    "explanationEn": "The second loop only visits 'a' and 'b', both still have counts, so the function returns true — a bug. The unused 'c' is never checked. The fix is a `a.length !== b.length` guard at the top; once the lengths match, no leftover count is possible."
+  },
+  {
+    "id": "q4",
+    "question": "Bạn cần đếm số lần mỗi từ xuất hiện trong văn bản do người dùng nhập, có thể chứa những từ như \"constructor\" hay \"toString\". Cấu trúc nào an toàn nhất để làm bộ đếm?",
+    "questionEn": "You need to count how often each word appears in user-supplied text that may contain words like \"constructor\" or \"toString\". Which structure is the safest counter?",
+    "options": [
+      "Một object thường `{}` với `counts[w] = (counts[w] || 0) + 1`",
+      "Một mảng dùng chính từ đó làm chỉ số",
+      "Một `Map` với `get` / `set`",
+      "Một `Set` chứa các từ đã gặp"
+    ],
+    "optionsEn": [
+      "A plain object `{}` with `counts[w] = (counts[w] || 0) + 1`",
+      "An array indexed by the word itself",
+      "A `Map` with `get` / `set`",
+      "A `Set` holding the words seen"
+    ],
+    "answer": 2,
+    "explanation": "Object thường kế thừa key từ `Object.prototype`: `counts['constructor']` ban đầu là một hàm, nên `|| 0` không kích hoạt và kết quả thành chuỗi rác. Map không có key kế thừa và giữ nguyên kiểu key. Set chỉ biết có hay không, không đếm được; mảng dùng từ làm chỉ số thực chất cũng là thuộc tính object.",
+    "explanationEn": "A plain object inherits keys from `Object.prototype`: `counts['constructor']` starts out as a function, so `|| 0` never kicks in and the result becomes a garbage string. A Map has no inherited keys and keeps key types intact. A Set only records presence and cannot count; an array indexed by words is really just object properties again."
+  },
+  {
+    "id": "q5",
+    "question": "Lời giải `sumZero` dùng hai con trỏ (một ở đầu, một ở cuối, di chuyển theo dấu của tổng) cần điều kiện gì của input để đúng?",
+    "questionEn": "The two-pointer `sumZero` solution (one pointer at each end, moving based on the sign of the sum) needs what property of the input to be correct?",
+    "options": [
+      "Mảng không chứa số 0",
+      "Mảng có số lượng phần tử chẵn",
+      "Mảng đã được sắp xếp",
+      "Mảng không chứa phần tử trùng lặp"
+    ],
+    "optionsEn": [
+      "The array contains no zero",
+      "The array has an even number of elements",
+      "The array is sorted",
+      "The array contains no duplicates"
+    ],
+    "answer": 2,
+    "explanation": "Việc loại `arr[right]` khi tổng dương chỉ hợp lệ vì `arr[left]` là giá trị nhỏ nhất còn lại — điều này chỉ đúng khi mảng đã sắp xếp. Với mảng chưa sắp xếp, hãy dùng Set (O(n)) hoặc sắp xếp trước (O(n log n)). Số 0, phần tử trùng hay độ dài lẻ đều không ảnh hưởng.",
+    "explanationEn": "Discarding `arr[right]` when the sum is positive is only valid because `arr[left]` is the smallest remaining value — which is true only for a sorted array. For unsorted input use a Set (O(n)) or sort first (O(n log n)). Zeros, duplicates and odd lengths do not matter."
+  },
+  {
+    "id": "q6",
+    "question": "Hàm `sumZero` hai con trỏ (tổng > 0 thì `right--`, tổng < 0 thì `left++`) trả về gì với input sau?\n`sumZero([-5, -3, -1, 0, 2, 3, 4]);`",
+    "questionEn": "What does the two-pointer `sumZero` (sum > 0 → `right--`, sum < 0 → `left++`) return for this input?\n`sumZero([-5, -3, -1, 0, 2, 3, 4]);`",
+    "options": [
+      "`[-3, 3]`",
+      "`[-3, 4]`",
+      "`[0, 0]`",
+      "`undefined`"
+    ],
+    "optionsEn": [
+      "`[-3, 3]`",
+      "`[-3, 4]`",
+      "`[0, 0]`",
+      "`undefined`"
+    ],
+    "answer": 0,
+    "explanation": "-5 + 4 = -1 < 0 → left tiến tới -3; -3 + 4 = 1 > 0 → right lùi về 3; -3 + 3 = 0 → trả về [-3, 3]. `[0, 0]` không thể xảy ra vì điều kiện `left < right` không cho hai con trỏ trùng vị trí.",
+    "explanationEn": "-5 + 4 = -1 < 0 → left moves to -3; -3 + 4 = 1 > 0 → right moves back to 3; -3 + 3 = 0 → return [-3, 3]. `[0, 0]` is impossible because `left < right` stops both pointers from sharing an index."
+  },
+  {
+    "id": "q7",
+    "question": "`countUniqueValues` dùng con trỏ chậm `i` và con trỏ nhanh `j` trên mảng đã sắp xếp, ghi đè giá trị mới lên `arr[i]`. Độ phức tạp của nó là gì?",
+    "questionEn": "`countUniqueValues` uses a slow pointer `i` and a fast pointer `j` on a sorted array, writing each new value into `arr[i]`. What is its complexity?",
+    "options": [
+      "O(n²) time, O(1) space",
+      "O(n) time, O(1) space",
+      "O(n) time, O(n) space",
+      "O(n log n) time, O(1) space"
+    ],
+    "optionsEn": [
+      "O(n²) time, O(1) space",
+      "O(n) time, O(1) space",
+      "O(n) time, O(n) space",
+      "O(n log n) time, O(1) space"
+    ],
+    "answer": 1,
+    "explanation": "`j` duyệt mảng đúng một lần và `i` chỉ tiến lên, nên thời gian là O(n). Chỉ cần hai biến chỉ số, nên bộ nhớ phụ là O(1). Dùng Set cũng O(n) time nhưng tốn O(n) space. Cái giá: hàm ghi đè lên input.",
+    "explanationEn": "`j` walks the array exactly once and `i` only ever moves forward, so time is O(n). Only two index variables are needed, so auxiliary space is O(1). A Set would also be O(n) time but O(n) space. The price: the function overwrites its input."
+  },
+  {
+    "id": "q8",
+    "question": "Trong `sumZero` hai con trỏ trên mảng đã sắp xếp, vì sao khi `arr[left] + arr[right] > 0` ta được phép giảm `right`?",
+    "questionEn": "In the two-pointer `sumZero` on a sorted array, why is it safe to decrement `right` when `arr[left] + arr[right] > 0`?",
+    "options": [
+      "Vì phần tử bên phải luôn là số dương",
+      "Vì giảm `right` luôn làm tổng bằng 0 ở bước tiếp theo",
+      "Vì `left` đã duyệt qua mọi phần tử bên phải",
+      "Vì ngay cả với giá trị nhỏ nhất còn lại, `arr[right]` vẫn quá lớn nên không thể thuộc đáp án nào"
+    ],
+    "optionsEn": [
+      "Because the element on the right is always positive",
+      "Because decrementing `right` always makes the next sum zero",
+      "Because `left` has already visited every element on the right",
+      "Because even with the smallest remaining value, `arr[right]` is too big, so it cannot be part of any answer"
+    ],
+    "answer": 3,
+    "explanation": "`arr[left]` là giá trị nhỏ nhất trong khoảng còn lại. Nếu ghép với nó mà tổng vẫn dương thì ghép với bất kỳ giá trị nào khác cũng dương, nên `arr[right]` bị loại vĩnh viễn. Mỗi bước loại đúng một ứng viên, đó là lý do thuật toán O(n) mà vẫn đúng.",
+    "explanationEn": "`arr[left]` is the smallest value in the remaining range. If pairing with it still gives a positive sum, pairing with anything else will too, so `arr[right]` is out for good. Each step eliminates exactly one candidate, which is why the algorithm is both O(n) and correct."
+  },
+  {
+    "id": "q9",
+    "question": "Lời giải ngây thơ cho \"tổng lớn nhất của k phần tử liên tiếp\" tính lại tổng k phần tử cho mọi vị trí bắt đầu. Độ phức tạp thời gian chính xác nhất là gì?",
+    "questionEn": "The naive solution to \"maximum sum of k consecutive elements\" recomputes the sum of k elements for every starting position. What is its most precise time complexity?",
+    "options": [
+      "O(n)",
+      "O(k)",
+      "O(n·k)",
+      "O(n log k)"
+    ],
+    "optionsEn": [
+      "O(n)",
+      "O(k)",
+      "O(n·k)",
+      "O(n log k)"
+    ],
+    "answer": 2,
+    "explanation": "Có n − k + 1 vị trí bắt đầu, mỗi vị trí cộng k phần tử: O((n − k + 1) · k) = O(n·k). Khi k tỉ lệ với n (ví dụ k = n/2) nó thành O(n²). Sliding window đưa về O(n) bằng cách chỉ cộng phần tử vào và trừ phần tử ra.",
+    "explanationEn": "There are n − k + 1 starting positions and each adds k elements: O((n − k + 1) · k) = O(n·k). When k scales with n (say k = n/2) that becomes O(n²). A sliding window brings it to O(n) by only adding the entering element and subtracting the leaving one."
+  },
+  {
+    "id": "q10",
+    "question": "Trong `maxSubarraySum(arr, k)` dạng sliding window, `windowSum` đang là tổng của `arr[i - k]` đến `arr[i - 1]`. Dòng nào cập nhật đúng để nó thành tổng của `arr[i - k + 1]` đến `arr[i]`?",
+    "questionEn": "In the sliding-window `maxSubarraySum(arr, k)`, `windowSum` currently holds the sum of `arr[i - k]` through `arr[i - 1]`. Which line correctly updates it to the sum of `arr[i - k + 1]` through `arr[i]`?",
+    "options": [
+      "`windowSum += arr[i] - arr[i - k];`",
+      "`windowSum += arr[i] - arr[i - k + 1];`",
+      "`windowSum = arr[i] + arr[i - k];`",
+      "`windowSum -= arr[i] - arr[i - k];`"
+    ],
+    "optionsEn": [
+      "`windowSum += arr[i] - arr[i - k];`",
+      "`windowSum += arr[i] - arr[i - k + 1];`",
+      "`windowSum = arr[i] + arr[i - k];`",
+      "`windowSum -= arr[i] - arr[i - k];`"
+    ],
+    "answer": 0,
+    "explanation": "Phần tử đi vào là `arr[i]`, phần tử đi ra là `arr[i - k]` (phần tử đầu tiên của cửa sổ cũ). Trừ `arr[i - k + 1]` là off-by-one: nó vẫn nằm trong cửa sổ mới. Gán lại bằng tổng hai phần tử thì làm mất cả cửa sổ; `-=` thì đảo dấu phép cập nhật.",
+    "explanationEn": "The entering element is `arr[i]` and the leaving one is `arr[i - k]` (the first element of the old window). Subtracting `arr[i - k + 1]` is an off-by-one: it is still inside the new window. Reassigning to the sum of two elements throws the window away; `-=` flips the update's sign."
+  },
+  {
+    "id": "q11",
+    "question": "`minSubArrayLen(nums, target)` mở rộng mép phải và thu hẹp mép trái chừng nào `sum >= target`. Với loại input nào cách này KHÔNG còn đảm bảo đúng?",
+    "questionEn": "`minSubArrayLen(nums, target)` grows the right edge and shrinks the left edge while `sum >= target`. For which kind of input is this approach NO LONGER guaranteed correct?",
+    "options": [
+      "Mảng chưa được sắp xếp",
+      "`target` lớn hơn tổng của cả mảng",
+      "Mảng chỉ có một phần tử",
+      "Mảng có chứa số âm"
+    ],
+    "optionsEn": [
+      "The array is not sorted",
+      "`target` is larger than the sum of the whole array",
+      "The array has only one element",
+      "The array contains negative numbers"
+    ],
+    "answer": 3,
+    "explanation": "Cửa sổ trượt theo tổng dựa vào tính đơn điệu: thêm phần tử không làm tổng giảm, bỏ phần tử không làm tổng tăng. Số âm phá vỡ điều đó, nên một cửa sổ ngắn hơn có thể bị bỏ lỡ. Sliding window không cần mảng đã sắp xếp; target quá lớn thì hàm trả về 0 đúng như mong đợi.",
+    "explanationEn": "A sum-based sliding window relies on monotonicity: adding an element never lowers the sum and removing one never raises it. Negative numbers break that, so a shorter valid window can be missed. Sliding windows do not need sorted input, and a target that is too large correctly returns 0."
+  },
+  {
+    "id": "q12",
+    "question": "Độ phức tạp thời gian của hàm sau là gì (n = `nums.length`)?\n`function minSubArrayLen(nums, target) {\n  let left = 0, sum = 0, best = Infinity;\n  for (let right = 0; right < nums.length; right++) {\n    sum += nums[right];\n    while (sum >= target) {\n      best = Math.min(best, right - left + 1);\n      sum -= nums[left++];\n    }\n  }\n  return best === Infinity ? 0 : best;\n}`",
+    "questionEn": "What is the time complexity of this function (n = `nums.length`)?\n`function minSubArrayLen(nums, target) {\n  let left = 0, sum = 0, best = Infinity;\n  for (let right = 0; right < nums.length; right++) {\n    sum += nums[right];\n    while (sum >= target) {\n      best = Math.min(best, right - left + 1);\n      sum -= nums[left++];\n    }\n  }\n  return best === Infinity ? 0 : best;\n}`",
+    "options": [
+      "O(n log n)",
+      "O(n)",
+      "O(n²)",
+      "O(n · target)"
+    ],
+    "optionsEn": [
+      "O(n log n)",
+      "O(n)",
+      "O(n²)",
+      "O(n · target)"
+    ],
+    "answer": 1,
+    "explanation": "`right` tăng n lần. `left` không bao giờ lùi và không vượt quá n, nên tổng số lần chạy thân `while` trên toàn bộ hàm là tối đa n. Tổng cộng O(n + n) = O(n). Đếm theo số lần mỗi chỉ số vào/ra cửa sổ, đừng nhân máy móc hai vòng lặp.",
+    "explanationEn": "`right` advances n times. `left` never moves backwards and never passes n, so the `while` body runs at most n times over the whole call. The total is O(n + n) = O(n). Count how often each index enters and leaves the window instead of blindly multiplying the loops."
+  },
+  {
+    "id": "q13",
+    "question": "Binary search (`min <= max`, `middle = Math.floor((min + max) / 2)`) tìm giá trị `3` trong mảng dưới đây. Biến `middle` được tính bao nhiêu lần?\n`[1, 3, 5, 7, 9, 11, 13, 15, 17]`",
+    "questionEn": "Binary search (`min <= max`, `middle = Math.floor((min + max) / 2)`) looks for the value `3` in the array below. How many times is `middle` computed?\n`[1, 3, 5, 7, 9, 11, 13, 15, 17]`",
+    "options": [
+      "1",
+      "3",
+      "2",
+      "4"
+    ],
+    "optionsEn": [
+      "1",
+      "3",
+      "2",
+      "4"
+    ],
+    "answer": 2,
+    "explanation": "Lần 1: min=0, max=8, middle=4, arr[4]=9 > 3 → max=3. Lần 2: min=0, max=3, middle=1, arr[1]=3 → tìm thấy, trả về 1. Chỉ hai bước cho 9 phần tử; tối đa là ⌊log₂ 9⌋ + 1 = 4 bước.",
+    "explanationEn": "Step 1: min=0, max=8, middle=4, arr[4]=9 > 3 → max=3. Step 2: min=0, max=3, middle=1, arr[1]=3 → found, return 1. Just two steps for 9 elements; the maximum is ⌊log₂ 9⌋ + 1 = 4 steps."
+  },
+  {
+    "id": "q14",
+    "question": "Độ phức tạp thời gian của hàm sau theo `exp` là gì?\n`function power(base, exp) {\n  if (exp === 0) return 1;\n  const half = power(base, Math.floor(exp / 2));\n  return exp % 2 === 0 ? half * half : half * half * base;\n}`",
+    "questionEn": "What is the time complexity of this function in terms of `exp`?\n`function power(base, exp) {\n  if (exp === 0) return 1;\n  const half = power(base, Math.floor(exp / 2));\n  return exp % 2 === 0 ? half * half : half * half * base;\n}`",
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "optionsEn": [
+      "O(log n)",
+      "O(n)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi lời gọi chia đôi `exp` và chỉ gọi đệ quy MỘT lần, làm O(1) việc: T(n) = T(n/2) + O(1) = O(log n). Space cũng là O(log n) do call stack. Nếu gọi `power` hai lần ở mỗi tầng thay vì dùng lại `half`, nó sẽ quay về O(n).",
+    "explanationEn": "Each call halves `exp` and recurses only ONCE, doing O(1) work: T(n) = T(n/2) + O(1) = O(log n). Space is O(log n) too, for the call stack. Calling `power` twice per level instead of reusing `half` would fall back to O(n)."
+  },
+  {
+    "id": "q15",
+    "question": "Một thuật toán chia input thành hai nửa bằng nhau, giải đệ quy từng nửa, rồi gộp kết quả trong thời gian tuyến tính. Độ phức tạp thời gian của nó là gì?",
+    "questionEn": "An algorithm splits its input into two equal halves, solves each half recursively, then combines the results in linear time. What is its time complexity?",
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(n²)",
+      "O(n log n)"
+    ],
+    "optionsEn": [
+      "O(log n)",
+      "O(n)",
+      "O(n²)",
+      "O(n log n)"
+    ],
+    "answer": 3,
+    "explanation": "T(n) = 2T(n/2) + O(n). Cây đệ quy có log n tầng, và tổng công việc gộp ở mỗi tầng là O(n), nên tổng là O(n log n) — đây chính là merge sort. O(log n) là khi chỉ đi vào MỘT nửa và làm O(1) việc, như binary search.",
+    "explanationEn": "T(n) = 2T(n/2) + O(n). The recursion tree has log n levels and the combine work across each level totals O(n), so the whole thing is O(n log n) — this is merge sort. O(log n) is when you descend into only ONE half doing O(1) work, like binary search."
+  },
+  {
+    "id": "q16",
+    "question": "Cho một mảng số nguyên CHƯA sắp xếp, cần kiểm tra có hai số nào cộng lại bằng `target` không, trong thời gian O(n). Bộ nhớ không bị giới hạn. Cách nào phù hợp nhất?",
+    "questionEn": "Given an UNSORTED array of integers, you must check whether any two numbers add up to `target` in O(n) time. Memory is not a concern. Which approach fits best?",
+    "options": [
+      "Hai con trỏ ở hai đầu mảng, không sắp xếp trước",
+      "Duyệt một lượt, lưu các số đã gặp vào Set và kiểm tra `target - x`",
+      "Sắp xếp mảng rồi dùng hai con trỏ",
+      "Binary search `target - x` cho từng phần tử của mảng gốc"
+    ],
+    "optionsEn": [
+      "Two pointers at both ends without sorting first",
+      "One pass that stores seen numbers in a Set and checks for `target - x`",
+      "Sort the array, then use two pointers",
+      "Binary-search for `target - x` for each element of the original array"
+    ],
+    "answer": 1,
+    "explanation": "Set cho tra cứu O(1) trung bình, nên một lượt duyệt là O(n) time, O(n) space. Hai con trỏ không sắp xếp thì sai; sắp xếp trước là O(n log n); binary search trên mảng chưa sắp xếp cũng sai (và kể cả đúng thì là O(n log n)).",
+    "explanationEn": "A Set gives O(1) average lookups, so a single pass is O(n) time, O(n) space. Two pointers without sorting is incorrect; sorting first is O(n log n); binary search on an unsorted array is also incorrect (and would be O(n log n) even if it worked)."
+  },
+  {
+    "id": "q17",
+    "question": "Bạn có nhiệt độ đo theo từng ngày trong 10 năm và cần tìm nhiệt độ trung bình cao nhất của 7 ngày liên tiếp bất kỳ. Mẫu nào phù hợp nhất?",
+    "questionEn": "You have daily temperature readings for 10 years and need the highest average over any 7 consecutive days. Which pattern fits best?",
+    "options": [
+      "Frequency counter đếm số lần mỗi nhiệt độ xuất hiện",
+      "Binary search trên mảng nhiệt độ",
+      "Sliding window kích thước cố định 7",
+      "Hai con trỏ ở hai đầu mảng tiến vào giữa"
+    ],
+    "optionsEn": [
+      "A frequency counter of how often each temperature occurs",
+      "Binary search over the temperature array",
+      "A fixed-size sliding window of 7",
+      "Two pointers at both ends moving inward"
+    ],
+    "answer": 2,
+    "explanation": "\"Liên tiếp\" và \"kích thước cố định\" là tín hiệu của sliding window: giữ tổng 7 ngày, mỗi bước cộng ngày mới và trừ ngày cũ, O(n) time, O(1) space. Dữ liệu không sắp xếp theo nhiệt độ nên binary search và hai con trỏ không áp dụng; đếm tần suất làm mất thứ tự ngày.",
+    "explanationEn": "\"Consecutive\" plus \"fixed size\" signals a sliding window: keep a 7-day sum, add the new day and subtract the old one each step, O(n) time, O(1) space. The data is not sorted by temperature, so binary search and two pointers do not apply; counting frequencies throws away the order of the days."
+  },
+  {
+    "id": "q18",
+    "question": "Cần kiểm tra mảng CHƯA sắp xếp có cặp nào tổng bằng `target` không, với yêu cầu chỉ dùng O(1) bộ nhớ phụ và được phép sửa mảng. Cách nào phù hợp và độ phức tạp thời gian là bao nhiêu?",
+    "questionEn": "You must check whether an UNSORTED array has a pair summing to `target`, using only O(1) extra space, and you are allowed to modify the array. Which approach fits, and what is its time complexity?",
+    "options": [
+      "Sắp xếp tại chỗ rồi dùng hai con trỏ — O(n log n)",
+      "Dùng Set các số đã gặp — O(n)",
+      "Hai vòng lặp lồng nhau không sắp xếp — O(n log n)",
+      "Sắp xếp tại chỗ rồi dùng hai con trỏ — O(n)"
+    ],
+    "optionsEn": [
+      "Sort in place, then two pointers — O(n log n)",
+      "A Set of seen numbers — O(n)",
+      "Two nested loops without sorting — O(n log n)",
+      "Sort in place, then two pointers — O(n)"
+    ],
+    "answer": 0,
+    "explanation": "Set vi phạm giới hạn O(1) bộ nhớ. Sắp xếp tại chỗ rồi quét hai con trỏ là O(n log n) + O(n) = O(n log n) — đừng quên chi phí sắp xếp. Hai vòng lặp lồng nhau cũng dùng O(1) bộ nhớ nhưng là O(n²), không phải O(n log n).",
+    "explanationEn": "The Set breaks the O(1) memory limit. Sorting in place and then a two-pointer scan is O(n log n) + O(n) = O(n log n) — never forget the sort cost. Two nested loops also use O(1) memory but are O(n²), not O(n log n)."
+  },
+  {
+    "id": "q19",
+    "question": "Hàm binary search chuẩn (`min <= max`, so sánh `arr[middle]` với `val`) được gọi trên một mảng CHƯA sắp xếp. Nó trả về gì?\n`search([5, 1, 4, 2, 3], 1);`",
+    "questionEn": "A standard binary search (`min <= max`, comparing `arr[middle]` with `val`) is called on an UNSORTED array. What does it return?\n`search([5, 1, 4, 2, 3], 1);`",
+    "options": [
+      "1",
+      "-1",
+      "0",
+      "4"
+    ],
+    "optionsEn": [
+      "1",
+      "-1",
+      "0",
+      "4"
+    ],
+    "answer": 1,
+    "explanation": "middle=2, arr[2]=4 > 1 → max=1; middle=0, arr[0]=5 > 1 → max=-1; vòng lặp dừng, trả về -1 dù số 1 nằm ở chỉ số 1. Binary search chỉ đúng khi mảng đã sắp xếp, vì việc loại bỏ một nửa dựa vào thứ tự.",
+    "explanationEn": "middle=2, arr[2]=4 > 1 → max=1; middle=0, arr[0]=5 > 1 → max=-1; the loop ends and returns -1 even though 1 sits at index 1. Binary search is only correct on sorted data, because discarding half relies on order."
+  }
+]

@@ -23,6 +23,7 @@ import {
   type BlitzItemFormat,
 } from "@/lib/blitz";
 import { cn } from "@/lib/utils";
+import QuestionText from "@/components/knowledge/QuestionText";
 
 type Phase = "setup" | "running" | "results";
 
@@ -516,7 +517,7 @@ export default function BlitzRunner() {
           <div className="card border-l-4 border-l-red-500 space-y-3">
             <p className="text-sm font-semibold text-red-600 dark:text-red-400">{t("blitz.wrong")}</p>
             {feedback.explanation && (
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{feedback.explanation}</p>
+              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400"><QuestionText text={feedback.explanation} /></p>
             )}
             <div className="flex items-center justify-between gap-3">
               <span className="text-xs text-zinc-500">{t("blitz.continueHint")}</span>

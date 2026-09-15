@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về trạng thái kết nối TCP.",
+      "promptEn": "Pick TWO statements that are true about TCP connection states.",
+      "options": [
+        "TIME_WAIT luôn nằm ở phía server, bất kể bên nào đóng trước",
+        "Rất nhiều socket ở CLOSE_WAIT thường là do ứng dụng không gọi close()",
+        "Bật tcp_tw_recycle là cách an toàn để xử lý TIME_WAIT sau NAT",
+        "TIME_WAIT giữ 4-tuple, nên client mở kết nối mới liên tục có thể cạn ephemeral port",
+        "UDP cũng có trạng thái TIME_WAIT nhưng ngắn hơn TCP"
+      ],
+      "optionsEn": [
+        "TIME_WAIT always sits on the server, whichever side closes first",
+        "Lots of sockets in CLOSE_WAIT usually mean the application never calls close()",
+        "Enabling tcp_tw_recycle is a safe way to handle TIME_WAIT behind NAT",
+        "TIME_WAIT holds the 4-tuple, so a client constantly opening new connections can run out of ephemeral ports",
+        "UDP also has a TIME_WAIT state, just shorter than TCP's"
+      ],
+      "answers": [1, 3],
+      "explanation": "CLOSE_WAIT là lỗi của ứng dụng (phía kia đã đóng, mình chưa đóng). TIME_WAIT nằm ở bên đóng trước và giữ 4-tuple 60 giây trên Linux, nên cách chữa cạn port là tái sử dụng kết nối. tcp_tw_recycle đã bị gỡ vì làm hỏng client sau NAT, còn UDP không có kết nối nên không có trạng thái nào.",
+      "explanationEn": "CLOSE_WAIT is an application bug (the peer closed, we did not). TIME_WAIT sits on whoever closes first and holds the 4-tuple for 60 seconds on Linux, so the cure for port exhaustion is connection reuse. tcp_tw_recycle was removed because it broke clients behind NAT, and UDP has no connections, so it has no states at all.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Một API ở AWS phục vụ người dùng di động khắp Đông Nam Á và bị chê chậm. Chọn HAI thay đổi giảm độ trễ hiệu quả nhất.",
+      "promptEn": "An API on AWS serves mobile users across Southeast Asia and is reported as slow. Pick TWO changes that cut latency most effectively.",
+      "options": [
+        "Kết thúc TLS và HTTP/3 tại CDN edge gần người dùng, giữ kết nối ấm về origin",
+        "Tăng TTL DNS của API lên 7 ngày",
+        "Chuyển load balancer từ L7 sang L4 để bỏ bớt một tầng",
+        "Bật jumbo frame 9.001 byte cho traffic ra Internet",
+        "Gộp các lời gọi API tuần tự thành ít round trip hơn"
+      ],
+      "optionsEn": [
+        "Terminate TLS and HTTP/3 at a CDN edge near users, keeping warm connections to the origin",
+        "Raise the API's DNS TTL to 7 days",
+        "Switch the load balancer from L7 to L4 to remove a layer",
+        "Enable 9,001-byte jumbo frames for internet traffic",
+        "Merge sequential API calls into fewer round trips"
+      ],
+      "answers": [0, 4],
+      "explanation": "Độ trễ chủ yếu là khoảng cách × số round trip. Edge gần người dùng rút ngắn các handshake, còn gộp lời gọi giảm số RTT. Jumbo frame không đi ra khỏi VPC, TTL dài chỉ tiết kiệm vài lookup, còn đổi L7 sang L4 tiết kiệm không đáng kể và mất tính năng.",
+      "explanationEn": "Latency is mostly distance × number of round trips. An edge near users shortens the handshakes, and merging calls cuts the RTT count. Jumbo frames do not leave the VPC, a long TTL saves only a few lookups, and swapping L7 for L4 saves almost nothing while losing features.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "DNS dùng port số mấy (cho cả UDP và TCP)?",
+      "promptEn": "Which port number does DNS use (for both UDP and TCP)?",
+      "answer": "53",
+      "answerEn": "53",
+      "accept": ["53", "port 53", "udp 53", "tcp 53", "udp/53", "tcp/53"],
+      "explanation": "Port 53. Truy vấn thường đi qua UDP; TCP 53 dùng cho response lớn (ví dụ DNSSEC) và zone transfer, nên firewall chỉ mở UDP 53 có thể gây lỗi khó hiểu.",
+      "explanationEn": "Port 53. Queries normally use UDP; TCP 53 carries large responses (e.g. DNSSEC) and zone transfers, so a firewall that opens only UDP 53 can cause confusing failures.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Trạng thái TCP nào giữ 4-tuple ở bên chủ động đóng kết nối trong 2×MSL (60 giây trên Linux)?",
+      "promptEn": "Which TCP state holds the 4-tuple on the actively closing side for 2×MSL (60 seconds on Linux)?",
+      "answer": "TIME_WAIT",
+      "answerEn": "TIME_WAIT",
+      "accept": ["time_wait", "time wait", "timewait", "time-wait"],
+      "explanation": "TIME_WAIT. Nó ngăn gói đến trễ của kết nối cũ lọt vào kết nối mới trên cùng 4-tuple, và cho phép gửi lại ACK cuối nếu bị mất.",
+      "explanationEn": "TIME_WAIT. It stops delayed packets from an old connection leaking into a new one on the same 4-tuple, and lets the final ACK be resent if it was lost.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi khái niệm với mô tả đúng.",
+      "promptEn": "Match each concept to what it is.",
+      "pairs": [
+        {
+          "left": "SNI",
+          "leftEn": "SNI",
+          "right": "Tên host client gửi trong ClientHello để một IP phục vụ được nhiều chứng chỉ",
+          "rightEn": "The hostname a client sends in ClientHello so one IP can serve many certificates"
+        },
+        {
+          "left": "ALPN",
+          "leftEn": "ALPN",
+          "right": "Phần mở rộng TLS dùng để thương lượng h2 hay http/1.1",
+          "rightEn": "The TLS extension used to negotiate h2 or http/1.1"
+        },
+        {
+          "left": "QUIC",
+          "leftEn": "QUIC",
+          "right": "Giao thức transport trên UDP, tích hợp TLS 1.3, nền của HTTP/3",
+          "rightEn": "A transport over UDP with built-in TLS 1.3, underneath HTTP/3"
+        },
+        {
+          "left": "PAT",
+          "leftEn": "PAT",
+          "right": "Ghi đè IP và port nguồn để nhiều máy private dùng chung một IP public",
+          "rightEn": "Rewriting source IP and port so many private hosts share one public IP"
+        }
+      ],
+      "explanation": "SNI và ALPN đều nằm trong ClientHello nhưng làm việc khác nhau: SNI chọn chứng chỉ, ALPN chọn giao thức ứng dụng. QUIC thay TCP+TLS cho HTTP/3, còn PAT là dạng NAT mà NAT Gateway dùng.",
+      "explanationEn": "SNI and ALPN both travel in ClientHello but do different jobs: SNI selects the certificate, ALPN selects the application protocol. QUIC replaces TCP+TLS for HTTP/3, and PAT is the form of NAT a NAT Gateway performs.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước khi trình duyệt mở lần đầu https://api.example.com qua HTTP/2.",
+      "promptEn": "Put the steps into order for a browser opening https://api.example.com for the first time over HTTP/2.",
+      "items": [
+        { "text": "Phân giải DNS tên api.example.com ra địa chỉ IP", "textEn": "Resolve api.example.com to an IP address via DNS" },
+        { "text": "TCP handshake: SYN, SYN+ACK, ACK", "textEn": "TCP handshake: SYN, SYN+ACK, ACK" },
+        { "text": "Client gửi ClientHello kèm key_share, SNI và ALPN", "textEn": "Client sends ClientHello with key_share, SNI and ALPN" },
+        { "text": "Server trả ServerHello, chứng chỉ và Finished", "textEn": "Server replies with ServerHello, certificate and Finished" },
+        { "text": "Client gửi Finished cùng request HTTP/2 đầu tiên", "textEn": "Client sends Finished together with the first HTTP/2 request" }
+      ],
+      "explanation": "DNS trước, rồi 1 RTT cho TCP, 1 RTT cho TLS 1.3, và request đi ngay cùng Finished của client. HTTP/3 gộp hai handshake giữa lại thành một vì QUIC mang TLS bên trong.",
+      "explanationEn": "DNS first, then 1 RTT for TCP, 1 RTT for TLS 1.3, with the request riding along with the client's Finished. HTTP/3 merges the two middle handshakes into one because QUIC carries TLS inside it.",
+      "id": "d6"
+    }
+  ]
+}

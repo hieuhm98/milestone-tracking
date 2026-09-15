@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI cách phát hiện đúng chu trình trong một đồ thị CÓ HƯỚNG.",
+      "promptEn": "Pick TWO methods that correctly detect a cycle in a DIRECTED graph.",
+      "options": [
+        "Union-Find: báo chu trình khi union hai đỉnh đã cùng tập",
+        "Thuật toán Kahn: báo chu trình khi kết quả có ít hơn V đỉnh",
+        "Thuật toán Prim bắt đầu từ đỉnh 0",
+        "DFS ba màu: báo chu trình khi gặp cạnh tới đỉnh GRAY",
+        "DFS với một tập visited: báo chu trình khi gặp lại đỉnh đã thăm"
+      ],
+      "optionsEn": [
+        "Union-Find: report a cycle when uniting two vertices already in one set",
+        "Kahn's algorithm: report a cycle when the output has fewer than V vertices",
+        "Prim's algorithm started from vertex 0",
+        "Three-colour DFS: report a cycle on an edge to a GRAY vertex",
+        "DFS with a single visited set: report a cycle on reaching any visited vertex"
+      ],
+      "answers": [1, 3],
+      "explanation": "Kahn và DFS ba màu đều đúng cho đồ thị có hướng. Union-Find bỏ qua hướng cạnh nên chỉ dùng cho đồ thị vô hướng; Prim tạo MST chứ không kiểm tra chu trình; còn một tập visited đơn thuần báo nhầm khi gặp lại đỉnh đã duyệt xong (cross edge).",
+      "explanationEn": "Kahn and three-colour DFS are both correct for directed graphs. Union-Find ignores edge direction, so it only works for undirected graphs; Prim builds an MST rather than checking for cycles; and a plain visited set gives false positives on cross edges to finished vertices.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về cây khung nhỏ nhất (MST).",
+      "promptEn": "Pick TWO TRUE statements about minimum spanning trees.",
+      "options": [
+        "MST của một đồ thị luôn duy nhất",
+        "Đường đi trong MST giữa hai đỉnh luôn là đường ngắn nhất giữa chúng",
+        "MST của đồ thị liên thông V đỉnh có đúng V − 1 cạnh",
+        "MST được định nghĩa cho cả đồ thị có hướng lẫn vô hướng",
+        "Kruskal và Prim luôn cho MST có cùng tổng trọng số"
+      ],
+      "optionsEn": [
+        "A graph's MST is always unique",
+        "The MST path between two vertices is always their shortest path",
+        "The MST of a connected graph with V vertices has exactly V − 1 edges",
+        "MSTs are defined for both directed and undirected graphs",
+        "Kruskal and Prim always produce MSTs with the same total weight"
+      ],
+      "answers": [2, 4],
+      "explanation": "Mọi cây khung có V − 1 cạnh, và mọi MST của cùng đồ thị có cùng tổng trọng số nên Kruskal và Prim cho cùng tổng (có thể khác cạnh). MST chỉ duy nhất khi trọng số khác nhau, không phải cây đường đi ngắn nhất, và Kruskal/Prim dành cho đồ thị vô hướng.",
+      "explanationEn": "Every spanning tree has V − 1 edges, and all MSTs of a graph share the same total weight, so Kruskal and Prim agree on the total (possibly with different edges). An MST is unique only with distinct weights, is not a shortest-path tree, and Kruskal/Prim are for undirected graphs.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tối ưu Union-Find nào cho mọi nút trên đường đi của `find` trỏ thẳng tới gốc?",
+      "promptEn": "Which Union-Find optimisation makes every node on a `find` path point directly at the root?",
+      "answer": "Path compression",
+      "answerEn": "Path compression",
+      "accept": [
+        "path compression",
+        "path-compression",
+        "compression",
+        "nen duong di",
+        "nén đường đi",
+        "nen duong",
+        "nén đường"
+      ],
+      "explanation": "Path compression (nén đường đi). Kết hợp với union by rank, mỗi thao tác chỉ tốn O(α(n)) amortized — gần như hằng số.",
+      "explanationEn": "Path compression. Combined with union by rank it brings every operation down to O(α(n)) amortized — effectively constant.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của topological sort (Kahn hoặc DFS) trên danh sách kề là gì? Dùng V cho số đỉnh, E cho số cạnh.",
+      "promptEn": "What is the time complexity of topological sort (Kahn or DFS) on an adjacency list? Use V for vertices and E for edges.",
+      "answer": "O(V + E)",
+      "answerEn": "O(V + E)",
+      "accept": [
+        "O(V + E)",
+        "O(V+E)",
+        "V + E",
+        "v+e",
+        "O(E + V)",
+        "E + V",
+        "e+v",
+        "linear",
+        "tuyen tinh",
+        "tuyến tính"
+      ],
+      "explanation": "O(V + E). Mỗi đỉnh được xử lý một lần và mỗi cạnh được xem xét một lần.",
+      "explanationEn": "O(V + E). Every vertex is processed once and every edge is examined once.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi bài toán với thuật toán phù hợp nhất.",
+      "promptEn": "Match each problem to the best-fitting algorithm.",
+      "pairs": [
+        {
+          "left": "Xác định thứ tự build các package có phụ thuộc",
+          "leftEn": "Find a build order for packages with dependencies",
+          "right": "Topological sort",
+          "rightEn": "Topological sort"
+        },
+        {
+          "left": "Trả lời \"A và B có liên thông không?\" khi cạnh được thêm dần",
+          "leftEn": "Answer \"are A and B connected?\" as edges keep being added",
+          "right": "Union-Find",
+          "rightEn": "Union-Find"
+        },
+        {
+          "left": "Kéo cáp nối mọi văn phòng với tổng chi phí nhỏ nhất",
+          "leftEn": "Cable every office together at minimum total cost",
+          "right": "Kruskal / Prim (MST)",
+          "rightEn": "Kruskal / Prim (MST)"
+        },
+        {
+          "left": "Tìm tuyến đường ngắn nhất giữa hai thành phố, trọng số không âm",
+          "leftEn": "Find the shortest route between two cities, non-negative weights",
+          "right": "Dijkstra",
+          "rightEn": "Dijkstra"
+        }
+      ],
+      "explanation": "Phụ thuộc có hướng → thứ tự topo; kết nối động chỉ thêm cạnh → Union-Find; nối mọi đỉnh rẻ nhất → MST; khoảng cách giữa hai điểm → Dijkstra.",
+      "explanationEn": "Directed dependencies → topological order; add-only dynamic connectivity → Union-Find; connecting everything cheaply → MST; distance between two points → Dijkstra.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Sắp xếp các bước của thuật toán Kruskal theo đúng thứ tự.",
+      "promptEn": "Put the steps of Kruskal's algorithm in the correct order.",
+      "items": [
+        {
+          "text": "Sắp xếp mọi cạnh theo trọng số tăng dần",
+          "textEn": "Sort all edges by weight, ascending"
+        },
+        {
+          "text": "Khởi tạo Union-Find, mỗi đỉnh là một tập riêng",
+          "textEn": "Initialise Union-Find with every vertex in its own set"
+        },
+        {
+          "text": "Lấy cạnh rẻ nhất tiếp theo (u, v) và so sánh find(u) với find(v)",
+          "textEn": "Take the next cheapest edge (u, v) and compare find(u) with find(v)"
+        },
+        {
+          "text": "Nếu khác tập: union(u, v) và thêm cạnh vào MST",
+          "textEn": "If the sets differ: union(u, v) and add the edge to the MST"
+        },
+        {
+          "text": "Dừng khi MST có đủ V − 1 cạnh",
+          "textEn": "Stop once the MST has V − 1 edges"
+        }
+      ],
+      "explanation": "Kruskal cần cạnh đã sắp xếp và Union-Find sẵn sàng trước khi duyệt; mỗi cạnh được kiểm tra rồi mới gộp; khi có V − 1 cạnh thì cây khung đã hoàn chỉnh.",
+      "explanationEn": "Kruskal needs sorted edges and a ready Union-Find before scanning; each edge is checked before merging; once V − 1 edges are taken the spanning tree is complete.",
+      "id": "d6"
+    }
+  ]
+}

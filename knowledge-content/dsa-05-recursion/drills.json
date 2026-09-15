@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI lời gọi sẽ dẫn tới đệ quy vô hạn và tràn stack.",
+      "promptEn": "Pick TWO calls that lead to infinite recursion and a stack overflow.",
+      "options": [
+        "`countDown(3)` với base case `num <= 0` và lời gọi `countDown(num - 1)`",
+        "`factorial(4)` với base case `num === 1` và lời gọi `factorial(num)`",
+        "`sumRange(5)` với base case `num === 1` và lời gọi `sumRange(num - 1)`",
+        "`sumRange(0)` với base case `num === 1` và lời gọi `sumRange(num - 1)`",
+        "`power(2, 3)` với base case `exponent === 0` và lời gọi `power(base, exponent - 1)`"
+      ],
+      "optionsEn": [
+        "`countDown(3)` with base case `num <= 0` and the call `countDown(num - 1)`",
+        "`factorial(4)` with base case `num === 1` and the call `factorial(num)`",
+        "`sumRange(5)` with base case `num === 1` and the call `sumRange(num - 1)`",
+        "`sumRange(0)` with base case `num === 1` and the call `sumRange(num - 1)`",
+        "`power(2, 3)` with base case `exponent === 0` and the call `power(base, exponent - 1)`"
+      ],
+      "answers": [1, 3],
+      "explanation": "`factorial(num)` gọi lại với cùng input nên không bao giờ tiến về base case. `sumRange(0)` đi 0, -1, -2, … và bỏ qua mất `num === 1`. Ba lời gọi còn lại đều giảm input về đúng base case của chúng.",
+      "explanationEn": "`factorial(num)` calls itself with the same input, so it never moves toward the base case. `sumRange(0)` goes 0, -1, -2, … and skips right past `num === 1`. The other three calls all shrink their input onto their base case.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI biểu thức tạo ra mảng ngắn hơn mà KHÔNG làm thay đổi mảng gốc `arr` (phù hợp cho pure recursion).",
+      "promptEn": "Pick TWO expressions that produce a shorter array WITHOUT changing the original `arr` (suitable for pure recursion).",
+      "options": [
+        "`arr.shift()`",
+        "`arr.splice(0, 1)`",
+        "`arr.slice(1)`",
+        "`arr.pop()`",
+        "`[...arr].slice(0, -1)`"
+      ],
+      "optionsEn": [
+        "`arr.shift()`",
+        "`arr.splice(0, 1)`",
+        "`arr.slice(1)`",
+        "`arr.pop()`",
+        "`[...arr].slice(0, -1)`"
+      ],
+      "answers": [2, 4],
+      "explanation": "`slice` và spread trả về bản sao, mảng gốc giữ nguyên. `shift`, `splice` và `pop` sửa trực tiếp mảng của nơi gọi — một side effect mà pure recursion cần tránh. Hãy nhớ bản sao tốn O(n) mỗi lần.",
+      "explanationEn": "`slice` and spread return copies and leave the original alone. `shift`, `splice` and `pop` modify the caller's array in place — a side effect pure recursion avoids. Remember each copy costs O(n).",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Điều kiện mà tại đó hàm đệ quy dừng lại và trả về mà không tự gọi lại nữa được gọi là gì?",
+      "promptEn": "What is the condition called where a recursive function stops and returns without calling itself again?",
+      "answer": "Base case",
+      "answerEn": "Base case",
+      "accept": [
+        "base case",
+        "basecase",
+        "base condition",
+        "truong hop co so",
+        "trường hợp cơ sở",
+        "dieu kien dung",
+        "điều kiện dừng"
+      ],
+      "explanation": "Base case (trường hợp cơ sở). Mỗi lời gọi đệ quy phải tiến dần về base case; nếu không, hàm sẽ gọi mãi đến khi tràn stack.",
+      "explanationEn": "Base case. Every recursive call must move toward it; otherwise the function keeps calling itself until the stack overflows.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Call stack hoạt động theo nguyên tắc nào (viết tắt 4 chữ cái)?",
+      "promptEn": "What ordering principle does the call stack follow (four-letter abbreviation)?",
+      "answer": "LIFO",
+      "answerEn": "LIFO",
+      "accept": [
+        "LIFO",
+        "last in first out",
+        "last-in first-out",
+        "last in, first out",
+        "vao sau ra truoc",
+        "vào sau ra trước"
+      ],
+      "explanation": "LIFO — vào sau, ra trước. Lời gọi được push sau cùng sẽ return và bị pop đầu tiên, nên kết quả đệ quy được ghép từ base case ngược lên lời gọi ban đầu.",
+      "explanationEn": "LIFO — last in, first out. The most recently pushed call returns and is popped first, which is why recursive results are built from the base case back up to the original call.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi hàm đệ quy với độ phức tạp thời gian đúng.",
+      "promptEn": "Match each recursive function to its time complexity.",
+      "pairs": [
+        {
+          "left": "fastPower(base, e) chia đôi e mỗi lời gọi",
+          "leftEn": "fastPower(base, e) halving e on every call",
+          "right": "O(log n)",
+          "rightEn": "O(log n)"
+        },
+        {
+          "left": "sumRange(n) gọi sumRange(n - 1)",
+          "leftEn": "sumRange(n) calling sumRange(n - 1)",
+          "right": "O(n)",
+          "rightEn": "O(n)"
+        },
+        {
+          "left": "collectOddValues gọi đệ quy với arr.slice(1)",
+          "leftEn": "collectOddValues recursing on arr.slice(1)",
+          "right": "O(n²)",
+          "rightEn": "O(n²)"
+        },
+        {
+          "left": "fib(n) gọi fib(n - 1) + fib(n - 2)",
+          "leftEn": "fib(n) calling fib(n - 1) + fib(n - 2)",
+          "right": "O(2ⁿ)",
+          "rightEn": "O(2ⁿ)"
+        }
+      ],
+      "explanation": "Chia đôi input mỗi lần cho log n lời gọi; giảm 1 mỗi lần cho n lời gọi O(1); n lời gọi mà mỗi lời gọi sao chép O(n) cho O(n²); hai lời gọi mỗi tầng tạo cây gần như nhân đôi theo từng tầng.",
+      "explanationEn": "Halving the input gives log n calls; shrinking by one gives n calls of O(1); n calls each doing an O(n) copy gives O(n²); two calls per level make a call tree that roughly doubles at each level.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Sắp xếp các sự kiện trên call stack khi chạy `sumRange(3)` (base case `num === 1`) theo đúng thứ tự thời gian.",
+      "promptEn": "Put the call stack events of running `sumRange(3)` (base case `num === 1`) in chronological order.",
+      "items": [
+        {
+          "text": "Push sumRange(3)",
+          "textEn": "Push sumRange(3)"
+        },
+        {
+          "text": "Push sumRange(2)",
+          "textEn": "Push sumRange(2)"
+        },
+        {
+          "text": "Push sumRange(1)",
+          "textEn": "Push sumRange(1)"
+        },
+        {
+          "text": "sumRange(1) chạm base case, trả về 1 và bị pop",
+          "textEn": "sumRange(1) hits the base case, returns 1 and is popped"
+        },
+        {
+          "text": "sumRange(2) trả về 2 + 1 = 3 và bị pop",
+          "textEn": "sumRange(2) returns 2 + 1 = 3 and is popped"
+        },
+        {
+          "text": "sumRange(3) trả về 3 + 3 = 6 và bị pop",
+          "textEn": "sumRange(3) returns 3 + 3 = 6 and is popped"
+        }
+      ],
+      "explanation": "Các frame được push trên đường đi xuống cho tới base case, rồi pop theo thứ tự LIFO trên đường quay lên; mỗi frame chỉ tính xong tổng khi lời gọi con đã trả về.",
+      "explanationEn": "Frames are pushed on the way down to the base case, then popped in LIFO order on the way back up; each frame can only finish its sum after its child call has returned.",
+      "id": "d6"
+    }
+  ]
+}

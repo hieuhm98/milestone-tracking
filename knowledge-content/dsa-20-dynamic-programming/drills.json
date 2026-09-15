@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI bài toán có cả bài toán con chồng lấp lẫn cấu trúc con tối ưu, nên hợp để giải bằng DP.",
+      "promptEn": "Pick TWO problems that have both overlapping subproblems and optimal substructure, making them a good fit for DP.",
+      "options": [
+        "Sắp xếp một mảng bằng merge sort",
+        "Đếm số cách leo cầu thang n bậc, mỗi lần bước 1 hoặc 2 bậc",
+        "Tìm một phần tử trong mảng đã sắp xếp bằng binary search",
+        "Tìm số đồng xu ít nhất để tạo ra một số tiền",
+        "Tìm đường đi đơn dài nhất giữa hai đỉnh của đồ thị"
+      ],
+      "optionsEn": [
+        "Sorting an array with merge sort",
+        "Counting the ways to climb n stairs taking 1 or 2 steps at a time",
+        "Finding an element in a sorted array with binary search",
+        "Finding the fewest coins that make up an amount",
+        "Finding the longest simple path between two vertices of a graph"
+      ],
+      "answers": [1, 3],
+      "explanation": "Leo cầu thang và số xu ít nhất đều lặp lại cùng các trạng thái nhỏ hơn, và đáp án tối ưu dựng được từ đáp án của trạng thái nhỏ hơn. Merge sort và binary search có các bài toán con không lặp lại, còn đường đơn dài nhất thiếu cấu trúc con tối ưu vì ghép các đoạn có thể lặp đỉnh.",
+      "explanationEn": "Climbing stairs and minimum coins both revisit the same smaller states, and their optimal answers build from those states' answers. Merge sort and binary search have subproblems that never repeat, and longest simple path lacks optimal substructure because gluing pieces can repeat a vertex.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về tabulation (bottom-up).",
+      "promptEn": "Pick TWO statements that are TRUE about tabulation (bottom-up).",
+      "options": [
+        "Thường được viết bằng đệ quy kèm một cache",
+        "Tính đi từ base case lên, điền bảng bằng vòng lặp",
+        "Luôn giải ít bài toán con hơn memoization",
+        "Không đệ quy nên không có nguy cơ tràn call stack",
+        "Chỉ dùng được cho bài toán không có cấu trúc con tối ưu"
+      ],
+      "optionsEn": [
+        "It is usually written as recursion plus a cache",
+        "It works up from the base cases, filling a table with a loop",
+        "It always solves fewer subproblems than memoization",
+        "It does not recurse, so it cannot overflow the call stack",
+        "It only works for problems without optimal substructure"
+      ],
+      "answers": [1, 3],
+      "explanation": "Tabulation điền bảng từ base case lên bằng vòng lặp, nên không dùng call stack. Đệ quy kèm cache là memoization; memoization mới là cách chỉ giải các trạng thái được chạm tới, còn tabulation thường điền cả bảng; và mọi cách DP đều cần cấu trúc con tối ưu.",
+      "explanationEn": "Tabulation fills a table from the base cases upward with a loop, so it uses no call stack. Recursion plus a cache is memoization; memoization is the one that solves only reached states, while tabulation usually fills the whole table; and every form of DP needs optimal substructure.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Kỹ thuật lưu kết quả của các lời gọi hàm tốn kém và trả về kết quả đã cache khi cùng input xuất hiện lại (DP top-down) gọi là gì?",
+      "promptEn": "What is the technique of storing the results of expensive function calls and returning the cached result when the same inputs occur again (top-down DP)?",
+      "answer": "Memoization",
+      "answerEn": "Memoization",
+      "accept": [
+        "memoization",
+        "memoisation",
+        "memoize",
+        "memoise",
+        "memo",
+        "top down memoization",
+        "ghi nho",
+        "ghi nhớ"
+      ],
+      "explanation": "Memoization (ghi nhớ kết quả): giữ nguyên đệ quy và thêm cache, biến Fibonacci từ O(2ⁿ) thành O(n).",
+      "explanationEn": "Memoization: keep the recursion and add a cache, turning Fibonacci from O(2ⁿ) into O(n).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Bản bottom-up của bài leo cầu thang chỉ giữ hai biến (số cách của hai bậc liền trước). Độ phức tạp bộ nhớ phụ của nó là gì?",
+      "promptEn": "The bottom-up climbing-stairs solution keeps only two variables (the ways for the two stairs below). What is its auxiliary space complexity?",
+      "answer": "O(1)",
+      "answerEn": "O(1)",
+      "accept": [
+        "O(1)",
+        "o 1",
+        "1",
+        "constant",
+        "constant space",
+        "hang so",
+        "hằng số"
+      ],
+      "explanation": "O(1). Mỗi trạng thái chỉ phụ thuộc hai trạng thái liền trước, nên thay cả bảng O(n) bằng hai biến cuốn chiếu; thời gian vẫn là O(n).",
+      "explanationEn": "O(1). Each state depends only on the previous two, so two rolling variables replace the O(n) table; time stays O(n).",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thuật ngữ với mô tả đúng.",
+      "promptEn": "Match each term to its description.",
+      "pairs": [
+        {
+          "left": "Memoization",
+          "leftEn": "Memoization",
+          "right": "Đệ quy top-down kèm cache kết quả",
+          "rightEn": "Top-down recursion with a result cache"
+        },
+        {
+          "left": "Tabulation",
+          "leftEn": "Tabulation",
+          "right": "Vòng lặp bottom-up điền bảng từ base case",
+          "rightEn": "A bottom-up loop filling a table from the base cases"
+        },
+        {
+          "left": "Bài toán con chồng lấp",
+          "leftEn": "Overlapping subproblems",
+          "right": "Cùng một bài toán con bị giải nhiều lần",
+          "rightEn": "The same subproblem gets solved many times"
+        },
+        {
+          "left": "Cấu trúc con tối ưu",
+          "leftEn": "Optimal substructure",
+          "right": "Lời giải tối ưu dựng từ lời giải tối ưu của bài toán con",
+          "rightEn": "An optimal solution is built from optimal solutions of subproblems"
+        }
+      ],
+      "explanation": "Memoization và tabulation là hai cách cài đặt DP (từ trên xuống và từ dưới lên); bài toán con chồng lấp và cấu trúc con tối ưu là hai tính chất bài toán phải có thì DP mới dùng được.",
+      "explanationEn": "Memoization and tabulation are the two ways to implement DP (top-down and bottom-up); overlapping subproblems and optimal substructure are the two properties a problem must have for DP to apply.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Sắp xếp các bước giải một bài toán quy hoạch động theo đúng thứ tự.",
+      "promptEn": "Put the steps for solving a dynamic programming problem in the correct order.",
+      "items": [
+        {
+          "text": "Định nghĩa trạng thái bằng lời (dp[i] nghĩa là gì)",
+          "textEn": "Define the state in words (what dp[i] means)"
+        },
+        {
+          "text": "Viết công thức truy hồi từ các trạng thái nhỏ hơn",
+          "textEn": "Write the recurrence from smaller states"
+        },
+        {
+          "text": "Đặt base case cho các trạng thái nhỏ nhất",
+          "textEn": "Set the base cases for the smallest states"
+        },
+        {
+          "text": "Chọn thứ tự tính: memoize đệ quy hoặc điền bảng",
+          "textEn": "Choose the order: memoize the recursion or fill a table"
+        },
+        {
+          "text": "Trả về đáp án ở đúng ô rồi tối ưu bộ nhớ",
+          "textEn": "Return the answer from the right cell, then optimise space"
+        }
+      ],
+      "explanation": "Không thể viết truy hồi khi chưa biết trạng thái nghĩa là gì; base case là điểm dừng của truy hồi; thứ tự tính phải đảm bảo mọi phụ thuộc có sẵn trước khi đọc; cuối cùng mới lấy đáp án và tối ưu bộ nhớ.",
+      "explanationEn": "You cannot write a recurrence before knowing what a state means; base cases are where the recurrence stops; the computation order must have every dependency ready before it is read; only then do you read the answer and trim memory.",
+      "id": "d6"
+    }
+  ]
+}

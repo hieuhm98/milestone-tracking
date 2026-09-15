@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI việc nên làm trong vài phút đầu của buổi phỏng vấn system design.",
+      "promptEn": "Pick TWO things you should do in the first few minutes of a system design interview.",
+      "options": [
+        "Chốt 3–4 tính năng cốt lõi và nói rõ những gì nằm ngoài phạm vi",
+        "Chọn ngay Kafka và Kubernetes để thể hiện hiểu biết công nghệ",
+        "Viết schema chi tiết cho mọi bảng trong database",
+        "Nêu rõ giả định về quy mô như DAU và tỉ lệ đọc/ghi",
+        "Bắt đầu với phần đào sâu khó nhất để tiết kiệm thời gian"
+      ],
+      "optionsEn": [
+        "Fix the 3–4 core features and say what is out of scope",
+        "Pick Kafka and Kubernetes right away to show technical breadth",
+        "Write a detailed schema for every database table",
+        "State scale assumptions such as DAU and the read/write ratio",
+        "Start with the hardest deep dive to save time"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "Mở đầu bằng phạm vi và giả định quy mô vì chúng quyết định mọi lựa chọn phía sau. Chọn công nghệ, viết schema chi tiết hay nhảy vào đào sâu trước khi có yêu cầu là những lỗi kinh điển.",
+      "explanationEn": "Open with scope and scale assumptions because they drive every later choice. Picking technologies, writing detailed schemas or diving deep before requirements exist are the classic mistakes.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về thiết kế rate limiter phân tán.",
+      "promptEn": "Pick TWO statements that are true about designing a distributed rate limiter.",
+      "options": [
+        "Kiểm tra giới hạn ở phía client là đủ an toàn",
+        "Token bucket cho phép burst tới dung lượng của bucket",
+        "Fixed window counter chặn chính xác mọi burst quanh ranh giới cửa sổ",
+        "Gọi `INCR` rồi `EXPIRE` bằng hai lệnh riêng là đủ nguyên tử",
+        "Request bị chặn nên nhận `429 Too Many Requests` kèm `Retry-After`"
+      ],
+      "optionsEn": [
+        "Enforcing the limit on the client is safe enough",
+        "A token bucket allows bursts up to the bucket capacity",
+        "A fixed window counter precisely blocks every burst around the window boundary",
+        "Calling `INCR` then `EXPIRE` as two separate commands is atomic enough",
+        "A rejected request should get `429 Too Many Requests` with `Retry-After`"
+      ],
+      "answers": [
+        1,
+        4
+      ],
+      "explanation": "Token bucket cho burst tới b rồi giới hạn theo tốc độ nạp; 429 kèm Retry-After giúp client lùi lại đúng lúc. Client không đáng tin, fixed window lọt tới 2× giới hạn quanh ranh giới, và hai lệnh Redis riêng lẻ không nguyên tử.",
+      "explanationEn": "A token bucket permits bursts up to b and then limits to the refill rate; 429 with Retry-After tells clients when to back off. Clients cannot be trusted, a fixed window admits up to 2× around the boundary, and two separate Redis commands are not atomic.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Trong thiết kế URL shortener, cách mã hoá dùng 62 ký tự (a–z, A–Z, 0–9) để tạo mã ngắn gọi là gì?",
+      "promptEn": "In a URL shortener design, what is the encoding that uses 62 characters (a–z, A–Z, 0–9) to build short codes called?",
+      "answer": "Base62",
+      "answerEn": "Base62",
+      "accept": [
+        "base62",
+        "base 62",
+        "base-62",
+        "base62 encoding"
+      ],
+      "explanation": "Base62. Nó chỉ dùng ký tự an toàn trong URL; Base64 thêm + và / nên phải escape. Mỗi ký tự thêm vào nhân số mã khả dụng lên 62 lần.",
+      "explanationEn": "Base62. It uses only URL-safe characters; Base64 adds + and /, which need escaping. Every extra character multiplies the number of available codes by 62.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Cần tối thiểu bao nhiêu ký tự base62 để có đủ mã cho 365 tỷ link (100 triệu link/ngày trong 10 năm)?",
+      "promptEn": "What is the minimum number of base62 characters needed for 365 billion links (100 million a day for 10 years)?",
+      "answer": "7",
+      "answerEn": "7",
+      "accept": [
+        "7",
+        "seven",
+        "7 characters",
+        "7 chars",
+        "bay",
+        "bảy",
+        "7 ky tu",
+        "7 ký tự"
+      ],
+      "explanation": "7. 62⁶ ≈ 56,8 tỷ — chưa đủ; 62⁷ ≈ 3,52 nghìn tỷ — dư sức. Tính ra con số rồi dùng nó để chọn độ dài mã chính là điều người phỏng vấn muốn thấy.",
+      "explanationEn": "7. 62⁶ ≈ 56.8 billion is not enough; 62⁷ ≈ 3.52 trillion is plenty. Working the number out and then using it to pick the code length is exactly what the interviewer wants to see.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thuật toán rate limiting với đặc điểm của nó.",
+      "promptEn": "Match each rate-limiting algorithm to its defining property.",
+      "pairs": [
+        {
+          "left": "Token bucket",
+          "leftEn": "Token bucket",
+          "right": "Cho phép burst tới dung lượng bucket, rồi giới hạn theo tốc độ nạp",
+          "rightEn": "Allows bursts up to the bucket capacity, then limits to the refill rate"
+        },
+        {
+          "left": "Leaky bucket",
+          "leftEn": "Leaky bucket",
+          "right": "Request chảy ra với tốc độ cố định, đầu ra đều đặn",
+          "rightEn": "Requests drain at a fixed rate, giving smooth output"
+        },
+        {
+          "left": "Fixed window counter",
+          "leftEn": "Fixed window counter",
+          "right": "Rẻ nhất nhưng có thể lọt gấp đôi giới hạn quanh ranh giới cửa sổ",
+          "rightEn": "Cheapest, but can admit double the limit around a window boundary"
+        },
+        {
+          "left": "Sliding window log",
+          "leftEn": "Sliding window log",
+          "right": "Chính xác nhưng lưu một timestamp cho mỗi request",
+          "rightEn": "Exact, but stores a timestamp for every request"
+        }
+      ],
+      "explanation": "Trong phỏng vấn, token bucket là lựa chọn mặc định phổ biến; sliding window counter là thoả hiệp giữa độ chính xác của log và chi phí O(1) của fixed window.",
+      "explanationEn": "In interviews the token bucket is the common default; the sliding window counter is the compromise between the log's accuracy and the fixed window's O(1) cost.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp các bước của khung phỏng vấn system design theo đúng thứ tự.",
+      "promptEn": "Put the steps of the system design interview framework into order.",
+      "items": [
+        {
+          "text": "Làm rõ yêu cầu chức năng, phi chức năng và phạm vi",
+          "textEn": "Clarify functional and non-functional requirements and scope"
+        },
+        {
+          "text": "Ước lượng nhanh QPS, dung lượng và bộ nhớ",
+          "textEn": "Back-of-the-envelope estimates for QPS, storage and memory"
+        },
+        {
+          "text": "Định nghĩa API",
+          "textEn": "Define the API"
+        },
+        {
+          "text": "Thiết kế mô hình dữ liệu theo access pattern",
+          "textEn": "Design the data model from access patterns"
+        },
+        {
+          "text": "Vẽ thiết kế tổng quan cho luồng đọc và luồng ghi",
+          "textEn": "Draw the high-level design for read and write paths"
+        },
+        {
+          "text": "Đào sâu phần khó, rồi phân tích điểm nghẽn và kịch bản lỗi",
+          "textEn": "Deep-dive the hard parts, then analyse bottlenecks and failure modes"
+        }
+      ],
+      "explanation": "Mỗi bước dùng kết quả của bước trước: con số ước lượng dựa trên yêu cầu, API và dữ liệu định hình các hộp, và phần đào sâu chỉ có ý nghĩa khi đã có thiết kế tổng quan để thử thách.",
+      "explanationEn": "Each step feeds the next: estimates rest on requirements, the API and data shape the boxes, and a deep dive only makes sense once there is a high-level design to stress.",
+      "id": "d6"
+    }
+  ]
+}

@@ -1,0 +1,1661 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "v1",
+      "lessonId": "l1",
+      "word": "package",
+      "pos": "v",
+      "ipa": "/ˈpæk.ɪdʒ/",
+      "question": "Trong câu \"A container packages an application together with all its dependencies into a standard unit.\", từ \"packages\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A container packages an application together with all its dependencies into a standard unit.\", what does \"packages\" (verb) mean?",
+      "options": [
+        "tháo rời",
+        "sao chép",
+        "đóng gói",
+        "xóa bỏ"
+      ],
+      "optionsEn": [
+        "to take apart",
+        "to make a copy of",
+        "to wrap things together into one unit",
+        "to remove completely"
+      ],
+      "answer": 2,
+      "explanation": "package /ˈpæk.ɪdʒ/ (động từ): đóng gói. Container \"đóng gói\" ứng dụng cùng mọi thứ nó cần thành một khối. Danh từ \"package\" = gói (ví dụ deployment package).",
+      "explanationEn": "package /ˈpæk.ɪdʒ/ (verb): to wrap things together into one unit. A container bundles the app with everything it needs into one unit. The noun \"package\" means a bundle (e.g. a deployment package)."
+    },
+    {
+      "id": "v2",
+      "lessonId": "l1",
+      "word": "dependency",
+      "pos": "n",
+      "ipa": "/dɪˈpen.dən.si/",
+      "question": "Trong câu \"A container packages an application together with all its dependencies (runtime, libraries, config).\", từ \"dependencies\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A container packages an application together with all its dependencies (runtime, libraries, config).\", what does \"dependencies\" (noun) mean?",
+      "options": [
+        "thành phần phụ thuộc (thứ mà phần mềm cần để chạy)",
+        "lỗi phát sinh khi chạy chương trình",
+        "bản sao lưu dữ liệu",
+        "giao diện người dùng"
+      ],
+      "optionsEn": [
+        "something a program needs in order to run",
+        "an error that happens while running",
+        "a backup copy of data",
+        "the user interface"
+      ],
+      "answer": 0,
+      "explanation": "dependency /dɪˈpen.dən.si/ (danh từ): thành phần phụ thuộc (thứ mà phần mềm cần để chạy). Trong phần mềm, dependencies là các thư viện, runtime, cấu hình mà ứng dụng cần. Động từ liên quan: depend on (phụ thuộc vào).",
+      "explanationEn": "dependency /dɪˈpen.dən.si/ (noun): something a program needs in order to run. In software, dependencies are the libraries, runtimes and config an app needs. Related verb: depend on."
+    },
+    {
+      "id": "v3",
+      "lessonId": "l1",
+      "word": "ecosystem",
+      "pos": "n",
+      "ipa": "/ˈiː.koʊˌsɪs.təm/",
+      "question": "Trong câu \"AWS offers an ecosystem of services to build, store, and run containers at scale.\", từ \"ecosystem\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"AWS offers an ecosystem of services to build, store, and run containers at scale.\", what does \"ecosystem\" (noun) mean?",
+      "options": [
+        "bảng giá dịch vụ",
+        "trung tâm dữ liệu",
+        "hợp đồng pháp lý",
+        "hệ sinh thái (tập hợp các thành phần liên kết với nhau)"
+      ],
+      "optionsEn": [
+        "a price list for services",
+        "a data center",
+        "a legal contract",
+        "a group of connected parts that work together"
+      ],
+      "answer": 3,
+      "explanation": "ecosystem /ˈiː.koʊˌsɪs.təm/ (danh từ): hệ sinh thái (tập hợp các thành phần liên kết với nhau). \"An ecosystem of services\" = một nhóm dịch vụ liên kết và bổ trợ cho nhau (ECS, ECR, EKS, Fargate...).",
+      "explanationEn": "ecosystem /ˈiː.koʊˌsɪs.təm/ (noun): a group of connected parts that work together. \"An ecosystem of services\" is a set of related services that work together (ECS, ECR, EKS, Fargate...)."
+    },
+    {
+      "id": "v4",
+      "lessonId": "l1",
+      "word": "at scale",
+      "pos": "phrase",
+      "ipa": "/æt skeɪl/",
+      "question": "Trong câu \"AWS offers an ecosystem of services to build, store, and run containers at scale.\", từ \"at scale\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"AWS offers an ecosystem of services to build, store, and run containers at scale.\", what does \"at scale\" (phrase) mean?",
+      "options": [
+        "với chi phí bằng không",
+        "ở quy mô lớn",
+        "một cách thủ công",
+        "trong môi trường thử nghiệm"
+      ],
+      "optionsEn": [
+        "at zero cost",
+        "in large amounts or on a large scale",
+        "by hand",
+        "in a test environment"
+      ],
+      "answer": 1,
+      "explanation": "at scale /æt skeɪl/ (cụm từ): ở quy mô lớn. \"Run containers at scale\" = chạy rất nhiều container, phục vụ khối lượng lớn.",
+      "explanationEn": "at scale /æt skeɪl/ (phrase): in large amounts or on a large scale. \"Run containers at scale\" means running very many containers for large workloads."
+    },
+    {
+      "id": "v5",
+      "lessonId": "l1",
+      "word": "native",
+      "pos": "adj",
+      "ipa": "/ˈneɪ.t̬ɪv/",
+      "question": "Trong câu \"Amazon ECS is the AWS-native container orchestrator, simple and deeply integrated with AWS services.\", từ \"native\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Amazon ECS is the AWS-native container orchestrator, simple and deeply integrated with AWS services.\", what does \"native\" (adjective) mean?",
+      "options": [
+        "đã lỗi thời, không còn hỗ trợ",
+        "được xây dựng riêng cho (một nền tảng)",
+        "chạy bằng mã nguồn mở",
+        "chỉ dùng thử miễn phí"
+      ],
+      "optionsEn": [
+        "outdated and no longer supported",
+        "built specifically for a platform",
+        "based on open-source code",
+        "free trial only"
+      ],
+      "answer": 1,
+      "explanation": "native /ˈneɪ.t̬ɪv/ (tính từ): được xây dựng riêng cho (một nền tảng). \"AWS-native\" = do AWS tự xây dựng và gắn chặt với hệ sinh thái AWS. Trạng từ: natively.",
+      "explanationEn": "native /ˈneɪ.t̬ɪv/ (adjective): built specifically for a platform. \"AWS-native\" means built by AWS for its own platform. Adverb: natively."
+    },
+    {
+      "id": "v6",
+      "lessonId": "l1",
+      "word": "orchestrator",
+      "pos": "n",
+      "ipa": "/ˈɔːr.kə.streɪ.t̬ɚ/",
+      "question": "Trong câu \"Amazon ECS is the AWS-native container orchestrator, simple and deeply integrated with AWS services.\", từ \"orchestrator\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Amazon ECS is the AWS-native container orchestrator, simple and deeply integrated with AWS services.\", what does \"orchestrator\" (noun) mean?",
+      "options": [
+        "người thiết kế giao diện",
+        "thiết bị lưu trữ",
+        "bộ mã hóa dữ liệu",
+        "công cụ điều phối (quản lý việc chạy nhiều thành phần)"
+      ],
+      "optionsEn": [
+        "a user interface designer",
+        "a storage device",
+        "a data encoder",
+        "a tool that coordinates and manages many components"
+      ],
+      "answer": 3,
+      "explanation": "orchestrator /ˈɔːr.kə.streɪ.t̬ɚ/ (danh từ): công cụ điều phối (quản lý việc chạy nhiều thành phần). Container orchestrator lên lịch, khởi chạy, thay thế và mở rộng container. Danh từ: orchestration (sự điều phối); động từ: orchestrate.",
+      "explanationEn": "orchestrator /ˈɔːr.kə.streɪ.t̬ɚ/ (noun): a tool that coordinates and manages many components. A container orchestrator schedules, starts, replaces and scales containers. Noun: orchestration; verb: orchestrate."
+    },
+    {
+      "id": "v7",
+      "lessonId": "l1",
+      "word": "deeply",
+      "pos": "adv",
+      "ipa": "/ˈdiːp.li/",
+      "question": "Trong câu \"Amazon ECS is the AWS-native container orchestrator, simple and deeply integrated with AWS services.\", từ \"deeply\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Amazon ECS is the AWS-native container orchestrator, simple and deeply integrated with AWS services.\", what does \"deeply\" (adverb) mean?",
+      "options": [
+        "sâu, chặt chẽ",
+        "hời hợt, sơ sài",
+        "tạm thời",
+        "ngẫu nhiên"
+      ],
+      "optionsEn": [
+        "closely and thoroughly",
+        "shallowly",
+        "temporarily",
+        "randomly"
+      ],
+      "answer": 0,
+      "explanation": "deeply /ˈdiːp.li/ (trạng từ): sâu, chặt chẽ. \"Deeply integrated\" = tích hợp rất chặt chẽ với các dịch vụ AWS khác (IAM, ALB, CloudWatch...).",
+      "explanationEn": "deeply /ˈdiːp.li/ (adverb): closely and thoroughly. \"Deeply integrated\" means tightly connected with other AWS services (IAM, ALB, CloudWatch...)."
+    },
+    {
+      "id": "v8",
+      "lessonId": "l1",
+      "word": "registry",
+      "pos": "n",
+      "ipa": "/ˈredʒ.ə.stri/",
+      "question": "Trong câu \"Amazon ECR is a registry to store Docker images, private or public, integrated with IAM.\", từ \"registry\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Amazon ECR is a registry to store Docker images, private or public, integrated with IAM.\", what does \"registry\" (noun) mean?",
+      "options": [
+        "hóa đơn thanh toán",
+        "nhật ký lỗi",
+        "kho lưu trữ tập trung (nơi đăng ký và lưu image)",
+        "bộ cân bằng tải"
+      ],
+      "optionsEn": [
+        "a payment invoice",
+        "an error log",
+        "a central store where items are registered and kept",
+        "a load balancer"
+      ],
+      "answer": 2,
+      "explanation": "registry /ˈredʒ.ə.stri/ (danh từ): kho lưu trữ tập trung (nơi đăng ký và lưu image). Image registry là nơi lưu và phân phối Docker image. Liên quan: register (đăng ký).",
+      "explanationEn": "registry /ˈredʒ.ə.stri/ (noun): a central store where items are registered and kept. An image registry stores and distributes Docker images. Related: register."
+    },
+    {
+      "id": "v9",
+      "lessonId": "l1",
+      "word": "control plane",
+      "pos": "phrase",
+      "ipa": "/kənˈtroʊl pleɪn/",
+      "question": "Trong câu \"Amazon EKS is managed Kubernetes (managed control plane) when you want standard open-source Kubernetes.\", từ \"control plane\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Amazon EKS is managed Kubernetes (managed control plane) when you want standard open-source Kubernetes.\", what does \"control plane\" (phrase) mean?",
+      "options": [
+        "máy bay điều khiển từ xa",
+        "bảng điều khiển phần cứng",
+        "lớp lưu trữ dữ liệu người dùng",
+        "lớp điều khiển (phần quản lý, ra quyết định của hệ thống)"
+      ],
+      "optionsEn": [
+        "a remote-controlled aircraft",
+        "a hardware control panel",
+        "the user data storage layer",
+        "the management layer that makes decisions for the system"
+      ],
+      "answer": 3,
+      "explanation": "control plane /kənˈtroʊl pleɪn/ (cụm từ): lớp điều khiển (phần quản lý, ra quyết định của hệ thống). Trong Kubernetes, control plane (API server, etcd...) quản lý cluster; AWS vận hành phần này trong EKS. Ở đây \"plane\" nghĩa là \"lớp\", không phải máy bay.",
+      "explanationEn": "control plane /kənˈtroʊl pleɪn/ (phrase): the management layer that makes decisions for the system. In Kubernetes the control plane (API server, etcd...) manages the cluster; AWS runs it in EKS. Here \"plane\" means a layer, not an aircraft."
+    },
+    {
+      "id": "v10",
+      "lessonId": "l1",
+      "word": "containerized",
+      "pos": "adj",
+      "ipa": "/kənˈteɪ.nɚ.aɪzd/",
+      "question": "Trong câu \"AWS App Runner is the simplest way to deploy a containerized web app or API.\", từ \"containerized\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"AWS App Runner is the simplest way to deploy a containerized web app or API.\", what does \"containerized\" (adjective) mean?",
+      "options": [
+        "được mã hóa hoàn toàn",
+        "được viết bằng tay",
+        "được đóng gói thành container",
+        "được lưu trên đĩa cứng"
+      ],
+      "optionsEn": [
+        "fully encrypted",
+        "written by hand",
+        "packaged to run in a container",
+        "saved on a hard disk"
+      ],
+      "answer": 2,
+      "explanation": "containerized /kənˈteɪ.nɚ.aɪzd/ (tính từ): được đóng gói thành container. \"A containerized web app\" = ứng dụng web đã được đóng gói để chạy trong container. Động từ: containerize.",
+      "explanationEn": "containerized /kənˈteɪ.nɚ.aɪzd/ (adjective): packaged to run in a container. \"A containerized web app\" is an app packaged to run inside a container. Verb: containerize."
+    },
+    {
+      "id": "v11",
+      "lessonId": "l1",
+      "word": "takeaway",
+      "pos": "n",
+      "ipa": "/ˈteɪk.ə.weɪ/",
+      "question": "Trong câu \"Core exam takeaways: Fargate = no server management; ECS = AWS-native orchestration.\", từ \"takeaways\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Core exam takeaways: Fargate = no server management; ECS = AWS-native orchestration.\", what does \"takeaways\" (noun) mean?",
+      "options": [
+        "điểm chính cần ghi nhớ",
+        "đồ ăn mang đi",
+        "bài kiểm tra thử",
+        "phần thưởng"
+      ],
+      "optionsEn": [
+        "a key point to remember",
+        "food to take away",
+        "a practice test",
+        "a reward"
+      ],
+      "answer": 0,
+      "explanation": "takeaway /ˈteɪk.ə.weɪ/ (danh từ): điểm chính cần ghi nhớ. \"Exam takeaways\" = những ý quan trọng rút ra để nhớ cho kỳ thi. Nghĩa \"đồ ăn mang đi\" không phù hợp ở đây.",
+      "explanationEn": "takeaway /ˈteɪk.ə.weɪ/ (noun): a key point to remember. \"Exam takeaways\" are the main lessons to remember for the exam. The \"take-out food\" meaning does not fit here."
+    },
+    {
+      "id": "v12",
+      "lessonId": "l1",
+      "word": "heavy",
+      "pos": "adj",
+      "ipa": "/ˈhev.i/",
+      "question": "Trong câu \"A VM virtualizes hardware and runs a full separate OS per machine, so it is heavy and slow to boot.\", từ \"heavy\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A VM virtualizes hardware and runs a full separate OS per machine, so it is heavy and slow to boot.\", what does \"heavy\" (adjective) mean?",
+      "options": [
+        "bảo mật cao",
+        "nặng, tốn nhiều tài nguyên",
+        "dễ di chuyển",
+        "rẻ tiền"
+      ],
+      "optionsEn": [
+        "highly secure",
+        "large and using many resources",
+        "easy to move",
+        "cheap"
+      ],
+      "answer": 1,
+      "explanation": "heavy /ˈhev.i/ (tính từ): nặng, tốn nhiều tài nguyên. VM \"heavy\" vì mỗi máy chạy cả hệ điều hành riêng, tốn CPU/RAM/đĩa. Trái nghĩa: lightweight (nhẹ).",
+      "explanationEn": "heavy /ˈhev.i/ (adjective): large and using many resources. A VM is \"heavy\" because each one runs a full OS, using lots of CPU, RAM and disk. Opposite: lightweight."
+    },
+    {
+      "id": "v13",
+      "lessonId": "l1",
+      "word": "kernel",
+      "pos": "n",
+      "ipa": "/ˈkɝː.nəl/",
+      "question": "Trong câu \"A container shares the host OS kernel and only packages the process and its dependencies.\", từ \"kernel\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A container shares the host OS kernel and only packages the process and its dependencies.\", what does \"kernel\" (noun) mean?",
+      "options": [
+        "vỏ ngoài của máy chủ",
+        "tệp cấu hình",
+        "nhân hệ điều hành (phần lõi quản lý phần cứng)",
+        "trình duyệt web"
+      ],
+      "optionsEn": [
+        "the outer case of a server",
+        "a configuration file",
+        "the core part of an operating system that manages hardware",
+        "a web browser"
+      ],
+      "answer": 2,
+      "explanation": "kernel /ˈkɝː.nəl/ (danh từ): nhân hệ điều hành (phần lõi quản lý phần cứng). Các container trên cùng một máy dùng chung kernel của hệ điều hành host, nên chúng nhẹ hơn VM.",
+      "explanationEn": "kernel /ˈkɝː.nəl/ (noun): the core part of an operating system that manages hardware. Containers on the same machine share the host OS kernel, which is why they are lighter than VMs."
+    },
+    {
+      "id": "v14",
+      "lessonId": "l1",
+      "word": "density",
+      "pos": "n",
+      "ipa": "/ˈden.sə.t̬i/",
+      "question": "Trong câu \"A container shares the host OS kernel, so it is lightweight, starts fast and allows higher density.\", từ \"density\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A container shares the host OS kernel, so it is lightweight, starts fast and allows higher density.\", what does \"density\" (noun) mean?",
+      "options": [
+        "mật độ (số lượng trên một đơn vị tài nguyên)",
+        "độ bền",
+        "tốc độ mạng",
+        "độ an toàn"
+      ],
+      "optionsEn": [
+        "how many things fit in a given space or resource",
+        "durability",
+        "network speed",
+        "safety level"
+      ],
+      "answer": 0,
+      "explanation": "density /ˈden.sə.t̬i/ (danh từ): mật độ (số lượng trên một đơn vị tài nguyên). \"Higher density\" = chạy được nhiều container hơn trên cùng một máy. Tính từ: dense.",
+      "explanationEn": "density /ˈden.sə.t̬i/ (noun): how many things fit in a given space or resource. \"Higher density\" means more containers can run on the same machine. Adjective: dense."
+    },
+    {
+      "id": "v15",
+      "lessonId": "l1",
+      "word": "spawn",
+      "pos": "v",
+      "ipa": "/spɑːn/",
+      "question": "Trong câu \"From one image you can spawn many identical containers.\", từ \"spawn\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"From one image you can spawn many identical containers.\", what does \"spawn\" (verb) mean?",
+      "options": [
+        "xóa bỏ",
+        "khóa lại",
+        "đổi tên",
+        "tạo ra, sinh ra (nhiều bản)"
+      ],
+      "optionsEn": [
+        "to delete",
+        "to lock",
+        "to rename",
+        "to create or produce new copies"
+      ],
+      "answer": 3,
+      "explanation": "spawn /spɑːn/ (động từ): tạo ra, sinh ra (nhiều bản). \"Spawn containers\" = khởi tạo nhiều container từ một image. Cũng dùng: spawn a process (tạo tiến trình).",
+      "explanationEn": "spawn /spɑːn/ (verb): to create or produce new copies. \"Spawn containers\" means creating many containers from one image. Also: spawn a process."
+    },
+    {
+      "id": "v16",
+      "lessonId": "l1",
+      "word": "base",
+      "pos": "adj",
+      "ipa": "/beɪs/",
+      "question": "Trong câu \"A Dockerfile describes the steps to build an image: base image, copy code, install dependencies, run command.\", từ \"base\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A Dockerfile describes the steps to build an image: base image, copy code, install dependencies, run command.\", what does \"base\" (adjective) mean?",
+      "options": [
+        "cuối cùng, hoàn chỉnh",
+        "cơ sở, nền tảng (dùng làm điểm khởi đầu)",
+        "bị hỏng",
+        "được chia sẻ công khai"
+      ],
+      "optionsEn": [
+        "final and complete",
+        "used as the starting point to build on",
+        "broken",
+        "publicly shared"
+      ],
+      "answer": 1,
+      "explanation": "base /beɪs/ (tính từ): cơ sở, nền tảng (dùng làm điểm khởi đầu). \"Base image\" = image nền (ví dụ node:20, python:3.12) mà bạn xây thêm các lớp lên trên.",
+      "explanationEn": "base /beɪs/ (adjective): used as the starting point to build on. A \"base image\" is the starting image (e.g. node:20, python:3.12) that you add layers on top of."
+    },
+    {
+      "id": "v17",
+      "lessonId": "l1",
+      "word": "on-premises",
+      "pos": "adj",
+      "ipa": "/ˌɑːn ˈprem.ɪ.sɪz/",
+      "question": "Trong câu \"The same image runs identically on a laptop, on-premises, or in the cloud.\", từ \"on-premises\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The same image runs identically on a laptop, on-premises, or in the cloud.\", what does \"on-premises\" (adjective) mean?",
+      "options": [
+        "trên thiết bị di động",
+        "tại hạ tầng riêng của doanh nghiệp (không phải trên cloud)",
+        "trong môi trường thử nghiệm",
+        "trên máy chủ của đối thủ"
+      ],
+      "optionsEn": [
+        "on a mobile device",
+        "in a company's own data center, not in the cloud",
+        "in a test environment",
+        "on a competitor's servers"
+      ],
+      "answer": 1,
+      "explanation": "on-premises /ˌɑːn ˈprem.ɪ.sɪz/ (tính từ): tại hạ tầng riêng của doanh nghiệp (không phải trên cloud). \"On-premises\" (thường viết tắt on-prem) = máy chủ đặt tại trung tâm dữ liệu của chính công ty.",
+      "explanationEn": "on-premises /ˌɑːn ˈprem.ɪ.sɪz/ (adjective): in a company's own data center, not in the cloud. \"On-premises\" (often \"on-prem\") means servers in the company's own data center."
+    },
+    {
+      "id": "v18",
+      "lessonId": "l1",
+      "word": "identically",
+      "pos": "adv",
+      "ipa": "/aɪˈden.t̬ɪ.kəl.i/",
+      "question": "Trong câu \"The same image runs identically on a laptop, on-premises, or in the cloud.\", từ \"identically\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The same image runs identically on a laptop, on-premises, or in the cloud.\", what does \"identically\" (adverb) mean?",
+      "options": [
+        "khác biệt hoàn toàn",
+        "chậm hơn",
+        "không ổn định",
+        "giống hệt nhau"
+      ],
+      "optionsEn": [
+        "completely differently",
+        "more slowly",
+        "unstably",
+        "in exactly the same way"
+      ],
+      "answer": 3,
+      "explanation": "identically /aɪˈden.t̬ɪ.kəl.i/ (trạng từ): giống hệt nhau. Image chạy \"identically\" ở mọi nơi, nên tránh lỗi \"chạy được trên máy tôi\". Tính từ: identical.",
+      "explanationEn": "identically /aɪˈden.t̬ɪ.kəl.i/ (adverb): in exactly the same way. The image runs \"identically\" everywhere, avoiding \"works on my machine\" issues. Adjective: identical."
+    },
+    {
+      "id": "v19",
+      "lessonId": "l1",
+      "word": "consistency",
+      "pos": "n",
+      "ipa": "/kənˈsɪs.tən.si/",
+      "question": "Trong câu \"The same image runs identically everywhere, giving consistency across environments.\", từ \"consistency\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The same image runs identically everywhere, giving consistency across environments.\", what does \"consistency\" (noun) mean?",
+      "options": [
+        "sự nhất quán, đồng nhất",
+        "sự mâu thuẫn",
+        "sự chậm trễ",
+        "sự tiết kiệm"
+      ],
+      "optionsEn": [
+        "the quality of being the same every time",
+        "contradiction",
+        "delay",
+        "saving money"
+      ],
+      "answer": 0,
+      "explanation": "consistency /kənˈsɪs.tən.si/ (danh từ): sự nhất quán, đồng nhất. \"Consistency across environments\" = dev, test, prod đều chạy giống nhau. Tính từ: consistent.",
+      "explanationEn": "consistency /kənˈsɪs.tən.si/ (noun): the quality of being the same every time. \"Consistency across environments\" means dev, test and prod behave the same. Adjective: consistent."
+    },
+    {
+      "id": "v20",
+      "lessonId": "l1",
+      "word": "blueprint",
+      "pos": "n",
+      "ipa": "/ˈbluː.prɪnt/",
+      "question": "Trong câu \"A Task Definition is a JSON blueprint describing how to run a container.\", từ \"blueprint\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A Task Definition is a JSON blueprint describing how to run a container.\", what does \"blueprint\" (noun) mean?",
+      "options": [
+        "bản báo cáo lỗi",
+        "bảng tính chi phí",
+        "bản thiết kế, bản mô tả mẫu",
+        "giấy phép sử dụng"
+      ],
+      "optionsEn": [
+        "an error report",
+        "a cost spreadsheet",
+        "a detailed plan or template",
+        "a usage license"
+      ],
+      "answer": 2,
+      "explanation": "blueprint /ˈbluː.prɪnt/ (danh từ): bản thiết kế, bản mô tả mẫu. Task Definition là \"blueprint\": mô tả image, CPU/RAM, port, biến môi trường... để ECS tạo task.",
+      "explanationEn": "blueprint /ˈbluː.prɪnt/ (noun): a detailed plan or template. A Task Definition is a \"blueprint\": it describes the image, CPU/RAM, ports, env vars... that ECS uses to create tasks."
+    },
+    {
+      "id": "v21",
+      "lessonId": "l1",
+      "word": "mapping",
+      "pos": "n",
+      "ipa": "/ˈmæp.ɪŋ/",
+      "question": "Trong câu \"A Task Definition includes the image, CPU/memory, port mappings, environment variables and volumes.\", từ \"mappings\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A Task Definition includes the image, CPU/memory, port mappings, environment variables and volumes.\", what does \"mappings\" (noun) mean?",
+      "options": [
+        "bản đồ địa lý",
+        "sự sao lưu",
+        "sự nén dữ liệu",
+        "sự ánh xạ (liên kết cái này với cái kia)"
+      ],
+      "optionsEn": [
+        "a geographic map",
+        "a backup",
+        "data compression",
+        "a link that connects one thing to another"
+      ],
+      "answer": 3,
+      "explanation": "mapping /ˈmæp.ɪŋ/ (danh từ): sự ánh xạ (liên kết cái này với cái kia). \"Port mapping\" = nối port của container với port của host. Động từ: map (ánh xạ).",
+      "explanationEn": "mapping /ˈmæp.ɪŋ/ (noun): a link that connects one thing to another. A \"port mapping\" links a container port to a host port. Verb: map."
+    },
+    {
+      "id": "v22",
+      "lessonId": "l1",
+      "word": "actual",
+      "pos": "adj",
+      "ipa": "/ˈæk.tʃu.əl/",
+      "question": "Trong câu \"A Task is a running instance of a Task Definition: the actual containers instantiated from the blueprint.\", từ \"actual\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A Task is a running instance of a Task Definition: the actual containers instantiated from the blueprint.\", what does \"actual\" (adjective) mean?",
+      "options": [
+        "giả định",
+        "cũ, trước đây",
+        "thực tế, thật sự",
+        "dự phòng"
+      ],
+      "optionsEn": [
+        "imaginary or assumed",
+        "old or former",
+        "real, existing in fact",
+        "backup"
+      ],
+      "answer": 2,
+      "explanation": "actual /ˈæk.tʃu.əl/ (tính từ): thực tế, thật sự. Task là container \"thực sự\" đang chạy, khác với blueprint chỉ là bản mô tả. Lưu ý: actual không có nghĩa \"hiện tại\".",
+      "explanationEn": "actual /ˈæk.tʃu.əl/ (adjective): real, existing in fact. A task is the \"actual\" running container, unlike the blueprint which is just a description. Note: actual does not mean \"current\"."
+    },
+    {
+      "id": "v23",
+      "lessonId": "l1",
+      "word": "instantiate",
+      "pos": "v",
+      "ipa": "/ɪnˈstæn.ʃi.eɪt/",
+      "question": "Trong câu \"A Task is a running instance of a Task Definition: the actual containers instantiated from the blueprint.\", từ \"instantiated\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A Task is a running instance of a Task Definition: the actual containers instantiated from the blueprint.\", what does \"instantiated\" (verb) mean?",
+      "options": [
+        "tạo ra một thực thể cụ thể (từ bản mẫu)",
+        "hủy bỏ",
+        "mô tả bằng lời",
+        "so sánh"
+      ],
+      "optionsEn": [
+        "to create a concrete instance from a template",
+        "to cancel",
+        "to describe in words",
+        "to compare"
+      ],
+      "answer": 0,
+      "explanation": "instantiate /ɪnˈstæn.ʃi.eɪt/ (động từ): tạo ra một thực thể cụ thể (từ bản mẫu). \"Instantiated from the blueprint\" = được tạo thành thực thể chạy thật từ bản mẫu. Danh từ: instance.",
+      "explanationEn": "instantiate /ɪnˈstæn.ʃi.eɪt/ (verb): to create a concrete instance from a template. \"Instantiated from the blueprint\" means created as a real running instance from the template. Noun: instance."
+    },
+    {
+      "id": "v24",
+      "lessonId": "l1",
+      "word": "controller",
+      "pos": "n",
+      "ipa": "/kənˈtroʊ.lɚ/",
+      "question": "Trong câu \"An ECS Service is a controller that maintains N tasks running in parallel and replaces failed tasks.\", từ \"controller\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"An ECS Service is a controller that maintains N tasks running in parallel and replaces failed tasks.\", what does \"controller\" (noun) mean?",
+      "options": [
+        "tay cầm chơi game",
+        "bộ điều khiển (thành phần giám sát và giữ trạng thái)",
+        "kế toán viên",
+        "thiết bị mạng"
+      ],
+      "optionsEn": [
+        "a game pad",
+        "a component that watches and keeps the desired state",
+        "an accountant",
+        "a network device"
+      ],
+      "answer": 1,
+      "explanation": "controller /kənˈtroʊ.lɚ/ (danh từ): bộ điều khiển (thành phần giám sát và giữ trạng thái). Service là \"controller\": luôn giữ đủ số task mong muốn (desired count), task nào hỏng thì thay.",
+      "explanationEn": "controller /kənˈtroʊ.lɚ/ (noun): a component that watches and keeps the desired state. A Service acts as a \"controller\": it keeps the desired count of tasks and replaces failed ones."
+    },
+    {
+      "id": "v25",
+      "lessonId": "l2",
+      "word": "provision",
+      "pos": "v",
+      "ipa": "/prəˈvɪʒ.ən/",
+      "question": "Trong câu \"With the EC2 launch type, you provision and manage the EC2 instances in the cluster.\", từ \"provision\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"With the EC2 launch type, you provision and manage the EC2 instances in the cluster.\", what does \"provision\" (verb) mean?",
+      "options": [
+        "hủy bỏ",
+        "kiểm tra",
+        "cấp phát, chuẩn bị sẵn (tài nguyên)",
+        "cho thuê lại"
+      ],
+      "optionsEn": [
+        "to cancel",
+        "to inspect",
+        "to set up and supply resources",
+        "to sublet"
+      ],
+      "answer": 2,
+      "explanation": "provision /prəˈvɪʒ.ən/ (động từ): cấp phát, chuẩn bị sẵn (tài nguyên). \"Provision instances\" = tạo và chuẩn bị máy chủ sẵn sàng sử dụng. Danh từ: provisioning.",
+      "explanationEn": "provision /prəˈvɪʒ.ən/ (verb): to set up and supply resources. \"Provision instances\" means creating and setting up servers ready for use. Noun: provisioning."
+    },
+    {
+      "id": "v26",
+      "lessonId": "l2",
+      "word": "responsible",
+      "pos": "adj",
+      "ipa": "/rɪˈspɑːn.sə.bəl/",
+      "question": "Trong câu \"You are responsible for patching, scaling, and capacity of the instances.\", từ \"responsible\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"You are responsible for patching, scaling, and capacity of the instances.\", what does \"responsible\" (adjective) mean?",
+      "options": [
+        "chịu trách nhiệm",
+        "được miễn trừ",
+        "có quyền truy cập",
+        "được trả tiền"
+      ],
+      "optionsEn": [
+        "having the duty to take care of something",
+        "exempt",
+        "having access",
+        "paid"
+      ],
+      "answer": 0,
+      "explanation": "responsible /rɪˈspɑːn.sə.bəl/ (tính từ): chịu trách nhiệm. \"Be responsible for\" = phải tự lo việc gì. Với EC2 launch type, bạn tự vá lỗi và mở rộng máy. Danh từ: responsibility.",
+      "explanationEn": "responsible /rɪˈspɑːn.sə.bəl/ (adjective): having the duty to take care of something. \"Be responsible for\" means you must handle it yourself. Noun: responsibility."
+    },
+    {
+      "id": "v27",
+      "lessonId": "l2",
+      "word": "declare",
+      "pos": "v",
+      "ipa": "/dɪˈkler/",
+      "question": "Trong câu \"With Fargate you only declare CPU/RAM per task and AWS handles the underlying infrastructure.\", từ \"declare\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"With Fargate you only declare CPU/RAM per task and AWS handles the underlying infrastructure.\", what does \"declare\" (verb) mean?",
+      "options": [
+        "từ chối",
+        "đo đạc",
+        "mua bán",
+        "khai báo"
+      ],
+      "optionsEn": [
+        "to refuse",
+        "to measure",
+        "to trade",
+        "to state officially what you need"
+      ],
+      "answer": 3,
+      "explanation": "declare /dɪˈkler/ (động từ): khai báo. \"Declare CPU/RAM\" = chỉ cần ghi rõ lượng CPU/RAM mong muốn, AWS lo phần còn lại. Danh từ: declaration.",
+      "explanationEn": "declare /dɪˈkler/ (verb): to state officially what you need. \"Declare CPU/RAM\" means simply stating the amount you want; AWS does the rest. Noun: declaration."
+    },
+    {
+      "id": "v28",
+      "lessonId": "l2",
+      "word": "underlying",
+      "pos": "adj",
+      "ipa": "/ˌʌn.dɚˈlaɪ.ɪŋ/",
+      "question": "Trong câu \"You only declare CPU/RAM per task and AWS handles the underlying infrastructure.\", từ \"underlying\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"You only declare CPU/RAM per task and AWS handles the underlying infrastructure.\", what does \"underlying\" (adjective) mean?",
+      "options": [
+        "nổi bật bên ngoài",
+        "nằm bên dưới, làm nền tảng",
+        "tùy chọn thêm",
+        "đã hết hạn"
+      ],
+      "optionsEn": [
+        "visible on the surface",
+        "lying beneath and supporting something",
+        "optional extra",
+        "expired"
+      ],
+      "answer": 1,
+      "explanation": "underlying /ˌʌn.dɚˈlaɪ.ɪŋ/ (tính từ): nằm bên dưới, làm nền tảng. \"Underlying infrastructure\" = hạ tầng máy chủ nằm phía dưới mà bạn không cần thấy hay quản lý.",
+      "explanationEn": "underlying /ˌʌn.dɚˈlaɪ.ɪŋ/ (adjective): lying beneath and supporting something. \"Underlying infrastructure\" is the server layer beneath that you do not see or manage."
+    },
+    {
+      "id": "v29",
+      "lessonId": "l2",
+      "word": "drastically",
+      "pos": "adv",
+      "ipa": "/ˈdræs.tɪ.kəl.i/",
+      "question": "Trong câu \"You pay per running task, with drastically lower operational overhead.\", từ \"drastically\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"You pay per running task, with drastically lower operational overhead.\", what does \"drastically\" (adverb) mean?",
+      "options": [
+        "hơi hơi, chút ít",
+        "đáng kể, mạnh mẽ",
+        "dần dần",
+        "bất ngờ"
+      ],
+      "optionsEn": [
+        "slightly",
+        "to a very large degree",
+        "gradually",
+        "unexpectedly"
+      ],
+      "answer": 1,
+      "explanation": "drastically /ˈdræs.tɪ.kəl.i/ (trạng từ): đáng kể, mạnh mẽ. \"Drastically lower\" = thấp hơn rất nhiều. Tính từ: drastic.",
+      "explanationEn": "drastically /ˈdræs.tɪ.kəl.i/ (adverb): to a very large degree. \"Drastically lower\" means much, much lower. Adjective: drastic."
+    },
+    {
+      "id": "v30",
+      "lessonId": "l2",
+      "word": "overhead",
+      "pos": "n",
+      "ipa": "/ˈoʊ.vɚ.hed/",
+      "question": "Trong câu \"You pay per running task, with drastically lower operational overhead.\", từ \"overhead\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"You pay per running task, with drastically lower operational overhead.\", what does \"overhead\" (noun) mean?",
+      "options": [
+        "trần nhà",
+        "lợi nhuận",
+        "bộ nhớ đệm",
+        "chi phí/công sức phụ trội (để vận hành)"
+      ],
+      "optionsEn": [
+        "a ceiling",
+        "profit",
+        "a cache",
+        "extra cost or effort needed to keep things running"
+      ],
+      "answer": 3,
+      "explanation": "overhead /ˈoʊ.vɚ.hed/ (danh từ): chi phí/công sức phụ trội (để vận hành). \"Operational overhead\" = khối lượng việc vận hành phát sinh (vá lỗi, mở rộng, theo dõi). Câu hỏi thi hay dùng \"least operational overhead\".",
+      "explanationEn": "overhead /ˈoʊ.vɚ.hed/ (noun): extra cost or effort needed to keep things running. \"Operational overhead\" is the extra work of running systems (patching, scaling, monitoring). Exams often say \"least operational overhead\"."
+    },
+    {
+      "id": "v31",
+      "lessonId": "l2",
+      "word": "idle",
+      "pos": "adj",
+      "ipa": "/ˈaɪ.dəl/",
+      "question": "Trong câu \"EC2 launch type pricing: pay for EC2 instances, even when they are idle.\", từ \"idle\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"EC2 launch type pricing: pay for EC2 instances, even when they are idle.\", what does \"idle\" (adjective) mean?",
+      "options": [
+        "nhàn rỗi, không làm việc",
+        "quá tải",
+        "bị hỏng",
+        "được bảo vệ"
+      ],
+      "optionsEn": [
+        "running but not doing any work",
+        "overloaded",
+        "broken",
+        "protected"
+      ],
+      "answer": 0,
+      "explanation": "idle /ˈaɪ.dəl/ (tính từ): nhàn rỗi, không làm việc. Instance \"idle\" vẫn bật nhưng không xử lý gì, và bạn vẫn phải trả tiền cho nó.",
+      "explanationEn": "idle /ˈaɪ.dəl/ (adjective): running but not doing any work. An \"idle\" instance is on but doing no work, and you still pay for it."
+    },
+    {
+      "id": "v32",
+      "lessonId": "l2",
+      "word": "fine-grained",
+      "pos": "adj",
+      "ipa": "/ˌfaɪn ˈɡreɪnd/",
+      "question": "Trong câu \"Infrastructure control with the EC2 launch type is fine-grained (GPU, instance type).\", từ \"fine-grained\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Infrastructure control with the EC2 launch type is fine-grained (GPU, instance type).\", what does \"fine-grained\" (adjective) mean?",
+      "options": [
+        "thô sơ",
+        "mặc định",
+        "chi tiết, tỉ mỉ đến từng phần",
+        "bị giới hạn"
+      ],
+      "optionsEn": [
+        "crude",
+        "default",
+        "very detailed, down to small parts",
+        "limited"
+      ],
+      "answer": 2,
+      "explanation": "fine-grained /ˌfaɪn ˈɡreɪnd/ (tính từ): chi tiết, tỉ mỉ đến từng phần. \"Fine-grained control\" = kiểm soát chi tiết (chọn GPU, loại instance...). Trái nghĩa: coarse-grained.",
+      "explanationEn": "fine-grained /ˌfaɪn ˈɡreɪnd/ (adjective): very detailed, down to small parts. \"Fine-grained control\" means detailed control (choosing GPU, instance type...). Opposite: coarse-grained."
+    },
+    {
+      "id": "v33",
+      "lessonId": "l2",
+      "word": "placement",
+      "pos": "n",
+      "ipa": "/ˈpleɪs.mənt/",
+      "question": "Trong câu \"Task placement is available with the EC2 launch type but is not applicable to Fargate.\", từ \"placement\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Task placement is available with the EC2 launch type but is not applicable to Fargate.\", what does \"placement\" (noun) mean?",
+      "options": [
+        "việc thanh toán",
+        "việc tuyển dụng",
+        "việc thay thế",
+        "việc bố trí, sắp đặt vị trí"
+      ],
+      "optionsEn": [
+        "payment",
+        "hiring",
+        "replacement",
+        "deciding where to put something"
+      ],
+      "answer": 3,
+      "explanation": "placement /ˈpleɪs.mənt/ (danh từ): việc bố trí, sắp đặt vị trí. \"Task placement\" = quyết định đặt task lên instance nào. Động từ: place.",
+      "explanationEn": "placement /ˈpleɪs.mənt/ (noun): deciding where to put something. \"Task placement\" means deciding which instance a task runs on. Verb: place."
+    },
+    {
+      "id": "v34",
+      "lessonId": "l2",
+      "word": "applicable",
+      "pos": "adj",
+      "ipa": "/əˈplɪk.ə.bəl/",
+      "question": "Trong câu \"Task placement is available with the EC2 launch type but is not applicable to Fargate.\", từ \"applicable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Task placement is available with the EC2 launch type but is not applicable to Fargate.\", what does \"applicable\" (adjective) mean?",
+      "options": [
+        "bắt buộc",
+        "miễn phí",
+        "có thể áp dụng, phù hợp",
+        "nguy hiểm"
+      ],
+      "optionsEn": [
+        "mandatory",
+        "free",
+        "able to be used or relevant",
+        "dangerous"
+      ],
+      "answer": 2,
+      "explanation": "applicable /əˈplɪk.ə.bəl/ (tính từ): có thể áp dụng, phù hợp. \"Not applicable\" = không áp dụng được, vì Fargate không cho bạn chọn máy. Động từ: apply.",
+      "explanationEn": "applicable /əˈplɪk.ə.bəl/ (adjective): able to be used or relevant. \"Not applicable\" means it does not apply, because Fargate does not let you pick hosts. Verb: apply."
+    },
+    {
+      "id": "v35",
+      "lessonId": "l2",
+      "word": "steady",
+      "pos": "adj",
+      "ipa": "/ˈsted.i/",
+      "question": "Trong câu \"EC2 launch type is best when you need control and cost optimization at steady scale.\", từ \"steady\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"EC2 launch type is best when you need control and cost optimization at steady scale.\", what does \"steady\" (adjective) mean?",
+      "options": [
+        "ổn định, đều đặn",
+        "thất thường",
+        "tăng vọt",
+        "rất nhỏ"
+      ],
+      "optionsEn": [
+        "stable and regular",
+        "unpredictable",
+        "suddenly rising",
+        "very small"
+      ],
+      "answer": 0,
+      "explanation": "steady /ˈsted.i/ (tính từ): ổn định, đều đặn. \"Steady scale/load\" = tải ổn định, dễ dự đoán, nên đặt trước instance sẽ rẻ hơn.",
+      "explanationEn": "steady /ˈsted.i/ (adjective): stable and regular. \"Steady scale/load\" means stable, predictable demand, where reserving instances is cheaper."
+    },
+    {
+      "id": "v36",
+      "lessonId": "l3",
+      "word": "distinction",
+      "pos": "n",
+      "ipa": "/dɪˈstɪŋk.ʃən/",
+      "question": "Trong câu \"This is an important exam distinction.\", từ \"distinction\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"This is an important exam distinction.\", what does \"distinction\" (noun) mean?",
+      "options": [
+        "phần thưởng",
+        "sự phân biệt, điểm khác biệt",
+        "sự kết hợp",
+        "sự trùng lặp"
+      ],
+      "optionsEn": [
+        "a prize",
+        "a difference between two things",
+        "a combination",
+        "a duplication"
+      ],
+      "answer": 1,
+      "explanation": "distinction /dɪˈstɪŋk.ʃən/ (danh từ): sự phân biệt, điểm khác biệt. Instance Role và Task Role là một \"distinction\" quan trọng: phải phân biệt được. Động từ: distinguish.",
+      "explanationEn": "distinction /dɪˈstɪŋk.ʃən/ (noun): a difference between two things. Instance Role vs Task Role is an important \"distinction\": you must tell them apart. Verb: distinguish."
+    },
+    {
+      "id": "v37",
+      "lessonId": "l3",
+      "word": "attach",
+      "pos": "v",
+      "ipa": "/əˈtætʃ/",
+      "question": "Trong câu \"The EC2 Instance Role is a role attached to the EC2 instance so the ECS agent can operate.\", từ \"attached\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The EC2 Instance Role is a role attached to the EC2 instance so the ECS agent can operate.\", what does \"attached\" (verb) mean?",
+      "options": [
+        "tách ra",
+        "mã hóa",
+        "gắn vào, đính kèm",
+        "nâng cấp"
+      ],
+      "optionsEn": [
+        "to detach",
+        "to encrypt",
+        "to connect or add to something",
+        "to upgrade"
+      ],
+      "answer": 2,
+      "explanation": "attach /əˈtætʃ/ (động từ): gắn vào, đính kèm. \"A role attached to the instance\" = role được gắn vào instance. Trái nghĩa: detach.",
+      "explanationEn": "attach /əˈtætʃ/ (verb): to connect or add to something. \"A role attached to the instance\" means the role is linked to that instance. Opposite: detach."
+    },
+    {
+      "id": "v38",
+      "lessonId": "l3",
+      "word": "operate",
+      "pos": "v",
+      "ipa": "/ˈɑː.pə.reɪt/",
+      "question": "Trong câu \"The role lets the ECS agent operate: register with the cluster, pull images, send logs.\", từ \"operate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The role lets the ECS agent operate: register with the cluster, pull images, send logs.\", what does \"operate\" (verb) mean?",
+      "options": [
+        "hoạt động, vận hành",
+        "phẫu thuật",
+        "tạm dừng",
+        "từ chối"
+      ],
+      "optionsEn": [
+        "to work and perform its functions",
+        "to do surgery",
+        "to pause",
+        "to refuse"
+      ],
+      "answer": 0,
+      "explanation": "operate /ˈɑː.pə.reɪt/ (động từ): hoạt động, vận hành. Ở đây \"operate\" = ECS agent làm được công việc của nó. Danh từ: operation; tính từ: operational.",
+      "explanationEn": "operate /ˈɑː.pə.reɪt/ (verb): to work and perform its functions. Here \"operate\" means the ECS agent can do its job. Noun: operation; adjective: operational."
+    },
+    {
+      "id": "v39",
+      "lessonId": "l3",
+      "word": "grant",
+      "pos": "v",
+      "ipa": "/ɡrænt/",
+      "question": "Trong câu \"The Task Role is attached to each Task Definition, granting the container itself permission to call AWS services.\", từ \"granting\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The Task Role is attached to each Task Definition, granting the container itself permission to call AWS services.\", what does \"granting\" (verb) mean?",
+      "options": [
+        "thu hồi",
+        "yêu cầu",
+        "kiểm tra",
+        "cấp, trao (quyền)"
+      ],
+      "optionsEn": [
+        "to revoke",
+        "to request",
+        "to check",
+        "to give (permission or access)"
+      ],
+      "answer": 3,
+      "explanation": "grant /ɡrænt/ (động từ): cấp, trao (quyền). \"Grant permission\" = cấp quyền. Trái nghĩa: revoke (thu hồi).",
+      "explanationEn": "grant /ɡrænt/ (verb): to give (permission or access). \"Grant permission\" means to give access. Opposite: revoke."
+    },
+    {
+      "id": "v40",
+      "lessonId": "l3",
+      "word": "query",
+      "pos": "v",
+      "ipa": "/ˈkwɪr.i/",
+      "question": "Trong câu \"The container can read/write S3, query DynamoDB, and send SQS messages.\", từ \"query\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The container can read/write S3, query DynamoDB, and send SQS messages.\", what does \"query\" (verb) mean?",
+      "options": [
+        "xóa dữ liệu",
+        "truy vấn (lấy dữ liệu từ cơ sở dữ liệu)",
+        "sao lưu",
+        "khởi động lại"
+      ],
+      "optionsEn": [
+        "to delete data",
+        "to request data from a database",
+        "to back up",
+        "to restart"
+      ],
+      "answer": 1,
+      "explanation": "query /ˈkwɪr.i/ (động từ): truy vấn (lấy dữ liệu từ cơ sở dữ liệu). \"Query DynamoDB\" = gửi yêu cầu lấy dữ liệu từ bảng DynamoDB. Cũng là danh từ: a query.",
+      "explanationEn": "query /ˈkwɪr.i/ (verb): to request data from a database. \"Query DynamoDB\" means requesting data from a DynamoDB table. Also a noun: a query."
+    },
+    {
+      "id": "v41",
+      "lessonId": "l3",
+      "word": "least privilege",
+      "pos": "phrase",
+      "ipa": "/liːst ˈprɪv.əl.ɪdʒ/",
+      "question": "Trong câu \"This is the correct way for a container to access AWS resources, following least privilege per task.\", từ \"least privilege\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"This is the correct way for a container to access AWS resources, following least privilege per task.\", what does \"least privilege\" (phrase) mean?",
+      "options": [
+        "quyền quản trị cao nhất",
+        "quyền tối thiểu (chỉ cấp đúng quyền cần thiết)",
+        "truy cập ẩn danh",
+        "quyền dùng chung"
+      ],
+      "optionsEn": [
+        "the highest admin rights",
+        "giving only the permissions that are needed",
+        "anonymous access",
+        "shared permissions"
+      ],
+      "answer": 1,
+      "explanation": "least privilege /liːst ˈprɪv.əl.ɪdʒ/ (cụm từ): quyền tối thiểu (chỉ cấp đúng quyền cần thiết). Nguyên tắc \"least privilege\": mỗi task chỉ nhận đúng quyền nó cần, giảm rủi ro bảo mật.",
+      "explanationEn": "least privilege /liːst ˈprɪv.əl.ɪdʒ/ (phrase): giving only the permissions that are needed. The \"least privilege\" principle gives each task only the permissions it needs, reducing security risk."
+    },
+    {
+      "id": "v42",
+      "lessonId": "l3",
+      "word": "tip",
+      "pos": "n",
+      "ipa": "/tɪp/",
+      "question": "Trong câu \"Exam tip: a container needs access to S3 or DynamoDB, so use the Task Role, not the instance role.\", từ \"tip\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Exam tip: a container needs access to S3 or DynamoDB, so use the Task Role, not the instance role.\", what does \"tip\" (noun) mean?",
+      "options": [
+        "tiền boa",
+        "đầu nhọn",
+        "lỗi nhỏ",
+        "mẹo, lời khuyên hữu ích"
+      ],
+      "optionsEn": [
+        "extra money for service",
+        "a pointed end",
+        "a small error",
+        "a useful piece of advice"
+      ],
+      "answer": 3,
+      "explanation": "tip /tɪp/ (danh từ): mẹo, lời khuyên hữu ích. \"Exam tip\" = mẹo làm bài thi. Nghĩa \"tiền boa\" không phù hợp trong ngữ cảnh này.",
+      "explanationEn": "tip /tɪp/ (noun): a useful piece of advice. \"Exam tip\" is a helpful hint for the exam. The \"money for service\" meaning does not fit here."
+    },
+    {
+      "id": "v43",
+      "lessonId": "l4",
+      "word": "decrease",
+      "pos": "v",
+      "ipa": "/dɪˈkriːs/",
+      "question": "Trong câu \"ECS Service Auto Scaling automatically increases or decreases the number of tasks in a service.\", từ \"decreases\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ECS Service Auto Scaling automatically increases or decreases the number of tasks in a service.\", what does \"decreases\" (verb) mean?",
+      "options": [
+        "giảm",
+        "tăng",
+        "giữ nguyên",
+        "sao chép"
+      ],
+      "optionsEn": [
+        "to become or make smaller",
+        "to become larger",
+        "to keep the same",
+        "to copy"
+      ],
+      "answer": 0,
+      "explanation": "decrease /dɪˈkriːs/ (động từ): giảm. Auto Scaling tăng (increase) hoặc giảm (decrease) số task theo tải. Cũng là danh từ: a decrease.",
+      "explanationEn": "decrease /dɪˈkriːs/ (verb): to become or make smaller. Auto Scaling increases or decreases the task count based on load. Also a noun: a decrease."
+    },
+    {
+      "id": "v44",
+      "lessonId": "l4",
+      "word": "utilization",
+      "pos": "n",
+      "ipa": "/ˌjuː.t̬əl.əˈzeɪ.ʃən/",
+      "question": "Trong câu \"The ALB maps traffic to each task's dynamic port, giving better resource utilization.\", từ \"utilization\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The ALB maps traffic to each task's dynamic port, giving better resource utilization.\", what does \"utilization\" (noun) mean?",
+      "options": [
+        "sự lãng phí",
+        "sự bảo trì",
+        "mức sử dụng, sự tận dụng",
+        "sự cách ly"
+      ],
+      "optionsEn": [
+        "waste",
+        "maintenance",
+        "how much of something is being used",
+        "isolation"
+      ],
+      "answer": 2,
+      "explanation": "utilization /ˌjuː.t̬əl.əˈzeɪ.ʃən/ (danh từ): mức sử dụng, sự tận dụng. \"Better resource utilization\" = tận dụng CPU/RAM của instance tốt hơn. Động từ: utilize.",
+      "explanationEn": "utilization /ˌjuː.t̬əl.əˈzeɪ.ʃən/ (noun): how much of something is being used. \"Better resource utilization\" means making fuller use of instance CPU/RAM. Verb: utilize."
+    },
+    {
+      "id": "v45",
+      "lessonId": "l4",
+      "word": "pack",
+      "pos": "v",
+      "ipa": "/pæk/",
+      "question": "Trong câu \"The binpack strategy packs tasks onto instances with the least available CPU/RAM first.\", từ \"packs\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The binpack strategy packs tasks onto instances with the least available CPU/RAM first.\", what does \"packs\" (verb) mean?",
+      "options": [
+        "phân tán ra",
+        "gỡ bỏ",
+        "di chuyển ra ngoài",
+        "xếp dồn, nhét chặt vào"
+      ],
+      "optionsEn": [
+        "to spread out",
+        "to remove",
+        "to move out",
+        "to fit things tightly together"
+      ],
+      "answer": 3,
+      "explanation": "pack /pæk/ (động từ): xếp dồn, nhét chặt vào. \"Binpack\" xếp dồn task vào ít instance nhất có thể để tiết kiệm chi phí.",
+      "explanationEn": "pack /pæk/ (verb): to fit things tightly together. \"Binpack\" packs tasks tightly onto as few instances as possible to save money."
+    },
+    {
+      "id": "v46",
+      "lessonId": "l4",
+      "word": "fewest",
+      "pos": "adj",
+      "ipa": "/ˈfjuː.ɪst/",
+      "question": "Trong câu \"Binpack uses the fewest instances, which saves cost.\", từ \"fewest\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Binpack uses the fewest instances, which saves cost.\", what does \"fewest\" (adjective) mean?",
+      "options": [
+        "nhiều nhất",
+        "mới nhất",
+        "ít nhất (về số lượng)",
+        "mạnh nhất"
+      ],
+      "optionsEn": [
+        "the largest number of",
+        "the newest",
+        "the smallest number of",
+        "the most powerful"
+      ],
+      "answer": 2,
+      "explanation": "fewest /ˈfjuː.ɪst/ (tính từ): ít nhất (về số lượng). \"Fewest\" là dạng so sánh nhất của \"few\", dùng với danh từ đếm được (the fewest instances).",
+      "explanationEn": "fewest /ˈfjuː.ɪst/ (adjective): the smallest number of. \"Fewest\" is the superlative of \"few\", used with countable nouns (the fewest instances)."
+    },
+    {
+      "id": "v47",
+      "lessonId": "l4",
+      "word": "randomly",
+      "pos": "adv",
+      "ipa": "/ˈræn.dəm.li/",
+      "question": "Trong câu \"The random strategy places tasks randomly.\", từ \"randomly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The random strategy places tasks randomly.\", what does \"randomly\" (adverb) mean?",
+      "options": [
+        "một cách ngẫu nhiên",
+        "theo thứ tự",
+        "đồng đều",
+        "có chủ đích"
+      ],
+      "optionsEn": [
+        "without any order or plan",
+        "in order",
+        "evenly",
+        "on purpose"
+      ],
+      "answer": 0,
+      "explanation": "randomly /ˈræn.dəm.li/ (trạng từ): một cách ngẫu nhiên. \"Randomly\" = không theo quy tắc nào. Tính từ: random.",
+      "explanationEn": "randomly /ˈræn.dəm.li/ (adverb): without any order or plan. \"Randomly\" means with no pattern or rule. Adjective: random."
+    },
+    {
+      "id": "v48",
+      "lessonId": "l4",
+      "word": "constraint",
+      "pos": "n",
+      "ipa": "/kənˈstreɪnt/",
+      "question": "Trong câu \"You can combine strategies with task placement constraints.\", từ \"constraints\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"You can combine strategies with task placement constraints.\", what does \"constraints\" (noun) mean?",
+      "options": [
+        "phần thưởng",
+        "ràng buộc, điều kiện giới hạn",
+        "cảnh báo",
+        "bản sao"
+      ],
+      "optionsEn": [
+        "a reward",
+        "a rule that limits what is allowed",
+        "a warning",
+        "a copy"
+      ],
+      "answer": 1,
+      "explanation": "constraint /kənˈstreɪnt/ (danh từ): ràng buộc, điều kiện giới hạn. Placement constraints = điều kiện bắt buộc khi đặt task (ví dụ chỉ chạy trên loại instance nhất định).",
+      "explanationEn": "constraint /kənˈstreɪnt/ (noun): a rule that limits what is allowed. Placement constraints are rules a placement must follow (e.g. only on a certain instance type)."
+    },
+    {
+      "id": "v49",
+      "lessonId": "l4",
+      "word": "long-lived",
+      "pos": "adj",
+      "ipa": "/ˌlɑːŋ ˈlɪvd/",
+      "question": "Trong câu \"With Fargate especially, there is no long-lived persistent disk.\", từ \"long-lived\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"With Fargate especially, there is no long-lived persistent disk.\", what does \"long-lived\" (adjective) mean?",
+      "options": [
+        "ngắn hạn",
+        "dùng chung",
+        "tồn tại lâu dài",
+        "tốc độ cao"
+      ],
+      "optionsEn": [
+        "short-term",
+        "shared",
+        "lasting for a long time",
+        "high-speed"
+      ],
+      "answer": 2,
+      "explanation": "long-lived /ˌlɑːŋ ˈlɪvd/ (tính từ): tồn tại lâu dài. \"No long-lived disk\" = không có đĩa tồn tại lâu; dữ liệu mất khi task dừng, nên cần EFS. Trái nghĩa: short-lived.",
+      "explanationEn": "long-lived /ˌlɑːŋ ˈlɪvd/ (adjective): lasting for a long time. \"No long-lived disk\" means storage does not last after the task stops, so you need EFS. Opposite: short-lived."
+    },
+    {
+      "id": "v50",
+      "lessonId": "l5",
+      "word": "repository",
+      "pos": "n",
+      "ipa": "/rɪˈpɑː.zə.tɔːr.i/",
+      "question": "Trong câu \"Amazon ECR (Elastic Container Registry) is a managed Docker image repository.\", từ \"repository\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Amazon ECR (Elastic Container Registry) is a managed Docker image repository.\", what does \"repository\" (noun) mean?",
+      "options": [
+        "kho chứa (nơi lưu trữ có tổ chức)",
+        "bản hướng dẫn",
+        "phòng họp",
+        "hàng đợi tin nhắn"
+      ],
+      "optionsEn": [
+        "an organized place where things are stored",
+        "a manual",
+        "a meeting room",
+        "a message queue"
+      ],
+      "answer": 0,
+      "explanation": "repository /rɪˈpɑː.zə.tɔːr.i/ (danh từ): kho chứa (nơi lưu trữ có tổ chức). Image repository = nơi lưu các phiên bản image của một ứng dụng. Thường viết tắt: repo.",
+      "explanationEn": "repository /rɪˈpɑː.zə.tɔːr.i/ (noun): an organized place where things are stored. An image repository stores the versions of an app's images. Short form: repo."
+    },
+    {
+      "id": "v51",
+      "lessonId": "l5",
+      "word": "natively",
+      "pos": "adv",
+      "ipa": "/ˈneɪ.t̬ɪv.li/",
+      "question": "Trong câu \"ECR natively integrates with ECS and EKS (and App Runner).\", từ \"natively\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ECR natively integrates with ECS and EKS (and App Runner).\", what does \"natively\" (adverb) mean?",
+      "options": [
+        "thông qua bên thứ ba",
+        "một cách thủ công",
+        "tạm thời",
+        "sẵn có, tích hợp trực tiếp (không cần công cụ thêm)"
+      ],
+      "optionsEn": [
+        "through a third party",
+        "manually",
+        "temporarily",
+        "directly and built in, with no extra tools"
+      ],
+      "answer": 3,
+      "explanation": "natively /ˈneɪ.t̬ɪv.li/ (trạng từ): sẵn có, tích hợp trực tiếp (không cần công cụ thêm). \"Natively integrates\" = kết nối sẵn, không cần cấu hình hay plugin phức tạp. Tính từ: native.",
+      "explanationEn": "natively /ˈneɪ.t̬ɪv.li/ (adverb): directly and built in, with no extra tools. \"Natively integrates\" means it works out of the box without extra plugins. Adjective: native."
+    },
+    {
+      "id": "v52",
+      "lessonId": "l5",
+      "word": "scan",
+      "pos": "v",
+      "ipa": "/skæn/",
+      "question": "Trong câu \"ECR scans images for security vulnerabilities (basic and enhanced scanning).\", từ \"scans\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ECR scans images for security vulnerabilities (basic and enhanced scanning).\", what does \"scans\" (verb) mean?",
+      "options": [
+        "in ra giấy",
+        "quét, kiểm tra kỹ để tìm vấn đề",
+        "nén lại",
+        "đổi định dạng"
+      ],
+      "optionsEn": [
+        "to print on paper",
+        "to check carefully to find problems",
+        "to compress",
+        "to convert format"
+      ],
+      "answer": 1,
+      "explanation": "scan /skæn/ (động từ): quét, kiểm tra kỹ để tìm vấn đề. \"Scan images for vulnerabilities\" = quét image để tìm lỗ hổng bảo mật. Danh từ: scanning.",
+      "explanationEn": "scan /skæn/ (verb): to check carefully to find problems. \"Scan images for vulnerabilities\" means checking images for security holes. Noun: scanning."
+    },
+    {
+      "id": "v53",
+      "lessonId": "l5",
+      "word": "vulnerability",
+      "pos": "n",
+      "ipa": "/ˌvʌl.nɚ.əˈbɪl.ə.t̬i/",
+      "question": "Trong câu \"ECR scans images for security vulnerabilities (basic and enhanced scanning).\", từ \"vulnerabilities\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ECR scans images for security vulnerabilities (basic and enhanced scanning).\", what does \"vulnerabilities\" (noun) mean?",
+      "options": [
+        "bản cập nhật",
+        "lỗ hổng bảo mật, điểm yếu",
+        "mật khẩu",
+        "giấy chứng nhận"
+      ],
+      "optionsEn": [
+        "an update",
+        "a weakness that can be attacked",
+        "a password",
+        "a certificate"
+      ],
+      "answer": 1,
+      "explanation": "vulnerability /ˌvʌl.nɚ.əˈbɪl.ə.t̬i/ (danh từ): lỗ hổng bảo mật, điểm yếu. \"Security vulnerabilities\" = điểm yếu mà kẻ tấn công có thể khai thác. Tính từ: vulnerable.",
+      "explanationEn": "vulnerability /ˌvʌl.nɚ.əˈbɪl.ə.t̬i/ (noun): a weakness that can be attacked. \"Security vulnerabilities\" are weaknesses attackers can exploit. Adjective: vulnerable."
+    },
+    {
+      "id": "v54",
+      "lessonId": "l5",
+      "word": "enhanced",
+      "pos": "adj",
+      "ipa": "/ɪnˈhænst/",
+      "question": "Trong câu \"ECR scans images for security vulnerabilities (basic and enhanced scanning).\", từ \"enhanced\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ECR scans images for security vulnerabilities (basic and enhanced scanning).\", what does \"enhanced\" (adjective) mean?",
+      "options": [
+        "rút gọn",
+        "bị vô hiệu hóa",
+        "cổ điển",
+        "nâng cao, được cải tiến"
+      ],
+      "optionsEn": [
+        "shortened",
+        "disabled",
+        "old-fashioned",
+        "improved and more advanced"
+      ],
+      "answer": 3,
+      "explanation": "enhanced /ɪnˈhænst/ (tính từ): nâng cao, được cải tiến. \"Enhanced scanning\" = chế độ quét nâng cao, sâu hơn chế độ basic. Động từ: enhance.",
+      "explanationEn": "enhanced /ɪnˈhænst/ (adjective): improved and more advanced. \"Enhanced scanning\" is a more advanced mode than basic scanning. Verb: enhance."
+    },
+    {
+      "id": "v55",
+      "lessonId": "l5",
+      "word": "under the hood",
+      "pos": "phrase",
+      "ipa": "/ˈʌn.dɚ ðə hʊd/",
+      "question": "Trong câu \"ECR stores images on S3 under the hood and encrypts them at rest.\", từ \"under the hood\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ECR stores images on S3 under the hood and encrypts them at rest.\", what does \"under the hood\" (phrase) mean?",
+      "options": [
+        "ở bên dưới, phía sau hậu trường",
+        "dưới mui xe",
+        "một cách công khai",
+        "trong tương lai"
+      ],
+      "optionsEn": [
+        "behind the scenes, internally",
+        "beneath a car bonnet",
+        "openly",
+        "in the future"
+      ],
+      "answer": 0,
+      "explanation": "under the hood /ˈʌn.dɚ ðə hʊd/ (cụm từ): ở bên dưới, phía sau hậu trường. \"Under the hood\" = cách hệ thống thực sự hoạt động bên trong mà người dùng không thấy. Nghĩa đen là \"dưới nắp capô\".",
+      "explanationEn": "under the hood /ˈʌn.dɚ ðə hʊd/ (phrase): behind the scenes, internally. \"Under the hood\" means how things work internally, hidden from the user. Literally it means under a car's hood."
+    },
+    {
+      "id": "v56",
+      "lessonId": "l5",
+      "word": "pod",
+      "pos": "n",
+      "ipa": "/pɑːd/",
+      "question": "Trong câu \"Build the image, push it to ECR, and ECS/EKS pull the image to run tasks or pods.\", từ \"pods\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Build the image, push it to ECR, and ECS/EKS pull the image to run tasks or pods.\", what does \"pods\" (noun) mean?",
+      "options": [
+        "vỏ hạt đậu",
+        "tai nghe không dây",
+        "pod (đơn vị chạy nhỏ nhất trong Kubernetes, chứa container)",
+        "ổ đĩa ngoài"
+      ],
+      "optionsEn": [
+        "a seed case of a plant",
+        "a wireless earphone",
+        "the smallest runnable unit in Kubernetes, holding containers",
+        "an external drive"
+      ],
+      "answer": 2,
+      "explanation": "pod /pɑːd/ (danh từ): pod (đơn vị chạy nhỏ nhất trong Kubernetes, chứa container). Trong Kubernetes/EKS, pod tương tự task trong ECS: gồm một hoặc nhiều container chạy cùng nhau.",
+      "explanationEn": "pod /pɑːd/ (noun): the smallest runnable unit in Kubernetes, holding containers. In Kubernetes/EKS a pod is like an ECS task: one or more containers running together."
+    },
+    {
+      "id": "v57",
+      "lessonId": "l5",
+      "word": "portability",
+      "pos": "n",
+      "ipa": "/ˌpɔːr.t̬əˈbɪl.ə.t̬i/",
+      "question": "Trong câu \"Choose EKS when you want standard open-source Kubernetes or need portability across clouds.\", từ \"portability\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Choose EKS when you want standard open-source Kubernetes or need portability across clouds.\", what does \"portability\" (noun) mean?",
+      "options": [
+        "tính bảo mật",
+        "tốc độ xử lý",
+        "giá rẻ",
+        "tính di động, khả năng chuyển sang nền tảng khác"
+      ],
+      "optionsEn": [
+        "security",
+        "processing speed",
+        "low price",
+        "ability to move easily to another platform"
+      ],
+      "answer": 3,
+      "explanation": "portability /ˌpɔːr.t̬əˈbɪl.ə.t̬i/ (danh từ): tính di động, khả năng chuyển sang nền tảng khác. Kubernetes chạy ở nhiều cloud, nên EKS cho \"portability\": dễ chuyển ứng dụng sang nơi khác. Tính từ: portable.",
+      "explanationEn": "portability /ˌpɔːr.t̬əˈbɪl.ə.t̬i/ (noun): ability to move easily to another platform. Kubernetes runs on many clouds, so EKS gives \"portability\": apps move easily. Adjective: portable."
+    },
+    {
+      "id": "v58",
+      "lessonId": "l5",
+      "word": "expertise",
+      "pos": "n",
+      "ipa": "/ˌek.spɝːˈtiːz/",
+      "question": "Trong câu \"Choose EKS if you already have Kubernetes tooling or expertise (Helm, kubectl, operators).\", từ \"expertise\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Choose EKS if you already have Kubernetes tooling or expertise (Helm, kubectl, operators).\", what does \"expertise\" (noun) mean?",
+      "options": [
+        "giấy phép",
+        "ngân sách",
+        "chuyên môn, kiến thức sâu",
+        "kinh nghiệm du lịch"
+      ],
+      "optionsEn": [
+        "a license",
+        "a budget",
+        "expert knowledge or skill",
+        "travel experience"
+      ],
+      "answer": 2,
+      "explanation": "expertise /ˌek.spɝːˈtiːz/ (danh từ): chuyên môn, kiến thức sâu. \"Kubernetes expertise\" = đội ngũ đã có chuyên môn Kubernetes. Liên quan: expert (chuyên gia).",
+      "explanationEn": "expertise /ˌek.spɝːˈtiːz/ (noun): expert knowledge or skill. \"Kubernetes expertise\" means the team already has Kubernetes skills. Related: expert."
+    },
+    {
+      "id": "v59",
+      "lessonId": "l5",
+      "word": "operator",
+      "pos": "n",
+      "ipa": "/ˈɑː.pə.reɪ.t̬ɚ/",
+      "question": "Trong câu \"Choose EKS if you already have Kubernetes tooling or expertise (Helm, kubectl, operators).\", từ \"operators\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Choose EKS if you already have Kubernetes tooling or expertise (Helm, kubectl, operators).\", what does \"operators\" (noun) mean?",
+      "options": [
+        "operator (phần mở rộng tự động quản lý ứng dụng trên Kubernetes)",
+        "nhân viên tổng đài",
+        "nhà mạng di động",
+        "toán tử cộng trừ"
+      ],
+      "optionsEn": [
+        "a Kubernetes extension that automates managing an app",
+        "a phone switchboard worker",
+        "a mobile network carrier",
+        "a math symbol like plus"
+      ],
+      "answer": 0,
+      "explanation": "operator /ˈɑː.pə.reɪ.t̬ɚ/ (danh từ): operator (phần mở rộng tự động quản lý ứng dụng trên Kubernetes). Trong Kubernetes, operator là phần mềm tự động cài đặt, nâng cấp, vận hành một ứng dụng phức tạp.",
+      "explanationEn": "operator /ˈɑː.pə.reɪ.t̬ɚ/ (noun): a Kubernetes extension that automates managing an app. In Kubernetes an operator is software that automatically installs, upgrades and runs a complex app."
+    },
+    {
+      "id": "v60",
+      "lessonId": "l5",
+      "word": "tradeoff",
+      "pos": "n",
+      "ipa": "/ˈtreɪd.ɔːf/",
+      "question": "Trong câu \"The tradeoff is higher operational complexity than ECS.\", từ \"tradeoff\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The tradeoff is higher operational complexity than ECS.\", what does \"tradeoff\" (noun) mean?",
+      "options": [
+        "lợi nhuận",
+        "sự đánh đổi",
+        "sự nâng cấp",
+        "hợp đồng mua bán"
+      ],
+      "optionsEn": [
+        "profit",
+        "something you give up to gain something else",
+        "an upgrade",
+        "a sales contract"
+      ],
+      "answer": 1,
+      "explanation": "tradeoff /ˈtreɪd.ɔːf/ (danh từ): sự đánh đổi. EKS linh hoạt hơn nhưng \"tradeoff\" là vận hành phức tạp hơn. Cũng viết: trade-off.",
+      "explanationEn": "tradeoff /ˈtreɪd.ɔːf/ (noun): something you give up to gain something else. EKS is more flexible, but the \"tradeoff\" is more complex operations. Also spelled trade-off."
+    },
+    {
+      "id": "v61",
+      "lessonId": "l5",
+      "word": "complexity",
+      "pos": "n",
+      "ipa": "/kəmˈplek.sə.t̬i/",
+      "question": "Trong câu \"The tradeoff is higher operational complexity than ECS.\", từ \"complexity\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The tradeoff is higher operational complexity than ECS.\", what does \"complexity\" (noun) mean?",
+      "options": [
+        "sự đơn giản",
+        "sự ổn định",
+        "sự phức tạp",
+        "sự nhanh chóng"
+      ],
+      "optionsEn": [
+        "simplicity",
+        "stability",
+        "the state of being complicated",
+        "speed"
+      ],
+      "answer": 2,
+      "explanation": "complexity /kəmˈplek.sə.t̬i/ (danh từ): sự phức tạp. \"Operational complexity\" = độ phức tạp khi vận hành. Tính từ: complex.",
+      "explanationEn": "complexity /kəmˈplek.sə.t̬i/ (noun): the state of being complicated. \"Operational complexity\" is how complicated something is to run. Adjective: complex."
+    },
+    {
+      "id": "v62",
+      "lessonId": "l5",
+      "word": "underneath",
+      "pos": "adv",
+      "ipa": "/ˌʌn.dɚˈniːθ/",
+      "question": "Trong câu \"Fargate is not an orchestrator; it is a launch type or compute engine used underneath ECS or EKS.\", từ \"underneath\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Fargate is not an orchestrator; it is a launch type or compute engine used underneath ECS or EKS.\", what does \"underneath\" (adverb) mean?",
+      "options": [
+        "ở bên dưới",
+        "ở bên cạnh",
+        "thay thế cho",
+        "trước khi"
+      ],
+      "optionsEn": [
+        "below, in a lower layer",
+        "beside",
+        "instead of",
+        "before"
+      ],
+      "answer": 0,
+      "explanation": "underneath /ˌʌn.dɚˈniːθ/ (trạng từ): ở bên dưới. Fargate nằm \"underneath\" ECS/EKS: là lớp tính toán bên dưới, còn ECS/EKS điều phối ở trên.",
+      "explanationEn": "underneath /ˌʌn.dɚˈniːθ/ (adverb): below, in a lower layer. Fargate sits \"underneath\" ECS/EKS as the compute layer, while ECS/EKS orchestrate on top."
+    },
+    {
+      "id": "v63",
+      "lessonId": "l6",
+      "word": "accept",
+      "pos": "v",
+      "ipa": "/əkˈsept/",
+      "question": "Trong câu \"Use the EC2 launch type when you need instance control and accept managing patching and scaling.\", từ \"accept\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Use the EC2 launch type when you need instance control and accept managing patching and scaling.\", what does \"accept\" (verb) mean?",
+      "options": [
+        "từ chối",
+        "trì hoãn",
+        "chuyển giao",
+        "chấp nhận"
+      ],
+      "optionsEn": [
+        "to refuse",
+        "to postpone",
+        "to hand over",
+        "to agree to take on something"
+      ],
+      "answer": 3,
+      "explanation": "accept /əkˈsept/ (động từ): chấp nhận. Chọn EC2 launch type nghĩa là \"chấp nhận\" tự lo vá lỗi và scale. Danh từ: acceptance.",
+      "explanationEn": "accept /əkˈsept/ (verb): to agree to take on something. Choosing the EC2 launch type means you \"accept\" handling patching and scaling. Noun: acceptance."
+    },
+    {
+      "id": "v64",
+      "lessonId": "l6",
+      "word": "built in",
+      "pos": "phrase",
+      "ipa": "/ˌbɪlt ˈɪn/",
+      "question": "Trong câu \"App Runner is the simplest way to deploy a containerized web app (auto scaling and LB built in).\", từ \"built in\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"App Runner is the simplest way to deploy a containerized web app (auto scaling and LB built in).\", what does \"built in\" (phrase) mean?",
+      "options": [
+        "phải mua thêm",
+        "có sẵn bên trong",
+        "đã bị gỡ bỏ",
+        "đang được xây dựng"
+      ],
+      "optionsEn": [
+        "sold separately",
+        "included as part of it",
+        "removed",
+        "under construction"
+      ],
+      "answer": 1,
+      "explanation": "built in /ˌbɪlt ˈɪn/ (cụm từ): có sẵn bên trong. \"Built in\" = tính năng có sẵn, không cần cấu hình riêng. Dạng tính từ đứng trước danh từ: built-in.",
+      "explanationEn": "built in /ˌbɪlt ˈɪn/ (phrase): included as part of it. \"Built in\" means included by default with no separate setup. Before a noun: built-in."
+    },
+    {
+      "id": "v65",
+      "lessonId": "l6",
+      "word": "lighter",
+      "pos": "adj",
+      "ipa": "/ˈlaɪ.t̬ɚ/",
+      "question": "Trong câu \"Containers are lighter and more portable than VMs.\", từ \"lighter\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Containers are lighter and more portable than VMs.\", what does \"lighter\" (adjective) mean?",
+      "options": [
+        "sáng hơn",
+        "nhẹ hơn (dùng ít tài nguyên hơn)",
+        "an toàn hơn",
+        "đắt hơn"
+      ],
+      "optionsEn": [
+        "brighter",
+        "using fewer resources",
+        "safer",
+        "more expensive"
+      ],
+      "answer": 1,
+      "explanation": "lighter /ˈlaɪ.t̬ɚ/ (tính từ): nhẹ hơn (dùng ít tài nguyên hơn). \"Lighter\" là so sánh hơn của \"light\" (nhẹ). Ở đây không phải nghĩa \"sáng\". Liên quan: lightweight.",
+      "explanationEn": "lighter /ˈlaɪ.t̬ɚ/ (adjective): using fewer resources. \"Lighter\" is the comparative of \"light\" (not heavy), not \"bright\" here. Related: lightweight."
+    },
+    {
+      "id": "v66",
+      "lessonId": "l6",
+      "word": "portable",
+      "pos": "adj",
+      "ipa": "/ˈpɔːr.t̬ə.bəl/",
+      "question": "Trong câu \"Containers are lighter and more portable than VMs.\", từ \"portable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Containers are lighter and more portable than VMs.\", what does \"portable\" (adjective) mean?",
+      "options": [
+        "cố định một chỗ",
+        "rất đắt",
+        "khó cài đặt",
+        "dễ di chuyển, chạy được ở nhiều nơi"
+      ],
+      "optionsEn": [
+        "fixed in one place",
+        "very expensive",
+        "hard to install",
+        "easy to move and run in different places"
+      ],
+      "answer": 3,
+      "explanation": "portable /ˈpɔːr.t̬ə.bəl/ (tính từ): dễ di chuyển, chạy được ở nhiều nơi. Container \"portable\" vì cùng image chạy trên laptop, on-prem hay cloud. Danh từ: portability.",
+      "explanationEn": "portable /ˈpɔːr.t̬ə.bəl/ (adjective): easy to move and run in different places. Containers are \"portable\" because one image runs on a laptop, on-prem or in the cloud. Noun: portability."
+    },
+    {
+      "id": "v67",
+      "lessonId": "l6",
+      "word": "serve",
+      "pos": "v",
+      "ipa": "/sɝːv/",
+      "question": "Trong câu \"ECR is the image registry, private or public, with IAM integration and image scanning, serving ECS/EKS.\", từ \"serving\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"ECR is the image registry, private or public, with IAM integration and image scanning, serving ECS/EKS.\", what does \"serving\" (verb) mean?",
+      "options": [
+        "phục vụ, cung cấp cho",
+        "thay thế",
+        "cạnh tranh với",
+        "ngăn chặn"
+      ],
+      "optionsEn": [
+        "to provide something for",
+        "to replace",
+        "to compete with",
+        "to block"
+      ],
+      "answer": 0,
+      "explanation": "serve /sɝːv/ (động từ): phục vụ, cung cấp cho. \"Serving ECS/EKS\" = ECR cung cấp image cho ECS/EKS kéo về để chạy.",
+      "explanationEn": "serve /sɝːv/ (verb): to provide something for. \"Serving ECS/EKS\" means ECR supplies the images that ECS/EKS pull to run."
+    },
+    {
+      "id": "v68",
+      "lessonId": "l6",
+      "word": "savings",
+      "pos": "n",
+      "ipa": "/ˈseɪ.vɪŋz/",
+      "question": "Trong câu \"Task placement binpack uses the fewest instances, which means cost savings.\", từ \"savings\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Task placement binpack uses the fewest instances, which means cost savings.\", what does \"savings\" (noun) mean?",
+      "options": [
+        "khoản nợ",
+        "khoản thuế",
+        "khoản tiết kiệm",
+        "khoản đầu tư"
+      ],
+      "optionsEn": [
+        "debt",
+        "tax",
+        "money that you do not have to spend",
+        "investment"
+      ],
+      "answer": 2,
+      "explanation": "savings /ˈseɪ.vɪŋz/ (danh từ): khoản tiết kiệm. \"Cost savings\" = số tiền tiết kiệm được. Động từ: save.",
+      "explanationEn": "savings /ˈseɪ.vɪŋz/ (noun): money that you do not have to spend. \"Cost savings\" is the money you save. Verb: save."
+    },
+    {
+      "id": "v69",
+      "lessonId": "l6",
+      "word": "stateless",
+      "pos": "adj",
+      "ipa": "/ˈsteɪt.ləs/",
+      "question": "Trong câu \"EFS provides persistent or shared storage for ECS and also Fargate; containers are stateless by default.\", từ \"stateless\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"EFS provides persistent or shared storage for ECS and also Fargate; containers are stateless by default.\", what does \"stateless\" (adjective) mean?",
+      "options": [
+        "không có quốc tịch",
+        "luôn đồng bộ",
+        "không cần mạng",
+        "không lưu trạng thái (dữ liệu mất khi dừng)"
+      ],
+      "optionsEn": [
+        "without a country",
+        "always in sync",
+        "working offline",
+        "not keeping data between runs"
+      ],
+      "answer": 3,
+      "explanation": "stateless /ˈsteɪt.ləs/ (tính từ): không lưu trạng thái (dữ liệu mất khi dừng). Container \"stateless\" nên dữ liệu cần giữ lâu phải lưu ra ngoài (EFS, S3, DB). Trái nghĩa: stateful.",
+      "explanationEn": "stateless /ˈsteɪt.ləs/ (adjective): not keeping data between runs. Containers are \"stateless\", so data that must last goes elsewhere (EFS, S3, a DB). Opposite: stateful."
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về Redis Cluster.",
+      "promptEn": "Pick TWO statements that are true about Redis Cluster.",
+      "options": [
+        "Cần chạy Sentinel riêng để có failover tự động",
+        "Keyspace được chia thành 16.384 hash slot theo CRC16(key) mod 16384",
+        "Lệnh nhiều key chạy được với bất kỳ tổ hợp key nào",
+        "Hash tag như `{user:42}` khiến các key có cùng tag nằm chung một slot",
+        "Mỗi node hỗ trợ 16 database chọn bằng `SELECT`"
+      ],
+      "optionsEn": [
+        "A separate Sentinel deployment is required for automatic failover",
+        "The keyspace is split into 16,384 hash slots by CRC16(key) mod 16384",
+        "Multi-key commands work with any combination of keys",
+        "A hash tag such as `{user:42}` puts keys sharing that tag in the same slot",
+        "Each node supports 16 databases chosen with `SELECT`"
+      ],
+      "answers": [1, 3],
+      "explanation": "Cluster tự lo failover (replica được các primary bầu lên), chỉ có database 0, và lệnh nhiều key chỉ chạy khi mọi key cùng slot — chính vì thế mới cần hash tag.",
+      "explanationEn": "Cluster handles failover itself (replicas are elected by the primaries), has only database 0, and multi-key commands only run when every key shares a slot — which is exactly why hash tags exist.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Một instance Redis chỉ dùng làm cache thuần. Chọn HAI thiết lập nên áp dụng.",
+      "promptEn": "A Redis instance is used purely as a cache. Pick TWO settings you should apply.",
+      "options": [
+        "Đặt `maxmemory-policy` là `allkeys-lfu` hoặc `allkeys-lru`",
+        "Giữ `maxmemory-policy` mặc định để không mất key nào",
+        "Bật AOF với `appendfsync always` cho an toàn",
+        "Dùng `KEYS pattern*` để tìm và xoá cache cũ",
+        "Đặt `maxmemory` thấp hơn RAM vật lý để chừa chỗ cho phân mảnh và buffer"
+      ],
+      "optionsEn": [
+        "Set `maxmemory-policy` to `allkeys-lfu` or `allkeys-lru`",
+        "Keep the default `maxmemory-policy` so no key is ever lost",
+        "Enable AOF with `appendfsync always` for safety",
+        "Use `KEYS pattern*` to find and delete stale cache entries",
+        "Set `maxmemory` below physical RAM to leave room for fragmentation and buffers"
+      ],
+      "answers": [0, 4],
+      "explanation": "Cache thuần phải loại được key khi đầy, và cần headroom bộ nhớ. Policy mặc định `noeviction` biến cache đầy thành lỗi ghi; fsync mỗi lệnh là chi phí vô ích với dữ liệu dựng lại được; `KEYS` chặn main thread.",
+      "explanationEn": "A pure cache must be able to evict when full and needs memory headroom. The default `noeviction` turns a full cache into write errors; an fsync per write is wasted cost for rebuildable data; `KEYS` blocks the main thread.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Cổng TCP mặc định của Redis là bao nhiêu?",
+      "promptEn": "What is Redis's default TCP port?",
+      "answer": "6379",
+      "answerEn": "6379",
+      "accept": ["6379", "port 6379", "tcp 6379", ":6379"],
+      "explanation": "6379. Sentinel mặc định dùng 26379, còn cluster bus dùng cổng dữ liệu + 10000 (16379).",
+      "explanationEn": "6379. Sentinel defaults to 26379, and the cluster bus uses the data port + 10000 (16379).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Redis Cluster chia keyspace thành bao nhiêu hash slot?",
+      "promptEn": "How many hash slots does Redis Cluster split the keyspace into?",
+      "answer": "16.384",
+      "answerEn": "16,384",
+      "accept": ["16384", "16,384", "16.384", "16 384"],
+      "explanation": "16.384 slot; slot của một key là CRC16(key) mod 16384, và mỗi primary sở hữu một số dải slot.",
+      "explanationEn": "16,384 slots; a key's slot is CRC16(key) mod 16384, and each primary owns some ranges of slots.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi kiểu dữ liệu Redis với nhu cầu phù hợp nhất.",
+      "promptEn": "Match each Redis data type to the need it fits best.",
+      "pairs": [
+        {
+          "left": "Sorted set",
+          "leftEn": "Sorted set",
+          "right": "Bảng xếp hạng với top N và thứ hạng từng người chơi",
+          "rightEn": "A leaderboard with top N and each player's rank"
+        },
+        {
+          "left": "HyperLogLog",
+          "leftEn": "HyperLogLog",
+          "right": "Đếm xấp xỉ số khách truy cập duy nhất với bộ nhớ cố định nhỏ",
+          "rightEn": "Approximate unique-visitor counts in small, fixed memory"
+        },
+        {
+          "left": "Stream",
+          "leftEn": "Stream",
+          "right": "Log sự kiện được nhiều worker xử lý, có ack và giao lại",
+          "rightEn": "An event log processed by several workers with acks and redelivery"
+        },
+        {
+          "left": "Hash",
+          "leftEn": "Hash",
+          "right": "Object người dùng có các field được cập nhật riêng lẻ",
+          "rightEn": "A user object whose fields are updated individually"
+        }
+      ],
+      "explanation": "Chọn kiểu dữ liệu theo cách truy cập: sắp xếp theo điểm → sorted set; đếm khác nhau xấp xỉ → HyperLogLog; tiêu thụ có ack → stream; object nhiều field → hash.",
+      "explanationEn": "Choose the type by access pattern: ordering by score → sorted set; approximate distinct counting → HyperLogLog; consumption with acks → stream; multi-field object → hash.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước Sentinel thực hiện failover khi primary chết.",
+      "promptEn": "Put the steps Sentinel takes to fail over a dead primary into order.",
+      "items": [
+        {
+          "text": "Một Sentinel không nhận được phản hồi từ primary và đánh dấu nó down theo góc nhìn riêng",
+          "textEn": "One Sentinel stops getting replies from the primary and marks it down from its own view"
+        },
+        {
+          "text": "Đủ số Sentinel theo quorum đồng ý rằng primary thực sự down",
+          "textEn": "Enough Sentinels to meet the quorum agree the primary is really down"
+        },
+        {
+          "text": "Đa số Sentinel bầu ra một leader để điều phối failover",
+          "textEn": "A majority of Sentinels elects a leader to run the failover"
+        },
+        {
+          "text": "Leader chọn replica phù hợp nhất và promote nó thành primary",
+          "textEn": "The leader picks the best replica and promotes it to primary"
+        },
+        {
+          "text": "Các replica còn lại được cấu hình theo primary mới và client hỏi Sentinel để lấy địa chỉ mới",
+          "textEn": "The remaining replicas are pointed at the new primary and clients ask Sentinel for its address"
+        }
+      ],
+      "explanation": "Quorum chỉ quyết định việc xác nhận primary down; để thực sự failover vẫn cần đa số Sentinel — vì vậy cần ít nhất 3 Sentinel ở các vùng lỗi độc lập.",
+      "explanationEn": "The quorum only decides that the primary is down; actually failing over still needs a majority of Sentinels — which is why you run at least 3 in independent failure domains.",
+      "id": "d6"
+    }
+  ]
+}

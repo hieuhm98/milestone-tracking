@@ -1,0 +1,1733 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "v1",
+      "lessonId": "l1",
+      "word": "relational",
+      "pos": "adj",
+      "ipa": "/rɪˈleɪ.ʃən.əl/",
+      "question": "Trong câu \"RDS is a managed relational database — MySQL, PostgreSQL, MariaDB, Oracle, SQL Server.\", từ \"relational\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS is a managed relational database — MySQL, PostgreSQL, MariaDB, Oracle, SQL Server.\", what does \"relational\" (adjective) mean?",
+      "options": [
+        "phân tán trên nhiều máy chủ",
+        "tạm thời, không lưu lâu dài",
+        "chỉ đọc, không thể ghi",
+        "quan hệ (dữ liệu lưu trong các bảng liên kết với nhau)"
+      ],
+      "optionsEn": [
+        "distributed across many servers",
+        "temporary, not stored long-term",
+        "read-only, cannot be written",
+        "relational (data stored in related tables)"
+      ],
+      "answer": 3,
+      "explanation": "relational /rɪˈleɪ.ʃən.əl/ (tính từ): \"quan hệ\". Relational database là cơ sở dữ liệu lưu dữ liệu thành các bảng có quan hệ với nhau và truy vấn bằng SQL.",
+      "explanationEn": "relational /rɪˈleɪ.ʃən.əl/ (adjective): relating to data organised in linked tables. A relational database stores data in related tables and is queried with SQL."
+    },
+    {
+      "id": "v2",
+      "lessonId": "l1",
+      "word": "compatible",
+      "pos": "adj",
+      "ipa": "/kəmˈpæt.ə.bəl/",
+      "question": "Trong câu \"Aurora is a relational database designed by AWS, compatible with MySQL/PostgreSQL, with higher performance and durability.\", từ \"compatible\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora is a relational database designed by AWS, compatible with MySQL/PostgreSQL, with higher performance and durability.\", what does \"compatible\" (adjective) mean?",
+      "options": [
+        "đắt hơn nhiều so với",
+        "hoàn toàn độc lập với",
+        "tương thích, dùng được cùng với",
+        "nhanh hơn gấp đôi"
+      ],
+      "optionsEn": [
+        "much more expensive than",
+        "completely independent of",
+        "able to work with, compatible",
+        "twice as fast as"
+      ],
+      "answer": 2,
+      "explanation": "compatible /kəmˈpæt.ə.bəl/ (tính từ): tương thích. \"Compatible with MySQL\" nghĩa là ứng dụng viết cho MySQL có thể chạy với Aurora mà không cần sửa nhiều.",
+      "explanationEn": "compatible /kəmˈpæt.ə.bəl/ (adjective): able to work together with something. \"Compatible with MySQL\" means applications built for MySQL can use Aurora with little or no change."
+    },
+    {
+      "id": "v3",
+      "lessonId": "l1",
+      "word": "durability",
+      "pos": "n",
+      "ipa": "/ˌdʊr.əˈbɪl.ə.t̬i/",
+      "question": "Trong câu \"Aurora is a relational database designed by AWS, compatible with MySQL/PostgreSQL, with higher performance and durability.\", từ \"durability\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora is a relational database designed by AWS, compatible with MySQL/PostgreSQL, with higher performance and durability.\", what does \"durability\" (noun) mean?",
+      "options": [
+        "độ bền (khả năng không bị mất dữ liệu)",
+        "tốc độ phản hồi",
+        "khả năng mở rộng",
+        "mức độ bảo mật"
+      ],
+      "optionsEn": [
+        "durability (ability not to lose data)",
+        "response speed",
+        "ability to scale",
+        "level of security"
+      ],
+      "answer": 0,
+      "explanation": "durability /ˌdʊr.əˈbɪl.ə.t̬i/ (danh từ): độ bền. Trong lưu trữ, durability là khả năng dữ liệu không bị mất theo thời gian; tính từ là durable.",
+      "explanationEn": "durability /ˌdʊr.əˈbɪl.ə.t̬i/ (noun): the ability to last; in storage, the ability to keep data without losing it. Adjective: durable."
+    },
+    {
+      "id": "v4",
+      "lessonId": "l1",
+      "word": "synchronous",
+      "pos": "adj",
+      "ipa": "/ˈsɪŋ.krə.nəs/",
+      "question": "Trong câu \"Multi-AZ = high availability (HA, synchronous), Read Replica = read scaling (asynchronous).\", từ \"synchronous\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Multi-AZ = high availability (HA, synchronous), Read Replica = read scaling (asynchronous).\", what does \"synchronous\" (adjective) mean?",
+      "options": [
+        "không đồng bộ, xảy ra sau",
+        "đồng bộ, xảy ra cùng lúc",
+        "thủ công, do người làm",
+        "ngẫu nhiên, không đoán trước"
+      ],
+      "optionsEn": [
+        "not in sync, happening later",
+        "happening at the same time, in sync",
+        "done by hand",
+        "random, unpredictable"
+      ],
+      "answer": 1,
+      "explanation": "synchronous /ˈsɪŋ.krə.nəs/ (tính từ): đồng bộ. Replication synchronous nghĩa là mỗi lần ghi được sao chép sang bản dự phòng ngay lập tức, cùng lúc.",
+      "explanationEn": "synchronous /ˈsɪŋ.krə.nəs/ (adjective): happening at the same time. Synchronous replication copies every write to the standby immediately, at the same moment."
+    },
+    {
+      "id": "v5",
+      "lessonId": "l1",
+      "word": "asynchronous",
+      "pos": "adj",
+      "ipa": "/eɪˈsɪŋ.krə.nəs/",
+      "question": "Trong câu \"Multi-AZ = high availability (HA, synchronous), Read Replica = read scaling (asynchronous).\", từ \"asynchronous\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Multi-AZ = high availability (HA, synchronous), Read Replica = read scaling (asynchronous).\", what does \"asynchronous\" (adjective) mean?",
+      "options": [
+        "đồng thời, cùng một lúc",
+        "được mã hóa",
+        "không đồng bộ, không diễn ra cùng lúc",
+        "liên tục, không ngắt quãng"
+      ],
+      "optionsEn": [
+        "simultaneous, at the same moment",
+        "encrypted",
+        "not happening at the same time",
+        "continuous, without breaks"
+      ],
+      "answer": 2,
+      "explanation": "asynchronous /eɪˈsɪŋ.krə.nəs/ (tính từ): không đồng bộ. Read Replica sao chép dữ liệu asynchronous, tức dữ liệu được chép sau một chút nên bản sao có thể trễ.",
+      "explanationEn": "asynchronous /eɪˈsɪŋ.krə.nəs/ (adjective): not happening at the same time. Read Replicas copy data asynchronously, so the copy can be slightly behind the primary."
+    },
+    {
+      "id": "v6",
+      "lessonId": "l1",
+      "word": "engine",
+      "pos": "n",
+      "ipa": "/ˈen.dʒɪn/",
+      "question": "Trong câu \"RDS (Relational Database Service) runs a database engine on infrastructure that AWS manages.\", từ \"engine\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS (Relational Database Service) runs a database engine on infrastructure that AWS manages.\", what does \"engine\" (noun) mean?",
+      "options": [
+        "động cơ xe",
+        "phần mềm lõi (hệ quản trị cơ sở dữ liệu)",
+        "ổ cứng lưu trữ",
+        "bảng điều khiển web"
+      ],
+      "optionsEn": [
+        "motor of a vehicle",
+        "core software (database management system)",
+        "storage hard drive",
+        "web control panel"
+      ],
+      "answer": 1,
+      "explanation": "engine /ˈen.dʒɪn/ (danh từ): ở đây là \"engine\" phần mềm, tức hệ quản trị cơ sở dữ liệu như MySQL hay PostgreSQL, không phải động cơ máy.",
+      "explanationEn": "engine /ˈen.dʒɪn/ (noun): here, the core software that runs the database, such as MySQL or PostgreSQL, not a physical motor."
+    },
+    {
+      "id": "v7",
+      "lessonId": "l1",
+      "word": "automatic",
+      "pos": "adj",
+      "ipa": "/ˌɑː.t̬əˈmæt̬.ɪk/",
+      "question": "Trong câu \"RDS provides continuous automatic backups with point-in-time recovery.\", từ \"automatic\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS provides continuous automatic backups with point-in-time recovery.\", what does \"automatic\" (adjective) mean?",
+      "options": [
+        "tự động, không cần người làm",
+        "thủ công, làm bằng tay",
+        "tùy chọn, có thể bỏ qua",
+        "hằng tháng"
+      ],
+      "optionsEn": [
+        "automatic, working by itself",
+        "manual, done by hand",
+        "optional, can be skipped",
+        "monthly"
+      ],
+      "answer": 0,
+      "explanation": "automatic /ˌɑː.t̬əˈmæt̬.ɪk/ (tính từ): tự động. \"Automatic backups\" là bản sao lưu được tạo tự động mà không cần bạn thao tác; trạng từ là automatically.",
+      "explanationEn": "automatic /ˌɑː.t̬əˈmæt̬.ɪk/ (adjective): working by itself without human action. \"Automatic backups\" are created without you doing anything; adverb: automatically."
+    },
+    {
+      "id": "v8",
+      "lessonId": "l1",
+      "word": "near",
+      "pos": "v",
+      "ipa": "/nɪr/",
+      "question": "Trong câu \"RDS automatically grows storage as it nears capacity (per your configured threshold) without downtime.\", từ \"nears\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS automatically grows storage as it nears capacity (per your configured threshold) without downtime.\", what does \"nears\" (verb) mean?",
+      "options": [
+        "vượt quá nhiều",
+        "giảm xuống dưới",
+        "bỏ qua, phớt lờ",
+        "tiến gần đến, sắp chạm tới"
+      ],
+      "optionsEn": [
+        "goes far beyond",
+        "drops below",
+        "ignores",
+        "gets close to, approaches"
+      ],
+      "answer": 3,
+      "explanation": "near /nɪr/ (động từ): tiến gần đến. \"Nears capacity\" nghĩa là dung lượng lưu trữ sắp đầy. Near thường là giới từ/tính từ, nhưng ở đây là động từ.",
+      "explanationEn": "near /nɪr/ (verb): to come close to. \"Nears capacity\" means storage is almost full. Near is usually a preposition, but here it is a verb."
+    },
+    {
+      "id": "v9",
+      "lessonId": "l1",
+      "word": "downtime",
+      "pos": "n",
+      "ipa": "/ˈdaʊn.taɪm/",
+      "question": "Trong câu \"RDS automatically grows storage as it nears capacity (per your configured threshold) without downtime.\", từ \"downtime\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS automatically grows storage as it nears capacity (per your configured threshold) without downtime.\", what does \"downtime\" (noun) mean?",
+      "options": [
+        "thời gian nghỉ trưa",
+        "thời gian tải xuống",
+        "thời gian chạy thử",
+        "thời gian hệ thống ngừng hoạt động"
+      ],
+      "optionsEn": [
+        "lunch break time",
+        "download time",
+        "trial run period",
+        "period when a system is not working"
+      ],
+      "answer": 3,
+      "explanation": "downtime /ˈdaʊn.taɪm/ (danh từ): thời gian ngừng hoạt động. \"Without downtime\" nghĩa là tăng dung lượng mà database vẫn chạy bình thường. Trái nghĩa: uptime.",
+      "explanationEn": "downtime /ˈdaʊn.taɪm/ (noun): a period when a system is unavailable. \"Without downtime\" means storage grows while the database keeps running. Opposite: uptime."
+    },
+    {
+      "id": "v10",
+      "lessonId": "l1",
+      "word": "trade-off",
+      "pos": "n",
+      "ipa": "/ˈtreɪd.ɑːf/",
+      "question": "Trong câu \"Important trade-off: data on the replica may lag slightly (replica lag).\", từ \"trade-off\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Important trade-off: data on the replica may lag slightly (replica lag).\", what does \"trade-off\" (noun) mean?",
+      "options": [
+        "sự đánh đổi (được cái này, mất cái kia)",
+        "giao dịch mua bán",
+        "lỗi nghiêm trọng",
+        "bước cài đặt ban đầu"
+      ],
+      "optionsEn": [
+        "a compromise (gain one thing, lose another)",
+        "a buying and selling deal",
+        "a serious error",
+        "an initial setup step"
+      ],
+      "answer": 0,
+      "explanation": "trade-off /ˈtreɪd.ɑːf/ (danh từ): sự đánh đổi. Read Replica giúp mở rộng đọc nhưng phải đánh đổi là dữ liệu có thể bị trễ một chút.",
+      "explanationEn": "trade-off /ˈtreɪd.ɑːf/ (noun): a balance between two opposite things. Read Replicas scale reads, but the trade-off is that data may lag slightly."
+    },
+    {
+      "id": "v11",
+      "lessonId": "l1",
+      "word": "replica",
+      "pos": "n",
+      "ipa": "/ˈrep.lɪ.kə/",
+      "question": "Trong câu \"It uses asynchronous replication, so data on the replica may lag slightly (replica lag).\", từ \"replica\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It uses asynchronous replication, so data on the replica may lag slightly (replica lag).\", what does \"replica\" (noun) mean?",
+      "options": [
+        "bản gốc",
+        "bản sao",
+        "bản nháp",
+        "bản báo cáo"
+      ],
+      "optionsEn": [
+        "the original",
+        "a copy",
+        "a draft",
+        "a report"
+      ],
+      "answer": 1,
+      "explanation": "replica /ˈrep.lɪ.kə/ (danh từ): bản sao. Read Replica là bản sao của database chính dùng để phục vụ truy vấn đọc; động từ liên quan: replicate (sao chép).",
+      "explanationEn": "replica /ˈrep.lɪ.kə/ (noun): an exact copy. A Read Replica is a copy of the primary database used to serve reads; related verb: replicate."
+    },
+    {
+      "id": "v12",
+      "lessonId": "l1",
+      "word": "slightly",
+      "pos": "adv",
+      "ipa": "/ˈslaɪt.li/",
+      "question": "Trong câu \"It uses asynchronous replication, so data on the replica may lag slightly (replica lag).\", từ \"slightly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It uses asynchronous replication, so data on the replica may lag slightly (replica lag).\", what does \"slightly\" (adverb) mean?",
+      "options": [
+        "rất nhiều",
+        "hoàn toàn",
+        "một chút, không đáng kể",
+        "thường xuyên"
+      ],
+      "optionsEn": [
+        "a lot",
+        "completely",
+        "a little, not much",
+        "often"
+      ],
+      "answer": 2,
+      "explanation": "slightly /ˈslaɪt.li/ (trạng từ): một chút. \"Lag slightly\" nghĩa là dữ liệu trên bản sao chậm hơn bản chính một chút.",
+      "explanationEn": "slightly /ˈslaɪt.li/ (adverb): a little. \"Lag slightly\" means the replica is a little behind the primary."
+    },
+    {
+      "id": "v13",
+      "lessonId": "l1",
+      "word": "eventually",
+      "pos": "adv",
+      "ipa": "/ɪˈven.tʃu.ə.li/",
+      "question": "Trong câu \"Data on the replica may lag slightly, meaning it is eventually consistent.\", từ \"eventually\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Data on the replica may lag slightly, meaning it is eventually consistent.\", what does \"eventually\" (adverb) mean?",
+      "options": [
+        "ngay lập tức",
+        "cuối cùng, sau một thời gian",
+        "thỉnh thoảng",
+        "không bao giờ"
+      ],
+      "optionsEn": [
+        "immediately",
+        "in the end, after some time",
+        "occasionally",
+        "never"
+      ],
+      "answer": 1,
+      "explanation": "eventually /ɪˈven.tʃu.ə.li/ (trạng từ): cuối cùng, sau một thời gian. \"Eventually consistent\" nghĩa là dữ liệu sẽ khớp với bản chính sau một khoảng trễ ngắn. Không nhầm với \"possibly\" (có thể).",
+      "explanationEn": "eventually /ɪˈven.tʃu.ə.li/ (adverb): in the end, after some time. \"Eventually consistent\" means the data will match the primary after a short delay. It does not mean \"possibly\"."
+    },
+    {
+      "id": "v14",
+      "lessonId": "l1",
+      "word": "consistent",
+      "pos": "adj",
+      "ipa": "/kənˈsɪs.tənt/",
+      "question": "Trong câu \"Data on the replica may lag slightly, meaning it is eventually consistent.\", từ \"consistent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Data on the replica may lag slightly, meaning it is eventually consistent.\", what does \"consistent\" (adjective) mean?",
+      "options": [
+        "bị hỏng",
+        "được nén lại",
+        "dễ thay đổi",
+        "nhất quán, khớp nhau"
+      ],
+      "optionsEn": [
+        "corrupted",
+        "compressed",
+        "easy to change",
+        "matching, the same everywhere"
+      ],
+      "answer": 3,
+      "explanation": "consistent /kənˈsɪs.tənt/ (tính từ): nhất quán. Dữ liệu consistent là dữ liệu giống nhau ở mọi bản sao; danh từ là consistency.",
+      "explanationEn": "consistent /kənˈsɪs.tənt/ (adjective): staying the same or matching. Consistent data is identical across all copies; noun: consistency."
+    },
+    {
+      "id": "v15",
+      "lessonId": "l1",
+      "word": "connection",
+      "pos": "n",
+      "ipa": "/kəˈnek.ʃən/",
+      "question": "Trong câu \"Each replica has its own connection string — the application must actively point read queries at the replica.\", từ \"connection\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each replica has its own connection string — the application must actively point read queries at the replica.\", what does \"connection\" (noun) mean?",
+      "options": [
+        "kết nối",
+        "bộ sưu tập",
+        "sự sửa đổi",
+        "lời giải thích"
+      ],
+      "optionsEn": [
+        "a link between two systems",
+        "a collection",
+        "a correction",
+        "an explanation"
+      ],
+      "answer": 0,
+      "explanation": "connection /kəˈnek.ʃən/ (danh từ): kết nối. \"Connection string\" là chuỗi chứa địa chỉ và thông tin để ứng dụng kết nối tới database.",
+      "explanationEn": "connection /kəˈnek.ʃən/ (noun): a link between two things. A \"connection string\" holds the address and details an application uses to connect to a database."
+    },
+    {
+      "id": "v16",
+      "lessonId": "l1",
+      "word": "actively",
+      "pos": "adv",
+      "ipa": "/ˈæk.tɪv.li/",
+      "question": "Trong câu \"Each replica has its own connection string — the application must actively point read queries at the replica.\", từ \"actively\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each replica has its own connection string — the application must actively point read queries at the replica.\", what does \"actively\" (adverb) mean?",
+      "options": [
+        "một cách tình cờ",
+        "một cách âm thầm",
+        "một cách chủ động",
+        "một cách chậm rãi"
+      ],
+      "optionsEn": [
+        "by chance",
+        "secretly",
+        "on purpose, taking action",
+        "slowly"
+      ],
+      "answer": 2,
+      "explanation": "actively /ˈæk.tɪv.li/ (trạng từ): một cách chủ động. Ứng dụng phải tự chủ động gửi truy vấn đọc tới replica, AWS không tự làm việc đó.",
+      "explanationEn": "actively /ˈæk.tɪv.li/ (adverb): by taking action deliberately. The application itself must send read queries to the replica; AWS does not do it automatically."
+    },
+    {
+      "id": "v17",
+      "lessonId": "l1",
+      "word": "promote",
+      "pos": "v",
+      "ipa": "/prəˈmoʊt/",
+      "question": "Trong câu \"A replica can be promoted into a standalone writable database (used for recovery or splitting off a system).\", từ \"promoted\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A replica can be promoted into a standalone writable database (used for recovery or splitting off a system).\", what does \"promoted\" (verb) mean?",
+      "options": [
+        "quảng cáo, tiếp thị",
+        "xóa bỏ hoàn toàn",
+        "nâng cấp (chuyển thành bản chính)",
+        "tạm dừng"
+      ],
+      "optionsEn": [
+        "advertised",
+        "deleted completely",
+        "raised to a higher role (made primary)",
+        "paused"
+      ],
+      "answer": 2,
+      "explanation": "promote /prəˈmoʊt/ (động từ): nâng lên vị trí cao hơn. Replica \"được promote\" nghĩa là trở thành database độc lập có thể ghi. Danh từ: promotion.",
+      "explanationEn": "promote /prəˈmoʊt/ (verb): to raise to a higher position. A promoted replica becomes an independent database that accepts writes. Noun: promotion."
+    },
+    {
+      "id": "v18",
+      "lessonId": "l1",
+      "word": "writable",
+      "pos": "adj",
+      "ipa": "/ˈraɪ.t̬ə.bəl/",
+      "question": "Trong câu \"A replica can be promoted into a standalone writable database (used for recovery or splitting off a system).\", từ \"writable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A replica can be promoted into a standalone writable database (used for recovery or splitting off a system).\", what does \"writable\" (adjective) mean?",
+      "options": [
+        "chỉ có thể đọc",
+        "có thể ghi dữ liệu vào",
+        "không thể truy cập",
+        "đã bị mã hóa"
+      ],
+      "optionsEn": [
+        "can only be read",
+        "able to have data written to it",
+        "cannot be accessed",
+        "already encrypted"
+      ],
+      "answer": 1,
+      "explanation": "writable /ˈraɪ.t̬ə.bəl/ (tính từ): có thể ghi. Replica bình thường chỉ đọc (read-only); sau khi promote thì trở thành writable.",
+      "explanationEn": "writable /ˈraɪ.t̬ə.bəl/ (adjective): able to be written to. A normal replica is read-only; after promotion it becomes writable."
+    },
+    {
+      "id": "v19",
+      "lessonId": "l1",
+      "word": "incur",
+      "pos": "v",
+      "ipa": "/ɪnˈkɝː/",
+      "question": "Trong câu \"Replication within the same AZ is free; cross-AZ or cross-region replication incurs data transfer charges.\", từ \"incurs\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Replication within the same AZ is free; cross-AZ or cross-region replication incurs data transfer charges.\", what does \"incurs\" (verb) mean?",
+      "options": [
+        "phát sinh, phải chịu (chi phí)",
+        "giảm bớt, cắt giảm",
+        "miễn phí hoàn toàn",
+        "hoàn trả lại"
+      ],
+      "optionsEn": [
+        "causes you to have to pay (a cost)",
+        "reduces, cuts",
+        "makes fully free",
+        "refunds"
+      ],
+      "answer": 0,
+      "explanation": "incur /ɪnˈkɝː/ (động từ): phát sinh, gánh chịu. \"Incur charges/costs\" là cụm hay gặp: làm phát sinh chi phí.",
+      "explanationEn": "incur /ɪnˈkɝː/ (verb): to become responsible for paying something. \"Incur charges/costs\" is a common collocation."
+    },
+    {
+      "id": "v20",
+      "lessonId": "l1",
+      "word": "offload",
+      "pos": "v",
+      "ipa": "/ˌɑːfˈloʊd/",
+      "question": "Trong câu \"Read Replicas are for offloading reads from the primary database (e.g., reporting, analytics).\", từ \"offloading\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Read Replicas are for offloading reads from the primary database (e.g., reporting, analytics).\", what does \"offloading\" (verb) mean?",
+      "options": [
+        "tải thêm dữ liệu vào",
+        "sao lưu toàn bộ",
+        "khóa quyền truy cập",
+        "giảm tải, chuyển bớt công việc sang nơi khác"
+      ],
+      "optionsEn": [
+        "loading more data in",
+        "backing up everything",
+        "locking access",
+        "moving work away to reduce the load"
+      ],
+      "answer": 3,
+      "explanation": "offload /ˌɑːfˈloʊd/ (động từ): giảm tải. Offload reads nghĩa là chuyển bớt truy vấn đọc sang replica để database chính đỡ nặng.",
+      "explanationEn": "offload /ˌɑːfˈloʊd/ (verb): to move work somewhere else to reduce the load. Offloading reads sends read queries to replicas so the primary is less busy."
+    },
+    {
+      "id": "v21",
+      "lessonId": "l1",
+      "word": "reporting",
+      "pos": "n",
+      "ipa": "/rɪˈpɔːr.t̬ɪŋ/",
+      "question": "Trong câu \"Read Replicas are for offloading reads from the primary database (e.g., reporting, analytics).\", từ \"reporting\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Read Replicas are for offloading reads from the primary database (e.g., reporting, analytics).\", what does \"reporting\" (noun) mean?",
+      "options": [
+        "việc lập báo cáo",
+        "việc đưa tin thời sự",
+        "việc khiếu nại",
+        "việc nhập dữ liệu"
+      ],
+      "optionsEn": [
+        "producing reports from data",
+        "news journalism",
+        "making complaints",
+        "data entry"
+      ],
+      "answer": 0,
+      "explanation": "reporting /rɪˈpɔːr.t̬ɪŋ/ (danh từ): việc lập báo cáo. Trong IT, reporting là chạy truy vấn để tạo báo cáo, thường nặng nên được đưa sang replica.",
+      "explanationEn": "reporting /rɪˈpɔːr.t̬ɪŋ/ (noun): producing reports. In IT, reporting means running queries to build reports, which are often heavy and sent to replicas."
+    },
+    {
+      "id": "v22",
+      "lessonId": "l1",
+      "word": "mechanism",
+      "pos": "n",
+      "ipa": "/ˈmek.ə.nɪ.zəm/",
+      "question": "Trong câu \"Read Replicas are NOT an automatic HA/failover mechanism.\", từ \"mechanism\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Read Replicas are NOT an automatic HA/failover mechanism.\", what does \"mechanism\" (noun) mean?",
+      "options": [
+        "bộ phận máy móc hỏng",
+        "quy định pháp lý",
+        "cơ chế, cách thức hoạt động",
+        "giao diện người dùng"
+      ],
+      "optionsEn": [
+        "a broken machine part",
+        "a legal regulation",
+        "a system or method that does a job",
+        "a user interface"
+      ],
+      "answer": 2,
+      "explanation": "mechanism /ˈmek.ə.nɪ.zəm/ (danh từ): cơ chế. \"Failover mechanism\" là cơ chế tự chuyển sang hệ thống dự phòng khi hệ thống chính lỗi.",
+      "explanationEn": "mechanism /ˈmek.ə.nɪ.zəm/ (noun): a system or process that achieves something. A \"failover mechanism\" switches to a backup when the primary fails."
+    },
+    {
+      "id": "v23",
+      "lessonId": "l2",
+      "word": "disaster",
+      "pos": "n",
+      "ipa": "/dɪˈzæs.tɚ/",
+      "question": "Trong câu \"Multi-AZ is a mechanism for High Availability (HA) and disaster recovery (DR) within the same region.\", từ \"disaster\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Multi-AZ is a mechanism for High Availability (HA) and disaster recovery (DR) within the same region.\", what does \"disaster\" (noun) mean?",
+      "options": [
+        "bản cập nhật nhỏ",
+        "thảm họa, sự cố nghiêm trọng",
+        "sự chậm trễ",
+        "đợt khuyến mãi"
+      ],
+      "optionsEn": [
+        "a small update",
+        "a disaster, serious failure",
+        "a delay",
+        "a promotion sale"
+      ],
+      "answer": 1,
+      "explanation": "disaster /dɪˈzæs.tɚ/ (danh từ): thảm họa, sự cố lớn. \"Disaster recovery (DR)\" là khôi phục hệ thống sau sự cố nghiêm trọng.",
+      "explanationEn": "disaster /dɪˈzæs.tɚ/ (noun): a sudden serious event causing great damage. \"Disaster recovery (DR)\" means restoring systems after a major failure."
+    },
+    {
+      "id": "v24",
+      "lessonId": "l2",
+      "word": "standby",
+      "pos": "n",
+      "ipa": "/ˈstænd.baɪ/",
+      "question": "Trong câu \"It maintains a synchronous standby in another AZ — every write is replicated synchronously.\", từ \"standby\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It maintains a synchronous standby in another AZ — every write is replicated synchronously.\", what does \"standby\" (noun) mean?",
+      "options": [
+        "bản chính đang phục vụ",
+        "bản lưu trữ lâu dài",
+        "bản thử nghiệm",
+        "bản dự phòng sẵn sàng thay thế"
+      ],
+      "optionsEn": [
+        "the main copy serving traffic",
+        "a long-term archive",
+        "a test copy",
+        "a backup ready to take over"
+      ],
+      "answer": 3,
+      "explanation": "standby /ˈstænd.baɪ/ (danh từ): bản dự phòng. Standby chờ sẵn và chỉ tiếp quản khi bản chính gặp sự cố. Cụm \"on standby\" = trong trạng thái sẵn sàng.",
+      "explanationEn": "standby /ˈstænd.baɪ/ (noun): something kept ready to be used if needed. The standby waits and takes over only when the primary fails. \"On standby\" = ready."
+    },
+    {
+      "id": "v25",
+      "lessonId": "l2",
+      "word": "maintenance",
+      "pos": "n",
+      "ipa": "/ˈmeɪn.tən.əns/",
+      "question": "Trong câu \"Automatic failover to the standby when the primary fails, an AZ is lost, or during maintenance.\", từ \"maintenance\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Automatic failover to the standby when the primary fails, an AZ is lost, or during maintenance.\", what does \"maintenance\" (noun) mean?",
+      "options": [
+        "mở rộng",
+        "bảo trì",
+        "di chuyển dữ liệu",
+        "kiểm toán"
+      ],
+      "optionsEn": [
+        "expansion",
+        "routine upkeep and repair",
+        "data migration",
+        "auditing"
+      ],
+      "answer": 1,
+      "explanation": "maintenance /ˈmeɪn.tən.əns/ (danh từ): bảo trì. Trong lúc AWS bảo trì (vá lỗi, nâng cấp) bản chính, Multi-AZ chuyển sang standby. Động từ: maintain.",
+      "explanationEn": "maintenance /ˈmeɪn.tən.əns/ (noun): the work of keeping something in good condition. During maintenance of the primary, Multi-AZ fails over to the standby. Verb: maintain."
+    },
+    {
+      "id": "v26",
+      "lessonId": "l2",
+      "word": "serve",
+      "pos": "v",
+      "ipa": "/sɝːv/",
+      "question": "Trong câu \"The standby does NOT serve read queries — it only waits to take over.\", từ \"serve\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The standby does NOT serve read queries — it only waits to take over.\", what does \"serve\" (verb) mean?",
+      "options": [
+        "lưu trữ lâu dài",
+        "từ chối",
+        "mã hóa",
+        "phục vụ, xử lý (yêu cầu)"
+      ],
+      "optionsEn": [
+        "store long-term",
+        "reject",
+        "encrypt",
+        "handle, respond to (requests)"
+      ],
+      "answer": 3,
+      "explanation": "serve /sɝːv/ (động từ): phục vụ, xử lý. \"Serve read queries\" nghĩa là nhận và trả kết quả cho truy vấn đọc; standby không làm điều này.",
+      "explanationEn": "serve /sɝːv/ (verb): to provide something to users. \"Serve read queries\" means handling read requests; the standby does not do this."
+    },
+    {
+      "id": "v27",
+      "lessonId": "l2",
+      "word": "take over",
+      "pos": "phrase",
+      "ipa": "/teɪk ˈoʊ.vɚ/",
+      "question": "Trong câu \"The standby does NOT serve read queries — it only waits to take over.\", từ \"take over\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The standby does NOT serve read queries — it only waits to take over.\", what does \"take over\" (phrase) mean?",
+      "options": [
+        "tiếp quản, thay thế vai trò",
+        "tắt hoàn toàn",
+        "sao chép lại",
+        "lật ngược"
+      ],
+      "optionsEn": [
+        "to take control, replace the role",
+        "to shut down completely",
+        "to copy again",
+        "to turn upside down"
+      ],
+      "answer": 0,
+      "explanation": "take over /teɪk ˈoʊ.vɚ/ (cụm từ): tiếp quản. Standby chờ để tiếp quản vai trò của bản chính khi bản chính lỗi.",
+      "explanationEn": "take over /teɪk ˈoʊ.vɚ/ (phrase): to take control or responsibility from someone else. The standby waits to take over the primary's role when it fails."
+    },
+    {
+      "id": "v28",
+      "lessonId": "l2",
+      "word": "therefore",
+      "pos": "adv",
+      "ipa": "/ˈðer.fɔːr/",
+      "question": "Trong câu \"The standby only waits to take over. Therefore Multi-AZ does NOT scale reads.\", từ \"Therefore\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The standby only waits to take over. Therefore Multi-AZ does NOT scale reads.\", what does \"Therefore\" (adverb) mean?",
+      "options": [
+        "tuy nhiên",
+        "ngoài ra",
+        "vì vậy, do đó",
+        "thay vào đó"
+      ],
+      "optionsEn": [
+        "however",
+        "in addition",
+        "for that reason, so",
+        "instead"
+      ],
+      "answer": 2,
+      "explanation": "therefore /ˈðer.fɔːr/ (trạng từ): vì vậy, do đó. Dùng để nêu kết quả: standby không phục vụ đọc, do đó Multi-AZ không mở rộng đọc.",
+      "explanationEn": "therefore /ˈðer.fɔːr/ (adverb): for that reason, as a result. The standby does not serve reads, so Multi-AZ does not scale reads."
+    },
+    {
+      "id": "v29",
+      "lessonId": "l2",
+      "word": "manual",
+      "pos": "adj",
+      "ipa": "/ˈmæn.ju.əl/",
+      "question": "Trong câu \"Automatic failover? Read Replica: No (manual promotion); Multi-AZ: Yes, automatic.\", từ \"manual\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Automatic failover? Read Replica: No (manual promotion); Multi-AZ: Yes, automatic.\", what does \"manual\" (adjective) mean?",
+      "options": [
+        "tự động hoàn toàn",
+        "thủ công, do người thực hiện",
+        "theo lịch định sẵn",
+        "miễn phí"
+      ],
+      "optionsEn": [
+        "fully automatic",
+        "done by a person, by hand",
+        "on a fixed schedule",
+        "free of charge"
+      ],
+      "answer": 1,
+      "explanation": "manual /ˈmæn.ju.əl/ (tính từ): thủ công. \"Manual promotion\" nghĩa là bạn phải tự tay promote replica; trái nghĩa là automatic. Trạng từ: manually.",
+      "explanationEn": "manual /ˈmæn.ju.əl/ (adjective): done by a person rather than automatically. \"Manual promotion\" means you must promote the replica yourself; opposite: automatic."
+    },
+    {
+      "id": "v30",
+      "lessonId": "l2",
+      "word": "criteria",
+      "pos": "n",
+      "ipa": "/kraɪˈtɪr.i.ə/",
+      "question": "Trong câu \"Read Replica vs Multi-AZ — Criteria: purpose, replication, failover, count, connection string.\", từ \"Criteria\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Read Replica vs Multi-AZ — Criteria: purpose, replication, failover, count, connection string.\", what does \"Criteria\" (noun) mean?",
+      "options": [
+        "các tiêu chí",
+        "các lỗi",
+        "các khách hàng",
+        "các phiên bản"
+      ],
+      "optionsEn": [
+        "standards used to compare or judge",
+        "errors",
+        "customers",
+        "versions"
+      ],
+      "answer": 0,
+      "explanation": "criteria /kraɪˈtɪr.i.ə/ (danh từ): các tiêu chí dùng để so sánh. Criteria là số nhiều; số ít là criterion.",
+      "explanationEn": "criteria /kraɪˈtɪr.i.ə/ (noun): standards for judging or comparing. Criteria is plural; the singular is criterion."
+    },
+    {
+      "id": "v31",
+      "lessonId": "l3",
+      "word": "pooling",
+      "pos": "n",
+      "ipa": "/ˈpuː.lɪŋ/",
+      "question": "Trong câu \"RDS Proxy is a managed proxy that provides connection pooling in front of the database.\", từ \"pooling\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS Proxy is a managed proxy that provides connection pooling in front of the database.\", what does \"pooling\" (noun) mean?",
+      "options": [
+        "bể bơi",
+        "chia nhỏ dữ liệu",
+        "mã hóa kết nối",
+        "gom chung và dùng lại (tài nguyên)"
+      ],
+      "optionsEn": [
+        "a swimming pool",
+        "splitting data",
+        "encrypting connections",
+        "sharing and reusing a group of resources"
+      ],
+      "answer": 3,
+      "explanation": "pooling /ˈpuː.lɪŋ/ (danh từ): gom chung và tái sử dụng. \"Connection pooling\" giữ sẵn một nhóm kết nối để nhiều yêu cầu dùng lại, thay vì mở kết nối mới mỗi lần.",
+      "explanationEn": "pooling /ˈpuː.lɪŋ/ (noun): combining resources into a shared group. \"Connection pooling\" keeps a set of open connections that many requests reuse."
+    },
+    {
+      "id": "v32",
+      "lessonId": "l3",
+      "word": "enforce",
+      "pos": "v",
+      "ipa": "/ɪnˈfɔːrs/",
+      "question": "Trong câu \"RDS Proxy can enforce IAM authentication and store credentials in Secrets Manager.\", từ \"enforce\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS Proxy can enforce IAM authentication and store credentials in Secrets Manager.\", what does \"enforce\" (verb) mean?",
+      "options": [
+        "gỡ bỏ",
+        "đề xuất",
+        "bắt buộc áp dụng",
+        "trì hoãn"
+      ],
+      "optionsEn": [
+        "remove",
+        "suggest",
+        "make something required",
+        "delay"
+      ],
+      "answer": 2,
+      "explanation": "enforce /ɪnˈfɔːrs/ (động từ): bắt buộc áp dụng. \"Enforce IAM authentication\" nghĩa là mọi kết nối buộc phải xác thực bằng IAM.",
+      "explanationEn": "enforce /ɪnˈfɔːrs/ (verb): to make sure a rule is obeyed. \"Enforce IAM authentication\" means every connection must authenticate with IAM."
+    },
+    {
+      "id": "v33",
+      "lessonId": "l3",
+      "word": "overload",
+      "pos": "v",
+      "ipa": "/ˌoʊ.vɚˈloʊd/",
+      "question": "Trong câu \"RDS Proxy pools and reuses connections, avoiding opening too many connections and overloading the database.\", từ \"overloading\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS Proxy pools and reuses connections, avoiding opening too many connections and overloading the database.\", what does \"overloading\" (verb) mean?",
+      "options": [
+        "làm trống",
+        "làm chậm lại có chủ ý",
+        "làm mới",
+        "làm quá tải"
+      ],
+      "optionsEn": [
+        "emptying",
+        "slowing down on purpose",
+        "refreshing",
+        "putting too much load on"
+      ],
+      "answer": 3,
+      "explanation": "overload /ˌoʊ.vɚˈloʊd/ (động từ): làm quá tải. Quá nhiều kết nối cùng lúc sẽ làm database quá tải; danh từ cũng là overload.",
+      "explanationEn": "overload /ˌoʊ.vɚˈloʊd/ (verb): to give something more work than it can handle. Too many connections at once overload the database."
+    },
+    {
+      "id": "v34",
+      "lessonId": "l3",
+      "word": "authentication",
+      "pos": "n",
+      "ipa": "/ɑːˌθen.t̬əˈkeɪ.ʃən/",
+      "question": "Trong câu \"RDS Proxy can enforce IAM authentication and store credentials in Secrets Manager.\", từ \"authentication\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS Proxy can enforce IAM authentication and store credentials in Secrets Manager.\", what does \"authentication\" (noun) mean?",
+      "options": [
+        "phân quyền truy cập",
+        "xác thực danh tính",
+        "mã hóa dữ liệu",
+        "ghi nhật ký"
+      ],
+      "optionsEn": [
+        "granting access rights",
+        "verifying identity",
+        "encrypting data",
+        "logging"
+      ],
+      "answer": 1,
+      "explanation": "authentication /ɑːˌθen.t̬əˈkeɪ.ʃən/ (danh từ): xác thực, tức kiểm tra bạn là ai. Khác với authorization (phân quyền: bạn được làm gì).",
+      "explanationEn": "authentication /ɑːˌθen.t̬əˈkeɪ.ʃən/ (noun): proving who you are. It differs from authorization, which decides what you are allowed to do."
+    },
+    {
+      "id": "v35",
+      "lessonId": "l3",
+      "word": "credentials",
+      "pos": "n",
+      "ipa": "/krəˈden.ʃəlz/",
+      "question": "Trong câu \"RDS Proxy can enforce IAM authentication and store credentials in Secrets Manager.\", từ \"credentials\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS Proxy can enforce IAM authentication and store credentials in Secrets Manager.\", what does \"credentials\" (noun) mean?",
+      "options": [
+        "thông tin đăng nhập (tên, mật khẩu, khóa)",
+        "bằng cấp học thuật",
+        "hóa đơn thanh toán",
+        "nhật ký hệ thống"
+      ],
+      "optionsEn": [
+        "login details (username, password, keys)",
+        "academic degrees",
+        "payment invoices",
+        "system logs"
+      ],
+      "answer": 0,
+      "explanation": "credentials /krəˈden.ʃəlz/ (danh từ): thông tin xác thực như username/password. Trong IT, credentials là thứ dùng để đăng nhập, cần lưu an toàn (Secrets Manager).",
+      "explanationEn": "credentials /krəˈden.ʃəlz/ (noun): information used to log in, such as username and password. Credentials should be stored securely, e.g. in Secrets Manager."
+    },
+    {
+      "id": "v36",
+      "lessonId": "l3",
+      "word": "concurrently",
+      "pos": "adv",
+      "ipa": "/kənˈkɝː.ənt.li/",
+      "question": "Trong câu \"Many Lambdas starting concurrently create a burst of connections.\", từ \"concurrently\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Many Lambdas starting concurrently create a burst of connections.\", what does \"concurrently\" (adverb) mean?",
+      "options": [
+        "lần lượt từng cái",
+        "thỉnh thoảng",
+        "đồng thời, cùng một lúc",
+        "một cách an toàn"
+      ],
+      "optionsEn": [
+        "one after another",
+        "occasionally",
+        "at the same time",
+        "safely"
+      ],
+      "answer": 2,
+      "explanation": "concurrently /kənˈkɝː.ənt.li/ (trạng từ): đồng thời. Nhiều Lambda khởi động cùng lúc tạo ra nhiều kết nối một lúc. Danh từ: concurrency.",
+      "explanationEn": "concurrently /kənˈkɝː.ənt.li/ (adverb): at the same time. Many Lambdas starting together open many connections at once. Noun: concurrency."
+    },
+    {
+      "id": "v37",
+      "lessonId": "l3",
+      "word": "burst",
+      "pos": "n",
+      "ipa": "/bɝːst/",
+      "question": "Trong câu \"Many Lambdas starting concurrently create a burst of connections — RDS Proxy pools them.\", từ \"burst\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Many Lambdas starting concurrently create a burst of connections — RDS Proxy pools them.\", what does \"burst\" (noun) mean?",
+      "options": [
+        "sự sụt giảm dần",
+        "khoảng lặng",
+        "lỗi kết nối",
+        "đợt tăng vọt đột ngột"
+      ],
+      "optionsEn": [
+        "a gradual decrease",
+        "a quiet period",
+        "a connection error",
+        "a sudden sharp increase"
+      ],
+      "answer": 3,
+      "explanation": "burst /bɝːst/ (danh từ): đợt tăng đột ngột. \"A burst of connections\" là rất nhiều kết nối xuất hiện cùng lúc trong thời gian ngắn.",
+      "explanationEn": "burst /bɝːst/ (noun): a sudden short increase. \"A burst of connections\" is a large number of connections appearing at once."
+    },
+    {
+      "id": "v38",
+      "lessonId": "l3",
+      "word": "overwhelm",
+      "pos": "v",
+      "ipa": "/ˌoʊ.vɚˈwelm/",
+      "question": "Trong câu \"Many Lambdas create a burst of connections — RDS Proxy pools them so the database is not overwhelmed.\", từ \"overwhelmed\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Many Lambdas create a burst of connections — RDS Proxy pools them so the database is not overwhelmed.\", what does \"overwhelmed\" (verb) mean?",
+      "options": [
+        "được bảo vệ an toàn",
+        "bị áp đảo, quá tải không chịu nổi",
+        "được nâng cấp",
+        "bị bỏ trống"
+      ],
+      "optionsEn": [
+        "kept safe",
+        "overpowered, given too much to handle",
+        "upgraded",
+        "left empty"
+      ],
+      "answer": 1,
+      "explanation": "overwhelm /ˌoʊ.vɚˈwelm/ (động từ): áp đảo, làm quá tải. Database \"overwhelmed\" là nhận quá nhiều yêu cầu đến mức không xử lý nổi.",
+      "explanationEn": "overwhelm /ˌoʊ.vɚˈwelm/ (verb): to be too much for something to handle. An overwhelmed database receives more requests than it can process."
+    },
+    {
+      "id": "v39",
+      "lessonId": "l3",
+      "word": "agent",
+      "pos": "n",
+      "ipa": "/ˈeɪ.dʒənt/",
+      "question": "Trong câu \"RDS Custom is for when you need OS and database access (installing agents, custom patching, deep configuration).\", từ \"agents\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS Custom is for when you need OS and database access (installing agents, custom patching, deep configuration).\", what does \"agents\" (noun) mean?",
+      "options": [
+        "nhân viên đại lý",
+        "điệp viên",
+        "phần mềm chạy nền (tác nhân) cài trên máy",
+        "khách hàng"
+      ],
+      "optionsEn": [
+        "sales representatives",
+        "secret spies",
+        "background software installed on a server",
+        "customers"
+      ],
+      "answer": 2,
+      "explanation": "agent /ˈeɪ.dʒənt/ (danh từ): trong IT, agent là chương trình nhỏ cài trên máy chủ để giám sát, thu thập dữ liệu hoặc quản lý, không phải người đại lý.",
+      "explanationEn": "agent /ˈeɪ.dʒənt/ (noun): in IT, a small program installed on a server to monitor, collect data or manage it, not a person."
+    },
+    {
+      "id": "v40",
+      "lessonId": "l3",
+      "word": "responsibility",
+      "pos": "n",
+      "ipa": "/rɪˌspɑːn.səˈbɪl.ə.t̬i/",
+      "question": "Trong câu \"With RDS Custom you take on more responsibility for the OS; with standard RDS, AWS manages everything.\", từ \"responsibility\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"With RDS Custom you take on more responsibility for the OS; with standard RDS, AWS manages everything.\", what does \"responsibility\" (noun) mean?",
+      "options": [
+        "trách nhiệm",
+        "quyền lợi",
+        "chi phí",
+        "rủi ro"
+      ],
+      "optionsEn": [
+        "duty to take care of something",
+        "benefit",
+        "cost",
+        "risk"
+      ],
+      "answer": 0,
+      "explanation": "responsibility /rɪˌspɑːn.səˈbɪl.ə.t̬i/ (danh từ): trách nhiệm. \"Take on responsibility\" = nhận thêm trách nhiệm; với RDS Custom bạn tự lo nhiều hơn về hệ điều hành.",
+      "explanationEn": "responsibility /rɪˌspɑːn.səˈbɪl.ə.t̬i/ (noun): a duty to deal with something. \"Take on responsibility\" means accept more duties; with RDS Custom you manage more of the OS."
+    },
+    {
+      "id": "v41",
+      "lessonId": "l4",
+      "word": "architecture",
+      "pos": "n",
+      "ipa": "/ˈɑːr.kə.tek.tʃɚ/",
+      "question": "Trong câu \"Amazon Aurora (architecture, endpoints, Serverless, Global Database)\", từ \"architecture\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Amazon Aurora (architecture, endpoints, Serverless, Global Database)\", what does \"architecture\" (noun) mean?",
+      "options": [
+        "giá cả dịch vụ",
+        "giao diện đồ họa",
+        "kiến trúc, cách hệ thống được thiết kế",
+        "quy trình tuyển dụng"
+      ],
+      "optionsEn": [
+        "service pricing",
+        "graphical interface",
+        "the design and structure of a system",
+        "hiring process"
+      ],
+      "answer": 2,
+      "explanation": "architecture /ˈɑːr.kə.tek.tʃɚ/ (danh từ): kiến trúc, tức cấu trúc và cách các thành phần của hệ thống được tổ chức.",
+      "explanationEn": "architecture /ˈɑːr.kə.tek.tʃɚ/ (noun): the overall design and structure of a system and how its parts fit together."
+    },
+    {
+      "id": "v42",
+      "lessonId": "l4",
+      "word": "roughly",
+      "pos": "adv",
+      "ipa": "/ˈrʌf.li/",
+      "question": "Trong câu \"Aurora is roughly 5x faster than standard MySQL and 3x faster than standard PostgreSQL.\", từ \"roughly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora is roughly 5x faster than standard MySQL and 3x faster than standard PostgreSQL.\", what does \"roughly\" (adverb) mean?",
+      "options": [
+        "chính xác tuyệt đối",
+        "khoảng, xấp xỉ",
+        "hiếm khi",
+        "một cách thô bạo"
+      ],
+      "optionsEn": [
+        "exactly",
+        "about, approximately",
+        "rarely",
+        "violently"
+      ],
+      "answer": 1,
+      "explanation": "roughly /ˈrʌf.li/ (trạng từ): khoảng, xấp xỉ. \"Roughly 5x faster\" = nhanh hơn khoảng 5 lần. Cũng có nghĩa \"thô bạo\", nhưng không phải trong câu này.",
+      "explanationEn": "roughly /ˈrʌf.li/ (adverb): approximately. \"Roughly 5x faster\" means about five times faster. It can also mean \"violently\", but not here."
+    },
+    {
+      "id": "v43",
+      "lessonId": "l4",
+      "word": "self-healing",
+      "pos": "adj",
+      "ipa": "/ˌself ˈhiː.lɪŋ/",
+      "question": "Trong câu \"Aurora keeps 6 copies of data across 3 AZs (2 per AZ), so it is self-healing with very high durability.\", từ \"self-healing\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora keeps 6 copies of data across 3 AZs (2 per AZ), so it is self-healing with very high durability.\", what does \"self-healing\" (adjective) mean?",
+      "options": [
+        "tự phục hồi, tự sửa lỗi",
+        "tự xóa dữ liệu cũ",
+        "tự tính phí",
+        "tự tắt khi rảnh"
+      ],
+      "optionsEn": [
+        "able to repair itself",
+        "deletes old data by itself",
+        "bills itself",
+        "shuts down when idle"
+      ],
+      "answer": 0,
+      "explanation": "self-healing /ˌself ˈhiː.lɪŋ/ (tính từ): tự phục hồi. Aurora tự phát hiện và sửa các khối dữ liệu bị lỗi dựa trên các bản sao khác.",
+      "explanationEn": "self-healing /ˌself ˈhiː.lɪŋ/ (adjective): able to fix its own problems. Aurora detects and repairs bad data blocks using its other copies."
+    },
+    {
+      "id": "v44",
+      "lessonId": "l4",
+      "word": "endpoint",
+      "pos": "n",
+      "ipa": "/ˈend.pɔɪnt/",
+      "question": "Trong câu \"Writer endpoint: always points to the primary instance for writes; re-points after a failover.\", từ \"endpoint\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Writer endpoint: always points to the primary instance for writes; re-points after a failover.\", what does \"endpoint\" (noun) mean?",
+      "options": [
+        "điểm kết thúc câu chuyện",
+        "hạn chót",
+        "mục tiêu kinh doanh",
+        "điểm kết nối (địa chỉ để truy cập dịch vụ)"
+      ],
+      "optionsEn": [
+        "end of a story",
+        "deadline",
+        "business goal",
+        "connection address for reaching a service"
+      ],
+      "answer": 3,
+      "explanation": "endpoint /ˈend.pɔɪnt/ (danh từ): điểm kết nối, tức địa chỉ (URL/DNS) mà ứng dụng dùng để kết nối tới dịch vụ. Aurora có writer endpoint và reader endpoint.",
+      "explanationEn": "endpoint /ˈend.pɔɪnt/ (noun): the address (URL/DNS name) an application connects to. Aurora has a writer endpoint and a reader endpoint."
+    },
+    {
+      "id": "v45",
+      "lessonId": "l4",
+      "word": "notable",
+      "pos": "adj",
+      "ipa": "/ˈnoʊ.t̬ə.bəl/",
+      "question": "Trong câu \"Notable features: Aurora Serverless, Global Database, Backtrack, Cloning.\", từ \"Notable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Notable features: Aurora Serverless, Global Database, Backtrack, Cloning.\", what does \"Notable\" (adjective) mean?",
+      "options": [
+        "bị ẩn đi",
+        "đáng chú ý",
+        "đã lỗi thời",
+        "tốn kém"
+      ],
+      "optionsEn": [
+        "hidden",
+        "worth noticing, important",
+        "outdated",
+        "expensive"
+      ],
+      "answer": 1,
+      "explanation": "notable /ˈnoʊ.t̬ə.bəl/ (tính từ): đáng chú ý. \"Notable features\" là những tính năng nổi bật cần nhớ.",
+      "explanationEn": "notable /ˈnoʊ.t̬ə.bəl/ (adjective): worth paying attention to. \"Notable features\" are the important features to remember."
+    },
+    {
+      "id": "v46",
+      "lessonId": "l4",
+      "word": "workload",
+      "pos": "n",
+      "ipa": "/ˈwɝːk.loʊd/",
+      "question": "Trong câu \"Aurora Serverless automatically scales compute capacity with load — ideal for variable or unpredictable workloads.\", từ \"workloads\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora Serverless automatically scales compute capacity with load — ideal for variable or unpredictable workloads.\", what does \"workloads\" (noun) mean?",
+      "options": [
+        "lịch làm việc",
+        "tiền lương",
+        "khối lượng công việc (ứng dụng/tác vụ chạy trên hệ thống)",
+        "bản hợp đồng"
+      ],
+      "optionsEn": [
+        "work schedule",
+        "salary",
+        "amount of work (applications/tasks running on a system)",
+        "contract"
+      ],
+      "answer": 2,
+      "explanation": "workload /ˈwɝːk.loʊd/ (danh từ): khối lượng công việc. Trong cloud, workload là ứng dụng hoặc tác vụ chạy trên hạ tầng và lượng tải nó tạo ra.",
+      "explanationEn": "workload /ˈwɝːk.loʊd/ (noun): the amount of work to be done. In cloud, a workload is an application or task running on the infrastructure."
+    },
+    {
+      "id": "v47",
+      "lessonId": "l4",
+      "word": "unpredictable",
+      "pos": "adj",
+      "ipa": "/ˌʌn.prɪˈdɪk.tə.bəl/",
+      "question": "Trong câu \"Aurora Serverless automatically scales compute capacity with load — ideal for variable or unpredictable workloads.\", từ \"unpredictable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora Serverless automatically scales compute capacity with load — ideal for variable or unpredictable workloads.\", what does \"unpredictable\" (adjective) mean?",
+      "options": [
+        "không đoán trước được",
+        "ổn định, đều đặn",
+        "rất nhỏ",
+        "đã lên kế hoạch"
+      ],
+      "optionsEn": [
+        "impossible to predict",
+        "steady, regular",
+        "very small",
+        "planned"
+      ],
+      "answer": 0,
+      "explanation": "unpredictable /ˌʌn.prɪˈdɪk.tə.bəl/ (tính từ): không đoán trước được. Tải lúc cao lúc thấp bất ngờ nên dùng Serverless để tự co giãn. Gốc: predict (dự đoán).",
+      "explanationEn": "unpredictable /ˌʌn.prɪˈdɪk.tə.bəl/ (adjective): not able to be predicted. Loads that rise and fall unexpectedly suit Serverless auto-scaling. Root: predict."
+    },
+    {
+      "id": "v48",
+      "lessonId": "l4",
+      "word": "secondary",
+      "pos": "adj",
+      "ipa": "/ˈsek.ən.der.i/",
+      "question": "Trong câu \"A secondary region can be promoted quickly during a disaster.\", từ \"secondary\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A secondary region can be promoted quickly during a disaster.\", what does \"secondary\" (adjective) mean?",
+      "options": [
+        "chính, quan trọng nhất",
+        "cũ nhất",
+        "riêng tư",
+        "phụ, thứ cấp (không phải chính)"
+      ],
+      "optionsEn": [
+        "main, most important",
+        "oldest",
+        "private",
+        "backup, not the main one"
+      ],
+      "answer": 3,
+      "explanation": "secondary /ˈsek.ən.der.i/ (tính từ): phụ, thứ cấp. Secondary region là region phụ chứa bản sao, có thể được nâng lên làm chính khi có thảm họa. Trái nghĩa: primary.",
+      "explanationEn": "secondary /ˈsek.ən.der.i/ (adjective): second in order, not the main one. A secondary region holds a copy and can be promoted in a disaster. Opposite: primary."
+    },
+    {
+      "id": "v49",
+      "lessonId": "l4",
+      "word": "rewind",
+      "pos": "v",
+      "ipa": "/ˌriːˈwaɪnd/",
+      "question": "Trong câu \"Backtrack lets you rewind the database to an earlier point in time without restoring from a backup.\", từ \"rewind\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Backtrack lets you rewind the database to an earlier point in time without restoring from a backup.\", what does \"rewind\" (verb) mean?",
+      "options": [
+        "tua nhanh tới tương lai",
+        "tua lại, quay về thời điểm trước",
+        "xóa vĩnh viễn",
+        "nén nhỏ lại"
+      ],
+      "optionsEn": [
+        "jump ahead to the future",
+        "go back to an earlier point",
+        "delete permanently",
+        "compress"
+      ],
+      "answer": 1,
+      "explanation": "rewind /ˌriːˈwaɪnd/ (động từ): tua lại. Backtrack giúp đưa database quay lại một thời điểm trước đó, như tua băng video.",
+      "explanationEn": "rewind /ˌriːˈwaɪnd/ (verb): to go back to an earlier point, like rewinding a video. Backtrack returns the database to an earlier state."
+    },
+    {
+      "id": "v50",
+      "lessonId": "l4",
+      "word": "consume",
+      "pos": "v",
+      "ipa": "/kənˈsuːm/",
+      "question": "Trong câu \"Cloning quickly creates a copy of the database (copy-on-write) for testing without consuming much storage.\", từ \"consuming\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Cloning quickly creates a copy of the database (copy-on-write) for testing without consuming much storage.\", what does \"consuming\" (verb) mean?",
+      "options": [
+        "tạo thêm",
+        "giải phóng",
+        "tiêu tốn, sử dụng hết",
+        "kiểm tra"
+      ],
+      "optionsEn": [
+        "creating more",
+        "freeing up",
+        "using up",
+        "checking"
+      ],
+      "answer": 2,
+      "explanation": "consume /kənˈsuːm/ (động từ): tiêu tốn. \"Without consuming much storage\" = không tốn nhiều dung lượng lưu trữ. Danh từ: consumption.",
+      "explanationEn": "consume /kənˈsuːm/ (verb): to use up a resource. \"Without consuming much storage\" means using little storage. Noun: consumption."
+    },
+    {
+      "id": "v51",
+      "lessonId": "l5",
+      "word": "persistence",
+      "pos": "n",
+      "ipa": "/pɚˈsɪs.təns/",
+      "question": "Trong câu \"Redis supports HA with Multi-AZ + replication, persistence (writing to disk), and backup/restore.\", từ \"persistence\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Redis supports HA with Multi-AZ + replication, persistence (writing to disk), and backup/restore.\", what does \"persistence\" (noun) mean?",
+      "options": [
+        "khả năng lưu bền dữ liệu (ghi xuống đĩa)",
+        "sự kiên nhẫn chờ đợi",
+        "tốc độ đọc cao",
+        "việc xóa dữ liệu"
+      ],
+      "optionsEn": [
+        "keeping data by saving it to disk",
+        "patient waiting",
+        "high read speed",
+        "deleting data"
+      ],
+      "answer": 0,
+      "explanation": "persistence /pɚˈsɪs.təns/ (danh từ): tính lưu bền. Trong IT, persistence là dữ liệu vẫn còn sau khi khởi động lại vì đã được ghi xuống đĩa. Nghĩa thông thường là \"sự kiên trì\".",
+      "explanationEn": "persistence /pɚˈsɪs.təns/ (noun): in IT, keeping data after a restart by saving it to disk. In everyday English it means \"determination\"."
+    },
+    {
+      "id": "v52",
+      "lessonId": "l5",
+      "word": "rich",
+      "pos": "adj",
+      "ipa": "/rɪtʃ/",
+      "question": "Trong câu \"Redis supports rich data structures (sorted sets, lists, pub/sub) and Cluster Mode for sharding.\", từ \"rich\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Redis supports rich data structures (sorted sets, lists, pub/sub) and Cluster Mode for sharding.\", what does \"rich\" (adjective) mean?",
+      "options": [
+        "giàu có, nhiều tiền",
+        "nặng nề, cồng kềnh",
+        "đơn giản, cơ bản",
+        "phong phú, đa dạng"
+      ],
+      "optionsEn": [
+        "wealthy",
+        "heavy, bulky",
+        "simple, basic",
+        "varied, with many kinds"
+      ],
+      "answer": 3,
+      "explanation": "rich /rɪtʃ/ (tính từ): phong phú, đa dạng. \"Rich data structures\" là nhiều kiểu cấu trúc dữ liệu khác nhau, không phải nghĩa \"giàu có\".",
+      "explanationEn": "rich /rɪtʃ/ (adjective): having many kinds or features. \"Rich data structures\" means many different data types, not \"wealthy\"."
+    },
+    {
+      "id": "v53",
+      "lessonId": "l5",
+      "word": "sharding",
+      "pos": "n",
+      "ipa": "/ˈʃɑːr.dɪŋ/",
+      "question": "Trong câu \"Memcached shards across multiple nodes (sharding), is multi-threaded, and has no persistence.\", từ \"sharding\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Memcached shards across multiple nodes (sharding), is multi-threaded, and has no persistence.\", what does \"sharding\" (noun) mean?",
+      "options": [
+        "chia nhỏ dữ liệu ra nhiều máy",
+        "gộp dữ liệu về một máy",
+        "mã hóa dữ liệu",
+        "sao lưu dữ liệu"
+      ],
+      "optionsEn": [
+        "splitting data across many machines",
+        "merging data onto one machine",
+        "encrypting data",
+        "backing up data"
+      ],
+      "answer": 0,
+      "explanation": "sharding /ˈʃɑːr.dɪŋ/ (danh từ): phân mảnh dữ liệu. Sharding chia dữ liệu thành các phần (shard) đặt trên nhiều node để mở rộng. Gốc: shard (mảnh vỡ).",
+      "explanationEn": "sharding /ˈʃɑːr.dɪŋ/ (noun): splitting data into pieces (shards) stored on many nodes to scale. Root: shard, \"a broken piece\"."
+    },
+    {
+      "id": "v54",
+      "lessonId": "l5",
+      "word": "node",
+      "pos": "n",
+      "ipa": "/noʊd/",
+      "question": "Trong câu \"Memcached shards across multiple nodes (sharding), is multi-threaded, and has no persistence.\", từ \"nodes\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Memcached shards across multiple nodes (sharding), is multi-threaded, and has no persistence.\", what does \"nodes\" (noun) mean?",
+      "options": [
+        "dòng mã lệnh",
+        "tệp cấu hình",
+        "máy/nút trong một cụm hệ thống",
+        "người dùng"
+      ],
+      "optionsEn": [
+        "a line of code",
+        "a config file",
+        "a machine in a cluster",
+        "a user"
+      ],
+      "answer": 2,
+      "explanation": "node /noʊd/ (danh từ): nút, tức một máy (hoặc tiến trình) trong cụm. Cluster gồm nhiều node.",
+      "explanationEn": "node /noʊd/ (noun): a single machine or server within a cluster. A cluster is made of many nodes."
+    },
+    {
+      "id": "v55",
+      "lessonId": "l5",
+      "word": "pure",
+      "pos": "adj",
+      "ipa": "/pjʊr/",
+      "question": "Trong câu \"Memcached has no persistence and no replication — a pure, simple cache that is easy to scale horizontally.\", từ \"pure\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Memcached has no persistence and no replication — a pure, simple cache that is easy to scale horizontally.\", what does \"pure\" (adjective) mean?",
+      "options": [
+        "sạch sẽ, vệ sinh",
+        "thuần túy, chỉ có đúng chức năng đó",
+        "đắt tiền",
+        "phức tạp"
+      ],
+      "optionsEn": [
+        "clean, hygienic",
+        "only that, with nothing extra",
+        "expensive",
+        "complicated"
+      ],
+      "answer": 1,
+      "explanation": "pure /pjʊr/ (tính từ): thuần túy. \"A pure cache\" là chỉ làm bộ nhớ đệm, không có thêm tính năng như lưu bền hay replication.",
+      "explanationEn": "pure /pjʊr/ (adjective): nothing but, without extras. \"A pure cache\" only caches, without extra features like persistence or replication."
+    },
+    {
+      "id": "v56",
+      "lessonId": "l5",
+      "word": "highly",
+      "pos": "adv",
+      "ipa": "/ˈhaɪ.li/",
+      "question": "Trong câu \"Use Redis when you need a durable, highly available cache.\", từ \"highly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Use Redis when you need a durable, highly available cache.\", what does \"highly\" (adverb) mean?",
+      "options": [
+        "ở vị trí cao về độ cao",
+        "hiếm khi",
+        "một cách chậm chạp",
+        "ở mức độ cao, rất"
+      ],
+      "optionsEn": [
+        "at a high physical position",
+        "rarely",
+        "slowly",
+        "to a high degree, very"
+      ],
+      "answer": 3,
+      "explanation": "highly /ˈhaɪ.li/ (trạng từ): rất, ở mức cao. \"Highly available\" = có tính sẵn sàng cao. Không nhầm với high (độ cao vật lý).",
+      "explanationEn": "highly /ˈhaɪ.li/ (adverb): to a high degree. \"Highly available\" means very available. Do not confuse it with high (physical height)."
+    },
+    {
+      "id": "v57",
+      "lessonId": "l5",
+      "word": "strategy",
+      "pos": "n",
+      "ipa": "/ˈstræt̬.ə.dʒi/",
+      "question": "Trong câu \"When placing a cache in front of the database, there are two main strategies for loading data.\", từ \"strategies\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"When placing a cache in front of the database, there are two main strategies for loading data.\", what does \"strategies\" (noun) mean?",
+      "options": [
+        "lỗi phần mềm",
+        "giới hạn dung lượng",
+        "chiến lược, cách tiếp cận",
+        "bảng giá"
+      ],
+      "optionsEn": [
+        "software bug",
+        "capacity limit",
+        "plan or approach",
+        "price list"
+      ],
+      "answer": 2,
+      "explanation": "strategy /ˈstræt̬.ə.dʒi/ (danh từ): chiến lược, cách làm. Hai chiến lược nạp cache là Lazy Loading và Write-Through.",
+      "explanationEn": "strategy /ˈstræt̬.ə.dʒi/ (noun): a planned approach. The two cache-loading strategies are Lazy Loading and Write-Through."
+    },
+    {
+      "id": "v58",
+      "lessonId": "l5",
+      "word": "expire",
+      "pos": "v",
+      "ipa": "/ɪkˈspaɪr/",
+      "question": "Trong câu \"Caching strategies are usually combined with a TTL (Time To Live) so data expires on its own.\", từ \"expires\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Caching strategies are usually combined with a TTL (Time To Live) so data expires on its own.\", what does \"expires\" (verb) mean?",
+      "options": [
+        "hết hạn",
+        "được gia hạn",
+        "được sao chép",
+        "được nén"
+      ],
+      "optionsEn": [
+        "stops being valid after a time",
+        "gets renewed",
+        "gets copied",
+        "gets compressed"
+      ],
+      "answer": 0,
+      "explanation": "expire /ɪkˈspaɪr/ (động từ): hết hạn. Khi TTL kết thúc, dữ liệu trong cache hết hạn và bị xóa. Danh từ: expiration/expiry.",
+      "explanationEn": "expire /ɪkˈspaɪr/ (verb): to reach the end of its valid period. When the TTL ends, cached data expires. Noun: expiration."
+    },
+    {
+      "id": "v59",
+      "lessonId": "l5",
+      "word": "stale",
+      "pos": "adj",
+      "ipa": "/steɪl/",
+      "question": "Trong câu \"Only requested data ends up in the cache, but the first miss is slow and data can become stale.\", từ \"stale\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Only requested data ends up in the cache, but the first miss is slow and data can become stale.\", what does \"stale\" (adjective) mean?",
+      "options": [
+        "bị mã hóa",
+        "rất lớn",
+        "mới tinh",
+        "cũ, không còn cập nhật"
+      ],
+      "optionsEn": [
+        "encrypted",
+        "very large",
+        "brand new",
+        "out of date"
+      ],
+      "answer": 3,
+      "explanation": "stale /steɪl/ (tính từ): cũ, lỗi thời. Stale data là dữ liệu trong cache đã khác so với database. Nghĩa gốc: đồ ăn bị ôi, không còn tươi.",
+      "explanationEn": "stale /steɪl/ (adjective): no longer fresh. Stale data in a cache no longer matches the database. Originally used for old bread or food."
+    },
+    {
+      "id": "v60",
+      "lessonId": "l5",
+      "word": "fresh",
+      "pos": "adj",
+      "ipa": "/freʃ/",
+      "question": "Trong câu \"With Write-Through, the cache is always fresh, but writes are slower.\", từ \"fresh\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"With Write-Through, the cache is always fresh, but writes are slower.\", what does \"fresh\" (adjective) mean?",
+      "options": [
+        "đã bị hỏng",
+        "mới, luôn cập nhật",
+        "rẻ tiền",
+        "bị khóa"
+      ],
+      "optionsEn": [
+        "damaged",
+        "new, up to date",
+        "cheap",
+        "locked"
+      ],
+      "answer": 1,
+      "explanation": "fresh /freʃ/ (tính từ): mới, cập nhật. Cache fresh là dữ liệu khớp với database; danh từ: freshness. Trái nghĩa: stale.",
+      "explanationEn": "fresh /freʃ/ (adjective): new and up to date. A fresh cache matches the database; noun: freshness. Opposite: stale."
+    },
+    {
+      "id": "v61",
+      "lessonId": "l5",
+      "word": "lifetime",
+      "pos": "n",
+      "ipa": "/ˈlaɪf.taɪm/",
+      "question": "Trong câu \"TTL: set a lifetime so cache entries expire automatically, reducing stale data.\", từ \"lifetime\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"TTL: set a lifetime so cache entries expire automatically, reducing stale data.\", what does \"lifetime\" (noun) mean?",
+      "options": [
+        "lịch sử thay đổi",
+        "dung lượng tối đa",
+        "thời gian tồn tại",
+        "mức ưu tiên"
+      ],
+      "optionsEn": [
+        "change history",
+        "maximum size",
+        "how long something exists",
+        "priority level"
+      ],
+      "answer": 2,
+      "explanation": "lifetime /ˈlaɪf.taɪm/ (danh từ): thời gian tồn tại. TTL đặt thời gian sống cho mỗi mục trong cache, hết thời gian thì mục đó hết hạn.",
+      "explanationEn": "lifetime /ˈlaɪf.taɪm/ (noun): the length of time something exists. A TTL sets how long each cache entry lives before it expires."
+    },
+    {
+      "id": "v62",
+      "lessonId": "l5",
+      "word": "entry",
+      "pos": "n",
+      "ipa": "/ˈen.tri/",
+      "question": "Trong câu \"TTL: set a lifetime so cache entries expire automatically, reducing stale data.\", từ \"entries\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"TTL: set a lifetime so cache entries expire automatically, reducing stale data.\", what does \"entries\" (noun) mean?",
+      "options": [
+        "lối vào tòa nhà",
+        "mục, bản ghi (một phần tử được lưu)",
+        "bài dự thi",
+        "phí vào cửa"
+      ],
+      "optionsEn": [
+        "a building entrance",
+        "an item or record stored",
+        "a competition submission",
+        "an admission fee"
+      ],
+      "answer": 1,
+      "explanation": "entry /ˈen.tri/ (danh từ): mục, bản ghi. \"Cache entries\" là các mục dữ liệu được lưu trong cache. Entry cũng có nghĩa \"lối vào\" nhưng không phải ở đây.",
+      "explanationEn": "entry /ˈen.tri/ (noun): a single item stored somewhere. \"Cache entries\" are the items kept in the cache. It can also mean \"entrance\", but not here."
+    },
+    {
+      "id": "v63",
+      "lessonId": "l5",
+      "word": "lazy",
+      "pos": "adj",
+      "ipa": "/ˈleɪ.zi/",
+      "question": "Trong câu \"Lazy Loading vs Write-Through: Lazy Loading loads data into the cache only on a miss.\", từ \"Lazy\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Lazy Loading vs Write-Through: Lazy Loading loads data into the cache only on a miss.\", what does \"Lazy\" (adjective) mean?",
+      "options": [
+        "trì hoãn, chỉ làm khi thật sự cần",
+        "lười biếng, không muốn làm việc",
+        "nhanh chóng, ngay lập tức",
+        "song song"
+      ],
+      "optionsEn": [
+        "delayed until actually needed",
+        "unwilling to work",
+        "quick, immediate",
+        "in parallel"
+      ],
+      "answer": 0,
+      "explanation": "lazy /ˈleɪ.zi/ (tính từ): trong IT, \"lazy\" nghĩa là chỉ thực hiện khi thật sự cần. Lazy Loading chỉ nạp dữ liệu vào cache khi có yêu cầu mà cache chưa có.",
+      "explanationEn": "lazy /ˈleɪ.zi/ (adjective): in IT, doing work only when it is really needed. Lazy Loading loads data into the cache only on a miss."
+    },
+    {
+      "id": "v64",
+      "lessonId": "l5",
+      "word": "downside",
+      "pos": "n",
+      "ipa": "/ˈdaʊn.saɪd/",
+      "question": "Trong câu \"Downside: the first miss is slow and data can be stale; Write-Through has slower writes and wasted memory.\", từ \"Downside\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Downside: the first miss is slow and data can be stale; Write-Through has slower writes and wasted memory.\", what does \"Downside\" (noun) mean?",
+      "options": [
+        "ưu điểm",
+        "mặt dưới vật thể",
+        "phần tóm tắt",
+        "nhược điểm, mặt trái"
+      ],
+      "optionsEn": [
+        "advantage",
+        "bottom surface",
+        "summary",
+        "disadvantage"
+      ],
+      "answer": 3,
+      "explanation": "downside /ˈdaʊn.saɪd/ (danh từ): nhược điểm. Trái nghĩa: upside (ưu điểm).",
+      "explanationEn": "downside /ˈdaʊn.saɪd/ (noun): the negative part of something. Opposite: upside."
+    },
+    {
+      "id": "v65",
+      "lessonId": "l5",
+      "word": "waste",
+      "pos": "v",
+      "ipa": "/weɪst/",
+      "question": "Trong câu \"Downside of Write-Through: slower writes and wasted memory.\", từ \"wasted\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Downside of Write-Through: slower writes and wasted memory.\", what does \"wasted\" (verb) mean?",
+      "options": [
+        "được tiết kiệm",
+        "được mở rộng",
+        "bị lãng phí",
+        "được bảo vệ"
+      ],
+      "optionsEn": [
+        "saved",
+        "expanded",
+        "used without benefit",
+        "protected"
+      ],
+      "answer": 2,
+      "explanation": "waste /weɪst/ (động từ): lãng phí. \"Wasted memory\" là bộ nhớ bị dùng cho dữ liệu không bao giờ được đọc.",
+      "explanationEn": "waste /weɪst/ (verb): to use something without useful result. \"Wasted memory\" holds data that is never read."
+    },
+    {
+      "id": "v66",
+      "lessonId": "l6",
+      "word": "charge",
+      "pos": "v",
+      "ipa": "/tʃɑːrdʒ/",
+      "question": "Trong câu \"Read Replicas are free within the same AZ for data transfer; cross-AZ / cross-region is charged.\", từ \"charged\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Read Replicas are free within the same AZ for data transfer; cross-AZ / cross-region is charged.\", what does \"charged\" (verb) mean?",
+      "options": [
+        "được sạc pin",
+        "bị tính phí",
+        "được miễn phí",
+        "bị cấm"
+      ],
+      "optionsEn": [
+        "battery charged",
+        "billed for, costs money",
+        "made free",
+        "forbidden"
+      ],
+      "answer": 1,
+      "explanation": "charge /tʃɑːrdʒ/ (động từ): tính phí. \"Is charged\" nghĩa là phải trả tiền. Charge cũng có nghĩa \"sạc pin\", nhưng không phải ở đây.",
+      "explanationEn": "charge /tʃɑːrdʒ/ (verb): to ask for payment. \"Is charged\" means you pay for it. It can also mean charging a battery, but not here."
+    },
+    {
+      "id": "v67",
+      "lessonId": "l6",
+      "word": "writer",
+      "pos": "n",
+      "ipa": "/ˈraɪ.t̬ɚ/",
+      "question": "Trong câu \"Aurora: 6 copies across 3 AZs, self-healing, up to 15 Aurora Replicas, writer/reader endpoints.\", từ \"writer\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora: 6 copies across 3 AZs, self-healing, up to 15 Aurora Replicas, writer/reader endpoints.\", what does \"writer\" (noun) mean?",
+      "options": [
+        "nhà văn",
+        "bút viết",
+        "người biên tập",
+        "thành phần nhận thao tác ghi dữ liệu"
+      ],
+      "optionsEn": [
+        "an author",
+        "a pen",
+        "an editor",
+        "the component that handles data writes"
+      ],
+      "answer": 3,
+      "explanation": "writer /ˈraɪ.t̬ɚ/ (danh từ): trong database, writer là instance/endpoint nhận thao tác ghi, không phải \"nhà văn\".",
+      "explanationEn": "writer /ˈraɪ.t̬ɚ/ (noun): in databases, the instance or endpoint that handles writes, not an author."
+    },
+    {
+      "id": "v68",
+      "lessonId": "l6",
+      "word": "reader",
+      "pos": "n",
+      "ipa": "/ˈriː.dɚ/",
+      "question": "Trong câu \"Aurora: 6 copies across 3 AZs, self-healing, up to 15 Aurora Replicas, writer/reader endpoints.\", từ \"reader\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora: 6 copies across 3 AZs, self-healing, up to 15 Aurora Replicas, writer/reader endpoints.\", what does \"reader\" (noun) mean?",
+      "options": [
+        "thành phần phục vụ thao tác đọc dữ liệu",
+        "độc giả",
+        "thiết bị đọc thẻ",
+        "sách giáo khoa"
+      ],
+      "optionsEn": [
+        "the component that serves data reads",
+        "a person who reads",
+        "a card-reading device",
+        "a textbook"
+      ],
+      "answer": 0,
+      "explanation": "reader /ˈriː.dɚ/ (danh từ): reader endpoint phân phối truy vấn đọc tới các Aurora Replica, không phải \"độc giả\".",
+      "explanationEn": "reader /ˈriː.dɚ/ (noun): the reader endpoint spreads read queries across Aurora Replicas; it does not mean a person who reads."
+    },
+    {
+      "id": "v69",
+      "lessonId": "l6",
+      "word": "sub-second",
+      "pos": "adj",
+      "ipa": "/ˌsʌbˈsek.ənd/",
+      "question": "Trong câu \"Aurora Global Database = sub-second cross-region replication for global DR.\", từ \"sub-second\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Aurora Global Database = sub-second cross-region replication for global DR.\", what does \"sub-second\" (adjective) mean?",
+      "options": [
+        "kéo dài vài giờ",
+        "hằng ngày",
+        "dưới một giây",
+        "thứ hai trong danh sách"
+      ],
+      "optionsEn": [
+        "lasting several hours",
+        "daily",
+        "less than one second",
+        "second in a list"
+      ],
+      "answer": 2,
+      "explanation": "sub-second /ˌsʌbˈsek.ənd/ (tính từ): dưới một giây. Tiền tố \"sub-\" nghĩa là \"dưới\" (như subdomain). Global Database sao chép sang region khác với độ trễ dưới 1 giây.",
+      "explanationEn": "sub-second /ˌsʌbˈsek.ənd/ (adjective): taking less than one second. The prefix \"sub-\" means \"under\" (as in subdomain)."
+    },
+    {
+      "id": "v70",
+      "lessonId": "l6",
+      "word": "multi-threaded",
+      "pos": "adj",
+      "ipa": "/ˌmʌl.tiˈθred.ɪd/",
+      "question": "Trong câu \"Memcached = sharding + multi-threaded, with no persistence/replication (pure cache).\", từ \"multi-threaded\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Memcached = sharding + multi-threaded, with no persistence/replication (pure cache).\", what does \"multi-threaded\" (adjective) mean?",
+      "options": [
+        "nhiều sợi chỉ",
+        "nhiều người dùng chung",
+        "có nhiều bản sao",
+        "đa luồng, xử lý nhiều tác vụ song song"
+      ],
+      "optionsEn": [
+        "made of many strings",
+        "shared by many users",
+        "having many copies",
+        "using many threads to run tasks in parallel"
+      ],
+      "answer": 3,
+      "explanation": "multi-threaded /ˌmʌl.tiˈθred.ɪd/ (tính từ): đa luồng. Chương trình multi-threaded dùng nhiều luồng (thread) để tận dụng nhiều nhân CPU cùng lúc.",
+      "explanationEn": "multi-threaded /ˌmʌl.tiˈθred.ɪd/ (adjective): using several threads at once. A multi-threaded program uses many CPU cores in parallel."
+    },
+    {
+      "id": "v71",
+      "lessonId": "l6",
+      "word": "autoscaling",
+      "pos": "n",
+      "ipa": "/ˈɑː.t̬oʊˌskeɪ.lɪŋ/",
+      "question": "Trong câu \"RDS = a managed relational database (patching, backups, monitoring) with no SSH; supports storage autoscaling.\", từ \"autoscaling\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RDS = a managed relational database (patching, backups, monitoring) with no SSH; supports storage autoscaling.\", what does \"autoscaling\" (noun) mean?",
+      "options": [
+        "tự động sao lưu",
+        "tự động mở rộng/thu hẹp tài nguyên",
+        "tự động cập nhật phần mềm",
+        "tự động tính phí"
+      ],
+      "optionsEn": [
+        "automatic backup",
+        "automatically growing or shrinking resources",
+        "automatic software update",
+        "automatic billing"
+      ],
+      "answer": 1,
+      "explanation": "autoscaling /ˈɑː.t̬oʊˌskeɪ.lɪŋ/ (danh từ): tự động co giãn. Storage autoscaling là RDS tự tăng dung lượng khi gần đầy.",
+      "explanationEn": "autoscaling /ˈɑː.t̬oʊˌskeɪ.lɪŋ/ (noun): automatic adjustment of resources to demand. Storage autoscaling makes RDS grow storage when it is nearly full."
+    },
+    {
+      "id": "v72",
+      "lessonId": "l6",
+      "word": "promotable",
+      "pos": "adj",
+      "ipa": "/prəˈmoʊ.t̬ə.bəl/",
+      "question": "Trong câu \"Read Replicas are for read scaling (asynchronous, up to 15, promotable, can be cross-region).\", từ \"promotable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Read Replicas are for read scaling (asynchronous, up to 15, promotable, can be cross-region).\", what does \"promotable\" (adjective) mean?",
+      "options": [
+        "có thể được nâng lên làm bản chính",
+        "có thể quảng cáo",
+        "không thể xóa",
+        "có thể mua bán"
+      ],
+      "optionsEn": [
+        "able to be made the primary",
+        "able to be advertised",
+        "impossible to delete",
+        "able to be sold"
+      ],
+      "answer": 0,
+      "explanation": "promotable /prəˈmoʊ.t̬ə.bəl/ (tính từ): có thể được promote. Hậu tố \"-able\" = có thể; replica có thể được nâng lên thành database độc lập.",
+      "explanationEn": "promotable /prəˈmoʊ.t̬ə.bəl/ (adjective): able to be promoted. The suffix \"-able\" means \"can be\"; a replica can become a standalone database."
+    }
+  ]
+}

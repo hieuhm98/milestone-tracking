@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI cách giữ secret KHÔNG lọt vào layer hay metadata của image.",
+      "promptEn": "Pick TWO ways to keep a secret OUT of an image's layers and metadata.",
+      "options": [
+        "Truyền secret bằng `--build-arg` rồi đặt `ENV` về rỗng ở cuối Dockerfile",
+        "Dùng `RUN --mount=type=secret` lúc build",
+        "`COPY` file secret vào rồi `rm` nó ở một lệnh `RUN` sau",
+        "Tiêm secret lúc chạy dưới dạng file mount vào `/run/secrets/`",
+        "Khai báo secret bằng `ENV` trong stage cuối của multi-stage build"
+      ],
+      "optionsEn": [
+        "Pass the secret with `--build-arg` and reset `ENV` to empty at the end of the Dockerfile",
+        "Use `RUN --mount=type=secret` at build time",
+        "`COPY` the secret file in and `rm` it in a later `RUN`",
+        "Inject the secret at runtime as a file mounted under `/run/secrets/`",
+        "Declare the secret with `ENV` in the final stage of a multi-stage build"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Secret mount của BuildKit chỉ tồn tại trong một bước `RUN`, còn secret tiêm lúc chạy thì không bao giờ nằm trong image. Build-arg bị ghi vào lịch sử build, `rm` không xoá bytes khỏi layer trước, và `ENV` ở stage cuối nằm ngay trong config của image.",
+      "explanationEn": "A BuildKit secret mount exists for one `RUN` step only, and a runtime-injected secret is never in the image at all. Build args are recorded in build history, `rm` does not remove bytes from an earlier layer, and `ENV` in the final stage sits right in the image config.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về container đang chạy bằng Docker thuần (không orchestrator).",
+      "promptEn": "Pick TWO statements that are true for containers run with plain Docker (no orchestrator).",
+      "options": [
+        "Vượt giới hạn `--cpus` khiến container bị throttle chứ không bị kill",
+        "Container `unhealthy` sẽ tự được restart nếu có restart policy",
+        "Driver `json-file` mặc định xoay vòng log khi đạt 100 MB",
+        "`docker stop` chờ vô hạn cho tới khi app tự thoát",
+        "Exit code 137 nghĩa là process nhận SIGKILL, thường do OOM"
+      ],
+      "optionsEn": [
+        "Exceeding `--cpus` throttles the container rather than killing it",
+        "An `unhealthy` container is restarted automatically if it has a restart policy",
+        "The `json-file` driver rotates logs at 100 MB by default",
+        "`docker stop` waits indefinitely until the app exits on its own",
+        "Exit code 137 means the process got SIGKILL, often from an OOM kill"
+      ],
+      "answers": [
+        0,
+        4
+      ],
+      "explanation": "CPU là tài nguyên nén được nên chỉ bị throttle; bộ nhớ thì không, vượt limit là OOM-kill với code 137 (128 + 9). Docker thuần chỉ báo cáo health, `json-file` mặc định không xoay vòng, và `docker stop` gửi SIGKILL sau 10 giây.",
+      "explanationEn": "CPU is compressible so it is only throttled; memory is not, and exceeding the limit means an OOM kill with code 137 (128 + 9). Plain Docker only reports health, `json-file` does not rotate by default, and `docker stop` sends SIGKILL after 10 seconds.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "File nào loại các đường dẫn như .git và node_modules ra khỏi build context khi build image?",
+      "promptEn": "Which file keeps paths such as .git and node_modules out of the build context when building an image?",
+      "answer": ".dockerignore",
+      "answerEn": ".dockerignore",
+      "accept": [
+        ".dockerignore",
+        "dockerignore",
+        "docker ignore",
+        "a .dockerignore file"
+      ],
+      "explanation": ".dockerignore. Không có nó, toàn bộ thư mục (kể cả .git, node_modules, file .env chứa secret) bị gửi lên daemon: build chậm hơn, cache dễ bị vô hiệu và secret có thể lọt vào image.",
+      "explanationEn": ".dockerignore. Without it the whole directory — .git, node_modules, even .env files with secrets — is sent to the daemon: builds get slower, the cache is invalidated more often, and secrets can end up in the image.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Logging driver mặc định của Docker Engine tên là gì?",
+      "promptEn": "What is the name of Docker Engine's default logging driver?",
+      "answer": "json-file",
+      "answerEn": "json-file",
+      "accept": [
+        "json-file",
+        "json file",
+        "jsonfile",
+        "json-file driver"
+      ],
+      "explanation": "`json-file` ghi stdout/stderr ra file JSON trên host và mặc định không xoay vòng — hãy đặt `max-size` và `max-file` trong `daemon.json`, hoặc dùng driver `local`.",
+      "explanationEn": "`json-file` writes stdout/stderr to JSON files on the host and does not rotate by default — set `max-size` and `max-file` in `daemon.json`, or use the `local` driver.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi loại base image với mô tả đúng.",
+      "promptEn": "Match each base image type to its description.",
+      "pairs": [
+        {
+          "left": "distroless",
+          "leftEn": "distroless",
+          "right": "Chỉ có thư viện runtime, không shell, không package manager",
+          "rightEn": "Runtime libraries only, no shell, no package manager"
+        },
+        {
+          "left": "alpine",
+          "leftEn": "alpine",
+          "right": "Rất nhỏ, dùng musl libc và BusyBox, vẫn có shell",
+          "rightEn": "Tiny, built on musl libc and BusyBox, still has a shell"
+        },
+        {
+          "left": "scratch",
+          "leftEn": "scratch",
+          "right": "Hoàn toàn rỗng, chỉ hợp với binary tĩnh",
+          "rightEn": "Completely empty, only suitable for static binaries"
+        },
+        {
+          "left": "*-slim",
+          "leftEn": "*-slim",
+          "right": "Debian rút gọn dùng glibc, vẫn có apt",
+          "rightEn": "Trimmed Debian with glibc, still has apt"
+        }
+      ],
+      "explanation": "Càng ít thứ bên trong thì bề mặt tấn công càng nhỏ nhưng debug càng khó. Slim là mặc định an toàn cho runtime cần glibc; distroless và scratch hợp với binary tĩnh; Alpine cần test kỹ vì musl.",
+      "explanationEn": "The less inside, the smaller the attack surface and the harder the debugging. Slim is the safe default for glibc runtimes; distroless and scratch suit static binaries; Alpine needs testing because of musl.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của một pipeline image an toàn.",
+      "promptEn": "Put the steps of a secure image pipeline into order.",
+      "items": [
+        {
+          "text": "Build image bằng multi-stage build trong CI",
+          "textEn": "Build the image with a multi-stage build in CI"
+        },
+        {
+          "text": "Quét lỗ hổng và fail pipeline nếu có CVE mức CRITICAL",
+          "textEn": "Scan for vulnerabilities and fail the pipeline on CRITICAL CVEs"
+        },
+        {
+          "text": "Push image lên registry với tag là git SHA",
+          "textEn": "Push the image to the registry tagged with the git SHA"
+        },
+        {
+          "text": "Ký digest của image đã push bằng cosign",
+          "textEn": "Sign the pushed image digest with cosign"
+        },
+        {
+          "text": "Lúc deploy, xác minh chữ ký rồi chạy image theo digest",
+          "textEn": "At deploy time, verify the signature and run the image by digest"
+        }
+      ],
+      "explanation": "Quét trước khi push để image lỗi không bao giờ vào registry; ký sau khi push vì cosign lưu chữ ký trong registry, gắn với digest. Bước xác minh lúc deploy là thứ biến chữ ký thành một cơ chế kiểm soát thật sự.",
+      "explanationEn": "Scan before pushing so a failing image never reaches the registry; sign after pushing because cosign stores the signature in the registry, bound to the digest. Verification at deploy time is what turns the signature into a real control.",
+      "id": "d6"
+    }
+  ]
+}

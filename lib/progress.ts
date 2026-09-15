@@ -1009,6 +1009,19 @@ export function recordLessonPhase(
 }
 
 /**
+ * Record an English vocabulary round. It only feeds recall (keyed
+ * `${slug}#v…`, which no question or drill id can take) — never the lesson's
+ * score or completion, so English never gates the IT material.
+ */
+export function recordVocab(prev: ProgressData, answered: AnsweredQuestion[]): ProgressData {
+  if (answered.length === 0) return prev;
+
+  const now = new Date().toISOString();
+
+  return { ...prev, updatedAt: now, recall: applyRecall(prev.recall, answered, now) };
+}
+
+/**
  * Order a pool of questions by how much they are worth reviewing: never-tested
  * first, then weakest by accuracy, then stalest. The jitter keeps the same
  * handful from cycling forever once everything is answered correctly.

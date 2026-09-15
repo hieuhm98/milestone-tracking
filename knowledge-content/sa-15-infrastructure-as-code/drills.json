@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về Terraform state.",
+      "promptEn": "Pick TWO statements that are true about Terraform state.",
+      "options": [
+        "`sensitive = true` khiến giá trị được mã hoá khi ghi vào state",
+        "State lưu giá trị nhạy cảm như mật khẩu DB dưới dạng plain text",
+        "Nên commit state vào Git để có lịch sử thay đổi",
+        "Terraform luôn dựng lại được state đầy đủ chỉ từ code",
+        "Remote backend có locking ngăn hai lần apply đồng thời làm hỏng state"
+      ],
+      "optionsEn": [
+        "`sensitive = true` makes the value encrypted when written to state",
+        "State stores sensitive values such as DB passwords in plain text",
+        "State should be committed to Git to keep a change history",
+        "Terraform can always rebuild complete state from the code alone",
+        "A remote backend with locking stops two concurrent applies corrupting state"
+      ],
+      "answers": [1, 4],
+      "explanation": "State là bản đồ từ địa chỉ trong code tới ID thật và chứa secret dạng plain text, nên phải nằm ở remote backend có mã hoá, IAM chặt và lock. `sensitive` chỉ che trên CLI; Git làm lộ secret và không có lock; code không chứa ID thật nên không tự dựng lại state được.",
+      "explanationEn": "State maps code addresses to real IDs and holds secrets in plain text, so it belongs in an encrypted, locked remote backend with tight IAM. `sensitive` only masks CLI output; Git leaks secrets and has no locking; code carries no real IDs, so it cannot rebuild state by itself.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI biện pháp giúp tránh vô tình xoá một database RDS production do Terraform quản lý.",
+      "promptEn": "Pick TWO measures that help prevent accidentally deleting a Terraform-managed production RDS database.",
+      "options": [
+        "Thêm `lifecycle { prevent_destroy = true }` vào resource",
+        "Thêm `depends_on` trỏ tới VPC của database",
+        "Chạy apply với `-parallelism=1`",
+        "Bật `deletion_protection = true` trên database",
+        "Đổi `for_each` thành `count` cho resource database"
+      ],
+      "optionsEn": [
+        "Add `lifecycle { prevent_destroy = true }` to the resource",
+        "Add `depends_on` pointing at the database's VPC",
+        "Run apply with `-parallelism=1`",
+        "Enable `deletion_protection = true` on the database",
+        "Switch the database resource from `for_each` to `count`"
+      ],
+      "answers": [0, 3],
+      "explanation": "`prevent_destroy` làm mọi plan xoá resource bị lỗi, còn `deletion_protection` được chính AWS thực thi — vẫn có hiệu lực nếu ai đó gỡ block khỏi code. `depends_on` và `-parallelism` chỉ ảnh hưởng thứ tự; `count` còn dễ gây thay thế ngoài ý muốn hơn.",
+      "explanationEn": "`prevent_destroy` makes any destroying plan fail, and `deletion_protection` is enforced by AWS itself — still effective if someone deletes the block from code. `depends_on` and `-parallelism` only affect ordering; `count` makes accidental replacement more likely, not less.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Lệnh Terraform nào xem trước các thay đổi sẽ xảy ra mà không áp dụng chúng?",
+      "promptEn": "Which Terraform command previews the changes that would be made without applying them?",
+      "answer": "terraform plan",
+      "answerEn": "terraform plan",
+      "accept": [
+        "terraform plan",
+        "plan",
+        "tf plan",
+        "tofu plan"
+      ],
+      "explanation": "`terraform plan`. Nó refresh resource thật, so với code và state, rồi in ra tập thay đổi. Trong CI, lưu nó bằng `-out=tfplan` để lần apply thực hiện đúng những gì đã được duyệt.",
+      "explanationEn": "`terraform plan`. It refreshes real resources, compares them with code and state, and prints the change set. In CI, save it with `-out=tfplan` so the apply executes exactly what was reviewed.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Fork cộng đồng của Terraform, ra đời sau khi HashiCorp chuyển sang giấy phép BSL và nay thuộc Linux Foundation, tên là gì?",
+      "promptEn": "What is the community fork of Terraform, created after HashiCorp's move to the BSL and now hosted by the Linux Foundation, called?",
+      "answer": "OpenTofu",
+      "answerEn": "OpenTofu",
+      "accept": [
+        "opentofu",
+        "open tofu",
+        "tofu"
+      ],
+      "explanation": "OpenTofu — fork từ phiên bản Terraform cuối cùng còn dùng MPL 2.0, CLI là `tofu` và gần như tương thích trực tiếp với cấu hình Terraform.",
+      "explanationEn": "OpenTofu — forked from the last MPL 2.0 Terraform release; its CLI is `tofu` and it is largely drop-in compatible with Terraform configurations.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi công cụ với mô tả đúng.",
+      "promptEn": "Match each tool to what it is.",
+      "pairs": [
+        {
+          "left": "Terraform",
+          "leftEn": "Terraform",
+          "right": "Provisioning declarative bằng HCL, đa cloud, state do bạn tự quản lý",
+          "rightEn": "Declarative provisioning in HCL, multi-cloud, with state you manage yourself"
+        },
+        {
+          "left": "Ansible",
+          "leftEn": "Ansible",
+          "right": "Quản lý cấu hình agentless qua SSH bằng playbook YAML",
+          "rightEn": "Agentless configuration management over SSH using YAML playbooks"
+        },
+        {
+          "left": "CloudFormation",
+          "leftEn": "CloudFormation",
+          "right": "Template YAML/JSON thành stack, AWS giữ state và tự rollback",
+          "rightEn": "YAML/JSON templates deployed as stacks, with AWS-held state and automatic rollback"
+        },
+        {
+          "left": "AWS CDK",
+          "leftEn": "AWS CDK",
+          "right": "Viết hạ tầng bằng TypeScript/Python rồi tổng hợp ra CloudFormation",
+          "rightEn": "Infrastructure written in TypeScript/Python and synthesised into CloudFormation"
+        }
+      ],
+      "explanation": "Cách phân biệt nhanh: Terraform và CloudFormation cấp phát hạ tầng (khác nhau ở phạm vi cloud và ai giữ state), CDK là lớp ngôn ngữ lập trình phía trên CloudFormation, còn Ansible cấu hình bên trong máy.",
+      "explanationEn": "The quick split: Terraform and CloudFormation provision infrastructure (differing in cloud scope and who holds state), CDK is a programming-language layer on top of CloudFormation, and Ansible configures inside machines.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của một pipeline Terraform an toàn cho thay đổi lên production.",
+      "promptEn": "Put the steps of a safe Terraform pipeline for a production change into order.",
+      "items": [
+        {
+          "text": "Mở pull request với thay đổi trong file `.tf`",
+          "textEn": "Open a pull request with the `.tf` changes"
+        },
+        {
+          "text": "CI chạy `fmt -check`, `validate` và quét policy",
+          "textEn": "CI runs `fmt -check`, `validate` and a policy scan"
+        },
+        {
+          "text": "CI chạy `plan -out=tfplan` và đăng plan lên PR",
+          "textEn": "CI runs `plan -out=tfplan` and posts the plan on the PR"
+        },
+        {
+          "text": "Người review duyệt plan và merge PR",
+          "textEn": "A reviewer approves the plan and merges the PR"
+        },
+        {
+          "text": "CI chạy `apply tfplan` với credential OIDC ngắn hạn",
+          "textEn": "CI runs `apply tfplan` with short-lived OIDC credentials"
+        }
+      ],
+      "explanation": "Các kiểm tra rẻ chạy trước, plan là thứ được review, và apply chỉ thực hiện đúng plan đã lưu — nếu state thay đổi trong lúc chờ, plan bị coi là stale và apply từ chối chạy.",
+      "explanationEn": "Cheap checks run first, the plan is what gets reviewed, and the apply executes only the saved plan — if state changed in the meantime, the plan is stale and the apply refuses to run.",
+      "id": "d6"
+    }
+  ]
+}

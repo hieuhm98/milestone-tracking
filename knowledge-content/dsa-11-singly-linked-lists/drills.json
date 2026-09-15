@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thao tác là O(1) trên danh sách liên kết đơn có cả con trỏ head và tail.",
+      "promptEn": "Pick TWO operations that are O(1) on a singly linked list with both head and tail pointers.",
+      "options": [
+        "pop() — xoá node cuối",
+        "unshift(val) — thêm vào đầu",
+        "get(i) với i bất kỳ",
+        "shift() — xoá node đầu",
+        "reverse() — đảo ngược list"
+      ],
+      "optionsEn": [
+        "pop() — remove the last node",
+        "unshift(val) — add to the front",
+        "get(i) for an arbitrary i",
+        "shift() — remove the first node",
+        "reverse() — reverse the list"
+      ],
+      "answers": [1, 3],
+      "explanation": "unshift và shift chỉ nối lại head nên là O(1). pop phải đi từ head tới node áp chót, get(i) phải bước i lần, và reverse lật mọi con trỏ — cả ba đều O(n).",
+      "explanationEn": "unshift and shift only rewire the head, so they are O(1). pop must walk from the head to the second-to-last node, get(i) takes i steps, and reverse flips every pointer — all three are O(n).",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI tình huống mà array tốt hơn danh sách liên kết đơn.",
+      "promptEn": "Pick TWO situations where an array beats a singly linked list.",
+      "options": [
+        "Thường xuyên thêm phần tử vào đầu",
+        "Thường xuyên truy cập ngẫu nhiên theo index",
+        "Liên tục lấy phần tử ra khỏi đầu",
+        "Chèn sau một node mà bạn đang giữ tham chiếu",
+        "Duyệt tuần tự cần tận dụng tốt CPU cache"
+      ],
+      "optionsEn": [
+        "Frequently adding items at the front",
+        "Frequent random access by index",
+        "Repeatedly removing items from the front",
+        "Inserting after a node you already hold a reference to",
+        "Sequential iteration that should make good use of the CPU cache"
+      ],
+      "answers": [1, 4],
+      "explanation": "Array có index O(1) và nằm liền mạch trong bộ nhớ nên thân thiện với cache. Thêm/xoá ở đầu và chèn sau một node đã biết là O(1) với linked list nhưng O(n) với array.",
+      "explanationEn": "Arrays give O(1) indexing and sit contiguously in memory, which is cache-friendly. Adding/removing at the front and inserting after a known node are O(1) for a linked list but O(n) for an array.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Con trỏ `next` của node cuối cùng (tail) trong danh sách liên kết đơn có giá trị gì?",
+      "promptEn": "What value does the `next` pointer of the last node (the tail) in a singly linked list hold?",
+      "answer": "null",
+      "answerEn": "null",
+      "accept": [
+        "null",
+        "null pointer",
+        "tail.next = null",
+        "tail next null"
+      ],
+      "explanation": "null. Đây là điều kiện dừng của mọi vòng duyệt `while (current)` và là một bất biến phải giữ sau mỗi thao tác.",
+      "explanationEn": "null. It is the stopping condition of every `while (current)` traversal and an invariant every operation must preserve.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của pop (xoá node cuối) trên danh sách liên kết đơn là gì?",
+      "promptEn": "What is the time complexity of pop (removing the last node) on a singly linked list?",
+      "answer": "O(n)",
+      "answerEn": "O(n)",
+      "accept": [
+        "O(n)",
+        "n",
+        "big o of n",
+        "linear",
+        "linear time",
+        "tuyến tính",
+        "tuyen tinh"
+      ],
+      "explanation": "O(n). Dù có con trỏ tail, ta vẫn phải đi từ head để tìm node áp chót làm tail mới, vì node không có con trỏ ngược.",
+      "explanationEn": "O(n). Even with a tail pointer, you still have to walk from the head to find the second-to-last node to become the new tail, because nodes have no back pointer.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thao tác với phép nối con trỏ cốt lõi của nó.",
+      "promptEn": "Match each operation to its core pointer rewiring.",
+      "pairs": [
+        {
+          "left": "push(val)",
+          "leftEn": "push(val)",
+          "right": "tail.next = newNode; tail = newNode",
+          "rightEn": "tail.next = newNode; tail = newNode"
+        },
+        {
+          "left": "unshift(val)",
+          "leftEn": "unshift(val)",
+          "right": "newNode.next = head; head = newNode",
+          "rightEn": "newNode.next = head; head = newNode"
+        },
+        {
+          "left": "shift()",
+          "leftEn": "shift()",
+          "right": "head = head.next",
+          "rightEn": "head = head.next"
+        },
+        {
+          "left": "remove(i) ở giữa list",
+          "leftEn": "remove(i) in the middle",
+          "right": "prev.next = prev.next.next",
+          "rightEn": "prev.next = prev.next.next"
+        }
+      ],
+      "explanation": "push gắn node mới sau tail rồi dời tail; unshift cho node mới trỏ vào head rồi dời head; shift chỉ dời head sang node kế; remove ở giữa cho node đứng trước bỏ qua node bị xoá.",
+      "explanationEn": "push hangs the new node after the tail and moves tail; unshift points the new node at the head and moves head; shift just moves head to the next node; a middle remove makes the previous node skip over the removed one.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Sắp xếp các bước của reverse() tại chỗ theo đúng thứ tự (bốn bước cuối lặp lại cho mỗi node).",
+      "promptEn": "Put the steps of an in-place reverse() in the correct order (the last four repeat for every node).",
+      "items": [
+        {
+          "text": "Đổi chỗ head và tail (node = head cũ, prev = null)",
+          "textEn": "Swap head and tail (node = old head, prev = null)"
+        },
+        {
+          "text": "next = node.next — lưu phần còn lại",
+          "textEn": "next = node.next — save the rest of the list"
+        },
+        {
+          "text": "node.next = prev — lật con trỏ",
+          "textEn": "node.next = prev — flip the pointer"
+        },
+        {
+          "text": "prev = node — dời prev",
+          "textEn": "prev = node — advance prev"
+        },
+        {
+          "text": "node = next — dời node",
+          "textEn": "node = next — advance node"
+        }
+      ],
+      "explanation": "Chuẩn bị trước khi lặp, rồi luôn lưu `next` trước khi lật để không mất phần còn lại, sau đó dời prev rồi mới dời node. Làm sai thứ tự sẽ mất list hoặc tạo vòng tự trỏ.",
+      "explanationEn": "Set up before looping, then always save `next` before flipping so the rest is not lost, then advance prev before node. Any other order loses the list or creates a self-loop.",
+      "id": "d6"
+    }
+  ]
+}

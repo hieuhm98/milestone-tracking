@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thứ KHÔNG nên dùng làm nhãn (label) cho metric Prometheus.",
+      "promptEn": "Pick TWO things that should NOT be used as Prometheus metric labels.",
+      "options": [
+        "Mã trạng thái HTTP (200, 404, 500…)",
+        "ID của người dùng",
+        "Tên service",
+        "Request ID duy nhất của từng request",
+        "Môi trường (prod, staging)"
+      ],
+      "optionsEn": [
+        "HTTP status code (200, 404, 500…)",
+        "The user's ID",
+        "Service name",
+        "The unique request ID of each request",
+        "Environment (prod, staging)"
+      ],
+      "answers": [1, 3],
+      "explanation": "Mỗi tổ hợp nhãn là một time series. Giá trị không giới hạn như user ID hay request ID gây bùng nổ cardinality; chúng thuộc về log và trace. Status code, tên service và môi trường có tập giá trị nhỏ, cố định nên an toàn.",
+      "explanationEn": "Every label combination is a time series. Unbounded values such as user IDs or request IDs cause a cardinality explosion; they belong in logs and traces. Status code, service name and environment have small, fixed value sets and are safe.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI lợi ích của việc gửi telemetry qua OpenTelemetry Collector thay vì export thẳng từ ứng dụng.",
+      "promptEn": "Pick TWO benefits of sending telemetry through an OpenTelemetry Collector instead of exporting straight from applications.",
+      "options": [
+        "Collector tự lưu trữ trace dài hạn nên không cần backend",
+        "Ứng dụng không cần instrumentation nữa",
+        "Có thể đổi backend hoặc thêm exporter chỉ bằng cấu hình, không deploy lại service",
+        "Collector đảm bảo không bao giờ mất span dù backend chết nhiều ngày",
+        "Có chỗ tập trung để làm tail sampling và che PII"
+      ],
+      "optionsEn": [
+        "The Collector stores traces long-term itself, so no backend is needed",
+        "Applications no longer need any instrumentation",
+        "Backends can be switched or exporters added purely by config, with no service redeploy",
+        "The Collector guarantees no span is ever lost even if the backend is down for days",
+        "It gives one central place to do tail sampling and PII redaction"
+      ],
+      "answers": [2, 4],
+      "explanation": "Collector tách ứng dụng khỏi backend: pipeline receivers → processors → exporters cho phép đổi đích, lấy mẫu theo đuôi, che dữ liệu nhạy cảm. Nó không phải backend lưu trữ, ứng dụng vẫn cần SDK/instrumentation, và bộ đệm của nó có giới hạn.",
+      "explanationEn": "The Collector decouples apps from backends: its receivers → processors → exporters pipeline lets you change destinations, tail-sample and redact sensitive data. It is not a storage backend, apps still need the SDK/instrumentation, and its buffering is finite.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Cổng mặc định của giao thức OTLP qua gRPC là bao nhiêu?",
+      "promptEn": "What is the default port for the OTLP protocol over gRPC?",
+      "answer": "4317",
+      "answerEn": "4317",
+      "accept": ["4317", "port 4317", "cổng 4317", ":4317"],
+      "explanation": "4317 là OTLP/gRPC; 4318 là OTLP/HTTP. Hai cổng liền nhau này là thứ bạn mở trên OTel Collector.",
+      "explanationEn": "4317 is OTLP/gRPC; 4318 is OTLP/HTTP. These two adjacent ports are what you open on an OTel Collector.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Hàm PromQL nào dùng để tính quantile (ví dụ p99) từ các bucket của một histogram?",
+      "promptEn": "Which PromQL function computes a quantile (e.g. p99) from a histogram's buckets?",
+      "answer": "histogram_quantile",
+      "answerEn": "histogram_quantile",
+      "accept": ["histogram_quantile", "histogram_quantile()", "histogram quantile"],
+      "explanation": "`histogram_quantile(0.99, sum by (le) (rate(x_bucket[5m])))` — nhớ giữ nhãn `le` khi gộp và `rate` trước khi `sum`.",
+      "explanationEn": "`histogram_quantile(0.99, sum by (le) (rate(x_bucket[5m])))` — keep the `le` label when aggregating and `rate` before you `sum`.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi khái niệm với mô tả đúng.",
+      "promptEn": "Match each concept to its description.",
+      "pairs": [
+        {
+          "left": "SLI",
+          "leftEn": "SLI",
+          "right": "Tỉ lệ đo được giữa sự kiện tốt và sự kiện hợp lệ",
+          "rightEn": "A measured ratio of good events to valid events"
+        },
+        {
+          "left": "SLO",
+          "leftEn": "SLO",
+          "right": "Mục tiêu nội bộ cho một chỉ số trong một cửa sổ thời gian",
+          "rightEn": "An internal target for an indicator over a time window"
+        },
+        {
+          "left": "SLA",
+          "leftEn": "SLA",
+          "right": "Hợp đồng với khách hàng có chế tài, lỏng hơn mục tiêu nội bộ",
+          "rightEn": "A customer contract with penalties, looser than the internal target"
+        },
+        {
+          "left": "Error budget",
+          "leftEn": "Error budget",
+          "right": "Lượng lỗi được phép, bằng 100% trừ mục tiêu",
+          "rightEn": "The amount of failure allowed, equal to 100% minus the target"
+        }
+      ],
+      "explanation": "SLI là phép đo, SLO là mục tiêu, SLA là lời hứa có hậu quả tài chính. Error budget biến độ tin cậy thành con số để product và engineering cùng thương lượng.",
+      "explanationEn": "The SLI is the measurement, the SLO the target, the SLA a promise with financial consequences. The error budget turns reliability into a number product and engineering can negotiate over.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự đường đi của một cảnh báo trong stack Prometheus.",
+      "promptEn": "Put the path of an alert through a Prometheus stack into order.",
+      "items": [
+        {
+          "text": "Prometheus scrape endpoint /metrics của ứng dụng",
+          "textEn": "Prometheus scrapes the application's /metrics endpoint"
+        },
+        {
+          "text": "Alert rule được đánh giá và chuyển sang pending khi điều kiện đúng",
+          "textEn": "The alert rule is evaluated and goes pending when its condition is true"
+        },
+        {
+          "text": "Điều kiện giữ đủ thời gian `for`, cảnh báo chuyển sang firing",
+          "textEn": "The condition holds for the `for` duration and the alert starts firing"
+        },
+        {
+          "text": "Alertmanager loại trùng, gom nhóm và định tuyến theo nhãn",
+          "textEn": "Alertmanager deduplicates, groups and routes it by labels"
+        },
+        {
+          "text": "Kỹ sư on-call nhận page kèm link runbook",
+          "textEn": "The on-call engineer receives a page with a runbook link"
+        }
+      ],
+      "explanation": "Prometheus chỉ đánh giá và bắn cảnh báo; việc gom nhóm, định tuyến, silence và gửi thông báo là của Alertmanager. `for` là bộ lọc chống nháy giữa pending và firing.",
+      "explanationEn": "Prometheus only evaluates and fires alerts; grouping, routing, silencing and notifying are Alertmanager's job. `for` is the anti-flap filter between pending and firing.",
+      "id": "d6"
+    }
+  ]
+}

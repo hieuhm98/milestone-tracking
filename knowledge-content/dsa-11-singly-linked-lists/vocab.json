@@ -1,0 +1,1637 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "v1",
+      "lessonId": "l1",
+      "word": "sequence",
+      "pos": "n",
+      "ipa": "/ˈsiːkwəns/",
+      "question": "Trong câu \"A singly linked list is a sequence of nodes.\", từ \"sequence\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A singly linked list is a sequence of nodes.\", what does \"sequence\" (noun) mean?",
+      "options": [
+        "dãy nối tiếp",
+        "phần còn lại",
+        "nhóm rời rạc",
+        "bản sao chép"
+      ],
+      "optionsEn": [
+        "an ordered series of items",
+        "the part that remains",
+        "a loose group of items",
+        "an exact copy of something"
+      ],
+      "answer": 0,
+      "explanation": "sequence /ˈsiːkwəns/ (danh từ): dãy nối tiếp. \"A sequence of X\" = một dãy X nối tiếp nhau theo thứ tự; từ này rất hay gặp khi mô tả list và string.",
+      "explanationEn": "sequence /ˈsiːkwəns/ (noun): an ordered series of items. \"A sequence of X\" is a series of X in a fixed order; it is common when describing lists and strings."
+    },
+    {
+      "id": "v2",
+      "lessonId": "l1",
+      "word": "pointer",
+      "pos": "n",
+      "ipa": "/ˈpɔɪntə(r)/",
+      "question": "Trong câu \"Each node stores a value and a pointer (next) to the following node; the last node points to null.\", từ \"pointer\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each node stores a value and a pointer (next) to the following node; the last node points to null.\", what does \"pointer\" (noun) mean?",
+      "options": [
+        "kim chỉ đồng hồ",
+        "con trỏ (tham chiếu)",
+        "lời gợi ý",
+        "bộ đếm số"
+      ],
+      "optionsEn": [
+        "the hand of a clock",
+        "a reference to another object",
+        "a helpful hint",
+        "a counting device"
+      ],
+      "answer": 1,
+      "explanation": "pointer /ˈpɔɪntə(r)/ (danh từ): con trỏ (tham chiếu). Trong lập trình, pointer là thứ \"chỉ tới\" một đối tượng khác; đời thường nó còn có nghĩa là lời khuyên (a useful pointer).",
+      "explanationEn": "pointer /ˈpɔɪntə(r)/ (noun): a reference to another object. In programming a pointer refers to another object; in everyday English \"a pointer\" can also mean a useful tip."
+    },
+    {
+      "id": "v3",
+      "lessonId": "l1",
+      "word": "successor",
+      "pos": "n",
+      "ipa": "/səkˈsesə(r)/",
+      "question": "Trong câu \"\"Singly\" means each node knows only its successor — you can walk forward, never backward (the doubly linked list in the next topic adds a prev pointer).\", từ \"successor\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"\"Singly\" means each node knows only its successor — you can walk forward, never backward (the doubly linked list in the next topic adds a prev pointer).\", what does \"successor\" (noun) mean?",
+      "options": [
+        "phần tử đứng trước",
+        "người thừa kế",
+        "phần tử đứng sau",
+        "phần tử đầu tiên"
+      ],
+      "optionsEn": [
+        "the item that comes before",
+        "a person who inherits",
+        "the item that comes next",
+        "the very first item"
+      ],
+      "answer": 2,
+      "explanation": "successor /səkˈsesə(r)/ (danh từ): phần tử đứng sau. Successor (đứng sau) là từ trái nghĩa của predecessor (đứng trước); nghĩa \"người kế nhiệm\" dùng cho người.",
+      "explanationEn": "successor /səkˈsesə(r)/ (noun): the item that comes next. Successor (what follows) is the opposite of predecessor (what comes before); for people it means someone who takes over a role."
+    },
+    {
+      "id": "v4",
+      "lessonId": "l1",
+      "word": "contiguous",
+      "pos": "adj",
+      "ipa": "/kənˈtɪɡjuəs/",
+      "question": "Trong câu \"An array is one contiguous block of memory, so arr[i] is a single address calculation.\", từ \"contiguous\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"An array is one contiguous block of memory, so arr[i] is a single address calculation.\", what does \"contiguous\" (adjective) mean?",
+      "options": [
+        "tách rời, rải rác",
+        "cố định, bất biến",
+        "tạm thời, ngắn hạn",
+        "liền kề, liên tục"
+      ],
+      "optionsEn": [
+        "separated, spread apart",
+        "fixed, unchangeable",
+        "temporary, short-lived",
+        "next to each other, unbroken"
+      ],
+      "answer": 3,
+      "explanation": "contiguous /kənˈtɪɡjuəs/ (tính từ): liền kề, liên tục. \"Contiguous memory\" = vùng nhớ liền một khối; đây là lý do array truy cập theo index nhanh.",
+      "explanationEn": "contiguous /kənˈtɪɡjuəs/ (adjective): next to each other, unbroken. \"Contiguous memory\" is one unbroken block; it is why arrays have fast index access."
+    },
+    {
+      "id": "v5",
+      "lessonId": "l1",
+      "word": "calculation",
+      "pos": "n",
+      "ipa": "/ˌkælkjuˈleɪʃn/",
+      "question": "Trong câu \"An array is one contiguous block of memory, so arr[i] is a single address calculation.\", từ \"calculation\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"An array is one contiguous block of memory, so arr[i] is a single address calculation.\", what does \"calculation\" (noun) mean?",
+      "options": [
+        "phép tính toán",
+        "sự ước đoán",
+        "bản ghi chép",
+        "sự so sánh"
+      ],
+      "optionsEn": [
+        "a mathematical computation",
+        "a rough guess",
+        "a written record",
+        "a comparison"
+      ],
+      "answer": 0,
+      "explanation": "calculation /ˌkælkjuˈleɪʃn/ (danh từ): phép tính toán. \"A simple calculation\" = một phép tính đơn giản; động từ là calculate.",
+      "explanationEn": "calculation /ˌkælkjuˈleɪʃn/ (noun): a mathematical computation. \"A simple calculation\" is an easy computation; the verb is calculate."
+    },
+    {
+      "id": "v6",
+      "lessonId": "l1",
+      "word": "scattered",
+      "pos": "adj",
+      "ipa": "/ˈskætəd/",
+      "question": "Trong câu \"Linked list nodes are separate objects scattered around the heap, glued together only by references.\", từ \"scattered\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Linked list nodes are separate objects scattered around the heap, glued together only by references.\", what does \"scattered\" (adjective) mean?",
+      "options": [
+        "xếp thành hàng",
+        "rải rác khắp nơi",
+        "gom thành cụm",
+        "bị xoá hoàn toàn"
+      ],
+      "optionsEn": [
+        "arranged in a row",
+        "spread over a wide area",
+        "gathered in a cluster",
+        "completely deleted"
+      ],
+      "answer": 1,
+      "explanation": "scattered /ˈskætəd/ (tính từ): rải rác khắp nơi. \"Scattered around X\" = nằm rải rác quanh X; trái nghĩa với contiguous.",
+      "explanationEn": "scattered /ˈskætəd/ (adjective): spread over a wide area. \"Scattered around X\" means spread all over X; it is the opposite of contiguous."
+    },
+    {
+      "id": "v7",
+      "lessonId": "l1",
+      "word": "glue",
+      "pos": "v",
+      "ipa": "/ɡluː/",
+      "question": "Trong câu \"Linked list nodes are separate objects scattered around the heap, glued together only by references.\", từ \"glue\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Linked list nodes are separate objects scattered around the heap, glued together only by references.\", what does \"glue\" (verb) mean?",
+      "options": [
+        "tách ra, gỡ bỏ",
+        "sao chép lại",
+        "gắn kết, dán lại",
+        "sắp xếp lại"
+      ],
+      "optionsEn": [
+        "to pull things apart",
+        "to copy again",
+        "to stick things together",
+        "to rearrange"
+      ],
+      "answer": 2,
+      "explanation": "glue /ɡluː/ (động từ): gắn kết, dán lại. \"Glued together by X\" = được gắn kết với nhau nhờ X; nghĩa đen là dán bằng keo.",
+      "explanationEn": "glue /ɡluː/ (verb): to stick things together. \"Glued together by X\" means held together by X; literally it means to stick with glue."
+    },
+    {
+      "id": "v8",
+      "lessonId": "l1",
+      "word": "reference",
+      "pos": "n",
+      "ipa": "/ˈrefrəns/",
+      "question": "Trong câu \"Linked list nodes are separate objects scattered around the heap, glued together only by references.\", từ \"reference\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Linked list nodes are separate objects scattered around the heap, glued together only by references.\", what does \"reference\" (noun) mean?",
+      "options": [
+        "thư giới thiệu",
+        "tài liệu tra cứu",
+        "lời nhắc đến",
+        "tham chiếu (tới đối tượng)"
+      ],
+      "optionsEn": [
+        "a letter of recommendation",
+        "a book for looking things up",
+        "a brief mention",
+        "a link to an object in memory"
+      ],
+      "answer": 3,
+      "explanation": "reference /ˈrefrəns/ (danh từ): tham chiếu (tới đối tượng). Trong JavaScript, object được truyền bằng reference; \"a reference to X\" = tham chiếu tới X.",
+      "explanationEn": "reference /ˈrefrəns/ (noun): a link to an object in memory. In JavaScript objects are passed by reference; \"a reference to X\" is a link to X."
+    },
+    {
+      "id": "v9",
+      "lessonId": "l1",
+      "word": "rule of thumb",
+      "pos": "phrase",
+      "ipa": "/ˌruːl əv ˈθʌm/",
+      "question": "Trong câu \"Rule of thumb: pick a linked list when you add and remove at the front a lot and rarely need random access.\", từ \"rule of thumb\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rule of thumb: pick a linked list when you add and remove at the front a lot and rarely need random access.\", what does \"rule of thumb\" (phrase) mean?",
+      "options": [
+        "quy tắc kinh nghiệm",
+        "luật bắt buộc",
+        "định lý toán học",
+        "quy trình chính thức"
+      ],
+      "optionsEn": [
+        "a practical guideline",
+        "a mandatory law",
+        "a mathematical theorem",
+        "an official procedure"
+      ],
+      "answer": 0,
+      "explanation": "rule of thumb /ˌruːl əv ˈθʌm/ (cụm từ): quy tắc kinh nghiệm. \"As a rule of thumb\" = theo kinh nghiệm chung, không chính xác tuyệt đối nhưng hữu ích.",
+      "explanationEn": "rule of thumb /ˌruːl əv ˈθʌm/ (phrase): a practical guideline. \"As a rule of thumb\" introduces a practical guideline that is usually, not always, true."
+    },
+    {
+      "id": "v10",
+      "lessonId": "l1",
+      "word": "random access",
+      "pos": "phrase",
+      "ipa": "/ˌrændəm ˈækses/",
+      "question": "Trong câu \"Rule of thumb: pick a linked list when you add and remove at the front a lot and rarely need random access.\", từ \"random access\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rule of thumb: pick a linked list when you add and remove at the front a lot and rarely need random access.\", what does \"random access\" (phrase) mean?",
+      "options": [
+        "truy cập ngẫu hứng",
+        "truy cập trực tiếp",
+        "truy cập tuần tự",
+        "truy cập bị chặn"
+      ],
+      "optionsEn": [
+        "access at unplanned moments",
+        "reaching any position directly",
+        "reading items one by one",
+        "access that is blocked"
+      ],
+      "answer": 1,
+      "explanation": "random access /ˌrændəm ˈækses/ (cụm từ): truy cập trực tiếp. \"Random access\" không có nghĩa là \"ngẫu nhiên\" mà là truy cập thẳng tới bất kỳ vị trí nào, như arr[i].",
+      "explanationEn": "random access /ˌrændəm ˈækses/ (phrase): reaching any position directly. \"Random access\" does not mean \"by chance\"; it means jumping straight to any position, like arr[i]."
+    },
+    {
+      "id": "v11",
+      "lessonId": "l1",
+      "word": "building block",
+      "pos": "phrase",
+      "ipa": "/ˈbɪldɪŋ blɒk/",
+      "question": "Trong câu \"It is also the building block for stacks and queues.\", từ \"building block\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It is also the building block for stacks and queues.\", what does \"building block\" (phrase) mean?",
+      "options": [
+        "khối nhà cao tầng",
+        "vật cản trở",
+        "thành phần nền tảng",
+        "bản thiết kế"
+      ],
+      "optionsEn": [
+        "a tall apartment block",
+        "an obstacle",
+        "a basic component",
+        "a design blueprint"
+      ],
+      "answer": 2,
+      "explanation": "building block /ˈbɪldɪŋ blɒk/ (cụm từ): thành phần nền tảng. \"The building block for X\" = thành phần cơ bản để xây dựng X.",
+      "explanationEn": "building block /ˈbɪldɪŋ blɒk/ (phrase): a basic component. \"The building block for X\" is a basic part used to build X."
+    },
+    {
+      "id": "v12",
+      "lessonId": "l1",
+      "word": "traversal",
+      "pos": "n",
+      "ipa": "/trəˈvɜːsl/",
+      "question": "Trong câu \"The while (current) loop is the traversal pattern every other method reuses: start at head, do something, move to current.next, stop at null.\", từ \"traversal\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The while (current) loop is the traversal pattern every other method reuses: start at head, do something, move to current.next, stop at null.\", what does \"traversal\" (noun) mean?",
+      "options": [
+        "sự sắp xếp",
+        "sự đảo ngược",
+        "sự sao lưu",
+        "sự duyệt qua"
+      ],
+      "optionsEn": [
+        "putting items in order",
+        "turning something around",
+        "making a backup",
+        "visiting each item in turn"
+      ],
+      "answer": 3,
+      "explanation": "traversal /trəˈvɜːsl/ (danh từ): sự duyệt qua. Động từ là traverse; \"tree traversal\", \"list traversal\" = duyệt qua cây, duyệt qua danh sách.",
+      "explanationEn": "traversal /trəˈvɜːsl/ (noun): visiting each item in turn. The verb is traverse; \"tree traversal\" and \"list traversal\" mean visiting every node."
+    },
+    {
+      "id": "v13",
+      "lessonId": "l1",
+      "word": "invariant",
+      "pos": "n",
+      "ipa": "/ɪnˈveəriənt/",
+      "question": "Trong câu \"Two invariants must hold after every method:\", từ \"invariant\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Two invariants must hold after every method:\", what does \"invariant\" (noun) mean?",
+      "options": [
+        "điều kiện bất biến",
+        "biến tạm thời",
+        "lỗi ngẫu nhiên",
+        "tham số tuỳ chọn"
+      ],
+      "optionsEn": [
+        "a condition that always stays true",
+        "a temporary variable",
+        "a random error",
+        "an optional parameter"
+      ],
+      "answer": 0,
+      "explanation": "invariant /ɪnˈveəriənt/ (danh từ): điều kiện bất biến. \"An invariant holds\" = điều kiện bất biến luôn đúng; rất hay dùng khi chứng minh thuật toán đúng.",
+      "explanationEn": "invariant /ɪnˈveəriənt/ (noun): a condition that always stays true. \"An invariant holds\" means the condition stays true; it is key when reasoning about correctness."
+    },
+    {
+      "id": "v14",
+      "lessonId": "l1",
+      "word": "edge case",
+      "pos": "phrase",
+      "ipa": "/ˈedʒ keɪs/",
+      "question": "Trong câu \"Most linked list bugs are an edge case (empty list, single node) that breaks one of these.\", từ \"edge case\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Most linked list bugs are an edge case (empty list, single node) that breaks one of these.\", what does \"edge case\" (phrase) mean?",
+      "options": [
+        "trường hợp phổ biến",
+        "trường hợp biên",
+        "lỗi giao diện",
+        "hộp đựng cạnh"
+      ],
+      "optionsEn": [
+        "a very common situation",
+        "an unusual boundary situation",
+        "a user interface bug",
+        "a box with sharp edges"
+      ],
+      "answer": 1,
+      "explanation": "edge case /ˈedʒ keɪs/ (cụm từ): trường hợp biên. \"Handle edge cases\" = xử lý các trường hợp biên như danh sách rỗng hay chỉ có một phần tử.",
+      "explanationEn": "edge case /ˈedʒ keɪs/ (phrase): an unusual boundary situation. \"Handle edge cases\" means dealing with boundary inputs such as an empty or one-item list."
+    },
+    {
+      "id": "v15",
+      "lessonId": "l2",
+      "word": "empty",
+      "pos": "adj",
+      "ipa": "/ˈempti/",
+      "question": "Trong câu \"If the list is empty, the node becomes both head and tail.\", từ \"empty\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"If the list is empty, the node becomes both head and tail.\", what does \"empty\" (adjective) mean?",
+      "options": [
+        "đầy, kín",
+        "bị lỗi",
+        "trống, rỗng",
+        "bị khoá"
+      ],
+      "optionsEn": [
+        "completely filled",
+        "broken",
+        "containing nothing",
+        "locked"
+      ],
+      "answer": 2,
+      "explanation": "empty /ˈempti/ (tính từ): trống, rỗng. \"An empty list\" = danh sách rỗng; luôn là edge case cần kiểm tra đầu tiên.",
+      "explanationEn": "empty /ˈempti/ (adjective): containing nothing. \"An empty list\" has no items; it is the first edge case to check."
+    },
+    {
+      "id": "v16",
+      "lessonId": "l2",
+      "word": "otherwise",
+      "pos": "adv",
+      "ipa": "/ˈʌðəwaɪz/",
+      "question": "Trong câu \"Otherwise link the current tail to it and move tail.\", từ \"otherwise\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Otherwise link the current tail to it and move tail.\", what does \"otherwise\" (adverb) mean?",
+      "options": [
+        "ngay lập tức",
+        "ngoài ra còn",
+        "dù sao đi nữa",
+        "nếu không thì"
+      ],
+      "optionsEn": [
+        "right away",
+        "in addition",
+        "in any case",
+        "if not; in the other case"
+      ],
+      "answer": 3,
+      "explanation": "otherwise /ˈʌðəwaɪz/ (trạng từ): nếu không thì. \"Otherwise\" = nếu điều kiện trước đó không đúng, tương đương nhánh else trong code.",
+      "explanationEn": "otherwise /ˈʌðəwaɪz/ (adverb): if not; in the other case. \"Otherwise\" means if the previous condition is false, like the else branch in code."
+    },
+    {
+      "id": "v17",
+      "lessonId": "l2",
+      "word": "increment",
+      "pos": "v",
+      "ipa": "/ˈɪŋkrəment/",
+      "question": "Trong câu \"Increment length and return the list.\", từ \"increment\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Increment length and return the list.\", what does \"increment\" (verb) mean?",
+      "options": [
+        "tăng thêm (một đơn vị)",
+        "giảm đi (một đơn vị)",
+        "đặt lại về 0",
+        "nhân đôi giá trị"
+      ],
+      "optionsEn": [
+        "to increase by a step",
+        "to decrease by a step",
+        "to reset to zero",
+        "to double a value"
+      ],
+      "answer": 0,
+      "explanation": "increment /ˈɪŋkrəment/ (động từ): tăng thêm (một đơn vị). \"Increment a counter\" = tăng bộ đếm; toán tử ++ trong JavaScript.",
+      "explanationEn": "increment /ˈɪŋkrəment/ (verb): to increase by a step. \"Increment a counter\" means add one to it; in JavaScript it is the ++ operator."
+    },
+    {
+      "id": "v18",
+      "lessonId": "l2",
+      "word": "thanks to",
+      "pos": "phrase",
+      "ipa": "/ˈθæŋks tə/",
+      "question": "Trong câu \"O(1) time, O(1) space — thanks to the tail pointer.\", từ \"thanks to\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"O(1) time, O(1) space — thanks to the tail pointer.\", what does \"thanks to\" (phrase) mean?",
+      "options": [
+        "mặc dù có",
+        "nhờ có",
+        "thay cho",
+        "cảm ơn vì"
+      ],
+      "optionsEn": [
+        "in spite of",
+        "because of, owing to",
+        "instead of",
+        "expressing gratitude for"
+      ],
+      "answer": 1,
+      "explanation": "thanks to /ˈθæŋks tə/ (cụm từ): nhờ có. \"Thanks to X\" = nhờ có X (chỉ nguyên nhân tích cực), không phải lời cảm ơn trực tiếp.",
+      "explanationEn": "thanks to /ˈθæŋks tə/ (phrase): because of, owing to. \"Thanks to X\" means because of X (a positive cause), not a direct expression of gratitude."
+    },
+    {
+      "id": "v19",
+      "lessonId": "l2",
+      "word": "second-to-last",
+      "pos": "adj",
+      "ipa": "/ˌsekənd tə ˈlɑːst/",
+      "question": "Trong câu \"Removing the tail is harder: we must make the second-to-last node the new tail, and a singly linked node has no pointer back to it.\", từ \"second-to-last\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Removing the tail is harder: we must make the second-to-last node the new tail, and a singly linked node has no pointer back to it.\", what does \"second-to-last\" (adjective) mean?",
+      "options": [
+        "thứ hai từ đầu",
+        "cuối cùng",
+        "áp chót, kế cuối",
+        "ở chính giữa"
+      ],
+      "optionsEn": [
+        "second from the start",
+        "the final one",
+        "just before the last one",
+        "in the exact middle"
+      ],
+      "answer": 2,
+      "explanation": "second-to-last /ˌsekənd tə ˈlɑːst/ (tính từ): áp chót, kế cuối. \"Second-to-last\" = đứng ngay trước phần tử cuối; từ đồng nghĩa là penultimate.",
+      "explanationEn": "second-to-last /ˌsekənd tə ˈlɑːst/ (adjective): just before the last one. \"Second-to-last\" means right before the last item; a synonym is penultimate."
+    },
+    {
+      "id": "v20",
+      "lessonId": "l2",
+      "word": "remove",
+      "pos": "v",
+      "ipa": "/rɪˈmuːv/",
+      "question": "Trong câu \"Removing the tail is harder: we must make the second-to-last node the new tail, and a singly linked node has no pointer back to it.\", từ \"remove\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Removing the tail is harder: we must make the second-to-last node the new tail, and a singly linked node has no pointer back to it.\", what does \"remove\" (verb) mean?",
+      "options": [
+        "thêm vào",
+        "di chuyển nhà",
+        "đổi tên",
+        "gỡ bỏ, lấy ra"
+      ],
+      "optionsEn": [
+        "to add in",
+        "to move house",
+        "to rename",
+        "to take away"
+      ],
+      "answer": 3,
+      "explanation": "remove /rɪˈmuːv/ (động từ): gỡ bỏ, lấy ra. \"Remove X from Y\" = lấy X ra khỏi Y; danh từ là removal.",
+      "explanationEn": "remove /rɪˈmuːv/ (verb): to take away. \"Remove X from Y\" means take X out of Y; the noun is removal."
+    },
+    {
+      "id": "v21",
+      "lessonId": "l2",
+      "word": "explicitly",
+      "pos": "adv",
+      "ipa": "/ɪkˈsplɪsɪtli/",
+      "question": "Trong câu \"The length === 0 block matters: popping the only node leaves newTail pointing at the removed node, so head and tail must be cleared explicitly.\", từ \"explicitly\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The length === 0 block matters: popping the only node leaves newTail pointing at the removed node, so head and tail must be cleared explicitly.\", what does \"explicitly\" (adverb) mean?",
+      "options": [
+        "một cách tường minh",
+        "một cách ngầm định",
+        "một cách nhanh chóng",
+        "một cách ngẫu nhiên"
+      ],
+      "optionsEn": [
+        "clearly and directly",
+        "indirectly, by implication",
+        "quickly",
+        "randomly"
+      ],
+      "answer": 0,
+      "explanation": "explicitly /ɪkˈsplɪsɪtli/ (trạng từ): một cách tường minh. \"Explicitly\" (tường minh) trái nghĩa với \"implicitly\" (ngầm định); code phải tự gán null, không tự xảy ra.",
+      "explanationEn": "explicitly /ɪkˈsplɪsɪtli/ (adverb): clearly and directly. \"Explicitly\" is the opposite of \"implicitly\"; the code must set the values itself."
+    },
+    {
+      "id": "v22",
+      "lessonId": "l2",
+      "word": "decrement",
+      "pos": "v",
+      "ipa": "/ˈdekrɪment/",
+      "question": "Trong câu \"shift removes the head: store it, move head to head.next, decrement.\", từ \"decrement\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"shift removes the head: store it, move head to head.next, decrement.\", what does \"decrement\" (verb) mean?",
+      "options": [
+        "tăng thêm (một đơn vị)",
+        "giảm đi (một đơn vị)",
+        "xoá toàn bộ",
+        "chia đôi giá trị"
+      ],
+      "optionsEn": [
+        "to increase by a step",
+        "to decrease by a step",
+        "to delete everything",
+        "to halve a value"
+      ],
+      "answer": 1,
+      "explanation": "decrement /ˈdekrɪment/ (động từ): giảm đi (một đơn vị). \"Decrement\" là ngược của increment; toán tử -- trong JavaScript.",
+      "explanationEn": "decrement /ˈdekrɪment/ (verb): to decrease by a step. \"Decrement\" is the opposite of increment; in JavaScript it is the -- operator."
+    },
+    {
+      "id": "v23",
+      "lessonId": "l2",
+      "word": "store",
+      "pos": "v",
+      "ipa": "/stɔː(r)/",
+      "question": "Trong câu \"shift removes the head: store it, move head to head.next, decrement.\", từ \"store\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"shift removes the head: store it, move head to head.next, decrement.\", what does \"store\" (verb) mean?",
+      "options": [
+        "bán hàng",
+        "xoá bỏ",
+        "lưu giữ",
+        "trả về"
+      ],
+      "optionsEn": [
+        "to sell goods",
+        "to delete",
+        "to keep for later use",
+        "to return"
+      ],
+      "answer": 2,
+      "explanation": "store /stɔː(r)/ (động từ): lưu giữ. \"Store a value in a variable\" = lưu giá trị vào biến; danh từ \"store\" còn nghĩa là cửa hàng.",
+      "explanationEn": "store /stɔː(r)/ (verb): to keep for later use. \"Store a value in a variable\" means keep it for later; the noun \"store\" also means a shop."
+    },
+    {
+      "id": "v24",
+      "lessonId": "l2",
+      "word": "no matter how",
+      "pos": "phrase",
+      "ipa": "/nəʊ ˈmætə haʊ/",
+      "question": "Trong câu \"Both are O(1) time, O(1) space — no matter how long the list is.\", từ \"no matter how\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Both are O(1) time, O(1) space — no matter how long the list is.\", what does \"no matter how\" (phrase) mean?",
+      "options": [
+        "chính vì như vậy",
+        "cho đến khi nào",
+        "không hề quan trọng",
+        "bất kể như thế nào"
+      ],
+      "optionsEn": [
+        "precisely because",
+        "until when",
+        "not important at all",
+        "regardless of how"
+      ],
+      "answer": 3,
+      "explanation": "no matter how /nəʊ ˈmætə haʊ/ (cụm từ): bất kể như thế nào. \"No matter how + adj\" = bất kể ... đến mức nào; ở đây: dù danh sách dài bao nhiêu.",
+      "explanationEn": "no matter how /nəʊ ˈmætə haʊ/ (phrase): regardless of how. \"No matter how + adjective\" means regardless of the degree; here, however long the list is."
+    },
+    {
+      "id": "v25",
+      "lessonId": "l2",
+      "word": "re-index",
+      "pos": "v",
+      "ipa": "/ˌriː ˈɪndeks/",
+      "question": "Trong câu \"Compare Array.prototype.shift/unshift, which are O(n) because every element must be re-indexed.\", từ \"re-index\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Compare Array.prototype.shift/unshift, which are O(n) because every element must be re-indexed.\", what does \"re-index\" (verb) mean?",
+      "options": [
+        "đánh lại chỉ số",
+        "sao chép lại",
+        "sắp xếp lại",
+        "xoá chỉ số"
+      ],
+      "optionsEn": [
+        "to assign new index numbers",
+        "to copy again",
+        "to sort again",
+        "to delete the index"
+      ],
+      "answer": 0,
+      "explanation": "re-index /ˌriː ˈɪndeks/ (động từ): đánh lại chỉ số. Tiền tố re- = làm lại; \"re-index\" = đánh lại số thứ tự cho mọi phần tử.",
+      "explanationEn": "re-index /ˌriː ˈɪndeks/ (verb): to assign new index numbers. The prefix re- means again; \"re-index\" means giving every element a new position number."
+    },
+    {
+      "id": "v26",
+      "lessonId": "l2",
+      "word": "signature",
+      "pos": "adj",
+      "ipa": "/ˈsɪɡnətʃə(r)/",
+      "question": "Trong câu \"This is the linked list's signature advantage.\", từ \"signature\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"This is the linked list's signature advantage.\", what does \"signature\" (adjective) mean?",
+      "options": [
+        "chữ ký tay",
+        "đặc trưng, tiêu biểu",
+        "chữ ký hàm",
+        "bí mật, ẩn giấu"
+      ],
+      "optionsEn": [
+        "a handwritten name",
+        "most typical and distinctive",
+        "a function’s parameter list",
+        "secret, hidden"
+      ],
+      "answer": 1,
+      "explanation": "signature /ˈsɪɡnətʃə(r)/ (tính từ): đặc trưng, tiêu biểu. \"Signature dish/advantage\" = món/ưu điểm đặc trưng nhất; trong code \"function signature\" lại là chữ ký hàm.",
+      "explanationEn": "signature /ˈsɪɡnətʃə(r)/ (adjective): most typical and distinctive. \"Signature dish/advantage\" is the most distinctive one; in code a \"function signature\" is something else."
+    },
+    {
+      "id": "v27",
+      "lessonId": "l2",
+      "word": "advantage",
+      "pos": "n",
+      "ipa": "/ədˈvɑːntɪdʒ/",
+      "question": "Trong câu \"This is the linked list's signature advantage.\", từ \"advantage\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"This is the linked list's signature advantage.\", what does \"advantage\" (noun) mean?",
+      "options": [
+        "nhược điểm",
+        "sự thay đổi",
+        "ưu điểm, lợi thế",
+        "mục đích"
+      ],
+      "optionsEn": [
+        "a weakness",
+        "a change",
+        "a benefit, a strength",
+        "a purpose"
+      ],
+      "answer": 2,
+      "explanation": "advantage /ədˈvɑːntɪdʒ/ (danh từ): ưu điểm, lợi thế. Trái nghĩa là disadvantage; \"take advantage of X\" = tận dụng X.",
+      "explanationEn": "advantage /ədˈvɑːntɪdʒ/ (noun): a benefit, a strength. The opposite is disadvantage; \"take advantage of X\" means make use of X."
+    },
+    {
+      "id": "v28",
+      "lessonId": "l3",
+      "word": "out of range",
+      "pos": "phrase",
+      "ipa": "/ˌaʊt əv ˈreɪndʒ/",
+      "question": "Trong câu \"Unlike insert, index === length is out of range here: there is no node to remove.\", từ \"out of range\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Unlike insert, index === length is out of range here: there is no node to remove.\", what does \"out of range\" (phrase) mean?",
+      "options": [
+        "nằm trong giới hạn",
+        "hết hàng trong kho",
+        "ngoài tầm với tay",
+        "nằm ngoài phạm vi"
+      ],
+      "optionsEn": [
+        "within the limits",
+        "out of stock",
+        "beyond arm’s reach",
+        "outside the allowed limits"
+      ],
+      "answer": 3,
+      "explanation": "out of range /ˌaʊt əv ˈreɪndʒ/ (cụm từ): nằm ngoài phạm vi. \"Index out of range\" = chỉ số nằm ngoài phạm vi hợp lệ; lỗi rất phổ biến.",
+      "explanationEn": "out of range /ˌaʊt əv ˈreɪndʒ/ (phrase): outside the allowed limits. \"Index out of range\" means the index is outside the valid positions; a very common error."
+    },
+    {
+      "id": "v29",
+      "lessonId": "l3",
+      "word": "overwrite",
+      "pos": "v",
+      "ipa": "/ˌəʊvəˈraɪt/",
+      "question": "Trong câu \"set(index, val) reuses get and overwrites the value in place.\", từ \"overwrite\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"set(index, val) reuses get and overwrites the value in place.\", what does \"overwrite\" (verb) mean?",
+      "options": [
+        "ghi đè lên",
+        "đọc lại",
+        "viết thêm vào",
+        "gạch bỏ"
+      ],
+      "optionsEn": [
+        "to replace existing data",
+        "to read again",
+        "to write additionally",
+        "to cross out"
+      ],
+      "answer": 0,
+      "explanation": "overwrite /ˌəʊvəˈraɪt/ (động từ): ghi đè lên. \"Overwrite a value/file\" = ghi dữ liệu mới đè lên dữ liệu cũ.",
+      "explanationEn": "overwrite /ˌəʊvəˈraɪt/ (verb): to replace existing data. \"Overwrite a value or file\" means replace the old data with new data."
+    },
+    {
+      "id": "v30",
+      "lessonId": "l3",
+      "word": "in place",
+      "pos": "phrase",
+      "ipa": "/ɪn ˈpleɪs/",
+      "question": "Trong câu \"set(index, val) reuses get and overwrites the value in place.\", từ \"in place\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"set(index, val) reuses get and overwrites the value in place.\", what does \"in place\" (phrase) mean?",
+      "options": [
+        "đúng thời điểm",
+        "tại chỗ, không tạo bản sao",
+        "thay thế cho",
+        "đang được áp dụng"
+      ],
+      "optionsEn": [
+        "at the right time",
+        "without making a copy",
+        "instead of",
+        "currently in effect"
+      ],
+      "answer": 1,
+      "explanation": "in place /ɪn ˈpleɪs/ (cụm từ): tại chỗ, không tạo bản sao. \"Modify in place\" = sửa trực tiếp dữ liệu gốc; \"in place of\" lại nghĩa là thay cho.",
+      "explanationEn": "in place /ɪn ˈpleɪs/ (phrase): without making a copy. \"Modify in place\" means change the original data; \"in place of\" means instead of."
+    },
+    {
+      "id": "v31",
+      "lessonId": "l3",
+      "word": "worst case",
+      "pos": "phrase",
+      "ipa": "/ˌwɜːst ˈkeɪs/",
+      "question": "Trong câu \"Both are O(n) time in the worst case (O(index) exactly), O(1) space.\", từ \"worst case\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Both are O(n) time in the worst case (O(index) exactly), O(1) space.\", what does \"worst case\" (phrase) mean?",
+      "options": [
+        "trường hợp tốt nhất",
+        "trường hợp trung bình",
+        "trường hợp xấu nhất",
+        "vụ án nghiêm trọng"
+      ],
+      "optionsEn": [
+        "the most favorable situation",
+        "the typical situation",
+        "the least favorable situation",
+        "a serious legal case"
+      ],
+      "answer": 2,
+      "explanation": "worst case /ˌwɜːst ˈkeɪs/ (cụm từ): trường hợp xấu nhất. Big O thường mô tả \"worst case\"; ngoài ra còn best case và average case.",
+      "explanationEn": "worst case /ˌwɜːst ˈkeɪs/ (phrase): the least favorable situation. Big O usually describes the worst case; the others are best case and average case."
+    },
+    {
+      "id": "v32",
+      "lessonId": "l3",
+      "word": "even though",
+      "pos": "conj",
+      "ipa": "/ˌiːvn ˈðəʊ/",
+      "question": "Trong câu \"Note get(0) is O(1) and get(length - 1) is O(n) even though we hold tail — the generic loop does not special-case it (you could add that shortcut).\", từ \"even though\" (liên từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Note get(0) is O(1) and get(length - 1) is O(n) even though we hold tail — the generic loop does not special-case it (you could add that shortcut).\", what does \"even though\" (conjunction) mean?",
+      "options": [
+        "bởi vì",
+        "cho nên",
+        "miễn là",
+        "mặc dù"
+      ],
+      "optionsEn": [
+        "because",
+        "therefore",
+        "as long as",
+        "despite the fact that"
+      ],
+      "answer": 3,
+      "explanation": "even though /ˌiːvn ˈðəʊ/ (liên từ): mặc dù. \"Even though\" nhấn mạnh sự trái ngược mạnh hơn \"although\".",
+      "explanationEn": "even though /ˌiːvn ˈðəʊ/ (conjunction): despite the fact that. \"Even though\" stresses a contrast more strongly than \"although\"."
+    },
+    {
+      "id": "v33",
+      "lessonId": "l3",
+      "word": "generic",
+      "pos": "adj",
+      "ipa": "/dʒəˈnerɪk/",
+      "question": "Trong câu \"Note get(0) is O(1) and get(length - 1) is O(n) even though we hold tail — the generic loop does not special-case it (you could add that shortcut).\", từ \"generic\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Note get(0) is O(1) and get(length - 1) is O(n) even though we hold tail — the generic loop does not special-case it (you could add that shortcut).\", what does \"generic\" (adjective) mean?",
+      "options": [
+        "chung, tổng quát",
+        "riêng biệt",
+        "hàng không thương hiệu",
+        "phức tạp"
+      ],
+      "optionsEn": [
+        "general, not specialised",
+        "specific, separate",
+        "sold without a brand name",
+        "complicated"
+      ],
+      "answer": 0,
+      "explanation": "generic /dʒəˈnerɪk/ (tính từ): chung, tổng quát. \"A generic solution\" = giải pháp dùng chung cho mọi trường hợp; \"generic drugs\" = thuốc không thương hiệu.",
+      "explanationEn": "generic /dʒəˈnerɪk/ (adjective): general, not specialised. \"A generic solution\" works for all cases; \"generic drugs\" are medicines without a brand name."
+    },
+    {
+      "id": "v34",
+      "lessonId": "l3",
+      "word": "shortcut",
+      "pos": "n",
+      "ipa": "/ˈʃɔːtkʌt/",
+      "question": "Trong câu \"Note get(0) is O(1) and get(length - 1) is O(n) even though we hold tail — the generic loop does not special-case it (you could add that shortcut).\", từ \"shortcut\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Note get(0) is O(1) and get(length - 1) is O(n) even though we hold tail — the generic loop does not special-case it (you could add that shortcut).\", what does \"shortcut\" (noun) mean?",
+      "options": [
+        "đường vòng",
+        "lối tắt",
+        "phím tắt",
+        "điểm dừng"
+      ],
+      "optionsEn": [
+        "a longer detour",
+        "a quicker way to do something",
+        "a keyboard key combination",
+        "a stopping point"
+      ],
+      "answer": 1,
+      "explanation": "shortcut /ˈʃɔːtkʌt/ (danh từ): lối tắt. \"Take a shortcut\" = đi lối tắt; \"keyboard shortcut\" là phím tắt, một nghĩa khác.",
+      "explanationEn": "shortcut /ˈʃɔːtkʌt/ (noun): a quicker way to do something. \"Take a shortcut\" means use a quicker route; a \"keyboard shortcut\" is a different sense."
+    },
+    {
+      "id": "v35",
+      "lessonId": "l3",
+      "word": "rewire",
+      "pos": "v",
+      "ipa": "/ˌriːˈwaɪə(r)/",
+      "question": "Trong câu \"To insert at index we need the node before that position, so we can rewire around it.\", từ \"rewire\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"To insert at index we need the node before that position, so we can rewire around it.\", what does \"rewire\" (verb) mean?",
+      "options": [
+        "đi dây điện lại",
+        "viết lại",
+        "nối lại (con trỏ)",
+        "khởi động lại"
+      ],
+      "optionsEn": [
+        "to replace electrical wires",
+        "to rewrite",
+        "to reconnect the links",
+        "to restart"
+      ],
+      "answer": 2,
+      "explanation": "rewire /ˌriːˈwaɪə(r)/ (động từ): nối lại (con trỏ). Nghĩa gốc là đi lại dây điện; trong linked list là đổi các con trỏ next.",
+      "explanationEn": "rewire /ˌriːˈwaɪə(r)/ (verb): to reconnect the links. Literally it means replacing wires; in linked lists it means changing the next pointers."
+    },
+    {
+      "id": "v36",
+      "lessonId": "l3",
+      "word": "valid",
+      "pos": "adj",
+      "ipa": "/ˈvælɪd/",
+      "question": "Trong câu \"Note index === this.length is valid for insert (append), which is why the guard uses >.\", từ \"valid\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Note index === this.length is valid for insert (append), which is why the guard uses >.\", what does \"valid\" (adjective) mean?",
+      "options": [
+        "hết hạn",
+        "bắt buộc",
+        "tối ưu",
+        "hợp lệ"
+      ],
+      "optionsEn": [
+        "no longer in date",
+        "required",
+        "optimal",
+        "acceptable by the rules"
+      ],
+      "answer": 3,
+      "explanation": "valid /ˈvælɪd/ (tính từ): hợp lệ. Trái nghĩa là invalid; \"validate input\" = kiểm tra dữ liệu có hợp lệ không.",
+      "explanationEn": "valid /ˈvælɪd/ (adjective): acceptable by the rules. The opposite is invalid; \"validate input\" means check that it is acceptable."
+    },
+    {
+      "id": "v37",
+      "lessonId": "l3",
+      "word": "append",
+      "pos": "v",
+      "ipa": "/əˈpend/",
+      "question": "Trong câu \"Note index === this.length is valid for insert (append), which is why the guard uses >.\", từ \"append\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Note index === this.length is valid for insert (append), which is why the guard uses >.\", what does \"append\" (verb) mean?",
+      "options": [
+        "nối thêm vào cuối",
+        "chèn vào đầu",
+        "đính kèm tệp",
+        "xoá phần cuối"
+      ],
+      "optionsEn": [
+        "to add at the end",
+        "to insert at the start",
+        "to attach a file",
+        "to cut off the end"
+      ],
+      "answer": 0,
+      "explanation": "append /əˈpend/ (động từ): nối thêm vào cuối. \"Append X to Y\" = thêm X vào cuối Y; ngược với prepend.",
+      "explanationEn": "append /əˈpend/ (verb): to add at the end. \"Append X to Y\" means add X at the end of Y; the opposite is prepend."
+    },
+    {
+      "id": "v38",
+      "lessonId": "l3",
+      "word": "guard",
+      "pos": "n",
+      "ipa": "/ɡɑːd/",
+      "question": "Trong câu \"Note index === this.length is valid for insert (append), which is why the guard uses >.\", từ \"guard\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Note index === this.length is valid for insert (append), which is why the guard uses >.\", what does \"guard\" (noun) mean?",
+      "options": [
+        "người bảo vệ",
+        "điều kiện chặn (kiểm tra)",
+        "tấm che chắn",
+        "khoá an toàn"
+      ],
+      "optionsEn": [
+        "a security officer",
+        "a check that stops bad input",
+        "a protective cover",
+        "a safety lock"
+      ],
+      "answer": 1,
+      "explanation": "guard /ɡɑːd/ (danh từ): điều kiện chặn (kiểm tra). \"Guard clause\" = câu lệnh kiểm tra ở đầu hàm để return sớm; nghĩa đời thường là người bảo vệ.",
+      "explanationEn": "guard /ɡɑːd/ (noun): a check that stops bad input. A \"guard clause\" is an early check that returns from a function; in daily life a guard is a security officer."
+    },
+    {
+      "id": "v39",
+      "lessonId": "l3",
+      "word": "unlike",
+      "pos": "prep",
+      "ipa": "/ʌnˈlaɪk/",
+      "question": "Trong câu \"Unlike insert, index === length is out of range here: there is no node to remove.\", từ \"unlike\" (giới từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Unlike insert, index === length is out of range here: there is no node to remove.\", what does \"unlike\" (preposition) mean?",
+      "options": [
+        "giống như",
+        "ngoài ra",
+        "khác với",
+        "bởi vì"
+      ],
+      "optionsEn": [
+        "similar to",
+        "apart from",
+        "different from",
+        "because of"
+      ],
+      "answer": 2,
+      "explanation": "unlike /ʌnˈlaɪk/ (giới từ): khác với. \"Unlike X, Y ...\" = khác với X thì Y...; dùng để so sánh đối lập.",
+      "explanationEn": "unlike /ʌnˈlaɪk/ (preposition): different from. \"Unlike X, Y ...\" introduces a contrast between two things."
+    },
+    {
+      "id": "v40",
+      "lessonId": "l3",
+      "word": "delegate",
+      "pos": "v",
+      "ipa": "/ˈdelɪɡeɪt/",
+      "question": "Trong câu \"Removing index 0 is O(1); removing the last index delegates to pop, which is still O(n).\", từ \"delegate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Removing index 0 is O(1); removing the last index delegates to pop, which is still O(n).\", what does \"delegate\" (verb) mean?",
+      "options": [
+        "cử làm đại biểu",
+        "trì hoãn lại",
+        "từ chối xử lý",
+        "giao lại (cho hàm khác)"
+      ],
+      "optionsEn": [
+        "to choose as a representative",
+        "to postpone",
+        "to refuse to handle",
+        "to hand the work to another"
+      ],
+      "answer": 3,
+      "explanation": "delegate /ˈdelɪɡeɪt/ (động từ): giao lại (cho hàm khác). \"Delegate to X\" = chuyển việc cho X làm; danh từ \"delegate\" là đại biểu.",
+      "explanationEn": "delegate /ˈdelɪɡeɪt/ (verb): to hand the work to another. \"Delegate to X\" means pass the work to X; the noun \"delegate\" means a representative."
+    },
+    {
+      "id": "v41",
+      "lessonId": "l4",
+      "word": "reverse",
+      "pos": "v",
+      "ipa": "/rɪˈvɜːs/",
+      "question": "Trong câu \"Reverse the list without creating new nodes: flip every next pointer to point backwards.\", từ \"reverse\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reverse the list without creating new nodes: flip every next pointer to point backwards.\", what does \"reverse\" (verb) mean?",
+      "options": [
+        "đảo ngược thứ tự",
+        "lùi xe lại",
+        "huỷ bỏ quyết định",
+        "lặp lại lần nữa"
+      ],
+      "optionsEn": [
+        "to turn into the opposite order",
+        "to drive backwards",
+        "to cancel a decision",
+        "to repeat once more"
+      ],
+      "answer": 0,
+      "explanation": "reverse /rɪˈvɜːs/ (động từ): đảo ngược thứ tự. \"Reverse a list/string\" = đảo ngược thứ tự; \"reverse a decision\" = huỷ quyết định.",
+      "explanationEn": "reverse /rɪˈvɜːs/ (verb): to turn into the opposite order. \"Reverse a list or string\" means put it in opposite order; \"reverse a decision\" means cancel it."
+    },
+    {
+      "id": "v42",
+      "lessonId": "l4",
+      "word": "flip",
+      "pos": "v",
+      "ipa": "/flɪp/",
+      "question": "Trong câu \"Reverse the list without creating new nodes: flip every next pointer to point backwards.\", từ \"flip\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reverse the list without creating new nodes: flip every next pointer to point backwards.\", what does \"flip\" (verb) mean?",
+      "options": [
+        "tung đồng xu",
+        "lật ngược",
+        "sao chép",
+        "cố định"
+      ],
+      "optionsEn": [
+        "to toss a coin",
+        "to turn over the other way",
+        "to copy",
+        "to fix in place"
+      ],
+      "answer": 1,
+      "explanation": "flip /flɪp/ (động từ): lật ngược. \"Flip a pointer/bit\" = đảo hướng con trỏ hoặc đảo bit 0↔1.",
+      "explanationEn": "flip /flɪp/ (verb): to turn over the other way. \"Flip a pointer or bit\" means turn it to the opposite direction or value."
+    },
+    {
+      "id": "v43",
+      "lessonId": "l4",
+      "word": "backwards",
+      "pos": "adv",
+      "ipa": "/ˈbækwədz/",
+      "question": "Trong câu \"Reverse the list without creating new nodes: flip every next pointer to point backwards.\", từ \"backwards\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reverse the list without creating new nodes: flip every next pointer to point backwards.\", what does \"backwards\" (adverb) mean?",
+      "options": [
+        "về phía trước",
+        "sang một bên",
+        "về phía sau",
+        "lên phía trên"
+      ],
+      "optionsEn": [
+        "toward the front",
+        "to one side",
+        "toward the rear",
+        "upward"
+      ],
+      "answer": 2,
+      "explanation": "backwards /ˈbækwədz/ (trạng từ): về phía sau. \"Walk backwards\" = đi lùi; trái nghĩa là forwards.",
+      "explanationEn": "backwards /ˈbækwədz/ (adverb): toward the rear. \"Walk backwards\" means move toward the rear; the opposite is forwards."
+    },
+    {
+      "id": "v44",
+      "lessonId": "l4",
+      "word": "variable",
+      "pos": "n",
+      "ipa": "/ˈveəriəbl/",
+      "question": "Trong câu \"Three variables walk together: prev, node, next.\", từ \"variable\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Three variables walk together: prev, node, next.\", what does \"variable\" (noun) mean?",
+      "options": [
+        "yếu tố thay đổi",
+        "hằng số",
+        "hàm số",
+        "biến (trong code)"
+      ],
+      "optionsEn": [
+        "a changing factor",
+        "a constant",
+        "a function",
+        "a named value in code"
+      ],
+      "answer": 3,
+      "explanation": "variable /ˈveəriəbl/ (danh từ): biến (trong code). \"Declare a variable\" = khai báo biến; trong khoa học \"variable\" là yếu tố thay đổi.",
+      "explanationEn": "variable /ˈveəriəbl/ (noun): a named value in code. \"Declare a variable\" means create one in code; in science a variable is a changing factor."
+    },
+    {
+      "id": "v45",
+      "lessonId": "l4",
+      "word": "recursive",
+      "pos": "adj",
+      "ipa": "/rɪˈkɜːsɪv/",
+      "question": "Trong câu \"A recursive reverse is also O(n) time but uses O(n) space on the call stack.\", từ \"recursive\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A recursive reverse is also O(n) time but uses O(n) space on the call stack.\", what does \"recursive\" (adjective) mean?",
+      "options": [
+        "đệ quy",
+        "lặp vòng",
+        "song song",
+        "tuyến tính"
+      ],
+      "optionsEn": [
+        "calling itself",
+        "using a loop",
+        "running in parallel",
+        "in a straight line"
+      ],
+      "answer": 0,
+      "explanation": "recursive /rɪˈkɜːsɪv/ (tính từ): đệ quy. \"A recursive function\" = hàm tự gọi lại chính nó; danh từ là recursion.",
+      "explanationEn": "recursive /rɪˈkɜːsɪv/ (adjective): calling itself. \"A recursive function\" calls itself; the noun is recursion."
+    },
+    {
+      "id": "v46",
+      "lessonId": "l4",
+      "word": "call stack",
+      "pos": "phrase",
+      "ipa": "/ˈkɔːl stæk/",
+      "question": "Trong câu \"A recursive reverse is also O(n) time but uses O(n) space on the call stack.\", từ \"call stack\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A recursive reverse is also O(n) time but uses O(n) space on the call stack.\", what does \"call stack\" (phrase) mean?",
+      "options": [
+        "đống cuộc gọi điện",
+        "ngăn xếp lời gọi hàm",
+        "hàng đợi tác vụ",
+        "danh bạ điện thoại"
+      ],
+      "optionsEn": [
+        "a pile of phone calls",
+        "memory tracking active function calls",
+        "a queue of tasks",
+        "a phone contact list"
+      ],
+      "answer": 1,
+      "explanation": "call stack /ˈkɔːl stæk/ (cụm từ): ngăn xếp lời gọi hàm. Mỗi lần gọi đệ quy thêm một frame vào call stack; quá sâu sẽ gây stack overflow.",
+      "explanationEn": "call stack /ˈkɔːl stæk/ (phrase): memory tracking active function calls. Each recursive call adds a frame to the call stack; too many cause a stack overflow."
+    },
+    {
+      "id": "v47",
+      "lessonId": "l4",
+      "word": "common",
+      "pos": "adj",
+      "ipa": "/ˈkɒmən/",
+      "question": "Trong câu \"Reversing a linked list is one of the most common interview warm-ups — know the four lines by heart.\", từ \"common\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reversing a linked list is one of the most common interview warm-ups — know the four lines by heart.\", what does \"common\" (adjective) mean?",
+      "options": [
+        "chung, dùng chung",
+        "hiếm gặp",
+        "phổ biến, thường gặp",
+        "khó nhất"
+      ],
+      "optionsEn": [
+        "shared by several",
+        "rarely seen",
+        "happening often",
+        "the hardest"
+      ],
+      "answer": 2,
+      "explanation": "common /ˈkɒmən/ (tính từ): phổ biến, thường gặp. \"One of the most common X\" = một trong những X phổ biến nhất; \"in common\" lại là điểm chung.",
+      "explanationEn": "common /ˈkɒmən/ (adjective): happening often. \"One of the most common X\" means among the most frequent; \"in common\" means shared."
+    },
+    {
+      "id": "v48",
+      "lessonId": "l4",
+      "word": "warm-up",
+      "pos": "n",
+      "ipa": "/ˈwɔːm ʌp/",
+      "question": "Trong câu \"Reversing a linked list is one of the most common interview warm-ups — know the four lines by heart.\", từ \"warm-up\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reversing a linked list is one of the most common interview warm-ups — know the four lines by heart.\", what does \"warm-up\" (noun) mean?",
+      "options": [
+        "bài kiểm tra cuối",
+        "sự hâm nóng đồ ăn",
+        "phần thưởng",
+        "bài khởi động"
+      ],
+      "optionsEn": [
+        "a final exam",
+        "reheating food",
+        "a reward",
+        "an easy opening exercise"
+      ],
+      "answer": 3,
+      "explanation": "warm-up /ˈwɔːm ʌp/ (danh từ): bài khởi động. \"A warm-up question\" = câu hỏi khởi động dễ ở đầu buổi phỏng vấn.",
+      "explanationEn": "warm-up /ˈwɔːm ʌp/ (noun): an easy opening exercise. \"A warm-up question\" is an easy one at the start of an interview."
+    },
+    {
+      "id": "v49",
+      "lessonId": "l4",
+      "word": "by heart",
+      "pos": "phrase",
+      "ipa": "/baɪ ˈhɑːt/",
+      "question": "Trong câu \"Reversing a linked list is one of the most common interview warm-ups — know the four lines by heart.\", từ \"by heart\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reversing a linked list is one of the most common interview warm-ups — know the four lines by heart.\", what does \"by heart\" (phrase) mean?",
+      "options": [
+        "thuộc lòng",
+        "bằng cả trái tim",
+        "một cách tình cờ",
+        "theo cảm tính"
+      ],
+      "optionsEn": [
+        "from memory",
+        "with deep love",
+        "by chance",
+        "based on feelings"
+      ],
+      "answer": 0,
+      "explanation": "by heart /baɪ ˈhɑːt/ (cụm từ): thuộc lòng. \"Know/learn something by heart\" = thuộc lòng, nhớ không cần nhìn.",
+      "explanationEn": "by heart /baɪ ˈhɑːt/ (phrase): from memory. \"Know or learn something by heart\" means remember it completely."
+    },
+    {
+      "id": "v50",
+      "lessonId": "l5",
+      "word": "storage",
+      "pos": "n",
+      "ipa": "/ˈstɔːrɪdʒ/",
+      "question": "Trong câu \"The storage of the list itself is O(n).\", từ \"storage\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The storage of the list itself is O(n).\", what does \"storage\" (noun) mean?",
+      "options": [
+        "kho hàng hoá",
+        "bộ nhớ lưu trữ",
+        "tốc độ xử lý",
+        "sự truy xuất"
+      ],
+      "optionsEn": [
+        "a goods warehouse",
+        "space used to hold data",
+        "processing speed",
+        "data retrieval"
+      ],
+      "answer": 1,
+      "explanation": "storage /ˈstɔːrɪdʒ/ (danh từ): bộ nhớ lưu trữ. \"Storage\" ở đây là lượng bộ nhớ cần để chứa danh sách; đời thường còn là kho chứa đồ.",
+      "explanationEn": "storage /ˈstɔːrɪdʒ/ (noun): space used to hold data. \"Storage\" here is the memory needed to hold the list; in daily life it is a place to keep things."
+    },
+    {
+      "id": "v51",
+      "lessonId": "l5",
+      "word": "shorthand",
+      "pos": "n",
+      "ipa": "/ˈʃɔːthænd/",
+      "question": "Trong câu \"The usual shorthand is \"insertion O(1), removal O(1) or O(n), search O(n), access O(n)\": insertion at either end is O(1); removal is O(1) at the head but O(n) at the tail.\", từ \"shorthand\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The usual shorthand is \"insertion O(1), removal O(1) or O(n), search O(n), access O(n)\": insertion at either end is O(1); removal is O(1) at the head but O(n) at the tail.\", what does \"shorthand\" (noun) mean?",
+      "options": [
+        "chữ tốc ký",
+        "lời giải thích dài",
+        "cách viết tóm gọn",
+        "bản đầy đủ"
+      ],
+      "optionsEn": [
+        "a fast handwriting system",
+        "a long explanation",
+        "a short way of saying something",
+        "the complete version"
+      ],
+      "answer": 2,
+      "explanation": "shorthand /ˈʃɔːthænd/ (danh từ): cách viết tóm gọn. \"Shorthand for X\" = cách nói ngắn gọn cho X; nghĩa gốc là chữ tốc ký.",
+      "explanationEn": "shorthand /ˈʃɔːthænd/ (noun): a short way of saying something. \"Shorthand for X\" is a brief way to express X; originally it means a fast writing system."
+    },
+    {
+      "id": "v52",
+      "lessonId": "l5",
+      "word": "efficient",
+      "pos": "adj",
+      "ipa": "/ɪˈfɪʃnt/",
+      "question": "Trong câu \"Because push + shift are both O(1), a singly linked list gives an efficient queue (enqueue at tail, dequeue at head), and unshift + shift give a stack at the head.\", từ \"efficient\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Because push + shift are both O(1), a singly linked list gives an efficient queue (enqueue at tail, dequeue at head), and unshift + shift give a stack at the head.\", what does \"efficient\" (adjective) mean?",
+      "options": [
+        "hữu hiệu (đạt mục tiêu)",
+        "tốn kém",
+        "phức tạp",
+        "hiệu quả (ít tốn tài nguyên)"
+      ],
+      "optionsEn": [
+        "achieving the intended result",
+        "costly",
+        "complicated",
+        "using few resources"
+      ],
+      "answer": 3,
+      "explanation": "efficient /ɪˈfɪʃnt/ (tính từ): hiệu quả (ít tốn tài nguyên). \"Efficient\" nhấn mạnh ít tốn thời gian/bộ nhớ; \"effective\" là đạt được kết quả.",
+      "explanationEn": "efficient /ɪˈfɪʃnt/ (adjective): using few resources. \"Efficient\" stresses using little time or memory; \"effective\" means producing the result."
+    },
+    {
+      "id": "v53",
+      "lessonId": "l5",
+      "word": "queue",
+      "pos": "n",
+      "ipa": "/kjuː/",
+      "question": "Trong câu \"Because push + shift are both O(1), a singly linked list gives an efficient queue (enqueue at tail, dequeue at head), and unshift + shift give a stack at the head.\", từ \"queue\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Because push + shift are both O(1), a singly linked list gives an efficient queue (enqueue at tail, dequeue at head), and unshift + shift give a stack at the head.\", what does \"queue\" (noun) mean?",
+      "options": [
+        "hàng đợi (vào trước ra trước)",
+        "hàng người xếp hàng",
+        "ngăn xếp",
+        "bảng băm"
+      ],
+      "optionsEn": [
+        "a first-in, first-out structure",
+        "a line of waiting people",
+        "a last-in, first-out structure",
+        "a hash table"
+      ],
+      "answer": 0,
+      "explanation": "queue /kjuː/ (danh từ): hàng đợi (vào trước ra trước). Queue theo nguyên tắc FIFO; trong tiếng Anh-Anh \"queue\" còn là hàng người xếp hàng.",
+      "explanationEn": "queue /kjuː/ (noun): a first-in, first-out structure. A queue is FIFO; in British English a queue is also a line of people."
+    },
+    {
+      "id": "v54",
+      "lessonId": "l5",
+      "word": "fake",
+      "pos": "adj",
+      "ipa": "/feɪk/",
+      "question": "Trong câu \"Placing a fake node before the real head removes the \"is this index 0?\" special case, because every real node then has a predecessor:\", từ \"fake\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Placing a fake node before the real head removes the \"is this index 0?\" special case, because every real node then has a predecessor:\", what does \"fake\" (adjective) mean?",
+      "options": [
+        "thật, chính gốc",
+        "giả, không thật",
+        "bị hỏng",
+        "dự phòng"
+      ],
+      "optionsEn": [
+        "real, genuine",
+        "not real, dummy",
+        "broken",
+        "backup"
+      ],
+      "answer": 1,
+      "explanation": "fake /feɪk/ (tính từ): giả, không thật. \"A fake/dummy node\" = nút giả chỉ để đơn giản hoá code; trái nghĩa là real.",
+      "explanationEn": "fake /feɪk/ (adjective): not real, dummy. \"A fake or dummy node\" exists only to simplify code; the opposite is real."
+    },
+    {
+      "id": "v55",
+      "lessonId": "l5",
+      "word": "predecessor",
+      "pos": "n",
+      "ipa": "/ˈpriːdɪsesə(r)/",
+      "question": "Trong câu \"Placing a fake node before the real head removes the \"is this index 0?\" special case, because every real node then has a predecessor:\", từ \"predecessor\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Placing a fake node before the real head removes the \"is this index 0?\" special case, because every real node then has a predecessor:\", what does \"predecessor\" (noun) mean?",
+      "options": [
+        "phần tử đứng sau",
+        "người tiền nhiệm",
+        "phần tử đứng trước",
+        "phần tử cuối cùng"
+      ],
+      "optionsEn": [
+        "the item that comes after",
+        "a person who held a job before",
+        "the item that comes before",
+        "the final item"
+      ],
+      "answer": 2,
+      "explanation": "predecessor /ˈpriːdɪsesə(r)/ (danh từ): phần tử đứng trước. Predecessor là ngược của successor; với người nó nghĩa là người tiền nhiệm.",
+      "explanationEn": "predecessor /ˈpriːdɪsesə(r)/ (noun): the item that comes before. Predecessor is the opposite of successor; for people it means someone who held a job before."
+    },
+    {
+      "id": "v56",
+      "lessonId": "l5",
+      "word": "iteration",
+      "pos": "n",
+      "ipa": "/ˌɪtəˈreɪʃn/",
+      "question": "Trong câu \"Move slow one step and fast two steps per iteration.\", từ \"iteration\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Move slow one step and fast two steps per iteration.\", what does \"iteration\" (noun) mean?",
+      "options": [
+        "một phiên bản",
+        "một lỗi",
+        "một tham số",
+        "một vòng lặp"
+      ],
+      "optionsEn": [
+        "a version of a product",
+        "a bug",
+        "a parameter",
+        "one pass through a loop"
+      ],
+      "answer": 3,
+      "explanation": "iteration /ˌɪtəˈreɪʃn/ (danh từ): một vòng lặp. \"Per iteration\" = mỗi vòng lặp; động từ là iterate. Trong sản phẩm, iteration còn là một phiên bản.",
+      "explanationEn": "iteration /ˌɪtəˈreɪʃn/ (noun): one pass through a loop. \"Per iteration\" means each time through the loop; the verb is iterate. For products it can mean a version."
+    },
+    {
+      "id": "v57",
+      "lessonId": "l5",
+      "word": "pass",
+      "pos": "n",
+      "ipa": "/pɑːs/",
+      "question": "Trong câu \"When fast reaches the end, slow is at the middle — one pass, O(1) space.\", từ \"pass\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"When fast reaches the end, slow is at the middle — one pass, O(1) space.\", what does \"pass\" (noun) mean?",
+      "options": [
+        "một lượt duyệt",
+        "giấy phép ra vào",
+        "đường chuyền bóng",
+        "lần thi đỗ"
+      ],
+      "optionsEn": [
+        "one run through the data",
+        "an entry permit",
+        "a ball thrown to a teammate",
+        "a successful exam result"
+      ],
+      "answer": 0,
+      "explanation": "pass /pɑːs/ (danh từ): một lượt duyệt. \"In one pass / a single pass\" = chỉ duyệt dữ liệu một lần.",
+      "explanationEn": "pass /pɑːs/ (noun): one run through the data. \"In one pass\" or \"a single pass\" means going through the data only once."
+    },
+    {
+      "id": "v58",
+      "lessonId": "l5",
+      "word": "reach",
+      "pos": "v",
+      "ipa": "/riːtʃ/",
+      "question": "Trong câu \"When fast reaches the end, slow is at the middle — one pass, O(1) space.\", từ \"reach\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"When fast reaches the end, slow is at the middle — one pass, O(1) space.\", what does \"reach\" (verb) mean?",
+      "options": [
+        "rời khỏi",
+        "đi tới, chạm tới",
+        "bỏ qua",
+        "quay lại"
+      ],
+      "optionsEn": [
+        "to leave",
+        "to arrive at",
+        "to skip over",
+        "to return to"
+      ],
+      "answer": 1,
+      "explanation": "reach /riːtʃ/ (động từ): đi tới, chạm tới. \"Reach the end\" = đi tới cuối; \"reach out to someone\" = liên hệ ai đó.",
+      "explanationEn": "reach /riːtʃ/ (verb): to arrive at. \"Reach the end\" means arrive at it; \"reach out to someone\" means contact them."
+    },
+    {
+      "id": "v59",
+      "lessonId": "l5",
+      "word": "detect",
+      "pos": "v",
+      "ipa": "/dɪˈtekt/",
+      "question": "Trong câu \"The same idea (Floyd's algorithm) detects a cycle: if fast ever meets slow, the list loops.\", từ \"detect\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The same idea (Floyd's algorithm) detects a cycle: if fast ever meets slow, the list loops.\", what does \"detect\" (verb) mean?",
+      "options": [
+        "ngăn chặn",
+        "sửa chữa",
+        "phát hiện",
+        "tạo ra"
+      ],
+      "optionsEn": [
+        "to prevent",
+        "to repair",
+        "to discover or notice",
+        "to create"
+      ],
+      "answer": 2,
+      "explanation": "detect /dɪˈtekt/ (động từ): phát hiện. \"Detect a cycle/error\" = phát hiện chu trình/lỗi; danh từ là detection.",
+      "explanationEn": "detect /dɪˈtekt/ (verb): to discover or notice. \"Detect a cycle or error\" means discover it; the noun is detection."
+    },
+    {
+      "id": "v60",
+      "lessonId": "l5",
+      "word": "cycle",
+      "pos": "n",
+      "ipa": "/ˈsaɪkl/",
+      "question": "Trong câu \"The same idea (Floyd's algorithm) detects a cycle: if fast ever meets slow, the list loops.\", từ \"cycle\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The same idea (Floyd's algorithm) detects a cycle: if fast ever meets slow, the list loops.\", what does \"cycle\" (noun) mean?",
+      "options": [
+        "xe đạp",
+        "chu kỳ thời gian",
+        "đường thẳng",
+        "chu trình (vòng khép kín)"
+      ],
+      "optionsEn": [
+        "a bicycle",
+        "a repeating time period",
+        "a straight line",
+        "a closed loop of links"
+      ],
+      "answer": 3,
+      "explanation": "cycle /ˈsaɪkl/ (danh từ): chu trình (vòng khép kín). \"A cycle in a linked list\" = một nút trỏ ngược về nút trước, tạo vòng lặp vô tận.",
+      "explanationEn": "cycle /ˈsaɪkl/ (noun): a closed loop of links. \"A cycle in a linked list\" means a node points back to an earlier node, forming an endless loop."
+    },
+    {
+      "id": "v61",
+      "lessonId": "l5",
+      "word": "loop",
+      "pos": "v",
+      "ipa": "/luːp/",
+      "question": "Trong câu \"The same idea (Floyd's algorithm) detects a cycle: if fast ever meets slow, the list loops.\", từ \"loop\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The same idea (Floyd's algorithm) detects a cycle: if fast ever meets slow, the list loops.\", what does \"loop\" (verb) mean?",
+      "options": [
+        "tạo thành vòng lặp",
+        "kết thúc đột ngột",
+        "rẽ nhánh",
+        "thắt nút dây"
+      ],
+      "optionsEn": [
+        "to form a circle back",
+        "to end suddenly",
+        "to branch off",
+        "to tie a knot"
+      ],
+      "answer": 0,
+      "explanation": "loop /luːp/ (động từ): tạo thành vòng lặp. Động từ \"loop\" = quay vòng lại; \"loop through an array\" = lặp qua mảng.",
+      "explanationEn": "loop /luːp/ (verb): to form a circle back. The verb \"loop\" means go round in a circle; \"loop through an array\" means iterate over it."
+    },
+    {
+      "id": "v62",
+      "lessonId": "l5",
+      "word": "classic",
+      "pos": "adj",
+      "ipa": "/ˈklæsɪk/",
+      "question": "Trong câu \"Other classic bugs: not clearing head/tail when the list becomes empty (a second pop then \"removes\" the same node again and length goes to -1), forgetting length++/--, and rewiring pointers in the wrong order (losing the rest of the list).\", từ \"classic\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Other classic bugs: not clearing head/tail when the list becomes empty (a second pop then \"removes\" the same node again and length goes to -1), forgetting length++/--, and rewiring pointers in the wrong order (losing the rest of the list).\", what does \"classic\" (adjective) mean?",
+      "options": [
+        "cổ điển (âm nhạc)",
+        "điển hình, kinh điển",
+        "hiếm gặp",
+        "mới xuất hiện"
+      ],
+      "optionsEn": [
+        "relating to classical music",
+        "typical and well known",
+        "rarely seen",
+        "newly appeared"
+      ],
+      "answer": 1,
+      "explanation": "classic /ˈklæsɪk/ (tính từ): điển hình, kinh điển. \"A classic mistake\" = lỗi điển hình ai cũng từng mắc; \"classical music\" là nhạc cổ điển.",
+      "explanationEn": "classic /ˈklæsɪk/ (adjective): typical and well known. \"A classic mistake\" is a typical, well-known one; \"classical music\" is a different word."
+    },
+    {
+      "id": "v63",
+      "lessonId": "l6",
+      "word": "locality",
+      "pos": "n",
+      "ipa": "/ləʊˈkæləti/",
+      "question": "Trong câu \"Arrays win on indexing and cache locality.\", từ \"locality\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Arrays win on indexing and cache locality.\", what does \"locality\" (noun) mean?",
+      "options": [
+        "địa phương, vùng",
+        "tính di động",
+        "tính cục bộ (dữ liệu gần nhau)",
+        "độ bảo mật"
+      ],
+      "optionsEn": [
+        "a local area, a district",
+        "portability",
+        "keeping related data close together",
+        "security level"
+      ],
+      "answer": 2,
+      "explanation": "locality /ləʊˈkæləti/ (danh từ): tính cục bộ (dữ liệu gần nhau). \"Cache locality\" = dữ liệu nằm gần nhau nên CPU cache đọc nhanh; nghĩa thường là một vùng địa phương.",
+      "explanationEn": "locality /ləʊˈkæləti/ (noun): keeping related data close together. \"Cache locality\" means data sits close together so the CPU cache reads it fast; generally it means a district."
+    },
+    {
+      "id": "v64",
+      "lessonId": "l6",
+      "word": "differ",
+      "pos": "v",
+      "ipa": "/ˈdɪfə(r)/",
+      "question": "Trong câu \"Guards differ: insert allows index === length, remove/get/set do not.\", từ \"differ\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Guards differ: insert allows index === length, remove/get/set do not.\", what does \"differ\" (verb) mean?",
+      "options": [
+        "giống nhau",
+        "thất bại",
+        "trì hoãn",
+        "khác nhau"
+      ],
+      "optionsEn": [
+        "to be alike",
+        "to fail",
+        "to postpone",
+        "to be unlike each other"
+      ],
+      "answer": 3,
+      "explanation": "differ /ˈdɪfə(r)/ (động từ): khác nhau. \"X and Y differ in Z\" = X và Y khác nhau ở Z; đừng nhầm với defer (trì hoãn).",
+      "explanationEn": "differ /ˈdɪfə(r)/ (verb): to be unlike each other. \"X and Y differ in Z\" means they are unlike in Z; do not confuse it with defer (postpone)."
+    },
+    {
+      "id": "v65",
+      "lessonId": "l6",
+      "word": "handle",
+      "pos": "v",
+      "ipa": "/ˈhændl/",
+      "question": "Trong câu \"Always handle the empty and single-node cases and keep head/tail/length consistent.\", từ \"handle\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Always handle the empty and single-node cases and keep head/tail/length consistent.\", what does \"handle\" (verb) mean?",
+      "options": [
+        "xử lý",
+        "cầm nắm",
+        "bỏ qua",
+        "ghi nhớ"
+      ],
+      "optionsEn": [
+        "to deal with",
+        "to hold in the hand",
+        "to ignore",
+        "to memorise"
+      ],
+      "answer": 0,
+      "explanation": "handle /ˈhændl/ (động từ): xử lý. \"Handle an error/case\" = xử lý lỗi/trường hợp; danh từ \"handle\" còn là tay cầm.",
+      "explanationEn": "handle /ˈhændl/ (verb): to deal with. \"Handle an error or case\" means deal with it; the noun \"handle\" is the part you hold."
+    },
+    {
+      "id": "v66",
+      "lessonId": "l6",
+      "word": "consistent",
+      "pos": "adj",
+      "ipa": "/kənˈsɪstənt/",
+      "question": "Trong câu \"Always handle the empty and single-node cases and keep head/tail/length consistent.\", từ \"consistent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Always handle the empty and single-node cases and keep head/tail/length consistent.\", what does \"consistent\" (adjective) mean?",
+      "options": [
+        "kiên trì, đều đặn",
+        "nhất quán, khớp nhau",
+        "mâu thuẫn",
+        "tạm thời"
+      ],
+      "optionsEn": [
+        "steady over time",
+        "in agreement with each other",
+        "contradictory",
+        "temporary"
+      ],
+      "answer": 1,
+      "explanation": "consistent /kənˈsɪstənt/ (tính từ): nhất quán, khớp nhau. \"Keep X consistent\" = giữ X luôn khớp nhau; \"consistent performance\" = hiệu suất ổn định.",
+      "explanationEn": "consistent /kənˈsɪstənt/ (adjective): in agreement with each other. \"Keep X consistent\" means keep the parts in agreement; \"consistent performance\" means steady performance."
+    },
+    {
+      "id": "v67",
+      "lessonId": "l6",
+      "word": "trade",
+      "pos": "v",
+      "ipa": "/treɪd/",
+      "question": "Trong câu \"Linked lists trade O(1) indexed access for O(1) insertion and removal at the front.\", từ \"trade\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Linked lists trade O(1) indexed access for O(1) insertion and removal at the front.\", what does \"trade\" (verb) mean?",
+      "options": [
+        "buôn bán",
+        "chia sẻ",
+        "đánh đổi",
+        "nâng cấp"
+      ],
+      "optionsEn": [
+        "to buy and sell goods",
+        "to share",
+        "to give up one thing for another",
+        "to upgrade"
+      ],
+      "answer": 2,
+      "explanation": "trade /treɪd/ (động từ): đánh đổi. \"Trade X for Y\" = đánh đổi X lấy Y; danh từ \"trade-off\" là sự đánh đổi.",
+      "explanationEn": "trade /treɪd/ (verb): to give up one thing for another. \"Trade X for Y\" means give up X to get Y; the noun \"trade-off\" is such a compromise."
+    },
+    {
+      "id": "v68",
+      "lessonId": "l6",
+      "word": "foundation",
+      "pos": "n",
+      "ipa": "/faʊnˈdeɪʃn/",
+      "question": "Trong câu \"Linked lists are the foundation for stacks, queues and doubly linked lists.\", từ \"foundation\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Linked lists are the foundation for stacks, queues and doubly linked lists.\", what does \"foundation\" (noun) mean?",
+      "options": [
+        "quỹ từ thiện",
+        "kem nền trang điểm",
+        "giới hạn",
+        "nền tảng, cơ sở"
+      ],
+      "optionsEn": [
+        "a charity organisation",
+        "a makeup base cream",
+        "a limit",
+        "the base something is built on"
+      ],
+      "answer": 3,
+      "explanation": "foundation /faʊnˈdeɪʃn/ (danh từ): nền tảng, cơ sở. \"The foundation for X\" = nền tảng để xây dựng X; \"a foundation\" còn là quỹ từ thiện.",
+      "explanationEn": "foundation /faʊnˈdeɪʃn/ (noun): the base something is built on. \"The foundation for X\" is the base X is built on; \"a foundation\" can also be a charity."
+    }
+  ]
+}

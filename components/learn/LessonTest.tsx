@@ -7,6 +7,7 @@ import OptionRationale from "@/components/knowledge/OptionRationale";
 import { localizeQuestion, type Question } from "@/components/knowledge/QuizBlock";
 import { type AnsweredQuestion } from "@/lib/progress";
 import { cn } from "@/lib/utils";
+import QuestionText from "@/components/knowledge/QuestionText";
 
 /** A question plus where it came from, so recall can be keyed per question. */
 export interface TestQuestion extends Question {
@@ -95,11 +96,11 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
         {dual ? (
           <BilingualPair
             labels
-            en={<p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed">{qEn.question}</p>}
-            vi={<p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed">{qVi.question}</p>}
+            en={<p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed"><QuestionText text={qEn.question} /></p>}
+            vi={<p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed"><QuestionText text={qVi.question} /></p>}
           />
         ) : (
-          <p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed">{q.question}</p>
+          <p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed"><QuestionText text={q.question} /></p>
         )}
 
         <div className="space-y-2">
@@ -143,7 +144,7 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
                       vi={<span className="text-zinc-600 dark:text-zinc-400">{qVi.options[i]}</span>}
                     />
                   ) : (
-                    <span>{opt}</span>
+                    <span><QuestionText text={opt} /></span>
                   )}
                 </button>
 
@@ -169,20 +170,20 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
                 en={
                   <>
                     <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                    {qEn.explanation}
+                    <QuestionText text={qEn.explanation} />
                   </>
                 }
                 vi={
                   <>
                     <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                    {qVi.explanation}
+                    <QuestionText text={qVi.explanation} />
                   </>
                 }
               />
             ) : (
               <>
                 <span className="text-zinc-500 font-medium">{t("quiz.explanation")}</span>
-                {q.explanation}
+                <QuestionText text={q.explanation} />
               </>
             )}
           </div>

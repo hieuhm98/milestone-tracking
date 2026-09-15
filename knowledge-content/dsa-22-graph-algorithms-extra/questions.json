@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Loại đồ thị nào LUÔN có ít nhất một thứ tự topo (topological order)?",
+    "questionEn": "Which kind of graph ALWAYS has at least one topological order?",
+    "options": [
+      "Mọi đồ thị vô hướng liên thông",
+      "Mọi đồ thị có hướng, kể cả khi có chu trình",
+      "Đồ thị có hướng không chu trình (DAG)",
+      "Chỉ những cây nhị phân tìm kiếm (BST)"
+    ],
+    "optionsEn": [
+      "Every connected undirected graph",
+      "Every directed graph, even one with cycles",
+      "A directed acyclic graph (DAG)",
+      "Only binary search trees"
+    ],
+    "answer": 2,
+    "explanation": "Thứ tự topo tồn tại khi và chỉ khi đồ thị là DAG. Với chu trình A → B → A, không đỉnh nào đứng trước được đỉnh kia; còn đồ thị vô hướng thì khái niệm \"cạnh hướng về phía trước\" không có nghĩa.",
+    "explanationEn": "A topological order exists if and only if the graph is a DAG. With a cycle A → B → A neither vertex can come first, and for undirected graphs \"every edge points forward\" has no meaning."
+  },
+  {
+    "id": "q2",
+    "question": "`topoSortKahn` (duyệt các key theo thứ tự chèn, queue FIFO) trả về gì với đồ thị sau?\n`const graph = {\n  a: ['d'],\n  b: ['a'],\n  c: ['a', 'b'],\n  d: [],\n};`",
+    "questionEn": "What does `topoSortKahn` (keys in insertion order, FIFO queue) return for this graph?\n`const graph = {\n  a: ['d'],\n  b: ['a'],\n  c: ['a', 'b'],\n  d: [],\n};`",
+    "options": [
+      "`['c', 'b', 'a', 'd']`",
+      "`['a', 'b', 'c', 'd']`",
+      "`['d', 'a', 'b', 'c']`",
+      "`['c', 'a', 'b', 'd']`"
+    ],
+    "optionsEn": [
+      "`['c', 'b', 'a', 'd']`",
+      "`['a', 'b', 'c', 'd']`",
+      "`['d', 'a', 'b', 'c']`",
+      "`['c', 'a', 'b', 'd']`"
+    ],
+    "answer": 0,
+    "explanation": "In-degree: a = 2, b = 1, c = 0, d = 1. Queue bắt đầu với c. Lấy c ra: a còn 1, b về 0. Lấy b: a về 0. Lấy a: d về 0. Lấy d. Kết quả c, b, a, d. Thứ tự c, a, b, d sai vì a phụ thuộc cả b.",
+    "explanationEn": "In-degrees: a = 2, b = 1, c = 0, d = 1. The queue starts with c. Output c: a drops to 1, b to 0. Output b: a drops to 0. Output a: d drops to 0. Output d. Result c, b, a, d. The order c, a, b, d is wrong because a also depends on b."
+  },
+  {
+    "id": "q3",
+    "question": "Chạy xong thuật toán Kahn, mảng kết quả có 7 đỉnh trong khi đồ thị có 10 đỉnh. Điều đó cho biết gì?",
+    "questionEn": "After Kahn's algorithm finishes, the output holds 7 vertices but the graph has 10. What does that tell you?",
+    "options": [
+      "Đồ thị không liên thông, nhưng vẫn là DAG",
+      "Queue bị tràn nên cần dùng stack thay thế",
+      "3 đỉnh còn lại có in-degree bằng 0 nên bị bỏ qua",
+      "Đồ thị có chu trình; các đỉnh còn lại không bao giờ về in-degree 0"
+    ],
+    "optionsEn": [
+      "The graph is disconnected but still a DAG",
+      "The queue overflowed, so a stack should be used instead",
+      "The 3 missing vertices had in-degree 0 and were skipped",
+      "The graph has a cycle; the remaining vertices never reach in-degree 0"
+    ],
+    "answer": 3,
+    "explanation": "Mỗi đỉnh trên chu trình luôn còn ít nhất một cạnh vào từ một đỉnh cũng thuộc chu trình, nên in-degree không bao giờ về 0 và nó không vào queue. Đồ thị không liên thông vẫn cho đủ V đỉnh, và đỉnh in-degree 0 luôn được đưa vào queue ngay từ đầu.",
+    "explanationEn": "Every vertex on a cycle keeps at least one incoming edge from another cycle vertex, so its in-degree never hits 0 and it never enters the queue. A disconnected DAG still outputs all V vertices, and in-degree-0 vertices are queued right at the start."
+  },
+  {
+    "id": "q4",
+    "question": "Độ phức tạp thời gian của thuật toán Kahn trên đồ thị lưu bằng danh sách kề là gì?",
+    "questionEn": "What is the time complexity of Kahn's algorithm on a graph stored as an adjacency list?",
+    "options": [
+      "O(V · E)",
+      "O(V + E)",
+      "O(V²)",
+      "O(E log V)"
+    ],
+    "optionsEn": [
+      "O(V · E)",
+      "O(V + E)",
+      "O(V²)",
+      "O(E log V)"
+    ],
+    "answer": 1,
+    "explanation": "Đếm in-degree duyệt mỗi cạnh một lần; mỗi đỉnh vào và ra queue đúng một lần; mỗi cạnh bị giảm in-degree một lần. Tổng O(V + E). Nếu dùng `shift()` trên mảng làm queue thì có thể thành O(V²), nên dùng con trỏ index.",
+    "explanationEn": "Counting in-degrees touches each edge once; each vertex enters and leaves the queue exactly once; each edge is decremented once. Total O(V + E). Using `shift()` on an array as the queue could make it O(V²), which is why an index pointer is used."
+  },
+  {
+    "id": "q5",
+    "question": "Trong topological sort bằng DFS, đỉnh được ghi vào danh sách khi nào, và cần làm gì ở cuối?",
+    "questionEn": "In DFS-based topological sort, when is a vertex recorded, and what must happen at the end?",
+    "options": [
+      "Ghi khi vừa được thăm (pre-order), giữ nguyên thứ tự",
+      "Ghi khi đã duyệt xong mọi hàng xóm (post-order), rồi đảo ngược danh sách",
+      "Ghi khi vừa được thăm (pre-order), rồi đảo ngược danh sách",
+      "Ghi theo thứ tự in-degree tăng dần, rồi sắp xếp lại"
+    ],
+    "optionsEn": [
+      "Recorded when first visited (pre-order), order kept as is",
+      "Recorded after all its neighbours finish (post-order), then the list is reversed",
+      "Recorded when first visited (pre-order), then the list is reversed",
+      "Recorded by increasing in-degree, then re-sorted"
+    ],
+    "answer": 1,
+    "explanation": "Khi DFS hoàn tất một đỉnh, mọi đỉnh phụ thuộc vào nó đã hoàn tất trước. Post-order vì thế đặt mỗi đỉnh sau các đỉnh con cháu; đảo ngược lại cho thứ tự topo. Pre-order không đảm bảo điều này khi một đỉnh có nhiều đường đi tới.",
+    "explanationEn": "When DFS finishes a vertex, every vertex reachable from it has already finished. Post-order therefore puts each vertex after its descendants, and reversing gives a topological order. Pre-order gives no such guarantee when a vertex is reachable along several paths."
+  },
+  {
+    "id": "q6",
+    "question": "Hàm sau được dùng để phát hiện chu trình trong đồ thị CÓ HƯỚNG. Với `{ A: ['B', 'C'], B: [], C: ['B'] }` nó sai ở đâu?\n`function hasCycle(graph) {\n  const visited = new Set();\n  function dfs(v) {\n    if (visited.has(v)) return true;\n    visited.add(v);\n    return graph[v].some((next) => dfs(next));\n  }\n  return Object.keys(graph).some((v) => !visited.has(v) && dfs(v));\n}`",
+    "questionEn": "This function is meant to detect a cycle in a DIRECTED graph. What goes wrong on `{ A: ['B', 'C'], B: [], C: ['B'] }`?\n`function hasCycle(graph) {\n  const visited = new Set();\n  function dfs(v) {\n    if (visited.has(v)) return true;\n    visited.add(v);\n    return graph[v].some((next) => dfs(next));\n  }\n  return Object.keys(graph).some((v) => !visited.has(v) && dfs(v));\n}`",
+    "options": [
+      "Nó rơi vào đệ quy vô hạn và gây stack overflow",
+      "Nó trả về `false` vì B không có hàng xóm",
+      "Nó chỉ sai với đồ thị không liên thông, còn đồ thị này thì đúng",
+      "Nó trả về `true` dù đồ thị không có chu trình, vì coi đỉnh đã duyệt xong như đỉnh trên đường đi hiện tại"
+    ],
+    "optionsEn": [
+      "It recurses forever and overflows the stack",
+      "It returns `false` because B has no neighbours",
+      "It only fails on disconnected graphs; this graph is handled correctly",
+      "It returns `true` although the graph is acyclic, treating a finished vertex as one on the current path"
+    ],
+    "answer": 3,
+    "explanation": "DFS từ A thăm B (xong), rồi C; từ C gặp lại B đã có trong `visited` nên báo có chu trình. Nhưng B đã duyệt xong, không nằm trên đường đi hiện tại — đó là cross edge, không phải back edge. Cần ba trạng thái WHITE/GRAY/BLACK và chỉ báo chu trình khi gặp đỉnh GRAY.",
+    "explanationEn": "DFS from A visits B (finished), then C; from C it reaches B, already in `visited`, and reports a cycle. But B is finished, not on the current path — that is a cross edge, not a back edge. You need WHITE/GRAY/BLACK states and report a cycle only on reaching a GRAY vertex."
+  },
+  {
+    "id": "q7",
+    "question": "Trong DFS ba màu (WHITE/GRAY/BLACK) trên đồ thị có hướng, chu trình được phát hiện khi DFS đi theo một cạnh tới đỉnh có màu gì?",
+    "questionEn": "In three-colour DFS (WHITE/GRAY/BLACK) on a directed graph, a cycle is detected when DFS follows an edge to a vertex of which colour?",
+    "options": [
+      "GRAY — đỉnh vẫn đang nằm trên đường đệ quy hiện tại",
+      "BLACK — đỉnh đã duyệt xong hoàn toàn",
+      "WHITE — đỉnh chưa được thăm",
+      "Bất kỳ màu nào khác WHITE"
+    ],
+    "optionsEn": [
+      "GRAY — the vertex is still on the current recursion path",
+      "BLACK — the vertex is fully explored",
+      "WHITE — the vertex is unvisited",
+      "Any colour other than WHITE"
+    ],
+    "answer": 0,
+    "explanation": "Cạnh tới đỉnh GRAY là back edge: nó quay về một tổ tiên trên đường đi hiện tại, tạo thành vòng. Cạnh tới đỉnh BLACK chỉ là đi tới phần đã duyệt xong (không có chu trình), còn đỉnh WHITE thì chỉ cần đệ quy tiếp.",
+    "explanationEn": "An edge to a GRAY vertex is a back edge: it returns to an ancestor on the current path, closing a loop. An edge to a BLACK vertex just reaches an already-finished region (no cycle), and a WHITE vertex is simply explored next."
+  },
+  {
+    "id": "q8",
+    "question": "Khi phát hiện chu trình trong đồ thị VÔ HƯỚNG bằng DFS, nếu bỏ phần kiểm tra `next !== parent` thì chuyện gì xảy ra?",
+    "questionEn": "When detecting a cycle in an UNDIRECTED graph with DFS, what happens if you drop the `next !== parent` check?",
+    "options": [
+      "Không thay đổi gì, vì đồ thị vô hướng không có back edge",
+      "Hàm bỏ sót các chu trình có độ dài 3",
+      "Mọi đồ thị có ít nhất một cạnh đều bị báo là có chu trình",
+      "Độ phức tạp tăng từ O(V + E) lên O(V²)"
+    ],
+    "optionsEn": [
+      "Nothing changes, since undirected graphs have no back edges",
+      "The function misses cycles of length 3",
+      "Every graph with at least one edge is reported as cyclic",
+      "The complexity grows from O(V + E) to O(V²)"
+    ],
+    "answer": 2,
+    "explanation": "Mỗi cạnh vô hướng được lưu hai chiều. Đi từ u sang v, danh sách kề của v chứa lại u — đã thăm — nên nếu không loại trừ parent, ngay một cạnh đơn lẻ u–v cũng bị coi là chu trình.",
+    "explanationEn": "Each undirected edge is stored in both directions. After moving from u to v, v's adjacency list contains u again — already visited — so without excluding the parent even a single edge u–v looks like a cycle."
+  },
+  {
+    "id": "q9",
+    "question": "Với Union-Find ngây thơ (không path compression, không union by rank), độ phức tạp worst case của `find` là gì và vì sao?",
+    "questionEn": "In a naive Union-Find (no path compression, no union by rank), what is the worst-case cost of `find`, and why?",
+    "options": [
+      "O(1), vì mỗi phần tử lưu trực tiếp gốc của nó",
+      "O(log n), vì cây luôn cân bằng",
+      "O(α(n)), vì hàm Ackermann ngược tăng rất chậm",
+      "O(n), vì các lần union có thể tạo thành một chuỗi dài"
+    ],
+    "optionsEn": [
+      "O(1), because each element stores its root directly",
+      "O(log n), because the trees are always balanced",
+      "O(α(n)), because the inverse Ackermann function grows very slowly",
+      "O(n), because unions can build one long chain"
+    ],
+    "answer": 3,
+    "explanation": "Chuỗi union(0,1), union(1,2), … có thể tạo cây dạng 0 → 1 → 2 → … → n−1, và find(0) phải đi qua cả n nút. Chỉ khi thêm union by rank (chiều cao ≤ log n) hoặc path compression thì chi phí mới giảm.",
+    "explanationEn": "union(0,1), union(1,2), … can build 0 → 1 → 2 → … → n−1, so find(0) walks all n nodes. Only union by rank (height ≤ log n) or path compression bring the cost down."
+  },
+  {
+    "id": "q10",
+    "question": "Path compression làm gì trong Union-Find?",
+    "questionEn": "What does path compression do in Union-Find?",
+    "options": [
+      "Luôn gắn cây thấp hơn vào dưới cây cao hơn khi union",
+      "Trong lúc `find`, cho mọi nút đi qua trỏ thẳng tới gốc",
+      "Xoá các tập chỉ có một phần tử để tiết kiệm bộ nhớ",
+      "Tách một tập lớn thành hai tập khi xoá cạnh"
+    ],
+    "optionsEn": [
+      "Always attaches the shorter tree under the taller one on union",
+      "During `find`, makes every node on the path point directly at the root",
+      "Deletes single-element sets to save memory",
+      "Splits a large set in two when an edge is deleted"
+    ],
+    "answer": 1,
+    "explanation": "Path compression làm phẳng cây: sau `find(x)`, x và mọi tổ tiên của nó trỏ thẳng tới gốc, nên lần sau chỉ tốn một bước. Gắn cây thấp dưới cây cao là union by rank; còn Union-Find không hỗ trợ tách tập.",
+    "explanationEn": "Path compression flattens the tree: after `find(x)`, x and all its ancestors point straight at the root, so the next lookup takes one step. Attaching the shorter tree is union by rank, and Union-Find does not support splitting sets."
+  },
+  {
+    "id": "q11",
+    "question": "Khi dùng CẢ path compression lẫn union by rank, chi phí amortized của mỗi thao tác Union-Find là gì?",
+    "questionEn": "With BOTH path compression and union by rank, what is the amortized cost of each Union-Find operation?",
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(α(n)) — gần như hằng số",
+      "O(log log n)"
+    ],
+    "optionsEn": [
+      "O(log n)",
+      "O(n)",
+      "O(α(n)) — effectively constant",
+      "O(log log n)"
+    ],
+    "answer": 2,
+    "explanation": "Kết hợp hai tối ưu cho O(α(n)) amortized, với α là hàm Ackermann ngược — không vượt quá 4 với mọi n thực tế. Chỉ dùng một trong hai tối ưu thì được O(log n).",
+    "explanationEn": "Combining both optimisations gives O(α(n)) amortized, where α is the inverse Ackermann function — at most 4 for any practical n. Using only one of the two gives O(log n)."
+  },
+  {
+    "id": "q12",
+    "question": "Đoạn code sau in ra gì? (`UnionFind` là lớp có `count` giảm mỗi khi `union` gộp hai tập khác nhau.)\n`const uf = new UnionFind(6);\nconst edges = [[0, 1], [2, 3], [1, 0], [4, 5], [3, 4]];\nfor (const [a, b] of edges) uf.union(a, b);\nconsole.log(uf.count);`",
+    "questionEn": "What does this print? (`UnionFind` decrements `count` whenever `union` merges two different sets.)\n`const uf = new UnionFind(6);\nconst edges = [[0, 1], [2, 3], [1, 0], [4, 5], [3, 4]];\nfor (const [a, b] of edges) uf.union(a, b);\nconsole.log(uf.count);`",
+    "options": [
+      "2",
+      "1",
+      "3",
+      "4"
+    ],
+    "optionsEn": [
+      "2",
+      "1",
+      "3",
+      "4"
+    ],
+    "answer": 0,
+    "explanation": "Bắt đầu 6 tập. [0,1] → 5. [2,3] → 4. [1,0] đã cùng tập nên không giảm. [4,5] → 3. [3,4] gộp {2,3} với {4,5} → 2. Còn lại hai thành phần {0,1} và {2,3,4,5}.",
+    "explanationEn": "Start with 6 sets. [0,1] → 5. [2,3] → 4. [1,0] is already joined, so no change. [4,5] → 3. [3,4] merges {2,3} with {4,5} → 2. Two components remain: {0,1} and {2,3,4,5}."
+  },
+  {
+    "id": "q13",
+    "question": "Một đồ thị vô hướng, liên thông, có trọng số gồm 50 đỉnh và 300 cạnh. Cây khung nhỏ nhất (MST) của nó có bao nhiêu cạnh?",
+    "questionEn": "A connected, undirected, weighted graph has 50 vertices and 300 edges. How many edges does its minimum spanning tree have?",
+    "options": [
+      "49",
+      "50",
+      "250",
+      "Tuỳ vào trọng số của các cạnh"
+    ],
+    "optionsEn": [
+      "49",
+      "50",
+      "250",
+      "It depends on the edge weights"
+    ],
+    "answer": 0,
+    "explanation": "Mọi cây khung của đồ thị V đỉnh đều có đúng V − 1 cạnh: ít hơn thì không liên thông, nhiều hơn thì có chu trình. Trọng số chỉ quyết định chọn cạnh nào, không quyết định số cạnh.",
+    "explanationEn": "Every spanning tree on V vertices has exactly V − 1 edges: fewer cannot connect everything, more would create a cycle. Weights decide which edges are chosen, not how many."
+  },
+  {
+    "id": "q14",
+    "question": "Đồ thị vô hướng có ba cạnh: `A-B` trọng số 3, `B-C` trọng số 3, `A-C` trọng số 5. Phát biểu nào ĐÚNG?",
+    "questionEn": "An undirected graph has three edges: `A-B` weight 3, `B-C` weight 3, `A-C` weight 5. Which statement is TRUE?",
+    "options": [
+      "MST chứa cạnh `A-C` vì nó là đường ngắn nhất từ A tới C",
+      "MST có tổng trọng số 11 vì phải dùng mọi cạnh",
+      "MST là `A-B` + `B-C` (tổng 6), dù đường ngắn nhất từ A tới C là cạnh `A-C` (5)",
+      "Đồ thị này không có MST vì chứa chu trình"
+    ],
+    "optionsEn": [
+      "The MST contains `A-C` because it is the shortest path from A to C",
+      "The MST weighs 11 because every edge must be used",
+      "The MST is `A-B` + `B-C` (total 6), even though the shortest A-to-C path is the edge `A-C` (5)",
+      "This graph has no MST because it contains a cycle"
+    ],
+    "answer": 2,
+    "explanation": "MST tối thiểu hoá tổng trọng số để nối mọi đỉnh (6 < 8), còn đường đi ngắn nhất tối thiểu hoá khoảng cách giữa hai đỉnh cụ thể. Hai mục tiêu khác nhau nên MST không phải cây đường đi ngắn nhất. Đồ thị có chu trình vẫn có MST — MST chỉ loại bỏ cạnh để phá chu trình.",
+    "explanationEn": "An MST minimises the total weight needed to connect every vertex (6 < 8), while a shortest path minimises the distance between two specific vertices. Different goals, so an MST is not a shortest-path tree. A graph with cycles still has an MST — the MST simply drops edges to break them."
+  },
+  {
+    "id": "q15",
+    "question": "Trong thuật toán Kruskal, khi nào một cạnh `(u, v)` bị BỎ QUA?",
+    "questionEn": "In Kruskal's algorithm, when is an edge `(u, v)` SKIPPED?",
+    "options": [
+      "Khi trọng số của nó lớn hơn trọng số trung bình",
+      "Khi `find(u) === find(v)`, vì thêm nó sẽ tạo chu trình",
+      "Khi u hoặc v đã có ít nhất một cạnh trong MST",
+      "Khi nó không kề với đỉnh xuất phát"
+    ],
+    "optionsEn": [
+      "When its weight is above the average weight",
+      "When `find(u) === find(v)`, because adding it would create a cycle",
+      "When u or v already has at least one MST edge",
+      "When it is not adjacent to the start vertex"
+    ],
+    "answer": 1,
+    "explanation": "Nếu u và v đã cùng một tập Union-Find thì giữa chúng đã có đường đi trong rừng đang xây, nên thêm cạnh sẽ khép chu trình. Một đỉnh có thể có nhiều cạnh MST, và Kruskal không có đỉnh xuất phát (đó là Prim).",
+    "explanationEn": "If u and v are already in the same Union-Find set, the forest built so far already connects them, so the edge would close a cycle. A vertex may have many MST edges, and Kruskal has no start vertex (that is Prim)."
+  },
+  {
+    "id": "q16",
+    "question": "Bước nào quyết định độ phức tạp thời gian O(E log E) của Kruskal?",
+    "questionEn": "Which step determines Kruskal's O(E log E) time complexity?",
+    "options": [
+      "Các lời gọi `find` và `union` trên Union-Find",
+      "Việc khởi tạo mảng `parent` và `rank`",
+      "Việc duyệt danh sách kề của từng đỉnh",
+      "Việc sắp xếp mọi cạnh theo trọng số"
+    ],
+    "optionsEn": [
+      "The `find` and `union` calls on Union-Find",
+      "Initialising the `parent` and `rank` arrays",
+      "Walking each vertex's adjacency list",
+      "Sorting all edges by weight"
+    ],
+    "answer": 3,
+    "explanation": "Sắp xếp E cạnh tốn O(E log E). Các thao tác Union-Find chỉ tốn O(E · α(V)) — gần như tuyến tính — và khởi tạo mảng là O(V). Vì E ≤ V² nên O(E log E) cũng bằng O(E log V).",
+    "explanationEn": "Sorting E edges costs O(E log E). The Union-Find work is only O(E · α(V)) — nearly linear — and initialising the arrays is O(V). Since E ≤ V², O(E log E) also equals O(E log V)."
+  },
+  {
+    "id": "q17",
+    "question": "Prim và Dijkstra có cấu trúc gần giống nhau. Điểm khác biệt then chốt ở bước cập nhật hàng xóm `v` của đỉnh `u` (cạnh trọng số `w`) là gì?",
+    "questionEn": "Prim and Dijkstra look almost identical. What is the key difference when updating neighbour `v` of vertex `u` (edge weight `w`)?",
+    "options": [
+      "Prim dùng stack, còn Dijkstra dùng queue",
+      "Prim cập nhật `best[v] = dist[u] + w`, còn Dijkstra cập nhật `dist[v] = w`",
+      "Prim cập nhật `best[v] = w`, còn Dijkstra cập nhật `dist[v] = dist[u] + w`",
+      "Prim chỉ chạy được trên đồ thị có hướng, còn Dijkstra thì không"
+    ],
+    "optionsEn": [
+      "Prim uses a stack while Dijkstra uses a queue",
+      "Prim sets `best[v] = dist[u] + w` while Dijkstra sets `dist[v] = w`",
+      "Prim sets `best[v] = w` while Dijkstra sets `dist[v] = dist[u] + w`",
+      "Prim only runs on directed graphs, Dijkstra does not"
+    ],
+    "answer": 2,
+    "explanation": "Prim chỉ quan tâm chi phí của MỘT cạnh nối v vào cây, nên so sánh với `w`. Dijkstra quan tâm tổng khoảng cách từ nguồn, nên so sánh với `dist[u] + w`. Cả hai đều có thể dùng priority queue, và Prim áp dụng cho đồ thị vô hướng.",
+    "explanationEn": "Prim only cares about the cost of the ONE edge linking v to the tree, so it compares against `w`. Dijkstra cares about the total distance from the source, so it compares against `dist[u] + w`. Both can use a priority queue, and Prim is for undirected graphs."
+  },
+  {
+    "id": "q18",
+    "question": "Cần tìm MST của một đồ thị gần như đầy đủ: 5.000 đỉnh, khoảng 12,5 triệu cạnh, lưu bằng ma trận kề. Lựa chọn nào có chặn thời gian tốt nhất?",
+    "questionEn": "You need the MST of a nearly complete graph: 5,000 vertices, about 12.5 million edges, stored as an adjacency matrix. Which choice has the best time bound?",
+    "options": [
+      "Prim quét mảng, O(V²)",
+      "Kruskal, O(E log E)",
+      "Topological sort, O(V + E)",
+      "Chạy Dijkstra từ mọi đỉnh, O(V · (V + E) log V)"
+    ],
+    "optionsEn": [
+      "Array-scan Prim, O(V²)",
+      "Kruskal, O(E log E)",
+      "Topological sort, O(V + E)",
+      "Dijkstra from every vertex, O(V · (V + E) log V)"
+    ],
+    "answer": 0,
+    "explanation": "Với đồ thị dày E ≈ V², Prim quét mảng tốn O(V²) ≈ 25 triệu bước, trong khi Kruskal phải sắp xếp 12,5 triệu cạnh (thêm hệ số log E ≈ 24). Topological sort không tạo MST, và Dijkstra tìm đường đi ngắn nhất chứ không phải MST.",
+    "explanationEn": "On a dense graph with E ≈ V², array-scan Prim costs O(V²) ≈ 25 million steps, whereas Kruskal must sort 12.5 million edges (an extra log E ≈ 24 factor). Topological sort does not build an MST, and Dijkstra finds shortest paths, not an MST."
+  },
+  {
+    "id": "q19",
+    "question": "Một mạng xã hội nhận luồng sự kiện \"X kết bạn với Y\" liên tục, và sau mỗi sự kiện phải trả lời nhanh \"A và B có thuộc cùng một nhóm bạn không?\". Không bao giờ có huỷ kết bạn. Cấu trúc nào phù hợp nhất?",
+    "questionEn": "A social network receives a stream of \"X befriends Y\" events, and after each one must quickly answer \"are A and B in the same friend group?\". Friendships are never removed. Which structure fits best?",
+    "options": [
+      "Chạy lại BFS từ A sau mỗi câu hỏi",
+      "Topological sort trên đồ thị bạn bè",
+      "Tính lại MST bằng Kruskal sau mỗi sự kiện",
+      "Union-Find: `union` cho mỗi sự kiện, `find(A) === find(B)` cho mỗi câu hỏi"
+    ],
+    "optionsEn": [
+      "Re-run BFS from A for every query",
+      "Topological sort on the friendship graph",
+      "Recompute a Kruskal MST after every event",
+      "Union-Find: `union` per event, `find(A) === find(B)` per query"
+    ],
+    "answer": 3,
+    "explanation": "Đây là bài kết nối động chỉ có thêm cạnh — đúng sở trường của Union-Find, mỗi thao tác O(α(n)). BFS mỗi câu hỏi tốn O(V + E), đồ thị bạn bè vô hướng nên không có thứ tự topo, và MST không cần thiết cho câu hỏi liên thông.",
+    "explanationEn": "This is add-only dynamic connectivity — exactly Union-Find's strength, at O(α(n)) per operation. BFS per query costs O(V + E), an undirected friendship graph has no topological order, and an MST is unnecessary for a connectivity question."
+  }
+]

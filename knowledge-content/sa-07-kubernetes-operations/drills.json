@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về probe trong Kubernetes.",
+      "promptEn": "Pick TWO statements that are true about Kubernetes probes.",
+      "options": [
+        "Liveness probe fail thì pod bị gỡ khỏi Service nhưng không bị restart",
+        "Readiness probe fail thì pod bị gỡ khỏi endpoints của Service, không bị restart",
+        "Readiness probe fail đủ số lần thì kubelet restart container",
+        "Khi có startup probe, liveness và readiness chỉ chạy sau khi startup probe thành công",
+        "Timeout mặc định của probe là 10 giây"
+      ],
+      "optionsEn": [
+        "A failing liveness probe removes the pod from the Service but does not restart it",
+        "A failing readiness probe removes the pod from Service endpoints without restarting it",
+        "After enough readiness failures the kubelet restarts the container",
+        "With a startup probe, liveness and readiness only run once the startup probe has succeeded",
+        "The default probe timeout is 10 seconds"
+      ],
+      "answers": [1, 3],
+      "explanation": "Readiness điều khiển traffic, liveness điều khiển restart — hai vai trò hay bị đảo ngược. Startup probe tạm hoãn hai probe kia để app khởi động chậm không bị kill. Timeout mặc định là 1 giây; 10 giây là periodSeconds mặc định.",
+      "explanationEn": "Readiness controls traffic and liveness controls restarts — the two roles people swap most often. A startup probe holds the other two back so a slow starter is not killed. The default timeout is 1 second; 10 seconds is the default periodSeconds.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Một HPA nhắm 70% CPU nhưng không bao giờ scale, dù pod đang rất bận. Chọn HAI nguyên nhân có khả năng nhất.",
+      "promptEn": "An HPA targeting 70% CPU never scales even though the pods are clearly busy. Pick TWO most likely causes.",
+      "options": [
+        "Container không đặt CPU request",
+        "Deployment dùng strategy RollingUpdate",
+        "Pod có readiness probe",
+        "metrics-server chưa được cài trong cluster",
+        "Container không đặt CPU limit"
+      ],
+      "optionsEn": [
+        "The containers have no CPU request",
+        "The Deployment uses the RollingUpdate strategy",
+        "The pods have a readiness probe",
+        "metrics-server is not installed in the cluster",
+        "The containers have no CPU limit"
+      ],
+      "answers": [0, 3],
+      "explanation": "Utilization được tính theo phần trăm CPU request, nên thiếu request thì HPA không có mẫu số. Không có metrics-server thì HPA không có số liệu CPU/memory. CPU limit không cần cho HPA; strategy và readiness không chặn việc scale.",
+      "explanationEn": "Utilization is a percentage of the CPU request, so without a request the HPA has no denominator. Without metrics-server the HPA has no CPU/memory data at all. A CPU limit is not needed by the HPA, and neither the strategy nor readiness blocks scaling.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Container bị kill vì vượt memory limit (OOMKilled) sẽ có exit code bao nhiêu?",
+      "promptEn": "What exit code does a container killed for exceeding its memory limit (OOMKilled) report?",
+      "answer": "137",
+      "answerEn": "137",
+      "accept": ["137", "exit code 137", "code 137"],
+      "explanation": "137 = 128 + 9, tức process bị SIGKILL. Kết hợp với reason `OOMKilled` trong `kubectl describe pod`, đó là dấu hiệu memory limit quá thấp hoặc app bị rò rỉ bộ nhớ.",
+      "explanationEn": "137 = 128 + 9, meaning the process received SIGKILL. Together with the `OOMKilled` reason in `kubectl describe pod` it points to a memory limit that is too low or a memory leak.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Workload object nào đảm bảo chạy đúng một pod trên mỗi node, tự thêm pod khi node mới tham gia cluster?",
+      "promptEn": "Which workload object runs exactly one pod on each node and adds one automatically when a new node joins?",
+      "answer": "DaemonSet",
+      "answerEn": "DaemonSet",
+      "accept": ["daemonset", "daemon set", "daemonsets", "daemon sets"],
+      "explanation": "DaemonSet — lựa chọn cho log shipper, node-exporter, CNI plugin và kube-proxy. Deployment với số replica bằng số node không đảm bảo mỗi node một pod.",
+      "explanationEn": "DaemonSet — the choice for log shippers, node-exporter, CNI plugins and kube-proxy. A Deployment with as many replicas as nodes does not guarantee one pod per node.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi object với việc nó làm.",
+      "promptEn": "Match each object to what it does.",
+      "pairs": [
+        {
+          "left": "HorizontalPodAutoscaler",
+          "leftEn": "HorizontalPodAutoscaler",
+          "right": "Thay đổi số replica dựa trên metric so với target",
+          "rightEn": "Changes the replica count based on a metric versus a target"
+        },
+        {
+          "left": "VerticalPodAutoscaler",
+          "leftEn": "VerticalPodAutoscaler",
+          "right": "Khuyến nghị hoặc áp dụng requests/limits dựa trên lịch sử sử dụng",
+          "rightEn": "Recommends or applies requests/limits based on historical usage"
+        },
+        {
+          "left": "Cluster Autoscaler",
+          "leftEn": "Cluster Autoscaler",
+          "right": "Thêm node khi có pod Pending, gỡ node khi dùng ít",
+          "rightEn": "Adds nodes when pods are Pending and removes under-used nodes"
+        },
+        {
+          "left": "PodDisruptionBudget",
+          "leftEn": "PodDisruptionBudget",
+          "right": "Giới hạn số pod bị gián đoạn tự nguyện cùng lúc, như khi drain node",
+          "rightEn": "Limits how many pods voluntary disruptions such as node drains may take down at once"
+        }
+      ],
+      "explanation": "Ba autoscaler tác động lên ba tầng khác nhau: số pod, kích thước pod, số node. PDB không scale gì cả — nó bảo vệ tính sẵn sàng khi bảo trì.",
+      "explanationEn": "The three autoscalers act on three different layers: pod count, pod size and node count. A PDB scales nothing — it protects availability during maintenance.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Traffic tăng đột biến trên một cluster đã đầy node. Xếp đúng thứ tự các sự kiện cho tới khi pod mới nhận traffic.",
+      "promptEn": "Traffic spikes on a cluster whose nodes are already full. Put the events into order, up to the new pods receiving traffic.",
+      "items": [
+        {
+          "text": "HPA tăng số replica của Deployment",
+          "textEn": "The HPA raises the Deployment's replica count"
+        },
+        {
+          "text": "Scheduler không xếp được pod mới, pod ở trạng thái Pending",
+          "textEn": "The scheduler cannot place the new pods, so they stay Pending"
+        },
+        {
+          "text": "Cluster Autoscaler hoặc Karpenter khởi tạo node mới",
+          "textEn": "Cluster Autoscaler or Karpenter launches new nodes"
+        },
+        {
+          "text": "Kubelet trên node mới pull image và khởi động container",
+          "textEn": "The kubelet on the new node pulls the image and starts the containers"
+        },
+        {
+          "text": "Readiness probe thành công, pod được thêm vào endpoints của Service",
+          "textEn": "The readiness probe passes and the pods are added to the Service endpoints"
+        }
+      ],
+      "explanation": "Chuỗi này giải thích vì sao scale-out mất vài phút chứ không phải vài giây khi node đã đầy: HPA phản ứng nhanh, nhưng tạo node, pull image và chờ readiness mới là phần chậm.",
+      "explanationEn": "This chain is why scale-out takes minutes rather than seconds when nodes are full: the HPA reacts quickly, but launching nodes, pulling images and waiting for readiness are the slow part.",
+      "id": "d6"
+    }
+  ]
+}

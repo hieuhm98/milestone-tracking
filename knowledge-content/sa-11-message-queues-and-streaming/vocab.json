@@ -1,0 +1,1853 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "v1",
+      "lessonId": "l1",
+      "word": "synchronous",
+      "pos": "adj",
+      "ipa": "/ˈsɪŋkrənəs/",
+      "question": "Trong câu \"In a synchronous call (HTTP, gRPC) the caller waits for the callee.\", từ \"synchronous\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"In a synchronous call (HTTP, gRPC) the caller waits for the callee.\", what does \"synchronous\" (adjective) mean?",
+      "options": [
+        "rời rạc, tách biệt",
+        "định kỳ, lặp lại",
+        "đồng bộ, chờ kết quả",
+        "tạm thời, ngắn hạn"
+      ],
+      "optionsEn": [
+        "separate and unconnected",
+        "repeating at intervals",
+        "in step, waiting for a reply",
+        "lasting a short time"
+      ],
+      "answer": 2,
+      "explanation": "synchronous /ˈsɪŋkrənəs/ (tính từ): đồng bộ, chờ kết quả. Synchronous call = lời gọi đồng bộ: bên gọi phải đợi bên được gọi trả lời rồi mới làm tiếp.",
+      "explanationEn": "synchronous /ˈsɪŋkrənəs/ (adjective): in step, waiting for a reply. A synchronous call blocks the caller until the callee replies; the opposite is asynchronous."
+    },
+    {
+      "id": "v2",
+      "lessonId": "l1",
+      "word": "couple",
+      "pos": "v",
+      "ipa": "/ˈkʌpl/",
+      "question": "Trong câu \"It is simple, but it couples services in time: a slow payment service makes checkout slow, a dead one makes it fail.\", từ \"couple\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It is simple, but it couples services in time: a slow payment service makes checkout slow, a dead one makes it fail.\", what does \"couple\" (verb) mean?",
+      "options": [
+        "gắn chặt, ràng buộc",
+        "kết đôi, cưới nhau",
+        "tách rời, cô lập",
+        "sao chép, nhân bản"
+      ],
+      "optionsEn": [
+        "to link so they depend",
+        "to pair up as partners",
+        "to separate or isolate",
+        "to copy or duplicate"
+      ],
+      "answer": 0,
+      "explanation": "couple /ˈkʌpl/ (động từ): gắn chặt, ràng buộc. Couple services = làm các dịch vụ phụ thuộc chặt vào nhau; danh từ là coupling, trái nghĩa là decouple.",
+      "explanationEn": "couple /ˈkʌpl/ (verb): to link so they depend. To couple services is to make them depend on each other; the noun is coupling and the opposite is decouple."
+    },
+    {
+      "id": "v3",
+      "lessonId": "l1",
+      "word": "latency",
+      "pos": "n",
+      "ipa": "/ˈleɪtənsi/",
+      "question": "Trong câu \"Latencies add up and availabilities multiply — five services at 99.9% in a chain give about 99.5%.\", từ \"latency\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Latencies add up and availabilities multiply — five services at 99.9% in a chain give about 99.5%.\", what does \"latency\" (noun) mean?",
+      "options": [
+        "độ bền",
+        "dung lượng",
+        "tần suất",
+        "độ trễ"
+      ],
+      "optionsEn": [
+        "ability to last long",
+        "amount it can hold",
+        "how often it happens",
+        "delay before a response"
+      ],
+      "answer": 3,
+      "explanation": "latency /ˈleɪtənsi/ (danh từ): độ trễ. Latency là thời gian trễ; \"latencies add up\" = độ trễ cộng dồn qua mỗi dịch vụ trong chuỗi.",
+      "explanationEn": "latency /ˈleɪtənsi/ (noun): delay before a response. Latency is the waiting time; \"latencies add up\" means each service in the chain adds its own delay."
+    },
+    {
+      "id": "v4",
+      "lessonId": "l1",
+      "word": "multiply",
+      "pos": "v",
+      "ipa": "/ˈmʌltɪplaɪ/",
+      "question": "Trong câu \"Latencies add up and availabilities multiply — five services at 99.9% in a chain give about 99.5%.\", từ \"multiply\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Latencies add up and availabilities multiply — five services at 99.9% in a chain give about 99.5%.\", what does \"multiply\" (verb) mean?",
+      "options": [
+        "chia nhỏ ra",
+        "nhân lên với nhau",
+        "cộng dồn vào",
+        "giảm dần đi"
+      ],
+      "optionsEn": [
+        "to split into parts",
+        "to combine by multiplying",
+        "to add together",
+        "to decrease gradually"
+      ],
+      "answer": 1,
+      "explanation": "multiply /ˈmʌltɪplaɪ/ (động từ): nhân lên với nhau. Availabilities multiply: độ sẵn sàng của từng dịch vụ nhân với nhau, 0.999^5 ≈ 0.995.",
+      "explanationEn": "multiply /ˈmʌltɪplaɪ/ (verb): to combine by multiplying. Availabilities multiply: each service's availability is multiplied together, so 0.999^5 ≈ 0.995."
+    },
+    {
+      "id": "v5",
+      "lessonId": "l1",
+      "word": "broker",
+      "pos": "n",
+      "ipa": "/ˈbrəʊkə(r)/",
+      "question": "Trong câu \"With asynchronous messaging the producer hands a message to a broker and moves on; the consumer processes it when it can.\", từ \"broker\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"With asynchronous messaging the producer hands a message to a broker and moves on; the consumer processes it when it can.\", what does \"broker\" (noun) mean?",
+      "options": [
+        "người tiêu dùng cuối",
+        "hệ thống trung gian",
+        "bản sao dự phòng",
+        "cổng đăng nhập"
+      ],
+      "optionsEn": [
+        "the final consumer",
+        "an intermediary system",
+        "a backup copy",
+        "a login gateway"
+      ],
+      "answer": 1,
+      "explanation": "broker /ˈbrəʊkə(r)/ (danh từ): hệ thống trung gian. Broker vốn là người môi giới; trong kỹ thuật là hệ thống trung gian nhận và chuyển tiếp message.",
+      "explanationEn": "broker /ˈbrəʊkə(r)/ (noun): an intermediary system. A broker is originally an agent who arranges deals; in software it is the middle system that receives and forwards messages."
+    },
+    {
+      "id": "v6",
+      "lessonId": "l1",
+      "word": "spike",
+      "pos": "n",
+      "ipa": "/spaɪk/",
+      "question": "Trong câu \"A broker buys temporal decoupling (consumers can be down for a deploy), load levelling (a spike of 10,000 orders/s is drained at 2,000/s instead of hitting the database), fan-out (email, fraud and analytics all react to one event) and independent scaling.\", từ \"spike\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A broker buys temporal decoupling (consumers can be down for a deploy), load levelling (a spike of 10,000 orders/s is drained at 2,000/s instead of hitting the database), fan-out (email, fraud and analytics all react to one event) and independent scaling.\", what does \"spike\" (noun) mean?",
+      "options": [
+        "cái đinh nhọn",
+        "sự sụt giảm dần",
+        "mức trung bình",
+        "sự tăng vọt đột ngột"
+      ],
+      "optionsEn": [
+        "a sharp pointed object",
+        "a gradual decline",
+        "an average level",
+        "a sudden sharp increase"
+      ],
+      "answer": 3,
+      "explanation": "spike /spaɪk/ (danh từ): sự tăng vọt đột ngột. \"A spike of traffic\" = lưu lượng tăng vọt; nghĩa gốc của spike là vật nhọn, đầu nhọn.",
+      "explanationEn": "spike /spaɪk/ (noun): a sudden sharp increase. \"A spike in traffic\" is a sudden jump; the literal meaning of spike is a sharp pointed object."
+    },
+    {
+      "id": "v7",
+      "lessonId": "l1",
+      "word": "drain",
+      "pos": "v",
+      "ipa": "/dreɪn/",
+      "question": "Trong câu \"A broker buys temporal decoupling (consumers can be down for a deploy), load levelling (a spike of 10,000 orders/s is drained at 2,000/s instead of hitting the database), fan-out (email, fraud and analytics all react to one event) and independent scaling.\", từ \"drain\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A broker buys temporal decoupling (consumers can be down for a deploy), load levelling (a spike of 10,000 orders/s is drained at 2,000/s instead of hitting the database), fan-out (email, fraud and analytics all react to one event) and independent scaling.\", what does \"drain\" (verb) mean?",
+      "options": [
+        "xử lý dần cho vơi",
+        "làm đầy thêm",
+        "chặn lại hoàn toàn",
+        "sao lưu định kỳ"
+      ],
+      "optionsEn": [
+        "to empty gradually",
+        "to fill up further",
+        "to block completely",
+        "to back up regularly"
+      ],
+      "answer": 0,
+      "explanation": "drain /dreɪn/ (động từ): xử lý dần cho vơi. Drain = rút cạn dần (như nước chảy khỏi bồn); ở đây hàng đợi được xử lý dần với tốc độ 2.000 đơn/giây.",
+      "explanationEn": "drain /dreɪn/ (verb): to empty gradually. Drain means to empty little by little, like water leaving a sink; here the backlog is worked off at 2,000 orders per second."
+    },
+    {
+      "id": "v8",
+      "lessonId": "l1",
+      "word": "decoupling",
+      "pos": "n",
+      "ipa": "/diːˈkʌplɪŋ/",
+      "question": "Trong câu \"A broker buys temporal decoupling (consumers can be down for a deploy), load levelling (a spike of 10,000 orders/s is drained at 2,000/s instead of hitting the database), fan-out (email, fraud and analytics all react to one event) and independent scaling.\", từ \"decoupling\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A broker buys temporal decoupling (consumers can be down for a deploy), load levelling (a spike of 10,000 orders/s is drained at 2,000/s instead of hitting the database), fan-out (email, fraud and analytics all react to one event) and independent scaling.\", what does \"decoupling\" (noun) mean?",
+      "options": [
+        "sự gộp chung lại",
+        "sự nhân đôi dữ liệu",
+        "sự tách rời phụ thuộc",
+        "sự mã hóa lại"
+      ],
+      "optionsEn": [
+        "a merging of parts",
+        "a doubling of data",
+        "removal of a dependency",
+        "a re-encoding of data"
+      ],
+      "answer": 2,
+      "explanation": "decoupling /diːˈkʌplɪŋ/ (danh từ): sự tách rời phụ thuộc. Temporal decoupling = tách rời về thời gian: producer và consumer không cần chạy cùng lúc.",
+      "explanationEn": "decoupling /diːˈkʌplɪŋ/ (noun): removal of a dependency. Temporal decoupling means the producer and consumer do not need to be running at the same time."
+    },
+    {
+      "id": "v9",
+      "lessonId": "l1",
+      "word": "eventual",
+      "pos": "adj",
+      "ipa": "/ɪˈventʃuəl/",
+      "question": "Trong câu \"It costs eventual consistency, duplicates and disorder you must design for, harder debugging (trace IDs must travel in headers), and one more stateful system to run.\", từ \"eventual\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It costs eventual consistency, duplicates and disorder you must design for, harder debugging (trace IDs must travel in headers), and one more stateful system to run.\", what does \"eventual\" (adjective) mean?",
+      "options": [
+        "xảy ra ngay lập tức",
+        "thỉnh thoảng xảy ra",
+        "xảy ra sau cùng",
+        "có thể xảy ra"
+      ],
+      "optionsEn": [
+        "happening immediately",
+        "happening now and then",
+        "happening in the end",
+        "possibly happening"
+      ],
+      "answer": 2,
+      "explanation": "eventual /ɪˈventʃuəl/ (tính từ): xảy ra sau cùng. Eventual consistency = nhất quán cuối cùng: dữ liệu sẽ khớp sau một khoảng trễ. Đừng nhầm eventual với \"có thể\".",
+      "explanationEn": "eventual /ɪˈventʃuəl/ (adjective): happening in the end. Eventual consistency means data will match after some delay; eventual does not mean \"possible\"."
+    },
+    {
+      "id": "v10",
+      "lessonId": "l1",
+      "word": "disorder",
+      "pos": "n",
+      "ipa": "/dɪsˈɔːdə(r)/",
+      "question": "Trong câu \"It costs eventual consistency, duplicates and disorder you must design for, harder debugging (trace IDs must travel in headers), and one more stateful system to run.\", từ \"disorder\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It costs eventual consistency, duplicates and disorder you must design for, harder debugging (trace IDs must travel in headers), and one more stateful system to run.\", what does \"disorder\" (noun) mean?",
+      "options": [
+        "sự sai thứ tự",
+        "chứng rối loạn (bệnh)",
+        "sự trùng lặp",
+        "sự chậm trễ"
+      ],
+      "optionsEn": [
+        "lack of correct order",
+        "a medical condition",
+        "repetition of items",
+        "a delay in time"
+      ],
+      "answer": 0,
+      "explanation": "disorder /dɪsˈɔːdə(r)/ (danh từ): sự sai thứ tự. Disorder ở đây là message đến sai thứ tự; trong y học disorder còn nghĩa là chứng rối loạn.",
+      "explanationEn": "disorder /dɪsˈɔːdə(r)/ (noun): lack of correct order. Here disorder means messages arriving out of order; in medicine a disorder is an illness."
+    },
+    {
+      "id": "v11",
+      "lessonId": "l1",
+      "word": "rule of thumb",
+      "pos": "phrase",
+      "ipa": "/ˌruːl əv ˈθʌm/",
+      "question": "Trong câu \"Rule of thumb: sync when the caller needs the answer to continue (auth, price check); async when the work can happen after you reply (emails, invoices, indexing).\", từ \"rule of thumb\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rule of thumb: sync when the caller needs the answer to continue (auth, price check); async when the work can happen after you reply (emails, invoices, indexing).\", what does \"rule of thumb\" (phrase) mean?",
+      "options": [
+        "luật lệ bắt buộc",
+        "ngoại lệ hiếm gặp",
+        "định lý đã chứng minh",
+        "nguyên tắc kinh nghiệm"
+      ],
+      "optionsEn": [
+        "a mandatory regulation",
+        "a rare exception",
+        "a proven theorem",
+        "a rough practical guideline"
+      ],
+      "answer": 3,
+      "explanation": "rule of thumb /ˌruːl əv ˈθʌm/ (cụm từ): nguyên tắc kinh nghiệm. Rule of thumb = nguyên tắc ước lượng dựa trên kinh nghiệm, dùng được trong đa số trường hợp.",
+      "explanationEn": "rule of thumb /ˌruːl əv ˈθʌm/ (phrase): a rough practical guideline. A rule of thumb is a rough guideline based on experience that works in most cases."
+    },
+    {
+      "id": "v12",
+      "lessonId": "l1",
+      "word": "shift",
+      "pos": "n",
+      "ipa": "/ʃɪft/",
+      "question": "Trong câu \"The key shift with a log: reading does not remove data.\", từ \"shift\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The key shift with a log: reading does not remove data.\", what does \"shift\" (noun) mean?",
+      "options": [
+        "ca làm việc",
+        "sự thay đổi căn bản",
+        "phím chuyển chữ hoa",
+        "sự sao chép"
+      ],
+      "optionsEn": [
+        "a period of work",
+        "a change in approach",
+        "a keyboard modifier key",
+        "an act of copying"
+      ],
+      "answer": 1,
+      "explanation": "shift /ʃɪft/ (danh từ): sự thay đổi căn bản. \"The key shift\" = thay đổi then chốt; shift còn nghĩa là ca làm việc (night shift).",
+      "explanationEn": "shift /ʃɪft/ (noun): a change in approach. \"The key shift\" is the most important change; shift can also mean a work period, as in \"night shift\"."
+    },
+    {
+      "id": "v13",
+      "lessonId": "l1",
+      "word": "cursor",
+      "pos": "n",
+      "ipa": "/ˈkɜːsə(r)/",
+      "question": "Trong câu \"Consumers are cursors into a durable, ordered file, so a new service can bootstrap by reading a Kafka topic from offset 0 — impossible with SQS.\", từ \"cursor\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Consumers are cursors into a durable, ordered file, so a new service can bootstrap by reading a Kafka topic from offset 0 — impossible with SQS.\", what does \"cursor\" (noun) mean?",
+      "options": [
+        "con trỏ chuột",
+        "con trỏ vị trí đọc",
+        "bản sao lưu",
+        "khóa truy cập"
+      ],
+      "optionsEn": [
+        "a mouse pointer on screen",
+        "a marker of read position",
+        "a backup copy",
+        "an access lock"
+      ],
+      "answer": 1,
+      "explanation": "cursor /ˈkɜːsə(r)/ (danh từ): con trỏ vị trí đọc. Cursor ở đây là con trỏ đánh dấu vị trí đang đọc trong log, không phải con trỏ chuột.",
+      "explanationEn": "cursor /ˈkɜːsə(r)/ (noun): a marker of read position. Here a cursor marks the current reading position in the log, not the pointer on your screen."
+    },
+    {
+      "id": "v14",
+      "lessonId": "l1",
+      "word": "durable",
+      "pos": "adj",
+      "ipa": "/ˈdjʊərəbl/",
+      "question": "Trong câu \"Consumers are cursors into a durable, ordered file, so a new service can bootstrap by reading a Kafka topic from offset 0 — impossible with SQS.\", từ \"durable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Consumers are cursors into a durable, ordered file, so a new service can bootstrap by reading a Kafka topic from offset 0 — impossible with SQS.\", what does \"durable\" (adjective) mean?",
+      "options": [
+        "tạm thời, dễ mất",
+        "nhẹ, gọn gàng",
+        "đắt, tốn kém",
+        "bền, lưu lâu dài"
+      ],
+      "optionsEn": [
+        "temporary, easily lost",
+        "light and compact",
+        "costly to buy",
+        "long-lasting, not lost"
+      ],
+      "answer": 3,
+      "explanation": "durable /ˈdjʊərəbl/ (tính từ): bền, lưu lâu dài. Durable storage = lưu trữ bền vững, không mất khi khởi động lại; danh từ là durability.",
+      "explanationEn": "durable /ˈdjʊərəbl/ (adjective): long-lasting, not lost. Durable storage survives restarts and crashes; the noun is durability."
+    },
+    {
+      "id": "v15",
+      "lessonId": "l1",
+      "word": "bootstrap",
+      "pos": "v",
+      "ipa": "/ˈbuːtstræp/",
+      "question": "Trong câu \"Consumers are cursors into a durable, ordered file, so a new service can bootstrap by reading a Kafka topic from offset 0 — impossible with SQS.\", từ \"bootstrap\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Consumers are cursors into a durable, ordered file, so a new service can bootstrap by reading a Kafka topic from offset 0 — impossible with SQS.\", what does \"bootstrap\" (verb) mean?",
+      "options": [
+        "tự khởi tạo từ đầu",
+        "tắt hẳn hoạt động",
+        "gộp nhiều nguồn",
+        "nâng cấp phiên bản"
+      ],
+      "optionsEn": [
+        "to start up from scratch",
+        "to shut down fully",
+        "to merge many sources",
+        "to upgrade a version"
+      ],
+      "answer": 0,
+      "explanation": "bootstrap /ˈbuːtstræp/ (động từ): tự khởi tạo từ đầu. Bootstrap = tự dựng trạng thái ban đầu; service mới đọc lại topic từ offset 0 để có đủ dữ liệu.",
+      "explanationEn": "bootstrap /ˈbuːtstræp/ (verb): to start up from scratch. To bootstrap is to build your initial state yourself; a new service replays the topic from offset 0."
+    },
+    {
+      "id": "v16",
+      "lessonId": "l2",
+      "word": "implement",
+      "pos": "v",
+      "ipa": "/ˈɪmplɪment/",
+      "question": "Trong câu \"RabbitMQ implements AMQP 0-9-1 (port 5672, TLS 5671, management UI 15672).\", từ \"implement\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"RabbitMQ implements AMQP 0-9-1 (port 5672, TLS 5671, management UI 15672).\", what does \"implement\" (verb) mean?",
+      "options": [
+        "phát minh ra",
+        "thay thế",
+        "hiện thực, triển khai",
+        "kiểm thử"
+      ],
+      "optionsEn": [
+        "to invent",
+        "to replace",
+        "to put into practice",
+        "to test"
+      ],
+      "answer": 2,
+      "explanation": "implement /ˈɪmplɪment/ (động từ): hiện thực, triển khai. \"Implement a protocol\" = hiện thực một giao thức; danh từ là implementation.",
+      "explanationEn": "implement /ˈɪmplɪment/ (verb): to put into practice. To implement a protocol is to build software that follows it; the noun is implementation."
+    },
+    {
+      "id": "v17",
+      "lessonId": "l2",
+      "word": "nameless",
+      "pos": "adj",
+      "ipa": "/ˈneɪmləs/",
+      "question": "Trong câu \"The nameless default exchange binds every queue by its own name\", từ \"nameless\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The nameless default exchange binds every queue by its own name\", what does \"nameless\" (adjective) mean?",
+      "options": [
+        "không có chủ",
+        "không có khóa",
+        "không có tên",
+        "không có hạn"
+      ],
+      "optionsEn": [
+        "having no owner",
+        "having no key",
+        "having no name",
+        "having no limit"
+      ],
+      "answer": 2,
+      "explanation": "nameless /ˈneɪmləs/ (tính từ): không có tên. Hậu tố -less = không có: nameless, stateless, serverless.",
+      "explanationEn": "nameless /ˈneɪmləs/ (adjective): having no name. The suffix -less means \"without\": nameless, stateless, serverless."
+    },
+    {
+      "id": "v18",
+      "lessonId": "l2",
+      "word": "bind",
+      "pos": "v",
+      "ipa": "/baɪnd/",
+      "question": "Trong câu \"The nameless default exchange binds every queue by its own name\", từ \"bind\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The nameless default exchange binds every queue by its own name\", what does \"bind\" (verb) mean?",
+      "options": [
+        "gắn kết, liên kết",
+        "đóng thành sách",
+        "tách riêng ra",
+        "gỡ bỏ, hủy"
+      ],
+      "optionsEn": [
+        "to attach or link",
+        "to fasten pages into a book",
+        "to split apart",
+        "to remove or cancel"
+      ],
+      "answer": 0,
+      "explanation": "bind /baɪnd/ (động từ): gắn kết, liên kết. Bind (quá khứ bound) = gắn kết; danh từ binding là liên kết giữa exchange và queue.",
+      "explanationEn": "bind /baɪnd/ (verb): to attach or link. Bind (past tense bound) means to link; a binding is the link between an exchange and a queue."
+    },
+    {
+      "id": "v19",
+      "lessonId": "l2",
+      "word": "reliability",
+      "pos": "n",
+      "ipa": "/rɪˌlaɪəˈbɪləti/",
+      "question": "Trong câu \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", từ \"reliability\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", what does \"reliability\" (noun) mean?",
+      "options": [
+        "độ phức tạp",
+        "tốc độ xử lý",
+        "chi phí vận hành",
+        "độ tin cậy"
+      ],
+      "optionsEn": [
+        "being complicated",
+        "being fast",
+        "being cheap",
+        "being dependable"
+      ],
+      "answer": 3,
+      "explanation": "reliability /rɪˌlaɪəˈbɪləti/ (danh từ): độ tin cậy. Reliability = độ tin cậy; tính từ là reliable.",
+      "explanationEn": "reliability /rɪˌlaɪəˈbɪləti/ (noun): being dependable. Reliability is how dependable a system is; the adjective is reliable."
+    },
+    {
+      "id": "v20",
+      "lessonId": "l2",
+      "word": "knob",
+      "pos": "n",
+      "ipa": "/nɒb/",
+      "question": "Trong câu \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", từ \"knob\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", what does \"knob\" (noun) mean?",
+      "options": [
+        "tay nắm cửa",
+        "thông số điều chỉnh",
+        "lỗi tiềm ẩn",
+        "giới hạn cứng"
+      ],
+      "optionsEn": [
+        "a door handle",
+        "an adjustable setting",
+        "a hidden bug",
+        "a hard limit"
+      ],
+      "answer": 1,
+      "explanation": "knob /nɒb/ (danh từ): thông số điều chỉnh. Knob nghĩa đen là núm vặn, tay nắm; nghĩa bóng là thông số có thể chỉnh.",
+      "explanationEn": "knob /nɒb/ (noun): an adjustable setting. A knob is literally a round handle or dial; figuratively it is a setting you can tune."
+    },
+    {
+      "id": "v21",
+      "lessonId": "l2",
+      "word": "redeliver",
+      "pos": "v",
+      "ipa": "/ˌriːdɪˈlɪvə(r)/",
+      "question": "Trong câu \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", từ \"redeliver\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", what does \"redeliver\" (verb) mean?",
+      "options": [
+        "từ chối nhận",
+        "giao lại lần nữa",
+        "xóa vĩnh viễn",
+        "chuyển tiếp đi"
+      ],
+      "optionsEn": [
+        "to refuse to accept",
+        "to deliver again",
+        "to delete permanently",
+        "to forward onward"
+      ],
+      "answer": 1,
+      "explanation": "redeliver /ˌriːdɪˈlɪvə(r)/ (động từ): giao lại lần nữa. Tiền tố re- = lại: redeliver, requeue, retry.",
+      "explanationEn": "redeliver /ˌriːdɪˈlɪvə(r)/ (verb): to deliver again. The prefix re- means \"again\": redeliver, requeue, retry."
+    },
+    {
+      "id": "v22",
+      "lessonId": "l2",
+      "word": "cap",
+      "pos": "v",
+      "ipa": "/kæp/",
+      "question": "Trong câu \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", từ \"cap\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", what does \"cap\" (verb) mean?",
+      "options": [
+        "đậy nắp, che đầu",
+        "tăng lên gấp đôi",
+        "ghi vào nhật ký",
+        "giới hạn mức tối đa"
+      ],
+      "optionsEn": [
+        "to cover the top",
+        "to double in size",
+        "to write to a log",
+        "to set an upper limit"
+      ],
+      "answer": 3,
+      "explanation": "cap /kæp/ (động từ): giới hạn mức tối đa. Cap (động từ) = đặt mức trần; danh từ cap là mức trần, cũng là cái mũ hoặc nắp.",
+      "explanationEn": "cap /kæp/ (verb): to set an upper limit. To cap is to set a maximum; as a noun, cap is a limit or a hat or lid."
+    },
+    {
+      "id": "v23",
+      "lessonId": "l2",
+      "word": "hoard",
+      "pos": "v",
+      "ipa": "/hɔːd/",
+      "question": "Trong câu \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", từ \"hoard\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", what does \"hoard\" (verb) mean?",
+      "options": [
+        "ôm giữ quá nhiều",
+        "chia ra đều nhau",
+        "bỏ qua hết",
+        "xử lý rất nhanh"
+      ],
+      "optionsEn": [
+        "to grab and keep too many",
+        "to share out evenly",
+        "to skip over entirely",
+        "to process very fast"
+      ],
+      "answer": 0,
+      "explanation": "hoard /hɔːd/ (động từ): ôm giữ quá nhiều. Hoard = tích trữ, ôm giữ; prefetch ngăn một worker chậm ôm hàng nghìn message.",
+      "explanationEn": "hoard /hɔːd/ (verb): to grab and keep too many. To hoard is to stockpile for yourself; prefetch stops one slow worker holding thousands of messages."
+    },
+    {
+      "id": "v24",
+      "lessonId": "l2",
+      "word": "persistent",
+      "pos": "adj",
+      "ipa": "/pəˈsɪstənt/",
+      "question": "Trong câu \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", từ \"persistent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", what does \"persistent\" (adjective) mean?",
+      "options": [
+        "kiên trì, bền bỉ",
+        "chỉ nằm trong RAM",
+        "được ghi bền xuống đĩa",
+        "được nén nhỏ lại"
+      ],
+      "optionsEn": [
+        "determined, not giving up",
+        "kept only in memory",
+        "saved to survive restarts",
+        "compressed to be small"
+      ],
+      "answer": 2,
+      "explanation": "persistent /pəˈsɪstənt/ (tính từ): được ghi bền xuống đĩa. Persistent message được ghi xuống đĩa; nói về người, persistent nghĩa là kiên trì.",
+      "explanationEn": "persistent /pəˈsɪstənt/ (adjective): saved to survive restarts. A persistent message is written to disk; about a person, persistent means determined."
+    },
+    {
+      "id": "v25",
+      "lessonId": "l2",
+      "word": "quorum",
+      "pos": "n",
+      "ipa": "/ˈkwɔːrəm/",
+      "question": "Trong câu \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", từ \"quorum\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", what does \"quorum\" (noun) mean?",
+      "options": [
+        "toàn bộ các thành viên",
+        "người đứng đầu nhóm",
+        "đa số tối thiểu để thông qua",
+        "bản sao lưu dự phòng"
+      ],
+      "optionsEn": [
+        "every member of a group",
+        "the leader of a group",
+        "a minimum majority to decide",
+        "a spare backup copy"
+      ],
+      "answer": 2,
+      "explanation": "quorum /ˈkwɔːrəm/ (danh từ): đa số tối thiểu để thông qua. Quorum = số thành viên tối thiểu (thường là đa số) cần đồng ý; quorum queue chỉ ghi nhận khi đa số node xác nhận.",
+      "explanationEn": "quorum /ˈkwɔːrəm/ (noun): a minimum majority to decide. A quorum is the minimum number, usually a majority, that must agree; a quorum queue confirms once most nodes have the message."
+    },
+    {
+      "id": "v26",
+      "lessonId": "l2",
+      "word": "mirrored",
+      "pos": "adj",
+      "ipa": "/ˈmɪrəd/",
+      "question": "Trong câu \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", từ \"mirrored\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Reliability knobs: consumer acks (un-acked messages are redelivered; auto-ack means at-most-once), prefetch (basic.qos, caps un-acked messages per consumer so one slow worker cannot hoard thousands), publisher confirms, durable queues + persistent messages, and quorum queues (Raft-replicated; classic mirrored queues were removed in RabbitMQ 4.0).\", what does \"mirrored\" (adjective) mean?",
+      "options": [
+        "được sao y sang node khác",
+        "bị đảo ngược trái phải",
+        "bị khóa tạm thời",
+        "được chia thành phần"
+      ],
+      "optionsEn": [
+        "copied onto other nodes",
+        "flipped left to right",
+        "temporarily locked",
+        "split into parts"
+      ],
+      "answer": 0,
+      "explanation": "mirrored /ˈmɪrəd/ (tính từ): được sao y sang node khác. Mirror = gương; mirrored queue là hàng đợi được sao y sang node khác.",
+      "explanationEn": "mirrored /ˈmɪrəd/ (adjective): copied onto other nodes. A mirror reflects an image; a mirrored queue is copied to other nodes."
+    },
+    {
+      "id": "v27",
+      "lessonId": "l2",
+      "word": "ignore",
+      "pos": "v",
+      "ipa": "/ɪɡˈnɔː(r)/",
+      "question": "Trong câu \"Ignores the key, copies to all bound queues\", từ \"ignore\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Ignores the key, copies to all bound queues\", what does \"ignore\" (verb) mean?",
+      "options": [
+        "kiểm tra kỹ",
+        "ghi đè lên",
+        "mã hóa lại",
+        "bỏ qua, không xét"
+      ],
+      "optionsEn": [
+        "to check carefully",
+        "to write over",
+        "to encode again",
+        "to pay no attention to"
+      ],
+      "answer": 3,
+      "explanation": "ignore /ɪɡˈnɔː(r)/ (động từ): bỏ qua, không xét. Fanout exchange ignores the key = không xét routing key, gửi bản sao cho mọi queue.",
+      "explanationEn": "ignore /ɪɡˈnɔː(r)/ (verb): to pay no attention to. A fanout exchange ignores the routing key and copies the message to every bound queue."
+    },
+    {
+      "id": "v28",
+      "lessonId": "l3",
+      "word": "distributed",
+      "pos": "adj",
+      "ipa": "/dɪˈstrɪbjuːtɪd/",
+      "question": "Trong câu \"Kafka is a distributed commit log (port 9092).\", từ \"distributed\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Kafka is a distributed commit log (port 9092).\", what does \"distributed\" (adjective) mean?",
+      "options": [
+        "tập trung một chỗ",
+        "phân tán trên nhiều máy",
+        "được phát miễn phí",
+        "được sắp xếp thứ tự"
+      ],
+      "optionsEn": [
+        "kept in one place",
+        "spread across many machines",
+        "handed out for free",
+        "sorted into order"
+      ],
+      "answer": 1,
+      "explanation": "distributed /dɪˈstrɪbjuːtɪd/ (tính từ): phân tán trên nhiều máy. Distributed system = hệ phân tán chạy trên nhiều máy; động từ distribute còn nghĩa là phân phát.",
+      "explanationEn": "distributed /dɪˈstrɪbjuːtɪd/ (adjective): spread across many machines. A distributed system runs across many machines; the verb distribute can also mean to hand out."
+    },
+    {
+      "id": "v29",
+      "lessonId": "l3",
+      "word": "append",
+      "pos": "v",
+      "ipa": "/əˈpend/",
+      "question": "Trong câu \"The broker appends records to files and serves them by offset; consumers do the bookkeeping.\", từ \"append\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The broker appends records to files and serves them by offset; consumers do the bookkeeping.\", what does \"append\" (verb) mean?",
+      "options": [
+        "chèn vào đầu",
+        "nối thêm vào cuối",
+        "xóa khỏi giữa",
+        "sắp xếp lại"
+      ],
+      "optionsEn": [
+        "to insert at the start",
+        "to add at the end",
+        "to remove from the middle",
+        "to put in a new order"
+      ],
+      "answer": 1,
+      "explanation": "append /əˈpend/ (động từ): nối thêm vào cuối. Append-only = chỉ ghi nối vào cuối, không sửa bản ghi cũ.",
+      "explanationEn": "append /əˈpend/ (verb): to add at the end. Append-only means you only add to the end and never change old records."
+    },
+    {
+      "id": "v30",
+      "lessonId": "l3",
+      "word": "bookkeeping",
+      "pos": "n",
+      "ipa": "/ˈbʊkkiːpɪŋ/",
+      "question": "Trong câu \"The broker appends records to files and serves them by offset; consumers do the bookkeeping.\", từ \"bookkeeping\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The broker appends records to files and serves them by offset; consumers do the bookkeeping.\", what does \"bookkeeping\" (noun) mean?",
+      "options": [
+        "việc phân quyền",
+        "việc định tuyến",
+        "việc nén dữ liệu",
+        "việc theo dõi, ghi sổ"
+      ],
+      "optionsEn": [
+        "granting permissions",
+        "routing traffic",
+        "compressing data",
+        "keeping track of records"
+      ],
+      "answer": 3,
+      "explanation": "bookkeeping /ˈbʊkkiːpɪŋ/ (danh từ): việc theo dõi, ghi sổ. Bookkeeping gốc là ghi sổ kế toán; trong kỹ thuật là việc theo dõi trạng thái như offset.",
+      "explanationEn": "bookkeeping /ˈbʊkkiːpɪŋ/ (noun): keeping track of records. Bookkeeping originally means keeping financial records; in software it means tracking state such as offsets."
+    },
+    {
+      "id": "v31",
+      "lessonId": "l3",
+      "word": "retention",
+      "pos": "n",
+      "ipa": "/rɪˈtenʃn/",
+      "question": "Trong câu \"Data is kept for a retention period (log.retention.hours default 168 = 7 days) whether or not anyone read it.\", từ \"retention\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Data is kept for a retention period (log.retention.hours default 168 = 7 days) whether or not anyone read it.\", what does \"retention\" (noun) mean?",
+      "options": [
+        "sự lưu giữ",
+        "sự sao chép",
+        "sự trì hoãn",
+        "sự loại bỏ"
+      ],
+      "optionsEn": [
+        "the keeping of something",
+        "the copying of something",
+        "the delaying of something",
+        "the removal of something"
+      ],
+      "answer": 0,
+      "explanation": "retention /rɪˈtenʃn/ (danh từ): sự lưu giữ. Retention period = thời gian lưu giữ; động từ là retain.",
+      "explanationEn": "retention /rɪˈtenʃn/ (noun): the keeping of something. The retention period is how long data is kept; the verb is retain."
+    },
+    {
+      "id": "v32",
+      "lessonId": "l3",
+      "word": "compaction",
+      "pos": "n",
+      "ipa": "/kəmˈpækʃn/",
+      "question": "Trong câu \"Log compaction instead keeps the latest record per key.\", từ \"compaction\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Log compaction instead keeps the latest record per key.\", what does \"compaction\" (noun) mean?",
+      "options": [
+        "sự mở rộng ra",
+        "sự phân mảnh",
+        "sự nén gọn lại",
+        "sự đồng bộ"
+      ],
+      "optionsEn": [
+        "making larger",
+        "breaking into fragments",
+        "making smaller and denser",
+        "keeping in sync"
+      ],
+      "answer": 2,
+      "explanation": "compaction /kəmˈpækʃn/ (danh từ): sự nén gọn lại. Log compaction nén gọn log, chỉ giữ bản ghi mới nhất cho mỗi key.",
+      "explanationEn": "compaction /kəmˈpækʃn/ (noun): making smaller and denser. Log compaction shrinks the log by keeping only the latest record for each key."
+    },
+    {
+      "id": "v33",
+      "lessonId": "l3",
+      "word": "replica",
+      "pos": "n",
+      "ipa": "/ˈreplɪkə/",
+      "question": "Trong câu \"Each partition has a leader and followers on other brokers; caught-up followers form the ISR (in-sync replicas).\", từ \"replica\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each partition has a leader and followers on other brokers; caught-up followers form the ISR (in-sync replicas).\", what does \"replica\" (noun) mean?",
+      "options": [
+        "bản gốc",
+        "bản nháp",
+        "bản sao",
+        "bản vá"
+      ],
+      "optionsEn": [
+        "the original",
+        "a rough draft",
+        "an exact copy",
+        "a fix patch"
+      ],
+      "answer": 2,
+      "explanation": "replica /ˈreplɪkə/ (danh từ): bản sao. Replica = bản sao; replication là sự nhân bản, replication factor là số bản sao.",
+      "explanationEn": "replica /ˈreplɪkə/ (noun): an exact copy. A replica is a copy; replication is the copying, and the replication factor is how many copies exist."
+    },
+    {
+      "id": "v34",
+      "lessonId": "l3",
+      "word": "acknowledge",
+      "pos": "v",
+      "ipa": "/əkˈnɒlɪdʒ/",
+      "question": "Trong câu \"With these, a write is acknowledged only when two replicas have it: one broker can die with no data loss.\", từ \"acknowledge\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"With these, a write is acknowledged only when two replicas have it: one broker can die with no data loss.\", what does \"acknowledge\" (verb) mean?",
+      "options": [
+        "xác nhận đã nhận",
+        "thừa nhận lỗi lầm",
+        "từ chối tiếp nhận",
+        "gửi đi lần nữa"
+      ],
+      "optionsEn": [
+        "to confirm receipt",
+        "to admit a mistake",
+        "to refuse to accept",
+        "to send again"
+      ],
+      "answer": 0,
+      "explanation": "acknowledge /əkˈnɒlɪdʒ/ (động từ): xác nhận đã nhận. Acknowledge (viết tắt ack) = xác nhận đã nhận; trong đời thường còn nghĩa là thừa nhận.",
+      "explanationEn": "acknowledge /əkˈnɒlɪdʒ/ (verb): to confirm receipt. Acknowledge (short form ack) means to confirm receipt; in daily speech it can also mean to admit."
+    },
+    {
+      "id": "v35",
+      "lessonId": "l3",
+      "word": "consistency",
+      "pos": "n",
+      "ipa": "/kənˈsɪstənsi/",
+      "question": "Trong câu \"If fewer replicas are in sync, producers get NotEnoughReplicas — Kafka picks consistency over availability.\", từ \"consistency\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"If fewer replicas are in sync, producers get NotEnoughReplicas — Kafka picks consistency over availability.\", what does \"consistency\" (noun) mean?",
+      "options": [
+        "độ đặc của chất lỏng",
+        "tính sẵn sàng phục vụ",
+        "tốc độ ghi dữ liệu",
+        "tính nhất quán dữ liệu"
+      ],
+      "optionsEn": [
+        "thickness of a liquid",
+        "being ready to serve",
+        "speed of writing data",
+        "data agreeing everywhere"
+      ],
+      "answer": 3,
+      "explanation": "consistency /kənˈsɪstənsi/ (danh từ): tính nhất quán dữ liệu. Consistency trong định lý CAP = mọi bản sao thấy cùng dữ liệu; Kafka ưu tiên nó hơn availability.",
+      "explanationEn": "consistency /kənˈsɪstənsi/ (noun): data agreeing everywhere. In CAP terms, consistency means every replica sees the same data; Kafka prefers it over availability."
+    },
+    {
+      "id": "v36",
+      "lessonId": "l3",
+      "word": "entirely",
+      "pos": "adv",
+      "ipa": "/ɪnˈtaɪəli/",
+      "question": "Trong câu \"Metadata used to live in ZooKeeper; Kafka now uses KRaft (built-in Raft controllers), and Kafka 4.0 removed ZooKeeper entirely.\", từ \"entirely\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Metadata used to live in ZooKeeper; Kafka now uses KRaft (built-in Raft controllers), and Kafka 4.0 removed ZooKeeper entirely.\", what does \"entirely\" (adverb) mean?",
+      "options": [
+        "một phần",
+        "hoàn toàn",
+        "tạm thời",
+        "dần dần"
+      ],
+      "optionsEn": [
+        "partly",
+        "completely",
+        "temporarily",
+        "gradually"
+      ],
+      "answer": 1,
+      "explanation": "entirely /ɪnˈtaɪəli/ (trạng từ): hoàn toàn. \"Removed ZooKeeper entirely\" = loại bỏ hoàn toàn, không còn chế độ dùng ZooKeeper.",
+      "explanationEn": "entirely /ɪnˈtaɪəli/ (adverb): completely. \"Removed ZooKeeper entirely\" means it is gone completely, with no ZooKeeper mode left."
+    },
+    {
+      "id": "v37",
+      "lessonId": "l3",
+      "word": "assign",
+      "pos": "v",
+      "ipa": "/əˈsaɪn/",
+      "question": "Trong câu \"Each partition is assigned to exactly one consumer in the group — parallelism plus per-partition order.\", từ \"assign\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each partition is assigned to exactly one consumer in the group — parallelism plus per-partition order.\", what does \"assign\" (verb) mean?",
+      "options": [
+        "chuyển nhượng quyền",
+        "gán, phân công",
+        "thu hồi lại",
+        "dùng chung"
+      ],
+      "optionsEn": [
+        "to transfer legal rights",
+        "to allocate to someone",
+        "to take back",
+        "to use jointly"
+      ],
+      "answer": 1,
+      "explanation": "assign /əˈsaɪn/ (động từ): gán, phân công. \"Be assigned to\" = được gán cho; mỗi partition được giao cho đúng một consumer trong nhóm.",
+      "explanationEn": "assign /əˈsaɪn/ (verb): to allocate to someone. \"Be assigned to\" means to be given to; each partition goes to exactly one consumer in the group."
+    },
+    {
+      "id": "v38",
+      "lessonId": "l3",
+      "word": "parallelism",
+      "pos": "n",
+      "ipa": "/ˈpærəlelɪzəm/",
+      "question": "Trong câu \"Each partition is assigned to exactly one consumer in the group — parallelism plus per-partition order.\", từ \"parallelism\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Each partition is assigned to exactly one consumer in the group — parallelism plus per-partition order.\", what does \"parallelism\" (noun) mean?",
+      "options": [
+        "việc lặp lại",
+        "việc chạy tuần tự",
+        "việc so sánh",
+        "việc chạy song song"
+      ],
+      "optionsEn": [
+        "doing work repeatedly",
+        "doing work one by one",
+        "comparing similar things",
+        "doing work at the same time"
+      ],
+      "answer": 3,
+      "explanation": "parallelism /ˈpærəlelɪzəm/ (danh từ): việc chạy song song. Parallelism = mức độ song song; số consumer làm việc hiệu quả tối đa bằng số partition.",
+      "explanationEn": "parallelism /ˈpærəlelɪzəm/ (noun): doing work at the same time. Parallelism is how much work runs at once; useful consumers are capped by the partition count."
+    },
+    {
+      "id": "v39",
+      "lessonId": "l3",
+      "word": "exceed",
+      "pos": "v",
+      "ipa": "/ɪkˈsiːd/",
+      "question": "Trong câu \"Rebalances happen when consumers join, leave, or exceed max.poll.interval.ms (default 5 min) — slow work inside the poll loop causes rebalance storms.\", từ \"exceed\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Rebalances happen when consumers join, leave, or exceed max.poll.interval.ms (default 5 min) — slow work inside the poll loop causes rebalance storms.\", what does \"exceed\" (verb) mean?",
+      "options": [
+        "vượt quá",
+        "đạt tới",
+        "giảm xuống",
+        "giữ nguyên"
+      ],
+      "optionsEn": [
+        "to go beyond",
+        "to reach",
+        "to fall below",
+        "to stay equal"
+      ],
+      "answer": 0,
+      "explanation": "exceed /ɪkˈsiːd/ (động từ): vượt quá. \"Exceed a limit\" = vượt quá giới hạn; poll chậm quá max.poll.interval.ms sẽ gây rebalance.",
+      "explanationEn": "exceed /ɪkˈsiːd/ (verb): to go beyond. To exceed a limit is to go past it; polling slower than max.poll.interval.ms triggers a rebalance."
+    },
+    {
+      "id": "v40",
+      "lessonId": "l3",
+      "word": "lag",
+      "pos": "n",
+      "ipa": "/læɡ/",
+      "question": "Trong câu \"Growing lag is the key health signal.\", từ \"lag\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Growing lag is the key health signal.\", what does \"lag\" (noun) mean?",
+      "options": [
+        "sự tăng tốc đột ngột",
+        "lỗi kết nối mạng",
+        "khoảng tụt lại phía sau",
+        "vùng nhớ đệm tạm"
+      ],
+      "optionsEn": [
+        "a sudden speed-up",
+        "a network connection error",
+        "the gap left behind",
+        "a temporary buffer area"
+      ],
+      "answer": 2,
+      "explanation": "lag /læɡ/ (danh từ): khoảng tụt lại phía sau. Consumer lag = số message consumer còn tụt lại so với cuối log; lag tăng dần là dấu hiệu có sự cố.",
+      "explanationEn": "lag /læɡ/ (noun): the gap left behind. Consumer lag is how far a consumer is behind the end of the log; steadily growing lag signals trouble."
+    },
+    {
+      "id": "v41",
+      "lessonId": "l3",
+      "word": "classic",
+      "pos": "adj",
+      "ipa": "/ˈklæsɪk/",
+      "question": "Trong câu \"A classic mistake is using Kafka as a job queue: one slow or poison message blocks its partition (head-of-line blocking), and per-message retry must be hand-built.\", từ \"classic\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A classic mistake is using Kafka as a job queue: one slow or poison message blocks its partition (head-of-line blocking), and per-message retry must be hand-built.\", what does \"classic\" (adjective) mean?",
+      "options": [
+        "cổ điển, lỗi thời",
+        "hiếm khi gặp",
+        "điển hình, hay gặp",
+        "rất nghiêm trọng"
+      ],
+      "optionsEn": [
+        "old-fashioned, dated",
+        "rarely seen",
+        "typical, well-known",
+        "very severe"
+      ],
+      "answer": 2,
+      "explanation": "classic /ˈklæsɪk/ (tính từ): điển hình, hay gặp. \"A classic mistake\" = lỗi điển hình mà nhiều người hay mắc.",
+      "explanationEn": "classic /ˈklæsɪk/ (adjective): typical, well-known. \"A classic mistake\" is a typical error that many people make."
+    },
+    {
+      "id": "v42",
+      "lessonId": "l3",
+      "word": "hand-built",
+      "pos": "adj",
+      "ipa": "/ˌhændˈbɪlt/",
+      "question": "Trong câu \"A classic mistake is using Kafka as a job queue: one slow or poison message blocks its partition (head-of-line blocking), and per-message retry must be hand-built.\", từ \"hand-built\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"A classic mistake is using Kafka as a job queue: one slow or poison message blocks its partition (head-of-line blocking), and per-message retry must be hand-built.\", what does \"hand-built\" (adjective) mean?",
+      "options": [
+        "tự viết thủ công",
+        "có sẵn tích hợp",
+        "tự động sinh ra",
+        "mua từ bên ngoài"
+      ],
+      "optionsEn": [
+        "made manually by yourself",
+        "provided built-in",
+        "generated automatically",
+        "bought from outside"
+      ],
+      "answer": 0,
+      "explanation": "hand-built /ˌhændˈbɪlt/ (tính từ): tự viết thủ công. Hand-built = tự xây dựng thủ công, trái với built-in (có sẵn).",
+      "explanationEn": "hand-built /ˌhændˈbɪlt/ (adjective): made manually by yourself. Hand-built means you must write it yourself, the opposite of built-in."
+    },
+    {
+      "id": "v43",
+      "lessonId": "l4",
+      "word": "boundary",
+      "pos": "n",
+      "ipa": "/ˈbaʊndri/",
+      "question": "Trong câu \"systems offer exactly-once processing inside a boundary\", từ \"boundary\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"systems offer exactly-once processing inside a boundary\", what does \"boundary\" (noun) mean?",
+      "options": [
+        "điểm khởi đầu",
+        "cổng kết nối",
+        "vùng lưu trữ",
+        "ranh giới, phạm vi"
+      ],
+      "optionsEn": [
+        "a starting point",
+        "a connection port",
+        "a storage area",
+        "a limit or border"
+      ],
+      "answer": 3,
+      "explanation": "boundary /ˈbaʊndri/ (danh từ): ranh giới, phạm vi. \"Inside a boundary\" = trong một phạm vi giới hạn, ví dụ chỉ trong Kafka → Kafka.",
+      "explanationEn": "boundary /ˈbaʊndri/ (noun): a limit or border. \"Inside a boundary\" means within a limited scope, such as Kafka to Kafka only."
+    },
+    {
+      "id": "v44",
+      "lessonId": "l4",
+      "word": "external",
+      "pos": "adj",
+      "ipa": "/ɪkˈstɜːnl/",
+      "question": "Trong câu \"It holds only Kafka → Kafka; an external DB or API call puts you back at at-least-once.\", từ \"external\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"It holds only Kafka → Kafka; an external DB or API call puts you back at at-least-once.\", what does \"external\" (adjective) mean?",
+      "options": [
+        "nội bộ",
+        "bên ngoài",
+        "tạm thời",
+        "chính thức"
+      ],
+      "optionsEn": [
+        "internal",
+        "outside",
+        "temporary",
+        "official"
+      ],
+      "answer": 1,
+      "explanation": "external /ɪkˈstɜːnl/ (tính từ): bên ngoài. External DB/API = hệ thống bên ngoài Kafka; trái nghĩa là internal.",
+      "explanationEn": "external /ɪkˈstɜːnl/ (adjective): outside. An external DB or API lives outside Kafka; the opposite is internal."
+    },
+    {
+      "id": "v45",
+      "lessonId": "l4",
+      "word": "window",
+      "pos": "n",
+      "ipa": "/ˈwɪndəʊ/",
+      "question": "Trong câu \"SQS FIFO — drops messages with the same deduplication ID within a 5-minute window.\", từ \"window\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"SQS FIFO — drops messages with the same deduplication ID within a 5-minute window.\", what does \"window\" (noun) mean?",
+      "options": [
+        "cửa sổ trên tường",
+        "khoảng thời gian",
+        "vùng bộ nhớ",
+        "màn hình ứng dụng"
+      ],
+      "optionsEn": [
+        "an opening in a wall",
+        "a limited period of time",
+        "an area of memory",
+        "an application screen"
+      ],
+      "answer": 1,
+      "explanation": "window /ˈwɪndəʊ/ (danh từ): khoảng thời gian. \"Time window\" = khung thời gian; SQS FIFO khử trùng lặp trong khung 5 phút.",
+      "explanationEn": "window /ˈwɪndəʊ/ (noun): a limited period of time. A time window is a limited period; SQS FIFO removes duplicates within five minutes."
+    },
+    {
+      "id": "v46",
+      "lessonId": "l4",
+      "word": "idempotent",
+      "pos": "adj",
+      "ipa": "/ˌaɪdəmˈpəʊtənt/",
+      "question": "Trong câu \"Idempotent means applying a message twice has the same effect as once.\", từ \"idempotent\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Idempotent means applying a message twice has the same effect as once.\", what does \"idempotent\" (adjective) mean?",
+      "options": [
+        "lặp lại thì chạy nhanh hơn",
+        "chỉ chạy được một lần",
+        "mỗi lần cho kết quả khác",
+        "lặp lại vẫn cùng kết quả"
+      ],
+      "optionsEn": [
+        "faster when repeated",
+        "able to run only once",
+        "different result each time",
+        "same result when repeated"
+      ],
+      "answer": 3,
+      "explanation": "idempotent /ˌaɪdəmˈpəʊtənt/ (tính từ): lặp lại vẫn cùng kết quả. Idempotent: áp dụng hai lần có tác dụng như một lần; danh từ là idempotency.",
+      "explanationEn": "idempotent /ˌaɪdəmˈpəʊtənt/ (adjective): same result when repeated. Idempotent means doing it twice has the same effect as once; the noun is idempotency."
+    },
+    {
+      "id": "v47",
+      "lessonId": "l4",
+      "word": "naturally",
+      "pos": "adv",
+      "ipa": "/ˈnætʃrəli/",
+      "question": "Trong câu \"Naturally idempotent writes — SET status = 'SHIPPED' or an upsert is safe; balance = balance - 10 is not.\", từ \"naturally\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Naturally idempotent writes — SET status = 'SHIPPED' or an upsert is safe; balance = balance - 10 is not.\", what does \"naturally\" (adverb) mean?",
+      "options": [
+        "vốn dĩ, tự bản chất",
+        "một cách ngẫu nhiên",
+        "một cách miễn cưỡng",
+        "một cách tạm thời"
+      ],
+      "optionsEn": [
+        "by its own nature",
+        "by random chance",
+        "with reluctance",
+        "for a short time"
+      ],
+      "answer": 0,
+      "explanation": "naturally /ˈnætʃrəli/ (trạng từ): vốn dĩ, tự bản chất. Naturally idempotent = tự bản chất đã idempotent, không cần thêm cơ chế nào.",
+      "explanationEn": "naturally /ˈnætʃrəli/ (adverb): by its own nature. Naturally idempotent means safe to repeat by design, with no extra mechanism."
+    },
+    {
+      "id": "v48",
+      "lessonId": "l4",
+      "word": "conditional",
+      "pos": "adj",
+      "ipa": "/kənˈdɪʃənl/",
+      "question": "Trong câu \"Conditional writes — UPDATE ... WHERE version = 7; a replay finds version 8 and does nothing.\", từ \"conditional\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Conditional writes — UPDATE ... WHERE version = 7; a replay finds version 8 and does nothing.\", what does \"conditional\" (adjective) mean?",
+      "options": [
+        "vô điều kiện",
+        "không đồng bộ",
+        "có điều kiện",
+        "định kỳ"
+      ],
+      "optionsEn": [
+        "without any condition",
+        "not synchronized",
+        "depending on a condition",
+        "happening regularly"
+      ],
+      "answer": 2,
+      "explanation": "conditional /kənˈdɪʃənl/ (tính từ): có điều kiện. Conditional write chỉ ghi khi điều kiện (ví dụ version = 7) còn đúng.",
+      "explanationEn": "conditional /kənˈdɪʃənl/ (adjective): depending on a condition. A conditional write only succeeds while its condition, such as version = 7, still holds."
+    },
+    {
+      "id": "v49",
+      "lessonId": "l4",
+      "word": "side effect",
+      "pos": "phrase",
+      "ipa": "/ˈsaɪd ɪfekt/",
+      "question": "Trong câu \"Dedup table — record the event ID in the same transaction as the side effect.\", từ \"side effect\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Dedup table — record the event ID in the same transaction as the side effect.\", what does \"side effect\" (phrase) mean?",
+      "options": [
+        "tác dụng phụ của thuốc",
+        "lỗi cú pháp trong code",
+        "tác động làm đổi trạng thái",
+        "giá trị hàm trả về"
+      ],
+      "optionsEn": [
+        "an unwanted drug reaction",
+        "a syntax error in code",
+        "a change made to state",
+        "a value a function returns"
+      ],
+      "answer": 2,
+      "explanation": "side effect /ˈsaɪd ɪfekt/ (cụm từ): tác động làm đổi trạng thái. Side effect trong lập trình là thay đổi bên ngoài hàm (ghi DB, trừ tiền); trong y khoa là tác dụng phụ.",
+      "explanationEn": "side effect /ˈsaɪd ɪfekt/ (phrase): a change made to state. In programming a side effect is a change outside the function, such as a DB write; in medicine it is an unwanted reaction."
+    },
+    {
+      "id": "v50",
+      "lessonId": "l4",
+      "word": "receipt",
+      "pos": "n",
+      "ipa": "/rɪˈsiːt/",
+      "question": "Trong câu \"Use an event ID created by the producer, not a broker delivery ID (an SQS receipt handle changes on every receive).\", từ \"receipt\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Use an event ID created by the producer, not a broker delivery ID (an SQS receipt handle changes on every receive).\", what does \"receipt\" (noun) mean?",
+      "options": [
+        "việc nhận, biên nhận",
+        "công thức nấu ăn",
+        "yêu cầu gửi đi",
+        "lỗi hết thời gian"
+      ],
+      "optionsEn": [
+        "proof of receiving",
+        "a cooking recipe",
+        "an outgoing request",
+        "a timeout error"
+      ],
+      "answer": 0,
+      "explanation": "receipt /rɪˈsiːt/ (danh từ): việc nhận, biên nhận. Receipt /rɪˈsiːt/ (chữ p câm) = sự nhận, biên nhận; receipt handle thay đổi sau mỗi lần nhận.",
+      "explanationEn": "receipt /rɪˈsiːt/ (noun): proof of receiving. Receipt /rɪˈsiːt/ (silent p) means the act or proof of receiving; do not confuse it with recipe."
+    },
+    {
+      "id": "v51",
+      "lessonId": "l4",
+      "word": "atomic",
+      "pos": "adj",
+      "ipa": "/əˈtɒmɪk/",
+      "question": "Trong câu \"Dedup insert and side effect must be atomic; two commits recreate the gap.\", từ \"atomic\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Dedup insert and side effect must be atomic; two commits recreate the gap.\", what does \"atomic\" (adjective) mean?",
+      "options": [
+        "thuộc về hạt nhân",
+        "chạy song song",
+        "được mã hóa",
+        "trọn vẹn, không chia cắt"
+      ],
+      "optionsEn": [
+        "relating to nuclear energy",
+        "running in parallel",
+        "being encrypted",
+        "all-or-nothing, indivisible"
+      ],
+      "answer": 3,
+      "explanation": "atomic /əˈtɒmɪk/ (tính từ): trọn vẹn, không chia cắt. Atomic operation = thao tác trọn gói: hoặc thành công hết hoặc không có gì thay đổi.",
+      "explanationEn": "atomic /əˈtɒmɪk/ (adjective): all-or-nothing, indivisible. An atomic operation is all-or-nothing: either every part succeeds or nothing changes."
+    },
+    {
+      "id": "v52",
+      "lessonId": "l4",
+      "word": "expire",
+      "pos": "v",
+      "ipa": "/ɪkˈspaɪə(r)/",
+      "question": "Trong câu \"Expire dedup rows only after your maximum redelivery/replay window.\", từ \"expire\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Expire dedup rows only after your maximum redelivery/replay window.\", what does \"expire\" (verb) mean?",
+      "options": [
+        "gia hạn thêm",
+        "cho hết hạn",
+        "tạo mới lại",
+        "khóa tạm lại"
+      ],
+      "optionsEn": [
+        "to extend further",
+        "to let run out",
+        "to create anew",
+        "to lock for now"
+      ],
+      "answer": 1,
+      "explanation": "expire /ɪkˈspaɪə(r)/ (động từ): cho hết hạn. Expire = hết hạn; ở đây là cho các dòng dedup hết hạn và xóa sau cửa sổ redelivery.",
+      "explanationEn": "expire /ɪkˈspaɪə(r)/ (verb): to let run out. Expire means to reach the end of a valid period; here dedup rows are removed after the redelivery window."
+    },
+    {
+      "id": "v53",
+      "lessonId": "l4",
+      "word": "conflict",
+      "pos": "v",
+      "ipa": "/kənˈflɪkt/",
+      "question": "Trong câu \"Global order and horizontal scale conflict: one ordered stream means one consumer.\", từ \"conflict\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Global order and horizontal scale conflict: one ordered stream means one consumer.\", what does \"conflict\" (verb) mean?",
+      "options": [
+        "bổ trợ cho nhau",
+        "mâu thuẫn, xung khắc",
+        "đi đôi với nhau",
+        "thay thế nhau"
+      ],
+      "optionsEn": [
+        "to support each other",
+        "to clash with each other",
+        "to go together",
+        "to replace each other"
+      ],
+      "answer": 1,
+      "explanation": "conflict /kənˈflɪkt/ (động từ): mâu thuẫn, xung khắc. Động từ conflict /kənˈflɪkt/ nhấn âm 2; danh từ /ˈkɒnflɪkt/ nhấn âm 1.",
+      "explanationEn": "conflict /kənˈflɪkt/ (verb): to clash with each other. The verb conflict /kənˈflɪkt/ stresses the second syllable; the noun /ˈkɒnflɪkt/ stresses the first."
+    },
+    {
+      "id": "v54",
+      "lessonId": "l4",
+      "word": "horizontal",
+      "pos": "adj",
+      "ipa": "/ˌhɒrɪˈzɒntl/",
+      "question": "Trong câu \"Global order and horizontal scale conflict: one ordered stream means one consumer.\", từ \"horizontal\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Global order and horizontal scale conflict: one ordered stream means one consumer.\", what does \"horizontal\" (adjective) mean?",
+      "options": [
+        "nâng cấp một máy mạnh",
+        "theo đường chéo",
+        "theo thứ bậc",
+        "mở rộng bằng thêm máy"
+      ],
+      "optionsEn": [
+        "by using a bigger machine",
+        "along a diagonal",
+        "by rank order",
+        "by adding more machines"
+      ],
+      "answer": 3,
+      "explanation": "horizontal /ˌhɒrɪˈzɒntl/ (tính từ): mở rộng bằng thêm máy. Horizontal scale = mở rộng ngang bằng cách thêm máy; vertical scale = nâng cấp một máy.",
+      "explanationEn": "horizontal /ˌhɒrɪˈzɒntl/ (adjective): by adding more machines. Horizontal scaling adds more machines; vertical scaling makes one machine bigger."
+    },
+    {
+      "id": "v55",
+      "lessonId": "l4",
+      "word": "silently",
+      "pos": "adv",
+      "ipa": "/ˈsaɪləntli/",
+      "question": "Trong câu \"What silently breaks order: retries that requeue to the back, several consumers or threads on one ordered stream, changing a keyed topic's partition count, and working around hot keys (one huge tenant on one partition).\", từ \"silently\" (trạng từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"What silently breaks order: retries that requeue to the back, several consumers or threads on one ordered stream, changing a keyed topic's partition count, and working around hot keys (one huge tenant on one partition).\", what does \"silently\" (adverb) mean?",
+      "options": [
+        "âm thầm, không báo lỗi",
+        "ồn ào, rõ ràng",
+        "một cách cố ý",
+        "ngay lập tức"
+      ],
+      "optionsEn": [
+        "without any warning",
+        "loudly and obviously",
+        "on purpose",
+        "immediately"
+      ],
+      "answer": 0,
+      "explanation": "silently /ˈsaɪləntli/ (trạng từ): âm thầm, không báo lỗi. \"Silently breaks\" = làm hỏng mà không có lỗi hay cảnh báo; \"fail silently\" là lỗi khó phát hiện.",
+      "explanationEn": "silently /ˈsaɪləntli/ (adverb): without any warning. \"Silently breaks\" means it fails with no error or warning, which makes it hard to notice."
+    },
+    {
+      "id": "v56",
+      "lessonId": "l4",
+      "word": "tenant",
+      "pos": "n",
+      "ipa": "/ˈtenənt/",
+      "question": "Trong câu \"What silently breaks order: retries that requeue to the back, several consumers or threads on one ordered stream, changing a keyed topic's partition count, and working around hot keys (one huge tenant on one partition).\", từ \"tenant\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"What silently breaks order: retries that requeue to the back, several consumers or threads on one ordered stream, changing a keyed topic's partition count, and working around hot keys (one huge tenant on one partition).\", what does \"tenant\" (noun) mean?",
+      "options": [
+        "người thuê nhà trọ",
+        "quản trị viên hệ thống",
+        "khách hàng trên hệ thống",
+        "nhà cung cấp dịch vụ"
+      ],
+      "optionsEn": [
+        "a person renting a flat",
+        "a system administrator",
+        "a customer on a shared system",
+        "a service provider"
+      ],
+      "answer": 2,
+      "explanation": "tenant /ˈtenənt/ (danh từ): khách hàng trên hệ thống. Tenant gốc là người thuê nhà; multi-tenant = nhiều khách hàng dùng chung một hệ thống.",
+      "explanationEn": "tenant /ˈtenənt/ (noun): a customer on a shared system. A tenant is originally someone renting a home; multi-tenant means many customers share one system."
+    },
+    {
+      "id": "v57",
+      "lessonId": "l4",
+      "word": "tolerate",
+      "pos": "v",
+      "ipa": "/ˈtɒləreɪt/",
+      "question": "Trong câu \"Often the better design is to tolerate disorder: carry a version in each event and ignore events older than the stored state.\", từ \"tolerate\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Often the better design is to tolerate disorder: carry a version in each event and ignore events older than the stored state.\", what does \"tolerate\" (verb) mean?",
+      "options": [
+        "loại bỏ hoàn toàn",
+        "sửa chữa lại",
+        "chấp nhận, chịu được",
+        "báo cáo lên"
+      ],
+      "optionsEn": [
+        "to remove completely",
+        "to repair",
+        "to accept and cope with",
+        "to report"
+      ],
+      "answer": 2,
+      "explanation": "tolerate /ˈtɒləreɪt/ (động từ): chấp nhận, chịu được. \"Tolerate disorder\" = chấp nhận message sai thứ tự; fault tolerance = khả năng chịu lỗi.",
+      "explanationEn": "tolerate /ˈtɒləreɪt/ (verb): to accept and cope with. \"Tolerate disorder\" means cope with out-of-order messages; fault tolerance is the ability to survive failures."
+    },
+    {
+      "id": "v58",
+      "lessonId": "l5",
+      "word": "transient",
+      "pos": "adj",
+      "ipa": "/ˈtrænziənt/",
+      "question": "Trong câu \"Transient failures (timeout, 503, lock conflict) → retry after a delay.\", từ \"transient\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Transient failures (timeout, 503, lock conflict) → retry after a delay.\", what does \"transient\" (adjective) mean?",
+      "options": [
+        "tạm thời, thoáng qua",
+        "vĩnh viễn",
+        "nghiêm trọng",
+        "lặp đi lặp lại"
+      ],
+      "optionsEn": [
+        "short-lived, passing",
+        "permanent",
+        "serious",
+        "recurring"
+      ],
+      "answer": 0,
+      "explanation": "transient /ˈtrænziənt/ (tính từ): tạm thời, thoáng qua. Transient failure = lỗi tạm thời, thử lại sau một lúc thường sẽ thành công.",
+      "explanationEn": "transient /ˈtrænziənt/ (adjective): short-lived, passing. A transient failure is temporary, so a retry after a short wait usually succeeds."
+    },
+    {
+      "id": "v59",
+      "lessonId": "l5",
+      "word": "malformed",
+      "pos": "adj",
+      "ipa": "/ˌmælˈfɔːmd/",
+      "question": "Trong câu \"Poison messages (malformed payload, bug) → retrying forever wastes capacity and, in a log, blocks the partition.\", từ \"malformed\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Poison messages (malformed payload, bug) → retrying forever wastes capacity and, in a log, blocks the partition.\", what does \"malformed\" (adjective) mean?",
+      "options": [
+        "bị mã hóa",
+        "quá cũ",
+        "bị trùng",
+        "sai định dạng"
+      ],
+      "optionsEn": [
+        "encrypted",
+        "out of date",
+        "duplicated",
+        "wrongly structured"
+      ],
+      "answer": 3,
+      "explanation": "malformed /ˌmælˈfɔːmd/ (tính từ): sai định dạng. Tiền tố mal- = xấu, sai: malformed, malware, malfunction.",
+      "explanationEn": "malformed /ˌmælˈfɔːmd/ (adjective): wrongly structured. The prefix mal- means \"bad\": malformed, malware, malfunction."
+    },
+    {
+      "id": "v60",
+      "lessonId": "l5",
+      "word": "payload",
+      "pos": "n",
+      "ipa": "/ˈpeɪləʊd/",
+      "question": "Trong câu \"Poison messages (malformed payload, bug) → retrying forever wastes capacity and, in a log, blocks the partition.\", từ \"payload\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Poison messages (malformed payload, bug) → retrying forever wastes capacity and, in a log, blocks the partition.\", what does \"payload\" (noun) mean?",
+      "options": [
+        "tải trọng của xe",
+        "phần dữ liệu chính",
+        "phần tiêu đề",
+        "khoản thanh toán"
+      ],
+      "optionsEn": [
+        "a vehicle's cargo load",
+        "the main data carried",
+        "the header part",
+        "a payment amount"
+      ],
+      "answer": 1,
+      "explanation": "payload /ˈpeɪləʊd/ (danh từ): phần dữ liệu chính. Payload là phần nội dung thực của message; nghĩa gốc là hàng hóa, tải trọng mà xe hay tên lửa chở.",
+      "explanationEn": "payload /ˈpeɪləʊd/ (noun): the main data carried. The payload is the actual content of a message; originally it is the cargo a vehicle or rocket carries."
+    },
+    {
+      "id": "v61",
+      "lessonId": "l5",
+      "word": "capacity",
+      "pos": "n",
+      "ipa": "/kəˈpæsəti/",
+      "question": "Trong câu \"Poison messages (malformed payload, bug) → retrying forever wastes capacity and, in a log, blocks the partition.\", từ \"capacity\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Poison messages (malformed payload, bug) → retrying forever wastes capacity and, in a log, blocks the partition.\", what does \"capacity\" (noun) mean?",
+      "options": [
+        "vai trò, tư cách",
+        "năng lực xử lý",
+        "độ trễ",
+        "độ chính xác"
+      ],
+      "optionsEn": [
+        "a role or position",
+        "ability to handle work",
+        "a delay",
+        "accuracy"
+      ],
+      "answer": 1,
+      "explanation": "capacity /kəˈpæsəti/ (danh từ): năng lực xử lý. \"Waste capacity\" = lãng phí năng lực xử lý; \"in my capacity as\" = với tư cách là.",
+      "explanationEn": "capacity /kəˈpæsəti/ (noun): ability to handle work. \"Waste capacity\" means using up processing power for nothing; \"in my capacity as\" means in my role as."
+    },
+    {
+      "id": "v62",
+      "lessonId": "l5",
+      "word": "park",
+      "pos": "v",
+      "ipa": "/pɑːk/",
+      "question": "Trong câu \"Park them.\", từ \"park\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Park them.\", what does \"park\" (verb) mean?",
+      "options": [
+        "đỗ xe vào chỗ",
+        "xóa bỏ ngay",
+        "gửi lại ngay",
+        "tạm gác sang một bên"
+      ],
+      "optionsEn": [
+        "to leave a car in a spot",
+        "to delete at once",
+        "to resend at once",
+        "to set aside for later"
+      ],
+      "answer": 3,
+      "explanation": "park /pɑːk/ (động từ): tạm gác sang một bên. Park nghĩa bóng = tạm để sang một bên xử lý sau, giống như đỗ xe vào chỗ riêng.",
+      "explanationEn": "park /pɑːk/ (verb): to set aside for later. Figuratively, to park something is to set it aside for later, like leaving a car in a spot."
+    },
+    {
+      "id": "v63",
+      "lessonId": "l5",
+      "word": "exponential",
+      "pos": "adj",
+      "ipa": "/ˌekspəˈnenʃl/",
+      "question": "Trong câu \"Exponential backoff with jitter stops consumers retrying in lockstep against a recovering dependency\", từ \"exponential\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Exponential backoff with jitter stops consumers retrying in lockstep against a recovering dependency\", what does \"exponential\" (adjective) mean?",
+      "options": [
+        "tăng theo cấp số nhân",
+        "tăng đều tuyến tính",
+        "giảm dần theo thời gian",
+        "thay đổi ngẫu nhiên"
+      ],
+      "optionsEn": [
+        "growing by multiplication",
+        "growing by a fixed step",
+        "shrinking over time",
+        "changing at random"
+      ],
+      "answer": 0,
+      "explanation": "exponential /ˌekspəˈnenʃl/ (tính từ): tăng theo cấp số nhân. Exponential backoff: chờ 1, 2, 4, 8… giây, mỗi lần gấp đôi.",
+      "explanationEn": "exponential /ˌekspəˈnenʃl/ (adjective): growing by multiplication. With exponential backoff you wait 1, 2, 4, 8… seconds, doubling each time."
+    },
+    {
+      "id": "v64",
+      "lessonId": "l5",
+      "word": "in lockstep",
+      "pos": "phrase",
+      "ipa": "/ɪn ˈlɒkstep/",
+      "question": "Trong câu \"Exponential backoff with jitter stops consumers retrying in lockstep against a recovering dependency\", từ \"in lockstep\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Exponential backoff with jitter stops consumers retrying in lockstep against a recovering dependency\", what does \"in lockstep\" (phrase) mean?",
+      "options": [
+        "lần lượt từng người",
+        "bị khóa chặt lại",
+        "đồng loạt, cùng nhịp",
+        "từng bước chậm rãi"
+      ],
+      "optionsEn": [
+        "one after another",
+        "firmly locked up",
+        "all together in exact step",
+        "slowly step by step"
+      ],
+      "answer": 2,
+      "explanation": "in lockstep /ɪn ˈlɒkstep/ (cụm từ): đồng loạt, cùng nhịp. \"In lockstep\" = cùng nhịp như đội diễu hành; nhiều consumer retry cùng lúc sẽ dồn tải vào dependency.",
+      "explanationEn": "in lockstep /ɪn ˈlɒkstep/ (phrase): all together in exact step. \"In lockstep\" means moving in exact step like marching soldiers; synchronized retries overload the dependency."
+    },
+    {
+      "id": "v65",
+      "lessonId": "l5",
+      "word": "dependency",
+      "pos": "n",
+      "ipa": "/dɪˈpendənsi/",
+      "question": "Trong câu \"Exponential backoff with jitter stops consumers retrying in lockstep against a recovering dependency\", từ \"dependency\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Exponential backoff with jitter stops consumers retrying in lockstep against a recovering dependency\", what does \"dependency\" (noun) mean?",
+      "options": [
+        "sự nghiện ngập",
+        "bản sao dự phòng",
+        "dịch vụ mà ta phụ thuộc",
+        "người dùng cuối"
+      ],
+      "optionsEn": [
+        "an addiction to something",
+        "a backup copy",
+        "a service you rely on",
+        "an end user"
+      ],
+      "answer": 2,
+      "explanation": "dependency /dɪˈpendənsi/ (danh từ): dịch vụ mà ta phụ thuộc. Dependency = thứ mà hệ thống phụ thuộc (DB, API, thư viện); \"recovering dependency\" = dịch vụ đang hồi phục.",
+      "explanationEn": "dependency /dɪˈpendənsi/ (noun): a service you rely on. A dependency is something your system relies on, such as a DB or API; a recovering one is coming back after failure."
+    },
+    {
+      "id": "v66",
+      "lessonId": "l5",
+      "word": "reappear",
+      "pos": "v",
+      "ipa": "/ˌriːəˈpɪə(r)/",
+      "question": "Trong câu \"an unacknowledged message reappears after the visibility timeout (default 30 s, max 12 h)\", từ \"reappear\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"an unacknowledged message reappears after the visibility timeout (default 30 s, max 12 h)\", what does \"reappear\" (verb) mean?",
+      "options": [
+        "xuất hiện lại",
+        "biến mất",
+        "bị nhân đôi",
+        "bị chuyển đi"
+      ],
+      "optionsEn": [
+        "to appear again",
+        "to vanish",
+        "to be doubled",
+        "to be moved away"
+      ],
+      "answer": 0,
+      "explanation": "reappear /ˌriːəˈpɪə(r)/ (động từ): xuất hiện lại. Re- + appear; message chưa bị xóa sẽ hiện lại trong hàng đợi sau visibility timeout.",
+      "explanationEn": "reappear /ˌriːəˈpɪə(r)/ (verb): to appear again. Re- plus appear; an undeleted message becomes visible again after the visibility timeout."
+    },
+    {
+      "id": "v67",
+      "lessonId": "l5",
+      "word": "worst-case",
+      "pos": "adj",
+      "ipa": "/ˌwɜːst ˈkeɪs/",
+      "question": "Trong câu \"Keep the timeout above worst-case processing time.\", từ \"worst-case\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Keep the timeout above worst-case processing time.\", what does \"worst-case\" (adjective) mean?",
+      "options": [
+        "trung bình thường gặp",
+        "tốt nhất có thể",
+        "hiếm khi xảy ra",
+        "xấu nhất có thể"
+      ],
+      "optionsEn": [
+        "typical on average",
+        "the best possible",
+        "rarely happening",
+        "the worst possible"
+      ],
+      "answer": 3,
+      "explanation": "worst-case /ˌwɜːst ˈkeɪs/ (tính từ): xấu nhất có thể. Worst-case processing time = thời gian xử lý lâu nhất có thể; timeout phải lớn hơn mức này.",
+      "explanationEn": "worst-case /ˌwɜːst ˈkeɪs/ (adjective): the worst possible. Worst-case processing time is the longest a job can take; the timeout must be above it."
+    },
+    {
+      "id": "v68",
+      "lessonId": "l5",
+      "word": "depth",
+      "pos": "n",
+      "ipa": "/depθ/",
+      "question": "Trong câu \"Alert on DLQ depth > 0 — an unwatched DLQ is a slow way to lose data.\", từ \"depth\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Alert on DLQ depth > 0 — an unwatched DLQ is a slow way to lose data.\", what does \"depth\" (noun) mean?",
+      "options": [
+        "chiều sâu xuống dưới",
+        "số lượng tồn trong hàng",
+        "tốc độ xử lý",
+        "mức độ ưu tiên"
+      ],
+      "optionsEn": [
+        "distance downwards",
+        "number of items waiting",
+        "processing speed",
+        "priority level"
+      ],
+      "answer": 1,
+      "explanation": "depth /depθ/ (danh từ): số lượng tồn trong hàng. Queue depth = số message đang nằm trong hàng đợi; DLQ depth > 0 nghĩa là đã có message lỗi.",
+      "explanationEn": "depth /depθ/ (noun): number of items waiting. Queue depth is how many messages are waiting; a DLQ depth above zero means something failed."
+    },
+    {
+      "id": "v69",
+      "lessonId": "l5",
+      "word": "relay",
+      "pos": "n",
+      "ipa": "/ˈriːleɪ/",
+      "question": "Trong câu \"The relay can crash after publishing but before marking the row, so the outbox is at-least-once: consumers stay idempotent, using the outbox ID as event ID (the receiving side's dedup table is often called an inbox).\", từ \"relay\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"The relay can crash after publishing but before marking the row, so the outbox is at-least-once: consumers stay idempotent, using the outbox ID as event ID (the receiving side's dedup table is often called an inbox).\", what does \"relay\" (noun) mean?",
+      "options": [
+        "cuộc chạy tiếp sức",
+        "tiến trình chuyển tiếp",
+        "bộ lưu trữ",
+        "bản ghi lỗi"
+      ],
+      "optionsEn": [
+        "a team running race",
+        "a process passing things on",
+        "a storage unit",
+        "an error record"
+      ],
+      "answer": 1,
+      "explanation": "relay /ˈriːleɪ/ (danh từ): tiến trình chuyển tiếp. Relay = bộ chuyển tiếp: đọc outbox rồi publish lên broker; \"relay race\" là chạy tiếp sức.",
+      "explanationEn": "relay /ˈriːleɪ/ (noun): a process passing things on. A relay passes things along: it reads the outbox and publishes to the broker; a relay race is a team race."
+    },
+    {
+      "id": "v70",
+      "lessonId": "l5",
+      "word": "reliable",
+      "pos": "adj",
+      "ipa": "/rɪˈlaɪəbl/",
+      "question": "Trong câu \"Outbox is what makes sagas reliable — sagas and CQRS are topic 18.\", từ \"reliable\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Outbox is what makes sagas reliable — sagas and CQRS are topic 18.\", what does \"reliable\" (adjective) mean?",
+      "options": [
+        "linh hoạt",
+        "rẻ tiền",
+        "phức tạp",
+        "đáng tin cậy"
+      ],
+      "optionsEn": [
+        "flexible",
+        "cheap",
+        "complicated",
+        "dependable"
+      ],
+      "answer": 3,
+      "explanation": "reliable /rɪˈlaɪəbl/ (tính từ): đáng tin cậy. \"Makes sagas reliable\" = làm cho saga đáng tin cậy; danh từ là reliability.",
+      "explanationEn": "reliable /rɪˈlaɪəbl/ (adjective): dependable. \"Makes sagas reliable\" means they can be depended on; the noun is reliability."
+    },
+    {
+      "id": "v71",
+      "lessonId": "l5",
+      "word": "tail",
+      "pos": "v",
+      "ipa": "/teɪl/",
+      "question": "Trong câu \"Tails the WAL/binlog (e.g. Debezium → Kafka)\", từ \"tail\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Tails the WAL/binlog (e.g. Debezium → Kafka)\", what does \"tail\" (verb) mean?",
+      "options": [
+        "bám theo đọc phần mới",
+        "cắt bỏ phần đuôi",
+        "sao lưu toàn bộ",
+        "khóa lại để ghi"
+      ],
+      "optionsEn": [
+        "to follow new entries",
+        "to cut off the end",
+        "to back up everything",
+        "to lock for writing"
+      ],
+      "answer": 0,
+      "explanation": "tail /teɪl/ (động từ): bám theo đọc phần mới. Tail (động từ) = bám theo; \"tail a log\" = đọc liên tục các dòng mới được ghi.",
+      "explanationEn": "tail /teɪl/ (verb): to follow new entries. To tail is to follow closely; tailing a log means reading new lines as they are written."
+    },
+    {
+      "id": "v72",
+      "lessonId": "l5",
+      "word": "batch",
+      "pos": "n",
+      "ipa": "/bætʃ/",
+      "question": "Trong câu \"Lambda consumers should use ReportBatchItemFailures so one bad message does not retry the whole batch\", từ \"batch\" (danh từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Lambda consumers should use ReportBatchItemFailures so one bad message does not retry the whole batch\", what does \"batch\" (noun) mean?",
+      "options": [
+        "mẻ bánh nướng",
+        "hàng đợi riêng",
+        "lô xử lý cùng lúc",
+        "bản ghi đơn lẻ"
+      ],
+      "optionsEn": [
+        "a set of baked loaves",
+        "a separate queue",
+        "a group processed together",
+        "a single record"
+      ],
+      "answer": 2,
+      "explanation": "batch /bætʃ/ (danh từ): lô xử lý cùng lúc. Batch = lô; batching = gom nhiều message xử lý một lần; nghĩa đời thường là một mẻ (bánh).",
+      "explanationEn": "batch /bætʃ/ (noun): a group processed together. A batch is a group handled together; in the kitchen it is a set of things baked at once."
+    },
+    {
+      "id": "v73",
+      "lessonId": "l6",
+      "word": "at the price of",
+      "pos": "phrase",
+      "ipa": "/æt ðə ˈpraɪs əv/",
+      "question": "Trong câu \"Sync when the caller needs the answer now; async for work after the reply, at the price of eventual consistency.\", từ \"at the price of\" (cụm từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Sync when the caller needs the answer now; async for work after the reply, at the price of eventual consistency.\", what does \"at the price of\" (phrase) mean?",
+      "options": [
+        "nhờ vào",
+        "thay vì",
+        "với cái giá là",
+        "bất chấp"
+      ],
+      "optionsEn": [
+        "thanks to",
+        "instead of",
+        "at the cost of",
+        "despite"
+      ],
+      "answer": 2,
+      "explanation": "at the price of /æt ðə ˈpraɪs əv/ (cụm từ): với cái giá là. \"At the price of X\" = đánh đổi bằng X; async được lợi nhưng phải chấp nhận eventual consistency.",
+      "explanationEn": "at the price of /æt ðə ˈpraɪs əv/ (phrase): at the cost of. \"At the price of X\" means you gain something but must give up X in exchange."
+    },
+    {
+      "id": "v74",
+      "lessonId": "l6",
+      "word": "monitored",
+      "pos": "adj",
+      "ipa": "/ˈmɒnɪtəd/",
+      "question": "Trong câu \"Backoff with jitter, a retry limit, a monitored DLQ; the outbox fixes dual writes.\", từ \"monitored\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Backoff with jitter, a retry limit, a monitored DLQ; the outbox fixes dual writes.\", what does \"monitored\" (adjective) mean?",
+      "options": [
+        "được giám sát",
+        "được mã hóa",
+        "bị bỏ quên",
+        "được nén"
+      ],
+      "optionsEn": [
+        "watched over",
+        "encrypted",
+        "forgotten",
+        "compressed"
+      ],
+      "answer": 0,
+      "explanation": "monitored /ˈmɒnɪtəd/ (tính từ): được giám sát. \"A monitored DLQ\" = DLQ có theo dõi và cảnh báo; trái nghĩa là unwatched.",
+      "explanationEn": "monitored /ˈmɒnɪtəd/ (adjective): watched over. A monitored DLQ is watched and alerted on; the opposite is unwatched."
+    },
+    {
+      "id": "v75",
+      "lessonId": "l6",
+      "word": "decouple",
+      "pos": "v",
+      "ipa": "/diːˈkʌpl/",
+      "question": "Trong câu \"Brokers decouple services in time and absorb spikes, but bring duplicates, disorder and eventual consistency.\", từ \"decouple\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Brokers decouple services in time and absorb spikes, but bring duplicates, disorder and eventual consistency.\", what does \"decouple\" (verb) mean?",
+      "options": [
+        "kết nối chặt chẽ",
+        "nhân bản dữ liệu",
+        "đồng bộ hóa",
+        "tách rời phụ thuộc"
+      ],
+      "optionsEn": [
+        "to link tightly",
+        "to replicate data",
+        "to synchronize",
+        "to separate dependencies"
+      ],
+      "answer": 3,
+      "explanation": "decouple /diːˈkʌpl/ (động từ): tách rời phụ thuộc. \"Decouple services in time\" = làm các dịch vụ không cần chạy cùng lúc; danh từ là decoupling.",
+      "explanationEn": "decouple /diːˈkʌpl/ (verb): to separate dependencies. To decouple services in time means they no longer need to run at the same moment; the noun is decoupling."
+    },
+    {
+      "id": "v76",
+      "lessonId": "l6",
+      "word": "absorb",
+      "pos": "v",
+      "ipa": "/əbˈzɔːb/",
+      "question": "Trong câu \"Brokers decouple services in time and absorb spikes, but bring duplicates, disorder and eventual consistency.\", từ \"absorb\" (động từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"Brokers decouple services in time and absorb spikes, but bring duplicates, disorder and eventual consistency.\", what does \"absorb\" (verb) mean?",
+      "options": [
+        "khuếch đại lên",
+        "hấp thụ, chịu được",
+        "từ chối nhận",
+        "gây ra"
+      ],
+      "optionsEn": [
+        "to amplify",
+        "to soak up and handle",
+        "to reject",
+        "to cause"
+      ],
+      "answer": 1,
+      "explanation": "absorb /əbˈzɔːb/ (động từ): hấp thụ, chịu được. \"Absorb spikes\" = hấp thụ các đợt tăng tải đột biến, như miếng bọt biển hút nước.",
+      "explanationEn": "absorb /əbˈzɔːb/ (verb): to soak up and handle. \"Absorb spikes\" means soaking up sudden load, like a sponge soaking up water."
+    },
+    {
+      "id": "v77",
+      "lessonId": "l6",
+      "word": "trustworthy",
+      "pos": "adj",
+      "ipa": "/ˈtrʌstwɜːði/",
+      "question": "Trong câu \"At-least-once plus idempotency, retries with DLQs and the outbox pattern make messaging trustworthy.\", từ \"trustworthy\" (tính từ) nghĩa là gì?",
+      "questionEn": "In the sentence \"At-least-once plus idempotency, retries with DLQs and the outbox pattern make messaging trustworthy.\", what does \"trustworthy\" (adjective) mean?",
+      "options": [
+        "dễ mở rộng",
+        "đáng tin cậy",
+        "tốn kém",
+        "khó hiểu"
+      ],
+      "optionsEn": [
+        "easy to scale",
+        "able to be trusted",
+        "expensive to run",
+        "hard to understand"
+      ],
+      "answer": 1,
+      "explanation": "trustworthy /ˈtrʌstwɜːði/ (tính từ): đáng tin cậy. Trustworthy = đáng tin; hậu tố -worthy = xứng đáng (trustworthy, noteworthy).",
+      "explanationEn": "trustworthy /ˈtrʌstwɜːði/ (adjective): able to be trusted. Trustworthy means deserving trust; the suffix -worthy means deserving (trustworthy, noteworthy)."
+    }
+  ]
+}

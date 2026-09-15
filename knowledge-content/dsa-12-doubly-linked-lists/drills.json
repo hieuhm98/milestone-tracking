@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG khi so sánh doubly linked list với singly linked list.",
+      "promptEn": "Pick TWO statements that are true when comparing a doubly linked list with a singly linked list.",
+      "options": [
+        "DLL truy cập phần tử theo index trong O(1)",
+        "DLL tốn ít bộ nhớ hơn vì không cần biến `tail`",
+        "Xoá node cuối là O(1) với DLL nhưng O(n) với singly list",
+        "Tìm kiếm theo giá trị trong DLL là O(log n)",
+        "Gỡ một node đang cầm sẵn tham chiếu là O(1) với DLL"
+      ],
+      "optionsEn": [
+        "A DLL accesses an element by index in O(1)",
+        "A DLL uses less memory because it needs no `tail` variable",
+        "Removing the last node is O(1) on a DLL but O(n) on a singly list",
+        "Searching a DLL by value is O(log n)",
+        "Unlinking a node you already hold a reference to is O(1) on a DLL"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "Con trỏ `prev` cho ngay node đứng trước, nên xoá tail và gỡ một node đã biết đều thành O(1). Truy cập theo index và tìm kiếm vẫn là O(n), còn bộ nhớ thì DLL tốn HƠN vì mỗi node có thêm một con trỏ.",
+      "explanationEn": "The `prev` pointer hands you the predecessor, so removing the tail and unlinking a known node both become O(1). Index access and search stay O(n), and a DLL uses MORE memory because every node carries an extra pointer.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Bạn cài đặt LRU cache với `get` và `put` đều O(1). Chọn HAI thành phần cần dùng.",
+      "promptEn": "You are building an LRU cache where both `get` and `put` are O(1). Pick TWO components you need.",
+      "options": [
+        "Một mảng được sắp xếp theo key",
+        "Một hash map từ key tới node",
+        "Một binary search tree theo thời gian truy cập",
+        "Một doubly linked list sắp theo mức độ dùng gần đây",
+        "Một singly linked list chỉ có con trỏ head"
+      ],
+      "optionsEn": [
+        "An array sorted by key",
+        "A hash map from key to node",
+        "A binary search tree keyed by access time",
+        "A doubly linked list ordered by recency",
+        "A singly linked list with only a head pointer"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Hash map tìm node trong O(1); doubly linked list gỡ node đó và đưa lên đầu trong O(1), rồi loại node lâu nhất ở cuối trong O(1). Singly list không gỡ được node ở giữa trong O(1), còn mảng sắp xếp và BST đều chậm hơn O(1).",
+      "explanationEn": "The hash map finds the node in O(1); the doubly linked list unlinks it and moves it to the front in O(1), and evicts the least recent from the end in O(1). A singly list cannot unlink a middle node in O(1), and a sorted array or BST is slower than O(1).",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của `pop` (xoá node cuối) trên doubly linked list có con trỏ `tail` là gì?",
+      "promptEn": "What is the time complexity of `pop` (removing the last node) on a doubly linked list with a `tail` pointer?",
+      "answer": "O(1)",
+      "answerEn": "O(1)",
+      "accept": [
+        "O(1)",
+        "o 1",
+        "1",
+        "constant",
+        "constant time",
+        "hằng số"
+      ],
+      "explanation": "O(1). Tail mới là `tail.prev`, nên chỉ cần vài phép gán. Đây là khác biệt lớn nhất so với singly linked list, nơi `pop` là O(n).",
+      "explanationEn": "O(1). The new tail is `tail.prev`, so it takes a few assignments. It is the headline difference from a singly linked list, where `pop` is O(n).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Head giả và tail giả luôn tồn tại, không chứa dữ liệu, dùng để loại bỏ các trường hợp đặc biệt khi thêm/xoá node được gọi là gì?",
+      "promptEn": "What are the permanent fake head and fake tail nodes, holding no data, that remove the special cases when inserting or removing called?",
+      "answer": "sentinel node",
+      "answerEn": "sentinel node",
+      "accept": [
+        "sentinel node",
+        "sentinel nodes",
+        "sentinel",
+        "sentinels",
+        "dummy node",
+        "dummy nodes",
+        "dummy",
+        "node lính canh"
+      ],
+      "explanation": "Sentinel node (còn gọi là dummy node). Nhờ chúng, mọi node thật luôn có `prev` và `next` khác null, nên list rỗng, xoá head hay xoá tail đều dùng chung một đoạn code.",
+      "explanationEn": "Sentinel nodes (also called dummy nodes). With them every real node always has non-null `prev` and `next`, so an empty list, removing the head and removing the tail all share the same code.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi method của doubly linked list với việc nó làm với các con trỏ.",
+      "promptEn": "Match each doubly linked list method to what it does with the pointers.",
+      "pairs": [
+        {
+          "left": "push",
+          "leftEn": "push",
+          "right": "Gán `tail.next = node` và `node.prev = tail`, rồi dời tail sang node mới",
+          "rightEn": "Sets `tail.next = node` and `node.prev = tail`, then moves tail to the new node"
+        },
+        {
+          "left": "shift",
+          "leftEn": "shift",
+          "right": "Dời head sang `head.next` rồi đặt `prev` của head mới về null",
+          "rightEn": "Moves head to `head.next`, then sets the new head's `prev` to null"
+        },
+        {
+          "left": "get",
+          "leftEn": "get",
+          "right": "Đi theo `next` từ head hoặc theo `prev` từ tail, tuỳ đầu nào gần index hơn",
+          "rightEn": "Follows `next` from the head or `prev` from the tail, whichever end is closer to the index"
+        },
+        {
+          "left": "reverse",
+          "leftEn": "reverse",
+          "right": "Hoán đổi `next` và `prev` trên mọi node, và hoán đổi head với tail",
+          "rightEn": "Swaps `next` and `prev` on every node, and swaps head with tail"
+        }
+      ],
+      "explanation": "push và shift là O(1) vì chỉ chạm vào vài con trỏ ở một đầu; get và reverse là O(n) vì phải đi qua các node — get tối đa khoảng n/2 node, reverse đi qua tất cả.",
+      "explanationEn": "push and shift are O(1) because they touch a few pointers at one end; get and reverse are O(n) because they walk nodes — get at most about n/2 of them, reverse all of them.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của `insert(index, val)` khi chèn vào GIỮA doubly linked list.",
+      "promptEn": "Put the steps of `insert(index, val)` into order for inserting into the MIDDLE of a doubly linked list.",
+      "items": [
+        {
+          "text": "Kiểm tra index nằm trong khoảng 0..length, nếu không trả về false",
+          "textEn": "Check the index is within 0..length, otherwise return false"
+        },
+        {
+          "text": "Lấy `before = get(index - 1)` và lưu `after = before.next`",
+          "textEn": "Get `before = get(index - 1)` and save `after = before.next`"
+        },
+        {
+          "text": "Tạo node mới và gán `node.prev = before`, `node.next = after`",
+          "textEn": "Create the new node and set `node.prev = before`, `node.next = after`"
+        },
+        {
+          "text": "Gán `before.next = node` và `after.prev = node`",
+          "textEn": "Set `before.next = node` and `after.prev = node`"
+        },
+        {
+          "text": "Tăng `length` và trả về true",
+          "textEn": "Increment `length` and return true"
+        }
+      ],
+      "explanation": "Điểm mấu chốt là lưu `after` trước khi sửa `before.next`; nếu làm ngược, `before.next` đã là node mới và phần còn lại của list bị mất.",
+      "explanationEn": "The crucial point is saving `after` before changing `before.next`; do it the other way round and `before.next` is already the new node, so the rest of the list is lost.",
+      "id": "d6"
+    }
+  ]
+}

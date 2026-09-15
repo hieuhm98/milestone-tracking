@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Một thiết bị quyết định chuyển request tới backend nào dựa trên header `Host` và đường dẫn URL. Cách gọi chính xác nhất cho thiết bị này là gì?",
+    "questionEn": "A device decides which backend receives a request based on the `Host` header and the URL path. What is the most accurate way to describe it?",
+    "options": [
+      "Một router tầng 3 vì nó định tuyến traffic",
+      "Một load balancer L4 vì nó chuyển tiếp kết nối TCP",
+      "Một load balancer/proxy L7 vì nó đọc nội dung HTTP",
+      "Một thiết bị NAT vì nó ghi đè địa chỉ đích"
+    ],
+    "optionsEn": [
+      "A layer 3 router, because it routes traffic",
+      "An L4 load balancer, because it forwards TCP connections",
+      "An L7 load balancer/proxy, because it reads HTTP content",
+      "A NAT device, because it rewrites the destination address"
+    ],
+    "answer": 2,
+    "explanation": "Hãy gọi tên theo thứ thành phần đó nhìn thấy. Host header và path là dữ liệu HTTP, nên thiết bị phải đọc được tầng ứng dụng — đó là L7. Thiết bị L4 chỉ thấy IP và port.",
+    "explanationEn": "Name a component by what it inspects. The Host header and path are HTTP data, so the device must read the application layer — that is L7. An L4 device only sees IPs and ports."
+  },
+  {
+    "id": "q2",
+    "question": "Sau khi dựng VPN site-to-site, người dùng báo: kết nối tới API mở được, request nhỏ chạy tốt, nhưng tải file lớn thì treo vô thời hạn. Firewall hai đầu chặn toàn bộ ICMP. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "After a site-to-site VPN goes live, users report that connections to an API open and small requests work, but large downloads hang forever. The firewalls at both ends block all ICMP. Most likely cause?",
+    "options": [
+      "Path MTU Discovery bị hỏng vì gói ICMP 'fragmentation needed' bị chặn",
+      "TCP handshake không hoàn tất vì thiếu gói SYN+ACK",
+      "DNS trả về bản ghi đã hết hạn vì TTL quá cao",
+      "Chứng chỉ TLS của API thiếu intermediate"
+    ],
+    "optionsEn": [
+      "Path MTU Discovery is broken because ICMP 'fragmentation needed' messages are blocked",
+      "The TCP handshake never completes because the SYN+ACK is missing",
+      "DNS returns a stale record because the TTL is too high",
+      "The API's TLS certificate is missing its intermediate"
+    ],
+    "answer": 0,
+    "explanation": "Handshake và request nhỏ đều dùng gói nhỏ nên đi qua được. Gói lớn vượt MTU của tunnel (VPN thêm header) cần ICMP để báo bên gửi giảm kích thước; chặn ICMP tạo ra 'hố đen'. Cách sửa: cho phép ICMP cần thiết hoặc clamp MSS trên tunnel.",
+    "explanationEn": "The handshake and small requests use small packets, so they get through. Large packets exceed the tunnel MTU (the VPN adds headers) and need ICMP to tell the sender to shrink them; blocking ICMP creates a black hole. Fix: allow the needed ICMP or clamp the MSS on the tunnel."
+  },
+  {
+    "id": "q3",
+    "question": "Trên đường Ethernet chuẩn (MTU 1.500 byte), với header IPv4 và TCP không có option, MSS mà TCP sẽ quảng bá là bao nhiêu?",
+    "questionEn": "On a standard Ethernet link (MTU 1,500 bytes), with IPv4 and TCP headers carrying no options, what MSS will TCP announce?",
+    "options": [
+      "1.500 byte",
+      "1.480 byte",
+      "1.472 byte",
+      "1.460 byte"
+    ],
+    "optionsEn": [
+      "1,500 bytes",
+      "1,480 bytes",
+      "1,472 bytes",
+      "1,460 bytes"
+    ],
+    "answer": 3,
+    "explanation": "MSS = MTU − header IP (20 byte) − header TCP (20 byte) = 1.460. Con số 1.472 là payload lớn nhất của một gói UDP/ICMP (header 8 byte), hay gặp khi test bằng ping.",
+    "explanationEn": "MSS = MTU − IP header (20 bytes) − TCP header (20 bytes) = 1,460. The 1,472 figure is the largest UDP/ICMP payload (8-byte header), often seen when testing with ping."
+  },
+  {
+    "id": "q4",
+    "question": "Trong quá trình đóng kết nối TCP bình thường, bên nào sẽ nằm ở trạng thái TIME_WAIT?",
+    "questionEn": "During a normal TCP connection close, which side ends up in the TIME_WAIT state?",
+    "options": [
+      "Luôn luôn là server, bất kể ai đóng trước",
+      "Bên gửi FIN đầu tiên (bên chủ động đóng)",
+      "Bên nhận FIN đầu tiên (bên bị động đóng)",
+      "Cả hai bên, mỗi bên 60 giây"
+    ],
+    "optionsEn": [
+      "Always the server, whoever closes first",
+      "The side that sends the first FIN (the active closer)",
+      "The side that receives the first FIN (the passive closer)",
+      "Both sides, for 60 seconds each"
+    ],
+    "answer": 1,
+    "explanation": "Bên chủ động đóng đi qua FIN_WAIT_1, FIN_WAIT_2 rồi TIME_WAIT (2×MSL, 60 giây trên Linux). Bên bị động đi qua CLOSE_WAIT và LAST_ACK. Vì vậy client gọi nhiều kết nối ngắn thường là nơi tích tụ TIME_WAIT.",
+    "explanationEn": "The active closer goes through FIN_WAIT_1, FIN_WAIT_2 and then TIME_WAIT (2×MSL, 60 seconds on Linux). The passive closer goes through CLOSE_WAIT and LAST_ACK. That is why clients making many short connections are where TIME_WAIT piles up."
+  },
+  {
+    "id": "q5",
+    "question": "Một service Node.js dần dần ngừng phản hồi sau vài giờ. Trên host bạn thấy kết quả sau. Nguyên nhân khả dĩ nhất?\n`$ ss -tan state close-wait | wc -l\n9412\n$ ss -tan state time-wait | wc -l\n37`",
+    "questionEn": "A Node.js service gradually stops responding after a few hours. On the host you see the output below. Most likely cause?\n`$ ss -tan state close-wait | wc -l\n9412\n$ ss -tan state time-wait | wc -l\n37`",
+    "options": [
+      "Server đóng kết nối quá nhanh nên TIME_WAIT tích tụ",
+      "Mạng mất gói khiến handshake TCP phải gửi lại liên tục",
+      "Client đang thực hiện SYN flood vào service",
+      "Ứng dụng nhận FIN từ phía kia nhưng không đóng socket của mình"
+    ],
+    "optionsEn": [
+      "The server closes connections too quickly, so TIME_WAIT piles up",
+      "Packet loss forces the TCP handshake to retransmit constantly",
+      "A client is SYN-flooding the service",
+      "The application receives the peer's FIN but never closes its own socket"
+    ],
+    "answer": 3,
+    "explanation": "CLOSE_WAIT nghĩa là phía kia đã đóng và kernel đang chờ ứng dụng gọi close(). Hàng nghìn socket ở trạng thái này là rò rỉ trong code (ví dụ quên release kết nối khi lỗi), dần làm cạn file descriptor. TIME_WAIT ở đây rất ít nên không phải vấn đề.",
+    "explanationEn": "CLOSE_WAIT means the peer has closed and the kernel is waiting for the application to call close(). Thousands of sockets in this state are a code leak (e.g. a connection not released on an error path) that slowly exhausts file descriptors. TIME_WAIT is tiny here, so it is not the issue."
+  },
+  {
+    "id": "q6",
+    "question": "Một worker gọi một API nội bộ (một IP, một port) khoảng 800 lần/giây, mỗi lần tạo HTTP client mới và đóng kết nối sau request. Sau khoảng một phút, log báo `EADDRNOTAVAIL`. Cách sửa tốt nhất là gì?",
+    "questionEn": "A worker calls one internal API (one IP, one port) about 800 times per second, creating a new HTTP client each time and closing the connection after the request. After about a minute the logs show `EADDRNOTAVAIL`. What is the best fix?",
+    "options": [
+      "Dùng một HTTP client chung với keep-alive để tái sử dụng kết nối",
+      "Bật net.ipv4.tcp_tw_recycle để dọn TIME_WAIT nhanh hơn",
+      "Tăng ulimit số file descriptor của tiến trình",
+      "Chuyển API sang UDP để không còn trạng thái TIME_WAIT"
+    ],
+    "optionsEn": [
+      "Use one shared HTTP client with keep-alive so connections are reused",
+      "Enable net.ipv4.tcp_tw_recycle to clear TIME_WAIT faster",
+      "Raise the process's file descriptor ulimit",
+      "Move the API to UDP so there is no TIME_WAIT state"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi kết nối đóng chủ động giữ một ephemeral port trong TIME_WAIT 60 giây; ~28.000 port cạn sau chưa tới một phút ở 800 req/s. Tái sử dụng kết nối loại bỏ gốc rễ. tcp_tw_recycle đã bị gỡ khỏi Linux 4.12, và lỗi này là cạn port chứ không phải cạn file descriptor.",
+    "explanationEn": "Each actively closed connection parks an ephemeral port in TIME_WAIT for 60 seconds; ~28,000 ports run out in under a minute at 800 req/s. Reusing connections removes the root cause. tcp_tw_recycle was removed in Linux 4.12, and the error is port exhaustion, not file descriptor exhaustion."
+  },
+  {
+    "id": "q7",
+    "question": "Một đội xây ứng dụng gọi video thời gian thực. Với họ, một frame đến trễ 400 ms còn tệ hơn là mất hẳn frame đó. Giao thức transport nào hợp lý nhất cho luồng media?",
+    "questionEn": "A team is building real-time video calling. For them a frame arriving 400 ms late is worse than losing it entirely. Which transport best suits the media stream?",
+    "options": [
+      "TCP, vì nó đảm bảo mọi frame đến đầy đủ",
+      "TCP với Nagle bật để gộp các frame nhỏ",
+      "UDP, vì không có retransmission và head-of-line blocking",
+      "HTTP/1.1 long polling qua TCP"
+    ],
+    "optionsEn": [
+      "TCP, because it guarantees every frame arrives",
+      "TCP with Nagle enabled to batch small frames",
+      "UDP, because it has no retransmission or head-of-line blocking",
+      "HTTP/1.1 long polling over TCP"
+    ],
+    "answer": 2,
+    "explanation": "Khi dữ liệu trễ là vô giá trị, cơ chế gửi lại và giao theo thứ tự của TCP trở thành gánh nặng: một gói mất làm đứng mọi frame phía sau. UDP cho phép bỏ qua frame mất; WebRTC chạy media trên UDP vì lý do này. Nagle còn tăng thêm độ trễ.",
+    "explanationEn": "When late data is worthless, TCP's retransmission and in-order delivery become a burden: one lost packet stalls every frame behind it. UDP lets you skip the lost frame; WebRTC carries media over UDP for this reason. Nagle would add even more delay."
+  },
+  {
+    "id": "q8",
+    "question": "Bạn tạo một subnet `10.20.16.0/20` trong AWS VPC. Có bao nhiêu địa chỉ IP gán được cho tài nguyên?",
+    "questionEn": "You create a subnet `10.20.16.0/20` in an AWS VPC. How many IP addresses can be assigned to resources?",
+    "options": [
+      "4.094",
+      "4.091",
+      "4.096",
+      "1.019"
+    ],
+    "optionsEn": [
+      "4,094",
+      "4,091",
+      "4,096",
+      "1,019"
+    ],
+    "answer": 1,
+    "explanation": "/20 cho 2^(32−20) = 4.096 địa chỉ. AWS giữ lại 5 địa chỉ mỗi subnet (địa chỉ mạng, router, DNS, dự phòng, địa chỉ cuối), còn 4.091. Con số 4.094 là cách tính mạng truyền thống chỉ trừ 2.",
+    "explanationEn": "A /20 gives 2^(32−20) = 4,096 addresses. AWS reserves 5 per subnet (network, router, DNS, future use, last), leaving 4,091. The 4,094 figure is the traditional calculation that subtracts only 2."
+  },
+  {
+    "id": "q9",
+    "question": "Công ty mua lại một startup. Cả VPC của công ty và VPC của startup đều dùng `10.0.0.0/16`, và hai hệ thống cần gọi nhau trực tiếp. Nhận định nào đúng?",
+    "questionEn": "A company acquires a startup. Both the company's VPC and the startup's VPC use `10.0.0.0/16`, and the two systems must call each other directly. Which statement is correct?",
+    "options": [
+      "VPC peering hoạt động bình thường vì hai VPC thuộc hai tài khoản khác nhau",
+      "Chỉ cần thêm route cụ thể hơn (/24) ở mỗi bên là peering chạy được",
+      "Đổi security group sang cho phép 10.0.0.0/16 là đủ",
+      "Không thể peering trực tiếp các CIDR chồng lấn; cần re-IP, NAT hoặc expose qua PrivateLink/load balancer"
+    ],
+    "optionsEn": [
+      "VPC peering works normally because the VPCs are in different accounts",
+      "Adding more specific /24 routes on each side makes peering work",
+      "Changing security groups to allow 10.0.0.0/16 is enough",
+      "Overlapping CIDRs cannot be peered directly; you need re-IP, NAT, or exposure via PrivateLink/a load balancer"
+    ],
+    "answer": 3,
+    "explanation": "Router không thể phân biệt 10.0.1.5 'bên này' với 10.0.1.5 'bên kia', nên AWS từ chối peering CIDR chồng lấn. Lối ra là đánh lại địa chỉ, NAT giữa hai mạng, hoặc chỉ expose service qua PrivateLink. Đây là lý do cần quy hoạch IP toàn công ty từ đầu.",
+    "explanationEn": "A router cannot tell 10.0.1.5 'over here' from 10.0.1.5 'over there', so AWS refuses to peer overlapping CIDRs. The ways out are re-addressing, NAT between the networks, or exposing only the service via PrivateLink. This is why a company-wide IP plan matters from day one."
+  },
+  {
+    "id": "q10",
+    "question": "Các Lambda chạy trong private subnet ghi rất nhiều object vào S3 qua NAT Gateway. CloudWatch báo `ErrorPortAllocation` tăng vọt vào giờ cao điểm, và hoá đơn NAT data processing rất cao. Thay đổi nào giải quyết cả hai vấn đề tốt nhất?",
+    "questionEn": "Lambdas in private subnets write huge numbers of objects to S3 through a NAT Gateway. CloudWatch shows `ErrorPortAllocation` spiking at peak, and the NAT data-processing bill is high. Which change best fixes both problems?",
+    "options": [
+      "Thêm S3 gateway VPC endpoint để traffic S3 không đi qua NAT",
+      "Chuyển NAT Gateway sang một AZ khác",
+      "Tăng bộ nhớ của Lambda để request chạy nhanh hơn",
+      "Hạ TTL của bản ghi DNS S3 xuống 5 giây"
+    ],
+    "optionsEn": [
+      "Add an S3 gateway VPC endpoint so S3 traffic bypasses the NAT",
+      "Move the NAT Gateway to a different AZ",
+      "Increase the Lambda memory so requests finish faster",
+      "Lower the TTL of the S3 DNS record to 5 seconds"
+    ],
+    "answer": 0,
+    "explanation": "NAT Gateway giới hạn 55.000 kết nối đồng thời tới mỗi đích duy nhất; ghi S3 dồn dập chạm giới hạn này. Gateway endpoint cho S3 định tuyến traffic trực tiếp, không tốn port NAT và không tính phí xử lý dữ liệu NAT. Gắn thêm IP public cho NAT chỉ sửa được lỗi port, không giảm chi phí.",
+    "explanationEn": "A NAT Gateway allows 55,000 simultaneous connections to each unique destination; bursty S3 writes hit that limit. An S3 gateway endpoint routes the traffic directly, using no NAT ports and incurring no NAT data-processing charge. Adding public IPs to the NAT would fix only the port errors, not the cost."
+  },
+  {
+    "id": "q11",
+    "question": "Bản ghi sau đang trỏ tới load balancer cũ. Thứ Bảy này bạn sẽ chuyển sang load balancer mới và muốn người dùng theo kịp trong vòng một phút. Kế hoạch hợp lý nhất?\n`$ dig app.example.com A +noall +answer\napp.example.com. 86400 IN A 198.51.100.7`",
+    "questionEn": "The record below points at the old load balancer. This Saturday you will switch to a new load balancer and want users to follow within about a minute. Best plan?\n`$ dig app.example.com A +noall +answer\napp.example.com. 86400 IN A 198.51.100.7`",
+    "options": [
+      "Đổi bản ghi vào thứ Bảy rồi hạ TTL xuống 60 giây ngay sau đó",
+      "Giữ TTL 86400 vì resolver sẽ tự phát hiện IP mới",
+      "Hạ TTL xuống 60 giây từ ít nhất một ngày trước thứ Bảy, chuyển, rồi nâng TTL lại",
+      "Xoá bản ghi trong 10 phút để buộc mọi resolver xoá cache"
+    ],
+    "optionsEn": [
+      "Change the record on Saturday and lower the TTL to 60 seconds right after",
+      "Keep TTL 86400, because resolvers will detect the new IP by themselves",
+      "Lower the TTL to 60 seconds at least a day before Saturday, switch, then raise it again",
+      "Delete the record for 10 minutes to force every resolver to flush its cache"
+    ],
+    "answer": 2,
+    "explanation": "Resolver đã cache bản ghi với TTL 86400 (một ngày) sẽ giữ IP cũ tới hết thời hạn đó. Phải hạ TTL trước ít nhất một khoảng bằng TTL cũ để mọi cache hết hạn và nhận TTL mới. Xoá bản ghi còn tệ hơn: NXDOMAIN cũng bị cache (negative caching).",
+    "explanationEn": "Resolvers that cached the record with TTL 86400 (one day) keep the old IP until it expires. You must lower the TTL at least one old-TTL period in advance so every cache expires and picks up the new TTL. Deleting the record is worse: NXDOMAIN gets cached too (negative caching)."
+  },
+  {
+    "id": "q12",
+    "question": "Bạn muốn domain gốc `example.com` trỏ tới một Application Load Balancer, vốn chỉ cung cấp một tên DNS (không có IP cố định). Cách làm đúng trên Route 53 là gì?",
+    "questionEn": "You want the bare domain `example.com` to point at an Application Load Balancer, which only provides a DNS name (no fixed IP). What is the correct approach in Route 53?",
+    "options": [
+      "Tạo bản ghi CNAME tại `example.com` trỏ tới tên DNS của ALB",
+      "Tạo bản ghi alias A tại `example.com` trỏ tới ALB",
+      "Tra IP hiện tại của ALB và tạo bản ghi A tĩnh",
+      "Tạo bản ghi NS tại `example.com` trỏ tới ALB"
+    ],
+    "optionsEn": [
+      "Create a CNAME record at `example.com` pointing to the ALB's DNS name",
+      "Create an alias A record at `example.com` pointing to the ALB",
+      "Look up the ALB's current IPs and create static A records",
+      "Create an NS record at `example.com` pointing to the ALB"
+    ],
+    "answer": 1,
+    "explanation": "Zone apex phải chứa bản ghi SOA và NS, nên không thể đặt CNAME ở đó. Alias record của Route 53 trả về trực tiếp IP hiện tại của ALB và tự cập nhật khi IP thay đổi. Hard-code IP của ALB sẽ hỏng vì IP của nó thay đổi theo thời gian.",
+    "explanationEn": "The zone apex must hold SOA and NS records, so a CNAME cannot live there. A Route 53 alias record answers with the ALB's current IPs directly and follows them as they change. Hard-coding ALB IPs breaks because those IPs change over time."
+  },
+  {
+    "id": "q13",
+    "question": "Sau khi thay chứng chỉ mới, website vẫn mở tốt trên Chrome, nhưng các service Java và app Android báo lỗi 'unable to find valid certification path'. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "After installing a new certificate, the website still opens fine in Chrome, but Java services and the Android app fail with 'unable to find valid certification path'. Most likely cause?",
+    "options": [
+      "Chứng chỉ đã hết hạn",
+      "Server không hỗ trợ TLS 1.3",
+      "Tên trong SAN không khớp với hostname",
+      "Server chỉ gửi chứng chỉ lá mà không kèm chứng chỉ intermediate"
+    ],
+    "optionsEn": [
+      "The certificate has expired",
+      "The server does not support TLS 1.3",
+      "The name in the SAN does not match the hostname",
+      "The server sends only the leaf certificate without the intermediate"
+    ],
+    "answer": 3,
+    "explanation": "Trình duyệt thường cache hoặc tự tải intermediate nên che giấu lỗi cấu hình; nhiều client khác không làm vậy và không dựng được chuỗi tới root CA. Hết hạn hay sai tên sẽ làm cả Chrome báo lỗi. Kiểm tra bằng `openssl s_client -showcerts`.",
+    "explanationEn": "Browsers often cache or fetch intermediates and hide the misconfiguration; many other clients do not, and cannot build a chain to a root CA. An expired certificate or wrong name would break Chrome as well. Check with `openssl s_client -showcerts`."
+  },
+  {
+    "id": "q14",
+    "question": "Một đội muốn bật TLS 1.3 0-RTT trên API thanh toán để giảm độ trễ cho client quay lại. Rủi ro chính cần xử lý là gì?",
+    "questionEn": "A team wants to enable TLS 1.3 0-RTT on a payments API to cut latency for returning clients. What is the main risk to address?",
+    "options": [
+      "Dữ liệu early data có thể bị phát lại, nên chỉ cho phép với request idempotent",
+      "0-RTT tắt forward secrecy cho toàn bộ phiên",
+      "0-RTT buộc server gửi chứng chỉ ở dạng không mã hoá",
+      "0-RTT chỉ chạy với trao đổi khoá RSA tĩnh"
+    ],
+    "optionsEn": [
+      "Early data can be replayed, so it should be allowed only for idempotent requests",
+      "0-RTT disables forward secrecy for the whole session",
+      "0-RTT forces the server to send its certificate unencrypted",
+      "0-RTT only works with static RSA key exchange"
+    ],
+    "answer": 0,
+    "explanation": "Kẻ tấn công có thể bắt và gửi lại lượt dữ liệu 0-RTT, và server không phân biệt được bản gốc. Một POST tạo giao dịch bị phát lại là thảm hoạ; vì vậy chỉ cho early data với request an toàn/idempotent (hoặc dùng idempotency key). TLS 1.3 đã bỏ hẳn RSA tĩnh.",
+    "explanationEn": "An attacker can capture and resend the 0-RTT flight, and the server cannot tell it from the original. A replayed POST that creates a transaction is a disaster, so allow early data only for safe/idempotent requests (or use idempotency keys). TLS 1.3 removed static RSA entirely."
+  },
+  {
+    "id": "q15",
+    "question": "Một app mobile tải trang chủ gồm 40 request song song qua HTTP/2. Trên mạng 4G hay mất gói, toàn bộ request thỉnh thoảng cùng đứng lại. Đâu là giải thích và hướng cải thiện đúng?",
+    "questionEn": "A mobile app loads its home screen with 40 parallel requests over HTTP/2. On a lossy 4G network all requests occasionally stall together. What is the right explanation and improvement?",
+    "options": [
+      "HTTP/2 giới hạn 6 stream mỗi kết nối; hãy mở thêm kết nối",
+      "Head-of-line blocking ở tầng TCP làm đứng mọi stream khi mất một gói; bật HTTP/3 (QUIC) ở edge",
+      "HPACK nén header quá chậm trên thiết bị di động; tắt nén header",
+      "Server push làm nghẽn đường truyền; bật server push cho mọi asset"
+    ],
+    "optionsEn": [
+      "HTTP/2 limits a connection to 6 streams; open more connections",
+      "TCP-level head-of-line blocking stalls every stream when one packet is lost; enable HTTP/3 (QUIC) at the edge",
+      "HPACK header compression is too slow on mobile devices; disable header compression",
+      "Server push congests the link; enable server push for every asset"
+    ],
+    "answer": 1,
+    "explanation": "HTTP/2 ghép mọi stream lên một kết nối TCP, và TCP giao byte theo thứ tự nên một gói mất chặn tất cả. QUIC quản lý stream độc lập, nên mất gói chỉ ảnh hưởng stream liên quan. Giới hạn ~6 kết nối là của HTTP/1.1 trên trình duyệt.",
+    "explanationEn": "HTTP/2 multiplexes every stream onto one TCP connection, and TCP delivers bytes in order, so one lost packet blocks them all. QUIC handles streams independently, so a loss affects only that stream. The ~6-connection limit belongs to HTTP/1.1 in browsers."
+  },
+  {
+    "id": "q16",
+    "question": "Mười pod gRPC nằm sau một Network Load Balancer (L4). Dashboard cho thấy vài pod chạy 90% CPU trong khi các pod khác gần như rảnh, dù số client lớn. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "Ten gRPC pods sit behind a Network Load Balancer (L4). Dashboards show a few pods at 90% CPU while the rest are nearly idle, despite many clients. Most likely cause?",
+    "options": [
+      "NLB không hỗ trợ traffic TCP trên port 443",
+      "Health check của NLB đang đánh dấu nhầm các pod rảnh là không khoẻ",
+      "L4 cân bằng theo kết nối, còn mỗi client gRPC dồn mọi lời gọi lên một kết nối HTTP/2 sống lâu",
+      "gRPC dùng UDP nên NLB không chia tải được"
+    ],
+    "optionsEn": [
+      "An NLB does not support TCP traffic on port 443",
+      "The NLB health checks are wrongly marking the idle pods unhealthy",
+      "L4 balances per connection, and each gRPC client puts all its calls on one long-lived HTTP/2 connection",
+      "gRPC uses UDP, so the NLB cannot spread the load"
+    ],
+    "answer": 2,
+    "explanation": "Load balancer L4 chỉ chọn backend lúc mở kết nối. gRPC giữ một kết nối HTTP/2 lâu dài và multiplex mọi request lên đó, nên mỗi client dính vào một pod. Cách sửa: load balancer L7 hiểu HTTP/2 (cân bằng theo request), cân bằng phía client, hoặc service mesh.",
+    "explanationEn": "An L4 balancer picks a backend only when a connection opens. gRPC keeps one long-lived HTTP/2 connection and multiplexes every request on it, so each client pins to one pod. Fix: an HTTP/2-aware L7 balancer (per-request balancing), client-side balancing, or a service mesh."
+  },
+  {
+    "id": "q17",
+    "question": "Một hệ thống IoT nhận telemetry MQTT qua TCP 8883 từ hàng triệu thiết bị. Đối tác yêu cầu danh sách IP cố định để whitelist trên firewall của họ. Lựa chọn load balancer nào phù hợp nhất trên AWS?",
+    "questionEn": "An IoT platform ingests MQTT telemetry over TCP 8883 from millions of devices. A partner requires a fixed list of IPs to allow-list on their firewall. Which AWS load balancer fits best?",
+    "options": [
+      "Application Load Balancer với rule định tuyến theo path",
+      "Classic Load Balancer ở chế độ HTTP",
+      "CloudFront distribution trước một ALB",
+      "Network Load Balancer với Elastic IP cho mỗi AZ"
+    ],
+    "optionsEn": [
+      "An Application Load Balancer with path-based routing rules",
+      "A Classic Load Balancer in HTTP mode",
+      "A CloudFront distribution in front of an ALB",
+      "A Network Load Balancer with an Elastic IP per AZ"
+    ],
+    "answer": 3,
+    "explanation": "MQTT không phải HTTP nên routing L7 vô dụng, và yêu cầu IP tĩnh chỉ NLB đáp ứng trực tiếp (gắn Elastic IP mỗi AZ). NLB là L4, throughput rất cao và chịu được lượng lớn kết nối sống lâu. ALB và CloudFront dùng IP thay đổi.",
+    "explanationEn": "MQTT is not HTTP, so L7 routing is useless, and only an NLB directly meets the static-IP requirement (an Elastic IP per AZ). An NLB is L4, has very high throughput and handles huge numbers of long-lived connections. ALB and CloudFront use changing IPs."
+  },
+  {
+    "id": "q18",
+    "question": "Người dùng ở Việt Nam gọi một API HTTPS đặt ở US West, RTT khoảng 180 ms, qua HTTP/2 và TLS 1.3, kết nối mới hoàn toàn (bỏ qua DNS). Server xử lý mất 20 ms. Time to first byte gần nhất với bao nhiêu?",
+    "questionEn": "A user in Vietnam calls an HTTPS API in US West with about 180 ms RTT, over HTTP/2 and TLS 1.3, on a brand-new connection (ignore DNS). The server takes 20 ms to process. Time to first byte is closest to?",
+    "options": [
+      "Khoảng 560 ms",
+      "Khoảng 200 ms",
+      "Khoảng 380 ms",
+      "Khoảng 740 ms"
+    ],
+    "optionsEn": [
+      "About 560 ms",
+      "About 200 ms",
+      "About 380 ms",
+      "About 740 ms"
+    ],
+    "answer": 0,
+    "explanation": "TCP handshake 1 RTT + TLS 1.3 1 RTT + request/response 1 RTT = 3 × 180 = 540 ms, cộng 20 ms xử lý ≈ 560 ms. Kết nối đã tái sử dụng chỉ tốn ~200 ms; TLS 1.2 thêm một RTT nữa (~740 ms); HTTP/3 gộp transport và TLS còn ~380 ms.",
+    "explanationEn": "TCP handshake 1 RTT + TLS 1.3 1 RTT + request/response 1 RTT = 3 × 180 = 540 ms, plus 20 ms processing ≈ 560 ms. A reused connection costs only ~200 ms; TLS 1.2 adds another RTT (~740 ms); HTTP/3 merges transport and TLS for ~380 ms."
+  },
+  {
+    "id": "q19",
+    "question": "Trang chi tiết đơn hàng của một web app ở Singapore gọi tuần tự 25 API tới một backend đặt ở region Tokyo (RTT ~70 ms). Trang tải mất gần 2 giây dù mỗi API chỉ xử lý 5 ms. Cải thiện nào hiệu quả nhất?",
+    "questionEn": "An order-details page of a web app in Singapore makes 25 sequential API calls to a backend in the Tokyo region (RTT ~70 ms). The page takes almost 2 seconds even though each API processes in 5 ms. Which improvement is most effective?",
+    "options": [
+      "Tối ưu query database để mỗi API xử lý còn 1 ms",
+      "Tăng kích thước instance backend ở Tokyo",
+      "Gộp thành một endpoint tổng hợp chạy cạnh dữ liệu (hoặc đưa backend về cùng region)",
+      "Hạ TTL DNS của API xuống 30 giây"
+    ],
+    "optionsEn": [
+      "Tune database queries so each API processes in 1 ms",
+      "Upsize the backend instances in Tokyo",
+      "Merge into one aggregate endpoint running next to the data (or move the backend into the same region)",
+      "Lower the API's DNS TTL to 30 seconds"
+    ],
+    "answer": 2,
+    "explanation": "25 × 70 ms ≈ 1,75 giây là thời gian mạng; xử lý chỉ chiếm 125 ms. Tối ưu code hay tăng cấu hình chỉ cắt phần nhỏ. Giảm số round trip (gộp, điều phối phía server) hoặc giảm khoảng cách mới xử lý đúng gốc rễ.",
+    "explanationEn": "25 × 70 ms ≈ 1.75 s is network time; processing is only 125 ms. Code tuning or bigger instances trim the small part. Cutting the number of round trips (aggregation, server-side orchestration) or the distance addresses the real cause."
+  }
+]

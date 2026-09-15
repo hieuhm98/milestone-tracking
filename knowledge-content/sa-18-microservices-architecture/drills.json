@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI dấu hiệu cho thấy hệ thống của bạn là distributed monolith.",
+      "promptEn": "Pick TWO signs that your system is a distributed monolith.",
+      "options": [
+        "Mỗi service có pipeline CI/CD riêng",
+        "Nhiều service đọc ghi chung một schema database",
+        "Service tham chiếu thực thể của nhau bằng ID",
+        "Một thay đổi nhỏ buộc phải deploy đồng loạt nhiều service",
+        "Các service phát event khi trạng thái thay đổi"
+      ],
+      "optionsEn": [
+        "Each service has its own CI/CD pipeline",
+        "Several services read and write one shared database schema",
+        "Services reference each other's entities by ID",
+        "A small change forces several services to be deployed together",
+        "Services publish events when their state changes"
+      ],
+      "answers": [1, 3],
+      "explanation": "Schema dùng chung và deploy đồng loạt đều xoá mất sự độc lập — lý do duy nhất để trả chi phí phân tán. Pipeline riêng, tham chiếu bằng ID và phát event là dấu hiệu của ranh giới lành mạnh.",
+      "explanationEn": "A shared schema and lockstep deploys both erase independence — the only reason to pay for distribution. Separate pipelines, ID references and published events are signs of healthy boundaries.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Một service gọi một API bên ngoài đôi khi trả lỗi 503. Chọn HAI thực hành retry đúng.",
+      "promptEn": "A service calls an external API that occasionally returns 503. Pick TWO correct retry practices.",
+      "options": [
+        "Dùng exponential backoff kèm jitter giữa các lần thử",
+        "Retry cả lỗi 400 và 404 để chắc chắn",
+        "Cấu hình retry ở mọi tầng trong chuỗi gọi",
+        "Không đặt timeout để request có đủ thời gian hoàn thành",
+        "Chỉ retry thao tác idempotent hoặc gửi kèm idempotency key"
+      ],
+      "optionsEn": [
+        "Use exponential backoff with jitter between attempts",
+        "Also retry 400 and 404 errors just to be safe",
+        "Configure retries at every layer of the call chain",
+        "Set no timeout so the request has time to finish",
+        "Only retry idempotent operations or send an idempotency key"
+      ],
+      "answers": [0, 4],
+      "explanation": "Backoff có jitter tránh việc mọi client retry cùng nhịp, còn idempotency đảm bảo retry không gây tác dụng phụ trùng lặp. Lỗi 4xx là vĩnh viễn, retry ở mọi tầng gây bão retry, và thiếu timeout làm cạn thread.",
+      "explanationEn": "Jittered backoff stops clients retrying in lockstep, and idempotency makes a retry safe from duplicate side effects. 4xx errors are permanent, retrying at every layer causes retry storms, and no timeout exhausts threads.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Mẫu thiết kế nào thay transaction phân tán bằng chuỗi local transaction, kèm giao dịch bù khi một bước thất bại?",
+      "promptEn": "Which pattern replaces a distributed transaction with a sequence of local transactions plus compensating transactions when a step fails?",
+      "answer": "Saga",
+      "answerEn": "Saga",
+      "accept": [
+        "saga",
+        "saga pattern",
+        "sagas",
+        "mau saga"
+      ],
+      "explanation": "Saga. Nó đổi isolation lấy availability: mỗi bước commit cục bộ, còn thất bại được xử lý bằng các hành động nghiệp vụ bù như hoàn tiền hay huỷ đặt chỗ.",
+      "explanationEn": "Saga. It trades isolation for availability: each step commits locally, and failure is handled by compensating business actions such as a refund or a cancelled reservation.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Mẫu chuyển đổi nào đặt một router trước monolith rồi tách dần từng năng lực sang service mới cho tới khi monolith có thể bị xoá?",
+      "promptEn": "Which migration pattern puts a router in front of a monolith and carves out one capability at a time into new services until the monolith can be deleted?",
+      "answer": "Strangler fig",
+      "answerEn": "Strangler fig",
+      "accept": [
+        "strangler fig",
+        "strangler fig pattern",
+        "strangler",
+        "strangler pattern",
+        "strangler application"
+      ],
+      "explanation": "Strangler fig — đặt theo loài cây mọc bao quanh cây chủ cho tới khi thay thế hoàn toàn. Mỗi bước nhỏ và quay lui được, nên hệ thống luôn chạy trong suốt quá trình chuyển đổi.",
+      "explanationEn": "Strangler fig — named after the plant that grows around a host tree until it replaces it. Every step is small and reversible, so the system keeps running throughout the migration.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi mẫu chịu lỗi với vấn đề nó giải quyết.",
+      "promptEn": "Match each resilience pattern to the problem it solves.",
+      "pairs": [
+        {
+          "left": "Timeout",
+          "leftEn": "Timeout",
+          "right": "Dependency chậm giữ chặt thread và kết nối vô thời hạn",
+          "rightEn": "A slow dependency holding threads and connections indefinitely"
+        },
+        {
+          "left": "Circuit breaker",
+          "leftEn": "Circuit breaker",
+          "right": "Tiếp tục gọi dồn dập một dependency đang hỏng kéo dài",
+          "rightEn": "Hammering a dependency that has been failing for a while"
+        },
+        {
+          "left": "Bulkhead",
+          "leftEn": "Bulkhead",
+          "right": "Một dependency chiếm hết tài nguyên dùng chung của cả service",
+          "rightEn": "One dependency using up resources the whole service shares"
+        },
+        {
+          "left": "Retry với backoff và jitter",
+          "leftEn": "Retry with backoff and jitter",
+          "right": "Lỗi mạng thoáng qua gây lỗi không cần thiết cho người dùng",
+          "rightEn": "Brief network blips causing needless user-facing errors"
+        }
+      ],
+      "explanation": "Bốn mẫu này bổ sung cho nhau: timeout giới hạn thời gian chờ, retry xử lý lỗi thoáng qua, circuit breaker xử lý lỗi kéo dài, bulkhead giới hạn phạm vi thiệt hại.",
+      "explanationEn": "The four complement each other: timeouts bound waiting, retries absorb brief failures, circuit breakers handle sustained failures, and bulkheads limit the blast radius.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự vòng đời của một circuit breaker khi dependency hỏng rồi hồi phục.",
+      "promptEn": "Put the lifecycle of a circuit breaker into order as a dependency fails and then recovers.",
+      "items": [
+        {
+          "text": "CLOSED: lời gọi đi qua bình thường, lỗi được đếm",
+          "textEn": "CLOSED: calls pass through normally and failures are counted"
+        },
+        {
+          "text": "Tỉ lệ lỗi vượt ngưỡng, breaker chuyển sang OPEN và thất bại nhanh",
+          "textEn": "The failure rate crosses the threshold; the breaker opens and fails fast"
+        },
+        {
+          "text": "Hết thời gian chờ, breaker chuyển sang HALF-OPEN",
+          "textEn": "The wait duration elapses; the breaker moves to HALF-OPEN"
+        },
+        {
+          "text": "Một số lời gọi thử được cho đi qua và thành công",
+          "textEn": "A few trial calls are let through and succeed"
+        },
+        {
+          "text": "Breaker quay về CLOSED, lưu lượng trở lại bình thường",
+          "textEn": "The breaker returns to CLOSED and traffic flows normally again"
+        }
+      ],
+      "explanation": "HALF-OPEN là bước thăm dò an toàn: nếu lời gọi thử thất bại, breaker quay lại OPEN thay vì dồn toàn bộ lưu lượng vào một dependency vừa hồi phục.",
+      "explanationEn": "HALF-OPEN is the safe probe: if the trial calls fail, the breaker goes back to OPEN instead of pushing full traffic onto a dependency that has barely recovered.",
+      "id": "d6"
+    }
+  ]
+}

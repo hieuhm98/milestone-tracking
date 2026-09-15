@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI việc thuộc về bước 1 \"Hiểu bài toán\".",
+      "promptEn": "Pick TWO activities that belong to step 1, \"Understand the problem\".",
+      "options": [
+        "Viết unit test cho các input không hợp lệ",
+        "Xác định input, kiểu dữ liệu và phạm vi giá trị của chúng",
+        "Refactor code cho dễ đọc hơn",
+        "Diễn đạt lại bài toán bằng lời của mình",
+        "Thay lời giải O(n log n) bằng lời giải O(n)"
+      ],
+      "optionsEn": [
+        "Write unit tests for invalid inputs",
+        "Identify the inputs, their types and ranges",
+        "Refactor the code to read more clearly",
+        "Restate the problem in your own words",
+        "Replace an O(n log n) solution with an O(n) one"
+      ],
+      "answers": [1, 3],
+      "explanation": "Hiểu đề là diễn đạt lại, xác định input, output, xem đã đủ thông tin chưa và đặt tên dữ liệu. Viết test cho input không hợp lệ thuộc về khám phá ví dụ; refactor và tối ưu Big O thuộc về bước nhìn lại.",
+      "explanationEn": "Understanding means restating, identifying inputs and outputs, checking you have enough information and labelling the data. Tests for invalid inputs belong to exploring examples; refactoring and improving Big O belong to looking back.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về kỹ thuật \"giải một bài toán đơn giản hơn\".",
+      "promptEn": "Pick TWO statements that are true about \"solve a simpler problem\".",
+      "options": [
+        "Tạm bỏ qua chỗ khó cốt lõi, giải phần còn lại, rồi đưa chỗ khó trở lại",
+        "Nghĩa là từ bỏ đề gốc và nộp lời giải của bài dễ hơn",
+        "Giải xong phần dễ thường giúp thấy rõ cách xử lý phần khó",
+        "Chỉ được dùng sau khi đã refactor xong",
+        "Lời giải đơn giản hoá phải tối ưu ngay từ đầu"
+      ],
+      "optionsEn": [
+        "Temporarily ignore the core difficulty, solve the rest, then add the difficulty back",
+        "It means abandoning the original problem and submitting the easier one",
+        "Progress on the easy part often makes the hard part clearer",
+        "It is only allowed once refactoring is finished",
+        "The simplified solution must be optimal from the start"
+      ],
+      "answers": [0, 2],
+      "explanation": "Đơn giản hoá là một bước đệm có chủ đích: bỏ tạm chỗ khó (như chữ hoa/thường và dấu câu trong charCount), có code chạy được, rồi đưa chỗ khó vào lại. Đề gốc vẫn là mục tiêu, và tối ưu là việc của bước nhìn lại.",
+      "explanationEn": "Simplifying is a deliberate stepping stone: set the hard part aside (like case and punctuation in charCount), get working code, then fold the hard part back in. The original problem stays the goal, and optimisation is the job of looking back.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Việc đi qua code từng dòng bằng tay với một ví dụ cụ thể, ghi lại giá trị các biến sau mỗi bước, gọi là gì (tiếng Anh, hai từ)?",
+      "promptEn": "What do you call walking through code line by line by hand with a concrete example, recording the variables after each step (two words)?",
+      "answer": "Dry run",
+      "answerEn": "Dry run",
+      "accept": [
+        "dry run",
+        "dry-run",
+        "dryrun",
+        "trace",
+        "tracing",
+        "hand trace",
+        "chạy tay",
+        "chay tay"
+      ],
+      "explanation": "Dry run (chạy tay). Đây là cách \"kiểm tra kết quả\" trong bước nhìn lại, và là cách thuyết phục nhất để chứng minh code đúng trong phỏng vấn khi không chạy được code.",
+      "explanationEn": "A dry run. It is how you \"check the result\" during look back, and the most convincing way to show your code works in an interview when you cannot execute it.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Lời giải hiển nhiên đúng nhưng chưa tối ưu, nên nêu ra trước rồi mới tối ưu, thường được gọi là gì (tiếng Anh)?",
+      "promptEn": "What is the obviously correct but unoptimised solution — the one you state first before optimising — usually called?",
+      "answer": "Brute force",
+      "answerEn": "Brute force",
+      "accept": [
+        "brute force",
+        "brute-force",
+        "bruteforce",
+        "brute force solution",
+        "naive solution",
+        "naive",
+        "vét cạn",
+        "vet can"
+      ],
+      "explanation": "Brute force (vét cạn). Ví dụ trong bài: loại trùng rồi sắp xếp để lấy số lớn thứ hai (O(n log n)) trước khi tối ưu thành một lần duyệt O(n).",
+      "explanationEn": "Brute force. The example in this topic: dedupe and sort to get the second largest number (O(n log n)) before optimising to a single O(n) pass.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi bước của quy trình với việc làm tiêu biểu của nó.",
+      "promptEn": "Match each step of the process to its typical activity.",
+      "pairs": [
+        {
+          "left": "Hiểu bài toán",
+          "leftEn": "Understand the problem",
+          "right": "Hỏi input, output và các ràng buộc còn thiếu",
+          "rightEn": "Ask about inputs, outputs and missing constraints"
+        },
+        {
+          "left": "Khám phá ví dụ",
+          "leftEn": "Explore examples",
+          "right": "Liệt kê trường hợp đơn giản, phức tạp, rỗng và không hợp lệ",
+          "rightEn": "List simple, complex, empty and invalid cases"
+        },
+        {
+          "left": "Chia nhỏ",
+          "leftEn": "Break it down",
+          "right": "Viết các bước dưới dạng pseudocode trước khi code",
+          "rightEn": "Write the steps as pseudocode before coding"
+        },
+        {
+          "left": "Nhìn lại & refactor",
+          "leftEn": "Look back & refactor",
+          "right": "Chạy tay, nêu Big O và làm code dễ đọc hơn",
+          "rightEn": "Dry-run, state the Big O and make the code clearer"
+        }
+      ],
+      "explanation": "Mỗi bước trả lời một câu hỏi khác nhau: đề là gì, hành vi đúng trông ra sao, làm theo thứ tự nào, và kết quả đã đúng, rõ, nhanh chưa.",
+      "explanationEn": "Each step answers a different question: what is being asked, what correct behaviour looks like, in what order to work, and whether the result is correct, clear and fast.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp các bước của quy trình giải quyết vấn đề theo đúng thứ tự.",
+      "promptEn": "Put the steps of the problem-solving approach in order.",
+      "items": [
+        {
+          "text": "Hiểu bài toán",
+          "textEn": "Understand the problem"
+        },
+        {
+          "text": "Khám phá ví dụ cụ thể",
+          "textEn": "Explore concrete examples"
+        },
+        {
+          "text": "Chia nhỏ vấn đề",
+          "textEn": "Break it down"
+        },
+        {
+          "text": "Giải hoặc đơn giản hoá",
+          "textEn": "Solve or simplify"
+        },
+        {
+          "text": "Nhìn lại và refactor",
+          "textEn": "Look back and refactor"
+        }
+      ],
+      "explanation": "Mỗi bước dựa trên bước trước: không thể viết ví dụ đúng khi chưa hiểu đề, không thể lập kế hoạch khi chưa chốt hành vi. Nếu một ví dụ chạy sai ở bước cuối, bạn quay lại bước trước đó.",
+      "explanationEn": "Each step builds on the one before: you cannot write correct examples without understanding the problem, or plan without pinning down the behaviour. If an example fails at the end, you loop back to an earlier step.",
+      "id": "d6"
+    }
+  ]
+}

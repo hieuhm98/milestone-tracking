@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Cặp HTTP method nào là idempotent nhưng KHÔNG safe?",
+    "questionEn": "Which pair of HTTP methods is idempotent but NOT safe?",
+    "options": [
+      "GET và HEAD",
+      "POST và PATCH",
+      "PUT và DELETE",
+      "POST và GET"
+    ],
+    "optionsEn": [
+      "GET and HEAD",
+      "POST and PATCH",
+      "PUT and DELETE",
+      "POST and GET"
+    ],
+    "answer": 2,
+    "explanation": "PUT và DELETE thay đổi trạng thái (không safe), nhưng gọi lại nhiều lần cho cùng kết quả như gọi một lần (idempotent). GET và HEAD vừa safe vừa idempotent; POST không idempotent, còn PATCH không được đảm bảo idempotent.",
+    "explanationEn": "PUT and DELETE change state (not safe), but repeating them leaves the same result as calling once (idempotent). GET and HEAD are both safe and idempotent; POST is not idempotent and PATCH is not guaranteed to be."
+  },
+  {
+    "id": "q2",
+    "question": "Một user gửi JWT hợp lệ nhưng không có quyền xoá đơn hàng. API trả 401, và SDK phía client liên tục refresh token rồi gọi lại trong vòng lặp. Cách sửa đúng là gì?",
+    "questionEn": "A user sends a valid JWT but lacks permission to delete an order. The API returns 401, and the client SDK keeps refreshing the token and retrying in a loop. What is the right fix?",
+    "options": [
+      "Trả 403, vì người gọi đã được xác thực và đăng nhập lại cũng không giúp gì",
+      "Trả 404 cho mọi lỗi phân quyền để client ngừng retry",
+      "Giữ 401 nhưng thêm header `Retry-After` để làm chậm vòng lặp",
+      "Trả 200 kèm `\"success\": false` để SDK không coi đó là lỗi"
+    ],
+    "optionsEn": [
+      "Return 403, because the caller is authenticated and re-login will not help",
+      "Return 404 for every authorization failure so the client stops retrying",
+      "Keep 401 but add a `Retry-After` header to slow the loop down",
+      "Return 200 with `\"success\": false` so the SDK does not treat it as an error"
+    ],
+    "answer": 0,
+    "explanation": "401 nghĩa là 'chưa xác thực' — client hợp lý khi thử lấy token mới. Ở đây danh tính đã rõ nhưng thiếu quyền, nên đúng là 403. 404 chỉ dùng khi muốn giấu sự tồn tại của tài nguyên, còn 200 kèm success=false phá vỡ mọi logic dựa trên status code.",
+    "explanationEn": "401 means 'not authenticated', so a client reasonably tries to get a new token. Here identity is known but permission is missing, which is 403. 404 is only for deliberately hiding a resource's existence, and 200 with success=false breaks every status-code-based tool."
+  },
+  {
+    "id": "q3",
+    "question": "Hai admin cùng mở một sản phẩm để sửa. Người lưu sau ghi đè mất thay đổi của người lưu trước mà không ai biết. Thiết kế API nào ngăn được điều này?",
+    "questionEn": "Two admins open the same product for editing. The one who saves second silently wipes out the first one's changes. Which API design prevents this?",
+    "options": [
+      "Đổi từ PUT sang POST cho mọi cập nhật",
+      "Thêm idempotency key vào mỗi request cập nhật",
+      "Giảm TTL cache của sản phẩm xuống 0",
+      "Trả `ETag`, yêu cầu `If-Match` khi cập nhật và trả 412 nếu không khớp"
+    ],
+    "optionsEn": [
+      "Switch every update from PUT to POST",
+      "Add an idempotency key to every update request",
+      "Reduce the product cache TTL to zero",
+      "Return an `ETag`, require `If-Match` on update and answer 412 on mismatch"
+    ],
+    "answer": 3,
+    "explanation": "Đây là bài toán lost update, giải bằng optimistic concurrency: phiên bản mà client đã đọc (ETag) phải khớp phiên bản hiện tại thì mới được ghi. Idempotency key chống xử lý trùng một request, không chống hai request khác nhau ghi đè nhau.",
+    "explanationEn": "This is the lost-update problem, solved with optimistic concurrency: the version the client read (ETag) must match the current one before the write is accepted. An idempotency key deduplicates one request; it does not stop two different requests overwriting each other."
+  },
+  {
+    "id": "q4",
+    "question": "Mobile app gọi `POST /payments`, bị timeout sau 10 giây và tự retry. Thỉnh thoảng khách bị trừ tiền hai lần dù server chỉ lỗi mạng ở chiều trả về. Thiết kế nào đúng?",
+    "questionEn": "A mobile app calls `POST /payments`, times out after 10 seconds and retries automatically. Occasionally customers are charged twice even though only the response leg failed. Which design is right?",
+    "options": [
+      "Tắt retry phía client và yêu cầu người dùng tự bấm lại",
+      "Client gửi `Idempotency-Key` cố định cho mỗi thanh toán; server giữ chỗ key nguyên tử và trả lại response đã lưu khi retry",
+      "Tăng timeout của client lên 60 giây để retry hiếm khi xảy ra",
+      "Kiểm tra trong 5 phút gần nhất đã có thanh toán cùng số tiền cho khách đó chưa"
+    ],
+    "optionsEn": [
+      "Disable client retries and ask the user to tap again manually",
+      "The client sends a fixed `Idempotency-Key` per payment; the server reserves it atomically and replays the stored response on retry",
+      "Raise the client timeout to 60 seconds so retries rarely happen",
+      "Check whether the customer had a payment of the same amount in the last 5 minutes"
+    ],
+    "answer": 1,
+    "explanation": "Idempotency key biến POST thành an toàn khi retry: lần đầu xử lý và lưu kết quả, các lần sau cùng key nhận lại đúng response đó. Tắt retry hay tăng timeout chỉ giảm xác suất; so khớp số tiền sẽ chặn nhầm hai giao dịch hợp lệ giống nhau.",
+    "explanationEn": "An idempotency key makes POST retry-safe: the first call is processed and its result stored, later calls with the same key get that same response. Disabling retries or raising timeouts only lowers the odds, and matching on amount would block two legitimate identical payments."
+  },
+  {
+    "id": "q5",
+    "question": "Endpoint feed dùng truy vấn dưới đây. Người dùng cuộn sâu thấy rất chậm, và khi có bài mới được đăng thì trang sau lặp lại bài đã thấy. Cách sửa tốt nhất?\n`SELECT * FROM posts\nORDER BY created_at DESC\nLIMIT 20 OFFSET 200000;`",
+    "questionEn": "A feed endpoint runs the query below. Users scrolling deep see it get very slow, and when new posts arrive the next page repeats posts already seen. Best fix?\n`SELECT * FROM posts\nORDER BY created_at DESC\nLIMIT 20 OFFSET 200000;`",
+    "options": [
+      "Thêm index trên `created_at` và giữ nguyên offset",
+      "Cache toàn bộ bảng posts trong Redis",
+      "Chuyển sang keyset pagination với cursor mờ theo `(created_at, id)`",
+      "Tăng `LIMIT` lên 1000 để giảm số trang"
+    ],
+    "optionsEn": [
+      "Add an index on `created_at` and keep the offset",
+      "Cache the whole posts table in Redis",
+      "Switch to keyset pagination with an opaque cursor on `(created_at, id)`",
+      "Raise `LIMIT` to 1000 to reduce the number of pages"
+    ],
+    "answer": 2,
+    "explanation": "OFFSET buộc DB đọc rồi bỏ 200.000 dòng, và vị trí bị dịch khi có insert mới. Keyset nhảy thẳng tới vị trí qua index nên chi phí hằng số và ổn định; `id` làm cột phá hoà cho các bài trùng timestamp. Chỉ thêm index không xử lý được việc skip dòng.",
+    "explanationEn": "OFFSET makes the database read and discard 200,000 rows, and positions shift when new rows are inserted. Keyset seeks directly via the index, so cost is constant and pages are stable; `id` breaks ties between equal timestamps. An index alone does not remove the skipping."
+  },
+  {
+    "id": "q6",
+    "question": "Thay đổi nào sau đây là tương thích ngược (backward compatible) với client đang dùng API?",
+    "questionEn": "Which of these changes is backward compatible for existing API clients?",
+    "options": [
+      "Thêm một field tuỳ chọn mới vào response",
+      "Đổi tên field `total` thành `totalAmount`",
+      "Biến tham số `currency` từ tuỳ chọn thành bắt buộc",
+      "Đổi kiểu của `id` từ số sang chuỗi"
+    ],
+    "optionsEn": [
+      "Adding a new optional field to the response",
+      "Renaming the field `total` to `totalAmount`",
+      "Making the `currency` parameter required instead of optional",
+      "Changing the type of `id` from number to string"
+    ],
+    "answer": 0,
+    "explanation": "Thay đổi bổ sung an toàn khi client là tolerant reader, bỏ qua field lạ. Đổi tên, đổi kiểu hay biến input thành bắt buộc đều làm vỡ client hiện có và cần version mới hoặc lộ trình chuyển đổi.",
+    "explanationEn": "Additive changes are safe when clients are tolerant readers that ignore unknown fields. Renaming, changing a type or making an input required all break existing clients and need a new version or a migration path."
+  },
+  {
+    "id": "q7",
+    "question": "Server nhận một `POST /transfers` với `Idempotency-Key` đã từng được dùng thành công, nhưng body lần này có số tiền khác. Server nên làm gì?",
+    "questionEn": "The server receives a `POST /transfers` with an `Idempotency-Key` that already succeeded, but this body has a different amount. What should the server do?",
+    "options": [
+      "Xử lý như một giao dịch mới vì body đã khác",
+      "Trả lại response đã lưu của lần đầu mà không kiểm tra body",
+      "Ghi đè bản ghi cũ bằng số tiền mới",
+      "Trả lỗi (ví dụ 422) vì key bị dùng lại cho một request khác"
+    ],
+    "optionsEn": [
+      "Process it as a new transfer because the body is different",
+      "Replay the first call's stored response without checking the body",
+      "Overwrite the old record with the new amount",
+      "Return an error (e.g. 422) because the key is being reused for a different request"
+    ],
+    "answer": 3,
+    "explanation": "Server lưu hash của request cùng key. Cùng key mà khác body gần như chắc chắn là bug phía client; xử lý mới hay trả lại response cũ đều che giấu bug đó và có thể gây sai lệch tiền. Từ chối rõ ràng là an toàn nhất.",
+    "explanationEn": "The server stores a hash of the request with the key. The same key with a different body is almost certainly a client bug; processing it or replaying the old response would hide the bug and could move the wrong money. Rejecting it explicitly is safest."
+  },
+  {
+    "id": "q8",
+    "question": "Một gRPC service được scale từ 2 lên 6 pod sau một Network Load Balancer (L4). Các pod mới gần như không nhận traffic. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "A gRPC service is scaled from 2 to 6 pods behind a Network Load Balancer (L4). The new pods receive almost no traffic. Most likely cause?",
+    "options": [
+      "Protobuf không hỗ trợ nhiều hơn 4 backend",
+      "Client giữ các kết nối HTTP/2 sống lâu và ghép mọi call trên đó, nên L4 LB không chia lại theo request",
+      "Readiness probe của pod mới bị tắt nên chúng nhận traffic quá sớm",
+      "gRPC chỉ chạy trên UDP nên L4 LB không định tuyến được"
+    ],
+    "optionsEn": [
+      "Protobuf does not support more than 4 backends",
+      "Clients hold long-lived HTTP/2 connections and multiplex every call over them, so an L4 LB never rebalances per request",
+      "The new pods' readiness probes are disabled so they receive traffic too early",
+      "gRPC runs only over UDP so the L4 LB cannot route it"
+    ],
+    "answer": 1,
+    "explanation": "L4 cân bằng theo kết nối. Kết nối HTTP/2 mở từ trước vẫn gắn với pod cũ, và mọi call mới đi trên đó. Cần proxy L7 cân bằng theo từng request (Envoy, ALB) hoặc client-side load balancing.",
+    "explanationEn": "An L4 balancer works per connection. The HTTP/2 connections opened earlier stay pinned to the old pods and every new call rides on them. Use an L7 proxy that balances per request (Envoy, ALB) or client-side load balancing."
+  },
+  {
+    "id": "q9",
+    "question": "Field `discount` (số 3) đã bị xoá khỏi message. Một dev thêm field mới như dưới đây. Rủi ro là gì?\n`message Order {\n  string id = 1;\n  int64 total_minor = 2;\n  string note = 3;\n}`",
+    "questionEn": "The field `discount` (number 3) was removed from the message. A developer adds a new field as below. What is the risk?\n`message Order {\n  string id = 1;\n  int64 total_minor = 2;\n  string note = 3;\n}`",
+    "options": [
+      "Client cũ và dữ liệu đã lưu sẽ đọc dữ liệu số 3 sai nghĩa; nên đánh dấu `reserved 3` và dùng số mới",
+      "Không có rủi ro vì Protobuf nhận diện field theo tên",
+      "File không biên dịch được vì số field phải liên tục",
+      "Chỉ ảnh hưởng hiệu năng vì số 3 tốn hai byte"
+    ],
+    "optionsEn": [
+      "Old clients and stored data will decode number 3 with the wrong meaning; mark `reserved 3` and use a new number",
+      "No risk, because Protobuf identifies fields by name",
+      "The file will not compile because field numbers must be contiguous",
+      "Only a performance impact, because number 3 takes two bytes"
+    ],
+    "answer": 0,
+    "explanation": "Trên dây Protobuf chỉ mang field number, không mang tên. Tái sử dụng số 3 khiến client cũ hiểu `note` là `discount` (hoặc lỗi giải mã). Số field không cần liên tục, và 1–15 đều chỉ tốn một byte.",
+    "explanationEn": "On the wire Protobuf carries only field numbers, not names. Reusing 3 makes old clients read `note` as `discount` (or fail to decode). Field numbers need not be contiguous, and 1–15 all encode in one byte."
+  },
+  {
+    "id": "q10",
+    "question": "Một dashboard GraphQL lấy 50 đơn hàng kèm `customer { name }`. Log DB cho thấy 51 truy vấn cho mỗi request. Cách xử lý phù hợp nhất?",
+    "questionEn": "A GraphQL dashboard fetches 50 orders with `customer { name }`. The DB log shows 51 queries per request. Most appropriate fix?",
+    "options": [
+      "Chuyển sang HTTP GET để response được cache ở CDN",
+      "Tắt introspection trên production",
+      "Gom lô việc tải customer trong mỗi request bằng DataLoader",
+      "Tăng connection pool của database"
+    ],
+    "optionsEn": [
+      "Switch to HTTP GET so the response is cached at the CDN",
+      "Disable introspection in production",
+      "Batch the customer lookups per request with DataLoader",
+      "Enlarge the database connection pool"
+    ],
+    "answer": 2,
+    "explanation": "Đây là N+1 kinh điển: một truy vấn lấy đơn hàng và 50 truy vấn customer từ các resolver riêng lẻ. DataLoader gom các khoá trong một tick thành một truy vấn `WHERE id IN (...)`. Pool lớn hơn chỉ cho phép chạy nhiều truy vấn thừa song song.",
+    "explanationEn": "Classic N+1: one query for orders and 50 customer queries from individual resolvers. DataLoader collects the keys within a tick into one `WHERE id IN (...)` query. A bigger pool only lets the wasted queries run in parallel."
+  },
+  {
+    "id": "q11",
+    "question": "Web app cần hiển thị tiến độ của một job export và stream câu trả lời của LLM tới trình duyệt. Client không cần gửi gì thêm trong lúc đó. Lựa chọn đơn giản nhất phù hợp?",
+    "questionEn": "A web app must show an export job's progress and stream an LLM answer to the browser. The client sends nothing else meanwhile. Simplest suitable choice?",
+    "options": [
+      "gRPC bidirectional streaming trực tiếp từ trình duyệt",
+      "WebSocket với giao thức message tự định nghĩa",
+      "Short polling mỗi 100 ms",
+      "Server-Sent Events qua HTTP thường"
+    ],
+    "optionsEn": [
+      "gRPC bidirectional streaming directly from the browser",
+      "WebSocket with a custom message protocol",
+      "Short polling every 100 ms",
+      "Server-Sent Events over plain HTTP"
+    ],
+    "answer": 3,
+    "explanation": "Luồng chỉ một chiều server → client nên SSE là đủ: HTTP thường, `EventSource` tự kết nối lại với `Last-Event-ID`. WebSocket dùng được nhưng thêm độ phức tạp không cần thiết; trình duyệt không gọi gRPC thuần được; polling 100 ms rất lãng phí.",
+    "explanationEn": "The flow is one-way server to client, so SSE is enough: plain HTTP, and `EventSource` reconnects with `Last-Event-ID`. WebSocket works but adds needless complexity; browsers cannot call raw gRPC; 100 ms polling is very wasteful."
+  },
+  {
+    "id": "q12",
+    "question": "Trách nhiệm nào KHÔNG nên đặt trong API gateway?",
+    "questionEn": "Which responsibility should NOT live in the API gateway?",
+    "options": [
+      "Xác thực chữ ký JWT và kiểm tra scope",
+      "Tính giá khuyến mãi theo hạng thành viên và tồn kho",
+      "Rate limiting và quota theo API key",
+      "Định tuyến `/v1` và `/v2` tới các backend khác nhau"
+    ],
+    "optionsEn": [
+      "Validating JWT signatures and checking scopes",
+      "Computing promotional prices from membership tier and stock",
+      "Rate limiting and quotas per API key",
+      "Routing `/v1` and `/v2` to different backends"
+    ],
+    "answer": 1,
+    "explanation": "Gateway nên mỏng và chỉ xử lý mối quan tâm cắt ngang: xác thực, rate limit, định tuyến, telemetry. Business logic như tính giá khiến mọi team phải sửa gateway, biến nó thành nút thắt và một dạng distributed monolith.",
+    "explanationEn": "A gateway should stay thin and handle cross-cutting concerns: authentication, rate limits, routing, telemetry. Business logic such as pricing forces every team to change the gateway, turning it into a bottleneck and a kind of distributed monolith."
+  },
+  {
+    "id": "q13",
+    "question": "Một batch job chạy lúc nửa đêm cần gọi Billing API. Không có người dùng nào tham gia. Nên dùng OAuth 2.0 flow nào?",
+    "questionEn": "A batch job running at midnight must call the Billing API. No user is involved. Which OAuth 2.0 flow should it use?",
+    "options": [
+      "Client Credentials",
+      "Authorization Code + PKCE",
+      "Implicit",
+      "Resource Owner Password Credentials với tài khoản admin"
+    ],
+    "optionsEn": [
+      "Client Credentials",
+      "Authorization Code + PKCE",
+      "Implicit",
+      "Resource Owner Password Credentials with an admin account"
+    ],
+    "answer": 0,
+    "explanation": "Client Credentials dành cho máy gọi máy: service xác thực bằng danh tính của chính nó và nhận access token. Authorization Code cần người dùng đăng nhập; Implicit và Password đã bị OAuth security BCP (RFC 9700) loại bỏ.",
+    "explanationEn": "Client Credentials is for machine-to-machine calls: the service authenticates as itself and receives an access token. Authorization Code needs a user to log in; Implicit and Password are deprecated by the OAuth security BCP (RFC 9700)."
+  },
+  {
+    "id": "q14",
+    "question": "Team frontend muốn gửi ID token nhận từ OIDC làm Bearer token khi gọi Orders API vì 'nó cũng là JWT hợp lệ'. Vì sao đây là thiết kế sai?",
+    "questionEn": "The frontend team wants to send the ID token from OIDC as the Bearer token to the Orders API because 'it is a valid JWT too'. Why is this the wrong design?",
+    "options": [
+      "ID token không được ký nên API không kiểm tra được",
+      "ID token luôn hết hạn sau 60 giây",
+      "ID token dành cho ứng dụng client (`aud` là client), còn API phải nhận access token cấp cho chính nó",
+      "ID token chỉ dùng được với gRPC, không dùng với REST"
+    ],
+    "optionsEn": [
+      "ID tokens are not signed, so the API cannot verify them",
+      "ID tokens always expire after 60 seconds",
+      "The ID token is meant for the client app (`aud` is the client), while the API must accept an access token issued for it",
+      "ID tokens only work with gRPC, not REST"
+    ],
+    "answer": 2,
+    "explanation": "ID token chứng minh cho ứng dụng client biết ai vừa đăng nhập; nó không mang scope cho API và audience không phải API. API phải kiểm tra `aud` của access token, nên chấp nhận ID token đồng nghĩa bỏ qua kiểm tra audience.",
+    "explanationEn": "The ID token tells the client app who just logged in; it carries no API scopes and its audience is not the API. The API must check the access token's `aud`, so accepting ID tokens means skipping the audience check."
+  },
+  {
+    "id": "q15",
+    "question": "API dùng RS256 và xác minh token như dưới đây, với thư viện đọc thuật toán từ header của token. Kẻ tấn công có thể làm gì, và cách sửa?\n`const claims = jwt.verify(token, publicKeyPem);\n// algorithm taken from token header`",
+    "questionEn": "An API uses RS256 and verifies tokens as below, with a library that takes the algorithm from the token header. What can an attacker do, and what is the fix?\n`const claims = jwt.verify(token, publicKeyPem);\n// algorithm taken from token header`",
+    "options": [
+      "Đọc được private key từ chữ ký; sửa bằng cách dùng khoá dài hơn",
+      "Giải mã payload; sửa bằng cách chuyển sang JWE",
+      "Phát lại token cũ; sửa bằng cách bỏ claim `exp`",
+      "Đổi header sang HS256 và ký bằng public key như HMAC secret; sửa bằng cách ghim `algorithms: ['RS256']`"
+    ],
+    "optionsEn": [
+      "Recover the private key from the signature; fix with a longer key",
+      "Decrypt the payload; fix by switching to JWE",
+      "Replay an old token; fix by removing the `exp` claim",
+      "Switch the header to HS256 and sign with the public key as the HMAC secret; fix by pinning `algorithms: ['RS256']`"
+    ],
+    "answer": 3,
+    "explanation": "Đây là tấn công algorithm confusion. Public key là công khai, nên nếu thư viện tin header và dùng nó làm HMAC secret thì kẻ tấn công tự ký được token bất kỳ. Không bao giờ để token tự chọn thuật toán; cũng từ chối `alg: none`.",
+    "explanationEn": "This is the algorithm-confusion attack. The public key is public, so if the library trusts the header and uses it as an HMAC secret, the attacker can sign any token. Never let the token choose its algorithm; also reject `alg: none`."
+  },
+  {
+    "id": "q16",
+    "question": "Công ty phát JWT access token sống 24 giờ. Yêu cầu mới: nhân viên bị cho nghỉ phải mất quyền truy cập API gần như ngay lập tức. Thiết kế nào đáp ứng tốt nhất?",
+    "questionEn": "A company issues JWT access tokens valid for 24 hours. New requirement: a terminated employee must lose API access almost immediately. Which design meets it best?",
+    "options": [
+      "Mã hoá JWT bằng JWE để không ai đọc được claim",
+      "Access token ngắn (vài phút) với refresh token thu hồi được, hoặc opaque token kiểm tra qua introspection có cache ngắn",
+      "Thêm claim `active: true` vào JWT lúc phát hành",
+      "Tăng độ dài khoá RSA lên 4096 bit"
+    ],
+    "optionsEn": [
+      "Encrypt the JWT with JWE so nobody can read the claims",
+      "Short access tokens (minutes) with revocable refresh tokens, or opaque tokens checked via briefly cached introspection",
+      "Add an `active: true` claim to the JWT at issue time",
+      "Increase the RSA key length to 4096 bits"
+    ],
+    "answer": 1,
+    "explanation": "JWT tự chứa nên vẫn hợp lệ tới `exp` dù người dùng đã bị khoá. Rút ngắn thời gian sống giới hạn khoảng hở, thu hồi refresh token chặn việc gia hạn; introspection cho phép thu hồi tức thì. Claim `active` bị đóng băng lúc phát hành, còn mã hoá hay khoá dài hơn không liên quan tới thu hồi.",
+    "explanationEn": "A JWT is self-contained, so it stays valid until `exp` even after the user is disabled. Short lifetimes bound the window, revoking the refresh token stops renewal, and introspection allows instant revocation. An `active` claim is frozen at issue time, and encryption or longer keys have nothing to do with revocation."
+  },
+  {
+    "id": "q17",
+    "question": "Một partner API phải cho phép burst tới 100 request, nhưng tốc độ duy trì lâu dài chỉ 10 request/giây. Cấu hình nào khớp nhất?",
+    "questionEn": "A partner API must allow bursts of up to 100 requests while the long-run sustained rate is only 10 requests per second. Which configuration fits best?",
+    "options": [
+      "Token bucket với sức chứa 100 và tốc độ nạp 10 token/giây",
+      "Fixed window 10 request mỗi giây, không cho burst",
+      "Leaky bucket xả 100 request/giây",
+      "Sliding log giới hạn 100 request mỗi giờ"
+    ],
+    "optionsEn": [
+      "Token bucket with capacity 100 and a refill rate of 10 tokens per second",
+      "Fixed window of 10 requests per second, no bursts",
+      "Leaky bucket draining 100 requests per second",
+      "Sliding log limiting 100 requests per hour"
+    ],
+    "answer": 0,
+    "explanation": "Hai tham số của token bucket ánh xạ trực tiếp yêu cầu: sức chứa b quyết định burst tối đa, tốc độ nạp r quyết định tốc độ duy trì. Fixed window 10/giây cấm burst; leaky bucket 100/giây cho tốc độ duy trì quá cao; 100/giờ quá chặt.",
+    "explanationEn": "Token bucket's two parameters map directly onto the requirement: capacity b sets the maximum burst, refill rate r sets the sustained rate. A 10/s fixed window forbids bursts; a 100/s leaky bucket sustains far too much; 100/hour is far too strict."
+  },
+  {
+    "id": "q18",
+    "question": "Limiter dùng fixed window 100 request/phút theo từng phút đồng hồ. Một client gửi 100 request lúc 10:00:59 và 100 request lúc 10:01:00, tất cả đều được chấp nhận. Cách khắc phục rẻ nhất mà vẫn gần chính xác?",
+    "questionEn": "A limiter uses a fixed window of 100 requests per clock minute. A client sends 100 requests at 10:00:59 and 100 at 10:01:00, and all are accepted. What is the cheapest near-exact fix?",
+    "options": [
+      "Sliding log lưu timestamp của mọi request",
+      "Sliding window counter cộng có trọng số bộ đếm phút trước và phút hiện tại",
+      "Giảm giới hạn xuống 50 request/phút",
+      "Chặn theo địa chỉ IP thay vì API key"
+    ],
+    "optionsEn": [
+      "A sliding log storing every request timestamp",
+      "A sliding window counter weighting the previous and current minute counters",
+      "Lowering the limit to 50 requests per minute",
+      "Limiting by IP address instead of API key"
+    ],
+    "answer": 1,
+    "explanation": "Fixed window cho phép tới 2× giới hạn quanh ranh giới cửa sổ. Sliding window counter chỉ cần hai bộ đếm mỗi khoá mà gần như loại bỏ burst ranh giới. Sliding log chính xác nhưng tốn bộ nhớ theo lưu lượng; giảm giới hạn làm hại client bình thường; theo IP còn tệ hơn vì NAT.",
+    "explanationEn": "A fixed window allows up to 2x the limit around a window boundary. A sliding window counter needs only two counters per key yet nearly removes the boundary burst. A sliding log is exact but its memory grows with traffic; lowering the limit hurts normal clients; per-IP keys are worse because of NAT."
+  }
+]

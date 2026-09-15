@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Phát biểu nào mô tả đúng nhất bản chất của continuous integration?",
+    "questionEn": "Which statement best describes what continuous integration actually is?",
+    "options": [
+      "Cài một CI server để chạy test mỗi đêm trên nhánh develop",
+      "Developer merge thay đổi nhỏ vào mainline ít nhất hằng ngày, mỗi lần merge đều được build và test tự động",
+      "Mỗi feature được phát triển trên nhánh riêng tới khi hoàn chỉnh rồi mới merge",
+      "Tự động deploy mọi commit lên production ngay khi test xanh"
+    ],
+    "optionsEn": [
+      "Installing a CI server that runs the tests nightly on the develop branch",
+      "Developers merge small changes to mainline at least daily, and every merge is built and tested automatically",
+      "Each feature is developed on its own branch until complete and only then merged",
+      "Automatically deploying every commit to production as soon as tests pass"
+    ],
+    "answer": 1,
+    "explanation": "CI là một thói quen: tích hợp thường xuyên vào nhánh chung và kiểm chứng tự động mỗi lần. Build hằng đêm hay nhánh feature dài đều làm việc tích hợp bị trễ. Tự động deploy lên production là continuous deployment — thuộc phần CD.",
+    "explanationEn": "CI is a practice: integrate into the shared branch frequently and verify each integration automatically. Nightly builds and long feature branches both delay integration. Auto-deploying to production is continuous deployment, the CD side."
+  },
+  {
+    "id": "q2",
+    "question": "Một đội SaaS muốn deploy nhiều lần mỗi ngày, nhưng hiện dùng GitFlow với nhánh feature sống 2–3 tuần và thường mất cả ngày để giải quyết conflict khi merge vào develop. Kiến trúc sư nên đề xuất gì?",
+    "questionEn": "A SaaS team wants to deploy several times a day but uses GitFlow with feature branches living 2–3 weeks, and merging into develop regularly takes a full day of conflict resolution. What should the architect propose?",
+    "options": [
+      "Thêm nhánh release/* riêng cho từng feature để cô lập rủi ro",
+      "Chạy CI trên nhánh feature thường xuyên hơn nhưng giữ nguyên quy trình nhánh",
+      "Tăng số reviewer bắt buộc để bắt conflict sớm hơn",
+      "Chuyển sang trunk-based với PR sống dưới 1–2 ngày và ẩn tính năng chưa xong sau feature flag"
+    ],
+    "optionsEn": [
+      "Add a separate release/* branch per feature to isolate risk",
+      "Run CI more often on the feature branches but keep the branching model",
+      "Require more reviewers so conflicts are caught earlier",
+      "Move to trunk-based development with PRs living under 1–2 days and unfinished features behind feature flags"
+    ],
+    "answer": 3,
+    "explanation": "Gốc rễ là tích hợp muộn: chạy CI nhiều hơn trên nhánh dài vẫn test một bản chụp lệch khỏi code của người khác. Trunk-based với PR ngắn và feature flag tích hợp liên tục, phù hợp mục tiêu deploy nhiều lần mỗi ngày. Thêm nhánh hoặc reviewer chỉ làm chậm thêm.",
+    "explanationEn": "The root cause is late integration: running CI more on long branches still tests a snapshot that drifts from everyone else's code. Trunk-based development with short PRs and flags integrates continuously, matching a many-deploys-a-day goal. More branches or reviewers only add delay."
+  },
+  {
+    "id": "q3",
+    "question": "Hai PR đều có CI xanh và được merge cách nhau vài phút. Ngay sau đó `main` bị đỏ vì PR thứ hai gọi một hàm mà PR thứ nhất đã đổi tên. Cơ chế nào ngăn chuyện này?",
+    "questionEn": "Two PRs both have green CI and are merged minutes apart. Immediately afterwards `main` goes red because the second PR calls a function the first PR renamed. Which mechanism prevents this?",
+    "options": [
+      "Merge queue / merge train, test lại mỗi PR trên main mới nhất cộng các PR xếp trước",
+      "Bắt buộc ít nhất hai người review mỗi PR",
+      "Chạy lại toàn bộ pipeline trên main mỗi đêm",
+      "Bật cancel-in-progress cho mọi workflow"
+    ],
+    "optionsEn": [
+      "A merge queue / merge train that re-tests each PR against the latest main plus the PRs ahead of it",
+      "Requiring at least two reviewers on every PR",
+      "Re-running the full pipeline on main every night",
+      "Enabling cancel-in-progress on every workflow"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi PR chỉ được test trên phiên bản main tại lúc nó tách nhánh, nên hai PR xanh riêng lẻ vẫn có thể xung đột về ngữ nghĩa. Merge queue (GitHub) hay merge train (GitLab) test đúng tổ hợp sẽ nằm trên main. Build hằng đêm chỉ phát hiện muộn, còn review hay cancel-in-progress không giải quyết được.",
+    "explanationEn": "Each PR was tested against main as it was when it branched, so two individually green PRs can still conflict semantically. A merge queue (GitHub) or merge train (GitLab) tests the exact combination that will land on main. A nightly build only detects it late, and reviews or cancel-in-progress do not address it."
+  },
+  {
+    "id": "q4",
+    "question": "Pipeline hiện tại chạy tuần tự: integration test (12 phút) → build image → lint (20 giây) → unit test (2 phút). Developer phàn nàn phải chờ lâu mới biết lỗi đánh máy. Thay đổi nào hợp lý nhất?",
+    "questionEn": "The current pipeline runs sequentially: integration tests (12 min) → build image → lint (20 s) → unit tests (2 min). Developers complain they wait ages to learn about a typo. What is the most sensible change?",
+    "options": [
+      "Bỏ bước lint vì editor đã tự kiểm tra",
+      "Chuyển integration test sang chạy hằng đêm và bỏ khỏi PR",
+      "Chạy lint và unit test song song trước, rồi mới build và integration test khi chúng xanh",
+      "Tăng cấu hình runner để integration test chạy nhanh hơn"
+    ],
+    "optionsEn": [
+      "Drop the lint step because editors already check it",
+      "Move integration tests to a nightly run and remove them from PRs",
+      "Run lint and unit tests in parallel first, then build and integration tests once they pass",
+      "Upgrade the runner size so integration tests run faster"
+    ],
+    "answer": 2,
+    "explanation": "Nguyên tắc fail fast: stage rẻ và dễ fail nhất chạy trước, các job độc lập chạy song song. Lỗi đánh máy khi đó chỉ tốn vài chục giây. Bỏ lint hay dời integration test khỏi PR làm yếu cổng kiểm soát; runner to hơn không sửa được thứ tự sai.",
+    "explanationEn": "Fail fast: cheapest and most failure-prone stages first, independent jobs in parallel. A typo then costs seconds. Dropping lint or removing integration tests from PRs weakens the gates, and a bigger runner does not fix a bad ordering."
+  },
+  {
+    "id": "q5",
+    "question": "Một bộ E2E test fail khoảng 1 trên 8 lần chạy mà không có thay đổi code, và mọi người đã quen bấm \"Re-run\". Cách xử lý tốt nhất là gì?",
+    "questionEn": "An E2E test fails roughly 1 run in 8 with no code change, and the team has got used to clicking \"Re-run\". What is the best way to handle it?",
+    "options": [
+      "Cách ly test đó vào job không chặn merge, theo dõi và sửa hoặc xoá nó",
+      "Cấu hình tự động retry toàn bộ pipeline tối đa 3 lần",
+      "Đánh dấu cả job E2E là không bắt buộc vĩnh viễn",
+      "Tăng timeout của test lên gấp đôi"
+    ],
+    "optionsEn": [
+      "Quarantine the test into a non-blocking job, track it, then fix or delete it",
+      "Configure the whole pipeline to retry automatically up to 3 times",
+      "Mark the entire E2E job as permanently optional",
+      "Double the test's timeout"
+    ],
+    "answer": 0,
+    "explanation": "Flaky test phá niềm tin vào CI: người ta ngừng đọc lỗi thật. Cách ly riêng test đó giữ các test còn lại có hiệu lực chặn, đồng thời có danh sách để sửa. Retry toàn bộ che giấu vấn đề, bỏ bắt buộc cả job làm mất tác dụng của mọi test E2E khác, còn timeout chỉ đúng nếu nguyên nhân là chậm.",
+    "explanationEn": "Flaky tests destroy trust in CI: people stop reading real failures. Quarantining that one test keeps the rest binding and gives a list to fix. Blanket retries hide the problem, making the whole job optional disables every other E2E test, and a longer timeout only helps if slowness is the cause."
+  },
+  {
+    "id": "q6",
+    "question": "Một hệ thống có 40 test E2E bằng trình duyệt, 15 unit test và không có integration test. Pipeline mất 45 phút và hay fail ngẫu nhiên. Theo tháp kiểm thử, hướng cải thiện là gì?",
+    "questionEn": "A system has 40 browser E2E tests, 15 unit tests and no integration tests. The pipeline takes 45 minutes and fails randomly. Following the test pyramid, what is the direction to improve?",
+    "options": [
+      "Thêm E2E test để phủ hết mọi luồng người dùng",
+      "Chạy E2E test trên nhiều trình duyệt hơn bằng matrix",
+      "Giữ nguyên tỉ lệ nhưng chuyển E2E sang chạy sau khi deploy production",
+      "Đẩy phần lớn kiểm tra xuống unit và integration test, chỉ giữ vài E2E cho luồng quan trọng"
+    ],
+    "optionsEn": [
+      "Add E2E tests until every user journey is covered",
+      "Run the E2E tests across more browsers with a matrix",
+      "Keep the ratio but run E2E after the production deploy instead",
+      "Push most checks down into unit and integration tests and keep a few E2E tests for critical journeys"
+    ],
+    "answer": 3,
+    "explanation": "Đây là hình cây kem ốc quế — ngược với tháp kiểm thử. Unit test nhanh và ổn định nên chiếm số đông, integration test kiểm tra biên với DB/queue thật, E2E chỉ là lớp mỏng. Thêm E2E hay chạy trên nhiều trình duyệt làm pipeline chậm và bất ổn hơn.",
+    "explanationEn": "This is the ice-cream cone, the inverse of the pyramid. Fast, stable unit tests should dominate, integration tests cover real DB/queue boundaries, and E2E is a thin layer. More E2E tests or more browsers make the pipeline slower and flakier."
+  },
+  {
+    "id": "q7",
+    "question": "Workflow GitHub Actions sau fail ở job `test` với lỗi không tìm thấy thư mục `dist/`. Nguyên nhân là gì?\n`jobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci && npm run build\n  test:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - run: node dist/smoke.js`",
+    "questionEn": "This GitHub Actions workflow fails in the `test` job because `dist/` cannot be found. Why?\n`jobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci && npm run build\n  test:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - run: node dist/smoke.js`",
+    "options": [
+      "`needs: build` khiến hai job chạy song song nên dist chưa kịp tạo",
+      "Mỗi job chạy trên một runner mới, không chia sẻ ổ đĩa; cần upload/download artifact giữa hai job",
+      "`npm ci` xoá thư mục dist sau khi build xong",
+      "Runner ubuntu-latest không cài sẵn Node.js"
+    ],
+    "optionsEn": [
+      "`needs: build` makes both jobs run in parallel, so dist is not ready yet",
+      "Each job runs on a fresh runner with no shared disk; upload and download an artifact between them",
+      "`npm ci` deletes the dist folder after the build",
+      "The ubuntu-latest runner has no Node.js installed"
+    ],
+    "answer": 1,
+    "explanation": "`needs` chỉ tạo thứ tự, không chia sẻ file. Job `test` chạy trên một VM mới tinh — thậm chí chưa checkout code. Muốn chuyển output build thì dùng `actions/upload-artifact` và `actions/download-artifact`, hoặc gộp thành các step trong cùng một job.",
+    "explanationEn": "`needs` only orders jobs; it shares no files. The `test` job runs on a brand-new VM that has not even checked out the code. Hand over build output with `actions/upload-artifact` and `actions/download-artifact`, or make them steps in the same job."
+  },
+  {
+    "id": "q8",
+    "question": "Trong GitLab CI, khai báo `stages: [lint, test, build]` có ba job ở stage `test`. Không dùng `needs:`, ba job này chạy như thế nào?",
+    "questionEn": "In GitLab CI, with `stages: [lint, test, build]` and three jobs in the `test` stage and no `needs:`, how do those three jobs run?",
+    "options": [
+      "Tuần tự theo thứ tự xuất hiện trong file",
+      "Song song với cả job ở stage lint",
+      "Song song với nhau, sau khi mọi job ở stage lint thành công",
+      "Chỉ chạy khi có tag được push"
+    ],
+    "optionsEn": [
+      "Sequentially, in the order they appear in the file",
+      "In parallel with the lint stage jobs as well",
+      "In parallel with each other, after every lint stage job succeeds",
+      "Only when a tag is pushed"
+    ],
+    "answer": 2,
+    "explanation": "Trong GitLab, các stage chạy tuần tự còn các job trong cùng stage chạy song song (nếu có đủ runner). `needs:` cho phép một job bắt đầu sớm hơn, không chờ cả stage trước, biến pipeline thành DAG.",
+    "explanationEn": "In GitLab, stages run in order and jobs within a stage run in parallel (given enough runners). `needs:` lets a job start early without waiting for the whole previous stage, turning the pipeline into a DAG."
+  },
+  {
+    "id": "q9",
+    "question": "Developer thường push 4–5 commit liên tiếp lên cùng một PR trong vài phút, khiến hàng đợi runner đầy các lần chạy đã lỗi thời. Cấu hình GitHub Actions nào giải quyết gọn nhất?",
+    "questionEn": "Developers often push 4–5 commits to the same PR within minutes, filling the runner queue with obsolete runs. Which GitHub Actions setting fixes this most cleanly?",
+    "options": [
+      "`concurrency` với group theo ref và `cancel-in-progress: true`",
+      "`timeout-minutes: 5` cho mọi job",
+      "`strategy.fail-fast: true`",
+      "`permissions: contents: read`"
+    ],
+    "optionsEn": [
+      "`concurrency` with a group per ref and `cancel-in-progress: true`",
+      "`timeout-minutes: 5` on every job",
+      "`strategy.fail-fast: true`",
+      "`permissions: contents: read`"
+    ],
+    "answer": 0,
+    "explanation": "Concurrency group theo ref đảm bảo mỗi nhánh/PR chỉ có một lần chạy; `cancel-in-progress` huỷ lần chạy cũ khi có push mới. Timeout cắt job chạy lâu bất kể còn giá trị hay không, fail-fast chỉ áp dụng trong một matrix, còn permissions là về quyền của token.",
+    "explanationEn": "A concurrency group per ref keeps one run per branch or PR, and `cancel-in-progress` cancels the old run on a new push. A timeout kills long jobs whether or not they are still relevant, fail-fast only applies inside a matrix, and permissions concern the token's scope."
+  },
+  {
+    "id": "q10",
+    "question": "Một job lưu `node_modules` vào cache với key cố định `deps`, và bỏ bước `npm ci` nếu cache trúng. Sau khi một PR nâng version thư viện trong lockfile, CI vẫn chạy với bản cũ. Cách sửa đúng là gì?",
+    "questionEn": "A job caches `node_modules` under the fixed key `deps` and skips `npm ci` on a cache hit. After a PR bumps a library in the lockfile, CI still runs the old version. What is the right fix?",
+    "options": [
+      "Chuyển node_modules sang upload-artifact để giữ 90 ngày",
+      "Xoá cache thủ công mỗi khi có PR đổi dependency",
+      "Đổi key sang `deps-v2` mỗi lần nâng version",
+      "Cache thư mục tải về của npm với key theo hash lockfile, và luôn chạy `npm ci`"
+    ],
+    "optionsEn": [
+      "Move node_modules to upload-artifact so it is kept for 90 days",
+      "Clear the cache by hand whenever a PR changes dependencies",
+      "Rename the key to `deps-v2` on every upgrade",
+      "Cache npm's download cache with a key based on the lockfile hash, and always run `npm ci`"
+    ],
+    "answer": 3,
+    "explanation": "Cache phải an toàn khi mất và không được quyết định tính đúng đắn. Key theo `hashFiles('package-lock.json')` tự đổi khi dependency đổi; `npm ci` luôn cài đúng theo lockfile, cache chỉ giúp tải nhanh hơn. Artifact là để chuyển output, còn đổi key hay xoá tay đều dễ quên.",
+    "explanationEn": "A cache must be safe to lose and must never decide correctness. A key from `hashFiles('package-lock.json')` changes whenever dependencies do, and `npm ci` always installs exactly the lockfile while the cache only speeds up downloads. Artifacts are for handing over output, and manual key bumps or purges get forgotten."
+  },
+  {
+    "id": "q11",
+    "question": "Matrix sau sinh ra bao nhiêu job?\n`strategy:\n  matrix:\n    os: [ubuntu-latest, macos-latest, windows-latest]\n    node: [20, 22]\n    exclude:\n      - os: macos-latest\n        node: 20`",
+    "questionEn": "How many jobs does this matrix produce?\n`strategy:\n  matrix:\n    os: [ubuntu-latest, macos-latest, windows-latest]\n    node: [20, 22]\n    exclude:\n      - os: macos-latest\n        node: 20`",
+    "options": [
+      "6",
+      "5",
+      "4",
+      "3"
+    ],
+    "optionsEn": [
+      "6",
+      "5",
+      "4",
+      "3"
+    ],
+    "answer": 1,
+    "explanation": "3 hệ điều hành × 2 version Node = 6 tổ hợp, trừ đi một tổ hợp bị exclude (macOS + Node 20) còn 5 job.",
+    "explanationEn": "3 operating systems × 2 Node versions = 6 combinations, minus the one excluded (macOS + Node 20), leaves 5 jobs."
+  },
+  {
+    "id": "q12",
+    "question": "Trong một monorepo, workflow của service billing chỉ chạy khi có thay đổi trong `services/billing/**`, và check của nó được đặt là bắt buộc. PR chỉ sửa tài liệu thì bị kẹt ở trạng thái \"Expected — waiting for status\". Cách xử lý phổ biến là gì?",
+    "questionEn": "In a monorepo, the billing service workflow runs only on changes under `services/billing/**`, and its check is required. A docs-only PR is stuck at \"Expected — waiting for status\". What is the common fix?",
+    "options": [
+      "Bỏ path filter để mọi service luôn chạy đầy đủ",
+      "Cho phép admin bỏ qua branch protection mỗi lần",
+      "Thêm một job gate luôn chạy, tổng hợp kết quả các job theo path và đặt gate đó là check bắt buộc",
+      "Chuyển monorepo thành nhiều repo riêng"
+    ],
+    "optionsEn": [
+      "Remove the path filter so every service always runs in full",
+      "Let admins bypass branch protection each time",
+      "Add an always-running gate job that aggregates the path-filtered jobs and make that gate the required check",
+      "Split the monorepo into separate repositories"
+    ],
+    "answer": 2,
+    "explanation": "Required check không bao giờ được báo cáo sẽ chặn merge mãi mãi. Một job gate luôn chạy (bỏ qua hoặc tổng hợp các job con) giữ được lợi ích \"chỉ chạy phần bị ảnh hưởng\" mà không kẹt PR. Bỏ filter làm mất lợi ích đó, bypass thì phá cổng kiểm soát, tách repo là giải pháp quá nặng.",
+    "explanationEn": "A required check that never reports blocks the merge forever. An always-running gate job that skips or aggregates the sub-jobs keeps the run-only-what-changed benefit without stranding PRs. Removing the filter loses that benefit, bypassing breaks the gate, and splitting repos is far too heavy."
+  },
+  {
+    "id": "q13",
+    "question": "Pipeline GitHub Actions cần push image lên Amazon ECR. Hiện access key của một IAM user được lưu trong repository secret và chưa xoay vòng hai năm. Thiết kế nào tốt nhất?",
+    "questionEn": "A GitHub Actions pipeline must push images to Amazon ECR. Today an IAM user's access key sits in a repository secret and has not been rotated for two years. What is the best design?",
+    "options": [
+      "Dùng OIDC: IAM role tin token của GitHub với điều kiện sub giới hạn repo và nhánh, job nhận credential tạm thời",
+      "Giữ access key nhưng thiết lập xoay vòng tự động mỗi 90 ngày",
+      "Chuyển access key sang environment secret có bắt buộc reviewer",
+      "Mã hoá access key bằng base64 trước khi lưu vào secret"
+    ],
+    "optionsEn": [
+      "Use OIDC: an IAM role trusts GitHub's token with a sub condition limiting repo and branch, and the job gets temporary credentials",
+      "Keep the access key but rotate it automatically every 90 days",
+      "Move the access key to an environment secret with required reviewers",
+      "Base64-encode the access key before storing it as a secret"
+    ],
+    "answer": 0,
+    "explanation": "Với OIDC không còn credential dài hạn nào để lộ: job xin JWT ngắn hạn, STS kiểm tra trust policy (issuer, aud, sub) và trả credential tạm thời. Xoay vòng hay environment secret chỉ giảm rủi ro của một key vẫn tồn tại; base64 không phải mã hoá và còn qua mặt được log masking.",
+    "explanationEn": "With OIDC there is no long-lived credential to leak: the job requests a short-lived JWT, STS checks the trust policy (issuer, aud, sub) and returns temporary credentials. Rotation or environment secrets only reduce the risk of a key that still exists; base64 is not encryption and even defeats log masking."
+  },
+  {
+    "id": "q14",
+    "question": "Một repo open-source muốn chạy test cho PR từ fork và cần secret để gọi một API trả phí, nên đã dùng workflow sau. Vấn đề nghiêm trọng nhất là gì?\n`on: pull_request_target\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.event.pull_request.head.sha }}\n      - run: npm ci && npm test\n        env:\n          API_KEY: ${{ secrets.API_KEY }}`",
+    "questionEn": "An open-source repo wants to test fork PRs and needs a secret for a paid API, so it uses this workflow. What is the most serious problem?\n`on: pull_request_target\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.event.pull_request.head.sha }}\n      - run: npm ci && npm test\n        env:\n          API_KEY: ${{ secrets.API_KEY }}`",
+    "options": [
+      "Thiếu `timeout-minutes` nên job có thể chạy tới 6 giờ",
+      "`npm ci` sẽ fail vì fork không có lockfile",
+      "`pull_request_target` không chạy được cho PR từ fork",
+      "Code không tin cậy từ fork được chạy trong ngữ cảnh có secret, nên bất kỳ ai cũng lấy được API_KEY"
+    ],
+    "optionsEn": [
+      "There is no `timeout-minutes`, so the job may run for 6 hours",
+      "`npm ci` will fail because forks have no lockfile",
+      "`pull_request_target` does not run for fork PRs",
+      "Untrusted fork code runs in a context with secrets, so anyone can exfiltrate API_KEY"
+    ],
+    "answer": 3,
+    "explanation": "`pull_request_target` chạy trong ngữ cảnh của repo gốc, có secret và token quyền cao hơn. Checkout commit head của PR rồi chạy `npm ci`/`npm test` nghĩa là chạy script do người lạ viết — lỗ hổng \"pwn request\" kinh điển. Với fork, hãy dùng `pull_request` (không có secret) và tách phần cần secret ra sau khi đã review.",
+    "explanationEn": "`pull_request_target` runs in the base repo's context with secrets and a more privileged token. Checking out the PR head and running `npm ci`/`npm test` executes scripts written by a stranger, the classic \"pwn request\" hole. For forks use `pull_request` (no secrets) and move secret-needing work behind a review."
+  },
+  {
+    "id": "q15",
+    "question": "Staging và production đều deploy `shop:latest`. Sau một sự cố, không ai xác định được production đang chạy commit nào và rollback lại kéo về một image khác với lúc trước. Cách làm nào khắc phục tận gốc?",
+    "questionEn": "Staging and production both deploy `shop:latest`. After an incident nobody can tell which commit production runs, and a rollback pulls a different image than before. What fixes this at the root?",
+    "options": [
+      "Build lại image riêng cho production từ nhánh main mỗi lần deploy",
+      "Build một lần, tag theo git SHA, bật tag immutability và deploy theo digest",
+      "Đặt `imagePullPolicy` luôn kéo lại image mới nhất",
+      "Đổi tên tag thành `stable` cho production và `latest` cho staging"
+    ],
+    "optionsEn": [
+      "Rebuild a separate production image from main on every deploy",
+      "Build once, tag by git SHA, enable tag immutability and deploy by digest",
+      "Set the pull policy to always fetch the newest image",
+      "Rename the tags to `stable` for production and `latest` for staging"
+    ],
+    "answer": 1,
+    "explanation": "`latest` là tag có thể dịch chuyển nên không truy vết và không tái lập được. Tag theo SHA liên kết image với commit, tag bất biến ngăn ghi đè, digest là địa chỉ theo nội dung nên không thể trỏ sang image khác. `stable` vẫn là tag di động, còn build lại theo môi trường vi phạm build once.",
+    "explanationEn": "`latest` is a moving tag, so it is neither traceable nor reproducible. A SHA tag ties the image to a commit, immutable tags prevent overwrites, and a digest is content-addressed so it can never point at another image. `stable` is still a moving tag, and rebuilding per environment breaks build once."
+  },
+  {
+    "id": "q16",
+    "question": "Sau vụ một GitHub Action phổ biến bị trỏ tag version sang commit độc hại và in secret ra log, đội bảo mật yêu cầu giảm rủi ro tương tự. Biện pháp trực tiếp nhất là gì?",
+    "questionEn": "After a popular GitHub Action had its version tags repointed to a malicious commit that printed secrets to logs, the security team wants to reduce that risk. What is the most direct measure?",
+    "options": [
+      "Chỉ dùng action có nhiều sao trên GitHub",
+      "Dùng tag major như `@v4` thay vì tag patch cụ thể",
+      "Pin action bên thứ ba bằng full commit SHA và để Dependabot/Renovate cập nhật pin",
+      "Bật log masking cho mọi secret"
+    ],
+    "optionsEn": [
+      "Only use actions with many GitHub stars",
+      "Use major tags like `@v4` instead of specific patch tags",
+      "Pin third-party actions by full commit SHA and let Dependabot/Renovate update the pins",
+      "Turn on log masking for every secret"
+    ],
+    "answer": 2,
+    "explanation": "Tag là con trỏ có thể bị dời; full commit SHA thì bất biến, nên việc trỏ lại tag không ảnh hưởng tới workflow đã pin. Tag major còn di động hơn tag patch. Số sao không bảo vệ gì — action bị tấn công chính là action phổ biến — và masking đã có sẵn nhưng bị qua mặt.",
+    "explanationEn": "A tag is a pointer that can be moved; a full commit SHA is immutable, so repointing tags does not affect a pinned workflow. Major tags move even more than patch tags. Stars protect nothing, since the attacked action was a popular one, and masking was already on and got bypassed."
+  },
+  {
+    "id": "q17",
+    "question": "Một lỗ hổng nghiêm trọng mới được công bố trong một thư viện logging. Tổ chức có 200 service và cần biết trong vài giờ service nào đang chứa phiên bản bị ảnh hưởng. Đầu tư nào từ trước sẽ giúp nhất?",
+    "questionEn": "A critical vulnerability is announced in a logging library. The organisation has 200 services and must know within hours which ones ship an affected version. Which prior investment helps most?",
+    "options": [
+      "Sinh SBOM (SPDX hoặc CycloneDX) cho mọi artifact trong CI và lưu tập trung để truy vấn",
+      "Chạy SAST trên code của từng service mỗi tuần",
+      "Bắt buộc Conventional Commits để có changelog tự động",
+      "Ký mọi image bằng cosign"
+    ],
+    "optionsEn": [
+      "Generate an SBOM (SPDX or CycloneDX) for every artifact in CI and store them centrally for querying",
+      "Run SAST on each service's code every week",
+      "Enforce Conventional Commits for automatic changelogs",
+      "Sign every image with cosign"
+    ],
+    "answer": 0,
+    "explanation": "SBOM là danh sách máy đọc được của mọi thành phần và phiên bản trong artifact đã build, nên có thể truy vấn ngay thay vì grep 200 repo. SAST phân tích code của chính bạn chứ không liệt kê dependency, changelog không nói gì về thư viện, còn chữ ký chứng minh nguồn gốc chứ không cho biết bên trong có gì.",
+    "explanationEn": "An SBOM is a machine-readable list of every component and version in the built artifact, so it can be queried immediately instead of grepping 200 repos. SAST analyses your own code rather than listing dependencies, changelogs say nothing about libraries, and a signature proves origin, not contents."
+  },
+  {
+    "id": "q18",
+    "question": "Một dự án open-source public muốn tiết kiệm chi phí bằng cách chạy CI trên một EC2 self-hosted runner đặt trong VPC công ty, dùng cho mọi PR. Rủi ro lớn nhất là gì?",
+    "questionEn": "A public open-source project wants to save money by running CI for every PR on a self-hosted EC2 runner inside the company VPC. What is the biggest risk?",
+    "options": [
+      "Self-hosted runner không hỗ trợ matrix build",
+      "Chi phí EC2 luôn cao hơn hosted runner",
+      "Cache của GitHub không dùng được trên self-hosted runner",
+      "PR từ fork có thể chạy code tuỳ ý trên máy tồn tại lâu nằm trong mạng nội bộ, để lại mã độc hoặc tấn công tài nguyên VPC"
+    ],
+    "optionsEn": [
+      "Self-hosted runners do not support matrix builds",
+      "EC2 costs are always higher than hosted runners",
+      "GitHub's cache cannot be used on self-hosted runners",
+      "Fork PRs can run arbitrary code on a persistent machine inside the private network, leaving malware or attacking VPC resources"
+    ],
+    "answer": 3,
+    "explanation": "GitHub khuyến cáo không dùng self-hosted runner cho repo public: bất kỳ ai mở PR đều có thể khiến code của họ chạy trên runner, và runner không ephemeral giữ lại trạng thái giữa các job. Nếu cần runner riêng, hãy dùng runner ephemeral, cô lập mạng và chỉ cho repo private. Các phương án còn lại không đúng về mặt kỹ thuật.",
+    "explanationEn": "GitHub advises against self-hosted runners for public repos: anyone who opens a PR can get code running on the runner, and a non-ephemeral runner keeps state between jobs. If you need your own runners, make them ephemeral, network-isolated and private-repo only. The other options are simply not true."
+  }
+]

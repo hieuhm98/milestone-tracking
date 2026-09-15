@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Vì sao một worker nginx có thể giữ hàng nghìn kết nối đồng thời mà không cần hàng nghìn thread?",
+    "questionEn": "Why can a single nginx worker hold thousands of concurrent connections without thousands of threads?",
+    "options": [
+      "Mỗi kết nối được giao cho một thread lấy từ thread pool dùng chung",
+      "Worker chạy event loop không blocking, dùng epoll/kqueue để chỉ xử lý socket đã sẵn sàng",
+      "Master process nhận hết request rồi chia lần lượt cho worker theo lô",
+      "Nginx đóng mọi kết nối keep-alive ngay sau khi gửi xong response"
+    ],
+    "optionsEn": [
+      "Each connection is handed to a thread taken from a shared thread pool",
+      "The worker runs a non-blocking event loop and uses epoll/kqueue to handle only ready sockets",
+      "The master process receives every request and passes them to workers in batches",
+      "Nginx closes every keep-alive connection right after the response is sent"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi worker là một thread chạy event loop: nó hỏi kernel socket nào sẵn sàng rồi xử lý từng cái, không bao giờ ngồi chờ một socket. Kết nối rảnh chỉ tốn vài KB. Thread pool chỉ dùng tuỳ chọn cho file I/O blocking, và master không xử lý request.",
+    "explanationEn": "Each worker is one thread running an event loop: it asks the kernel which sockets are ready and serves them, never waiting on one. An idle connection costs a few KB. Thread pools are only an option for blocking file I/O, and the master never handles requests."
+  },
+  {
+    "id": "q2",
+    "question": "Công ty muốn mọi laptop nhân viên đi Internet qua một điểm kiểm soát để chặn website độc hại, còn website thương mại điện tử của công ty cần ẩn 6 app server phía sau một điểm vào duy nhất. Hai vai trò này lần lượt là gì?",
+    "questionEn": "A company wants every employee laptop to reach the internet through one control point that blocks malicious sites, while its e-commerce site must hide six app servers behind a single entry point. What are these two roles, in order?",
+    "options": [
+      "Reverse proxy cho laptop, forward proxy cho website",
+      "Load balancer cho laptop, API gateway cho website",
+      "Hai reverse proxy, vì cả hai đều nằm giữa client và server",
+      "Forward proxy cho laptop, reverse proxy cho website"
+    ],
+    "optionsEn": [
+      "A reverse proxy for the laptops, a forward proxy for the website",
+      "A load balancer for the laptops, an API gateway for the website",
+      "Two reverse proxies, because both sit between client and server",
+      "A forward proxy for the laptops, a reverse proxy for the website"
+    ],
+    "answer": 3,
+    "explanation": "Forward proxy làm việc thay client và được client cấu hình — hợp với kiểm soát traffic đi ra. Reverse proxy làm việc thay server, client chỉ thấy nó — hợp với che giấu và cân bằng tải cho các app server. Nginx là lựa chọn tự nhiên cho vai trò thứ hai.",
+    "explanationEn": "A forward proxy acts for clients and is configured by them — right for egress control. A reverse proxy acts for servers and is all the client sees — right for hiding and balancing app servers. Nginx is the natural choice for the second role."
+  },
+  {
+    "id": "q3",
+    "question": "Nginx có cấu hình dưới đây. Một request tới cổng 80 với header `Host: unknown.com` sẽ được block nào xử lý?\n`server {\n  listen 80;\n  server_name blog.example.com;\n}\nserver {\n  listen 80;\n  server_name shop.example.com;\n}`",
+    "questionEn": "Nginx has the config below. A request on port 80 with `Host: unknown.com` is handled by which block?\n`server {\n  listen 80;\n  server_name blog.example.com;\n}\nserver {\n  listen 80;\n  server_name shop.example.com;\n}`",
+    "options": [
+      "Block `blog.example.com`, vì nó là server đầu tiên cho cổng 80 và không có `default_server`",
+      "Block `shop.example.com`, vì nginx chọn block được khai báo cuối cùng",
+      "Không block nào; nginx trả 404 ngay ở tầng kết nối",
+      "Nginx chọn ngẫu nhiên giữa hai block để chia tải"
+    ],
+    "optionsEn": [
+      "The `blog.example.com` block, as the first server for port 80 with no `default_server`",
+      "The `shop.example.com` block, because nginx picks the last one declared",
+      "Neither block; nginx returns 404 at the connection level",
+      "Nginx picks one of the two blocks at random to spread load"
+    ],
+    "answer": 0,
+    "explanation": "Khi không `server_name` nào khớp, default server của cặp địa chỉ:cổng sẽ trả lời. Nếu không có `default_server`, đó là block đầu tiên. Cách chuẩn là thêm một block `listen 80 default_server;` trả `444` để domain lạ không rơi vào website thật.",
+    "explanationEn": "When no `server_name` matches, the default server for that address:port answers. Without `default_server`, that is the first block. The clean fix is a `listen 80 default_server;` block returning `444` so unknown hosts never reach a real site."
+  },
+  {
+    "id": "q4",
+    "question": "Với các location sau, request `/static/logo.png` được xử lý bởi location nào?\n`location / { proxy_pass http://app; }\nlocation /static/ { root /var/www; }\nlocation ~* \\.png$ { root /var/images; }`",
+    "questionEn": "Given these locations, which one handles the request `/static/logo.png`?\n`location / { proxy_pass http://app; }\nlocation /static/ { root /var/www; }\nlocation ~* \\.png$ { root /var/images; }`",
+    "options": [
+      "`location /static/`, vì đó là prefix dài nhất",
+      "`location /`, vì nó được khai báo đầu tiên",
+      "`location ~* \\.png$`, vì regex khớp được ưu tiên hơn prefix thường",
+      "Nginx báo lỗi xung đột location khi chạy `nginx -t`"
+    ],
+    "optionsEn": [
+      "`location /static/`, because it is the longest prefix",
+      "`location /`, because it is declared first",
+      "`location ~* \\.png$`, because a matching regex beats a plain prefix",
+      "Nginx reports a location conflict when running `nginx -t`"
+    ],
+    "answer": 2,
+    "explanation": "Nginx nhớ prefix dài nhất (`/static/`) nhưng vẫn thử các regex; regex đầu tiên khớp sẽ thắng. Muốn `/static/` thắng thì phải viết `location ^~ /static/`, khi đó regex bị bỏ qua.",
+    "explanationEn": "Nginx remembers the longest prefix (`/static/`) but still tries the regexes, and the first matching regex wins. To make `/static/` win you would write `location ^~ /static/`, which skips the regex step."
+  },
+  {
+    "id": "q5",
+    "question": "Client gọi `/api/users`. Backend nhận được đường dẫn nào?\n`location /api/ {\n  proxy_pass http://app:3000/;\n}`",
+    "questionEn": "A client calls `/api/users`. Which path does the backend receive?\n`location /api/ {\n  proxy_pass http://app:3000/;\n}`",
+    "options": [
+      "`/api/users`",
+      "`/users`",
+      "`//users`",
+      "`/api//users`"
+    ],
+    "optionsEn": [
+      "`/api/users`",
+      "`/users`",
+      "`//users`",
+      "`/api//users`"
+    ],
+    "answer": 1,
+    "explanation": "`proxy_pass` có phần URI (dấu `/` cuối), nên phần khớp với location (`/api/`) bị thay bằng `/`, còn lại `/users`. Nếu viết `proxy_pass http://app:3000;` không có URI thì backend nhận nguyên `/api/users`.",
+    "explanationEn": "The `proxy_pass` has a URI part (the trailing `/`), so the matched location part (`/api/`) is replaced by `/`, leaving `/users`. Written as `proxy_pass http://app:3000;` with no URI, the backend would receive `/api/users` unchanged."
+  },
+  {
+    "id": "q6",
+    "question": "Sau khi chuyển TLS termination sang nginx, trình duyệt báo \"too many redirects\" trên trang đăng nhập. App vẫn cấu hình \"bắt buộc HTTPS\". Nguyên nhân khả dĩ nhất là gì?",
+    "questionEn": "After moving TLS termination to nginx, browsers show \"too many redirects\" on the login page. The app is still configured to \"require HTTPS\". What is the most likely cause?",
+    "options": [
+      "Nginx không gửi `X-Forwarded-Proto`, nên app thấy mọi request là HTTP và liên tục redirect sang HTTPS",
+      "Chứng chỉ thiếu intermediate nên trình duyệt redirect lại từ đầu",
+      "`proxy_read_timeout` quá ngắn khiến request bị gửi lại",
+      "HTTP/2 không hỗ trợ redirect 301 giữa các scheme"
+    ],
+    "optionsEn": [
+      "Nginx does not send `X-Forwarded-Proto`, so the app sees every request as HTTP and keeps redirecting to HTTPS",
+      "The certificate lacks intermediates, so the browser restarts the redirect",
+      "`proxy_read_timeout` is too short, so requests are being resent",
+      "HTTP/2 does not support 301 redirects between schemes"
+    ],
+    "answer": 0,
+    "explanation": "Nginx giải mã rồi proxy HTTP thường; app chỉ thấy HTTP và redirect sang HTTPS, trình duyệt quay lại nginx, và vòng lặp tiếp diễn. Đặt `proxy_set_header X-Forwarded-Proto $scheme;` và cho framework tin proxy (trust proxy).",
+    "explanationEn": "Nginx decrypts and proxies plain HTTP; the app sees HTTP, redirects to HTTPS, the browser returns to nginx, and the loop continues. Set `proxy_set_header X-Forwarded-Proto $scheme;` and tell the framework to trust the proxy."
+  },
+  {
+    "id": "q7",
+    "question": "Backend nhận được đường dẫn `//orders` và trả 404 cho request `/api/orders`. Cấu hình nào gây ra hiện tượng này?",
+    "questionEn": "The backend receives the path `//orders` and returns 404 for a request to `/api/orders`. Which config causes this?",
+    "options": [
+      "`location /api/ { proxy_pass http://app:3000; }`",
+      "`location /api/ { proxy_pass http://app:3000/; }`",
+      "`location /api/ { proxy_pass http://app:3000/api/; }`",
+      "`location /api { proxy_pass http://app:3000/; }`"
+    ],
+    "optionsEn": [
+      "`location /api/ { proxy_pass http://app:3000; }`",
+      "`location /api/ { proxy_pass http://app:3000/; }`",
+      "`location /api/ { proxy_pass http://app:3000/api/; }`",
+      "`location /api { proxy_pass http://app:3000/; }`"
+    ],
+    "answer": 3,
+    "explanation": "Location `/api` (không có gạch chéo) khớp phần `/api`, phần đó bị thay bằng `/`, còn lại `/` + `/orders` = `//orders`. Các cấu hình khác lần lượt cho `/api/orders`, `/orders` và `/api/orders`. Quy tắc: giữ dấu gạch chéo đối xứng giữa location và proxy_pass.",
+    "explanationEn": "Location `/api` (no slash) matches `/api`, which is replaced by `/`, leaving `/` + `/orders` = `//orders`. The other configs yield `/api/orders`, `/orders` and `/api/orders`. The rule: keep the slashes symmetric between location and proxy_pass."
+  },
+  {
+    "id": "q8",
+    "question": "Một API có endpoint thường trả trong 20 ms nhưng endpoint xuất báo cáo mất tới 40 giây. Với round robin, một vài backend bị dồn nhiều request báo cáo và chậm hẳn. Nên đổi sang thuật toán nào trong nginx OSS?",
+    "questionEn": "An API has endpoints that answer in 20 ms, but a report export takes up to 40 seconds. With round robin, some backends pile up report requests and slow down. Which open-source nginx method should you switch to?",
+    "options": [
+      "`ip_hash`, để mỗi client luôn về cùng một backend",
+      "`least_time`, để chọn backend có độ trễ thấp nhất",
+      "`least_conn`, để gửi request tới backend đang có ít kết nối nhất",
+      "`hash $request_uri`, để cùng endpoint luôn về cùng backend"
+    ],
+    "optionsEn": [
+      "`ip_hash`, so each client always reaches the same backend",
+      "`least_time`, to choose the backend with the lowest latency",
+      "`least_conn`, to send requests to the backend with the fewest active connections",
+      "`hash $request_uri`, so the same endpoint always hits the same backend"
+    ],
+    "answer": 2,
+    "explanation": "Khi thời gian xử lý chênh lệch lớn, số kết nối đang mở phản ánh tải thật tốt hơn là đếm lượt. `least_time` chỉ có trong NGINX Plus. `hash $request_uri` còn tệ hơn: mọi request báo cáo dồn vào một node.",
+    "explanationEn": "When durations vary widely, active connections reflect real load far better than taking turns. `least_time` is NGINX Plus only. `hash $request_uri` is worse still: every report request lands on the same node."
+  },
+  {
+    "id": "q9",
+    "question": "Dưới tải cao, máy nginx có hàng chục nghìn socket `TIME_WAIT` tới các backend dù upstream đã khai báo `keepalive 64;`. Còn thiếu gì?\n`location / {\n  proxy_pass http://app_backend;\n}`",
+    "questionEn": "Under heavy load the nginx host has tens of thousands of `TIME_WAIT` sockets to the backends, even though the upstream declares `keepalive 64;`. What is missing?\n`location / {\n  proxy_pass http://app_backend;\n}`",
+    "options": [
+      "`proxy_http_version 1.1;` và `proxy_set_header Connection \"\";`",
+      "`keepalive_timeout 65;` trong khối `http`",
+      "Tăng `worker_connections` lên 65535",
+      "Chuyển thuật toán sang `least_conn`"
+    ],
+    "optionsEn": [
+      "`proxy_http_version 1.1;` and `proxy_set_header Connection \"\";`",
+      "`keepalive_timeout 65;` in the `http` block",
+      "Raising `worker_connections` to 65535",
+      "Switching the method to `least_conn`"
+    ],
+    "answer": 0,
+    "explanation": "Mặc định nginx nói HTTP/1.0 với upstream và gửi `Connection: close`, nên mỗi request mở rồi đóng một kết nối TCP bất chấp `keepalive`. `keepalive_timeout` chỉ áp dụng cho kết nối phía client.",
+    "explanationEn": "By default nginx speaks HTTP/1.0 upstream and sends `Connection: close`, so each request opens and closes a TCP connection despite `keepalive`. `keepalive_timeout` only governs client-side connections."
+  },
+  {
+    "id": "q10",
+    "question": "Website HTTPS mới chạy tốt trên Chrome desktop, nhưng `curl` và một số app Android báo \"unable to get local issuer certificate\". Nguyên nhân khả dĩ nhất?",
+    "questionEn": "A new HTTPS site works in desktop Chrome, but `curl` and some Android apps report \"unable to get local issuer certificate\". What is the most likely cause?",
+    "options": [
+      "`ssl_protocols` chưa bật TLSv1.3",
+      "`ssl_certificate` chỉ chứa chứng chỉ lá, thiếu các chứng chỉ intermediate",
+      "Chưa bật `http2 on;` nên client cũ không kết nối được",
+      "`ssl_session_cache` quá nhỏ nên handshake bị huỷ"
+    ],
+    "optionsEn": [
+      "`ssl_protocols` does not enable TLSv1.3",
+      "`ssl_certificate` holds only the leaf certificate, without the intermediates",
+      "`http2 on;` is not set, so older clients cannot connect",
+      "`ssl_session_cache` is too small, so handshakes are aborted"
+    ],
+    "answer": 1,
+    "explanation": "Trình duyệt desktop thường tự tải intermediate còn thiếu, còn `curl` và nhiều client di động thì không, nên chuỗi tin cậy bị đứt. Hãy trỏ `ssl_certificate` vào file full chain (chứng chỉ lá + intermediate).",
+    "explanationEn": "Desktop browsers often fetch missing intermediates themselves; `curl` and many mobile clients do not, so the trust chain breaks. Point `ssl_certificate` at the full chain file (leaf plus intermediates)."
+  },
+  {
+    "id": "q11",
+    "question": "Request `/media/cat.png` sẽ đọc file nào trên đĩa?\n`location /media/ {\n  root /data/uploads;\n}`",
+    "questionEn": "Which file on disk does the request `/media/cat.png` read?\n`location /media/ {\n  root /data/uploads;\n}`",
+    "options": [
+      "`/data/uploads/cat.png`",
+      "`/data/cat.png`",
+      "`/media/data/uploads/cat.png`",
+      "`/data/uploads/media/cat.png`"
+    ],
+    "optionsEn": [
+      "`/data/uploads/cat.png`",
+      "`/data/cat.png`",
+      "`/media/data/uploads/cat.png`",
+      "`/data/uploads/media/cat.png`"
+    ],
+    "answer": 3,
+    "explanation": "`root` nối thêm toàn bộ URI vào đường dẫn, nên kết quả là `/data/uploads/media/cat.png`. Muốn bỏ phần `/media/` thì dùng `alias /data/uploads/;` — alias thay thế phần prefix của location.",
+    "explanationEn": "`root` appends the whole URI to the path, giving `/data/uploads/media/cat.png`. To drop the `/media/` part, use `alias /data/uploads/;` — alias replaces the location prefix."
+  },
+  {
+    "id": "q12",
+    "question": "Trang danh mục sản phẩm được nginx cache 5 phút. Mỗi lần cache hết hạn vào giờ cao điểm, hàng trăm request cùng lúc đập vào backend và database tăng vọt CPU. Directive nào giải quyết trực tiếp nhất?",
+    "questionEn": "A product listing page is cached by nginx for 5 minutes. Every time the entry expires at peak hours, hundreds of simultaneous requests hit the backend and database CPU spikes. Which directive addresses this most directly?",
+    "options": [
+      "`proxy_cache_valid 200 1h;` để cache lâu hơn",
+      "`proxy_buffering off;` để trả response nhanh hơn",
+      "`proxy_cache_lock on;` để chỉ một request mỗi key đi lên backend, số còn lại chờ",
+      "`gzip_comp_level 9;` để giảm kích thước response"
+    ],
+    "optionsEn": [
+      "`proxy_cache_valid 200 1h;` to cache for longer",
+      "`proxy_buffering off;` to return responses faster",
+      "`proxy_cache_lock on;` so only one request per key goes upstream while the rest wait",
+      "`gzip_comp_level 9;` to shrink responses"
+    ],
+    "answer": 2,
+    "explanation": "Đây là cache stampede: nhiều request cùng miss một key. `proxy_cache_lock` cho đúng một request đi làm mới cache. Kết hợp `proxy_cache_use_stale updating` và `proxy_cache_background_update on` còn trả được bản cũ trong lúc làm mới. Cache lâu hơn chỉ làm stampede thưa đi chứ không hết.",
+    "explanationEn": "This is a cache stampede: many requests miss the same key at once. `proxy_cache_lock` lets exactly one request refresh it. Adding `proxy_cache_use_stale updating` with `proxy_cache_background_update on` even serves the old copy meanwhile. A longer TTL only makes stampedes rarer, not gone."
+  },
+  {
+    "id": "q13",
+    "question": "Team bật proxy cache cho `/account/` với `proxy_ignore_headers Set-Cookie Cache-Control;` và key mặc định. Vài phút sau có người dùng báo thấy thông tin tài khoản của người khác. Chuyện gì đã xảy ra?",
+    "questionEn": "A team enabled proxy caching on `/account/` with `proxy_ignore_headers Set-Cookie Cache-Control;` and the default key. Minutes later a user reports seeing someone else's account details. What happened?",
+    "options": [
+      "Response cá nhân hoá được cache theo key chỉ gồm URL, nên người sau nhận bản của người trước",
+      "Nginx trộn lẫn cookie của hai request trong cùng một worker",
+      "`keys_zone` quá nhỏ nên các key bị ghi đè lẫn nhau",
+      "Upstream keepalive khiến hai response đi nhầm kết nối"
+    ],
+    "optionsEn": [
+      "A personalised response was cached under a URL-only key, so later users got the first user's copy",
+      "Nginx mixed the cookies of two requests inside the same worker",
+      "`keys_zone` was too small, so keys overwrote each other",
+      "Upstream keepalive sent two responses down the wrong connections"
+    ],
+    "answer": 0,
+    "explanation": "Mặc định nginx không cache response có `Set-Cookie` hay `Cache-Control: private` chính là để tránh việc này; bỏ qua các header đó với key `$scheme$proxy_host$request_uri` là rò rỉ dữ liệu. Trang cá nhân hoá không nên cache chung, hoặc key phải chứa định danh user.",
+    "explanationEn": "Nginx skips responses with `Set-Cookie` or `Cache-Control: private` by default precisely to prevent this; ignoring those headers with the key `$scheme$proxy_host$request_uri` leaks data. Personalised pages should not be shared-cached, or the key must include the user."
+  },
+  {
+    "id": "q14",
+    "question": "Nginx đứng sau một AWS ALB, cấu hình `limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;`. Sau khi deploy, gần như toàn bộ người dùng nhận lỗi giới hạn tốc độ vào giờ cao điểm. Cách sửa đúng là gì?",
+    "questionEn": "Nginx sits behind an AWS ALB with `limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;`. After deploy, nearly all users get rate-limit errors at peak hours. What is the right fix?",
+    "options": [
+      "Tăng `rate` lên 1000r/s để đủ cho mọi người",
+      "Đổi `$binary_remote_addr` thành `$remote_addr`",
+      "Tăng kích thước zone từ 10m lên 100m",
+      "Dùng `set_real_ip_from` với dải IP của ALB và `real_ip_header X-Forwarded-For` để lấy IP thật của client"
+    ],
+    "optionsEn": [
+      "Raise `rate` to 1000r/s so there is enough for everyone",
+      "Change `$binary_remote_addr` to `$remote_addr`",
+      "Grow the zone from 10m to 100m",
+      "Use `set_real_ip_from` with the ALB's IP range and `real_ip_header X-Forwarded-For` to recover the client IP"
+    ],
+    "answer": 3,
+    "explanation": "Mọi kết nối tới nginx đều đến từ vài IP của ALB, nên mọi người dùng chia chung một bucket. Module real_ip thay địa chỉ bằng IP client lấy từ `X-Forwarded-For` (chỉ tin khi đến từ ALB). Tăng rate thì làm mất tác dụng của giới hạn cho từng client.",
+    "explanationEn": "Every connection to nginx comes from a few ALB IPs, so all users share one bucket. The real_ip module replaces the address with the client IP from `X-Forwarded-For` (trusted only from the ALB). Raising the rate just removes the per-client protection."
+  },
+  {
+    "id": "q15",
+    "question": "Với cấu hình sau, một client gửi 30 request trong cùng một khoảnh khắc. Điều gì xảy ra?\n`limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;\nlocation /api/ {\n  limit_req zone=api burst=20 nodelay;\n}`",
+    "questionEn": "With this config a client fires 30 requests at the same instant. What happens?\n`limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;\nlocation /api/ {\n  limit_req zone=api burst=20 nodelay;\n}`",
+    "options": [
+      "Cả 30 được chuyển đi ngay, vì rate là 10r/s cộng burst 20",
+      "Khoảng 21 được chuyển đi ngay, khoảng 9 bị từ chối với mã 503",
+      "10 được chuyển đi ngay, 20 được xếp hàng và nhả dần mỗi 100 ms",
+      "Khoảng 21 được chuyển đi ngay, khoảng 9 bị từ chối với mã 429"
+    ],
+    "optionsEn": [
+      "All 30 are forwarded at once, because the rate is 10r/s plus a burst of 20",
+      "About 21 are forwarded at once and about 9 are rejected with 503",
+      "10 are forwarded at once and 20 are queued and released every 100 ms",
+      "About 21 are forwarded at once and about 9 are rejected with 429"
+    ],
+    "answer": 1,
+    "explanation": "Rate 10r/s nghĩa là một slot mỗi 100 ms, nên tức thời chỉ có 1 request + 20 slot burst. `nodelay` chuyển chúng đi ngay thay vì xếp hàng; phần dư bị từ chối. Mã mặc định là 503 — chỉ thành 429 khi đặt `limit_req_status 429`.",
+    "explanationEn": "10r/s means one slot every 100 ms, so at one instant there is 1 request plus 20 burst slots. `nodelay` forwards them immediately instead of queuing; the rest are rejected. The default code is 503 — it is 429 only with `limit_req_status 429`."
+  },
+  {
+    "id": "q16",
+    "question": "Ứng dụng chat qua nginx kết nối WebSocket thành công, nhưng các phòng chat yên lặng bị ngắt kết nối đúng sau khoảng 60 giây. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "A chat app behind nginx opens its WebSocket successfully, but quiet rooms disconnect after almost exactly 60 seconds. What is the most likely cause?",
+    "options": [
+      "Thiếu `proxy_set_header Upgrade $http_upgrade;`",
+      "`client_max_body_size` mặc định 1m quá nhỏ cho frame WebSocket",
+      "`proxy_read_timeout` mặc định 60s đóng kết nối khi upstream không gửi gì trong 60 giây",
+      "`worker_connections` đã chạm giới hạn nên nginx đóng kết nối cũ nhất"
+    ],
+    "optionsEn": [
+      "`proxy_set_header Upgrade $http_upgrade;` is missing",
+      "The default 1m `client_max_body_size` is too small for WebSocket frames",
+      "The default 60s `proxy_read_timeout` closes the connection when upstream sends nothing for 60 seconds",
+      "`worker_connections` hit its limit, so nginx closes the oldest connections"
+    ],
+    "answer": 2,
+    "explanation": "Kết nối đã nâng cấp thành công nên header Upgrade không thiếu. Nginx đóng tunnel khi không đọc được gì từ upstream trong `proxy_read_timeout`. Tăng timeout cho location WebSocket hoặc cho server gửi ping định kỳ ngắn hơn 60 giây.",
+    "explanationEn": "The upgrade succeeded, so the Upgrade header is not missing. Nginx closes the tunnel when nothing is read from upstream within `proxy_read_timeout`. Raise it on the WebSocket location or have the server send pings more often than every 60 seconds."
+  },
+  {
+    "id": "q17",
+    "question": "Người dùng báo lỗi khi xuất báo cáo lớn. Error log của nginx ghi \"upstream timed out (110: Connection timed out) while reading response header from upstream\". Client nhận mã nào và nên xem xét gì?",
+    "questionEn": "Users report errors when exporting large reports. The nginx error log says \"upstream timed out (110: Connection timed out) while reading response header from upstream\". What code do clients get, and what should you look at?",
+    "options": [
+      "504 Gateway Timeout — backend còn sống nhưng chậm hơn `proxy_read_timeout`; tối ưu hoặc chuyển báo cáo sang xử lý bất đồng bộ",
+      "502 Bad Gateway — backend đã chết; khởi động lại container",
+      "499 — client đóng kết nối; tăng `keepalive_timeout`",
+      "413 — response quá lớn; tăng `client_max_body_size`"
+    ],
+    "optionsEn": [
+      "504 Gateway Timeout — the backend is alive but slower than `proxy_read_timeout`; optimise it or move reports to async processing",
+      "502 Bad Gateway — the backend is dead; restart the container",
+      "499 — the client closed the connection; raise `keepalive_timeout`",
+      "413 — the response is too large; raise `client_max_body_size`"
+    ],
+    "answer": 0,
+    "explanation": "\"Timed out while reading response header\" nghĩa là kết nối tới được backend nhưng nó không trả lời kịp: 504. Tăng timeout chỉ là giải pháp tạm; kiến trúc tốt hơn là trả job id rồi xử lý báo cáo bất đồng bộ. 502 là không kết nối được hoặc bị reset; 413 liên quan tới request body.",
+    "explanationEn": "\"Timed out while reading response header\" means the backend was reached but did not answer in time: 504. Raising the timeout is a stopgap; the better design returns a job id and builds the report asynchronously. 502 means refused or reset; 413 is about request bodies."
+  },
+  {
+    "id": "q18",
+    "question": "Một nền tảng có 300 microservice trên Kubernetes cần thay đổi route, retry và circuit breaking liên tục mà không reload proxy, kèm distributed tracing sẵn có. Lựa chọn proxy nào hợp nhất?",
+    "questionEn": "A platform with 300 microservices on Kubernetes needs routes, retries and circuit breaking to change constantly without reloading proxies, with distributed tracing built in. Which proxy fits best?",
+    "options": [
+      "Nginx OSS với một file cấu hình lớn và cron `nginx -s reload`",
+      "HAProxy với stick table cho mọi service",
+      "Một AWS NLB duy nhất trước toàn bộ cluster",
+      "Envoy do control plane (ví dụ Istio) cấu hình động qua xDS API"
+    ],
+    "optionsEn": [
+      "Nginx OSS with one large config file and a cron job running `nginx -s reload`",
+      "HAProxy with stick tables for every service",
+      "A single AWS NLB in front of the whole cluster",
+      "Envoy configured dynamically by a control plane (such as Istio) over the xDS APIs"
+    ],
+    "answer": 3,
+    "explanation": "Envoy được thiết kế cho đúng bài toán này: cấu hình đẩy trực tiếp qua xDS không cần reload, retry/circuit breaking/tracing có sẵn, và là data plane của Istio. NLB là L4 nên không định tuyến HTTP được; nginx và HAProxy mạnh nhưng hướng tới cấu hình file.",
+    "explanationEn": "Envoy was designed for exactly this: config pushed live over xDS without reloads, built-in retries, circuit breaking and tracing, and it is Istio's data plane. An NLB is L4 and cannot route HTTP; nginx and HAProxy are strong but file-config oriented."
+  },
+  {
+    "id": "q19",
+    "question": "Header HSTS được đặt ở cấp `server` và xuất hiện ở mọi trang, trừ các trang dưới `/products/`. Vì sao?\n`server {\n  add_header Strict-Transport-Security \"max-age=63072000\" always;\n  location /products/ {\n    add_header X-Cache-Status $upstream_cache_status;\n    proxy_pass http://app;\n  }\n}`",
+    "questionEn": "An HSTS header is set at `server` level and appears on every page except those under `/products/`. Why?\n`server {\n  add_header Strict-Transport-Security \"max-age=63072000\" always;\n  location /products/ {\n    add_header X-Cache-Status $upstream_cache_status;\n    proxy_pass http://app;\n  }\n}`",
+    "options": [
+      "Header HSTS không được gửi kèm response đã qua proxy",
+      "Location có `add_header` riêng nên không kế thừa bất kỳ `add_header` nào từ cấp server",
+      "Biến `$upstream_cache_status` rỗng làm nginx bỏ toàn bộ header",
+      "Backend ghi đè header HSTS bằng giá trị rỗng"
+    ],
+    "optionsEn": [
+      "HSTS headers are never sent on proxied responses",
+      "The location has its own `add_header`, so it inherits no `add_header` from server level",
+      "The empty `$upstream_cache_status` variable makes nginx drop every header",
+      "The backend overwrites the HSTS header with an empty value"
+    ],
+    "answer": 1,
+    "explanation": "`add_header` chỉ được kế thừa khi cấp hiện tại không khai báo `add_header` nào. Một header thêm trong location là làm mất mọi header ở cấp ngoài. Cách sửa: lặp lại header cần thiết trong location, hoặc gom chúng vào một file `include` dùng chung.",
+    "explanationEn": "`add_header` is inherited only when the current level declares none. Adding one header in a location drops every outer one. The fix: repeat the needed headers in the location, or keep them in a shared `include` file."
+  }
+]

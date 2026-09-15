@@ -1,0 +1,342 @@
+[
+  {
+    "id": "q1",
+    "question": "Với một hàm băm tốt, những thao tác nào của hash table có độ phức tạp trung bình O(1)?",
+    "questionEn": "With a good hash function, which hash table operations are O(1) on average?",
+    "options": [
+      "Chỉ tra cứu theo key; thêm và xoá là O(n)",
+      "Thêm, tra cứu theo key và xoá",
+      "Thêm, xoá và tìm kiếm theo value",
+      "Chỉ thêm; tra cứu và xoá là O(log n)"
+    ],
+    "optionsEn": [
+      "Only lookup by key; insert and delete are O(n)",
+      "Insert, lookup by key and delete",
+      "Insert, delete and search by value",
+      "Only insert; lookup and delete are O(log n)"
+    ],
+    "answer": 1,
+    "explanation": "Cả ba thao tác theo key đều băm key thành index rồi nhảy thẳng tới ô đó, nên trung bình là O(1). Tìm theo value thì không băm được gì — phải duyệt toàn bộ bảng, O(n).",
+    "explanationEn": "All three key-based operations hash the key to an index and jump straight to that slot, so they average O(1). Searching by value has nothing to hash — you must scan the whole table, O(n)."
+  },
+  {
+    "id": "q2",
+    "question": "Trong một hash table tự cài đặt trên array, hàm băm (hash function) có nhiệm vụ gì?",
+    "questionEn": "In a hash table built on top of an array, what is the job of the hash function?",
+    "options": [
+      "Mã hoá value để không ai đọc được dữ liệu trong bảng",
+      "Sắp xếp các key để có thể dùng binary search",
+      "Nén value để tiết kiệm bộ nhớ trong mỗi ô",
+      "Biến một key bất kỳ thành một index hợp lệ của array"
+    ],
+    "optionsEn": [
+      "Encrypt the values so nobody can read the table's data",
+      "Sort the keys so binary search can be used",
+      "Compress the values to save memory in each slot",
+      "Convert any key into a valid index of the array"
+    ],
+    "answer": 3,
+    "explanation": "Máy tính chỉ biết truy cập `slots[3]`, không biết `slots[\"cyan\"]`. Hàm băm biến key thành index trong khoảng 0 đến length - 1 để có thể truy cập ngẫu nhiên O(1). Nó không mã hoá, không sắp xếp và không nén gì cả.",
+    "explanationEn": "The computer can access `slots[3]` but has no idea what `slots[\"cyan\"]` means. The hash turns the key into an index between 0 and length - 1 so O(1) random access works. It does not encrypt, sort or compress anything."
+  },
+  {
+    "id": "q3",
+    "question": "Vấn đề lớn nhất khi dùng hàm này làm hàm băm cho hash table là gì?\n`function randomHash(key) {\n  return Math.floor(Math.random() * 1000);\n}`",
+    "questionEn": "What is the biggest problem with using this as a hash table's hash function?\n`function randomHash(key) {\n  return Math.floor(Math.random() * 1000);\n}`",
+    "options": [
+      "Nó không tất định: `get` sẽ tìm ở ô khác với ô mà `set` đã lưu",
+      "Nó quá chậm vì `Math.random` là O(n)",
+      "Nó dồn mọi key vào cùng index 0",
+      "Nó chỉ hoạt động được với key là số"
+    ],
+    "optionsEn": [
+      "It is not deterministic: `get` looks in a different slot from where `set` stored the value",
+      "It is too slow because `Math.random` is O(n)",
+      "It clusters every key at index 0",
+      "It only works with numeric keys"
+    ],
+    "answer": 0,
+    "explanation": "Hàm băm phải tất định — cùng key luôn ra cùng index. Hàm này chạy nhanh và thậm chí rải đều, nhưng lần `get(\"pink\")` sẽ nhìn vào một ô ngẫu nhiên khác, nên dữ liệu coi như mất. Đây là lỗi làm hỏng hẳn bảng, không chỉ làm chậm.",
+    "explanationEn": "A hash must be deterministic — the same key always yields the same index. This one is fast and even spreads keys evenly, but `get(\"pink\")` looks in some other random slot, so the data is effectively lost. It breaks the table rather than just slowing it down."
+  },
+  {
+    "id": "q4",
+    "question": "Hàm dưới đây trả về gì cho `hash(\"cab\", 10)`? (Mã ký tự: `\"a\"` = 97.)\n`function hash(key, arrayLen) {\n  let total = 0;\n  for (const char of key) {\n    const value = char.charCodeAt(0) - 96;\n    total = (total + value) % arrayLen;\n  }\n  return total;\n}`",
+    "questionEn": "What does `hash(\"cab\", 10)` return? (Char code of `\"a\"` is 97.)\n`function hash(key, arrayLen) {\n  let total = 0;\n  for (const char of key) {\n    const value = char.charCodeAt(0) - 96;\n    total = (total + value) % arrayLen;\n  }\n  return total;\n}`",
+    "options": [
+      "3",
+      "5",
+      "6",
+      "0"
+    ],
+    "optionsEn": [
+      "3",
+      "5",
+      "6",
+      "0"
+    ],
+    "answer": 2,
+    "explanation": "c = 3, a = 1, b = 2. total đi qua (0 + 3) % 10 = 3, (3 + 1) % 10 = 4, (4 + 2) % 10 = 6. Vì phép cộng không quan tâm thứ tự, \"abc\" và \"bca\" cũng ra 6.",
+    "explanationEn": "c = 3, a = 1, b = 2. total goes (0 + 3) % 10 = 3, (3 + 1) % 10 = 4, (4 + 2) % 10 = 6. Because addition ignores order, \"abc\" and \"bca\" also give 6."
+  },
+  {
+    "id": "q5",
+    "question": "Với hàm băm cộng mã ký tự lại rồi lấy `% arrayLen`, vì sao `\"listen\"` và `\"silent\"` luôn xung đột?",
+    "questionEn": "With a hash that adds up character codes and takes `% arrayLen`, why do `\"listen\"` and `\"silent\"` always collide?",
+    "options": [
+      "Vì hai chuỗi có độ dài chẵn",
+      "Vì phép cộng không phụ thuộc thứ tự chữ cái, nên các anagram có cùng tổng",
+      "Vì cả hai chuỗi đều chứa chữ \"e\"",
+      "Vì `%` luôn trả về 0 với chuỗi dài hơn 5 ký tự"
+    ],
+    "optionsEn": [
+      "Because both strings have an even length",
+      "Because addition ignores letter order, so anagrams have the same total",
+      "Because both strings contain the letter \"e\"",
+      "Because `%` always returns 0 for strings longer than 5 characters"
+    ],
+    "answer": 1,
+    "explanation": "Hai từ gồm đúng cùng các chữ cái, chỉ khác thứ tự; tổng mã ký tự vì thế bằng nhau với mọi kích thước bảng. Nhân tổng với một số nguyên tố trước khi cộng chữ tiếp theo (`total * 31 + value`) làm vị trí có ý nghĩa.",
+    "explanationEn": "The two words are made of exactly the same letters in a different order, so their code sums are equal for any table size. Multiplying the running total by a prime before adding the next letter (`total * 31 + value`) makes position matter."
+  },
+  {
+    "id": "q6",
+    "question": "Một hàm băm dùng `total = (total * 31 + value) % arrayLen` với `arrayLen = 10`. Anagram vẫn xung đột y như khi chỉ cộng. Vì sao?",
+    "questionEn": "A hash uses `total = (total * 31 + value) % arrayLen` with `arrayLen = 10`. Anagrams still collide exactly as with plain addition. Why?",
+    "options": [
+      "Vì 31 quá nhỏ để trộn các chữ cái",
+      "Vì vòng lặp bị giới hạn ở 100 ký tự",
+      "Vì phép nhân trong JavaScript bị làm tròn với số lớn",
+      "Vì `31 % 10 === 1`, nên nhân 31 không đổi gì theo modulo 10"
+    ],
+    "optionsEn": [
+      "Because 31 is too small to mix the letters",
+      "Because the loop is capped at 100 characters",
+      "Because JavaScript rounds multiplication of large numbers",
+      "Because `31 % 10 === 1`, so multiplying by 31 changes nothing modulo 10"
+    ],
+    "answer": 3,
+    "explanation": "Theo modulo 10, nhân 31 cũng như nhân 1, nên hàm lại thành phép cộng. Đó là lý do nên chọn kích thước bảng là số nguyên tố (như 13 hay 53): khi đó hệ số nhân thực sự trộn key và \"listen\"/\"silent\" rơi vào hai ô khác nhau.",
+    "explanationEn": "Modulo 10, multiplying by 31 is the same as multiplying by 1, so the hash degenerates into plain addition. That is why a prime table length (13, 53…) is recommended: the multiplier then genuinely mixes keys and \"listen\"/\"silent\" land in different slots."
+  },
+  {
+    "id": "q7",
+    "question": "Lời gọi cuối cùng trả về gì?\n`function hash(key, len) {\n  let total = 0;\n  for (let i = 0; i < key.length; i++) {\n    const value = key.charCodeAt(i) - 96;\n    total = (total * 31 + value) % len;\n  }\n  return total;\n}\nhash(\"A\", 53); // \"A\" is 65`",
+    "questionEn": "What does the last call return?\n`function hash(key, len) {\n  let total = 0;\n  for (let i = 0; i < key.length; i++) {\n    const value = key.charCodeAt(i) - 96;\n    total = (total * 31 + value) % len;\n  }\n  return total;\n}\nhash(\"A\", 53); // \"A\" is 65`",
+    "options": [
+      "-31 — một index âm, vì `%` trong JS giữ dấu của số bị chia",
+      "22 — vì `%` luôn trả về số không âm",
+      "0 — vì chữ hoa bị bỏ qua",
+      "Ném ra `RangeError` vì index âm"
+    ],
+    "optionsEn": [
+      "-31 — a negative index, because JS `%` keeps the sign of the dividend",
+      "22 — because `%` always returns a non-negative number",
+      "0 — because uppercase letters are ignored",
+      "It throws a `RangeError` for the negative index"
+    ],
+    "answer": 0,
+    "explanation": "65 - 96 = -31 và `-31 % 53` trong JavaScript là -31, không phải 22. Hàm băm không ném lỗi; nó trả về index âm, và `keyMap[-31]` âm thầm tạo một thuộc tính lạ trên array. Dùng mã ký tự gốc (luôn không âm) sẽ tránh được lỗi này.",
+    "explanationEn": "65 - 96 = -31 and in JavaScript `-31 % 53` is -31, not 22. Nothing throws; the hash returns a negative index and `keyMap[-31]` silently creates an odd property on the array. Using the raw char code (never negative) avoids the bug."
+  },
+  {
+    "id": "q8",
+    "question": "Bảng dùng separate chaining, dài 10. `\"darkblue\"` và `\"salmon\"` đều băm ra index 4. Sau khi set cả hai, ô 4 chứa gì?",
+    "questionEn": "A table uses separate chaining with length 10. `\"darkblue\"` and `\"salmon\"` both hash to index 4. After setting both, what does slot 4 hold?",
+    "options": [
+      "Chỉ cặp của `\"salmon\"`, vì nó ghi đè cặp trước",
+      "Chỉ cặp của `\"darkblue\"`; `\"salmon\"` được đưa sang ô 5",
+      "Một bucket chứa cả hai cặp `[key, value]`",
+      "Tổng hai value, vì hai key có cùng index"
+    ],
+    "optionsEn": [
+      "Only the `\"salmon\"` pair, because it overwrote the first one",
+      "Only the `\"darkblue\"` pair; `\"salmon\"` is moved to slot 5",
+      "One bucket holding both `[key, value]` pairs",
+      "The two values combined, because the keys share an index"
+    ],
+    "answer": 2,
+    "explanation": "Separate chaining lưu một tập hợp (array hoặc linked list) ở mỗi ô, nên nhiều cặp cùng index nằm chung một bucket. Chuyển sang ô kế tiếp là cách của linear probing; ghi đè thì làm mất dữ liệu.",
+    "explanationEn": "Separate chaining keeps a collection (array or linked list) in each slot, so pairs sharing an index live together in one bucket. Moving to the next slot is what linear probing does; overwriting would lose data."
+  },
+  {
+    "id": "q9",
+    "question": "Bảng dùng linear probing, dài 10 và đang trống. Chèn lần lượt `\"darkblue\"`, `\"salmon\"`, `\"tomato\"` — cả ba đều băm ra 4. `\"tomato\"` nằm ở ô nào?",
+    "questionEn": "An empty table of length 10 uses linear probing. You insert `\"darkblue\"`, `\"salmon\"`, `\"tomato\"` in that order — all three hash to 4. Which slot holds `\"tomato\"`?",
+    "options": [
+      "4, trong cùng bucket với hai key kia",
+      "6",
+      "5",
+      "3, vì probing đi lùi"
+    ],
+    "optionsEn": [
+      "4, in the same bucket as the other two",
+      "6",
+      "5",
+      "3, because probing walks backwards"
+    ],
+    "answer": 1,
+    "explanation": "darkblue lấy ô 4. salmon thấy 4 đã có người nên đi tiếp sang 5. tomato thấy 4 và 5 đều đầy nên dừng ở 6. Linear probing chỉ lưu một cặp mỗi ô và đi về phía trước (quay vòng khi tới cuối).",
+    "explanationEn": "darkblue takes slot 4. salmon finds 4 taken and moves on to 5. tomato finds 4 and 5 full and settles at 6. Linear probing stores one pair per slot and walks forward (wrapping at the end)."
+  },
+  {
+    "id": "q10",
+    "question": "Trong bảng linear probing ở trên (darkblue ở 4, salmon ở 5, tomato ở 6), vì sao xoá `\"salmon\"` bằng cách chỉ làm trống ô 5 là SAI?",
+    "questionEn": "In the linear probing table above (darkblue at 4, salmon at 5, tomato at 6), why is deleting `\"salmon\"` by simply emptying slot 5 WRONG?",
+    "options": [
+      "Vì ô trống làm tăng load factor",
+      "Vì darkblue sẽ tự động bị dời sang ô 5",
+      "Vì array JavaScript không cho gán `undefined` vào giữa",
+      "Vì `get(\"tomato\")` sẽ dừng ở ô trống 5 và báo sai là không tìm thấy"
+    ],
+    "optionsEn": [
+      "Because the empty slot increases the load factor",
+      "Because darkblue will automatically shift into slot 5",
+      "Because JavaScript arrays do not allow `undefined` in the middle",
+      "Because `get(\"tomato\")` stops at the empty slot 5 and wrongly reports it missing"
+    ],
+    "answer": 3,
+    "explanation": "Khi tìm kiếm, gặp ô trống nghĩa là \"key không tồn tại\". Làm trống ô 5 cắt đứt chuỗi dò từ 4 tới 6. Cách đúng là đặt một tombstone: get dò tiếp qua nó, còn set có thể tái sử dụng ô đó.",
+    "explanationEn": "During a lookup, an empty slot means \"key not present\". Emptying slot 5 breaks the probe chain from 4 to 6. The fix is a tombstone marker: get keeps probing past it, while set may reuse the slot."
+  },
+  {
+    "id": "q11",
+    "question": "Method `set` này có lỗi gì?\n`set(key, value) {\n  const index = this._hash(key);\n  if (!this.keyMap[index]) this.keyMap[index] = [];\n  this.keyMap[index].push([key, value]);\n}\n// ht.set(\"yellow\", \"#FF0\");\n// ht.set(\"yellow\", \"#FF1\");`",
+    "questionEn": "What is wrong with this `set` method?\n`set(key, value) {\n  const index = this._hash(key);\n  if (!this.keyMap[index]) this.keyMap[index] = [];\n  this.keyMap[index].push([key, value]);\n}\n// ht.set(\"yellow\", \"#FF0\");\n// ht.set(\"yellow\", \"#FF1\");`",
+    "options": [
+      "Set lại một key đã có sẽ thêm cặp thứ hai thay vì cập nhật, nên `keys()` trả \"yellow\" hai lần",
+      "Lần set thứ hai ném lỗi vì bucket đã tồn tại",
+      "Nó luôn tạo bucket mới, nên cặp đầu tiên bị mất",
+      "Không có lỗi — hash table cho phép một key có nhiều value"
+    ],
+    "optionsEn": [
+      "Setting an existing key adds a second pair instead of updating, so `keys()` returns \"yellow\" twice",
+      "The second set throws because the bucket already exists",
+      "It always creates a new bucket, so the first pair is lost",
+      "Nothing — hash tables allow one key to have several values"
+    ],
+    "answer": 0,
+    "explanation": "Bucket chỉ được tạo khi còn trống, nên không có gì bị mất; nhưng method không duyệt bucket để tìm key cũ. Kết quả là key trùng lặp, và một `get` duyệt từ đầu bucket sẽ trả về value cũ \"#FF0\". Phải so sánh key và cập nhật `pair[1]` nếu đã tồn tại.",
+    "explanationEn": "The bucket is only created when missing, so nothing is lost; but the method never scans the bucket for the existing key. You get duplicate keys, and a `get` scanning from the front returns the stale \"#FF0\". It must compare keys and update `pair[1]` when found."
+  },
+  {
+    "id": "q12",
+    "question": "Một hash table dùng separate chaining có `m` ô và đang chứa `n` cặp. Độ phức tạp thời gian của `keys()` là gì?",
+    "questionEn": "A separate-chaining hash table has `m` slots and holds `n` pairs. What is the time complexity of `keys()`?",
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n + m)",
+      "O(n · m)"
+    ],
+    "optionsEn": [
+      "O(1)",
+      "O(n)",
+      "O(n + m)",
+      "O(n · m)"
+    ],
+    "answer": 2,
+    "explanation": "keys() phải đi qua cả `m` ô của array (kể cả ô trống) và lấy ra `n` cặp trong các bucket. Hai phần cộng lại, không nhân, vì mỗi cặp chỉ nằm trong đúng một bucket. Một bảng rất lớn mà gần như trống vẫn tốn O(m).",
+    "explanationEn": "keys() walks all `m` slots of the array (empty ones included) and collects the `n` pairs in the buckets. The two add rather than multiply, since every pair lives in exactly one bucket. A huge, mostly empty table still costs O(m)."
+  },
+  {
+    "id": "q13",
+    "question": "Vì sao mỗi ô trong class HashTable lưu cả cặp `[key, value]` thay vì chỉ lưu value?",
+    "questionEn": "Why does each slot in the HashTable class store the `[key, value]` pair rather than just the value?",
+    "options": [
+      "Để `values()` có thể trả về kết quả đã sắp xếp theo key",
+      "Vì nhiều key khác nhau có thể rơi vào cùng index, nên `get` phải so sánh key để chọn đúng cặp",
+      "Vì JavaScript không cho array chứa giá trị chuỗi đơn lẻ",
+      "Để hàm băm có thể băm lại value khi resize"
+    ],
+    "optionsEn": [
+      "So `values()` can return results sorted by key",
+      "Because different keys can land on the same index, so `get` must compare keys to pick the right pair",
+      "Because JavaScript arrays cannot hold bare string values",
+      "So the hash function can rehash the value during a resize"
+    ],
+    "answer": 1,
+    "explanation": "Xung đột là không tránh được. Nếu bucket ở ô 4 chỉ chứa \"#00008b\" và \"#fa8072\", ta không biết value nào thuộc \"salmon\". Lưu key cho phép `get` và `set` nhận ra đúng cặp (và cũng là thứ `keys()` và việc rehash cần đến).",
+    "explanationEn": "Collisions are unavoidable. If the bucket at slot 4 held only \"#00008b\" and \"#fa8072\", you could not tell which belongs to \"salmon\". Storing the key lets `get` and `set` identify the right pair (and is what `keys()` and rehashing need too)."
+  },
+  {
+    "id": "q14",
+    "question": "Một hash table dùng separate chaining với hàm băm luôn `return 0`. Độ phức tạp của `get` sau khi đã chèn `n` key là gì?",
+    "questionEn": "A separate-chaining hash table uses a hash that always does `return 0`. After inserting `n` keys, what is the complexity of `get`?",
+    "options": [
+      "O(1), vì truy cập index 0 là O(1)",
+      "O(log n), vì bucket được giữ theo thứ tự",
+      "O(n²), vì mỗi lần get phải băm lại mọi key",
+      "O(n), vì mọi key nằm chung một bucket và phải duyệt tuần tự"
+    ],
+    "optionsEn": [
+      "O(1), because accessing index 0 is O(1)",
+      "O(log n), because the bucket is kept in order",
+      "O(n²), because each get rehashes every key",
+      "O(n), because every key sits in one bucket that must be scanned linearly"
+    ],
+    "answer": 3,
+    "explanation": "Nhảy tới ô 0 thì O(1), nhưng ô đó chứa cả `n` cặp, và bucket không được sắp xếp nên phải duyệt tuần tự: O(n). Đây chính là trường hợp xấu nhất của hash table — nó biến thành một list. O(1) trung bình chỉ đúng với hàm băm phân bố đều.",
+    "explanationEn": "Jumping to slot 0 is O(1), but that slot holds all `n` pairs in an unsorted bucket that must be scanned linearly: O(n). This is exactly the hash table worst case — it degenerates into a list. The O(1) average only holds with a uniform hash."
+  },
+  {
+    "id": "q15",
+    "question": "Một bảng có 32 ô, đang chứa 24 cặp, và resize khi load factor VƯỢT 0,75. Điều gì xảy ra khi chèn thêm một key mới?",
+    "questionEn": "A table has 32 slots, holds 24 pairs, and resizes when the load factor EXCEEDS 0.75. What happens when one more new key is inserted?",
+    "options": [
+      "Không có gì, vì load factor chỉ tính số ô đã có bucket",
+      "Bảng resize, nhưng các cặp cũ vẫn ở nguyên index cũ",
+      "Load factor thành 25/32 ≈ 0,78, bảng cấp phát array lớn hơn và rehash mọi cặp",
+      "Chèn thất bại vì bảng đã đầy"
+    ],
+    "optionsEn": [
+      "Nothing, because the load factor only counts slots that have a bucket",
+      "The table resizes, but old pairs stay at their old indices",
+      "The load factor becomes 25/32 ≈ 0.78, so the table allocates a larger array and rehashes every pair",
+      "The insert fails because the table is full"
+    ],
+    "answer": 2,
+    "explanation": "α = n / m = 25 / 32 ≈ 0,78 > 0,75, nên bảng tăng khoảng gấp đôi và mọi cặp được băm lại theo độ dài mới. Lần resize này tốn O(n), nhưng vì hiếm dần nên `set` vẫn là amortized O(1). Bảng chaining không bao giờ \"đầy\" theo nghĩa từ chối chèn.",
+    "explanationEn": "α = n / m = 25 / 32 ≈ 0.78 > 0.75, so the table roughly doubles and every pair is rehashed for the new length. That resize costs O(n), but it becomes rarer and rarer, so `set` stays amortized O(1). A chaining table is never \"full\" in the sense of refusing inserts."
+  },
+  {
+    "id": "q16",
+    "question": "Khi resize hash table từ 53 lên 107 ô, vì sao không thể chỉ copy các bucket sang đúng index cũ trong array mới?",
+    "questionEn": "When resizing a hash table from 53 to 107 slots, why can't you just copy each bucket to the same index in the new array?",
+    "options": [
+      "Vì index được tính bằng `% length`, nên đổi độ dài thì hầu hết key thuộc về index khác",
+      "Vì array mới không có các index nhỏ hơn 53",
+      "Vì copy bucket tốn O(n²) còn rehash chỉ tốn O(1)",
+      "Vì value phải được sắp xếp lại trước khi chèn"
+    ],
+    "optionsEn": [
+      "Because the index is computed with `% length`, so changing the length moves most keys to different indices",
+      "Because the new array has no indices below 53",
+      "Because copying buckets costs O(n²) while rehashing costs O(1)",
+      "Because values must be re-sorted before insertion"
+    ],
+    "answer": 0,
+    "explanation": "Nếu để nguyên index cũ, `get` sau resize sẽ tính `hash % 107` và nhìn sai chỗ. Mọi cặp phải được băm lại theo độ dài mới — một thao tác O(n) mỗi lần resize.",
+    "explanationEn": "If pairs stayed at their old indices, a `get` after the resize computes `hash % 107` and looks in the wrong place. Every pair must be rehashed against the new length — an O(n) step per resize."
+  },
+  {
+    "id": "q17",
+    "question": "Bạn cần lưu 1 triệu sản phẩm theo giá và thường xuyên truy vấn \"mọi sản phẩm có giá từ 100 đến 200, theo thứ tự tăng dần\". Cấu trúc nào phù hợp nhất?",
+    "questionEn": "You store 1 million products by price and frequently query \"all products priced between 100 and 200, in ascending order\". Which structure fits best?",
+    "options": [
+      "Một `Map` với giá làm key",
+      "Một balanced binary search tree (hoặc array đã sắp xếp) theo giá",
+      "Một `Set` chứa các giá",
+      "Một hash table dùng linear probing với kích thước nguyên tố"
+    ],
+    "optionsEn": [
+      "A `Map` keyed by price",
+      "A balanced binary search tree (or a sorted array) keyed by price",
+      "A `Set` of prices",
+      "A linear-probing hash table with a prime size"
+    ],
+    "answer": 1,
+    "explanation": "Hash table rải key một cách \"ngẫu nhiên\" nên không hỗ trợ thứ tự hay truy vấn khoảng — phải duyệt mọi phần tử rồi sắp xếp. BST cân bằng tìm điểm bắt đầu trong O(log n) rồi duyệt in-order các kết quả theo thứ tự. Hash table là lựa chọn cho tra cứu chính xác theo key.",
+    "explanationEn": "A hash table scatters keys \"randomly\", so it cannot answer ordered or range queries without scanning everything and sorting. A balanced BST finds the start in O(log n) and walks the matches in order. Hash tables are for exact-key lookups."
+  }
+]

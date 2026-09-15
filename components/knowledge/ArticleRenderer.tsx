@@ -15,7 +15,7 @@ export default function ArticleRenderer({ content }: Props) {
       prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3
       prose-h3:text-base prose-h3:mt-5 prose-h3:mb-2
       prose-p:leading-relaxed
-      prose-code:text-blue-600 dark:prose-code:text-blue-300 prose-code:bg-zinc-100 dark:prose-code:bg-zinc-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:break-words
+      prose-code:text-blue-600 dark:prose-code:text-blue-300 prose-code:bg-zinc-100 dark:prose-code:bg-zinc-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:break-words prose-code:before:content-none prose-code:after:content-none
       prose-pre:bg-zinc-100 dark:prose-pre:bg-zinc-800 prose-pre:border prose-pre:border-zinc-200 dark:prose-pre:border-zinc-700 prose-pre:rounded-xl
       prose-blockquote:border-blue-500 prose-blockquote:italic
       prose-table:text-sm

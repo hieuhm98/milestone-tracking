@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về layer của image Docker.",
+      "promptEn": "Pick TWO statements that are true about Docker image layers.",
+      "options": [
+        "Xoá một file ở layer sau sẽ làm image nhỏ đi đúng bằng kích thước file đó",
+        "Mỗi container có một writable layer mỏng riêng nằm trên các layer chỉ-đọc dùng chung",
+        "Instruction `EXPOSE` tạo một layer chứa luật iptables cho port",
+        "Layer được định danh bằng hash nội dung, nên layer giống nhau chỉ lưu và pull một lần",
+        "Writable layer của container được giữ lại kể cả sau khi chạy `docker rm`"
+      ],
+      "optionsEn": [
+        "Deleting a file in a later layer shrinks the image by that file's size",
+        "Each container gets its own thin writable layer on top of shared read-only layers",
+        "The `EXPOSE` instruction creates a layer holding iptables rules for the port",
+        "Layers are addressed by content hash, so identical layers are stored and pulled once",
+        "A container's writable layer is kept even after `docker rm`"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Layer là bất biến và content-addressed: dùng chung được giữa các image và container, nhưng xoá file ở layer sau chỉ tạo whiteout, không làm image nhỏ đi. `EXPOSE` chỉ là metadata, và writable layer mất cùng container.",
+      "explanationEn": "Layers are immutable and content-addressed: shareable across images and containers, but deleting a file later only adds a whiteout and never shrinks the image. `EXPOSE` is metadata only, and the writable layer is gone with the container.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Một API trong container phải truy cập được từ internet ở port 443 của host, còn PostgreSQL chỉ được truy cập từ API. Chọn HAI việc nên làm.",
+      "promptEn": "A containerised API must be reachable from the internet on host port 443, while PostgreSQL must be reachable only by the API. Pick TWO things you should do.",
+      "options": [
+        "Publish port của database bằng `-p 5432:5432` và dựa vào ufw để chặn bên ngoài",
+        "Chạy database với `--network host` để API gọi được qua `localhost`",
+        "Đặt API và database trên cùng một user-defined bridge network, API gọi `db:5432`",
+        "Thêm `EXPOSE 5432` cho database là đủ để giữ port ở trạng thái riêng tư",
+        "Chỉ publish port của API, ví dụ `-p 443:8443`, và không publish port của database"
+      ],
+      "optionsEn": [
+        "Publish the database with `-p 5432:5432` and rely on ufw to block outsiders",
+        "Run the database with `--network host` so the API can reach it via `localhost`",
+        "Put the API and database on the same user-defined bridge network, with the API calling `db:5432`",
+        "Adding `EXPOSE 5432` to the database is enough to keep the port private",
+        "Publish only the API's port, e.g. `-p 443:8443`, and never publish the database port"
+      ],
+      "answers": [
+        2,
+        4
+      ],
+      "explanation": "Container trên cùng user-defined bridge gọi nhau bằng tên và port của container mà không cần publish. Chỉ publish thứ cần ra internet. Luật iptables của Docker có thể vượt qua ufw, host network bỏ hết cô lập mạng, còn `EXPOSE` không kiểm soát truy cập.",
+      "explanationEn": "Containers on the same user-defined bridge reach each other by name and container port without publishing. Publish only what must face the internet. Docker's iptables rules can bypass ufw, host networking drops network isolation, and `EXPOSE` controls no access.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Tính năng nào của Linux kernel giới hạn CPU và bộ nhớ mà một container được dùng?",
+      "promptEn": "Which Linux kernel feature limits how much CPU and memory a container can use?",
+      "answer": "cgroups",
+      "answerEn": "cgroups",
+      "accept": [
+        "cgroups",
+        "cgroup",
+        "control groups",
+        "control group",
+        "cgroups v2",
+        "cgroup v2"
+      ],
+      "explanation": "cgroups (control groups). Namespaces quyết định container thấy gì (process, mạng, filesystem); cgroups quyết định container được dùng bao nhiêu tài nguyên. Hai tính năng này cộng lại chính là \"container\".",
+      "explanationEn": "cgroups (control groups). Namespaces decide what a container can see (processes, network, filesystem); cgroups decide how much it can use. Together they are what a \"container\" actually is.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Storage driver mặc định mà Docker dùng trên Linux để gộp các layer của image thành một filesystem là gì?",
+      "promptEn": "Which storage driver does Docker use by default on Linux to merge image layers into one filesystem?",
+      "answer": "overlay2",
+      "answerEn": "overlay2",
+      "accept": [
+        "overlay2",
+        "overlay 2",
+        "overlayfs2"
+      ],
+      "explanation": "overlay2, dựa trên OverlayFS của kernel: các layer chỉ-đọc là lowerdir, writable layer của container là upperdir, và copy-on-write xảy ra khi sửa file của layer dưới.",
+      "explanationEn": "overlay2, built on the kernel's OverlayFS: read-only layers are the lowerdirs, the container's writable layer is the upperdir, and copy-on-write happens when a lower-layer file is modified.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thành phần trong kiến trúc Docker với vai trò của nó.",
+      "promptEn": "Match each component of the Docker architecture to its role.",
+      "pairs": [
+        {
+          "left": "docker CLI",
+          "leftEn": "docker CLI",
+          "right": "Client gửi lệnh qua REST API tới daemon",
+          "rightEn": "The client that sends commands over the REST API to the daemon"
+        },
+        {
+          "left": "dockerd",
+          "leftEn": "dockerd",
+          "right": "Daemon lo API, build image, network và volume",
+          "rightEn": "The daemon handling the API, image builds, networks and volumes"
+        },
+        {
+          "left": "containerd",
+          "leftEn": "containerd",
+          "right": "Runtime quản lý image và vòng đời container, Kubernetes gọi trực tiếp qua CRI",
+          "rightEn": "The runtime managing images and container lifecycles, called directly by Kubernetes via CRI"
+        },
+        {
+          "left": "runc",
+          "leftEn": "runc",
+          "right": "OCI runtime tầng thấp tạo namespaces và cgroups rồi khởi chạy process",
+          "rightEn": "The low-level OCI runtime that creates namespaces and cgroups, then starts the process"
+        }
+      ],
+      "explanation": "Hiểu các tầng này giải thích vì sao Kubernetes bỏ được Docker ở node mà image vẫn chạy: containerd và runc vẫn còn đó, và image theo chuẩn OCI.",
+      "explanationEn": "Knowing these layers explains why Kubernetes could drop Docker on nodes while images kept working: containerd and runc are still there, and the images follow the OCI standard.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự những gì xảy ra khi chạy `docker stop api` với một app không xử lý SIGTERM.",
+      "promptEn": "Put into order what happens when you run `docker stop api` against an app that does not handle SIGTERM.",
+      "items": [
+        {
+          "text": "CLI gửi yêu cầu stop tới dockerd qua Docker socket",
+          "textEn": "The CLI sends a stop request to dockerd over the Docker socket"
+        },
+        {
+          "text": "SIGTERM được gửi tới PID 1 trong container",
+          "textEn": "SIGTERM is sent to PID 1 inside the container"
+        },
+        {
+          "text": "PID 1 không có handler nên tín hiệu bị bỏ qua, Docker chờ hết thời gian ân hạn 10 giây",
+          "textEn": "PID 1 has no handler, so the signal is ignored and Docker waits out the 10-second grace period"
+        },
+        {
+          "text": "SIGKILL được gửi và process bị kết thúc ngay",
+          "textEn": "SIGKILL is sent and the process is terminated immediately"
+        },
+        {
+          "text": "Container chuyển sang Exited với exit code 137, writable layer vẫn còn cho tới khi `docker rm`",
+          "textEn": "The container moves to Exited with code 137; its writable layer remains until `docker rm`"
+        }
+      ],
+      "explanation": "Đây là lý do mỗi lần deploy chậm thêm 10 giây và request đang dở bị cắt ngang. Cài handler SIGTERM, dùng exec form, hoặc thêm `--init`.",
+      "explanationEn": "This is why every deploy gets 10 seconds slower and in-flight requests are cut off. Install a SIGTERM handler, use exec form, or add `--init`.",
+      "id": "d6"
+    }
+  ]
+}

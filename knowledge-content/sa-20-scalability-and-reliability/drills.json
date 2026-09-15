@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI việc cần làm để một web service có thể scale ngang an toàn.",
+      "promptEn": "Pick TWO things needed so a web service can scale out safely.",
+      "options": [
+        "Bật sticky session để user luôn về cùng instance",
+        "Chuyển session của người dùng ra store dùng chung như Redis",
+        "Lưu file upload trên đĩa cục bộ của từng instance",
+        "Lưu file upload vào object storage như S3",
+        "Chạy job cron trên instance đầu tiên được khởi động"
+      ],
+      "optionsEn": [
+        "Enable sticky sessions so each user always hits the same instance",
+        "Move user sessions to a shared store such as Redis",
+        "Keep uploaded files on each instance's local disk",
+        "Store uploaded files in object storage such as S3",
+        "Run cron jobs on whichever instance started first"
+      ],
+      "answers": [
+        1,
+        3
+      ],
+      "explanation": "Scale ngang cần service stateless: bất kỳ instance nào cũng phục vụ được bất kỳ request nào. Session và file phải nằm ở store dùng chung. Sticky session, đĩa cục bộ và cron trên một máy đều trói state vào một instance.",
+      "explanationEn": "Scaling out needs stateless services: any instance can serve any request. Sessions and files must live in shared stores. Sticky sessions, local disk and cron on one box all tie state to a single instance.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Một dependency bắt đầu chậm và lỗi chập chờn. Chọn HAI biện pháp giúp ngăn lỗi dây chuyền.",
+      "promptEn": "A dependency starts getting slow and flaky. Pick TWO measures that help prevent a cascading failure.",
+      "options": [
+        "Đặt timeout cho mọi lời gọi dựa trên độ trễ thực tế của dependency",
+        "Cho mọi tầng trong chuỗi gọi đều tự retry 5 lần",
+        "Bỏ giới hạn hàng đợi để không đánh rơi request nào",
+        "Tăng timeout lên 120 giây để request chậm vẫn kịp xong",
+        "Retry ở một tầng duy nhất với exponential backoff và jitter"
+      ],
+      "optionsEn": [
+        "Set a timeout on every call based on the dependency's real latency",
+        "Let every layer in the call chain retry 5 times",
+        "Remove queue limits so no request is ever dropped",
+        "Raise timeouts to 120 seconds so slow requests can finish",
+        "Retry at a single layer with exponential backoff and jitter"
+      ],
+      "answers": [
+        0,
+        4
+      ],
+      "explanation": "Timeout ngắn và hợp lý giải phóng tài nguyên thay vì để request chờ dồn lại; retry một tầng với backoff + jitter không nhân tải lên dependency đang yếu. Retry mọi tầng, queue không giới hạn và timeout dài đều làm dây chuyền lan nhanh hơn.",
+      "explanationEn": "Sensible timeouts free resources instead of letting waiting requests pile up; retrying at one layer with backoff and jitter avoids multiplying load on a weak dependency. Retries at every layer, unbounded queues and long timeouts all make the cascade spread faster.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Chỉ số nào đo lượng dữ liệu tối đa chấp nhận mất khi có thảm hoạ, tính bằng thời gian? (viết tắt)",
+      "promptEn": "Which metric measures the maximum acceptable data loss in a disaster, expressed in time? (acronym)",
+      "answer": "RPO",
+      "answerEn": "RPO",
+      "accept": [
+        "rpo",
+        "recovery point objective"
+      ],
+      "explanation": "RPO — Recovery Point Objective. Đừng nhầm với RTO (Recovery Time Objective), là thời gian ngừng dịch vụ chấp nhận được. RPO quyết định tần suất backup hay kiểu replication.",
+      "explanationEn": "RPO — Recovery Point Objective. Do not confuse it with RTO (Recovery Time Objective), the acceptable downtime. RPO drives backup frequency or the replication mode.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Thực hành cố ý gây lỗi (tắt instance, thêm độ trễ) để kiểm chứng hệ thống chịu lỗi được gọi là gì?",
+      "promptEn": "What is the practice of deliberately injecting failures (killing instances, adding latency) to verify a system is resilient called?",
+      "answer": "Chaos engineering",
+      "answerEn": "Chaos engineering",
+      "accept": [
+        "chaos engineering",
+        "chaos testing",
+        "chaos experiments",
+        "chaos experiment",
+        "chaos"
+      ],
+      "explanation": "Chaos engineering. Bắt đầu nhỏ, có giả thuyết rõ ràng và giới hạn phạm vi ảnh hưởng (blast radius); mục tiêu là tìm điểm yếu trước khi sự cố thật tìm ra nó.",
+      "explanationEn": "Chaos engineering. Start small, with a clear hypothesis and a limited blast radius; the point is to find the weakness before a real incident does.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi chiến lược DR với mô tả đúng.",
+      "promptEn": "Match each DR strategy to its description.",
+      "pairs": [
+        {
+          "left": "Backup & restore",
+          "leftEn": "Backup & restore",
+          "right": "Không có gì chạy ở site DR; RTO hàng giờ, rẻ nhất",
+          "rightEn": "Nothing runs in the DR site; RTO in hours, cheapest"
+        },
+        {
+          "left": "Pilot light",
+          "leftEn": "Pilot light",
+          "right": "Dữ liệu được replicate, hạ tầng lõi sẵn sàng nhưng app server đang tắt",
+          "rightEn": "Data is replicated and core infra is ready, but app servers are off"
+        },
+        {
+          "left": "Warm standby",
+          "leftEn": "Warm standby",
+          "right": "Một bản sao thu nhỏ đang chạy đầy đủ, scale lên khi failover",
+          "rightEn": "A scaled-down but fully working copy, scaled up on failover"
+        },
+        {
+          "left": "Multi-site active-active",
+          "leftEn": "Multi-site active-active",
+          "right": "Production đầy đủ ở cả hai site và cả hai cùng phục vụ traffic",
+          "rightEn": "Full production in both sites, both serving traffic"
+        }
+      ],
+      "explanation": "Bốn chiến lược xếp theo chi phí tăng dần và RTO/RPO giảm dần. Chọn chiến lược rẻ nhất vẫn đạt RTO/RPO mà nghiệp vụ yêu cầu.",
+      "explanationEn": "The four strategies rise in cost as RTO/RPO shrink. Choose the cheapest one that still meets the RTO/RPO the business requires.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của một chaos experiment.",
+      "promptEn": "Put the steps of a chaos experiment into order.",
+      "items": [
+        {
+          "text": "Định nghĩa steady state bằng một metric nghiệp vụ",
+          "textEn": "Define steady state with a business metric"
+        },
+        {
+          "text": "Đặt giả thuyết về hành vi của hệ thống khi có lỗi",
+          "textEn": "State a hypothesis about how the system behaves under the fault"
+        },
+        {
+          "text": "Giới hạn blast radius và đặt điều kiện dừng tự động",
+          "textEn": "Limit the blast radius and set automatic stop conditions"
+        },
+        {
+          "text": "Gây lỗi thực tế như kill instance hoặc thêm độ trễ",
+          "textEn": "Inject a realistic fault such as killing instances or adding latency"
+        },
+        {
+          "text": "Quan sát, so sánh với giả thuyết và sửa điểm yếu tìm được",
+          "textEn": "Observe, compare against the hypothesis and fix the weaknesses found"
+        }
+      ],
+      "explanation": "Không có steady state và giả thuyết thì không biết thí nghiệm thành công hay thất bại; không giới hạn blast radius thì thí nghiệm có thể biến thành sự cố thật.",
+      "explanationEn": "Without a steady state and a hypothesis you cannot tell whether the experiment passed or failed; without a limited blast radius the experiment can become a real incident.",
+      "id": "d6"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về danh sách kề và ma trận kề.",
+      "promptEn": "Pick TWO statements that are true about adjacency lists and adjacency matrices.",
+      "options": [
+        "Ma trận kề luôn tốn O(V²) bộ nhớ, bất kể có bao nhiêu cạnh",
+        "Danh sách kề dùng mảng luôn kiểm tra cạnh u–v được trong O(1)",
+        "BFS trên ma trận kề là O(V + E)",
+        "Danh sách kề tốn O(V + E) bộ nhớ và là lựa chọn mặc định cho đồ thị thưa",
+        "Thêm một đỉnh vào ma trận kề là O(1)"
+      ],
+      "optionsEn": [
+        "An adjacency matrix always uses O(V²) memory, however many edges there are",
+        "An array-based adjacency list always checks edge u–v in O(1)",
+        "BFS on an adjacency matrix is O(V + E)",
+        "An adjacency list uses O(V + E) memory and is the default for sparse graphs",
+        "Adding a vertex to an adjacency matrix is O(1)"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "Ma trận có V² ô dù đồ thị gần như trống, nên thêm đỉnh phải dựng lại lưới và BFS phải quét cả hàng cho mỗi đỉnh (O(V²)). Danh sách kề chỉ lưu những cạnh có thật; đổi lại, tra một cạnh cụ thể tốn O(deg(u)) với mảng.",
+      "explanationEn": "A matrix has V² cells even when the graph is nearly empty, so adding a vertex rebuilds the grid and BFS scans a whole row per vertex (O(V²)). An adjacency list stores only real edges; in exchange, looking up one specific edge costs O(deg(u)) with arrays.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về BFS trên đồ thị không trọng số.",
+      "promptEn": "Pick TWO statements that are true about BFS on an unweighted graph.",
+      "options": [
+        "BFS dùng stack để lưu các đỉnh đang chờ",
+        "Lần đầu BFS tới một đỉnh là theo đường đi có ít cạnh nhất",
+        "BFS tìm được đường rẻ nhất cả trên đồ thị có trọng số",
+        "BFS bắt buộc phải viết bằng đệ quy",
+        "Đánh dấu visited khi enqueue giúp mỗi đỉnh vào queue đúng một lần"
+      ],
+      "optionsEn": [
+        "BFS uses a stack to hold the waiting vertices",
+        "The first time BFS reaches a vertex, it is along a fewest-edge path",
+        "BFS finds the cheapest path on weighted graphs too",
+        "BFS must be written recursively",
+        "Marking visited on enqueue makes each vertex enter the queue exactly once"
+      ],
+      "answers": [
+        1,
+        4
+      ],
+      "explanation": "BFS dùng queue (FIFO) và lan ra theo từng tầng khoảng cách, nên cho đường ít cạnh nhất — nhưng ít cạnh không có nghĩa là rẻ nhất khi có trọng số, đó là việc của Dijkstra. Stack và đệ quy là đặc trưng của DFS.",
+      "explanationEn": "BFS uses a queue (FIFO) and spreads out one distance level at a time, so it gives fewest-edge paths — but fewest edges is not cheapest once edges have weights; that is Dijkstra's job. Stacks and recursion belong to DFS.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian của BFS hoặc DFS trên đồ thị lưu bằng danh sách kề (dùng V và E)?",
+      "promptEn": "What is the time complexity of BFS or DFS on a graph stored as an adjacency list (in terms of V and E)?",
+      "answer": "O(V + E)",
+      "answerEn": "O(V + E)",
+      "accept": [
+        "O(V + E)",
+        "o(v+e)",
+        "v + e",
+        "v+e",
+        "O(|V| + |E|)",
+        "O(E + V)",
+        "e + v",
+        "e+v"
+      ],
+      "explanation": "O(V + E): mỗi đỉnh được xử lý một lần và mỗi mảng kề được quét một lần. Với ma trận kề thì là O(V²).",
+      "explanationEn": "O(V + E): each vertex is processed once and each neighbour array is scanned once. With an adjacency matrix it becomes O(V²).",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "BFS dùng cấu trúc dữ liệu nào để giữ các đỉnh đang chờ thăm?",
+      "promptEn": "Which data structure does BFS use to hold the vertices waiting to be visited?",
+      "answer": "queue",
+      "answerEn": "queue",
+      "accept": [
+        "queue",
+        "a queue",
+        "fifo queue",
+        "fifo",
+        "hàng đợi",
+        "hang doi"
+      ],
+      "explanation": "Queue (hàng đợi, FIFO): đỉnh được phát hiện trước thì được thăm trước, nên BFS đi hết tầng gần rồi mới tới tầng xa. DFS dùng stack hoặc call stack của đệ quy.",
+      "explanationEn": "A queue (FIFO): vertices discovered first are visited first, so BFS finishes the nearer level before the farther one. DFS uses a stack or the recursion call stack.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi kỹ thuật với đặc điểm đúng của nó.",
+      "promptEn": "Match each technique to its defining trait.",
+      "pairs": [
+        {
+          "left": "DFS đệ quy",
+          "leftEn": "Recursive DFS",
+          "right": "Quay lui nhờ call stack; đồ thị rất sâu có thể gây stack overflow",
+          "rightEn": "Backtracks via the call stack; a very deep graph can overflow it"
+        },
+        {
+          "left": "DFS vòng lặp",
+          "leftEn": "Iterative DFS",
+          "right": "Dùng stack tường minh (LIFO); thứ tự có thể khác bản đệ quy",
+          "rightEn": "Uses an explicit stack (LIFO); its order may differ from the recursive one"
+        },
+        {
+          "left": "BFS",
+          "leftEn": "BFS",
+          "right": "Dùng queue (FIFO); cho đường ít cạnh nhất trên đồ thị không trọng số",
+          "rightEn": "Uses a queue (FIFO); gives fewest-edge paths on unweighted graphs"
+        },
+        {
+          "left": "Ma trận kề",
+          "leftEn": "Adjacency matrix",
+          "right": "Tra cạnh O(1) nhưng tốn O(V²) bộ nhớ",
+          "rightEn": "O(1) edge lookup at the cost of O(V²) memory"
+        }
+      ],
+      "explanation": "Hai bản DFS cùng ý tưởng đi sâu rồi quay lui, chỉ khác stack ngầm hay stack tường minh. BFS là lựa chọn duy nhất ở đây đảm bảo đường ngắn nhất theo số cạnh.",
+      "explanationEn": "Both DFS versions share the go-deep-then-backtrack idea; they differ only in an implicit versus explicit stack. BFS is the only one here that guarantees shortest paths by edge count.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của BFS từ một đỉnh xuất phát.",
+      "promptEn": "Put the steps of BFS from a start vertex into order.",
+      "items": [
+        {
+          "text": "Đưa đỉnh xuất phát vào queue và đánh dấu đã thăm",
+          "textEn": "Put the start vertex in the queue and mark it visited"
+        },
+        {
+          "text": "Lấy đỉnh ở đầu queue ra và thêm vào kết quả",
+          "textEn": "Take the vertex at the front of the queue and add it to the result"
+        },
+        {
+          "text": "Với mỗi đỉnh kề chưa thăm: đánh dấu đã thăm rồi enqueue",
+          "textEn": "For each unvisited neighbour: mark it visited, then enqueue it"
+        },
+        {
+          "text": "Lặp lại cho tới khi queue rỗng",
+          "textEn": "Repeat until the queue is empty"
+        },
+        {
+          "text": "Trả về mảng kết quả",
+          "textEn": "Return the result array"
+        }
+      ],
+      "explanation": "Điểm hay bị làm sai là thời điểm đánh dấu: đánh dấu ngay khi enqueue, không đợi tới lúc lấy ra, để một đỉnh không bị đưa vào queue nhiều lần.",
+      "explanationEn": "The step people get wrong is when to mark: mark on enqueue, not on dequeue, so a vertex is never put in the queue more than once.",
+      "id": "d6"
+    }
+  ]
+}

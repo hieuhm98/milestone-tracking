@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về merge sort (cài đặt chuẩn trên mảng).",
+      "promptEn": "Pick TWO statements that are true about merge sort (standard array implementation).",
+      "options": [
+        "Nó sắp xếp tại chỗ với bộ nhớ phụ O(1)",
+        "Nó là stable nếu hàm merge lấy từ nửa trái khi hai giá trị bằng nhau",
+        "Worst case của nó là O(n²) khi input đã sắp xếp",
+        "Nó chạy O(n log n) ở cả best, average và worst case",
+        "Nó chạy O(n) khi input đã sắp xếp sẵn"
+      ],
+      "optionsEn": [
+        "It sorts in place with O(1) extra space",
+        "It is stable if merge takes from the left half on ties",
+        "Its worst case is O(n²) on already-sorted input",
+        "It runs in O(n log n) in the best, average and worst case",
+        "It runs in O(n) on already-sorted input"
+      ],
+      "answers": [1, 3],
+      "explanation": "Merge sort luôn chia đôi và trộn qua log n tầng, nên mọi trường hợp đều O(n log n), và dùng `<=` khi trộn giữ nó stable. Nó cần mảng tạm O(n) nên không tại chỗ; input đã sắp xếp không làm nó nhanh hơn hay chậm hơn.",
+      "explanationEn": "Merge sort always halves and merges through log n levels, so every case is O(n log n), and using `<=` while merging keeps it stable. It needs an O(n) buffer, so it is not in place; sorted input makes it neither faster nor slower.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI cách giúp quick sort tránh worst case O(n²) trên dữ liệu thực tế.",
+      "promptEn": "Pick TWO techniques that help quick sort avoid its O(n²) worst case on real-world data.",
+      "options": [
+        "Luôn chọn phần tử đầu tiên làm pivot",
+        "Đổi phép so sánh `<` thành `<=` trong hàm pivot",
+        "Chọn pivot ngẫu nhiên trong đoạn",
+        "Chuyển sang bubble sort khi mảng lớn",
+        "Dùng three-way partition khi có nhiều giá trị trùng"
+      ],
+      "optionsEn": [
+        "Always pick the first element as the pivot",
+        "Change `<` to `<=` in the pivot helper",
+        "Pick a random pivot within the range",
+        "Switch to bubble sort for large arrays",
+        "Use a three-way partition when there are many duplicates"
+      ],
+      "answers": [2, 4],
+      "explanation": "Pivot ngẫu nhiên khiến không input nào (như mảng đã sắp xếp) luôn gây ra phân hoạch lệch, còn three-way partition xử lý mảng nhiều giá trị trùng. Pivot phần tử đầu chính là nguyên nhân gây worst case; `<=` chỉ đẩy các giá trị trùng sang phía còn lại; bubble sort là O(n²).",
+      "explanationEn": "A random pivot means no input (such as sorted data) reliably causes lopsided partitions, and a three-way partition handles duplicate-heavy arrays. The first-element pivot is what causes the worst case; `<=` just moves duplicates to the other side; bubble sort is O(n²).",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Quick sort chọn một phần tử, đặt nó vào đúng vị trí cuối cùng rồi sắp xếp hai phía. Phần tử đó gọi là gì?",
+      "promptEn": "Quick sort chooses one element, places it at its final sorted index, then sorts both sides. What is that element called?",
+      "answer": "pivot",
+      "answerEn": "pivot",
+      "accept": [
+        "pivot",
+        "the pivot",
+        "pivot element",
+        "phan tu chot",
+        "phần tử chốt",
+        "phần tử pivot"
+      ],
+      "explanation": "Pivot (phần tử chốt). Sau khi phân hoạch, mọi giá trị nhỏ hơn pivot nằm bên trái, lớn hơn hoặc bằng nằm bên phải, và pivot không bao giờ phải di chuyển nữa.",
+      "explanationEn": "The pivot. After partitioning, every smaller value is on its left, every greater-or-equal value on its right, and the pivot never has to move again.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Độ phức tạp thời gian worst case của merge sort là gì?",
+      "promptEn": "What is merge sort's worst-case time complexity?",
+      "answer": "O(n log n)",
+      "answerEn": "O(n log n)",
+      "accept": [
+        "O(n log n)",
+        "n log n",
+        "nlogn",
+        "o(nlogn)",
+        "O(n log2 n)",
+        "n log2 n",
+        "linearithmic"
+      ],
+      "explanation": "O(n log n). Chia đôi tạo ra log n tầng và mỗi tầng trộn tổng cộng n phần tử — bất kể input được sắp xếp thế nào.",
+      "explanationEn": "O(n log n). Halving creates log n levels and each level merges n elements in total — regardless of how the input is ordered.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi đại lượng với độ phức tạp đúng.",
+      "promptEn": "Match each measure to its complexity.",
+      "pairs": [
+        {
+          "left": "Thời gian worst case của merge sort",
+          "leftEn": "Merge sort worst-case time",
+          "right": "O(n log n)",
+          "rightEn": "O(n log n)"
+        },
+        {
+          "left": "Thời gian worst case của quick sort",
+          "leftEn": "Quick sort worst-case time",
+          "right": "O(n²)",
+          "rightEn": "O(n²)"
+        },
+        {
+          "left": "Bộ nhớ phụ của merge sort",
+          "leftEn": "Merge sort auxiliary space",
+          "right": "O(n)",
+          "rightEn": "O(n)"
+        },
+        {
+          "left": "Stack trung bình của quick sort",
+          "leftEn": "Quick sort average stack space",
+          "right": "O(log n)",
+          "rightEn": "O(log n)"
+        }
+      ],
+      "explanation": "Merge sort đảm bảo O(n log n) nhưng cần mảng tạm O(n). Quick sort chạy tại chỗ, chỉ tốn stack O(log n) khi pivot chia đều, nhưng pivot tệ đẩy thời gian lên O(n²).",
+      "explanationEn": "Merge sort guarantees O(n log n) but needs an O(n) buffer. Quick sort works in place with only O(log n) stack when pivots split evenly, but bad pivots push time to O(n²).",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Sắp xếp các bước của hàm pivot (pivot là phần tử đầu) theo đúng thứ tự.",
+      "promptEn": "Put the steps of the first-element pivot helper in the correct order.",
+      "items": [
+        {
+          "text": "Lấy arr[start] làm giá trị pivot và đặt swapIdx = start",
+          "textEn": "Take arr[start] as the pivot value and set swapIdx = start"
+        },
+        {
+          "text": "Duyệt i từ start + 1 đến end",
+          "textEn": "Loop i from start + 1 to end"
+        },
+        {
+          "text": "Nếu arr[i] nhỏ hơn pivot: tăng swapIdx rồi hoán đổi arr[swapIdx] với arr[i]",
+          "textEn": "If arr[i] is smaller than the pivot: increment swapIdx, then swap arr[swapIdx] with arr[i]"
+        },
+        {
+          "text": "Hoán đổi arr[start] với arr[swapIdx] để đặt pivot vào đúng chỗ",
+          "textEn": "Swap arr[start] with arr[swapIdx] to drop the pivot into place"
+        },
+        {
+          "text": "Trả về swapIdx",
+          "textEn": "Return swapIdx"
+        }
+      ],
+      "explanation": "swapIdx đếm số giá trị nhỏ hơn pivot trong lúc duyệt; khi duyệt xong, đó chính là vị trí cuối cùng của pivot. Chỉ sau vòng lặp mới hoán đổi pivot vào chỗ, rồi trả về chỉ số để quickSort đệ quy hai phía.",
+      "explanationEn": "swapIdx counts the values smaller than the pivot during the scan; once the scan ends, that is the pivot's final position. Only after the loop is the pivot swapped into place, and its index is returned so quickSort can recurse on both sides.",
+      "id": "d6"
+    }
+  ]
+}

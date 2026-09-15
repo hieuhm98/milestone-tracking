@@ -1,0 +1,342 @@
+[
+  {
+    "id": "q1",
+    "question": "Điều gì phân biệt rõ nhất observability với monitoring truyền thống?",
+    "questionEn": "What best distinguishes observability from traditional monitoring?",
+    "options": [
+      "Observability chỉ dùng trace, còn monitoring chỉ dùng metric",
+      "Observability là tên gọi mới của dashboard và cảnh báo theo ngưỡng",
+      "Observability cho phép trả lời những câu hỏi mới, chưa lường trước, từ dữ liệu hệ thống phát ra",
+      "Observability chỉ cần thiết khi chạy trên Kubernetes"
+    ],
+    "optionsEn": [
+      "Observability only uses traces, while monitoring only uses metrics",
+      "Observability is just a new name for dashboards and threshold alerts",
+      "Observability lets you answer new, unanticipated questions from the data the system emits",
+      "Observability is only needed when running on Kubernetes"
+    ],
+    "answer": 2,
+    "explanation": "Monitoring kiểm tra các câu hỏi định sẵn (CPU > 90%?). Observability là khả năng hiểu trạng thái bên trong từ telemetry giàu ngữ cảnh, kể cả với lỗi chưa ai dự đoán. Nó dùng cả log, metric, trace và không gắn với nền tảng nào.",
+    "explanationEn": "Monitoring checks predefined questions (CPU > 90%?). Observability is the ability to understand internal state from rich, correlated telemetry, including for failures nobody predicted. It uses logs, metrics and traces and is not tied to any platform."
+  },
+  {
+    "id": "q2",
+    "question": "Một team thêm nhãn `user_id` vào metric `http_requests_total` để debug theo từng khách hàng. Hệ thống có 2 triệu người dùng. Rủi ro lớn nhất là gì?",
+    "questionEn": "A team adds a `user_id` label to the `http_requests_total` metric to debug per customer. The system has 2 million users. What is the biggest risk?",
+    "options": [
+      "Bùng nổ cardinality: hàng triệu time series làm backend metric quá tải bộ nhớ và chi phí",
+      "PromQL không cho phép lọc theo nhãn chứa dấu gạch dưới",
+      "Counter sẽ bị reset mỗi khi một người dùng mới xuất hiện",
+      "Grafana không hiển thị được metric có nhiều hơn năm nhãn"
+    ],
+    "optionsEn": [
+      "Cardinality explosion: millions of time series overload the metrics backend's memory and cost",
+      "PromQL cannot filter on label names that contain underscores",
+      "The counter will reset every time a new user appears",
+      "Grafana cannot display metrics with more than five labels"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi tổ hợp nhãn khác nhau là một time series riêng. Giá trị không giới hạn như user ID nhân số series lên hàng triệu. Chi tiết theo từng người dùng thuộc về log và trace; nhãn metric phải có tập giá trị nhỏ và cố định.",
+    "explanationEn": "Every distinct label combination is its own time series. An unbounded value like a user ID multiplies the series count into the millions. Per-user detail belongs in logs and traces; metric labels must have small, bounded value sets."
+  },
+  {
+    "id": "q3",
+    "question": "Người dùng báo lỗi thanh toán, request đi qua gateway → order-svc → payment-svc. Mỗi service ghi log riêng. Cách nào giúp lấy nhanh toàn bộ log của đúng request đó?",
+    "questionEn": "A user reports a failed payment; the request went gateway → order-svc → payment-svc. Each service writes its own logs. What lets you pull all logs for exactly that request quickly?",
+    "options": [
+      "Đồng bộ đồng hồ của mọi server rồi lọc log theo khoảng thời gian",
+      "Tăng log level lên `debug` ở cả ba service",
+      "Ghi log dạng văn bản thuần để `grep` theo tên người dùng",
+      "Tạo correlation/trace ID ở biên, truyền qua header và ghi vào mọi dòng log có cấu trúc"
+    ],
+    "optionsEn": [
+      "Synchronise all server clocks and filter logs by time range",
+      "Raise the log level to `debug` in all three services",
+      "Write plain-text logs so you can `grep` for the user's name",
+      "Create a correlation/trace ID at the edge, propagate it in headers and write it into every structured log line"
+    ],
+    "answer": 3,
+    "explanation": "Một ID đi theo request qua mọi chặng biến việc ghép log thành một truy vấn duy nhất `trace_id = ...`. Lọc theo thời gian lẫn request của người khác, debug level chỉ tăng khối lượng, còn grep theo tên vừa chậm vừa có nguy cơ lộ PII.",
+    "explanationEn": "One ID that travels with the request through every hop turns stitching logs together into a single `trace_id = ...` query. Time filtering mixes in other requests, debug level only adds volume, and grepping by name is slow and risks PII in logs."
+  },
+  {
+    "id": "q4",
+    "question": "Dịch vụ chạy 20 pod, mỗi pod xuất p99 latency qua metric kiểu Summary. Kiến trúc sư muốn p99 của toàn bộ fleet. Nhận định nào đúng?",
+    "questionEn": "A service runs 20 pods, each exporting p99 latency via a Summary metric. The architect wants the p99 across the whole fleet. Which statement is correct?",
+    "options": [
+      "Lấy trung bình p99 của 20 pod sẽ ra đúng p99 của fleet",
+      "Quantile của Summary không gộp được; nên dùng Histogram rồi cộng bucket trước khi tính quantile",
+      "Lấy giá trị lớn nhất trong 20 p99 là chính xác p99 của fleet",
+      "Chỉ cần đổi metric sang Gauge là có thể tính p99 toàn cục"
+    ],
+    "optionsEn": [
+      "Averaging the 20 pods' p99 values gives the exact fleet p99",
+      "Summary quantiles cannot be aggregated; use a Histogram and sum buckets before computing the quantile",
+      "Taking the maximum of the 20 p99 values is exactly the fleet p99",
+      "Simply switching the metric to a Gauge allows a global p99"
+    ],
+    "answer": 1,
+    "explanation": "Quantile không phải đại lượng cộng hay lấy trung bình được. Histogram lưu số đếm theo bucket, vốn cộng được qua các instance, nên `histogram_quantile(0.99, sum by (le) (rate(..._bucket[5m])))` cho p99 toàn fleet (xấp xỉ theo ranh giới bucket).",
+    "explanationEn": "Quantiles cannot be summed or averaged. A Histogram stores bucket counts, which do add up across instances, so `histogram_quantile(0.99, sum by (le) (rate(..._bucket[5m])))` yields the fleet p99 (approximate to bucket boundaries)."
+  },
+  {
+    "id": "q5",
+    "question": "Biểu thức PromQL này trả về gì?\n`sum by (service) (rate(http_requests_total{status=~\"5..\"}[5m]))\n  / sum by (service) (rate(http_requests_total[5m]))`",
+    "questionEn": "What does this PromQL expression return?\n`sum by (service) (rate(http_requests_total{status=~\"5..\"}[5m]))\n  / sum by (service) (rate(http_requests_total[5m]))`",
+    "options": [
+      "Tổng số lỗi 5xx kể từ khi mỗi service khởi động",
+      "Số request mỗi giây của từng pod trong 5 phút qua",
+      "Độ trễ p95 của các request lỗi theo từng service",
+      "Tỉ lệ request trả về 5xx (từ 0 đến 1) của từng service, tính trên 5 phút gần nhất"
+    ],
+    "optionsEn": [
+      "The total number of 5xx errors since each service started",
+      "Requests per second for each pod over the last 5 minutes",
+      "The p95 latency of failed requests per service",
+      "The fraction of requests returning 5xx (0 to 1) per service, over the last 5 minutes"
+    ],
+    "answer": 3,
+    "explanation": "Tử số là tốc độ request 5xx, mẫu số là tốc độ mọi request, cả hai gộp theo `service`. Chia cho nhau ra tỉ lệ lỗi — tín hiệu Errors của RED và là SLI phổ biến.",
+    "explanationEn": "The numerator is the rate of 5xx requests and the denominator the rate of all requests, both grouped by `service`. Dividing gives the error ratio — the Errors signal of RED and a common SLI."
+  },
+  {
+    "id": "q6",
+    "question": "Một batch job chạy khoảng 20 giây mỗi đêm và cần gửi metric (số bản ghi đã xử lý) cho Prometheus có scrape interval 60 giây. Cách phù hợp nhất?",
+    "questionEn": "A batch job runs for about 20 seconds each night and must report a metric (records processed) to a Prometheus with a 60-second scrape interval. What is the best fit?",
+    "options": [
+      "Job đẩy metric lên Pushgateway ở cuối lần chạy, Prometheus scrape Pushgateway",
+      "Giảm scrape interval toàn cục xuống 1 giây",
+      "Cho job giữ tiến trình sống vô hạn sau khi xong để chờ scrape",
+      "Ghi metric vào log rồi dùng `grep` đếm vào sáng hôm sau"
+    ],
+    "optionsEn": [
+      "The job pushes its metrics to the Pushgateway at the end of the run, and Prometheus scrapes the Pushgateway",
+      "Lower the global scrape interval to 1 second",
+      "Keep the job's process alive forever after it finishes so it can be scraped",
+      "Write the metric into logs and count it with `grep` the next morning"
+    ],
+    "answer": 0,
+    "explanation": "Mô hình pull có thể bỏ lỡ job kết thúc trước lần scrape. Pushgateway tồn tại chính cho trường hợp batch job ngắn này. Giảm interval toàn cục làm tăng tải cho mọi target, còn giữ process sống là chắp vá.",
+    "explanationEn": "The pull model can miss a job that ends before the next scrape. The Pushgateway exists precisely for this short-lived batch case. Lowering the global interval loads every target, and keeping the process alive is a hack."
+  },
+  {
+    "id": "q7",
+    "question": "Công ty có 6 cluster Kubernetes, mỗi cluster một Prometheus. Họ cần lưu metric 13 tháng và truy vấn gộp mọi cluster trên một dashboard. Thiết kế nào hợp lý?",
+    "questionEn": "A company has 6 Kubernetes clusters, each with its own Prometheus. They need 13 months of metrics and queries across all clusters in one dashboard. Which design fits?",
+    "options": [
+      "Tăng retention local của mỗi Prometheus lên 13 tháng và thêm đĩa",
+      "Gộp cả 6 cluster về một Prometheus duy nhất scrape qua internet",
+      "Dùng `remote_write` từ mỗi Prometheus sang một backend dài hạn như Thanos, Mimir hoặc dịch vụ managed",
+      "Xuất metric ra CSV hằng ngày và nạp vào Grafana khi cần"
+    ],
+    "optionsEn": [
+      "Raise each Prometheus's local retention to 13 months and add disks",
+      "Collapse all 6 clusters into one Prometheus scraping over the internet",
+      "Use `remote_write` from each Prometheus to a long-term backend such as Thanos, Mimir or a managed service",
+      "Export metrics to CSV daily and load them into Grafana when needed"
+    ],
+    "answer": 2,
+    "explanation": "Prometheus đơn lẻ không chạy cluster, lưu local (mặc định 15 ngày) và không có góc nhìn toàn cục. `remote_write` sang Thanos/Mimir/Amazon Managed Service for Prometheus cho lưu dài hạn trên object storage, HA và truy vấn gộp nhiều cluster.",
+    "explanationEn": "A single Prometheus is not clustered, stores locally (15 days by default) and has no global view. `remote_write` to Thanos/Mimir/Amazon Managed Service for Prometheus gives long-term object-storage retention, HA and cross-cluster queries."
+  },
+  {
+    "id": "q8",
+    "question": "Trace của các request checkout luôn bị tách thành hai mảnh: một mảnh kết thúc ở order-svc, mảnh kia bắt đầu ở worker đọc từ Kafka với trace ID khác. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "Checkout traces always split into two pieces: one ends at order-svc, the other starts in a worker consuming from Kafka with a different trace ID. What is the most likely cause?",
+    "options": [
+      "Tỉ lệ head sampling đặt quá thấp",
+      "Ngữ cảnh trace (traceparent) không được đưa vào header của message khi publish lên Kafka",
+      "Worker dùng ngôn ngữ lập trình khác với order-svc",
+      "Backend tracing đang hết dung lượng lưu trữ"
+    ],
+    "optionsEn": [
+      "The head sampling rate is set too low",
+      "The trace context (traceparent) is not injected into the message headers when publishing to Kafka",
+      "The worker is written in a different programming language from order-svc",
+      "The tracing backend is running out of storage"
+    ],
+    "answer": 1,
+    "explanation": "Trace chỉ nối được khi mọi chặng truyền ngữ cảnh. Với chặng bất đồng bộ, producer phải chèn traceparent vào header message và consumer phải trích xuất nó; nếu không, consumer bắt đầu trace mới. OTel là chuẩn chung nên khác ngôn ngữ không phải vấn đề.",
+    "explanationEn": "Traces only join if every hop propagates context. On an async hop, the producer must inject traceparent into message headers and the consumer must extract it; otherwise the consumer starts a new trace. OTel is cross-language, so a different language is not the issue."
+  },
+  {
+    "id": "q9",
+    "question": "Hệ thống xử lý 50.000 request/giây. Lưu 100% trace quá đắt, nhưng đội SRE bắt buộc phải xem được mọi trace có lỗi hoặc chậm hơn 2 giây. Chiến lược sampling nào?",
+    "questionEn": "A system handles 50,000 requests per second. Storing 100% of traces is too expensive, but SRE must be able to see every trace with an error or slower than 2 seconds. Which sampling strategy?",
+    "options": [
+      "Head-based sampling cố định 1% ở span gốc",
+      "Tắt tracing và chỉ dựa vào log lỗi",
+      "Head-based sampling 100% nhưng xoá trace sau 1 giờ",
+      "Tail-based sampling trong OTel Collector: giữ mọi trace lỗi/chậm, lấy mẫu phần còn lại"
+    ],
+    "optionsEn": [
+      "Fixed 1% head-based sampling at the root span",
+      "Turn off tracing and rely on error logs only",
+      "100% head-based sampling but delete traces after 1 hour",
+      "Tail-based sampling in the OTel Collector: keep all error/slow traces, sample the rest"
+    ],
+    "answer": 3,
+    "explanation": "Head sampling quyết định trước khi biết request có lỗi hay chậm, nên sẽ bỏ ngẫu nhiên 99% trace lỗi. Tail sampling quyết định sau khi trace hoàn tất, nên giữ được mọi trace thú vị — đổi lại collector phải đệm trace trong bộ nhớ.",
+    "explanationEn": "Head sampling decides before knowing whether a request fails or is slow, so it randomly drops 99% of error traces. Tail sampling decides after the trace completes and can keep every interesting one — at the cost of the collector buffering traces in memory."
+  },
+  {
+    "id": "q10",
+    "question": "Một team đang export trace thẳng từ 30 service sang một vendor APM và muốn chuyển sang Grafana Tempo sau này mà không phải sửa code. Kiến trúc nào tốt nhất?",
+    "questionEn": "A team exports traces directly from 30 services to an APM vendor and wants to move to Grafana Tempo later without code changes. Which architecture is best?",
+    "options": [
+      "Instrument bằng OpenTelemetry SDK, gửi OTLP tới OTel Collector; đổi backend chỉ bằng cấu hình exporter của Collector",
+      "Dùng SDK riêng của vendor trong mọi service vì nó có nhiều tính năng nhất",
+      "Ghi trace ra file JSON trong container rồi copy thủ công",
+      "Mỗi service tự viết exporter riêng cho từng backend"
+    ],
+    "optionsEn": [
+      "Instrument with the OpenTelemetry SDK, send OTLP to an OTel Collector; switch backends by changing only the Collector's exporter config",
+      "Use the vendor's proprietary SDK in every service because it has the most features",
+      "Write traces to JSON files in the container and copy them manually",
+      "Have each service implement its own exporter for every backend"
+    ],
+    "answer": 0,
+    "explanation": "OTel chuẩn hoá instrumentation và giao thức OTLP; Collector tách app khỏi backend. Đổi vendor, thêm tail sampling hay che PII chỉ là thay đổi pipeline của Collector, không cần deploy lại 30 service. SDK độc quyền chính là lock-in cần tránh.",
+    "explanationEn": "OTel standardises instrumentation and the OTLP protocol; the Collector decouples apps from backends. Changing vendor, adding tail sampling or redacting PII becomes a Collector pipeline change, with no redeploy of 30 services. A proprietary SDK is exactly the lock-in to avoid."
+  },
+  {
+    "id": "q11",
+    "question": "Phương pháp USE (Brendan Gregg) phù hợp nhất để phân tích đối tượng nào?",
+    "questionEn": "The USE method (Brendan Gregg) is best suited to analysing what?",
+    "options": [
+      "Hành trình người dùng trên giao diện web",
+      "Các endpoint API theo tốc độ request và thời lượng",
+      "Tài nguyên như CPU, đĩa, connection pool, hàng đợi — theo Utilization, Saturation, Errors",
+      "Chi phí lưu trữ log theo từng team"
+    ],
+    "optionsEn": [
+      "User journeys through a web UI",
+      "API endpoints by request rate and duration",
+      "Resources such as CPU, disks, connection pools and queues — by Utilization, Saturation and Errors",
+      "Log storage cost per team"
+    ],
+    "answer": 2,
+    "explanation": "USE dành cho tài nguyên: mức sử dụng, mức bão hoà (việc phải xếp hàng chờ) và lỗi. Đo endpoint theo Rate, Errors, Duration là RED — dành cho service xử lý request. Hai phương pháp bổ trợ nhau: RED phát hiện triệu chứng, USE tìm nguyên nhân.",
+    "explanationEn": "USE is for resources: utilization, saturation (queued work) and errors. Measuring endpoints by Rate, Errors, Duration is RED — for request-driven services. They complement each other: RED spots the symptom, USE finds the cause."
+  },
+  {
+    "id": "q12",
+    "question": "API có p99 tăng từ 200 ms lên 3 s. CPU của các pod chỉ 35%. Dashboard cho thấy DB connection pool đang 50/50 và 180 request đang chờ lấy connection. Kết luận nào hợp lý nhất?",
+    "questionEn": "An API's p99 rose from 200 ms to 3 s. Pod CPU is only 35%. The dashboard shows the DB connection pool at 50/50 with 180 requests waiting for a connection. What is the most reasonable conclusion?",
+    "options": [
+      "CPU thấp chứng tỏ hệ thống khoẻ; độ trễ là do mạng của người dùng",
+      "Connection pool đang bão hoà — đây là nút thắt; cần điều tra truy vấn chậm hoặc kích thước pool",
+      "Cần tăng gấp đôi số pod vì CPU sắp chạm ngưỡng",
+      "Nên đổi metric latency từ histogram sang summary để có số chính xác hơn"
+    ],
+    "optionsEn": [
+      "Low CPU proves the system is healthy; the latency is the users' network",
+      "The connection pool is saturated — that is the bottleneck; investigate slow queries or pool size",
+      "Double the pod count because CPU is about to hit its limit",
+      "Switch the latency metric from histogram to summary for more accurate numbers"
+    ],
+    "answer": 1,
+    "explanation": "Saturation là tín hiệu then chốt của USE: pool đầy kèm hàng chờ giải thích trực tiếp độ trễ, dù CPU thấp. Thêm pod còn có thể làm DB tệ hơn vì mở thêm connection. Utilization một mình dễ gây hiểu nhầm.",
+    "explanationEn": "Saturation is USE's key signal: a full pool with a wait queue directly explains the latency even with low CPU. Adding pods may make the database worse by opening more connections. Utilization alone is misleading."
+  },
+  {
+    "id": "q13",
+    "question": "Service có SLO khả dụng 99.9% trong cửa sổ 30 ngày. Error budget tương ứng khoảng bao nhiêu thời gian downtime?",
+    "questionEn": "A service has a 99.9% availability SLO over a 30-day window. Roughly how much downtime does its error budget allow?",
+    "options": [
+      "Khoảng 43 phút",
+      "Khoảng 4 phút",
+      "Khoảng 7 giờ",
+      "Khoảng 8,8 giờ"
+    ],
+    "optionsEn": [
+      "About 43 minutes",
+      "About 4 minutes",
+      "About 7 hours",
+      "About 8.8 hours"
+    ],
+    "answer": 0,
+    "explanation": "30 ngày = 43.200 phút; 0,1% là 43,2 phút. Khoảng 4 phút là 99.99%, khoảng 7 giờ là 99% trong 30 ngày, còn khoảng 8,8 giờ là 99.9% tính cho cả năm.",
+    "explanationEn": "30 days = 43,200 minutes; 0.1% of that is 43.2 minutes. About 4 minutes is 99.99%, about 7 hours is 99% over 30 days, and about 8.8 hours is 99.9% over a whole year."
+  },
+  {
+    "id": "q14",
+    "question": "Product muốn cam kết SLA 99.95% với khách hàng doanh nghiệp. SLO nội bộ hiện là 99.9%, và service phụ thuộc hai dependency nối tiếp, mỗi cái 99.95%. Phản hồi tốt nhất của kiến trúc sư?",
+    "questionEn": "Product wants to promise enterprise customers a 99.95% SLA. The internal SLO is currently 99.9%, and the service depends on two serial dependencies at 99.95% each. What is the architect's best response?",
+    "options": [
+      "Đồng ý, vì SLA nên trùng khớp chính xác với SLO",
+      "Đồng ý và nâng SLO lên 100% để đảm bảo an toàn",
+      "Đồng ý, vì dependency không ảnh hưởng tới độ khả dụng của service",
+      "Từ chối con số đó: SLA phải lỏng hơn SLO, và hai dependency 99.95% nối tiếp đã giới hạn trần ở khoảng 99.9%"
+    ],
+    "optionsEn": [
+      "Agree, since the SLA should match the SLO exactly",
+      "Agree and raise the SLO to 100% to be safe",
+      "Agree, since dependencies do not affect the service's availability",
+      "Push back: the SLA must be looser than the SLO, and two serial 99.95% dependencies already cap it at about 99.9%"
+    ],
+    "answer": 3,
+    "explanation": "SLA là hợp đồng có chế tài nên phải có khoảng đệm dưới SLO. Độ khả dụng nối tiếp nhân với nhau: 0,9995 × 0,9995 ≈ 99.9% trước cả khi tính lỗi của chính service. 100% là mục tiêu sai về cả kỹ thuật lẫn chi phí.",
+    "explanationEn": "An SLA is a contract with penalties, so it needs headroom below the SLO. Serial availabilities multiply: 0.9995 × 0.9995 ≈ 99.9% before counting the service's own failures. 100% is the wrong target technically and financially."
+  },
+  {
+    "id": "q15",
+    "question": "Đội on-call bị gọi dậy hơn 30 lần mỗi tuần vì các cảnh báo như \"CPU pod > 85%\" và \"một pod restart\", phần lớn không có ảnh hưởng tới người dùng. Thay đổi nào hiệu quả nhất?",
+    "questionEn": "The on-call team is paged more than 30 times a week by alerts like \"pod CPU > 85%\" and \"a pod restarted\", most with no user impact. Which change is most effective?",
+    "options": [
+      "Giữ nguyên cảnh báo nhưng tăng số người trực on-call",
+      "Chỉ page theo triệu chứng người dùng (burn rate SLO); chuyển cảnh báo nguyên nhân thành ticket hoặc dashboard",
+      "Hạ ngưỡng CPU xuống 70% để phát hiện sớm hơn",
+      "Gửi mọi cảnh báo vào một kênh Slack chung thay vì page"
+    ],
+    "optionsEn": [
+      "Keep the alerts but add more people to the on-call rotation",
+      "Page only on user-facing symptoms (SLO burn rate); turn cause alerts into tickets or dashboards",
+      "Lower the CPU threshold to 70% to detect problems earlier",
+      "Send every alert into one shared Slack channel instead of paging"
+    ],
+    "answer": 1,
+    "explanation": "Cảnh báo nguyên nhân gây ồn khi không ai bị ảnh hưởng, dẫn tới alert fatigue và bỏ qua cả page thật. Page phải khẩn cấp, hành động được và ảnh hưởng người dùng. Hạ ngưỡng làm ồn hơn; đổ hết vào Slack thì không ai chịu trách nhiệm.",
+    "explanationEn": "Cause alerts are noisy when nobody is affected, leading to alert fatigue and ignored real pages. A page must be urgent, actionable and user-impacting. A lower threshold adds noise; dumping everything in Slack means nobody owns it."
+  },
+  {
+    "id": "q16",
+    "question": "Trong alert rule Prometheus sau, dòng `for: 10m` có tác dụng gì?\n`- alert: CheckoutHighErrorRate\n  expr: job:errors:ratio5m{job=\"checkout\"} > 0.05\n  for: 10m\n  labels:\n    severity: page`",
+    "questionEn": "In this Prometheus alert rule, what does the `for: 10m` line do?\n`- alert: CheckoutHighErrorRate\n  expr: job:errors:ratio5m{job=\"checkout\"} > 0.05\n  for: 10m\n  labels:\n    severity: page`",
+    "options": [
+      "Gửi lại thông báo cứ mỗi 10 phút cho tới khi được xác nhận",
+      "Tính tỉ lệ lỗi trên cửa sổ 10 phút thay vì 5 phút",
+      "Cảnh báo chỉ chuyển từ pending sang firing khi điều kiện đúng liên tục 10 phút",
+      "Tự động silence cảnh báo sau 10 phút"
+    ],
+    "optionsEn": [
+      "Re-sends the notification every 10 minutes until acknowledged",
+      "Computes the error ratio over a 10-minute window instead of 5 minutes",
+      "The alert only moves from pending to firing once the condition has held continuously for 10 minutes",
+      "Automatically silences the alert after 10 minutes"
+    ],
+    "answer": 2,
+    "explanation": "`for` là thời gian điều kiện phải đúng liên tục trước khi bật, giúp lọc các cú nháy ngắn. Cửa sổ tính toán nằm trong biểu thức (recording rule 5m); việc gửi lại và silence do Alertmanager đảm nhận.",
+    "explanationEn": "`for` is how long the condition must stay true before firing, which filters out short blips. The calculation window lives in the expression (a 5m recording rule); repeat notifications and silences are Alertmanager's job."
+  },
+  {
+    "id": "q17",
+    "question": "Với SLO 99.9% trong 30 ngày, team cấu hình page khi burn rate > 14.4 trên CẢ cửa sổ 1 giờ VÀ cửa sổ 5 phút. Vì sao cần thêm cửa sổ 5 phút?",
+    "questionEn": "For a 99.9% SLO over 30 days, a team pages when burn rate > 14.4 over BOTH a 1-hour window AND a 5-minute window. Why add the 5-minute window?",
+    "options": [
+      "Để page được gửi trước khi sự cố bắt đầu",
+      "Để cảnh báo tắt nhanh sau khi sự cố đã được khắc phục, thay vì kéo dài gần một giờ",
+      "Để giảm error budget từ 0,1% xuống 0,01%",
+      "Vì Prometheus không hỗ trợ cửa sổ dài hơn 5 phút cho hàm `rate`"
+    ],
+    "optionsEn": [
+      "So the page is sent before the incident starts",
+      "So the alert clears soon after the incident is fixed, instead of lingering for most of an hour",
+      "To reduce the error budget from 0.1% to 0.01%",
+      "Because Prometheus does not support windows longer than 5 minutes in `rate`"
+    ],
+    "answer": 1,
+    "explanation": "Cửa sổ 1 giờ đảm bảo tín hiệu đủ nghiêm trọng (burn 14.4 tiêu 2% ngân sách tháng trong 1 giờ); nhưng sau khi sửa xong nó vẫn còn cao rất lâu. Cửa sổ 5 phút hồi phục nhanh, nên điều kiện AND tắt gần như ngay khi lỗi dừng.",
+    "explanationEn": "The 1-hour window ensures the signal is serious (burn 14.4 spends 2% of the monthly budget in an hour), but it stays elevated long after a fix. The 5-minute window recovers quickly, so the AND condition clears almost as soon as errors stop."
+  }
+]

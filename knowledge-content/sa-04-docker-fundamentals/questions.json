@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Lý do chính khiến một container thường khởi động dưới một giây, còn một máy ảo mất hàng chục giây trở lên là gì?",
+    "questionEn": "What is the main reason a container usually starts in under a second while a virtual machine takes tens of seconds or more?",
+    "options": [
+      "Image của container được nén tốt hơn nên giải nén nhanh hơn",
+      "Container runtime giữ sẵn bộ nhớ của container trong RAM từ lần chạy trước",
+      "Container chỉ khởi chạy một process trên kernel của host đang chạy sẵn, không phải boot hệ điều hành",
+      "Container bỏ qua bước cấu hình mạng nên không phải chờ DHCP"
+    ],
+    "optionsEn": [
+      "Container images are compressed better, so they unpack faster",
+      "The container runtime keeps the container's memory in RAM from the previous run",
+      "A container just starts a process on the host's already-running kernel; no operating system boots",
+      "Containers skip network configuration, so they never wait for DHCP"
+    ],
+    "answer": 2,
+    "explanation": "Máy ảo phải boot cả một guest OS với kernel riêng. Container dùng chung kernel của host: runtime chỉ tạo namespaces, cgroups rồi exec process của app. Kích thước image ảnh hưởng thời gian pull, không phải thời gian khởi động.",
+    "explanationEn": "A VM has to boot a whole guest OS with its own kernel. A container shares the host kernel: the runtime creates namespaces and cgroups, then execs the app's process. Image size affects pull time, not start time."
+  },
+  {
+    "id": "q2",
+    "question": "Một nền tảng SaaS cho phép khách hàng chạy mã tuỳ ý của họ. Đội bảo mật lo rằng một lỗ hổng kernel sẽ cho khách hàng này đọc dữ liệu của khách hàng khác. Thiết kế nào giải quyết đúng mối lo đó?",
+    "questionEn": "A SaaS platform lets customers run arbitrary code. Security worries that a kernel exploit would let one customer read another customer's data. Which design addresses exactly that concern?",
+    "options": [
+      "Chạy workload của mỗi khách hàng trong VM hoặc micro-VM riêng (ví dụ Firecracker), có thể dùng container bên trong",
+      "Chạy mọi khách hàng trong container trên cùng host, mỗi container đặt `--memory` và `--cpus`",
+      "Tạo một user-defined bridge network riêng cho từng khách hàng trên cùng một host",
+      "Chạy mọi container với `--init` để PID 1 xử lý signal và dọn process zombie"
+    ],
+    "optionsEn": [
+      "Run each customer's workload in its own VM or micro-VM (e.g. Firecracker), optionally with containers inside",
+      "Run every customer in containers on shared hosts, each with `--memory` and `--cpus` set",
+      "Create a separate user-defined bridge network per customer on the same host",
+      "Run every container with `--init` so PID 1 handles signals and reaps zombies"
+    ],
+    "answer": 0,
+    "explanation": "Container dùng chung một kernel, nên một lỗ hổng kernel có thể thoát ra host và chạm tới container khác. Cgroups chỉ giới hạn tài nguyên, network riêng chỉ cô lập mạng, `--init` chỉ xử lý signal. Ranh giới kernel riêng của VM/micro-VM mới chặn được kiểu tấn công này.",
+    "explanationEn": "Containers share one kernel, so a kernel exploit can escape to the host and reach other containers. cgroups only limit resources, separate networks only isolate traffic, and `--init` only handles signals. The separate kernel boundary of a VM or micro-VM is what stops this attack."
+  },
+  {
+    "id": "q3",
+    "question": "Một container worker liên tục thoát với exit code 137 sau khoảng 20 phút xử lý. `docker inspect` cho thấy `\"OOMKilled\": true`. Nguyên nhân khả dĩ nhất là gì?",
+    "questionEn": "A worker container keeps exiting with code 137 after about 20 minutes of processing. `docker inspect` shows `\"OOMKilled\": true`. What is the most likely cause?",
+    "options": [
+      "App đang bind vào `127.0.0.1` nên health check từ bên ngoài thất bại",
+      "Container vượt CPU quota của `--cpus` nên kernel dừng hẳn process",
+      "App bắt được SIGTERM nhưng thoát quá chậm trong thời gian ân hạn",
+      "Mức dùng bộ nhớ của process chạm giới hạn `--memory` của cgroup"
+    ],
+    "optionsEn": [
+      "The app binds to `127.0.0.1`, so external health checks fail",
+      "The container exceeded its `--cpus` quota, so the kernel killed the process",
+      "The app caught SIGTERM but exited too slowly within the grace period",
+      "The process's memory usage reached the cgroup's `--memory` limit"
+    ],
+    "answer": 3,
+    "explanation": "137 = 128 + 9 (SIGKILL), và cờ OOMKilled xác nhận kernel đã kill vì hết bộ nhớ trong cgroup — thường do rò rỉ bộ nhớ hoặc giới hạn quá thấp. Vượt CPU quota chỉ bị throttle (chậm đi), không bị kill.",
+    "explanationEn": "137 = 128 + 9 (SIGKILL), and the OOMKilled flag confirms the kernel killed it for running out of memory in its cgroup — usually a leak or a limit set too low. Exceeding a CPU quota only throttles the container; it does not kill it."
+  },
+  {
+    "id": "q4",
+    "question": "Tính năng nào của kernel Linux khiến process bên trong container thấy mình là PID 1 và có network interface, địa chỉ IP riêng?",
+    "questionEn": "Which Linux kernel feature makes a process inside a container see itself as PID 1 and have its own network interfaces and IP address?",
+    "options": [
+      "Control groups (cgroups)",
+      "Namespaces",
+      "Storage driver overlay2",
+      "Seccomp profile"
+    ],
+    "optionsEn": [
+      "Control groups (cgroups)",
+      "Namespaces",
+      "The overlay2 storage driver",
+      "A seccomp profile"
+    ],
+    "answer": 1,
+    "explanation": "Namespaces (`pid`, `net`, `mnt`…) quyết định process thấy gì. Cgroups quyết định dùng được bao nhiêu tài nguyên, overlay2 gộp các layer của image, seccomp lọc system call.",
+    "explanationEn": "Namespaces (`pid`, `net`, `mnt`…) decide what a process can see. cgroups decide how much it can use, overlay2 merges image layers, and seccomp filters system calls."
+  },
+  {
+    "id": "q5",
+    "question": "Công ty chuẩn bị chuyển sang Amazon EKS bản mới. Một kỹ sư lo rằng Kubernetes đã gỡ dockershim từ v1.24 nên image build bằng `docker build` sẽ không chạy được. Câu trả lời đúng là gì?",
+    "questionEn": "A company is moving to a recent Amazon EKS version. An engineer worries that because Kubernetes removed dockershim in v1.24, images built with `docker build` will not run. What is the correct response?",
+    "options": [
+      "Đúng vậy — phải build lại mọi image bằng Podman trước khi deploy",
+      "Không sao — image tuân theo chuẩn OCI nên containerd trên node chạy nguyên vẹn",
+      "Chỉ chạy được nếu bật lại dockershim bằng một feature flag trên EKS",
+      "Phải chuyển image sang định dạng riêng của EKS bằng lệnh `eksctl convert`"
+    ],
+    "optionsEn": [
+      "Correct — every image must be rebuilt with Podman before deploying",
+      "No problem — the images follow the OCI standard, so containerd on the nodes runs them unchanged",
+      "They only run if dockershim is re-enabled with a feature flag on EKS",
+      "The images must be converted to an EKS-specific format with `eksctl convert`"
+    ],
+    "answer": 1,
+    "explanation": "Việc gỡ dockershim chỉ thay đổi runtime trên node (Kubernetes gọi thẳng containerd qua CRI). Docker cũng xuất image theo chuẩn OCI, nên image vẫn dùng được. Không có định dạng image riêng của EKS.",
+    "explanationEn": "Removing dockershim only changed the runtime on the node (Kubernetes talks to containerd directly via CRI). Docker produces OCI-standard images, so they keep working. There is no EKS-specific image format."
+  },
+  {
+    "id": "q6",
+    "question": "Một Dockerfile dùng SSH key để clone repo private rồi xoá key. Sau khi build, key có còn lấy ra được từ image không?\n`FROM alpine:3.20\nRUN apk add --no-cache git openssh-client\nCOPY id_ed25519 /root/.ssh/id_ed25519\nRUN git clone git@github.com:acme/lib.git /lib\nRUN rm /root/.ssh/id_ed25519`",
+    "questionEn": "A Dockerfile uses an SSH key to clone a private repo, then deletes the key. After the build, can the key still be extracted from the image?\n`FROM alpine:3.20\nRUN apk add --no-cache git openssh-client\nCOPY id_ed25519 /root/.ssh/id_ed25519\nRUN git clone git@github.com:acme/lib.git /lib\nRUN rm /root/.ssh/id_ed25519`",
+    "options": [
+      "Không — lệnh `rm` ở bước cuối xoá file khỏi mọi layer trước đó",
+      "Không — Docker tự loại các file trong `/root/.ssh` khỏi image khi push",
+      "Chỉ lấy được nếu image được build với cờ `--no-cache`",
+      "Có — key vẫn nằm trong layer do `COPY` tạo ra, chỉ bị che ở layer sau"
+    ],
+    "optionsEn": [
+      "No — the final `rm` deletes the file from every earlier layer",
+      "No — Docker automatically strips files under `/root/.ssh` when pushing",
+      "Only if the image was built with the `--no-cache` flag",
+      "Yes — the key still lives in the layer created by `COPY`; a later layer only hides it"
+    ],
+    "answer": 3,
+    "explanation": "Layer là bất biến. `rm` chỉ tạo một whiteout ở layer mới; ai pull image đều có thể giải nén layer của `COPY` và đọc key. Cách đúng là dùng build secret hoặc SSH mount của BuildKit (bài 5).",
+    "explanationEn": "Layers are immutable. `rm` only adds a whiteout in a new layer; anyone who pulls the image can unpack the `COPY` layer and read the key. The right approach is a BuildKit build secret or SSH mount (topic 5)."
+  },
+  {
+    "id": "q7",
+    "question": "Một host chạy 50 container từ cùng một image 300 MB. Dung lượng đĩa chỉ tăng thêm vài chục MB. Điều gì giải thích việc này?",
+    "questionEn": "A host runs 50 containers from the same 300 MB image, yet disk usage grows by only a few tens of MB. What explains this?",
+    "options": [
+      "Mọi container dùng chung các layer chỉ-đọc của image, mỗi container chỉ có một writable layer mỏng",
+      "Docker nén từng container bằng gzip khi container ở trạng thái running",
+      "Chỉ container đầu tiên được ghi ra đĩa, 49 container còn lại chạy hoàn toàn trong RAM",
+      "Overlay2 xoá image gốc sau khi container đầu tiên khởi động xong"
+    ],
+    "optionsEn": [
+      "All containers share the image's read-only layers; each one only adds a thin writable layer",
+      "Docker gzips each container while it is running",
+      "Only the first container is written to disk; the other 49 run entirely in RAM",
+      "overlay2 deletes the original image once the first container has started"
+    ],
+    "answer": 0,
+    "explanation": "Union filesystem xếp một writable layer riêng lên trên các layer chỉ-đọc dùng chung. Nhờ copy-on-write, chỉ những file container thực sự sửa mới bị copy lên writable layer của nó.",
+    "explanationEn": "The union filesystem stacks a private writable layer on top of shared read-only layers. Thanks to copy-on-write, only files a container actually modifies are copied into its own writable layer."
+  },
+  {
+    "id": "q8",
+    "question": "Với Dockerfile dưới đây, lệnh `docker run myimg --port 9000` sẽ thực thi gì?\n`FROM python:3.12-slim\nWORKDIR /app\nCOPY app.py .\nENTRYPOINT [\"python\", \"app.py\"]\nCMD [\"--port\", \"8000\"]`",
+    "questionEn": "Given the Dockerfile below, what does `docker run myimg --port 9000` execute?\n`FROM python:3.12-slim\nWORKDIR /app\nCOPY app.py .\nENTRYPOINT [\"python\", \"app.py\"]\nCMD [\"--port\", \"8000\"]`",
+    "options": [
+      "`--port 9000` — tham số thay thế cả ENTRYPOINT lẫn CMD",
+      "`python app.py --port 8000 --port 9000`",
+      "`python app.py --port 9000`",
+      "`/bin/sh -c \"python app.py\" --port 9000`"
+    ],
+    "optionsEn": [
+      "`--port 9000` — the arguments replace both ENTRYPOINT and CMD",
+      "`python app.py --port 8000 --port 9000`",
+      "`python app.py --port 9000`",
+      "`/bin/sh -c \"python app.py\" --port 9000`"
+    ],
+    "answer": 2,
+    "explanation": "Tham số sau tên image thay thế CMD và được nối vào sau ENTRYPOINT. Muốn đổi ENTRYPOINT phải dùng `--entrypoint`. Cả hai đều ở exec form nên không có `/bin/sh -c`.",
+    "explanationEn": "Arguments after the image name replace CMD and are appended to ENTRYPOINT. Changing ENTRYPOINT needs `--entrypoint`. Both use exec form, so no `/bin/sh -c` is involved."
+  },
+  {
+    "id": "q9",
+    "question": "Mỗi lần deploy, `docker stop api` luôn mất đúng 10 giây và app không hề ghi log \"shutting down\" dù đã có handler cho SIGTERM. Dockerfile kết thúc bằng dòng dưới. Nguyên nhân khả dĩ nhất?\n`CMD node server.js`",
+    "questionEn": "On every deploy, `docker stop api` takes exactly 10 seconds and the app never logs \"shutting down\", even though it has a SIGTERM handler. The Dockerfile ends with the line below. Most likely cause?\n`CMD node server.js`",
+    "options": [
+      "Node.js không hỗ trợ bắt SIGTERM khi chạy bên trong container",
+      "Shell form khiến `/bin/sh` làm PID 1 và shell không chuyển tiếp SIGTERM cho node",
+      "Container thiếu cờ `--memory` nên kernel bỏ qua mọi signal gửi tới nó",
+      "`docker stop` chỉ gửi SIGKILL, còn SIGTERM phải gửi bằng `docker kill`"
+    ],
+    "optionsEn": [
+      "Node.js cannot catch SIGTERM when running inside a container",
+      "Shell form makes `/bin/sh` PID 1, and the shell does not forward SIGTERM to node",
+      "The container has no `--memory` flag, so the kernel ignores signals sent to it",
+      "`docker stop` only sends SIGKILL; SIGTERM has to be sent with `docker kill`"
+    ],
+    "answer": 1,
+    "explanation": "Shell form chạy `/bin/sh -c \"node server.js\"`; SIGTERM tới shell chứ không tới node, nên sau 10 giây Docker gửi SIGKILL. Sửa bằng exec form `CMD [\"node\", \"server.js\"]` (hoặc thêm `--init`). `docker stop` gửi SIGTERM trước, SIGKILL sau.",
+    "explanationEn": "Shell form runs `/bin/sh -c \"node server.js\"`; SIGTERM reaches the shell, not node, so after 10 seconds Docker sends SIGKILL. Fix it with exec form `CMD [\"node\", \"server.js\"]` (or add `--init`). `docker stop` sends SIGTERM first and SIGKILL later."
+  },
+  {
+    "id": "q10",
+    "question": "Pipeline build image mất 4 phút mỗi lần, kể cả khi chỉ sửa một dòng code, vì `npm ci` luôn chạy lại. Thay đổi nào sửa đúng gốc rễ?\n`FROM node:22-slim\nWORKDIR /app\nCOPY . .\nRUN npm ci\nCMD [\"node\", \"server.js\"]`",
+    "questionEn": "The image build takes 4 minutes every time, even for a one-line code change, because `npm ci` always reruns. Which change fixes the root cause?\n`FROM node:22-slim\nWORKDIR /app\nCOPY . .\nRUN npm ci\nCMD [\"node\", \"server.js\"]`",
+    "options": [
+      "Đổi `npm ci` thành `npm install` vì lệnh này tự dùng lại `node_modules` cũ",
+      "Thêm `--no-cache` vào `docker build` để builder không so sánh các layer nữa",
+      "Đổi base image sang `node:22` bản đầy đủ để có sẵn nhiều package hơn",
+      "Copy `package.json` và `package-lock.json`, chạy `npm ci`, rồi mới `COPY . .`"
+    ],
+    "optionsEn": [
+      "Replace `npm ci` with `npm install`, which reuses the old `node_modules` automatically",
+      "Add `--no-cache` to `docker build` so the builder stops comparing layers",
+      "Switch the base image to the full `node:22` so more packages are preinstalled",
+      "Copy `package.json` and `package-lock.json`, run `npm ci`, and only then `COPY . .`"
+    ],
+    "answer": 3,
+    "explanation": "`COPY . .` đổi checksum mỗi khi bất kỳ file nào đổi, làm mất cache của mọi bước sau, kể cả `npm ci`. Copy riêng các file manifest trước giúp layer cài dependency chỉ chạy lại khi dependency đổi. `--no-cache` còn làm mọi thứ chậm hơn.",
+    "explanationEn": "`COPY . .` changes checksum whenever any file changes, which busts the cache for every later step, including `npm ci`. Copying the manifests first means the dependency layer only reruns when dependencies change. `--no-cache` makes everything slower."
+  },
+  {
+    "id": "q11",
+    "question": "Một Dockerfile có hai dòng riêng biệt dưới đây. Vài tuần sau, thêm một package vào dòng thứ hai thì build lỗi \"404 Not Found\" khi tải package. Vì sao?\n`RUN apt-get update\nRUN apt-get install -y curl jq`",
+    "questionEn": "A Dockerfile has the two separate lines below. Weeks later, adding a package to the second line makes the build fail with \"404 Not Found\" while downloading. Why?\n`RUN apt-get update\nRUN apt-get install -y curl jq`",
+    "options": [
+      "Layer `apt-get update` được lấy từ cache vì chuỗi lệnh không đổi, nên danh sách package đã cũ",
+      "`apt-get` không được phép chạy trong hai instruction `RUN` khác nhau",
+      "Mỗi `RUN` chạy trong một container mới nên mất kết nối mạng của bước trước",
+      "Builder BuildKit không hỗ trợ trình quản lý package của Debian và Ubuntu"
+    ],
+    "optionsEn": [
+      "The `apt-get update` layer came from cache because its command string was unchanged, so the package index was stale",
+      "`apt-get` is not allowed to run in two different `RUN` instructions",
+      "Each `RUN` runs in a new container, so it loses the previous step's network connection",
+      "The BuildKit builder does not support Debian and Ubuntu package managers"
+    ],
+    "answer": 0,
+    "explanation": "Cache của `RUN` chỉ so chuỗi lệnh. Bước update được dùng lại với index cũ, còn bước install (đã đổi) tải những phiên bản không còn trên mirror. Gộp `apt-get update && apt-get install -y …` trong một `RUN`.",
+    "explanationEn": "`RUN` caching only compares the command string. The update step is reused with an old index, while the changed install step asks for versions no longer on the mirror. Combine `apt-get update && apt-get install -y …` in one `RUN`."
+  },
+  {
+    "id": "q12",
+    "question": "Một đội chạy PostgreSQL bằng container trên một VM duy nhất. Dữ liệu phải sống sót khi xoá và tạo lại container hoặc nâng cấp image, và không nên phụ thuộc cấu trúc thư mục của host. Lựa chọn nào phù hợp nhất?",
+    "questionEn": "A team runs PostgreSQL in a container on a single VM. Data must survive removing and recreating the container or upgrading the image, without depending on the host's directory layout. Which option fits best?",
+    "options": [
+      "Để dữ liệu trong writable layer và không bao giờ xoá container",
+      "Mount tmpfs vào `/var/lib/postgresql/data` để có tốc độ ghi cao nhất",
+      "Named volume mount vào `/var/lib/postgresql/data`",
+      "Chạy `docker commit` sau mỗi giờ để lưu dữ liệu vào một image mới"
+    ],
+    "optionsEn": [
+      "Keep the data in the writable layer and never remove the container",
+      "Mount tmpfs at `/var/lib/postgresql/data` for the fastest writes",
+      "A named volume mounted at `/var/lib/postgresql/data`",
+      "Run `docker commit` every hour to save the data into a new image"
+    ],
+    "answer": 2,
+    "explanation": "Named volume do Docker quản lý, tồn tại độc lập với vòng đời container và không cần biết đường dẫn host. Writable layer mất khi xoá container, tmpfs mất khi container dừng, còn `docker commit` biến dữ liệu thành layer image — chậm và sai mục đích.",
+    "explanationEn": "A named volume is managed by Docker, lives independently of the container lifecycle and needs no host path. The writable layer dies with the container, tmpfs dies when it stops, and `docker commit` turns data into image layers — slow and the wrong tool."
+  },
+  {
+    "id": "q13",
+    "question": "Container khởi động bình thường nhưng thư mục `/etc/app` bên trong lại rỗng, app dùng cấu hình mặc định. Trên host, file cấu hình thật nằm ở `/opt/app/config`. Chuyện gì đã xảy ra?\n`docker run -d -v /opt/app/confg:/etc/app my-app:2.1.0`",
+    "questionEn": "The container starts fine, but `/etc/app` inside it is empty and the app falls back to defaults. On the host the real config lives in `/opt/app/config`. What happened?\n`docker run -d -v /opt/app/confg:/etc/app my-app:2.1.0`",
+    "options": [
+      "Bind mount luôn chỉ-đọc nên app không đọc được file cấu hình",
+      "Đường dẫn gõ sai; `-v` âm thầm tạo thư mục host rỗng và thư mục đó che `/etc/app`",
+      "Image đã khai báo `VOLUME /etc/app` nên mọi bind mount vào đó đều bị bỏ qua",
+      "Docker chỉ cho bind mount các thư mục nằm trong `/var/lib/docker`"
+    ],
+    "optionsEn": [
+      "Bind mounts are always read-only, so the app cannot read the config",
+      "The path is misspelled; `-v` silently created an empty host directory, which hides `/etc/app`",
+      "The image declares `VOLUME /etc/app`, so any bind mount there is ignored",
+      "Docker only allows bind mounts of directories under `/var/lib/docker`"
+    ],
+    "answer": 1,
+    "explanation": "`confg` là lỗi chính tả. Với `-v`, đường dẫn host không tồn tại sẽ được tạo thành thư mục rỗng, và bind mount che mất nội dung của image. `--mount type=bind` sẽ báo lỗi ngay nên an toàn hơn.",
+    "explanationEn": "`confg` is a typo. With `-v`, a missing host path is created as an empty directory, and the bind mount hides the image's contents. `--mount type=bind` would have failed immediately, which is safer."
+  },
+  {
+    "id": "q14",
+    "question": "Khi chạy `docker stop api` với cấu hình mặc định, Docker làm gì với process chính trong container?",
+    "questionEn": "When you run `docker stop api` with default settings, what does Docker do to the container's main process?",
+    "options": [
+      "Gửi SIGKILL ngay lập tức để giải phóng tài nguyên nhanh nhất",
+      "Gửi SIGHUP, chờ app nạp lại cấu hình rồi tạm dừng container",
+      "Đóng băng mọi process bằng cgroup freezer cho tới khi có `docker start`",
+      "Gửi SIGTERM, chờ tối đa 10 giây, rồi gửi SIGKILL nếu process vẫn chạy"
+    ],
+    "optionsEn": [
+      "Sends SIGKILL immediately to free resources as fast as possible",
+      "Sends SIGHUP, waits for the app to reload config, then pauses the container",
+      "Freezes every process with the cgroup freezer until `docker start`",
+      "Sends SIGTERM, waits up to 10 seconds, then sends SIGKILL if it is still running"
+    ],
+    "answer": 3,
+    "explanation": "Đây là cơ chế dừng êm: SIGTERM cho app cơ hội xử lý nốt request và thoát; thời gian chờ đổi bằng `-t`. SIGKILL ngay là `docker kill`, còn cgroup freezer là `docker pause`.",
+    "explanationEn": "This is the graceful stop: SIGTERM gives the app a chance to finish in-flight work and exit; the wait is changed with `-t`. Immediate SIGKILL is `docker kill`, and the cgroup freezer is `docker pause`."
+  },
+  {
+    "id": "q15",
+    "question": "Hai container `api` và `db` được chạy bằng `docker run` mà không có cờ `--network`. Trong `api`, kết nối tới `db:5432` báo lỗi không phân giải được tên máy. Cách sửa phù hợp nhất?",
+    "questionEn": "Two containers, `api` and `db`, were started with `docker run` and no `--network` flag. Inside `api`, connecting to `db:5432` fails because the hostname cannot be resolved. What is the right fix?",
+    "options": [
+      "Tạo một user-defined bridge network và chạy cả hai container trong network đó",
+      "Publish port của database bằng `-p 5432:5432` rồi dùng `db:5432` như cũ",
+      "Thêm `EXPOSE 5432` vào Dockerfile của `db` để Docker đăng ký tên DNS",
+      "Chạy `api` với `--network none` để nó dùng loopback của `db`"
+    ],
+    "optionsEn": [
+      "Create a user-defined bridge network and run both containers on it",
+      "Publish the database port with `-p 5432:5432` and keep using `db:5432`",
+      "Add `EXPOSE 5432` to the `db` Dockerfile so Docker registers a DNS name",
+      "Run `api` with `--network none` so it shares the loopback of `db`"
+    ],
+    "answer": 0,
+    "explanation": "Không có `--network`, container nằm trên bridge mặc định — nơi không có DNS theo tên container. User-defined bridge có DNS nhúng (`127.0.0.11`) phân giải tên. Publish port chỉ phục vụ traffic từ ngoài host, còn `EXPOSE` chỉ là ghi chú.",
+    "explanationEn": "Without `--network`, containers sit on the default bridge, which has no DNS by container name. A user-defined bridge has embedded DNS (`127.0.0.11`) that resolves names. Publishing ports only serves traffic from outside the host, and `EXPOSE` is documentation."
+  },
+  {
+    "id": "q16",
+    "question": "Container được chạy như dưới, `docker ps` hiện `0.0.0.0:8080->3000/tcp`, nhưng `curl localhost:8080` trên host báo \"connection reset\". Trong container, `ss -tlnp` cho thấy app lắng nghe `127.0.0.1:3000`. Nguyên nhân?\n`docker run -d --name api -p 8080:3000 my-api:1.4.0`",
+    "questionEn": "The container is started as below; `docker ps` shows `0.0.0.0:8080->3000/tcp`, yet `curl localhost:8080` on the host returns \"connection reset\". Inside the container, `ss -tlnp` shows the app listening on `127.0.0.1:3000`. Cause?\n`docker run -d --name api -p 8080:3000 my-api:1.4.0`",
+    "options": [
+      "Dockerfile thiếu `EXPOSE 3000` nên Docker không chuyển tiếp traffic",
+      "Phải dùng `-P` thay cho `-p` thì port mới thực sự được publish",
+      "App chỉ bind vào loopback của network namespace riêng; traffic chuyển tiếp tới IP của container nên không tới được app",
+      "Host firewall ufw đang chặn port 8080 nên kết nối bị reset"
+    ],
+    "optionsEn": [
+      "The Dockerfile lacks `EXPOSE 3000`, so Docker does not forward traffic",
+      "You must use `-P` instead of `-p` for the port to really be published",
+      "The app binds only to the loopback of its own network namespace; forwarded traffic arrives on the container IP and never reaches it",
+      "The host's ufw firewall blocks port 8080, so the connection is reset"
+    ],
+    "answer": 2,
+    "explanation": "`127.0.0.1` trong container là loopback của chính namespace đó. NAT của Docker gửi traffic tới IP của container trên bridge, nên app phải lắng nghe `0.0.0.0`. `EXPOSE` không ảnh hưởng tới `-p`, và ufw thường còn bị Docker vượt qua chứ không chặn.",
+    "explanationEn": "`127.0.0.1` inside the container is that namespace's own loopback. Docker's NAT delivers traffic to the container's bridge IP, so the app must listen on `0.0.0.0`. `EXPOSE` has no effect on `-p`, and Docker usually bypasses ufw rather than being blocked by it."
+  },
+  {
+    "id": "q17",
+    "question": "Một developer build image trên MacBook chip Apple M3, push lên ECR. Trên EC2 `t3.medium` (x86_64), container thoát ngay với log `exec format error`. Cách sửa đúng?",
+    "questionEn": "A developer builds an image on an Apple M3 MacBook and pushes it to ECR. On an EC2 `t3.medium` (x86_64), the container exits immediately logging `exec format error`. What is the right fix?",
+    "options": [
+      "Thêm `--init` vào lệnh `docker run` để tini khởi động được binary",
+      "Đổi `CMD` sang shell form để `/bin/sh` tự chọn đúng kiến trúc",
+      "Tăng `--memory` vì lỗi này xuất hiện khi process không đủ bộ nhớ để nạp",
+      "Build bằng `docker buildx build --platform linux/amd64,linux/arm64` và push image multi-arch"
+    ],
+    "optionsEn": [
+      "Add `--init` to `docker run` so tini can start the binary",
+      "Switch `CMD` to shell form so `/bin/sh` picks the right architecture",
+      "Raise `--memory`, since this error appears when a process lacks memory to load",
+      "Build with `docker buildx build --platform linux/amd64,linux/arm64` and push a multi-arch image"
+    ],
+    "answer": 3,
+    "explanation": "Image build trên Apple Silicon mặc định là `arm64`; binary ARM không chạy được trên CPU x86_64. Build multi-platform tạo một index để mỗi node tự pull đúng kiến trúc (hoặc build riêng `linux/amd64` trong CI).",
+    "explanationEn": "An image built on Apple Silicon defaults to `arm64`, and ARM binaries cannot run on an x86_64 CPU. A multi-platform build creates an index so each node pulls its own architecture (or build `linux/amd64` in CI)."
+  },
+  {
+    "id": "q18",
+    "question": "Trong một sự cố, hai node chạy cùng tên image `payments/api:latest` nhưng lại chạy hai phiên bản code khác nhau. Khuyến nghị kiến trúc nào ngăn chuyện này lặp lại?",
+    "questionEn": "During an incident, two nodes running the same image reference `payments/api:latest` turned out to be running different code. Which architectural recommendation prevents this from recurring?",
+    "options": [
+      "Chạy `docker system prune` trên mọi node trước mỗi lần deploy",
+      "Deploy bằng tag phiên bản bất biến hoặc digest `@sha256:…`, và bật immutable tags trên registry",
+      "Luôn dùng `latest` nhưng thêm `--pull always` để mọi node tải bản mới cùng lúc",
+      "Chuyển từ ECR sang Docker Hub vì Docker Hub đồng bộ tag nhanh hơn"
+    ],
+    "optionsEn": [
+      "Run `docker system prune` on every node before each deploy",
+      "Deploy by an immutable version tag or an `@sha256:…` digest, and enable immutable tags on the registry",
+      "Keep using `latest` but add `--pull always` so every node fetches the new build at once",
+      "Move from ECR to Docker Hub because Docker Hub syncs tags faster"
+    ],
+    "answer": 1,
+    "explanation": "Tag là con trỏ thay đổi được; node pull `latest` vào thời điểm khác nhau sẽ nhận nội dung khác nhau. Digest là hash của manifest nên luôn trỏ đúng một nội dung. `--pull always` vẫn có race khi tag bị push lại giữa chừng.",
+    "explanationEn": "A tag is a mutable pointer; nodes that pull `latest` at different times get different content. A digest is the manifest's hash, so it always identifies exactly one image. `--pull always` still races when the tag is re-pushed mid-rollout."
+  }
+]

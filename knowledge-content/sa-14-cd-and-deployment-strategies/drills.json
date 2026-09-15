@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về blue-green deployment.",
+      "promptEn": "Pick TWO statements that are true about blue-green deployment.",
+      "options": [
+        "Traffic được dịch dần từ 5% lên 100% theo từng bước",
+        "Cần khoảng gấp đôi capacity trong lúc release",
+        "Nó loại bỏ nhu cầu thay đổi database tương thích ngược",
+        "Chuyển bằng DNS có hiệu lực tức thì với mọi client",
+        "Rollback là chuyển router ngược về môi trường cũ vẫn đang chạy"
+      ],
+      "optionsEn": [
+        "Traffic shifts gradually from 5% to 100% in steps",
+        "It needs roughly double capacity during the release",
+        "It removes the need for backward-compatible database changes",
+        "Switching via DNS takes effect instantly for every client",
+        "Rollback means switching the router back to the old environment that is still running"
+      ],
+      "answers": [1, 4],
+      "explanation": "Blue-green chạy hai môi trường đầy đủ và chuyển toàn bộ traffic trong một lần, nên tốn gấp đôi capacity nhưng rollback chỉ mất vài giây. Dịch dần theo phần trăm là canary; database thường dùng chung nên vẫn cần expand–contract; DNS bị cache theo TTL nên không tức thì.",
+      "explanationEn": "Blue-green runs two full environments and moves all traffic at once, so it costs double capacity but rolls back in seconds. Gradual percentage shifts are a canary; the database is usually shared, so expand–contract is still needed; DNS is cached for the TTL, so it is not instant.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI nguyên tắc thuộc định nghĩa GitOps của OpenGitOps.",
+      "promptEn": "Pick TWO principles that belong to the OpenGitOps definition of GitOps.",
+      "options": [
+        "Trạng thái mong muốn được agent phần mềm kéo về tự động",
+        "Pipeline CI đẩy thay đổi vào cluster bằng `kubectl apply`",
+        "Hệ thống được đối soát liên tục với trạng thái mong muốn",
+        "Thay đổi được áp dụng thủ công qua dashboard của cluster",
+        "Trạng thái mong muốn được mô tả trong một trang wiki nội bộ"
+      ],
+      "optionsEn": [
+        "Desired state is pulled automatically by software agents",
+        "The CI pipeline pushes changes into the cluster with `kubectl apply`",
+        "The system is continuously reconciled against the desired state",
+        "Changes are applied manually through the cluster dashboard",
+        "The desired state is described on an internal wiki page"
+      ],
+      "answers": [0, 2],
+      "explanation": "Bốn nguyên tắc OpenGitOps: declarative, versioned and immutable, pulled automatically, continuously reconciled. CI đẩy bằng `kubectl apply` là mô hình push; thao tác thủ công và wiki không có version bất biến lẫn đối soát tự động.",
+      "explanationEn": "The four OpenGitOps principles: declarative, versioned and immutable, pulled automatically, continuously reconciled. CI pushing with `kubectl apply` is the push model; manual changes and wiki pages have neither immutable versions nor automated reconciliation.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Pattern thay đổi schema không downtime gồm: thêm cấu trúc mới, chuyển app và dữ liệu sang, rồi mới xoá cấu trúc cũ — tên là gì?",
+      "promptEn": "What is the zero-downtime schema change pattern of adding the new structure, moving the app and data over, and only then removing the old structure?",
+      "answer": "expand–contract",
+      "answerEn": "expand–contract",
+      "accept": [
+        "expand contract",
+        "expand-contract",
+        "expand and contract",
+        "expand/contract",
+        "expand contract pattern",
+        "parallel change"
+      ],
+      "explanation": "Expand–contract (còn gọi là parallel change). Mỗi bước tương thích với version app trước đó, nên rolling update và rollback vẫn an toàn trong suốt quá trình.",
+      "explanationEn": "Expand–contract (also called parallel change). Every step stays compatible with the previous app version, so rolling updates and rollbacks remain safe throughout.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Lệnh kubectl nào đưa một Deployment về revision trước đó?",
+      "promptEn": "Which kubectl command returns a Deployment to its previous revision?",
+      "answer": "kubectl rollout undo",
+      "answerEn": "kubectl rollout undo",
+      "accept": [
+        "kubectl rollout undo",
+        "rollout undo",
+        "kubectl rollout undo deployment",
+        "kubectl rollout undo deploy"
+      ],
+      "explanation": "`kubectl rollout undo deployment/<name>`. Nó chỉ khôi phục pod template (image, env, resource) từ ReplicaSet cũ — không hoàn tác dữ liệu hay side effect đã xảy ra.",
+      "explanationEn": "`kubectl rollout undo deployment/<name>`. It only restores the pod template (image, env, resources) from an old ReplicaSet — it does not undo data or side effects that already happened.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi chiến lược triển khai với mô tả đúng.",
+      "promptEn": "Match each deployment strategy to what it does.",
+      "pairs": [
+        {
+          "left": "Rolling update",
+          "leftEn": "Rolling update",
+          "right": "Thay dần từng nhóm instance; hai version cùng phục vụ trong lúc rollout",
+          "rightEn": "Replaces instances a few at a time; both versions serve traffic during the rollout"
+        },
+        {
+          "left": "Blue-green",
+          "leftEn": "Blue-green",
+          "right": "Hai môi trường đầy đủ; chuyển toàn bộ traffic trong một lần ở router",
+          "rightEn": "Two full environments; all traffic switched in one step at the router"
+        },
+        {
+          "left": "Canary",
+          "leftEn": "Canary",
+          "right": "Một phần nhỏ traffic thật tới version mới, tăng dần nếu metric tốt",
+          "rightEn": "A small slice of real traffic goes to the new version, rising if metrics stay healthy"
+        },
+        {
+          "left": "Shadow",
+          "leftEn": "Shadow",
+          "right": "Sao chép request sang version mới và bỏ response của nó",
+          "rightEn": "Copies requests to the new version and discards its responses"
+        }
+      ],
+      "explanation": "Điểm phân biệt: rolling trộn version; blue-green là tất cả hoặc không; canary giới hạn blast radius; shadow không ảnh hưởng người dùng nhưng phải cẩn thận với side effect.",
+      "explanationEn": "The distinctions: rolling mixes versions; blue-green is all-or-nothing; canary limits the blast radius; shadow has no user impact but must be careful with side effects.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước đổi tên cột `fullname` thành `display_name` không downtime.",
+      "promptEn": "Put the steps to rename the `fullname` column to `display_name` with zero downtime into order.",
+      "items": [
+        {
+          "text": "Thêm cột `display_name` dạng nullable",
+          "textEn": "Add a nullable `display_name` column"
+        },
+        {
+          "text": "Deploy code ghi vào cả hai cột",
+          "textEn": "Deploy code that writes to both columns"
+        },
+        {
+          "text": "Backfill các dòng cũ theo từng batch",
+          "textEn": "Backfill old rows in batches"
+        },
+        {
+          "text": "Deploy code đọc từ `display_name`",
+          "textEn": "Deploy code that reads from `display_name`"
+        },
+        {
+          "text": "Deploy code ngừng ghi vào `fullname`",
+          "textEn": "Deploy code that stops writing to `fullname`"
+        },
+        {
+          "text": "Xoá cột `fullname`",
+          "textEn": "Drop the `fullname` column"
+        }
+      ],
+      "explanation": "Bổ sung trước, phá huỷ sau cùng. Ở mỗi bước, version app đang chạy và version ngay trước nó đều hoạt động được với schema, nên có thể rollback bất cứ lúc nào cho tới khi cột cũ bị xoá.",
+      "explanationEn": "Additive first, destructive last. At every step both the running app version and the one before it work with the schema, so you can roll back at any point until the old column is dropped.",
+      "id": "d6"
+    }
+  ]
+}

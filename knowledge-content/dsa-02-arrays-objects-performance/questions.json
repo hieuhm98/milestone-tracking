@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Với một object JavaScript, thao tác nào KHÔNG phải O(1) trung bình?",
+    "questionEn": "For a JavaScript object, which operation is NOT O(1) on average?",
+    "options": [
+      "Thêm một key mới: `obj.city = \"Hue\"`",
+      "Đọc giá trị theo key: `obj.city`",
+      "Tìm xem có key nào đang giữ giá trị `\"Hue\"` hay không",
+      "Xoá một key: `delete obj.city`"
+    ],
+    "optionsEn": [
+      "Adding a new key: `obj.city = \"Hue\"`",
+      "Reading a value by key: `obj.city`",
+      "Finding whether any key currently holds the value `\"Hue\"`",
+      "Removing a key: `delete obj.city`"
+    ],
+    "answer": 2,
+    "explanation": "Thêm, đọc và xoá theo key đều dẫn thẳng tới vị trí nhờ băm key, nên là O(1) trung bình. Giá trị thì không được đánh chỉ mục: muốn biết giá trị nào đó có tồn tại không, bạn phải kiểm tra từng key — O(n).",
+    "explanationEn": "Adding, reading and removing by key go straight to the slot by hashing the key, so they are O(1) on average. Values are not indexed: to know whether some value exists you must check every key — O(n)."
+  },
+  {
+    "id": "q2",
+    "question": "Độ phức tạp thời gian và bộ nhớ phụ của `Object.keys(obj)` với object có n key là gì?",
+    "questionEn": "What are the time and extra space complexity of `Object.keys(obj)` for an object with n keys?",
+    "options": [
+      "O(n) thời gian và O(n) bộ nhớ, vì nó tạo một mảng mới chứa n key",
+      "O(1) thời gian và O(1) bộ nhớ, vì engine đã lưu sẵn danh sách key",
+      "O(n) thời gian nhưng O(1) bộ nhớ, vì chỉ trả về một tham chiếu",
+      "O(log n) thời gian và O(n) bộ nhớ, vì key được giữ ở dạng cây"
+    ],
+    "optionsEn": [
+      "O(n) time and O(n) space, because it builds a new array of n keys",
+      "O(1) time and O(1) space, because the engine already stores a key list",
+      "O(n) time but O(1) space, because it only returns a reference",
+      "O(log n) time and O(n) space, because keys are kept in a tree"
+    ],
+    "answer": 0,
+    "explanation": "`Object.keys`, `Object.values` và `Object.entries` đều phải đi qua mọi key và trả về một mảng mới, nên tốn O(n) cả thời gian lẫn bộ nhớ. Đó là lý do `Object.keys(obj).length` trong vòng lặp là một chi phí ẩn.",
+    "explanationEn": "`Object.keys`, `Object.values` and `Object.entries` all visit every key and return a fresh array, so they cost O(n) in both time and space. That is why `Object.keys(obj).length` inside a loop is a hidden cost."
+  },
+  {
+    "id": "q3",
+    "question": "Độ phức tạp thời gian của hàm sau là gì, với n là số key của `counts`?\n`function countKeysBelow(counts, limit) {\n  let total = 0;\n  for (const key in counts) {\n    if (Object.keys(counts).length > limit) break;\n    total++;\n  }\n  return total;\n}`",
+    "questionEn": "What is the time complexity of this function, where n is the number of keys in `counts`?\n`function countKeysBelow(counts, limit) {\n  let total = 0;\n  for (const key in counts) {\n    if (Object.keys(counts).length > limit) break;\n    total++;\n  }\n  return total;\n}`",
+    "options": [
+      "O(n), vì chỉ có một vòng lặp",
+      "O(1), vì `.length` là O(1)",
+      "O(n log n), vì vòng lặp có thể dừng sớm",
+      "O(n²), vì `Object.keys` là O(n) và được gọi ở mỗi lần lặp"
+    ],
+    "optionsEn": [
+      "O(n), because there is only one loop",
+      "O(1), because `.length` is O(1)",
+      "O(n log n), because the loop may break early",
+      "O(n²), because `Object.keys` is O(n) and runs on every iteration"
+    ],
+    "answer": 3,
+    "explanation": "`.length` của mảng đúng là O(1), nhưng trước đó `Object.keys` phải dựng cả mảng n key — O(n) — ở mỗi vòng. n vòng × O(n) = O(n²) trong trường hợp xấu nhất (không break). Hãy tính số key một lần trước vòng lặp.",
+    "explanationEn": "An array's `.length` is O(1), but `Object.keys` must first build the whole n-key array — O(n) — on every pass. n iterations × O(n) = O(n²) in the worst case (no break). Compute the key count once before the loop."
+  },
+  {
+    "id": "q4",
+    "question": "`stock` là object có n loại hàng. Cách nào kiểm tra \"có mặt hàng `kiwi` không\" trong O(1)?",
+    "questionEn": "`stock` is an object with n products. Which check for \"is there a `kiwi` entry\" runs in O(1)?",
+    "options": [
+      "`Object.keys(stock).includes(\"kiwi\")`",
+      "`Object.hasOwn(stock, \"kiwi\")`",
+      "`Object.entries(stock).some(([k]) => k === \"kiwi\")`",
+      "`JSON.stringify(stock).includes(\"kiwi\")`"
+    ],
+    "optionsEn": [
+      "`Object.keys(stock).includes(\"kiwi\")`",
+      "`Object.hasOwn(stock, \"kiwi\")`",
+      "`Object.entries(stock).some(([k]) => k === \"kiwi\")`",
+      "`JSON.stringify(stock).includes(\"kiwi\")`"
+    ],
+    "answer": 1,
+    "explanation": "`Object.hasOwn` (hay `hasOwnProperty`) chỉ là một lần tra key: O(1). Các cách còn lại đều dựng một mảng hoặc chuỗi từ toàn bộ object rồi quét nó — O(n) — và cách dùng JSON còn có thể khớp nhầm với một giá trị chứa chữ kiwi.",
+    "explanationEn": "`Object.hasOwn` (or `hasOwnProperty`) is a single key lookup: O(1). The others all build an array or string from the whole object and scan it — O(n) — and the JSON approach can even match a value that happens to contain the word kiwi."
+  },
+  {
+    "id": "q5",
+    "question": "Mảng `arr` có 1.000.000 phần tử. So sánh chi phí của `arr[0]` và `arr[999999]`.",
+    "questionEn": "`arr` holds 1,000,000 elements. Compare the cost of `arr[0]` and `arr[999999]`.",
+    "options": [
+      "`arr[999999]` là O(n) vì engine phải đi qua các phần tử phía trước",
+      "Cả hai đều O(1): engine tính thẳng được vị trí của ô theo index",
+      "`arr[0]` là O(1) còn `arr[999999]` là O(log n)",
+      "Cả hai đều O(n) vì mảng JavaScript thực chất là linked list"
+    ],
+    "optionsEn": [
+      "`arr[999999]` is O(n) because the engine walks past the earlier elements",
+      "Both are O(1): the engine computes the slot's location from the index directly",
+      "`arr[0]` is O(1) while `arr[999999]` is O(log n)",
+      "Both are O(n) because JavaScript arrays are really linked lists"
+    ],
+    "answer": 1,
+    "explanation": "Truy cập theo index không phụ thuộc vị trí hay độ dài mảng: engine nhảy thẳng tới ô i. Việc phải đi từng bước từ đầu là đặc điểm của linked list, không phải array.",
+    "explanationEn": "Access by index does not depend on the position or the array's length: the engine jumps straight to slot i. Walking step by step from the start is how a linked list behaves, not an array."
+  },
+  {
+    "id": "q6",
+    "question": "Vì sao `arr.unshift(x)` là O(n) trong khi `arr.push(x)` là O(1) (amortized)?",
+    "questionEn": "Why is `arr.unshift(x)` O(n) while `arr.push(x)` is O(1) (amortized)?",
+    "options": [
+      "Vì `unshift` phải sắp xếp lại mảng sau khi thêm phần tử",
+      "Vì `unshift` luôn tạo một mảng mới và bỏ mảng cũ",
+      "Vì `unshift` phải kiểm tra phần tử có bị trùng hay không",
+      "Vì thêm vào đầu làm mọi phần tử hiện có dịch sang và nhận index mới"
+    ],
+    "optionsEn": [
+      "Because `unshift` has to re-sort the array after inserting",
+      "Because `unshift` always allocates a new array and discards the old one",
+      "Because `unshift` must check whether the element is a duplicate",
+      "Because adding at the front shifts every existing element to a new index"
+    ],
+    "answer": 3,
+    "explanation": "Mỗi phần tử gắn với index của nó. Thêm vào vị trí 0 buộc phần tử ở 0 thành 1, 1 thành 2, … — n phần tử phải dịch. `push` chỉ thêm một ô mới ở cuối, không đụng phần tử nào khác.",
+    "explanationEn": "Every element is tied to its index. Inserting at position 0 forces the element at 0 to become 1, 1 to become 2, … — n elements move. `push` just adds a new slot at the end and touches nothing else."
+  },
+  {
+    "id": "q7",
+    "question": "Độ phức tạp thời gian của hàm sau với mảng `tasks` gồm n phần tử là gì?\n`function drainQueue(tasks) {\n  let processed = 0;\n  while (tasks.length > 0) {\n    tasks.shift();\n    processed++;\n  }\n  return processed;\n}`",
+    "questionEn": "What is the time complexity of this function for a `tasks` array of n elements?\n`function drainQueue(tasks) {\n  let processed = 0;\n  while (tasks.length > 0) {\n    tasks.shift();\n    processed++;\n  }\n  return processed;\n}`",
+    "options": [
+      "O(n²), vì mỗi lần `shift` là O(n) và nó chạy n lần",
+      "O(n), vì vòng lặp chạy n lần",
+      "O(1), vì mảng đang ngắn dần",
+      "O(n log n), vì mỗi lần mảng giảm đi một phần tử"
+    ],
+    "optionsEn": [
+      "O(n²), because each `shift` is O(n) and it runs n times",
+      "O(n), because the loop runs n times",
+      "O(1), because the array keeps shrinking",
+      "O(n log n), because the array loses one element per pass"
+    ],
+    "answer": 0,
+    "explanation": "`shift` đánh số lại toàn bộ phần tử còn lại: (n-1) + (n-2) + … ≈ n²/2 = O(n²). Mảng ngắn dần chỉ đổi hằng số. Dùng `pop` (nếu thứ tự không quan trọng) hoặc một queue thật sẽ đưa về O(n).",
+    "explanationEn": "`shift` re-indexes all remaining elements: (n-1) + (n-2) + … ≈ n²/2 = O(n²). The shrinking array only changes the constant. Using `pop` (if order does not matter) or a real queue brings it down to O(n)."
+  },
+  {
+    "id": "q8",
+    "question": "Sau khi chạy đoạn code sau, `bag` chứa gì?\n`const bag = [10, 20, 30, 40];\nconst i = 1;\nbag[i] = bag[bag.length - 1];\nbag.pop();`",
+    "questionEn": "After this code runs, what does `bag` contain?\n`const bag = [10, 20, 30, 40];\nconst i = 1;\nbag[i] = bag[bag.length - 1];\nbag.pop();`",
+    "options": [
+      "`[10, 30, 40]`",
+      "`[10, 20, 30]`",
+      "`[10, 40, 30]`",
+      "`[40, 20, 30]`"
+    ],
+    "optionsEn": [
+      "`[10, 30, 40]`",
+      "`[10, 20, 30]`",
+      "`[10, 40, 30]`",
+      "`[40, 20, 30]`"
+    ],
+    "answer": 2,
+    "explanation": "Index 1 (giá trị 20) bị ghi đè bằng phần tử cuối (40), cho `[10, 40, 30, 40]`, rồi `pop` bỏ bản sao ở cuối: `[10, 40, 30]`. Đây là mẹo xoá O(1) khi không cần giữ thứ tự; `splice(1, 1)` sẽ giữ thứ tự `[10, 30, 40]` nhưng tốn O(n).",
+    "explanationEn": "Index 1 (value 20) is overwritten with the last element (40), giving `[10, 40, 30, 40]`, then `pop` drops the duplicate at the end: `[10, 40, 30]`. This is the O(1) removal trick when order does not matter; `splice(1, 1)` would keep the order `[10, 30, 40]` but costs O(n)."
+  },
+  {
+    "id": "q9",
+    "question": "Thao tác mảng nào sau đây có độ phức tạp thời gian O(n log n)?",
+    "questionEn": "Which of these array operations has O(n log n) time complexity?",
+    "options": [
+      "`arr.reverse()`",
+      "`arr.concat(other)`",
+      "`arr.indexOf(x)`",
+      "`arr.sort((a, b) => a - b)`"
+    ],
+    "optionsEn": [
+      "`arr.reverse()`",
+      "`arr.concat(other)`",
+      "`arr.indexOf(x)`",
+      "`arr.sort((a, b) => a - b)`"
+    ],
+    "answer": 3,
+    "explanation": "`sort` là sắp xếp dựa trên so sánh (V8 dùng TimSort), tốn O(n log n). `reverse` là một lượt đảo tại chỗ O(n), `concat` chép hai mảng O(n + m), còn `indexOf` là quét tuyến tính O(n).",
+    "explanationEn": "`sort` is a comparison sort (V8 uses TimSort) and costs O(n log n). `reverse` is a single in-place pass, O(n); `concat` copies both arrays, O(n + m); and `indexOf` is a linear scan, O(n)."
+  },
+  {
+    "id": "q10",
+    "question": "`users` có n phần tử, `banned` là mảng m id. Độ phức tạp thời gian của dòng sau là gì?\n`const allowed = users.filter((u) => !banned.includes(u.id));`",
+    "questionEn": "`users` has n items and `banned` is an array of m ids. What is the time complexity of this line?\n`const allowed = users.filter((u) => !banned.includes(u.id));`",
+    "options": [
+      "O(n · m), vì `includes` quét `banned` cho mỗi user",
+      "O(n + m), vì `filter` và `includes` chạy nối tiếp nhau",
+      "O(n), vì `filter` chỉ duyệt `users` một lần",
+      "O(m), vì `includes` là thao tác chậm nhất"
+    ],
+    "optionsEn": [
+      "O(n · m), because `includes` scans `banned` for every user",
+      "O(n + m), because `filter` and `includes` run one after the other",
+      "O(n), because `filter` only walks `users` once",
+      "O(m), because `includes` is the slowest step"
+    ],
+    "answer": 0,
+    "explanation": "Callback của `filter` chạy n lần và mỗi lần gọi `includes` O(m) — lồng nhau nên nhân: O(n · m). Dựng `new Set(banned)` một lần (O(m)) rồi dùng `has` O(1) sẽ đưa về O(n + m).",
+    "explanationEn": "The `filter` callback runs n times and each call does an O(m) `includes` — nested, so they multiply: O(n · m). Building `new Set(banned)` once (O(m)) and using O(1) `has` brings it to O(n + m)."
+  },
+  {
+    "id": "q11",
+    "question": "Bạn có mảng n sản phẩm và phải xử lý q truy vấn \"lấy sản phẩm theo id\". Cách nào hiệu quả nhất khi q lớn?",
+    "questionEn": "You have an array of n products and must answer q \"get product by id\" queries. Which approach is most efficient when q is large?",
+    "options": [
+      "Gọi `products.find((p) => p.id === id)` cho mỗi truy vấn",
+      "Sắp xếp mảng theo id trước mỗi truy vấn rồi dùng `find`",
+      "Dựng một object hoặc Map từ id sang sản phẩm một lần, rồi tra theo key",
+      "Dùng `products.indexOf(id)` cho mỗi truy vấn"
+    ],
+    "optionsEn": [
+      "Call `products.find((p) => p.id === id)` for every query",
+      "Sort the array by id before each query, then use `find`",
+      "Build an object or Map from id to product once, then look up by key",
+      "Use `products.indexOf(id)` for every query"
+    ],
+    "answer": 2,
+    "explanation": "Dựng bảng tra tốn O(n) một lần, sau đó mỗi truy vấn là O(1): tổng O(n + q). `find` mỗi truy vấn là O(n · q); sắp xếp mỗi lần còn tệ hơn, O(q · n log n); còn `indexOf(id)` so sánh id với chính các object nên thậm chí không tìm đúng.",
+    "explanationEn": "Building the lookup table costs O(n) once, then each query is O(1): O(n + q) total. `find` per query is O(n · q); sorting each time is worse, O(q · n log n); and `indexOf(id)` compares the id against the objects themselves, so it does not even find the right item."
+  },
+  {
+    "id": "q12",
+    "question": "Phát biểu nào về chuỗi method `arr.filter(f).map(g).reduce(h, 0)` là ĐÚNG (giả sử f, g, h đều O(1))?",
+    "questionEn": "Which statement about the chain `arr.filter(f).map(g).reduce(h, 0)` is TRUE (assuming f, g and h are O(1))?",
+    "options": [
+      "Nó là O(n³) vì có ba method lồng nhau",
+      "Nó là O(n) thời gian, nhưng tạo ra hai mảng trung gian",
+      "Nó là O(n) thời gian và O(1) bộ nhớ vì engine gộp ba lượt thành một",
+      "Nó là O(n log n) vì `reduce` phải sắp xếp kết quả"
+    ],
+    "optionsEn": [
+      "It is O(n³) because three methods are nested",
+      "It is O(n) time, but it creates two intermediate arrays",
+      "It is O(n) time and O(1) space because the engine fuses the three passes",
+      "It is O(n log n) because `reduce` sorts the result"
+    ],
+    "answer": 1,
+    "explanation": "Các method trong chuỗi chạy nối tiếp, không lồng nhau: ba lượt O(n) là O(3n) = O(n). `filter` và `map` mỗi cái trả về một mảng mới, nên có tới O(n) bộ nhớ phụ. JavaScript không tự gộp các lượt này.",
+    "explanationEn": "Chained methods run one after another, not nested: three O(n) passes are O(3n) = O(n). `filter` and `map` each return a new array, so there is up to O(n) extra memory. JavaScript does not fuse the passes for you."
+  },
+  {
+    "id": "q13",
+    "question": "Bạn cần thường xuyên biết một từ điển đang có bao nhiêu phần tử, trong khi key được thêm và xoá liên tục. Lựa chọn nào tốt nhất?",
+    "questionEn": "You frequently need the number of entries in a dictionary whose keys are added and removed constantly. Which choice is best?",
+    "options": [
+      "Một `Map`, đọc `map.size` trong O(1)",
+      "Một object, đọc `Object.keys(obj).length` trong O(1)",
+      "Một mảng các cặp `[key, value]`, đọc `arr.length`",
+      "Một object, đọc `obj.length` do engine tự cập nhật"
+    ],
+    "optionsEn": [
+      "A `Map`, reading `map.size` in O(1)",
+      "An object, reading `Object.keys(obj).length` in O(1)",
+      "An array of `[key, value]` pairs, reading `arr.length`",
+      "An object, reading `obj.length`, which the engine keeps updated"
+    ],
+    "answer": 0,
+    "explanation": "`Map` được thiết kế cho thêm/xoá thường xuyên và `size` là O(1). `Object.keys(obj).length` là O(n) vì phải dựng mảng key; object thường không có `length`; còn mảng cặp khiến mỗi lần tra hoặc xoá theo key tốn O(n).",
+    "explanationEn": "`Map` is built for frequent adds and deletes, and `size` is O(1). `Object.keys(obj).length` is O(n) because it builds the key array; plain objects have no `length`; and an array of pairs makes every lookup or delete by key O(n)."
+  },
+  {
+    "id": "q14",
+    "question": "Đoạn code sau in ra gì?\n`const scores = {};\nconst alice = { name: \"Alice\" };\nconst bob = { name: \"Bob\" };\nscores[alice] = 95;\nscores[bob] = 70;\nconsole.log(scores[alice]);`",
+    "questionEn": "What does this code print?\n`const scores = {};\nconst alice = { name: \"Alice\" };\nconst bob = { name: \"Bob\" };\nscores[alice] = 95;\nscores[bob] = 70;\nconsole.log(scores[alice]);`",
+    "options": [
+      "`95`",
+      "`undefined`",
+      "Một TypeError vì key không được là object",
+      "`70`"
+    ],
+    "optionsEn": [
+      "`95`",
+      "`undefined`",
+      "A TypeError because keys cannot be objects",
+      "`70`"
+    ],
+    "answer": 3,
+    "explanation": "Key của object thường bị ép sang string, nên cả `alice` và `bob` đều thành key `\"[object Object]\"`. Lần gán thứ hai ghi đè lần đầu, và `scores[alice]` đọc lại chính key đó: 70. Dùng `Map` thì object được giữ nguyên làm key theo tham chiếu.",
+    "explanationEn": "Plain-object keys are coerced to strings, so both `alice` and `bob` become the key `\"[object Object]\"`. The second assignment overwrites the first, and `scores[alice]` reads that same key: 70. With a `Map`, objects stay keys by reference."
+  },
+  {
+    "id": "q15",
+    "question": "Giá trị của biểu thức sau là gì?\n`new Set([1, 1, NaN, NaN, [2], [2]]).size`",
+    "questionEn": "What is the value of this expression?\n`new Set([1, 1, NaN, NaN, [2], [2]]).size`",
+    "options": [
+      "3",
+      "5",
+      "4",
+      "6"
+    ],
+    "optionsEn": [
+      "3",
+      "5",
+      "4",
+      "6"
+    ],
+    "answer": 2,
+    "explanation": "`Set` so sánh theo SameValueZero: hai số 1 là một, hai `NaN` cũng được coi là bằng nhau, nhưng hai mảng `[2]` là hai object khác nhau nên được giữ cả hai. Kết quả: 1, NaN, [2], [2] — 4 phần tử.",
+    "explanationEn": "`Set` uses SameValueZero: the two 1s collapse into one, the two `NaN`s are also treated as equal, but the two `[2]` arrays are distinct objects so both stay. Result: 1, NaN, [2], [2] — 4 entries."
+  },
+  {
+    "id": "q16",
+    "question": "Vì sao cách dựng chuỗi sau thường được coi là O(n²) trên lý thuyết?\n`let out = \"\";\nfor (let i = 0; i < n; i++) {\n  out += \"x\";\n}`",
+    "questionEn": "Why is this way of building a string considered O(n²) on paper?\n`let out = \"\";\nfor (let i = 0; i < n; i++) {\n  out += \"x\";\n}`",
+    "options": [
+      "Vì `+=` trên string phải sắp xếp các ký tự",
+      "Vì string là bất biến: mỗi lần `+=` tạo chuỗi mới và chép lại toàn bộ phần đã có",
+      "Vì vòng lặp `for` trên string luôn là O(n²)",
+      "Vì `out.length` phải được đếm lại từ đầu sau mỗi lần nối"
+    ],
+    "optionsEn": [
+      "Because `+=` on a string has to sort the characters",
+      "Because strings are immutable: each `+=` creates a new string copying everything so far",
+      "Because a `for` loop over a string is always O(n²)",
+      "Because `out.length` must be recounted from scratch after each append"
+    ],
+    "answer": 1,
+    "explanation": "Không sửa được string tại chỗ, nên bước i chép i ký tự: 1 + 2 + … + n = O(n²). V8 tối ưu bằng rope nên thực tế thường nhanh, nhưng cách chắc chắn O(n) là `push` từng phần vào mảng rồi `join` một lần. `length` của string vẫn là O(1).",
+    "explanationEn": "A string cannot be changed in place, so step i copies i characters: 1 + 2 + … + n = O(n²). V8 optimises this with ropes so it is often fast in practice, but the guaranteed O(n) approach is to `push` parts into an array and `join` once. A string's `length` is still O(1)."
+  },
+  {
+    "id": "q17",
+    "question": "Đoạn code sau (không ở strict mode) in ra gì?\n`let word = \"cat\";\nword[0] = \"b\";\nconsole.log(word);`",
+    "questionEn": "What does this code (not in strict mode) print?\n`let word = \"cat\";\nword[0] = \"b\";\nconsole.log(word);`",
+    "options": [
+      "`\"cat\"`",
+      "`\"bat\"`",
+      "`\"bcat\"`",
+      "`undefined`"
+    ],
+    "optionsEn": [
+      "`\"cat\"`",
+      "`\"bat\"`",
+      "`\"bcat\"`",
+      "`undefined`"
+    ],
+    "answer": 0,
+    "explanation": "String là bất biến: gán vào một index bị lặng lẽ bỏ qua (ở strict mode sẽ ném TypeError). Muốn có \"bat\" bạn phải tạo chuỗi mới, ví dụ `\"b\" + word.slice(1)`, tốn O(n).",
+    "explanationEn": "Strings are immutable: assigning to an index is silently ignored (in strict mode it throws a TypeError). To get \"bat\" you must build a new string, e.g. `\"b\" + word.slice(1)`, which is O(n)."
+  },
+  {
+    "id": "q18",
+    "question": "Phát biểu nào về chi phí O(1) khi tra cứu trong object, `Map` hay `Set` là CHÍNH XÁC nhất?",
+    "questionEn": "Which statement about the O(1) lookup cost of objects, `Map` and `Set` is most ACCURATE?",
+    "options": [
+      "Đó là O(1) bảo đảm trong mọi trường hợp, kể cả khi có hàng triệu key",
+      "Đó là O(log n) vì các key luôn được giữ ở dạng cây cân bằng",
+      "Đó là O(1) chỉ khi key là số nguyên nhỏ",
+      "Đó là O(1) trung bình; nếu nhiều key va chạm, trường hợp xấu nhất có thể tới O(n)"
+    ],
+    "optionsEn": [
+      "It is guaranteed O(1) in every case, even with millions of keys",
+      "It is O(log n) because keys are always kept in a balanced tree",
+      "It is O(1) only when the keys are small integers",
+      "It is O(1) on average; if many keys collide, the worst case can reach O(n)"
+    ],
+    "answer": 3,
+    "explanation": "Các cấu trúc này dựa trên bảng băm. Với hàm băm tốt, key phân bố đều nên tra cứu là O(1) trung bình, bất kể kiểu key. Khi nhiều key rơi vào cùng bucket, phải duyệt cả bucket, nên worst case là O(n). Trong phỏng vấn hãy nói rõ \"trung bình\".",
+    "explanationEn": "These structures are backed by hash tables. With a good hash function keys spread evenly, so lookups are O(1) on average regardless of key type. When many keys land in the same bucket the whole bucket must be scanned, so the worst case is O(n). Say \"average\" in interviews."
+  }
+]

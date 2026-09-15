@@ -5,13 +5,14 @@ import { DEFAULT_GROUP } from "@/lib/groups";
 
 const CONTENT_DIR = path.join(process.cwd(), "knowledge-content");
 
-export async function GET(_req: Request, { params }: { params: { slug: string } }) {
+export async function GET(req: Request, { params }: { params: { slug: string } }) {
   try {
     const dir = path.join(CONTENT_DIR, params.slug);
     const articlePath = path.join(dir, "article.md");
     const articleEnPath = path.join(dir, "article.en.md");
     const questionsPath = path.join(dir, "questions.json");
     const lessonsPath = path.join(dir, "lessons.json");
+    const vocabPath = path.join(dir, "vocab.json");
     const metaPath = path.join(dir, "meta.json");
 
     if (!fs.existsSync(articlePath)) {
@@ -31,6 +32,15 @@ export async function GET(_req: Request, { params }: { params: { slug: string } 
       ? JSON.parse(fs.readFileSync(lessonsPath, "utf-8")).lessons ?? []
       : [];
 
+    // English vocabulary is opt-in (`?vocab=1`). Only the lesson player needs
+    // it, and the exam and Daily Quick Test fetch every topic in a track — at
+    // ~60 KB a topic, sending it unasked would bloat those draws for nothing.
+    const wantVocab = new URL(req.url).searchParams.get("vocab") === "1";
+    const vocab =
+      wantVocab && fs.existsSync(vocabPath)
+        ? JSON.parse(fs.readFileSync(vocabPath, "utf-8")).items ?? []
+        : [];
+
     return NextResponse.json({
       slug: params.slug,
       group: meta.group ?? DEFAULT_GROUP,
@@ -38,6 +48,7 @@ export async function GET(_req: Request, { params }: { params: { slug: string } 
       contentEn,
       questions,
       lessons,
+      ...(wantVocab ? { vocab } : {}),
       ...meta,
     });
   } catch {

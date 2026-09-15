@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Cấu trúc nào dưới đây KHÔNG phải là một cây?",
+    "questionEn": "Which of these structures is NOT a tree?",
+    "options": [
+      "Một nút duy nhất, không có con nào",
+      "Một singly linked list gồm 5 nút",
+      "Các nút cha/con, trong đó có một nút có hai cha",
+      "Một gốc có ba con, mỗi con là một lá"
+    ],
+    "optionsEn": [
+      "A single node with no children",
+      "A singly linked list of 5 nodes",
+      "Parent/child nodes where one node has two parents",
+      "A root with three children, each of them a leaf"
+    ],
+    "answer": 2,
+    "explanation": "Trong cây, mọi nút trừ gốc có đúng một cha. Nút có hai cha nghĩa là có hai đường đi tới nó, tức là tồn tại chu trình (hoặc nhiều gốc). Một nút đơn lẻ là cây hợp lệ, linked list là cây suy biến, còn cây không bắt buộc phải là cây nhị phân.",
+    "explanationEn": "In a tree every node except the root has exactly one parent. A node with two parents means two paths reach it, so there is a cycle (or more than one root). A single node is a valid tree, a linked list is a degenerate tree, and a tree does not have to be binary."
+  },
+  {
+    "id": "q2",
+    "question": "Với cây sau, có bao nhiêu lá và chiều cao của cây (đếm theo cạnh) là bao nhiêu?\n`        10\n       /  \\\n      6    15\n     /    /  \\\n    3    12   20\n          \\\n           13`",
+    "questionEn": "For this tree, how many leaves are there and what is the tree's height (counting edges)?\n`        10\n       /  \\\n      6    15\n     /    /  \\\n    3    12   20\n          \\\n           13`",
+    "options": [
+      "3 lá, chiều cao 3",
+      "4 lá, chiều cao 3",
+      "3 lá, chiều cao 4",
+      "2 lá, chiều cao 2"
+    ],
+    "optionsEn": [
+      "3 leaves, height 3",
+      "4 leaves, height 3",
+      "3 leaves, height 4",
+      "2 leaves, height 2"
+    ],
+    "answer": 0,
+    "explanation": "Lá là nút không có con: 3, 20 và 13 — tổng 3 lá (12 có con là 13 nên không phải lá). Đường dài nhất từ gốc là 10 → 15 → 12 → 13, gồm 3 cạnh, nên chiều cao là 3.",
+    "explanationEn": "Leaves are nodes with no children: 3, 20 and 13 — three leaves (12 has the child 13, so it is not a leaf). The longest root path is 10 → 15 → 12 → 13, which is 3 edges, so the height is 3."
+  },
+  {
+    "id": "q3",
+    "question": "Phát biểu nào về cây và danh sách (list) là ĐÚNG?",
+    "questionEn": "Which statement about trees and lists is TRUE?",
+    "options": [
+      "Cây là cấu trúc tuyến tính, còn list là phi tuyến",
+      "Cây có n nút luôn có đúng n cạnh",
+      "Mọi cây đều phải là cây nhị phân",
+      "Singly linked list có thể xem là một cây suy biến, mỗi nút có tối đa một con"
+    ],
+    "optionsEn": [
+      "Trees are linear structures, while lists are non-linear",
+      "A tree with n nodes always has exactly n edges",
+      "Every tree must be a binary tree",
+      "A singly linked list can be seen as a degenerate tree where each node has at most one child"
+    ],
+    "answer": 3,
+    "explanation": "List là tuyến tính (mỗi phần tử có tối đa một phần tử kế tiếp), cây là phi tuyến (có thể rẽ nhiều nhánh). Cây n nút có n − 1 cạnh, và cây như DOM hay hệ thống file có thể có nhiều con. Linked list là trường hợp đặc biệt của cây — cũng là hình dạng BST suy biến thành.",
+    "explanationEn": "Lists are linear (each element has at most one next), trees are non-linear (they can branch). A tree with n nodes has n − 1 edges, and trees such as the DOM or a file system can have many children per node. A linked list is a special case of a tree — and the shape a degenerate BST collapses into."
+  },
+  {
+    "id": "q4",
+    "question": "Điều gì phân biệt một cây nhị phân (binary tree) với một cây nhị phân tìm kiếm (BST)?",
+    "questionEn": "What distinguishes a binary tree from a binary search tree (BST)?",
+    "options": [
+      "Cây nhị phân có tối đa hai con mỗi nút, còn BST có thể có nhiều hơn",
+      "BST là cây nhị phân có thêm ràng buộc thứ tự: cây con trái nhỏ hơn, cây con phải lớn hơn nút",
+      "BST luôn cân bằng, còn cây nhị phân thì không",
+      "Cây nhị phân lưu giá trị đã sắp xếp, còn BST lưu theo thứ tự chèn"
+    ],
+    "optionsEn": [
+      "A binary tree has at most two children per node, while a BST may have more",
+      "A BST is a binary tree with an extra ordering rule: left subtree smaller, right subtree larger than the node",
+      "A BST is always balanced, while a binary tree is not",
+      "A binary tree stores sorted values, while a BST stores them in insertion order"
+    ],
+    "answer": 1,
+    "explanation": "Cả hai đều giới hạn tối đa hai con mỗi nút. BST thêm tính chất thứ tự áp dụng cho toàn bộ cây con. BST không tự cân bằng — chèn dữ liệu đã sắp xếp sẽ tạo ra một chuỗi dài.",
+    "explanationEn": "Both allow at most two children per node. A BST adds the ordering property, applied to entire subtrees. A BST is not automatically balanced — inserting sorted data produces a long chain."
+  },
+  {
+    "id": "q5",
+    "question": "Cây sau có phải là một BST hợp lệ không?\n`        10\n       /  \\\n      8    15\n     / \\     \\\n    3   12    20`",
+    "questionEn": "Is this a valid BST?\n`        10\n       /  \\\n      8    15\n     / \\     \\\n    3   12    20`",
+    "options": [
+      "Có, vì mỗi nút con trái nhỏ hơn cha và mỗi nút con phải lớn hơn cha",
+      "Không, vì 3 nhỏ hơn 8",
+      "Không, vì 12 nằm trong cây con trái của 10 nhưng lại lớn hơn 10",
+      "Không, vì 15 chỉ có một con"
+    ],
+    "optionsEn": [
+      "Yes, because every left child is smaller than its parent and every right child is larger",
+      "No, because 3 is smaller than 8",
+      "No, because 12 is in the left subtree of 10 but is greater than 10",
+      "No, because 15 has only one child"
+    ],
+    "answer": 2,
+    "explanation": "Tính chất BST áp dụng cho toàn bộ cây con: mọi giá trị bên trái 10 phải nhỏ hơn 10. 12 > 8 nên đúng vị trí so với cha trực tiếp, nhưng vi phạm ràng buộc với 10. Nút có một con là hoàn toàn bình thường.",
+    "explanationEn": "The BST property applies to whole subtrees: every value to the left of 10 must be less than 10. 12 > 8 is fine relative to its direct parent, but it breaks the constraint from 10. A node with a single child is perfectly normal."
+  },
+  {
+    "id": "q6",
+    "question": "Một cây nhị phân perfect có 4 tầng (chiều cao 3 tính theo cạnh) chứa bao nhiêu nút?",
+    "questionEn": "A perfect binary tree with 4 levels (height 3, counting edges) holds how many nodes?",
+    "options": [
+      "8",
+      "16",
+      "12",
+      "15"
+    ],
+    "optionsEn": [
+      "8",
+      "16",
+      "12",
+      "15"
+    ],
+    "answer": 3,
+    "explanation": "Tầng d chứa 2^d nút: 1 + 2 + 4 + 8 = 15 = 2^(h+1) − 1. Ngược lại, n nút cần chiều cao tối thiểu khoảng log₂ n — lý do BST cân bằng đạt O(log n).",
+    "explanationEn": "Level d holds 2^d nodes: 1 + 2 + 4 + 8 = 15 = 2^(h+1) − 1. Turned around, n nodes need a height of at least about log₂ n — which is why a balanced BST achieves O(log n)."
+  },
+  {
+    "id": "q7",
+    "question": "Chèn lần lượt 10, 6, 15, 3, 8, 20 vào một BST rỗng, rồi chèn 13. Nút 13 nằm ở đâu?",
+    "questionEn": "Insert 10, 6, 15, 3, 8, 20 into an empty BST in that order, then insert 13. Where does 13 end up?",
+    "options": [
+      "Con phải của 8",
+      "Con trái của 15",
+      "Con trái của 20",
+      "Con phải của 10, đẩy 15 xuống dưới"
+    ],
+    "optionsEn": [
+      "Right child of 8",
+      "Left child of 15",
+      "Left child of 20",
+      "Right child of 10, pushing 15 down"
+    ],
+    "answer": 1,
+    "explanation": "13 > 10 nên sang phải tới 15; 13 < 15 nên sang trái, và con trái của 15 đang trống nên 13 được gắn vào đó. Insert trong BST thường không bao giờ đẩy nút có sẵn xuống — nút mới luôn trở thành một lá.",
+    "explanationEn": "13 > 10, go right to 15; 13 < 15, go left, and 15's left is empty, so 13 is attached there. Plain BST insertion never pushes existing nodes down — a new node always becomes a leaf."
+  },
+  {
+    "id": "q8",
+    "question": "Hàm chèn đệ quy sau có bug. Hậu quả là gì khi gọi `root = insert(root, v)` trên một cây đã có gốc?\n`function insert(node, value) {\n  if (node === null) return new Node(value);\n\n  if (value < node.value) insert(node.left, value);\n  else insert(node.right, value);\n\n  return node;\n}`",
+    "questionEn": "This recursive insert has a bug. What happens when you call `root = insert(root, v)` on a tree that already has a root?\n`function insert(node, value) {\n  if (node === null) return new Node(value);\n\n  if (value < node.value) insert(node.left, value);\n  else insert(node.right, value);\n\n  return node;\n}`",
+    "options": [
+      "Đệ quy vô hạn và stack overflow",
+      "Giá trị mới thay thế giá trị ở gốc",
+      "Nút mới được tạo ra nhưng không bao giờ được gắn vào cây",
+      "Nút mới luôn bị gắn vào bên phải của gốc"
+    ],
+    "optionsEn": [
+      "Infinite recursion and a stack overflow",
+      "The new value replaces the root's value",
+      "The new node is created but never linked into the tree",
+      "The new node is always attached to the right of the root"
+    ],
+    "answer": 2,
+    "explanation": "Kết quả của lời gọi đệ quy bị bỏ đi. Khi chạm `null`, nút mới được trả về nhưng nơi gọi không gán nó vào `node.left` hay `node.right`, nên nó bị mất. Sửa bằng `node.left = insert(node.left, value)` và tương tự bên phải.",
+    "explanationEn": "The result of the recursive call is thrown away. When it reaches `null` the new node is returned, but the caller never assigns it to `node.left` or `node.right`, so it is lost. Fix it with `node.left = insert(node.left, value)` and likewise on the right."
+  },
+  {
+    "id": "q9",
+    "question": "Trong BST gồm 10 (gốc), 6, 15, 3, 8, 20 (như hình), `find(9)` so sánh 9 với những nút nào trước khi kết luận không tìm thấy?\n`      10\n     /  \\\n    6    15\n   / \\     \\\n  3   8     20`",
+    "questionEn": "In this BST of 10 (root), 6, 15, 3, 8, 20, which nodes does `find(9)` compare 9 against before concluding it is not there?\n`      10\n     /  \\\n    6    15\n   / \\     \\\n  3   8     20`",
+    "options": [
+      "10, 6, 8",
+      "10, 15, 20",
+      "10, 6, 3, 8",
+      "Cả 6 nút"
+    ],
+    "optionsEn": [
+      "10, 6, 8",
+      "10, 15, 20",
+      "10, 6, 3, 8",
+      "All 6 nodes"
+    ],
+    "answer": 0,
+    "explanation": "9 < 10 → sang trái tới 6; 9 > 6 → sang phải tới 8; 9 > 8 → sang phải, gặp `null` nên dừng. Chỉ đi trên một đường từ gốc, không bao giờ ghé 3 hay nhánh bên phải của 10.",
+    "explanationEn": "9 < 10 → left to 6; 9 > 6 → right to 8; 9 > 8 → right, which is `null`, so stop. Search walks a single root path and never visits 3 or the right side of 10."
+  },
+  {
+    "id": "q10",
+    "question": "Làm thế nào để tìm giá trị nhỏ nhất trong một BST?",
+    "questionEn": "How do you find the minimum value in a BST?",
+    "options": [
+      "Duyệt mọi nút và giữ lại giá trị nhỏ nhất",
+      "Đó luôn là giá trị ở gốc",
+      "Đó luôn là con trái trực tiếp của gốc",
+      "Đi theo con trỏ `left` từ gốc cho tới khi `left` là `null`"
+    ],
+    "optionsEn": [
+      "Visit every node and keep the smallest value",
+      "It is always the root's value",
+      "It is always the root's direct left child",
+      "Follow `left` pointers from the root until `left` is `null`"
+    ],
+    "answer": 3,
+    "explanation": "Mọi giá trị nhỏ hơn đều nằm bên trái, nên nút ngoài cùng bên trái là nhỏ nhất: O(h), không cần so sánh. Duyệt mọi nút cũng ra đáp án đúng nhưng tốn O(n) và bỏ phí tính chất BST. Con trái của gốc có thể còn con trái nhỏ hơn nữa.",
+    "explanationEn": "Every smaller value lies to the left, so the leftmost node is the minimum: O(h), no comparisons. Visiting every node also gives the right answer but costs O(n) and wastes the BST property. The root's left child may have an even smaller left child."
+  },
+  {
+    "id": "q11",
+    "question": "Chèn lần lượt 1, 2, 3, …, n (đã sắp xếp) vào một BST thường (không tự cân bằng). Độ phức tạp của `find` trên cây kết quả là gì?",
+    "questionEn": "You insert 1, 2, 3, …, n (already sorted) into a plain, non-self-balancing BST. What is the time complexity of `find` on the resulting tree?",
+    "options": [
+      "O(log n), vì BST luôn chia đôi không gian tìm kiếm",
+      "O(n), vì cây suy biến thành một chuỗi cao n − 1",
+      "O(1), vì phần tử lớn nhất nằm ngay ở gốc",
+      "O(n log n), vì mỗi tầng tốn O(n)"
+    ],
+    "optionsEn": [
+      "O(log n), because a BST always halves the search space",
+      "O(n), because the tree degenerates into a chain of height n − 1",
+      "O(1), because the largest element sits right at the root",
+      "O(n log n), because each level costs O(n)"
+    ],
+    "answer": 1,
+    "explanation": "Mỗi giá trị mới lớn hơn tất cả giá trị cũ nên luôn đi sang phải: cây thành một linked list. Tìm n phải đi qua cả n nút. O(log n) chỉ đúng khi cây cân bằng; gốc ở đây là 1, không phải n.",
+    "explanationEn": "Each new value is larger than everything so far, so it always goes right: the tree becomes a linked list. Finding n visits all n nodes. O(log n) only holds when the tree is balanced; the root here is 1, not n."
+  },
+  {
+    "id": "q12",
+    "question": "Phát biểu nào mô tả CHÍNH XÁC nhất độ phức tạp của insert và find trong một BST thường?",
+    "questionEn": "Which statement MOST accurately describes insert and find in a plain BST?",
+    "options": [
+      "Luôn là O(log n) trong mọi trường hợp",
+      "Luôn là O(n) vì có thể phải duyệt toàn bộ cây",
+      "O(h) với h là chiều cao: O(log n) khi cân bằng, O(n) trong trường hợp xấu nhất",
+      "O(1) trung bình, giống hash table"
+    ],
+    "optionsEn": [
+      "Always O(log n) in every case",
+      "Always O(n) because the whole tree may need to be visited",
+      "O(h), where h is the height: O(log n) when balanced, O(n) in the worst case",
+      "O(1) on average, like a hash table"
+    ],
+    "answer": 2,
+    "explanation": "Cả hai chỉ đi trên một đường từ gốc xuống, nên chi phí tỉ lệ với chiều cao h. Chiều cao nằm giữa ⌊log₂ n⌋ và n − 1 tuỳ hình dạng cây, vì vậy O(log n) là cam kết chỉ khi cây được giữ cân bằng.",
+    "explanationEn": "Both walk a single root-to-leaf path, so the cost is proportional to the height h. Height ranges from ⌊log₂ n⌋ to n − 1 depending on shape, so O(log n) is only a guarantee when the tree is kept balanced."
+  },
+  {
+    "id": "q13",
+    "question": "Cây AVL và cây red-black mang lại điều gì so với BST thường?",
+    "questionEn": "What do AVL and red-black trees provide over a plain BST?",
+    "options": [
+      "Chiều cao luôn là O(log n) nhờ phép xoay, nên insert/find/remove là O(log n) ngay cả trong trường hợp xấu nhất",
+      "Tra cứu O(1) giống hash table",
+      "Không cần so sánh giá trị khi tìm kiếm",
+      "Cho phép mỗi nút có nhiều hơn hai con để giảm chiều cao"
+    ],
+    "optionsEn": [
+      "Height is always O(log n) thanks to rotations, so insert/find/remove are O(log n) even in the worst case",
+      "O(1) lookups like a hash table",
+      "Search no longer needs to compare values",
+      "Each node may have more than two children to reduce height"
+    ],
+    "answer": 0,
+    "explanation": "Cây tự cân bằng làm thêm các phép xoay O(1) khi insert/remove để giữ chiều cao O(log n) (AVL ≈ 1,44 log₂ n, red-black ≤ 2 log₂(n + 1)). Vẫn là BST nên vẫn so sánh và vẫn là O(log n), không phải O(1). Nhiều key mỗi nút là đặc điểm của B-tree.",
+    "explanationEn": "Self-balancing trees do O(1) rotations during insert/remove to keep height O(log n) (AVL ≈ 1.44 log₂ n, red-black ≤ 2 log₂(n + 1)). They are still BSTs, so they still compare and are O(log n), not O(1). Many keys per node is what a B-tree does."
+  },
+  {
+    "id": "q14",
+    "question": "Bạn cần lưu các đơn đặt hàng theo timestamp, thường xuyên thêm/xoá, và hay phải trả lời \"liệt kê mọi đơn từ 9h đến 10h theo thứ tự\". Cấu trúc nào phù hợp nhất?",
+    "questionEn": "You store orders keyed by timestamp, insert and delete often, and frequently need \"list every order between 9:00 and 10:00, in order\". Which structure fits best?",
+    "options": [
+      "Hash table theo timestamp",
+      "Mảng chưa sắp xếp",
+      "BST thường, chèn theo thứ tự thời gian đến",
+      "BST tự cân bằng (ví dụ red-black tree)"
+    ],
+    "optionsEn": [
+      "A hash table keyed by timestamp",
+      "An unsorted array",
+      "A plain BST, inserting in arrival order",
+      "A self-balancing BST (e.g. a red-black tree)"
+    ],
+    "answer": 3,
+    "explanation": "Truy vấn khoảng theo thứ tự cần cấu trúc giữ thứ tự: BST cân bằng làm được trong O(log n + k), insert/delete O(log n). Hash table không có thứ tự nên phải quét O(n). BST thường nhận timestamp tăng dần sẽ suy biến thành chuỗi O(n) — chính là trường hợp xấu nhất.",
+    "explanationEn": "An ordered range query needs an ordered structure: a balanced BST answers it in O(log n + k) with O(log n) insert/delete. A hash table has no order, so it needs an O(n) scan. A plain BST fed increasing timestamps degenerates into an O(n) chain — exactly its worst case."
+  },
+  {
+    "id": "q15",
+    "question": "Khi xoá một nút có HAI con trong BST, cách làm chuẩn là gì?",
+    "questionEn": "When removing a node that has TWO children from a BST, what is the standard approach?",
+    "options": [
+      "Xoá nút đó cùng toàn bộ cây con của nó",
+      "Thay giá trị của nút bằng in-order successor (nhỏ nhất trong cây con phải), rồi xoá successor",
+      "Thay nút bằng con trái trực tiếp của nó",
+      "Thay giá trị của nút bằng giá trị lớn nhất trong cây con phải"
+    ],
+    "optionsEn": [
+      "Delete the node together with its whole subtree",
+      "Replace its value with the in-order successor (smallest in the right subtree), then delete the successor",
+      "Replace the node with its direct left child",
+      "Replace its value with the largest value in the right subtree"
+    ],
+    "answer": 1,
+    "explanation": "Successor là giá trị nhỏ nhất vẫn lớn hơn mọi giá trị bên trái, nên đặt vào vị trí đó vẫn giữ tính chất BST; nó không có con trái nên xoá nó thuộc trường hợp 0 hoặc 1 con. Lấy con trái trực tiếp lên có thể làm mất cây con phải; giá trị lớn nhất bên phải thì vi phạm thứ tự.",
+    "explanationEn": "The successor is the smallest value that is still larger than everything on the left, so putting it there keeps the BST property; it has no left child, so deleting it is a 0- or 1-child case. Promoting the direct left child can orphan the right subtree; the largest value on the right would break the ordering."
+  },
+  {
+    "id": "q16",
+    "question": "Xoá 15 khỏi BST sau. Cây kết quả là gì?\n`      10\n     /  \\\n    6    15\n   / \\     \\\n  3   8     20`",
+    "questionEn": "Remove 15 from this BST. What is the resulting tree?\n`      10\n     /  \\\n    6    15\n   / \\     \\\n  3   8     20`",
+    "options": [
+      "20 trở thành gốc mới",
+      "10 bị thay bằng 20",
+      "20 thế chỗ 15, trở thành con phải của 10",
+      "15 không xoá được vì nó không phải lá"
+    ],
+    "optionsEn": [
+      "20 becomes the new root",
+      "10 is replaced by 20",
+      "20 takes 15's place as the right child of 10",
+      "15 cannot be removed because it is not a leaf"
+    ],
+    "answer": 2,
+    "explanation": "15 chỉ có một con (20), nên đây là trường hợp 2: nối tắt, cho cha của 15 trỏ thẳng tới 20. Mọi giá trị trong cây con của 15 đều lớn hơn 10 nên 20 vẫn hợp lệ ở vị trí con phải của 10. Gốc không bị động tới.",
+    "explanationEn": "15 has a single child (20), so this is case 2: splice it out by pointing 15's parent straight at 20. Everything in 15's subtree is greater than 10, so 20 is valid as 10's right child. The root is untouched."
+  },
+  {
+    "id": "q17",
+    "question": "Hàm sau trả về gì cho cây có gốc 10, con trái 6 (con của 6 là 3 và 12), con phải 15?\n`function isValid(node) {\n  if (node === null) return true;\n\n  if (node.left && node.left.value >= node.value) return false;\n\n  if (node.right && node.right.value <= node.value) return false;\n\n  return isValid(node.left) && isValid(node.right);\n}`",
+    "questionEn": "What does this return for a tree with root 10, left child 6 (whose children are 3 and 12) and right child 15?\n`function isValid(node) {\n  if (node === null) return true;\n\n  if (node.left && node.left.value >= node.value) return false;\n\n  if (node.right && node.right.value <= node.value) return false;\n\n  return isValid(node.left) && isValid(node.right);\n}`",
+    "options": [
+      "`true` — sai, vì cây này không phải BST",
+      "`false` — đúng, vì 12 > 10",
+      "`true` — đúng, vì đây là BST hợp lệ",
+      "Ném lỗi vì truy cập `value` của `null`"
+    ],
+    "optionsEn": [
+      "`true` — wrong, because this tree is not a BST",
+      "`false` — correct, because 12 > 10",
+      "`true` — correct, because this is a valid BST",
+      "It throws because it reads `value` from `null`"
+    ],
+    "answer": 0,
+    "explanation": "Hàm chỉ so sánh cha với con trực tiếp: 6 < 10, 15 > 10, 3 < 6, 12 > 6 đều qua, nên trả về `true`. Nhưng 12 nằm bên trái 10 nên cây không hợp lệ. Cách đúng là truyền xuống khoảng (min, max) cho mỗi cây con. Các phép kiểm tra `node.left &&` ngăn việc đọc từ `null`.",
+    "explanationEn": "It only compares parents with direct children: 6 < 10, 15 > 10, 3 < 6 and 12 > 6 all pass, so it returns `true`. But 12 sits to the left of 10, so the tree is invalid. The fix is passing a (min, max) range down to each subtree. The `node.left &&` checks prevent reading from `null`."
+  },
+  {
+    "id": "q18",
+    "question": "Độ phức tạp thời gian và bộ nhớ của hàm kiểm tra BST dùng khoảng min/max sau là gì (n nút, chiều cao h)?\n`function isValidBST(node, min = -Infinity, max = Infinity) {\n  if (node === null) return true;\n\n  if (node.value <= min || node.value >= max) return false;\n\n  return isValidBST(node.left, min, node.value) &&\n    isValidBST(node.right, node.value, max);\n}`",
+    "questionEn": "What are the time and space complexity of this min/max-range BST validator (n nodes, height h)?\n`function isValidBST(node, min = -Infinity, max = Infinity) {\n  if (node === null) return true;\n\n  if (node.value <= min || node.value >= max) return false;\n\n  return isValidBST(node.left, min, node.value) &&\n    isValidBST(node.right, node.value, max);\n}`",
+    "options": [
+      "O(log n) thời gian, O(1) bộ nhớ",
+      "O(h) thời gian, O(h) bộ nhớ",
+      "O(n²) thời gian, O(n) bộ nhớ",
+      "O(n) thời gian, O(h) bộ nhớ"
+    ],
+    "optionsEn": [
+      "O(log n) time, O(1) space",
+      "O(h) time, O(h) space",
+      "O(n²) time, O(n) space",
+      "O(n) time, O(h) space"
+    ],
+    "answer": 3,
+    "explanation": "Khác với find (chỉ đi một đường), hàm này phải ghé mọi nút một lần: O(n) thời gian. Tại mỗi thời điểm call stack chỉ chứa các lời gọi trên một đường từ gốc, nên bộ nhớ là O(h) — O(log n) nếu cân bằng, O(n) nếu suy biến.",
+    "explanationEn": "Unlike find (one path), this must visit every node once: O(n) time. At any moment the call stack only holds the calls along one root path, so space is O(h) — O(log n) if balanced, O(n) if degenerate."
+  }
+]

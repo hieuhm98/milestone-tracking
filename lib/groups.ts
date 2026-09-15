@@ -17,7 +17,7 @@ export interface Group {
   descriptionEn: string;
   icon: string;
   /** Tailwind color name used for accents (must exist in the safelist below). */
-  accent: "blue" | "emerald" | "amber" | "rose" | "violet" | "orange";
+  accent: "blue" | "emerald" | "amber" | "rose" | "violet" | "orange" | "cyan" | "indigo";
 }
 
 export const GROUPS: Group[] = [
@@ -91,6 +91,30 @@ export const GROUPS: Group[] = [
     icon: "☁",
     accent: "orange",
   },
+  {
+    id: "dsa",
+    order: 7,
+    label: "Cấu trúc dữ liệu & Giải thuật",
+    labelEn: "Data Structures & Algorithms",
+    description:
+      "Big O, các mẫu giải bài, đệ quy, tìm kiếm & sắp xếp, linked list, cây, heap, hash table, đồ thị và quy hoạch động — bằng JavaScript.",
+    descriptionEn:
+      "Big O, problem-solving patterns, recursion, searching & sorting, linked lists, trees, heaps, hash tables, graphs, and dynamic programming — in JavaScript.",
+    icon: "⌬",
+    accent: "cyan",
+  },
+  {
+    id: "sa",
+    order: 8,
+    label: "Solutions Architect · DevOps",
+    labelEn: "Solutions Architect · DevOps",
+    description:
+      "Lộ trình Solutions Architect: Linux, mạng, Docker, Kubernetes, nginx, Redis, message queue, CI/CD, IaC, observability, bảo mật, microservices và system design.",
+    descriptionEn:
+      "The Solutions Architect path: Linux, networking, Docker, Kubernetes, nginx, Redis, message queues, CI/CD, IaC, observability, security, microservices, and system design.",
+    icon: "⛭",
+    accent: "indigo",
+  },
 ];
 
 export const DEFAULT_GROUP = "it-fundamentals";
@@ -133,5 +157,16 @@ export const GROUP_ACCENT: Record<Group["accent"], { badge: string; bar: string;
     badge: "bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800",
     bar: "bg-orange-500",
     text: "text-orange-600 dark:text-orange-400",
+  },
+  cyan: {
+    badge: "bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800",
+    bar: "bg-cyan-500",
+    text: "text-cyan-600 dark:text-cyan-400",
+  },
+  indigo: {
+    badge:
+      "bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800",
+    bar: "bg-indigo-500",
+    text: "text-indigo-600 dark:text-indigo-400",
   },
 };

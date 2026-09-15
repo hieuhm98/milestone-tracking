@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI thứ BẮT BUỘC để nginx tái sử dụng kết nối keepalive tới upstream.",
+      "promptEn": "Pick TWO things REQUIRED for nginx to reuse keepalive connections to an upstream.",
+      "options": [
+        "Đặt `keepalive_timeout 65;` trong khối `http`",
+        "Đặt `proxy_http_version 1.1;` trong location",
+        "Dùng thuật toán `least_conn` trong upstream",
+        "Xoá header Connection bằng `proxy_set_header Connection \"\";`",
+        "Bật `http2 on;` trong server block"
+      ],
+      "optionsEn": [
+        "Set `keepalive_timeout 65;` in the `http` block",
+        "Set `proxy_http_version 1.1;` in the location",
+        "Use the `least_conn` method in the upstream",
+        "Clear the Connection header with `proxy_set_header Connection \"\";`",
+        "Enable `http2 on;` in the server block"
+      ],
+      "answers": [1, 3],
+      "explanation": "Cùng với `keepalive N` trong upstream, nginx phải nói HTTP/1.1 và không gửi `Connection: close` tới backend. `keepalive_timeout` và `http2 on` chỉ ảnh hưởng tới kết nối phía client; thuật toán cân bằng tải không liên quan.",
+      "explanationEn": "Alongside `keepalive N` in the upstream, nginx must speak HTTP/1.1 and must not send `Connection: close` to the backend. `keepalive_timeout` and `http2 on` only affect client-side connections; the balancing method is unrelated.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI phát biểu ĐÚNG về `limit_req` của nginx mã nguồn mở.",
+      "promptEn": "Pick TWO statements that are true about `limit_req` in open-source nginx.",
+      "options": [
+        "Mã từ chối mặc định là 503, có thể đổi bằng `limit_req_status`",
+        "Bộ đếm được đồng bộ tự động giữa mọi instance nginx trong cluster",
+        "Thuật toán bên dưới là sliding window log lưu trong Redis",
+        "`burst` không có `nodelay` sẽ xếp hàng request vượt mức và nhả dần theo rate",
+        "Đứng sau load balancer thì `$binary_remote_addr` tự trở thành IP thật của client"
+      ],
+      "optionsEn": [
+        "The default rejection code is 503 and can be changed with `limit_req_status`",
+        "Counters are synchronised automatically across every nginx instance in a cluster",
+        "The underlying algorithm is a sliding window log stored in Redis",
+        "`burst` without `nodelay` queues excess requests and releases them at the rate",
+        "Behind a load balancer `$binary_remote_addr` automatically becomes the real client IP"
+      ],
+      "answers": [0, 3],
+      "explanation": "limit_req là leaky bucket trong shared memory của từng instance: không đồng bộ giữa các node, không dùng Redis. Sau load balancer, địa chỉ là IP của LB cho tới khi bạn cấu hình module real_ip.",
+      "explanationEn": "limit_req is a leaky bucket in each instance's shared memory: not synchronised across nodes and not backed by Redis. Behind a load balancer the address is the LB's IP until you configure the real_ip module.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "Mã trạng thái riêng của nginx ghi trong access log khi client đóng kết nối trước khi nginx kịp trả response là gì?",
+      "promptEn": "Which nginx-specific status code appears in the access log when the client closes the connection before nginx responds?",
+      "answer": "499",
+      "answerEn": "499",
+      "accept": ["499", "http 499", "status 499", "499 client closed request"],
+      "explanation": "499 (Client Closed Request) không phải mã HTTP chuẩn và không bao giờ được gửi tới client. Nhiều 499 thường nghĩa là backend quá chậm khiến client hoặc load balancer phía trước bỏ cuộc.",
+      "explanationEn": "499 (Client Closed Request) is not a standard HTTP code and is never sent to the client. Lots of 499s usually mean the backend is so slow that clients or an upstream load balancer give up.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Người dùng upload file 5 MB và nhận lỗi 413 từ nginx. Directive nào cần tăng (mặc định 1m)?",
+      "promptEn": "Users uploading a 5 MB file get a 413 from nginx. Which directive needs raising (default 1m)?",
+      "answer": "client_max_body_size",
+      "answerEn": "client_max_body_size",
+      "accept": ["client_max_body_size", "client max body size", "client_max_body_size 10m"],
+      "explanation": "`client_max_body_size`, mặc định 1m. Nó có thể đặt ở `http`, `server` hoặc `location` — tốt nhất chỉ nâng cho đúng endpoint upload thay vì cả site.",
+      "explanationEn": "`client_max_body_size`, default 1m. It can be set in `http`, `server` or `location` — best raised only for the upload endpoint rather than the whole site.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi thuật toán cân bằng tải của nginx với tình huống phù hợp nhất.",
+      "promptEn": "Match each nginx load-balancing method to the situation it fits best.",
+      "pairs": [
+        {
+          "left": "Round robin (mặc định)",
+          "leftEn": "Round robin (default)",
+          "right": "Request ngắn, tương tự nhau, backend stateless",
+          "rightEn": "Short, similar requests to stateless backends"
+        },
+        {
+          "left": "least_conn",
+          "leftEn": "least_conn",
+          "right": "Thời gian xử lý request chênh lệch lớn",
+          "rightEn": "Request durations vary widely"
+        },
+        {
+          "left": "hash $key consistent",
+          "leftEn": "hash $key consistent",
+          "right": "Gắn mỗi key vào một node và ít xáo trộn khi thêm/bớt node",
+          "rightEn": "Pin each key to a node with minimal remapping when nodes change"
+        },
+        {
+          "left": "random two least_conn",
+          "leftEn": "random two least_conn",
+          "right": "Nhiều instance nginx độc lập cùng chia tải một pool",
+          "rightEn": "Many independent nginx instances balancing the same pool"
+        }
+      ],
+      "explanation": "Consistent hashing (ketama) chỉ di chuyển một phần nhỏ key khi pool thay đổi — hữu ích cho cache shard. Power of two choices tránh việc mọi nginx cùng dồn vào một server \"ít kết nối nhất\" mà mỗi instance nhìn thấy.",
+      "explanationEn": "Consistent hashing (ketama) moves only a small share of keys when the pool changes — useful for cache shards. Power of two choices stops every nginx from piling onto the one server each instance sees as \"least connected\".",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước khi nginx chọn location cho một request.",
+      "promptEn": "Put the steps nginx follows to choose a location for a request into order.",
+      "items": [
+        {
+          "text": "Kiểm tra location khớp chính xác `=`; nếu có thì dùng ngay",
+          "textEn": "Check for an exact `=` location; use it immediately if found"
+        },
+        {
+          "text": "Tìm và ghi nhớ prefix location khớp dài nhất",
+          "textEn": "Find and remember the longest matching prefix location"
+        },
+        {
+          "text": "Nếu prefix dài nhất có `^~` thì dùng nó và dừng",
+          "textEn": "If that longest prefix has `^~`, use it and stop"
+        },
+        {
+          "text": "Thử các regex location theo thứ tự trong file; regex đầu tiên khớp thắng",
+          "textEn": "Try regex locations in file order; the first match wins"
+        },
+        {
+          "text": "Không regex nào khớp thì dùng prefix đã ghi nhớ",
+          "textEn": "If no regex matches, use the remembered prefix"
+        }
+      ],
+      "explanation": "Điểm hay bị hỏi: thứ tự khai báo trong file chỉ quan trọng với regex; với prefix thì độ dài quyết định, bất kể vị trí.",
+      "explanationEn": "The part interviewers probe: declaration order in the file matters only for regexes; for prefixes, length decides regardless of position.",
+      "id": "d6"
+    }
+  ]
+}

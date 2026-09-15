@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Trong trường hợp tệ nhất, số phép so sánh tối thiểu mà MỌI thuật toán sắp xếp dựa trên so sánh (comparison sort) phải thực hiện tăng theo bậc nào?",
+    "questionEn": "In the worst case, how does the minimum number of comparisons that ANY comparison sort must make grow?",
+    "options": [
+      "Ω(n)",
+      "Ω(log n)",
+      "Ω(n log n)",
+      "Ω(n²)"
+    ],
+    "optionsEn": [
+      "Ω(n)",
+      "Ω(log n)",
+      "Ω(n log n)",
+      "Ω(n²)"
+    ],
+    "answer": 2,
+    "explanation": "Cây quyết định của comparison sort cần ít nhất n! lá, nên chiều cao ít nhất là log₂(n!) = Θ(n log n). Vì vậy không comparison sort nào có worst case tốt hơn n log n; merge sort và heap sort đạt đúng chặn này.",
+    "explanationEn": "A comparison sort's decision tree needs at least n! leaves, so its height is at least log₂(n!) = Θ(n log n). No comparison sort can have a better worst case; merge sort and heap sort meet this bound exactly."
+  },
+  {
+    "id": "q2",
+    "question": "Trong lập luận bằng cây quyết định, vì sao chiều cao h của cây phải thoả `h ≥ log₂(n!)`?",
+    "questionEn": "In the decision-tree argument, why must the tree's height h satisfy `h ≥ log₂(n!)`?",
+    "options": [
+      "Vì cây cần ít nhất n! lá (mỗi hoán vị một lá) và cây nhị phân cao h có tối đa 2^h lá",
+      "Vì mỗi phép so sánh loại bỏ đúng một phần tử khỏi mảng",
+      "Vì thuật toán phải hoán đổi mỗi cặp phần tử ít nhất một lần",
+      "Vì cây có n tầng và mỗi tầng chứa log n nút"
+    ],
+    "optionsEn": [
+      "Because the tree needs at least n! leaves (one per permutation) and a binary tree of height h has at most 2^h leaves",
+      "Because each comparison removes exactly one element from the array",
+      "Because the algorithm must swap every pair of elements at least once",
+      "Because the tree has n levels and each level holds log n nodes"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi thứ tự ban đầu cần một chuỗi thao tác khác nhau, nên phải có ít nhất n! lá. Cây nhị phân cao h có tối đa 2^h lá, nên 2^h ≥ n!, tức h ≥ log₂(n!). Chiều cao chính là số phép so sánh trên đường đi dài nhất.",
+    "explanationEn": "Each starting order needs a different sequence of moves, so there must be at least n! leaves. A binary tree of height h has at most 2^h leaves, so 2^h ≥ n!, i.e. h ≥ log₂(n!). The height is the number of comparisons on the longest path."
+  },
+  {
+    "id": "q3",
+    "question": "Insertion sort chạy O(n) trên mảng đã sắp xếp. Điều này có mâu thuẫn với chặn dưới Ω(n log n) của comparison sort không?",
+    "questionEn": "Insertion sort runs in O(n) on an already sorted array. Does this contradict the Ω(n log n) lower bound for comparison sorts?",
+    "options": [
+      "Có — chặn dưới chỉ đúng cho merge sort và quick sort",
+      "Không — chặn dưới nói về trường hợp tệ nhất trên mọi input, không phải một input may mắn",
+      "Có — nên insertion sort thực ra không phải comparison sort",
+      "Không — vì insertion sort thực chất là O(n log n) trên mảng đã sắp xếp"
+    ],
+    "optionsEn": [
+      "Yes — the lower bound only holds for merge sort and quick sort",
+      "No — the bound is about the worst case over all inputs, not one lucky input",
+      "Yes — so insertion sort is not really a comparison sort",
+      "No — because insertion sort is actually O(n log n) on sorted arrays"
+    ],
+    "answer": 1,
+    "explanation": "Chặn dưới khẳng định rằng với mọi comparison sort luôn tồn tại input buộc nó dùng khoảng n log n phép so sánh. Best case vẫn có thể thấp hơn: insertion sort chỉ cần n − 1 phép so sánh với mảng đã sắp xếp, nhưng worst case của nó là O(n²).",
+    "explanationEn": "The bound says every comparison sort has some input that forces about n log n comparisons. The best case can still be lower: insertion sort needs only n − 1 comparisons on a sorted array, but its worst case is O(n²)."
+  },
+  {
+    "id": "q4",
+    "question": "Thuật toán nào KHÔNG phải là comparison sort?",
+    "questionEn": "Which algorithm is NOT a comparison sort?",
+    "options": [
+      "Merge sort",
+      "Quick sort",
+      "Insertion sort",
+      "Radix sort"
+    ],
+    "optionsEn": [
+      "Merge sort",
+      "Quick sort",
+      "Insertion sort",
+      "Radix sort"
+    ],
+    "answer": 3,
+    "explanation": "Radix sort không bao giờ so sánh hai phần tử: nó dùng từng chữ số làm chỉ số bucket. Nhờ vậy nó không bị chặn dưới Ω(n log n) ràng buộc, còn merge, quick và insertion sort đều quyết định dựa trên phép so sánh.",
+    "explanationEn": "Radix sort never compares two elements: it uses each digit as a bucket index. That is why the Ω(n log n) bound does not bind it, while merge, quick and insertion sort all decide by comparing."
+  },
+  {
+    "id": "q5",
+    "question": "Counting sort sắp xếp n số nguyên có giá trị trong khoảng `0..k`. Độ phức tạp thời gian là gì?",
+    "questionEn": "Counting sort sorts n integers whose values lie in `0..k`. What is its time complexity?",
+    "options": [
+      "O(n log n)",
+      "O(n + k)",
+      "O(n · k)",
+      "O(k log n)"
+    ],
+    "optionsEn": [
+      "O(n log n)",
+      "O(n + k)",
+      "O(n · k)",
+      "O(k log n)"
+    ],
+    "answer": 1,
+    "explanation": "Một lượt qua n phần tử để đếm, và một lượt qua k + 1 bộ đếm để ghi lại kết quả. Hai lượt nối tiếp nên cộng: O(n + k). Bộ nhớ cũng là O(n + k).",
+    "explanationEn": "One pass over the n items to count, and one pass over the k + 1 counters to write the result. The passes are sequential, so they add: O(n + k). Space is O(n + k) as well."
+  },
+  {
+    "id": "q6",
+    "question": "Tập dữ liệu nào KHÔNG phù hợp nhất với counting sort?",
+    "questionEn": "Which dataset is the WORST fit for counting sort?",
+    "options": [
+      "10 triệu giá trị tuổi trong khoảng 0–120",
+      "Điểm thi 0–100 của 50.000 thí sinh",
+      "1.000 mã ID có giá trị lên tới 10⁹",
+      "Một triệu byte có giá trị 0–255"
+    ],
+    "optionsEn": [
+      "10 million ages in the range 0–120",
+      "Exam scores 0–100 for 50,000 students",
+      "1,000 IDs with values up to 10⁹",
+      "A million bytes with values 0–255"
+    ],
+    "answer": 2,
+    "explanation": "Với 1.000 ID lên tới 10⁹, k ≫ n: mảng đếm cần khoảng một tỉ ô dù chỉ có 1.000 phần tử, nên O(n + k) bị k chi phối. Ba tập còn lại có khoảng giá trị nhỏ nên counting sort chạy gần như tuyến tính.",
+    "explanationEn": "With 1,000 IDs up to 10⁹, k ≫ n: the counts array needs about a billion slots for only 1,000 items, so O(n + k) is dominated by k. The other three have small value ranges, so counting sort is effectively linear."
+  },
+  {
+    "id": "q7",
+    "question": "Lời gọi sau trả về gì?\n`function getDigit(num, i) {\n  return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;\n}\ngetDigit(7845, 2);`",
+    "questionEn": "What does this call return?\n`function getDigit(num, i) {\n  return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;\n}\ngetDigit(7845, 2);`",
+    "options": [
+      "8",
+      "4",
+      "7",
+      "78"
+    ],
+    "optionsEn": [
+      "8",
+      "4",
+      "7",
+      "78"
+    ],
+    "answer": 0,
+    "explanation": "7845 / 10² = 78.45, làm tròn xuống được 78, rồi 78 % 10 = 8. Chỉ số i = 2 là hàng trăm (đếm từ 0 ở hàng đơn vị), và chữ số hàng trăm của 7845 là 8.",
+    "explanationEn": "7845 / 10² = 78.45, floored to 78, then 78 % 10 = 8. Index i = 2 is the hundreds place (counting from 0 at the ones place), and the hundreds digit of 7845 is 8."
+  },
+  {
+    "id": "q8",
+    "question": "Nếu bỏ dòng `if (num === 0) return 1;`, lời gọi `digitCount(0)` sẽ trả về gì?\n`function digitCount(num) {\n  return Math.floor(Math.log10(Math.abs(num))) + 1;\n}`",
+    "questionEn": "With the `if (num === 0) return 1;` guard removed, what does `digitCount(0)` return?\n`function digitCount(num) {\n  return Math.floor(Math.log10(Math.abs(num))) + 1;\n}`",
+    "options": [
+      "1",
+      "0",
+      "NaN",
+      "-Infinity"
+    ],
+    "optionsEn": [
+      "1",
+      "0",
+      "NaN",
+      "-Infinity"
+    ],
+    "answer": 3,
+    "explanation": "`Math.log10(0)` là `-Infinity`; `Math.floor(-Infinity)` vẫn là `-Infinity`, và cộng 1 cũng không đổi. Vì thế cần xử lý riêng số 0, vốn có đúng 1 chữ số.",
+    "explanationEn": "`Math.log10(0)` is `-Infinity`; `Math.floor(-Infinity)` is still `-Infinity`, and adding 1 changes nothing. That is why 0, which has exactly one digit, needs its own guard."
+  },
+  {
+    "id": "q9",
+    "question": "Radix sort (LSD) chạy trên `[902, 4, 7, 408, 29, 86]`. Sau lượt ĐẦU TIÊN (theo chữ số hàng đơn vị), mảng là gì?",
+    "questionEn": "LSD radix sort runs on `[902, 4, 7, 408, 29, 86]`. What is the array after the FIRST pass (by the ones digit)?",
+    "options": [
+      "[4, 7, 29, 86, 408, 902]",
+      "[902, 4, 86, 7, 408, 29]",
+      "[4, 7, 902, 408, 29, 86]",
+      "[29, 86, 4, 7, 408, 902]"
+    ],
+    "optionsEn": [
+      "[4, 7, 29, 86, 408, 902]",
+      "[902, 4, 86, 7, 408, 29]",
+      "[4, 7, 902, 408, 29, 86]",
+      "[29, 86, 4, 7, 408, 902]"
+    ],
+    "answer": 1,
+    "explanation": "Chữ số hàng đơn vị: 902→2, 4→4, 7→7, 408→8, 29→9, 86→6. Đọc các bucket từ 0 đến 9: 2:[902], 4:[4], 6:[86], 7:[7], 8:[408], 9:[29]. Mảng chỉ được sắp xếp hoàn toàn sau lượt thứ ba (hàng trăm).",
+    "explanationEn": "Ones digits: 902→2, 4→4, 7→7, 408→8, 29→9, 86→6. Reading buckets 0 to 9: 2:[902], 4:[4], 6:[86], 7:[7], 8:[408], 9:[29]. The array is only fully sorted after the third (hundreds) pass."
+  },
+  {
+    "id": "q10",
+    "question": "`radixSort([3, 1556, 42, 90210])` thực hiện bao nhiêu lượt phân phối vào bucket?",
+    "questionEn": "How many bucket-distribution passes does `radixSort([3, 1556, 42, 90210])` perform?",
+    "options": [
+      "4, vì mảng có 4 phần tử",
+      "1, vì mỗi số chỉ vào đúng một bucket",
+      "5, vì số dài nhất có 5 chữ số",
+      "10, vì có 10 bucket"
+    ],
+    "optionsEn": [
+      "4, because the array has 4 elements",
+      "1, because each number goes into exactly one bucket",
+      "5, because the longest number has 5 digits",
+      "10, because there are 10 buckets"
+    ],
+    "answer": 2,
+    "explanation": "Số lượt là `mostDigits(nums)` — số chữ số của số dài nhất. 90210 có 5 chữ số nên có 5 lượt (k = 0..4). Số 10 là số bucket mỗi lượt, không phải số lượt.",
+    "explanationEn": "The number of passes is `mostDigits(nums)` — the digit count of the longest number. 90210 has 5 digits, so there are 5 passes (k = 0..4). Ten is the number of buckets per pass, not the number of passes."
+  },
+  {
+    "id": "q11",
+    "question": "Cài đặt radix sort sau có lỗi. Lỗi đó là gì?\n`function radixSort(nums) {\n  const buckets = Array.from({ length: 10 }, () => []);\n  for (let k = 0; k < mostDigits(nums); k++) {\n    for (const num of nums) {\n      buckets[getDigit(num, k)].push(num);\n    }\n    nums = [].concat(...buckets);\n  }\n  return nums;\n}`",
+    "questionEn": "This radix sort implementation has a bug. What is it?\n`function radixSort(nums) {\n  const buckets = Array.from({ length: 10 }, () => []);\n  for (let k = 0; k < mostDigits(nums); k++) {\n    for (const num of nums) {\n      buckets[getDigit(num, k)].push(num);\n    }\n    nums = [].concat(...buckets);\n  }\n  return nums;\n}`",
+    "options": [
+      "Bucket chỉ được tạo một lần ngoài vòng lặp, nên số của lượt trước còn nằm lại và kết quả bị trùng lặp",
+      "`[].concat(...buckets)` đảo ngược thứ tự các phần tử trong từng bucket",
+      "`getDigit` phải bắt đầu từ chữ số cao nhất thay vì hàng đơn vị",
+      "Gọi `mostDigits` trong điều kiện vòng lặp khiến kết quả sai"
+    ],
+    "optionsEn": [
+      "The buckets are created once outside the loop, so earlier passes' numbers stay and the result has duplicates",
+      "`[].concat(...buckets)` reverses the order of elements inside each bucket",
+      "`getDigit` must start from the most significant digit instead of the ones place",
+      "Calling `mostDigits` in the loop condition makes the result wrong"
+    ],
+    "answer": 0,
+    "explanation": "Bucket phải được tạo mới ở mỗi lượt. Ở đây lượt thứ hai đẩy thêm các số vào bucket vẫn còn chứa số của lượt đầu, nên mảng dài ra và đầy phần tử trùng. `concat` giữ nguyên thứ tự; LSD bắt đầu từ hàng đơn vị là đúng; gọi `mostDigits` mỗi vòng chỉ tốn thêm thời gian chứ không làm sai kết quả.",
+    "explanationEn": "Buckets must be fresh on every pass. Here the second pass pushes into buckets still holding the first pass's numbers, so the array grows and fills with duplicates. `concat` keeps order; LSD correctly starts at the ones place; calling `mostDigits` every iteration only wastes time, it does not break the result."
+  },
+  {
+    "id": "q12",
+    "question": "Với n là số phần tử và k là số chữ số của số dài nhất, độ phức tạp thời gian của radix sort (cơ số 10) là gì?",
+    "questionEn": "With n elements and k the number of digits in the longest number, what is radix sort's time complexity (base 10)?",
+    "options": [
+      "O(n log n)",
+      "O(n²)",
+      "O(n + k)",
+      "O(nk)"
+    ],
+    "optionsEn": [
+      "O(n log n)",
+      "O(n²)",
+      "O(n + k)",
+      "O(nk)"
+    ],
+    "answer": 3,
+    "explanation": "Có k lượt, mỗi lượt duyệt cả n số và 10 bucket: O(k · (n + 10)) = O(nk). Best, average và worst đều như nhau vì thứ tự input không ảnh hưởng. O(n + k) là độ phức tạp của counting sort.",
+    "explanationEn": "There are k passes, each visiting all n numbers and 10 buckets: O(k · (n + 10)) = O(nk). Best, average and worst are identical since input order does not matter. O(n + k) is counting sort's complexity."
+  },
+  {
+    "id": "q13",
+    "question": "Một đồng nghiệp nói: \"Radix sort là O(nk), nên nó LUÔN nhanh hơn các thuật toán O(n log n).\" Nhận định chính xác nhất là gì?",
+    "questionEn": "A colleague says: \"Radix sort is O(nk), so it ALWAYS beats O(n log n) sorts.\" What is the most accurate response?",
+    "options": [
+      "Đúng — mọi thuật toán tuyến tính đều nhanh hơn O(n log n)",
+      "Chưa chắc — O(nk) chỉ tuyến tính khi k bị chặn; với n số phân biệt thì k ít nhất khoảng log₁₀ n",
+      "Sai — radix sort thực chất là O(n²) trong trường hợp tệ nhất",
+      "Đúng — vì k luôn nhỏ hơn 10"
+    ],
+    "optionsEn": [
+      "Right — any linear algorithm is faster than O(n log n)",
+      "Not necessarily — O(nk) is linear only when k is bounded; for n distinct numbers k is at least about log₁₀ n",
+      "Wrong — radix sort is actually O(n²) in the worst case",
+      "Right — because k is always less than 10"
+    ],
+    "answer": 1,
+    "explanation": "Nếu các số có độ rộng cố định (ví dụ 32-bit), k là hằng số và radix sort tuyến tính. Nhưng n số phân biệt có giá trị lớn nhất ít nhất n − 1, nên k ≥ log₁₀ n và O(nk) không tốt hơn O(n log n) về tiệm cận. Worst case của radix sort vẫn là O(nk), không phải O(n²).",
+    "explanationEn": "If the numbers are fixed-width (e.g. 32-bit), k is a constant and radix sort is linear. But n distinct numbers have a maximum of at least n − 1, so k ≥ log₁₀ n and O(nk) is asymptotically no better than O(n log n). Radix sort's worst case is still O(nk), not O(n²)."
+  },
+  {
+    "id": "q14",
+    "question": "Một thuật toán sắp xếp được gọi là ổn định (stable) khi nào?",
+    "questionEn": "When is a sorting algorithm called stable?",
+    "options": [
+      "Khi các phần tử có key bằng nhau giữ nguyên thứ tự tương đối như ban đầu",
+      "Khi thời gian chạy như nhau với mọi input",
+      "Khi nó không dùng thêm bộ nhớ phụ",
+      "Khi chạy lại trên mảng đã sắp xếp không làm thay đổi gì"
+    ],
+    "optionsEn": [
+      "When elements with equal keys keep their original relative order",
+      "When its running time is the same for every input",
+      "When it uses no extra memory",
+      "When running it again on a sorted array changes nothing"
+    ],
+    "answer": 0,
+    "explanation": "Stability nói về các key bằng nhau: nếu An đứng trước Chi và cả hai 30 tuổi, sắp xếp theo tuổi vẫn giữ An trước Chi. Không dùng bộ nhớ phụ là in-place; mọi thuật toán đúng đều không thay đổi một mảng đã sắp xếp.",
+    "explanationEn": "Stability is about equal keys: if An comes before Chi and both are 30, sorting by age keeps An before Chi. Using no extra memory is in-place; every correct sort leaves an already sorted array unchanged."
+  },
+  {
+    "id": "q15",
+    "question": "Nhóm nào CHỈ gồm các thuật toán ổn định (theo cách cài đặt thông thường)?",
+    "questionEn": "Which group contains ONLY stable sorts (as typically implemented)?",
+    "options": [
+      "Selection sort, insertion sort, merge sort",
+      "Quick sort, merge sort, radix sort",
+      "Insertion sort, merge sort, counting sort",
+      "Bubble sort, heap sort, radix sort"
+    ],
+    "optionsEn": [
+      "Selection sort, insertion sort, merge sort",
+      "Quick sort, merge sort, radix sort",
+      "Insertion sort, merge sort, counting sort",
+      "Bubble sort, heap sort, radix sort"
+    ],
+    "answer": 2,
+    "explanation": "Insertion sort chỉ dịch phần tử lớn hơn hẳn, merge sort lấy từ nửa trái khi hoà, counting sort (bản prefix sum) điền từ cuối lên — cả ba đều ổn định. Selection sort, quick sort và heap sort hoán đổi phần tử qua khoảng cách xa nên có thể đảo thứ tự các key bằng nhau.",
+    "explanationEn": "Insertion sort only shifts strictly larger elements, merge sort takes from the left half on ties, and counting sort (prefix-sum version) fills from the back — all three are stable. Selection, quick and heap sort swap elements across long distances, so they can reorder equal keys."
+  },
+  {
+    "id": "q16",
+    "question": "Với `getDigit` dùng `Math.abs`, radix sort cơ bản trả về gì cho input sau?\n`radixSort([-5, 3, -1, 2]);`",
+    "questionEn": "With `getDigit` using `Math.abs`, what does the basic radix sort return for this input?\n`radixSort([-5, 3, -1, 2]);`",
+    "options": [
+      "[-5, -1, 2, 3]",
+      "[2, 3, -1, -5]",
+      "Ném lỗi vì chỉ số bucket âm",
+      "[-1, 2, 3, -5]"
+    ],
+    "optionsEn": [
+      "[-5, -1, 2, 3]",
+      "[2, 3, -1, -5]",
+      "It throws because of a negative bucket index",
+      "[-1, 2, 3, -5]"
+    ],
+    "answer": 3,
+    "explanation": "`Math.abs` khiến các số được xếp theo giá trị tuyệt đối 5, 3, 1, 2 → bucket 1:[-1], 2:[2], 3:[3], 5:[-5]. Không có lỗi nào vì chữ số luôn nằm trong 0–9, nhưng kết quả sai. Cách sửa: tách số âm và số dương, sắp xếp riêng, đảo ngược và đổi dấu phần âm.",
+    "explanationEn": "`Math.abs` sorts by absolute values 5, 3, 1, 2 → buckets 1:[-1], 2:[2], 3:[3], 5:[-5]. Nothing throws because digits are always 0–9, but the result is wrong. Fix: split negatives from non-negatives, sort each, then reverse and negate the negative part."
+  },
+  {
+    "id": "q17",
+    "question": "Thuật toán nào đảm bảo worst case O(n log n) và chỉ dùng O(1) bộ nhớ phụ?",
+    "questionEn": "Which algorithm guarantees an O(n log n) worst case while using only O(1) extra space?",
+    "options": [
+      "Merge sort",
+      "Heap sort",
+      "Quick sort",
+      "Radix sort"
+    ],
+    "optionsEn": [
+      "Merge sort",
+      "Heap sort",
+      "Quick sort",
+      "Radix sort"
+    ],
+    "answer": 1,
+    "explanation": "Heap sort là O(n log n) ở mọi trường hợp và sắp xếp tại chỗ. Merge sort cũng đảm bảo O(n log n) nhưng cần O(n) bộ nhớ phụ; quick sort có worst case O(n²); radix sort cần O(n + b) bộ nhớ cho bucket.",
+    "explanationEn": "Heap sort is O(n log n) in every case and sorts in place. Merge sort also guarantees O(n log n) but needs O(n) extra space; quick sort has an O(n²) worst case; radix sort needs O(n + b) space for its buckets."
+  },
+  {
+    "id": "q18",
+    "question": "Phát biểu nào về `Array.prototype.sort` trong JavaScript hiện đại là ĐÚNG?",
+    "questionEn": "Which statement about `Array.prototype.sort` in modern JavaScript is TRUE?",
+    "options": [
+      "Từ ES2019 nó bắt buộc phải ổn định, nhưng nếu không truyền comparator thì nó so sánh phần tử dạng chuỗi",
+      "Nó dùng radix sort cho mảng số nên luôn chạy O(n)",
+      "Nó không ổn định, nên các phần tử bằng nhau có thể bị đổi thứ tự",
+      "Mặc định nó so sánh theo giá trị số, nên `[10, 9, 1].sort()` cho `[1, 9, 10]`"
+    ],
+    "optionsEn": [
+      "Since ES2019 it must be stable, but without a comparator it compares elements as strings",
+      "It uses radix sort for numeric arrays, so it always runs in O(n)",
+      "It is unstable, so equal elements may be reordered",
+      "It compares numerically by default, so `[10, 9, 1].sort()` gives `[1, 9, 10]`"
+    ],
+    "answer": 0,
+    "explanation": "ES2019 yêu cầu `sort` ổn định (V8 dùng TimSort: O(n log n) worst case). Không có comparator, các phần tử được chuyển sang chuỗi, nên `[10, 9, 1].sort()` cho `[1, 10, 9]`. Hãy truyền `(a, b) => a - b` khi sắp xếp số.",
+    "explanationEn": "ES2019 requires `sort` to be stable (V8 uses TimSort: O(n log n) worst case). Without a comparator elements are compared as strings, so `[10, 9, 1].sort()` gives `[1, 10, 9]`. Pass `(a, b) => a - b` when sorting numbers."
+  }
+]

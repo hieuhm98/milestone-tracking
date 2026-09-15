@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1",
+    "question": "Điểm khác biệt giữa một node của doubly linked list và một node của singly linked list là gì?",
+    "questionEn": "What distinguishes a doubly linked list node from a singly linked list node?",
+    "options": [
+      "Node của DLL lưu index của nó trong list",
+      "Node của DLL lưu hai giá trị thay vì một",
+      "Node của DLL có thêm con trỏ `prev` trỏ về node đứng trước",
+      "Node của DLL trỏ trực tiếp tới cả head và tail của list"
+    ],
+    "optionsEn": [
+      "A DLL node stores its own index in the list",
+      "A DLL node stores two values instead of one",
+      "A DLL node has an extra `prev` pointer to the node before it",
+      "A DLL node points directly to both the list's head and tail"
+    ],
+    "answer": 2,
+    "explanation": "Ngoài `val` và `next`, node của DLL có thêm `prev`. Nhờ vậy list duyệt được theo cả hai chiều. Node không lưu index (index thay đổi mỗi khi thêm/xoá) và không trỏ tới head/tail.",
+    "explanationEn": "Besides `val` and `next`, a DLL node has `prev`, which lets the list be walked in both directions. Nodes do not store indices (they would change on every insert/remove) and do not point at the head or tail."
+  },
+  {
+    "id": "q2",
+    "question": "Cùng lưu n giá trị, vì sao doubly linked list tốn bộ nhớ hơn singly linked list?",
+    "questionEn": "Storing the same n values, why does a doubly linked list use more memory than a singly linked list?",
+    "options": [
+      "Vì mỗi node lưu hai reference (`next` và `prev`) thay vì một",
+      "Vì DLL phải cấp phát trước một mảng liền kề gấp đôi kích thước",
+      "Vì DLL lưu mỗi giá trị hai lần để duyệt được hai chiều",
+      "Vì DLL không thể giải phóng node đã xoá"
+    ],
+    "optionsEn": [
+      "Because each node stores two references (`next` and `prev`) instead of one",
+      "Because a DLL pre-allocates a contiguous array twice the size",
+      "Because a DLL stores each value twice to allow two-way traversal",
+      "Because a DLL cannot free nodes that were removed"
+    ],
+    "answer": 0,
+    "explanation": "Chi phí thêm chỉ là một con trỏ `prev` trên mỗi node — vẫn O(n) tổng cộng nhưng hằng số lớn hơn. Đó là trade-off: thêm bộ nhớ để đổi lấy duyệt ngược và xoá O(1) tại node đã biết.",
+    "explanationEn": "The extra cost is one `prev` pointer per node — still O(n) overall, but with a larger constant. That is the trade-off: more memory in exchange for backward traversal and O(1) removal at a known node."
+  },
+  {
+    "id": "q3",
+    "question": "Trong một doubly linked list đúng, có ít nhất 2 node, điều nào LUÔN đúng?",
+    "questionEn": "In a correct doubly linked list with at least 2 nodes, which statement is ALWAYS true?",
+    "options": [
+      "`tail.prev === null`",
+      "`head.prev === tail`",
+      "`tail.next === head`",
+      "`head.next.prev === head`"
+    ],
+    "optionsEn": [
+      "`tail.prev === null`",
+      "`head.prev === tail`",
+      "`tail.next === head`",
+      "`head.next.prev === head`"
+    ],
+    "answer": 3,
+    "explanation": "Mọi liên kết phải khớp hai chiều: nếu `a.next` là `b` thì `b.prev` là `a`. `head.prev` và `tail.next` là `null`; nếu `tail.next === head` thì đó là circular list chứ không phải DLL thường.",
+    "explanationEn": "Every link must match in both directions: if `a.next` is `b`, then `b.prev` is `a`. `head.prev` and `tail.next` are `null`; `tail.next === head` would make it a circular list, not a plain DLL."
+  },
+  {
+    "id": "q4",
+    "question": "Vì sao `pop` là O(1) với doubly linked list nhưng O(n) với singly linked list (dù cả hai đều có `tail`)?",
+    "questionEn": "Why is `pop` O(1) on a doubly linked list but O(n) on a singly linked list (even though both keep a `tail`)?",
+    "options": [
+      "Vì DLL lưu `length` còn singly list thì không",
+      "Vì tail mới chính là `tail.prev`, không cần đi từ head để tìm node áp chót",
+      "Vì DLL luôn được sắp xếp nên biết ngay phần tử cuối",
+      "Vì JavaScript tối ưu sẵn thao tác pop cho object có con trỏ `prev`"
+    ],
+    "optionsEn": [
+      "Because a DLL keeps `length` and a singly list does not",
+      "Because the new tail is simply `tail.prev`, so there is no walk from the head to find the second-to-last node",
+      "Because a DLL is always sorted, so the last element is known",
+      "Because JavaScript has a built-in optimisation for objects with a `prev` pointer"
+    ],
+    "answer": 1,
+    "explanation": "Xoá tail đòi hỏi phải sửa `next` của node áp chót. Singly list chỉ tìm được node đó bằng cách duyệt từ head (O(n)); DLL có sẵn `tail.prev` nên chỉ vài phép gán O(1).",
+    "explanationEn": "Removing the tail means updating the second-to-last node's `next`. A singly list can only find that node by walking from the head (O(n)); a DLL has it at `tail.prev`, so it is a few O(1) assignments."
+  },
+  {
+    "id": "q5",
+    "question": "Method `pop` sau có bug. Hậu quả là gì?\n`pop() {\n  if (!this.head) return undefined;\n  const oldTail = this.tail;\n  if (this.length === 1) {\n    this.head = this.tail = null;\n  } else {\n    this.tail = oldTail.prev;\n  }\n  this.length--;\n  return oldTail;\n}`",
+    "questionEn": "This `pop` method has a bug. What is the consequence?\n`pop() {\n  if (!this.head) return undefined;\n  const oldTail = this.tail;\n  if (this.length === 1) {\n    this.head = this.tail = null;\n  } else {\n    this.tail = oldTail.prev;\n  }\n  this.length--;\n  return oldTail;\n}`",
+    "options": [
+      "Nó ném TypeError khi list chỉ có một node",
+      "`length` bị giảm hai lần",
+      "Nó trả về node áp chót thay vì node cuối",
+      "Duyệt xuôi từ head vẫn đi tới node đã xoá, vì `next` của tail mới vẫn trỏ vào nó"
+    ],
+    "optionsEn": [
+      "It throws a TypeError when the list has one node",
+      "`length` is decremented twice",
+      "It returns the second-to-last node instead of the last",
+      "A forward traversal from the head still reaches the removed node, because the new tail's `next` still points to it"
+    ],
+    "answer": 3,
+    "explanation": "Thiếu dòng `this.tail.next = null`. Con trỏ `tail` đã dời lùi, nhưng liên kết `next` của tail mới vẫn còn, nên node bị \"xoá\" vẫn nằm trong chuỗi khi duyệt xuôi và `length` không còn khớp với số node thực tế.",
+    "explanationEn": "The line `this.tail.next = null` is missing. The `tail` pointer moved back, but the new tail's `next` link survives, so the \"removed\" node is still in the chain when walking forward and `length` no longer matches the real node count."
+  },
+  {
+    "id": "q6",
+    "question": "Đoạn code sau in ra gì (dùng DoublyLinkedList trong bài)?\n`const list = new DoublyLinkedList();\nlist.push(1).push(2);\nlist.unshift(0);\nlist.pop();\nlist.shift();\nconsole.log(list.head.val, list.tail.val, list.length);`",
+    "questionEn": "What does this print (using the DoublyLinkedList from the article)?\n`const list = new DoublyLinkedList();\nlist.push(1).push(2);\nlist.unshift(0);\nlist.pop();\nlist.shift();\nconsole.log(list.head.val, list.tail.val, list.length);`",
+    "options": [
+      "1 1 1",
+      "0 1 2",
+      "1 2 2",
+      "0 0 1"
+    ],
+    "optionsEn": [
+      "1 1 1",
+      "0 1 2",
+      "1 2 2",
+      "0 0 1"
+    ],
+    "answer": 0,
+    "explanation": "[1, 2] → unshift(0) → [0, 1, 2] → pop() xoá 2 → [0, 1] → shift() xoá 0 → [1]. Chỉ còn một node nên head và tail là cùng một node có giá trị 1, length là 1.",
+    "explanationEn": "[1, 2] → unshift(0) → [0, 1, 2] → pop() removes 2 → [0, 1] → shift() removes 0 → [1]. One node is left, so head and tail are the same node with value 1, and length is 1."
+  },
+  {
+    "id": "q7",
+    "question": "Method `shift` sau thiếu một nhánh. Điều gì xảy ra khi gọi nó trên list chỉ có MỘT node?\n`shift() {\n  if (this.length === 0) return undefined;\n  const oldHead = this.head;\n  this.head = oldHead.next;\n  this.head.prev = null;\n  oldHead.next = null;\n  this.length--;\n  return oldHead;\n}`",
+    "questionEn": "This `shift` method is missing a branch. What happens when it is called on a list with ONE node?\n`shift() {\n  if (this.length === 0) return undefined;\n  const oldHead = this.head;\n  this.head = oldHead.next;\n  this.head.prev = null;\n  oldHead.next = null;\n  this.length--;\n  return oldHead;\n}`",
+    "options": [
+      "Nó chạy đúng và list trở nên rỗng hoàn toàn",
+      "Nó trả về `undefined` mà không thay đổi list",
+      "Nó ném TypeError vì `this.head` là `null` khi gán `.prev`",
+      "Nó tạo ra vòng lặp vô hạn khi duyệt list"
+    ],
+    "optionsEn": [
+      "It works correctly and the list becomes fully empty",
+      "It returns `undefined` without changing the list",
+      "It throws a TypeError because `this.head` is `null` when `.prev` is assigned",
+      "It creates an infinite loop when the list is traversed"
+    ],
+    "answer": 2,
+    "explanation": "Với một node, `oldHead.next` là `null`, nên `this.head` thành `null` và `this.head.prev = null` ném lỗi \"Cannot set properties of null\". Dù có tránh được lỗi, `tail` vẫn trỏ vào node đã xoá. Vì vậy cần nhánh `length === 1` đặt cả head và tail về `null`.",
+    "explanationEn": "With one node `oldHead.next` is `null`, so `this.head` becomes `null` and `this.head.prev = null` throws \"Cannot set properties of null\". Even if it didn't, `tail` would still point at the removed node. That is why a `length === 1` branch must null out both head and tail."
+  },
+  {
+    "id": "q8",
+    "question": "Một doubly linked list có `length = 10`. Với `get` tối ưu (đi từ đầu gần hơn), `get(7)` phải đi bao nhiêu bước `prev` từ tail?",
+    "questionEn": "A doubly linked list has `length = 10`. With the optimised `get` (walk from the nearer end), how many `prev` steps from the tail does `get(7)` take?",
+    "options": [
+      "7",
+      "2",
+      "3",
+      "5"
+    ],
+    "optionsEn": [
+      "7",
+      "2",
+      "3",
+      "5"
+    ],
+    "answer": 1,
+    "explanation": "7 > 10 / 2 nên bắt đầu từ tail (index 9): 9 → 8 → 7 là 2 bước. Singly list sẽ phải đi 7 bước từ head.",
+    "explanationEn": "7 > 10 / 2, so it starts at the tail (index 9): 9 → 8 → 7 is 2 steps. A singly list would need 7 steps from the head."
+  },
+  {
+    "id": "q9",
+    "question": "`get` của doubly linked list không bao giờ đi quá khoảng n/2 bước. Vậy Big O của nó là gì?",
+    "questionEn": "A doubly linked list's `get` never walks more than about n/2 steps. What is its Big O?",
+    "options": [
+      "O(log n), vì mỗi lần đều chia đôi list",
+      "O(1), vì biết trước nên bắt đầu từ đầu nào",
+      "O(n/2), và đó là độ phức tạp khác với O(n)",
+      "O(n), vì n/2 chỉ khác n một hằng số"
+    ],
+    "optionsEn": [
+      "O(log n), because the list is halved each time",
+      "O(1), because it knows in advance which end to start from",
+      "O(n/2), which is a different complexity from O(n)",
+      "O(n), because n/2 differs from n only by a constant"
+    ],
+    "answer": 3,
+    "explanation": "Chọn đầu gần hơn chỉ chia đôi MỘT lần, không chia liên tục như binary search. Số bước vẫn tăng tuyến tính theo n, và O(n/2) rút gọn thành O(n). Nhanh hơn thật trong thực tế, nhưng cùng lớp độ phức tạp.",
+    "explanationEn": "Picking the nearer end halves the work ONCE, not repeatedly as binary search does. The step count still grows linearly with n, and O(n/2) simplifies to O(n). Faster in practice, but the same complexity class."
+  },
+  {
+    "id": "q10",
+    "question": "`list` có đúng 3 node (index 0–2). `list.set(3, 'x')` trả về gì?",
+    "questionEn": "`list` has exactly 3 nodes (indices 0–2). What does `list.set(3, 'x')` return?",
+    "options": [
+      "`false`, và list không thay đổi",
+      "`true`, và 'x' được thêm vào cuối list",
+      "Ném TypeError vì truy cập `.val` trên `null`",
+      "`true`, và giá trị của tail được thay bằng 'x'"
+    ],
+    "optionsEn": [
+      "`false`, and the list is unchanged",
+      "`true`, and 'x' is appended to the list",
+      "It throws a TypeError from reading `.val` on `null`",
+      "`true`, and the tail's value is replaced by 'x'"
+    ],
+    "answer": 0,
+    "explanation": "`get(3)` trả về `null` vì index >= length, nên `set` rơi vào guard `if (!node) return false`. `set` chỉ thay giá trị của node đã tồn tại; nó không bao giờ thêm node — đó là việc của `insert`/`push`.",
+    "explanationEn": "`get(3)` returns `null` because index >= length, so `set` hits its `if (!node) return false` guard. `set` only replaces the value of an existing node; it never adds one — that is `insert`/`push`'s job."
+  },
+  {
+    "id": "q11",
+    "question": "Phần giữa của một `insert` được viết như sau. Lỗi là gì?\n`const before = this.get(index - 1);\nconst node = new Node(val);\nbefore.next = node;\nconst after = before.next;\nnode.prev = before;\nnode.next = after;\nafter.prev = node;`",
+    "questionEn": "The middle part of an `insert` is written like this. What is wrong?\n`const before = this.get(index - 1);\nconst node = new Node(val);\nbefore.next = node;\nconst after = before.next;\nnode.prev = before;\nnode.next = after;\nafter.prev = node;`",
+    "options": [
+      "Không có lỗi; thứ tự các phép gán không quan trọng",
+      "`node.prev` nên trỏ tới `after` chứ không phải `before`",
+      "`after` đọc ra chính node mới, nên `node.next` trỏ vào chính nó và phần sau list bị mất",
+      "Phải gọi `this.get(index)` thay vì `this.get(index - 1)`"
+    ],
+    "optionsEn": [
+      "Nothing; the order of the assignments does not matter",
+      "`node.prev` should point to `after`, not `before`",
+      "`after` reads back the new node itself, so `node.next` points to itself and the rest of the list is lost",
+      "It must call `this.get(index)` instead of `this.get(index - 1)`"
+    ],
+    "answer": 2,
+    "explanation": "Sau `before.next = node`, đọc `before.next` cho ra `node`. Kết quả `node.next = node` và `node.prev = node`: một vòng tự trỏ, còn các node phía sau không còn đường tới. Phải lưu `after = before.next` TRƯỚC khi nối lại.",
+    "explanationEn": "After `before.next = node`, reading `before.next` gives back `node`. The result is `node.next = node` and `node.prev = node`: a self-loop, with the nodes after it no longer reachable. Save `after = before.next` BEFORE rewiring."
+  },
+  {
+    "id": "q12",
+    "question": "Bạn đang cầm sẵn tham chiếu tới một node nằm giữa doubly linked list có n node. Gỡ node đó ra tốn bao nhiêu thời gian?",
+    "questionEn": "You already hold a reference to a node in the middle of a doubly linked list of n nodes. How long does it take to unlink that node?",
+    "options": [
+      "O(n), vì vẫn phải tìm node đứng trước nó",
+      "O(1), vì `node.prev` và `node.next` cho ngay hai hàng xóm cần sửa",
+      "O(log n)",
+      "O(n/2), vì đi từ đầu gần hơn"
+    ],
+    "optionsEn": [
+      "O(n), because its predecessor must still be found",
+      "O(1), because `node.prev` and `node.next` give the two neighbours to update directly",
+      "O(log n)",
+      "O(n/2), because it walks from the nearer end"
+    ],
+    "answer": 1,
+    "explanation": "`node.prev.next = node.next` và `node.next.prev = node.prev` là hai phép gán O(1), không cần duyệt. `remove(index)` là O(n) chỉ vì phải `get` trước. Với singly list, có node trong tay vẫn cần tìm node đứng trước (O(n)).",
+    "explanationEn": "`node.prev.next = node.next` and `node.next.prev = node.prev` are two O(1) assignments with no traversal. `remove(index)` is O(n) only because of the `get` first. In a singly list, holding the node still leaves you searching for its predecessor (O(n))."
+  },
+  {
+    "id": "q13",
+    "question": "Một doubly linked list có `length = 4`. Với `insert` đúng, lời gọi nào phải trả về `false`?",
+    "questionEn": "A doubly linked list has `length = 4`. With a correct `insert`, which call must return `false`?",
+    "options": [
+      "`insert(0, 'x')`",
+      "`insert(4, 'x')`",
+      "`insert(2, 'x')`",
+      "`insert(5, 'x')`"
+    ],
+    "optionsEn": [
+      "`insert(0, 'x')`",
+      "`insert(4, 'x')`",
+      "`insert(2, 'x')`",
+      "`insert(5, 'x')`"
+    ],
+    "answer": 3,
+    "explanation": "Index hợp lệ cho insert là 0..length. `insert(4, 'x')` bằng length nên nghĩa là push vào cuối — hợp lệ. Chỉ `5 > length` mới không hợp lệ. Guard `index >= length` là lỗi off-by-one phổ biến, chặn nhầm việc thêm vào cuối.",
+    "explanationEn": "Valid insert indices are 0..length. `insert(4, 'x')` equals length, so it means push to the end — valid. Only `5 > length` is invalid. A guard of `index >= length` is a common off-by-one that wrongly blocks appending."
+  },
+  {
+    "id": "q14",
+    "question": "List ban đầu là 1 ⇄ 2 ⇄ 3. Sau khi gọi `list.reverse()`, `list.head.next.next.prev.val` là gì?",
+    "questionEn": "The list starts as 1 ⇄ 2 ⇄ 3. After `list.reverse()`, what is `list.head.next.next.prev.val`?",
+    "options": [
+      "2",
+      "1",
+      "3",
+      "`undefined`"
+    ],
+    "optionsEn": [
+      "2",
+      "1",
+      "3",
+      "`undefined`"
+    ],
+    "answer": 0,
+    "explanation": "Sau reverse list là 3 ⇄ 2 ⇄ 1. `head` là 3, `.next` là 2, `.next` là 1, và `.prev` của 1 là 2. Nếu reverse chỉ đổi `next` mà quên đổi `prev`, kết quả sẽ sai — đó là lý do phải hoán đổi cả hai con trỏ trên mọi node.",
+    "explanationEn": "After reversing, the list is 3 ⇄ 2 ⇄ 1. `head` is 3, `.next` is 2, `.next` is 1, and 1's `.prev` is 2. If reverse swapped only `next` and forgot `prev`, this would be wrong — which is why both pointers must be swapped on every node."
+  },
+  {
+    "id": "q15",
+    "question": "Thao tác nào là O(1) với doubly linked list nhưng O(n) với singly linked list (có cả head và tail)?",
+    "questionEn": "Which operation is O(1) on a doubly linked list but O(n) on a singly linked list (with both head and tail)?",
+    "options": [
+      "Truy cập phần tử theo index",
+      "Thêm một node vào đầu list",
+      "Xoá node cuối cùng",
+      "Tìm một giá trị trong list"
+    ],
+    "optionsEn": [
+      "Accessing an element by index",
+      "Inserting a node at the head",
+      "Removing the last node",
+      "Searching for a value"
+    ],
+    "answer": 2,
+    "explanation": "Xoá tail cần node áp chót: DLL có `tail.prev`, singly list phải duyệt. Thêm vào đầu là O(1) ở cả hai; truy cập theo index và tìm kiếm là O(n) ở cả hai.",
+    "explanationEn": "Removing the tail needs the second-to-last node: a DLL has `tail.prev`, a singly list must walk. Inserting at the head is O(1) in both; index access and search are O(n) in both."
+  },
+  {
+    "id": "q16",
+    "question": "Ứng dụng cần đọc phần tử theo vị trí ngẫu nhiên (ví dụ `items[i]`) hàng triệu lần, và hiếm khi thêm/xoá. Nên chọn cấu trúc nào?",
+    "questionEn": "An app reads elements at random positions (like `items[i]`) millions of times and rarely inserts or removes. Which structure should it use?",
+    "options": [
+      "Doubly linked list, vì `get` đi từ đầu gần hơn",
+      "Array, vì truy cập theo index là O(1)",
+      "Singly linked list, vì tốn ít bộ nhớ hơn DLL",
+      "Doubly linked list có sentinel node"
+    ],
+    "optionsEn": [
+      "A doubly linked list, because `get` walks from the nearer end",
+      "An array, because index access is O(1)",
+      "A singly linked list, because it uses less memory than a DLL",
+      "A doubly linked list with sentinel nodes"
+    ],
+    "answer": 1,
+    "explanation": "Mọi loại linked list đều truy cập theo index trong O(n); đi từ đầu gần hơn chỉ giảm hằng số. Array cho O(1) và còn nhanh hơn khi duyệt vì bộ nhớ liền kề thân thiện với CPU cache. Linked list chỉ đáng dùng khi thêm/xoá ở hai đầu hoặc tại node đã biết là việc chính.",
+    "explanationEn": "Every kind of linked list does index access in O(n); walking from the nearer end only trims the constant. An array gives O(1) and iterates faster thanks to cache-friendly contiguous memory. Linked lists pay off when inserting/removing at the ends or at known nodes is the main workload."
+  },
+  {
+    "id": "q17",
+    "question": "Lợi ích chính của việc dùng sentinel node (head giả và tail giả) trong doubly linked list là gì?",
+    "questionEn": "What is the main benefit of using sentinel nodes (a dummy head and dummy tail) in a doubly linked list?",
+    "options": [
+      "Truy cập theo index trở thành O(1)",
+      "List dùng ít bộ nhớ hơn vì không cần biến `head` và `tail`",
+      "List tự động được sắp xếp khi thêm phần tử",
+      "Mọi node thật luôn có `prev` và `next` khác null, nên các trường hợp list rỗng, xoá head, xoá tail không cần xử lý riêng"
+    ],
+    "optionsEn": [
+      "Index access becomes O(1)",
+      "The list uses less memory because `head` and `tail` variables are no longer needed",
+      "The list stays sorted automatically on insert",
+      "Every real node always has non-null `prev` and `next`, so empty-list, remove-head and remove-tail cases need no special handling"
+    ],
+    "answer": 3,
+    "explanation": "Sentinel đổi hai node thêm lấy code đơn giản: thêm và gỡ node dùng cùng bốn dòng ở mọi vị trí, không còn kiểm tra `null`. Chúng không đổi Big O của truy cập, không tiết kiệm bộ nhớ và không sắp xếp gì.",
+    "explanationEn": "Sentinels trade two extra nodes for simpler code: inserting and unlinking use the same four lines everywhere, with no `null` checks. They do not change access Big O, save memory or sort anything."
+  },
+  {
+    "id": "q18",
+    "question": "Vì sao LRU cache kinh điển kết hợp hash map với doubly linked list thay vì chỉ dùng một trong hai?",
+    "questionEn": "Why does the classic LRU cache combine a hash map with a doubly linked list rather than using just one of them?",
+    "options": [
+      "Map tìm ra node trong O(1); DLL cho phép gỡ node và đưa lên đầu trong O(1), và loại phần tử lâu nhất ở cuối trong O(1)",
+      "Map lưu thứ tự dùng gần đây; DLL dùng để băm key",
+      "DLL cho phép tìm key theo giá trị trong O(log n); map để đếm số phần tử",
+      "Hai cấu trúc lưu cùng dữ liệu hai lần để phòng khi một cái bị lỗi"
+    ],
+    "optionsEn": [
+      "The map finds the node in O(1); the DLL lets you unlink it and move it to the front in O(1), and evict the least recent from the end in O(1)",
+      "The map stores recency order; the DLL is used to hash the keys",
+      "The DLL finds keys by value in O(log n); the map counts the items",
+      "The two structures store the same data twice in case one gets corrupted"
+    ],
+    "answer": 0,
+    "explanation": "Chỉ có map thì không biết phần tử nào lâu nhất chưa dùng; chỉ có list thì tìm key mất O(n). Map (key → node) cộng DLL sắp theo recency cho `get` và `put` đều O(1). `prev` là thứ giúp gỡ một node ở giữa trong O(1) — singly list không làm được.",
+    "explanationEn": "A map alone does not know which item is least recently used; a list alone needs O(n) to find a key. A map (key → node) plus a recency-ordered DLL makes both `get` and `put` O(1). `prev` is what makes unlinking a middle node O(1) — a singly list cannot."
+  },
+  {
+    "id": "q19",
+    "question": "Dùng class BrowserHistory trong bài, với `forward(steps)` là ảnh gương của `back` (đi theo `next`). Đoạn code sau in ra gì?\n`const h = new BrowserHistory(\"A\");\nh.visit(\"B\");\nh.visit(\"C\");\nh.back(2);\nh.visit(\"D\");\nconsole.log(h.forward(1));`",
+    "questionEn": "Using the BrowserHistory class from the article, with `forward(steps)` mirroring `back` (following `next`). What does this print?\n`const h = new BrowserHistory(\"A\");\nh.visit(\"B\");\nh.visit(\"C\");\nh.back(2);\nh.visit(\"D\");\nconsole.log(h.forward(1));`",
+    "options": [
+      "\"B\"",
+      "\"D\"",
+      "\"C\"",
+      "\"A\""
+    ],
+    "optionsEn": [
+      "\"B\"",
+      "\"D\"",
+      "\"C\"",
+      "\"A\""
+    ],
+    "answer": 1,
+    "explanation": "back(2) đưa `current` từ C về A. `visit(\"D\")` gán `A.next = D`, cắt bỏ nhánh forward B ⇄ C. D không có `next`, nên `forward(1)` dừng ngay và trả về \"D\" — giống hệt trình duyệt thật: mở trang mới thì mất lịch sử forward.",
+    "explanationEn": "back(2) moves `current` from C to A. `visit(\"D\")` sets `A.next = D`, cutting off the B ⇄ C forward branch. D has no `next`, so `forward(1)` stops immediately and returns \"D\" — just like a real browser: opening a new page discards the forward history."
+  }
+]

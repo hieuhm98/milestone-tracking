@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "drills": [
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI trách nhiệm phù hợp để đặt ở API gateway.",
+      "promptEn": "Pick TWO responsibilities that belong in an API gateway.",
+      "options": [
+        "Quyết định user có được xem một đơn hàng cụ thể hay không dựa trên dữ liệu đơn",
+        "Kết thúc TLS và xác thực chữ ký JWT",
+        "Tính phí vận chuyển theo địa chỉ giao hàng",
+        "Lưu trạng thái giỏ hàng của người dùng",
+        "Rate limiting và quota theo API key"
+      ],
+      "optionsEn": [
+        "Deciding whether a user may view a specific order based on the order's data",
+        "Terminating TLS and validating JWT signatures",
+        "Calculating shipping fees from the delivery address",
+        "Storing the user's shopping cart state",
+        "Rate limiting and quotas per API key"
+      ],
+      "answers": [
+        1,
+        4
+      ],
+      "explanation": "Gateway xử lý mối quan tâm cắt ngang áp dụng cho mọi API: TLS, xác thực, rate limit, định tuyến, telemetry. Phân quyền chi tiết theo dữ liệu, tính phí và trạng thái giỏ hàng là business logic và phải nằm trong service.",
+      "explanationEn": "A gateway handles cross-cutting concerns that apply to every API: TLS, authentication, rate limits, routing, telemetry. Data-level authorization, fee calculation and cart state are business logic and belong inside the services.",
+      "id": "d1"
+    },
+    {
+      "type": "multi",
+      "prompt": "Chọn HAI kiểm tra BẮT BUỘC khi API xác minh một JWT access token.",
+      "promptEn": "Pick TWO checks an API MUST perform when verifying a JWT access token.",
+      "options": [
+        "Claim `aud` phải khớp với định danh của chính API này",
+        "Giải mã payload bằng private key trước khi đọc",
+        "Chấp nhận mọi thuật toán mà header của token khai báo",
+        "Chữ ký hợp lệ với thuật toán nằm trong danh sách cho phép cố định",
+        "Token phải được lưu trong `localStorage` của trình duyệt"
+      ],
+      "optionsEn": [
+        "The `aud` claim must match this API's own identifier",
+        "Decrypt the payload with the private key before reading it",
+        "Accept whatever algorithm the token header declares",
+        "The signature is valid under an algorithm from a fixed allow-list",
+        "The token must be stored in the browser's `localStorage`"
+      ],
+      "answers": [
+        0,
+        3
+      ],
+      "explanation": "JWT chỉ được ký, không được mã hoá, nên không có bước giải mã. Để header tự chọn thuật toán mở đường cho `alg: none` và algorithm confusion. Kiểm tra `aud` chặn token cấp cho API khác; lưu token trong `localStorage` là một điểm yếu XSS chứ không phải kiểm tra.",
+      "explanationEn": "A JWT is signed, not encrypted, so there is nothing to decrypt. Letting the header pick the algorithm opens the door to `alg: none` and algorithm confusion. Checking `aud` rejects tokens minted for other APIs; `localStorage` storage is an XSS weakness, not a check.",
+      "id": "d2"
+    },
+    {
+      "type": "recall",
+      "prompt": "API nên trả HTTP status code nào khi client vượt quá giới hạn tốc độ?",
+      "promptEn": "Which HTTP status code should an API return when a client exceeds its rate limit?",
+      "answer": "429",
+      "answerEn": "429",
+      "accept": [
+        "429",
+        "429 too many requests",
+        "too many requests",
+        "http 429"
+      ],
+      "explanation": "429 Too Many Requests, kèm header `Retry-After` để client biết khi nào thử lại. Khác với 503 là server quá tải nói chung, 429 nói rằng chính client này đã vượt quota.",
+      "explanationEn": "429 Too Many Requests, with a `Retry-After` header so the client knows when to try again. Unlike 503, which signals general overload, 429 says this particular client has exceeded its quota.",
+      "id": "d3"
+    },
+    {
+      "type": "recall",
+      "prompt": "Phần mở rộng của OAuth 2.0 dùng `code_verifier` và `code_challenge` để authorization code bị đánh cắp trở nên vô dụng, tên viết tắt là gì?",
+      "promptEn": "Which OAuth 2.0 extension uses a `code_verifier` and `code_challenge` so that a stolen authorization code is useless? Give its short name.",
+      "answer": "PKCE",
+      "answerEn": "PKCE",
+      "accept": [
+        "pkce",
+        "proof key for code exchange",
+        "pkce s256"
+      ],
+      "explanation": "PKCE (Proof Key for Code Exchange). App gửi hash của verifier khi redirect tới /authorize, rồi gửi verifier gốc khi đổi code lấy token; ai chỉ có code mà không có verifier sẽ bị từ chối. Nay được khuyến nghị cho mọi client, không chỉ mobile.",
+      "explanationEn": "PKCE (Proof Key for Code Exchange). The app sends a hash of the verifier when redirecting to /authorize, then the original verifier when exchanging the code for tokens; anyone holding only the code is refused. It is now recommended for every client, not just mobile.",
+      "id": "d4"
+    },
+    {
+      "type": "match",
+      "prompt": "Ghép mỗi kiểu API với tình huống nó phù hợp nhất.",
+      "promptEn": "Match each API style to the situation it suits best.",
+      "pairs": [
+        {
+          "left": "REST",
+          "leftEn": "REST",
+          "right": "API công khai cho partner, dựa trên tài nguyên và HTTP caching",
+          "rightEn": "A public partner API built on resources and HTTP caching"
+        },
+        {
+          "left": "gRPC",
+          "leftEn": "gRPC",
+          "right": "Gọi nội bộ giữa các service với hợp đồng chặt và streaming hai chiều",
+          "rightEn": "Internal service-to-service calls with strict contracts and bidirectional streaming"
+        },
+        {
+          "left": "GraphQL",
+          "leftEn": "GraphQL",
+          "right": "Nhiều loại client cần các tập field khác nhau trên cùng một domain",
+          "rightEn": "Many client types needing different field selections over one domain"
+        },
+        {
+          "left": "Server-Sent Events",
+          "leftEn": "Server-Sent Events",
+          "right": "Đẩy thông báo một chiều từ server tới trình duyệt qua HTTP thường",
+          "rightEn": "One-way notifications pushed from server to browser over plain HTTP"
+        }
+      ],
+      "explanation": "Không có kiểu API nào thắng tuyệt đối. Câu hỏi đúng là: ai gọi, cần hợp đồng chặt tới đâu, dữ liệu có hình dạng thay đổi theo client không, và luồng có một chiều hay hai chiều.",
+      "explanationEn": "No API style wins everywhere. The right questions are: who calls it, how strict the contract must be, whether the data shape varies by client, and whether the flow is one-way or two-way.",
+      "id": "d5"
+    },
+    {
+      "type": "order",
+      "prompt": "Xếp đúng thứ tự các bước của Authorization Code flow với PKCE.",
+      "promptEn": "Put the steps of the Authorization Code flow with PKCE into order.",
+      "items": [
+        {
+          "text": "App tạo `code_verifier` ngẫu nhiên và tính `code_challenge` bằng S256",
+          "textEn": "The app generates a random `code_verifier` and derives the `code_challenge` with S256"
+        },
+        {
+          "text": "App chuyển hướng người dùng tới /authorize kèm `code_challenge` và `state`",
+          "textEn": "The app redirects the user to /authorize with the `code_challenge` and `state`"
+        },
+        {
+          "text": "Người dùng đăng nhập, và authorization server chuyển hướng về kèm `code`",
+          "textEn": "The user logs in and the authorization server redirects back with a `code`"
+        },
+        {
+          "text": "App gửi `code` cùng `code_verifier` tới /token để lấy access token",
+          "textEn": "The app posts the `code` plus the `code_verifier` to /token to get an access token"
+        },
+        {
+          "text": "App gọi API với header `Authorization: Bearer` chứa access token",
+          "textEn": "The app calls the API with an `Authorization: Bearer` header carrying the access token"
+        }
+      ],
+      "explanation": "Verifier không bao giờ rời app cho tới bước đổi token, nên kẻ chặn được `code` ở bước redirect vẫn không đổi được token. API ở bước cuối chỉ nhận access token, không nhận ID token.",
+      "explanationEn": "The verifier never leaves the app until the token exchange, so anyone who intercepts the `code` on the redirect still cannot redeem it. The API in the final step accepts only the access token, never the ID token.",
+      "id": "d6"
+    }
+  ]
+}

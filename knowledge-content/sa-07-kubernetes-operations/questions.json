@@ -1,0 +1,362 @@
+[
+  {
+    "id": "q1",
+    "question": "Readiness probe của một pod bắt đầu fail liên tục trong khi liveness probe vẫn pass. Điều gì xảy ra?",
+    "questionEn": "A pod's readiness probe starts failing repeatedly while its liveness probe keeps passing. What happens?",
+    "options": [
+      "Kubelet restart container sau 3 lần fail liên tiếp",
+      "Pod bị gỡ khỏi endpoints của Service nhưng container vẫn chạy",
+      "Deployment tự rollback về revision trước",
+      "Pod bị evict và được xếp sang node khác"
+    ],
+    "optionsEn": [
+      "The kubelet restarts the container after 3 consecutive failures",
+      "The pod is removed from the Service endpoints but the container keeps running",
+      "The Deployment rolls back to the previous revision automatically",
+      "The pod is evicted and rescheduled onto another node"
+    ],
+    "answer": 1,
+    "explanation": "Readiness chỉ điều khiển việc pod có nhận traffic hay không; khi pass lại, pod được thêm trở lại vào endpoints. Chỉ liveness (hoặc startup) fail mới dẫn tới restart. Kubernetes không tự rollback và readiness không gây evict.",
+    "explanationEn": "Readiness only controls whether the pod receives traffic; once it passes again the pod is added back to the endpoints. Only a liveness (or startup) failure causes a restart. Kubernetes never rolls back on its own, and readiness does not trigger eviction."
+  },
+  {
+    "id": "q2",
+    "question": "Mỗi khi database chậm vài chục giây, toàn bộ 20 pod API cùng restart một lúc và dịch vụ sập hoàn toàn. Liveness probe được cấu hình như sau. Nguyên nhân gốc là gì?\n`livenessProbe:\n  httpGet:\n    path: /health   # runs SELECT 1 on the DB\n    port: 8080\n  periodSeconds: 10\n  failureThreshold: 3`",
+    "questionEn": "Whenever the database is slow for a few tens of seconds, all 20 API pods restart at once and the service goes fully down. The liveness probe is configured below. What is the root cause?\n`livenessProbe:\n  httpGet:\n    path: /health   # runs SELECT 1 on the DB\n    port: 8080\n  periodSeconds: 10\n  failureThreshold: 3`",
+    "options": [
+      "periodSeconds quá ngắn, cần tăng lên 60",
+      "Thiếu startup probe nên liveness chạy quá sớm",
+      "Pod thiếu CPU limit nên bị throttle khi DB chậm",
+      "Liveness probe kiểm tra một dependency bên ngoài thay vì chỉ kiểm tra process"
+    ],
+    "optionsEn": [
+      "periodSeconds is too short and should be raised to 60",
+      "There is no startup probe, so liveness runs too early",
+      "The pods lack a CPU limit, so they are throttled when the DB is slow",
+      "The liveness probe checks an external dependency instead of only the process itself"
+    ],
+    "answer": 3,
+    "explanation": "Khi liveness phụ thuộc DB, một sự cố của DB làm mọi replica fail cùng lúc và kubelet restart cả đội — biến sự chập chờn của dependency thành outage toàn phần, trong khi restart cũng không sửa được DB. Liveness chỉ nên kiểm tra process; dependency (nếu cần) đặt ở readiness. Tăng periodSeconds chỉ trì hoãn vấn đề.",
+    "explanationEn": "When liveness depends on the DB, a DB problem fails every replica at once and the kubelet restarts the whole fleet — turning a dependency blip into a full outage, and restarting cannot fix the DB anyway. Liveness should check only the process; dependency checks, if any, go in readiness. Raising periodSeconds only delays the problem."
+  },
+  {
+    "id": "q3",
+    "question": "Một ứng dụng Java cần 90–120 giây để khởi động. Với liveness probe mặc định, pod rơi vào CrashLoopBackOff trước khi kịp chạy xong. Sau khi khởi động, team vẫn muốn phát hiện treo trong khoảng 30 giây. Cách tốt nhất?",
+    "questionEn": "A Java application takes 90–120 seconds to boot. With a default liveness probe the pod lands in CrashLoopBackOff before it finishes starting. After boot the team still wants hangs detected within about 30 seconds. What is the best fix?",
+    "options": [
+      "Thêm startup probe với failureThreshold × periodSeconds khoảng 150 giây, giữ liveness chặt như cũ",
+      "Đặt initialDelaySeconds: 150 cho liveness probe",
+      "Bỏ liveness probe, chỉ dùng readiness probe",
+      "Đổi restartPolicy của pod thành Never"
+    ],
+    "optionsEn": [
+      "Add a startup probe with failureThreshold × periodSeconds of about 150 seconds and keep liveness tight",
+      "Set initialDelaySeconds: 150 on the liveness probe",
+      "Remove the liveness probe and rely on the readiness probe only",
+      "Change the pod's restartPolicy to Never"
+    ],
+    "answer": 0,
+    "explanation": "Startup probe cho ngân sách khởi động rộng rãi và tạm hoãn liveness tới khi app lên, sau đó liveness vẫn phát hiện treo nhanh. initialDelaySeconds cố định luôn chờ đủ 150 giây kể cả khi app lên sớm, và khó chỉnh khi thời gian boot thay đổi. Bỏ liveness thì mất khả năng tự phục hồi khi treo; Deployment cũng không cho restartPolicy Never.",
+    "explanationEn": "A startup probe gives a generous boot budget and holds liveness back until the app is up, after which liveness still detects hangs quickly. A fixed initialDelaySeconds always waits the full 150 seconds even when boot is faster, and is brittle when boot time varies. Dropping liveness loses self-healing on hangs, and a Deployment does not allow restartPolicy Never."
+  },
+  {
+    "id": "q4",
+    "question": "Pod chỉ có một container với cấu hình tài nguyên dưới đây. Pod thuộc QoS class nào?\n`resources:\n  requests:\n    cpu: 500m\n    memory: 512Mi\n  limits:\n    cpu: 500m\n    memory: 1Gi`",
+    "questionEn": "A pod has a single container with the resources below. Which QoS class does the pod get?\n`resources:\n  requests:\n    cpu: 500m\n    memory: 512Mi\n  limits:\n    cpu: 500m\n    memory: 1Gi`",
+    "options": [
+      "Guaranteed",
+      "BestEffort",
+      "Burstable",
+      "Không có QoS class vì limits khác requests"
+    ],
+    "optionsEn": [
+      "Guaranteed",
+      "BestEffort",
+      "Burstable",
+      "No QoS class, because limits differ from requests"
+    ],
+    "answer": 2,
+    "explanation": "Guaranteed đòi hỏi requests = limits cho cả CPU và memory ở mọi container. Ở đây CPU bằng nhau nhưng memory thì không, nên pod là Burstable. BestEffort chỉ khi không đặt request hay limit nào. Mọi pod đều có một QoS class.",
+    "explanationEn": "Guaranteed requires requests = limits for both CPU and memory in every container. Here CPU matches but memory does not, so the pod is Burstable. BestEffort applies only when nothing is set. Every pod gets a QoS class."
+  },
+  {
+    "id": "q5",
+    "question": "Một worker xử lý file lớn cứ vài giờ lại restart. `kubectl describe pod` cho thấy Last State: Terminated, Reason: OOMKilled, Exit Code: 137. Hướng xử lý đúng?",
+    "questionEn": "A worker that processes large files restarts every few hours. `kubectl describe pod` shows Last State: Terminated, Reason: OOMKilled, Exit Code: 137. What is the right direction?",
+    "options": [
+      "Tăng CPU limit vì container bị throttle quá mức",
+      "Đo mức dùng memory thực tế, tăng memory request/limit hoặc sửa rò rỉ bộ nhớ trong app",
+      "Tăng failureThreshold của liveness probe",
+      "Thêm HPA để chia tải cho nhiều pod hơn"
+    ],
+    "optionsEn": [
+      "Raise the CPU limit because the container is being throttled too hard",
+      "Measure real memory usage, then raise the memory request/limit or fix a memory leak in the app",
+      "Raise the liveness probe's failureThreshold",
+      "Add an HPA to spread the load over more pods"
+    ],
+    "answer": 1,
+    "explanation": "OOMKilled nghĩa là container vượt memory limit và bị kernel kill (137 = SIGKILL). CPU không bao giờ gây OOMKilled — vượt CPU limit chỉ bị throttle. Probe không liên quan. HPA không giúp nếu một file lớn đơn lẻ đã vượt memory của một pod.",
+    "explanationEn": "OOMKilled means the container exceeded its memory limit and was killed by the kernel (137 = SIGKILL). CPU never causes OOMKilled — going over a CPU limit only throttles. Probes are unrelated. An HPA does not help when a single large file already exceeds one pod's memory."
+  },
+  {
+    "id": "q6",
+    "question": "Dashboard cho thấy CPU trung bình của một API chỉ 30% so với limit, nhưng p99 latency thỉnh thoảng tăng vọt lên hàng trăm ms. Container có `limits.cpu: 500m`. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "Dashboards show an API averaging only 30% of its CPU limit, yet p99 latency occasionally spikes by hundreds of milliseconds. The container has `limits.cpu: 500m`. What is the most likely cause?",
+    "options": [
+      "CPU throttling bởi CFS quota khi các đợt burst ngắn vượt limit",
+      "Container bị OOMKilled và restart liên tục",
+      "Pod thuộc QoS BestEffort nên bị evict",
+      "Readiness probe fail khiến pod ra vào Service"
+    ],
+    "optionsEn": [
+      "CPU throttling by the CFS quota when short bursts exceed the limit",
+      "The container is being OOMKilled and restarted repeatedly",
+      "The pod is BestEffort QoS and is being evicted",
+      "A failing readiness probe keeps moving the pod in and out of the Service"
+    ],
+    "answer": 0,
+    "explanation": "CPU limit được áp theo từng chu kỳ ngắn của CFS; một đợt burst vài chục ms có thể dùng hết quota và bị bóp tới chu kỳ sau, dù trung bình vẫn thấp. Đó là lý do nhiều team bỏ CPU limit và chỉ đặt request. Pod có limit thì không phải BestEffort, và OOMKill hay readiness sẽ để lại dấu vết khác (restart, 0/1 READY).",
+    "explanationEn": "CPU limits are enforced per short CFS period; a burst of a few tens of milliseconds can use up the quota and be held until the next period even though the average is low. That is why many teams drop CPU limits and set only requests. A pod with limits is not BestEffort, and OOM kills or readiness failures would leave different evidence (restarts, 0/1 READY)."
+  },
+  {
+    "id": "q7",
+    "question": "Một HPA có target CPU utilization 60%. Deployment đang có 5 pod với utilization trung bình 90% so với request. HPA sẽ đặt số replica mong muốn là bao nhiêu (bỏ qua min/max)?",
+    "questionEn": "An HPA targets 60% CPU utilization. The Deployment has 5 pods averaging 90% of their CPU request. What desired replica count does the HPA compute (ignoring min/max)?",
+    "options": [
+      "7",
+      "6",
+      "10",
+      "8"
+    ],
+    "optionsEn": [
+      "7",
+      "6",
+      "10",
+      "8"
+    ],
+    "answer": 3,
+    "explanation": "desiredReplicas = ceil(currentReplicas × currentMetric / targetMetric) = ceil(5 × 90 / 60) = ceil(7.5) = 8. HPA luôn làm tròn lên để không thiếu công suất.",
+    "explanationEn": "desiredReplicas = ceil(currentReplicas × currentMetric / targetMetric) = ceil(5 × 90 / 60) = ceil(7.5) = 8. The HPA always rounds up so it never under-provisions."
+  },
+  {
+    "id": "q8",
+    "question": "Team muốn vừa dùng HPA scale theo CPU utilization, vừa bật VPA ở chế độ tự động cập nhật CPU/memory request cho cùng Deployment. Kiến trúc sư nên nói gì?",
+    "questionEn": "A team wants an HPA scaling on CPU utilization and a VPA in an auto-updating mode adjusting CPU/memory requests on the same Deployment. What should the architect say?",
+    "options": [
+      "Tốt, vì VPA và HPA chia sẻ số liệu từ metrics-server nên luôn đồng bộ",
+      "Chỉ cần đặt maxReplicas thấp là hai autoscaler sẽ không xung đột",
+      "Không nên: VPA đổi request làm thay đổi utilization mà HPA dựa vào, hai bên sẽ dao động; hãy dùng VPA ở mode Off hoặc cho HPA scale theo metric khác",
+      "Không nên, vì VPA chỉ dùng được cho StatefulSet"
+    ],
+    "optionsEn": [
+      "Fine — both read metrics-server data, so they always stay in sync",
+      "Just set a low maxReplicas and the two autoscalers will not conflict",
+      "Avoid it: VPA changing requests shifts the utilization HPA relies on, so they oscillate; use VPA in Off mode or scale HPA on a different metric",
+      "Avoid it, because VPA only works with StatefulSets"
+    ],
+    "answer": 2,
+    "explanation": "Utilization = usage / request. VPA tăng request thì utilization giảm, HPA scale in; ít pod hơn thì usage mỗi pod tăng, VPA lại chỉnh — một vòng phản hồi dao động. Cách phổ biến: VPA mode Off chỉ để lấy khuyến nghị, hoặc HPA scale theo metric tuỳ biến như RPS. VPA dùng được cho Deployment.",
+    "explanationEn": "Utilization = usage / request. VPA raises requests, utilization drops, HPA scales in; fewer pods raise per-pod usage, VPA adjusts again — an oscillating feedback loop. Common approaches: VPA in Off mode for recommendations only, or HPA on a custom metric such as RPS. VPA works with Deployments."
+  },
+  {
+    "id": "q9",
+    "question": "Sau đợt tăng traffic, HPA đã nâng Deployment lên 12 replica nhưng 4 pod ở trạng thái Pending với event `0/6 nodes are available: 6 Insufficient cpu`. Node nào cũng chỉ dùng thực tế khoảng 35% CPU. Giải thích nào đúng?",
+    "questionEn": "After a traffic spike the HPA raised the Deployment to 12 replicas, but 4 pods are Pending with the event `0/6 nodes are available: 6 Insufficient cpu`. Every node is only using about 35% CPU in reality. Which explanation is correct?",
+    "options": [
+      "Scheduler xếp chỗ theo tổng CPU request, không theo mức dùng thực tế; cần Cluster Autoscaler/Karpenter thêm node hoặc chỉnh request cho sát thực tế",
+      "Scheduler bị lỗi vì node còn 65% CPU trống; cần restart kube-scheduler",
+      "HPA đã vượt maxReplicas nên pod bị giữ ở Pending",
+      "Pod Pending vì readiness probe chưa pass"
+    ],
+    "optionsEn": [
+      "The scheduler places pods by the sum of CPU requests, not real usage; Cluster Autoscaler/Karpenter must add nodes, or requests must be tuned to reality",
+      "The scheduler is broken because nodes have 65% CPU free; restart kube-scheduler",
+      "The HPA exceeded maxReplicas, so the extra pods are held Pending",
+      "The pods are Pending because their readiness probes have not passed"
+    ],
+    "answer": 0,
+    "explanation": "Scheduling dựa hoàn toàn trên request so với allocatable. Node trông 'rảnh' nhưng đã được giữ chỗ hết bởi request quá cao. Cluster Autoscaler cũng chỉ phản ứng với pod Pending do thiếu request. HPA không bao giờ tạo quá maxReplicas, và readiness chỉ chạy sau khi pod đã được xếp chỗ.",
+    "explanationEn": "Scheduling is based entirely on requests versus allocatable. The nodes look idle but are fully reserved by inflated requests. Cluster Autoscaler likewise reacts only to pods Pending for lack of requested resources. The HPA never exceeds maxReplicas, and readiness only runs after a pod has been scheduled."
+  },
+  {
+    "id": "q10",
+    "question": "Deployment có cấu hình dưới đây và đang cập nhật image. Trong suốt quá trình rollout, tổng số pod tối đa và số pod available tối thiểu là bao nhiêu?\n`spec:\n  replicas: 4\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxSurge: 1\n      maxUnavailable: 0`",
+    "questionEn": "The Deployment below is rolling out a new image. Throughout the rollout, what are the maximum total pods and the minimum available pods?\n`spec:\n  replicas: 4\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxSurge: 1\n      maxUnavailable: 0`",
+    "options": [
+      "Tối đa 4 pod, tối thiểu 3 available",
+      "Tối đa 5 pod, tối thiểu 4 available",
+      "Tối đa 8 pod, tối thiểu 4 available",
+      "Tối đa 5 pod, tối thiểu 3 available"
+    ],
+    "optionsEn": [
+      "At most 4 pods, at least 3 available",
+      "At most 5 pods, at least 4 available",
+      "At most 8 pods, at least 4 available",
+      "At most 5 pods, at least 3 available"
+    ],
+    "answer": 1,
+    "explanation": "maxSurge: 1 cho phép vượt replicas thêm 1 pod (tối đa 5); maxUnavailable: 0 nghĩa là số pod available không bao giờ dưới 4. Rollout tạo một pod mới, chờ nó ready, rồi mới tắt một pod cũ — chậm hơn nhưng không mất công suất.",
+    "explanationEn": "maxSurge: 1 allows one pod above replicas (5 at most); maxUnavailable: 0 means available pods never drop below 4. The rollout starts one new pod, waits for it to be ready, then stops one old pod — slower, but no capacity is lost."
+  },
+  {
+    "id": "q11",
+    "question": "Khi nâng cấp node group, `kubectl drain` bị treo mãi ở một node. Node đó chạy pod duy nhất của một service nội bộ (replicas: 1) có PodDisruptionBudget `minAvailable: 1`. Nguyên nhân và cách xử lý?",
+    "questionEn": "During a node group upgrade, `kubectl drain` hangs forever on one node. That node runs the only pod of an internal service (replicas: 1) with a PodDisruptionBudget of `minAvailable: 1`. What is the cause and the fix?",
+    "options": [
+      "PDB chặn cả sự cố node sập; cần xoá node bằng tay",
+      "Drain bị treo vì pod thiếu readiness probe; thêm readiness là xong",
+      "Pod thuộc QoS Guaranteed nên không thể bị evict; hãy bỏ limits",
+      "PDB không cho phép gián đoạn nào với một replica; tăng replicas lên ít nhất 2 (hoặc nới PDB) để eviction được phép"
+    ],
+    "optionsEn": [
+      "The PDB also blocks node crashes; the node must be deleted manually",
+      "The drain hangs because the pod has no readiness probe; adding one fixes it",
+      "The pod is Guaranteed QoS and cannot be evicted; remove its limits",
+      "The PDB allows zero disruptions with one replica; raise replicas to at least 2 (or relax the PDB) so eviction is allowed"
+    ],
+    "answer": 3,
+    "explanation": "Drain dùng Eviction API, vốn tôn trọng PDB. Với 1 replica và minAvailable: 1, không bao giờ có ngân sách gián đoạn nên drain chờ vô hạn. Chạy ít nhất 2 replica (trên các node khác nhau) là cách đúng. PDB không bảo vệ trước sự cố không tự nguyện như node sập; QoS không ngăn eviction qua drain.",
+    "explanationEn": "Drain uses the Eviction API, which respects PDBs. With 1 replica and minAvailable: 1 there is never any disruption budget, so drain waits indefinitely. Running at least 2 replicas (on different nodes) is the proper fix. PDBs do not protect against involuntary events such as node crashes, and QoS does not prevent eviction by drain."
+  },
+  {
+    "id": "q12",
+    "question": "Trên EKS trải trên 3 AZ, một StatefulSet PostgreSQL dùng StorageClass EBS với `volumeBindingMode: Immediate`. Thỉnh thoảng pod mới bị Pending với lỗi volume node affinity conflict. Cách khắc phục hợp lý nhất?",
+    "questionEn": "On EKS across 3 AZs, a PostgreSQL StatefulSet uses an EBS StorageClass with `volumeBindingMode: Immediate`. New pods sometimes stay Pending with a volume node affinity conflict. What is the most sensible fix?",
+    "options": [
+      "Đổi access mode của PVC sang ReadWriteMany",
+      "Đổi StatefulSet thành Deployment để pod được xếp tự do",
+      "Dùng StorageClass với volumeBindingMode: WaitForFirstConsumer để EBS được tạo ở đúng AZ của node được chọn",
+      "Đặt reclaimPolicy: Retain cho StorageClass"
+    ],
+    "optionsEn": [
+      "Change the PVC access mode to ReadWriteMany",
+      "Turn the StatefulSet into a Deployment so pods can be placed freely",
+      "Use a StorageClass with volumeBindingMode: WaitForFirstConsumer so the EBS volume is created in the AZ of the chosen node",
+      "Set reclaimPolicy: Retain on the StorageClass"
+    ],
+    "answer": 2,
+    "explanation": "EBS gắn với một AZ. Với Immediate, volume được tạo trước khi pod được xếp chỗ nên có thể nằm ở AZ không có node phù hợp. WaitForFirstConsumer hoãn cấp phát tới khi scheduler chọn node. EBS không hỗ trợ ReadWriteMany; Deployment mất danh tính và PVC riêng; Retain chỉ ảnh hưởng việc xoá disk.",
+    "explanationEn": "EBS volumes are zonal. With Immediate, the volume is created before the pod is scheduled and can end up in an AZ with no suitable node. WaitForFirstConsumer delays provisioning until the scheduler picks a node. EBS does not support ReadWriteMany, a Deployment loses stable identity and per-pod PVCs, and Retain only affects what happens to the disk on deletion."
+  },
+  {
+    "id": "q13",
+    "question": "Team platform cần một agent thu thập log (Fluent Bit) đọc file log trên mọi node, kể cả các node được Cluster Autoscaler thêm vào sau này. Nên triển khai bằng object nào?",
+    "questionEn": "The platform team needs a log collector (Fluent Bit) reading log files on every node, including nodes Cluster Autoscaler adds later. Which object should they deploy it with?",
+    "options": [
+      "DaemonSet",
+      "Deployment với replicas bằng số node hiện tại",
+      "StatefulSet với một PVC cho mỗi node",
+      "CronJob chạy mỗi phút"
+    ],
+    "optionsEn": [
+      "DaemonSet",
+      "A Deployment with replicas equal to the current node count",
+      "A StatefulSet with one PVC per node",
+      "A CronJob that runs every minute"
+    ],
+    "answer": 0,
+    "explanation": "DaemonSet chạy đúng một pod trên mỗi node phù hợp và tự thêm pod khi node mới tham gia. Deployment không đảm bảo mỗi node một pod và không tự theo số node. StatefulSet dành cho danh tính và storage ổn định; CronJob cho việc chạy xong rồi dừng, không phải agent chạy liên tục.",
+    "explanationEn": "A DaemonSet runs exactly one pod on each matching node and adds one when a node joins. A Deployment neither guarantees one pod per node nor tracks the node count. A StatefulSet is for stable identity and storage, and a CronJob is for run-to-completion work, not a continuously running agent."
+  },
+  {
+    "id": "q14",
+    "question": "Một CronJob đối soát thanh toán chạy mỗi 10 phút. Có lúc một lần chạy mất tới 15 phút và hai Job chạy chồng lên nhau, gây ghi trùng dữ liệu. Thay đổi phù hợp nhất?",
+    "questionEn": "A payment reconciliation CronJob runs every 10 minutes. Sometimes a run takes up to 15 minutes and two Jobs overlap, writing duplicate data. What is the most appropriate change?",
+    "options": [
+      "Đặt restartPolicy: Always cho pod template",
+      "Đặt concurrencyPolicy: Forbid và làm cho job idempotent",
+      "Tăng backoffLimit lên 10",
+      "Chuyển sang DaemonSet để mỗi node chạy một bản"
+    ],
+    "optionsEn": [
+      "Set restartPolicy: Always in the pod template",
+      "Set concurrencyPolicy: Forbid and make the job idempotent",
+      "Raise backoffLimit to 10",
+      "Switch to a DaemonSet so each node runs one copy"
+    ],
+    "answer": 1,
+    "explanation": "Forbid bỏ qua lần chạy mới nếu lần trước chưa xong. Nhưng CronJob chỉ đảm bảo xấp xỉ một lần, nên job vẫn phải idempotent để chịu được việc bị tạo trùng. Job không cho phép restartPolicy Always; backoffLimit chỉ là số lần retry khi fail; DaemonSet còn làm tăng số bản chạy song song.",
+    "explanationEn": "Forbid skips a new run while the previous one is still going. But a CronJob is only approximately once, so the job must still be idempotent to survive an occasional duplicate. Jobs do not allow restartPolicy Always, backoffLimit only counts retries on failure, and a DaemonSet would multiply the parallel copies."
+  },
+  {
+    "id": "q15",
+    "question": "Pod `payments-api` (ServiceAccount `payments-api`, namespace `payments`) cần đọc ConfigMap trong namespace `payments` và không được đụng tới namespace khác. Cấu hình RBAC tối thiểu nào đúng?",
+    "questionEn": "The `payments-api` pod (ServiceAccount `payments-api`, namespace `payments`) must read ConfigMaps in the `payments` namespace and touch nothing in other namespaces. Which minimal RBAC setup is correct?",
+    "options": [
+      "ClusterRole cho get/list/watch configmaps và ClusterRoleBinding tới ServiceAccount",
+      "Gán ClusterRole `edit` bằng RoleBinding trong namespace `payments`",
+      "Role cho phép get/list/watch configmaps kèm một rule deny cho secrets",
+      "Role trong `payments` cho get/list/watch configmaps và RoleBinding trong `payments` tới ServiceAccount"
+    ],
+    "optionsEn": [
+      "A ClusterRole for get/list/watch on configmaps and a ClusterRoleBinding to the ServiceAccount",
+      "Bind the `edit` ClusterRole with a RoleBinding in the `payments` namespace",
+      "A Role allowing get/list/watch on configmaps plus a deny rule for secrets",
+      "A Role in `payments` for get/list/watch on configmaps and a RoleBinding in `payments` to the ServiceAccount"
+    ],
+    "answer": 3,
+    "explanation": "Role + RoleBinding giới hạn quyền trong một namespace và chỉ những verb cần thiết. ClusterRoleBinding cấp quyền ở mọi namespace. ClusterRole `edit` quá rộng (sửa được deployment, secret…). RBAC không có rule deny — muốn hạn chế thì cấp ít hơn.",
+    "explanationEn": "A Role plus RoleBinding scopes the permission to one namespace and only the verbs needed. A ClusterRoleBinding grants it in every namespace. The `edit` ClusterRole is far too broad (it can modify deployments, secrets and more). RBAC has no deny rules — to restrict, grant less."
+  },
+  {
+    "id": "q16",
+    "question": "NetworkPolicy dưới đây được áp cho pod `app: api` trong namespace `shop`. Traffic ingress nào được cho phép?\n`ingress:\n  - from:\n      - namespaceSelector:\n          matchLabels: { team: web }\n      - podSelector:\n          matchLabels: { app: frontend }`",
+    "questionEn": "The NetworkPolicy below applies to pods `app: api` in namespace `shop`. Which ingress traffic is allowed?\n`ingress:\n  - from:\n      - namespaceSelector:\n          matchLabels: { team: web }\n      - podSelector:\n          matchLabels: { app: frontend }`",
+    "options": [
+      "Chỉ pod `app: frontend` nằm trong các namespace có nhãn `team: web`",
+      "Chỉ pod `app: frontend` ở bất kỳ namespace nào",
+      "Mọi pod trong namespace có nhãn `team: web`, HOẶC pod `app: frontend` trong namespace `shop`",
+      "Mọi traffic, vì policy không khai báo ports"
+    ],
+    "optionsEn": [
+      "Only `app: frontend` pods inside namespaces labelled `team: web`",
+      "Only `app: frontend` pods in any namespace",
+      "Any pod in a namespace labelled `team: web`, OR `app: frontend` pods in the `shop` namespace",
+      "All traffic, because the policy declares no ports"
+    ],
+    "answer": 2,
+    "explanation": "Hai selector là hai phần tử riêng trong mảng `from` (mỗi cái có dấu `-`), nên chúng được OR. podSelector đứng một mình chỉ chọn pod trong namespace của chính policy. Muốn AND (frontend nằm trong namespace team: web) phải đặt cả hai selector trong cùng một phần tử. Không khai báo ports nghĩa là mọi port từ các nguồn được phép, không phải mọi nguồn.",
+    "explanationEn": "The two selectors are separate items in the `from` list (each has its own dash), so they are ORed. A podSelector on its own only selects pods in the policy's own namespace. To AND them (frontend pods in team: web namespaces) both selectors must sit in the same item. Omitting ports means all ports from the allowed sources, not all sources."
+  },
+  {
+    "id": "q17",
+    "question": "Sau khi áp một NetworkPolicy default-deny cho cả Ingress và Egress trong namespace, rồi cho phép egress tới `postgres` port 5432, ứng dụng báo lỗi `could not translate host name \"postgres\"`. Thiếu gì?",
+    "questionEn": "After applying a default-deny NetworkPolicy for both Ingress and Egress in a namespace, then allowing egress to `postgres` on port 5432, the app fails with `could not translate host name \"postgres\"`. What is missing?",
+    "options": [
+      "Rule egress cho phép UDP và TCP port 53 tới CoreDNS trong kube-system",
+      "Rule ingress cho phép postgres gọi ngược lại ứng dụng",
+      "Một ClusterRole cho phép pod đọc Service",
+      "Nhãn `kubernetes.io/metadata.name` trên namespace của ứng dụng"
+    ],
+    "optionsEn": [
+      "An egress rule allowing UDP and TCP port 53 to CoreDNS in kube-system",
+      "An ingress rule letting postgres call back into the application",
+      "A ClusterRole allowing the pod to read Services",
+      "The `kubernetes.io/metadata.name` label on the application's namespace"
+    ],
+    "answer": 0,
+    "explanation": "Lỗi là lỗi phân giải tên: default-deny egress chặn luôn truy vấn DNS tới CoreDNS. Phải cho phép port 53 (UDP và TCP) trước. Traffic trả lời của kết nối đã được cho phép không cần rule ingress riêng; phân giải DNS không cần quyền RBAC; nhãn metadata.name được Kubernetes tự gắn cho namespace.",
+    "explanationEn": "This is a name-resolution failure: default-deny egress also blocks DNS queries to CoreDNS. Port 53 (UDP and TCP) must be allowed first. Reply traffic on an allowed connection needs no separate ingress rule, DNS lookups need no RBAC permission, and Kubernetes sets the metadata.name label on namespaces automatically."
+  },
+  {
+    "id": "q18",
+    "question": "Một bản `helm upgrade` đã thay đổi Deployment, ConfigMap và NetworkPolicy của release `api`, và bản mới bị lỗi. Cách hoàn tác phù hợp nhất?",
+    "questionEn": "A `helm upgrade` changed the Deployment, ConfigMap and NetworkPolicy of release `api`, and the new version is broken. What is the most appropriate way to revert?",
+    "options": [
+      "`kubectl rollout undo deployment/api`, vì nó hoàn tác mọi resource liên quan",
+      "`helm rollback api <revision>`, vì nó đưa mọi resource của release về revision trước",
+      "`helm template` với values cũ, vì nó áp cấu hình trở lại cluster",
+      "Xoá namespace rồi `helm install` lại từ đầu"
+    ],
+    "optionsEn": [
+      "`kubectl rollout undo deployment/api`, because it reverts every related resource",
+      "`helm rollback api <revision>`, because it returns every resource in the release to a previous revision",
+      "`helm template` with the old values, because it applies the configuration back to the cluster",
+      "Delete the namespace and `helm install` again from scratch"
+    ],
+    "answer": 1,
+    "explanation": "helm rollback khôi phục toàn bộ manifest của release theo revision đã lưu. kubectl rollout undo chỉ đảo pod template của một Deployment, bỏ sót ConfigMap và NetworkPolicy. helm template chỉ render YAML ra màn hình, không áp vào cluster. Xoá namespace gây downtime và có thể mất PVC.",
+    "explanationEn": "helm rollback restores the release's whole manifest from a stored revision. kubectl rollout undo only reverts one Deployment's pod template and misses the ConfigMap and NetworkPolicy. helm template only renders YAML locally and applies nothing. Deleting the namespace causes downtime and can lose PVCs."
+  }
+]

@@ -1,0 +1,578 @@
+[
+  {
+    "id": "fs08-q1",
+    "question": "User B đã đăng nhập thành công, nhưng khi gọi `PATCH /api/todos/5` (to-do của user A) thì nhận `404 To-do not found.`. Đây là gì?",
+    "questionEn": "User B is logged in, but calling `PATCH /api/todos/5` (user A's to-do) returns `404 To-do not found.`. What is this?",
+    "options": [
+      "Authentication thất bại vì cookie sai",
+      "Quy tắc authorization đang hoạt động đúng",
+      "Token JWT của user B đã hết hạn",
+      "Lỗi của bcrypt khi so sánh mật khẩu"
+    ],
+    "optionsEn": [
+      "Authentication failing because the cookie is wrong",
+      "The authorization rule working as intended",
+      "User B's JWT having expired",
+      "A bcrypt error while comparing passwords"
+    ],
+    "answer": 1,
+    "explanation": "User B đã được xác thực (authN ổn). Mọi query to-do đều lọc theo `user_id`, nên to-do của người khác \"không tìm thấy\": đó là authorization (authZ) chặn đúng như thiết kế.",
+    "explanationEn": "User B is authenticated (authN is fine). Every to-do query filters by `user_id`, so someone else's to-do is \"not found\": that is authorization (authZ) blocking access by design.",
+    "optionExplanations": [
+      "Nếu authN thất bại, requireAuth sẽ trả 401, không phải 404.",
+      "Đúng: query có `AND user_id = ?` nên to-do của A không thuộc về B.",
+      "Token hết hạn cho 401 \"Your session has expired...\", không phải 404.",
+      "bcrypt chỉ chạy lúc đăng nhập/đăng ký, không chạy ở route to-do."
+    ],
+    "optionExplanationsEn": [
+      "A failed authN makes requireAuth return 401, not 404.",
+      "Correct: the query has `AND user_id = ?`, so A's to-do does not belong to B.",
+      "An expired token gives 401 \"Your session has expired...\", not 404.",
+      "bcrypt only runs at login/sign-up, never in the to-do routes."
+    ]
+  },
+  {
+    "id": "fs08-q2",
+    "question": "\"HTTP là stateless\" nghĩa là gì?",
+    "questionEn": "What does \"HTTP is stateless\" mean?",
+    "options": [
+      "Server lưu mọi request vào database để nhớ user",
+      "Trình duyệt không được phép gửi cookie",
+      "Response không được chứa dữ liệu trạng thái",
+      "Mỗi request đứng độc lập, server không nhớ request trước"
+    ],
+    "optionsEn": [
+      "The server stores every request in the database to remember users",
+      "The browser is not allowed to send cookies",
+      "Responses may not contain any state data",
+      "Each request stands alone; the server does not remember the previous one"
+    ],
+    "answer": 3,
+    "explanation": "Stateless nghĩa là mỗi request tự đứng một mình. Vì vậy sau khi đăng nhập, mỗi request tiếp theo phải tự chứng minh lại bạn là ai, bằng session ID hoặc token trong cookie.",
+    "explanationEn": "Stateless means each request stands on its own. That is why, after login, every following request must prove again who you are, with a session ID or a token in a cookie.",
+    "optionExplanations": [
+      "Ngược lại: HTTP bản thân không nhớ gì; app phải tự thêm cơ chế.",
+      "Cookie vẫn được gửi bình thường; cookie chính là cách vượt qua tính stateless.",
+      "Response có thể chứa bất kỳ dữ liệu nào, kể cả Set-Cookie.",
+      "Đúng: đó là định nghĩa của stateless."
+    ],
+    "optionExplanationsEn": [
+      "The opposite: HTTP itself remembers nothing; the app must add a mechanism.",
+      "Cookies are sent normally; they are exactly how apps work around statelessness.",
+      "Responses may carry any data, including Set-Cookie.",
+      "Correct: that is the definition of stateless."
+    ]
+  },
+  {
+    "id": "fs08-q3",
+    "question": "So với session phía server, nhược điểm chính của JWT thuần (stateless) là gì?",
+    "questionEn": "Compared with server-side sessions, what is the main drawback of a pure (stateless) JWT?",
+    "options": [
+      "Không thu hồi ngay được token trước khi nó hết hạn",
+      "Không chạy được khi có nhiều server",
+      "Phải lưu mọi token vào một bảng trong database",
+      "Trình duyệt không thể gửi JWT trong cookie"
+    ],
+    "optionsEn": [
+      "A token cannot be revoked instantly before it expires",
+      "It cannot work when there are several servers",
+      "Every token must be stored in a database table",
+      "The browser cannot send a JWT inside a cookie"
+    ],
+    "answer": 0,
+    "explanation": "Server không giữ danh sách token, nên không có gì để xóa: token còn hiệu lực đến `exp`. Session phía server chỉ cần xóa một dòng là phiên chết ngay.",
+    "explanationEn": "The server keeps no list of tokens, so there is nothing to delete: a token stays valid until `exp`. With server-side sessions, deleting one row kills the session instantly.",
+    "optionExplanations": [
+      "Đúng: đây là trade-off của thiết kế stateless.",
+      "Ngược lại: server nào có secret cũng kiểm tra được JWT, đó là ưu điểm.",
+      "JWT thuần không lưu gì phía server; đó là ý nghĩa của stateless.",
+      "App mẫu làm đúng như vậy: JWT nằm trong cookie `token`."
+    ],
+    "optionExplanationsEn": [
+      "Correct: this is the stateless trade-off.",
+      "The opposite: any server with the secret can verify a JWT, which is a strength.",
+      "A pure JWT stores nothing on the server; that is what stateless means.",
+      "The sample does exactly that: the JWT lives in the `token` cookie."
+    ]
+  },
+  {
+    "id": "fs08-q4",
+    "question": "Đã có tài khoản `an@example.com`. Một người đăng ký với email `AN@Example.com`. Kết quả?",
+    "questionEn": "An account `an@example.com` exists. Someone signs up with `AN@Example.com`. What happens?",
+    "options": [
+      "201, một tài khoản mới được tạo",
+      "400 \"Email is not valid.\"",
+      "409 \"This email is already registered.\"",
+      "500 vì vi phạm ràng buộc UNIQUE"
+    ],
+    "optionsEn": [
+      "201, a new account is created",
+      "400 \"Email is not valid.\"",
+      "409 \"This email is already registered.\"",
+      "500 because the UNIQUE constraint fails"
+    ],
+    "answer": 2,
+    "explanation": "Server `trim()` và `toLowerCase()` email trước khi kiểm tra, nên `AN@Example.com` thành `an@example.com`, tìm thấy dòng cũ và trả 409.",
+    "explanationEn": "The server calls `trim()` and `toLowerCase()` on the email before checking, so `AN@Example.com` becomes `an@example.com`, matches the existing row and returns 409.",
+    "optionExplanations": [
+      "Sẽ đúng nếu server không chuyển email về chữ thường; nhưng nó có.",
+      "Email viết hoa vẫn đúng định dạng, nên qua được EMAIL_PATTERN.",
+      "Đúng: email được lowercase rồi mới SELECT.",
+      "Server kiểm tra trùng trước khi INSERT, nên không chạm tới ràng buộc UNIQUE."
+    ],
+    "optionExplanationsEn": [
+      "That would happen if the server did not lowercase emails, but it does.",
+      "An uppercase email is still well-formed, so it passes EMAIL_PATTERN.",
+      "Correct: the email is lowercased before the SELECT.",
+      "The server checks for a duplicate before INSERT, so the UNIQUE constraint is never hit."
+    ]
+  },
+  {
+    "id": "fs08-q5",
+    "question": "Form đăng ký đã kiểm tra mật khẩu ≥ 8 ký tự. Vì sao server vẫn kiểm tra lại?",
+    "questionEn": "The sign-up form already checks the password is 8+ characters. Why does the server check again?",
+    "options": [
+      "Để request chạy nhanh hơn gấp đôi",
+      "Vì React không có khả năng kiểm tra dữ liệu",
+      "Vì trình duyệt tự xóa phần kiểm tra khi gửi form",
+      "Vì bất kỳ ai cũng có thể bỏ qua form và gọi API trực tiếp"
+    ],
+    "optionsEn": [
+      "To make the request run twice as fast",
+      "Because React cannot validate data",
+      "Because browsers strip validation when submitting",
+      "Because anyone can skip the form and call the API directly"
+    ],
+    "answer": 3,
+    "explanation": "Kiểm tra ở frontend chỉ để tiện (phản hồi tức thì). Ai cũng có thể gửi request bằng curl, Postman hoặc Console, nên quy tắc thật phải nằm ở server.",
+    "explanationEn": "Frontend checks are for convenience (instant feedback). Anyone can send a request with curl, Postman or the Console, so the real rule must live on the server.",
+    "optionExplanations": [
+      "Kiểm tra hai lần không làm request nhanh hơn.",
+      "React kiểm tra được; `AuthForm` đang làm đúng điều đó.",
+      "Trình duyệt không xóa gì; vấn đề là có thể không dùng form.",
+      "Đúng: đây chính là comment trong `routes/auth.js`."
+    ],
+    "optionExplanationsEn": [
+      "Checking twice does not make anything faster.",
+      "React can validate; `AuthForm` does exactly that.",
+      "Browsers strip nothing; the issue is that the form can be bypassed.",
+      "Correct: this is the very comment in `routes/auth.js`."
+    ]
+  },
+  {
+    "id": "fs08-q6",
+    "question": "Hai user cùng chọn mật khẩu `secret123`. Cột `password_hash` của họ chứa gì?",
+    "questionEn": "Two users both pick the password `secret123`. What does their `password_hash` column contain?",
+    "options": [
+      "Hai hash giống hệt nhau",
+      "Hai hash khác nhau, vì mỗi hash có salt ngẫu nhiên riêng",
+      "Chính chuỗi `secret123` ở dạng chữ thường",
+      "Chuỗi mã hóa giải được bằng `JWT_SECRET`"
+    ],
+    "optionsEn": [
+      "Two identical hashes",
+      "Two different hashes, because each has its own random salt",
+      "The plain string `secret123`",
+      "An encrypted string that `JWT_SECRET` can decrypt"
+    ],
+    "answer": 1,
+    "explanation": "bcrypt sinh salt ngẫu nhiên cho mỗi lần hash và lưu salt ngay trong chuỗi `$2b$10$...`. Cùng mật khẩu nhưng hash khác nhau, nên kẻ tấn công không nhận ra ai dùng chung mật khẩu.",
+    "explanationEn": "bcrypt generates a random salt for every hash and stores it inside the `$2b$10$...` string. Same password, different hashes, so an attacker cannot spot shared passwords.",
+    "optionExplanations": [
+      "Sẽ đúng nếu không có salt; bcrypt luôn thêm salt.",
+      "Đúng: salt ngẫu nhiên làm mỗi hash khác nhau.",
+      "App không bao giờ lưu mật khẩu gốc.",
+      "Hash là một chiều, và JWT_SECRET chỉ dùng để ký token."
+    ],
+    "optionExplanationsEn": [
+      "That would be true without a salt; bcrypt always adds one.",
+      "Correct: the random salt makes each hash different.",
+      "The app never stores the plain password.",
+      "Hashing is one-way, and JWT_SECRET is only used to sign tokens."
+    ]
+  },
+  {
+    "id": "fs08-q7",
+    "question": "Trong hash `$2b$10$XKAMQ...`, số `10` nghĩa là gì?",
+    "questionEn": "In the hash `$2b$10$XKAMQ...`, what does `10` mean?",
+    "options": [
+      "Cost factor: 2^10 vòng băm, cố tình làm chậm",
+      "Độ dài tối thiểu của mật khẩu",
+      "Số ký tự của salt",
+      "Id của user trong bảng users"
+    ],
+    "optionsEn": [
+      "The cost factor: 2^10 rounds, deliberately slow",
+      "The minimum password length",
+      "The number of characters in the salt",
+      "The user's id in the users table"
+    ],
+    "answer": 0,
+    "explanation": "`bcrypt.hashSync(password, 10)` dùng cost 10 = 1.024 vòng, khoảng 70 ms mỗi lần. Tăng cost thêm 1 là gấp đôi công sức, làm việc đoán mật khẩu hàng loạt rất tốn kém.",
+    "explanationEn": "`bcrypt.hashSync(password, 10)` uses cost 10 = 1,024 rounds, about 70 ms per hash. Each +1 doubles the work, which makes mass password guessing expensive.",
+    "optionExplanations": [
+      "Đúng: đó là cost factor truyền vào `hashSync`.",
+      "Độ dài tối thiểu là 8, được kiểm tra riêng trong route signup.",
+      "Salt luôn là 22 ký tự, nằm ngay sau `$10$`.",
+      "Hash không chứa user id; id nằm ở cột riêng."
+    ],
+    "optionExplanationsEn": [
+      "Correct: it is the cost factor passed to `hashSync`.",
+      "The minimum length is 8, checked separately in the signup route.",
+      "The salt is always 22 characters, right after `$10$`.",
+      "A hash contains no user id; the id is a separate column."
+    ]
+  },
+  {
+    "id": "fs08-q8",
+    "question": "Tester đăng nhập bằng email không tồn tại và thấy \"Email or password is incorrect.\". Tester mở bug: \"phải báo là không có tài khoản\". BA nên trả lời thế nào?",
+    "questionEn": "A tester logs in with an email that does not exist and sees \"Email or password is incorrect.\". They file a bug: \"it should say there is no account\". How should the BA respond?",
+    "options": [
+      "Đồng ý, đổi thông báo cho rõ ràng hơn",
+      "Đổi status thành 404 cho đúng chuẩn REST",
+      "Đây là cố ý, để chống account enumeration",
+      "Đây là lỗi do email bị chuyển về chữ thường"
+    ],
+    "optionsEn": [
+      "Agree and make the message clearer",
+      "Change the status to 404 to follow REST",
+      "It is deliberate, to prevent account enumeration",
+      "It is a bug caused by lowercasing the email"
+    ],
+    "answer": 2,
+    "explanation": "Cùng một thông báo cho \"không có email\" và \"sai mật khẩu\" để không ai dùng form đăng nhập dò xem ai có tài khoản. Bug nên được đóng với lý do \"by design\".",
+    "explanationEn": "The same message for \"no such email\" and \"wrong password\" stops anyone from using the login form to find out who has an account. The bug should be closed as \"by design\".",
+    "optionExplanations": [
+      "Thông báo rõ hơn sẽ tiết lộ email nào đã đăng ký.",
+      "Một status khác cũng tiết lộ đúng thông tin cần giấu.",
+      "Đúng: comment trong `routes/auth.js` nói rõ điều này.",
+      "Lowercase chỉ chuẩn hóa email, không liên quan đến thông báo."
+    ],
+    "optionExplanationsEn": [
+      "A clearer message would reveal which emails are registered.",
+      "A different status leaks exactly the fact being hidden.",
+      "Correct: the comment in `routes/auth.js` says so.",
+      "Lowercasing only normalizes the email; it does not affect the message."
+    ]
+  },
+  {
+    "id": "fs08-q9",
+    "question": "Payload của JWT trong app mẫu chứa những gì?",
+    "questionEn": "What does the JWT payload contain in the sample?",
+    "options": [
+      "`{ sub, email, password_hash, exp }`",
+      "`{ id, name, role }`",
+      "`{ user, token, secret }`",
+      "`{ sub, email, iat, exp }`"
+    ],
+    "optionsEn": [
+      "`{ sub, email, password_hash, exp }`",
+      "`{ id, name, role }`",
+      "`{ user, token, secret }`",
+      "`{ sub, email, iat, exp }`"
+    ],
+    "answer": 3,
+    "explanation": "`signToken` ký `{ sub: user.id, email: user.email }`, và thư viện tự thêm `iat` (thời điểm cấp) và `exp` (hết hạn sau 7 ngày).",
+    "explanationEn": "`signToken` signs `{ sub: user.id, email: user.email }`, and the library adds `iat` (issued at) and `exp` (7 days later).",
+    "optionExplanations": [
+      "Không bao giờ đặt hash mật khẩu vào JWT: ai cũng đọc được payload.",
+      "App mẫu không có role, và dùng `sub` chứ không dùng `id`.",
+      "Đặt secret vào token là sai nghiêm trọng.",
+      "Đúng: sub và email từ signToken, iat và exp do thư viện thêm."
+    ],
+    "optionExplanationsEn": [
+      "Never put a password hash in a JWT: anyone can read the payload.",
+      "The sample has no roles, and uses `sub`, not `id`.",
+      "Putting the secret in the token would be a serious mistake.",
+      "Correct: sub and email from signToken, iat and exp added by the library."
+    ]
+  },
+  {
+    "id": "fs08-q10",
+    "question": "Một đồng nghiệp dán token của bạn vào jwt.io và đọc được email của bạn. Điều này cho thấy gì?",
+    "questionEn": "A colleague pastes your token into jwt.io and reads your email. What does this show?",
+    "options": [
+      "Token được mã hóa bằng một key quá yếu",
+      "Payload chỉ được encode base64url, nên ai cũng đọc được",
+      "JWT_SECRET đã bị lộ ra ngoài",
+      "Cookie không được đặt cờ HttpOnly"
+    ],
+    "optionsEn": [
+      "The token was encrypted with a key that is too weak",
+      "The payload is only base64url-encoded, so anyone can read it",
+      "JWT_SECRET has leaked",
+      "The cookie was not marked HttpOnly"
+    ],
+    "answer": 1,
+    "explanation": "JWT được ký, không được mã hóa. Đọc payload không cần secret; secret chỉ cần để tạo chữ ký hợp lệ. Vì vậy không bao giờ đặt bí mật vào JWT.",
+    "explanationEn": "A JWT is signed, not encrypted. Reading the payload needs no secret; the secret is only needed to make a valid signature. So never put secrets in a JWT.",
+    "optionExplanations": [
+      "JWT của app mẫu không được mã hóa chút nào.",
+      "Đúng: encode không phải là mã hóa.",
+      "Đọc payload không cần secret, nên đây không phải bằng chứng lộ secret.",
+      "HttpOnly chặn JavaScript đọc cookie, không liên quan đến việc đọc token đã copy."
+    ],
+    "optionExplanationsEn": [
+      "The sample's JWT is not encrypted at all.",
+      "Correct: encoding is not encryption.",
+      "Reading the payload needs no secret, so this proves no leak.",
+      "HttpOnly stops JavaScript reading the cookie; it is unrelated to reading a copied token."
+    ]
+  },
+  {
+    "id": "fs08-q11",
+    "question": "Ai đó sửa `sub` từ 1 thành 2 trong một token đã copy rồi gọi `GET /api/todos`. Kết quả?",
+    "questionEn": "Someone changes `sub` from 1 to 2 in a copied token and calls `GET /api/todos`. What happens?",
+    "options": [
+      "401 \"Your session has expired. Please log in again.\" vì chữ ký không còn khớp",
+      "200 kèm danh sách to-do của user 2",
+      "403 Forbidden vì user 1 không có quyền",
+      "409 vì token bị trùng"
+    ],
+    "optionsEn": [
+      "401 \"Your session has expired. Please log in again.\" because the signature no longer matches",
+      "200 with user 2's to-dos",
+      "403 Forbidden because user 1 lacks permission",
+      "409 because the token is a duplicate"
+    ],
+    "answer": 0,
+    "explanation": "Chữ ký được tính trên header và payload bằng JWT_SECRET. Sửa payload là chữ ký sai, `verifyToken` ném lỗi và requireAuth trả 401 (cùng thông báo với token hết hạn).",
+    "explanationEn": "The signature is computed over the header and payload with JWT_SECRET. Change the payload and the signature is wrong, `verifyToken` throws, and requireAuth returns 401 (the same message as an expired token).",
+    "optionExplanations": [
+      "Đúng: đã kiểm chứng trên app mẫu.",
+      "Chỉ xảy ra nếu có JWT_SECRET để ký lại token.",
+      "App mẫu không dùng 403; lỗi token luôn là 401.",
+      "409 chỉ dùng cho email đã đăng ký."
+    ],
+    "optionExplanationsEn": [
+      "Correct: verified against the sample.",
+      "Only possible with JWT_SECRET to re-sign the token.",
+      "The sample never uses 403; token errors are always 401.",
+      "409 is only used for an already-registered email."
+    ]
+  },
+  {
+    "id": "fs08-q12",
+    "question": "Thuộc tính cookie nào ngăn một script bị chèn vào trang (XSS) đọc được token?",
+    "questionEn": "Which cookie attribute stops a script injected into the page (XSS) from reading the token?",
+    "options": [
+      "`Secure`",
+      "`SameSite=Lax`",
+      "`HttpOnly`",
+      "`Path=/`"
+    ],
+    "optionsEn": [
+      "`Secure`",
+      "`SameSite=Lax`",
+      "`HttpOnly`",
+      "`Path=/`"
+    ],
+    "answer": 2,
+    "explanation": "HttpOnly giấu cookie khỏi JavaScript: `document.cookie` không thấy `token`, nhưng trình duyệt vẫn gửi nó kèm mọi request.",
+    "explanationEn": "HttpOnly hides the cookie from JavaScript: `document.cookie` does not show `token`, yet the browser still sends it with every request.",
+    "optionExplanations": [
+      "Secure chỉ bắt cookie đi qua HTTPS, chống nghe lén.",
+      "SameSite chống CSRF từ website khác.",
+      "Đúng: HttpOnly chặn JavaScript đọc cookie.",
+      "Path chỉ quy định cookie gửi kèm đường dẫn nào."
+    ],
+    "optionExplanationsEn": [
+      "Secure only forces HTTPS, against sniffing.",
+      "SameSite is against CSRF from other sites.",
+      "Correct: HttpOnly blocks JavaScript from reading the cookie.",
+      "Path only sets which paths the cookie goes with."
+    ]
+  },
+  {
+    "id": "fs08-q13",
+    "question": "`SameSite=Lax` chủ yếu bảo vệ khỏi kiểu tấn công nào?",
+    "questionEn": "What does `SameSite=Lax` mainly protect against?",
+    "options": [
+      "Nghe lén cookie trên Wi-Fi công cộng",
+      "SQL injection qua form đăng nhập",
+      "Đoán mật khẩu hàng loạt (brute force)",
+      "CSRF: website khác khiến trình duyệt POST tới API kèm cookie của bạn"
+    ],
+    "optionsEn": [
+      "Sniffing the cookie on public Wi-Fi",
+      "SQL injection through the login form",
+      "Mass password guessing (brute force)",
+      "CSRF: another site making your browser POST to the API with your cookie"
+    ],
+    "answer": 3,
+    "explanation": "Với Lax, cookie không được gửi kèm request POST xuyên site, nhưng vẫn được gửi khi bạn bấm một link bình thường tới website.",
+    "explanationEn": "With Lax, the cookie is not sent on cross-site POST requests, but it is still sent when you click a normal link to the site.",
+    "optionExplanations": [
+      "Đó là việc của `Secure` + HTTPS.",
+      "SQL injection được chặn bằng prepared statement (`?`).",
+      "Brute force cần rate limiting, app mẫu chưa có.",
+      "Đúng: SameSite là lớp chống CSRF cơ bản."
+    ],
+    "optionExplanationsEn": [
+      "That is the job of `Secure` + HTTPS.",
+      "SQL injection is blocked by prepared statements (`?`).",
+      "Brute force needs rate limiting, which the sample lacks.",
+      "Correct: SameSite is the basic CSRF defence."
+    ]
+  },
+  {
+    "id": "fs08-q14",
+    "question": "Bạn refresh trang và vẫn thấy danh sách to-do của mình. Điều gì làm được việc đó?",
+    "questionEn": "You refresh the page and still see your to-dos. What made that possible?",
+    "options": [
+      "Mật khẩu được lưu trong localStorage và gửi lại",
+      "`App` gọi `GET /api/auth/me` khi tải trang và cookie vẫn còn hợp lệ",
+      "React giữ nguyên state qua các lần tải lại trang",
+      "Vite lưu cache thông tin user giữa các lần tải"
+    ],
+    "optionsEn": [
+      "The password is kept in localStorage and sent again",
+      "`App` calls `GET /api/auth/me` on load and the cookie is still valid",
+      "React keeps its state across page reloads",
+      "Vite caches the user between loads"
+    ],
+    "answer": 1,
+    "explanation": "Sau refresh, `user` bắt đầu là `null`. `useEffect` trong App.jsx gọi `/api/auth/me`; cookie còn hạn thì server trả 200 kèm user và danh sách hiện ra.",
+    "explanationEn": "After a refresh, `user` starts as `null`. The `useEffect` in App.jsx calls `/api/auth/me`; if the cookie is still valid, the server answers 200 with the user and the list appears.",
+    "optionExplanations": [
+      "Mật khẩu không bao giờ được lưu trong trình duyệt.",
+      "Đúng: đây là cơ chế khôi phục phiên.",
+      "State của React mất hết khi tải lại trang.",
+      "Vite chỉ phục vụ file và proxy, không giữ user."
+    ],
+    "optionExplanationsEn": [
+      "The password is never stored in the browser.",
+      "Correct: this is how the session is restored.",
+      "React state is lost on every reload.",
+      "Vite only serves files and proxies; it holds no user."
+    ]
+  },
+  {
+    "id": "fs08-q15",
+    "question": "Sau khi đăng xuất, tester dùng lại một token đã copy từ trước bằng curl và `GET /api/auth/me` vẫn trả 200. Nguyên nhân?",
+    "questionEn": "After logging out, a tester replays a token copied earlier with curl, and `GET /api/auth/me` still returns 200. Why?",
+    "options": [
+      "Endpoint logout bị lỗi 500 nên không chạy",
+      "Cookie không có cờ HttpOnly",
+      "JWT stateless còn hiệu lực đến `exp` vì server không giữ danh sách token",
+      "bcrypt cost quá thấp nên token dễ đoán"
+    ],
+    "optionsEn": [
+      "The logout endpoint failed with a 500",
+      "The cookie was not HttpOnly",
+      "A stateless JWT stays valid until `exp` because the server keeps no token list",
+      "The bcrypt cost is too low, so tokens are guessable"
+    ],
+    "answer": 2,
+    "explanation": "Logout chỉ bảo trình duyệt xóa cookie (204 + cookie hết hạn). Bản copy của token vẫn có chữ ký hợp lệ. Muốn chặn, cần session/deny list phía server hoặc access token sống ngắn + refresh token.",
+    "explanationEn": "Logout only tells the browser to delete the cookie (204 + an expired cookie). A copy of the token still has a valid signature. Blocking it needs a server-side session/deny list or a short-lived access token + refresh token.",
+    "optionExplanations": [
+      "Logout trả 204 bình thường; vấn đề nằm ở thiết kế.",
+      "HttpOnly không liên quan: token đã được copy sẵn.",
+      "Đúng: đây là trade-off của JWT stateless.",
+      "bcrypt dùng cho mật khẩu, không dùng cho token."
+    ],
+    "optionExplanationsEn": [
+      "Logout returns 204 normally; the issue is the design.",
+      "HttpOnly is irrelevant: the token was already copied.",
+      "Correct: this is the stateless JWT trade-off.",
+      "bcrypt is for passwords, not tokens."
+    ]
+  },
+  {
+    "id": "fs08-q16",
+    "question": "User báo: \"Tôi đang gõ một to-do, bấm Add thì bỗng thấy form đăng nhập, chữ đã gõ mất hết.\" Tab Network có `POST /api/todos → 401`. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "A user reports: \"I was typing a to-do, clicked Add, and suddenly saw the login form; my text was gone.\" The Network tab shows `POST /api/todos → 401`. Most likely cause?",
+    "options": [
+      "Phiên (JWT/cookie) đã hết hạn nên requireAuth trả 401 và FE gọi `onSessionExpired()`",
+      "Tiêu đề dài hơn 200 ký tự",
+      "Server bị sập giữa chừng",
+      "Email của user bị đổi sang chữ hoa"
+    ],
+    "optionsEn": [
+      "The session (JWT/cookie) expired, so requireAuth returned 401 and the FE called `onSessionExpired()`",
+      "The title was longer than 200 characters",
+      "The server crashed mid-request",
+      "The user's email was changed to uppercase"
+    ],
+    "answer": 0,
+    "explanation": "TodoPage coi mọi 401 là hết phiên: `onSessionExpired()` đặt user về null và hiện form đăng nhập, không có thông báo. Đây là ứng viên tốt cho một user story cải thiện UX.",
+    "explanationEn": "TodoPage treats every 401 as an expired session: `onSessionExpired()` sets user to null and shows the login form, with no message. A good candidate for a UX-improvement story.",
+    "optionExplanations": [
+      "Đúng: 401 + quay về form đăng nhập là dấu hiệu hết phiên.",
+      "Tiêu đề quá dài cho 400 và thông báo lỗi, không phải 401.",
+      "Server sập sẽ không trả được 401 nào.",
+      "Email không liên quan tới việc thêm to-do."
+    ],
+    "optionExplanationsEn": [
+      "Correct: a 401 + back to the login form is the expired-session signature.",
+      "A too-long title gives 400 and an error message, not 401.",
+      "A crashed server could not return any 401.",
+      "The email plays no part in adding a to-do."
+    ]
+  },
+  {
+    "id": "fs08-q17",
+    "question": "User story nào đúng cho tình huống user quên mật khẩu?",
+    "questionEn": "Which user story is right for users who forget their password?",
+    "options": [
+      "Gửi mật khẩu hiện tại của tôi qua email",
+      "Hiện gợi ý mật khẩu dựa trên hash",
+      "Cho bộ phận hỗ trợ đọc mật khẩu từ database",
+      "Gửi link đặt lại dùng một lần, hết hạn nhanh, để tôi đặt mật khẩu mới"
+    ],
+    "optionsEn": [
+      "Email me my current password",
+      "Show a password hint based on the hash",
+      "Let support read my password from the database",
+      "Send a one-time, short-lived reset link so I can set a new password"
+    ],
+    "answer": 3,
+    "explanation": "Hệ thống chỉ có hash một chiều, không có mật khẩu gốc để gửi. Cách đúng là link/token đặt lại dùng một lần, có thời hạn ngắn.",
+    "explanationEn": "The system only has a one-way hash, with no original password to send. The right way is a one-time, short-lived reset link/token.",
+    "optionExplanations": [
+      "Bất khả thi: không ai biết mật khẩu gốc.",
+      "Hash không thể đảo ngược thành gợi ý.",
+      "Database chỉ có hash; và support không bao giờ nên thấy mật khẩu.",
+      "Đúng: đây là cách làm chuẩn."
+    ],
+    "optionExplanationsEn": [
+      "Impossible: nobody knows the original password.",
+      "A hash cannot be reversed into a hint.",
+      "The database only holds hashes, and support should never see passwords.",
+      "Correct: this is the standard approach."
+    ]
+  },
+  {
+    "id": "fs08-q18",
+    "question": "App mẫu lưu \"email gõ lần cuối\" và token đăng nhập ở đâu?",
+    "questionEn": "Where does the sample keep the \"last email typed\" and the login token?",
+    "options": [
+      "Cả hai trong localStorage",
+      "Email trong localStorage (`todo:lastEmail`), token trong cookie HttpOnly",
+      "Cả hai trong cookie HttpOnly",
+      "Email trong cookie, token trong localStorage"
+    ],
+    "optionsEn": [
+      "Both in localStorage",
+      "Email in localStorage (`todo:lastEmail`), token in an HttpOnly cookie",
+      "Both in an HttpOnly cookie",
+      "Email in a cookie, token in localStorage"
+    ],
+    "answer": 1,
+    "explanation": "Email chỉ là tùy chọn vô hại để điền sẵn form, nên để trong localStorage. Token là chìa khóa đăng nhập, nên nằm trong cookie HttpOnly mà JavaScript không đọc được.",
+    "explanationEn": "The email is a harmless preference for pre-filling the form, so localStorage is fine. The token is the login key, so it lives in an HttpOnly cookie that JavaScript cannot read.",
+    "optionExplanations": [
+      "Token trong localStorage có thể bị XSS lấy trộm.",
+      "Đúng: đúng như bảng \"Where things are stored\" trong README.",
+      "Cookie HttpOnly không đọc được bằng JS, nên không điền sẵn form được.",
+      "Đây là cách sắp xếp ngược và kém an toàn nhất."
+    ],
+    "optionExplanationsEn": [
+      "A token in localStorage can be stolen by XSS.",
+      "Correct: exactly as the README's \"Where things are stored\" table says.",
+      "JS cannot read an HttpOnly cookie, so it could not pre-fill the form.",
+      "The reverse, and least safe, arrangement."
+    ]
+  }
+]

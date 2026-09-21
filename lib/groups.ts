@@ -27,9 +27,9 @@ export const GROUPS: Group[] = [
     label: "Nền tảng IT",
     labelEn: "IT Fundamentals",
     description:
-      "Kiến thức kỹ thuật nền tảng mà mọi vai trò BA, PO, PM đều cần: mạng, web, API, dữ liệu, kiến trúc và quy trình phát triển.",
+      "Kiến thức kỹ thuật nền tảng mà mọi vai trò BA, PO, PM đều cần: mạng, web, API, dữ liệu, kiến trúc và quy trình phát triển — kết thúc bằng phần thực hành tự xây một website To-do có đăng nhập (React, Express, SQL) và kiểm thử bằng Chrome DevTools.",
     descriptionEn:
-      "The technical groundwork every BA, PO, and PM needs: networking, the web, APIs, data, architecture, and the development process.",
+      "The technical groundwork every BA, PO, and PM needs: networking, the web, APIs, data, architecture, and the development process — ending with a hands-on build of a to-do website with login (React, Express, SQL), tested with Chrome DevTools.",
     icon: "◉",
     accent: "blue",
   },

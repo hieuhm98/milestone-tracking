@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #f4f5f7;
+  color: #1f2328;
+}
+
+.container {
+  max-width: 520px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+.center {
+  text-align: center;
+  margin-top: 64px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+
+input:not([type='checkbox']) {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #2f6feb;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+button.secondary {
+  background: #eaeef2;
+  color: #1f2328;
+}
+
+button.link {
+  background: none;
+  color: #2f6feb;
+  padding: 0;
+  font-size: inherit;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.filters {
+  justify-content: flex-start;
+}
+
+.chip {
+  padding: 4px 12px;
+  background: #eaeef2;
+  color: #1f2328;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.chip.active {
+  background: #2f6feb;
+  color: #fff;
+}
+
+.muted {
+  color: #656d76;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.error {
+  color: #cf222e;
+  background: #ffebe9;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.todos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todos li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eaeef2;
+}
+
+.todos li label {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.todos li.done span {
+  text-decoration: line-through;
+  color: #8c959f;
+}

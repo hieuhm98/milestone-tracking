@@ -1,0 +1,546 @@
+[
+  {
+    "id": "fs01-q1",
+    "question": "Mục tiêu chính của chuỗi bài \"Xây website từ A–Z\" đối với một BA là gì?",
+    "questionEn": "What is the main goal of the \"Build a Website A–Z\" run for a BA?",
+    "options": [
+      "Chuyển nghề thành full-stack developer sau 11 bài",
+      "Hiểu một app thật chạy thế nào để viết yêu cầu tốt hơn và test tự tin",
+      "Học cách tự deploy và vận hành app trên production",
+      "Thay thế team QA bằng cách tự viết test tự động"
+    ],
+    "optionsEn": [
+      "Switch careers to full-stack developer after 11 topics",
+      "Understand how a real app works to write better requirements and test confidently",
+      "Learn to deploy and operate the app in production yourself",
+      "Replace the QA team by writing automated tests yourself"
+    ],
+    "answer": 1,
+    "explanation": "Mục tiêu là \"hiểu chuyện\" (literacy): có mô hình trong đầu đáng tin, viết acceptance criteria cho cả luồng lỗi và test bằng DevTools. Bài viết nói rõ bạn sẽ KHÔNG trở thành developer và không học đưa lên production.",
+    "explanationEn": "The goal is literacy: a trustworthy mental model, acceptance criteria that cover unhappy paths, and confident testing with DevTools. The article says plainly you will NOT become a developer or learn to ship to production.",
+    "optionExplanations": [
+      "Sai: bài viết nói rõ bạn sẽ không trở thành developer.",
+      "Đúng: hiểu app thật để viết yêu cầu tốt hơn và test tự tin.",
+      "Sai: đưa lên production nằm ngoài mục tiêu của khóa.",
+      "Sai: khóa học giúp BA test tự tin hơn, không thay thế QA."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the article says you will not become a developer.",
+      "Correct: understand a real app to write better requirements and test confidently.",
+      "Wrong: shipping to production is explicitly out of the course goals.",
+      "Wrong: the course makes a BA a better tester, not a QA replacement."
+    ]
+  },
+  {
+    "id": "fs01-q2",
+    "question": "Tính năng nào sau đây NẰM NGOÀI phạm vi của app To-do?",
+    "questionEn": "Which feature is OUT of scope for the To-do app?",
+    "options": [
+      "Lọc danh sách theo all / active / done",
+      "Vẫn đăng nhập sau khi tải lại trang",
+      "Tick một to-do để đánh dấu đã xong",
+      "Đặt lại mật khẩu khi quên (password reset)"
+    ],
+    "optionsEn": [
+      "Filtering the list by all / active / done",
+      "Staying logged in after a page refresh",
+      "Ticking a to-do to mark it done",
+      "Resetting a forgotten password"
+    ],
+    "answer": 3,
+    "explanation": "Bảng tính năng là phát biểu phạm vi. Quên mật khẩu, xác minh email và chia sẻ danh sách được nêu rõ là ngoài phạm vi; lọc, tick và giữ phiên đăng nhập đều có trong app.",
+    "explanationEn": "The feature table is the scope statement. Password reset, email verification and list sharing are named as out of scope; filtering, ticking and staying logged in are all in the app.",
+    "optionExplanations": [
+      "Có trong app: bộ lọc all/active/done, còn được ghi nhớ.",
+      "Có trong app: GET /api/auth/me khôi phục phiên khi tải lại.",
+      "Có trong app: tick gửi PATCH để đổi trạng thái done.",
+      "Đúng: password reset là ngoài phạm vi (và là một user story cho trước go-live)."
+    ],
+    "optionExplanationsEn": [
+      "In the app: the all/active/done filter, and it is remembered.",
+      "In the app: GET /api/auth/me restores the session on refresh.",
+      "In the app: ticking sends a PATCH that flips done.",
+      "Correct: password reset is out of scope (and a user story before go-live)."
+    ]
+  },
+  {
+    "id": "fs01-q3",
+    "question": "Người dùng đã đăng nhập bấm F5 và vẫn thấy danh sách to-do. Điều gì làm được việc đó?",
+    "questionEn": "A logged-in user presses F5 and still sees their to-do list. What makes that work?",
+    "options": [
+      "Khi tải trang, app gọi `GET /api/auth/me`; cookie `token` còn hạn nên server trả về user",
+      "Mật khẩu được lưu trong `localStorage` và form tự đăng nhập lại",
+      "State của React được giữ nguyên qua lần tải lại trang",
+      "Server ghi nhớ địa chỉ IP của trình duyệt đã đăng nhập"
+    ],
+    "optionsEn": [
+      "On load the app calls `GET /api/auth/me`; the `token` cookie is still valid, so the server returns the user",
+      "The password is kept in `localStorage` and the form logs in again",
+      "React state survives the page reload unchanged",
+      "The server remembers the IP address of the logged-in browser"
+    ],
+    "answer": 0,
+    "explanation": "App.jsx gọi `GET /api/auth/me` ngay khi tải. Trình duyệt tự gửi cookie `token` (HttpOnly, 7 ngày); nếu hợp lệ, server trả `{user}` và app hiện danh sách. Mật khẩu không bao giờ được lưu ở trình duyệt.",
+    "explanationEn": "App.jsx calls `GET /api/auth/me` on load. The browser sends the `token` cookie (HttpOnly, 7 days) by itself; if it is valid the server returns `{user}` and the list appears. The password is never stored in the browser.",
+    "optionExplanations": [
+      "Đúng: /api/auth/me cộng với cookie còn hạn khôi phục phiên.",
+      "Sai: localStorage chỉ giữ email gần nhất và bộ lọc, không bao giờ giữ mật khẩu.",
+      "Sai: tải lại trang xóa sạch state React; phải hỏi lại server.",
+      "Sai: app nhận diện người dùng bằng cookie JWT, không phải IP."
+    ],
+    "optionExplanationsEn": [
+      "Correct: /api/auth/me plus a still-valid cookie restores the session.",
+      "Wrong: localStorage only holds the last email and the filter, never the password.",
+      "Wrong: a reload wipes React state; the app must ask the server again.",
+      "Wrong: the app identifies users by the JWT cookie, not by IP."
+    ]
+  },
+  {
+    "id": "fs01-q4",
+    "question": "Minh đăng ký bằng một email đã có người dùng. Theo acceptance criteria, kết quả đúng là gì?",
+    "questionEn": "Minh signs up with an email that is already registered. According to the acceptance criteria, what is the correct outcome?",
+    "options": [
+      "Tài khoản thứ hai được tạo, email được thêm hậu tố để khỏi trùng",
+      "Minh được đăng nhập thẳng vào tài khoản đang có của email đó",
+      "Minh thấy \"This email is already registered.\" và không có tài khoản mới",
+      "Minh thấy \"Email or password is incorrect.\" kèm status 401"
+    ],
+    "optionsEn": [
+      "A second account is created with a suffix on the email to avoid a clash",
+      "Minh is logged straight into the existing account for that email",
+      "Minh sees \"This email is already registered.\" and no new account is created",
+      "Minh sees \"Email or password is incorrect.\" with status 401"
+    ],
+    "answer": 2,
+    "explanation": "US-1 quy định: email trùng thì hiện \"This email is already registered.\" và không tạo tài khoản thứ hai. Server trả 409; cột `email` còn có ràng buộc UNIQUE trong database.",
+    "explanationEn": "US-1 says a duplicate email shows \"This email is already registered.\" and no second account is created. The server answers 409, and the `email` column is also UNIQUE in the database.",
+    "optionExplanations": [
+      "Sai: không bao giờ tạo tài khoản thứ hai cho cùng email.",
+      "Sai: đăng nhập vào tài khoản người khác mà không có mật khẩu là lỗ hổng bảo mật.",
+      "Đúng: đúng thông báo, 409, không tạo gì thêm.",
+      "Sai: đó là thông báo của luồng đăng nhập sai, không phải đăng ký."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a second account for the same email is never created.",
+      "Wrong: logging into someone else's account without a password would be a security hole.",
+      "Correct: the exact message, a 409, and nothing created.",
+      "Wrong: that is the failed-login message, not the sign-up one."
+    ]
+  },
+  {
+    "id": "fs01-q5",
+    "question": "Vì sao màn hình đăng nhập hiện CÙNG một thông báo cho \"sai mật khẩu\" và \"email không tồn tại\"?",
+    "questionEn": "Why does the login screen show the SAME message for \"wrong password\" and \"unknown email\"?",
+    "options": [
+      "Vì code đơn giản hơn khi chỉ có một thông báo lỗi",
+      "Để không ai dùng form đăng nhập dò xem email nào đã có tài khoản",
+      "Vì server không phân biệt được hai trường hợp đó",
+      "Để tiết kiệm một câu truy vấn vào database"
+    ],
+    "optionsEn": [
+      "Because the code is simpler with a single error message",
+      "So nobody can use the login form to find out which emails have accounts",
+      "Because the server cannot tell the two cases apart",
+      "To save one query against the database"
+    ],
+    "answer": 1,
+    "explanation": "Nếu thông báo khác nhau, kẻ xấu có thể thử hàng loạt email để biết ai là khách hàng. Server phân biệt được hai trường hợp nhưng cố tình trả cùng \"Email or password is incorrect.\" (401). Đây là một yêu cầu bảo mật BA nên viết ra.",
+    "explanationEn": "Different messages would let an attacker try many emails to learn who is a customer. The server can tell the cases apart but deliberately returns the same \"Email or password is incorrect.\" (401). It is a security requirement a BA should write down.",
+    "optionExplanations": [
+      "Sai: lý do là bảo mật, không phải cho code gọn.",
+      "Đúng: chặn việc dò tìm tài khoản (account enumeration).",
+      "Sai: server biết rõ email có tồn tại hay không.",
+      "Sai: số câu truy vấn là như nhau trong cả hai trường hợp."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the reason is security, not tidier code.",
+      "Correct: it blocks account enumeration.",
+      "Wrong: the server knows exactly whether the email exists.",
+      "Wrong: the number of queries is the same either way."
+    ]
+  },
+  {
+    "id": "fs01-q6",
+    "question": "Acceptance criterion nào dưới đây viết tốt nhất cho tính năng thêm to-do?",
+    "questionEn": "Which acceptance criterion below is best written for adding a to-do?",
+    "options": [
+      "Tính năng thêm to-do phải hoạt động tốt và thân thiện",
+      "Hệ thống phải nhanh khi người dùng thêm to-do",
+      "Dev sẽ tự xử lý validation cho ô tiêu đề",
+      "Given ô tiêu đề chỉ có khoảng trắng, when bấm Add, then hiện \"Title is required.\" và không thêm gì"
+    ],
+    "optionsEn": [
+      "Adding a to-do must work well and be user-friendly",
+      "The system must be fast when the user adds a to-do",
+      "The developer will handle validation for the title box",
+      "Given the title box holds only spaces, when I click Add, then \"Title is required.\" shows and nothing is added"
+    ],
+    "answer": 3,
+    "explanation": "Tiêu chí tốt thì kiểm thử được: có ngữ cảnh (Given), hành động (When) và kết quả quan sát được (Then), kể cả luồng lỗi. Các lựa chọn còn lại mơ hồ (\"tốt\", \"nhanh\") hoặc đẩy quyết định cho dev.",
+    "explanationEn": "A good criterion is testable: a context (Given), an action (When) and an observable result (Then), unhappy paths included. The other options are vague (\"well\", \"fast\") or push the decision to the developer.",
+    "optionExplanations": [
+      "Sai: \"hoạt động tốt\" không kiểm thử được.",
+      "Sai: \"nhanh\" không có con số nên không đo được.",
+      "Sai: BA phải nêu quy tắc, không bỏ trống cho dev đoán.",
+      "Đúng: Given/When/Then cụ thể, có thông báo chính xác."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: \"work well\" cannot be tested.",
+      "Wrong: \"fast\" has no number, so it cannot be measured.",
+      "Wrong: the BA must state the rule, not leave the developer guessing.",
+      "Correct: a concrete Given/When/Then with the exact message."
+    ]
+  },
+  {
+    "id": "fs01-q7",
+    "question": "Minh biết id một to-do của Lan và gửi `DELETE /api/todos/:id` bằng cookie của chính Minh. Chuyện gì xảy ra?",
+    "questionEn": "Minh knows the id of one of Lan's to-dos and sends `DELETE /api/todos/:id` with his own cookie. What happens?",
+    "options": [
+      "Server trả 404 \"To-do not found.\" và không có gì bị xóa",
+      "Server trả 204 và to-do của Lan bị xóa",
+      "Server trả 401 vì cookie của Minh không hợp lệ",
+      "Server trả 200 kèm to-do của Lan trong body"
+    ],
+    "optionsEn": [
+      "The server answers 404 \"To-do not found.\" and nothing is deleted",
+      "The server answers 204 and Lan's to-do is deleted",
+      "The server answers 401 because Minh's cookie is invalid",
+      "The server answers 200 with Lan's to-do in the body"
+    ],
+    "answer": 0,
+    "explanation": "Mọi câu truy vấn đều lọc theo `user_id`, nên với Minh, to-do của Lan \"không tồn tại\": 404 \"To-do not found.\". Cookie của Minh vẫn hợp lệ nên không phải 401. Đây là tiêu chí trong US-4.",
+    "explanationEn": "Every query filters by `user_id`, so to Minh, Lan's to-do simply \"does not exist\": 404 \"To-do not found.\". Minh's cookie is valid, so it is not a 401. This is a criterion in US-4.",
+    "optionExplanations": [
+      "Đúng: lọc theo user_id biến to-do của người khác thành \"không tìm thấy\".",
+      "Sai: đó chính là lỗ hổng mà US-4 ngăn chặn.",
+      "Sai: Minh đã đăng nhập hợp lệ, requireAuth cho qua.",
+      "Sai: DELETE không trả dữ liệu, và càng không lộ dữ liệu người khác."
+    ],
+    "optionExplanationsEn": [
+      "Correct: filtering by user_id turns someone else's to-do into \"not found\".",
+      "Wrong: that is exactly the hole US-4 prevents.",
+      "Wrong: Minh is validly logged in, so requireAuth lets him through.",
+      "Wrong: DELETE returns no data, let alone another user's data."
+    ]
+  },
+  {
+    "id": "fs01-q8",
+    "question": "Khi chạy ở máy dev, trình duyệt gửi request thêm to-do tới địa chỉ nào?",
+    "questionEn": "When running locally, which address does the browser send the add-a-to-do request to?",
+    "options": [
+      "Thẳng tới `http://localhost:4000/api/todos`",
+      "Thẳng vào file `server/todo.db`",
+      "`http://localhost:5173/api/todos`, rồi Vite chuyển tiếp sang cổng 4000",
+      "`http://localhost:5173`, rồi trình duyệt tự chuyển hướng sang 4000"
+    ],
+    "optionsEn": [
+      "Straight to `http://localhost:4000/api/todos`",
+      "Straight into the `server/todo.db` file",
+      "`http://localhost:5173/api/todos`, then Vite forwards it to port 4000",
+      "`http://localhost:5173`, then the browser redirects itself to 4000"
+    ],
+    "answer": 2,
+    "explanation": "Trình duyệt chỉ nói chuyện với cổng 5173. Proxy trong `vite.config.js` chuyển mọi đường dẫn `/api` sang Express ở 4000, phía sau hậu trường; trình duyệt không hề biết có cổng 4000.",
+    "explanationEn": "The browser only ever talks to port 5173. The proxy in `vite.config.js` forwards every `/api` path to Express on 4000 behind the scenes; the browser never knows port 4000 exists.",
+    "optionExplanations": [
+      "Sai: trình duyệt không gọi thẳng cổng 4000.",
+      "Sai: trình duyệt không bao giờ chạm vào database.",
+      "Đúng: 5173 nhận, proxy của Vite chuyển tiếp sang 4000.",
+      "Sai: proxy chuyển tiếp ở phía server, không có chuyển hướng (redirect) nào."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the browser does not call port 4000 directly.",
+      "Wrong: the browser never touches the database.",
+      "Correct: 5173 receives it and the Vite proxy forwards it to 4000.",
+      "Wrong: the proxy forwards on the server side; there is no redirect."
+    ]
+  },
+  {
+    "id": "fs01-q9",
+    "question": "Lợi ích chính của proxy `/api` trong Vite ở dự án này là gì?",
+    "questionEn": "What is the main benefit of the Vite `/api` proxy in this project?",
+    "options": [
+      "Nó cache response nên API chạy nhanh hơn",
+      "Frontend và API trông như một site, nên cookie tự được gửi và không cần cấu hình CORS",
+      "Nó mã hóa dữ liệu giữa trình duyệt và server",
+      "React không thể hiển thị gì nếu thiếu proxy"
+    ],
+    "optionsEn": [
+      "It caches responses so the API runs faster",
+      "Frontend and API look like one site, so the cookie is sent automatically and no CORS setup is needed",
+      "It encrypts the data between the browser and the server",
+      "React cannot render anything without the proxy"
+    ],
+    "answer": 1,
+    "explanation": "Như comment trong `vite.config.js`: trình duyệt chỉ thấy localhost:5173, nên với nó frontend và API là một site. Cookie đăng nhập \"tự chạy\" và không cần thiết lập gọi chéo site.",
+    "explanationEn": "As the comment in `vite.config.js` says: the browser only sees localhost:5173, so frontend and API are one site to it. The login cookie \"just works\" and no cross-site setup is needed.",
+    "optionExplanations": [
+      "Sai: proxy không cache gì cả.",
+      "Đúng: một site duy nhất, cookie tự gửi, không cần CORS.",
+      "Sai: mã hóa là việc của HTTPS, không phải proxy dev.",
+      "Sai: React vẫn render được, chỉ các lời gọi /api mới cần proxy."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the proxy caches nothing.",
+      "Correct: one site, the cookie is sent automatically, no CORS.",
+      "Wrong: encryption is HTTPS's job, not the dev proxy's.",
+      "Wrong: React still renders; only the /api calls need the proxy."
+    ]
+  },
+  {
+    "id": "fs01-q10",
+    "question": "Vì sao khóa học chọn SQLite thay vì MySQL hay PostgreSQL?",
+    "questionEn": "Why does the course choose SQLite over MySQL or PostgreSQL?",
+    "options": [
+      "Nó là một file nằm trong app, không cần cài server riêng, mà vẫn dùng SQL thật",
+      "Nó xử lý nhiều người cùng ghi một lúc tốt nhất trong ba loại",
+      "React bắt buộc phải dùng SQLite làm database",
+      "Nó lưu dữ liệu ngay trong trình duyệt của người dùng"
+    ],
+    "optionsEn": [
+      "It is one file inside the app, with no separate server to install, yet it is real SQL",
+      "It handles many users writing at once best of the three",
+      "React requires SQLite as its database",
+      "It stores data right inside the user's browser"
+    ],
+    "answer": 0,
+    "explanation": "SQLite là thư viện đọc/ghi một file (`todo.db`), không cần cài hay khởi động server nào: hoàn hảo để học. Đổi lại, nó hạn chế khi nhiều người cùng ghi; MySQL/PostgreSQL mạnh hơn ở điểm đó.",
+    "explanationEn": "SQLite is a library that reads and writes one file (`todo.db`), with no server to install or start: perfect for learning. The trade-off is limited concurrent writes, where MySQL/PostgreSQL are stronger.",
+    "optionExplanations": [
+      "Đúng: một file, không cần setup, SQL thật.",
+      "Sai: đây chính là điểm yếu của SQLite so với hai loại kia.",
+      "Sai: React chạy trong trình duyệt và không biết database là gì.",
+      "Sai: SQLite chạy trong process Express trên server, không ở trình duyệt."
+    ],
+    "optionExplanationsEn": [
+      "Correct: one file, zero setup, real SQL.",
+      "Wrong: that is exactly SQLite's weak spot compared with the others.",
+      "Wrong: React runs in the browser and knows nothing about the database.",
+      "Wrong: SQLite runs inside the Express process on the server, not in the browser."
+    ]
+  },
+  {
+    "id": "fs01-q11",
+    "question": "Tester báo: chữ trên nút \"Delete\" bị viết sai chính tả. File nào nhiều khả năng cần sửa nhất?",
+    "questionEn": "A tester reports that the \"Delete\" button label is misspelled. Which file most likely needs the fix?",
+    "options": [
+      "`server/src/routes/todos.js`",
+      "`server/db/schema.sql`",
+      "`client/vite.config.js`",
+      "`client/src/components/TodoPage.jsx`"
+    ],
+    "optionsEn": [
+      "`server/src/routes/todos.js`",
+      "`server/db/schema.sql`",
+      "`client/vite.config.js`",
+      "`client/src/components/TodoPage.jsx`"
+    ],
+    "answer": 3,
+    "explanation": "Nhãn chữ trên màn hình là việc của frontend. Nút Delete nằm trong component `TodoPage.jsx`. Câu hỏi \"ô nào?\" giúp BA chỉ đúng chỗ ngay từ bug report.",
+    "explanationEn": "On-screen labels are a frontend concern. The Delete button lives in the `TodoPage.jsx` component. Asking \"which box?\" lets a BA point to the right place straight from the bug report.",
+    "optionExplanations": [
+      "Sai: route backend trả JSON, không vẽ nút.",
+      "Sai: schema.sql định nghĩa bảng, không có giao diện.",
+      "Sai: vite.config.js chỉ cấu hình cổng và proxy.",
+      "Đúng: TodoPage.jsx hiển thị danh sách và nút Delete."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the backend route returns JSON; it draws no buttons.",
+      "Wrong: schema.sql defines tables, not UI.",
+      "Wrong: vite.config.js only sets the port and the proxy.",
+      "Correct: TodoPage.jsx renders the list and the Delete button."
+    ]
+  },
+  {
+    "id": "fs01-q12",
+    "question": "Sau khi `fetch` gửi `POST /api/todos` ra khỏi trình duyệt, bước NGAY TIẾP THEO là gì?",
+    "questionEn": "After `fetch` sends `POST /api/todos` out of the browser, what is the VERY NEXT step?",
+    "options": [
+      "Câu lệnh INSERT ghi dòng mới vào `todo.db`",
+      "React re-render và hiện \"Buy milk\" ở đầu danh sách",
+      "Proxy của Vite chuyển request sang Express ở cổng 4000",
+      "`requireAuth` chạy trong trình duyệt để kiểm tra cookie"
+    ],
+    "optionsEn": [
+      "The INSERT statement writes a new row into `todo.db`",
+      "React re-renders and shows \"Buy milk\" at the top of the list",
+      "The Vite proxy forwards the request to Express on port 4000",
+      "`requireAuth` runs in the browser to check the cookie"
+    ],
+    "answer": 2,
+    "explanation": "Thứ tự: onSubmit → fetch → proxy → middleware (requireAuth) → validate → INSERT → 201 → cập nhật state → re-render. Ngay sau fetch là proxy chuyển tiếp.",
+    "explanationEn": "The order is: onSubmit → fetch → proxy → middleware (requireAuth) → validation → INSERT → 201 → state update → re-render. Right after fetch comes the proxy.",
+    "optionExplanations": [
+      "Sai: INSERT xảy ra sau khi đã qua requireAuth và validate.",
+      "Sai: re-render là bước cuối cùng, sau khi có response.",
+      "Đúng: proxy là chặng đầu tiên sau khi request rời trình duyệt.",
+      "Sai: requireAuth là middleware chạy trên server, không phải trình duyệt."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the INSERT happens after requireAuth and validation.",
+      "Wrong: re-render is the very last step, after the response.",
+      "Correct: the proxy is the first hop after the request leaves the browser.",
+      "Wrong: requireAuth is server middleware, not browser code."
+    ]
+  },
+  {
+    "id": "fs01-q13",
+    "question": "Lan để tab mở hơn một tuần rồi bấm Add. Tab Network hiện `POST /api/todos` → 401. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "Lan left the tab open for over a week, then clicked Add. The Network tab shows `POST /api/todos` → 401. What is the most likely cause?",
+    "options": [
+      "Tiêu đề to-do để trống nên server từ chối",
+      "Cookie `token` (hạn 7 ngày) đã hết hạn nên `requireAuth` từ chối",
+      "File `todo.db` đã đầy và không ghi thêm được",
+      "Proxy của Vite đã tắt nên không chuyển tiếp được"
+    ],
+    "optionsEn": [
+      "The to-do title was empty, so the server rejected it",
+      "The `token` cookie (7-day lifetime) has expired, so `requireAuth` rejected it",
+      "The `todo.db` file is full and cannot take more writes",
+      "The Vite proxy stopped, so nothing could be forwarded"
+    ],
+    "answer": 1,
+    "explanation": "401 nghĩa là \"chưa xác thực\". Token và cookie đều sống 7 ngày; hết hạn thì `requireAuth` trả 401 trước khi route chạy, và app đưa Lan về màn hình đăng nhập.",
+    "explanationEn": "401 means \"not authenticated\". The token and cookie both live 7 days; once expired, `requireAuth` answers 401 before the route runs, and the app sends Lan back to the login screen.",
+    "optionExplanations": [
+      "Sai: tiêu đề trống cho 400 \"Title is required.\", không phải 401.",
+      "Đúng: phiên hết hạn là nguyên nhân kinh điển của 401.",
+      "Sai: lỗi database sẽ ra 500, không phải 401.",
+      "Sai: proxy hỏng thì request không tới được Express, không có 401 từ requireAuth."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: an empty title gives 400 \"Title is required.\", not 401.",
+      "Correct: an expired session is the classic cause of a 401.",
+      "Wrong: a database failure would be a 500, not a 401.",
+      "Wrong: with the proxy down the request never reaches Express, so no 401 from requireAuth."
+    ]
+  },
+  {
+    "id": "fs01-q14",
+    "question": "Thư mục nào tuyệt đối KHÔNG được chứa bí mật (như JWT secret), và vì sao?",
+    "questionEn": "Which folder must NEVER contain secrets (such as the JWT secret), and why?",
+    "options": [
+      "`client/`, vì mọi thứ trong đó rốt cuộc đều nằm trong trình duyệt",
+      "`server/src/`, vì code server được commit lên Git",
+      "`server/db/`, vì schema.sql ai cũng đọc được",
+      "`server/`, vì Express in mọi biến môi trường ra log"
+    ],
+    "optionsEn": [
+      "`client/`, because everything in it ends up in the browser",
+      "`server/src/`, because server code is committed to Git",
+      "`server/db/`, because anyone can read schema.sql",
+      "`server/`, because Express prints every environment variable to the log"
+    ],
+    "answer": 0,
+    "explanation": "Code frontend được tải về máy người dùng, nên ai cũng xem được. Bí mật nằm trong `server/.env`, file không bao giờ được commit (có trong `.gitignore`).",
+    "explanationEn": "Frontend code is downloaded to the user's machine, so anyone can read it. Secrets live in `server/.env`, a file that is never committed (it is in `.gitignore`).",
+    "optionExplanations": [
+      "Đúng: client/ rốt cuộc chạy trong trình duyệt, ai cũng đọc được.",
+      "Sai: code server được commit, nhưng bí mật để trong .env chứ không để trong code.",
+      "Sai: schema.sql chỉ mô tả bảng, không phải lý do chính.",
+      "Sai: server log chỉ in method, URL, status và thời gian."
+    ],
+    "optionExplanationsEn": [
+      "Correct: client/ ends up in the browser, where anyone can read it.",
+      "Wrong: server code is committed, but secrets go in .env, not in code.",
+      "Wrong: schema.sql just describes tables; that is not the point.",
+      "Wrong: the server log prints only method, URL, status and timing."
+    ]
+  },
+  {
+    "id": "fs01-q15",
+    "question": "Mật khẩu của người dùng được lưu ở đâu trong app này?",
+    "questionEn": "Where is a user's password stored in this app?",
+    "options": [
+      "Trong `localStorage` với key `todo:lastEmail`",
+      "Bên trong cookie `token` cùng với JWT",
+      "Nguyên văn trong bảng `users` để đối chiếu khi đăng nhập",
+      "Chỉ dưới dạng hash bcrypt trong cột `users.password_hash`"
+    ],
+    "optionsEn": [
+      "In `localStorage` under the key `todo:lastEmail`",
+      "Inside the `token` cookie along with the JWT",
+      "As plain text in the `users` table, to compare at login",
+      "Only as a bcrypt hash in the `users.password_hash` column"
+    ],
+    "answer": 3,
+    "explanation": "Server chỉ lưu hash một chiều (bcrypt). Khi đăng nhập, nó băm mật khẩu vừa gõ rồi so sánh. Lộ database cũng không lộ mật khẩu; trình duyệt thì không bao giờ giữ mật khẩu.",
+    "explanationEn": "The server stores only a one-way bcrypt hash. At login it hashes the typed password and compares. A leaked database does not leak passwords, and the browser never keeps the password.",
+    "optionExplanations": [
+      "Sai: key đó chỉ giữ email gần nhất, không giữ mật khẩu.",
+      "Sai: JWT chỉ chứa id và email, không có mật khẩu.",
+      "Sai: lưu nguyên văn là thảm họa khi database bị lộ.",
+      "Đúng: chỉ lưu hash bcrypt."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that key holds only the last email, never the password.",
+      "Wrong: the JWT carries the id and email, not the password.",
+      "Wrong: plain-text storage is a disaster when the database leaks.",
+      "Correct: only a bcrypt hash is stored."
+    ]
+  },
+  {
+    "id": "fs01-q16",
+    "question": "Vì sao token đăng nhập nằm trong cookie HttpOnly thay vì `localStorage`?",
+    "questionEn": "Why does the login token live in an HttpOnly cookie instead of `localStorage`?",
+    "options": [
+      "`localStorage` quá nhỏ, không chứa nổi một JWT",
+      "Cookie được gửi nhanh hơn `localStorage`",
+      "JavaScript trên trang không đọc được cookie HttpOnly, nên script độc hại không lấy cắp được",
+      "`localStorage` bị xóa mỗi lần tải lại trang"
+    ],
+    "optionsEn": [
+      "`localStorage` is too small to hold a JWT",
+      "Cookies are sent faster than `localStorage`",
+      "Page JavaScript cannot read an HttpOnly cookie, so an injected script cannot steal it",
+      "`localStorage` is wiped on every page reload"
+    ],
+    "answer": 2,
+    "explanation": "HttpOnly nghĩa là JavaScript không đọc được cookie; trình duyệt chỉ tự gửi nó kèm request. Token trong `localStorage` thì bất kỳ script nào chèn vào trang (lỗi XSS) cũng đọc được.",
+    "explanationEn": "HttpOnly means JavaScript cannot read the cookie; the browser only attaches it to requests. A token in `localStorage` could be read by any script injected into the page (an XSS bug).",
+    "optionExplanations": [
+      "Sai: localStorage chứa được vài MB, thừa sức cho một JWT.",
+      "Sai: lý do là bảo mật, không phải tốc độ.",
+      "Đúng: HttpOnly chặn JavaScript đọc token.",
+      "Sai: localStorage vẫn còn sau khi tải lại trang (vì thế bộ lọc được ghi nhớ)."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: localStorage holds megabytes, plenty for a JWT.",
+      "Wrong: the reason is security, not speed.",
+      "Correct: HttpOnly stops JavaScript from reading the token.",
+      "Wrong: localStorage survives reloads (that is how the filter is remembered)."
+    ]
+  },
+  {
+    "id": "fs01-q17",
+    "question": "Theo API contract, `DELETE /api/todos/:id` thành công trả về gì?",
+    "questionEn": "According to the API contract, what does a successful `DELETE /api/todos/:id` return?",
+    "options": [
+      "200 kèm `{todo}` vừa bị xóa",
+      "204, không có body",
+      "201 kèm `{todo}`",
+      "404 kèm \"To-do not found.\""
+    ],
+    "optionsEn": [
+      "200 with the deleted `{todo}`",
+      "204, with no body",
+      "201 with `{todo}`",
+      "404 with \"To-do not found.\""
+    ],
+    "answer": 1,
+    "explanation": "Bảng contract ghi DELETE thành công là 204 (No Content). Lỗi có thể là 401 (chưa đăng nhập) hoặc 404 (không có hoặc không phải của bạn). 201 dành cho tạo mới (POST).",
+    "explanationEn": "The contract table lists a successful DELETE as 204 (No Content). Errors are 401 (not logged in) or 404 (missing or not yours). 201 is for creating (POST).",
+    "optionExplanations": [
+      "Sai: 200 {todo} là của PATCH, không phải DELETE.",
+      "Đúng: 204 No Content.",
+      "Sai: 201 Created dành cho POST tạo mới.",
+      "Sai: 404 là trường hợp lỗi, không phải thành công."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 200 {todo} is PATCH, not DELETE.",
+      "Correct: 204 No Content.",
+      "Wrong: 201 Created is for a POST that creates.",
+      "Wrong: 404 is an error case, not success."
+    ]
+  }
+]

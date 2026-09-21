@@ -1,0 +1,578 @@
+[
+  {
+    "id": "fs02-q1",
+    "question": "Code React của thư mục `client/` cuối cùng chạy trong trình duyệt. Vậy vì sao máy developer vẫn phải cài Node.js để làm việc với client?",
+    "questionEn": "The React code in `client/` finally runs in the browser. So why does the developer's machine still need Node.js to work on the client?",
+    "options": [
+      "Vì code React chạy bên trong Node.js nằm sẵn trong trình duyệt người dùng",
+      "Vì Vite dev server và công cụ build là chương trình chạy bằng Node",
+      "Vì trình duyệt không hiển thị được HTML nếu máy không có Node.js",
+      "Vì Node.js lưu dữ liệu to-do thay cho client khi server tắt"
+    ],
+    "optionsEn": [
+      "Because React code runs inside a copy of Node.js built into the user's browser",
+      "Because the Vite dev server and the build tools are programs run by Node",
+      "Because the browser cannot display HTML unless Node.js is installed",
+      "Because Node.js stores the to-do data for the client when the server is off"
+    ],
+    "answer": 1,
+    "explanation": "Ở client, Node.js chạy các CÔNG CỤ: `npm run dev` khởi động Vite dev server, `npm run build` đóng gói code. Bản thân code React thì chạy trong trình duyệt. Vì vậy cả dự án \"chỉ frontend\" cũng cần Node trên máy dev.",
+    "explanationEn": "On the client, Node.js runs the TOOLS: `npm run dev` starts the Vite dev server and `npm run build` bundles the code. The React code itself runs in the browser. That is why even a \"frontend-only\" project needs Node on the developer's machine.",
+    "optionExplanations": [
+      "Sai: trình duyệt không chứa Node.js; nó có engine JavaScript riêng để chạy code React.",
+      "Đúng: Vite (dev server, build) là chương trình Node, nên máy dev phải có Node.",
+      "Sai: trình duyệt hiển thị HTML hoàn toàn độc lập với Node.js.",
+      "Sai: dữ liệu to-do nằm trong SQLite phía server, không phải do Node phía client lưu."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: browsers do not contain Node.js; they have their own JavaScript engine to run React code.",
+      "Right: Vite (dev server, build) is a Node program, so the dev machine needs Node.",
+      "Wrong: the browser displays HTML entirely independently of Node.js.",
+      "Wrong: the to-do data lives in SQLite on the server, not in a client-side Node process."
+    ]
+  },
+  {
+    "id": "fs02-q2",
+    "question": "Công ty bạn chuẩn bị cài Node.js cho cả team để làm một dự án kéo dài vài năm. Nên chọn phiên bản nào trên nodejs.org?",
+    "questionEn": "Your company is about to install Node.js for the whole team for a project that will run for several years. Which version on nodejs.org should it pick?",
+    "options": [
+      "Bản \"Current\" mới nhất, vì có nhiều tính năng mới nhất",
+      "Bản nào hiện lên đầu tiên khi tìm trên Google",
+      "Bản cũ nhất còn tải được, vì đã được dùng lâu nên ổn định",
+      "Bản được gắn nhãn LTS, vì được vá lỗi và bảo mật trong nhiều năm"
+    ],
+    "optionsEn": [
+      "The newest \"Current\" release, because it has the latest features",
+      "Whichever version shows up first in a Google search",
+      "The oldest version still downloadable, because age means stability",
+      "The version labelled LTS, because it gets bug and security fixes for years"
+    ],
+    "answer": 3,
+    "explanation": "LTS (Long-Term Support) là các bản được vá lỗi và vá bảo mật trong khoảng ba năm, nên doanh nghiệp thống nhất dùng chúng. Dự án mẫu cần Node 22 trở lên, và 22, 24 đều là dòng LTS.",
+    "explanationEn": "LTS (Long-Term Support) releases receive bug and security fixes for about three years, so companies standardise on them. The sample needs Node 22 or newer, and 22 and 24 are both LTS lines.",
+    "optionExplanations": [
+      "Sai: bản Current thay đổi nhanh và hết hỗ trợ sớm, không hợp cho dự án dài hạn.",
+      "Sai: kết quả tìm kiếm không phải tiêu chí chọn phiên bản; hãy dùng nhãn LTS.",
+      "Sai: bản cũ đã hết hỗ trợ thì không còn được vá bảo mật, và app mẫu cần Node 22+.",
+      "Đúng: LTS được hỗ trợ lâu dài, là lựa chọn chuẩn của doanh nghiệp."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: Current releases change fast and lose support early, a poor fit for a long project.",
+      "Wrong: search ranking is no way to choose a version; use the LTS label.",
+      "Wrong: an out-of-support version gets no security fixes, and the sample needs Node 22+.",
+      "Right: LTS versions are supported for years, the standard company choice."
+    ]
+  },
+  {
+    "id": "fs02-q3",
+    "question": "`server/package.json` chỉ liệt kê 5 package, nhưng sau khi cài, lock file ghi hơn 100 package. Vì sao?",
+    "questionEn": "`server/package.json` lists only 5 packages, but after installing, the lock file records over 100. Why?",
+    "options": [
+      "Vì mỗi package lại phụ thuộc package khác (transitive dependency), ví dụ Express kéo theo vài chục package nhỏ",
+      "Vì npm tải mỗi package nhiều lần để dự phòng khi mạng chập chờn",
+      "Vì lock file sao chép danh sách mọi package phổ biến trên npm registry",
+      "Vì developer quên xóa những package cũ từ các dự án trước"
+    ],
+    "optionsEn": [
+      "Because each package depends on others (transitive dependencies); Express alone pulls in dozens of small ones",
+      "Because npm downloads each package several times as a backup against bad networks",
+      "Because the lock file copies a list of every popular package on the npm registry",
+      "Because the developer forgot to delete old packages from earlier projects"
+    ],
+    "answer": 0,
+    "explanation": "Package phụ thuộc vào package khác. 5 dependency trực tiếp kéo theo hơn 100 transitive dependency, và lock file ghi lại tất cả. Mỗi cái đều là code sản phẩm mang theo.",
+    "explanationEn": "Packages depend on other packages. Five direct dependencies pull in over 100 transitive ones, and the lock file records them all. Each one is code the product ships.",
+    "optionExplanations": [
+      "Đúng: phụ thuộc bắc cầu giải thích con số hơn 100.",
+      "Sai: npm không tải trùng để dự phòng; mỗi phiên bản package chỉ xuất hiện theo nhu cầu.",
+      "Sai: lock file chỉ ghi những gì dự án này thực sự cài.",
+      "Sai: mỗi dự án có `node_modules` và lock file riêng, không lẫn package của dự án khác."
+    ],
+    "optionExplanationsEn": [
+      "Right: transitive dependencies explain the 100+ count.",
+      "Wrong: npm does not download duplicates as a backup; each package version appears only when needed.",
+      "Wrong: the lock file records only what this project actually installed.",
+      "Wrong: each project has its own `node_modules` and lock file; other projects do not leak in."
+    ]
+  },
+  {
+    "id": "fs02-q4",
+    "question": "Trong `client/package.json`, `vite` nằm ở `devDependencies` còn `react` nằm ở `dependencies`. Vì sao?",
+    "questionEn": "In `client/package.json`, `vite` is under `devDependencies` while `react` is under `dependencies`. Why?",
+    "options": [
+      "Vì Vite ít quan trọng hơn React nên được xếp vào nhóm phụ",
+      "Vì React dung lượng lớn hơn nên phải nằm ở nhóm chính",
+      "Vì Vite chỉ cần khi phát triển và build, còn code React nằm trong JavaScript mà trình duyệt tải về",
+      "Vì `devDependencies` chỉ được cài trên server production"
+    ],
+    "optionsEn": [
+      "Because Vite matters less than React, so it goes in the secondary group",
+      "Because React is bigger in size, so it must be in the main group",
+      "Because Vite is only needed to develop and build, while React code ends up in the JavaScript the browser downloads",
+      "Because `devDependencies` are installed only on the production server"
+    ],
+    "answer": 2,
+    "explanation": "Vite là \"đồ nghề nhà bếp\": phục vụ và đóng gói code, không nằm trong món ăn. React là \"nguyên liệu\": nằm trong bundle chạy ở trình duyệt. Tiêu chí là CẦN LÚC NÀO, không phải quan trọng hay to nhỏ.",
+    "explanationEn": "Vite is kitchen equipment: it serves and bundles the code but is not in the meal. React is an ingredient: it is inside the bundle that runs in the browser. The criterion is WHEN it is needed, not importance or size.",
+    "optionExplanations": [
+      "Sai: thiếu Vite thì không chạy được dev server; vấn đề là thời điểm cần, không phải tầm quan trọng.",
+      "Sai: dung lượng không quyết định nhóm dependency.",
+      "Đúng: dev dependency chỉ cần khi phát triển/build; dependency cần khi app chạy.",
+      "Sai: ngược lại, production có thể BỎ QUA dev dependency bằng `npm install --omit=dev`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: without Vite the dev server cannot run; the point is when it is needed, not importance.",
+      "Wrong: size does not decide the dependency group.",
+      "Right: dev dependencies are needed only to develop/build; dependencies are needed when the app runs.",
+      "Wrong: the opposite; production can SKIP dev dependencies with `npm install --omit=dev`."
+    ]
+  },
+  {
+    "id": "fs02-q5",
+    "question": "Trường `\"private\": true` trong `package.json` của app mẫu có tác dụng gì?",
+    "questionEn": "What does the `\"private\": true` field in the sample's `package.json` do?",
+    "options": [
+      "Giấu mã nguồn để các developer khác trong team không đọc được",
+      "Ngăn npm vô tình công bố (publish) dự án lên registry công khai",
+      "Mã hóa nội dung `package.json` trước khi commit lên Git",
+      "Bắt người dùng phải đăng nhập mới mở được ứng dụng"
+    ],
+    "optionsEn": [
+      "Hides the source code so other developers on the team cannot read it",
+      "Stops npm from accidentally publishing the project to the public registry",
+      "Encrypts the contents of `package.json` before it is committed to Git",
+      "Forces users to log in before they can open the application"
+    ],
+    "answer": 1,
+    "explanation": "`private: true` là chốt an toàn: `npm publish` sẽ từ chối, nên một ứng dụng nội bộ không bị đưa nhầm lên npm registry công khai. Nó không liên quan đến quyền đọc code hay đăng nhập.",
+    "explanationEn": "`private: true` is a safety catch: `npm publish` refuses, so an internal application cannot be pushed to the public npm registry by mistake. It has nothing to do with who can read the code or with login.",
+    "optionExplanations": [
+      "Sai: ai có repo vẫn đọc được code; trường này không kiểm soát quyền truy cập.",
+      "Đúng: nó chặn việc publish nhầm lên registry công khai.",
+      "Sai: npm không mã hóa `package.json`; file vẫn là JSON đọc được.",
+      "Sai: đăng nhập là tính năng của app (JWT trong cookie), không phải của `package.json`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: anyone with the repo can still read the code; this field is not access control.",
+      "Right: it blocks an accidental publish to the public registry.",
+      "Wrong: npm does not encrypt `package.json`; it stays readable JSON.",
+      "Wrong: login is an app feature (a JWT in a cookie), not something `package.json` does."
+    ]
+  },
+  {
+    "id": "fs02-q6",
+    "question": "`package.json` ghi `\"express\": \"^5.1.0\"`. Khi cài mới, npm được phép chọn phiên bản nào?",
+    "questionEn": "`package.json` says `\"express\": \"^5.1.0\"`. On a fresh install, which versions may npm pick?",
+    "options": [
+      "Được cài 5.9.2, nhưng không được cài 6.0.0",
+      "Chỉ đúng 5.1.0, không được bản nào khác",
+      "Mọi bản từ 5.1.0 trở lên, kể cả 6.0.0",
+      "Chỉ các bản 5.1.x, như 5.1.9, không được 5.2.0"
+    ],
+    "optionsEn": [
+      "5.9.2 is allowed, but 6.0.0 is not",
+      "Only exactly 5.1.0, nothing else",
+      "Any version from 5.1.0 upwards, including 6.0.0",
+      "Only 5.1.x versions such as 5.1.9, not 5.2.0"
+    ],
+    "answer": 0,
+    "explanation": "Dấu mũ `^` cho phép mọi bản cùng MAJOR và không thấp hơn bản đã ghi: >=5.1.0 và <6.0.0. Thực tế dự án mẫu đã cài express 5.2.1. Bản 6.0.0 là thay đổi phá vỡ (breaking) nên bị loại.",
+    "explanationEn": "The caret `^` allows any version with the same MAJOR and not lower than written: >=5.1.0 and <6.0.0. In fact the sample installed express 5.2.1. Version 6.0.0 is a breaking change, so it is excluded.",
+    "optionExplanations": [
+      "Đúng: `^` giữ nguyên MAJOR 5, nên 5.9.2 được còn 6.0.0 thì không.",
+      "Sai: đó là cách viết chính xác `5.1.0`, không có ký hiệu.",
+      "Sai: `^` không bao giờ vượt sang MAJOR mới.",
+      "Sai: đó là ý nghĩa của dấu ngã `~5.1.0`."
+    ],
+    "optionExplanationsEn": [
+      "Right: `^` keeps MAJOR 5, so 5.9.2 is allowed and 6.0.0 is not.",
+      "Wrong: that is the exact form `5.1.0`, with no symbol.",
+      "Wrong: `^` never crosses into a new MAJOR.",
+      "Wrong: that is what the tilde `~5.1.0` means."
+    ]
+  },
+  {
+    "id": "fs02-q7",
+    "question": "Một dependency được ghi là `~5.1.0`. Phiên bản nào dưới đây npm được phép cài?",
+    "questionEn": "A dependency is written as `~5.1.0`. Which of these versions may npm install?",
+    "options": [
+      "5.2.0, vì đây chỉ là bản MINOR thêm tính năng",
+      "6.0.0, vì đây là bản mới nhất trên registry",
+      "5.0.9, vì nó cùng MAJOR 5 với bản đã ghi",
+      "5.1.9, vì nó cùng MAJOR.MINOR và chỉ khác PATCH"
+    ],
+    "optionsEn": [
+      "5.2.0, because it is only a MINOR release with new features",
+      "6.0.0, because it is the newest version on the registry",
+      "5.0.9, because it has the same MAJOR 5 as the one written",
+      "5.1.9, because it has the same MAJOR.MINOR and differs only in PATCH"
+    ],
+    "answer": 3,
+    "explanation": "Dấu ngã `~` chỉ cho phép thay đổi PATCH: >=5.1.0 và <5.2.0. Vì thế 5.1.9 hợp lệ, còn 5.2.0, 6.0.0 và bản thấp hơn 5.1.0 đều bị loại.",
+    "explanationEn": "The tilde `~` allows only PATCH changes: >=5.1.0 and <5.2.0. So 5.1.9 is valid, while 5.2.0, 6.0.0 and anything below 5.1.0 are excluded.",
+    "optionExplanations": [
+      "Sai: `~` không cho đổi MINOR; 5.2.0 chỉ được chấp nhận với `^`.",
+      "Sai: 6.0.0 là MAJOR mới, không ký hiệu nào trong hai loại cho phép.",
+      "Sai: range không bao giờ đi xuống thấp hơn bản đã ghi (5.1.0).",
+      "Đúng: cùng 5.1, chỉ khác PATCH, nằm trong range của `~`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `~` does not allow a MINOR change; 5.2.0 would only be accepted with `^`.",
+      "Wrong: 6.0.0 is a new MAJOR, which neither symbol allows.",
+      "Wrong: a range never goes below the version written (5.1.0).",
+      "Right: same 5.1, only the PATCH differs, inside the `~` range."
+    ]
+  },
+  {
+    "id": "fs02-q8",
+    "question": "Một thành viên mới hỏi: \"Có nên commit thư mục `node_modules` lên Git để người khác khỏi phải cài không?\" Câu trả lời đúng là gì?",
+    "questionEn": "A new teammate asks: \"Should we commit the `node_modules` folder to Git so others don't have to install?\" What is the right answer?",
+    "options": [
+      "Có, như vậy mọi người có ngay code giống hệt nhau mà không cần mạng",
+      "Có, nhưng chỉ commit `node_modules` của server vì nó nhỏ hơn của client",
+      "Không; nó rất nặng và dựng lại được từ `package.json` cộng lock file, nên commit lock file thay vào đó",
+      "Không, và cũng đừng commit lock file vì nó được sinh tự động"
+    ],
+    "optionsEn": [
+      "Yes, then everyone instantly has identical code without needing the network",
+      "Yes, but only the server's `node_modules`, because it is smaller than the client's",
+      "No; it is huge and can be rebuilt from `package.json` plus the lock file, so commit the lock file instead",
+      "No, and do not commit the lock file either, because it is generated automatically"
+    ],
+    "answer": 2,
+    "explanation": "`node_modules` là cache: nặng (18 MB và 48 MB trong app mẫu), có thể xóa và cài lại bất cứ lúc nào. Thứ bảo đảm mọi người cài giống nhau là lock file, và lock file PHẢI được commit. `.gitignore` của app mẫu mở đầu bằng `node_modules/`.",
+    "explanationEn": "`node_modules` is a cache: huge (18 MB and 48 MB in the sample) and deletable and reinstallable at any time. What guarantees identical installs is the lock file, and the lock file MUST be committed. The sample's `.gitignore` starts with `node_modules/`.",
+    "optionExplanations": [
+      "Sai: lock file đã bảo đảm code giống nhau; commit `node_modules` chỉ làm repo phình to và dễ xung đột.",
+      "Sai: quy tắc áp dụng cho mọi `node_modules`, bất kể kích thước.",
+      "Đúng: bỏ `node_modules`, commit lock file.",
+      "Sai: lock file tuy tự sinh nhưng chính là thứ phải commit để tránh \"works on my machine\"."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the lock file already guarantees identical code; committing `node_modules` only bloats the repo and causes conflicts.",
+      "Wrong: the rule applies to every `node_modules`, whatever its size.",
+      "Right: ignore `node_modules`, commit the lock file.",
+      "Wrong: the lock file is generated, but it is exactly what must be committed to avoid \"works on my machine\"."
+    ]
+  },
+  {
+    "id": "fs02-q9",
+    "question": "App chạy tốt trên máy developer A nhưng test trên CI lỗi, và log CI cho thấy phiên bản express khác với máy A. Repo không có lock file. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "The app works on developer A's machine but the CI tests fail, and the CI log shows a different express version from A's. The repo has no lock file. What is the most likely cause?",
+    "options": [
+      "CI dùng một trình duyệt khác với máy của developer A",
+      "Không có lock file nên mỗi lần cài, range `^` được giải thành phiên bản khác nhau",
+      "Ai đó đã commit `node_modules` nên CI dùng bản cũ",
+      "Cổng 4000 trên CI đang bị một chương trình khác chiếm"
+    ],
+    "optionsEn": [
+      "CI uses a different browser from developer A's machine",
+      "With no lock file, each install resolved the `^` range to a different version",
+      "Someone committed `node_modules`, so CI used an old copy",
+      "Port 4000 on CI is taken by another program"
+    ],
+    "answer": 1,
+    "explanation": "Đây là lỗi kinh điển \"works on my machine\". Không có lock file, `^5.1.0` được giải theo thời điểm cài: A có 5.2.1, CI cài sau có thể nhận bản mới hơn. Commit lock file (và dùng `npm ci` trên CI) để mọi nơi cài đúng cùng phiên bản.",
+    "explanationEn": "This is the classic \"works on my machine\" bug. Without a lock file, `^5.1.0` resolves according to when you install: A got 5.2.1, CI installing later may get a newer one. Commit the lock file (and use `npm ci` on CI) so everywhere installs the same versions.",
+    "optionExplanations": [
+      "Sai: express chạy trên server, trình duyệt không ảnh hưởng phiên bản express.",
+      "Đúng: thiếu lock file nên phiên bản trôi theo thời điểm cài.",
+      "Sai: đề bài nói phiên bản khác nhau do cài, và repo không có lock file; commit `node_modules` là chuyện khác.",
+      "Sai: cổng bị chiếm gây lỗi khởi động server, không làm đổi phiên bản express."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: express runs on the server; a browser does not affect its version.",
+      "Right: without a lock file the version drifts with the install date.",
+      "Wrong: the symptom is a different installed version with no lock file; committed `node_modules` is another story.",
+      "Wrong: a busy port stops the server starting; it does not change the express version."
+    ]
+  },
+  {
+    "id": "fs02-q10",
+    "question": "Script `dev` của server là `node --env-file-if-exists=.env --watch src/index.js`. Cờ `--watch` làm gì?",
+    "questionEn": "The server's `dev` script is `node --env-file-if-exists=.env --watch src/index.js`. What does the `--watch` flag do?",
+    "options": [
+      "Theo dõi các lỗ hổng bảo mật mới của dependency",
+      "In ra một dòng log cho mỗi request gửi tới API",
+      "Tự tải lại trang trong trình duyệt khi code React đổi",
+      "Tự khởi động lại server mỗi khi bạn lưu một file"
+    ],
+    "optionsEn": [
+      "Watches for new security vulnerabilities in dependencies",
+      "Prints one log line for every request sent to the API",
+      "Reloads the page in the browser when React code changes",
+      "Restarts the server automatically whenever you save a file"
+    ],
+    "answer": 3,
+    "explanation": "`node --watch` theo dõi file và khởi động lại tiến trình khi có thay đổi, rất tiện lúc phát triển. Vì vậy `npm run dev` dùng cho laptop, còn `npm start` (không có `--watch`) dùng cho server thật.",
+    "explanationEn": "`node --watch` watches the files and restarts the process when they change, which is handy during development. That is why `npm run dev` is for your laptop and `npm start` (no `--watch`) is for a real server.",
+    "optionExplanations": [
+      "Sai: kiểm tra lỗ hổng là việc của `npm audit`.",
+      "Sai: dòng log mỗi request đến từ middleware trong `src/index.js`, không phải cờ `--watch`.",
+      "Sai: tải lại trang khi React đổi là việc của Vite dev server phía client.",
+      "Đúng: `--watch` khởi động lại server khi file thay đổi."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: checking for vulnerabilities is `npm audit`'s job.",
+      "Wrong: the per-request log line comes from middleware in `src/index.js`, not from `--watch`.",
+      "Wrong: reloading the page when React changes is the client-side Vite dev server's job.",
+      "Right: `--watch` restarts the server when files change."
+    ]
+  },
+  {
+    "id": "fs02-q11",
+    "question": "Repo đã commit `package-lock.json`. Một đồng nghiệp quen dùng yarn nên chạy `yarn add dayjs` và commit luôn `yarn.lock` mới sinh ra. Vấn đề là gì?",
+    "questionEn": "The repo has `package-lock.json` committed. A colleague used to yarn runs `yarn add dayjs` and also commits the newly created `yarn.lock`. What is the problem?",
+    "options": [
+      "Giờ có hai lock file có thể lệch nhau; dự án nên giữ một công cụ, ở đây là `npm install dayjs`",
+      "Không có vấn đề gì, vì npm và yarn đọc chung một lock file",
+      "yarn không đọc được `package.json` do npm tạo, nên dayjs sẽ không được cài",
+      "yarn tải package từ một registry khác nên dayjs sẽ là một thư viện khác"
+    ],
+    "optionsEn": [
+      "There are now two lock files that can drift apart; the project should stick to one tool, here `npm install dayjs`",
+      "No problem at all, because npm and yarn share the same lock file",
+      "yarn cannot read a `package.json` created by npm, so dayjs will not be installed",
+      "yarn downloads from a different registry, so dayjs will be a different library"
+    ],
+    "answer": 0,
+    "explanation": "Quy tắc: mỗi dự án một package manager. Nhìn lock file đang commit (`package-lock.json`) để biết dùng npm. Hai lock file sẽ trôi dần và mọi người lại cài phiên bản khác nhau.",
+    "explanationEn": "Rule: one package manager per project. The committed lock file (`package-lock.json`) tells you to use npm. Two lock files drift apart and people get different versions again.",
+    "optionExplanations": [
+      "Đúng: trộn hai lock file phá mất lợi ích của lock file.",
+      "Sai: npm dùng `package-lock.json`, yarn dùng `yarn.lock`; chúng không chung.",
+      "Sai: cả hai đều đọc cùng `package.json`; vấn đề nằm ở lock file.",
+      "Sai: cả hai tải cùng package dayjs từ npm registry."
+    ],
+    "optionExplanationsEn": [
+      "Right: mixing two lock files throws away the benefit of a lock file.",
+      "Wrong: npm uses `package-lock.json` and yarn uses `yarn.lock`; they are not shared.",
+      "Wrong: both read the same `package.json`; the problem is the lock files.",
+      "Wrong: both fetch the same dayjs package from the npm registry."
+    ]
+  },
+  {
+    "id": "fs02-q12",
+    "question": "Trong bài thực hành, bạn xóa `node_modules` rồi chạy `node index.js` và thấy `Cannot find package 'dayjs'`. Cách sửa đúng là gì?",
+    "questionEn": "In the exercise, you delete `node_modules`, run `node index.js` and see `Cannot find package 'dayjs'`. What is the right fix?",
+    "options": [
+      "Xóa luôn `package-lock.json` rồi viết lại `package.json` từ đầu",
+      "Tải file dayjs từ một website rồi chép tay vào thư mục dự án",
+      "Chạy `npm install` trong thư mục đó để dựng lại `node_modules` từ `package.json` và lock file",
+      "Đổi `import` thành `require` để Node tự tìm được package"
+    ],
+    "optionsEn": [
+      "Delete `package-lock.json` too and rewrite `package.json` from scratch",
+      "Download dayjs from a website and copy it into the project folder by hand",
+      "Run `npm install` in that folder to rebuild `node_modules` from `package.json` and the lock file",
+      "Change `import` to `require` so Node can find the package on its own"
+    ],
+    "answer": 2,
+    "explanation": "`node_modules` là thứ dùng xong bỏ được: `package.json` và lock file vẫn nhớ dayjs 1.11.23, nên `npm install` dựng lại y hệt. Đây chính là điểm mà bước 6 của bài thực hành muốn chứng minh.",
+    "explanationEn": "`node_modules` is disposable: `package.json` and the lock file still remember dayjs 1.11.23, so `npm install` rebuilds it exactly. That is exactly what step 6 of the exercise is meant to prove.",
+    "optionExplanations": [
+      "Sai: xóa lock file làm mất bản ghi phiên bản chính xác, không cần thiết.",
+      "Sai: chép tay vào dự án bỏ qua package manager và không được ghi vào lock file.",
+      "Đúng: `npm install` khôi phục `node_modules`.",
+      "Sai: đổi cú pháp không làm package xuất hiện; nó vẫn thiếu trong `node_modules`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: deleting the lock file throws away the exact version record, for no reason.",
+      "Wrong: copying by hand bypasses the package manager and is not recorded in the lock file.",
+      "Right: `npm install` restores `node_modules`.",
+      "Wrong: changing syntax does not make the package appear; it is still missing from `node_modules`."
+    ]
+  },
+  {
+    "id": "fs02-q13",
+    "question": "Trên Windows, bạn gõ `npm -v` trong PowerShell và nhận lỗi `npm.ps1 cannot be loaded because running scripts is disabled on this system`. Nên làm gì?",
+    "questionEn": "On Windows, you type `npm -v` in PowerShell and get `npm.ps1 cannot be loaded because running scripts is disabled on this system`. What should you do?",
+    "options": [
+      "Gỡ Node.js ra rồi cài một bản cũ hơn",
+      "Chạy một lần `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, rồi mở lại PowerShell",
+      "Đổi tên file `npm.ps1` thành `npm.txt` để Windows không chặn nữa",
+      "Chạy `npm audit fix` để sửa các script bị chặn"
+    ],
+    "optionsEn": [
+      "Uninstall Node.js and install an older version",
+      "Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then reopen PowerShell",
+      "Rename `npm.ps1` to `npm.txt` so Windows stops blocking it",
+      "Run `npm audit fix` to repair the blocked scripts"
+    ],
+    "answer": 1,
+    "explanation": "Node đã cài đúng; chỉ là chính sách thực thi (execution policy) mặc định của PowerShell chặn file script `.ps1`. Đặt `RemoteSigned` cho user hiện tại cho phép chạy script cục bộ.",
+    "explanationEn": "Node is installed correctly; PowerShell's default execution policy is blocking the `.ps1` script file. Setting `RemoteSigned` for the current user allows local scripts to run.",
+    "optionExplanations": [
+      "Sai: phiên bản Node không liên quan; mọi bản đều cài `npm.ps1`.",
+      "Đúng: đổi execution policy cho user hiện tại là cách sửa chuẩn.",
+      "Sai: đổi tên làm hỏng lệnh `npm` chứ không sửa được chính sách.",
+      "Sai: lệnh `npm` còn chưa chạy được thì `npm audit fix` cũng không chạy; và nó sửa lỗ hổng, không sửa chính sách."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the Node version is irrelevant; every version installs `npm.ps1`.",
+      "Right: changing the execution policy for the current user is the standard fix.",
+      "Wrong: renaming breaks the `npm` command instead of fixing the policy.",
+      "Wrong: if `npm` cannot run, `npm audit fix` cannot either; and it fixes vulnerabilities, not policies."
+    ]
+  },
+  {
+    "id": "fs02-q14",
+    "question": "Bạn vừa cài Node.js xong, quay lại cửa sổ terminal trong VS Code đã mở từ trước và gõ `npm -v`, nhận được `'npm' is not recognized...`. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "You have just installed Node.js, go back to a VS Code terminal that was already open, type `npm -v` and get `'npm' is not recognized...`. What is the most likely cause?",
+    "options": [
+      "npm không được cài kèm Node, phải cài riêng từ một trang khác",
+      "Máy thiếu Python nên npm không khởi động được",
+      "Registry npm đang bị sập nên lệnh không chạy",
+      "Terminal mở trước khi cài nên chưa thấy PATH mới; đóng và mở lại terminal (và VS Code)"
+    ],
+    "optionsEn": [
+      "npm is not bundled with Node and must be installed from another site",
+      "The machine lacks Python, so npm cannot start",
+      "The npm registry is down, so the command does not run",
+      "The terminal was opened before installing, so it has not seen the new PATH; close and reopen the terminal (and VS Code)"
+    ],
+    "answer": 3,
+    "explanation": "Bộ cài Node thêm thư mục của `node` và `npm` vào PATH, nhưng cửa sổ đã mở từ trước vẫn giữ PATH cũ. Mở lại terminal (và VS Code) là xong.",
+    "explanationEn": "The Node installer adds the `node` and `npm` folder to PATH, but a window opened earlier keeps the old PATH. Reopening the terminal (and VS Code) fixes it.",
+    "optionExplanations": [
+      "Sai: npm được cài cùng Node trong một bộ cài.",
+      "Sai: `npm -v` không cần Python; Python chỉ liên quan khi biên dịch package native.",
+      "Sai: `npm -v` không kết nối registry; lỗi \"not recognized\" nghĩa là shell không tìm thấy lệnh.",
+      "Đúng: terminal cũ chưa nhận PATH mới."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: npm comes with Node in the same installer.",
+      "Wrong: `npm -v` does not need Python; Python only matters when compiling native packages.",
+      "Wrong: `npm -v` does not contact the registry; \"not recognized\" means the shell cannot find the command.",
+      "Right: the old terminal has not picked up the new PATH."
+    ]
+  },
+  {
+    "id": "fs02-q15",
+    "question": "`npm install` trong `server/` thất bại với nhiều dòng `gyp ERR!` quanh `better-sqlite3`. Máy đang dùng một phiên bản Node rất mới, không phải LTS. Cách xử lý hợp lý nhất?",
+    "questionEn": "`npm install` in `server/` fails with many `gyp ERR!` lines around `better-sqlite3`. The machine runs a very new, non-LTS Node version. What is the most sensible fix?",
+    "options": [
+      "Chuyển sang Node LTS (22 hoặc 24) để có sẵn bản dựng sẵn, xóa `node_modules` rồi cài lại",
+      "Chạy lại `npm install` với `--legacy-peer-deps` cho đến khi hết lỗi",
+      "Xóa `better-sqlite3` khỏi `package.json` vì app vẫn chạy được không cần nó",
+      "Mở `node_modules/better-sqlite3` và sửa file C++ cho khớp phiên bản Node"
+    ],
+    "optionsEn": [
+      "Switch to an LTS Node (22 or 24) so a prebuilt binary exists, delete `node_modules` and reinstall",
+      "Re-run `npm install` with `--legacy-peer-deps` until the error goes away",
+      "Remove `better-sqlite3` from `package.json`, since the app runs fine without it",
+      "Open `node_modules/better-sqlite3` and edit the C++ files to match the Node version"
+    ],
+    "answer": 0,
+    "explanation": "`better-sqlite3` là package native. npm tải bản dựng sẵn (prebuilt binary) cho đúng phiên bản Node; với Node quá mới chưa có bản đó, nó thử tự biên dịch và cần bộ công cụ build. Dùng Node LTS là cách đơn giản nhất.",
+    "explanationEn": "`better-sqlite3` is a native package. npm downloads a prebuilt binary for your exact Node version; with a very new Node that has none yet, it tries to compile and needs build tools. Using an LTS Node is the simplest fix.",
+    "optionExplanations": [
+      "Đúng: Node LTS có bản dựng sẵn, không cần biên dịch.",
+      "Sai: `--legacy-peer-deps` dành cho xung đột peer dependency (ERESOLVE), không phải lỗi biên dịch.",
+      "Sai: `better-sqlite3` đọc ghi `todo.db`; thiếu nó server không chạy.",
+      "Sai: không bao giờ sửa file trong `node_modules`; lần cài sau sẽ ghi đè."
+    ],
+    "optionExplanationsEn": [
+      "Right: an LTS Node has a prebuilt binary, so nothing needs compiling.",
+      "Wrong: `--legacy-peer-deps` is for peer dependency conflicts (ERESOLVE), not compile errors.",
+      "Wrong: `better-sqlite3` reads and writes `todo.db`; the server cannot run without it.",
+      "Wrong: never edit files inside `node_modules`; the next install overwrites them."
+    ]
+  },
+  {
+    "id": "fs02-q16",
+    "question": "Một bài blog cũ hướng dẫn chạy `npm install crossenv`. Tài liệu chính thức của thư viện lại ghi `cross-env`. Điều gì đáng lo nhất?",
+    "questionEn": "An old blog post tells you to run `npm install crossenv`. The library's official documentation says `cross-env`. What is the biggest concern?",
+    "options": [
+      "Hai tên cùng một package, chỉ khác cách viết, nên cài cái nào cũng được",
+      "`crossenv` là bản cũ hơn nên chỉ thiếu vài tính năng mới",
+      "Đây có thể là typosquatting: một package giả tên gần giống, đã từng đánh cắp biến môi trường và secret",
+      "npm sẽ tự động sửa lỗi chính tả và cài đúng `cross-env`"
+    ],
+    "optionsEn": [
+      "Both names are the same package spelled differently, so either is fine",
+      "`crossenv` is an older version, so it just lacks a few new features",
+      "It may be typosquatting: a fake package with a near-identical name, one that has stolen environment variables and secrets",
+      "npm will automatically correct the typo and install the real `cross-env`"
+    ],
+    "answer": 2,
+    "explanation": "Năm 2017, `crossenv` giả mạo `cross-env` và đánh cắp biến môi trường của người cài. Luôn chép tên package từ tài liệu chính thức và kiểm tra trang npm (lượt tải, người công bố) trước khi cài.",
+    "explanationEn": "In 2017 a fake `crossenv` imitated `cross-env` and stole installers' environment variables. Always copy package names from official documentation and check the npm page (downloads, publisher) before installing.",
+    "optionExplanations": [
+      "Sai: trên npm, mỗi tên là một package riêng, có thể của người khác hoàn toàn.",
+      "Sai: tên khác thì là package khác, không phải phiên bản cũ.",
+      "Đúng: đây là dấu hiệu điển hình của typosquatting.",
+      "Sai: npm cài đúng cái tên bạn gõ, không đoán ý bạn."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: on npm every name is a separate package, possibly from a completely different author.",
+      "Wrong: a different name is a different package, not an older version.",
+      "Right: this is a textbook sign of typosquatting.",
+      "Wrong: npm installs exactly the name you type; it does not guess."
+    ]
+  },
+  {
+    "id": "fs02-q17",
+    "question": "Team muốn thêm một thư viện vẽ biểu đồ vào sản phẩm phần mềm bán cho khách hàng (mã nguồn đóng). Thư viện dùng license GPL. Với vai trò BA, bạn nên làm gì?",
+    "questionEn": "The team wants to add a charting library to a closed-source product sold to clients. The library uses a GPL licence. As the BA, what should you do?",
+    "options": [
+      "Không cần quan tâm, license chỉ là chuyện kỹ thuật của developer",
+      "Nêu vấn đề sớm: GPL có thể buộc công ty công bố mã nguồn; kiểm tra danh sách license được duyệt hoặc chọn thư viện MIT/Apache",
+      "Yêu cầu developer xóa dòng `\"license\"` trong lock file để không ai thấy",
+      "Chấp nhận luôn, vì mọi package trên npm đều miễn phí cho mọi mục đích"
+    ],
+    "optionsEn": [
+      "Ignore it; licences are a developer's technical detail",
+      "Raise it early: GPL can oblige the company to publish its source; check the approved-licence list or pick an MIT/Apache library",
+      "Ask the developer to delete the `\"license\"` line in the lock file so nobody sees it",
+      "Accept it, because every npm package is free for any purpose"
+    ],
+    "answer": 1,
+    "explanation": "License là chuyện kinh doanh. MIT, ISC, Apache-2.0 dễ dãi; GPL có thể buộc công bố mã nguồn của chính sản phẩm. BA nên hỏi về danh sách license được duyệt và đưa điều kiện này vào definition of done.",
+    "explanationEn": "Licences are a business matter. MIT, ISC and Apache-2.0 are permissive; GPL can oblige the product's own source code to be published. The BA should ask about an approved-licence list and put the rule into the definition of done.",
+    "optionExplanations": [
+      "Sai: license có hệ quả pháp lý và kinh doanh, không chỉ là chi tiết kỹ thuật.",
+      "Đúng: phát hiện sớm rủi ro license và đưa ra lựa chọn thay thế.",
+      "Sai: che giấu thông tin không thay đổi nghĩa vụ pháp lý, và lock file sẽ được sinh lại.",
+      "Sai: miễn phí không có nghĩa là không có điều kiện; mỗi license có nghĩa vụ riêng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: licences have legal and business consequences, not just technical ones.",
+      "Right: catch the licence risk early and offer alternatives.",
+      "Wrong: hiding the information changes no legal obligation, and the lock file is regenerated anyway.",
+      "Wrong: free does not mean unconditional; each licence has its own obligations."
+    ]
+  },
+  {
+    "id": "fs02-q18",
+    "question": "Tech lead nói: \"Nâng React 18 lên 19 thôi, việc kỹ thuật nhỏ, không cần ticket.\" Phản hồi tốt nhất của BA là gì?",
+    "questionEn": "The tech lead says: \"Just bump React 18 to 19, it's a small technical task, no ticket needed.\" What is the BA's best response?",
+    "options": [
+      "Coi đây là một story có rủi ro: ticket riêng, một vòng regression test, và acceptance criteria \"mọi luồng hoạt động y như trước\"",
+      "Đồng ý bỏ qua, vì SemVer bảo đảm bản MAJOR mới không bao giờ làm hỏng gì",
+      "Yêu cầu chạy `npm audit fix --force` thay cho việc nâng cấp thủ công",
+      "Đề nghị xóa lock file để lần cài sau tự lấy bản mới nhất"
+    ],
+    "optionsEn": [
+      "Treat it as a story with risk: its own ticket, a regression test pass, and acceptance criteria \"every flow behaves as before\"",
+      "Agree to skip it, because SemVer guarantees a new MAJOR never breaks anything",
+      "Ask for `npm audit fix --force` instead of a manual upgrade",
+      "Suggest deleting the lock file so the next install picks up the newest version"
+    ],
+    "answer": 0,
+    "explanation": "Đổi MAJOR nghĩa là có thể có thay đổi phá vỡ (breaking change). Một lần nâng cấp như vậy cần được lên kế hoạch, test hồi quy và có tiêu chí nghiệm thu rõ ràng như \"đăng ký, đăng nhập, đăng xuất và mọi thao tác to-do vẫn như trước\".",
+    "explanationEn": "A MAJOR change means breaking changes are possible. Such an upgrade needs planning, regression testing and clear acceptance criteria such as \"sign-up, login, logout and every to-do action behave exactly as before\".",
+    "optionExplanations": [
+      "Đúng: nâng cấp MAJOR là công việc có rủi ro, cần ticket, test và AC.",
+      "Sai: MAJOR chính là loại thay đổi được phép phá vỡ; và SemVer chỉ là lời hứa.",
+      "Sai: `--force` có thể nhảy MAJOR một cách mất kiểm soát, càng cần test hơn.",
+      "Sai: xóa lock file làm mọi phiên bản trôi và gây \"works on my machine\"; `^` cũng không vượt sang MAJOR mới."
+    ],
+    "optionExplanationsEn": [
+      "Right: a MAJOR upgrade is risky work that needs a ticket, testing and AC.",
+      "Wrong: MAJOR is exactly the kind of change allowed to break things; and SemVer is only a promise.",
+      "Wrong: `--force` may jump MAJOR versions uncontrolled, which needs even more testing.",
+      "Wrong: deleting the lock file lets every version drift and causes \"works on my machine\"; `^` would not cross a MAJOR anyway."
+    ]
+  }
+]

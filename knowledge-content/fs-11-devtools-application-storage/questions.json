@@ -1,0 +1,514 @@
+[
+  {
+    "id": "fs11-q1",
+    "question": "Loại bộ nhớ nào của trình duyệt được TỰ ĐỘNG gửi lên server theo mỗi request khớp?",
+    "questionEn": "Which kind of browser storage is sent to the server AUTOMATICALLY with every matching request?",
+    "options": [
+      "localStorage",
+      "Cookie",
+      "sessionStorage",
+      "IndexedDB"
+    ],
+    "optionsEn": [
+      "localStorage",
+      "Cookies",
+      "sessionStorage",
+      "IndexedDB"
+    ],
+    "answer": 1,
+    "explanation": "Cookie là loại duy nhất trình duyệt tự đính kèm vào request (header Cookie). Nhờ vậy `api.js` không bao giờ phải đụng tới token. localStorage, sessionStorage và IndexedDB chỉ được gửi đi nếu code tự đọc rồi gửi.",
+    "explanationEn": "Cookies are the only kind the browser attaches to requests by itself (the Cookie header). That is why `api.js` never touches the token. localStorage, sessionStorage and IndexedDB only leave the browser if code reads them and sends them.",
+    "optionExplanations": [
+      "Sai: localStorage chỉ nằm trong trình duyệt; muốn gửi thì code phải tự đọc và đưa vào request.",
+      "Đúng: trình duyệt tự gắn cookie vào header Cookie của mọi request khớp domain và path.",
+      "Sai: sessionStorage giống localStorage, không tự gửi đi; nó chỉ khác ở chỗ sống theo tab.",
+      "Sai: IndexedDB là database trong trình duyệt, không bao giờ được gửi tự động."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: localStorage stays in the browser; code must read it and put it into a request.",
+      "Right: the browser adds cookies to the Cookie header of every request matching the domain and path.",
+      "Wrong: sessionStorage is like localStorage and is never sent by itself; it only differs by living per tab.",
+      "Wrong: IndexedDB is a database inside the browser and is never sent automatically."
+    ]
+  },
+  {
+    "id": "fs11-q2",
+    "question": "Bạn gõ `document.cookie` trong Console khi đang đăng nhập vào app To-do và nhận về chuỗi rỗng. Điều đó có nghĩa gì?",
+    "questionEn": "You type `document.cookie` in the Console while logged in to the To-do app and get an empty string. What does that mean?",
+    "options": [
+      "Đăng nhập đã thất bại, không có cookie nào được đặt",
+      "Cookie chỉ lưu ở server nên trình duyệt không có",
+      "Console đang chạy ở origin localhost:4000",
+      "Cookie `token` có cờ HttpOnly nên JavaScript của trang không đọc được"
+    ],
+    "optionsEn": [
+      "The login failed and no cookie was set",
+      "Cookies live only on the server, so the browser has none",
+      "The Console is running on the localhost:4000 origin",
+      "The `token` cookie is HttpOnly, so page JavaScript cannot read it"
+    ],
+    "answer": 3,
+    "explanation": "`COOKIE_OPTIONS` đặt `httpOnly: true`. Trình duyệt vẫn giữ và gửi cookie, nhưng giấu nó khỏi `document.cookie`, nên một script XSS cũng không lấy được token. Panel Application vẫn hiện nó vì DevTools có đặc quyền.",
+    "explanationEn": "`COOKIE_OPTIONS` sets `httpOnly: true`. The browser still keeps and sends the cookie but hides it from `document.cookie`, so an XSS script cannot grab the token. The Application panel still shows it because DevTools is privileged.",
+    "optionExplanations": [
+      "Sai: nếu bạn đang thấy danh sách to-do thì đăng nhập đã thành công và cookie tồn tại.",
+      "Sai: cookie được lưu trong trình duyệt; server chỉ gửi lệnh Set-Cookie.",
+      "Sai: tab app chạy ở localhost:5173; trình duyệt không bao giờ mở trang 4000.",
+      "Đúng: HttpOnly giấu cookie khỏi JavaScript của trang nhưng vẫn gửi nó theo request."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: if you can see your to-do list, the login worked and the cookie exists.",
+      "Wrong: cookies are stored in the browser; the server only sends a Set-Cookie instruction.",
+      "Wrong: the app tab runs on localhost:5173; the browser never opens the 4000 page.",
+      "Right: HttpOnly hides the cookie from page JavaScript while still sending it with requests."
+    ]
+  },
+  {
+    "id": "fs11-q3",
+    "question": "Vì sao cookie `token` hiện dưới `http://localhost:5173` trong panel Application chứ không phải dưới `localhost:4000`?",
+    "questionEn": "Why does the `token` cookie appear under `http://localhost:5173` in the Application panel rather than under `localhost:4000`?",
+    "options": [
+      "Trình duyệt chỉ nói chuyện với 5173; proxy của Vite chuyển /api sang Express phía sau",
+      "Express được cấu hình đặt Domain của cookie là localhost:5173",
+      "React sao chép cookie từ port 4000 sang port 5173 khi khởi động",
+      "Port 4000 bị chặn cookie vì không phải HTTPS"
+    ],
+    "optionsEn": [
+      "The browser only talks to 5173; Vite's proxy forwards /api to Express behind the scenes",
+      "Express is configured to set the cookie's Domain to localhost:5173",
+      "React copies the cookie from port 4000 to port 5173 at start-up",
+      "Port 4000 blocks cookies because it is not HTTPS"
+    ],
+    "answer": 0,
+    "explanation": "Response đăng nhập về từ `localhost:5173`, nơi Vite đã proxy request sang port 4000. Với Chrome, cả app là một site, nên cookie gắn với trang 5173. Thực ra cookie bỏ qua port, nên nó cũng sẽ được gửi nếu bạn mở trực tiếp localhost:4000.",
+    "explanationEn": "The login response came back from `localhost:5173`, where Vite had proxied the request to port 4000. To Chrome the whole app is one site, so the cookie belongs to the 5173 page. Cookies actually ignore the port, so it would also be sent if you opened localhost:4000 directly.",
+    "optionExplanations": [
+      "Đúng: Set-Cookie đến trong response của localhost:5173; proxy làm frontend và API trông như một site.",
+      "Sai: `COOKIE_OPTIONS` không đặt Domain, và Domain của cookie không bao giờ chứa port.",
+      "Sai: code React không đụng tới token; nó là HttpOnly nên React cũng không đọc được.",
+      "Sai: `secure` là false ở dev, và HTTP không chặn việc đặt cookie."
+    ],
+    "optionExplanationsEn": [
+      "Right: the Set-Cookie arrived in a response from localhost:5173; the proxy makes frontend and API look like one site.",
+      "Wrong: `COOKIE_OPTIONS` sets no Domain, and a cookie Domain never includes a port.",
+      "Wrong: React code never touches the token; it is HttpOnly, so React could not even read it.",
+      "Wrong: `secure` is false in development, and plain HTTP does not block setting cookies."
+    ]
+  },
+  {
+    "id": "fs11-q4",
+    "question": "Trong cột SameSite của cookie `token`, bạn thấy `Lax`. Cài đặt này bảo vệ điều gì?",
+    "questionEn": "In the SameSite column of the `token` cookie you see `Lax`. What does this setting protect against?",
+    "options": [
+      "Nó mã hóa giá trị cookie để không ai đọc được",
+      "Nó làm cookie hết hạn khi đóng trình duyệt",
+      "Cookie không được gửi kèm các POST từ site khác, một lớp chống CSRF cơ bản",
+      "Nó chỉ cho phép gửi cookie qua HTTPS"
+    ],
+    "optionsEn": [
+      "It encrypts the cookie value so nobody can read it",
+      "It makes the cookie expire when the browser closes",
+      "The cookie is not sent on cross-site POSTs, basic CSRF protection",
+      "It only allows the cookie to be sent over HTTPS"
+    ],
+    "answer": 2,
+    "explanation": "Comment trong `auth-token.js` ghi rõ: `sameSite: 'lax'` nghĩa là không gửi cookie khi một site khác POST tới app, chặn kiểu tấn công CSRF cơ bản. Chỉ gửi qua HTTPS là việc của cờ Secure; thời hạn là việc của Max-Age.",
+    "explanationEn": "The comment in `auth-token.js` says it: `sameSite: 'lax'` means the cookie is not sent when another site POSTs to the app, blocking basic CSRF attacks. HTTPS-only is the Secure flag's job; the lifetime is Max-Age's.",
+    "optionExplanations": [
+      "Sai: SameSite không mã hóa gì; giá trị là JWT đã ký, không phải đã mã hóa.",
+      "Sai: thời gian sống do Expires/Max-Age quyết định, ở đây là 7 ngày.",
+      "Đúng: Lax không gửi cookie theo POST từ site khác, chống CSRF cơ bản.",
+      "Sai: đó là cờ Secure, chỉ bật khi NODE_ENV là production."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: SameSite encrypts nothing; the value is a signed JWT, not an encrypted one.",
+      "Wrong: the lifetime is set by Expires/Max-Age, here 7 days.",
+      "Right: Lax keeps the cookie off cross-site POSTs, which is basic CSRF protection.",
+      "Wrong: that is the Secure flag, only switched on when NODE_ENV is production."
+    ]
+  },
+  {
+    "id": "fs11-q5",
+    "question": "Bạn xóa cookie `token` trong panel Application khi danh sách to-do vẫn đang hiện, rồi bấm Add. Network sẽ hiện gì?",
+    "questionEn": "You delete the `token` cookie in the Application panel while the to-do list is still showing, then click Add. What does Network show?",
+    "options": [
+      "`POST /api/todos` 201, vì React vẫn nhớ người dùng",
+      "`POST /api/todos` 400 \"Title is required.\"",
+      "`POST /api/todos` 401 \"Please log in first.\"",
+      "`POST /api/todos` 401 \"Your session has expired. Please log in again.\""
+    ],
+    "optionsEn": [
+      "`POST /api/todos` 201, because React still remembers the user",
+      "`POST /api/todos` 400 \"Title is required.\"",
+      "`POST /api/todos` 401 \"Please log in first.\"",
+      "`POST /api/todos` 401 \"Your session has expired. Please log in again.\""
+    ],
+    "answer": 2,
+    "explanation": "`requireAuth` kiểm tra trước tiên: không có cookie → 401 \"Please log in first.\" và route không chạy. App bắt lỗi 401 và quay về màn hình đăng nhập. Thông báo \"session has expired\" chỉ xuất hiện khi CÓ cookie nhưng token không hợp lệ.",
+    "explanationEn": "`requireAuth` checks first: no cookie → 401 \"Please log in first.\" and the route never runs. The app catches the 401 and returns to the login screen. The \"session has expired\" message only appears when a cookie IS present but the token is invalid.",
+    "optionExplanations": [
+      "Sai: state của React không có giá trị gì với server; server chỉ tin cookie.",
+      "Sai: kiểm tra tiêu đề nằm trong route, mà route không bao giờ chạy khi thiếu cookie.",
+      "Đúng: thiếu cookie là nhánh đầu tiên trong `requireAuth`.",
+      "Sai: thông báo này dành cho cookie có mặt nhưng `verifyToken` từ chối."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: React state means nothing to the server; the server only trusts the cookie.",
+      "Wrong: the title check lives in the route, which never runs without a cookie.",
+      "Right: a missing cookie is the first branch in `requireAuth`.",
+      "Wrong: this message is for a cookie that is present but rejected by `verifyToken`."
+    ]
+  },
+  {
+    "id": "fs11-q6",
+    "question": "Bạn sửa giá trị cookie `token` thành `garbage` rồi tick một to-do. Kết quả là gì?",
+    "questionEn": "You edit the `token` cookie's value to `garbage` and tick a to-do. What is the result?",
+    "options": [
+      "401 \"Your session has expired. Please log in again.\" và app quay về màn hình đăng nhập",
+      "404 \"To-do not found.\" vì token không khớp người dùng nào",
+      "200, vì chỉ tên cookie được kiểm tra chứ không phải giá trị",
+      "500 \"Something went wrong on the server.\""
+    ],
+    "optionsEn": [
+      "401 \"Your session has expired. Please log in again.\" and the app returns to the login screen",
+      "404 \"To-do not found.\" because the token matches no user",
+      "200, because only the cookie's name is checked, not its value",
+      "500 \"Something went wrong on the server.\""
+    ],
+    "answer": 0,
+    "explanation": "Có cookie, nên `requireAuth` gọi `verifyToken`. Chữ ký sai làm nó ném lỗi, khối catch trả 401 với thông báo \"Your session has expired. Please log in again.\". Token giả, hỏng hay hết hạn đều đi vào nhánh này.",
+    "explanationEn": "A cookie is present, so `requireAuth` calls `verifyToken`. The bad signature makes it throw, and the catch block returns 401 with \"Your session has expired. Please log in again.\". Forged, damaged and expired tokens all take this branch.",
+    "optionExplanations": [
+      "Đúng: `verifyToken` ném lỗi và catch trả về 401 với thông báo này.",
+      "Sai: route PATCH không bao giờ chạy tới bước tìm to-do vì middleware đã chặn.",
+      "Sai: `jwt.verify` kiểm tra chữ ký của giá trị; chỉ có tên thì không đủ.",
+      "Sai: lỗi xác thực được bắt trong `requireAuth` và trả 401, không lọt thành 500."
+    ],
+    "optionExplanationsEn": [
+      "Right: `verifyToken` throws and the catch returns 401 with this message.",
+      "Wrong: the PATCH route never reaches the to-do lookup because the middleware stops it.",
+      "Wrong: `jwt.verify` checks the value's signature; the name alone is not enough.",
+      "Wrong: the verification error is caught in `requireAuth` and becomes a 401, not a 500."
+    ]
+  },
+  {
+    "id": "fs11-q7",
+    "question": "Sau khi refresh trang (F5), bạn vẫn đăng nhập. Request nào trong Network giải thích điều đó?",
+    "questionEn": "After refreshing the page (F5) you are still logged in. Which request in Network explains that?",
+    "options": [
+      "`POST /api/auth/login` được gửi lại tự động với mật khẩu đã lưu",
+      "`GET /api/todos` đọc tên người dùng từ localStorage",
+      "Không có request nào: React giữ state qua lần refresh",
+      "`GET /api/auth/me` trả về 200 kèm thông tin user nhờ cookie còn hiệu lực"
+    ],
+    "optionsEn": [
+      "`POST /api/auth/login` is resent automatically with a saved password",
+      "`GET /api/todos` reads the user's name from localStorage",
+      "No request: React keeps its state across the refresh",
+      "`GET /api/auth/me` returns 200 with the user thanks to the still-valid cookie"
+    ],
+    "answer": 3,
+    "explanation": "Refresh xóa sạch state của React. `App.jsx` gọi `GET /api/auth/me` khi tải trang; cookie còn hạn nên server trả `{user}` và app hiện lại danh sách. Ở dev bạn có thể thấy request này hai lần do StrictMode.",
+    "explanationEn": "A refresh wipes React's state. `App.jsx` calls `GET /api/auth/me` on page load; the cookie is still valid, so the server returns `{user}` and the app shows the list again. In development you may see this request twice because of StrictMode.",
+    "optionExplanations": [
+      "Sai: app không bao giờ lưu mật khẩu; chỉ email được nhớ trong localStorage.",
+      "Sai: localStorage không chứa tên người dùng, và `/api/todos` chỉ trả về danh sách to-do.",
+      "Sai: refresh tải lại toàn bộ trang và xóa mọi state trong bộ nhớ.",
+      "Đúng: `/api/auth/me` khôi phục phiên dựa trên cookie `token`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the app never stores the password; only the email is remembered in localStorage.",
+      "Wrong: localStorage holds no user name, and `/api/todos` only returns the to-do list.",
+      "Wrong: a refresh reloads the whole page and wipes all in-memory state.",
+      "Right: `/api/auth/me` restores the session based on the `token` cookie."
+    ]
+  },
+  {
+    "id": "fs11-q8",
+    "question": "Bạn bấm Log out rồi xem Response Headers của `POST /api/auth/logout`. Header nào khiến cookie biến mất?",
+    "questionEn": "You click Log out and look at the Response Headers of `POST /api/auth/logout`. Which header makes the cookie disappear?",
+    "options": [
+      "`Cache-Control: no-store`",
+      "`Set-Cookie: token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; ...`",
+      "`Content-Type: application/json`",
+      "`Clear-Site-Data: \"storage\"`"
+    ],
+    "optionsEn": [
+      "`Cache-Control: no-store`",
+      "`Set-Cookie: token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; ...`",
+      "`Content-Type: application/json`",
+      "`Clear-Site-Data: \"storage\"`"
+    ],
+    "answer": 1,
+    "explanation": "`res.clearCookie` gửi lại cookie cùng tên với giá trị rỗng và ngày hết hạn trong quá khứ (1970). Trình duyệt hiểu đó là lệnh xóa. localStorage không bị đụng tới, nên `todo:lastEmail` vẫn còn.",
+    "explanationEn": "`res.clearCookie` sends the same cookie back with an empty value and an expiry date in the past (1970). The browser takes that as a delete instruction. localStorage is untouched, so `todo:lastEmail` remains.",
+    "optionExplanations": [
+      "Sai: header này nói về cache, không xóa cookie; server của ta cũng không gửi nó.",
+      "Đúng: một Set-Cookie với ngày đã qua là cách server bảo trình duyệt xóa cookie.",
+      "Sai: response 204 không có body, và Content-Type không liên quan tới cookie.",
+      "Sai: header này có tồn tại trên web, nhưng server của app không gửi nó; localStorage vẫn còn sau logout."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: this header is about caching, not cookies, and our server does not send it.",
+      "Right: a Set-Cookie with a past date is how a server tells the browser to delete a cookie.",
+      "Wrong: a 204 response has no body, and Content-Type has nothing to do with cookies.",
+      "Wrong: this header exists on the web, but the app's server does not send it; localStorage survives logout."
+    ]
+  },
+  {
+    "id": "fs11-q9",
+    "question": "Trong Local storage, bạn sửa `todo:filter` thành `urgent` rồi refresh. App hiển thị bộ lọc nào?",
+    "questionEn": "In Local storage you change `todo:filter` to `urgent` and refresh. Which filter does the app show?",
+    "options": [
+      "`urgent`, một bộ lọc mới được tạo tự động",
+      "Không bộ lọc nào; app báo lỗi và dừng",
+      "`done`, giá trị hợp lệ gần nhất",
+      "`all`, vì `readFilter` chỉ chấp nhận `all`, `active` hoặc `done`"
+    ],
+    "optionsEn": [
+      "`urgent`, a new filter created automatically",
+      "No filter; the app shows an error and stops",
+      "`done`, the closest valid value",
+      "`all`, because `readFilter` only accepts `all`, `active` or `done`"
+    ],
+    "answer": 3,
+    "explanation": "`readFilter` kiểm tra `FILTERS.includes(saved)`; giá trị lạ thì trả về `'all'`. Bộ nhớ trình duyệt ai cũng sửa được, nên code không tin nó mù quáng. `urgent` vẫn nằm trong storage cho đến khi bạn bấm một nút lọc.",
+    "explanationEn": "`readFilter` checks `FILTERS.includes(saved)`; any unknown value falls back to `'all'`. Anyone can edit browser storage, so the code does not trust it blindly. `urgent` stays in storage until you click a filter chip.",
+    "optionExplanations": [
+      "Sai: danh sách bộ lọc cố định trong `FILTERS`; storage không thêm được bộ lọc mới.",
+      "Sai: giá trị lạ được xử lý êm, không có lỗi nào hiện ra.",
+      "Sai: code không tìm giá trị gần nhất; nó chỉ rơi về mặc định.",
+      "Đúng: giá trị không nằm trong `FILTERS` thì rơi về `'all'`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the list of filters is fixed in `FILTERS`; storage cannot add a new one.",
+      "Wrong: the unknown value is handled quietly; no error appears.",
+      "Wrong: the code does not look for the closest value; it just falls back to the default.",
+      "Right: a value outside `FILTERS` falls back to `'all'`."
+    ]
+  },
+  {
+    "id": "fs11-q10",
+    "question": "Bạn chạy `sessionStorage.setItem('demo', 'hello')` ở một tab, rồi mở tab MỚI tới cùng địa chỉ và gọi `sessionStorage.getItem('demo')`. Kết quả là gì?",
+    "questionEn": "You run `sessionStorage.setItem('demo', 'hello')` in one tab, then open a NEW tab at the same address and call `sessionStorage.getItem('demo')`. What is the result?",
+    "options": [
+      "`'hello'`, vì cùng origin",
+      "`null`, vì sessionStorage tách riêng cho từng tab",
+      "Một lỗi, vì sessionStorage chỉ dùng được sau khi đăng nhập",
+      "`'hello'`, nhưng chỉ sau khi refresh tab mới"
+    ],
+    "optionsEn": [
+      "`'hello'`, because it is the same origin",
+      "`null`, because sessionStorage is separate for each tab",
+      "An error, because sessionStorage only works after login",
+      "`'hello'`, but only after refreshing the new tab"
+    ],
+    "answer": 1,
+    "explanation": "sessionStorage theo origin VÀ theo tab: một tab mới bắt đầu với sessionStorage trống, còn localStorage thì dùng chung giữa các tab cùng origin. Ngoại lệ duy nhất là Duplicate tab, vốn sao chép sessionStorage.",
+    "explanationEn": "sessionStorage is per origin AND per tab: a new tab starts with an empty sessionStorage, while localStorage is shared by every tab of the same origin. The one exception is Duplicate tab, which copies sessionStorage.",
+    "optionExplanations": [
+      "Sai: cùng origin là đủ với localStorage, nhưng sessionStorage còn tách theo tab.",
+      "Đúng: tab mới có sessionStorage riêng, trống.",
+      "Sai: storage của trình duyệt không liên quan gì tới việc đăng nhập.",
+      "Sai: refresh giữ sessionStorage của chính tab đó, không lấy dữ liệu từ tab khác."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the same origin is enough for localStorage, but sessionStorage is also split by tab.",
+      "Right: a new tab has its own, empty sessionStorage.",
+      "Wrong: browser storage has nothing to do with being logged in.",
+      "Wrong: a refresh keeps that tab's own sessionStorage; it never pulls data from another tab."
+    ]
+  },
+  {
+    "id": "fs11-q11",
+    "question": "Một developer đề xuất lưu JWT đăng nhập vào localStorage của một app ngân hàng \"cho tiện\". Lý do chính để phản đối là gì?",
+    "questionEn": "A developer suggests storing the login JWT in localStorage in a banking app \"for convenience\". What is the main reason to object?",
+    "options": [
+      "localStorage quá nhỏ để chứa một JWT",
+      "localStorage bị xóa mỗi khi đóng tab, nên người dùng phải đăng nhập liên tục",
+      "Bất kỳ script nào chạy trên trang, kể cả script chèn qua lỗi XSS, đều đọc và gửi token đi được",
+      "Server không đọc được localStorage nên không thể xác thực"
+    ],
+    "optionsEn": [
+      "localStorage is too small to hold a JWT",
+      "localStorage is wiped whenever the tab closes, so users must log in constantly",
+      "Any script running on the page, including one injected through XSS, can read and send the token away",
+      "The server cannot read localStorage, so it cannot authenticate"
+    ],
+    "answer": 2,
+    "explanation": "Mọi JavaScript trên trang đều đọc được localStorage: code của bạn, thư viện bên thứ ba, widget, và script của kẻ tấn công. Cookie HttpOnly là nơi script không với tới, nên app này để token ở đó.",
+    "explanationEn": "Every piece of JavaScript on the page can read localStorage: your code, third-party libraries, widgets, and an attacker's script. An HttpOnly cookie is out of scripts' reach, which is why this app keeps the token there.",
+    "optionExplanations": [
+      "Sai: localStorage có khoảng 5 MB, một JWT chỉ vài trăm byte.",
+      "Sai: đó là sessionStorage; localStorage tồn tại đến khi bị xóa.",
+      "Đúng: rủi ro XSS là lý do chính không để token ở nơi script đọc được.",
+      "Sai: code có thể đọc token rồi gửi trong header; khó khăn kỹ thuật không phải lý do chính."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: localStorage holds about 5 MB; a JWT is a few hundred bytes.",
+      "Wrong: that describes sessionStorage; localStorage lasts until deleted.",
+      "Right: the XSS risk is the main reason not to keep a token where scripts can read it.",
+      "Wrong: code could read the token and send it in a header; a technical hurdle is not the main reason."
+    ]
+  },
+  {
+    "id": "fs11-q12",
+    "question": "Người dùng A đăng xuất trên máy tính dùng chung. Người tiếp theo mở app và thấy email của A đã được điền sẵn. Nguyên nhân là gì?",
+    "questionEn": "User A logs out on a shared computer. The next person opens the app and sees A's email pre-filled. What causes this?",
+    "options": [
+      "Key `todo:lastEmail` trong localStorage không bị xóa khi đăng xuất",
+      "Cookie `token` vẫn còn sau khi đăng xuất",
+      "Server trả email của người đăng nhập cuối qua `GET /api/auth/me`",
+      "sessionStorage giữ email cho đến khi đóng trình duyệt"
+    ],
+    "optionsEn": [
+      "The `todo:lastEmail` key in localStorage is not removed on logout",
+      "The `token` cookie survives the logout",
+      "The server returns the last user's email through `GET /api/auth/me`",
+      "sessionStorage keeps the email until the browser closes"
+    ],
+    "answer": 0,
+    "explanation": "`AuthForm.jsx` lưu email vào `todo:lastEmail` sau khi đăng nhập thành công, và logout chỉ xóa cookie. Đây là quyết định về quyền riêng tư mà BA nên nêu ra: chấp nhận, hay xóa key khi đăng xuất?",
+    "explanationEn": "`AuthForm.jsx` saves the email to `todo:lastEmail` after a successful login, and logout only clears the cookie. This is a privacy decision a BA should raise: accept it, or remove the key on logout?",
+    "optionExplanations": [
+      "Đúng: localStorage tồn tại qua lần đăng xuất; chỉ cookie bị xóa.",
+      "Sai: logout gửi Set-Cookie ngày 1970 nên cookie đã biến mất.",
+      "Sai: sau logout `/api/auth/me` trả 401, không trả email nào.",
+      "Sai: app không dùng sessionStorage."
+    ],
+    "optionExplanationsEn": [
+      "Right: localStorage survives logout; only the cookie is cleared.",
+      "Wrong: logout sends a Set-Cookie dated 1970, so the cookie is gone.",
+      "Wrong: after logout `/api/auth/me` returns 401 and no email at all.",
+      "Wrong: the app does not use sessionStorage."
+    ]
+  },
+  {
+    "id": "fs11-q13",
+    "question": "Vì sao nên dùng cửa sổ Incognito (hoặc một Chrome profile khác) để kiểm thử người dùng B trong khi A vẫn đăng nhập ở cửa sổ thường?",
+    "questionEn": "Why use an Incognito window (or another Chrome profile) to test user B while A stays logged in in the normal window?",
+    "options": [
+      "Incognito có hộp cookie và localStorage riêng, nên hai phiên đăng nhập không đè lên nhau",
+      "Incognito tắt JavaScript nên kiểm thử an toàn hơn",
+      "Incognito tự động dùng HTTPS nên cookie Secure hoạt động",
+      "Incognito kết nối thẳng tới port 4000, bỏ qua proxy"
+    ],
+    "optionsEn": [
+      "Incognito has its own cookie jar and localStorage, so the two logins do not overwrite each other",
+      "Incognito turns off JavaScript, so testing is safer",
+      "Incognito uses HTTPS automatically, so Secure cookies work",
+      "Incognito connects straight to port 4000, skipping the proxy"
+    ],
+    "answer": 0,
+    "explanation": "Cùng một cửa sổ chỉ có một cookie `token` cho localhost; đăng nhập B sẽ thay thế A. Incognito có bộ nhớ riêng nên A và B cùng đăng nhập song song. Lưu ý: các cửa sổ Incognito dùng chung một hộp cookie với nhau.",
+    "explanationEn": "One window holds only one `token` cookie for localhost; logging in as B would replace A. Incognito has separate storage, so A and B stay logged in side by side. Note: all Incognito windows share one cookie jar with each other.",
+    "optionExplanations": [
+      "Đúng: bộ nhớ tách biệt cho phép hai phiên song song.",
+      "Sai: Incognito vẫn chạy JavaScript bình thường; app React sẽ không chạy nếu tắt JS.",
+      "Sai: Incognito không đổi http thành https; app vẫn chạy ở http://localhost:5173.",
+      "Sai: Incognito dùng cùng địa chỉ 5173 và cùng proxy của Vite."
+    ],
+    "optionExplanationsEn": [
+      "Right: separate storage allows two sessions side by side.",
+      "Wrong: Incognito runs JavaScript normally; the React app would not work without it.",
+      "Wrong: Incognito does not turn http into https; the app still runs on http://localhost:5173.",
+      "Wrong: Incognito uses the same 5173 address and the same Vite proxy."
+    ]
+  },
+  {
+    "id": "fs11-q14",
+    "question": "Người dùng B gọi `fetch('/api/todos/1', { method: 'DELETE' })` trong Console, với 1 là id to-do của người dùng A. Server trả về gì, và vì sao?",
+    "questionEn": "User B calls `fetch('/api/todos/1', { method: 'DELETE' })` in the Console, where 1 is the id of user A's to-do. What does the server return, and why?",
+    "options": [
+      "204, vì B đã đăng nhập hợp lệ",
+      "403 \"Forbidden\", vì to-do thuộc về người khác",
+      "404 \"To-do not found.\", vì câu DELETE lọc theo cả `id` và `user_id` của B",
+      "401, vì Console không gửi cookie"
+    ],
+    "optionsEn": [
+      "204, because B is validly logged in",
+      "403 \"Forbidden\", because the to-do belongs to someone else",
+      "404 \"To-do not found.\", because the DELETE filters by both `id` and B's `user_id`",
+      "401, because the Console does not send cookies"
+    ],
+    "answer": 2,
+    "explanation": "`DELETE FROM todos WHERE id = ? AND user_id = ?` không xóa dòng nào (`changes === 0`) nên server trả 404. Với B, to-do của A không tồn tại, và server không xác nhận id đó có thật. Đây là phép thử chống IDOR.",
+    "explanationEn": "`DELETE FROM todos WHERE id = ? AND user_id = ?` deletes no row (`changes === 0`), so the server returns 404. For B, A's to-do does not exist, and the server does not confirm the id is real. This is the anti-IDOR test.",
+    "optionExplanations": [
+      "Sai: đăng nhập hợp lệ chỉ vượt qua `requireAuth`; câu SQL vẫn lọc theo chủ sở hữu.",
+      "Sai: code không bao giờ trả 403; nó cố ý trả 404 để không lộ id tồn tại.",
+      "Đúng: không có dòng nào khớp cả id lẫn user_id của B, nên trả 404.",
+      "Sai: `fetch` từ Console của trang cùng site vẫn gửi cookie như app."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a valid login only passes `requireAuth`; the SQL still filters by owner.",
+      "Wrong: the code never returns 403; it deliberately returns 404 so as not to reveal that the id exists.",
+      "Right: no row matches both the id and B's user_id, so the answer is 404.",
+      "Wrong: a `fetch` from the page's own Console sends the cookie just like the app does."
+    ]
+  },
+  {
+    "id": "fs11-q15",
+    "question": "Trong ca E2E \"Mật khẩu ngắn\" (đăng ký với mật khẩu 7 ký tự), bằng chứng Network đúng là gì?",
+    "questionEn": "In the E2E case \"Short password\" (sign up with a 7-character password), what is the correct Network evidence?",
+    "options": [
+      "`POST /api/auth/signup` 400 \"Password must be at least 8 characters.\"",
+      "Không có request nào: form trên trình duyệt chặn lại trước khi gọi API",
+      "`POST /api/auth/signup` 409",
+      "`POST /api/auth/signup` 201, vì server chấp nhận mọi mật khẩu"
+    ],
+    "optionsEn": [
+      "`POST /api/auth/signup` 400 \"Password must be at least 8 characters.\"",
+      "No request: the form in the browser stops it before calling the API",
+      "`POST /api/auth/signup` 409",
+      "`POST /api/auth/signup` 201, because the server accepts any password"
+    ],
+    "answer": 1,
+    "explanation": "`AuthForm.jsx` kiểm tra `password.length < 8` trước khi gọi API, nên Network trống. Server cũng có kiểm tra y hệt (trả 400) cho những ai gọi API trực tiếp, bỏ qua form. Case kiểm thử phải ghi đúng bằng chứng mong đợi.",
+    "explanationEn": "`AuthForm.jsx` checks `password.length < 8` before calling the API, so Network stays empty. The server has the same check (returning 400) for anyone who calls the API directly and skips the form. A test case must state the evidence it expects precisely.",
+    "optionExplanations": [
+      "Sai: 400 này chỉ xuất hiện khi gọi API trực tiếp; qua form thì request không được gửi.",
+      "Đúng: kiểm tra phía client chặn trước, không có request nào đi ra.",
+      "Sai: 409 dành cho email đã đăng ký.",
+      "Sai: server từ chối mật khẩu dưới 8 ký tự với 400."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: this 400 only appears when calling the API directly; through the form no request is sent.",
+      "Right: the client-side check stops it first, so no request goes out.",
+      "Wrong: 409 is for an email that is already registered.",
+      "Wrong: the server rejects passwords under 8 characters with a 400."
+    ]
+  },
+  {
+    "id": "fs11-q16",
+    "question": "Đã có `lan@mail.com`. Tester đăng ký với `LAN@Mail.com` và app tạo thành công tài khoản thứ hai. Case nào trong kịch bản E2E phát hiện bug này, và kết quả đúng phải là gì?",
+    "questionEn": "`lan@mail.com` already exists. A tester signs up with `LAN@Mail.com` and the app creates a second account. Which E2E case catches this bug, and what should the correct result be?",
+    "options": [
+      "E2E-05 \"Email sai định dạng\"; kết quả đúng là 400 \"Email is not valid.\"",
+      "E2E-09 \"Email không tồn tại\"; kết quả đúng là 401",
+      "E2E-01 \"Đăng ký hợp lệ\"; kết quả đúng là 201",
+      "E2E-03 \"Trùng email, khác chữ hoa/thường\"; kết quả đúng là 409 \"This email is already registered.\""
+    ],
+    "optionsEn": [
+      "E2E-05 \"Invalid email\"; the correct result is 400 \"Email is not valid.\"",
+      "E2E-09 \"Unknown email\"; the correct result is 401",
+      "E2E-01 \"Sign up, valid\"; the correct result is 201",
+      "E2E-03 \"Duplicate, other letter case\"; the correct result is 409 \"This email is already registered.\""
+    ],
+    "answer": 3,
+    "explanation": "Server chuyển email về chữ thường trước khi kiểm tra trùng, nên `LAN@Mail.com` phải bị từ chối với 409. Nếu một phiên bản code quên `toLowerCase()`, case E2E-03 là case bắt được lỗi này. Đó là lý do kịch bản có một case riêng cho chữ hoa/thường.",
+    "explanationEn": "The server lower-cases the email before the duplicate check, so `LAN@Mail.com` must be rejected with 409. If a version of the code forgot `toLowerCase()`, E2E-03 is the case that catches it. That is why the script has a separate case for letter case.",
+    "optionExplanations": [
+      "Sai: `LAN@Mail.com` là email hợp lệ về định dạng, nên không liên quan tới E2E-05.",
+      "Sai: E2E-09 kiểm tra đăng nhập với email lạ, không phải đăng ký trùng.",
+      "Sai: E2E-01 là happy path với email mới; nó không thể phát hiện trùng lặp.",
+      "Đúng: E2E-03 kiểm tra trùng email khác chữ hoa/thường và mong đợi 409."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `LAN@Mail.com` has a valid format, so E2E-05 does not apply.",
+      "Wrong: E2E-09 tests logging in with an unknown email, not a duplicate sign-up.",
+      "Wrong: E2E-01 is the happy path with a new email; it cannot detect a duplicate.",
+      "Right: E2E-03 tests a duplicate email in different letter case and expects 409."
+    ]
+  }
+]

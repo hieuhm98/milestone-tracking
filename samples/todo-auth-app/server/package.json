@@ -1,0 +1,21 @@
+{
+  "name": "todo-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --watch src/index.js",
+    "start": "node --env-file-if-exists=.env src/index.js",
+    "db:reset": "node --env-file-if-exists=.env src/reset-db.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^12.4.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

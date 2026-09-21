@@ -1,0 +1,578 @@
+[
+  {
+    "id": "fs10-q1",
+    "question": "Bạn bấm Add, rồi mới mở DevTools và chọn tab Network. Danh sách không có request thêm to-do nào. Lý do có khả năng nhất là gì?",
+    "questionEn": "You click Add, and only then open DevTools and select the Network tab. The list shows no request for adding the to-do. What is the most likely reason?",
+    "options": [
+      "Request thêm to-do đã lỗi âm thầm trên server",
+      "DevTools chỉ ghi khi đang mở, nên request trước đó không được ghi lại",
+      "Bộ lọc Fetch/XHR luôn ẩn các request POST",
+      "Vite cache các lời gọi API nên chúng không hiện ra"
+    ],
+    "optionsEn": [
+      "The add request failed silently on the server",
+      "DevTools only records while it is open, so the earlier request was not captured",
+      "The Fetch/XHR filter always hides POST requests",
+      "Vite caches API calls, so they are not shown"
+    ],
+    "answer": 1,
+    "explanation": "Tab Network chỉ ghi lại request khi DevTools đang mở. Hãy mở panel trước khi thao tác, hoặc tải lại trang để ghi từ đầu.",
+    "explanationEn": "The Network tab records requests only while DevTools is open. Open the panel before acting, or reload the page to capture from the start.",
+    "optionExplanations": [
+      "Một request lỗi vẫn hiện trong Network (với status lỗi) nếu panel đang mở; ở đây nó không được ghi.",
+      "Đúng: request xảy ra trước khi mở DevTools không để lại dấu vết trong panel.",
+      "Fetch/XHR hiển thị mọi method: GET, POST, PATCH, DELETE.",
+      "Proxy của Vite không cache lời gọi API; mỗi lần gọi đều là một request mới."
+    ],
+    "optionExplanationsEn": [
+      "A failed request still shows in Network (with an error status) if the panel is open; here it was never recorded.",
+      "Correct: a request made before DevTools was opened leaves no trace in the panel.",
+      "Fetch/XHR shows every method: GET, POST, PATCH, DELETE.",
+      "Vite's proxy does not cache API calls; every call is a fresh request."
+    ]
+  },
+  {
+    "id": "fs10-q2",
+    "question": "Trong tab Network, bộ lọc loại nào chỉ để lại các lời gọi API mà code React tạo ra bằng `fetch`?",
+    "questionEn": "In the Network tab, which type filter leaves only the API calls our React code makes with `fetch`?",
+    "options": [
+      "Doc",
+      "JS",
+      "Other",
+      "Fetch/XHR"
+    ],
+    "optionsEn": [
+      "Doc",
+      "JS",
+      "Other",
+      "Fetch/XHR"
+    ],
+    "answer": 3,
+    "explanation": "Fetch/XHR hiển thị các request do JavaScript gửi bằng `fetch` hoặc XMLHttpRequest. Trong app này đó là mọi thứ dưới `/api`.",
+    "explanationEn": "Fetch/XHR shows requests that JavaScript sends with `fetch` or XMLHttpRequest. In this app that is everything under `/api`.",
+    "optionExplanations": [
+      "Doc là tài liệu HTML của trang, không phải lời gọi API.",
+      "JS là các file JavaScript Vite phục vụ, như `main.jsx`, `api.js`.",
+      "Other gom những request không thuộc loại nào khác, không phải lời gọi `fetch`.",
+      "Đúng: Fetch/XHR lọc ra đúng các lời gọi API."
+    ],
+    "optionExplanationsEn": [
+      "Doc is the page's HTML document, not an API call.",
+      "JS is the JavaScript files Vite serves, such as `main.jsx` and `api.js`.",
+      "Other collects requests that fit no other type, not `fetch` calls.",
+      "Correct: Fetch/XHR isolates exactly the API calls."
+    ]
+  },
+  {
+    "id": "fs10-q3",
+    "question": "Cột Name hiển thị `5` cho một dòng có Type là `fetch`. Đó nhiều khả năng là request nào?",
+    "questionEn": "The Name column shows `5` for a row whose Type is `fetch`. Which request is it most likely?",
+    "options": [
+      "Một lời gọi tới `/api/todos/5`, ví dụ PATCH hoặc DELETE to-do số 5",
+      "Request thứ năm mà trang đã gửi kể từ khi tải",
+      "Một response có status thuộc nhóm 5xx",
+      "Một file tên `5.js` mà Vite tải về"
+    ],
+    "optionsEn": [
+      "A call to `/api/todos/5`, such as a PATCH or DELETE of to-do 5",
+      "The fifth request the page has sent since loading",
+      "A response whose status is in the 5xx range",
+      "A file called `5.js` that Vite loaded"
+    ],
+    "answer": 0,
+    "explanation": "Cột Name chỉ hiện phần cuối của URL. Với `/api/todos/5`, phần cuối là `5`. Rê chuột hoặc thêm cột Method để biết rõ đó là PATCH hay DELETE.",
+    "explanationEn": "The Name column shows only the last part of the URL. For `/api/todos/5` that is `5`. Hover, or add the Method column, to see whether it was a PATCH or a DELETE.",
+    "optionExplanations": [
+      "Đúng: Name là đoạn cuối của đường dẫn, ở đây là id của to-do.",
+      "Cột Name không đánh số thứ tự request.",
+      "Status nằm ở cột Status, không phải cột Name.",
+      "Một file JS sẽ có Type là `script`, không phải `fetch`."
+    ],
+    "optionExplanationsEn": [
+      "Correct: Name is the last path segment, here the to-do's id.",
+      "The Name column does not number requests.",
+      "The status lives in the Status column, not the Name column.",
+      "A JS file would have Type `script`, not `fetch`."
+    ]
+  },
+  {
+    "id": "fs10-q4",
+    "question": "Trong Headers → General của request login, Request URL là `http://localhost:5173/api/auth/login`, không phải cổng 4000. Vì sao?",
+    "questionEn": "In Headers → General for the login request, the Request URL is `http://localhost:5173/api/auth/login`, not port 4000. Why?",
+    "options": [
+      "Ở chế độ dev, Express thực ra chạy trên cổng 5173",
+      "Chrome tự đổi cổng của request vì lý do bảo mật",
+      "Trình duyệt chỉ nói chuyện với Vite; proxy của Vite chuyển `/api` sang Express ở cổng 4000 mà trình duyệt không thấy",
+      "Request chưa bao giờ đến được backend"
+    ],
+    "optionsEn": [
+      "In development, Express actually runs on port 5173",
+      "Chrome rewrites the request's port for security reasons",
+      "The browser only talks to Vite; Vite's proxy forwards `/api` to Express on port 4000, out of the browser's sight",
+      "The request never reached the backend"
+    ],
+    "answer": 2,
+    "explanation": "`vite.config.js` khai báo proxy `/api → http://localhost:4000`. Với trình duyệt, frontend và API là cùng một site ở cổng 5173, nên cookie hoạt động mà không cần cấu hình CORS.",
+    "explanationEn": "`vite.config.js` declares the proxy `/api → http://localhost:4000`. To the browser, frontend and API are one site on port 5173, so cookies just work without any CORS setup.",
+    "optionExplanations": [
+      "Express luôn chạy trên cổng 4000 (`PORT` mặc định).",
+      "Chrome không tự đổi cổng; URL là đúng những gì code gọi.",
+      "Đúng: proxy nằm phía sau Vite nên không hiện trong Network.",
+      "Status 200 và body user cho thấy backend đã trả lời."
+    ],
+    "optionExplanationsEn": [
+      "Express always runs on port 4000 (the default `PORT`).",
+      "Chrome does not rewrite ports; the URL is exactly what the code called.",
+      "Correct: the proxy sits behind Vite, so it never shows in Network.",
+      "A 200 status and a user body show the backend did answer."
+    ]
+  },
+  {
+    "id": "fs10-q5",
+    "question": "Bạn muốn xem chính xác JSON mà trình duyệt đã gửi khi thêm một to-do. Bạn mở tab nào của request `POST /api/todos`?",
+    "questionEn": "You want to see exactly the JSON the browser sent when adding a to-do. Which tab of the `POST /api/todos` request do you open?",
+    "options": [
+      "Preview",
+      "Payload",
+      "Timing",
+      "Response Headers trong Headers"
+    ],
+    "optionsEn": [
+      "Preview",
+      "Payload",
+      "Timing",
+      "Response Headers under Headers"
+    ],
+    "answer": 1,
+    "explanation": "Payload hiển thị body của request, ở đây là `{\"title\":\"Buy milk\"}`. Preview và Response hiển thị những gì server trả về.",
+    "explanationEn": "Payload shows the request body, here `{\"title\":\"Buy milk\"}`. Preview and Response show what the server sent back.",
+    "optionExplanations": [
+      "Preview là body của response, không phải thứ bạn gửi đi.",
+      "Đúng: Payload là dữ liệu đã gửi (view source để xem JSON gốc).",
+      "Timing chỉ cho biết thời gian của từng giai đoạn.",
+      "Response Headers là header server gửi về, không chứa body bạn gửi."
+    ],
+    "optionExplanationsEn": [
+      "Preview is the response body, not what you sent.",
+      "Correct: Payload is the data sent (view source shows the raw JSON).",
+      "Timing only shows how long each phase took.",
+      "Response Headers are what the server sent back and do not contain your body."
+    ]
+  },
+  {
+    "id": "fs10-q6",
+    "question": "Sau khi đăng nhập, header nào trên request `GET /api/todos` tiếp theo chứng minh trình duyệt đã gửi kèm cookie đăng nhập?",
+    "questionEn": "After logging in, which header on the next `GET /api/todos` request proves the browser sent the login cookie?",
+    "options": [
+      "`Set-Cookie` trong Response Headers",
+      "`Content-Type: application/json` trong Request Headers",
+      "`Authorization: Bearer …` do `api.js` thêm vào",
+      "`Cookie: token=…` trong Request Headers"
+    ],
+    "optionsEn": [
+      "`Set-Cookie` in the Response Headers",
+      "`Content-Type: application/json` in the Request Headers",
+      "`Authorization: Bearer …` added by `api.js`",
+      "`Cookie: token=…` in the Request Headers"
+    ],
+    "answer": 3,
+    "explanation": "Server đặt cookie bằng `Set-Cookie` trong response của login/signup. Từ đó trình duyệt tự gắn `Cookie: token=…` vào mọi request tới cùng site; code không hề đụng vào token.",
+    "explanationEn": "The server sets the cookie with `Set-Cookie` on the login/signup response. From then on the browser attaches `Cookie: token=…` to every request to the same site; our code never touches the token.",
+    "optionExplanations": [
+      "`Set-Cookie` là server *đặt* cookie, xuất hiện ở response của login, không phải bằng chứng trình duyệt gửi nó.",
+      "Request GET không có body và không cho biết gì về cookie.",
+      "App này không dùng header Authorization; `api.js` không đụng vào token.",
+      "Đúng: header `Cookie` trong request là thứ trình duyệt đã gửi."
+    ],
+    "optionExplanationsEn": [
+      "`Set-Cookie` is the server *setting* the cookie on the login response, not proof the browser sends it.",
+      "A GET has no body, and this header says nothing about cookies.",
+      "This app uses no Authorization header; `api.js` never touches the token.",
+      "Correct: the `Cookie` request header is what the browser sent."
+    ]
+  },
+  {
+    "id": "fs10-q7",
+    "question": "Khi chưa đăng nhập, bạn tải lại trang và thấy hai dòng `GET /api/auth/me` với status 401, cùng lỗi đỏ \"Failed to load resource … 401 (Unauthorized)\" trong Console. Bạn nên làm gì?",
+    "questionEn": "While logged out, you reload and see two `GET /api/auth/me` rows with status 401, plus red \"Failed to load resource … 401 (Unauthorized)\" errors in the Console. What should you do?",
+    "options": [
+      "Không làm gì: StrictMode chạy effect hai lần ở dev, và 401 là câu trả lời đã thiết kế cho \"chưa đăng nhập\"",
+      "Báo bug BE: `/me` phải trả về 200 cho khách chưa đăng nhập",
+      "Báo bug FE: app không bao giờ được gọi một API hai lần",
+      "Xóa cookie, vì cookie hỏng mới gây ra lỗi 401 này"
+    ],
+    "optionsEn": [
+      "Nothing: StrictMode runs the effect twice in dev, and 401 is the designed answer for \"not logged in\"",
+      "File a BE bug: `/me` must return 200 for logged-out visitors",
+      "File an FE bug: the app must never call an API twice",
+      "Clear cookies, because only a broken cookie causes this 401"
+    ],
+    "answer": 0,
+    "explanation": "`<StrictMode>` trong `main.jsx` cố ý chạy effect hai lần ở dev. `/me` trả 401 `Please log in first.` khi không có cookie, và app hiện form đăng nhập: đúng thiết kế. Chrome ghi mọi response 4xx vào Console.",
+    "explanationEn": "`<StrictMode>` in `main.jsx` deliberately runs effects twice in dev. `/me` returns 401 `Please log in first.` when there is no cookie, and the app shows the login form: as designed. Chrome logs every 4xx response in the Console.",
+    "optionExplanations": [
+      "Đúng: cả việc gọi hai lần lẫn status 401 đều là hành vi mong đợi.",
+      "401 chính là cách API nói \"chưa đăng nhập\"; trả 200 sẽ sai hợp đồng.",
+      "Việc gọi hai lần chỉ xảy ra ở dev do StrictMode; bản production gọi một lần.",
+      "Không có cookie là đủ để nhận 401; không có cookie nào bị hỏng cả."
+    ],
+    "optionExplanationsEn": [
+      "Correct: both the double call and the 401 are expected behaviour.",
+      "401 is how the API says \"not logged in\"; returning 200 would break the contract.",
+      "The double call only happens in dev because of StrictMode; production calls once.",
+      "Having no cookie is enough to get 401; nothing is broken."
+    ]
+  },
+  {
+    "id": "fs10-q8",
+    "question": "Tester bấm Add với một tiêu đề hợp lệ và thấy `POST /api/todos → 500` với body `{\"error\":\"Something went wrong on the server.\"}`. Bug này nên giao cho ai?",
+    "questionEn": "A tester clicks Add with a valid title and sees `POST /api/todos → 500` with body `{\"error\":\"Something went wrong on the server.\"}`. Who should get this bug?",
+    "options": [
+      "Frontend, vì chính nút Add đã gửi request",
+      "Không ai, vì 5xx là lỗi validation bình thường",
+      "Backend: request đúng nhưng server bị lỗi khi xử lý",
+      "Mạng của tester, vì 5xx nghĩa là đang offline"
+    ],
+    "optionsEn": [
+      "Frontend, because the Add button sent the request",
+      "Nobody, because 5xx is normal validation",
+      "Backend: the request was right but the server broke handling it",
+      "The tester's network, because 5xx means offline"
+    ],
+    "answer": 2,
+    "explanation": "5xx nghĩa là server bị lỗi. Payload hợp lệ mà nhận về 500 là \"đúng câu hỏi, sai câu trả lời\", tức là bug của backend.",
+    "explanationEn": "5xx means the server broke. A valid payload answered with 500 is \"right question, wrong answer\", which is a backend bug.",
+    "optionExplanations": [
+      "Frontend đã gửi đúng dữ liệu; việc gửi request không phải là lỗi.",
+      "Validation trả về 4xx (ở đây là 400), không phải 5xx.",
+      "Đúng: 500 với payload hợp lệ thuộc về backend.",
+      "Khi offline, request hiện `(failed)`, không có HTTP status nào."
+    ],
+    "optionExplanationsEn": [
+      "The frontend sent correct data; sending the request is not the bug.",
+      "Validation answers with 4xx (400 here), not 5xx.",
+      "Correct: a 500 on a valid payload belongs to the backend.",
+      "Offline requests show `(failed)` with no HTTP status at all."
+    ]
+  },
+  {
+    "id": "fs10-q9",
+    "question": "Bấm Delete không có gì xảy ra, và không có dòng mới nào trong Network (đang ghi, bộ lọc Fetch/XHR). Nguyên nhân có khả năng nhất?",
+    "questionEn": "Clicking Delete does nothing, and no new row appears in Network (recording on, Fetch/XHR filter). What is the most likely cause?",
+    "options": [
+      "Backend trả về 404 cho to-do đó",
+      "Bug frontend: cú bấm không bao giờ đến được đoạn code gửi request",
+      "Bug backend trong route DELETE",
+      "Database đang bị khóa"
+    ],
+    "optionsEn": [
+      "The backend returned 404 for that to-do",
+      "A frontend bug: the click never reached the code that sends the request",
+      "A backend bug in the DELETE route",
+      "The database is locked"
+    ],
+    "answer": 1,
+    "explanation": "Không có request nào nghĩa là backend thậm chí chưa được hỏi. Theo sơ đồ quyết định: không có request → frontend.",
+    "explanationEn": "No request means the backend was never even asked. By the decision guide: no request → frontend.",
+    "optionExplanations": [
+      "Một response 404 sẽ hiện thành một dòng trong Network.",
+      "Đúng: không có request thì lỗi nằm trước khi `api()` được gọi.",
+      "Backend chỉ có thể lỗi khi nhận được request; ở đây không có request nào.",
+      "Lỗi database sẽ trả về một response (thường là 500), vẫn có một dòng trong Network."
+    ],
+    "optionExplanationsEn": [
+      "A 404 response would appear as a row in Network.",
+      "Correct: with no request, the fault is before `api()` is ever called.",
+      "The backend can only fail after receiving a request; there was none.",
+      "A database error would still produce a response (usually 500), so a row would appear."
+    ]
+  },
+  {
+    "id": "fs10-q10",
+    "question": "Form đăng nhập hiện `Request failed (500)`, và terminal của Vite ghi một lỗi proxy kèm `ECONNREFUSED`. Nguyên nhân là gì?",
+    "questionEn": "The login form shows `Request failed (500)`, and the Vite terminal logs a proxy error with `ECONNREFUSED`. What is the cause?",
+    "options": [
+      "Backend Express ở cổng 4000 chưa chạy",
+      "Mật khẩu nhập vào không đúng",
+      "Cookie `token` đã hết hạn",
+      "React StrictMode đã gửi login hai lần"
+    ],
+    "optionsEn": [
+      "The Express backend on port 4000 is not running",
+      "The password entered is wrong",
+      "The `token` cookie has expired",
+      "React StrictMode sent the login twice"
+    ],
+    "answer": 0,
+    "explanation": "`ECONNREFUSED` nghĩa là proxy của Vite không kết nối được tới cổng 4000, nên nó trả 500 với body rỗng. `api.js` không đọc được JSON nên hiện `Request failed (500)`. Đây là vấn đề môi trường, không phải bug code.",
+    "explanationEn": "`ECONNREFUSED` means Vite's proxy could not connect to port 4000, so it answers 500 with an empty body. `api.js` finds no JSON and shows `Request failed (500)`. It is an environment problem, not a code bug.",
+    "optionExplanations": [
+      "Đúng: hãy khởi động lại `npm run dev` trong thư mục `server`.",
+      "Sai mật khẩu trả về 401 `Email or password is incorrect.`",
+      "Login không cần cookie cũ; cookie hết hạn cho 401 trên route được bảo vệ.",
+      "StrictMode chỉ chạy lại effect, không chạy lại việc submit form."
+    ],
+    "optionExplanationsEn": [
+      "Correct: start `npm run dev` in the `server` folder again.",
+      "A wrong password returns 401 `Email or password is incorrect.`",
+      "Login needs no previous cookie; an expired cookie gives 401 on protected routes.",
+      "StrictMode re-runs effects, not form submissions."
+    ]
+  },
+  {
+    "id": "fs10-q11",
+    "question": "Bạn muốn thấy `Please wait…` trên nút đăng nhập đủ lâu để kiểm tra nó. Bạn dùng công cụ nào trong tab Network?",
+    "questionEn": "You want to see `Please wait…` on the login button long enough to check it. Which Network tool do you use?",
+    "options": [
+      "Preserve log",
+      "Disable cache",
+      "Block request URL trên request login",
+      "Throttling đặt ở 3G (hoặc Slow 4G)"
+    ],
+    "optionsEn": [
+      "Preserve log",
+      "Disable cache",
+      "Block request URL on the login request",
+      "Throttling set to 3G (or Slow 4G)"
+    ],
+    "answer": 3,
+    "explanation": "Throttling giả lập mạng chậm, nên request login mất vài giây và bạn thấy rõ trạng thái `Please wait…` với nút bị vô hiệu hóa.",
+    "explanationEn": "Throttling simulates a slow network, so the login request takes seconds and you clearly see the `Please wait…` state with the button disabled.",
+    "optionExplanations": [
+      "Preserve log giữ lại các dòng khi reload, không làm request chậm đi.",
+      "Disable cache tải lại file mới, không làm chậm lời gọi API.",
+      "Chặn request làm nó thất bại ngay lập tức với `Failed to fetch`.",
+      "Đúng: mạng chậm kéo dài trạng thái loading."
+    ],
+    "optionExplanationsEn": [
+      "Preserve log keeps rows across reloads; it does not slow requests.",
+      "Disable cache fetches files fresh; it does not slow API calls.",
+      "Blocking makes the request fail at once with `Failed to fetch`.",
+      "Correct: a slow network stretches out the loading state."
+    ]
+  },
+  {
+    "id": "fs10-q12",
+    "question": "Khi đã đăng nhập, bạn chạy trong Console: `await call('POST', '/todos', { title: 'x'.repeat(201) })`. Kết quả mong đợi là gì?",
+    "questionEn": "While logged in, you run in the Console: `await call('POST', '/todos', { title: 'x'.repeat(201) })`. What is the expected result?",
+    "options": [
+      "201, và tiêu đề bị cắt còn 200 ký tự",
+      "413 Payload Too Large",
+      "400 `{error: 'Title must be 200 characters or fewer.'}`",
+      "500 `Something went wrong on the server.`"
+    ],
+    "optionsEn": [
+      "201, with the title cut down to 200 characters",
+      "413 Payload Too Large",
+      "400 `{error: 'Title must be 200 characters or fewer.'}`",
+      "500 `Something went wrong on the server.`"
+    ],
+    "answer": 2,
+    "explanation": "Route `POST /api/todos` kiểm tra `title.length > MAX_TITLE` (200) và trả 400 với thông báo đó. Tiêu đề 200 ký tự thì được chấp nhận (201): đó là giá trị biên.",
+    "explanationEn": "The `POST /api/todos` route checks `title.length > MAX_TITLE` (200) and returns 400 with that message. A 200-character title is accepted (201): that is the boundary.",
+    "optionExplanations": [
+      "Server không tự cắt tiêu đề; nó từ chối request.",
+      "201 ký tự còn rất xa giới hạn kích thước body; quy tắc là validation của route.",
+      "Đúng: đây là chuỗi lỗi chính xác trong `routes/todos.js`.",
+      "Validation được xử lý đàng hoàng với 400, không làm server lỗi."
+    ],
+    "optionExplanationsEn": [
+      "The server does not trim the title; it rejects the request.",
+      "201 characters is far below any body size limit; the rule is route validation.",
+      "Correct: that is the exact error string in `routes/todos.js`.",
+      "Validation is handled cleanly with a 400; the server does not break."
+    ]
+  },
+  {
+    "id": "fs10-q13",
+    "question": "Form đăng ký đã chặn mật khẩu ngắn. Vì sao tester vẫn gửi một yêu cầu signup với password `'123'` từ Console?",
+    "questionEn": "The sign-up form already blocks short passwords. Why does a tester still send a signup with password `'123'` from the Console?",
+    "options": [
+      "Để chứng minh server cũng thực thi quy tắc, vì ai cũng có thể bỏ qua form và gọi thẳng API",
+      "Vì thông báo của form đang hiển thị sai ngôn ngữ",
+      "Để kiểm tra mật khẩu có được lưu dạng plain text hay không",
+      "Vì gọi từ Console nhanh hơn điền form"
+    ],
+    "optionsEn": [
+      "To prove the server enforces the rule too, since anyone can skip the form and call the API directly",
+      "Because the form's message is shown in the wrong language",
+      "To check whether the password is stored as plain text",
+      "Because calling from the Console is faster than filling the form"
+    ],
+    "answer": 0,
+    "explanation": "Kiểm tra trong form chỉ để tiện cho người dùng. Server phải tự kiểm tra lại; gọi thẳng API và nhận 400 `Password must be at least 8 characters.` chứng minh điều đó.",
+    "explanationEn": "The form check is only for convenience. The server must check again; calling the API directly and getting 400 `Password must be at least 8 characters.` proves it does.",
+    "optionExplanations": [
+      "Đúng: đây là kiểm thử validation mà giao diện che đi.",
+      "Ngôn ngữ của thông báo không liên quan tới việc bỏ qua giao diện.",
+      "Response không bao giờ tiết lộ cách lưu mật khẩu; và mật khẩu ngắn bị từ chối trước khi lưu.",
+      "Tốc độ không phải mục đích; mục đích là vượt qua lớp kiểm tra của form."
+    ],
+    "optionExplanationsEn": [
+      "Correct: this tests validation that the UI hides.",
+      "The message's language has nothing to do with bypassing the UI.",
+      "The response never reveals how passwords are stored, and a short one is rejected before saving.",
+      "Speed is not the point; getting past the form's check is."
+    ]
+  },
+  {
+    "id": "fs10-q14",
+    "question": "Từ Console của tài khoản Lan, bạn gửi `PATCH` tới id của một to-do thuộc về Minh. Response đúng là gì?",
+    "questionEn": "From Lan's Console, you send a `PATCH` to the id of a to-do that belongs to Minh. What is the correct response?",
+    "options": [
+      "403 Forbidden kèm tên người sở hữu",
+      "404 `To-do not found.`",
+      "200 với to-do đã được cập nhật",
+      "401 `Please log in first.`"
+    ],
+    "optionsEn": [
+      "403 Forbidden with the owner's name",
+      "404 `To-do not found.`",
+      "200 with the updated to-do",
+      "401 `Please log in first.`"
+    ],
+    "answer": 1,
+    "explanation": "Mọi truy vấn đều lọc theo `user_id`, nên với Lan to-do đó \"không tồn tại\": 404 `To-do not found.` Server thậm chí không tiết lộ rằng id đó có tồn tại.",
+    "explanationEn": "Every query filters by `user_id`, so to Lan that to-do \"does not exist\": 404 `To-do not found.` The server does not even reveal that the id exists.",
+    "optionExplanations": [
+      "App không trả 403, và việc lộ tên người sở hữu sẽ là rò rỉ dữ liệu.",
+      "Đúng: `findOwnTodo` không tìm thấy to-do của Lan với id đó.",
+      "200 ở đây sẽ là một lỗ hổng bảo mật nghiêm trọng.",
+      "Lan đã đăng nhập, nên `requireAuth` cho qua; 401 là cho trường hợp không có cookie."
+    ],
+    "optionExplanationsEn": [
+      "The app never returns 403, and naming the owner would leak data.",
+      "Correct: `findOwnTodo` finds no to-do of Lan's with that id.",
+      "A 200 here would be a serious security hole.",
+      "Lan is logged in, so `requireAuth` lets her through; 401 is for a missing cookie."
+    ]
+  },
+  {
+    "id": "fs10-q15",
+    "question": "Phép soi bảo mật nào dưới đây mô tả đúng hành vi mong đợi của app?",
+    "questionEn": "Which security peek below describes the app's expected behaviour correctly?",
+    "options": [
+      "Response của login phải chứa `password_hash` để frontend tự kiểm tra",
+      "Email không tồn tại phải trả về \"No account with this email.\"",
+      "Token phải nằm trong body response để frontend lưu vào `localStorage`",
+      "Email không tồn tại và sai mật khẩu đều trả 401 `Email or password is incorrect.`"
+    ],
+    "optionsEn": [
+      "The login response must contain `password_hash` so the frontend can check it",
+      "An unknown email must return \"No account with this email.\"",
+      "The token must be in the response body so the frontend can store it in `localStorage`",
+      "An unknown email and a wrong password both return 401 `Email or password is incorrect.`"
+    ],
+    "answer": 3,
+    "explanation": "Cùng một thông báo cho cả hai trường hợp giúp không ai dùng form login để dò ai có tài khoản. Response chỉ chứa `id`, `name`, `email`, còn token chỉ đi trong cookie HttpOnly.",
+    "explanationEn": "One message for both cases stops anyone using the login form to discover who has an account. Responses contain only `id`, `name`, `email`, and the token travels only in the HttpOnly cookie.",
+    "optionExplanations": [
+      "`password_hash` không bao giờ được gửi về trình duyệt (`publicUser` chỉ chọn trường an toàn).",
+      "Thông báo riêng cho email không tồn tại sẽ làm lộ ai đã đăng ký.",
+      "Token nằm trong cookie HttpOnly, không nằm trong body hay `localStorage`.",
+      "Đúng: đây là chuỗi lỗi chung trong `routes/auth.js`."
+    ],
+    "optionExplanationsEn": [
+      "`password_hash` is never sent to the browser (`publicUser` picks only safe fields).",
+      "A separate unknown-email message would reveal who is registered.",
+      "The token lives in an HttpOnly cookie, not in a body or `localStorage`.",
+      "Correct: that is the shared error string in `routes/auth.js`."
+    ]
+  },
+  {
+    "id": "fs10-q16",
+    "question": "Trước khi đính kèm file HAR vào một ticket, bạn nên làm gì?",
+    "questionEn": "Before attaching a HAR file to a ticket, what should you do?",
+    "options": [
+      "Không cần gì, vì HAR chỉ chứa số liệu thời gian",
+      "Đổi đuôi thành `.json` để không ai mở được",
+      "Ghi bằng tài khoản test và rà file tìm mật khẩu, token và dữ liệu cá nhân, kể cả khi đã export bản sanitized",
+      "Nén file cùng mật khẩu của khách hàng thật để dev tái hiện"
+    ],
+    "optionsEn": [
+      "Nothing, because a HAR contains only timing data",
+      "Rename it to `.json` so nobody can open it",
+      "Record with a test account and check the file for passwords, tokens and personal data, even when exported sanitized",
+      "Zip it together with the real customer's password so devs can reproduce"
+    ],
+    "answer": 2,
+    "explanation": "HAR chứa mọi request và response. Bản sanitized bỏ header `Cookie`, `Set-Cookie`, `Authorization` nhưng body request (ví dụ mật khẩu khi login) vẫn còn.",
+    "explanationEn": "A HAR holds every request and response. A sanitized export drops the `Cookie`, `Set-Cookie` and `Authorization` headers, but request bodies (such as the login password) remain.",
+    "optionExplanations": [
+      "HAR chứa cả header, payload và body response, không chỉ thời gian.",
+      "HAR vốn là JSON; đổi đuôi không che giấu được gì.",
+      "Đúng: dùng tài khoản test và tự rà lại trước khi chia sẻ.",
+      "Không bao giờ chia sẻ thông tin đăng nhập thật của khách hàng."
+    ],
+    "optionExplanationsEn": [
+      "A HAR includes headers, payloads and response bodies, not just timings.",
+      "A HAR is already JSON; renaming it hides nothing.",
+      "Correct: use a test account and review the file before sharing.",
+      "Never share a real customer's credentials."
+    ]
+  },
+  {
+    "id": "fs10-q17",
+    "question": "Acceptance criterion nào dễ kiểm chứng nhất bằng tab Network?",
+    "questionEn": "Which acceptance criterion is easiest to verify with the Network tab?",
+    "options": [
+      "Given title rỗng, when bấm Add, then API trả 400 với `Title is required.` và danh sách không đổi",
+      "Ứng dụng phải xử lý lỗi một cách khéo léo",
+      "Thêm một to-do phải tạo cảm giác nhanh",
+      "Hệ thống hiển thị một thông báo phù hợp khi có sự cố"
+    ],
+    "optionsEn": [
+      "Given an empty title, when I click Add, then the API returns 400 with `Title is required.` and the list is unchanged",
+      "The application must handle errors gracefully",
+      "Adding a to-do must feel fast",
+      "The system shows an appropriate message when something goes wrong"
+    ],
+    "answer": 0,
+    "explanation": "Tiêu chí nêu rõ status code và thông báo chính xác thì ai cũng kiểm tra được trong Network, và không thể tranh cãi.",
+    "explanationEn": "A criterion that names the status code and the exact message can be checked by anyone in the Network tab and cannot be argued about.",
+    "optionExplanations": [
+      "Đúng: có request, status và body cụ thể để đối chiếu.",
+      "\"Khéo léo\" không đo được; mỗi người hiểu một kiểu.",
+      "\"Cảm giác nhanh\" không có ngưỡng; cần con số cụ thể mới kiểm được.",
+      "\"Phù hợp\" không nói thông báo nào, nên không kiểm chứng được."
+    ],
+    "optionExplanationsEn": [
+      "Correct: there is a concrete request, status and body to compare.",
+      "\"Gracefully\" cannot be measured; everyone reads it differently.",
+      "\"Feel fast\" has no threshold; it needs a number to be testable.",
+      "\"Appropriate\" names no message, so it cannot be verified."
+    ]
+  },
+  {
+    "id": "fs10-q18",
+    "question": "Khi throttle về 3G, bạn bấm Add hai lần thật nhanh và nhận được hai to-do giống hệt nhau. BA nên xử lý phát hiện này thế nào?",
+    "questionEn": "With 3G throttling on, you click Add twice quickly and get two identical to-dos. How should a BA treat this finding?",
+    "options": [
+      "Bỏ qua, vì throttling không phải điều kiện có thật",
+      "Một requirement còn thiếu: nút Add phải bị vô hiệu hóa trong lúc lưu, cần viết thành story/criterion",
+      "Bug backend: server phải từ chối mọi tiêu đề trùng nhau",
+      "Hiện tượng do StrictMode, sẽ tự hết ở bản production"
+    ],
+    "optionsEn": [
+      "Ignore it, because throttling is not a real condition",
+      "A missing requirement: the Add button must be disabled while saving, written up as a story/criterion",
+      "A backend bug: the server must reject every duplicate title",
+      "A StrictMode artefact that disappears in production"
+    ],
+    "answer": 1,
+    "explanation": "Hai dòng `POST /api/todos` cho thấy người dùng thật sự đã gửi hai lần. Form login có `Please wait…` và nút bị vô hiệu hóa, còn nút Add thì không: đó là một khoảng trống trong requirement.",
+    "explanationEn": "Two `POST /api/todos` rows show the user really submitted twice. The login form has `Please wait…` and a disabled button, the Add button does not: that is a gap in the requirements.",
+    "optionExplanations": [
+      "Mạng chậm là điều kiện có thật với người dùng di động.",
+      "Đúng: phát hiện này trở thành một acceptance criterion mới.",
+      "Không có requirement nào cấm tiêu đề trùng; hai to-do cùng tên là hợp lệ.",
+      "StrictMode chỉ chạy lại effect, không nhân đôi cú bấm của người dùng."
+    ],
+    "optionExplanationsEn": [
+      "Slow networks are a real condition for mobile users.",
+      "Correct: the finding becomes a new acceptance criterion.",
+      "No requirement forbids duplicate titles; two to-dos with the same name are valid.",
+      "StrictMode re-runs effects; it does not double a user's click."
+    ]
+  }
+]

@@ -1,0 +1,578 @@
+[
+  {
+    "id": "fs04-q1",
+    "question": "Điểm khác biệt cốt lõi giữa cách viết giao diện bằng JavaScript thuần và bằng React là gì?",
+    "questionEn": "What is the core difference between building a UI with plain JavaScript and with React?",
+    "options": [
+      "React chạy trên server, còn JavaScript thuần chạy trong trình duyệt",
+      "React không cần HTML nên trang web tải nhanh hơn nhiều",
+      "Với React, bạn mô tả màn hình cho dữ liệu hiện tại và React tự cập nhật DOM",
+      "Với React, bạn phải tự tìm và sửa từng phần tử mỗi khi dữ liệu đổi"
+    ],
+    "optionsEn": [
+      "React runs on the server, while plain JavaScript runs in the browser",
+      "React needs no HTML at all, so pages load much faster",
+      "With React you describe the screen for the current data and React updates the DOM",
+      "With React you must find and patch each element whenever the data changes"
+    ],
+    "answer": 2,
+    "explanation": "React theo mô hình UI = f(data): bạn mô tả màn hình nên trông thế nào với dữ liệu hiện tại, React tính phần nào của DOM cần đổi. Tự tìm và sửa từng phần tử là cách làm của JavaScript thuần.",
+    "explanationEn": "React follows UI = f(data): you describe what the screen should look like for the current data and React works out which parts of the DOM must change. Finding and patching each element yourself is the plain-JavaScript way.",
+    "optionExplanations": [
+      "Sai: React (trong app này) chạy trong trình duyệt, giống JavaScript thuần.",
+      "Sai: React vẫn render ra HTML; tốc độ tải không phải điểm khác biệt cốt lõi.",
+      "Đúng: bạn mô tả màn hình theo dữ liệu, React lo phần cập nhật DOM.",
+      "Sai: đây chính là cách làm của JavaScript thuần mà React thay thế."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: React (in this app) runs in the browser, just like plain JavaScript.",
+      "Wrong: React still renders HTML; load speed is not the core difference.",
+      "Right: you describe the screen from the data, and React handles the DOM updates.",
+      "Wrong: that is exactly the plain-JavaScript approach React replaces."
+    ]
+  },
+  {
+    "id": "fs04-q2",
+    "question": "Trong `main.jsx`, dòng `createRoot(document.getElementById('root')).render(<App />)` làm gì?",
+    "questionEn": "In `main.jsx`, what does `createRoot(document.getElementById('root')).render(<App />)` do?",
+    "options": [
+      "Giao `<div id=\"root\">` trong index.html cho React và vẽ component App vào đó",
+      "Tạo một trang HTML mới tên root.html và chuyển trình duyệt sang trang đó",
+      "Gửi request `GET /api/auth/me` để kiểm tra người dùng đã đăng nhập chưa",
+      "Build toàn bộ project vào thư mục `dist/` để chuẩn bị deploy"
+    ],
+    "optionsEn": [
+      "Hands the `<div id=\"root\">` in index.html to React and draws the App component in it",
+      "Creates a new HTML page called root.html and sends the browser there",
+      "Sends a `GET /api/auth/me` request to check whether the user is logged in",
+      "Builds the whole project into the `dist/` folder, ready to deploy"
+    ],
+    "answer": 0,
+    "explanation": "`createRoot` nhận cái div trống `#root` từ index.html, `render(<App />)` vẽ App vào đó. Từ đó React sở hữu mọi thứ bên trong `#root`. Request `/auth/me` nằm trong `App.jsx`, còn build là việc của `npm run build`.",
+    "explanationEn": "`createRoot` takes the empty `#root` div from index.html and `render(<App />)` draws App inside it. From then on React owns everything inside `#root`. The `/auth/me` request lives in `App.jsx`, and building is the job of `npm run build`.",
+    "optionExplanations": [
+      "Đúng: đây là điểm gắn React vào trang.",
+      "Sai: app chỉ có một trang index.html; React thay nội dung bên trong nó.",
+      "Sai: request này nằm trong `useEffect` của `App.jsx`, không phải `main.jsx`.",
+      "Sai: build là việc của lệnh `npm run build` (Vite), không phải một dòng code."
+    ],
+    "optionExplanationsEn": [
+      "Right: this is where React is attached to the page.",
+      "Wrong: the app has a single index.html; React replaces what is inside it.",
+      "Wrong: that request lives in `App.jsx`'s `useEffect`, not in `main.jsx`.",
+      "Wrong: building is done by the `npm run build` command (Vite), not by a line of code."
+    ]
+  },
+  {
+    "id": "fs04-q3",
+    "question": "Chạy `npm run build` trong thư mục `client/` tạo ra gì?",
+    "questionEn": "What does running `npm run build` in the `client/` folder produce?",
+    "options": [
+      "Một dev server ở cổng 5173 có hot reload",
+      "File database `todo.db` với các bảng users và todos",
+      "Thư mục `node_modules/` chứa React và Vite",
+      "Thư mục `dist/` gồm HTML, CSS, JS thuần để host trên web server"
+    ],
+    "optionsEn": [
+      "A dev server on port 5173 with hot reload",
+      "The `todo.db` database file with the users and todos tables",
+      "The `node_modules/` folder containing React and Vite",
+      "A `dist/` folder of plain HTML, CSS and JS to host on a web server"
+    ],
+    "answer": 3,
+    "explanation": "`npm run build` (tức `vite build`) gom và nén code vào `dist/`. Đây là thứ được deploy. Dev server là `npm run dev`, `node_modules/` do `npm install` tạo, còn `todo.db` thuộc về server.",
+    "explanationEn": "`npm run build` (that is, `vite build`) bundles and minifies the code into `dist/`. That is what gets deployed. The dev server is `npm run dev`, `node_modules/` comes from `npm install`, and `todo.db` belongs to the server.",
+    "optionExplanations": [
+      "Sai: dev server là `npm run dev`.",
+      "Sai: `todo.db` do backend (`server/`) tạo khi khởi động.",
+      "Sai: `node_modules/` được tạo bởi `npm install`.",
+      "Đúng: bản build production nằm trong `dist/`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the dev server is `npm run dev`.",
+      "Wrong: `todo.db` is created by the backend (`server/`) when it starts.",
+      "Wrong: `node_modules/` is created by `npm install`.",
+      "Right: the production build lands in `dist/`."
+    ]
+  },
+  {
+    "id": "fs04-q4",
+    "question": "Khi chạy app ở chế độ dev, bạn thấy `GET /api/auth/me` xuất hiện hai lần trong terminal của server mỗi khi tải trang. Nguyên nhân khả dĩ nhất là gì?",
+    "questionEn": "Running the app in dev mode, you see `GET /api/auth/me` twice in the server terminal on every page load. What is the most likely cause?",
+    "options": [
+      "Cookie `token` đã hết hạn nên trình duyệt gửi lại request",
+      "`StrictMode` trong `main.jsx` chạy thêm kiểm tra khi dev; đây là bình thường",
+      "Vite proxy gửi mỗi request tới cả cổng 5173 và 4000",
+      "Có hai người dùng khác nhau đang đăng nhập cùng lúc"
+    ],
+    "optionsEn": [
+      "The `token` cookie has expired, so the browser resends the request",
+      "`StrictMode` in `main.jsx` runs extra checks in dev; this is normal",
+      "The Vite proxy sends every request to both port 5173 and 4000",
+      "Two different users are logged in at the same time"
+    ],
+    "answer": 1,
+    "explanation": "`StrictMode` bật các kiểm tra bổ sung chỉ trong môi trường phát triển, khiến effect chạy hai lần. Điều này không xảy ra ở bản build production.",
+    "explanationEn": "`StrictMode` turns on extra development-only checks that run effects twice. It does not happen in the production build.",
+    "optionExplanations": [
+      "Sai: cookie hết hạn cho kết quả 401, trình duyệt không tự gửi lại request.",
+      "Đúng: hành vi chỉ có ở dev, do StrictMode.",
+      "Sai: proxy chỉ chuyển `/api` từ 5173 sang 4000, mỗi request một lần.",
+      "Sai: log là của một trình duyệt tải trang, không liên quan số người dùng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: an expired cookie gives a 401; the browser does not resend on its own.",
+      "Right: dev-only behavior caused by StrictMode.",
+      "Wrong: the proxy forwards `/api` from 5173 to 4000, once per request.",
+      "Wrong: the log comes from one browser loading the page, not from user count."
+    ]
+  },
+  {
+    "id": "fs04-q5",
+    "question": "Dòng JSX nào dưới đây viết đúng?",
+    "questionEn": "Which JSX line below is written correctly?",
+    "options": [
+      "`<section class=\"card\">`",
+      "`<section className=\"card\">`",
+      "`<h1>Hi, user.name</h1>` để hiện tên người dùng",
+      "`<input placeholder=\"What needs doing?\">` không có dấu đóng"
+    ],
+    "optionsEn": [
+      "`<section class=\"card\">`",
+      "`<section className=\"card\">`",
+      "`<h1>Hi, user.name</h1>` to show the user's name",
+      "`<input placeholder=\"What needs doing?\">` with no closing slash"
+    ],
+    "answer": 1,
+    "explanation": "JSX dùng `className` vì `class` là từ khóa của JavaScript. Biểu thức phải nằm trong `{ }` (`{user.name}`), và mọi thẻ phải đóng, kể cả `<input ... />`.",
+    "explanationEn": "JSX uses `className` because `class` is a JavaScript keyword. Expressions go inside `{ }` (`{user.name}`), and every tag must be closed, including `<input ... />`.",
+    "optionExplanations": [
+      "Sai: trong JSX phải dùng `className`.",
+      "Đúng: đúng như trong `TodoPage.jsx`.",
+      "Sai: thiếu `{ }`, màn hình sẽ in nguyên chữ \"user.name\".",
+      "Sai: JSX bắt buộc đóng thẻ rỗng: `<input ... />`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: JSX requires `className`.",
+      "Right: exactly as in `TodoPage.jsx`.",
+      "Wrong: without `{ }` the screen prints the literal text \"user.name\".",
+      "Wrong: JSX requires empty tags to be closed: `<input ... />`."
+    ]
+  },
+  {
+    "id": "fs04-q6",
+    "question": "Trong `App.jsx`, điều gì quyết định màn hình hiển thị `AuthForm` hay `TodoPage` (sau khi đã kiểm tra xong)?",
+    "questionEn": "In `App.jsx`, what decides whether `AuthForm` or `TodoPage` is shown (once checking is done)?",
+    "options": [
+      "State `user`: có user thì hiện `TodoPage`, không có thì hiện `AuthForm`",
+      "URL của trang: `/login` hiện `AuthForm`, `/todos` hiện `TodoPage`",
+      "Key `todo:lastEmail` trong `localStorage` có giá trị hay không",
+      "Người dùng đã bấm nút \"Log in\" bao nhiêu lần trong phiên này"
+    ],
+    "optionsEn": [
+      "The `user` state: a user shows `TodoPage`, no user shows `AuthForm`",
+      "The page URL: `/login` shows `AuthForm`, `/todos` shows `TodoPage`",
+      "Whether the `todo:lastEmail` key in `localStorage` has a value",
+      "How many times the user clicked \"Log in\" in this session"
+    ],
+    "answer": 0,
+    "explanation": "`App` render `{user ? <TodoPage … /> : <AuthForm … />}`. `user` được đặt từ `GET /api/auth/me` khi tải trang, hoặc qua `onLoggedIn` khi đăng nhập thành công. App không dùng URL routing.",
+    "explanationEn": "`App` renders `{user ? <TodoPage … /> : <AuthForm … />}`. `user` is set from `GET /api/auth/me` on page load, or through `onLoggedIn` after a successful login. The app has no URL routing.",
+    "optionExplanations": [
+      "Đúng: một ternary trên state `user`.",
+      "Sai: app mẫu không có routing theo URL, chỉ có một trang.",
+      "Sai: `todo:lastEmail` chỉ dùng để điền sẵn ô email, không chứng minh đã đăng nhập.",
+      "Sai: số lần bấm không được lưu; chỉ kết quả đăng nhập mới đặt `user`."
+    ],
+    "optionExplanationsEn": [
+      "Right: a ternary on the `user` state.",
+      "Wrong: the sample has no URL routing, just one page.",
+      "Wrong: `todo:lastEmail` only pre-fills the email field; it proves no login.",
+      "Wrong: clicks are not counted; only a successful login sets `user`."
+    ]
+  },
+  {
+    "id": "fs04-q7",
+    "question": "Người dùng bấm \"Log out\" trong `TodoPage`. Phần code nào thực sự gửi `POST /api/auth/logout` và đổi màn hình?",
+    "questionEn": "A user clicks \"Log out\" in `TodoPage`. Which code actually sends `POST /api/auth/logout` and switches the screen?",
+    "options": [
+      "Chính `TodoPage`, vì nút Log out nằm trong component đó",
+      "`AuthForm`, vì nó quản lý mọi thứ liên quan đến đăng nhập",
+      "`main.jsx`, vì nó tạo root và render lại toàn bộ app",
+      "Hàm `handleLogout` trong `App`, được truyền xuống qua prop `onLogout`"
+    ],
+    "optionsEn": [
+      "`TodoPage` itself, because the Log out button lives in that component",
+      "`AuthForm`, because it manages everything about logging in",
+      "`main.jsx`, because it creates the root and re-renders the whole app",
+      "`App`'s `handleLogout` function, passed down as the `onLogout` prop"
+    ],
+    "answer": 3,
+    "explanation": "`onLogout` là một callback prop: `TodoPage` chỉ gọi `onClick={onLogout}`, còn `App` làm việc thật (`api('POST', '/auth/logout')` rồi `setUser(null)`). Dữ liệu chảy xuống, sự kiện đi lên.",
+    "explanationEn": "`onLogout` is a callback prop: `TodoPage` only calls `onClick={onLogout}`, while `App` does the real work (`api('POST', '/auth/logout')`, then `setUser(null)`). Data flows down, events flow up.",
+    "optionExplanations": [
+      "Sai: TodoPage chỉ gọi hàm được truyền vào; nó không biết cách đăng xuất.",
+      "Sai: AuthForm thậm chí không được hiển thị khi đang ở TodoPage.",
+      "Sai: main.jsx chỉ gắn App vào trang một lần lúc khởi động.",
+      "Đúng: App sở hữu `user` nên App xử lý đăng xuất."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: TodoPage only calls the function it was given; it does not know how to log out.",
+      "Wrong: AuthForm is not even on screen while TodoPage is shown.",
+      "Wrong: main.jsx only mounts App once at startup.",
+      "Right: App owns `user`, so App handles logging out."
+    ]
+  },
+  {
+    "id": "fs04-q8",
+    "question": "`const [count, setCount] = useState(0);` trả về gì?",
+    "questionEn": "What does `const [count, setCount] = useState(0);` return?",
+    "options": [
+      "Một con số duy nhất tự tăng mỗi giây",
+      "Một object chứa toàn bộ props của component",
+      "Một cặp: giá trị hiện tại và hàm setter để đổi giá trị đó",
+      "Một request tới server để lấy giá trị ban đầu"
+    ],
+    "optionsEn": [
+      "A single number that increases by itself every second",
+      "An object holding all of the component's props",
+      "A pair: the current value and a setter function to change it",
+      "A request to the server to fetch the initial value"
+    ],
+    "answer": 2,
+    "explanation": "`useState` trả về một cặp `[giá trị, setter]`. `0` là giá trị ban đầu. Gọi setter sẽ khiến React render lại component với giá trị mới.",
+    "explanationEn": "`useState` returns a pair `[value, setter]`. `0` is the initial value. Calling the setter makes React re-render the component with the new value.",
+    "optionExplanations": [
+      "Sai: giá trị chỉ đổi khi bạn gọi setter.",
+      "Sai: props được nhận qua tham số của hàm component, không qua useState.",
+      "Đúng: giá trị hiện tại + setter.",
+      "Sai: useState không gọi server; việc đó cần `fetch` (fs-05)."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the value only changes when you call the setter.",
+      "Wrong: props arrive as the component function's parameter, not via useState.",
+      "Right: current value + setter.",
+      "Wrong: useState never calls a server; that needs `fetch` (fs-05)."
+    ]
+  },
+  {
+    "id": "fs04-q9",
+    "question": "Một dev viết `onClick={() => { count = count + 1; }}` cho bộ đếm tạo bằng `useState`. Bấm nút, con số trên màn hình không đổi. Vì sao?",
+    "questionEn": "A developer writes `onClick={() => { count = count + 1; }}` for a counter made with `useState`. Clicking the button does not change the number on screen. Why?",
+    "options": [
+      "Gán trực tiếp không báo cho React; phải gọi `setCount(count + 1)` để có re-render",
+      "Nút thiếu `type=\"submit\"` nên sự kiện click không chạy",
+      "React chỉ cập nhật màn hình khi người dùng tải lại trang",
+      "Biến `count` phải được lưu vào `localStorage` trước khi hiển thị"
+    ],
+    "optionsEn": [
+      "Assigning directly does not tell React; calling `setCount(count + 1)` triggers a re-render",
+      "The button lacks `type=\"submit\"`, so the click event never runs",
+      "React only updates the screen when the user reloads the page",
+      "The `count` variable must be saved to `localStorage` before it can show"
+    ],
+    "answer": 0,
+    "explanation": "State chỉ đổi qua setter. Setter báo cho React, React gọi lại component (re-render) và cập nhật DOM. Gán trực tiếp thì React không hề biết.",
+    "explanationEn": "State only changes through its setter. The setter tells React, React calls the component again (re-render) and updates the DOM. A direct assignment goes unnoticed.",
+    "optionExplanations": [
+      "Đúng: chỉ đổi state qua setter.",
+      "Sai: `onClick` chạy với mọi nút; `type=\"submit\"` chỉ liên quan đến form.",
+      "Sai: React cập nhật màn hình mà không cần tải lại trang, đó là điểm mạnh của nó.",
+      "Sai: localStorage không liên quan đến việc render."
+    ],
+    "optionExplanationsEn": [
+      "Right: change state only through the setter.",
+      "Wrong: `onClick` runs on any button; `type=\"submit\"` only matters for forms.",
+      "Wrong: React updates the screen without a reload; that is its whole point.",
+      "Wrong: localStorage has nothing to do with rendering."
+    ]
+  },
+  {
+    "id": "fs04-q10",
+    "question": "Trong phiên bản đơn giản của `TodoPage`, một dev đổi code thêm to-do thành `todos.push(todo); setTodos(todos);`. Danh sách có lúc không cập nhật. Nguyên nhân là gì?",
+    "questionEn": "In the simplified `TodoPage`, a developer changes the add code to `todos.push(todo); setTodos(todos);`. The list sometimes does not update. What is the cause?",
+    "options": [
+      "`push` thêm to-do vào cuối thay vì đầu danh sách",
+      "`setTodos` chỉ nhận chuỗi, không nhận mảng",
+      "Thiếu `key` trên thẻ `<ul>` bọc danh sách",
+      "Mảng cũ bị sửa tại chỗ nên React thấy cùng một mảng và có thể bỏ qua re-render"
+    ],
+    "optionsEn": [
+      "`push` adds the to-do at the end instead of the start of the list",
+      "`setTodos` only accepts strings, not arrays",
+      "The `<ul>` wrapping the list is missing a `key`",
+      "The old array is changed in place, so React sees the same array and may skip the re-render"
+    ],
+    "answer": 3,
+    "explanation": "React so sánh giá trị cũ và mới. Sửa mảng tại chỗ rồi đưa lại chính mảng đó thì React thấy \"không có gì đổi\". Cách đúng là tạo mảng mới: `setTodos([todo, ...todos])`.",
+    "explanationEn": "React compares old and new values. Changing the array in place and passing back the same array looks like \"nothing changed\". The right way is a new array: `setTodos([todo, ...todos])`.",
+    "optionExplanations": [
+      "Sai: thứ tự là chuyện phụ; vấn đề chính là màn hình không cập nhật.",
+      "Sai: state có thể chứa mọi kiểu dữ liệu, kể cả mảng.",
+      "Sai: key đặt trên từng `<li>`, không phải `<ul>`, và không gây ra lỗi này.",
+      "Đúng: luôn đưa cho setter một mảng mới."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: order is secondary; the real problem is that the screen does not update.",
+      "Wrong: state can hold any type, including arrays.",
+      "Wrong: keys go on each `<li>`, not the `<ul>`, and do not cause this.",
+      "Right: always hand the setter a new array."
+    ]
+  },
+  {
+    "id": "fs04-q11",
+    "question": "Người dùng gõ một to-do rồi nhấn Enter (không bấm nút Add). Sự kiện nào trong `TodoPage.jsx` xử lý việc thêm to-do?",
+    "questionEn": "A user types a to-do and presses Enter (without clicking Add). Which event in `TodoPage.jsx` handles adding the to-do?",
+    "options": [
+      "`onChange` trên ô nhập",
+      "`onSubmit={addTodo}` trên thẻ `<form>`",
+      "`onClick` trên chip lọc",
+      "`onClick={onLogout}` trên nút Log out"
+    ],
+    "optionsEn": [
+      "`onChange` on the input",
+      "`onSubmit={addTodo}` on the `<form>` tag",
+      "`onClick` on a filter chip",
+      "`onClick={onLogout}` on the Log out button"
+    ],
+    "answer": 1,
+    "explanation": "Nhấn Enter trong ô nhập hoặc bấm nút `type=\"submit\"` đều gửi form, kích hoạt `onSubmit`. `addTodo` gọi `event.preventDefault()` để chặn việc tải lại toàn trang.",
+    "explanationEn": "Pressing Enter in the input or clicking a `type=\"submit\"` button both submit the form and fire `onSubmit`. `addTodo` calls `event.preventDefault()` to stop the full-page reload.",
+    "optionExplanations": [
+      "Sai: `onChange` chỉ cập nhật `newTitle` theo từng phím gõ.",
+      "Đúng: form submit chạy `addTodo`.",
+      "Sai: chip lọc chỉ đổi state `filter`.",
+      "Sai: đó là nút đăng xuất."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `onChange` only updates `newTitle` on each keystroke.",
+      "Right: submitting the form runs `addTodo`.",
+      "Wrong: a filter chip only changes the `filter` state.",
+      "Wrong: that is the logout button."
+    ]
+  },
+  {
+    "id": "fs04-q12",
+    "question": "Vì sao danh sách dùng `key={todo.id}` thay vì vị trí trong mảng (0, 1, 2…)?",
+    "questionEn": "Why does the list use `key={todo.id}` instead of the position in the array (0, 1, 2…)?",
+    "options": [
+      "Vì id giúp server sắp xếp to-do theo ngày tạo",
+      "Vì React yêu cầu key phải là số lớn hơn 0",
+      "Vì id ổn định và duy nhất, nên React ghép đúng dòng cũ với dòng mới khi xóa hoặc lọc",
+      "Vì key được hiển thị bên cạnh tiêu đề để người dùng thấy"
+    ],
+    "optionsEn": [
+      "Because the id helps the server sort to-dos by creation date",
+      "Because React requires keys to be numbers greater than 0",
+      "Because the id is stable and unique, so React matches old and new rows correctly after a delete or filter",
+      "Because the key is displayed next to the title for the user to see"
+    ],
+    "answer": 2,
+    "explanation": "React ghép phần tử cũ và mới theo key. Vị trí thay đổi khi xóa hoặc lọc, nên \"dòng 1\" có thể trỏ tới to-do khác và React dùng lại nhầm dòng. Id từ database thì không đổi.",
+    "explanationEn": "React matches old and new elements by key. Positions shift after a delete or filter, so \"row 1\" may point to a different to-do and React may reuse the wrong row. A database id never changes.",
+    "optionExplanations": [
+      "Sai: sắp xếp do SQL `ORDER BY` ở server đảm nhận.",
+      "Sai: key có thể là chuỗi, như `key={f}` trên các chip lọc.",
+      "Đúng: key ổn định và duy nhất.",
+      "Sai: key không bao giờ được hiển thị trên màn hình."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: sorting is done by the SQL `ORDER BY` on the server.",
+      "Wrong: keys can be strings, like `key={f}` on the filter chips.",
+      "Right: stable and unique keys.",
+      "Wrong: keys are never shown on screen."
+    ]
+  },
+  {
+    "id": "fs04-q13",
+    "question": "Với `{error && <p className=\"error\" role=\"alert\">{error}</p>}`, điều gì xảy ra khi `error` là chuỗi rỗng `''`?",
+    "questionEn": "With `{error && <p className=\"error\" role=\"alert\">{error}</p>}`, what happens when `error` is the empty string `''`?",
+    "options": [
+      "Không hiện gì: chuỗi rỗng là falsy nên khung lỗi không được render",
+      "Hiện một khung đỏ trống không có chữ",
+      "Hiện chữ \"undefined\" trong khung đỏ",
+      "React báo lỗi vì `&&` không dùng được trong JSX"
+    ],
+    "optionsEn": [
+      "Nothing shows: an empty string is falsy, so the error box is not rendered",
+      "An empty red box with no text appears",
+      "The word \"undefined\" appears in a red box",
+      "React throws an error because `&&` cannot be used in JSX"
+    ],
+    "answer": 0,
+    "explanation": "`a && b` chỉ hiện `b` khi `a` có giá trị (truthy). `''` là falsy nên khung lỗi biến mất; đó là lý do `addTodo` gọi `setError('')` trước khi gửi request.",
+    "explanationEn": "`a && b` only shows `b` when `a` is truthy. `''` is falsy, so the error box disappears; that is why `addTodo` calls `setError('')` before sending the request.",
+    "optionExplanations": [
+      "Đúng: không có lỗi thì không có khung.",
+      "Sai: cả thẻ `<p>` không được render.",
+      "Sai: `error` là `''`, không phải `undefined`, và cả khung không hiện.",
+      "Sai: `&&` là cách render có điều kiện rất phổ biến trong JSX."
+    ],
+    "optionExplanationsEn": [
+      "Right: no error, no box.",
+      "Wrong: the whole `<p>` is not rendered.",
+      "Wrong: `error` is `''`, not `undefined`, and no box renders at all.",
+      "Wrong: `&&` is a very common conditional-rendering pattern in JSX."
+    ]
+  },
+  {
+    "id": "fs04-q14",
+    "question": "Bạn có 2 to-do chưa xong và 0 to-do đã xong. Bạn bấm chip \"Done\". Màn hình hiện gì?",
+    "questionEn": "You have 2 unfinished to-dos and 0 done ones. You click the \"Done\" chip. What does the screen show?",
+    "options": [
+      "Hai to-do chưa xong, bị làm mờ",
+      "\"Loading…\" cho tới khi server trả về danh sách đã lọc",
+      "\"Nothing here yet.\" và bộ đếm vẫn ghi \"2 left\"",
+      "\"Nothing here yet.\" và bộ đếm ghi \"0 left\""
+    ],
+    "optionsEn": [
+      "The two unfinished to-dos, greyed out",
+      "\"Loading…\" until the server returns the filtered list",
+      "\"Nothing here yet.\" and the counter still says \"2 left\"",
+      "\"Nothing here yet.\" and the counter says \"0 left\""
+    ],
+    "answer": 2,
+    "explanation": "`visible` lọc theo `filter` nên rỗng, và nhánh `visible.length === 0` hiện \"Nothing here yet.\". Nhưng `remaining` đếm trên toàn bộ `todos`, không theo bộ lọc, nên vẫn là 2.",
+    "explanationEn": "`visible` is filtered by `filter`, so it is empty and the `visible.length === 0` branch shows \"Nothing here yet.\". But `remaining` counts over all `todos`, ignoring the filter, so it stays 2.",
+    "optionExplanations": [
+      "Sai: bộ lọc \"Done\" loại hẳn các to-do chưa xong khỏi `visible`.",
+      "Sai: lọc được tính ngay trong trình duyệt, không gọi server.",
+      "Đúng: danh sách trống nhưng bộ đếm tính trên mọi to-do.",
+      "Sai: `remaining` không phụ thuộc bộ lọc đang chọn."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the \"Done\" filter removes unfinished to-dos from `visible` entirely.",
+      "Wrong: filtering is computed in the browser; no server call.",
+      "Right: the list is empty but the counter covers every to-do.",
+      "Wrong: `remaining` does not depend on the selected filter."
+    ]
+  },
+  {
+    "id": "fs04-q15",
+    "question": "Một dev đề xuất thêm `const [remaining, setRemaining] = useState(0)` và cập nhật nó trong mỗi hàm thêm, tick, xóa. Phản hồi tốt nhất là gì?",
+    "questionEn": "A developer proposes adding `const [remaining, setRemaining] = useState(0)` and updating it in every add, tick and delete function. What is the best response?",
+    "options": [
+      "Đồng ý, vì mọi con số trên màn hình đều phải nằm trong state",
+      "Đồng ý, nhưng lưu `remaining` vào `localStorage` để giữ khi tải lại trang",
+      "Chuyển việc đếm sang server để trình duyệt không phải tính",
+      "Không cần: `remaining` tính được từ `todos` ở mỗi lần render, nên không bao giờ lệch với danh sách"
+    ],
+    "optionsEn": [
+      "Agree, because every number on screen must live in state",
+      "Agree, but save `remaining` in `localStorage` so it survives a reload",
+      "Move the counting to the server so the browser does not compute it",
+      "Not needed: `remaining` can be computed from `todos` on each render, so it can never disagree with the list"
+    ],
+    "answer": 3,
+    "explanation": "Đừng lưu thứ bạn tính được. Một state riêng cho `remaining` buộc mọi thao tác phải nhớ cập nhật nó, dễ dẫn tới lỗi \"bộ đếm ghi 3, danh sách có 2\". Giá trị suy ra luôn khớp với nguồn sự thật `todos`.",
+    "explanationEn": "Don't store what you can compute. A separate `remaining` state forces every action to remember to update it, inviting the \"counter says 3, list shows 2\" bug. A derived value always matches the source of truth, `todos`.",
+    "optionExplanations": [
+      "Sai: con số tính được từ state khác thì không cần state riêng.",
+      "Sai: vẫn là lưu trùng dữ liệu, còn thêm nguy cơ lệch sau khi tải lại.",
+      "Sai: thêm request và độ trễ cho một phép đếm đơn giản đã có sẵn dữ liệu.",
+      "Đúng: dùng giá trị suy ra."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a number computable from other state needs no state of its own.",
+      "Wrong: it still duplicates data, and adds a risk of mismatch after reload.",
+      "Wrong: it adds a request and latency for a simple count the browser already has data for.",
+      "Right: use a derived value."
+    ]
+  },
+  {
+    "id": "fs04-q16",
+    "question": "Bạn đổi màu nền trong rule `.chip.active` thành `#1a7f37` và lưu file. Điều gì xảy ra trong trình duyệt?",
+    "questionEn": "You change the background in the `.chip.active` rule to `#1a7f37` and save. What happens in the browser?",
+    "options": [
+      "Không có gì cho tới khi bạn chạy `npm run build`",
+      "Chip lọc đang chọn chuyển xanh lá qua hot reload; nút Add vẫn xanh dương",
+      "Mọi nút trong app, kể cả Add và Log out, đều chuyển xanh lá",
+      "Trang báo lỗi vì CSS không được phép sửa khi dev server đang chạy"
+    ],
+    "optionsEn": [
+      "Nothing, until you run `npm run build`",
+      "The selected filter chip turns green through hot reload; the Add button stays blue",
+      "Every button in the app, including Add and Log out, turns green",
+      "The page shows an error because CSS cannot be edited while the dev server runs"
+    ],
+    "answer": 1,
+    "explanation": "Vite hot reload áp dụng CSS mới ngay khi lưu. Rule `.chip.active` chỉ áp dụng cho chip đang chọn; nút Add dùng rule `button` riêng.",
+    "explanationEn": "Vite's hot reload applies the new CSS as soon as you save. `.chip.active` only matches the selected chip; the Add button uses the separate `button` rule.",
+    "optionExplanations": [
+      "Sai: dev server cập nhật ngay; build chỉ cần cho production.",
+      "Đúng: chỉ chip đang chọn đổi màu, không cần tải lại.",
+      "Sai: selector `.chip.active` chỉ khớp chip đang chọn.",
+      "Sai: sửa file khi dev server chạy chính là cách làm việc bình thường."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the dev server updates immediately; a build is only for production.",
+      "Right: only the selected chip changes, with no reload.",
+      "Wrong: the `.chip.active` selector only matches the selected chip.",
+      "Wrong: editing files while the dev server runs is the normal workflow."
+    ]
+  },
+  {
+    "id": "fs04-q17",
+    "question": "Một báo cáo lỗi ghi \"bộ đếm N left bị sai\". Trong tab Components của React DevTools, bạn có thể kiểm tra gì?",
+    "questionEn": "A bug report says \"the N left counter is wrong\". In the React DevTools Components tab, what can you check?",
+    "options": [
+      "Props và các giá trị State của `TodoPage`, ví dụ mảng `todos` và trường `done` của từng to-do",
+      "Mã hash mật khẩu của người dùng trong bảng `users`",
+      "Thời gian phản hồi của từng request trong tab Network",
+      "Nội dung cookie `token` HttpOnly"
+    ],
+    "optionsEn": [
+      "`TodoPage`'s props and State values, such as the `todos` array and each to-do's `done` field",
+      "The user's password hash in the `users` table",
+      "The response time of each request in the Network tab",
+      "The contents of the HttpOnly `token` cookie"
+    ],
+    "answer": 0,
+    "explanation": "Tab Components hiện cây component; chọn `TodoPage` sẽ thấy props (`user`, `onLogout`, `onSessionExpired`) và các hook State theo thứ tự. So `todos` với con số trên màn hình để biết lỗi nằm ở dữ liệu hay ở phép tính.",
+    "explanationEn": "The Components tab shows the component tree; selecting `TodoPage` reveals its props (`user`, `onLogout`, `onSessionExpired`) and its State hooks in order. Compare `todos` with the number on screen to tell a data bug from a calculation bug.",
+    "optionExplanations": [
+      "Đúng: đúng mục đích của tab Components.",
+      "Sai: database nằm ở server; trình duyệt không bao giờ thấy hash mật khẩu.",
+      "Sai: đó là tab Network (fs-10), không phải Components.",
+      "Sai: cookie xem ở tab Application (fs-11), và JavaScript của trang không đọc được cookie HttpOnly."
+    ],
+    "optionExplanationsEn": [
+      "Right: exactly what the Components tab is for.",
+      "Wrong: the database lives on the server; the browser never sees password hashes.",
+      "Wrong: that is the Network tab (fs-10), not Components.",
+      "Wrong: cookies are in the Application tab (fs-11), and page JavaScript cannot read HttpOnly cookies."
+    ]
+  },
+  {
+    "id": "fs04-q18",
+    "question": "Bạn viết user story cho màn hình \"Danh sách đơn hàng\" có tải dữ liệu từ API. Bộ trạng thái nào nên có trong acceptance criteria và mockup?",
+    "questionEn": "You are writing a user story for an \"Order list\" screen that loads data from an API. Which set of states belongs in the acceptance criteria and mockups?",
+    "options": [
+      "Chỉ trạng thái thành công, vì dev sẽ tự lo các trường hợp còn lại",
+      "Chỉ trạng thái lỗi, vì thành công là mặc định",
+      "Trạng thái thành công và màn hình 404 khi sai URL",
+      "Loading, empty, error và success, mỗi trạng thái có câu chữ và vị trí hiển thị"
+    ],
+    "optionsEn": [
+      "Only the success state, since developers will handle the rest",
+      "Only the error state, since success is the default",
+      "The success state and a 404 page for a wrong URL",
+      "Loading, empty, error and success, each with its wording and placement"
+    ],
+    "answer": 3,
+    "explanation": "Mỗi màn hình tải dữ liệu có ít nhất bốn trạng thái. Dev đằng nào cũng viết một `?` hoặc `&&` cho từng trạng thái; nếu BA không đặc tả, dev phải đoán và tester không có gì để đối chiếu.",
+    "explanationEn": "Every screen that loads data has at least four states. Developers will write a `?` or `&&` for each anyway; if the BA does not specify them, developers guess and testers have nothing to test against.",
+    "optionExplanations": [
+      "Sai: để dev đoán dẫn tới câu chữ và hành vi không nhất quán.",
+      "Sai: thiếu loading và empty, hai trạng thái người dùng gặp rất thường xuyên.",
+      "Sai: bỏ sót loading, empty và lỗi khi gọi API.",
+      "Đúng: đủ bốn trạng thái, có câu chữ cụ thể."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: leaving developers to guess leads to inconsistent wording and behavior.",
+      "Wrong: it misses loading and empty, two states users see all the time.",
+      "Wrong: it misses loading, empty and API errors.",
+      "Right: all four states, with concrete wording."
+    ]
+  }
+]

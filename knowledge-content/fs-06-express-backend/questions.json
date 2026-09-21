@@ -1,0 +1,578 @@
+[
+  {
+    "id": "fs06-q1",
+    "question": "Form React đã kiểm tra title rỗng rồi. Vì sao route `POST /api/todos` vẫn kiểm tra lại?",
+    "questionEn": "The React form already checks for an empty title. Why does the `POST /api/todos` route check it again?",
+    "options": [
+      "Vì React không thể kiểm tra chuỗi rỗng một cách chính xác",
+      "Vì ai cũng có thể bỏ qua form và gọi thẳng API bằng curl hay DevTools",
+      "Vì Express bắt buộc mọi route phải có ít nhất một câu if",
+      "Vì database SQLite sẽ tự xóa các to-do có title rỗng"
+    ],
+    "optionsEn": [
+      "Because React cannot check for empty strings reliably",
+      "Because anyone can skip the form and call the API with curl or DevTools",
+      "Because Express requires every route to contain at least one if",
+      "Because SQLite automatically deletes to-dos with an empty title"
+    ],
+    "answer": 1,
+    "explanation": "Trình duyệt nằm trong tay người dùng: họ có thể sửa trang hoặc gửi request trực tiếp. Chỉ server mới là nơi đáng tin để thực thi rule, nên validation phía client chỉ là tiện ích, còn validation phía server là bắt buộc.",
+    "explanationEn": "The browser is in the user's hands: they can edit the page or send requests directly. Only the server can be trusted to enforce a rule, so client-side validation is a convenience and server-side validation is mandatory.",
+    "optionExplanations": [
+      "Sai: React kiểm tra chuỗi rỗng hoàn toàn được; vấn đề là người dùng có thể bỏ qua nó.",
+      "Đúng: request có thể đến server mà không hề đi qua form.",
+      "Sai: Express không có yêu cầu nào như vậy.",
+      "Sai: SQLite không tự xóa dòng nào; nếu không kiểm tra, title rỗng sẽ được lưu."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: React can check empty strings fine; the problem is that users can bypass it.",
+      "Correct: a request can reach the server without ever passing through the form.",
+      "Wrong: Express has no such requirement.",
+      "Wrong: SQLite deletes nothing on its own; without the check, an empty title would be stored."
+    ]
+  },
+  {
+    "id": "fs06-q2",
+    "question": "Bạn chạy `npm run dev` trong `server/` trong khi một bản khác của server vẫn đang chạy. Điều gì xảy ra nhiều khả năng nhất?",
+    "questionEn": "You run `npm run dev` in `server/` while another copy of the server is still running. What most likely happens?",
+    "options": [
+      "Hai server chia nhau xử lý request trên cùng port 4000",
+      "Server mới tự động chuyển sang port 5173",
+      "Server cũ tự tắt và nhường port cho server mới",
+      "Server mới báo lỗi `EADDRINUSE` vì port 4000 đã bị chiếm"
+    ],
+    "optionsEn": [
+      "The two servers share the requests on port 4000",
+      "The new server automatically moves to port 5173",
+      "The old server shuts itself down and hands over the port",
+      "The new server fails with `EADDRINUSE` because port 4000 is taken"
+    ],
+    "answer": 3,
+    "explanation": "Mỗi port chỉ một chương trình được lắng nghe tại một thời điểm. `app.listen(4000)` lần thứ hai thất bại với lỗi `EADDRINUSE` (address in use); server To-do in ra `Port 4000 is already in use.` rồi dừng. Cách xử lý: tắt bản cũ bằng Ctrl + C, hoặc dùng port khác qua `PORT` trong `.env`.",
+    "explanationEn": "Only one program can listen on a port at a time. A second `app.listen(4000)` fails with `EADDRINUSE` (address in use); the to-do server prints `Port 4000 is already in use.` and stops. Fix it by stopping the old one with Ctrl + C, or by using another port via `PORT` in `.env`.",
+    "optionExplanations": [
+      "Sai: hai chương trình bình thường không thể cùng lắng nghe một port.",
+      "Sai: server không tự đổi port; 5173 lại là port của Vite.",
+      "Sai: server cũ không biết gì về server mới và vẫn chạy.",
+      "Đúng: port đã bị chiếm nên `listen` thất bại."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: two ordinary programs cannot listen on the same port.",
+      "Wrong: the server never changes port on its own; 5173 is Vite's port anyway.",
+      "Wrong: the old server knows nothing about the new one and keeps running.",
+      "Correct: the port is taken, so `listen` fails."
+    ]
+  },
+  {
+    "id": "fs06-q3",
+    "question": "`index.js` có dòng `const PORT = process.env.PORT ?? 4000;`. File `.env` chứa `PORT=4100`. Server lắng nghe ở đâu?",
+    "questionEn": "`index.js` has `const PORT = process.env.PORT ?? 4000;`. The `.env` file contains `PORT=4100`. Where does the server listen?",
+    "options": [
+      "http://localhost:4100, vì giá trị trong `.env` được ưu tiên",
+      "http://localhost:4000, vì 4000 được viết cứng trong code",
+      "Cả 4000 và 4100 cùng lúc",
+      "Không port nào, vì hai giá trị mâu thuẫn nên server dừng lại"
+    ],
+    "optionsEn": [
+      "http://localhost:4100, because the `.env` value wins",
+      "http://localhost:4000, because 4000 is hard-coded",
+      "Both 4000 and 4100 at the same time",
+      "Neither, because the two values conflict and the server stops"
+    ],
+    "answer": 0,
+    "explanation": "`??` nghĩa là \"dùng vế trái nếu có giá trị, không thì dùng vế phải\". `npm run dev` nạp `.env`, nên `process.env.PORT` là `4100` và 4000 chỉ là giá trị mặc định dự phòng.",
+    "explanationEn": "`??` means \"use the left side if it has a value, otherwise the right side\". `npm run dev` loads `.env`, so `process.env.PORT` is `4100` and 4000 is only the fallback default.",
+    "optionExplanations": [
+      "Đúng: biến môi trường có giá trị nên được dùng.",
+      "Sai: 4000 chỉ được dùng khi `PORT` không có giá trị.",
+      "Sai: `app.listen` chỉ mở một port.",
+      "Sai: không có mâu thuẫn nào; `??` chọn một giá trị."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the environment variable has a value, so it is used.",
+      "Wrong: 4000 is used only when `PORT` has no value.",
+      "Wrong: `app.listen` opens a single port.",
+      "Wrong: there is no conflict; `??` picks one value."
+    ]
+  },
+  {
+    "id": "fs06-q4",
+    "question": "Request `PATCH /api/todos/7` tới server. Bên trong `router.patch('/:id', ...)`, `req.params.id` là gì?",
+    "questionEn": "The request `PATCH /api/todos/7` reaches the server. Inside `router.patch('/:id', ...)`, what is `req.params.id`?",
+    "options": [
+      "Id của user đang đăng nhập",
+      "Toàn bộ body JSON của request",
+      "Chuỗi \"7\" lấy từ URL",
+      "`undefined`, vì PATCH không có params"
+    ],
+    "optionsEn": [
+      "The logged-in user's id",
+      "The whole JSON body of the request",
+      "The string \"7\" taken from the URL",
+      "`undefined`, because PATCH has no params"
+    ],
+    "answer": 2,
+    "explanation": "`:id` là chỗ giữ trong path; Express đặt phần tương ứng của URL vào `req.params.id`, dưới dạng chuỗi. Id của user nằm ở `req.userId` (do `requireAuth` gắn vào), còn body nằm ở `req.body`.",
+    "explanationEn": "`:id` is a placeholder in the path; Express puts the matching part of the URL into `req.params.id`, as a string. The user's id is in `req.userId` (set by `requireAuth`), and the body is in `req.body`.",
+    "optionExplanations": [
+      "Sai: id của user là `req.userId`, do middleware `requireAuth` đặt.",
+      "Sai: body nằm ở `req.body`.",
+      "Đúng: `:id` khớp với `7` trong URL.",
+      "Sai: params đến từ path, dùng được với mọi method."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the user's id is `req.userId`, set by the `requireAuth` middleware.",
+      "Wrong: the body is in `req.body`.",
+      "Correct: `:id` matches the `7` in the URL.",
+      "Wrong: params come from the path and work with any method."
+    ]
+  },
+  {
+    "id": "fs06-q5",
+    "question": "Khi xóa to-do thành công, route `DELETE /api/todos/:id` trả lời thế nào?",
+    "questionEn": "When a to-do is deleted successfully, how does the `DELETE /api/todos/:id` route answer?",
+    "options": [
+      "`res.status(204).end()`: status 204, không có body",
+      "`res.status(200).json({ deleted: true })`",
+      "`res.status(201).json({ todo })` với to-do vừa xóa",
+      "`res.status(404).json({ error: 'To-do not found.' })`"
+    ],
+    "optionsEn": [
+      "`res.status(204).end()`: status 204 with no body",
+      "`res.status(200).json({ deleted: true })`",
+      "`res.status(201).json({ todo })` with the deleted to-do",
+      "`res.status(404).json({ error: 'To-do not found.' })`"
+    ],
+    "answer": 0,
+    "explanation": "Xóa xong thì không còn gì để gửi lại, nên route trả 204 No Content và `end()` mà không có body. Vì vậy `api.js` có dòng đặc biệt: \"204 No Content has no body to read\".",
+    "explanationEn": "After a delete there is nothing to send back, so the route answers 204 No Content and calls `end()` with no body. That is why `api.js` has a special case: \"204 No Content has no body to read\".",
+    "optionExplanations": [
+      "Đúng: đúng như code trong `routes/todos.js`.",
+      "Sai: một dạng hợp lệ nói chung, nhưng không phải thứ app này trả.",
+      "Sai: 201 dành cho việc tạo mới, không phải xóa.",
+      "Sai: 404 chỉ trả khi không xóa được dòng nào."
+    ],
+    "optionExplanationsEn": [
+      "Correct: exactly what the code in `routes/todos.js` does.",
+      "Wrong: a valid style in general, but not what this app returns.",
+      "Wrong: 201 is for creating, not deleting.",
+      "Wrong: 404 is returned only when no row was deleted."
+    ]
+  },
+  {
+    "id": "fs06-q6",
+    "question": "`routes/todos.js` định nghĩa `router.get('/', ...)` và `index.js` có `app.use('/api/todos', todoRoutes)`. URL đầy đủ nào tới được route đó?",
+    "questionEn": "`routes/todos.js` defines `router.get('/', ...)` and `index.js` has `app.use('/api/todos', todoRoutes)`. Which full URL reaches that route?",
+    "options": [
+      "`GET /`",
+      "`GET /todos`",
+      "`GET /api`",
+      "`GET /api/todos`"
+    ],
+    "optionsEn": [
+      "`GET /`",
+      "`GET /todos`",
+      "`GET /api`",
+      "`GET /api/todos`"
+    ],
+    "answer": 3,
+    "explanation": "URL đầy đủ = tiền tố lúc mount + path của route: `/api/todos` + `/` = `/api/todos`. Nhờ vậy file route chỉ cần path ngắn, và đổi tiền tố chỉ cần sửa một dòng trong `index.js`.",
+    "explanationEn": "Full URL = mount prefix + route path: `/api/todos` + `/` = `/api/todos`. That keeps paths short inside the route file, and changing the prefix is one line in `index.js`.",
+    "optionExplanations": [
+      "Sai: bỏ mất tiền tố lúc mount.",
+      "Sai: thiếu phần `/api` của tiền tố.",
+      "Sai: `GET /api` rơi vào 404 catch-all.",
+      "Đúng: tiền tố cộng với `/`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it drops the mount prefix.",
+      "Wrong: it is missing the `/api` part of the prefix.",
+      "Wrong: `GET /api` falls through to the 404 catch-all.",
+      "Correct: the prefix plus `/`."
+    ]
+  },
+  {
+    "id": "fs06-q7",
+    "question": "Thứ gì biến body JSON dạng chữ của request thành object `req.body`?",
+    "questionEn": "What turns the request's JSON body text into the `req.body` object?",
+    "options": [
+      "Middleware `cookieParser()`",
+      "Middleware `express.json()`",
+      "Hàm `app.listen()`",
+      "Middleware `requireAuth`"
+    ],
+    "optionsEn": [
+      "The `cookieParser()` middleware",
+      "The `express.json()` middleware",
+      "The `app.listen()` function",
+      "The `requireAuth` middleware"
+    ],
+    "answer": 1,
+    "explanation": "`app.use(express.json())` đọc body có `Content-Type: application/json` và đặt kết quả vào `req.body`. Không có nó (hoặc thiếu header Content-Type), `req.body` là `undefined` trong Express 5.",
+    "explanationEn": "`app.use(express.json())` reads a body sent with `Content-Type: application/json` and puts the result in `req.body`. Without it (or without the Content-Type header), `req.body` is `undefined` in Express 5.",
+    "optionExplanations": [
+      "Sai: `cookieParser()` điền `req.cookies`, không phải `req.body`.",
+      "Đúng: đây là việc của `express.json()`.",
+      "Sai: `app.listen()` chỉ mở port.",
+      "Sai: `requireAuth` kiểm tra cookie và đặt `req.userId`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `cookieParser()` fills `req.cookies`, not `req.body`.",
+      "Correct: that is exactly the job of `express.json()`.",
+      "Wrong: `app.listen()` only opens the port.",
+      "Wrong: `requireAuth` checks the cookie and sets `req.userId`."
+    ]
+  },
+  {
+    "id": "fs06-q8",
+    "question": "Một middleware đã làm xong việc và muốn chuyển request cho hàm kế tiếp trong đường ống. Nó phải làm gì?",
+    "questionEn": "A middleware has done its work and wants to pass the request to the next function in the pipeline. What must it do?",
+    "options": [
+      "Gọi `res.end()`",
+      "Gọi `return`, Express sẽ tự đi tiếp",
+      "Gọi `next()`",
+      "Gọi `app.listen()` lần nữa"
+    ],
+    "optionsEn": [
+      "Call `res.end()`",
+      "Call `return`; Express moves on by itself",
+      "Call `next()`",
+      "Call `app.listen()` again"
+    ],
+    "answer": 2,
+    "explanation": "Middleware có ba lựa chọn: gọi `next()` để đi tiếp, tự trả response để dừng lại (như `requireAuth` trả 401), hoặc ném lỗi. Nếu nó không làm gì cả, request bị treo cho tới khi hết thời gian chờ.",
+    "explanationEn": "A middleware has three choices: call `next()` to continue, send a response itself to stop (like `requireAuth` sending 401), or throw an error. If it does none of these, the request hangs until it times out.",
+    "optionExplanations": [
+      "Sai: `res.end()` kết thúc response, request dừng tại đó.",
+      "Sai: chỉ `return` mà không gọi `next()` sẽ làm request bị treo.",
+      "Đúng: `next()` chuyển sang hàm kế tiếp.",
+      "Sai: `app.listen()` chỉ gọi một lần để mở port."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `res.end()` finishes the response, so the request stops there.",
+      "Wrong: returning without `next()` leaves the request hanging.",
+      "Correct: `next()` hands over to the next function.",
+      "Wrong: `app.listen()` is called once to open the port."
+    ]
+  },
+  {
+    "id": "fs06-q9",
+    "question": "Tester gửi request có body JSON bị hỏng, nhận `400`, nhưng terminal của server không in dòng log nào cho request đó. Vì sao?",
+    "questionEn": "A tester sends a request with a broken JSON body and gets `400`, but the server terminal prints no log line for it. Why?",
+    "options": [
+      "`express.json()` đứng trước logger và báo lỗi trước, nên logger không bao giờ chạy",
+      "Logger cố ý bỏ qua mọi response có status 400",
+      "Server đã bị crash và tự khởi động lại",
+      "Request bị Vite chặn nên không tới được server"
+    ],
+    "optionsEn": [
+      "`express.json()` sits before the logger and fails first, so the logger never runs",
+      "The logger deliberately skips every response with status 400",
+      "The server crashed and restarted itself",
+      "Vite blocked the request, so it never reached the server"
+    ],
+    "answer": 0,
+    "explanation": "Middleware chạy theo thứ tự được thêm. Logger được thêm sau `express.json()`, nên khi JSON hỏng, lỗi đi thẳng tới error handler (trả 400 kèm thông báo) mà không qua logger. Đây là một ví dụ thật cho việc \"thứ tự rất quan trọng\".",
+    "explanationEn": "Middleware runs in the order it is added. The logger is added after `express.json()`, so with broken JSON the error goes straight to the error handler (which answers 400 with a message) without passing the logger. A real example of \"order matters\".",
+    "optionExplanations": [
+      "Đúng: lỗi xảy ra trước khi tới logger.",
+      "Sai: logger in mọi status, kể cả 400 do validation.",
+      "Sai: lỗi 4xx được error handler xử lý, server vẫn chạy.",
+      "Sai: tester vẫn nhận được response 400 từ Express."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the error happens before the logger is reached.",
+      "Wrong: the logger prints every status, including validation 400s.",
+      "Wrong: a 4xx is handled by the error handler; the server keeps running.",
+      "Wrong: the tester still got a 400 response from Express."
+    ]
+  },
+  {
+    "id": "fs06-q10",
+    "question": "Express nhận ra một hàm là error handler (chứ không phải middleware thường) bằng cách nào?",
+    "questionEn": "How does Express recognise a function as an error handler rather than an ordinary middleware?",
+    "options": [
+      "Tên hàm phải bắt đầu bằng `error`",
+      "Nó phải được đặt ở dòng đầu tiên của `index.js`",
+      "Nó phải được mount dưới đường dẫn `/api/errors`",
+      "Nó có bốn tham số `(err, req, res, next)`"
+    ],
+    "optionsEn": [
+      "Its name must start with `error`",
+      "It must be the first line of `index.js`",
+      "It must be mounted under the `/api/errors` path",
+      "It takes four parameters `(err, req, res, next)`"
+    ],
+    "answer": 3,
+    "explanation": "Error handler là hàm có bốn tham số, với `err` đứng đầu. Nó được đặt ở cuối, sau mọi route, để bắt mọi thứ bị ném ra: lỗi 4xx giữ thông báo, lỗi 500 được ghi log và ẩn chi tiết khỏi người dùng.",
+    "explanationEn": "An error handler is a function with four parameters, `err` first. It is placed last, after all routes, to catch anything thrown: 4xx errors keep their message, 500s are logged and their details hidden from the user.",
+    "optionExplanations": [
+      "Sai: trong `index.js` nó là một hàm không có tên.",
+      "Sai: nó phải đứng ở cuối, không phải đầu.",
+      "Sai: không có route `/api/errors` nào; nó áp cho mọi request.",
+      "Đúng: số tham số là dấu hiệu Express dùng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: in `index.js` it is an unnamed function.",
+      "Wrong: it must come last, not first.",
+      "Wrong: there is no `/api/errors` route; it applies to every request.",
+      "Correct: the parameter count is the signal Express uses."
+    ]
+  },
+  {
+    "id": "fs06-q11",
+    "question": "Tick vào checkbox gửi `PATCH /api/todos/3` với body `{ \"done\": true }`. Vì sao dùng PATCH mà không dùng PUT?",
+    "questionEn": "Ticking a checkbox sends `PATCH /api/todos/3` with the body `{ \"done\": true }`. Why PATCH rather than PUT?",
+    "options": [
+      "Vì PUT chỉ dùng được với dữ liệu kiểu số",
+      "Vì PATCH chỉ đổi field được gửi, còn PUT nghĩa là thay toàn bộ resource",
+      "Vì PATCH nhanh hơn PUT ở tầng mạng",
+      "Vì trình duyệt không cho phép gửi PUT kèm cookie"
+    ],
+    "optionsEn": [
+      "Because PUT only works with numeric data",
+      "Because PATCH changes only the fields sent, while PUT means replace the whole resource",
+      "Because PATCH is faster than PUT on the network",
+      "Because browsers do not allow PUT with cookies"
+    ],
+    "answer": 1,
+    "explanation": "PATCH = cập nhật một phần: handler giữ giá trị cũ cho field không được gửi (ở đây title không đổi). PUT = thay thế toàn bộ, client phải gửi đủ mọi field. App này không có route PUT nào, nên `PUT /api/todos/3` nhận 404 từ catch-all.",
+    "explanationEn": "PATCH = partial update: the handler keeps the old value of any field not sent (here the title stays). PUT = full replacement, so the client must send every field. This app has no PUT route, so `PUT /api/todos/3` gets a 404 from the catch-all.",
+    "optionExplanations": [
+      "Sai: PUT không giới hạn kiểu dữ liệu.",
+      "Đúng: đây là khác biệt về ý nghĩa giữa hai method.",
+      "Sai: về mặt mạng hai method như nhau.",
+      "Sai: trình duyệt gửi cookie với mọi method tới cùng site."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: PUT has no restriction on data types.",
+      "Correct: that is the difference in meaning between the two methods.",
+      "Wrong: on the network the two methods cost the same.",
+      "Wrong: browsers send cookies with any method to the same site."
+    ]
+  },
+  {
+    "id": "fs06-q12",
+    "question": "Người dùng đăng ký với một email đã có trong hệ thống. API trả gì?",
+    "questionEn": "A user signs up with an email that is already in the system. What does the API return?",
+    "options": [
+      "`400` với `{\"error\":\"Email is not valid.\"}`",
+      "`401` với `{\"error\":\"Email or password is incorrect.\"}`",
+      "`409` với `{\"error\":\"This email is already registered.\"}`",
+      "`500` với `{\"error\":\"Something went wrong on the server.\"}`"
+    ],
+    "optionsEn": [
+      "`400` with `{\"error\":\"Email is not valid.\"}`",
+      "`401` with `{\"error\":\"Email or password is incorrect.\"}`",
+      "`409` with `{\"error\":\"This email is already registered.\"}`",
+      "`500` with `{\"error\":\"Something went wrong on the server.\"}`"
+    ],
+    "answer": 2,
+    "explanation": "409 Conflict nghĩa là dữ liệu gửi lên hợp lệ nhưng xung đột với dữ liệu đã có. 400 dành cho dữ liệu sai định dạng; 401 là lỗi đăng nhập; 500 là bug phía server.",
+    "explanationEn": "409 Conflict means the input is well-formed but clashes with existing data. 400 is for malformed input; 401 is a login failure; 500 is a server bug.",
+    "optionExplanations": [
+      "Sai: email có định dạng đúng, chỉ là đã bị dùng.",
+      "Sai: đây là lỗi của login, không phải sign-up.",
+      "Đúng: đúng status và thông báo trong `auth.js`.",
+      "Sai: route kiểm tra trùng trước khi insert nên không có bug nào xảy ra."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the email is well-formed, just already taken.",
+      "Wrong: that is the login error, not the sign-up one.",
+      "Correct: the exact status and message in `auth.js`.",
+      "Wrong: the route checks for duplicates before inserting, so no bug occurs."
+    ]
+  },
+  {
+    "id": "fs06-q13",
+    "question": "Bình đang đăng nhập và gửi `DELETE /api/todos/1`, một to-do thuộc về An. Bình nhận được gì?",
+    "questionEn": "Binh is logged in and sends `DELETE /api/todos/1`, a to-do that belongs to An. What does Binh get?",
+    "options": [
+      "`404` với `{\"error\":\"To-do not found.\"}`, và to-do của An vẫn còn",
+      "`204`, và to-do của An bị xóa",
+      "`403` với thông báo rằng to-do thuộc về người khác",
+      "`401` với `{\"error\":\"Please log in first.\"}`"
+    ],
+    "optionsEn": [
+      "`404` with `{\"error\":\"To-do not found.\"}`, and An's to-do is untouched",
+      "`204`, and An's to-do is deleted",
+      "`403` with a message saying the to-do belongs to someone else",
+      "`401` with `{\"error\":\"Please log in first.\"}`"
+    ],
+    "answer": 0,
+    "explanation": "Câu SQL là `DELETE FROM todos WHERE id = ? AND user_id = ?`. Không dòng nào khớp cả id 1 lẫn user_id của Bình, nên `changes` bằng 0 và route trả 404. Bình đã đăng nhập nên không phải 401.",
+    "explanationEn": "The SQL is `DELETE FROM todos WHERE id = ? AND user_id = ?`. No row matches both id 1 and Binh's user_id, so `changes` is 0 and the route answers 404. Binh is logged in, so it is not a 401.",
+    "optionExplanations": [
+      "Đúng: bộ lọc user_id khiến to-do của người khác trông như không tồn tại.",
+      "Sai: điều kiện `user_id` ngăn việc xóa.",
+      "Sai: app này cố ý không dùng 403 cho trường hợp này.",
+      "Sai: Bình có cookie hợp lệ nên `requireAuth` cho đi qua."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the user_id filter makes someone else's to-do look non-existent.",
+      "Wrong: the `user_id` condition prevents the delete.",
+      "Wrong: this app deliberately does not use 403 here.",
+      "Wrong: Binh has a valid cookie, so `requireAuth` lets him through."
+    ]
+  },
+  {
+    "id": "fs06-q14",
+    "question": "Vì sao API trả 404 thay vì 403 khi một user đụng tới to-do của người khác?",
+    "questionEn": "Why does the API return 404 rather than 403 when a user touches someone else's to-do?",
+    "options": [
+      "Vì Express không hỗ trợ status 403",
+      "Vì 404 được trình duyệt lưu cache nên nhanh hơn",
+      "Vì 403 chỉ dành cho lỗi của database",
+      "Vì 403 sẽ xác nhận id đó có tồn tại, làm lộ thông tin cho người đoán id"
+    ],
+    "optionsEn": [
+      "Because Express does not support status 403",
+      "Because browsers cache 404s, so it is faster",
+      "Because 403 is reserved for database errors",
+      "Because 403 would confirm the id exists, leaking information to someone guessing ids"
+    ],
+    "answer": 3,
+    "explanation": "403 nói \"có thứ này, nhưng không phải của bạn\". Trả 404 làm \"của người khác\" và \"không tồn tại\" giống hệt nhau, nên không ai dò được id nào có thật. 403 phù hợp khi người dùng được phép biết thứ đó tồn tại.",
+    "explanationEn": "403 says \"this exists, but it is not yours\". Answering 404 makes \"someone else's\" and \"does not exist\" identical, so nobody can probe which ids are real. 403 fits when the user may know the thing exists.",
+    "optionExplanations": [
+      "Sai: Express trả được bất kỳ status nào, kể cả 403.",
+      "Sai: đây là lý do bảo mật, không phải hiệu năng.",
+      "Sai: 403 nghĩa là không có quyền, không liên quan database.",
+      "Đúng: tránh lộ thông tin về dữ liệu của người khác."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: Express can send any status, including 403.",
+      "Wrong: the reason is security, not performance.",
+      "Wrong: 403 means forbidden; it has nothing to do with the database.",
+      "Correct: it avoids leaking information about other users' data."
+    ]
+  },
+  {
+    "id": "fs06-q15",
+    "question": "Trong `curl ... -c cookies.txt` (khi đăng ký) rồi `curl ... -b cookies.txt` (khi tạo to-do), hai cờ `-c` và `-b` làm gì?",
+    "questionEn": "In `curl ... -c cookies.txt` (at sign-up) and then `curl ... -b cookies.txt` (when creating a to-do), what do `-c` and `-b` do?",
+    "options": [
+      "`-c` mã hóa cookie, `-b` giải mã cookie",
+      "`-c` tạo tài khoản, `-b` tạo to-do",
+      "`-c` lưu cookie server gửi về vào file, `-b` gửi cookie trong file lên server",
+      "`-c` xóa cookie cũ, `-b` in cookie ra màn hình"
+    ],
+    "optionsEn": [
+      "`-c` encrypts the cookie, `-b` decrypts it",
+      "`-c` creates the account, `-b` creates the to-do",
+      "`-c` saves the cookies the server sends into the file, `-b` sends the file's cookies to the server",
+      "`-c` deletes old cookies, `-b` prints cookies on screen"
+    ],
+    "answer": 2,
+    "explanation": "curl không tự nhớ cookie như trình duyệt. `-c` (cookie jar) ghi header `Set-Cookie` vào file; `-b` đọc file đó và gửi header `Cookie`. Thiếu `-b`, request tới `/api/todos` nhận 401.",
+    "explanationEn": "curl does not remember cookies like a browser does. `-c` (cookie jar) writes the `Set-Cookie` header into a file; `-b` reads that file and sends the `Cookie` header. Without `-b`, a request to `/api/todos` gets 401.",
+    "optionExplanations": [
+      "Sai: curl không mã hóa hay giải mã cookie.",
+      "Sai: việc tạo gì là do URL và method quyết định, không phải hai cờ này.",
+      "Đúng: lưu rồi gửi lại, giống trình duyệt làm tự động.",
+      "Sai: không cờ nào trong hai cờ này xóa hay in cookie."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: curl neither encrypts nor decrypts cookies.",
+      "Wrong: the URL and method decide what is created, not these flags.",
+      "Correct: save, then send back, as a browser does automatically.",
+      "Wrong: neither flag deletes or prints cookies."
+    ]
+  },
+  {
+    "id": "fs06-q16",
+    "question": "Bạn gọi `curl -i http://localhost:4000/api/todos` và nhận `401 {\"error\":\"Please log in first.\"}`, dù vừa đăng ký thành công. Nguyên nhân nhiều khả năng nhất?",
+    "questionEn": "You call `curl -i http://localhost:4000/api/todos` and get `401 {\"error\":\"Please log in first.\"}`, although you just signed up successfully. What is the most likely cause?",
+    "options": [
+      "Database chưa có bảng `todos`",
+      "Lệnh không gửi cookie (thiếu `-b cookies.txt`), nên `requireAuth` chặn request",
+      "Token đã hết hạn sau 7 ngày",
+      "Route `GET /api/todos` chưa được mount"
+    ],
+    "optionsEn": [
+      "The database has no `todos` table yet",
+      "The command sent no cookie (no `-b cookies.txt`), so `requireAuth` stopped it",
+      "The token expired after 7 days",
+      "The `GET /api/todos` route is not mounted"
+    ],
+    "answer": 1,
+    "explanation": "\"Please log in first.\" là thông báo khi không có cookie `token`. Một token sai hay hết hạn sẽ cho thông báo khác: \"Your session has expired. Please log in again.\". Route chưa mount sẽ cho 404, còn thiếu bảng sẽ cho 500.",
+    "explanationEn": "\"Please log in first.\" is the message when there is no `token` cookie. A bad or expired token gives a different one: \"Your session has expired. Please log in again.\". An unmounted route gives 404, and a missing table gives 500.",
+    "optionExplanations": [
+      "Sai: bảng được tạo khi server khởi động; thiếu bảng sẽ ra 500.",
+      "Đúng: thông báo này nghĩa là không có cookie nào được gửi.",
+      "Sai: vừa đăng ký xong, và token hết hạn cho thông báo khác.",
+      "Sai: route chưa mount sẽ ra 404 từ catch-all."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: tables are created at start-up; a missing table would give 500.",
+      "Correct: this message means no cookie was sent.",
+      "Wrong: you just signed up, and an expired token gives a different message.",
+      "Wrong: an unmounted route would give 404 from the catch-all."
+    ]
+  },
+  {
+    "id": "fs06-q17",
+    "question": "Log server có dòng `POST /api/auth/signup → 201 (89 ms)`, trong khi các dòng khác chỉ 1–9 ms. Giải thích hợp lý nhất?",
+    "questionEn": "The server log shows `POST /api/auth/signup → 201 (89 ms)`, while other lines take 1–9 ms. What is the best explanation?",
+    "options": [
+      "Băm mật khẩu bằng bcrypt được thiết kế để tốn thời gian",
+      "Request đăng ký bị lỗi và server phải thử lại",
+      "Logger chậm hơn với các request POST",
+      "Mạng giữa trình duyệt và server bị nghẽn"
+    ],
+    "optionsEn": [
+      "Hashing the password with bcrypt is designed to take time",
+      "The sign-up request failed and the server had to retry",
+      "The logger is slower for POST requests",
+      "The network between browser and server is congested"
+    ],
+    "answer": 0,
+    "explanation": "Thời gian trong log là thời gian server xử lý. Đăng ký gọi `bcrypt.hashSync(password, 10)`, một phép tính cố ý chậm để kẻ tấn công khó dò mật khẩu hàng loạt. Status 201 cho biết nó đã thành công.",
+    "explanationEn": "The time in the log is server processing time. Sign-up calls `bcrypt.hashSync(password, 10)`, a deliberately slow computation that makes mass password guessing expensive. The 201 shows it succeeded.",
+    "optionExplanations": [
+      "Đúng: bcrypt chậm là có chủ đích.",
+      "Sai: status 201 nghĩa là thành công, và server không tự thử lại.",
+      "Sai: logger làm cùng một việc cho mọi method.",
+      "Sai: thời gian đo từ lúc server nhận tới lúc trả lời, không gồm mạng phía trình duyệt."
+    ],
+    "optionExplanationsEn": [
+      "Correct: bcrypt is slow on purpose.",
+      "Wrong: 201 means success, and the server never retries on its own.",
+      "Wrong: the logger does the same work for every method.",
+      "Wrong: the time is measured inside the server, not on the browser's network."
+    ]
+  },
+  {
+    "id": "fs06-q18",
+    "question": "Điều nào nên được chốt như một quyết định về yêu cầu trong API spec, trước khi developer viết route?",
+    "questionEn": "Which of these should be decided as a requirement in the API spec, before a developer writes the route?",
+    "options": [
+      "Tên biến JavaScript bên trong handler",
+      "Việc dùng `const` hay `let` trong file route",
+      "Thứ tự import ở đầu file `auth.js`",
+      "Status code và đúng câu thông báo trả về khi email bị trùng"
+    ],
+    "optionsEn": [
+      "The JavaScript variable names inside the handler",
+      "Whether the route file uses `const` or `let`",
+      "The order of imports at the top of `auth.js`",
+      "The status code and exact message returned for a duplicate email"
+    ],
+    "answer": 3,
+    "explanation": "Status code và thông báo là thứ người dùng, frontend và tester đều thấy: chúng quyết định màn hình hiển thị gì và test kiểm tra gì. Tên biến hay thứ tự import là chi tiết nội bộ của developer.",
+    "explanationEn": "Status codes and messages are what users, the frontend and testers all see: they decide what the screen shows and what tests assert. Variable names and import order are the developer's internal details.",
+    "optionExplanations": [
+      "Sai: tên biến không ảnh hưởng tới hành vi mà người dùng thấy.",
+      "Sai: đây là lựa chọn code thuần túy.",
+      "Sai: thứ tự import không nằm trong contract.",
+      "Đúng: đây là một phần của contract và của acceptance criteria."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: variable names do not change any behaviour users see.",
+      "Wrong: this is a pure coding choice.",
+      "Wrong: import order is not part of the contract.",
+      "Correct: it is part of the contract and of the acceptance criteria."
+    ]
+  }
+]

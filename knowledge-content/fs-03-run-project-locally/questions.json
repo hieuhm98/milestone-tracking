@@ -1,0 +1,578 @@
+[
+  {
+    "id": "fs03-q1",
+    "question": "Bạn gửi đồng nghiệp link `http://localhost:5173` để khoe app đang chạy trên máy mình. Khi họ mở link, chuyện gì xảy ra?",
+    "questionEn": "You send a colleague the link `http://localhost:5173` to show the app running on your machine. What happens when they open it?",
+    "options": [
+      "Họ thấy app của bạn, vì link localhost dùng được trong cùng mạng văn phòng",
+      "Trình duyệt của họ tìm trên chính máy họ, nơi không có gì chạy ở 5173, nên lỗi",
+      "Họ được tự động chuyển sang server staging có cùng port",
+      "Họ thấy app của bạn nếu máy họ cũng đã cài Node.js và Chrome"
+    ],
+    "optionsEn": [
+      "They see your app, because localhost links work across the office network",
+      "Their browser looks on their own computer, where nothing runs on 5173, so it fails",
+      "They are redirected automatically to the staging server on the same port",
+      "They see your app as long as they also have Node.js and Chrome installed"
+    ],
+    "answer": 1,
+    "explanation": "localhost (127.0.0.1) luôn có nghĩa là \"máy này\". Link đó mở máy của người nhận, không phải máy bạn. Muốn người khác xem, app phải được deploy lên một môi trường dùng chung như dev hay staging.",
+    "explanationEn": "localhost (127.0.0.1) always means \"this computer\". The link opens the recipient's machine, not yours. For others to see it, the app has to be deployed to a shared environment such as dev or staging.",
+    "optionExplanations": [
+      "Sai: localhost không bao giờ rời khỏi máy, kể cả trong mạng nội bộ.",
+      "Đúng: localhost trỏ về máy của người mở link, và ở đó không có server nào chạy.",
+      "Sai: không có cơ chế nào tự chuyển localhost sang staging.",
+      "Sai: cài công cụ không giúp họ thấy app đang chạy trên máy bạn."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: localhost never leaves the machine, not even on an office network.",
+      "Right: localhost points to the machine that opens the link, and no server runs there.",
+      "Wrong: nothing redirects localhost to staging.",
+      "Wrong: installing tools does not let them see an app running on your machine."
+    ]
+  },
+  {
+    "id": "fs03-q2",
+    "question": "Môi trường nào được mô tả: \"chạy trên laptop của một dev, dữ liệu giả dùng xong bỏ, chỉ một người dùng\"?",
+    "questionEn": "Which environment is described: \"runs on one developer's laptop, fake throw-away data, used by one person\"?",
+    "options": [
+      "Staging / UAT",
+      "Production",
+      "Local",
+      "Dev (server dùng chung)"
+    ],
+    "optionsEn": [
+      "Staging / UAT",
+      "Production",
+      "Local",
+      "Dev (a shared server)"
+    ],
+    "answer": 2,
+    "explanation": "Local là máy của chính bạn: nhanh, an toàn, miễn phí, dữ liệu giả. Dev là server dùng chung cho cả team, staging là bản sao production cho QA/BA, production là môi trường thật của khách hàng.",
+    "explanationEn": "Local is your own machine: fast, safe, free, fake data. Dev is a server shared by the team, staging is a copy of production for QA/BA, and production is the live environment for customers.",
+    "optionExplanations": [
+      "Sai: staging là bản sao production dùng cho QA, BA và người dùng nghiệp vụ.",
+      "Sai: production có khách hàng thật và dữ liệu thật.",
+      "Đúng: local chạy trên laptop của một người với dữ liệu giả.",
+      "Sai: dev là một server dùng chung cho cả team, không phải laptop cá nhân."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: staging is a copy of production used by QA, BA and business users.",
+      "Wrong: production has real customers and real data.",
+      "Right: local runs on one person's laptop with fake data.",
+      "Wrong: dev is a server shared by the team, not a personal laptop."
+    ]
+  },
+  {
+    "id": "fs03-q3",
+    "question": "Vì sao dự án To-do yêu cầu Node.js 22 trở lên?",
+    "questionEn": "Why does the To-do project require Node.js 22 or newer?",
+    "options": [
+      "Script của server dùng cờ `--env-file-if-exists` và `--watch` mà bản Node cũ không có",
+      "Node bản cũ không mở được port lớn hơn 1024 như 4000 hay 5173",
+      "Dự án dùng SQLite có sẵn trong Node 22 thay vì cài gói riêng",
+      "npm từ chối tải gói về cho những máy đang chạy Node bản cũ"
+    ],
+    "optionsEn": [
+      "The server scripts use the `--env-file-if-exists` and `--watch` flags that older Node lacks",
+      "Older Node cannot open ports above 1024 such as 4000 or 5173",
+      "The project uses the SQLite built into Node 22 instead of installing a package",
+      "npm refuses to download packages onto machines running an older Node"
+    ],
+    "answer": 0,
+    "explanation": "`npm run dev` chạy `node --env-file-if-exists=.env --watch src/index.js`. Hai cờ này (đọc file .env và tự khởi động lại khi sửa file) không có ở các bản Node cũ, nên `package.json` khai báo `\"node\": \">=22\"`.",
+    "explanationEn": "`npm run dev` runs `node --env-file-if-exists=.env --watch src/index.js`. Those two flags (read the .env file, restart on file changes) are missing in older Node, so `package.json` declares `\"node\": \">=22\"`.",
+    "optionExplanations": [
+      "Đúng: đó chính là hai cờ trong script dev và start.",
+      "Sai: mọi bản Node đều mở được port 4000 hay 5173.",
+      "Sai: dự án dùng gói better-sqlite3 cài qua npm.",
+      "Sai: npm không chặn tải gói vì phiên bản Node."
+    ],
+    "optionExplanationsEn": [
+      "Right: those are the two flags in the dev and start scripts.",
+      "Wrong: every Node version can open ports 4000 and 5173.",
+      "Wrong: the project uses the better-sqlite3 package installed with npm.",
+      "Wrong: npm does not block downloads because of the Node version."
+    ]
+  },
+  {
+    "id": "fs03-q4",
+    "question": "Terminal đang chạy `npm run dev` cho backend và không trả lại dấu nhắc lệnh. Bạn muốn gõ lệnh khác ngay trong terminal đó. Bạn làm gì?",
+    "questionEn": "A terminal is running `npm run dev` for the backend and does not give the prompt back. You want to type another command in that same terminal. What do you do?",
+    "options": [
+      "Nhấn Tab để chuyển sang một dấu nhắc lệnh mới",
+      "Nhấn mũi tên lên để lấy lại dấu nhắc lệnh",
+      "Đóng VS Code; server vẫn chạy ngầm và terminal được giải phóng",
+      "Nhấn Ctrl + C để dừng server, terminal rảnh lại (hoặc mở terminal thứ hai)"
+    ],
+    "optionsEn": [
+      "Press Tab to switch to a new prompt",
+      "Press the up arrow to get the prompt back",
+      "Close VS Code; the server keeps running in the background and the terminal is freed",
+      "Press Ctrl + C to stop the server, freeing the terminal (or open a second terminal)"
+    ],
+    "answer": 3,
+    "explanation": "Một chương trình đang chạy chiếm trọn terminal của nó. Ctrl + C dừng chương trình; nếu vẫn cần server chạy thì mở thêm terminal thay vì dừng nó.",
+    "explanationEn": "A running program keeps its terminal busy. Ctrl + C stops the program; if the server must keep running, open another terminal instead of stopping it.",
+    "optionExplanations": [
+      "Sai: Tab chỉ tự hoàn thành tên file hoặc thư mục.",
+      "Sai: mũi tên lên gọi lại lệnh cũ, nhưng chỉ khi đã có dấu nhắc lệnh.",
+      "Sai: đóng VS Code thường tắt luôn các terminal và server bên trong.",
+      "Đúng: Ctrl + C dừng server; muốn giữ server thì dùng terminal thứ hai."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: Tab only completes file or folder names.",
+      "Wrong: the up arrow recalls old commands, but only once there is a prompt.",
+      "Wrong: closing VS Code usually ends its terminals and the servers in them.",
+      "Right: Ctrl + C stops the server; to keep it, use a second terminal."
+    ]
+  },
+  {
+    "id": "fs03-q5",
+    "question": "Bạn đang ở `C:\\projects\\todo-auth-app\\server`. Lệnh nào đưa bạn vào thư mục `client`?",
+    "questionEn": "You are in `C:\\projects\\todo-auth-app\\server`. Which command takes you into the `client` folder?",
+    "options": [
+      "`cd client`",
+      "`cd /client`",
+      "`cd ..\\client` (hoặc `cd ../client`)",
+      "`cd server\\client`"
+    ],
+    "optionsEn": [
+      "`cd client`",
+      "`cd /client`",
+      "`cd ..\\client` (or `cd ../client`)",
+      "`cd server\\client`"
+    ],
+    "answer": 2,
+    "explanation": "`client` nằm cạnh `server`, không nằm bên trong. `..` lùi lên `todo-auth-app`, rồi đi vào `client`. Đây là đường dẫn tương đối tính từ chỗ bạn đang đứng.",
+    "explanationEn": "`client` sits next to `server`, not inside it. `..` goes up to `todo-auth-app`, then into `client`. It is a relative path from where you stand.",
+    "optionExplanations": [
+      "Sai: không có thư mục `client` bên trong `server`.",
+      "Sai: dấu `/` ở đầu là đường dẫn tuyệt đối từ gốc ổ đĩa.",
+      "Đúng: lên một cấp rồi vào `client`.",
+      "Sai: bạn đã ở trong `server`, và trong đó không có `server\\client`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: there is no `client` folder inside `server`.",
+      "Wrong: a leading `/` is an absolute path from the drive root.",
+      "Right: go up one level, then into `client`.",
+      "Wrong: you are already in `server`, and it has no `server\\client` inside."
+    ]
+  },
+  {
+    "id": "fs03-q6",
+    "question": "Giải nén `todo-auth-app.zip` xong, bạn không thấy thư mục `node_modules` và file `todo.db`. Vì sao?",
+    "questionEn": "After unzipping `todo-auth-app.zip` you see no `node_modules` folder and no `todo.db` file. Why?",
+    "options": [
+      "File zip bị lỗi khi tải, cần tải lại",
+      "Chúng được tạo trên máy bạn bởi `npm install` và lần chạy server đầu tiên, nên không bao giờ được chia sẻ",
+      "Chúng là file ẩn; cần bật hiển thị file ẩn trong Explorer",
+      "Phần mềm diệt virus đã xóa chúng khi giải nén"
+    ],
+    "optionsEn": [
+      "The zip was damaged during download and must be downloaded again",
+      "They are created on your machine by `npm install` and the first server start, so they are never shared",
+      "They are hidden files; turn on hidden items in Explorer",
+      "The antivirus deleted them while unzipping"
+    ],
+    "answer": 1,
+    "explanation": "`node_modules` là hàng nghìn file thư viện mà `npm install` tải về theo `package.json`; `todo.db` là file database được `db.js` tạo khi server khởi động. Cả hai đều sinh ra trên từng máy.",
+    "explanationEn": "`node_modules` is thousands of library files that `npm install` downloads from `package.json`; `todo.db` is the database file `db.js` creates when the server starts. Both are generated on each machine.",
+    "optionExplanations": [
+      "Sai: zip cố ý không chứa hai thứ này.",
+      "Đúng: chúng được tạo cục bộ, nên không cần (và không nên) chia sẻ.",
+      "Sai: tên không bắt đầu bằng dấu chấm và chúng thực sự chưa tồn tại.",
+      "Sai: không có gì bị xóa, chúng chưa từng nằm trong zip."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the zip leaves these two out on purpose.",
+      "Right: they are created locally, so there is no need (and no reason) to share them.",
+      "Wrong: their names do not start with a dot, and they really do not exist yet.",
+      "Wrong: nothing was deleted; they were never in the zip."
+    ]
+  },
+  {
+    "id": "fs03-q7",
+    "question": "Vì sao `.env` không bao giờ được commit lên Git, còn `.env.example` thì có?",
+    "questionEn": "Why is `.env` never committed to Git while `.env.example` is?",
+    "options": [
+      "`.env` quá lớn so với giới hạn dung lượng file của Git",
+      "Git không lưu được các file có tên bắt đầu bằng dấu chấm",
+      "`.env.example` mới là file server đọc khi chạy, còn `.env` chỉ là bản nháp",
+      "`.env` có thể chứa secret thật và giá trị riêng của từng máy; file example chỉ cho biết cần biến nào, với giá trị giả"
+    ],
+    "optionsEn": [
+      "`.env` is too large for Git's file size limit",
+      "Git cannot store files whose names start with a dot",
+      "`.env.example` is the file the server reads at runtime, `.env` is just a draft",
+      "`.env` may hold real secrets and per-machine values; the example only lists the variables, with placeholder values"
+    ],
+    "answer": 3,
+    "explanation": "Secret (mật khẩu database, API key, JWT_SECRET) lọt lên Git là sự cố bảo mật. `.gitignore` có dòng `.env`; `.env.example` được commit để người mới biết cần những biến nào.",
+    "explanationEn": "A secret (database password, API key, JWT_SECRET) pushed to Git is a security incident. `.gitignore` lists `.env`; `.env.example` is committed so newcomers know which variables exist.",
+    "optionExplanations": [
+      "Sai: `.env` chỉ vài dòng.",
+      "Sai: Git lưu được file bắt đầu bằng dấu chấm, ví dụ `.gitignore`.",
+      "Sai: ngược lại, script dev đọc `.env` (`--env-file-if-exists=.env`).",
+      "Đúng: bảo vệ secret và để mỗi máy tự cấu hình."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `.env` is only a few lines.",
+      "Wrong: Git stores dot-files fine, for example `.gitignore`.",
+      "Wrong: the other way round, the dev script reads `.env` (`--env-file-if-exists=.env`).",
+      "Right: it protects secrets and lets each machine configure itself."
+    ]
+  },
+  {
+    "id": "fs03-q8",
+    "question": "Một dev đổi giá trị `JWT_SECRET` trong `.env` rồi khởi động lại server. Tester sẽ thấy gì?",
+    "questionEn": "A developer changes `JWT_SECRET` in `.env` and restarts the server. What do testers notice?",
+    "options": [
+      "Mọi người đang đăng nhập bị đăng xuất, vì token cũ không còn xác minh được",
+      "Toàn bộ to-do trong database bị xóa sạch",
+      "Server chuyển sang chạy ở một port khác",
+      "Không có gì, vì `JWT_SECRET` chỉ có tác dụng ở production"
+    ],
+    "optionsEn": [
+      "Everyone who was logged in is logged out, because old tokens no longer verify",
+      "All to-dos in the database are wiped",
+      "The server moves to a different port",
+      "Nothing, because `JWT_SECRET` only matters in production"
+    ],
+    "answer": 0,
+    "explanation": "`JWT_SECRET` là khóa ký token đăng nhập trong cookie `token`. Đổi khóa thì chữ ký cũ không khớp, `GET /api/auth/me` trả 401 và app hiện form đăng nhập. Dữ liệu vẫn nguyên.",
+    "explanationEn": "`JWT_SECRET` is the key that signs the login token in the `token` cookie. Change it and old signatures no longer match, `GET /api/auth/me` returns 401 and the app shows the login form. The data is untouched.",
+    "optionExplanations": [
+      "Đúng: token cũ ký bằng khóa cũ nên bị từ chối.",
+      "Sai: dữ liệu nằm trong `todo.db`, không phụ thuộc secret.",
+      "Sai: port do biến `PORT` quyết định.",
+      "Sai: secret được dùng ở mọi môi trường, kể cả local."
+    ],
+    "optionExplanationsEn": [
+      "Right: tokens signed with the old key are rejected.",
+      "Wrong: the data lives in `todo.db` and does not depend on the secret.",
+      "Wrong: the port comes from the `PORT` variable.",
+      "Wrong: the secret is used in every environment, local included."
+    ]
+  },
+  {
+    "id": "fs03-q9",
+    "question": "Sau `npm run dev` trong `server`, terminal hiện `API running on http://localhost:4000` và không trả lại dấu nhắc lệnh. Điều đó nghĩa là gì?",
+    "questionEn": "After `npm run dev` in `server`, the terminal shows `API running on http://localhost:4000` and does not return to the prompt. What does it mean?",
+    "options": [
+      "npm bị treo; nhấn Enter vài lần cho tới khi xong",
+      "Đúng như mong đợi: server đang chạy và chờ request; cứ để terminal mở",
+      "Cài đặt thất bại âm thầm; cần chạy lại `npm install`",
+      "Database đang được xây; chờ đến khi hiện chữ \"Done\""
+    ],
+    "optionsEn": [
+      "npm is stuck; press Enter a few times until it finishes",
+      "As expected: the server is running and waiting for requests; leave the terminal open",
+      "The install failed silently; run `npm install` again",
+      "The database is being built; wait until it prints \"Done\""
+    ],
+    "answer": 1,
+    "explanation": "Một server là chương trình chạy liên tục để chờ request, nên terminal \"đứng im\" là đúng. Kiểm tra bằng cách mở http://localhost:4000/api/health và thấy `{\"status\":\"ok\"}`.",
+    "explanationEn": "A server is a program that keeps running to wait for requests, so a \"hanging\" terminal is correct. Check it by opening http://localhost:4000/api/health and seeing `{\"status\":\"ok\"}`.",
+    "optionExplanations": [
+      "Sai: không bị treo, Enter cũng không làm gì.",
+      "Đúng: server đang lắng nghe ở port 4000.",
+      "Sai: dòng `API running` chứng tỏ server đã khởi động được.",
+      "Sai: bảng được tạo ngay lúc khởi động, không có thông báo \"Done\"."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: nothing is stuck, and Enter does nothing useful.",
+      "Right: the server is listening on port 4000.",
+      "Wrong: the `API running` line proves the server started.",
+      "Wrong: the tables are created at start-up and there is no \"Done\" message."
+    ]
+  },
+  {
+    "id": "fs03-q10",
+    "question": "Bạn mở http://localhost:4000 và thấy `Cannot GET /`. Khả năng cao nhất là gì?",
+    "questionEn": "You open http://localhost:4000 and see `Cannot GET /`. What is most likely going on?",
+    "options": [
+      "Backend đã crash; cần khởi động lại terminal 1",
+      "Thiếu file `.env` nên các route không được nạp",
+      "Bình thường: backend chỉ trả lời URL dưới `/api`; app nằm ở port 5173",
+      "Tường lửa đang chặn port 4000 trên máy bạn"
+    ],
+    "optionsEn": [
+      "The backend crashed; restart terminal 1",
+      "The `.env` file is missing, so no routes were loaded",
+      "Normal: the backend only answers URLs under `/api`; the app is on port 5173",
+      "A firewall is blocking port 4000 on your machine"
+    ],
+    "answer": 2,
+    "explanation": "Việc Express trả về `Cannot GET /` (404) chứng tỏ nó đang chạy. Server này không có route cho `/`; màn hình do frontend ở http://localhost:5173 phục vụ.",
+    "explanationEn": "Getting `Cannot GET /` (404) from Express proves it is running. This server has no route for `/`; the screens are served by the frontend at http://localhost:5173.",
+    "optionExplanations": [
+      "Sai: server crash thì trình duyệt không nhận được câu trả lời nào.",
+      "Sai: thiếu `.env` thì code dùng giá trị mặc định, route vẫn có.",
+      "Đúng: backend chỉ phục vụ `/api`.",
+      "Sai: bị chặn thì cũng không có câu trả lời `Cannot GET /`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a crashed server sends no answer at all.",
+      "Wrong: without `.env` the code uses defaults and the routes still exist.",
+      "Right: the backend only serves `/api`.",
+      "Wrong: a blocked port would not produce a `Cannot GET /` answer."
+    ]
+  },
+  {
+    "id": "fs03-q11",
+    "question": "Trình duyệt chỉ nói chuyện với port 5173. Vậy request `GET /api/todos` đến được Express ở port 4000 bằng cách nào?",
+    "questionEn": "The browser only talks to port 5173. So how does a `GET /api/todos` request reach Express on port 4000?",
+    "options": [
+      "Proxy trong `vite.config.js` chuyển mọi request bắt đầu bằng `/api` sang `http://localhost:4000`",
+      "Trình duyệt tự thử sang port 4000 khi port 5173 trả về 404",
+      "Code React gọi thẳng `http://localhost:4000` và dựa vào cấu hình CORS",
+      "Express theo dõi port 5173 và tự sao chép các request ở đó"
+    ],
+    "optionsEn": [
+      "The proxy in `vite.config.js` forwards every request starting with `/api` to `http://localhost:4000`",
+      "The browser automatically tries port 4000 when port 5173 returns 404",
+      "The React code calls `http://localhost:4000` directly and relies on CORS setup",
+      "Express watches port 5173 and copies the requests it sees there"
+    ],
+    "answer": 0,
+    "explanation": "`api.js` gọi `fetch('/api' + path)` tới cùng origin 5173; Vite thấy tiền tố `/api` và chuyển tiếp sang 4000. Nhờ vậy frontend và API trông như một site: cookie hoạt động, không cần CORS.",
+    "explanationEn": "`api.js` calls `fetch('/api' + path)` on the same origin, 5173; Vite sees the `/api` prefix and forwards it to 4000. So frontend and API look like one site: the cookie works and no CORS is needed.",
+    "optionExplanations": [
+      "Đúng: đó là cấu hình `proxy: { '/api': 'http://localhost:4000' }`.",
+      "Sai: trình duyệt không tự đổi port.",
+      "Sai: code dùng đường dẫn tương đối `/api`, không gọi thẳng 4000.",
+      "Sai: một port chỉ do một chương trình lắng nghe."
+    ],
+    "optionExplanationsEn": [
+      "Right: that is the `proxy: { '/api': 'http://localhost:4000' }` setting.",
+      "Wrong: browsers never switch ports on their own.",
+      "Wrong: the code uses the relative path `/api`, not port 4000 directly.",
+      "Wrong: only one program listens on a port."
+    ]
+  },
+  {
+    "id": "fs03-q12",
+    "question": "Lần đầu mở app, terminal 1 in ra `GET /api/auth/me → 401` hai lần. Chuyện gì đang xảy ra?",
+    "questionEn": "When you first open the app, terminal 1 prints `GET /api/auth/me → 401` twice. What is going on?",
+    "options": [
+      "Bạn đã nhập sai mật khẩu hai lần liên tiếp",
+      "Proxy của Vite bị lỗi và đang tự thử lại request",
+      "Lỗi server: `/api/auth/me` lẽ ra phải trả 200 cho mọi người",
+      "Bình thường: app hỏi \"đã đăng nhập chưa?\" (chưa → 401), và StrictMode ở chế độ dev chạy effect hai lần"
+    ],
+    "optionsEn": [
+      "You typed a wrong password twice in a row",
+      "The Vite proxy is broken and retrying the request",
+      "A server bug: `/api/auth/me` should return 200 for everyone",
+      "Normal: the app asks \"am I logged in?\" (not yet → 401), and StrictMode in dev runs effects twice"
+    ],
+    "answer": 3,
+    "explanation": "`App.jsx` gọi `GET /auth/me` khi tải trang để khôi phục phiên. Chưa có cookie thì 401 là đúng. React StrictMode (chỉ ở dev) cố ý chạy effect hai lần để bắt lỗi.",
+    "explanationEn": "`App.jsx` calls `GET /auth/me` on page load to restore the session. With no cookie yet, 401 is correct. React StrictMode (dev only) deliberately runs effects twice to catch bugs.",
+    "optionExplanations": [
+      "Sai: bạn chưa hề gửi form đăng nhập.",
+      "Sai: proxy không tự thử lại; nếu lỗi sẽ có `http proxy error` ở terminal 2.",
+      "Sai: `/me` được bảo vệ, không có cookie hợp lệ thì phải 401.",
+      "Đúng: 401 là câu trả lời \"chưa đăng nhập\", và dòng lặp là do StrictMode."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: you have not submitted the login form yet.",
+      "Wrong: the proxy does not retry; a failure shows `http proxy error` in terminal 2.",
+      "Wrong: `/me` is protected, so no valid cookie must mean 401.",
+      "Right: 401 means \"not logged in\", and the duplicate line comes from StrictMode."
+    ]
+  },
+  {
+    "id": "fs03-q13",
+    "question": "Bạn đổi chữ tiêu đề trong `AuthForm.jsx` rồi lưu. Chuyện gì xảy ra?",
+    "questionEn": "You change the heading text in `AuthForm.jsx` and save. What happens?",
+    "options": [
+      "Phải dừng Vite rồi chạy lại `npm run dev` mới thấy thay đổi",
+      "Trình duyệt cập nhật ngay nhờ HMR, không tải lại cả trang; terminal 2 in một dòng `hmr update`",
+      "`node --watch` khởi động lại backend ở terminal 1",
+      "Không có gì thay đổi cho tới khi bạn chạy lại `npm install`"
+    ],
+    "optionsEn": [
+      "You must stop Vite and run `npm run dev` again to see the change",
+      "The browser updates at once via HMR, without a full reload; terminal 2 logs an `hmr update` line",
+      "`node --watch` restarts the backend in terminal 1",
+      "Nothing changes until you run `npm install` again"
+    ],
+    "answer": 1,
+    "explanation": "Vite theo dõi file trong `client/src` và thay nóng module vừa sửa (Hot Module Replacement). Dữ liệu đang gõ trong form vẫn còn.",
+    "explanationEn": "Vite watches the files in `client/src` and hot-swaps the edited module (Hot Module Replacement). What you typed in the form stays.",
+    "optionExplanations": [
+      "Sai: dev server tự cập nhật, không cần khởi động lại.",
+      "Đúng: đó là HMR của Vite.",
+      "Sai: `AuthForm.jsx` là file frontend, backend không theo dõi nó.",
+      "Sai: `npm install` chỉ cần khi thư viện thay đổi."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the dev server updates itself, no restart needed.",
+      "Right: that is Vite's HMR.",
+      "Wrong: `AuthForm.jsx` is a frontend file; the backend does not watch it.",
+      "Wrong: `npm install` is only needed when dependencies change."
+    ]
+  },
+  {
+    "id": "fs03-q14",
+    "question": "Bạn sửa `server/src/index.js` rồi lưu. Terminal 1 hiện gì?",
+    "questionEn": "You edit `server/src/index.js` and save. What does terminal 1 show?",
+    "options": [
+      "`hmr update /src/index.js`, và module được thay tại chỗ",
+      "Không gì cả; sửa backend phải khởi động lại máy tính",
+      "`Restarting 'src/index.js'` rồi `API running on http://localhost:4000`: `node --watch` đã khởi động lại server",
+      "`Database emptied.` vì mỗi lần khởi động lại đều xóa dữ liệu"
+    ],
+    "optionsEn": [
+      "`hmr update /src/index.js`, and the module is swapped in place",
+      "Nothing; backend edits need a reboot of the computer",
+      "`Restarting 'src/index.js'` then `API running on http://localhost:4000`: `node --watch` restarted the server",
+      "`Database emptied.` because every restart wipes the data"
+    ],
+    "answer": 2,
+    "explanation": "Script `dev` chạy `node --watch`: mỗi lần lưu file, Node khởi động lại toàn bộ server. Dữ liệu vẫn còn vì nằm trong `todo.db`.",
+    "explanationEn": "The `dev` script runs `node --watch`: on every save Node restarts the whole server. The data survives because it lives in `todo.db`.",
+    "optionExplanations": [
+      "Sai: HMR là của Vite ở frontend.",
+      "Sai: `--watch` tự khởi động lại, không cần làm gì.",
+      "Đúng: đó là hai dòng `node --watch` in ra.",
+      "Sai: chỉ `npm run db:reset` mới in `Database emptied.`"
+    ],
+    "optionExplanationsEn": [
+      "Wrong: HMR belongs to Vite on the frontend.",
+      "Wrong: `--watch` restarts it for you.",
+      "Right: those are the two lines `node --watch` prints.",
+      "Wrong: only `npm run db:reset` prints `Database emptied.`"
+    ]
+  },
+  {
+    "id": "fs03-q15",
+    "question": "Form đăng nhập hiện `Request failed (500)`, còn terminal 2 báo `[vite] http proxy error: /api/auth/login` kèm `ECONNREFUSED`. Nguyên nhân khả dĩ nhất?",
+    "questionEn": "The login form shows `Request failed (500)` and terminal 2 reports `[vite] http proxy error: /api/auth/login` with `ECONNREFUSED`. What is the most likely cause?",
+    "options": [
+      "Backend không chạy (terminal 1 đã dừng hoặc bị đóng), nên proxy không có ai để chuyển tiếp",
+      "Bạn nhập sai mật khẩu nên server từ chối",
+      "Thiếu file `.env.example` trong thư mục `server`",
+      "Bộ nhớ đệm (cache) của trình duyệt đã đầy"
+    ],
+    "optionsEn": [
+      "The backend is not running (terminal 1 was stopped or closed), so the proxy has nobody to forward to",
+      "You typed the wrong password, so the server refused it",
+      "The `.env.example` file is missing from the `server` folder",
+      "The browser cache is full"
+    ],
+    "answer": 0,
+    "explanation": "ECONNREFUSED nghĩa là không có chương trình nào lắng nghe ở port 4000. Vite trả 500 dạng text, `api.js` không đọc được JSON nên hiện `Request failed (500)`. Bật lại `npm run dev` trong `server`.",
+    "explanationEn": "ECONNREFUSED means nothing is listening on port 4000. Vite returns a plain-text 500, `api.js` cannot read JSON from it, so it shows `Request failed (500)`. Start `npm run dev` in `server` again.",
+    "optionExplanations": [
+      "Đúng: proxy bị từ chối kết nối tới port 4000.",
+      "Sai: sai mật khẩu sẽ là 401 với `Email or password is incorrect.`",
+      "Sai: server không cần file example để chạy.",
+      "Sai: cache không liên quan đến việc kết nối tới port 4000."
+    ],
+    "optionExplanationsEn": [
+      "Right: the proxy's connection to port 4000 was refused.",
+      "Wrong: a wrong password gives 401 with `Email or password is incorrect.`",
+      "Wrong: the server does not need the example file to run.",
+      "Wrong: the cache has nothing to do with connecting to port 4000."
+    ]
+  },
+  {
+    "id": "fs03-q16",
+    "question": "Chạy `npm run dev` trong `server`, bạn thấy `Port 4000 is already in use. Stop the other server (Ctrl + C in its terminal) or set PORT in .env.` rồi `Failed running 'src/index.js'. Waiting for file changes before restarting...`. Cách xử lý đúng nhất?",
+    "questionEn": "Running `npm run dev` in `server`, you see `Port 4000 is already in use. Stop the other server (Ctrl + C in its terminal) or set PORT in .env.` followed by `Failed running 'src/index.js'. Waiting for file changes before restarting...`. What is the best fix?",
+    "options": [
+      "Không cần làm gì; `--watch` sẽ tự khởi động lại server sau vài giây",
+      "Thiếu file `.env`; cần copy từ `.env.example` rồi chạy lại",
+      "Node quá cũ; cài lại Node LTS rồi chạy lại",
+      "Port 4000 đang bị chương trình khác chiếm (thường là server cũ); tìm bằng `netstat -ano | findstr :4000` rồi `taskkill /PID <pid> /F`"
+    ],
+    "optionsEn": [
+      "Nothing; `--watch` will restart the server by itself in a few seconds",
+      "The `.env` file is missing; copy it from `.env.example` and run again",
+      "Node is too old; reinstall Node LTS and run again",
+      "Port 4000 is taken by another program (often an old server); find it with `netstat -ano | findstr :4000`, then `taskkill /PID <pid> /F`"
+    ],
+    "answer": 3,
+    "explanation": "Server không khởi động được vì port 4000 đã có chương trình khác lắng nghe (thường là server cũ bạn quên tắt). `--watch` chỉ chạy lại khi bạn lưu file, và sẽ lại thất bại nếu port vẫn bận. Tắt chương trình đang giữ port rồi chạy lại.",
+    "explanationEn": "The server could not start because another program is already listening on port 4000 (often an old server you forgot). `--watch` only reruns when you save a file, and it will fail again while the port is still taken. Stop whatever holds the port, then run again.",
+    "optionExplanations": [
+      "Sai: `--watch` chỉ chạy lại khi file thay đổi, và port vẫn bận.",
+      "Sai: thiếu `.env` thì code dùng mặc định và vẫn chạy bình thường.",
+      "Sai: Node cũ sẽ báo lỗi về cờ lệnh, không phải thông báo port bận.",
+      "Đúng: port bị chiếm; tìm PID rồi tắt nó."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `--watch` only reruns on a file change, and the port is still taken.",
+      "Wrong: without `.env` the code uses defaults and runs normally.",
+      "Wrong: an old Node would complain about the flags, not about a busy port.",
+      "Right: the port is taken; find the PID and stop it."
+    ]
+  },
+  {
+    "id": "fs03-q17",
+    "question": "Đứng ở thư mục gốc `todo-auth-app`, bạn chạy `npm install` và nhận `npm error enoent Could not read package.json`. Cách sửa?",
+    "questionEn": "In the root folder `todo-auth-app` you run `npm install` and get `npm error enoent Could not read package.json`. How do you fix it?",
+    "options": [
+      "Gỡ và cài lại Node.js",
+      "Chạy `Set-ExecutionPolicy` để cho phép script",
+      "`cd server` (hoặc `cd client`), vì `package.json` nằm trong từng thư mục đó",
+      "Xóa thư mục `node_modules` rồi chạy lại"
+    ],
+    "optionsEn": [
+      "Uninstall and reinstall Node.js",
+      "Run `Set-ExecutionPolicy` to allow scripts",
+      "`cd server` (or `cd client`), because `package.json` lives in each of those folders",
+      "Delete the `node_modules` folder and run again"
+    ],
+    "answer": 2,
+    "explanation": "Thư mục gốc không có `package.json`; mỗi phần (client, server) là một chương trình riêng với `package.json` riêng. Dùng `pwd` để biết mình đang ở đâu.",
+    "explanationEn": "The root folder has no `package.json`; each part (client, server) is a separate program with its own `package.json`. Use `pwd` to see where you are.",
+    "optionExplanations": [
+      "Sai: npm đã chạy, nghĩa là Node đã cài đúng.",
+      "Sai: lỗi execution policy có thông báo khác (`running scripts is disabled`).",
+      "Đúng: vào đúng thư mục có `package.json`.",
+      "Sai: ở thư mục gốc chưa hề có `node_modules`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: npm ran, so Node is installed correctly.",
+      "Wrong: the execution-policy error has a different message (`running scripts is disabled`).",
+      "Right: go into the folder that holds `package.json`.",
+      "Wrong: there is no `node_modules` in the root folder at all."
+    ]
+  },
+  {
+    "id": "fs03-q18",
+    "question": "Với vai trò BA, bug report nào giúp dev xử lý nhanh nhất?",
+    "questionEn": "As a BA, which bug report helps a developer act fastest?",
+    "options": [
+      "\"Đăng nhập bị hỏng trên máy em, nhờ anh sửa gấp giúp em nhé.\"",
+      "Môi trường (staging, commit/build), trình duyệt & OS, điều kiện ban đầu, các bước đánh số, mong đợi vs thực tế, bằng chứng",
+      "Chỉ một ảnh chụp màn hình lỗi, không kèm chữ, để dev tự xem",
+      "\"Đăng ký thỉnh thoảng lỗi, em thử nhiều cách rồi, bị khá thường xuyên.\""
+    ],
+    "optionsEn": [
+      "\"Login is broken on my machine, please fix it urgently.\"",
+      "Environment (staging, commit/build), browser & OS, preconditions, numbered steps, expected vs actual, evidence",
+      "Only a screenshot of the error with no text, so the dev can look for themselves",
+      "\"Sign-up fails sometimes, I tried many things, it happens quite often.\""
+    ],
+    "answer": 1,
+    "explanation": "Bước tái hiện và thông tin môi trường cho phép dev tái hiện lỗi ngay lần đầu. Bằng chứng (request trong tab Network, dòng log ở terminal) chỉ thẳng vào FE hay BE.",
+    "explanationEn": "Steps to reproduce and environment info let the developer reproduce the bug on the first try. Evidence (the request in the Network tab, the terminal log line) points straight at FE or BE.",
+    "optionExplanations": [
+      "Sai: không có bước, không có môi trường, không có kết quả mong đợi.",
+      "Đúng: đủ thông tin để tái hiện và đối chiếu.",
+      "Sai: ảnh không cho biết các bước hay môi trường.",
+      "Sai: mơ hồ, không tái hiện được."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: no steps, no environment, no expected result.",
+      "Right: enough information to reproduce and compare.",
+      "Wrong: a picture gives neither the steps nor the environment.",
+      "Wrong: vague and not reproducible."
+    ]
+  }
+]

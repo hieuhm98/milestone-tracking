@@ -1,0 +1,578 @@
+[
+  {
+    "id": "fs09-q1",
+    "question": "Khi test app to-do, bạn thấy server trả về đúng danh sách to-do, nhưng màn hình lại hiển thị sai thứ tự. Bug này nhiều khả năng nằm ở đâu?",
+    "questionEn": "While testing the to-do app you see the server returned the correct list of to-dos, but the screen shows them in the wrong order. Where is the bug most likely?",
+    "options": [
+      "Ở database, vì dữ liệu được lưu sai thứ tự",
+      "Ở frontend, vì dữ liệu đúng nhưng cách hiển thị sai",
+      "Ở backend, vì mọi lỗi hiển thị đều bắt nguồn từ API",
+      "Ở trình duyệt Chrome, cần đổi sang trình duyệt khác"
+    ],
+    "optionsEn": [
+      "In the database, because the data is stored in the wrong order",
+      "In the frontend, because the data is right but the display is wrong",
+      "In the backend, because every display problem starts in the API",
+      "In Chrome itself, so you should switch to another browser"
+    ],
+    "answer": 1,
+    "explanation": "Quy tắc trong bài: server trả đúng dữ liệu mà màn hình hiển thị sai thì bug ở frontend; nếu bản thân dữ liệu sai thì bug ở backend. Phân biệt được điều này giúp giao ticket đúng người.",
+    "explanationEn": "The rule from the topic: if the server returned the right data but the screen shows it wrong, the bug is in the frontend; if the data itself is wrong, it is in the backend. Knowing this routes the ticket to the right person.",
+    "optionExplanations": [
+      "Server đã trả đúng dữ liệu, nên dữ liệu trong database không phải vấn đề.",
+      "Đúng: dữ liệu đúng nhưng hiển thị sai là dấu hiệu của bug frontend.",
+      "Sai: API đã trả đúng; không phải lỗi hiển thị nào cũng do backend.",
+      "Không có dấu hiệu nào cho thấy lỗi do trình duyệt; đổi trình duyệt chỉ né vấn đề."
+    ],
+    "optionExplanationsEn": [
+      "The server already returned the right data, so the stored data is not the problem.",
+      "Correct: right data shown wrongly is the sign of a frontend bug.",
+      "Wrong: the API answered correctly; not every display problem comes from the backend.",
+      "Nothing points to the browser; switching browsers only hides the problem."
+    ]
+  },
+  {
+    "id": "fs09-q2",
+    "question": "Trên Windows, phím tắt nào bật công cụ chọn phần tử (element picker) để rê chuột lên trang và bấm chọn một phần tử?",
+    "questionEn": "On Windows, which shortcut turns on the element picker so you can hover over the page and click an element to select it?",
+    "options": [
+      "Ctrl+Shift+M",
+      "Ctrl+Shift+J",
+      "Ctrl+Shift+P",
+      "Ctrl+Shift+C"
+    ],
+    "optionsEn": [
+      "Ctrl+Shift+M",
+      "Ctrl+Shift+J",
+      "Ctrl+Shift+P",
+      "Ctrl+Shift+C"
+    ],
+    "answer": 3,
+    "explanation": "Ctrl+Shift+C (Cmd+Shift+C trên macOS) bật element picker. Ctrl+Shift+M bật Device Toolbar, Ctrl+Shift+J mở thẳng Console, Ctrl+Shift+P mở Command Menu.",
+    "explanationEn": "Ctrl+Shift+C (Cmd+Shift+C on macOS) turns on the element picker. Ctrl+Shift+M toggles the Device Toolbar, Ctrl+Shift+J opens the Console directly, and Ctrl+Shift+P opens the Command Menu.",
+    "optionExplanations": [
+      "Ctrl+Shift+M bật/tắt Device Toolbar để thử kích thước điện thoại.",
+      "Ctrl+Shift+J mở DevTools thẳng vào panel Console.",
+      "Ctrl+Shift+P mở Command Menu, ô tìm kiếm mọi lệnh.",
+      "Đúng: Ctrl+Shift+C là element picker."
+    ],
+    "optionExplanationsEn": [
+      "Ctrl+Shift+M toggles the Device Toolbar for phone sizes.",
+      "Ctrl+Shift+J opens DevTools straight on the Console panel.",
+      "Ctrl+Shift+P opens the Command Menu, the search box for all commands.",
+      "Correct: Ctrl+Shift+C is the element picker."
+    ]
+  },
+  {
+    "id": "fs09-q3",
+    "question": "Bạn muốn xem cookie `token` và khóa `todo:filter` trong `localStorage`. Panel nào của DevTools dành cho việc này (sẽ học kỹ ở bài fs-11)?",
+    "questionEn": "You want to look at the `token` cookie and the `todo:filter` key in `localStorage`. Which DevTools panel is for this (covered in detail in fs-11)?",
+    "options": [
+      "Application",
+      "Elements",
+      "Lighthouse",
+      "Sources"
+    ],
+    "optionsEn": [
+      "Application",
+      "Elements",
+      "Lighthouse",
+      "Sources"
+    ],
+    "answer": 0,
+    "explanation": "Theo bản đồ panel, Application chứa cookie, `localStorage` và các kho lưu trữ khác. Elements dành cho HTML/CSS, Lighthouse để audit, Sources để xem code và đặt breakpoint.",
+    "explanationEn": "Per the panel map, Application holds cookies, `localStorage` and other storage. Elements is for HTML/CSS, Lighthouse for audits, Sources for code files and breakpoints.",
+    "optionExplanations": [
+      "Đúng: Application là nơi xem cookie và localStorage.",
+      "Elements hiện HTML và CSS đang hiển thị, không hiện kho lưu trữ.",
+      "Lighthouse chạy audit tự động, không liệt kê cookie.",
+      "Sources hiện các file code và breakpoint, không phải dữ liệu lưu trữ."
+    ],
+    "optionExplanationsEn": [
+      "Correct: Application is where cookies and localStorage live.",
+      "Elements shows the live HTML and CSS, not storage.",
+      "Lighthouse runs automated audits; it does not list cookies.",
+      "Sources shows code files and breakpoints, not stored data."
+    ]
+  },
+  {
+    "id": "fs09-q4",
+    "question": "Trong Elements, chip bộ lọc ghi `all`, nhưng trên màn hình lại hiện \"All\" viết hoa. Vì sao?",
+    "questionEn": "In Elements the filter chip says `all`, but the screen shows \"All\" with a capital letter. Why?",
+    "options": [
+      "React tự viết hoa chữ cái đầu của mọi nút khi render",
+      "Elements hiện bản HTML cũ, chưa cập nhật theo màn hình",
+      "Rule CSS `.chip { text-transform: capitalize; }` đổi cách hiển thị",
+      "Trình duyệt tự viết hoa chữ trong mọi thẻ button"
+    ],
+    "optionsEn": [
+      "React capitalises the first letter of every button when rendering",
+      "Elements shows an old copy of the HTML, not the current screen",
+      "The CSS rule `.chip { text-transform: capitalize; }` changes how it looks",
+      "The browser capitalises the text of every button element"
+    ],
+    "answer": 2,
+    "explanation": "HTML vẫn chứa chữ `all`; CSS `text-transform: capitalize` chỉ đổi cách hiển thị. Elements giúp BA biết một requirement về cách hiển thị chữ đang được đáp ứng bằng CSS.",
+    "explanationEn": "The HTML still contains `all`; the CSS `text-transform: capitalize` only changes how it is displayed. Elements tells the BA that this display requirement is met by CSS.",
+    "optionExplanations": [
+      "React render đúng chữ trong code (`{f}` = `all`), không tự đổi hoa thường.",
+      "Elements hiện DOM sống, cập nhật ngay theo trang.",
+      "Đúng: text-transform trong styles.css làm chữ hiện thành All.",
+      "Trình duyệt không tự viết hoa button; nút Add hay Delete vẫn giữ nguyên chữ."
+    ],
+    "optionExplanationsEn": [
+      "React renders exactly the text in the code (`{f}` = `all`); it does not change case.",
+      "Elements shows the live DOM, updated instantly with the page.",
+      "Correct: text-transform in styles.css makes the text appear as All.",
+      "Browsers do not capitalise buttons by default; Add and Delete keep their text."
+    ]
+  },
+  {
+    "id": "fs09-q5",
+    "question": "Trong tab Styles, bạn thấy một khai báo CSS bị gạch ngang. Điều đó có nghĩa là gì?",
+    "questionEn": "In the Styles tab you see a CSS declaration with a line through it. What does that mean?",
+    "options": [
+      "Nó đã bị một rule mạnh hơn ghi đè nên không có hiệu lực",
+      "Nó có lỗi cú pháp và trình duyệt không đọc được",
+      "Nó sẽ bị xóa khỏi file styles.css ở lần refresh tới",
+      "Nó chỉ áp dụng khi phần tử đang ở trạng thái :hover"
+    ],
+    "optionsEn": [
+      "It was overridden by a stronger rule, so it has no effect",
+      "It has a syntax error and the browser cannot read it",
+      "It will be removed from styles.css on the next refresh",
+      "It only applies while the element is in the :hover state"
+    ],
+    "answer": 0,
+    "explanation": "Khai báo bị gạch nghĩa là đã bị rule cụ thể hơn ghi đè. Ví dụ nút Delete: `background` trong rule `button` bị gạch vì `button.link { background: none; }` thắng.",
+    "explanationEn": "A crossed-out declaration has been overridden by a more specific rule. Example: on the Delete button, `background` in the `button` rule is crossed out because `button.link { background: none; }` wins.",
+    "optionExplanations": [
+      "Đúng: gạch ngang = bị ghi đè (overridden).",
+      "Khai báo sai cú pháp thường hiện kèm biểu tượng cảnh báo, không chỉ là gạch ngang như ở ví dụ nút Delete.",
+      "DevTools không tự sửa file styles.css; refresh chỉ khôi phục trạng thái ban đầu.",
+      "Style theo trạng thái nằm trong rule có :hover riêng, không phải ý nghĩa của gạch ngang."
+    ],
+    "optionExplanationsEn": [
+      "Correct: crossed out = overridden.",
+      "Invalid declarations are usually marked with a warning icon; the Delete button example is simply overridden.",
+      "DevTools never edits styles.css by itself; a refresh only restores the original.",
+      "State styles live in their own :hover rules; that is not what the line means."
+    ]
+  },
+  {
+    "id": "fs09-q6",
+    "question": "Bạn double-click vào chữ `Nothing here yet.` trong Elements, sửa thành một câu mới và chụp màn hình. Sau đó bạn nhấn F5. Điều gì xảy ra?",
+    "questionEn": "You double-click `Nothing here yet.` in Elements, change it to a new sentence and take a screenshot. Then you press F5. What happens?",
+    "options": [
+      "Câu mới được lưu vào TodoPage.jsx cho mọi người dùng",
+      "Câu mới được giữ lại cho đến khi bạn đăng xuất",
+      "Câu mới được gửi lên server và lưu vào database",
+      "Trang tải lại và câu gốc `Nothing here yet.` quay về"
+    ],
+    "optionsEn": [
+      "The new sentence is saved into TodoPage.jsx for every user",
+      "The new sentence stays until you log out",
+      "The new sentence is sent to the server and saved in the database",
+      "The page reloads and the original `Nothing here yet.` comes back"
+    ],
+    "answer": 3,
+    "explanation": "Sửa trong Elements chỉ thay đổi trang đang mở trong trình duyệt của bạn; không có gì được lưu. Refresh là mọi thứ về như cũ, nên đây là sân chơi an toàn để dựng mock-up.",
+    "explanationEn": "Edits in Elements only change the page open in your own browser; nothing is saved. A refresh brings the original back, which is why it is a safe sandbox for mock-ups.",
+    "optionExplanations": [
+      "DevTools không ghi vào file code của dự án.",
+      "Thay đổi không gắn với phiên đăng nhập; nó mất ngay khi tải lại.",
+      "Sửa DOM không gửi request nào tới server.",
+      "Đúng: refresh khôi phục nội dung gốc."
+    ],
+    "optionExplanationsEn": [
+      "DevTools does not write into the project's code files.",
+      "The change is not tied to the login session; it disappears on reload.",
+      "Editing the DOM sends no request to the server.",
+      "Correct: a refresh restores the original content."
+    ]
+  },
+  {
+    "id": "fs09-q7",
+    "question": "Acceptance criteria ghi: \"Thông báo lỗi phải được đọc cho người dùng screen reader ngay khi xuất hiện.\" Trong Elements, bằng chứng nào cho thấy app to-do đáp ứng điều này?",
+    "questionEn": "An acceptance criterion says: \"Error messages must be announced to screen reader users as soon as they appear.\" What evidence in Elements shows the to-do app meets it?",
+    "options": [
+      "Khung lỗi có class `error` với nền màu đỏ nhạt",
+      "Khung lỗi là `<p class=\"error\" role=\"alert\">`",
+      "Nút Add có `type=\"submit\"` bên trong một form",
+      "Ô nhập to-do có placeholder `What needs doing?`"
+    ],
+    "optionsEn": [
+      "The error box has class `error` with a light red background",
+      "The error box is `<p class=\"error\" role=\"alert\">`",
+      "The Add button has `type=\"submit\"` inside a form",
+      "The to-do input has the placeholder `What needs doing?`"
+    ],
+    "answer": 1,
+    "explanation": "`role=\"alert\"` khiến screen reader đọc thông báo ngay khi nó xuất hiện. Màu sắc chỉ hỗ trợ người nhìn thấy, không giúp gì cho người dùng screen reader.",
+    "explanationEn": "`role=\"alert\"` makes screen readers announce the message as soon as it appears. Colour only helps sighted users; it does nothing for screen reader users.",
+    "optionExplanations": [
+      "Màu nền chỉ có tác dụng với người nhìn thấy màn hình.",
+      "Đúng: role=\"alert\" là thứ khiến screen reader đọc thông báo ngay.",
+      "type=\"submit\" liên quan tới việc gửi form, không liên quan tới thông báo lỗi.",
+      "Placeholder là gợi ý trong ô nhập, không phải thông báo lỗi."
+    ],
+    "optionExplanationsEn": [
+      "A background colour only helps people who can see the screen.",
+      "Correct: role=\"alert\" is what makes screen readers announce it at once.",
+      "type=\"submit\" is about submitting the form, not about error messages.",
+      "A placeholder is a hint inside the input, not an error message."
+    ]
+  },
+  {
+    "id": "fs09-q8",
+    "question": "Bạn muốn kiểm tra acceptance criterion \"Trang dùng được trên màn hình rộng 320 px\" mà không có điện thoại. Cách nào đúng nhất?",
+    "questionEn": "You want to test the criterion \"The page is usable on a 320 px wide screen\" without a phone. What is the best way?",
+    "options": [
+      "Thu nhỏ trang bằng Ctrl + dấu trừ cho tới khi trông vừa",
+      "Chạy Lighthouse ở chế độ Mobile và đọc điểm Performance",
+      "Bật Device Toolbar (Ctrl+Shift+M), chọn Responsive và gõ chiều rộng 320",
+      "Mở Console và gõ `window.innerWidth = 320`"
+    ],
+    "optionsEn": [
+      "Zoom the page out with Ctrl + minus until it looks right",
+      "Run Lighthouse in Mobile mode and read the Performance score",
+      "Turn on the Device Toolbar (Ctrl+Shift+M), choose Responsive and type a width of 320",
+      "Open the Console and type `window.innerWidth = 320`"
+    ],
+    "answer": 2,
+    "explanation": "Device Toolbar vẽ trang trong một viewport có kích thước bạn chọn; gõ 320 ở chế độ Responsive là bài kiểm tra 320 px trong bài. Zoom trình duyệt không cho viewport 320 px thật, Lighthouse không kiểm tra bố cục, và gán innerWidth không đổi kích thước trang.",
+    "explanationEn": "The Device Toolbar draws the page in a viewport of the size you choose; typing 320 in Responsive mode is the 320 px check from the topic. Browser zoom does not give a real 320 px viewport, Lighthouse does not test the layout, and assigning innerWidth does not resize the page.",
+    "optionExplanations": [
+      "Zoom làm chữ nhỏ đi nhưng không tạo viewport 320 px như trên điện thoại.",
+      "Điểm Performance nói về tốc độ, không cho biết bố cục có vỡ ở 320 px hay không.",
+      "Đúng: Device Toolbar ở chế độ Responsive với chiều rộng 320.",
+      "innerWidth chỉ đọc kích thước; gán giá trị không co trang lại."
+    ],
+    "optionExplanationsEn": [
+      "Zoom shrinks things but does not create a phone-like 320 px viewport.",
+      "The Performance score is about speed; it says nothing about layout at 320 px.",
+      "Correct: Device Toolbar in Responsive mode with a width of 320.",
+      "innerWidth only reports the size; assigning it does not resize the page."
+    ]
+  },
+  {
+    "id": "fs09-q9",
+    "question": "Bạn đăng xuất, tải lại trang và thấy hai dòng đỏ trong Console: `Failed to load resource: the server responded with a status of 401 (Unauthorized)`, đều từ `GET /api/auth/me`. Form đăng nhập hiện bình thường. Kết luận nào đúng?",
+    "questionEn": "You log out, reload and see two red Console lines: `Failed to load resource: the server responded with a status of 401 (Unauthorized)`, both from `GET /api/auth/me`. The login form shows normally. What is the right conclusion?",
+    "options": [
+      "Bug nghiêm trọng: server từ chối mọi request nên cần báo ngay",
+      "Bug frontend: app gọi API hai lần nên làm server quá tải",
+      "Bình thường: app hỏi \"có ai đăng nhập không?\" và nhận \"không\"; hai lần là do StrictMode ở dev",
+      "Cookie `token` bị hỏng và cần xóa cache trình duyệt"
+    ],
+    "optionsEn": [
+      "A serious bug: the server rejects every request, so report it at once",
+      "A frontend bug: the app calls the API twice and overloads the server",
+      "Expected: the app asks \"is anyone logged in?\" and hears \"no\"; twice because of StrictMode in dev",
+      "The `token` cookie is corrupted and the browser cache must be cleared"
+    ],
+    "answer": 2,
+    "explanation": "Khi đã đăng xuất, `GET /api/auth/me` trả 401 là đúng thiết kế; app bắt lỗi và hiện form đăng nhập. StrictMode của React chạy effect khởi động hai lần ở development. Chrome in mọi request thất bại bằng màu đỏ dù app đã xử lý. Phép thử: người dùng có thấy đúng điều cần thấy không?",
+    "explanationEn": "When logged out, a 401 from `GET /api/auth/me` is by design; the app catches it and shows the login form. React's StrictMode runs start-up effects twice in development. Chrome prints every failed request in red even when the app handles it. The test: did the user see the right thing?",
+    "optionExplanations": [
+      "Server chỉ trả 401 cho /auth/me vì chưa đăng nhập; đăng nhập vẫn hoạt động.",
+      "Hai lần gọi là hành vi cố ý của StrictMode trong development, không phải bug.",
+      "Đúng: lỗi 401 này là hành vi mong đợi.",
+      "Khi đã đăng xuất thì không có cookie token; không có gì bị hỏng."
+    ],
+    "optionExplanationsEn": [
+      "The server only answers 401 to /auth/me because nobody is logged in; login still works.",
+      "The double call is StrictMode's deliberate development behaviour, not a bug.",
+      "Correct: this 401 is expected behaviour.",
+      "After logout there is no token cookie at all; nothing is corrupted."
+    ]
+  },
+  {
+    "id": "fs09-q10",
+    "question": "Trong Console của bản dev, bạn thấy dòng đỏ `Each child in a list should have a unique \"key\" prop.` nhưng danh sách vẫn hiển thị bình thường. Nên hiểu thế nào?",
+    "questionEn": "In the dev build's Console you see a red line `Each child in a list should have a unique \"key\" prop.` but the list still displays fine. How should you read it?",
+    "options": [
+      "React ghi cảnh báo này bằng console.error; thiếu key có thể làm sai dòng giữ sai trạng thái, nên vẫn cần báo",
+      "Đây là lỗi của server khi trả về danh sách to-do bị trùng id",
+      "Vì trang vẫn chạy, đây chắc chắn là lỗi giả và nên bỏ qua",
+      "Người dùng production cũng sẽ thấy dòng này và bị crash trang"
+    ],
+    "optionsEn": [
+      "React logs this with console.error; missing keys can leave the wrong row with the wrong state, so report it",
+      "It is a server error caused by the to-do list containing duplicate ids",
+      "Since the page still works, it is certainly a false alarm to ignore",
+      "Production users will see this line too and their page will crash"
+    ],
+    "answer": 0,
+    "explanation": "React dùng key để phân biệt các phần tử khi danh sách thay đổi. Cảnh báo này được ghi bằng console.error nên có màu đỏ, chỉ xuất hiện ở bản development, và là một lỗi rẻ để sửa trước khi thành bug khó hiểu.",
+    "explanationEn": "React uses keys to tell list items apart when the list changes. The warning is logged with console.error, so it is red, it only appears in the development build, and it is a cheap fix before it becomes a strange bug.",
+    "optionExplanations": [
+      "Đúng: màu đỏ vì console.error, và thiếu key là vấn đề thật cần báo.",
+      "Đây là cảnh báo của React ở frontend về cách render, không phải lỗi server.",
+      "Trang chạy được lúc này không có nghĩa là an toàn; tick/xóa có thể sai dòng.",
+      "Cảnh báo chỉ có ở bản development và không làm trang crash."
+    ],
+    "optionExplanationsEn": [
+      "Correct: red because of console.error, and missing keys are a real issue worth reporting.",
+      "It is a frontend React warning about rendering, not a server error.",
+      "Working right now does not mean safe; ticking or deleting can hit the wrong row.",
+      "The warning only exists in the development build and does not crash the page."
+    ]
+  },
+  {
+    "id": "fs09-q11",
+    "question": "App có 4 to-do, 1 việc đã xong, đang chọn bộ lọc **all**. `document.querySelectorAll('.todos li').length` trả về 4, còn nhãn ghi \"3 left\". Bạn kết luận gì?",
+    "questionEn": "The app has 4 to-dos, 1 of them done, with the **all** filter selected. `document.querySelectorAll('.todos li').length` returns 4 and the label says \"3 left\". What do you conclude?",
+    "options": [
+      "Bug: số phần tử trên màn hình phải luôn bằng nhãn \"N left\"",
+      "Bug: querySelectorAll đếm sai vì React chưa render xong",
+      "Bug backend: server trả thiếu một to-do",
+      "Không phải bug: \"N left\" đếm việc chưa xong; so sánh ở bộ lọc active mới phải bằng nhau"
+    ],
+    "optionsEn": [
+      "A bug: the number of items on screen must always equal the \"N left\" label",
+      "A bug: querySelectorAll miscounts because React has not finished rendering",
+      "A backend bug: the server returned one to-do too few",
+      "Not a bug: \"N left\" counts unfinished items; the numbers must match only under the active filter"
+    ],
+    "answer": 3,
+    "explanation": "Danh sách hiện các việc khớp bộ lọc (ở all là cả 4), còn \"N left\" đếm mọi việc chưa xong (3). Chỉ khi chọn bộ lọc active hai con số mới phải bằng nhau.",
+    "explanationEn": "The list shows items matching the filter (all 4 under all), while \"N left\" counts every unfinished item (3). Only with the active filter selected must the two numbers be equal.",
+    "optionExplanations": [
+      "Hai con số đo hai thứ khác nhau nên không cần luôn bằng nhau.",
+      "querySelectorAll đếm đúng DOM hiện tại; 4 phần tử là đúng.",
+      "Có đủ 4 to-do trên màn hình, server không trả thiếu.",
+      "Đúng: chỉ ở bộ lọc active thì số li mới phải bằng N left."
+    ],
+    "optionExplanationsEn": [
+      "The two numbers measure different things, so they need not always match.",
+      "querySelectorAll counts the current DOM correctly; 4 items is right.",
+      "All 4 to-dos are on screen; the server did not return too few.",
+      "Correct: only under the active filter must the li count equal N left."
+    ]
+  },
+  {
+    "id": "fs09-q12",
+    "question": "Bạn cần tái hiện một bug xảy ra ngay lúc đăng nhập, nhưng mỗi lần trang tải lại thì các thông báo trong Console biến mất. Nên làm gì?",
+    "questionEn": "You need to reproduce a bug that happens right at login, but every time the page reloads the Console messages disappear. What should you do?",
+    "options": [
+      "Chụp màn hình Console thật nhanh trước khi trang tải lại",
+      "Mở cài đặt Console (bánh răng) và tick Preserve log trước khi tái hiện",
+      "Chuyển Default levels sang Verbose để hiện mọi thông báo",
+      "Gõ `$0` trong Console để khôi phục các thông báo cũ"
+    ],
+    "optionsEn": [
+      "Screenshot the Console quickly before the page reloads",
+      "Open the Console settings (gear) and tick Preserve log before reproducing",
+      "Switch Default levels to Verbose to show every message",
+      "Type `$0` in the Console to bring the old messages back"
+    ],
+    "answer": 1,
+    "explanation": "Console bị xóa khi trang tải lại hoặc chuyển trang. Preserve log giữ lại thông báo qua các lần tải lại, rất cần cho bug liên quan tới refresh hay đăng nhập.",
+    "explanationEn": "The Console is cleared when the page reloads or navigates. Preserve log keeps messages across reloads, which you need for bugs involving a refresh or a login.",
+    "optionExplanations": [
+      "Chụp vội không đáng tin, và thông báo trước khi tải lại vẫn mất.",
+      "Đúng: Preserve log giữ thông báo qua các lần tải lại.",
+      "Verbose chỉ hiện thêm mức debug; nó không giữ log qua lần tải lại.",
+      "`$0` là phần tử đang chọn trong Elements, không liên quan tới log."
+    ],
+    "optionExplanationsEn": [
+      "A rushed screenshot is unreliable, and the earlier messages are still lost.",
+      "Correct: Preserve log keeps messages across reloads.",
+      "Verbose only shows the debug level; it does not keep logs across reloads.",
+      "`$0` is the element selected in Elements; it has nothing to do with logs."
+    ]
+  },
+  {
+    "id": "fs09-q13",
+    "question": "Trong panel Sources, bạn mở được đúng file `TodoPage.jsx` như trong dự án, dù trình duyệt thực ra chạy code đã được biến đổi. Nhờ đâu?",
+    "questionEn": "In the Sources panel you can open `TodoPage.jsx` exactly as it is in the project, even though the browser actually runs transformed code. What makes this possible?",
+    "options": [
+      "Chrome tự dịch ngược mọi file JavaScript về JSX",
+      "Server Express gửi thêm file JSX gốc trong mỗi response",
+      "Lighthouse lưu một bản sao code gốc khi chạy audit",
+      "Vite phục vụ source map ở môi trường development"
+    ],
+    "optionsEn": [
+      "Chrome automatically decompiles every JavaScript file back to JSX",
+      "The Express server sends the original JSX with every response",
+      "Lighthouse stores a copy of the original code while auditing",
+      "Vite serves source maps in development"
+    ],
+    "answer": 3,
+    "explanation": "Source map nối code đã biến đổi với file gốc, nên Sources hiện đúng `TodoPage.jsx` và bạn đặt breakpoint được trên từng dòng gốc.",
+    "explanationEn": "Source maps link the transformed code to the original files, so Sources shows `TodoPage.jsx` and you can set breakpoints on the original lines.",
+    "optionExplanations": [
+      "Chrome không tự dịch ngược; nó cần source map.",
+      "Frontend do Vite phục vụ ở cổng 5173, không phải server Express.",
+      "Lighthouse chỉ chạy audit, không lưu code nguồn.",
+      "Đúng: source map từ Vite giúp hiện file gốc."
+    ],
+    "optionExplanationsEn": [
+      "Chrome cannot decompile on its own; it needs source maps.",
+      "The frontend is served by Vite on port 5173, not by the Express server.",
+      "Lighthouse only runs audits; it does not store source code.",
+      "Correct: Vite's source maps show the original files."
+    ]
+  },
+  {
+    "id": "fs09-q14",
+    "question": "Bạn chạy Lighthouse trên app to-do ở dev server (localhost:5173) và điểm Performance thấp. Cách hiểu nào hợp lý nhất?",
+    "questionEn": "You run Lighthouse on the to-do app on the dev server (localhost:5173) and the Performance score is low. What is the most sensible reading?",
+    "options": [
+      "Bản dev cố ý không tối ưu nên đừng tin điểm Performance; tập trung vào Accessibility và chạy trong Incognito",
+      "App chắc chắn sẽ chậm trên production nên cần báo bug Performance ngay",
+      "Lighthouse chỉ chạy đúng trên điện thoại thật, không chạy được trên laptop",
+      "Điểm thấp nghĩa là app có lỗi bảo mật trong cookie đăng nhập"
+    ],
+    "optionsEn": [
+      "The dev build is deliberately unoptimised, so ignore Performance; focus on Accessibility and run in Incognito",
+      "The app will certainly be slow in production, so file a Performance bug at once",
+      "Lighthouse only works properly on a real phone, not on a laptop",
+      "A low score means the app has a security flaw in its login cookie"
+    ],
+    "answer": 0,
+    "explanation": "Bản development không được tối ưu (không nén, có thêm công cụ dev), nên điểm Performance ở đó không phản ánh production. Chạy trong Incognito để extension không làm sai kết quả, và đọc kỹ phần Accessibility.",
+    "explanationEn": "The development build is not optimised, so its Performance score does not reflect production. Run in Incognito so extensions do not skew the result, and focus on the Accessibility findings.",
+    "optionExplanations": [
+      "Đúng: bỏ qua Performance trên dev server, tập trung vào Accessibility.",
+      "Điểm của bản dev không dự đoán được tốc độ bản production.",
+      "Lighthouse chạy ngay trong DevTools trên máy tính, với chế độ Mobile hoặc Desktop.",
+      "Performance đo tốc độ tải, không kiểm tra bảo mật cookie."
+    ],
+    "optionExplanationsEn": [
+      "Correct: ignore Performance on the dev server and focus on Accessibility.",
+      "A dev-build score does not predict production speed.",
+      "Lighthouse runs right inside DevTools on a computer, in Mobile or Desktop mode.",
+      "Performance measures loading speed; it does not check cookie security."
+    ]
+  },
+  {
+    "id": "fs09-q15",
+    "question": "Bạn chọn một nút **Delete** và mở tab Accessibility trong Elements. Tên (name) mà screen reader sẽ đọc là gì?",
+    "questionEn": "You select a **Delete** button and open the Accessibility tab in Elements. What name will a screen reader announce?",
+    "options": [
+      "`Delete`, đúng chữ hiển thị trên nút",
+      "`Delete Buy milk`, lấy từ `aria-label`",
+      "`button.link`, lấy từ tag và class",
+      "Không có tên, vì nút không nằm trong label"
+    ],
+    "optionsEn": [
+      "`Delete`, the text shown on the button",
+      "`Delete Buy milk`, from the `aria-label`",
+      "`button.link`, from the tag and class",
+      "No name, because the button is not inside a label"
+    ],
+    "answer": 1,
+    "explanation": "TodoPage gán cho nút một `aria-label` gồm chữ \"Delete\" cộng tiêu đề to-do, nên tên accessible là `Delete Buy milk`. Nhờ vậy người dùng screen reader biết nút xóa việc nào.",
+    "explanationEn": "TodoPage gives the button an `aria-label` made of \"Delete\" plus the to-do title, so its accessible name is `Delete Buy milk`. That tells screen reader users which item the button deletes.",
+    "optionExplanations": [
+      "aria-label được ưu tiên hơn chữ hiển thị khi tính tên accessible.",
+      "Đúng: tên lấy từ aria-label.",
+      "Tag và class là chi tiết kỹ thuật, screen reader không đọc chúng làm tên.",
+      "Nút có tên từ aria-label, không cần nằm trong label."
+    ],
+    "optionExplanationsEn": [
+      "aria-label takes priority over the visible text when computing the accessible name.",
+      "Correct: the name comes from aria-label.",
+      "Tag and class are technical details; screen readers do not use them as the name.",
+      "The button gets its name from aria-label; it does not need a label element."
+    ]
+  },
+  {
+    "id": "fs09-q16",
+    "question": "Dữ liệu test nào dễ làm lộ bug tràn chữ (overflow) của danh sách to-do ở chiều rộng 320 px nhất?",
+    "questionEn": "Which test data is most likely to reveal an overflow bug in the to-do list at a width of 320 px?",
+    "options": [
+      "Một tiêu đề ngắn như `Buy milk`",
+      "Một câu dài 150 ký tự có dấu cách giữa các từ",
+      "Một chuỗi 60 ký tự liền không có dấu cách, ví dụ một URL",
+      "Một tiêu đề rỗng, để xem thông báo lỗi"
+    ],
+    "optionsEn": [
+      "A short title such as `Buy milk`",
+      "A 150-character sentence with spaces between words",
+      "A 60-character unbroken string with no spaces, such as a URL",
+      "An empty title, to see the error message"
+    ],
+    "answer": 2,
+    "explanation": "Câu có dấu cách sẽ xuống dòng giữa các từ; chuỗi liền không có chỗ để ngắt, và stylesheet không có rule bảo từ dài phải ngắt, nên nó dễ tràn khỏi card trên màn hình hẹp.",
+    "explanationEn": "A sentence with spaces wraps between words; an unbroken string has nowhere to wrap, and the stylesheet has no rule telling long words to break, so it overflows the card on a narrow screen (the sample keeps this bug on purpose for practice).",
+    "optionExplanations": [
+      "Tiêu đề ngắn vừa vặn, không thử thách bố cục.",
+      "Câu có dấu cách xuống dòng bình thường giữa các từ.",
+      "Đúng: chuỗi liền không có chỗ ngắt dòng.",
+      "Tiêu đề rỗng kiểm tra trạng thái lỗi, không kiểm tra tràn chữ."
+    ],
+    "optionExplanationsEn": [
+      "A short title fits easily and does not stress the layout.",
+      "A sentence with spaces wraps normally between words.",
+      "Correct: an unbroken string has nowhere to wrap.",
+      "An empty title tests the error state, not overflow."
+    ]
+  },
+  {
+    "id": "fs09-q17",
+    "question": "Bạn chỉ muốn chụp riêng danh sách `ul.todos` (không lấy header hay bộ lọc) để đính kèm bug report. Cách nhanh nhất là gì?",
+    "questionEn": "You want a screenshot of just the `ul.todos` list (no header, no filters) for a bug report. What is the quickest way?",
+    "options": [
+      "Chọn `ul.todos` trong Elements, rồi chạy Capture node screenshot từ Command Menu",
+      "Chạy Capture full size screenshot rồi cắt ảnh bằng Paint",
+      "Bật Device Toolbar và chọn Show device frame",
+      "Gõ `copy($0)` trong Console để sao chép hình ảnh danh sách"
+    ],
+    "optionsEn": [
+      "Select `ul.todos` in Elements, then run Capture node screenshot from the Command Menu",
+      "Run Capture full size screenshot, then crop it in Paint",
+      "Turn on the Device Toolbar and choose Show device frame",
+      "Type `copy($0)` in the Console to copy an image of the list"
+    ],
+    "answer": 0,
+    "explanation": "Capture node screenshot chụp đúng phần tử đang chọn trong Elements. Ảnh được lưu thành PNG trong thư mục Downloads.",
+    "explanationEn": "Capture node screenshot captures exactly the element selected in Elements. The PNG is saved to your Downloads folder.",
+    "optionExplanations": [
+      "Đúng: chọn node rồi Capture node screenshot.",
+      "Làm được nhưng chậm hơn và dễ cắt lệch.",
+      "Show device frame chỉ vẽ khung điện thoại quanh trang, không chụp riêng danh sách.",
+      "copy() sao chép giá trị dạng chữ (ở đây là HTML), không tạo ảnh."
+    ],
+    "optionExplanationsEn": [
+      "Correct: select the node, then Capture node screenshot.",
+      "It works, but it is slower and easy to crop badly.",
+      "Show device frame only draws a phone frame around the page; it does not capture the list.",
+      "copy() copies a text value (here the HTML), not an image."
+    ]
+  },
+  {
+    "id": "fs09-q18",
+    "question": "Phần Expected/Actual nào trong bug report giao diện là tốt nhất?",
+    "questionEn": "Which Expected/Actual pair is the best for a UI bug report?",
+    "options": [
+      "Expected: trông đẹp. Actual: trông sai sai.",
+      "Expected: như thiết kế. Actual: không như thiết kế.",
+      "Expected: không có lỗi. Actual: có lỗi trong Console.",
+      "Expected: tiêu đề xuống dòng trong card, không có thanh cuộn ngang. Actual: tiêu đề tràn qua mép phải, trang cuộn ngang."
+    ],
+    "optionsEn": [
+      "Expected: looks nice. Actual: looks a bit wrong.",
+      "Expected: as designed. Actual: not as designed.",
+      "Expected: no errors. Actual: there is an error in the Console.",
+      "Expected: the title wraps inside the card, no horizontal scrollbar. Actual: the title runs past the right edge; the page scrolls sideways."
+    ],
+    "answer": 3,
+    "explanation": "Expected và actual phải mô tả cụ thể, trích đúng chữ hoặc giá trị, để developer hiểu ngay mà không cần hỏi lại. Các câu mơ hồ như \"trông sai\" hay \"có lỗi\" buộc developer phải đoán.",
+    "explanationEn": "Expected and actual must be specific and quote exact text or values, so the developer understands without asking. Vague lines like \"looks wrong\" or \"there is an error\" force the developer to guess.",
+    "optionExplanations": [
+      "Mơ hồ: \"đẹp\" và \"sai sai\" không kiểm chứng được.",
+      "Không nói phần nào của thiết kế bị sai.",
+      "Thiếu nội dung lỗi; phải dán đúng dòng lỗi vào report.",
+      "Đúng: cụ thể, quan sát được và kiểm chứng được."
+    ],
+    "optionExplanationsEn": [
+      "Vague: \"nice\" and \"a bit wrong\" cannot be verified.",
+      "It does not say which part of the design is wrong.",
+      "The error text is missing; paste the exact line into the report.",
+      "Correct: specific, observable and verifiable."
+    ]
+  }
+]

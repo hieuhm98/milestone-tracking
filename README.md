@@ -1,6 +1,6 @@
 # IT Learning Platform (milestone-tracking)
 
-A free, open, **bilingual (Vietnamese + English) website for learning IT**. No login, no accounts, no sign-up — anyone can open it and start reading, taking quizzes, and practising.
+A free, open, **bilingual (Vietnamese + English) website for learning IT**. No login needed — anyone can open it and start reading, taking quizzes, and practising. An optional account (approved by an admin) syncs progress across devices and sends a daily learning update on Telegram.
 
 > **New here? Read the first two sections.** They explain the whole project in plain language.
 > **Developer or AI agent?** Jump to [For Developers & AI Agents](#for-developers--ai-agents) for the technical map.
@@ -36,7 +36,7 @@ yarn install     # download the building blocks (do this once)
 yarn dev         # start the website locally
 ```
 
-Then open **http://localhost:3000** in your browser. That's it — no configuration, no `.env` file, no database setup required.
+Then open **http://localhost:3000** in your browser. That's it — no configuration, no `.env` file, no database setup required. Accounts and Telegram are optional: copy `.env.example` to `.env.local`, fill in the Supabase and Telegram values, and run `supabase/schema.sql` in your Supabase project's SQL editor.
 
 To build the finished version for hosting:
 ```bash
@@ -69,7 +69,8 @@ Technical reference for anyone (human or AI) extending or maintaining the codeba
 - **Next.js 14** (App Router) · **React 18** · **TypeScript** · **Tailwind CSS** (dark theme).
 - **better-sqlite3** — used **read-only, server-side** to serve a committed word bank for the SQL playground. This native module requires **Node 22** at runtime.
 - `react-markdown` + `remark-gfm` for rendering lessons/answers · `recharts` · `date-fns` · `lucide-react`.
-- Package manager: **yarn**. **No auth, no Supabase, no server-writable database** — everything is file-based; the only runtime data is the read-only word bank.
+- Package manager: **yarn**. Content is file-based. **Supabase** (optional) holds accounts (`profiles`: status `draft`/`active`/`disabled`, role `admin`/`teacher`/`learner`) and synced progress (`user_progress`); progress always stays in localStorage too.
+- **Telegram Bot API** (optional) — account linking via webhook and a daily digest (`/api/cron/daily-digest`, scheduled in `vercel.json`).
 
 ### Project layout
 ```
@@ -157,7 +158,7 @@ On mount the three sources are merged — newest `updatedAt` wins per topic, bes
 - **Node 22 is required** for `better-sqlite3` (the native module fails to load on older Node). `next.config.mjs` lists it in `experimental.serverComponentsExternalPackages` so it isn't bundled.
 - `ReviewSession` reads the `?quick=1` query param via `window.location.search` (**not** `useSearchParams`) to avoid a build-time Suspense boundary. The sidebar ⚡ link (`/knowledge-review?quick=1`) auto-starts a 5-question test.
 - `next.config.mjs` permanently redirects the old `/sql-practice` → `/practice/sql`.
-- **Historical note:** this project began as a personal study tracker with login/Supabase/dev-mode. All of that was removed on 2026-07-10 to go **fully public** (no auth, no backend DB, no user data). Some legacy scaffolding (`middleware.ts`, `supabase/`, `.env.example`) may still linger but is unused.
+- **Historical note:** this project began as a personal study tracker with login/Supabase/dev-mode. All of that was removed on 2026-07-10 to go **fully public**. On 2026-09-22 optional accounts came back with a new Supabase schema (`supabase/schema.sql`) built around this app's progress model; everything still works without one.
 
 ---
 

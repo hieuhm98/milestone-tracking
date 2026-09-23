@@ -1,0 +1,44 @@
+# Supabase's free plan pauses a project after 7 days of inactivity. This pings
+# the database once a day straight from GitHub, independent of where (or
+# whether) the site is deployed. vercel.json has a matching /api/cron/keep-alive.
+#
+# Repo → Settings → Secrets and variables → Actions → add:
+#   SUPABASE_URL       https://<ref>.supabase.co
+#   SUPABASE_ANON_KEY  the project's anon (public) key
+
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: "17 2 * * *" # daily, 09:17 Vietnam time
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Query the database
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "SUPABASE_URL / SUPABASE_ANON_KEY secrets are not set — skipping."
+            exit 0
+          fi
+
+          # A real PostgREST query (RLS returns [] to the anon key, which is fine —
+          # the request itself is the activity).
+          status=$(curl -sS -o /tmp/body -w "%{http_code}" \
+            --retry 3 --retry-delay 10 \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+            "$SUPABASE_URL/rest/v1/profiles?select=id&limit=1")
+
+          echo "HTTP $status"
+          cat /tmp/body; echo
+
+          if [ "$status" -ge 400 ]; then
+            exit 1
+          fi

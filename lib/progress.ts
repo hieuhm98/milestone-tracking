@@ -1,7 +1,7 @@
 // Learning-progress store.
 //
-// The app is public and has no accounts, so the browser's localStorage is the
-// live source of truth. Two extra layers keep progress from being tied to a
+// The app is public and accounts are optional, so the browser's localStorage is
+// the live source of truth. Extra layers keep progress from being tied to a
 // single browser session:
 //
 //   1. A committed snapshot at `data/progress.json` is copied into `public/` at
@@ -11,6 +11,8 @@
 //      VPS, Docker) `/api/progress` writes the snapshot back to `data/`.
 //      Vercel's runtime filesystem is read-only, so write-back is skipped there
 //      and localStorage simply carries on alone.
+//   3. A signed-in, approved account syncs the snapshot to Supabase
+//      (`lib/cloudProgress.ts`), merged with the same `mergeProgress`.
 
 export const PROGRESS_VERSION = 1;
 export const STORAGE_KEY = "progress:v1";

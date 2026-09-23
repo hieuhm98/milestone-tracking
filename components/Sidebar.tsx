@@ -7,6 +7,7 @@ import { useLang } from "@/context/lang";
 import { useTheme } from "@/context/theme";
 import { LANGS } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import AccountCard from "@/components/auth/AccountCard";
 
 const NAV = [{ href: "/dashboard", label: "nav.home", icon: "◈" }];
 
@@ -163,6 +164,11 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
           {t("nav.quickTest")}
         </Link>
       </nav>
+
+      {/* Pinned under the scrolling nav so the sign-up nudge is always in view. */}
+      <div className="shrink-0">
+        <AccountCard />
+      </div>
     </div>
   );
 }

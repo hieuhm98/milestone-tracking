@@ -1,6 +1,9 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useAuth } from "@/context/auth";
+import { pushCloudProgress } from "@/lib/cloudProgress";
+import { getSupabase } from "@/lib/supabase/client";
 import {
   SEED_URL,
   emptyProgress,
@@ -21,6 +24,9 @@ interface PushOptions {
   mode?: "merge" | "replace";
 }
 
+/** Cross-device sync state for a signed-in, approved account. */
+export type CloudSyncState = "off" | "syncing" | "synced" | "error";
+
 interface ProgressContextValue {
   progress: ProgressData;
   /** False until localStorage + the shipped seed have been reconciled. */
@@ -28,6 +34,7 @@ interface ProgressContextValue {
   /** True when the host can persist the snapshot back to data/progress.json. */
   writable: boolean;
   lastSyncedAt: string | null;
+  cloud: CloudSyncState;
   update: (fn: (prev: ProgressData) => ProgressData) => void;
   /** Overwrite everything (import / reset), syncing the server in replace mode. */
   replaceAll: (data: ProgressData) => Promise<void>;
@@ -42,10 +49,50 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const [writable, setWritable] = useState(false);
   const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null);
+  const [cloud, setCloud] = useState<CloudSyncState>("off");
+  const { profile } = useAuth();
 
   const progressRef = useRef<ProgressData>(emptyProgress());
   const writableRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** The approved account progress syncs to, or null when signed out. */
+  const cloudUserRef = useRef<string | null>(null);
+
+  /** Take in data from elsewhere (the cloud) without scheduling another push. */
+  const adopt = useCallback((next: ProgressData) => {
+    progressRef.current = next;
+    setProgress(next);
+    saveLocal(next);
+  }, []);
+
+  const pushCloud = useCallback(
+    async (mode: "merge" | "replace" = "merge") => {
+      const supabase = getSupabase();
+      const userId = cloudUserRef.current;
+
+      if (!supabase || !userId) return;
+
+      setCloud("syncing");
+
+      try {
+        const sent = progressRef.current;
+        const merged = await pushCloudProgress(supabase, userId, sent, mode);
+
+        // Signed out (or switched account) while the request was in flight.
+        if (cloudUserRef.current !== userId) return;
+
+        // Another device's entries came back with the merge — fold them in,
+        // keeping anything answered here since the push started.
+        if (merged !== sent) adopt(mergeProgress(merged, progressRef.current));
+
+        setCloud("synced");
+        setLastSyncedAt(new Date().toISOString());
+      } catch {
+        if (cloudUserRef.current === userId) setCloud("error");
+      }
+    },
+    [adopt]
+  );
 
   const push = useCallback(async (data: ProgressData, opts: PushOptions = {}) => {
     if (!writableRef.current) return;
@@ -74,8 +121,8 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       timerRef.current = null;
     }
 
-    await push(progressRef.current);
-  }, [push]);
+    await Promise.all([push(progressRef.current), pushCloud()]);
+  }, [push, pushCloud]);
 
   const commit = useCallback(
     (next: ProgressData) => {
@@ -83,16 +130,17 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       setProgress(next);
       saveLocal(next);
 
-      if (!writableRef.current) return;
+      if (!writableRef.current && !cloudUserRef.current) return;
 
       if (timerRef.current) clearTimeout(timerRef.current);
 
       timerRef.current = setTimeout(() => {
         timerRef.current = null;
         void push(progressRef.current);
+        void pushCloud();
       }, PUSH_DEBOUNCE_MS);
     },
-    [push]
+    [push, pushCloud]
   );
 
   const update = useCallback(
@@ -118,9 +166,9 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       setProgress(next);
       saveLocal(next);
 
-      await push(next, { mode: "replace" });
+      await Promise.all([push(next, { mode: "replace" }), pushCloud("replace")]);
     },
-    [push]
+    [push, pushCloud]
   );
 
   const reset = useCallback(() => replaceAll(emptyProgress()), [replaceAll]);
@@ -183,6 +231,9 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
       void push(progressRef.current, { keepalive: true });
+      // Best effort: if the tab dies first, localStorage still holds it and the
+      // next load's sign-in sync uploads it.
+      void pushCloud();
     }
 
     window.addEventListener("pagehide", handlePageHide);
@@ -191,11 +242,30 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       window.removeEventListener("pagehide", handlePageHide);
       handlePageHide();
     };
-  }, [push]);
+  }, [push, pushCloud]);
+
+  // Signing in to an approved account folds this browser's progress into the
+  // account (and the account's into this browser); signing out stops syncing
+  // but leaves localStorage exactly as it is.
+  const profileId = profile?.id ?? null;
+
+  useEffect(() => {
+    if (!ready) return;
+
+    cloudUserRef.current = profileId;
+
+    if (!profileId) {
+      setCloud("off");
+
+      return;
+    }
+
+    void pushCloud();
+  }, [ready, profileId, pushCloud]);
 
   return (
     <ProgressContext.Provider
-      value={{ progress, ready, writable, lastSyncedAt, update, replaceAll, reset, flush }}
+      value={{ progress, ready, writable, lastSyncedAt, cloud, update, replaceAll, reset, flush }}
     >
       {children}
     </ProgressContext.Provider>

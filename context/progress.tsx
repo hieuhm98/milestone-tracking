@@ -6,6 +6,7 @@ import { pushCloudProgress } from "@/lib/cloudProgress";
 import { getSupabase } from "@/lib/supabase/client";
 import {
   SEED_URL,
+  STORAGE_KEY,
   emptyProgress,
   loadLocal,
   mergeProgress,
@@ -58,11 +59,26 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   /** The approved account progress syncs to, or null when signed out. */
   const cloudUserRef = useRef<string | null>(null);
 
-  /** Take in data from elsewhere (the cloud) without scheduling another push. */
-  const adopt = useCallback((next: ProgressData) => {
-    progressRef.current = next;
-    setProgress(next);
-    saveLocal(next);
+  /**
+   * Write through to localStorage, folding in whatever is stored right now.
+   *
+   * A tab holds its snapshot in memory, so a tab that has been sitting open
+   * since before a study session in another tab is stale. Without this merge
+   * its next write — logging in is the usual one, since it syncs immediately —
+   * would clobber the newer data with what that tab happens to remember.
+   * Per entry the newer `updatedAt` wins, and ties go to the caller, so a
+   * retake that deliberately clears a topic still sticks. Only the deliberate
+   * overwrites (import / reset) bypass this.
+   */
+  const persist = useCallback((next: ProgressData): ProgressData => {
+    const stored = loadLocal();
+    const merged = stored ? mergeProgress(stored, next) : next;
+
+    progressRef.current = merged;
+    setProgress(merged);
+    saveLocal(merged);
+
+    return merged;
   }, []);
 
   const pushCloud = useCallback(
@@ -75,7 +91,9 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       setCloud("syncing");
 
       try {
-        const sent = progressRef.current;
+        // Sync what this browser actually holds, not just what this tab
+        // remembers — see `persist`.
+        const sent = mode === "replace" ? progressRef.current : persist(progressRef.current);
         const merged = await pushCloudProgress(supabase, userId, sent, mode);
 
         // Signed out (or switched account) while the request was in flight.
@@ -83,7 +101,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
 
         // Another device's entries came back with the merge — fold them in,
         // keeping anything answered here since the push started.
-        if (merged !== sent) adopt(mergeProgress(merged, progressRef.current));
+        if (merged !== sent) persist(mergeProgress(merged, progressRef.current));
 
         setCloud("synced");
         setLastSyncedAt(new Date().toISOString());
@@ -91,7 +109,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         if (cloudUserRef.current === userId) setCloud("error");
       }
     },
-    [adopt]
+    [persist]
   );
 
   const push = useCallback(async (data: ProgressData, opts: PushOptions = {}) => {
@@ -126,9 +144,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
 
   const commit = useCallback(
     (next: ProgressData) => {
-      progressRef.current = next;
-      setProgress(next);
-      saveLocal(next);
+      persist(next);
 
       if (!writableRef.current && !cloudUserRef.current) return;
 
@@ -140,7 +156,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         void pushCloud();
       }, PUSH_DEBOUNCE_MS);
     },
-    [push, pushCloud]
+    [persist, push, pushCloud]
   );
 
   const update = useCallback(
@@ -207,10 +223,8 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       const merged = mergeProgress(mergeProgress(seed, server), local);
 
       writableRef.current = canWrite;
-      progressRef.current = merged;
       setWritable(canWrite);
-      setProgress(merged);
-      saveLocal(merged);
+      persist(merged);
       setReady(true);
 
       if (canWrite && merged.updatedAt > server.updatedAt) void push(merged);
@@ -221,7 +235,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [push]);
+  }, [persist, push]);
 
   // Don't lose a debounced write when the tab is closed or backgrounded.
   useEffect(() => {
@@ -243,6 +257,31 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       handlePageHide();
     };
   }, [push, pushCloud]);
+
+  // Another tab studied: take its entries in, so this tab stops being stale
+  // rather than only being stopped from overwriting. The write-back is skipped
+  // when the merge changes nothing, which is what keeps two tabs from echoing
+  // storage events at each other forever.
+  useEffect(() => {
+    function onStorage(event: StorageEvent) {
+      if (event.key !== STORAGE_KEY) return;
+
+      const stored = loadLocal();
+
+      if (!stored) return;
+
+      const merged = mergeProgress(stored, progressRef.current);
+
+      progressRef.current = merged;
+      setProgress(merged);
+
+      if (JSON.stringify(merged) !== JSON.stringify(stored)) saveLocal(merged);
+    }
+
+    window.addEventListener("storage", onStorage);
+
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   // Signing in to an approved account folds this browser's progress into the
   // account (and the account's into this browser); signing out stops syncing

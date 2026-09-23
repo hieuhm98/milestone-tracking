@@ -237,6 +237,7 @@ const vi: Dict = {
   // Accounts
   "account.promptTitle": "Lưu tiến độ trên mọi thiết bị",
   "account.promptBody": "Tiến độ hiện chỉ lưu trên trình duyệt này. Đăng ký để học tiếp trên máy khác và nhận nhắc học qua Telegram.",
+  "account.promptBodyPlain": "Tiến độ hiện chỉ lưu trên trình duyệt này. Đăng ký để học tiếp trên máy khác.",
   "account.signup": "Đăng ký",
   "account.ticketTitle": "Đã gửi đăng ký",
   "account.ticketBody": "Trình duyệt này đã đăng ký một tài khoản. Đăng nhập khi tài khoản được duyệt.",
@@ -509,6 +510,7 @@ const en: Dict = {
   // Accounts
   "account.promptTitle": "Keep your progress everywhere",
   "account.promptBody": "Your progress is only saved in this browser. Sign up to continue on other devices and get study reminders on Telegram.",
+  "account.promptBodyPlain": "Your progress is only saved in this browser. Sign up to continue on other devices.",
   "account.signup": "Sign up",
   "account.ticketTitle": "Sign-up sent",
   "account.ticketBody": "This browser has already signed up an account. Log in once it's approved.",

@@ -34,6 +34,8 @@ interface AuthContextValue {
   profile: Profile | null;
   /** Set once this browser has signed up; further sign-ups are refused. */
   signupTicket: SignupTicket | null;
+  /** True only when the server has a bot token — Telegram is optional. */
+  telegramEnabled: boolean;
   dialog: AuthDialogMode | null;
   openDialog: (mode: AuthDialogMode) => void;
   closeDialog: () => void;
@@ -85,7 +87,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [dialog, setDialog] = useState<AuthDialogMode | null>(null);
   const [signupTicket, setSignupTicket] = useState<SignupTicket | null>(null);
 
+  const [telegramEnabled, setTelegramEnabled] = useState(false);
+
   useEffect(() => setSignupTicket(loadTicket()), []);
+
+  // Which optional pieces the server actually has. Accounts can run without a
+  // bot; the Telegram button stays hidden until one is configured.
+  useEffect(() => {
+    if (!isSupabaseConfigured) return;
+
+    let cancelled = false;
+
+    fetch("/api/config", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (!cancelled) setTelegramEnabled(Boolean(json?.telegram));
+      })
+      .catch(() => {
+        // Leave it off — a missing probe shouldn't offer a button that 503s.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // A browser that already signed up gets the approval notice, not a second form.
   const openDialog = useCallback(
@@ -193,6 +218,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         const json = await res.json().catch(() => null);
 
+        // Deploy-time problem, not a user error — name the variables in the
+        // console so it can be fixed without reading server logs.
+        if (Array.isArray(json?.missing) && json.missing.length > 0) {
+          console.error("[signup] server is missing env vars:", json.missing.join(", "));
+        }
+
         return { ok: false, error: json?.error ?? "signup_failed" };
       } catch {
         return { ok: false, error: "network" };
@@ -280,6 +311,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     session,
     profile,
     signupTicket,
+    telegramEnabled,
     dialog,
     openDialog,
     closeDialog: () => setDialog(null),

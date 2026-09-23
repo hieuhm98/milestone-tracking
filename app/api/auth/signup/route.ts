@@ -8,8 +8,13 @@ export const dynamic = "force-dynamic";
 
 const MIN_PASSWORD = 8;
 
-function fail(error: string, status = 400) {
-  return NextResponse.json({ error }, { status });
+function fail(error: string, status = 400, extra?: Record<string, unknown>) {
+  return NextResponse.json({ error, ...extra }, { status });
+}
+
+/** Names (never values) of the server-side variables sign-up needs. */
+function missingConfig(): string[] {
+  return ["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].filter((name) => !process.env[name]);
 }
 
 /**
@@ -20,7 +25,13 @@ function fail(error: string, status = 400) {
 export async function POST(request: Request) {
   const supabase = getSupabaseAdmin();
 
-  if (!supabase) return fail("not_configured", 503);
+  if (!supabase) {
+    const missing = missingConfig();
+
+    console.error("[signup] Supabase is not configured on the server; missing:", missing.join(", "));
+
+    return fail("not_configured", 503, { missing });
+  }
 
   let body: Record<string, unknown>;
 
@@ -55,7 +66,11 @@ export async function POST(request: Request) {
   if (error || !data.user) {
     // The auth user can exist without a profile only if the trigger failed; the
     // email is unique per phone, so a duplicate still means the phone is taken.
-    if (error?.status === 422 || /already/i.test(error?.message ?? "")) return fail("phone_taken", 409);
+    // The pre-check above can miss (its query is best effort), so a unique
+    // violation from the profiles trigger means the same thing.
+    if (error?.status === 422 || /already|duplicate key|profiles_phone_key/i.test(error?.message ?? "")) {
+      return fail("phone_taken", 409);
+    }
 
     console.error("[signup] createUser failed", error);
 

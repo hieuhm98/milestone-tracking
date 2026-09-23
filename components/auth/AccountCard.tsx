@@ -18,8 +18,18 @@ const ROLE_BADGE = {
  * with its sync state and Telegram link. Hidden when accounts aren't configured.
  */
 export default function AccountCard() {
-  const { enabled, ready, profile, signupTicket, openDialog, signOut, telegramLink, disconnectTelegram, refreshProfile } =
-    useAuth();
+  const {
+    enabled,
+    ready,
+    profile,
+    signupTicket,
+    telegramEnabled,
+    openDialog,
+    signOut,
+    telegramLink,
+    disconnectTelegram,
+    refreshProfile,
+  } = useAuth();
   const { cloud } = useProgress();
   const { t } = useLang();
   const [linking, setLinking] = useState(false);
@@ -68,7 +78,9 @@ export default function AccountCard() {
           <span className="text-base leading-5" aria-hidden="true">☁</span>
           <div className="min-w-0">
             <div className="text-sm font-semibold text-amber-900 dark:text-amber-200">{t("account.promptTitle")}</div>
-            <p className="text-xs text-amber-800/90 dark:text-amber-200/80 mt-1">{t("account.promptBody")}</p>
+            <p className="text-xs text-amber-800/90 dark:text-amber-200/80 mt-1">
+              {t(telegramEnabled ? "account.promptBody" : "account.promptBodyPlain")}
+            </p>
           </div>
         </div>
         <div className="flex gap-2 mt-3">
@@ -139,7 +151,8 @@ export default function AccountCard() {
         {syncLabel}
       </div>
 
-      {profile.telegram_chat_id ? (
+      {/* Telegram is optional — no bot configured, no button. */}
+      {!telegramEnabled && !profile.telegram_chat_id ? null : profile.telegram_chat_id ? (
         <div className="flex items-center justify-between gap-2 text-xs mt-2 text-zinc-600 dark:text-zinc-400">
           <span className="truncate">✈ {t("account.telegramConnected")}</span>
           <button

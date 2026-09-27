@@ -6,25 +6,56 @@ import { usePathname } from "next/navigation";
 import { useLang } from "@/context/lang";
 import { useTheme } from "@/context/theme";
 import { LANGS } from "@/lib/i18n";
+import { SECTIONS, sectionForPath, type SectionId } from "@/lib/sections";
 import { cn } from "@/lib/utils";
 import AccountCard from "@/components/auth/AccountCard";
 
-const NAV = [{ href: "/dashboard", label: "nav.home", icon: "◈" }];
+interface NavItem {
+  href: string;
+  label: string;
+  icon: string;
+}
 
-const KNOWLEDGE_NAV = [
-  { href: "/learn", label: "nav.learn", icon: "◐" },
-  { href: "/knowledge", label: "nav.knowledge", icon: "◉" },
-  { href: "/knowledge-review", label: "nav.review", icon: "⟳" },
-  { href: "/exam", label: "nav.exam", icon: "◎" },
-  { href: "/progress", label: "nav.progress", icon: "◑" },
-];
+interface NavGroup {
+  /** i18n key for the heading above the links; omitted for the top group. */
+  heading?: string;
+  items: NavItem[];
+}
 
-const PRACTICE_NAV = [
-  { href: "/practice/blitz", label: "nav.blitz", icon: "⚡" },
-  { href: "/practice/english", label: "nav.englishPractice", icon: "Ⓐ" },
-  { href: "/practice/questions", label: "nav.exercises", icon: "✐" },
-  { href: "/practice/sql", label: "nav.sqlPractice", icon: "▤" },
-];
+/** Each half of the site brings its own nav — see `lib/sections.ts`. */
+const SECTION_NAV: Record<SectionId, NavGroup[]> = {
+  it: [
+    { items: [{ href: "/dashboard", label: "nav.home", icon: "◈" }] },
+    {
+      heading: "nav.sectionKnowledge",
+      items: [
+        { href: "/learn", label: "nav.learn", icon: "◐" },
+        { href: "/knowledge", label: "nav.knowledge", icon: "◉" },
+        { href: "/knowledge-review", label: "nav.review", icon: "⟳" },
+        { href: "/exam", label: "nav.exam", icon: "◎" },
+        { href: "/progress", label: "nav.progress", icon: "◑" },
+      ],
+    },
+    {
+      heading: "nav.sectionPractice",
+      items: [
+        { href: "/practice/blitz", label: "nav.blitz", icon: "⚡" },
+        { href: "/practice/questions", label: "nav.exercises", icon: "✐" },
+        { href: "/practice/sql", label: "nav.sqlPractice", icon: "▤" },
+      ],
+    },
+  ],
+  english: [
+    { items: [{ href: "/english", label: "nav.englishHome", icon: "◈" }] },
+    {
+      heading: "nav.sectionEnglish",
+      items: [
+        { href: "/english/dictionary", label: "nav.dictionary", icon: "▤" },
+        { href: "/english/practice", label: "nav.englishPractice", icon: "Ⓐ" },
+      ],
+    },
+  ],
+};
 
 /**
  * The nav itself. Rendered twice — as the fixed desktop rail and inside the
@@ -32,6 +63,7 @@ const PRACTICE_NAV = [
  */
 function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
+  const section = sectionForPath(pathname);
   const { lang, setLang, dual, toggleDual, t } = useLang();
   const { theme, toggle: toggleTheme } = useTheme();
 
@@ -40,6 +72,29 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
       <div className="px-5 py-4 lg:py-6 border-b border-zinc-200 dark:border-zinc-800">
         <div className="font-bold text-lg tracking-tight">Milestone Tracking</div>
         <div className="text-xs text-zinc-500 mt-0.5">IT · AWS · English</div>
+      </div>
+
+      {/* Which half of the site the nav below belongs to. */}
+      <div className="px-3 pt-3">
+        <div className="grid grid-cols-2 gap-1 p-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+          {SECTIONS.map((item) => (
+            <Link
+              key={item.id}
+              href={item.home}
+              onClick={onNavigate}
+              aria-current={section === item.id ? "true" : undefined}
+              className={cn(
+                "flex items-center justify-center gap-1.5 text-xs font-medium py-1.5 rounded-md transition-colors",
+                section === item.id
+                  ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm"
+                  : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+              )}
+            >
+              <span aria-hidden="true">{item.icon}</span>
+              {t(item.label)}
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Language toggle */}
@@ -93,76 +148,43 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
       </div>
 
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        {NAV.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={onNavigate}
-            className={cn(
-              "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
-              pathname === item.href
-                ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
-                : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800/60"
+        {SECTION_NAV[section].map((group) => (
+          <div key={group.heading ?? "top"} className="space-y-1">
+            {group.heading && (
+              <div className="px-3 pt-3 pb-1 text-xs font-semibold text-zinc-400 dark:text-zinc-600 uppercase tracking-wider">
+                {t(group.heading)}
+              </div>
             )}
-          >
-            <span className="text-base">{item.icon}</span>
-            {t(item.label)}
-          </Link>
-        ))}
-
-        <div className="pt-3 pb-1">
-          <div className="px-3 text-xs font-semibold text-zinc-400 dark:text-zinc-600 uppercase tracking-wider mb-1">
-            {t("nav.sectionKnowledge")}
+            {group.items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={onNavigate}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
+                  pathname === item.href
+                    ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800/60"
+                )}
+              >
+                <span className="text-base">{item.icon}</span>
+                {t(item.label)}
+              </Link>
+            ))}
           </div>
-        </div>
-        {KNOWLEDGE_NAV.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={onNavigate}
-            className={cn(
-              "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
-              pathname === item.href
-                ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
-                : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800/60"
-            )}
-          >
-            <span className="text-base">{item.icon}</span>
-            {t(item.label)}
-          </Link>
         ))}
 
-        <div className="pt-3 pb-1">
-          <div className="px-3 text-xs font-semibold text-zinc-400 dark:text-zinc-600 uppercase tracking-wider mb-1">
-            {t("nav.sectionPractice")}
-          </div>
-        </div>
-        {PRACTICE_NAV.map((item) => (
+        {/* Daily Quick Test — prominent shortcut, IT only. */}
+        {section === "it" && (
           <Link
-            key={item.href}
-            href={item.href}
+            href="/knowledge-review?quick=1"
             onClick={onNavigate}
-            className={cn(
-              "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
-              pathname === item.href
-                ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
-                : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800/60"
-            )}
+            className="flex items-center gap-3 px-3 py-2 mt-1 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-600/15 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 hover:bg-blue-100 dark:hover:bg-blue-600/25 transition-colors"
           >
-            <span className="text-base">{item.icon}</span>
-            {t(item.label)}
+            <span className="text-base">⚡</span>
+            {t("nav.quickTest")}
           </Link>
-        ))}
-
-        {/* Daily Quick Test — prominent shortcut */}
-        <Link
-          href="/knowledge-review?quick=1"
-          onClick={onNavigate}
-          className="flex items-center gap-3 px-3 py-2 mt-1 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-600/15 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 hover:bg-blue-100 dark:hover:bg-blue-600/25 transition-colors"
-        >
-          <span className="text-base">⚡</span>
-          {t("nav.quickTest")}
-        </Link>
+        )}
       </nav>
 
       {/* Pinned under the scrolling nav so the sign-up nudge is always in view. */}

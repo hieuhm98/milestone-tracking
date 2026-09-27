@@ -7,6 +7,17 @@ import { overallStats } from "@/lib/progress";
 
 const CARDS = [
   {
+    // The other half of the site; the sidebar switcher is the other way in.
+    href: "/english",
+    icon: "Ⓐ",
+    accent: "text-sky-700 dark:text-sky-300",
+    title: { vi: "Học tiếng Anh", en: "Learn English" },
+    desc: {
+      vi: "Phần tiếng Anh: từ điển tra nghĩa kèm câu ví dụ từ chính bài học, và luyện từ vựng.",
+      en: "The English half: a dictionary with example sentences from your own lessons, plus vocabulary practice.",
+    },
+  },
+  {
     href: "/learn",
     icon: "◐",
     accent: "text-indigo-700 dark:text-indigo-300",
@@ -103,8 +114,8 @@ export default function HomePage() {
         </h1>
         <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
           {pick(
-            "Học kiến thức IT/AWS song ngữ, luyện quiz, thực hành thiết kế hệ thống và viết SQL — miễn phí, không cần đăng nhập.",
-            "Learn bilingual IT/AWS knowledge, take quizzes, practice system design and write SQL — free, no login required."
+            "Học kiến thức IT/AWS song ngữ, luyện quiz, thực hành thiết kế hệ thống và viết SQL — tiến độ được lưu theo tài khoản của bạn.",
+            "Learn bilingual IT/AWS knowledge, take quizzes, practice system design and write SQL — your progress follows your account."
           )}
         </p>
       </div>

@@ -1,6 +1,6 @@
 # IT Learning Platform (milestone-tracking)
 
-A free, open, **bilingual (Vietnamese + English) website for learning IT**. No login needed — anyone can open it and start reading, taking quizzes, and practising. An optional account (approved by an admin) syncs progress across devices and sends a daily learning update on Telegram.
+A **bilingual (Vietnamese + English) learning website in two halves: IT and English.** The IT half has articles, quizzes, mini-lessons, exams and practice playgrounds; the English half has a 24k-word dictionary — every word carries example sentences taken from the IT lessons themselves — and vocabulary practice. A switcher at the top of the sidebar moves between them. When it is connected to Supabase, **an account is required**: visitors see a sign-in screen, and every new sign-up waits for an admin to approve it. An account also carries progress across devices and can send a daily learning update on Telegram. Run without Supabase and the site is fully public, exactly as before.
 
 > **New here? Read the first two sections.** They explain the whole project in plain language.
 > **Developer or AI agent?** Jump to [For Developers & AI Agents](#for-developers--ai-agents) for the technical map.
@@ -23,7 +23,11 @@ On top of the lessons there are three practice tools:
 - **Design Exercises** — real-world "how would you design this?" questions (databases, APIs, AWS) with model answers hidden until you're ready to check.
 - **SQL Practice** — a mini playground where you type real database queries and see live results, using a built-in dictionary of ~23,000 English words.
 
-**There is no user data.** Nothing you do is saved to a server, there are no passwords, and there is no personal database. All the lessons are just files that ship with the website.
+And a second half of the site for **English**:
+- **Dictionary** — look up any of ~24,000 English words: meaning in both languages, pronunciation, part of speech, and — for words used in the lessons — the real sentence from the article plus a link straight to that lesson.
+- **English Practice** — pick words by course, topic, lesson or one at a time and practise their meaning in context.
+
+**Your progress lives in your browser**, and — once you log in with an approved account — in your account, so it follows you to another device. The lessons themselves are just files that ship with the website.
 
 ---
 
@@ -36,7 +40,9 @@ yarn install     # download the building blocks (do this once)
 yarn dev         # start the website locally
 ```
 
-Then open **http://localhost:3000** in your browser. That's it — no configuration, no `.env` file, no database setup required. Accounts and Telegram are optional: copy `.env.example` to `.env.local`, fill in the Supabase and Telegram values, and run `supabase/schema.sql` in your Supabase project's SQL editor.
+Then open **http://localhost:3000** in your browser. That's it — with no `.env` file the site runs public and needs no database, so local development never depends on the login.
+
+To run it the way the deployed site runs (accounts, login required, optional Telegram): copy `.env.example` to `.env.local`, fill in the Supabase values, and run `supabase/schema.sql` in your Supabase project's SQL editor. `NEXT_PUBLIC_REQUIRE_LOGIN=0` keeps the site open while still having accounts.
 
 To build the finished version for hosting:
 ```bash
@@ -77,8 +83,9 @@ Technical reference for anyone (human or AI) extending or maintaining the codeba
 app/
   page.tsx                       → redirects "/" to "/dashboard"
   (app)/
-    layout.tsx                   → mounts LanguageProvider + Sidebar (no auth)
-    dashboard/                   → "Home hub" of section cards
+    layout.tsx                   → Theme/Language/Auth/Progress providers + AuthGate + Sidebar
+    dashboard/                   → IT "Home hub" of section cards
+    english/                     → the English half: hub, dictionary/, practice/
     knowledge/                   → topic list
     knowledge/[slug]/            → one topic (lesson + quiz)
     knowledge-review/            → Daily Quick Test / random review
@@ -89,6 +96,7 @@ app/
     knowledge/route.ts           → lists topics from knowledge-content/
     knowledge/[slug]/route.ts    → returns one topic (VI + EN + questions)
     sql-playground/route.ts      → GET = schema, POST {sql} = run query
+    english/dictionary/route.ts  → dictionary search + one entry (word bank + course vocab)
 
 knowledge-content/<slug>/        → file-based lessons (see below)
 data/word-bank.db                → committed read-only SQLite (NOT git-ignored)

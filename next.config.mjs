@@ -9,12 +9,17 @@ const nextConfig = {
     // deployed. (public/progress.json is the always-available fallback.)
     outputFileTracingIncludes: {
       "/api/progress": ["./data/progress.json"],
+      // The dictionary index reads every vocab.json plus the word bank through
+      // runtime path joins, which file tracing can't follow on its own.
+      "/api/english/dictionary": ["./knowledge-content/**/vocab.json", "./data/word-bank.db"],
     },
   },
   async redirects() {
     return [
       // The SQL playground moved under the new /practice parent.
       { source: "/sql-practice", destination: "/practice/sql", permanent: true },
+      // English practice moved out of IT practice into the English section.
+      { source: "/practice/english", destination: "/english/practice", permanent: true },
     ];
   },
 };

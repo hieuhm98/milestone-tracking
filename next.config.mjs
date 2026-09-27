@@ -12,6 +12,9 @@ const nextConfig = {
       // The dictionary index reads every vocab.json plus the word bank through
       // runtime path joins, which file tracing can't follow on its own.
       "/api/english/dictionary": ["./knowledge-content/**/vocab.json", "./data/word-bank.db"],
+      // The IELTS pages are statically generated, but keep their data with them
+      // in case one is ever rendered on demand.
+      "/english/ielts-speaking/**": ["./data/ielts-speaking/**"],
     },
   },
   async redirects() {

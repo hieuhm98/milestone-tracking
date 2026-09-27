@@ -354,8 +354,9 @@ export default function EnglishPracticePage() {
   return (
     <div className="max-w-6xl space-y-6">
       <div>
-        <Link href="/practice" className="inline-block py-2 -my-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
-          ← {pick("Luyện tập", "Practice")}
+        {/* This page lives in the English half now — back goes to its home. */}
+        <Link href="/english" className="inline-block py-2 -my-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
+          ← {pick("Học tiếng Anh", "Learn English")}
         </Link>
         <h1 className="text-2xl font-bold mt-1">{pick("Luyện tiếng Anh", "English Practice")}</h1>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-2xl">

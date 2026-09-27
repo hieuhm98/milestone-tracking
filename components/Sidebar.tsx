@@ -52,6 +52,7 @@ const SECTION_NAV: Record<SectionId, NavGroup[]> = {
       items: [
         { href: "/english/dictionary", label: "nav.dictionary", icon: "▤" },
         { href: "/english/practice", label: "nav.englishPractice", icon: "Ⓐ" },
+        { href: "/english/ielts-speaking", label: "ielts.entry", icon: "◍" },
       ],
     },
   ],

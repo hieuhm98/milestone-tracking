@@ -86,7 +86,7 @@ export const PHRASE =
   "bg-yellow-200/80 dark:bg-yellow-500/25 text-yellow-950 dark:text-yellow-100 decoration-yellow-600/60 dark:decoration-yellow-400/60 underline decoration-dotted underline-offset-2 rounded px-0.5";
 
 /** IPA under the word — grey, never competing with the answer text. */
-export const IPA_TEXT = "text-zinc-500 dark:text-zinc-400";
+export const IPA_TEXT = "text-zinc-600 dark:text-zinc-400";
 
 /** 1-MINUTE NOTES: four rotating pastels, reused in order. */
 export const NOTE_COLOURS = [

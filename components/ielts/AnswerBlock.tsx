@@ -12,6 +12,7 @@ import type { Answer, VocabRow } from "@/lib/ielts/types";
 import { BAND } from "./tokens";
 import IpaWord from "./IpaWord";
 import Phrase from "./Phrase";
+import { useReaderSettings } from "./settings";
 
 interface Props {
   band: 6 | 9;
@@ -25,7 +26,12 @@ interface Props {
 
 export default function AnswerBlock({ band, answer, vocabulary, unitId, id }: Props) {
   const { t } = useLang();
+  const [settings] = useReaderSettings();
   const style = band === 6 ? BAND.band6 : BAND.band9;
+  const hasIpa = answer.segments.some(
+    (segment) => segment.t === "ipa" || (segment.t === "phrase" && (segment.ipa?.length ?? 0) > 0)
+  );
+  const showingIpa = hasIpa && settings.ipa;
 
   return (
     <div id={id} className={cn("scroll-mt-28 rounded-xl rounded-l-md p-4 sm:p-5", style.frame)}>
@@ -40,8 +46,17 @@ export default function AnswerBlock({ band, answer, vocabulary, unitId, id }: Pr
       </p>
 
       {/* `whitespace-pre-line` keeps the source's paragraph breaks while the
-          segments stay in one inline flow (a phrase may straddle a line). */}
-      <p className="whitespace-pre-line text-zinc-800 dark:text-zinc-100">
+          segments stay in one inline flow (a phrase may straddle a line).
+          Ruby sits *under* the word, so a line carrying IPA needs room beneath
+          it — without the extra leading the transcriptions crowd the next line
+          and the answer stops being readable. The taller spacing is dropped
+          again when the reader turns IPA off. */}
+      <p
+        className={cn(
+          "whitespace-pre-line text-zinc-800 dark:text-zinc-100",
+          showingIpa ? "leading-[2.45]" : "leading-relaxed"
+        )}
+      >
         {answer.segments.map((segment, index) => {
           if (segment.t === "text") return <span key={index}>{segment.v}</span>;
 
@@ -55,6 +70,7 @@ export default function AnswerBlock({ band, answer, vocabulary, unitId, id }: Pr
               text={segment.v}
               vietnamese={row?.vietnamese}
               target={row ? `${unitId}-v${segment.vocabIndex}` : undefined}
+              ipa={segment.ipa}
             />
           );
         })}

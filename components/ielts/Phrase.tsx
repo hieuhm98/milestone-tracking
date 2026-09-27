@@ -11,6 +11,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { PHRASE, VOCAB } from "./tokens";
+import IpaWord from "./IpaWord";
 
 interface Props {
   text: string;
@@ -18,6 +19,8 @@ interface Props {
   vietnamese?: string;
   /** `data-vocab` value of the target row, e.g. "p1-q18-v0". */
   target?: string;
+  /** Transcriptions for words inside the phrase — a third of all IPA sits here. */
+  ipa?: { word: string; ipa: string }[];
 }
 
 function flash(target: string) {
@@ -36,8 +39,9 @@ function flash(target: string) {
   }
 }
 
-export default function Phrase({ text, vietnamese, target }: Props) {
+export default function Phrase({ text, vietnamese, target, ipa }: Props) {
   const [open, setOpen] = useState(false);
+  const byWord = new Map((ipa ?? []).map((entry) => [entry.word, entry.ipa]));
 
   const onActivate = () => {
     setOpen(true);
@@ -69,7 +73,16 @@ export default function Phrase({ text, vietnamese, target }: Props) {
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
       >
-        {text}
+        {byWord.size === 0
+          ? text
+          : // Keep the words in one inline flow so the phrase still wraps
+            // normally; only the ones with a transcription become ruby.
+            text.split(" ").map((word, index) => (
+              <span key={index}>
+                {index > 0 && " "}
+                {byWord.has(word) ? <IpaWord word={word} ipa={byWord.get(word)!} /> : word}
+              </span>
+            ))}
       </span>
 
       {open && vietnamese && (

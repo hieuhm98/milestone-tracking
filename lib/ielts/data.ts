@@ -1,9 +1,8 @@
 // Data access for the "IELTS Speaking — Band 6 vs Band 9" section.
 //
 // Every route reads the section through these six functions and nothing else,
-// so where the content comes from is a detail. They now read the converted PDF
-// in data/ielts-speaking/ (see scripts/ielts/extract.py); lib/ielts/fixture.ts
-// keeps a small hand-written sample for working on the components without it.
+// so where the content comes from is a detail. They read the converted PDF in
+// data/ielts-speaking/ (see scripts/ielts/extract.py).
 
 import "server-only";
 

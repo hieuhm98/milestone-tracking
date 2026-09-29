@@ -1,0 +1,236 @@
+{
+ "part": "C",
+ "title": "Part C review · Sentences",
+ "editing": {
+  "text": "Our class spent the whole of March preparing for a debate about traffic in Hà Nội. We divided the subject into three smaller questions. Because one question was far too wide for a single lesson. Trúc led the first group, she collected five years of data from the city transport website. Although the figures were slightly out of date, but they still showed a clear pattern. Because the number of motorbikes keeps growing, so an average journey across the city now takes twice as long as it did ten years ago. My group had to argue against a congestion charge, which meant reading, to take notes and summarise three long reports. We had three jobs; researching, timing and writing the final speech. The expert which we interviewed works for a planning institute in Cầu Giấy. He explained that the survey that we had read it last week covered only four inner districts. Ms Lan who has judged the competition twice, warned us that the judges dislike long introductions. She also told us that we had to be not only accurate but also speaking clearly. While waiting for our turn, the hall was so quiet that I could hear my own notes shaking. The debate took place on a friday afternoon in the school hall, and about eighty students came to watch. If the school will provide a projector next year, we will show two short videos instead of reading statistics aloud. Unless we don't rehearse properly, we will never finish inside the time limit. Looking back, if we prepared more carefully last year, we would have reached the final round.",
+  "errors": [
+   {
+    "span": "Because one question was far too wide for a single lesson.",
+    "fix": "because one question was far too wide for a single lesson.",
+    "type": "fragment",
+    "reason": "A *because* clause cannot stand alone; join it to the sentence before it.",
+    "trap": "T-C02"
+   },
+   {
+    "span": "the first group, she collected",
+    "fix": "the first group, and she collected",
+    "type": "comma splice",
+    "reason": "Two complete sentences cannot be joined by a comma alone; add *and* or use a full stop.",
+    "trap": "T-C01"
+   },
+   {
+    "span": "but they still showed",
+    "fix": "they still showed",
+    "type": "double connector",
+    "reason": "*Although* already marks the contrast, so *but* is one linking word too many.",
+    "trap": "T-C03"
+   },
+   {
+    "span": "so an average journey",
+    "fix": "an average journey",
+    "type": "double connector",
+    "reason": "Use *because* or *so*, never both in the same sentence.",
+    "trap": "T-C04"
+   },
+   {
+    "span": "reading, to take notes and summarise",
+    "fix": "reading, taking notes and summarising",
+    "type": "parallel structure",
+    "reason": "Items in a list must share one form; here all three are -ing forms.",
+    "trap": "T-C05"
+   },
+   {
+    "span": "three jobs; researching",
+    "fix": "three jobs: researching",
+    "type": "punctuation",
+    "reason": "A colon, not a semicolon, introduces a list that follows a complete clause.",
+    "rule": "12-sentence-structure-and-punctuation"
+   },
+   {
+    "span": "The expert which we interviewed",
+    "fix": "The expert who we interviewed",
+    "type": "relative pronoun",
+    "reason": "*which* cannot refer to a person; use *who* or *that* (*whom* is also correct in very formal writing).",
+    "trap": "T-C06"
+   },
+   {
+    "span": "we had read it last week",
+    "fix": "we had read last week",
+    "type": "relative clause",
+    "reason": "*that* already stands for the object, so the extra *it* repeats it.",
+    "trap": "T-C07"
+   },
+   {
+    "span": "Ms Lan who has judged",
+    "fix": "Ms Lan, who has judged",
+    "type": "punctuation",
+    "reason": "A non-defining clause adds extra information, so it needs a comma on each side.",
+    "rule": "14-adjective-relative-clauses"
+   },
+   {
+    "span": "not only accurate but also speaking clearly",
+    "fix": "not only accurate but also clear",
+    "type": "parallel structure",
+    "reason": "*not only … but also* must join two items of the same kind, here two adjectives.",
+    "trap": "T-C05"
+   },
+   {
+    "span": "While waiting for our turn, the hall",
+    "fix": "While we were waiting for our turn, the hall",
+    "type": "dangling clause",
+    "reason": "A reduced adverb clause must share its subject with the main clause, and the hall was not waiting.",
+    "rule": "15-adverb-clauses"
+   },
+   {
+    "span": "on a friday afternoon",
+    "fix": "on a Friday afternoon",
+    "type": "capital letter",
+    "reason": "Days, months and place names always start with a capital letter in English.",
+    "rule": "12-sentence-structure-and-punctuation"
+   },
+   {
+    "span": "If the school will provide",
+    "fix": "If the school provides",
+    "type": "conditional form",
+    "reason": "A real future conditional keeps the present in the *if* clause.",
+    "trap": "T-C08"
+   },
+   {
+    "span": "Unless we don't rehearse properly",
+    "fix": "Unless we rehearse properly",
+    "type": "double negative",
+    "reason": "*unless* already means \"if not\", so a second negative reverses the meaning.",
+    "rule": "16-conditionals"
+   },
+   {
+    "span": "if we prepared more carefully last year",
+    "fix": "if we had prepared more carefully last year",
+    "type": "conditional form",
+    "reason": "An unreal past condition takes *had* + past participle to match *would have reached*.",
+    "trap": "T-C09"
+   }
+  ]
+ },
+ "items": [
+  {
+   "id": "c1",
+   "sentence": "Traffic is heavy every morning, many people leave home before six o'clock.",
+   "error": "morning, many people",
+   "fix": "morning, so many people",
+   "reason": "Two full sentences joined by a comma alone make a comma splice; add a conjunction or a full stop.",
+   "trap": "T-C01"
+  },
+  {
+   "id": "c2",
+   "stem": "We finished the report very late ___ we still handed it in on time.",
+   "options": ["; however,", ", however,", "however"],
+   "answer": 0,
+   "reason": "*however* is not a conjunction, so two clauses around it need a semicolon or a full stop.",
+   "rule": "12-sentence-structure-and-punctuation"
+  },
+  {
+   "id": "c3",
+   "sentence": "I visited my aunt in hue last april and stayed for a fortnight.",
+   "error": "in hue last april",
+   "fix": "in Huế last April",
+   "reason": "Place names and the names of months take a capital letter.",
+   "rule": "12-sentence-structure-and-punctuation"
+  },
+  {
+   "id": "c4",
+   "sentence": "Although the bus was late, but we still arrived before the exam started.",
+   "error": "late, but we",
+   "fix": "late, we",
+   "reason": "*Although* already signals the contrast, so *but* cannot be used as well.",
+   "trap": "T-C03"
+  },
+  {
+   "id": "c5",
+   "stem": "The course teaches students to plan an essay, to organise their ideas and ___.",
+   "options": ["writing clearly", "to write clearly", "clear writing"],
+   "answer": 1,
+   "reason": "Every item in the list is an infinitive, so the last one must match.",
+   "trap": "T-C05"
+  },
+  {
+   "id": "c6",
+   "stem": "Hằng is interested not only in economics ___ in environmental policy.",
+   "options": ["but also", "but too", "and also"],
+   "answer": 0,
+   "reason": "*not only* pairs with *but also*; the two halves work together as one structure.",
+   "rule": "13-coordination-and-parallel-structure"
+  },
+  {
+   "id": "c7",
+   "sentence": "The volunteer which organised the beach clean-up lives on my street.",
+   "error": "which organised",
+   "fix": "who organised",
+   "reason": "*which* refers to things; a person takes *who* or *that*.",
+   "trap": "T-C06"
+  },
+  {
+   "id": "c8",
+   "sentence": "This is the essay that I wrote it during the mock exam in December.",
+   "error": "that I wrote it",
+   "fix": "that I wrote",
+   "reason": "*that* is already the object of *wrote*, so *it* repeats the same thing twice.",
+   "trap": "T-C07"
+  },
+  {
+   "id": "c9",
+   "stem": "My grandmother, ___ garden is full of herbs, sells them at the morning market.",
+   "options": ["who", "whose", "which"],
+   "answer": 1,
+   "reason": "*whose* shows possession inside a relative clause: the garden belongs to her.",
+   "rule": "14-adjective-relative-clauses"
+  },
+  {
+   "id": "c10",
+   "sentence": "Because the ticket price is high, so many students stay at home instead.",
+   "error": "high, so many",
+   "fix": "high, many",
+   "reason": "One sentence takes one connector: *because* or *so*, not both.",
+   "trap": "T-C04"
+  },
+  {
+   "id": "c11",
+   "stem": "___ she had finished her homework, Mai went to the night market with her cousins.",
+   "options": ["After", "Although", "So"],
+   "answer": 0,
+   "reason": "The homework came first, so a time subordinator is what the sentence needs.",
+   "rule": "15-adverb-clauses"
+  },
+  {
+   "id": "c12",
+   "stem": "We left an hour early ___ miss the traffic on the ring road.",
+   "options": ["for", "so that", "in order to"],
+   "answer": 2,
+   "reason": "A purpose before a base verb takes *in order to*; *so that* has to be followed by a clause with its own subject.",
+   "rule": "15-adverb-clauses"
+  },
+  {
+   "id": "c13",
+   "sentence": "If it will rain tomorrow, the football final will be postponed until Sunday.",
+   "error": "If it will rain",
+   "fix": "If it rains",
+   "reason": "In a real conditional, the *if* clause stays in the present even about the future.",
+   "trap": "T-C08"
+  },
+  {
+   "id": "c14",
+   "stem": "If I ___ about the deadline, I would have submitted the form last Friday.",
+   "options": ["knew", "had known", "would know"],
+   "answer": 1,
+   "reason": "An unreal past condition takes *had* + past participle to match *would have submitted*.",
+   "trap": "T-C09"
+  },
+  {
+   "id": "c15",
+   "stem": "___ you book early, the tickets to Đà Lạt are very expensive in July.",
+   "options": ["Unless", "If", "Provided that"],
+   "answer": 0,
+   "reason": "*Unless* means \"if not\", which is the meaning the sentence needs here.",
+   "rule": "16-conditionals"
+  }
+ ]
+}

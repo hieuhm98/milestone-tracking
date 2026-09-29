@@ -15,6 +15,7 @@ const nextConfig = {
       // The IELTS pages are statically generated, but keep their data with them
       // in case one is ever rendered on demand.
       "/english/ielts-speaking/**": ["./data/ielts-speaking/**"],
+      "/english/grammar-for-writing/**": ["./data/grammar-for-writing/**"],
     },
   },
   async redirects() {

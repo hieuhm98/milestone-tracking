@@ -1,0 +1,229 @@
+{
+ "part": "B",
+ "title": "Part B review · Nouns and reference",
+ "editing": {
+  "text": "Last term I joined a reading club at my school in Đà Nẵng, and it has changed the way I study. At the first meeting there were only three student and one teacher, but the group grew quickly after the holidays. Our leader, Ms Yến, is teacher of literature, and she gave us many good advices about choosing books that match our level. She also sent us many informations about the city library, which stays open until eight o'clock on weekdays. My brother he joined in the second week, and he brought two classmates with him. Is important to say that none of us had finished a whole novel in English before that term. Ms Yến told us that much problems disappear once you stop translating every single word, and she was right. She asked us to keep a notebook and to write down five new words after each chapter. Between Mai and I, we filled three notebooks before the end of April. One Saturday the whole club went to cinema together to watch a film based on the novel we had just finished. It was raining hard that afternoon and I had forgotten a umbrella, so I arrived late and completely soaked. My sister Ngọc reads faster than anyone else in the group, and he never misses a meeting, even when the weather is terrible. Our last book was about the environment, and it argued that the pollution is mainly a problem of transport rather than of factories. Ms Yến then showed us some researches on the reading habits of teenagers. We all agreed on one point: Government should open more free reading rooms in the suburbs, because not every family can afford books.",
+  "errors": [
+   {
+    "span": "three student and",
+    "fix": "three students and",
+    "type": "plural",
+    "reason": "A count noun after a number above one takes -s.",
+    "trap": "T-B02"
+   },
+   {
+    "span": "is teacher of literature",
+    "fix": "is a teacher of literature",
+    "type": "article",
+    "reason": "A singular count noun needs a determiner, so a job title after *be* takes *a* or *an*.",
+    "trap": "T-B04"
+   },
+   {
+    "span": "many good advices",
+    "fix": "much good advice",
+    "type": "uncountable noun",
+    "reason": "*advice* is uncountable in English: no -s, and *much* rather than *many*.",
+    "trap": "T-B01"
+   },
+   {
+    "span": "many informations",
+    "fix": "a lot of information",
+    "type": "uncountable noun",
+    "reason": "*information* has no plural; use *a lot of* or *much* with it.",
+    "trap": "T-B01"
+   },
+   {
+    "span": "My brother he joined",
+    "fix": "My brother joined",
+    "type": "double subject",
+    "reason": "The noun is already the subject, so the pronoun after it is one subject too many.",
+    "trap": "T-B09"
+   },
+   {
+    "span": "Is important to say",
+    "fix": "It is important to say",
+    "type": "missing subject",
+    "reason": "An English sentence needs a subject, so start the structure with a dummy *it*.",
+    "trap": "T-B07"
+   },
+   {
+    "span": "much problems",
+    "fix": "many problems",
+    "type": "quantifier",
+    "reason": "*problems* is a plural count noun, so it takes *many*, not *much*.",
+    "trap": "T-B03"
+   },
+   {
+    "span": "Between Mai and I",
+    "fix": "Between Mai and me",
+    "type": "pronoun case",
+    "reason": "After a preposition such as *between*, use the object pronoun *me*.",
+    "rule": "11-pronouns"
+   },
+   {
+    "span": "went to cinema",
+    "fix": "went to the cinema",
+    "type": "article",
+    "reason": "*the cinema*, *the theatre* and *the market* take *the* when both writer and reader know the place.",
+    "trap": "T-B06"
+   },
+   {
+    "span": "a umbrella",
+    "fix": "an umbrella",
+    "type": "article form",
+    "reason": "Use *an* before a vowel sound, and *umbrella* begins with one.",
+    "rule": "10-articles-and-other-determiners"
+   },
+   {
+    "span": "he never misses",
+    "fix": "she never misses",
+    "type": "pronoun reference",
+    "reason": "The pronoun refers back to *my sister Ngọc*, so it must be *she*.",
+    "trap": "T-B08"
+   },
+   {
+    "span": "the pollution is mainly",
+    "fix": "pollution is mainly",
+    "type": "article",
+    "reason": "An uncountable noun used in a general sense takes no article.",
+    "trap": "T-B05"
+   },
+   {
+    "span": "some researches",
+    "fix": "some research",
+    "type": "uncountable noun",
+    "reason": "*research* is uncountable in academic English; write *research* or *studies*.",
+    "trap": "T-B01"
+   },
+   {
+    "span": "Government should open",
+    "fix": "The government should open",
+    "type": "article",
+    "reason": "*The government* is a unique institution the reader can identify, so it takes *the*.",
+    "trap": "T-B06"
+   }
+  ]
+ },
+ "items": [
+  {
+   "id": "b1",
+   "stem": "The careers teacher gave us ___ about choosing a university.",
+   "options": ["many advices", "a lot of advice", "much advices"],
+   "answer": 1,
+   "reason": "*advice* is uncountable, so it never takes -s and never takes *many*.",
+   "trap": "T-B01"
+  },
+  {
+   "id": "b2",
+   "sentence": "There are three student from Huế in my study group this semester.",
+   "error": "three student",
+   "fix": "three students",
+   "reason": "A count noun after a number above one has to be plural.",
+   "trap": "T-B02"
+  },
+  {
+   "id": "b3",
+   "stem": "___ research has already been done on air quality in the city centre.",
+   "options": ["Many", "Much", "A few"],
+   "answer": 1,
+   "reason": "*research* is an uncountable academic noun, so it takes *much*, not *many*.",
+   "rule": "09-count-and-uncountable-nouns"
+  },
+  {
+   "id": "b4",
+   "sentence": "We collected a lot of informations about recycling for our class poster.",
+   "error": "informations",
+   "fix": "information",
+   "reason": "*information* has no plural form in English.",
+   "trap": "T-B01"
+  },
+  {
+   "id": "b5",
+   "stem": "The canteen sells about ___ of bottled water every week.",
+   "options": ["two hundred litre", "two hundred litres", "two hundreds litres"],
+   "answer": 1,
+   "reason": "A unit of measure takes the plural after a number, but *hundred* itself stays singular.",
+   "rule": "09-count-and-uncountable-nouns"
+  },
+  {
+   "id": "b6",
+   "sentence": "My older sister is engineer at a factory just outside Biên Hòa.",
+   "error": "is engineer",
+   "fix": "is an engineer",
+   "reason": "A job name after *be* is a singular count noun, so it needs *a* or *an*.",
+   "trap": "T-B04"
+  },
+  {
+   "id": "b7",
+   "stem": "___ is a serious problem in many fast-growing Asian cities.",
+   "options": ["The pollution", "Pollution", "A pollution"],
+   "answer": 1,
+   "reason": "An uncountable noun used generally takes no article.",
+   "trap": "T-B05"
+  },
+  {
+   "id": "b8",
+   "sentence": "Government should invest more money in public transport before the roads become impassable.",
+   "error": "Government should",
+   "fix": "The government should",
+   "reason": "*The government* refers to one institution the reader can identify, so it takes *the*.",
+   "trap": "T-B06"
+  },
+  {
+   "id": "b9",
+   "stem": "Hoa bought ___ umbrella and a thin raincoat before the rainy season started.",
+   "options": ["a", "an", "the"],
+   "answer": 1,
+   "reason": "*an* goes before a vowel sound, and *umbrella* starts with one.",
+   "rule": "10-articles-and-other-determiners"
+  },
+  {
+   "id": "b10",
+   "stem": "___ the candidates who sat the first test came from schools in Cần Thơ.",
+   "options": ["Almost", "Most of", "Most"],
+   "answer": 1,
+   "reason": "A quantifier needs *of* before *the* + noun: *most of the candidates*.",
+   "rule": "10-articles-and-other-determiners"
+  },
+  {
+   "id": "b11",
+   "sentence": "My brother he plays football for the school team every Saturday morning.",
+   "error": "brother he plays",
+   "fix": "brother plays",
+   "reason": "The noun is already the subject, so the extra pronoun has to go.",
+   "trap": "T-B09"
+  },
+  {
+   "id": "b12",
+   "sentence": "Is necessary to check the word limit before you hand in the essay.",
+   "error": "Is necessary",
+   "fix": "It is necessary",
+   "reason": "English needs a subject in every sentence, even when it carries no meaning.",
+   "trap": "T-B07"
+  },
+  {
+   "id": "b13",
+   "stem": "The head teacher handed the certificates to Long and ___.",
+   "options": ["I", "me", "myself"],
+   "answer": 1,
+   "reason": "The pronoun is the object of *to*, so the object form *me* is correct.",
+   "rule": "11-pronouns"
+  },
+  {
+   "id": "b14",
+   "stem": "Everyone in the group ___ to bring a dictionary to the next session.",
+   "options": ["have", "has", "are having"],
+   "answer": 1,
+   "reason": "*everyone* is grammatically singular, so it takes a singular verb.",
+   "rule": "11-pronouns"
+  },
+  {
+   "id": "b15",
+   "sentence": "My mother works at a clinic in Huế, and he starts at six every morning.",
+   "error": "and he starts",
+   "fix": "and she starts",
+   "reason": "The pronoun points back to *my mother*, so English marks it as *she*.",
+   "trap": "T-B08"
+  }
+ ]
+}

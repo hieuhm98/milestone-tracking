@@ -1,0 +1,268 @@
+{
+ "id": "17-word-forms",
+ "number": 17,
+ "part": "D",
+ "title": "Word forms",
+ "status": "draft",
+ "focus": {
+  "text": "Most English words belong to a family: *decide, decision, decisive, decisively*. The family shares a meaning, but each member fits a different slot in the sentence. A noun works as a subject or an object, a verb carries the action, an adjective sits before a noun or after *be*, and an adverb describes a verb or a whole clause. Endings such as *-tion, -ment, -ise, -ful* and *-ly* are the signposts. Choosing the wrong member is one of the quickest ways to lose marks, because the sentence still looks familiar but no longer works.",
+  "summaryTable": {
+   "caption": "One meaning, four jobs in the sentence",
+   "columns": ["Noun", "Verb", "Adjective", "Adverb"],
+   "rows": [
+    ["decision", "decide", "decisive", "decisively"],
+    ["success", "succeed", "successful", "successfully"],
+    ["difference", "differ", "different", "differently"],
+    ["strength", "strengthen", "strong", "strongly"]
+   ]
+  }
+ },
+ "pretest": [
+  { "id": "p1", "sentence": "The government has taken a decisive step towards cleaner air.", "correct": true, "reason": "*decisive* is the adjective form, and it belongs before the noun *step*.", "layer": "core" },
+  { "id": "p2", "sentence": "This is a very success business in Đà Nẵng.", "correct": false, "reason": "Before a noun, use the adjective: *a very successful business*.", "trap": "T-D02", "layer": "core" },
+  { "id": "p3", "sentence": "My cousin drives very careful on wet roads.", "correct": false, "reason": "*drives* is a verb, so it takes the adverb *carefully*.", "trap": "T-D03", "layer": "core" },
+  { "id": "p4", "sentence": "Air pollution has increased quickly in several large cities.", "correct": true, "reason": "*quickly* is an adverb describing the verb *has increased*.", "layer": "core" },
+  { "id": "p5", "sentence": "I was very boring during the long lecture.", "correct": false, "reason": "*-ed* describes how you feel, so write *I was very bored*.", "trap": "T-D01", "layer": "core" },
+  { "id": "p6", "sentence": "The results of the survey were surprising.", "correct": true, "reason": "*-ing* describes what causes the feeling, and the results caused it.", "layer": "core" },
+  { "id": "p7", "sentence": "The company wants to improvement its website before June.", "correct": false, "reason": "After *to*, the slot needs a verb: *to improve its website*.", "layer": "core" },
+  { "id": "p8", "sentence": "Renting a room in Huế is far cheaper than renting one in Hà Nội.", "correct": true, "reason": "*far* strengthens the comparative *cheaper*, and *than* introduces the second item.", "layer": "extend" },
+  { "id": "p9", "sentence": "Đà Lạt is the most coldest city I have visited.", "correct": false, "reason": "Use *the coldest* or *the most…*, never both markings together.", "layer": "extend" },
+  { "id": "p10", "sentence": "Students who revise regularly perform better in the final exam.", "correct": true, "reason": "*regularly* describes the verb *revise*, and *better* is the comparative of the adverb *well*.", "layer": "extend" }
+ ],
+ "context": {
+  "title": "A quieter street",
+  "paragraph": "The neighbourhood where Khánh lives has changed since the council approved a new traffic plan. The improvement that residents notice first is the silence after nine o'clock. Noise pollution used to make sleep difficult, and the difference now is obvious. The council also widened the pavement, and this decision has encouraged families to walk instead of riding motorbikes. Shop owners were doubtful at first, because they expected a fall in sales. Their fear proved wrong: the number of customers has grown, and several of them arrive on foot. Khánh believes the success of the plan depends on one simple idea. If a street feels safe, people will use it, and safety costs less than people imagine.",
+  "task": "tap-nouns",
+  "targets": ["improvement", "silence", "pollution", "difference", "decision", "fear", "success", "safety"]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming word families",
+   "table": {
+    "caption": "Four members of the same family",
+    "columns": ["Noun", "Verb", "Adjective", "Adverb"],
+    "rows": [
+     ["competition", "compete", "competitive", "competitively"],
+     ["creation", "create", "creative", "creatively"],
+     ["economy", "economise", "economical", "economically"],
+     ["care", "care", "careful", "carefully"],
+     ["pollution", "pollute", "polluted", "—"]
+    ]
+   },
+   "notes": [
+    "Not every family has all four members. *Pollution* has no everyday adverb, and some words — *care, use, help, change* — keep the same shape as a noun and as a verb.",
+    "*Economy* has two adjectives: *economic* means *about the economy*, and *economical* means *cheap to run*. Unit 18 looks at that pair again."
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "form",
+    "items": [
+     { "id": "sc1-1", "stem": "The new bus lane is a real ___ for everyone who travels into the centre.", "base": "improve", "answer": ["improvement"], "reason": "After *a real*, the slot needs a noun: *improvement*." },
+     { "id": "sc1-2", "stem": "Our teacher explained the rule ___, so nobody was confused.", "base": "clear", "answer": ["clearly"], "reason": "An adverb describes the verb *explained*.", "trap": "T-D03" },
+     { "id": "sc1-3", "stem": "Đà Nẵng has become a very ___ city for young workers.", "base": "attract", "answer": ["attractive"], "reason": "Before the noun *city*, use the adjective *attractive*.", "trap": "T-D02" },
+     { "id": "sc1-4", "stem": "The council wants to ___ the old market next year.", "base": "modern", "answer": ["modernise"], "reason": "After *to*, the slot needs a verb: *modernise*." },
+     { "id": "sc1-5", "stem": "The ___ between the two charts is easy to see.", "base": "different", "answer": ["difference"], "reason": "After *the*, the slot needs a noun: *difference*." }
+    ]
+   }
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming words with suffixes",
+   "table": {
+    "caption": "Common endings and the word class they build",
+    "columns": ["Ending", "Builds", "Examples"],
+    "rows": [
+     ["-tion, -sion, -ment, -ness, -ity, -ance", "nouns for things and ideas", "education, decision, agreement, illness, ability, importance"],
+     ["-er, -or, -ist, -ian", "nouns for people", "teacher, visitor, scientist, technician"],
+     ["-ise, -ify, -en", "verbs", "organise, simplify, strengthen"],
+     ["-ful, -less, -al, -ive, -ous, -able", "adjectives", "useful, careless, national, creative, famous, comfortable"],
+     ["-ly", "adverbs", "quickly, clearly, recently"]
+    ]
+   },
+   "notes": [
+    "Spelling: an adjective ending in consonant + **y** takes *-ily* (*easy → easily*), and one ending in *-le* drops the e (*simple → simply*). Adjectives that already end in *-ly* (*friendly, lively*) have no adverb form, so write *in a friendly way*.",
+    "A few adverbs keep the adjective shape: *fast, hard, late, early*. *Hardly* is not the adverb of *hard*; it means *almost not*."
+   ]
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using the right form for the slot",
+   "rules": [
+    {
+     "text": "A noun goes after *a, the, this, my* or a number, and after a preposition.",
+     "examples": [
+      { "text": "The **growth** of online shopping has changed the high street.", "bold": ["growth"] },
+      { "text": "Many families worry about the **cost** of private tuition.", "bold": ["cost"] }
+     ]
+    },
+    {
+     "text": "An adjective goes before a noun, or after *be, seem, become* and *look*.",
+     "examples": [
+      { "text": "Cần Thơ is a **peaceful** city, and the food is **cheap**.", "bold": ["peaceful", "cheap"] },
+      { "text": "The exam became **difficult** after the first section.", "bold": ["difficult"] }
+     ]
+    },
+    {
+     "text": "An adverb describes a verb, an adjective or the whole sentence. It never sits between a verb and its object.",
+     "examples": [
+      { "text": "She answered the questions **confidently**.", "bold": ["confidently"] },
+      { "text": "**Unfortunately**, the survey covered only two districts.", "bold": ["Unfortunately"] }
+     ]
+    }
+   ],
+   "tips": ["Before you change a word, find its slot. Ask what comes before the gap: *the* or *a* wants a noun, *very* wants an adjective or adverb, and *to* wants a base verb."]
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using -ed and -ing adjectives, and adverbs of manner",
+   "rules": [
+    {
+     "text": "An *-ed* adjective says how a person feels; an *-ing* adjective says what causes the feeling.",
+     "examples": [
+      { "text": "The students were **bored** because the film was **boring**.", "bold": ["bored", "boring"] },
+      { "text": "I am **interested** in architecture, and Hội An is an **interesting** place to study it.", "bold": ["interested", "interesting"] }
+     ]
+    },
+    {
+     "text": "Use the adverb form to say how something is done, even where Vietnamese would use the plain describing word.",
+     "examples": [
+      { "text": "Trang speaks English **fluently** after two years abroad.", "bold": ["fluently"] },
+      { "text": "The team worked **hard** and finished the report early.", "bold": ["hard"] }
+     ]
+    },
+    {
+     "text": "After *be, feel, look, smell* and *taste*, use an adjective. These verbs describe the subject, not an action.",
+     "examples": [
+      { "text": "The soup tastes **delicious**.", "bold": ["delicious"] },
+      { "text": "Everyone felt **nervous** before the results appeared.", "bold": ["nervous"] }
+     ]
+    }
+   ],
+   "notes": ["*Good* is an adjective and *well* is its adverb: *a good essay*, but *she writes well*. *I feel well* is about health, not about quality."],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "choice",
+    "items": [
+     { "id": "sc2-1", "stem": "The documentary about plastic waste was really ___.", "options": ["shocked", "shocking"], "answer": 1, "reason": "The documentary causes the feeling, so use the *-ing* form.", "trap": "T-D01" },
+     { "id": "sc2-2", "stem": "Minh was ___ when he saw his IELTS score.", "options": ["excited", "exciting"], "answer": 0, "reason": "Minh is the person who feels it, so use the *-ed* form.", "trap": "T-D01" },
+     { "id": "sc2-3", "stem": "The traffic in the old quarter moves very ___.", "options": ["slow", "slowly"], "answer": 1, "reason": "*moves* is a verb, so it takes the adverb *slowly*.", "trap": "T-D03" },
+     { "id": "sc2-4", "stem": "Her notes were clear and ___ organised.", "options": ["careful", "carefully"], "answer": 1, "reason": "An adverb describes *organised*, not the notes themselves.", "trap": "T-D03" },
+     { "id": "sc2-5", "stem": "Living near the beach is a ___ experience for most visitors.", "options": ["relax", "relaxing"], "answer": 1, "reason": "Before the noun *experience*, use the adjective *relaxing*.", "trap": "T-D02" }
+    ]
+   }
+  },
+  {
+   "id": "forming-3",
+   "kind": "forming",
+   "layer": "extend",
+   "title": "Forming comparatives and superlatives",
+   "table": {
+    "caption": "Short words add an ending; longer words take *more* and *most*",
+    "columns": ["Adjective or adverb", "Comparative", "Superlative"],
+    "rows": [
+     ["cheap (one syllable)", "cheaper", "the cheapest"],
+     ["busy (two syllables, ending -y)", "busier", "the busiest"],
+     ["expensive (two or more syllables)", "more expensive", "the most expensive"],
+     ["quickly (adverb ending -ly)", "more quickly", "the most quickly"],
+     ["good / well", "better", "the best"],
+     ["bad / badly", "worse", "the worst"],
+     ["far", "further", "the furthest"]
+    ]
+   },
+   "notes": ["Never mark the comparison twice: *more cheaper* and *the most cheapest* are both wrong. Use *than* after a comparative, and *in* or *of* after a superlative: *the busiest street in Hà Nội*."]
+  },
+  {
+   "id": "using-3",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using word forms in academic writing",
+   "rules": [
+    {
+     "text": "Academic writing often turns a verb into a noun so that the idea itself can be the subject of the sentence.",
+     "examples": [
+      { "text": "The **reduction** in plastic waste began after the ban.", "bold": ["reduction"] },
+      { "text": "A careful **analysis** of the data shows two clear trends.", "bold": ["analysis"] }
+     ]
+    },
+    {
+     "text": "Fixed academic phrases keep one fixed form. Learn the whole phrase rather than the single word.",
+     "examples": [
+      { "text": "**In conclusion**, the two policies produced very different results.", "bold": ["In conclusion"] },
+      { "text": "The scheme succeeded **to a large extent**.", "bold": ["to a large extent"] }
+     ]
+    },
+    {
+     "text": "Say your opinion once. *In my opinion* and *I think* do the same job, so using both weakens the sentence.",
+     "examples": [
+      { "text": "**In my opinion**, university fees should stay the same.", "bold": ["In my opinion"] },
+      { "text": "**I believe** that free bus travel would reduce congestion.", "bold": ["I believe"] }
+     ]
+    }
+   ],
+   "tips": ["Nouns make a sentence heavy. One noun form per sentence is usually enough: *the improvement in air quality* is fine, but *the improvement in the reduction of the pollution* is not."],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "fix",
+    "items": [
+     { "id": "sc3-1", "sentence": "In my opinion, I think schools should start later.", "error": "In my opinion, I think", "fix": "In my opinion,", "reason": "*In my opinion* and *I think* say the same thing; keep one.", "trap": "T-D10" },
+     { "id": "sc3-2", "sentence": "The report gives a clear explain of the new rules.", "error": "explain", "fix": "explanation", "reason": "After *a clear*, the slot needs a noun: *explanation*." },
+     { "id": "sc3-3", "sentence": "Hà Nội is the most busiest city I have lived in.", "error": "the most busiest", "fix": "the busiest", "reason": "Use *-est* or *most*, never both markings together." },
+     { "id": "sc3-4", "sentence": "This method is more effective, and it works quick as well.", "error": "quick", "fix": "quickly", "reason": "*works* is a verb, so it takes the adverb *quickly*.", "trap": "T-D03" },
+     { "id": "sc3-5", "sentence": "The students were very satisfying with their results.", "error": "satisfying", "fix": "satisfied", "reason": "The students are the ones who feel it, so use the *-ed* form.", "trap": "T-D01" }
+    ]
+   }
+  }
+ ],
+ "traps": ["T-D01", "T-D02", "T-D03", "T-D10"],
+ "editing": {
+  "text": "Last month our class took part in a photography competition organised by the city library. The theme was 'A quiet corner of my neighbourhood', and the prize was a weekend course with a profession photographer. I was very exciting when our teacher read out the rules, because I had never entered anything like this. My friend Ngọc and I planned our shots careful, and we walked around Thanh Khê district for two afternoons. Ngọc take more than three hundred pictures, while I chose only twelve. In my opinion, I think her method was better. The judges praised the creative of her final image, and she won second place. The most surprising part was the comment from the head judge, who said the competition had been the most closest for years. Our teacher told us that the improve in our work since September was clear.",
+  "errors": [
+   { "span": "profession photographer", "fix": "professional photographer", "type": "word form", "reason": "Before a noun, use the adjective *professional*.", "trap": "T-D02" },
+   { "span": "very exciting", "fix": "very excited", "type": "word form", "reason": "The writer feels it, so the *-ed* form is needed.", "trap": "T-D01" },
+   { "span": "shots careful", "fix": "shots carefully", "type": "word form", "reason": "*planned* is a verb, so it takes the adverb *carefully*.", "trap": "T-D03" },
+   { "span": "Ngọc take", "fix": "Ngọc took", "type": "tense", "reason": "The paragraph describes last month, so use the simple past.", "trap": "T-A05" },
+   { "span": "In my opinion, I think", "fix": "In my opinion,", "type": "repetition", "reason": "*In my opinion* and *I think* say the same thing; use one.", "trap": "T-D10" },
+   { "span": "the creative of", "fix": "the creativity of", "type": "word form", "reason": "After *the*, the slot needs a noun: *creativity*.", "rule": "using-1" },
+   { "span": "the most closest", "fix": "the closest", "type": "comparison", "reason": "Use *-est* or *most*, never both markings together.", "rule": "forming-3" },
+   { "span": "the improve in", "fix": "the improvement in", "type": "word form", "reason": "After *the*, the slot needs a noun: *improvement*.", "rule": "using-1" }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email to the organisers of a photography or writing competition. Ask for details about the entry rules and explain why the topic attracts you.",
+   "length": "120–150 words",
+   "checklist": [
+    "Every *-ed* and *-ing* adjective does its own job: *-ed* for how you feel, *-ing* for what causes the feeling.",
+    "Each describing word sits in the right slot: an adjective before a noun, an adverb after a verb.",
+    "No sentence uses *In my opinion* and *I think* together."
+   ]
+  },
+  {
+   "prompt": "'Schools should teach practical skills such as cooking and budgeting.' Give your opinion and support it with two reasons.",
+   "length": "150–180 words",
+   "checklist": [
+    "At least three nouns come from a family you also use as a verb or an adjective (*improve / improvement*).",
+    "Every adverb of manner ends in *-ly*, unless it is *fast, hard, late* or *well*.",
+    "Opinion phrases appear once each, never stacked together."
+   ]
+  },
+  {
+   "prompt": "Compare two places you know well, for example your home town and a city you have visited. Say which one suits a student better, and why.",
+   "length": "150–180 words",
+   "checklist": [
+    "Every comparative uses *-er … than* or *more … than*, never both.",
+    "Every superlative uses *the* + *-est* or *the most*, never both.",
+    "At least two sentences use a noun built with *-tion, -ment, -ity* or *-ness*."
+   ]
+  }
+ ]
+}

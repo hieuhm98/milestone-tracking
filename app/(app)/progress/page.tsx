@@ -7,6 +7,7 @@ import { useProgress } from "@/context/progress";
 import {
   PASS_PCT,
   UNKNOWN_COURSE,
+  isCurriculumTopic,
   isUnchanged,
   mergeImport,
   normalize,
@@ -99,6 +100,7 @@ export default function ProgressPage() {
     const known = new Map(topics.map((tp) => [tp.slug, tp]));
 
     return Object.keys(progress.topics)
+      .filter(isCurriculumTopic)
       .map((slug) => {
         const topic = known.get(slug);
         const stat = topicStats(progress, slug, topic?.questionCount);

@@ -1,0 +1,692 @@
+{
+ "id": "16-conditionals",
+ "number": 16,
+ "part": "C",
+ "title": "Conditionals",
+ "status": "draft",
+ "focus": {
+  "text": "A conditional sentence has two parts: an if clause that sets a condition, and a main clause that gives the result. The verb forms you choose tell the reader whether you think the condition is likely, unlikely or impossible. Real conditionals describe things that do happen or easily could happen; hypothetical conditionals describe a situation you have only imagined. The if clause never takes will or would, however far into the future it looks. Either half can come first, and when the if clause comes first it takes a comma.",
+  "summaryTable": {
+   "caption": "The four patterns at a glance",
+   "columns": [
+    "Type",
+    "The *if* clause",
+    "The main clause",
+    "Example"
+   ],
+   "rows": [
+    [
+     "Zero: always true",
+     "present simple",
+     "present simple",
+     "If water **reaches** 100 degrees, it **boils**."
+    ],
+    [
+     "First: likely future",
+     "present simple",
+     "*will* + base verb",
+     "If the bus **is** late, I **will walk**."
+    ],
+    [
+     "Second: unreal now",
+     "past simple",
+     "*would* + base verb",
+     "If I **had** more time, I **would join** the club."
+    ],
+    [
+     "Third: unreal past",
+     "past perfect",
+     "*would have* + past participle",
+     "If I **had revised**, I **would have passed**."
+    ]
+   ]
+  }
+ },
+ "pretest": [
+  {
+   "id": "p1",
+   "sentence": "If the shop closes early, we buy our lunch at the market.",
+   "correct": true,
+   "reason": "A situation that repeats takes the present simple in both clauses.",
+   "layer": "core"
+  },
+  {
+   "id": "p2",
+   "sentence": "If it will rain tomorrow, the match will be postponed.",
+   "correct": false,
+   "reason": "The *if* clause takes the present: *If it rains tomorrow*.",
+   "trap": "T-C08",
+   "layer": "core"
+  },
+  {
+   "id": "p3",
+   "sentence": "If you hand the form in late, the office will not accept it.",
+   "correct": true,
+   "reason": "A likely future condition takes the present simple plus *will*.",
+   "layer": "core"
+  },
+  {
+   "id": "p4",
+   "sentence": "If I see Nga tomorrow, I tell her about the meeting.",
+   "correct": false,
+   "reason": "One future result needs *will*: *I will tell her about the meeting*.",
+   "layer": "core"
+  },
+  {
+   "id": "p5",
+   "sentence": "Water freezes if the temperature falls below zero.",
+   "correct": true,
+   "reason": "A fact that is always true takes the present in both clauses, and no comma is needed here.",
+   "layer": "core"
+  },
+  {
+   "id": "p6",
+   "sentence": "If the library is full, we will to study at home.",
+   "correct": false,
+   "reason": "A modal is followed by the base verb: *we will study*.",
+   "trap": "T-A14",
+   "layer": "core"
+  },
+  {
+   "id": "p7",
+   "sentence": "If I lived closer to the campus, I would cycle every day.",
+   "correct": true,
+   "reason": "An unreal present situation takes the past simple after *if* and *would* + base verb.",
+   "layer": "extend"
+  },
+  {
+   "id": "p8",
+   "sentence": "If she studied harder last year, she would pass the entrance exam.",
+   "correct": false,
+   "reason": "For an unreal past, use *had studied* and *would have passed*.",
+   "trap": "T-C09",
+   "layer": "extend"
+  },
+  {
+   "id": "p9",
+   "sentence": "If Khoa had taken the earlier bus, he would not be waiting now.",
+   "correct": true,
+   "reason": "A mixed conditional: an unreal past cause (*had taken*) with a result that is true now.",
+   "layer": "extend"
+  },
+  {
+   "id": "p10",
+   "sentence": "Unless you don't submit the essay by Friday, you will lose marks.",
+   "correct": false,
+   "reason": "*Unless* already means *if not*, so the second negative reverses the meaning.",
+   "layer": "extend"
+  }
+ ],
+ "context": {
+  "title": "Planning the clean-up day",
+  "paragraph": "Our class is planning a clean-up day at the riverside park next month. If the weather is dry, we will start at seven in the morning. If it rains heavily, we will move the whole event to the following Saturday. Unless every group brings its own gloves, the teachers cannot let us collect broken glass. Nga says that if she had known about the project earlier, she would have asked her uncle to lend us a van. Provided that the council approves our plan, a lorry will take the rubbish away at noon. If we finish before lunch, we will get free drinks from the café opposite the gate.",
+  "task": "tap-clauses",
+  "targets": [
+   "If the weather is dry",
+   "we will start at seven in the morning",
+   "If it rains heavily",
+   "Unless every group brings its own gloves",
+   "if she had known about the project earlier",
+   "she would have asked her uncle to lend us a van",
+   "Provided that the council approves our plan",
+   "If we finish before lunch"
+  ]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming real conditionals",
+   "table": {
+    "caption": "Real conditionals: the forms",
+    "columns": [
+     "Type",
+     "The *if* clause",
+     "The main clause",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Zero: always true",
+      "present simple",
+      "present simple",
+      "If the tide **goes** out, the boats **rest** on the sand."
+     ],
+     [
+      "First: likely future",
+      "present simple",
+      "*will* or *will not* + base verb",
+      "If the fee **rises**, fewer students **will enrol**."
+     ],
+     [
+      "First with a modal",
+      "present simple",
+      "*may*, *might*, *can* or *should* + base verb",
+      "If you **book** early, you **may get** a discount."
+     ],
+     [
+      "First as an instruction",
+      "present simple",
+      "imperative",
+      "If the alarm **sounds**, **leave** by the back door."
+     ]
+    ]
+   },
+   "notes": [
+    "The *if* clause never takes *will*, even when it points to the future: *If the bus is late* — not *if the bus will be late*.",
+    "When the *if* clause comes first, put a comma after it. When it comes second, no comma is needed."
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "form",
+    "items": [
+     {
+      "id": "sc1-1",
+      "stem": "If the rain ___ before six, we will cycle to the market.",
+      "base": "stop",
+      "answer": [
+       "stops"
+      ],
+      "reason": "The *if* clause takes the present simple, and *the rain* is third person singular.",
+      "trap": "T-C08"
+     },
+     {
+      "id": "sc1-2",
+      "stem": "If you leave now, you ___ the last ferry.",
+      "base": "catch",
+      "answer": [
+       "will catch",
+       "'ll catch"
+      ],
+      "reason": "A likely future result takes *will* plus the base verb."
+     },
+     {
+      "id": "sc1-3",
+      "stem": "If the temperature ___ above 35 degrees, the school cancels afternoon sport.",
+      "base": "rise",
+      "answer": [
+       "rises"
+      ],
+      "reason": "A rule that is always true takes the present simple in both clauses."
+     },
+     {
+      "id": "sc1-4",
+      "stem": "If Hùng ___ his wallet at home, he will not be able to pay.",
+      "base": "leave",
+      "answer": [
+       "leaves"
+      ],
+      "reason": "The *if* clause stays in the present, however far into the future it looks.",
+      "trap": "T-C08"
+     },
+     {
+      "id": "sc1-5",
+      "stem": "If you ___ the instructions carefully, you may avoid the common mistakes.",
+      "base": "read",
+      "answer": [
+       "read"
+      ],
+      "reason": "The *if* clause stays in the present simple even when the sentence looks forward, and *you* adds no -s.",
+      "trap": "T-C08"
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using real conditionals",
+   "rules": [
+    {
+     "text": "Use present plus present when the result always follows: a rule, a habit or a scientific fact.",
+     "examples": [
+      {
+       "text": "If the canteen **runs** out of rice, it **serves** noodles instead.",
+       "bold": [
+        "runs",
+        "serves"
+       ]
+      },
+      {
+       "text": "If a pupil **misses** three classes, the school **calls** the parents.",
+       "bold": [
+        "misses",
+        "calls"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use present plus *will* when you are talking about one likely situation in the future.",
+     "examples": [
+      {
+       "text": "If the council **builds** the new line, my journey **will take** twenty minutes.",
+       "bold": [
+        "builds",
+        "will take"
+       ]
+      },
+      {
+       "text": "We **will postpone** the trip if the forecast **is** bad.",
+       "bold": [
+        "will postpone",
+        "is"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Swap *will* for *may*, *might*, *can* or *should* when you want to soften the result, which is useful in academic writing.",
+     "examples": [
+      {
+       "text": "If sea levels **rise** further, several districts **may flood**.",
+       "bold": [
+        "may flood"
+       ]
+      },
+      {
+       "text": "If the city **charges** for parking, drivers **might use** the bus.",
+       "bold": [
+        "might use"
+       ]
+      }
+     ]
+    }
+   ],
+   "tips": [
+    "In a Task 2 essay, a first conditional is the cleanest way to argue a consequence: *If the government subsidises train tickets, fewer people will drive into the centre.*"
+   ]
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "extend",
+   "title": "Forming hypothetical conditionals",
+   "table": {
+    "caption": "Hypothetical and mixed conditionals: the forms",
+    "columns": [
+     "Type",
+     "The *if* clause",
+     "The main clause",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Second: unreal or unlikely now",
+      "past simple (*were* with *be*)",
+      "*would*, *could* or *might* + base verb",
+      "If I **were** you, I **would apply** today."
+     ],
+     [
+      "Third: unreal past",
+      "past perfect (*had* + past participle)",
+      "*would have* or *could have* + past participle",
+      "If she **had asked**, we **would have helped**."
+     ],
+     [
+      "Mixed: past cause, present result",
+      "past perfect",
+      "*would* + base verb",
+      "If they **had left** earlier, they **would be** here now."
+     ],
+     [
+      "Mixed: present cause, past result",
+      "past simple",
+      "*would have* + past participle",
+      "If he **were** more careful, he **would not have lost** his keys."
+     ]
+    ]
+   },
+   "notes": [
+    "The past forms here do not mean past time; they mean that the situation is not real. *If I had a car* is about today, not about yesterday.",
+    "*Were* is the formal choice for every subject in a second conditional: *If the report were shorter, more people would read it.* *Was* is common in speech."
+   ],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "choice",
+    "items": [
+     {
+      "id": "sc2-1",
+      "stem": "If I ___ in Đà Nẵng, I would swim every morning before work.",
+      "options": [
+       "live",
+       "lived"
+      ],
+      "answer": 1,
+      "reason": "An unreal present situation takes the past simple in the *if* clause."
+     },
+     {
+      "id": "sc2-2",
+      "stem": "If the team had trained harder, they ___ the final.",
+      "options": [
+       "would win",
+       "would have won"
+      ],
+      "answer": 1,
+      "reason": "An unreal past result takes *would have* plus the past participle.",
+      "trap": "T-C09"
+     },
+     {
+      "id": "sc2-3",
+      "stem": "If Lan had caught the earlier train, she ___ in Huế by now.",
+      "options": [
+       "would be",
+       "would have been"
+      ],
+      "answer": 0,
+      "reason": "The cause is in the past but the result is true now, so use *would* plus the base verb."
+     },
+     {
+      "id": "sc2-4",
+      "stem": "If I ___ the answer, I would tell you straight away.",
+      "options": [
+       "knew",
+       "had known"
+      ],
+      "answer": 0,
+      "reason": "The situation is unreal now, not in the past, so use the past simple."
+     },
+     {
+      "id": "sc2-5",
+      "stem": "If the school had bought new computers last year, the lab ___ so crowded today.",
+      "options": [
+       "would not be",
+       "would not have been"
+      ],
+      "answer": 0,
+      "reason": "A mixed conditional: a past condition with a present result takes *would* plus the base verb."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using hypothetical and mixed conditionals",
+   "rules": [
+    {
+     "text": "Use the second conditional for a present or future situation you know is not true, or think is very unlikely.",
+     "examples": [
+      {
+       "text": "If the city **had** a metro line, the air **would be** cleaner.",
+       "bold": [
+        "had",
+        "would be"
+       ]
+      },
+      {
+       "text": "If I **were** the head teacher, I **would shorten** the lunch break.",
+       "bold": [
+        "were",
+        "would shorten"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use the third conditional to look back at something that did not happen and imagine a different past.",
+     "examples": [
+      {
+       "text": "If we **had booked** the hostel earlier, we **would have paid** half the price.",
+       "bold": [
+        "had booked",
+        "would have paid"
+       ]
+      },
+      {
+       "text": "Trang **would have joined** the trip if her passport **had arrived** in time.",
+       "bold": [
+        "would have joined",
+        "had arrived"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Mix the two patterns when the condition and the result belong to different times. Keep each half in its own form.",
+     "examples": [
+      {
+       "text": "If Minh **had chosen** science, he **would be** studying medicine now.",
+       "bold": [
+        "had chosen",
+        "would be"
+       ]
+      },
+      {
+       "text": "If I **were** better at maths, I **would have taken** the engineering course.",
+       "bold": [
+        "were",
+        "would have taken"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Keep *would* in the main clause. An *if* clause takes a past form instead.",
+     "examples": [
+      {
+       "text": "If the bus **came** more often, I would not need a motorbike.",
+       "bold": [
+        "came"
+       ]
+      },
+      {
+       "text": "If they **offered** scholarships, more students would apply.",
+       "bold": [
+        "offered"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "The one common exception to the last rule is the polite formula *If you would like more information, please contact the office*, which is a request rather than a condition."
+   ],
+   "tips": [
+    "Hypothetical conditionals are useful for recommendations: *If schools started later, teenagers would sleep longer.* Follow one with evidence, or it reads as a guess."
+   ],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "fix",
+    "items": [
+     {
+      "id": "sc3-1",
+      "sentence": "If the ferry will leave at six, we need to be at the port by five.",
+      "error": "will leave",
+      "fix": "leaves",
+      "reason": "The *if* clause takes the present, not *will*.",
+      "trap": "T-C08"
+     },
+     {
+      "id": "sc3-2",
+      "sentence": "If I would have more free time, I would learn to play the guitar.",
+      "error": "would have more free time",
+      "fix": "had more free time",
+      "reason": "*Would* belongs in the main clause; the *if* clause takes the past simple."
+     },
+     {
+      "id": "sc3-3",
+      "sentence": "If she had revised the vocabulary, she would pass the test last Friday.",
+      "error": "would pass",
+      "fix": "would have passed",
+      "reason": "The result is in the past too, so use *would have* plus the past participle.",
+      "trap": "T-C09"
+     },
+     {
+      "id": "sc3-4",
+      "sentence": "Unless you don't bring your student card, you will pay the full price.",
+      "error": "don't bring",
+      "fix": "bring",
+      "reason": "*Unless* already means *if not*, so a second negative reverses the meaning."
+     },
+     {
+      "id": "sc3-5",
+      "sentence": "If the price fell a little, many more people would to buy electric bikes.",
+      "error": "would to buy",
+      "fix": "would buy",
+      "reason": "A modal is followed by the base verb, never by *to* plus a verb.",
+      "trap": "T-A14"
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-3",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using unless, provided that and even if",
+   "rules": [
+    {
+     "text": "*Unless* means *if not*, so the clause after it stays positive.",
+     "examples": [
+      {
+       "text": "**Unless the rain stops**, the match will be cancelled.",
+       "bold": [
+        "Unless the rain stops"
+       ]
+      },
+      {
+       "text": "You cannot enter the lab **unless you wear** closed shoes.",
+       "bold": [
+        "unless you wear"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *provided that*, *as long as* or *on condition that* when the condition is a requirement you are setting.",
+     "examples": [
+      {
+       "text": "You can borrow my notes **provided that you return them** by Friday.",
+       "bold": [
+        "provided that you return them"
+       ]
+      },
+      {
+       "text": "The club accepts new members **as long as they attend** two sessions a month.",
+       "bold": [
+        "as long as they attend"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *even if* when the result does not change, and *in case* for a precaution you take in advance.",
+     "examples": [
+      {
+       "text": "**Even if the fee doubles**, I will finish the course.",
+       "bold": [
+        "Even if the fee doubles"
+       ]
+      },
+      {
+       "text": "Take a raincoat **in case the weather changes**.",
+       "bold": [
+        "in case the weather changes"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "*In case* is not a conditional. *If it rains, I will take an umbrella* is a reaction; *I will take an umbrella in case it rains* is a precaution you take before anything happens."
+   ],
+   "tips": [
+    "*Unless* is strong, so it suits rules and warnings. In a balanced essay, *provided that* and *as long as* sound fairer: *Higher fees are acceptable provided that grants exist.*"
+   ]
+  }
+ ],
+ "traps": [
+  "T-A09",
+  "T-A14",
+  "T-C08",
+  "T-C09",
+  "T-C13"
+ ],
+ "editing": {
+  "text": "Last term our school ran a free coding course, and I still regret that I did not sign up. If I would have joined it in September, I would know how to build a simple website by now. My friend Khang took the course, and he says that if he had not learned Python, he will not have found his part-time job at a start-up in Đà Nẵng. The teacher told us that if students attend every session, they receive a certificate. Unless you don't miss more than two classes, the certificate is yours. I asked my parents about the fee for the next course. Because I really want to continue. They said that if the price fell a little, they would to pay for it. If the school offer the course again, I will apply on the first day, and when I will start university, I hope to study computer science.",
+  "errors": [
+   {
+    "span": "If I would have joined",
+    "fix": "If I had joined",
+    "type": "conditional form",
+    "reason": "*Would* belongs in the main clause; an unreal past condition takes *had* plus the past participle.",
+    "rule": "forming-2"
+   },
+   {
+    "span": "he will not have found",
+    "fix": "he would not have found",
+    "type": "conditional form",
+    "reason": "A third conditional takes *would have* plus the past participle, not *will have*.",
+    "trap": "T-C09"
+   },
+   {
+    "span": "Unless you don't miss",
+    "fix": "Unless you miss",
+    "type": "double negative",
+    "reason": "*Unless* already means *if not*, so *don't* reverses the meaning.",
+    "rule": "using-3"
+   },
+   {
+    "span": "next course. Because",
+    "fix": "next course because",
+    "type": "fragment",
+    "reason": "A *because* clause cannot stand alone as a sentence.",
+    "trap": "T-C02"
+   },
+   {
+    "span": "would to pay",
+    "fix": "would pay",
+    "type": "modal form",
+    "reason": "A modal is followed by the base verb with no *to*.",
+    "trap": "T-A14"
+   },
+   {
+    "span": "school offer",
+    "fix": "school offers",
+    "type": "agreement",
+    "reason": "*The school* is third person singular, so the verb takes -s.",
+    "trap": "T-A01"
+   },
+   {
+    "span": "when I will start",
+    "fix": "when I start",
+    "type": "tense in a time clause",
+    "reason": "A future time clause takes the present, not *will*.",
+    "trap": "T-A09"
+   }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email to a classmate who missed the meeting about the school trip. Explain what will happen if the group reaches thirty people, and what will happen if it does not.",
+   "length": "120–150 words",
+   "checklist": [
+    "At least three first conditionals: a present form after *if* and *will* in the main clause.",
+    "Neither *will* nor *would* appears inside an *if* clause.",
+    "A comma follows every *if* clause that comes first."
+   ]
+  },
+  {
+   "prompt": "Some people say that if public transport were free, city centres would be far cleaner. How far do you agree? Give reasons and an example.",
+   "length": "150–180 words",
+   "checklist": [
+    "At least two second conditionals with a past form after *if* and *would* plus the base verb.",
+    "At least one result is softened with *might*, *may* or *could*.",
+    "*Unless*, *provided that* or *as long as* appears at least once."
+   ]
+  },
+  {
+   "prompt": "Look back at a decision you made two or three years ago, such as a school, a club or a subject. Describe what happened, then imagine how your life would be different today if you had chosen otherwise.",
+   "length": "150–180 words",
+   "checklist": [
+    "At least two third conditionals: *had* plus the past participle, then *would have* plus the past participle.",
+    "At least one mixed conditional: an unreal past condition with a result that is true now.",
+    "Past forms after *if* describe unreal situations, not past time."
+   ]
+  }
+ ]
+}

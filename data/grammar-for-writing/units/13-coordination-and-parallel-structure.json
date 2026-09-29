@@ -1,0 +1,266 @@
+{
+ "id": "13-coordination-and-parallel-structure",
+ "number": 13,
+ "part": "C",
+ "title": "Coordination and parallel structure",
+ "status": "draft",
+ "focus": {
+  "text": "Coordination joins two parts of a sentence that carry equal weight. The seven coordinating conjunctions — *for, and, nor, but, or, yet, so* — do most of that work, and paired words such as *both … and* or *not only … but also* add emphasis. Whatever you join has to share one shape: a noun with a noun, an *-ing* form with an *-ing* form, a clause with a clause. That balance is called parallel structure, and examiners notice it at once, because it is what makes a long sentence easy to follow.",
+  "summaryTable": {
+   "caption": "The coordinators and the pairs that go with them",
+   "columns": ["Joining word", "What it adds", "Example"],
+   "rows": [
+    ["and", "extra information", "Linh plays the guitar **and** writes songs."],
+    ["but / yet", "a contrast", "The course is short **but** intensive."],
+    ["or", "an alternative", "We can cycle **or** take the bus."],
+    ["so", "a result", "The road was flooded, **so** the match was cancelled."],
+    ["for", "a reason (formal)", "We left early, **for** the last ferry was at six."],
+    ["nor", "a second negative", "She did not phone, **nor** did she reply to emails."],
+    ["both … and / either … or", "a matched pair", "**Both** the cost **and** the timing worried the committee."]
+   ]
+  }
+ },
+ "pretest": [
+  { "id": "p1", "sentence": "The workshop was free, and the materials were provided.", "correct": true, "reason": "Two independent clauses joined by a comma plus *and*.", "layer": "core" },
+  { "id": "p2", "sentence": "Although the ticket was expensive, but we bought it anyway.", "correct": false, "reason": "One contrast needs one linking word: *although* **or** *but*.", "trap": "T-C03", "layer": "core" },
+  { "id": "p3", "sentence": "Because the river rose quickly, so the market closed early.", "correct": false, "reason": "One cause needs one linking word: *because* **or** *so*.", "trap": "T-C04", "layer": "core" },
+  { "id": "p4", "sentence": "Neither the manager nor the staff knew about the change.", "correct": true, "reason": "*Neither … nor* joins two noun phrases, and the verb agrees with the nearer one.", "layer": "core" },
+  { "id": "p5", "sentence": "In my free time I enjoy swimming, to read and cycling.", "correct": false, "reason": "The three items must share one form: *swimming, reading and cycling*.", "trap": "T-C05", "layer": "core" },
+  { "id": "p6", "sentence": "We can either take the early coach or book a night train.", "correct": true, "reason": "A verb phrase follows *either* and a verb phrase follows *or*, so the pair is balanced.", "layer": "core" },
+  { "id": "p7", "sentence": "The library was full, we studied in the canteen instead.", "correct": false, "reason": "Two full sentences joined by only a comma → comma splice; add *so*.", "trap": "T-C01", "layer": "core" },
+  { "id": "p8", "sentence": "The new policy aims to reduce waste, cut costs and improve safety.", "correct": true, "reason": "Three base verbs follow *to*, so the list is parallel.", "layer": "extend" },
+  { "id": "p9", "sentence": "Cycling to school is cheaper than to take a taxi.", "correct": false, "reason": "Both sides of a comparison must match: *cheaper than taking a taxi*.", "trap": "T-C05", "layer": "extend" },
+  { "id": "p10", "sentence": "Not only did the fee rise, but the number of places also fell.", "correct": true, "reason": "After a front *not only*, the clause inverts: *did the fee rise*.", "layer": "extend" }
+ ],
+ "context": {
+  "title": "The library at the back of the room",
+  "paragraph": "Our class runs a small library at the back of the room, and everyone takes a turn looking after it. The rules are simple: borrow one book, return it within a week, and write your name in the folder. Neither the teacher nor the monitors check every entry, yet almost nobody forgets. Last month we added both a shelf of graded readers and a box of old magazines, so the choice is wider now. Some students come for the novels, others come for the comics, but all of them leave with something. The scheme costs nothing, for the books are donated by families, and it has made reading feel like a habit rather than a task.",
+  "task": "tap-clauses",
+  "targets": ["and everyone takes a turn looking after it", "borrow one book", "return it within a week", "and write your name in the folder", "Neither the teacher nor the monitors", "yet almost nobody forgets", "both a shelf of graded readers and a box of old magazines", "so the choice is wider now", "others come for the comics", "but all of them leave with something", "for the books are donated by families", "and it has made reading feel like a habit"]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming coordinated sentences with FANBOYS",
+   "table": {
+    "caption": "What a coordinator joins, and how it is punctuated",
+    "columns": ["What you join", "Comma?", "Example"],
+    "rows": [
+     ["two words", "no", "cheap **and** reliable"],
+     ["two phrases", "no", "by bus **or** on foot"],
+     ["two verb phrases with one subject", "no", "She applied **and** got the job."],
+     ["two independent clauses", "yes, before the conjunction", "The fee rose**, but** enrolment stayed the same."],
+     ["three or more items in a list", "between the items", "paper, plastic **and** metal"]
+    ]
+   },
+   "notes": [
+    "The seven coordinators spell FANBOYS: **f**or, **a**nd, **n**or, **b**ut, **o**r, **y**et, **s**o.",
+    "Put a comma before *and, but, so* only when a complete sentence follows: *The fee rose, but enrolment stayed the same.* Leave it out when only a verb phrase follows: *The fee rose but stayed low.*"
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "choice",
+    "items": [
+     { "id": "sc1-1", "stem": "The bus was full, ___ we waited for the next one.", "options": ["so", "for"], "answer": 0, "reason": "The second clause is the result, so the coordinator is *so*." },
+     { "id": "sc1-2", "stem": "The café is small ___ always busy.", "options": ["but", "so"], "answer": 0, "reason": "*Small* and *busy* pull in opposite directions, so the contrast word is *but*." },
+     { "id": "sc1-3", "stem": "Although the fee was high, ___ the class was full by Friday.", "options": ["but", "no extra word"], "answer": 1, "reason": "*Although* already marks the contrast; adding *but* doubles it.", "trap": "T-C03" },
+     { "id": "sc1-4", "stem": "Because the deadline moved, ___ we had another week to revise.", "options": ["so", "no extra word"], "answer": 1, "reason": "*Because* already marks the reason; adding *so* doubles it.", "trap": "T-C04" },
+     { "id": "sc1-5", "stem": "She did not reply to my email, ___ did she answer the phone.", "options": ["nor", "or"], "answer": 0, "reason": "After a negative clause, *nor* adds a second negative and the verb inverts." }
+    ]
+   }
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using coordinators and correlative pairs",
+   "rules": [
+    {
+     "text": "Use *and, but, or, so* to join ideas of equal weight, with a comma before the conjunction whenever a full sentence follows it.",
+     "examples": [
+      { "text": "The workshop was free, **but** only twenty places were offered.", "bold": ["but"] },
+      { "text": "We can meet at the café **or** at the library.", "bold": ["or"] }
+     ]
+    },
+    {
+     "text": "A correlative pair must be followed by the same kind of words on both sides.",
+     "examples": [
+      { "text": "The course teaches **both** writing **and** speaking.", "bold": ["both", "and"] },
+      { "text": "**Neither** the cost **nor** the timetable suits our class.", "bold": ["Neither", "nor"] }
+     ]
+    },
+    {
+     "text": "Use one linking word for each relationship: *although* or *but*, *because* or *so*, never both together.",
+     "examples": [
+      { "text": "**Although** the queue was long, the food was worth the wait.", "bold": ["Although"] },
+      { "text": "The queue was long, **but** the food was worth the wait.", "bold": ["but"] }
+     ]
+    }
+   ],
+   "tips": [
+    "*So* and *because* answer the same question from opposite ends. *Because the river rose, the market closed* and *The river rose, so the market closed* say one thing twice if you combine them."
+   ],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "combine",
+    "items": [
+     {
+      "id": "sc2-1",
+      "sentences": ["The fee was high.", "Few students signed up for the course."],
+      "model": ["The fee was high, so few students signed up for the course.", "Because the fee was high, few students signed up for the course."],
+      "focus": "one linking word, not two",
+      "reason": "*Because* and *so* do the same job, so only one of them can appear.",
+      "trap": "T-C04"
+     },
+     {
+      "id": "sc2-2",
+      "sentences": ["The hotel was cheap.", "The hotel was very clean."],
+      "model": ["The hotel was cheap but very clean."],
+      "focus": "contrast between two adjectives",
+      "reason": "*But* joins the two adjectives, so the subject and verb are not repeated and no comma is needed."
+     },
+     {
+      "id": "sc2-3",
+      "sentences": ["Minh did not come to the rehearsal.", "Minh did not send a message."],
+      "model": ["Minh did not come to the rehearsal, nor did he send a message.", "Minh neither came to the rehearsal nor sent a message."],
+      "focus": "two negatives joined",
+      "reason": "After a negative clause *nor* inverts the verb; *neither … nor* joins the two verb phrases instead."
+     },
+     {
+      "id": "sc2-4",
+      "sentences": ["The club needs new equipment.", "The club needs a bigger room."],
+      "model": ["The club needs both new equipment and a bigger room."],
+      "focus": "both … and with two noun phrases",
+      "reason": "A noun phrase follows *both*, so a noun phrase must follow *and*."
+     },
+     {
+      "id": "sc2-5",
+      "sentences": ["We could postpone the concert.", "We could move the concert indoors."],
+      "model": ["We could either postpone the concert or move it indoors."],
+      "focus": "either … or with two verb phrases",
+      "reason": "A base verb follows *either*, so a base verb must follow *or*."
+     }
+    ]
+   }
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming pairs: both … and, either … or, neither … nor",
+   "table": {
+    "caption": "Correlative pairs and what follows each half",
+    "columns": ["Pair", "Meaning", "Example"],
+    "rows": [
+     ["both … and", "the two together", "**Both** the cost **and** the timing worried us."],
+     ["either … or", "one of the two", "You can **either** email **or** phone the office."],
+     ["neither … nor", "not one and not the other", "**Neither** the lift **nor** the stairs were working."],
+     ["not only … but also", "the second one is the surprise", "The trip was **not only** cheap **but also** well organised."],
+     ["so … that", "a result", "The queue was **so** long **that** we gave up."]
+    ]
+   },
+   "notes": [
+    "With *either … or* and *neither … nor*, the verb agrees with the subject nearest to it: *Neither the teacher nor the students **were** told.*",
+    "When *not only* opens the sentence, the clause after it inverts: *Not only **did the fee rise**, but the number of places also fell.*"
+   ]
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using parallel structure in lists and comparisons",
+   "rules": [
+    {
+     "text": "Every item in a list must have the same grammatical shape: all nouns, all *-ing* forms, or all clauses.",
+     "examples": [
+      { "text": "The programme aims to **reduce** waste, **cut** costs and **improve** safety.", "bold": ["reduce", "cut", "improve"] },
+      { "text": "She enjoys **hiking**, **swimming** and **cycling**.", "bold": ["hiking", "swimming", "cycling"] }
+     ]
+    },
+    {
+     "text": "Keep both halves of a correlative pair parallel: what follows the first word must match what follows the second.",
+     "examples": [
+      { "text": "The scheme helps **both students and teachers**.", "bold": ["both students and teachers"] },
+      { "text": "We can **either extend the deadline or reduce the workload**.", "bold": ["either extend the deadline or reduce the workload"] }
+     ]
+    },
+    {
+     "text": "In a comparison with *than* or *as … as*, the two sides must have the same form.",
+     "examples": [
+      { "text": "**Cycling** to school is cheaper than **taking** a taxi.", "bold": ["Cycling", "taking"] },
+      { "text": "Reading **the summary** is quicker than reading **the whole report**.", "bold": ["the summary", "the whole report"] }
+     ]
+    },
+    {
+     "text": "Repeat a small word such as *to*, *that* or a preposition in front of every item, or leave it out of all of them but the first.",
+     "examples": [
+      { "text": "The council promised **to widen** the road, **to add** street lights and **to plant** trees.", "bold": ["to widen", "to add", "to plant"] },
+      { "text": "The council promised **to widen** the road, add street lights and plant trees.", "bold": ["to widen"] }
+     ]
+    }
+   ],
+   "notes": [
+    "A list is easiest to check when you read the opening words with each item in turn: *aims to reduce…*, *aims to cut…*, *aims to improve…*."
+   ],
+   "tips": [
+    "In IELTS Writing Task 1, a parallel list makes a trend sentence compact: *Sales rose in Hà Nội, fell in Huế and stayed flat in Cần Thơ.*"
+   ],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "fix",
+    "items": [
+     { "id": "sc3-1", "sentence": "Although the training was free, but only ten people came.", "error": "free, but only", "fix": "free, only", "reason": "*Although* already marks the contrast, so *but* has to go.", "trap": "T-C03" },
+     { "id": "sc3-2", "sentence": "Because the ferry was cancelled, so we stayed one more night.", "error": "cancelled, so we", "fix": "cancelled, we", "reason": "*Because* already marks the reason, so *so* has to go.", "trap": "T-C04" },
+     { "id": "sc3-3", "sentence": "My weekend job involves serving customers, to clean tables and washing cups.", "error": "to clean tables", "fix": "cleaning tables", "reason": "The list must keep one form: *serving, cleaning, washing*.", "trap": "T-C05" },
+     { "id": "sc3-4", "sentence": "The new bridge is both faster and it is safer than the old one.", "error": "and it is safer", "fix": "and safer", "reason": "An adjective follows *both*, so an adjective must follow *and*.", "trap": "T-C05" },
+     { "id": "sc3-5", "sentence": "Revising with a friend is more useful than to revise alone.", "error": "than to revise alone", "fix": "than revising alone", "reason": "Both sides of a comparison must match: *revising … than revising*.", "trap": "T-C05" }
+    ]
+   }
+  }
+ ],
+ "traps": ["T-C01", "T-C03", "T-C04", "T-C05"],
+ "editing": {
+  "text": "Last year our school entered a debating competition for the first time, and six of us formed a team. Although we practised twice a week, but we were still nervous. Our coach told us to read widely, to argue calmly and speaking slowly. Because the first round was in Hải Phòng, so we travelled by night coach. There have four teams in our group, and only two of them went through. The journey was long, we arrived with barely an hour to spare. Neither the judges nor our coach were surprised when we lost the opening debate. In the second round we were both better prepared and we were more confident, so we won by two points. Preparing arguments in English is harder than to speak them, but the practice has changed the way I write essays.",
+  "errors": [
+   { "span": "a week, but we were still nervous", "fix": "a week, we were still nervous", "type": "double linker", "reason": "*Although* already marks the contrast, so *but* has to go.", "trap": "T-C03" },
+   { "span": "and speaking slowly", "fix": "and to speak slowly", "type": "parallel structure", "reason": "The list starts with *to read* and *to argue*, so the third item must match.", "trap": "T-C05" },
+   { "span": "Hải Phòng, so we travelled", "fix": "Hải Phòng, we travelled", "type": "double linker", "reason": "*Because* already marks the reason, so *so* has to go.", "trap": "T-C04" },
+   { "span": "There have four teams", "fix": "There were four teams", "type": "existence", "reason": "Existence takes *there is/are/was/were*, not *there have*.", "trap": "T-A13" },
+   { "span": "long, we arrived", "fix": "long, but we arrived", "type": "comma splice", "reason": "Two full sentences joined by only a comma → comma splice.", "trap": "T-C01" },
+   { "span": "nor our coach were surprised", "fix": "nor our coach was surprised", "type": "agreement", "reason": "With *neither … nor*, the verb agrees with the nearer subject, *our coach*.", "rule": "forming-2" },
+   { "span": "and we were more confident", "fix": "and more confident", "type": "parallel structure", "reason": "An adjective phrase follows *both*, so an adjective phrase must follow *and*.", "trap": "T-C05" },
+   { "span": "than to speak them", "fix": "than speaking them", "type": "parallel comparison", "reason": "The first half of the comparison is *preparing*, so the second half must be *speaking*.", "trap": "T-C05" }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email to a classmate who missed the first meeting of a school project. Explain what the group decided, what each person will do and what is still undecided.",
+   "length": "120–150 words",
+   "checklist": [
+    "At least two sentences join independent clauses with *and*, *but*, *so* or *or*, punctuated correctly.",
+    "One sentence uses a correlative pair (*both … and*, *either … or*).",
+    "No sentence contains both *although* and *but*, or both *because* and *so*."
+   ]
+  },
+  {
+   "prompt": "\"Every student should learn a second foreign language at school.\" Give your opinion with two reasons and one example.",
+   "length": "150–180 words",
+   "checklist": [
+    "Reasons are listed in parallel form: all *-ing* forms, all infinitives or all noun phrases.",
+    "Comparisons with *than* have the same form on both sides.",
+    "Each contrast or reason is marked by one linking word, never two."
+   ]
+  },
+  {
+   "prompt": "Report on two after-school clubs at your school. Compare what they offer, who joins them and what each one still needs.",
+   "length": "150–180 words",
+   "checklist": [
+    "Lists of activities keep one grammatical shape all the way through.",
+    "At least one sentence uses *not only … but also* or *neither … nor* with matching halves.",
+    "Comparisons between the two clubs are balanced (*cheaper than…*, *as popular as…*)."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,680 @@
+{
+ "id": "06-modals",
+ "number": 6,
+ "part": "A",
+ "title": "Modals",
+ "status": "draft",
+ "focus": {
+  "text": "Modals are small words that change how strong a sentence sounds. *Can, could, should, must, may* and *might* tell your reader whether something is possible, necessary, advisable or only likely. They never change their form, and the verb after a modal is always the base form. In academic writing they also let you be careful: *may* and *could* turn a bold claim into a reasonable one. Phrasal modals such as *have to* and *be able to* fill the gaps where a modal cannot go, because English allows only one modal in a verb phrase.",
+  "summaryTable": {
+   "caption": "What each modal adds to the sentence",
+   "columns": [
+    "Modal",
+    "What it adds",
+    "Example"
+   ],
+   "rows": [
+    [
+     "can / could",
+     "ability, permission",
+     "Nga **can** read a graph quickly."
+    ],
+    [
+     "should",
+     "advice, the right thing to do",
+     "The council **should** widen the pavement."
+    ],
+    [
+     "must / have to",
+     "obligation",
+     "Every applicant **must** send a photograph."
+    ],
+    [
+     "may / might",
+     "possibility, careful claims",
+     "Fees **might** rise again next year."
+    ]
+   ]
+  }
+ },
+ "pretest": [
+  {
+   "id": "p1",
+   "sentence": "Students can borrow four books at a time from the school library.",
+   "correct": true,
+   "reason": "*can* + base verb states what is allowed, and the modal has one form for every subject.",
+   "layer": "core"
+  },
+  {
+   "id": "p2",
+   "sentence": "My younger brother cans play the guitar and the piano.",
+   "correct": false,
+   "reason": "A modal never takes -s: *my brother can play*.",
+   "trap": "T-A14",
+   "layer": "core"
+  },
+  {
+   "id": "p3",
+   "sentence": "You should to talk to your form teacher before you decide.",
+   "correct": false,
+   "reason": "*should* is followed by the base verb, with no *to*: *you should talk*.",
+   "trap": "T-A14",
+   "layer": "core"
+  },
+  {
+   "id": "p4",
+   "sentence": "We had to pay for the train tickets ourselves.",
+   "correct": true,
+   "reason": "*must* has no past form, so a past obligation uses *had to*.",
+   "layer": "core"
+  },
+  {
+   "id": "p5",
+   "sentence": "You must try the coconut coffee when you visit Hà Nội.",
+   "correct": false,
+   "reason": "This is friendly advice, not an obligation, so *should* fits better than *must*.",
+   "trap": "T-A15",
+   "layer": "core"
+  },
+  {
+   "id": "p6",
+   "sentence": "The workshop may be cancelled if fewer than ten people sign up.",
+   "correct": true,
+   "reason": "*may* + base verb marks something that is possible but not certain.",
+   "layer": "core"
+  },
+  {
+   "id": "p7",
+   "sentence": "I am not able to finding a part-time job near my house.",
+   "correct": false,
+   "reason": "*be able to* is followed by the base verb: *able to find*.",
+   "layer": "core"
+  },
+  {
+   "id": "p8",
+   "sentence": "She should have booked the tickets earlier; now they are sold out.",
+   "correct": true,
+   "reason": "*should have* + past participle judges a past decision from now.",
+   "layer": "extend"
+  },
+  {
+   "id": "p9",
+   "sentence": "The delay might been caused by the heavy rain.",
+   "correct": false,
+   "reason": "A past modal needs *have*: *might have been caused*.",
+   "layer": "extend"
+  },
+  {
+   "id": "p10",
+   "sentence": "The figures suggest that remote work may reduce commuting costs.",
+   "correct": true,
+   "reason": "*may* softens a claim the evidence only partly supports, which is what careful writing needs.",
+   "layer": "extend"
+  }
+ ],
+ "context": {
+  "title": "Choosing a club",
+  "paragraph": "Every student at Hải's school has to choose one club before the end of September. He cannot decide between the debate club and the football team, because the two meet on the same afternoon. His form teacher says that he should think about his timetable first: he may need those hours for extra maths lessons in the spring. Hải's sister joined three clubs in her first year and could not keep up with any of them, so she had to leave two of them by December. She still says that she should have chosen more carefully. Hải might ask the debate club whether he can attend twice a month instead of every week.",
+  "task": "tap-verbs",
+  "targets": [
+   "has to choose",
+   "cannot decide",
+   "should think",
+   "may need",
+   "could not keep up",
+   "had to leave",
+   "should have chosen",
+   "might ask",
+   "can attend"
+  ]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming sentences with modals",
+   "table": {
+    "caption": "Modals: statements, negatives, questions and short answers",
+    "columns": [
+     "Type",
+     "Pattern",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Statement",
+      "subject + modal + base verb",
+      "She **can drive**."
+     ],
+     [
+      "Negative",
+      "subject + modal + not + base verb",
+      "She **cannot drive** at night."
+     ],
+     [
+      "Question",
+      "modal + subject + base verb",
+      "**Can she drive** a motorbike?"
+     ],
+     [
+      "Short answer",
+      "Yes / No + subject + modal",
+      "Yes, she **can**."
+     ]
+    ]
+   },
+   "notes": [
+    "A modal never takes -s, -ed or -ing, and it is never followed by *to*: *she can swim*, not *she cans to swim*.",
+    "Only one modal can stand in a verb phrase, so *will can* is impossible. Use a phrasal modal instead: *will be able to*."
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "fix",
+    "items": [
+     {
+      "id": "sc1-1",
+      "sentence": "My cousin cans speak three languages.",
+      "error": "cans speak",
+      "fix": "can speak",
+      "reason": "A modal has one form for every subject and never takes -s.",
+      "trap": "T-A14"
+     },
+     {
+      "id": "sc1-2",
+      "sentence": "Teachers should to explain the marking criteria at the start.",
+      "error": "should to explain",
+      "fix": "should explain",
+      "reason": "*should* is followed by the base verb, with no *to*.",
+      "trap": "T-A14"
+     },
+     {
+      "id": "sc1-3",
+      "sentence": "We will can finish the survey next week.",
+      "error": "will can finish",
+      "fix": "will be able to finish",
+      "reason": "Two modals cannot follow each other; after *will*, use *be able to*."
+     },
+     {
+      "id": "sc1-4",
+      "sentence": "She musted leave early because her bus was at five.",
+      "error": "musted leave",
+      "fix": "had to leave",
+      "reason": "*must* has no past form; a past obligation is *had to*.",
+      "trap": "T-A14"
+     },
+     {
+      "id": "sc1-5",
+      "sentence": "Can you to help me with the poster tonight?",
+      "error": "Can you to help",
+      "fix": "Can you help",
+      "reason": "In a question the modal comes first and the verb stays in the base form.",
+      "trap": "T-A14"
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using modals for ability, permission and obligation",
+   "rules": [
+    {
+     "text": "Use *can* for present ability and *could* for ability over a period in the past.",
+     "examples": [
+      {
+       "text": "Mai **can** present her ideas clearly in English.",
+       "bold": [
+        "can"
+       ]
+      },
+      {
+       "text": "Before the bridge opened, farmers **could** only reach the market by boat.",
+       "bold": [
+        "could"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *can* for permission, and *could* or *may* when you want to sound more formal or more polite.",
+     "examples": [
+      {
+       "text": "Visitors **can** take photographs in the museum.",
+       "bold": [
+        "can"
+       ]
+      },
+      {
+       "text": "**Could** I borrow your notes until Thursday?",
+       "bold": [
+        "Could"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *must* or *have to* for something that is necessary, and *must not* for something that is forbidden.",
+     "examples": [
+      {
+       "text": "Every candidate **must** arrive thirty minutes before the test.",
+       "bold": [
+        "must"
+       ]
+      },
+      {
+       "text": "Passengers **must not** open the doors while the train is moving.",
+       "bold": [
+        "must not"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "*Do not have to* is not the opposite of *must*; it means there is no obligation at all.",
+     "examples": [
+      {
+       "text": "New members **do not have to** pay for the first month.",
+       "bold": [
+        "do not have to"
+       ]
+      }
+     ]
+    }
+   ],
+   "tips": [
+    "*Must* usually comes from the writer, while *have to* usually comes from a rule outside the writer. In a formal report, *be required to* sounds more neutral than both."
+   ]
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming phrasal modals",
+   "table": {
+    "caption": "Phrasal modals change for time and for the subject",
+    "columns": [
+     "Time",
+     "have to",
+     "be able to"
+    ],
+    "rows": [
+     [
+      "Present",
+      "I **have to** revise / she **has to** revise",
+      "I **am able to** join / she **is able to** join"
+     ],
+     [
+      "Past",
+      "we **had to** revise",
+      "we **were able to** join"
+     ],
+     [
+      "Future",
+      "they **will have to** revise",
+      "they **will be able to** join"
+     ],
+     [
+      "Negative",
+      "he **does not have to** revise",
+      "he **is not able to** join"
+     ]
+    ]
+   },
+   "notes": [
+    "Use a phrasal modal wherever a modal cannot go: after another modal (*will be able to*), after *to* (*I hope to be able to help*), and in the past (*had to*)."
+   ],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "choice",
+    "items": [
+     {
+      "id": "sc2-1",
+      "stem": "Applicants ___ send their documents before 15 June.",
+      "options": [
+       "must to",
+       "must"
+      ],
+      "answer": 1,
+      "reason": "A modal is followed by the base verb, with no *to*.",
+      "trap": "T-A14"
+     },
+     {
+      "id": "sc2-2",
+      "stem": "Students ___ wear a uniform on Saturdays; it is optional.",
+      "options": [
+       "must not",
+       "do not have to"
+      ],
+      "answer": 1,
+      "reason": "*must not* forbids something, while *do not have to* means there is no obligation."
+     },
+     {
+      "id": "sc2-3",
+      "stem": "Although the queue was long, we ___ get tickets for the evening show.",
+      "options": [
+       "could",
+       "were able to"
+      ],
+      "answer": 1,
+      "reason": "For one successful action in the past, *was / were able to* is clearer than *could*."
+     },
+     {
+      "id": "sc2-4",
+      "stem": "Tourists ___ take food into the reading room.",
+      "options": [
+       "must not",
+       "do not have to"
+      ],
+      "answer": 0,
+      "reason": "The rule forbids food, so the strong negative *must not* is correct."
+     },
+     {
+      "id": "sc2-5",
+      "stem": "By next summer Hưng ___ drive his parents to the airport.",
+      "options": [
+       "will can",
+       "will be able to"
+      ],
+      "answer": 1,
+      "reason": "Two modals cannot follow each other, so use *will be able to*."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using modals for advice and possibility",
+   "rules": [
+    {
+     "text": "Use *should* and *ought to* for advice and for what you think is the right thing to do.",
+     "examples": [
+      {
+       "text": "The city **should** invest more in cycle lanes.",
+       "bold": [
+        "should"
+       ]
+      },
+      {
+       "text": "Teenagers **should not** revise with a phone beside them.",
+       "bold": [
+        "should not"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *may*, *might* and *could* when something is possible but you are not sure.",
+     "examples": [
+      {
+       "text": "Heavy rain **may** delay the ferry to Cát Bà.",
+       "bold": [
+        "may"
+       ]
+      },
+      {
+       "text": "A shorter working week **could** improve people's health.",
+       "bold": [
+        "could"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *must* when the evidence in front of you makes something almost certain.",
+     "examples": [
+      {
+       "text": "The lights are on, so somebody **must** be in the office.",
+       "bold": [
+        "must"
+       ]
+      },
+      {
+       "text": "She has been studying since six, so she **must** be tired.",
+       "bold": [
+        "must"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "*Must* has two different jobs: obligation (*you must wear a helmet*) and a confident guess (*you must be tired*). The negative of the guess is *cannot*: *he cannot be at home; his bike is here*."
+   ]
+  },
+  {
+   "id": "using-3",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using past modals and modals for hedging",
+   "timeline": {
+    "tense": "Past modals",
+    "marks": [
+     "point",
+     "now"
+    ],
+    "label": "A finished moment in the past that we are judging or guessing about from now."
+   },
+   "rules": [
+    {
+     "text": "Use a modal + *have* + past participle to look back: *should have* judges a past choice, while *must have*, *might have* and *could have* guess how likely it was.",
+     "examples": [
+      {
+       "text": "The organisers **should have booked** a bigger hall.",
+       "bold": [
+        "should have booked"
+       ]
+      },
+      {
+       "text": "She looks exhausted, so she **must have revised** all night.",
+       "bold": [
+        "must have revised"
+       ]
+      },
+      {
+       "text": "The fire **might have started** in the kitchen.",
+       "bold": [
+        "might have started"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Choose the modal that matches how certain you really are, because a claim with no modal sounds absolute and is easy to argue against.",
+     "examples": [
+      {
+       "text": "Air pollution **may account** for part of the increase in asthma.",
+       "bold": [
+        "may account"
+       ]
+      },
+      {
+       "text": "A four-day week **could raise** productivity in some industries.",
+       "bold": [
+        "could raise"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "One hedge is enough. Do not stack *may*, *possibly* and *perhaps* in the same claim.",
+     "examples": [
+      {
+       "text": "Higher fees **might discourage** students from rural provinces.",
+       "bold": [
+        "might discourage"
+       ]
+      },
+      {
+       "text": "The survey shows that online lessons **can work** well for revision.",
+       "bold": [
+        "can work"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "*Cannot have* + past participle says a past event was impossible: *she cannot have sent the email; her laptop was broken*."
+   ],
+   "tips": [
+    "Compare *Social media damages concentration* with *Social media may damage concentration*. The second is easier to defend in an essay and still makes your point clearly."
+   ],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "form",
+    "items": [
+     {
+      "id": "sc3-1",
+      "stem": "You ___ me about the deadline — I would have finished the essay.",
+      "base": "should + tell",
+      "answer": [
+       "should have told"
+      ],
+      "reason": "*should have* + past participle criticises something that did not happen."
+     },
+     {
+      "id": "sc3-2",
+      "stem": "The lights are off, so the shop ___ at six.",
+      "base": "must + close",
+      "answer": [
+       "must have closed"
+      ],
+      "reason": "*must have* + past participle is a confident guess about the past."
+     },
+     {
+      "id": "sc3-3",
+      "stem": "Nobody answered the door; the family ___ out.",
+      "base": "might + be",
+      "answer": [
+       "might have been"
+      ],
+      "reason": "*might have been* keeps a guess about the past open."
+     },
+     {
+      "id": "sc3-4",
+      "stem": "She ___ the train, because she arrived before the lesson started.",
+      "base": "cannot + miss",
+      "answer": [
+       "cannot have missed",
+       "can't have missed",
+       "could not have missed"
+      ],
+      "reason": "*cannot have* + past participle says a past event was impossible."
+     },
+     {
+      "id": "sc3-5",
+      "stem": "We ___ the tickets online and saved twenty per cent.",
+      "base": "could + buy",
+      "answer": [
+       "could have bought"
+      ],
+      "reason": "*could have* + past participle describes a past possibility that we did not take."
+     }
+    ]
+   }
+  }
+ ],
+ "traps": [
+  "T-A01",
+  "T-A05",
+  "T-A14",
+  "T-A15",
+  "T-A21",
+  "T-A22",
+  "T-A23"
+ ],
+ "editing": {
+  "text": "I am writing to ask about the volunteer programme in Huế. Your website says that every applicant must to send a short letter, so here is mine. I think I cans help with the children's reading group, because my form teacher say I explain things patiently. Last summer I work at my uncle's bookshop in Cần Thơ, and I learnt a lot about dealing with difficult customers. I musted stop after two months because my exams started, but I am free again now. I will can join the Saturday sessions from July, and I can come on Tuesday afternoons until then. I should applied last year; unfortunately nobody in my class knew that the programme existed. One more thing: you must read the section about travel costs again, because students from other provinces might have found it confusing.",
+  "errors": [
+   {
+    "span": "must to send",
+    "fix": "must send",
+    "type": "modal form",
+    "reason": "A modal is followed by the base verb, with no *to*.",
+    "trap": "T-A14"
+   },
+   {
+    "span": "cans help",
+    "fix": "can help",
+    "type": "modal form",
+    "reason": "A modal has one form for every subject and never takes -s.",
+    "trap": "T-A14"
+   },
+   {
+    "span": "teacher say",
+    "fix": "teacher says",
+    "type": "agreement",
+    "reason": "*My form teacher* is he or she, so the verb takes -s.",
+    "trap": "T-A01"
+   },
+   {
+    "span": "I work at my uncle's bookshop",
+    "fix": "I worked at my uncle's bookshop",
+    "type": "tense",
+    "reason": "*Last summer* is finished time, so the verb must be simple past.",
+    "trap": "T-A05"
+   },
+   {
+    "span": "musted stop",
+    "fix": "had to stop",
+    "type": "modal form",
+    "reason": "*must* has no past form; a past obligation is *had to*.",
+    "rule": "forming-2"
+   },
+   {
+    "span": "will can join",
+    "fix": "will be able to join",
+    "type": "double modal",
+    "reason": "Two modals cannot follow each other; after *will*, use *be able to*.",
+    "rule": "forming-1"
+   },
+   {
+    "span": "should applied",
+    "fix": "should have applied",
+    "type": "past modal",
+    "reason": "Looking back at a past choice needs *should have* + past participle.",
+    "rule": "using-3"
+   },
+   {
+    "span": "you must read the section about travel costs again",
+    "fix": "you should read the section about travel costs again",
+    "type": "modal choice",
+    "reason": "This is a suggestion to the reader, not an obligation, so *should* fits better than *must*.",
+    "trap": "T-A15"
+   }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email to the manager of a café where you would like to work at the weekend. Explain what you can already do, which hours you are able to work, and what the manager should know about your exam timetable.",
+   "length": "120–150 words",
+   "checklist": [
+    "At least three different modals appear (*can, could, should, may, might*).",
+    "Every modal is followed by a base verb, with no *to* and no -s.",
+    "One sentence uses *be able to* or *have to* where a modal cannot go."
+   ]
+  },
+  {
+   "prompt": "\"Schools should ban mobile phones during lessons.\" Give your opinion and support it with two reasons.",
+   "length": "150–180 words",
+   "checklist": [
+    "*should* or *ought to* introduces each recommendation.",
+    "At least two claims are softened with *may*, *might* or *could*.",
+    "No claim stacks two hedges together (*may possibly*)."
+   ]
+  },
+  {
+   "prompt": "A school trip went badly: the coach arrived two hours late and half the group missed the museum tour. Write a short report for your teacher saying what happened and what the organisers should have done differently.",
+   "length": "150–180 words",
+   "checklist": [
+    "At least three sentences use *should have*, *could have* or *might have* + past participle.",
+    "Past obligations use *had to*, because *must* has no past form.",
+    "Guesses about the causes use *must have* or *might have*, not *will*."
+   ]
+  }
+ ]
+}

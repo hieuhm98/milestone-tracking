@@ -27,6 +27,7 @@ And a second half of the site for **English**:
 - **Dictionary** — look up any of ~24,000 English words: meaning in both languages, pronunciation, part of speech, and — for words used in the lessons — the real sentence from the article plus a link straight to that lesson.
 - **English Practice** — pick words by course, topic, lesson or one at a time and practise their meaning in context.
 - **IELTS Speaking — Band 6 vs Band 9** — 561 questions (Part 1, 66 cue cards, Part 3), each with a Band 6 and a Band 9 model answer, a comparison of what the examiner hears, the key difference in one line, and a vocabulary table. Converted from a 725-page PDF; see `local-docs/project-knowledge.md`.
+- **Grammar for Writing** — 19 units of writing grammar in four parts, each with a Core and an Extend layer, plus 76 "Vietnamese learner traps": the mistakes Vietnamese writers actually make, with the reason behind each one. Every unit has a pretest, model tables and rules, self-checks, an editing paragraph and writing topics. All of it written for this project.
 
 **Your progress lives in your browser**, and — once you log in with an approved account — in your account, so it follows you to another device. The lessons themselves are just files that ship with the website.
 

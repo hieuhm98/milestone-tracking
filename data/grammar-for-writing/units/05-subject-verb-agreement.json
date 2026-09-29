@@ -1,0 +1,678 @@
+{
+ "id": "05-subject-verb-agreement",
+ "number": 5,
+ "part": "A",
+ "title": "Subject–verb agreement",
+ "status": "draft",
+ "focus": {
+  "text": "Agreement is a small ending that carries a lot of trust. In the present, a singular subject takes a verb with -s and a plural subject does not, and *be* changes shape in the past as well. The difficulty is rarely the rule itself; it is finding the real subject when a phrase or a clause sits between it and the verb. Cover everything between the subject and the verb with your finger, and the right form is usually obvious.",
+  "summaryTable": {
+   "caption": "Which verb form goes with which subject",
+   "columns": [
+    "Subject",
+    "Present verb",
+    "Example"
+   ],
+   "rows": [
+    [
+     "he / she / it, a singular noun",
+     "verb + -s",
+     "The library **opens** at eight."
+    ],
+    [
+     "I / you / we / they, a plural noun",
+     "base verb",
+     "The libraries **open** at eight."
+    ],
+    [
+     "*there* + singular or plural noun",
+     "**is** / **are**",
+     "**There is** one exit. **There are** two exits."
+    ],
+    [
+     "*each*, *every*, *one of*",
+     "singular verb",
+     "Every student **needs** a card."
+    ]
+   ]
+  }
+ },
+ "pretest": [
+  {
+   "id": "p1",
+   "sentence": "There are three computers in the small study room.",
+   "correct": true,
+   "reason": "*Computers* is plural, so *there are* is right.",
+   "layer": "core"
+  },
+  {
+   "id": "p2",
+   "sentence": "Many people in my neighbourhood is worried about flooding.",
+   "correct": false,
+   "reason": "*People* is plural, so the verb is *are*.",
+   "trap": "T-A11",
+   "layer": "core"
+  },
+  {
+   "id": "p3",
+   "sentence": "Each of the classrooms has its own projector.",
+   "correct": true,
+   "reason": "*Each* is singular, even before a plural noun.",
+   "layer": "core"
+  },
+  {
+   "id": "p4",
+   "sentence": "The price of vegetables have risen sharply this month.",
+   "correct": false,
+   "reason": "The head noun is *the price*, not *vegetables*, so write *has risen*.",
+   "trap": "T-A12",
+   "layer": "core"
+  },
+  {
+   "id": "p5",
+   "sentence": "There have a new bookshop near the bus station.",
+   "correct": false,
+   "reason": "Existence takes *there is*, never *have*.",
+   "trap": "T-A13",
+   "layer": "core"
+  },
+  {
+   "id": "p6",
+   "sentence": "My parents work in Đà Nẵng, but my sister works in Huế.",
+   "correct": true,
+   "reason": "A plural subject takes the base verb and a singular subject takes -s.",
+   "layer": "core"
+  },
+  {
+   "id": "p7",
+   "sentence": "One of my classmates are studying in Australia.",
+   "correct": false,
+   "reason": "The subject is *one*, not *classmates*, so write *is studying*.",
+   "trap": "T-A12",
+   "layer": "core"
+  },
+  {
+   "id": "p8",
+   "sentence": "Neither of the two plans solves the problem completely.",
+   "correct": true,
+   "reason": "*Neither of* takes a singular verb in formal writing.",
+   "layer": "extend"
+  },
+  {
+   "id": "p9",
+   "sentence": "Learning two foreign languages take a lot of time.",
+   "correct": false,
+   "reason": "A gerund subject (*learning two foreign languages*) is singular: *takes*.",
+   "layer": "extend"
+  },
+  {
+   "id": "p10",
+   "sentence": "The team of researchers was divided about the results.",
+   "correct": true,
+   "reason": "The head noun is *the team*, acting here as one body, so the verb is singular.",
+   "layer": "extend"
+  }
+ ],
+ "context": {
+  "title": "The Saturday clean-up",
+  "paragraph": "Every Saturday morning a group of students from our school meets at the park gate. The leader of the two teams is Ngân, and she brings the gloves and the bags. There are always more volunteers in the dry season, but neither rain nor heat stops the regulars. One of the teams collects plastic along the canal, while the other cuts the grass around the benches. Each volunteer writes the weight of the rubbish in a notebook, because the numbers help the club ask for money. Working together for two hours every week is hard, yet everybody says the park looks better. The staff of the park now know all our names.",
+  "task": "tap-verbs",
+  "targets": [
+   "meets",
+   "is Ngân",
+   "brings",
+   "There are",
+   "stops",
+   "collects",
+   "cuts",
+   "writes",
+   "numbers help",
+   "is hard",
+   "says",
+   "now know"
+  ]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming agreement in the present",
+   "table": {
+    "caption": "Present verb forms after singular and plural subjects",
+    "columns": [
+     "Subject",
+     "Most verbs",
+     "*be*",
+     "*have*",
+     "*do*"
+    ],
+    "rows": [
+     [
+      "I",
+      "work",
+      "am",
+      "have",
+      "do"
+     ],
+     [
+      "you / we / they / plural nouns",
+      "work",
+      "are",
+      "have",
+      "do"
+     ],
+     [
+      "he / she / it / singular nouns",
+      "works",
+      "is",
+      "has",
+      "does"
+     ]
+    ]
+   },
+   "notes": [
+    "In the past, only *be* changes: *I / he / she / it **was***, *you / we / they **were***. Every other past verb has one form for all subjects."
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "form",
+    "items": [
+     {
+      "id": "sc1-1",
+      "stem": "The new sports hall ___ open until nine every evening.",
+      "base": "stay",
+      "answer": [
+       "stays"
+      ],
+      "reason": "*The sports hall* is it, so the present verb takes -s.",
+      "trap": "T-A01"
+     },
+     {
+      "id": "sc1-2",
+      "stem": "My two older brothers ___ in a factory near Biên Hòa.",
+      "base": "work",
+      "answer": [
+       "work"
+      ],
+      "reason": "A plural subject takes the base verb with no -s.",
+      "trap": "T-A01"
+     },
+     {
+      "id": "sc1-3",
+      "stem": "There ___ several reasons for the delay.",
+      "base": "be",
+      "answer": [
+       "are"
+      ],
+      "reason": "*Reasons* is plural, so *there are* is correct.",
+      "trap": "T-A13"
+     },
+     {
+      "id": "sc1-4",
+      "stem": "Each of the four groups ___ a different topic.",
+      "base": "choose",
+      "answer": [
+       "chooses"
+      ],
+      "reason": "*Each* is singular, even before a plural noun."
+     },
+     {
+      "id": "sc1-5",
+      "stem": "The number of students in my class ___ thirty-two.",
+      "base": "be",
+      "answer": [
+       "is"
+      ],
+      "reason": "The head noun is *the number*, so the verb is singular.",
+      "trap": "T-A12"
+     }
+    ]
+   }
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming *there is* and *there are*",
+   "table": {
+    "caption": "there is and there are across time",
+    "columns": [
+     "Meaning",
+     "Singular",
+     "Plural"
+    ],
+    "rows": [
+     [
+      "Now",
+      "There **is** a market on this street.",
+      "There **are** two markets on this street."
+     ],
+     [
+      "Past",
+      "There **was** a market here.",
+      "There **were** two markets here."
+     ],
+     [
+      "Future",
+      "There **will be** a market here.",
+      "There **will be** two markets here."
+     ],
+     [
+      "Question",
+      "**Is there** a market near here?",
+      "**Are there** any markets near here?"
+     ]
+    ]
+   },
+   "notes": [
+    "English uses *there is* and *there are* to say that something exists. *There have* is never possible, even though many languages use one word for *have* and for *there is*."
+   ],
+   "tips": [
+    "*There* starts the sentence, but it is not the subject. Look to the right of the verb to decide between *is* and *are*."
+   ]
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using agreement when other words get in the way",
+   "rules": [
+    {
+     "text": "Find the head of the subject and ignore everything between it and the verb.",
+     "examples": [
+      {
+       "text": "The cost of school uniforms **has** risen every year.",
+       "bold": [
+        "has"
+       ]
+      },
+      {
+       "text": "Students who join the club **get** a free notebook.",
+       "bold": [
+        "get"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "*Each*, *every*, *one of*, *everybody* and *nobody* are singular, even when a plural noun follows.",
+     "examples": [
+      {
+       "text": "Each of the classes **has** its own timetable.",
+       "bold": [
+        "has"
+       ]
+      },
+      {
+       "text": "One of my cousins **lives** in Cần Thơ.",
+       "bold": [
+        "lives"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "*People*, *police*, *children* and *staff* are plural, so they take a plural verb.",
+     "examples": [
+      {
+       "text": "Many people **walk** to the market in the early morning.",
+       "bold": [
+        "walk"
+       ]
+      },
+      {
+       "text": "The police **were** already at the scene.",
+       "bold": [
+        "were"
+       ]
+      }
+     ]
+    }
+   ],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "choice",
+    "items": [
+     {
+      "id": "sc2-1",
+      "stem": "The list of approved books ___ on the noticeboard.",
+      "options": [
+       "is",
+       "are"
+      ],
+      "answer": 0,
+      "reason": "The head noun is *the list*, not *books*.",
+      "trap": "T-A12"
+     },
+     {
+      "id": "sc2-2",
+      "stem": "There ___ a lot of noise from the building site every morning.",
+      "options": [
+       "is",
+       "are"
+      ],
+      "answer": 0,
+      "reason": "*Noise* is uncountable, so the singular *there is* is correct.",
+      "trap": "T-A13"
+     },
+     {
+      "id": "sc2-3",
+      "stem": "Young people in my city ___ more about climate change than before.",
+      "options": [
+       "knows",
+       "know"
+      ],
+      "answer": 1,
+      "reason": "*People* is plural, so the verb has no -s.",
+      "trap": "T-A11"
+     },
+     {
+      "id": "sc2-4",
+      "stem": "One of the teachers ___ us to enter the competition.",
+      "options": [
+       "encourage",
+       "encourages"
+      ],
+      "answer": 1,
+      "reason": "The subject is *one*, so the verb is singular.",
+      "trap": "T-A12"
+     },
+     {
+      "id": "sc2-5",
+      "stem": "Every student and every teacher ___ a copy of the timetable.",
+      "options": [
+       "gets",
+       "get"
+      ],
+      "answer": 0,
+      "reason": "Subjects introduced by *every* stay singular, even when they are joined by *and*."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using *there is* and *there are*",
+   "rules": [
+    {
+     "text": "Use *there is* or *there are* to introduce something new, and make the verb agree with the noun that follows it.",
+     "examples": [
+      {
+       "text": "**There are** four bus routes from my village to the city centre.",
+       "bold": [
+        "There are"
+       ]
+      },
+      {
+       "text": "**There is** a long queue outside the exam hall.",
+       "bold": [
+        "There is"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "With a list, the verb agrees with the first item.",
+     "examples": [
+      {
+       "text": "**There is** a laptop, two chargers and a printer in the cupboard.",
+       "bold": [
+        "There is"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Keep *have* for possession. It never means that something exists.",
+     "examples": [
+      {
+       "text": "**There are** many parks in Đà Nẵng, and my family **has** a favourite one.",
+       "bold": [
+        "There are",
+        "has"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "In writing, prefer a full verb where you can: *Đà Nẵng **has** many parks* is stronger than *There are many parks in Đà Nẵng*."
+   ]
+  },
+  {
+   "id": "using-3",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using agreement with harder subjects",
+   "rules": [
+    {
+     "text": "Treat a collective noun (*team, government, family, company*) as singular when it acts as one body, and as plural when the members act separately.",
+     "examples": [
+      {
+       "text": "The committee **meets** twice a month.",
+       "bold": [
+        "meets"
+       ]
+      },
+      {
+       "text": "The committee **were** unable to agree among themselves.",
+       "bold": [
+        "were"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "With *either … or* and *neither … nor*, the verb agrees with the noun closest to it.",
+     "examples": [
+      {
+       "text": "Neither the teachers nor the head **wants** to cancel the trip.",
+       "bold": [
+        "wants"
+       ]
+      },
+      {
+       "text": "Either the bus or the trains **are** late every morning.",
+       "bold": [
+        "are"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "A gerund or a clause used as a subject is singular, however long it is.",
+     "examples": [
+      {
+       "text": "**Cycling** to school every day **saves** my family a lot of money.",
+       "bold": [
+        "Cycling",
+        "saves"
+       ]
+      },
+      {
+       "text": "What most students want **is** more time for revision.",
+       "bold": [
+        "is"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "With *a number of* the verb is plural, but with *the number of* it is singular.",
+     "examples": [
+      {
+       "text": "A number of students **have** asked for extra lessons.",
+       "bold": [
+        "have"
+       ]
+      },
+      {
+       "text": "The number of students **has** doubled since 2019.",
+       "bold": [
+        "has"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "Quantifiers with *of* take their number from the noun after *of*: *some of the water **is** warm*, *some of the seats **are** free*."
+   ],
+   "tips": [
+    "Long subjects hide their head noun. In *the effect of social media on young readers*, the head is *the effect*, so the verb is singular."
+   ],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "fix",
+    "items": [
+     {
+      "id": "sc3-1",
+      "sentence": "The list of problems are getting longer every week.",
+      "error": "are getting",
+      "fix": "is getting",
+      "reason": "The head noun is *the list*, so the verb is singular.",
+      "trap": "T-A12"
+     },
+     {
+      "id": "sc3-2",
+      "sentence": "There have a big supermarket at the end of our street.",
+      "error": "There have",
+      "fix": "There is",
+      "reason": "Existence takes *there is* or *there are*, never *have*.",
+      "trap": "T-A13"
+     },
+     {
+      "id": "sc3-3",
+      "sentence": "Neither of the two routes are shorter than ten kilometres.",
+      "error": "are",
+      "fix": "is",
+      "reason": "*Neither of* takes a singular verb in formal writing."
+     },
+     {
+      "id": "sc3-4",
+      "sentence": "Reading news articles in English help me learn new vocabulary.",
+      "error": "help",
+      "fix": "helps",
+      "reason": "A gerund subject (*reading news articles in English*) is singular."
+     },
+     {
+      "id": "sc3-5",
+      "sentence": "Many people in my class thinks that the test was too long.",
+      "error": "thinks",
+      "fix": "think",
+      "reason": "*People* is plural, so the verb has no -s.",
+      "trap": "T-A11"
+     }
+    ]
+   }
+  }
+ ],
+ "traps": [
+  "T-A01",
+  "T-A11",
+  "T-A12",
+  "T-A13",
+  "T-A33",
+  "T-A34"
+ ],
+ "editing": {
+  "text": "There have two secondary schools in the small town where I live. The number of students in each class are about forty, so the classrooms are always noisy. Each of my three brothers study in a different year, and one of them are preparing for the entrance exam. My mother, who works at the post office, leave home before seven every day. Many people in our street walks to work, because the bus only comes twice an hour. Neither my father nor my uncle drive a car, so the whole family shares one old motorbike. Reading about big cities make me curious about life there. There is three new shops near the market this year, and my friends say that the town is changing fast.",
+  "errors": [
+   {
+    "span": "There have two secondary schools",
+    "fix": "There are two secondary schools",
+    "type": "existence",
+    "reason": "Existence takes *there are*, never *have*.",
+    "trap": "T-A13"
+   },
+   {
+    "span": "in each class are about forty",
+    "fix": "in each class is about forty",
+    "type": "agreement",
+    "reason": "The head noun is *the number*, so the verb is singular.",
+    "trap": "T-A12"
+   },
+   {
+    "span": "brothers study",
+    "fix": "brothers studies",
+    "type": "agreement",
+    "reason": "*Each of* is singular, so the verb takes -s.",
+    "rule": "using-1"
+   },
+   {
+    "span": "one of them are preparing",
+    "fix": "one of them is preparing",
+    "type": "agreement",
+    "reason": "The subject is *one*, not *them*.",
+    "trap": "T-A12"
+   },
+   {
+    "span": "leave home before seven",
+    "fix": "leaves home before seven",
+    "type": "agreement",
+    "reason": "The subject is *my mother*; the relative clause between them changes nothing.",
+    "trap": "T-A01"
+   },
+   {
+    "span": "people in our street walks",
+    "fix": "people in our street walk",
+    "type": "agreement",
+    "reason": "*People* is plural, so the verb has no -s.",
+    "trap": "T-A11"
+   },
+   {
+    "span": "my uncle drive a car",
+    "fix": "my uncle drives a car",
+    "type": "agreement",
+    "reason": "With *neither … nor*, the verb agrees with the nearer subject (*my uncle*).",
+    "rule": "using-3"
+   },
+   {
+    "span": "Reading about big cities make",
+    "fix": "Reading about big cities makes",
+    "type": "agreement",
+    "reason": "A gerund subject is singular.",
+    "rule": "using-3"
+   },
+   {
+    "span": "There is three new shops",
+    "fix": "There are three new shops",
+    "type": "existence",
+    "reason": "*Three new shops* is plural, so use *there are*.",
+    "rule": "using-2"
+   }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email to a host family before an exchange visit. Describe who is in your family, what each of them does, and what there is to see in your home town.",
+   "length": "120–150 words",
+   "checklist": [
+    "Every present verb after a singular subject ends in -s.",
+    "*There is* and *there are* agree with the noun that follows them.",
+    "*Each of* and *one of* take a singular verb."
+   ]
+  },
+  {
+   "prompt": "\"Every student should do two hours of sport a week.\" Give your view and support it with reasons.",
+   "length": "150–180 words",
+   "checklist": [
+    "Subjects such as *students*, *people* and *the number of students* take the verb they really need.",
+    "At least one sentence has a phrase between the subject and the verb (*the cost of sports clubs is…*).",
+    "At least one sentence uses a gerund subject (*playing football helps…*)."
+   ]
+  },
+  {
+   "prompt": "Write a short report about a club, team or class you belong to: how many members there are, what the group does each week, and what the members think of it.",
+   "length": "150–180 words",
+   "checklist": [
+    "The collective noun (*team*, *group*, *club*) keeps one number through the whole report.",
+    "*There is* and *there are* introduce the numbers correctly.",
+    "*Neither … nor* or *either … or* appears at least once with the right verb."
+   ]
+  }
+ ]
+}

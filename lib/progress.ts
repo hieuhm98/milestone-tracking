@@ -397,6 +397,17 @@ export type TopicGroups = Record<string, string>;
 /** Bucket for progress whose topic is no longer in the catalogue. */
 export const UNKNOWN_COURSE = "__unknown";
 
+/**
+ * Sections outside the IT curriculum store their progress in the same object
+ * under a namespaced slug (`grammar:01-present-time`). They are real progress —
+ * they merge, export and sync like everything else — but they are not topics in
+ * the curriculum, so the IT dashboard, the /progress topic list and the course
+ * comparison all step over them.
+ */
+export function isCurriculumTopic(key: string): boolean {
+  return !keySlug(key).includes(":");
+}
+
 /** Progress is keyed by `slug`, `slug#lessonId`, or `slug#questionId`. */
 export function keySlug(key: string): string {
   const hash = key.indexOf("#");
@@ -405,7 +416,14 @@ export function keySlug(key: string): string {
 }
 
 export function courseOf(key: string, groups: TopicGroups): string {
-  return groups[keySlug(key)] ?? UNKNOWN_COURSE;
+  const slug = keySlug(key);
+  const namespace = slug.indexOf(":");
+
+  // A namespaced slug belongs to a section outside the curriculum, so it gets
+  // its own bucket ("grammar") rather than landing in "outside the catalogue".
+  if (namespace > 0) return slug.slice(0, namespace);
+
+  return groups[slug] ?? UNKNOWN_COURSE;
 }
 
 /**
@@ -1111,7 +1129,10 @@ function dayKey(iso: string): string {
 }
 
 export function overallStats(data: ProgressData): OverallStats {
-  const topics = Object.values(data.topics);
+  // Curriculum topics only — see `isCurriculumTopic`.
+  const topics = Object.entries(data.topics)
+    .filter(([slug]) => isCurriculumTopic(slug))
+    .map(([, value]) => value);
   const started = topics.filter((t) => Object.keys(t.answers).length > 0 || t.attempts > 0);
   const completed = topics.filter((t) => t.total > 0 && Object.keys(t.answers).length >= t.total && t.attempts > 0);
   const questionsAnswered = topics.reduce((sum, t) => sum + Object.keys(t.answers).length, 0);
@@ -1119,7 +1140,9 @@ export function overallStats(data: ProgressData): OverallStats {
   const reviewQuestions = data.reviews.reduce((sum, r) => sum + r.total, 0);
   const reviewCorrect = data.reviews.reduce((sum, r) => sum + r.correct, 0);
 
-  const lessons = Object.values(data.lessons);
+  const lessons = Object.entries(data.lessons)
+    .filter(([key]) => isCurriculumTopic(key))
+    .map(([, value]) => value);
   const exams = Object.values(data.exams);
   const blitz = Object.values(data.blitz);
 

@@ -67,6 +67,13 @@ export default function EnglishHome() {
       description: t("ielts.card.desc"),
       stat: `212 ${t("ielts.stat.part1")} · 66 ${t("ielts.stat.cards")} · 283 ${t("ielts.stat.part3")}`,
     },
+    {
+      href: "/english/grammar-for-writing",
+      icon: "✎",
+      title: "Grammar for Writing",
+      description: t("grammar.card.desc"),
+      stat: `19 ${t("grammar.home.units")} · 48 ${t("grammar.home.traps")}`,
+    },
   ];
 
   return (

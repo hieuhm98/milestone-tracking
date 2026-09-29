@@ -9,6 +9,7 @@ import { LANGS } from "@/lib/i18n";
 import { SECTIONS, sectionForPath, type SectionId } from "@/lib/sections";
 import { cn } from "@/lib/utils";
 import AccountCard from "@/components/auth/AccountCard";
+import { useSidebarCollapsed } from "@/lib/useSidebarCollapsed";
 
 interface NavItem {
   href: string;
@@ -53,6 +54,7 @@ const SECTION_NAV: Record<SectionId, NavGroup[]> = {
         { href: "/english/dictionary", label: "nav.dictionary", icon: "▤" },
         { href: "/english/practice", label: "nav.englishPractice", icon: "Ⓐ" },
         { href: "/english/ielts-speaking", label: "ielts.entry", icon: "◍" },
+        { href: "/english/grammar-for-writing", label: "grammar.entry", icon: "✎" },
       ],
     },
   ],
@@ -62,11 +64,88 @@ const SECTION_NAV: Record<SectionId, NavGroup[]> = {
  * The nav itself. Rendered twice — as the fixed desktop rail and inside the
  * mobile drawer — so the two can never drift apart.
  */
-function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void; collapsed?: boolean }) {
   const pathname = usePathname();
   const section = sectionForPath(pathname);
   const { lang, setLang, dual, toggleDual, t } = useLang();
   const { theme, toggle: toggleTheme } = useTheme();
+
+  // Minimised, the rail keeps one-click navigation but drops every label; the
+  // icon carries the meaning and `title` gives it back on hover.
+  if (collapsed) {
+    return (
+      <div className="flex flex-col h-full min-h-0 items-center">
+        <div className="py-4 text-lg font-bold" title="Milestone Tracking" aria-hidden="true">
+          M
+        </div>
+
+        <div className="flex flex-col gap-1 pb-2">
+          {SECTIONS.map((item) => (
+            <Link
+              key={item.id}
+              href={item.home}
+              title={t(item.label)}
+              aria-label={t(item.label)}
+              aria-current={section === item.id ? "true" : undefined}
+              className={cn(
+                "flex h-9 w-9 items-center justify-center rounded-lg text-sm transition-colors",
+                section === item.id
+                  ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+              )}
+            >
+              <span aria-hidden="true">{item.icon}</span>
+            </Link>
+          ))}
+        </div>
+
+        <nav className="flex-1 w-full overflow-y-auto flex flex-col items-center gap-1 pb-3">
+          {SECTION_NAV[section].flatMap((group) => group.items).map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onNavigate}
+              title={t(item.label)}
+              aria-label={t(item.label)}
+              className={cn(
+                "flex h-9 w-9 items-center justify-center rounded-lg text-base transition-colors",
+                pathname === item.href
+                  ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800/60"
+              )}
+            >
+              <span aria-hidden="true">{item.icon}</span>
+            </Link>
+          ))}
+        </nav>
+
+        {/* Language and theme still have to be reachable when minimised. */}
+        <div className="shrink-0 flex flex-col items-center gap-1 pb-2">
+          <button
+            type="button"
+            onClick={() => setLang(lang === "vi" ? "en" : "vi")}
+            title={t("lang.dual")}
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
+          >
+            {lang.toUpperCase()}
+          </button>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? t("theme.toLight") : t("theme.toDark")}
+            title={theme === "dark" ? t("theme.toLight") : t("theme.toDark")}
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
+          >
+            <span aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span>
+          </button>
+        </div>
+
+        <div className="shrink-0 pb-3">
+          <AccountCard collapsed />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-full min-h-0">
@@ -200,6 +279,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { t } = useLang();
   const [open, setOpen] = useState(false);
+  const [collapsed, setCollapsed] = useSidebarCollapsed();
 
   // A tap that navigates should also dismiss the drawer.
   useEffect(() => setOpen(false), [pathname]);
@@ -267,8 +347,29 @@ export default function Sidebar() {
         </div>
       </aside>
 
-      <aside className="hidden lg:block w-56 shrink-0 border-r border-zinc-200 dark:border-zinc-800 h-screen sticky top-0">
-        <SidebarNav />
+      {/* Desktop rail. It minimises to icons rather than disappearing, so
+          navigation stays one click away on a small laptop screen where the
+          reading column is what needs the room. */}
+      <aside
+        className={cn(
+          "hidden lg:block shrink-0 border-r border-zinc-200 dark:border-zinc-800 h-screen sticky top-0",
+          "transition-[width] duration-200 ease-out motion-reduce:transition-none",
+          collapsed ? "w-14" : "w-56"
+        )}
+      >
+        <div className="relative h-full">
+          <button
+            type="button"
+            onClick={() => setCollapsed(!collapsed)}
+            aria-label={collapsed ? t("nav.expandSidebar") : t("nav.collapseSidebar")}
+            title={collapsed ? t("nav.expandSidebar") : t("nav.collapseSidebar")}
+            aria-expanded={!collapsed}
+            className="absolute -right-3 top-6 z-10 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-sm transition-colors"
+          >
+            <span aria-hidden="true">{collapsed ? "›" : "‹"}</span>
+          </button>
+          <SidebarNav collapsed={collapsed} />
+        </div>
       </aside>
     </>
   );

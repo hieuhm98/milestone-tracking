@@ -1,0 +1,651 @@
+{
+ "id": "18-commonly-confused-words",
+ "number": 18,
+ "part": "D",
+ "title": "Commonly confused words",
+ "status": "draft",
+ "focus": {
+  "text": "Some words sit so close together that a spellchecker will never separate them. *Their*, *there* and *they're* sound the same; *lose* and *loose* differ by one letter; *affect* and *effect* differ by one job in the sentence. A reader notices these slips immediately, and they suggest carelessness rather than a gap in your English. The cure is not memorising a long list. It is asking two questions before you write the word: what does it mean here, and which word class does the slot need?",
+  "summaryTable": {
+   "caption": "Four pairs that cause the most trouble",
+   "columns": [
+    "Pair",
+    "What each one is",
+    "Test sentence"
+   ],
+   "rows": [
+    [
+     "their / there / they're",
+     "possessive · place · *they are*",
+     "**They're** leaving **their** bikes over **there**."
+    ],
+    [
+     "its / it's",
+     "possessive · *it is*",
+     "**It's** raining, and the dog wants **its** dinner."
+    ],
+    [
+     "affect / effect",
+     "verb · noun",
+     "Noise **affects** sleep, and the **effect** lasts all day."
+    ],
+    [
+     "lose / loose",
+     "verb · adjective",
+     "Don't **lose** the key; the handle is **loose**."
+    ]
+   ]
+  }
+ },
+ "pretest": [
+  {
+   "id": "p1",
+   "sentence": "The students left their notebooks on the table.",
+   "correct": true,
+   "reason": "*their* shows who the notebooks belong to.",
+   "layer": "core"
+  },
+  {
+   "id": "p2",
+   "sentence": "Its a long walk from the station to the hotel.",
+   "correct": false,
+   "reason": "*It's* = *it is*; *its* only shows possession.",
+   "layer": "core"
+  },
+  {
+   "id": "p3",
+   "sentence": "Heavy rain affects the rice harvest every year.",
+   "correct": true,
+   "reason": "*affect* is the verb, and the subject *rain* takes the -s form.",
+   "layer": "core"
+  },
+  {
+   "id": "p4",
+   "sentence": "The new rule had a big affect on class sizes.",
+   "correct": false,
+   "reason": "After *a big*, the slot needs the noun *effect*; *affect* is the verb.",
+   "layer": "core"
+  },
+  {
+   "id": "p5",
+   "sentence": "The strap on my bag is loose, so I will repair it tonight.",
+   "correct": true,
+   "reason": "*loose* is the adjective meaning *not tight*.",
+   "layer": "core"
+  },
+  {
+   "id": "p6",
+   "sentence": "I lost the last bus and had to walk home.",
+   "correct": false,
+   "reason": "You *miss* a bus; you *lose* an object such as a wallet.",
+   "trap": "T-D06",
+   "layer": "core"
+  },
+  {
+   "id": "p7",
+   "sentence": "Buses are an economic way to travel around the city.",
+   "correct": false,
+   "reason": "*economical* = saving money; *economic* = about the economy.",
+   "trap": "T-D04",
+   "layer": "extend"
+  },
+  {
+   "id": "p8",
+   "sentence": "The city plans to raise the parking fee next year.",
+   "correct": true,
+   "reason": "*raise* takes an object (*the fee*); *rise* never does.",
+   "layer": "extend"
+  },
+  {
+   "id": "p9",
+   "sentence": "My teacher adviced me to take the test in June.",
+   "correct": false,
+   "reason": "*advise* is the verb (*advised*); *advice* is the noun.",
+   "layer": "extend"
+  },
+  {
+   "id": "p10",
+   "sentence": "Prices have risen faster than wages since 2020.",
+   "correct": true,
+   "reason": "*rise* takes no object, and its past participle is *risen*.",
+   "layer": "extend"
+  }
+ ],
+ "context": {
+  "title": "A message that went wrong",
+  "paragraph": "Dear Ms Hoa, I am writing about the school trip to Huế. Their are two problems with the plan. First, the coach leaves at five, and I think its too early for students who live far away. Second, the fee is high, so some families will loose the chance to join. A later start would not effect the programme, because the first museum opens at nine. My parents also asked me to pass on there advice about the return journey. They say a night bus is more economic than a hotel, but it is also more tiring. Could you tell me weather the school can change the times? Thank you for your help.",
+  "task": "tap-errors",
+  "targets": [
+   "Their are",
+   "its too early",
+   "loose the chance",
+   "effect the programme",
+   "there advice",
+   "more economic",
+   "weather the school"
+  ]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming and telling apart the sound-alike words",
+   "table": {
+    "caption": "Words that sound the same but do different jobs",
+    "columns": [
+     "Word",
+     "What it is",
+     "Read it as",
+     "Example"
+    ],
+    "rows": [
+     [
+      "their",
+      "possessive",
+      "my / our",
+      "**Their** results improved this term."
+     ],
+     [
+      "there",
+      "place, or *there is/are*",
+      "in that place",
+      "**There** are four options."
+     ],
+     [
+      "they're",
+      "they + are",
+      "they are",
+      "**They're** waiting outside."
+     ],
+     [
+      "its",
+      "possessive",
+      "his / her",
+      "The city lost **its** old trees."
+     ],
+     [
+      "it's",
+      "it + is, or it + has",
+      "it is",
+      "**It's** the cheapest option."
+     ],
+     [
+      "your",
+      "possessive",
+      "my",
+      "Send **your** draft by Friday."
+     ],
+     [
+      "you're",
+      "you + are",
+      "you are",
+      "**You're** late again."
+     ],
+     [
+      "whose",
+      "possessive question word",
+      "of whom",
+      "**Whose** bag is this?"
+     ],
+     [
+      "who's",
+      "who + is, or who + has",
+      "who is",
+      "**Who's** coming with us?"
+     ]
+    ]
+   },
+   "notes": [
+    "The apostrophe in *it's, they're, you're* and *who's* always stands for a missing letter, never for possession. If the two full words fit, the apostrophe form is right."
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "choice",
+    "items": [
+     {
+      "id": "sc1-1",
+      "stem": "___ going to publish the results next Monday.",
+      "options": [
+       "Their",
+       "There",
+       "They're"
+      ],
+      "answer": 2,
+      "reason": "*They are going* fits, so the contraction *They're* is correct."
+     },
+     {
+      "id": "sc1-2",
+      "stem": "The committee has changed ___ mind about the fee.",
+      "options": [
+       "its",
+       "it's"
+      ],
+      "answer": 0,
+      "reason": "The mind belongs to the committee, so use the possessive *its*."
+     },
+     {
+      "id": "sc1-3",
+      "stem": "___ have been three accidents on this corner this year.",
+      "options": [
+       "Their",
+       "There",
+       "They're"
+      ],
+      "answer": 1,
+      "reason": "*There* introduces something that exists."
+     },
+     {
+      "id": "sc1-4",
+      "stem": "___ essay was the only one without a spelling mistake.",
+      "options": [
+       "Your",
+       "You're"
+      ],
+      "answer": 0,
+      "reason": "The essay belongs to you, so use the possessive *Your*."
+     },
+     {
+      "id": "sc1-5",
+      "stem": "The student ___ project won the prize studies in my class.",
+      "options": [
+       "whose",
+       "who's"
+      ],
+      "answer": 0,
+      "reason": "The project belongs to the student, so use *whose*."
+     }
+    ]
+   }
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming a habit with the look-alike pairs",
+   "table": {
+    "caption": "Pairs that differ by a letter or two",
+    "columns": [
+     "Pair",
+     "What each one means",
+     "Example"
+    ],
+    "rows": [
+     [
+      "lose / loose",
+      "stop having something · not tight",
+      "Don't **lose** your ticket. The screw is **loose**."
+     ],
+     [
+      "quiet / quite",
+      "not noisy · fairly",
+      "The street is **quiet** and **quite** narrow."
+     ],
+     [
+      "than / then",
+      "comparison · after that",
+      "Huế is smaller **than** Đà Nẵng. We ate, **then** we walked."
+     ],
+     [
+      "accept / except",
+      "say yes to · not including",
+      "I **accept** the offer. Everyone came **except** Lan."
+     ],
+     [
+      "affect / effect",
+      "verb: change something · noun: the change",
+      "Noise **affects** sleep. The **effect** lasts for hours."
+     ],
+     [
+      "weather / whether",
+      "rain, sun and wind · if",
+      "The **weather** is fine. I asked **whether** she agreed."
+     ],
+     [
+      "good / well",
+      "adjective · adverb",
+      "It was a **good** talk, and she spoke **well**."
+     ]
+    ]
+   },
+   "notes": [
+    "*Effect* can also be a verb meaning *bring about* (*effect change*), but it is rare. In almost every student essay, *affect* is the verb and *effect* is the noun."
+   ],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "fix",
+    "items": [
+     {
+      "id": "sc2-1",
+      "sentence": "If you loose your student card, report it to the office.",
+      "error": "loose",
+      "fix": "lose",
+      "reason": "*lose* is the verb; *loose* means *not tight*."
+     },
+     {
+      "id": "sc2-2",
+      "sentence": "The new timetable will effect every class in the school.",
+      "error": "effect",
+      "fix": "affect",
+      "reason": "The slot after *will* needs a verb, and the verb is *affect*."
+     },
+     {
+      "id": "sc2-3",
+      "sentence": "The library is quite in the morning, so I revise there.",
+      "error": "quite",
+      "fix": "quiet",
+      "reason": "*quiet* means *not noisy*; *quite* means *fairly*."
+     },
+     {
+      "id": "sc2-4",
+      "sentence": "Everyone in the group passed the test accept Duy.",
+      "error": "accept",
+      "fix": "except",
+      "reason": "*except* means *not including*; *accept* means *say yes to*."
+     },
+     {
+      "id": "sc2-5",
+      "sentence": "My home town is much quieter then the capital.",
+      "error": "then",
+      "fix": "than",
+      "reason": "*than* follows a comparative; *then* means *after that*."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using the two tests: meaning and word class",
+   "rules": [
+    {
+     "text": "Read the sentence with the full words. If *it is* or *they are* still makes sense, the apostrophe form is the right one.",
+     "examples": [
+      {
+       "text": "**It's** the first survey of its kind in the province.",
+       "bold": [
+        "It's"
+       ]
+      },
+      {
+       "text": "The report lost **its** value once the data changed.",
+       "bold": [
+        "its"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Decide the word class first. A verb slot takes *affect, advise, practise*; a noun slot after *a, the* or an adjective takes *effect, advice, practice*.",
+     "examples": [
+      {
+       "text": "Long journeys **affect** concentration.",
+       "bold": [
+        "affect"
+       ]
+      },
+      {
+       "text": "The main **effect** of the new lane is shorter journeys.",
+       "bold": [
+        "effect"
+       ]
+      },
+      {
+       "text": "The team played **well**, although the pitch was not **good**.",
+       "bold": [
+        "well",
+        "good"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Some pairs differ in what follows them rather than in meaning. *Raise* needs an object; *rise* stands alone.",
+     "examples": [
+      {
+       "text": "The school **raised** the entry fee by ten per cent.",
+       "bold": [
+        "raised"
+       ]
+      },
+      {
+       "text": "Temperatures **rose** sharply after midday.",
+       "bold": [
+        "rose"
+       ]
+      }
+     ]
+    }
+   ],
+   "tips": [
+    "A spellchecker cannot help here, because both words exist. Read your finished draft once with only these pairs in mind: *their/there*, *its/it's*, *affect/effect*, *than/then*."
+   ]
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using the academic pairs correctly",
+   "rules": [
+    {
+     "text": "*Economic* means *about the economy*; *economical* means *cheap to run*.",
+     "examples": [
+      {
+       "text": "The **economic** growth of the region slowed in 2023.",
+       "bold": [
+        "economic"
+       ]
+      },
+      {
+       "text": "A small motorbike is far more **economical** than a car.",
+       "bold": [
+        "economical"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "*Advice* is the noun and *advise* is the verb. British English splits *practice* and *practise*, and *licence* and *license*, in the same way.",
+     "examples": [
+      {
+       "text": "My tutor **advised** me to start the reading early.",
+       "bold": [
+        "advised"
+       ]
+      },
+      {
+       "text": "Her **advice** saved me two weeks of work.",
+       "bold": [
+        "advice"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "*Miss* is for buses, classes and chances; *lose* is for objects, games and money.",
+     "examples": [
+      {
+       "text": "I **missed** the last bus to Thủ Đức.",
+       "bold": [
+        "missed"
+       ]
+      },
+      {
+       "text": "He **lost** his phone somewhere in the market.",
+       "bold": [
+        "lost"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "*Advice* is uncountable, so write *a piece of advice* or *some advice*, never *an advice*."
+   ],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "form",
+    "items": [
+     {
+      "id": "sc3-1",
+      "stem": "The government hopes to ___ the minimum wage next year.",
+      "base": "rise / raise",
+      "answer": [
+       "raise"
+      ],
+      "reason": "*raise* takes an object (*the minimum wage*); *rise* does not.",
+      "trap": "T-D05"
+     },
+     {
+      "id": "sc3-2",
+      "stem": "Rents have ___ steadily since the new factory opened.",
+      "base": "rise / raise",
+      "answer": [
+       "risen"
+      ],
+      "reason": "*rise* takes no object, and its past participle is *risen*.",
+      "trap": "T-D05"
+     },
+     {
+      "id": "sc3-3",
+      "stem": "A bicycle is the most ___ way to travel across a small town.",
+      "base": "economic / economical",
+      "answer": [
+       "economical"
+      ],
+      "reason": "*economical* = saving money; *economic* = about the economy.",
+      "trap": "T-D04"
+     },
+     {
+      "id": "sc3-4",
+      "stem": "Could you ___ me on which optional subject to choose?",
+      "base": "advice / advise",
+      "answer": [
+       "advise"
+      ],
+      "reason": "The slot after *you* needs the verb *advise*."
+     },
+     {
+      "id": "sc3-5",
+      "stem": "Hương ___ her train because the taxi was stuck in traffic.",
+      "base": "lose / miss",
+      "answer": [
+       "missed"
+      ],
+      "reason": "You *miss* a train; you *lose* an object.",
+      "trap": "T-D06"
+     }
+    ]
+   }
+  }
+ ],
+ "traps": [
+  "T-D03",
+  "T-D04",
+  "T-D05",
+  "T-D06",
+  "T-D11",
+  "T-D12",
+  "T-D13",
+  "T-D14",
+  "T-D15"
+ ],
+ "editing": {
+  "text": "Last Saturday our volunteer group met at a café near the Hàn River to plan a beach clean-up. There were eleven of us, and everyone accept Bảo had joined a similar event before. Bảo asked whether the plastic on the sand really effects the fish, and our leader Chi answered with two photographs. She explained the problem very clear, and nobody left the café with a question. Chi also gave us some useful advise about gloves and sun cream. We agreed that an early start is more economic than hiring a van for the whole day. Nobody wanted to miss the event, so we chose the first Sunday in October. My job is to remind every volunteer to bring they're own water bottle. I wrote a short notice for the school board, and I think its clear enough. Quiet a few teachers have already promised to help, which is better then I expected.",
+  "errors": [
+   {
+    "span": "accept Bảo",
+    "fix": "except Bảo",
+    "type": "confused word",
+    "reason": "*except* means *not including*; *accept* means *say yes to*.",
+    "rule": "forming-2"
+   },
+   {
+    "span": "effects the fish",
+    "fix": "affects the fish",
+    "type": "confused word",
+    "reason": "The slot needs the verb *affect*; *effect* is the noun.",
+    "rule": "using-1"
+   },
+   {
+    "span": "very clear",
+    "fix": "very clearly",
+    "type": "word form",
+    "reason": "*explained* is a verb, so it takes the adverb *clearly*.",
+    "trap": "T-D03"
+   },
+   {
+    "span": "useful advise",
+    "fix": "useful advice",
+    "type": "confused word",
+    "reason": "After *some useful*, the slot needs the noun *advice*.",
+    "rule": "using-2"
+   },
+   {
+    "span": "more economic than",
+    "fix": "more economical than",
+    "type": "confused word",
+    "reason": "*economical* = saving money; *economic* = about the economy.",
+    "trap": "T-D04"
+   },
+   {
+    "span": "they're own",
+    "fix": "their own",
+    "type": "confused word",
+    "reason": "*they're* = *they are*; the possessive is *their*.",
+    "rule": "forming-1"
+   },
+   {
+    "span": "I think its clear",
+    "fix": "I think it's clear",
+    "type": "confused word",
+    "reason": "*it's* = *it is*; *its* only shows possession.",
+    "rule": "forming-1"
+   },
+   {
+    "span": "Quiet a few",
+    "fix": "Quite a few",
+    "type": "confused word",
+    "reason": "*quite a few* means *several*; *quiet* means *not noisy*.",
+    "rule": "forming-2"
+   },
+   {
+    "span": "better then I expected",
+    "fix": "better than I expected",
+    "type": "confused word",
+    "reason": "*than* follows a comparative such as *better*.",
+    "rule": "forming-2"
+   }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email to a classmate who missed a week of school. Explain what the class has done, what the homework is, and give two pieces of advice.",
+   "length": "120–150 words",
+   "checklist": [
+    "*Their*, *there* and *they're* each appear at least once, each doing its own job.",
+    "*Advice* is used as a noun and *advise* as a verb.",
+    "Every *it's* can be read aloud as *it is*."
+   ]
+  },
+  {
+   "prompt": "'Public transport should be free for students.' Give your opinion and say what effect the change would have on families and on the city.",
+   "length": "150–180 words",
+   "checklist": [
+    "*Affect* is used only as a verb and *effect* only as a noun.",
+    "*Economic* and *economical* keep their own meanings if both appear.",
+    "*Than* is used for comparisons and *then* only for time."
+   ]
+  },
+  {
+   "prompt": "Describe a problem in your neighbourhood — noise, rubbish or traffic — and the effect it has on the people who live there. Suggest one change.",
+   "length": "150–180 words",
+   "checklist": [
+    "*Its* and *it's* are each used correctly at least once.",
+    "*Lose* and *miss* are used with the right kind of object.",
+    "Every comparison uses *than*, and every *then* means *after that*."
+   ]
+  }
+ ]
+}

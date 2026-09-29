@@ -1,0 +1,603 @@
+{
+ "id": "07-the-passive-voice",
+ "number": 7,
+ "part": "A",
+ "title": "The passive voice",
+ "status": "draft",
+ "focus": {
+  "text": "In a passive sentence the subject receives the action instead of doing it: *the bridge was built*, not *engineers built the bridge*. The form is always the same, a form of *be* plus the past participle, and only *be* changes for time and number. Writers choose the passive when the doer is unknown, obvious or unimportant, and when they want the topic of the paragraph to stay at the front of the sentence. That is why reports, process descriptions and academic writing use it far more often than conversation does.",
+  "summaryTable": {
+   "caption": "The passive across the main tenses",
+   "columns": [
+    "Tense",
+    "Passive form",
+    "Example"
+   ],
+   "rows": [
+    [
+     "Simple present",
+     "am / is / are + past participle",
+     "The results **are published** online."
+    ],
+    [
+     "Simple past",
+     "was / were + past participle",
+     "The market **was rebuilt** in 2018."
+    ],
+    [
+     "Present perfect",
+     "have / has been + past participle",
+     "Three sites **have been chosen**."
+    ],
+    [
+     "With a modal",
+     "modal + be + past participle",
+     "The forms **must be signed** by a parent."
+    ]
+   ]
+  }
+ },
+ "pretest": [
+  {
+   "id": "p1",
+   "sentence": "The new library was opened in March.",
+   "correct": true,
+   "reason": "*was* + past participle is the past passive, and the builder does not matter here.",
+   "layer": "core"
+  },
+  {
+   "id": "p2",
+   "sentence": "A serious accident was happened near the market last night.",
+   "correct": false,
+   "reason": "*happen* takes no object, so it has no passive: *an accident happened*.",
+   "trap": "T-A16",
+   "layer": "core"
+  },
+  {
+   "id": "p3",
+   "sentence": "Rice is grown in the Mekong Delta and exported all over the world.",
+   "correct": true,
+   "reason": "The present passive suits a general fact where the farmers are not the point.",
+   "layer": "core"
+  },
+  {
+   "id": "p4",
+   "sentence": "This temple built more than two hundred years ago.",
+   "correct": false,
+   "reason": "The temple receives the action, so the verb needs *be*: *was built*.",
+   "trap": "T-A17",
+   "layer": "core"
+  },
+  {
+   "id": "p5",
+   "sentence": "All the application forms have been checked twice.",
+   "correct": true,
+   "reason": "*have been* + past participle reports a result that still matters now.",
+   "layer": "core"
+  },
+  {
+   "id": "p6",
+   "sentence": "Many people was affected by the flood in October.",
+   "correct": false,
+   "reason": "*people* is plural, so the passive auxiliary is *were affected*.",
+   "trap": "T-A11",
+   "layer": "core"
+  },
+  {
+   "id": "p7",
+   "sentence": "The samples must be stored in a cool room.",
+   "correct": true,
+   "reason": "After a modal the passive is *be* + past participle.",
+   "layer": "extend"
+  },
+  {
+   "id": "p8",
+   "sentence": "The survey should be carry out again next year.",
+   "correct": false,
+   "reason": "A passive needs the past participle after *be*: *should be carried out*.",
+   "layer": "extend"
+  },
+  {
+   "id": "p9",
+   "sentence": "Since 2020 more than forty bridges have been repaired.",
+   "correct": true,
+   "reason": "An unfinished period (*since 2020*) takes the present perfect passive.",
+   "layer": "extend"
+  },
+  {
+   "id": "p10",
+   "sentence": "The temperature of the water was risen by two degrees.",
+   "correct": false,
+   "reason": "*rise* takes no object and has no passive; write *rose*, or use *raise*: *was raised*.",
+   "trap": "T-D05",
+   "layer": "extend"
+  }
+ ],
+ "context": {
+  "title": "A market that keeps changing",
+  "paragraph": "The Đông Ba market in Huế is visited by thousands of people every week, and the building itself has been repaired many times. It was first opened in the nineteenth century, and parts of it were destroyed during the war. In the 1980s the roof was rebuilt, and new stalls were added along the river side. Today the market is managed by the city, and the rents are kept low so that small traders can stay. A new drainage system will be installed next year, and the oldest section may be closed for several months. Visitors are asked to use the side entrance while the work is carried out.",
+  "task": "tap-verbs",
+  "targets": [
+   "is visited",
+   "has been repaired",
+   "was first opened",
+   "were destroyed",
+   "was rebuilt",
+   "were added",
+   "is managed",
+   "are kept",
+   "will be installed",
+   "may be closed",
+   "are asked",
+   "is carried out"
+  ]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming the passive",
+   "table": {
+    "caption": "The same sentence, active and passive, in five tenses",
+    "columns": [
+     "Tense",
+     "Active",
+     "Passive"
+    ],
+    "rows": [
+     [
+      "Simple present",
+      "Volunteers **clean** the beach.",
+      "The beach **is cleaned** every Sunday."
+     ],
+     [
+      "Present progressive",
+      "They **are repairing** the road.",
+      "The road **is being repaired**."
+     ],
+     [
+      "Simple past",
+      "The council **built** the bridge.",
+      "The bridge **was built** in 1998."
+     ],
+     [
+      "Present perfect",
+      "Somebody **has taken** my umbrella.",
+      "My umbrella **has been taken**."
+     ],
+     [
+      "Future",
+      "We **will announce** the results.",
+      "The results **will be announced** on Friday."
+     ]
+    ]
+   },
+   "notes": [
+    "Only the first word of the verb phrase changes for time and number. The past participle never changes, so once you can write *taken*, you can write every passive tense of *take*.",
+    "*be* must agree with the new subject: *the report is checked*, but *the reports are checked*."
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "form",
+    "items": [
+     {
+      "id": "sc1-1",
+      "stem": "The new stadium ___ in 2021.",
+      "base": "open",
+      "answer": [
+       "was opened"
+      ],
+      "reason": "A finished past time takes *was* + past participle."
+     },
+     {
+      "id": "sc1-2",
+      "stem": "Plastic bags ___ in this shop any more.",
+      "base": "not use",
+      "answer": [
+       "are not used",
+       "aren't used"
+      ],
+      "reason": "A present habit with an unimportant doer takes *are not* + past participle."
+     },
+     {
+      "id": "sc1-3",
+      "stem": "The coastal road ___ at the moment, so take the bus.",
+      "base": "repair",
+      "answer": [
+       "is being repaired"
+      ],
+      "reason": "An action in progress now takes *is being* + past participle."
+     },
+     {
+      "id": "sc1-4",
+      "stem": "All the registration forms ___ already.",
+      "base": "check",
+      "answer": [
+       "have been checked"
+      ],
+      "reason": "*already* points to a result that matters now, so use *have been* + past participle."
+     },
+     {
+      "id": "sc1-5",
+      "stem": "The winners ___ at the ceremony next month.",
+      "base": "announce",
+      "answer": [
+       "will be announced"
+      ],
+      "reason": "A future passive is *will be* + past participle."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using the passive: when to leave the doer out",
+   "rules": [
+    {
+     "text": "Use the passive when the doer is unknown, obvious from the situation, or simply not worth naming.",
+     "examples": [
+      {
+       "text": "My bicycle **was stolen** outside the market.",
+       "bold": [
+        "was stolen"
+       ]
+      },
+      {
+       "text": "The exam papers **are marked** in Hà Nội.",
+       "bold": [
+        "are marked"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use it to keep the topic of your paragraph in the subject position, so that each sentence starts from what the reader already knows.",
+     "examples": [
+      {
+       "text": "The old quarter attracts most visitors. It **was protected** by a city rule in 1995.",
+       "bold": [
+        "was protected"
+       ]
+      },
+      {
+       "text": "Our questionnaire had twelve questions. It **was translated** into English and Vietnamese.",
+       "bold": [
+        "was translated"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Never make a passive from a verb that takes no object, such as *happen, occur, arrive, rise, appear* and *take place*.",
+     "examples": [
+      {
+       "text": "The flood **happened** in the middle of October.",
+       "bold": [
+        "happened"
+       ]
+      },
+      {
+       "text": "Prices **rose** sharply after the storm.",
+       "bold": [
+        "rose"
+       ]
+      }
+     ]
+    }
+   ],
+   "tips": [
+    "A passive sentence is not automatically more academic. When the doer matters — *the government raised the fee* — the active sentence is shorter and tells the reader more."
+   ]
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "extend",
+   "title": "Forming the passive with modals and in longer verb phrases",
+   "table": {
+    "caption": "Passive patterns beyond the simple tenses",
+    "columns": [
+     "Pattern",
+     "Example"
+    ],
+    "rows": [
+     [
+      "modal + be + past participle",
+      "Helmets **must be worn** on the building site."
+     ],
+     [
+      "modal + have been + past participle",
+      "The parcel **may have been delivered** to the wrong address."
+     ],
+     [
+      "be going to + be + past participle",
+      "The rules **are going to be changed** in September."
+     ],
+     [
+      "infinitive: to be + past participle",
+      "The bridge needs **to be inspected** every year."
+     ],
+     [
+      "-ing form: being + past participle",
+      "She hates **being interrupted** during a test."
+     ]
+    ]
+   },
+   "notes": [
+    "The object of the active sentence becomes the subject of the passive one. A verb with two objects gives you a choice: *the school gave Minh a prize* becomes *Minh was given a prize*, or, less commonly, *a prize was given to Minh*."
+   ],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "choice",
+    "items": [
+     {
+      "id": "sc2-1",
+      "stem": "The accident ___ at about nine o'clock.",
+      "options": [
+       "was happened",
+       "happened"
+      ],
+      "answer": 1,
+      "reason": "*happen* takes no object, so it has no passive form.",
+      "trap": "T-A16"
+     },
+     {
+      "id": "sc2-2",
+      "stem": "This pagoda ___ in 1601 and rebuilt after a fire.",
+      "options": [
+       "built",
+       "was built"
+      ],
+      "answer": 1,
+      "reason": "The pagoda receives the action, so it needs *be* + past participle.",
+      "trap": "T-A17"
+     },
+     {
+      "id": "sc2-3",
+      "stem": "Bags ___ into the exam room.",
+      "options": [
+       "must not be taken",
+       "must not be took"
+      ],
+      "answer": 0,
+      "reason": "After a modal the passive uses the past participle *taken*."
+     },
+     {
+      "id": "sc2-4",
+      "stem": "Half of the seats ___ before the tickets went on general sale.",
+      "options": [
+       "had already been sold",
+       "had already sold"
+      ],
+      "answer": 0,
+      "reason": "The seats sold nothing; they received the action, so the verb is passive."
+     },
+     {
+      "id": "sc2-5",
+      "stem": "The average temperature ___ by almost one degree since 1990.",
+      "options": [
+       "has been risen",
+       "has risen"
+      ],
+      "answer": 1,
+      "reason": "*rise* takes no object, so it has no passive; *raise* is the verb that takes one.",
+      "trap": "T-D05"
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using the by-phrase, and the passive in reports",
+   "rules": [
+    {
+     "text": "Add a *by*-phrase only when the doer is new information the reader needs.",
+     "examples": [
+      {
+       "text": "The mural **was painted by students** from the art college.",
+       "bold": [
+        "was painted by students"
+       ]
+      },
+      {
+       "text": "Most of the rubbish **is collected** at night, so nobody needs to be told by whom.",
+       "bold": [
+        "is collected"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "In a process description, the passive keeps every step on the material rather than on an imaginary worker.",
+     "examples": [
+      {
+       "text": "The beans **are washed**, **dried** and then **roasted** for twenty minutes.",
+       "bold": [
+        "are washed",
+        "dried",
+        "roasted"
+       ]
+      },
+      {
+       "text": "Once the clay **has been shaped**, it is left in the sun for a day.",
+       "bold": [
+        "has been shaped"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "In a report, the passive lets you say what was done without naming yourself in every sentence.",
+     "examples": [
+      {
+       "text": "Forty students **were interviewed** in three schools in Cần Thơ.",
+       "bold": [
+        "were interviewed"
+       ]
+      },
+      {
+       "text": "The data **were collected** over two weeks in March.",
+       "bold": [
+        "were collected"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "*The data were collected* and *the data was collected* are both in use. Plural *were* is the safer choice in academic writing."
+   ],
+   "tips": [
+    "In IELTS Writing Task 1 process diagrams, almost every step is passive: *the fruit is sorted*, *the pulp is heated*. Name the material, not a worker the diagram never shows."
+   ],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "fix",
+    "items": [
+     {
+      "id": "sc3-1",
+      "sentence": "The festival was took place last weekend in Hội An.",
+      "error": "was took place",
+      "fix": "took place",
+      "reason": "*take place* has no object, so it cannot be made passive.",
+      "trap": "T-A16"
+     },
+     {
+      "id": "sc3-2",
+      "sentence": "My phone stole on the bus to school.",
+      "error": "stole",
+      "fix": "was stolen",
+      "reason": "The phone received the action, so the verb must be passive.",
+      "trap": "T-A17"
+     },
+     {
+      "id": "sc3-3",
+      "sentence": "The questionnaires was sent to every class teacher.",
+      "error": "was sent",
+      "fix": "were sent",
+      "reason": "*be* agrees with the plural subject *the questionnaires*."
+     },
+     {
+      "id": "sc3-4",
+      "sentence": "The report should be write in the third person.",
+      "error": "be write",
+      "fix": "be written",
+      "reason": "After a modal the passive needs the past participle *written*."
+     },
+     {
+      "id": "sc3-5",
+      "sentence": "The bridge has been opened in 2015 by the prime minister.",
+      "error": "has been opened",
+      "fix": "was opened",
+      "reason": "*in 2015* is a finished time, so the past passive is correct.",
+      "trap": "T-A06"
+     }
+    ]
+   }
+  }
+ ],
+ "traps": [
+  "T-A06",
+  "T-A11",
+  "T-A16",
+  "T-A17",
+  "T-A24",
+  "T-A25",
+  "T-D05"
+ ],
+ "editing": {
+  "text": "Our class ran a paper collection for three weeks, and I was asked to write this report. On the first day posters were put up in every corridor, and a box was placed beside each classroom door. The boxes were emptied every Friday by two volunteers. In the second week a problem was happened: the boxes on the top floor were fill with plastic bottles as well as paper. We agreed that clearer labels should be print before the next round. Altogether one hundred and twelve kilos of paper collected, and the money was given to the library fund. The results has been shown to the head teacher, and she was very pleased. Last term a similar project organised by the science club. Their posters were designed by an art student, and everybody in the school say that they looked professional. Next year the collection will be run by the new committee, so we must to write clear instructions for them.",
+  "errors": [
+   {
+    "span": "was happened",
+    "fix": "happened",
+    "type": "passive with an intransitive verb",
+    "reason": "*happen* takes no object, so it has no passive form.",
+    "trap": "T-A16"
+   },
+   {
+    "span": "were fill",
+    "fix": "were filled",
+    "type": "participle form",
+    "reason": "A passive needs the past participle after *be*: *were filled*.",
+    "rule": "forming-1"
+   },
+   {
+    "span": "should be print",
+    "fix": "should be printed",
+    "type": "participle form",
+    "reason": "After a modal the passive is *be* + past participle.",
+    "rule": "forming-2"
+   },
+   {
+    "span": "of paper collected",
+    "fix": "of paper were collected",
+    "type": "missing passive",
+    "reason": "The paper received the action, so the verb needs *be* + past participle.",
+    "trap": "T-A17"
+   },
+   {
+    "span": "The results has been shown",
+    "fix": "The results have been shown",
+    "type": "agreement",
+    "reason": "*be* agrees with the plural subject *the results*.",
+    "rule": "forming-1"
+   },
+   {
+    "span": "a similar project organised by the science club",
+    "fix": "a similar project was organised by the science club",
+    "type": "missing passive",
+    "reason": "A *by*-phrase means the subject receives the action, so use *was organised*.",
+    "trap": "T-A17"
+   },
+   {
+    "span": "everybody in the school say",
+    "fix": "everybody in the school says",
+    "type": "agreement",
+    "reason": "*everybody* is singular, so the verb takes -s.",
+    "trap": "T-A01"
+   },
+   {
+    "span": "must to write",
+    "fix": "must write",
+    "type": "modal form",
+    "reason": "A modal is followed by the base verb, with no *to*.",
+    "trap": "T-A14"
+   }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Your school held a clean-up day in a local park. Write a short report for the school newsletter: what was organised before the day, what was collected, and what will be done differently next time.",
+   "length": "150–180 words",
+   "checklist": [
+    "At least five verbs are passive, using *be* + past participle.",
+    "The day itself is described in the past passive (*was organised*, *were collected*).",
+    "A *by*-phrase appears only where the doer is worth naming."
+   ]
+  },
+  {
+   "prompt": "Describe how something familiar is made or how a service works where you live: how rubbish is collected on your street, how bánh mì is prepared at a street stall, or how books are borrowed from your library.",
+   "length": "120–150 words",
+   "checklist": [
+    "Every step uses the present passive (*the bread is sliced*).",
+    "Sequence words (*first, then, after that, finally*) link the steps.",
+    "No step invents a worker the reader does not need."
+   ]
+  },
+  {
+   "prompt": "\"Old buildings in city centres should be protected, not replaced with modern ones.\" Give your view.",
+   "length": "150–180 words",
+   "checklist": [
+    "At least two modal passives appear (*should be protected*, *must be preserved*).",
+    "Verbs that take no object (*happen, rise, arrive*) stay active.",
+    "At least one present perfect passive says what has already been lost or saved."
+   ]
+  }
+ ]
+}

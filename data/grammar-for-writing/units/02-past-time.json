@@ -1,0 +1,696 @@
+{
+ "id": "02-past-time",
+ "number": 2,
+ "part": "A",
+ "title": "Past time",
+ "status": "draft",
+ "focus": {
+  "text": "Writing about the past means deciding how far back to take your reader. The simple past reports finished events in the order they happened. The past progressive sets the scene: something was already going on when the main event arrived. The past perfect steps back one more stage, to what had happened before that. *Used to* marks a habit that has now stopped. When these four work together, a story or a report reads in a clear order and the reader never has to rebuild the timeline.",
+  "summaryTable": {
+   "caption": "The four past forms at a glance",
+   "columns": [
+    "Form",
+    "Use it for",
+    "Example"
+   ],
+   "rows": [
+    [
+     "Simple past",
+     "a finished event at a known time",
+     "Trang **passed** her driving test last June."
+    ],
+    [
+     "Past progressive",
+     "a longer action already in progress",
+     "It **was raining** when we left the station."
+    ],
+    [
+     "Past perfect",
+     "an action before another past action",
+     "The film **had started** before we found our seats."
+    ],
+    [
+     "*used to*",
+     "a past habit or state that has stopped",
+     "We **used to live** above a bakery."
+    ]
+   ]
+  }
+ },
+ "pretest": [
+  {
+   "id": "p1",
+   "sentence": "Last summer Khoa worked as a waiter in a seafood restaurant in Nha Trang.",
+   "correct": true,
+   "reason": "*Last summer* is a finished time, so the simple past is right.",
+   "layer": "core"
+  },
+  {
+   "id": "p2",
+   "sentence": "Yesterday my sister teached me how to make bánh mì.",
+   "correct": false,
+   "reason": "*Teach* is irregular: the past form is *taught*.",
+   "trap": "T-A08",
+   "layer": "core"
+  },
+  {
+   "id": "p3",
+   "sentence": "While I was revising for the test, my phone rang three times.",
+   "correct": true,
+   "reason": "The longer background action takes the past progressive and the short interruption takes the simple past.",
+   "layer": "core"
+  },
+  {
+   "id": "p4",
+   "sentence": "Last week we go to the museum with our history teacher.",
+   "correct": false,
+   "reason": "Finished past time (*last week*) needs a past form: *went*.",
+   "trap": "T-A05",
+   "layer": "core"
+  },
+  {
+   "id": "p5",
+   "sentence": "I used to played badminton every Sunday morning.",
+   "correct": false,
+   "reason": "*Used to* is always followed by the base verb: *used to play*.",
+   "layer": "core"
+  },
+  {
+   "id": "p6",
+   "sentence": "When we got home, someone had already cleaned the kitchen.",
+   "correct": true,
+   "reason": "The cleaning happened before we got home, so it takes the past perfect.",
+   "layer": "core"
+  },
+  {
+   "id": "p7",
+   "sentence": "My grandmother was knowing every family in the village.",
+   "correct": false,
+   "reason": "*Know* is stative, so it has no progressive form: *knew*.",
+   "trap": "T-A04",
+   "layer": "core"
+  },
+  {
+   "id": "p8",
+   "sentence": "Before she moved to Huế, Ngọc had been teaching in a primary school for six years.",
+   "correct": true,
+   "reason": "The past perfect progressive says how long an action lasted up to a past point.",
+   "layer": "extend"
+  },
+  {
+   "id": "p9",
+   "sentence": "Every Saturday my father would drive us to the market in Cần Thơ.",
+   "correct": true,
+   "reason": "*Would* + base verb describes a repeated past action.",
+   "layer": "extend"
+  },
+  {
+   "id": "p10",
+   "sentence": "I have finished my assignment two days ago.",
+   "correct": false,
+   "reason": "*Two days ago* is a finished time, so use the simple past: *finished*.",
+   "trap": "T-A06",
+   "layer": "extend"
+  }
+ ],
+ "context": {
+  "title": "The night the canal rose",
+  "paragraph": "Two years ago my family lived in a small house near a canal in Cần Thơ. One night in October the water rose much faster than anyone expected. My father had checked the forecast that morning, but the report said nothing about a storm. While my mother was carrying boxes upstairs, our neighbour knocked on the door and warned us. We used to keep our schoolbooks in a cupboard on the ground floor, so I ran down and rescued them. By midnight the water had reached the third step. We stayed awake until it stopped rising, and in the morning the street looked completely different.",
+  "task": "tap-verbs",
+  "targets": [
+   "lived",
+   "rose",
+   "expected",
+   "had checked",
+   "said",
+   "was carrying",
+   "knocked",
+   "warned",
+   "used to keep",
+   "ran",
+   "had reached",
+   "looked"
+  ]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming the simple past",
+   "table": {
+    "caption": "Simple past: statements, negatives and questions",
+    "columns": [
+     "Verb type",
+     "Statement",
+     "Negative",
+     "Question"
+    ],
+    "rows": [
+     [
+      "Regular (*work*)",
+      "She worked late.",
+      "She did not (didn't) work late.",
+      "Did she work late?"
+     ],
+     [
+      "Irregular (*write*)",
+      "He wrote a reply.",
+      "He did not (didn't) write a reply.",
+      "Did he write a reply?"
+     ],
+     [
+      "*be*",
+      "They were tired.",
+      "They were not (weren't) tired.",
+      "Were they tired?"
+     ]
+    ]
+   },
+   "timeline": {
+    "tense": "Simple past",
+    "marks": [
+     "point",
+     "now"
+    ],
+    "label": "One finished event at a point before now."
+   },
+   "notes": [
+    "Spelling of **-ed**: add only -d after a silent e (*close → closed*); change consonant + **y** to -ied (*study → studied*); double a final consonant after a single stressed vowel (*stop → stopped*, *prefer → preferred*).",
+    "After *did*, the main verb goes back to its base form: *Did you **see** the email?* — never *did you saw*."
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "form",
+    "items": [
+     {
+      "id": "sc1-1",
+      "stem": "Last Tuesday the school ___ a charity fair in the yard.",
+      "base": "hold",
+      "answer": [
+       "held"
+      ],
+      "reason": "*Hold* is irregular: the past form is *held*.",
+      "trap": "T-A08"
+     },
+     {
+      "id": "sc1-2",
+      "stem": "We ___ for the bus for twenty minutes, and then we walked.",
+      "base": "wait",
+      "answer": [
+       "waited"
+      ],
+      "reason": "A finished past action takes -ed.",
+      "trap": "T-A05"
+     },
+     {
+      "id": "sc1-3",
+      "stem": "My cousin ___ to Đà Lạt with her classmates last March.",
+      "base": "go",
+      "answer": [
+       "went"
+      ],
+      "reason": "*Go* is irregular, and *last March* is finished time.",
+      "trap": "T-A08"
+     },
+     {
+      "id": "sc1-4",
+      "stem": "I ___ not understand the question, so I asked the teacher.",
+      "base": "do",
+      "answer": [
+       "did"
+      ],
+      "reason": "Past negatives use *did not* plus the base verb."
+     },
+     {
+      "id": "sc1-5",
+      "stem": "The rain ___ at about six, so we cycled home.",
+      "base": "stop",
+      "answer": [
+       "stopped"
+      ],
+      "reason": "Double the final consonant before -ed: *stop → stopped*."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using the simple past and the past progressive",
+   "rules": [
+    {
+     "text": "Use the simple past for an action that finished at a known past time, even when a time word already makes the time clear.",
+     "examples": [
+      {
+       "text": "In 2022 our school **opened** a small library on the second floor.",
+       "bold": [
+        "opened"
+       ]
+      },
+      {
+       "text": "Yesterday Minh **sent** the application form to the university.",
+       "bold": [
+        "sent"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use the past progressive for a longer action that was already in progress when a shorter action interrupted it.",
+     "examples": [
+      {
+       "text": "I **was cycling** home when the storm started.",
+       "bold": [
+        "was cycling"
+       ]
+      },
+      {
+       "text": "While my parents **were watching** the news, I finished my homework.",
+       "bold": [
+        "were watching"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use the past progressive to set the scene, and the simple past for the events that move the story forward.",
+     "examples": [
+      {
+       "text": "It **was getting** dark when a motorbike **stopped** in front of the shop.",
+       "bold": [
+        "was getting",
+        "stopped"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Stative verbs (*know, believe, own, want, seem*) have no progressive form, so they stay in the simple past even when they describe a long period.",
+     "examples": [
+      {
+       "text": "Nobody **knew** the answer, so the teacher explained it again.",
+       "bold": [
+        "knew"
+       ]
+      },
+      {
+       "text": "At that time my family **owned** a small fishing boat.",
+       "bold": [
+        "owned"
+       ]
+      }
+     ]
+    }
+   ],
+   "tips": [
+    "In a narrative, open with the past progressive to set the scene, then switch to the simple past for the events. The contrast tells your reader which part is background and which part matters."
+   ]
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming the past progressive, the past perfect and *used to*",
+   "table": {
+    "caption": "Past progressive, past perfect and used to",
+    "columns": [
+     "Form",
+     "Structure",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Past progressive",
+      "was / were + verb-ing",
+      "She **was studying** when I called."
+     ],
+     [
+      "Past progressive (negative)",
+      "was / were + not + verb-ing",
+      "They **weren't listening** to the announcement."
+     ],
+     [
+      "Past perfect",
+      "had + past participle",
+      "The train **had left** before we arrived."
+     ],
+     [
+      "Past perfect (negative)",
+      "had + not + past participle",
+      "I **hadn't seen** the message until lunchtime."
+     ],
+     [
+      "*used to*",
+      "used to + base verb",
+      "We **used to live** above a bakery."
+     ]
+    ]
+   },
+   "timeline": {
+    "tense": "Past perfect",
+    "marks": [
+     "point",
+     "point",
+     "now"
+    ],
+    "label": "An earlier past action, finished before a second past action, which is itself before now."
+   },
+   "notes": [
+    "*Used to* has one form for every subject, and after *did* it loses the -d: *Did you **use to** play the piano?*"
+   ],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "choice",
+    "items": [
+     {
+      "id": "sc2-1",
+      "stem": "When we reached the platform, the train ___.",
+      "options": [
+       "already left",
+       "had already left"
+      ],
+      "answer": 1,
+      "reason": "The train left before we reached the platform, so the earlier action takes the past perfect."
+     },
+     {
+      "id": "sc2-2",
+      "stem": "While Hoa ___ dinner, the electricity went off.",
+      "options": [
+       "cooked",
+       "was cooking"
+      ],
+      "answer": 1,
+      "reason": "The longer background action takes the past progressive."
+     },
+     {
+      "id": "sc2-3",
+      "stem": "My father ___ in a shipyard in Hải Phòng before he became a teacher.",
+      "options": [
+       "used to work",
+       "used to worked"
+      ],
+      "answer": 0,
+      "reason": "*Used to* is always followed by the base verb."
+     },
+     {
+      "id": "sc2-4",
+      "stem": "Nobody ___ the answer, so the teacher explained it again.",
+      "options": [
+       "knew",
+       "was knowing"
+      ],
+      "answer": 0,
+      "reason": "*Know* is stative, so it has no progressive form.",
+      "trap": "T-A04"
+     },
+     {
+      "id": "sc2-5",
+      "stem": "She ___ me last night while I was doing the washing-up.",
+      "options": [
+       "called",
+       "was calling"
+      ],
+      "answer": 0,
+      "reason": "The short interrupting action takes the simple past."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using the past perfect and *used to*",
+   "rules": [
+    {
+     "text": "Use the past perfect for the earlier of two past actions, so the reader can see which one happened first.",
+     "examples": [
+      {
+       "text": "By the time the results came out, Mai **had chosen** a different course.",
+       "bold": [
+        "had chosen"
+       ]
+      },
+      {
+       "text": "The match **had already finished** when we reached the stadium.",
+       "bold": [
+        "had already finished"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "You do not need the past perfect when *before*, *after* or *then* already shows the order.",
+     "examples": [
+      {
+       "text": "After we **paid** the fee, the office **sent** us a receipt.",
+       "bold": [
+        "paid",
+        "sent"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *used to* for a habit or a state that was true in the past but is not true now.",
+     "examples": [
+      {
+       "text": "I **used to be** afraid of speaking in class, but now I enjoy it.",
+       "bold": [
+        "used to be"
+       ]
+      },
+      {
+       "text": "Our street **used to flood** every rainy season before the new drain was built.",
+       "bold": [
+        "used to flood"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "Do not use *used to* for something that happened once. Write *Last year I **visited** Sa Pa*, not *I used to visit Sa Pa last year*."
+   ]
+  },
+  {
+   "id": "using-3",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using the past perfect progressive, *would* and past time words",
+   "timeline": {
+    "tense": "Past perfect progressive",
+    "marks": [
+     "span",
+     "point",
+     "now"
+    ],
+    "label": "An action that had been going on for a while before a later past moment."
+   },
+   "rules": [
+    {
+     "text": "Use *had been + verb-ing* to say how long an action had lasted before a moment in the past.",
+     "examples": [
+      {
+       "text": "By March the team **had been testing** the app for six months.",
+       "bold": [
+        "had been testing"
+       ]
+      },
+      {
+       "text": "She **had been saving** for a year when the price finally dropped.",
+       "bold": [
+        "had been saving"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *would + base verb* for repeated past actions, especially in a description of how life used to be.",
+     "examples": [
+      {
+       "text": "Every Tết my grandmother **would cook** for the whole family.",
+       "bold": [
+        "would cook"
+       ]
+      },
+      {
+       "text": "When we lived in Huế, we **would cycle** along the river after dinner.",
+       "bold": [
+        "would cycle"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Match the time word to the form: *last week, in 2019, ago* take the simple past; *while, as* take the past progressive; *by then, before that, already* take the past perfect.",
+     "examples": [
+      {
+       "text": "By then the council **had banned** parking on the pavement.",
+       "bold": [
+        "had banned"
+       ]
+      },
+      {
+       "text": "While the guide **was explaining** the map, two students took photos.",
+       "bold": [
+        "was explaining"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "*Would* only works for repeated actions. For a past state, use the simple past or *used to*: *My father **used to have** a motorbike*, never *would have a motorbike*."
+   ],
+   "tips": [
+    "When you describe past data, keep the simple past for the figures themselves and use *had* + past participle only when you need to point back to something earlier."
+   ],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "fix",
+    "items": [
+     {
+      "id": "sc3-1",
+      "sentence": "Last year our class have visited a rice farm in An Giang.",
+      "error": "have visited",
+      "fix": "visited",
+      "reason": "*Last year* is finished time, so use the simple past.",
+      "trap": "T-A06"
+     },
+     {
+      "id": "sc3-2",
+      "sentence": "When I was in grade 9, my teacher teached us how to write reports.",
+      "error": "teached",
+      "fix": "taught",
+      "reason": "*Teach* is irregular: the past form is *taught*.",
+      "trap": "T-A08"
+     },
+     {
+      "id": "sc3-3",
+      "sentence": "Before the pandemic, my uncle would have a small restaurant near the market.",
+      "error": "would have",
+      "fix": "used to have",
+      "reason": "*Would* does not work for past states, so use *used to*."
+     },
+     {
+      "id": "sc3-4",
+      "sentence": "By the time the guests arrived, my mother cooked five dishes.",
+      "error": "cooked",
+      "fix": "had cooked",
+      "reason": "The cooking finished before the guests arrived, so it takes the past perfect."
+     },
+     {
+      "id": "sc3-5",
+      "sentence": "We didn't knew the answer, so we asked our teacher for help.",
+      "error": "didn't knew",
+      "fix": "didn't know",
+      "reason": "After *did*, the main verb stays in its base form."
+     }
+    ]
+   }
+  }
+ ],
+ "traps": [
+  "T-A04",
+  "T-A05",
+  "T-A06",
+  "T-A08",
+  "T-A10",
+  "T-A28",
+  "T-A29",
+  "T-A30"
+ ],
+ "editing": {
+  "text": "Last August I spend three weeks with my aunt in Huế. She worked at a hotel near the river, so she leaved home before six every morning. On my first day I wake up at ten and found the house empty. My aunt had wrote a note on the kitchen table, and it explained how to use the gas cooker. The house very quiet in the afternoon, so I read on the balcony. In the evenings we used to walked along the Perfume River, and she told me stories about the old city. One rainy afternoon, while I was copying a recipe, my cousin call from Đà Nẵng and invited us to visit. By the end of the trip I have learnt to cook three local dishes. On my last night my aunt gave me her recipe notebook, and I brought it home with me.",
+  "errors": [
+   {
+    "span": "I spend three weeks",
+    "fix": "I spent three weeks",
+    "type": "tense",
+    "reason": "*Last August* is finished past time, so use the simple past *spent*.",
+    "trap": "T-A05"
+   },
+   {
+    "span": "she leaved home",
+    "fix": "she left home",
+    "type": "irregular past",
+    "reason": "*Leave* is irregular: the past form is *left*.",
+    "trap": "T-A08"
+   },
+   {
+    "span": "I wake up at ten",
+    "fix": "I woke up at ten",
+    "type": "tense",
+    "reason": "The rest of the sentence is past (*found*), so the verb needs its past form *woke*.",
+    "trap": "T-A10"
+   },
+   {
+    "span": "had wrote",
+    "fix": "had written",
+    "type": "past participle",
+    "reason": "The past perfect takes the past participle *written*, not the simple past *wrote*.",
+    "rule": "forming-2"
+   },
+   {
+    "span": "The house very quiet",
+    "fix": "The house was very quiet",
+    "type": "missing verb",
+    "reason": "An adjective cannot be the verb; the sentence needs *was*.",
+    "trap": "T-A02"
+   },
+   {
+    "span": "used to walked",
+    "fix": "used to walk",
+    "type": "verb form",
+    "reason": "*Used to* is always followed by the base verb.",
+    "rule": "using-2"
+   },
+   {
+    "span": "my cousin call",
+    "fix": "my cousin called",
+    "type": "tense",
+    "reason": "A single finished event in a past story takes the simple past.",
+    "trap": "T-A05"
+   },
+   {
+    "span": "I have learnt",
+    "fix": "I learnt",
+    "type": "tense",
+    "reason": "*By the end of the trip* is a finished past time, so the simple past is right, not the present perfect.",
+    "trap": "T-A06"
+   }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email to a friend about a trip you took last year. Say where you went, what you were doing when something unexpected happened, and what you had planned before you left.",
+   "length": "120–150 words",
+   "checklist": [
+    "Finished events use the simple past, and every irregular verb has its correct past form.",
+    "At least one sentence uses the past progressive for an action that was interrupted.",
+    "At least one sentence uses the past perfect for something that happened earlier."
+   ]
+  },
+  {
+   "prompt": "Describe a school day that did not go as planned. Explain what had gone wrong before the day started and how your class solved the problem.",
+   "length": "150–180 words",
+   "checklist": [
+    "The story keeps one past time frame; no verb slips into the present.",
+    "*Used to* or *would* appears at least once for something that was normal then but is not normal now.",
+    "*Did not* is followed by a base verb every time."
+   ]
+  },
+  {
+   "prompt": "Write a short report for your school magazine about an activity your group ran last term: what the group did every week, what it had prepared beforehand, and how long it had been working on the project.",
+   "length": "150–180 words",
+   "checklist": [
+    "Repeated past activities use *would*, *used to*, or the simple past with a frequency adverb.",
+    "At least one sentence uses the past perfect progressive to say how long something lasted.",
+    "Time words (*last term*, *by then*, *before that*) match the verb form you choose."
+   ]
+  }
+ ]
+}

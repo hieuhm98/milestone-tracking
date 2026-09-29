@@ -1,57 +1,62 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useAuth } from "@/context/auth";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
-import { formatPhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 
-const ROLE_BADGE = {
-  admin: "bg-rose-100 dark:bg-rose-600/20 text-rose-700 dark:text-rose-300",
-  teacher: "bg-violet-100 dark:bg-violet-600/20 text-violet-700 dark:text-violet-300",
-  learner: "bg-emerald-100 dark:bg-emerald-600/20 text-emerald-700 dark:text-emerald-300",
+const SYNC_DOT = {
+  error: "bg-amber-500",
+  syncing: "bg-blue-500 animate-pulse",
+  synced: "bg-emerald-500",
+  off: "bg-zinc-400",
 } as const;
 
 /**
- * Bottom of the sidebar: a sign-up nudge for guests, or the signed-in account
- * with its sync state and Telegram link. Hidden when accounts aren't configured.
+ * Bottom of the sidebar. Deliberately small: a signed-in learner sees their
+ * name and whether their progress is safe, and everything else — phone, role,
+ * Telegram, sign out — lives on /account, which this links to.
  */
-export default function AccountCard() {
-  const {
-    enabled,
-    ready,
-    profile,
-    signupTicket,
-    telegramEnabled,
-    openDialog,
-    signOut,
-    telegramLink,
-    disconnectTelegram,
-    refreshProfile,
-  } = useAuth();
+export default function AccountCard({ collapsed = false }: { collapsed?: boolean }) {
+  const { enabled, ready, profile, signupTicket, openDialog } = useAuth();
   const { cloud } = useProgress();
   const { t } = useLang();
-  const [linking, setLinking] = useState(false);
-  const [telegramError, setTelegramError] = useState(false);
-
-  // The chat id lands via the webhook while the learner is in Telegram, so
-  // re-read the profile when they come back to this tab.
-  const awaitingTelegram = linking && profile && !profile.telegram_chat_id;
-
-  useEffect(() => {
-    if (!awaitingTelegram) return;
-
-    function onFocus() {
-      void refreshProfile();
-    }
-
-    window.addEventListener("focus", onFocus);
-
-    return () => window.removeEventListener("focus", onFocus);
-  }, [awaitingTelegram, refreshProfile]);
 
   if (!enabled || !ready) return null;
+
+  const initial = profile?.full_name?.trim().charAt(0).toUpperCase() || "?";
+
+  if (collapsed) {
+    if (!profile) {
+      return (
+        <button
+          type="button"
+          onClick={() => openDialog(signupTicket ? "login" : "signup")}
+          title={signupTicket ? t("account.login") : t("account.signup")}
+          aria-label={signupTicket ? t("account.login") : t("account.signup")}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300 dark:border-amber-800/60 bg-amber-50 dark:bg-amber-500/10 text-sm text-amber-700 dark:text-amber-300"
+        >
+          <span aria-hidden="true">☁</span>
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        href="/account"
+        title={`${profile.full_name} · ${t(`account.sync.${cloud}`)}`}
+        aria-label={t("account.title")}
+        className="relative flex h-9 w-9 items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-700 text-sm font-semibold text-zinc-700 dark:text-zinc-200"
+      >
+        {initial}
+        <span
+          aria-hidden="true"
+          className={cn("absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full ring-2 ring-zinc-50 dark:ring-zinc-950", SYNC_DOT[cloud])}
+        />
+      </Link>
+    );
+  }
 
   // This browser already used its one sign-up: nudge towards logging in instead.
   if (!profile && signupTicket) {
@@ -78,9 +83,7 @@ export default function AccountCard() {
           <span className="text-base leading-5" aria-hidden="true">☁</span>
           <div className="min-w-0">
             <div className="text-sm font-semibold text-amber-900 dark:text-amber-200">{t("account.promptTitle")}</div>
-            <p className="text-xs text-amber-800/90 dark:text-amber-200/80 mt-1">
-              {t(telegramEnabled ? "account.promptBody" : "account.promptBodyPlain")}
-            </p>
+            <p className="text-xs text-amber-800/90 dark:text-amber-200/80 mt-1">{t("account.promptBodyPlain")}</p>
           </div>
         </div>
         <div className="flex gap-2 mt-3">
@@ -95,93 +98,30 @@ export default function AccountCard() {
     );
   }
 
-  async function handleConnect() {
-    setTelegramError(false);
-
-    // Open the tab synchronously, inside the click, so popup blockers allow it;
-    // point it at the deep link once the server has issued one.
-    const tab = window.open("", "_blank");
-    const url = await telegramLink();
-
-    if (!url) {
-      tab?.close();
-      setTelegramError(true);
-
-      return;
-    }
-
-    if (tab) {
-      tab.opener = null;
-      tab.location.href = url;
-    } else {
-      window.location.href = url;
-    }
-
-    setLinking(true);
-  }
-
-  const syncLabel =
-    cloud === "syncing" ? t("account.syncing") : cloud === "error" ? t("account.syncError") : t("account.synced");
-
   return (
-    <div className="m-3 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-      <div className="flex items-center gap-2 min-w-0">
-        <div className="min-w-0 flex-1">
-          <div className="text-sm font-semibold truncate">{profile.full_name}</div>
-          <div className="text-xs text-zinc-500 truncate">{formatPhone(profile.phone)}</div>
-        </div>
-        <span className={cn("shrink-0 text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded", ROLE_BADGE[profile.role])}>
-          {t(`account.role.${profile.role}`)}
-        </span>
-      </div>
-
-      <div
-        className={cn(
-          "flex items-center gap-1.5 text-xs mt-2",
-          cloud === "error" ? "text-amber-600 dark:text-amber-400" : "text-zinc-500"
-        )}
+    <Link
+      href="/account"
+      className="m-3 flex items-center gap-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-2.5 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+    >
+      <span
+        aria-hidden="true"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-700 text-sm font-semibold text-zinc-700 dark:text-zinc-200"
       >
+        {initial}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-sm font-medium">{profile.full_name}</span>
         <span
-          aria-hidden="true"
           className={cn(
-            "inline-block w-1.5 h-1.5 rounded-full",
-            cloud === "error" ? "bg-amber-500" : cloud === "syncing" ? "bg-blue-500 animate-pulse" : "bg-emerald-500"
+            "flex items-center gap-1.5 text-xs",
+            cloud === "error" ? "text-amber-600 dark:text-amber-400" : "text-zinc-500"
           )}
-        />
-        {syncLabel}
-      </div>
-
-      {/* Telegram is optional — no bot configured, no button. */}
-      {!telegramEnabled && !profile.telegram_chat_id ? null : profile.telegram_chat_id ? (
-        <div className="flex items-center justify-between gap-2 text-xs mt-2 text-zinc-600 dark:text-zinc-400">
-          <span className="truncate">✈ {t("account.telegramConnected")}</span>
-          <button
-            type="button"
-            onClick={() => void disconnectTelegram()}
-            className="shrink-0 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 underline py-2 -my-2"
-          >
-            {t("account.telegramDisconnect")}
-          </button>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => void handleConnect()}
-          className="w-full mt-2 text-xs font-medium py-1.5 rounded-lg border border-sky-200 dark:border-sky-800/60 bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-500/20 transition-colors"
         >
-          ✈ {t("account.telegramConnect")}
-        </button>
-      )}
-
-      {telegramError && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{t("account.telegramError")}</p>}
-
-      <button
-        type="button"
-        onClick={() => void signOut()}
-        className="w-full mt-2 text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 py-1.5"
-      >
-        {t("account.signOut")}
-      </button>
-    </div>
+          <span aria-hidden="true" className={cn("inline-block h-1.5 w-1.5 rounded-full", SYNC_DOT[cloud])} />
+          {t(`account.sync.${cloud}`)}
+        </span>
+      </span>
+      <span aria-hidden="true" className="shrink-0 text-zinc-400">›</span>
+    </Link>
   );
 }

@@ -1,0 +1,666 @@
+{
+ "id": "03-future-time",
+ "number": 3,
+ "part": "A",
+ "title": "Future time",
+ "status": "draft",
+ "focus": {
+  "text": "English has no future tense, only several ways of writing about what has not happened yet, and each one carries a different message. *Will* announces a prediction, an offer or a decision made as you write. *Be going to* reports a plan you already have, or evidence you can see right now. The present progressive fixes an arrangement in the diary, and the simple present belongs to timetables. Choosing the right one tells your reader how certain you are and how firm the plan already is.",
+  "summaryTable": {
+   "caption": "Four ways of writing about future time",
+   "columns": [
+    "Form",
+    "Use it for",
+    "Example"
+   ],
+   "rows": [
+    [
+     "*will* + base verb",
+     "predictions, offers, decisions made now",
+     "I think prices **will rise** again next year."
+    ],
+    [
+     "*be going to* + base verb",
+     "plans you already have; visible evidence",
+     "We **are going to plant** trees on Saturday."
+    ],
+    [
+     "Present progressive",
+     "arrangements with a time and a place",
+     "She **is meeting** her tutor at four."
+    ],
+    [
+     "Simple present",
+     "timetables and programmes",
+     "The ferry **leaves** at seven tomorrow."
+    ]
+   ]
+  }
+ },
+ "pretest": [
+  {
+   "id": "p1",
+   "sentence": "The train to Huế leaves at half past six tomorrow morning.",
+   "correct": true,
+   "reason": "A published timetable takes the simple present, even for tomorrow.",
+   "layer": "core"
+  },
+  {
+   "id": "p2",
+   "sentence": "I will to call you as soon as I get home.",
+   "correct": false,
+   "reason": "*Will* is a modal, so it takes the base verb with no *to*: *I will call*.",
+   "trap": "T-A14",
+   "layer": "core"
+  },
+  {
+   "id": "p3",
+   "sentence": "We are going to open a small stall at the school fair.",
+   "correct": true,
+   "reason": "A plan made before now takes *be going to*.",
+   "layer": "core"
+  },
+  {
+   "id": "p4",
+   "sentence": "When I will finish my exams, I will look for a part-time job.",
+   "correct": false,
+   "reason": "A *when* clause about the future takes the present: *When I finish*.",
+   "trap": "T-A09",
+   "layer": "core"
+  },
+  {
+   "id": "p5",
+   "sentence": "Next Saturday I am meet my cousin at the airport.",
+   "correct": false,
+   "reason": "The present progressive for an arrangement needs *be* + verb-ing: *I am meeting*.",
+   "layer": "core"
+  },
+  {
+   "id": "p6",
+   "sentence": "Tomorrow morning I am flying to Đà Nẵng with my parents.",
+   "correct": true,
+   "reason": "A booked arrangement with a time takes the present progressive.",
+   "layer": "core"
+  },
+  {
+   "id": "p7",
+   "sentence": "Before we will leave, we will check the weather forecast.",
+   "correct": false,
+   "reason": "After *before*, use the present for future time: *Before we leave*.",
+   "trap": "T-A09",
+   "layer": "core"
+  },
+  {
+   "id": "p8",
+   "sentence": "This time next week we will be sitting the final exam.",
+   "correct": true,
+   "reason": "The future progressive describes an action in progress at a named future moment.",
+   "layer": "extend"
+  },
+  {
+   "id": "p9",
+   "sentence": "By the end of this term, I will have finish all my coursework.",
+   "correct": false,
+   "reason": "The future perfect needs the past participle after *have*: *will have finished*.",
+   "layer": "extend"
+  },
+  {
+   "id": "p10",
+   "sentence": "By next April, Duy will have been studying Japanese for three years.",
+   "correct": true,
+   "reason": "The future perfect progressive says how long an action will have lasted by a future point.",
+   "layer": "extend"
+  }
+ ],
+ "context": {
+  "title": "Plans for the science fair",
+  "paragraph": "Our class is organising a science fair, and it opens on the first Saturday of next month. The head teacher has already signed the form, so the hall will be free all day. Trang and I are going to build a small model of a solar dryer, and we are meeting on Sunday to buy the parts. If the weather is good, we will test it in the yard. By Friday evening every group will have finished its poster, and the judges arrive at nine the next morning. This time next week we will be explaining our project to visitors, and I am sure we will be nervous.",
+  "task": "tap-verbs",
+  "targets": [
+   "is organising",
+   "opens",
+   "will be free",
+   "are going to build",
+   "are meeting",
+   "is good",
+   "will test",
+   "will have finished",
+   "arrive",
+   "will be explaining",
+   "will be nervous"
+  ]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming the future with *will* and *be going to*",
+   "table": {
+    "caption": "will and be going to: statements, negatives and questions",
+    "columns": [
+     "Form",
+     "Statement",
+     "Negative",
+     "Question"
+    ],
+    "rows": [
+     [
+      "*will*",
+      "She **will arrive** at six.",
+      "She **will not (won't) arrive** at six.",
+      "**Will** she **arrive** at six?"
+     ],
+     [
+      "*be going to*",
+      "They **are going to move** house.",
+      "They **are not going to move** house.",
+      "**Are** they **going to move** house?"
+     ]
+    ]
+   },
+   "timeline": {
+    "tense": "*will* and *be going to*",
+    "marks": [
+     "now",
+     "point"
+    ],
+    "label": "A point after now, seen from the present moment."
+   },
+   "notes": [
+    "*Will* is a modal. It never adds -s and it is never followed by *to*: *He **will help** you*, not *he will to help* or *he wills help*."
+   ],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "choice",
+    "items": [
+     {
+      "id": "sc1-1",
+      "stem": "Look at that queue — we ___ get a table before eight.",
+      "options": [
+       "won't",
+       "don't"
+      ],
+      "answer": 0,
+      "reason": "A prediction about the future uses *will not (won't)*."
+     },
+     {
+      "id": "sc1-2",
+      "stem": "That bag looks heavy. I ___ carry it for you.",
+      "options": [
+       "am going to",
+       "will"
+      ],
+      "answer": 1,
+      "reason": "A decision made at the moment of writing or speaking takes *will*."
+     },
+     {
+      "id": "sc1-3",
+      "stem": "We ___ paint the classroom during the holiday; we bought the paint last week.",
+      "options": [
+       "will",
+       "are going to"
+      ],
+      "answer": 1,
+      "reason": "The plan already existed before now, so *be going to* is right."
+     },
+     {
+      "id": "sc1-4",
+      "stem": "The sky is completely grey. It ___ rain.",
+      "options": [
+       "will",
+       "is going to"
+      ],
+      "answer": 1,
+      "reason": "Evidence you can see now points to *be going to*."
+     },
+     {
+      "id": "sc1-5",
+      "stem": "___ you help me carry these chairs, please?",
+      "options": [
+       "Will",
+       "Are going to"
+      ],
+      "answer": 0,
+      "reason": "A request uses *will*, not *be going to*."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using *will* and *be going to*",
+   "rules": [
+    {
+     "text": "Use *will* for a prediction, an offer, a promise, or a decision you make as you write.",
+     "examples": [
+      {
+       "text": "Experts think the cost of solar panels **will fall** over the next decade.",
+       "bold": [
+        "will fall"
+       ]
+      },
+      {
+       "text": "That box is heavy — I **will carry** it for you.",
+       "bold": [
+        "will carry"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *be going to* for a plan you made before now, or for something the present evidence already points to.",
+     "examples": [
+      {
+       "text": "Our club **is going to run** a free English corner next term.",
+       "bold": [
+        "is going to run"
+       ]
+      },
+      {
+       "text": "The sky is dark, so the match **is going to be** cancelled.",
+       "bold": [
+        "is going to be"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "In academic writing, soften a prediction with *is likely to*, *may* or *probably* instead of promising what the future holds.",
+     "examples": [
+      {
+       "text": "If this trend continues, rural schools **will lose** more teachers.",
+       "bold": [
+        "will lose"
+       ]
+      },
+      {
+       "text": "Electric buses **are likely to become** cheaper than diesel ones.",
+       "bold": [
+        "are likely to become"
+       ]
+      }
+     ]
+    }
+   ],
+   "tips": [
+    "*Be going to* sounds spoken. In an IELTS Writing Task 2 prediction, *will*, *is likely to* and *may* read better than *is going to*."
+   ]
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming the future with present forms",
+   "table": {
+    "caption": "Present forms used for future time",
+    "columns": [
+     "Form",
+     "Structure",
+     "Use it for",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Present progressive",
+      "am / is / are + verb-ing",
+      "arrangements already fixed",
+      "We **are leaving** on Friday morning."
+     ],
+     [
+      "Simple present",
+      "base verb (+ -s)",
+      "timetables and programmes",
+      "The exam **starts** at eight on Monday."
+     ]
+    ]
+   },
+   "notes": [
+    "Only use the simple present for future time when something runs to a published schedule: a train, a lesson, a film, an opening time."
+   ],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "form",
+    "items": [
+     {
+      "id": "sc2-1",
+      "stem": "Our flight ___ at 6.40 tomorrow, so we must leave home at four.",
+      "base": "leave",
+      "answer": [
+       "leaves"
+      ],
+      "reason": "A timetable takes the simple present, and *our flight* is it."
+     },
+     {
+      "id": "sc2-2",
+      "stem": "I can't come on Thursday — I ___ the dentist at three.",
+      "base": "see",
+      "answer": [
+       "am seeing",
+       "'m seeing"
+      ],
+      "reason": "A fixed personal arrangement takes the present progressive."
+     },
+     {
+      "id": "sc2-3",
+      "stem": "Nga ___ her cousin at the station tonight.",
+      "base": "meet",
+      "answer": [
+       "is meeting"
+      ],
+      "reason": "An arrangement with a time and a place takes the present progressive."
+     },
+     {
+      "id": "sc2-4",
+      "stem": "The library ___ at nine every day during the exam period.",
+      "base": "open",
+      "answer": [
+       "opens"
+      ],
+      "reason": "An opening time is a schedule, so use the simple present."
+     },
+     {
+      "id": "sc2-5",
+      "stem": "After the ceremony, my parents ___ back to Cần Thơ on the night bus.",
+      "base": "travel",
+      "answer": [
+       "are travelling"
+      ],
+      "reason": "A booked arrangement takes the present progressive, and *travel* doubles its l before -ing."
+     }
+    ]
+   }
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using present forms for the future",
+   "rules": [
+    {
+     "text": "Use the present progressive for arrangements you have already fixed, usually with a time or a place.",
+     "examples": [
+      {
+       "text": "I **am starting** my internship on 5 July.",
+       "bold": [
+        "am starting"
+       ]
+      },
+      {
+       "text": "The mayor **is opening** the new footbridge on Sunday.",
+       "bold": [
+        "is opening"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use the simple present for timetables, programmes and opening hours.",
+     "examples": [
+      {
+       "text": "The last bus to Huế **leaves** at ten past nine.",
+       "bold": [
+        "leaves"
+       ]
+      },
+      {
+       "text": "Our course **finishes** three weeks before the national exam.",
+       "bold": [
+        "finishes"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Choose the form by how fixed the future already is. A timetable is fixed for everyone, an arrangement is fixed for you, a plan is an intention, and a prediction is only a guess.",
+     "examples": [
+      {
+       "text": "The ferry **sails** at six, we **are boarding** at half past five, and I think the sea **will be** calm.",
+       "bold": [
+        "sails",
+        "are boarding",
+        "will be"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "A plan can move up this list. *We are going to visit the museum* becomes *We are visiting the museum at ten* as soon as you book the tickets."
+   ]
+  },
+  {
+   "id": "using-3",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using the future progressive, the future perfect and time clauses",
+   "timeline": {
+    "tense": "Future perfect",
+    "marks": [
+     "now",
+     "point",
+     "point"
+    ],
+    "label": "Seen from now: the action is finished before the future moment you name."
+   },
+   "rules": [
+    {
+     "text": "Use *will be + verb-ing* for an action that will already be in progress at a future moment.",
+     "examples": [
+      {
+       "text": "This time tomorrow we **will be presenting** our results to the class.",
+       "bold": [
+        "will be presenting"
+       ]
+      },
+      {
+       "text": "Don't call at eight — I **will be revising** with my study group.",
+       "bold": [
+        "will be revising"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *will have + past participle* for an action finished before a future deadline, often with *by*.",
+     "examples": [
+      {
+       "text": "By the end of March the council **will have planted** two thousand trees.",
+       "bold": [
+        "will have planted"
+       ]
+      },
+      {
+       "text": "The builders **will have repaired** the roof before the rainy season starts.",
+       "bold": [
+        "will have repaired"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "Use *will have been + verb-ing* to say how long something will have lasted by a future point.",
+     "examples": [
+      {
+       "text": "By July, Hằng **will have been working** at the clinic for a year.",
+       "bold": [
+        "will have been working"
+       ]
+      },
+      {
+       "text": "Next month my parents **will have been running** the shop for twenty years.",
+       "bold": [
+        "will have been running"
+       ]
+      }
+     ]
+    },
+    {
+     "text": "After *when, before, after, as soon as, until* and *if*, use a present form, not *will*, even though the meaning is future.",
+     "examples": [
+      {
+       "text": "When the results **come** out, I will decide which course to take.",
+       "bold": [
+        "come"
+       ]
+      },
+      {
+       "text": "We will not start until everyone **has arrived**.",
+       "bold": [
+        "has arrived"
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "*Will* is possible after *when* only when *when* introduces a question or an indirect question: *I don't know when the results **will** come out*."
+   ],
+   "tips": [
+    "Time clauses are where marks go missing. Read every *when*, *before*, *until* and *if* in your draft and check that no *will* follows it."
+   ],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "fix",
+    "items": [
+     {
+      "id": "sc3-1",
+      "sentence": "When the rain will stop, we will cycle to the market.",
+      "error": "will stop",
+      "fix": "stops",
+      "reason": "A *when* clause about the future takes a present form.",
+      "trap": "T-A09"
+     },
+     {
+      "id": "sc3-2",
+      "sentence": "By next summer I will have finish my driving lessons.",
+      "error": "will have finish",
+      "fix": "will have finished",
+      "reason": "The future perfect needs the past participle after *have*."
+     },
+     {
+      "id": "sc3-3",
+      "sentence": "My cousin will to study abroad next year.",
+      "error": "will to study",
+      "fix": "will study",
+      "reason": "*Will* is a modal, so it takes the base verb with no *to*.",
+      "trap": "T-A14"
+     },
+     {
+      "id": "sc3-4",
+      "sentence": "This time next week we will sit on a beach in Phú Quốc.",
+      "error": "will sit",
+      "fix": "will be sitting",
+      "reason": "*This time next week* names a moment, so an action in progress takes the future progressive."
+     },
+     {
+      "id": "sc3-5",
+      "sentence": "If it will rain tomorrow, the trip is going to be cancelled.",
+      "error": "will rain",
+      "fix": "rains",
+      "reason": "The *if* clause of a real conditional takes the present.",
+      "trap": "T-C08"
+     }
+    ]
+   }
+  }
+ ],
+ "traps": [
+  "T-A09",
+  "T-A14",
+  "T-A31",
+  "T-C08"
+ ],
+ "editing": {
+  "text": "Next month our English club will to organise a study trip to Hội An, and I am really excited about it. The coach leave the school at five in the morning, so we will be sleeping for most of the journey. When we will arrive, a local guide is going to show us the old streets. My friend Bảo already booked the tickets last week, so the price will not changes. In the afternoon we are visit a lantern workshop, and each group will have make its own lantern by six o'clock. If the weather will be fine, we are going to walk along the river before dinner. By the time we come home on Sunday night, we will have been travel for almost twelve hours.",
+  "errors": [
+   {
+    "span": "will to organise",
+    "fix": "will organise",
+    "type": "modal form",
+    "reason": "*Will* is followed by the base verb with no *to*.",
+    "trap": "T-A14"
+   },
+   {
+    "span": "coach leave",
+    "fix": "coach leaves",
+    "type": "agreement",
+    "reason": "*The coach* is it, so the simple present takes -s.",
+    "trap": "T-A01"
+   },
+   {
+    "span": "When we will arrive",
+    "fix": "When we arrive",
+    "type": "time clause",
+    "reason": "A *when* clause about the future uses the present.",
+    "trap": "T-A09"
+   },
+   {
+    "span": "will not changes",
+    "fix": "will not change",
+    "type": "modal form",
+    "reason": "A modal is never followed by a verb with -s.",
+    "trap": "T-A14"
+   },
+   {
+    "span": "we are visit",
+    "fix": "we are visiting",
+    "type": "verb form",
+    "reason": "The present progressive for an arrangement needs *be* + verb-ing.",
+    "rule": "forming-2"
+   },
+   {
+    "span": "will have make",
+    "fix": "will have made",
+    "type": "past participle",
+    "reason": "The future perfect uses the past participle: *will have made*.",
+    "rule": "using-3"
+   },
+   {
+    "span": "If the weather will be fine",
+    "fix": "If the weather is fine",
+    "type": "conditional",
+    "reason": "The *if* clause of a real conditional takes the present.",
+    "trap": "T-C08"
+   },
+   {
+    "span": "will have been travel",
+    "fix": "will have been travelling",
+    "type": "verb form",
+    "reason": "The future perfect progressive needs *been* + verb-ing.",
+    "rule": "using-3"
+   }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email inviting a friend from another city to visit you next month. Say what you have already arranged, what you are going to do together, and what the weather will probably be like.",
+   "length": "120–150 words",
+   "checklist": [
+    "Fixed arrangements use the present progressive with a time or a place.",
+    "At least one plan uses *be going to* and at least one prediction uses *will*.",
+    "No *will* appears after *when*, *before* or *if*."
+   ]
+  },
+  {
+   "prompt": "\"In twenty years, most students will study online instead of going to school.\" Give your view and support it with reasons.",
+   "length": "150–180 words",
+   "checklist": [
+    "Predictions use *will*, softened where needed with *may*, *is likely to* or *probably*.",
+    "At least one sentence uses the future perfect with *by* and a future year.",
+    "Time clauses after *when*, *before* and *until* keep a present form."
+   ]
+  },
+  {
+   "prompt": "Your class is planning an activity day for next term. Write a short plan for your teacher: the timetable for the day, what each group is doing, and what will have been finished before the day starts.",
+   "length": "150–180 words",
+   "checklist": [
+    "The timetable is in the simple present (*the day starts at eight*).",
+    "Each group's arrangement uses the present progressive.",
+    "At least one sentence uses the future perfect (*we will have set up…*)."
+   ]
+  }
+ ]
+}

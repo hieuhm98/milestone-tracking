@@ -1,0 +1,229 @@
+{
+ "part": "A",
+ "title": "Part A review · Verbs and time",
+ "editing": {
+  "text": "Two years ago my cousin Khánh and I have decided to spend the summer working at a small hotel in Đà Nẵng. Neither of us have worked in tourism before, so the owner put us in the kitchen for the first week. The hotel built in 2004, and it still looks new because the family repaints the front every spring. Our manager, Mrs Hạnh, know every regular guest by name, and she remembers which room each family prefers. On our first morning she teached us how to fold a towel properly, and she told us that we should to greet every visitor in English as well as in Vietnamese. That July the road behind the hotel was repair, so the delivery vans stopped at the corner and we carried the boxes to the kitchen ourselves. One afternoon a French family arrived after midnight, and I forget their room number completely. Mrs Hạnh stayed calm, found the key and said nothing about it until the end of the shift. Looking back, I should have ask for more hours, because those three weeks taught me more English than a whole term of lessons. Many tourists is surprised by how fast the city has grown, and now I am understanding why the owner insists on good manners: a polite answer costs nothing and it keeps people coming back. When I will go back next summer, I want to apply for a job at the reception desk instead of the kitchen. By September I will have work there for three seasons, which should look good on my first application form. I look forward to hear from Mrs Hạnh about the dates.",
+  "errors": [
+   {
+    "span": "have decided",
+    "fix": "decided",
+    "type": "tense",
+    "reason": "*Two years ago* is a finished time, so the event takes the simple past, not the present perfect.",
+    "trap": "T-A06"
+   },
+   {
+    "span": "Neither of us have worked",
+    "fix": "Neither of us has worked",
+    "type": "agreement",
+    "reason": "*Neither of* + a plural group still takes a singular verb, because *neither* means \"not one\".",
+    "trap": "T-A12"
+   },
+   {
+    "span": "The hotel built in 2004",
+    "fix": "The hotel was built in 2004",
+    "type": "passive",
+    "reason": "The hotel receives the action, so the sentence needs *be* + past participle.",
+    "trap": "T-A17"
+   },
+   {
+    "span": "know every regular guest",
+    "fix": "knows every regular guest",
+    "type": "agreement",
+    "reason": "The subject *Mrs Hạnh* is she, so the present-tense verb ends in -s.",
+    "trap": "T-A01"
+   },
+   {
+    "span": "teached",
+    "fix": "taught",
+    "type": "irregular past",
+    "reason": "*teach* is irregular: teach – taught – taught. Check the irregular verb list.",
+    "trap": "T-A08"
+   },
+   {
+    "span": "should to greet",
+    "fix": "should greet",
+    "type": "modal form",
+    "reason": "A modal is followed by the base verb with no *to*.",
+    "trap": "T-A14"
+   },
+   {
+    "span": "was repair",
+    "fix": "was repaired",
+    "type": "passive",
+    "reason": "The passive is *be* + past participle, so *repair* has to become *repaired*.",
+    "rule": "07-the-passive-voice"
+   },
+   {
+    "span": "I forget their room number",
+    "fix": "I forgot their room number",
+    "type": "time shift",
+    "reason": "The story is in the past (*arrived*, *stayed*, *found*), so keep one time frame.",
+    "trap": "T-A10"
+   },
+   {
+    "span": "should have ask",
+    "fix": "should have asked",
+    "type": "past modal",
+    "reason": "*should have* is followed by the past participle: *should have asked*.",
+    "rule": "06-modals"
+   },
+   {
+    "span": "Many tourists is surprised",
+    "fix": "Many tourists are surprised",
+    "type": "agreement",
+    "reason": "*Many tourists* is plural, so the verb is *are*.",
+    "trap": "T-A11"
+   },
+   {
+    "span": "am understanding",
+    "fix": "understand",
+    "type": "stative verb",
+    "reason": "*understand* describes a state, so it stays in the simple present even when you mean right now.",
+    "trap": "T-A04"
+   },
+   {
+    "span": "When I will go back",
+    "fix": "When I go back",
+    "type": "future time clause",
+    "reason": "After *when*, *before*, *after* and *as soon as*, English uses the present for future time.",
+    "trap": "T-A09"
+   },
+   {
+    "span": "I will have work there",
+    "fix": "I will have worked there",
+    "type": "future perfect",
+    "reason": "The future perfect is *will have* + past participle, used for what is complete by a future point.",
+    "rule": "03-future-time"
+   },
+   {
+    "span": "look forward to hear",
+    "fix": "look forward to hearing",
+    "type": "gerund after a preposition",
+    "reason": "*to* in *look forward to* is a preposition, so the verb after it takes -ing.",
+    "trap": "T-A20"
+   }
+  ]
+ },
+ "items": [
+  {
+   "id": "a1",
+   "stem": "Nam ___ the bus to school, but this week he is cycling because the route has changed.",
+   "options": ["take", "takes", "is taking"],
+   "answer": 1,
+   "reason": "A routine takes the simple present, and a third-person singular subject adds -s.",
+   "trap": "T-A01"
+  },
+  {
+   "id": "a2",
+   "sentence": "My grandmother is owning a small shop near the market in Cần Thơ.",
+   "error": "is owning",
+   "fix": "owns",
+   "reason": "*own* is a stative verb of possession, so it has no progressive form.",
+   "trap": "T-A04"
+  },
+  {
+   "id": "a3",
+   "sentence": "Last winter my teacher teached us how to write a formal letter of complaint.",
+   "error": "teached",
+   "fix": "taught",
+   "reason": "*teach* is irregular; its past form is *taught*, not *teached*.",
+   "trap": "T-A08"
+  },
+  {
+   "id": "a4",
+   "stem": "By the time we reached the station, the last train to Huế ___.",
+   "options": ["left", "had left", "has left"],
+   "answer": 1,
+   "reason": "The train left before the other past event, so the earlier action takes the past perfect.",
+   "rule": "02-past-time"
+  },
+  {
+   "id": "a5",
+   "stem": "As soon as the results ___ out next Friday, I will send you a message.",
+   "options": ["will come", "come", "came"],
+   "answer": 1,
+   "reason": "A time clause about the future uses the present, even though the meaning is future.",
+   "trap": "T-A09"
+  },
+  {
+   "id": "a6",
+   "sentence": "We are going to visiting Đà Lạt during the winter break with my uncle's family.",
+   "error": "going to visiting",
+   "fix": "going to visit",
+   "reason": "*be going to* is followed by the base verb, so *visiting* becomes *visit*.",
+   "rule": "03-future-time"
+  },
+  {
+   "id": "a7",
+   "stem": "Last month I joined a coding club, and I ___ three small apps since then.",
+   "options": ["built", "have built", "was building"],
+   "answer": 1,
+   "reason": "*since then* runs up to now, so the second verb shifts to the present perfect while the first stays past.",
+   "rule": "04-time-shifts-in-writing"
+  },
+  {
+   "id": "a8",
+   "sentence": "The number of students who take part in the science competition have doubled this year.",
+   "error": "have doubled",
+   "fix": "has doubled",
+   "reason": "The head noun is *the number*, which is singular; *students* only sits inside the phrase.",
+   "trap": "T-A12"
+  },
+  {
+   "id": "a9",
+   "stem": "Neither of the two proposals ___ the committee's budget limit.",
+   "options": ["meet", "meets", "are meeting"],
+   "answer": 1,
+   "reason": "*Neither of* + plural noun takes a singular verb, because it points at one item at a time.",
+   "trap": "T-A12"
+  },
+  {
+   "id": "a10",
+   "sentence": "Students should to hand in the assignment before Friday afternoon.",
+   "error": "should to hand",
+   "fix": "should hand",
+   "reason": "A modal such as *should* is followed by the base verb with no *to*.",
+   "trap": "T-A14"
+  },
+  {
+   "id": "a11",
+   "stem": "I cannot find my student card. I ___ it at the photocopy shop.",
+   "options": ["must leave", "must have left", "must leaving"],
+   "answer": 1,
+   "reason": "A confident guess about the past uses *must have* + past participle.",
+   "rule": "06-modals"
+  },
+  {
+   "id": "a12",
+   "sentence": "The accident was happened near the roundabout on Monday evening.",
+   "error": "was happened",
+   "fix": "happened",
+   "reason": "*happen* takes no object, so it has no passive form.",
+   "trap": "T-A16"
+  },
+  {
+   "id": "a13",
+   "stem": "The new library ___ next to the stadium two years ago.",
+   "options": ["built", "was built", "has built"],
+   "answer": 1,
+   "reason": "The library receives the action and the time is finished, so use the past passive.",
+   "trap": "T-A17"
+  },
+  {
+   "id": "a14",
+   "sentence": "My form teacher suggested me to join the debating club this term.",
+   "error": "suggested me to join",
+   "fix": "suggested that I join",
+   "reason": "*suggest* is never followed by object + infinitive; use a *that* clause or *suggest* + -ing.",
+   "trap": "T-A19"
+  },
+  {
+   "id": "a15",
+   "stem": "The whole class is looking forward to ___ the results of the survey.",
+   "options": ["see", "seeing", "be seen"],
+   "answer": 1,
+   "reason": "*look forward to* ends in a preposition, so the next verb takes -ing.",
+   "trap": "T-A20"
+  }
+ ]
+}

@@ -1,0 +1,236 @@
+{
+ "part": "D",
+ "title": "Part D review · Words",
+ "editing": {
+  "text": "In my opinion, I think a part-time job teaches students something that no classroom can. My neighbour Dũng, who is nineteen, works three evenings a week in a small bookshop near the university. He says the job has changed him, and he is now very interesting in publishing as a career. His manager told me that Dũng is a very success employee, mainly because he never arrives late. He handles complaints very calm, even when the shop is crowded on Saturday afternoons. Of course, a heavy work schedule can have a bad affect on marks. Last term Dũng lost the last bus home twice and reached his room after midnight, so he slept through a whole morning of lectures. Its true that some employers in the area pay badly and change the hours at the last minute. Their are clear rules about how many hours a student may work, but almost nobody reads them. We discussed about this problem in our citizenship lesson on Tuesday, and the whole class had an opinion. Our teacher said that a student who is good in maths can find tutoring work very easily, and that tutoring is more easier to fit around a timetable than shift work. She asked us to send our short reports in Friday evening so that she could read them at the weekend. She also mentioned that the college plans to rise the number of paid internships next year. For students who live in the outer districts, buses are an economic way to reach the industrial park, although the journey is slow. Whether Dũng keeps his job next term depends of the exam timetable, but he says he would miss the shop if he left.",
+  "errors": [
+   {
+    "span": "In my opinion, I think",
+    "fix": "In my opinion,",
+    "type": "redundancy",
+    "reason": "*In my opinion* and *I think* say the same thing; keep one of them.",
+    "trap": "T-D10"
+   },
+   {
+    "span": "very interesting in publishing",
+    "fix": "very interested in publishing",
+    "type": "-ed / -ing adjective",
+    "reason": "*-ed* describes how a person feels; *-ing* describes the thing that causes the feeling.",
+    "trap": "T-D01"
+   },
+   {
+    "span": "a very success employee",
+    "fix": "a very successful employee",
+    "type": "word form",
+    "reason": "A word in front of a noun has to be the adjective form, *successful*.",
+    "trap": "T-D02"
+   },
+   {
+    "span": "very calm, even",
+    "fix": "very calmly, even",
+    "type": "word form",
+    "reason": "The word describes how he handles complaints, so it takes the adverb form.",
+    "trap": "T-D03"
+   },
+   {
+    "span": "a bad affect on marks",
+    "fix": "a bad effect on marks",
+    "type": "confused words",
+    "reason": "*effect* is the noun (*an effect on*); *affect* is the verb.",
+    "rule": "18-commonly-confused-words"
+   },
+   {
+    "span": "lost the last bus",
+    "fix": "missed the last bus",
+    "type": "confused words",
+    "reason": "You *miss* a bus, a class or a chance; you *lose* an object you owned.",
+    "trap": "T-D06"
+   },
+   {
+    "span": "Its true that",
+    "fix": "It's true that",
+    "type": "confused words",
+    "reason": "*It's* is short for *it is*; *its* with no apostrophe means \"belonging to it\".",
+    "rule": "18-commonly-confused-words"
+   },
+   {
+    "span": "Their are clear rules",
+    "fix": "There are clear rules",
+    "type": "confused words",
+    "reason": "*There* introduces existence; *their* is the possessive of *they*.",
+    "rule": "18-commonly-confused-words"
+   },
+   {
+    "span": "discussed about this problem",
+    "fix": "discussed this problem",
+    "type": "extra preposition",
+    "reason": "*discuss* takes a direct object with no preposition.",
+    "trap": "T-D07"
+   },
+   {
+    "span": "good in maths",
+    "fix": "good at maths",
+    "type": "dependent preposition",
+    "reason": "*good* is followed by *at* for a skill or a subject.",
+    "trap": "T-D08"
+   },
+   {
+    "span": "more easier to fit",
+    "fix": "easier to fit",
+    "type": "comparative form",
+    "reason": "Short adjectives take -er on their own; *more* as well as -er marks the comparison twice.",
+    "rule": "17-word-forms"
+   },
+   {
+    "span": "reports in Friday evening",
+    "fix": "reports on Friday evening",
+    "type": "preposition of time",
+    "reason": "*on* goes with a named day or date, even when a part of the day follows it.",
+    "trap": "T-D09"
+   },
+   {
+    "span": "to rise the number",
+    "fix": "to raise the number",
+    "type": "confused words",
+    "reason": "*raise* takes an object (*raise the number*); *rise* never does.",
+    "trap": "T-D05"
+   },
+   {
+    "span": "an economic way",
+    "fix": "an economical way",
+    "type": "confused words",
+    "reason": "*economical* means \"saving money\"; *economic* means \"about the economy\".",
+    "trap": "T-D04"
+   },
+   {
+    "span": "depends of the exam timetable",
+    "fix": "depends on the exam timetable",
+    "type": "dependent preposition",
+    "reason": "*depend* is always followed by *on*.",
+    "trap": "T-D08"
+   }
+  ]
+ },
+ "items": [
+  {
+   "id": "d1",
+   "sentence": "The documentary about coral reefs in Nha Trang was very interested.",
+   "error": "very interested",
+   "fix": "very interesting",
+   "reason": "The documentary causes the feeling, so it takes the -ing form.",
+   "trap": "T-D01"
+  },
+  {
+   "id": "d2",
+   "sentence": "Nga gave a confident presentation and answered every question clear.",
+   "error": "question clear",
+   "fix": "question clearly",
+   "reason": "The word describes how she answered, so it needs the adverb form.",
+   "trap": "T-D03"
+  },
+  {
+   "id": "d3",
+   "stem": "The committee praised the ___ of the new recycling scheme.",
+   "options": ["succeed", "success", "successful"],
+   "answer": 1,
+   "reason": "After *the* and before *of*, the slot needs a noun.",
+   "trap": "T-D02"
+  },
+  {
+   "id": "d4",
+   "stem": "Traffic in the city centre is ___ than it was five years ago.",
+   "options": ["more bad", "worse", "more worse"],
+   "answer": 1,
+   "reason": "*bad* has the irregular comparative *worse*, and it never takes *more* as well.",
+   "rule": "17-word-forms"
+  },
+  {
+   "id": "d5",
+   "stem": "___ public transport should be cheaper for students under eighteen.",
+   "options": ["In my opinion, I think", "In my opinion,", "I think in my opinion"],
+   "answer": 1,
+   "reason": "One marker of opinion is enough; doubling it weakens the sentence.",
+   "trap": "T-D10"
+  },
+  {
+   "id": "d6",
+   "sentence": "Their are several reasons why young people move to the big cities.",
+   "error": "Their are",
+   "fix": "There are",
+   "reason": "*There* introduces existence; *their* shows possession.",
+   "rule": "18-commonly-confused-words"
+  },
+  {
+   "id": "d7",
+   "sentence": "The new policy will effect every secondary school in the province.",
+   "error": "will effect",
+   "fix": "will affect",
+   "reason": "*affect* is the verb; *effect* is normally the noun.",
+   "rule": "18-commonly-confused-words"
+  },
+  {
+   "id": "d8",
+   "stem": "Solar panels are an ___ choice for families who want a smaller electricity bill.",
+   "options": ["economic", "economical", "economy"],
+   "answer": 1,
+   "reason": "*economical* means \"it saves money\"; *economic* relates to the economy.",
+   "trap": "T-D04"
+  },
+  {
+   "id": "d9",
+   "stem": "The company plans to ___ wages by five per cent in April.",
+   "options": ["rise", "raise", "arise"],
+   "answer": 1,
+   "reason": "*raise* takes an object, and *wages* is the object here.",
+   "trap": "T-D05"
+  },
+  {
+   "id": "d10",
+   "sentence": "I lost the train to Vinh because the taxi got stuck in the morning traffic.",
+   "error": "lost the train",
+   "fix": "missed the train",
+   "reason": "You *miss* a train you failed to catch; you *lose* something you owned.",
+   "trap": "T-D06"
+  },
+  {
+   "id": "d11",
+   "sentence": "Please arrive to the hall ten minutes before the ceremony starts.",
+   "error": "arrive to the hall",
+   "fix": "arrive at the hall",
+   "reason": "*arrive* takes *at* for a building or a point, and *in* for a town or a country.",
+   "rule": "19-prepositions"
+  },
+  {
+   "id": "d12",
+   "sentence": "We discussed about the proposal for almost an hour without agreeing.",
+   "error": "discussed about",
+   "fix": "discussed",
+   "reason": "*discuss* is followed straight by its object, with no preposition.",
+   "trap": "T-D07"
+  },
+  {
+   "id": "d13",
+   "stem": "The success of the project depends ___ how many volunteers sign up.",
+   "options": ["of", "on", "from"],
+   "answer": 1,
+   "reason": "*depend* always takes *on*; learn the verb and its preposition together.",
+   "trap": "T-D08"
+  },
+  {
+   "id": "d14",
+   "stem": "The results will be published ___ the morning of 12 May.",
+   "options": ["in", "on", "at"],
+   "answer": 1,
+   "reason": "A part of the day normally takes *in*, but a part of a named date takes *on*.",
+   "trap": "T-D09"
+  },
+  {
+   "id": "d15",
+   "stem": "My cousin has been interested ___ marine biology since she was twelve.",
+   "options": ["on", "in", "about"],
+   "answer": 1,
+   "reason": "*interested* is always followed by *in*.",
+   "trap": "T-D08"
+  }
+ ]
+}

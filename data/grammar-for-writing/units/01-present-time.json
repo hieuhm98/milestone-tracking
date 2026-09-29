@@ -1,0 +1,239 @@
+{
+ "id": "01-present-time",
+ "number": 1,
+ "part": "A",
+ "title": "Present time",
+ "status": "draft",
+ "focus": {
+  "text": "English has three ways of writing about now, and each one tells your reader something different. The simple present is for facts and routines that do not change. The present progressive is for what is happening now or around now, so it suggests something temporary. The present perfect connects an earlier action to the present moment, which is why it works so well for experience and for change. Choosing carefully between them is often the difference between a sentence the reader trusts and one they have to read twice.",
+  "summaryTable": {
+   "caption": "The three present forms at a glance",
+   "columns": ["Form", "Use it for", "Example"],
+   "rows": [
+    ["Simple present", "facts, routines, opinions", "Nam **cycles** to school every day."],
+    ["Present progressive", "now, or a temporary situation", "He **is saving** for a new laptop."],
+    ["Present perfect", "past action that still matters now", "He **has saved** two million đồng so far."]
+   ]
+  }
+ },
+ "pretest": [
+  { "id": "p1", "sentence": "Mai usually revises in the library after class.", "correct": true, "reason": "A routine takes the simple present, and *usually* sits before the main verb.", "layer": "core" },
+  { "id": "p2", "sentence": "My cousin study economics in Hồ Chí Minh City.", "correct": false, "reason": "A third-person singular subject (*my cousin*) needs *studies*.", "trap": "T-A01", "layer": "core" },
+  { "id": "p3", "sentence": "This street very noisy in the evening.", "correct": false, "reason": "An adjective cannot be the verb: write *This street **is** very noisy*.", "trap": "T-A02", "layer": "core" },
+  { "id": "p4", "sentence": "At the moment I am writing a report about air quality.", "correct": true, "reason": "*At the moment* points to right now, so the present progressive is right.", "layer": "core" },
+  { "id": "p5", "sentence": "I am knowing the answer to this question.", "correct": false, "reason": "*know* is a stative verb, so use the simple present: *I know*.", "trap": "T-A04", "layer": "core" },
+  { "id": "p6", "sentence": "She has lived in Đà Nẵng since 2019.", "correct": true, "reason": "An action that started in the past and continues now takes the present perfect with *since*.", "layer": "core" },
+  { "id": "p7", "sentence": "I live here since last April.", "correct": false, "reason": "With *since*, use the present perfect: *I have lived here since last April*.", "trap": "T-A07", "layer": "core" },
+  { "id": "p8", "sentence": "We have been waiting for the results for three weeks.", "correct": true, "reason": "The present perfect progressive stresses how long an unfinished action has been going on.", "layer": "extend" },
+  { "id": "p9", "sentence": "He has finished his homework yesterday.", "correct": false, "reason": "A finished time word (*yesterday*) needs the simple past: *He finished*.", "trap": "T-A06", "layer": "extend" },
+  { "id": "p10", "sentence": "My laptop is belonging to my sister.", "correct": false, "reason": "*belong* describes a state, so it stays simple: *My laptop belongs to my sister*.", "trap": "T-A04", "layer": "extend" }
+ ],
+ "context": {
+  "title": "A week in a student's life",
+  "paragraph": "Linh studies at a high school in Cầu Giấy, and her week rarely changes. She leaves home at half past six, because the traffic gets heavy after seven. This month she is preparing for a speaking test, so she practises with a classmate every Thursday evening. She has recorded eight of those conversations already, and she says the recordings show how much her pronunciation has improved. Her teacher believes that steady practice matters more than talent. Right now Linh is reading an article about air quality in Hà Nội, and she has decided to use it in her next essay.",
+  "task": "tap-verbs",
+  "targets": ["studies", "leaves", "gets", "is preparing", "practises", "has recorded", "says", "has improved", "believes", "is reading", "has decided"]
+ },
+ "sections": [
+  {
+   "id": "forming-1",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming the simple present",
+   "table": {
+    "caption": "Simple present: statements, negatives and questions",
+    "columns": ["Subject", "Statement", "Negative", "Question"],
+    "rows": [
+     ["I / you / we / they", "work", "do not (don't) work", "Do you work?"],
+     ["he / she / it", "works", "does not (doesn't) work", "Does she work?"]
+    ]
+   },
+   "timeline": { "tense": "Simple present", "marks": ["repeat", "now", "repeat"], "label": "Repeated action: it happened before now, it happens now, and it will happen again." },
+   "notes": ["Add **-es** after -ch, -sh, -s, -x and -z (*teaches, washes, misses, fixes, buzzes*). If the verb ends in a consonant + **y**, change the y to **-ies** (*study → studies*), but keep the y after a vowel (*play → plays*)."],
+   "selfCheck": {
+    "title": "Self Check 1",
+    "type": "form",
+    "items": [
+     { "id": "sc1-1", "stem": "My brother ___ in a coffee shop at the weekend.", "base": "work", "answer": ["works"], "reason": "*My brother* is he, so the verb takes -s.", "trap": "T-A01" },
+     { "id": "sc1-2", "stem": "She ___ English every morning before school.", "base": "study", "answer": ["studies"], "reason": "Consonant + y becomes -ies in the third person singular.", "trap": "T-A01" },
+     { "id": "sc1-3", "stem": "The bus ___ not stop outside our school.", "base": "do", "answer": ["does"], "reason": "*The bus* is it, so the negative uses *does not*.", "trap": "T-A01" },
+     { "id": "sc1-4", "stem": "___ your parents work in the city centre?", "base": "do", "answer": ["Do", "do"], "reason": "*Your parents* is plural, so the question starts with *Do*.", "trap": "T-A01" },
+     { "id": "sc1-5", "stem": "My grandmother ___ tea every afternoon.", "base": "fix", "answer": ["fixes"], "reason": "Verbs ending in -x take -es.", "trap": "T-A01" }
+    ]
+   }
+  },
+  {
+   "id": "using-1",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using the simple present",
+   "rules": [
+    {
+     "text": "Use the simple present for facts and things that stay true.",
+     "examples": [
+      { "text": "Water **boils** at 100 degrees.", "bold": ["boils"] },
+      { "text": "Hà Nội **has** four seasons, and the summer **is** long.", "bold": ["has", "is"] }
+     ]
+    },
+    {
+     "text": "Use it for routines and habits, often with a frequency adverb (*always, usually, often, rarely, never*) before the main verb.",
+     "examples": [
+      { "text": "Tuấn **always checks** the weather before he cycles to work.", "bold": ["always checks"] },
+      { "text": "We **rarely eat** out during the week.", "bold": ["rarely eat"] }
+     ]
+    },
+    {
+     "text": "Use it to give an opinion or to report what a text says, which is why it is common in essays.",
+     "examples": [
+      { "text": "The chart **shows** that rents **rise** every year.", "bold": ["shows", "rise"] },
+      { "text": "Many people **believe** that public transport **needs** more investment.", "bold": ["believe", "needs"] }
+     ]
+    }
+   ],
+   "tips": ["In IELTS Writing Task 1, describe what a chart shows in the simple present: *the graph shows*, *the figure represents*. Save the past tense for the years the data covers."]
+  },
+  {
+   "id": "forming-2",
+   "kind": "forming",
+   "layer": "core",
+   "title": "Forming the present progressive and the present perfect",
+   "table": {
+    "caption": "Present progressive and present perfect",
+    "columns": ["Form", "Structure", "Example"],
+    "rows": [
+     ["Present progressive", "am / is / are + verb-ing", "They **are building** a new bridge."],
+     ["Present progressive (negative)", "am / is / are + not + verb-ing", "She **isn't working** today."],
+     ["Present perfect", "have / has + past participle", "I **have finished** the first draft."],
+     ["Present perfect (negative)", "have / has + not + past participle", "He **hasn't replied** yet."]
+    ]
+   },
+   "notes": ["Spelling of -ing: drop a silent **e** (*write → writing*), and double a final consonant after a single stressed vowel (*plan → planning*, *begin → beginning*)."],
+   "selfCheck": {
+    "title": "Self Check 2",
+    "type": "choice",
+    "items": [
+     { "id": "sc2-1", "stem": "Be quiet — the baby ___.", "options": ["sleeps", "is sleeping"], "answer": 1, "reason": "The action is happening right now, so use the present progressive." },
+     { "id": "sc2-2", "stem": "My father ___ for the same company since 2010.", "options": ["works", "has worked"], "answer": 1, "reason": "*since 2010* links the past to now, so the present perfect is correct.", "trap": "T-A07" },
+     { "id": "sc2-3", "stem": "I ___ what you mean.", "options": ["understand", "am understanding"], "answer": 0, "reason": "*understand* is stative, so it stays in the simple present.", "trap": "T-A04" },
+     { "id": "sc2-4", "stem": "We ___ three experiments this term.", "options": ["are doing", "have done"], "answer": 1, "reason": "A finished number of actions inside an unfinished period takes the present perfect." },
+     { "id": "sc2-5", "stem": "This week the students ___ their presentations.", "options": ["prepare", "are preparing"], "answer": 1, "reason": "*This week* frames a temporary period around now." }
+    ]
+   }
+  },
+  {
+   "id": "using-2",
+   "kind": "using",
+   "layer": "core",
+   "title": "Using the present progressive and the present perfect",
+   "rules": [
+    {
+     "text": "Use the present progressive for an action in progress now, or for a temporary situation around now.",
+     "examples": [
+      { "text": "I **am writing** to ask about your summer course.", "bold": ["am writing"] },
+      { "text": "Prices **are rising** faster than wages this year.", "bold": ["are rising"] }
+     ]
+    },
+    {
+     "text": "Use the present perfect when the time is not finished, or when the result still matters now.",
+     "examples": [
+      { "text": "She **has visited** three provinces this month.", "bold": ["has visited"] },
+      { "text": "The city **has banned** plastic bags, so shops now use paper ones.", "bold": ["has banned"] }
+     ]
+    },
+    {
+     "text": "Keep stative verbs (*know, believe, own, belong, contain, prefer*) in the simple present, even when you mean right now.",
+     "examples": [
+      { "text": "I **prefer** studying in the morning.", "bold": ["prefer"] },
+      { "text": "This report **contains** data from 2024.", "bold": ["contains"] }
+     ]
+    }
+   ],
+   "tips": ["*Have been to* means you went and came back; *have gone to* means you are still there. In an essay about your own experience, you almost always want *have been to*."]
+  },
+  {
+   "id": "using-3",
+   "kind": "using",
+   "layer": "extend",
+   "title": "Using the present perfect progressive",
+   "timeline": { "tense": "Present perfect progressive", "marks": ["span", "now"], "label": "An action that started earlier, has continued, and is still going on now." },
+   "rules": [
+    {
+     "text": "Use *have / has been + verb-ing* to stress how long an unfinished action has lasted, usually with *for* or *since*.",
+     "examples": [
+      { "text": "They **have been collecting** plastic waste since March.", "bold": ["have been collecting"] },
+      { "text": "I **have been revising** for two hours and I need a break.", "bold": ["have been revising"] }
+     ]
+    },
+    {
+     "text": "Prefer the present perfect (not the progressive) when you count finished results.",
+     "examples": [
+      { "text": "She **has written** four paragraphs. (how many)", "bold": ["has written"] },
+      { "text": "She **has been writing** all afternoon. (how long)", "bold": ["has been writing"] }
+     ]
+    },
+    {
+     "text": "Match the time word to the form: *every day, usually* → simple present; *now, at the moment, this week* → present progressive; *since, for, already, yet, so far* → present perfect.",
+     "examples": [
+      { "text": "So far the club **has recruited** twenty members.", "bold": ["has recruited"] },
+      { "text": "At the moment we **are testing** the new design.", "bold": ["are testing"] }
+     ]
+    }
+   ],
+   "notes": ["Stative verbs have no progressive form, so *have known* — never *have been knowing* — is the way to say how long you have known someone."],
+   "selfCheck": {
+    "title": "Self Check 3",
+    "type": "fix",
+    "items": [
+     { "id": "sc3-1", "sentence": "I have been knowing Trang since primary school.", "error": "have been knowing", "fix": "have known", "reason": "*know* is stative, so it has no progressive form.", "trap": "T-A04" },
+     { "id": "sc3-2", "sentence": "We have visited the museum last weekend.", "error": "have visited", "fix": "visited", "reason": "*last weekend* is finished time, so use the simple past.", "trap": "T-A06" },
+     { "id": "sc3-3", "sentence": "My sister work at a hospital in Huế.", "error": "work", "fix": "works", "reason": "A third-person singular subject needs -s.", "trap": "T-A01" },
+     { "id": "sc3-4", "sentence": "This room very cold in winter.", "error": "very cold", "fix": "is very cold", "reason": "The sentence has no verb; an adjective needs *be*.", "trap": "T-A02" },
+     { "id": "sc3-5", "sentence": "I am agree with the writer's main point.", "error": "am agree", "fix": "agree", "reason": "*agree* is already a verb, so it does not take *be*.", "trap": "T-A03" }
+    ]
+   }
+  }
+ ],
+ "traps": ["T-A01", "T-A02", "T-A03", "T-A04", "T-A06", "T-A07"],
+ "editing": {
+  "text": "My name is Quân and I am student at a high school in Cần Thơ. Every morning I take the bus to school, and my best friend Hải usually wait for me at the stop. This term we are prepare for the national English competition, so we practise together twice a week. I am knowing that the reading part is my weakness, so I have started a vocabulary notebook in September. So far I have wrote more than two hundred words in it. My teacher says that the notebook help students remember new language, and she is right. This morning I review it on the bus, and I remembered almost everything.",
+  "errors": [
+   { "span": "am student", "fix": "am a student", "type": "article", "reason": "A singular count noun needs an article.", "trap": "T-B04" },
+   { "span": "usually wait", "fix": "usually waits", "type": "agreement", "reason": "*Hải* is he, so the verb takes -s.", "trap": "T-A01" },
+   { "span": "are prepare", "fix": "are preparing", "type": "verb form", "reason": "The present progressive needs *be* + verb-ing.", "rule": "forming-2" },
+   { "span": "am knowing", "fix": "know", "type": "stative verb", "reason": "*know* is stative, so it stays in the simple present.", "trap": "T-A04" },
+   { "span": "have started a vocabulary notebook in September", "fix": "started a vocabulary notebook in September", "type": "tense", "reason": "*in September* is a finished time, so use the simple past.", "trap": "T-A06" },
+   { "span": "have wrote", "fix": "have written", "type": "past participle", "reason": "The present perfect uses the past participle *written*.", "rule": "forming-2" },
+   { "span": "notebook help", "fix": "notebook helps", "type": "agreement", "reason": "*The notebook* is it, so the verb takes -s.", "trap": "T-A01" },
+   { "span": "This morning I review it", "fix": "This morning I reviewed it", "type": "tense", "reason": "The rest of the sentence is past (*remembered*), so keep one time frame.", "trap": "T-A10" }
+  ]
+ },
+ "topics": [
+  {
+   "prompt": "Write an email to an exchange student who is coming to your school next month. Describe what a normal school day looks like and what your class is doing this term.",
+   "length": "120–150 words",
+   "checklist": [
+    "Routines are in the simple present, with frequency adverbs before the main verb.",
+    "At least two sentences use the present progressive for this term's temporary activities.",
+    "Every third-person singular verb ends in -s."
+   ]
+  },
+  {
+   "prompt": "Describe how your study habits have changed since you started secondary school. Say what you have tried and what you are still working on.",
+   "length": "150–180 words",
+   "checklist": [
+    "Changes that still matter now use the present perfect.",
+    "Finished times (*last year*, *in 2023*) use the simple past, not the present perfect.",
+    "At least one sentence uses *since* or *for* with the present perfect."
+   ]
+  },
+  {
+   "prompt": "Your class is running a project to reduce plastic waste. Write a short progress report for your teacher: what the group does every week, what it is doing now, and what it has achieved so far.",
+   "length": "150–180 words",
+   "checklist": [
+    "The report mixes all three present forms, each for its own purpose.",
+    "Results so far are counted with the present perfect (*we have collected…*).",
+    "No stative verb appears in the -ing form."
+   ]
+  }
+ ]
+}

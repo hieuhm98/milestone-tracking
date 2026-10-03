@@ -398,5 +398,133 @@
     "explanation": "Không có người quyết định sẵn sàng, đội bị chặn hoặc phải tự đoán — tái tạo lại chính vấn đề mà Agile định giải quyết.",
     "explanationEn": "Without an available decision-maker the team is blocked or guessing — recreating the very problem Agile was meant to solve.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "\"Cone of uncertainty\" (hình nón bất định) nói lên điều gì về ước tính phần mềm?",
+    "questionEn": "What does the 'cone of uncertainty' say about software estimates?",
+    "options": [
+      "Ước tính luôn chính xác nếu tài liệu yêu cầu đủ dài",
+      "Chỉ dự án Agile mới có sự bất định",
+      "Ước tính lúc đầu rất thô (có thể lệch tới khoảng 4 lần) và chỉ chính xác dần khi công việc thật được làm",
+      "Dự án càng kéo dài thì ước tính càng sai"
+    ],
+    "optionsEn": [
+      "Estimates are always accurate if the requirements document is long enough",
+      "Only Agile projects have uncertainty",
+      "Early estimates are very rough (they can be off by about 4×) and only become accurate as real work is done",
+      "The longer a project runs, the worse its estimates get"
+    ],
+    "answer": 2,
+    "explanation": "Đầu dự án, không ai biết chính xác nó lớn đến đâu. Waterfall bắt cam kết ở phần rộng nhất của hình nón; Agile thu hẹp sự bất định bằng cách giao sản phẩm chạy được sau mỗi vài tuần.",
+    "explanationEn": "At the start nobody knows exactly how big a project is. Waterfall forces a commitment at the widest part of the cone; Agile narrows the uncertainty by delivering working software every few weeks.",
+    "optionExplanations": [
+      "Tài liệu dài không xóa được những điều chưa ai biết; người dùng chỉ thật sự hiểu nhu cầu khi thấy sản phẩm.",
+      "Mọi dự án phần mềm đều có bất định; Agile chỉ là cách xử lý nó tốt hơn.",
+      "Đúng: khoảng sai lệch thu hẹp dần khi yêu cầu, thiết kế và code được hoàn thành.",
+      "Ngược lại: càng làm, càng học thêm, ước tính càng sát thực tế."
+    ],
+    "optionExplanationsEn": [
+      "A longer document cannot remove what nobody knows yet; users only truly understand their needs when they see the product.",
+      "Every software project has uncertainty; Agile is just a better way of handling it.",
+      "Correct: the error range narrows as requirements, design and code are completed.",
+      "The opposite: as work progresses the team learns more and estimates get closer to reality."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Trong ví dụ sửa nhà, điểm mạnh chính của cách làm Agile là gì?",
+    "questionEn": "In the house-renovation analogy, what is the main strength of the Agile approach?",
+    "options": [
+      "Chủ nhà thấy kết quả từng phòng sớm và sửa được vấn đề (như đảo bếp chắn đường) trước khi tốn kém",
+      "Không cần ngân sách hay hạn chót",
+      "Thợ không cần bản vẽ nào cả",
+      "Cả căn nhà được làm xong nhanh gấp đôi"
+    ],
+    "optionsEn": [
+      "The owner sees each room early and can fix problems (like the island blocking the way) before they become expensive",
+      "No budget or deadline is needed",
+      "The builders need no plans at all",
+      "The whole house is finished twice as fast"
+    ],
+    "answer": 0,
+    "explanation": "Agile không làm nhanh hơn một cách thần kỳ; nó giúp phát hiện sai sót sớm khi sửa còn rẻ, trong khi ngân sách và hạn chót vẫn giữ nguyên.",
+    "explanationEn": "Agile does not magically go faster; it surfaces mistakes early, while they are still cheap to fix, with the same budget and deadline.",
+    "optionExplanations": [
+      "Đúng: phản hồi sớm giúp đổi hướng trước khi lát gạch — chính là ý nghĩa của rủi ro được phát hiện sớm.",
+      "Ví dụ nói rõ ngân sách và hạn chót vẫn giữ nguyên.",
+      "Vẫn có kế hoạch; chỉ là chi tiết được chốt dần theo từng phòng.",
+      "Agile không hứa làm nhanh hơn; nó giảm rủi ro làm sai."
+    ],
+    "optionExplanationsEn": [
+      "Correct: early feedback lets you change course before the tiles go down — that is what discovering risk early means.",
+      "The example states the budget and deadline stay the same.",
+      "There is still a plan; details are just decided room by room.",
+      "Agile does not promise more speed; it reduces the risk of building the wrong thing."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "\"WIP limit\" trong Kanban có tác dụng gì?",
+    "questionEn": "What does a WIP limit do in Kanban?",
+    "options": [
+      "Giới hạn số giờ làm việc mỗi ngày",
+      "Giới hạn số việc được ở trạng thái \"đang làm\" cùng lúc, để làm xong việc cũ trước khi nhận việc mới",
+      "Giới hạn số người trong team",
+      "Quy định độ dài của mỗi sprint"
+    ],
+    "optionsEn": [
+      "It limits the number of working hours per day",
+      "It caps how many items can be \"in progress\" at once, so work gets finished before new work starts",
+      "It limits the number of people on the team",
+      "It sets the length of each sprint"
+    ],
+    "answer": 1,
+    "explanation": "WIP = Work In Progress. Ví dụ không quá 3 thẻ ở cột Doing: mọi người tập trung hoàn thành thay vì ôm nhiều việc dở dang.",
+    "explanationEn": "WIP = Work In Progress. For example, no more than 3 cards in Doing: people focus on finishing instead of juggling half-done tasks.",
+    "optionExplanations": [
+      "WIP limit đếm số việc, không đếm số giờ.",
+      "Đúng: đây là quy tắc cốt lõi giúp công việc chảy đều trên bảng Kanban.",
+      "Quy mô team không phải là WIP limit.",
+      "Kanban không có sprint; độ dài sprint là khái niệm của Scrum."
+    ],
+    "optionExplanationsEn": [
+      "A WIP limit counts tasks, not hours.",
+      "Correct: this is the core rule that keeps work flowing on a Kanban board.",
+      "Team size is not a WIP limit.",
+      "Kanban has no sprints; sprint length is a Scrum concept."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Giữa sprint, một developer báo chưa được cấp quyền truy cập tài khoản test của đối tác. Trong ví dụ, ai xử lý và vì sao?",
+    "questionEn": "Mid-sprint a developer reports that the partner has not granted test account access. In the example, who handles it and why?",
+    "options": [
+      "Developer tự chờ đến sprint sau",
+      "Tester bỏ qua phần thanh toán",
+      "Product Owner hủy sprint",
+      "Scrum Master nhận vướng mắc và liên hệ đối tác, để developer tiếp tục làm việc"
+    ],
+    "optionsEn": [
+      "The developer simply waits until the next sprint",
+      "The tester skips testing payments",
+      "The Product Owner cancels the sprint",
+      "The Scrum Master takes the blocker and chases the partner, so the developer can keep working"
+    ],
+    "answer": 3,
+    "explanation": "Gỡ trở ngại là việc của Scrum Master. Team Agile cần đường tắt nhanh tới sự hỗ trợ và quyết định, nếu không sẽ bị chặn.",
+    "explanationEn": "Removing blockers is the Scrum Master's job. Agile teams need a fast path to help and decisions, or they get stuck.",
+    "optionExplanations": [
+      "Chờ đợi lãng phí thời gian của sprint; trở ngại cần được gỡ ngay.",
+      "Bỏ qua kiểm thử không giải quyết vấn đề mà còn làm giảm chất lượng.",
+      "Một trở ngại nhỏ không phải lý do để hủy sprint.",
+      "Đúng: Minh, Scrum Master, liên hệ đối tác ngay chiều hôm đó."
+    ],
+    "optionExplanationsEn": [
+      "Waiting wastes sprint time; blockers should be cleared quickly.",
+      "Skipping testing does not solve the problem and lowers quality.",
+      "A small blocker is no reason to cancel a sprint.",
+      "Correct: Minh, the Scrum Master, chased the partner that same afternoon."
+    ]
   }
 ]

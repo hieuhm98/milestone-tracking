@@ -398,5 +398,101 @@
     "explanation": "JSON không có kiểu ngày tháng. Ngày luôn được truyền dưới dạng chuỗi, nên đặc tả phải nêu rõ định dạng, ví dụ ISO 8601.",
     "explanationEn": "JSON has no date type. Dates always travel as strings, so the specification must state the format, for example ISO 8601.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Hai đoạn `{\"name\":\"An\",\"age\":25}` (viết dồn một dòng) và cùng nội dung đó viết xuống dòng, thụt lề đẹp có gì khác nhau?",
+    "questionEn": "How do `{\"name\":\"An\",\"age\":25}` (squashed on one line) and the same content spread over several indented lines differ?",
+    "options": [
+      "Bản viết dồn bị lỗi vì JSON bắt buộc xuống dòng",
+      "Bản thụt lề chứa nhiều dữ liệu hơn",
+      "Chúng là cùng một dữ liệu; dấu cách và xuống dòng ngoài dấu nháy không quan trọng",
+      "Bản viết dồn chỉ dùng được cho XML"
+    ],
+    "optionsEn": [
+      "The squashed one is invalid because JSON requires line breaks",
+      "The indented one contains more data",
+      "They are the same data; spaces and line breaks outside quotes do not matter",
+      "The squashed one only works for XML"
+    ],
+    "answer": 2,
+    "explanation": "JSON bỏ qua dấu cách và xuống dòng nằm ngoài dấu nháy. Bản viết dồn (minified) tiết kiệm dung lượng; bản thụt lề (pretty-printed) dễ đọc cho người — nhưng dữ liệu là một.",
+    "explanationEn": "JSON ignores spaces and line breaks outside quotes. The minified form saves space; the pretty-printed form is easier for humans to read — but the data is identical.",
+    "optionExplanations": [
+      "JSON không bắt buộc xuống dòng; viết trên một dòng vẫn hợp lệ.",
+      "Thụt lề chỉ thêm khoảng trắng để dễ đọc, không thêm dữ liệu nào.",
+      "Đúng. Khoảng trắng ngoài dấu nháy không làm thay đổi dữ liệu.",
+      "Đây vẫn là JSON hợp lệ, không liên quan gì đến XML."
+    ],
+    "optionExplanationsEn": [
+      "JSON does not require line breaks; one line is perfectly valid.",
+      "Indentation only adds whitespace for readability; it adds no data.",
+      "Correct. Whitespace outside quotes does not change the data.",
+      "This is still valid JSON; it has nothing to do with XML."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Vì sao số điện thoại `0901234567` nên được lưu trong JSON dưới dạng string `\"0901234567\"` thay vì number?",
+    "questionEn": "Why should the phone number `0901234567` be stored in JSON as the string `\"0901234567\"` rather than as a number?",
+    "options": [
+      "Vì nếu là number, số 0 ở đầu sẽ bị mất và ta không bao giờ làm phép tính với số điện thoại",
+      "Vì JSON không cho phép number dài quá 5 chữ số",
+      "Vì string được mã hóa nên an toàn hơn",
+      "Vì number chỉ dùng được trong XML"
+    ],
+    "optionsEn": [
+      "Because as a number the leading 0 would be lost, and you never do arithmetic on a phone number",
+      "Because JSON does not allow numbers longer than 5 digits",
+      "Because strings are encrypted and therefore safer",
+      "Because numbers only work in XML"
+    ],
+    "answer": 0,
+    "explanation": "Number không giữ được số 0 ở đầu: 0901234567 sẽ thành 901234567. Quy tắc dễ nhớ: nếu không bao giờ cộng trừ nó (số điện thoại, số CCCD, mã bưu chính), hãy để là string.",
+    "explanationEn": "A number cannot keep a leading zero: 0901234567 would become 901234567. Rule of thumb: if you never do arithmetic on it (phone numbers, ID numbers, postcodes), make it a string.",
+    "optionExplanations": [
+      "Đúng. Để là string thì giữ nguyên số 0 ở đầu, và số điện thoại không phải là một đại lượng để tính toán.",
+      "JSON không giới hạn số chữ số như vậy; ví dụ 25000000 có 8 chữ số vẫn hợp lệ.",
+      "String trong JSON không hề được mã hóa; đó chỉ là văn bản thường.",
+      "Number là một kiểu giá trị chuẩn của JSON."
+    ],
+    "optionExplanationsEn": [
+      "Correct. A string keeps the leading zero, and a phone number is not a quantity to calculate with.",
+      "JSON has no such limit; 25000000, with 8 digits, is perfectly valid.",
+      "Strings in JSON are not encrypted at all; they are plain text.",
+      "Number is a standard JSON value type."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Bạn cần định dạng lại một response API thật chứa tên và số điện thoại khách hàng. Cách làm nào phù hợp nhất?",
+    "questionEn": "You need to format a real API response that contains customer names and phone numbers. What is the most appropriate approach?",
+    "options": [
+      "Dán vào trang định dạng JSON công cộng đầu tiên tìm được trên Google",
+      "Gửi cho bạn bè nhờ đọc giúp",
+      "Đăng lên diễn đàn để hỏi cộng đồng",
+      "Dùng công cụ có sẵn của công ty (Postman, VS Code, DevTools) hoặc xóa dữ liệu cá nhân trước khi dùng công cụ online"
+    ],
+    "optionsEn": [
+      "Paste it into the first public JSON formatter website found on Google",
+      "Send it to a friend to read for you",
+      "Post it on a forum to ask the community",
+      "Use the company's own tools (Postman, VS Code, DevTools) or remove personal data before using an online tool"
+    ],
+    "answer": 3,
+    "explanation": "Response thật thường chứa dữ liệu cá nhân của khách hàng. Dán vào website công cộng là đưa dữ liệu đó ra ngoài công ty. Hãy dùng công cụ nội bộ hoặc ẩn dữ liệu cá nhân trước.",
+    "explanationEn": "Real responses often contain customers' personal data. Pasting them into a public website sends that data outside the company. Use internal tools or remove personal data first.",
+    "optionExplanations": [
+      "Website công cộng có thể lưu lại dữ liệu bạn dán — dữ liệu khách hàng đã rời khỏi công ty.",
+      "Gửi cho người ngoài là làm lộ dữ liệu cá nhân của khách hàng.",
+      "Đăng lên diễn đàn công khai dữ liệu khách hàng cho bất kỳ ai đọc.",
+      "Đúng. Công cụ nội bộ giữ dữ liệu trong công ty; xóa dữ liệu cá nhân trước cũng an toàn."
+    ],
+    "optionExplanationsEn": [
+      "A public website may store what you paste — the customer data has left the company.",
+      "Sending it to an outsider leaks customers' personal data.",
+      "Posting on a forum publishes customer data for anyone to read.",
+      "Correct. Internal tools keep the data inside the company; removing personal data first is also safe."
+    ]
   }
 ]

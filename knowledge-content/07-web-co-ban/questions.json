@@ -398,5 +398,133 @@
     "explanation": "Nhóm 4xx là lỗi phía client: 404 không tìm thấy, 401 chưa xác thực, 403 không đủ quyền. Nhóm 5xx là lỗi phía server.",
     "explanationEn": "The 4xx family is client-side: 404 not found, 401 unauthenticated, 403 forbidden. The 5xx family is server-side.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Trong luồng truy cập website, kết nối TCP (với 3-way handshake) đảm bảo điều gì?",
+    "questionEn": "In the flow of visiting a website, what does the TCP connection (with its 3-way handshake) guarantee?",
+    "options": [
+      "Dữ liệu được mã hoá để không ai đọc trộm được",
+      "Mọi mảnh dữ liệu đều tới nơi, và đúng thứ tự",
+      "Tên miền được đổi thành địa chỉ IP",
+      "Trang được vẽ ra màn hình"
+    ],
+    "optionsEn": [
+      "The data is encrypted so nobody can eavesdrop",
+      "Every piece of data arrives, and in the right order",
+      "The domain name is turned into an IP address",
+      "The page is drawn on the screen"
+    ],
+    "answer": 1,
+    "explanation": "TCP mở một đường truyền tin cậy: hai bên chào nhau (SYN, SYN-ACK, ACK) rồi đảm bảo mọi mảnh dữ liệu tới đủ và đúng thứ tự. Mã hoá là việc của TLS.",
+    "explanationEn": "TCP opens a reliable line: the two sides greet each other (SYN, SYN-ACK, ACK) and then make sure every piece arrives, in order. Encryption is TLS's job.",
+    "optionExplanations": [
+      "Mã hoá do bước TLS handshake đảm nhận (chỉ với HTTPS), không phải TCP.",
+      "Đúng — đó là vai trò của TCP.",
+      "Đổi tên thành IP là việc của DNS, diễn ra trước bước TCP.",
+      "Vẽ trang (render) là bước cuối, do trình duyệt làm sau khi nhận đủ file."
+    ],
+    "optionExplanationsEn": [
+      "Encryption is handled by the TLS handshake (HTTPS only), not TCP.",
+      "Correct — that is TCP's role.",
+      "Turning a name into an IP is DNS's job, which happens before TCP.",
+      "Drawing the page (rendering) is the last step, done by the browser after the files arrive."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Trong tab Network, một request trả về status `500`. Điều này thường có nghĩa là gì?",
+    "questionEn": "In the Network tab, a request returns status `500`. What does this usually mean?",
+    "options": [
+      "Request thành công",
+      "Trang đã chuyển sang địa chỉ khác",
+      "Có lỗi xảy ra ở phía server — bug hoặc sự cố mà developer cần sửa",
+      "Người dùng chưa đăng nhập"
+    ],
+    "optionsEn": [
+      "The request succeeded",
+      "The page has moved to another address",
+      "Something broke on the server side — a bug or outage for developers to fix",
+      "The user is not logged in"
+    ],
+    "answer": 2,
+    "explanation": "Mã 5xx là lỗi phía server. 2xx là thành công, 3xx là chuyển hướng, 4xx là request có vấn đề (ví dụ 401/403 về đăng nhập và quyền, 404 không tìm thấy).",
+    "explanationEn": "5xx codes are server-side errors. 2xx is success, 3xx is a redirect, 4xx means a problem with the request (e.g. 401/403 for login and permission, 404 not found).",
+    "optionExplanations": [
+      "Thành công là nhóm 2xx, ví dụ 200 OK.",
+      "Chuyển hướng là nhóm 3xx, ví dụ 301 hoặc 302.",
+      "Đúng — nhóm 5xx nghĩa là server bị lỗi.",
+      "Chưa đăng nhập thường trả về 401, thuộc nhóm 4xx."
+    ],
+    "optionExplanationsEn": [
+      "Success is the 2xx family, e.g. 200 OK.",
+      "Redirects are the 3xx family, e.g. 301 or 302.",
+      "Correct — the 5xx family means the server failed.",
+      "Not being logged in usually returns 401, in the 4xx family."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Vì sao việc kiểm tra quyền và tính giá tiền phải nằm ở backend, không chỉ ở frontend?",
+    "questionEn": "Why must permission checks and price calculations live on the backend, not only on the frontend?",
+    "options": [
+      "Vì ai cũng có thể mở, đọc và sửa code frontend trong trình duyệt của chính họ",
+      "Vì frontend không thể hiển thị con số",
+      "Vì backend luôn nhanh hơn frontend",
+      "Vì HTML không hỗ trợ tiếng Việt"
+    ],
+    "optionsEn": [
+      "Because anyone can open, read and change the frontend code in their own browser",
+      "Because the frontend cannot display numbers",
+      "Because the backend is always faster than the frontend",
+      "Because HTML does not support Vietnamese"
+    ],
+    "answer": 0,
+    "explanation": "Code frontend chạy trên máy người dùng nên có thể bị xem và chỉnh sửa. Những quy tắc không được phép bị qua mặt phải được kiểm tra trên server, nơi người dùng không chạm tới.",
+    "explanationEn": "Frontend code runs on the user's machine, so it can be viewed and changed. Rules that must not be bypassed have to be checked on the server, which users cannot touch.",
+    "optionExplanations": [
+      "Đúng — frontend 'thấy được' và sửa được trên máy người dùng.",
+      "Frontend hiển thị số hoàn toàn bình thường; vấn đề là độ tin cậy, không phải hiển thị.",
+      "Tốc độ không phải lý do; đây là vấn đề bảo mật.",
+      "HTML hỗ trợ tiếng Việt (UTF-8); điều này không liên quan."
+    ],
+    "optionExplanationsEn": [
+      "Correct — the frontend is visible and editable on the user's machine.",
+      "The frontend displays numbers just fine; the issue is trust, not display.",
+      "Speed is not the reason; this is about security.",
+      "HTML supports Vietnamese (UTF-8); this is unrelated."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Bạn sửa một dòng chữ trong tab Elements của Dev Tools. Điều gì xảy ra?",
+    "questionEn": "You edit a line of text in the Elements tab of Dev Tools. What happens?",
+    "options": [
+      "Website bị thay đổi cho mọi người dùng",
+      "Server ghi lại thay đổi vào database",
+      "Trình duyệt bị khoá cho tới khi bạn hoàn tác",
+      "Chỉ màn hình của bạn thay đổi, và thay đổi biến mất khi tải lại trang"
+    ],
+    "optionsEn": [
+      "The website changes for every user",
+      "The server saves the change to the database",
+      "The browser is locked until you undo it",
+      "Only your own screen changes, and the change disappears when you reload"
+    ],
+    "answer": 3,
+    "explanation": "Dev Tools chỉ sửa bản sao của trang trong trình duyệt của bạn. Không có gì được gửi lên server, nên tải lại trang là mọi thứ trở về như cũ.",
+    "explanationEn": "Dev Tools only edits your browser's copy of the page. Nothing is sent to the server, so reloading brings everything back.",
+    "optionExplanations": [
+      "Người khác tải trang từ server nên không thấy thay đổi của bạn.",
+      "Sửa trong Elements không gửi request nào lên server.",
+      "Trình duyệt không bị khoá; bạn có thể tiếp tục dùng bình thường.",
+      "Đúng — thay đổi chỉ là tạm thời và cục bộ."
+    ],
+    "optionExplanationsEn": [
+      "Other people load the page from the server, so they do not see your change.",
+      "Editing in Elements sends no request to the server.",
+      "The browser is not locked; you can keep using it normally.",
+      "Correct — the change is temporary and local."
+    ]
   }
 ]

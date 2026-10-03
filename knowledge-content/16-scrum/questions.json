@@ -398,5 +398,133 @@
     "explanation": "Phạm vi Sprint được bảo vệ để đội có thể cam kết. Thay đổi vẫn được chào đón, nhưng phải trả giá bằng việc đẩy thứ khác ra.",
     "explanationEn": "The sprint scope is protected so the team can commit. Change is still welcome, but it costs by pushing something else out.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Theo Scrum Guide 2020, \"Developers\" trong Scrum gồm những ai?",
+    "questionEn": "According to the 2020 Scrum Guide, who counts as \"Developers\" in Scrum?",
+    "options": [
+      "Chỉ những người viết code",
+      "Product Owner và Scrum Master",
+      "Tất cả những người trong Scrum Team trực tiếp làm ra sản phẩm, gồm cả tester, designer, analyst",
+      "Nhóm lập trình viên thuê ngoài"
+    ],
+    "optionsEn": [
+      "Only the people who write code",
+      "The Product Owner and the Scrum Master",
+      "Everyone on the Scrum Team who builds the product, including testers, designers and analysts",
+      "An outsourced group of programmers"
+    ],
+    "answer": 2,
+    "explanation": "Scrum Guide 2020 đổi \"Development Team\" thành \"Developers\": mọi người cùng làm ra Increment, có đủ kỹ năng (cross-functional), không phân cấp.",
+    "explanationEn": "The 2020 Guide renamed the \"Development Team\" to \"Developers\": everyone who creates the Increment, cross-functional, with no hierarchy.",
+    "optionExplanations": [
+      "Quá hẹp: trong Scrum, tester hay designer trong team cũng là Developers.",
+      "PO và SM là hai trách nhiệm riêng, khác với Developers.",
+      "Đúng: Developers là bất kỳ ai trong team cùng xây dựng sản phẩm.",
+      "Developers là thành viên của Scrum Team, không phải nhóm bên ngoài."
+    ],
+    "optionExplanationsEn": [
+      "Too narrow: in Scrum, testers and designers on the team are Developers too.",
+      "The PO and SM are separate accountabilities from the Developers.",
+      "Correct: Developers are anyone on the team who builds the product.",
+      "Developers are members of the Scrum Team, not an outside group."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Theo Scrum Guide 2020, cam kết (commitment) nào đi kèm với Product Backlog?",
+    "questionEn": "In the 2020 Scrum Guide, which commitment belongs to the Product Backlog?",
+    "options": [
+      "Product Goal",
+      "Sprint Goal",
+      "Definition of Done",
+      "Release plan"
+    ],
+    "optionsEn": [
+      "The Product Goal",
+      "The Sprint Goal",
+      "The Definition of Done",
+      "The release plan"
+    ],
+    "answer": 0,
+    "explanation": "Product Backlog → Product Goal; Sprint Backlog → Sprint Goal; Increment → Definition of Done.",
+    "explanationEn": "Product Backlog → Product Goal; Sprint Backlog → Sprint Goal; Increment → Definition of Done.",
+    "optionExplanations": [
+      "Đúng: Product Goal là mục tiêu dài hạn mà toàn bộ backlog hướng tới.",
+      "Sprint Goal đi kèm Sprint Backlog.",
+      "Definition of Done đi kèm Increment.",
+      "Release plan không phải một commitment trong Scrum Guide."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the Product Goal is the long-term target the whole backlog works toward.",
+      "The Sprint Goal belongs to the Sprint Backlog.",
+      "The Definition of Done belongs to the Increment.",
+      "A release plan is not one of the Scrum Guide's commitments."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Ai có quyền hủy một sprint, và khi nào?",
+    "questionEn": "Who can cancel a sprint, and when?",
+    "options": [
+      "Scrum Master, bất cứ khi nào team chậm tiến độ",
+      "Developers, khi gặp một bug khó",
+      "Bất kỳ stakeholder nào có yêu cầu gấp",
+      "Chỉ Product Owner, khi Sprint Goal trở nên lỗi thời"
+    ],
+    "optionsEn": [
+      "The Scrum Master, whenever the team falls behind",
+      "The Developers, when they hit a hard bug",
+      "Any stakeholder with an urgent request",
+      "Only the Product Owner, when the Sprint Goal becomes obsolete"
+    ],
+    "answer": 3,
+    "explanation": "Hủy sprint rất hiếm: chỉ PO có quyền, và chỉ khi mục tiêu sprint không còn ý nghĩa (ví dụ công ty bỏ hẳn tính năng).",
+    "explanationEn": "Cancelling is rare: only the PO has the authority, and only when the Sprint Goal no longer makes sense (e.g. the company drops the feature).",
+    "optionExplanations": [
+      "Chậm tiến độ được xử lý bằng cách thương lượng phạm vi, không phải hủy sprint; SM cũng không có quyền này.",
+      "Bug khó là trở ngại cần gỡ, không phải lý do hủy sprint.",
+      "Yêu cầu gấp đi vào Product Backlog; stakeholder không hủy được sprint.",
+      "Đúng: theo Scrum Guide, chỉ Product Owner được hủy sprint khi Sprint Goal lỗi thời."
+    ],
+    "optionExplanationsEn": [
+      "Falling behind is handled by renegotiating scope, not cancelling; the SM also lacks this authority.",
+      "A hard bug is an impediment to resolve, not a reason to cancel.",
+      "Urgent requests go to the Product Backlog; stakeholders cannot cancel a sprint.",
+      "Correct: per the Scrum Guide, only the Product Owner may cancel, when the Sprint Goal is obsolete."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Giữa sprint, team phát hiện một PBI lớn hơn dự kiến. Cách xử lý nào đúng tinh thần Scrum Guide 2020?",
+    "questionEn": "Mid-sprint, the team finds a PBI is bigger than expected. Which response fits the 2020 Scrum Guide?",
+    "options": [
+      "Kéo dài sprint thêm vài ngày",
+      "Developers và PO thương lượng lại phạm vi (ví dụ bỏ một tùy chọn phụ) mà vẫn giữ Sprint Goal",
+      "Bỏ qua Definition of Done cho kịp",
+      "Đổi Sprint Goal sang mục tiêu dễ hơn"
+    ],
+    "optionsEn": [
+      "Extend the sprint by a few days",
+      "The Developers and PO renegotiate scope (e.g. drop a minor option) while keeping the Sprint Goal",
+      "Skip the Definition of Done to finish on time",
+      "Change the Sprint Goal to something easier"
+    ],
+    "answer": 1,
+    "explanation": "Sprint Goal cố định và chất lượng không giảm, nhưng phạm vi chi tiết có thể được làm rõ và thương lượng lại với PO khi team hiểu thêm — như việc bỏ \"lưu thẻ\" ở ngày 6.",
+    "explanationEn": "The Sprint Goal is fixed and quality does not drop, but detailed scope can be clarified and renegotiated with the PO as the team learns — like dropping \"save card\" on day 6.",
+    "optionExplanations": [
+      "Sprint là timebox cố định, không kéo dài.",
+      "Đúng: điều chỉnh phạm vi cùng PO để vẫn đạt Sprint Goal.",
+      "Chất lượng không được hạ thấp; công việc chưa đạt DoD không tính là xong.",
+      "Sprint Goal không thay đổi trong sprint."
+    ],
+    "optionExplanationsEn": [
+      "A sprint is a fixed timebox; it is not extended.",
+      "Correct: adjust scope with the PO so the Sprint Goal is still met.",
+      "Quality is not lowered; work that misses the DoD is not done.",
+      "The Sprint Goal does not change during the sprint."
+    ]
   }
 ]

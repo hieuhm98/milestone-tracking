@@ -398,5 +398,133 @@
     "explanation": "1 MB xấp xỉ 1.000 KB, nên 500 MB chứa khoảng 500.000 bản ghi 1 KB. Nắm đơn vị dữ liệu giúp BA kiểm tra tính hợp lý của yêu cầu ngay khi viết.",
     "explanationEn": "1 MB is roughly 1,000 KB, so 500 MB holds about 500,000 one-kilobyte records. Knowing data units lets a BA sanity-check a requirement as they write it.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Một laptop được quảng cáo \"16 GB RAM, 512 GB SSD\". Đồng nghiệp nói: \"Máy này có 512 GB bộ nhớ.\" Câu đó sai ở đâu?",
+    "questionEn": "A laptop is advertised as \"16 GB RAM, 512 GB SSD\". A colleague says: \"This machine has 512 GB of memory.\" What is wrong with that statement?",
+    "options": [
+      "Không sai gì — RAM và SSD là cùng một thứ",
+      "512 GB là dung lượng của card đồ họa",
+      "512 GB là tốc độ của CPU",
+      "512 GB là ổ cứng (lưu trữ lâu dài); bộ nhớ RAM chỉ có 16 GB"
+    ],
+    "optionsEn": [
+      "Nothing — RAM and SSD are the same thing",
+      "512 GB is the size of the graphics card",
+      "512 GB is the CPU speed",
+      "512 GB is storage (long-term); the RAM (memory) is only 16 GB"
+    ],
+    "answer": 3,
+    "explanation": "RAM và ổ cứng đều đo bằng GB nên rất dễ nhầm. RAM (16 GB) là \"mặt bàn bếp\" tạm thời; SSD (512 GB) là \"kho\" lưu trữ lâu dài.",
+    "explanationEn": "RAM and storage are both measured in GB, so they are easy to confuse. RAM (16 GB) is the temporary \"kitchen counter\"; the SSD (512 GB) is the long-term \"pantry\".",
+    "optionExplanations": [
+      "Sai: RAM là bộ nhớ tạm, mất dữ liệu khi tắt máy; SSD lưu vĩnh viễn — hai bộ phận khác nhau.",
+      "Sai: bảng cấu hình ghi rõ 512 GB là SSD, không phải GPU.",
+      "Sai: tốc độ CPU đo bằng GHz, không phải GB.",
+      "Đúng: 512 GB là ổ SSD (lưu trữ), còn RAM chỉ 16 GB."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: RAM is temporary and is erased at power-off; an SSD keeps data permanently — they are different parts.",
+      "Wrong: the spec clearly says the 512 GB is the SSD, not the GPU.",
+      "Wrong: CPU speed is measured in GHz, not GB.",
+      "Correct: the 512 GB is the SSD (storage), while the RAM is only 16 GB."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Khi bạn nhấp đúp mở file report.docx, điều gì xảy ra TRƯỚC KHI bạn có thể gõ chữ?",
+    "questionEn": "When you double-click report.docx to open it, what happens BEFORE you can start typing?",
+    "options": [
+      "Word và file được chép từ ổ cứng lên RAM để CPU xử lý",
+      "File được gửi lên Internet để kiểm tra",
+      "CPU xóa RAM để lấy chỗ cho file",
+      "File được chuyển hẳn từ ổ cứng sang GPU"
+    ],
+    "optionsEn": [
+      "Word and the file are copied from storage into RAM so the CPU can work on them",
+      "The file is sent to the Internet to be checked",
+      "The CPU wipes RAM to make room for the file",
+      "The file is moved permanently from storage to the GPU"
+    ],
+    "answer": 0,
+    "explanation": "CPU chỉ làm việc nhanh với dữ liệu trong RAM, nên OS chép chương trình Word và file từ ổ cứng lên RAM trước. Đó là lý do chương trình lớn mất vài giây để mở.",
+    "explanationEn": "The CPU can only work quickly with data in RAM, so the OS first copies the Word program and the file from storage into RAM. That is why big programs take a few seconds to open.",
+    "optionExplanations": [
+      "Đúng: chương trình và dữ liệu được nạp từ ổ cứng lên RAM trước khi CPU chạy chúng.",
+      "Sai: mở một file cục bộ không cần gửi lên Internet.",
+      "Sai: OS chỉ cấp thêm phần RAM trống, không xóa dữ liệu của ứng dụng khác.",
+      "Sai: GPU chỉ giúp vẽ hình lên màn hình; file vẫn nằm trong ổ cứng và được chép lên RAM."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the program and the data are loaded from storage into RAM before the CPU runs them.",
+      "Wrong: opening a local file does not require sending it to the Internet.",
+      "Wrong: the OS hands out free RAM; it does not wipe other apps' data.",
+      "Wrong: the GPU only helps draw the screen; the file stays in storage and is copied into RAM."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Bạn mua ổ cứng ghi \"1 TB\" nhưng Windows chỉ hiển thị khoảng 931 GB. Vì sao?",
+    "questionEn": "You buy a drive labelled \"1 TB\" but Windows shows only about 931 GB. Why?",
+    "options": [
+      "Ổ cứng bị lỗi một phần",
+      "Hệ điều hành đã chiếm mất 69 GB",
+      "Nhà sản xuất tính 1 TB = 1.000.000.000.000 byte, còn Windows chia theo bậc 1.024",
+      "Virus đã ẩn bớt dung lượng"
+    ],
+    "optionsEn": [
+      "The drive is partly faulty",
+      "The operating system has taken 69 GB",
+      "The manufacturer counts 1 TB = 1,000,000,000,000 bytes, while Windows divides in steps of 1,024",
+      "A virus is hiding some of the space"
+    ],
+    "answer": 2,
+    "explanation": "Cùng một lượng byte được đếm theo hai cách: nhà sản xuất dùng bậc 1.000, Windows dùng bậc 1.024. 10¹² byte chia cho 1.024 ba lần ≈ 931 GB.",
+    "explanationEn": "The same number of bytes is counted two ways: manufacturers use steps of 1,000, Windows uses steps of 1,024. 10¹² bytes divided by 1,024 three times ≈ 931 GB.",
+    "optionExplanations": [
+      "Sai: ổ hoàn toàn bình thường; chênh lệch đến từ cách đếm.",
+      "Sai: con số 931 GB là tổng dung lượng ổ, trước khi tính phần OS sử dụng.",
+      "Đúng: 1.000.000.000.000 ÷ 1.024 ÷ 1.024 ÷ 1.024 ≈ 931 GB.",
+      "Sai: đây là hiện tượng bình thường trên mọi ổ cứng, không liên quan virus."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the drive is perfectly fine; the gap comes from the way of counting.",
+      "Wrong: 931 GB is the drive's total capacity, before anything the OS uses.",
+      "Correct: 1,000,000,000,000 ÷ 1,024 ÷ 1,024 ÷ 1,024 ≈ 931 GB.",
+      "Wrong: this happens on every drive and has nothing to do with viruses."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Gói Internet của bạn là 100 Mbps. Tốc độ tải file tối đa vào khoảng bao nhiêu?",
+    "questionEn": "Your Internet plan is 100 Mbps. Roughly what is the maximum file download speed?",
+    "options": [
+      "100 MB mỗi giây",
+      "Khoảng 12,5 MB mỗi giây",
+      "800 MB mỗi giây",
+      "Khoảng 1 GB mỗi giây"
+    ],
+    "optionsEn": [
+      "100 MB per second",
+      "About 12.5 MB per second",
+      "800 MB per second",
+      "About 1 GB per second"
+    ],
+    "answer": 1,
+    "explanation": "Mbps là megabit mỗi giây (chữ b thường), còn dung lượng file tính bằng megabyte (B hoa). 1 byte = 8 bit, nên 100 ÷ 8 = 12,5 MB/giây.",
+    "explanationEn": "Mbps means megabits per second (lower-case b), while file sizes are in megabytes (upper-case B). 1 byte = 8 bits, so 100 ÷ 8 = 12.5 MB per second.",
+    "optionExplanations": [
+      "Sai: nhầm bit (b) với byte (B) — cần chia cho 8.",
+      "Đúng: 100 megabit ÷ 8 = 12,5 megabyte mỗi giây.",
+      "Sai: đây là nhân với 8 thay vì chia cho 8.",
+      "Sai: 1 GB/giây nhanh gấp khoảng 80 lần đường truyền 100 Mbps."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: this confuses bits (b) with bytes (B) — you need to divide by 8.",
+      "Correct: 100 megabits ÷ 8 = 12.5 megabytes per second.",
+      "Wrong: this multiplies by 8 instead of dividing by 8.",
+      "Wrong: 1 GB per second is about 80 times faster than a 100 Mbps line."
+    ]
   }
 ]

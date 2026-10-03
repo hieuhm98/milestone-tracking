@@ -228,5 +228,133 @@
     "answer": 1,
     "explanation": "Webhook để client cung cấp Callback URL; khi có thay đổi, server chủ động gọi ngược — real-time và hiệu quả. Polling (hỏi liên tục) tốn tài nguyên và có độ trễ.",
     "explanationEn": "With a webhook, the client provides a Callback URL; when something changes, the server calls back — real-time and efficient. Polling (asking continuously) wastes resources and adds latency."
+  },
+  {
+    "id": "q20",
+    "question": "HTTP method nào chỉ dùng để đọc dữ liệu và không thay đổi gì trên server?",
+    "questionEn": "Which HTTP method only reads data and changes nothing on the server?",
+    "options": [
+      "POST",
+      "DELETE",
+      "GET",
+      "PATCH"
+    ],
+    "optionsEn": [
+      "POST",
+      "DELETE",
+      "GET",
+      "PATCH"
+    ],
+    "answer": 2,
+    "explanation": "GET nghĩa là \"cho tôi xem\": nó chỉ đọc dữ liệu. POST tạo mới, PATCH sửa một phần, DELETE xóa — cả ba đều thay đổi dữ liệu.",
+    "explanationEn": "GET means \"show me\": it only reads data. POST creates, PATCH partially updates and DELETE removes — all three change data.",
+    "optionExplanations": [
+      "POST tạo ra một tài nguyên mới, tức là có thay đổi dữ liệu trên server.",
+      "DELETE xóa tài nguyên — đây là thay đổi dữ liệu rõ ràng nhất.",
+      "Đúng. GET chỉ đọc và trả dữ liệu về, không sửa gì trên server.",
+      "PATCH sửa một phần tài nguyên, nên có thay đổi dữ liệu."
+    ],
+    "optionExplanationsEn": [
+      "POST creates a new resource, so it changes data on the server.",
+      "DELETE removes a resource — the most obvious kind of data change.",
+      "Correct. GET only reads and returns data; it modifies nothing on the server.",
+      "PATCH updates part of a resource, so it changes data."
+    ]
+  },
+  {
+    "id": "q21",
+    "question": "Bạn muốn xem một trang web đã gọi những API nào và nhận status code gì. Bạn mở chỗ nào trong trình duyệt?",
+    "questionEn": "You want to see which API calls a web page made and what status codes came back. Where do you look in the browser?",
+    "options": [
+      "Tab Network trong công cụ dành cho nhà phát triển (DevTools)",
+      "Lịch sử duyệt web (History)",
+      "Trang cài đặt của trình duyệt",
+      "Danh sách dấu trang (Bookmarks)"
+    ],
+    "optionsEn": [
+      "The Network tab in the browser's developer tools (DevTools)",
+      "The browsing History",
+      "The browser's Settings page",
+      "The Bookmarks list"
+    ],
+    "answer": 0,
+    "explanation": "Tab Network trong DevTools (F12 trên Windows, Cmd+Option+I trên macOS) liệt kê từng request mà trang gửi đi, kèm URL, method, status code, headers và response.",
+    "explanationEn": "The Network tab in DevTools (F12 on Windows, Cmd+Option+I on macOS) lists every request the page sends, with its URL, method, status code, headers and response.",
+    "optionExplanations": [
+      "Đúng. Tab Network hiển thị từng lần gọi API cùng status code và dữ liệu trả về.",
+      "History chỉ ghi các trang bạn đã mở, không ghi các lần gọi API bên trong trang.",
+      "Trang cài đặt dùng để chỉnh trình duyệt, không hiển thị request.",
+      "Bookmarks chỉ lưu địa chỉ trang bạn đánh dấu, không liên quan đến API."
+    ],
+    "optionExplanationsEn": [
+      "Correct. The Network tab shows each API call with its status code and returned data.",
+      "History records the pages you opened, not the API calls made inside a page.",
+      "Settings is for configuring the browser; it does not show requests.",
+      "Bookmarks only store addresses you saved; they have nothing to do with API calls."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "App gọi `GET /api/products/99999` và nhận về `404 Not Found`. Điều này thường có nghĩa là gì?",
+    "questionEn": "An app calls `GET /api/products/99999` and receives `404 Not Found`. What does this usually mean?",
+    "options": [
+      "Server bị sập và cần khởi động lại",
+      "Người dùng chưa đăng nhập",
+      "Bên gọi gửi quá nhiều request",
+      "Không có tài nguyên nào ở địa chỉ đó — sản phẩm 99999 không tồn tại hoặc URL sai"
+    ],
+    "optionsEn": [
+      "The server has crashed and must be restarted",
+      "The user is not logged in",
+      "The caller sent too many requests",
+      "Nothing exists at that address — product 99999 does not exist or the URL is wrong"
+    ],
+    "answer": 3,
+    "explanation": "404 thuộc nhóm 4xx (lỗi phía bên gọi): bên gọi hỏi một thứ không có ở địa chỉ đó. Server sập là 5xx, chưa đăng nhập là 401, gọi quá dày là 429.",
+    "explanationEn": "404 is in the 4xx group (caller-side error): the caller asked for something that is not at that address. A crashed server is 5xx, not logged in is 401, too many calls is 429.",
+    "optionExplanations": [
+      "Server sập sẽ trả về mã 5xx như 500 hoặc 503, không phải 404.",
+      "Chưa đăng nhập hoặc sai token là 401 Unauthorized.",
+      "Gọi quá dày là 429 Too Many Requests.",
+      "Đúng. 404 nghĩa là không tìm thấy tài nguyên ở URL đó."
+    ],
+    "optionExplanationsEn": [
+      "A crashed server returns a 5xx code such as 500 or 503, not 404.",
+      "Not logged in or a wrong token is 401 Unauthorized.",
+      "Calling too often is 429 Too Many Requests.",
+      "Correct. 404 means no resource was found at that URL."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Vì sao không được dán API key vào ảnh chụp màn hình, ticket hay code công khai?",
+    "questionEn": "Why must you never paste an API key into a screenshot, a ticket or public code?",
+    "options": [
+      "Vì API key quá dài nên làm ảnh khó đọc",
+      "Vì ai có key là có thể gọi API dưới danh nghĩa của bạn, và API trả phí sẽ tính tiền công ty bạn",
+      "Vì API key sẽ tự động hết hạn khi bị chụp ảnh",
+      "Vì API key chỉ hoạt động trên một máy tính duy nhất"
+    ],
+    "optionsEn": [
+      "Because API keys are long and make screenshots hard to read",
+      "Because whoever has the key can call the API as you, and paid APIs will bill your company",
+      "Because an API key expires automatically when it is photographed",
+      "Because an API key only works on one single computer"
+    ],
+    "answer": 1,
+    "explanation": "API key là bí mật chứng minh ai đang gọi. Lộ key thì người khác có thể dùng API thay bạn — đọc dữ liệu hoặc tạo chi phí. Nếu lỡ lộ, phải thu hồi và tạo key mới.",
+    "explanationEn": "An API key is a secret that proves who is calling. If it leaks, someone else can use the API as you — reading data or running up costs. If it leaks, revoke it and create a new one.",
+    "optionExplanations": [
+      "Độ dài không phải vấn đề; vấn đề là tính bí mật của key.",
+      "Đúng. Key bị lộ cho phép người khác giả danh bạn khi gọi API và tạo chi phí.",
+      "Key không tự hết hạn khi bị chụp; nó vẫn dùng được cho tới khi bị thu hồi.",
+      "API key thường dùng được từ bất kỳ máy nào, đó chính là lý do lộ key rất nguy hiểm."
+    ],
+    "optionExplanationsEn": [
+      "Length is not the problem; the key's secrecy is.",
+      "Correct. A leaked key lets someone else call the API pretending to be you and run up costs.",
+      "A key does not expire when photographed; it keeps working until it is revoked.",
+      "API keys usually work from any machine, which is exactly why a leak is dangerous."
+    ]
   }
 ]

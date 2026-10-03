@@ -398,5 +398,101 @@
     "explanation": "NoSQL đánh đổi tính nhất quán chặt và khả năng join lấy tính linh hoạt và khả năng mở rộng ngang. Chọn theo bài toán, không theo xu hướng.",
     "explanationEn": "NoSQL trades strict consistency and joins for flexibility and horizontal scale. Choose by the problem, not by fashion.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Vì sao một ứng dụng thật dùng database thay vì một file bảng tính Excel?",
+    "questionEn": "Why does a real app use a database instead of an Excel spreadsheet file?",
+    "options": [
+      "Vì Excel không thể hiển thị dữ liệu dạng bảng",
+      "Vì database luôn miễn phí còn Excel phải trả tiền",
+      "Vì database phục vụ an toàn nhiều người dùng cùng lúc, xử lý hàng triệu dòng và từ chối dữ liệu sai kiểu",
+      "Vì database không cần cột và hàng"
+    ],
+    "optionsEn": [
+      "Because Excel cannot display data as a table",
+      "Because databases are always free while Excel costs money",
+      "Because a database safely serves many users at once, handles millions of rows, and rejects wrongly typed data",
+      "Because a database does not need columns and rows"
+    ],
+    "answer": 2,
+    "explanation": "Bảng tính hợp với một người và lượng dữ liệu nhỏ. Database được xây cho nhiều người sửa cùng lúc, khối lượng rất lớn, kiểm tra dữ liệu theo schema và khôi phục đúng sau sự cố.",
+    "explanationEn": "A spreadsheet suits one person and small data. A database is built for many simultaneous users, very large volumes, checking data against a schema, and recovering correctly after a crash.",
+    "optionExplanations": [
+      "Sai — Excel hiển thị dạng bảng rất tốt; vấn đề là nhiều người dùng, khối lượng lớn và kiểm tra dữ liệu.",
+      "Sai — có database miễn phí (PostgreSQL) và database trả phí (Oracle); giá không phải lý do chính.",
+      "Đúng — đây là những điểm bảng tính làm kém còn database được thiết kế để làm tốt.",
+      "Sai — database quan hệ vẫn tổ chức dữ liệu thành cột và hàng, giống một sheet."
+    ],
+    "optionExplanationsEn": [
+      "Wrong — Excel displays tables just fine; the issues are many users, large volume and data checking.",
+      "Wrong — there are free databases (PostgreSQL) and paid ones (Oracle); price is not the main reason.",
+      "Correct — these are exactly the things a spreadsheet does poorly and a database is designed to do well.",
+      "Wrong — a relational database still organizes data into columns and rows, much like a sheet."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Trong bảng customers, cột phone của một khách có giá trị NULL. Điều đó nghĩa là gì?",
+    "questionEn": "In a customers table, one customer's phone column is NULL. What does that mean?",
+    "options": [
+      "Chưa có giá trị — khách chưa cung cấp số điện thoại",
+      "Số điện thoại là 0",
+      "Số điện thoại là một chuỗi rỗng đã được nhập cố ý",
+      "Bản ghi đó bị lỗi và phải xóa"
+    ],
+    "optionsEn": [
+      "There is no value yet — the customer has not given a phone number",
+      "The phone number is 0",
+      "The phone number is an empty string that was entered on purpose",
+      "The record is broken and must be deleted"
+    ],
+    "answer": 0,
+    "explanation": "NULL nghĩa là 'chưa biết / chưa nhập'. Nó khác số 0 và khác chuỗi rỗng. Muốn bắt buộc nhập, schema đánh dấu cột là NOT NULL.",
+    "explanationEn": "NULL means 'unknown / not entered'. It is different from zero and from an empty string. To make a value required, the schema marks the column NOT NULL.",
+    "optionExplanations": [
+      "Đúng — NULL là 'chưa có giá trị'.",
+      "Sai — 0 là một giá trị cụ thể; NULL là không có giá trị nào.",
+      "Sai — chuỗi rỗng cũng là một giá trị; NULL thì không.",
+      "Sai — NULL là hợp lệ trừ khi cột được khai báo NOT NULL."
+    ],
+    "optionExplanationsEn": [
+      "Correct — NULL means 'no value yet'.",
+      "Wrong — 0 is a real value; NULL is the absence of any value.",
+      "Wrong — an empty string is still a value; NULL is not.",
+      "Wrong — NULL is valid unless the column is declared NOT NULL."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Trong database của shop cà phê, bảng nào ghi lại 'đơn 101 có 2 gói Arabica và 1 giấy lọc'?",
+    "questionEn": "In the coffee shop's database, which table records 'order 101 contains 2 × Arabica and 1 × paper filter'?",
+    "options": [
+      "customers",
+      "products",
+      "orders",
+      "order_items — bảng trung gian giữa orders và products"
+    ],
+    "optionsEn": [
+      "customers",
+      "products",
+      "orders",
+      "order_items — the junction table between orders and products"
+    ],
+    "answer": 3,
+    "explanation": "Một đơn có nhiều sản phẩm và một sản phẩm nằm trong nhiều đơn (nhiều-nhiều), nên mỗi dòng của order_items ghi một cặp (order_id, product_id) kèm quantity.",
+    "explanationEn": "An order has many products and a product appears in many orders (many-to-many), so each row of order_items records one (order_id, product_id) pair with a quantity.",
+    "optionExplanations": [
+      "Sai — customers chỉ lưu thông tin khách hàng.",
+      "Sai — products chỉ lưu tên và giá sản phẩm, không biết sản phẩm nằm trong đơn nào.",
+      "Sai — orders lưu ai đặt và ngày đặt; một dòng orders không thể chứa danh sách nhiều sản phẩm.",
+      "Đúng — bảng trung gian nối orders với products và lưu số lượng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong — customers only stores customer details.",
+      "Wrong — products only stores names and prices; it does not know which orders a product is in.",
+      "Wrong — orders stores who ordered and when; one orders row cannot hold a list of many products.",
+      "Correct — the junction table links orders to products and stores the quantity."
+    ]
   }
 ]

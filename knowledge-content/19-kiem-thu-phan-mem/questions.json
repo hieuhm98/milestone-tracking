@@ -398,5 +398,133 @@
     "explanation": "Chức năng bị bỏ sót không tồn tại trong mã nên không thể lộ ra khi đọc mã. Chỉ test suy ra từ yêu cầu mới bắt được.",
     "explanationEn": "Missing functionality is not in the code, so reading the code cannot reveal it. Only requirements-derived tests catch it.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Kiểm tra xem cửa hàng online còn phản hồi trong 2 giây khi 5.000 người mua cùng lúc thuộc loại kiểm thử nào?",
+    "questionEn": "Checking whether an online shop still responds within 2 seconds when 5,000 people shop at once is which type of testing?",
+    "options": [
+      "Functional testing",
+      "Non-functional testing (performance/load)",
+      "Unit testing",
+      "UAT"
+    ],
+    "optionsEn": [
+      "Functional testing",
+      "Non-functional testing (performance/load)",
+      "Unit testing",
+      "UAT"
+    ],
+    "answer": 1,
+    "explanation": "Functional hỏi \"có làm đúng việc không?\"; non-functional hỏi \"làm tốt đến mức nào?\" — tốc độ dưới tải là performance/load testing.",
+    "explanationEn": "Functional asks \"does it do the right thing?\"; non-functional asks \"how well does it do it?\" — speed under load is performance/load testing.",
+    "optionExplanations": [
+      "Functional testing kiểm tra kết quả có đúng không, không đo tốc độ dưới tải.",
+      "Đúng: đây là performance/load testing, một loại phi chức năng.",
+      "Unit test là một cấp độ, kiểm tra một hàm riêng lẻ, không mô phỏng 5.000 người dùng.",
+      "UAT là người dùng thật xác nhận nhu cầu kinh doanh, không phải đo tải."
+    ],
+    "optionExplanationsEn": [
+      "Functional testing checks whether results are correct, not speed under load.",
+      "Correct: this is performance/load testing, a non-functional type.",
+      "A unit test is a level that checks one function in isolation; it does not simulate 5,000 users.",
+      "UAT is real users confirming business needs, not load measurement."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Retesting khác regression testing thế nào?",
+    "questionEn": "How does retesting differ from regression testing?",
+    "options": [
+      "Chúng là một",
+      "Retesting do người dùng làm, regression do developer làm",
+      "Regression chỉ chạy một lần trước khi go-live",
+      "Retesting kiểm tra một bug cụ thể đã hết chưa; regression kiểm tra thay đổi có làm hỏng thứ khác không"
+    ],
+    "optionsEn": [
+      "They are the same thing",
+      "Retesting is done by users, regression by developers",
+      "Regression runs only once before go-live",
+      "Retesting checks that one specific bug is gone; regression checks the change didn't break anything else"
+    ],
+    "answer": 3,
+    "explanation": "Retesting: \"bug này đã hết chưa?\". Regression: \"có thứ gì khác bị hỏng không?\" — thường được tự động hóa và chạy sau mỗi thay đổi.",
+    "explanationEn": "Retesting: \"is this bug gone?\". Regression: \"did anything else break?\" — usually automated and run after every change.",
+    "optionExplanations": [
+      "Hai việc trả lời hai câu hỏi khác nhau.",
+      "Cả hai thường do QA làm (regression hay được tự động hóa); không phân chia theo người dùng/developer.",
+      "Regression chạy sau mỗi thay đổi, không phải chỉ một lần.",
+      "Đúng: một bên nhìn vào bug đã sửa, một bên nhìn vào phần còn lại của hệ thống."
+    ],
+    "optionExplanationsEn": [
+      "The two answer different questions.",
+      "Both are usually QA work (regression is often automated); it is not a users-vs-developers split.",
+      "Regression runs after every change, not just once.",
+      "Correct: one looks at the fixed bug, the other at the rest of the system."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Yêu cầu: mã SAVE10 giảm 10% cho đơn từ 200.000 VND. Ngoài happy path, test case nào kiểm tra giá trị biên?",
+    "questionEn": "Requirement: code SAVE10 gives 10% off orders of 200,000 VND or more. Beyond the happy path, which test case checks the boundary?",
+    "options": [
+      "Đơn hàng đúng 200.000 VND (được giảm) và 199.999 VND (không được giảm)",
+      "Đơn hàng 5.000.000 VND",
+      "Đăng nhập bằng mật khẩu sai",
+      "Đổi màu nút \"Áp dụng\""
+    ],
+    "optionsEn": [
+      "An order of exactly 200,000 VND (discount applies) and 199,999 VND (no discount)",
+      "An order of 5,000,000 VND",
+      "Logging in with a wrong password",
+      "Changing the colour of the \"Apply\" button"
+    ],
+    "answer": 0,
+    "explanation": "Lỗi hay nằm ở ngay ranh giới (≥ hay >). Test đúng tại và ngay dưới mức 200.000 VND sẽ bắt được những lỗi đó.",
+    "explanationEn": "Bugs often sit right at the boundary (≥ vs >). Testing exactly at and just below 200,000 VND catches them.",
+    "optionExplanations": [
+      "Đúng: hai giá trị sát ranh giới là cách kiểm thử biên điển hình.",
+      "Đây vẫn là một trường hợp bình thường, xa ranh giới.",
+      "Không liên quan đến yêu cầu giảm giá đang được test.",
+      "Màu nút không phải yêu cầu trong acceptance criterion này."
+    ],
+    "optionExplanationsEn": [
+      "Correct: two values right at the edge are classic boundary testing.",
+      "This is still a normal case, far from the boundary.",
+      "Unrelated to the discount requirement being tested.",
+      "Button colour is not part of this acceptance criterion."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Tên công ty bị viết sai chính tả trên trang chủ. Severity và priority hợp lý nhất là gì?",
+    "questionEn": "The company name is misspelled on the homepage. What are the most sensible severity and priority?",
+    "options": [
+      "Severity cao, priority thấp",
+      "Severity cao, priority cao",
+      "Severity thấp, priority cao",
+      "Severity thấp, priority thấp"
+    ],
+    "optionsEn": [
+      "High severity, low priority",
+      "High severity, high priority",
+      "Low severity, high priority",
+      "Low severity, low priority"
+    ],
+    "answer": 2,
+    "explanation": "Hệ thống vẫn chạy đúng (severity thấp), nhưng lỗi ảnh hưởng hình ảnh thương hiệu trên trang ai cũng thấy (priority cao).",
+    "explanationEn": "The system still works (low severity), but the error hurts the brand on a page everyone sees (high priority).",
+    "optionExplanations": [
+      "Không có chức năng nào bị hỏng, nên severity không cao.",
+      "Severity cao dành cho crash, mất dữ liệu, chức năng chính hỏng.",
+      "Đúng: lỗi nhỏ về kỹ thuật nhưng cần sửa gấp vì tác động kinh doanh.",
+      "Priority thấp hợp với lỗi chính tả trên trang gần như không ai vào, không phải trang chủ."
+    ],
+    "optionExplanationsEn": [
+      "Nothing is functionally broken, so severity is not high.",
+      "High severity is for crashes, data loss or broken core functions.",
+      "Correct: technically minor but urgent because of the business impact.",
+      "Low priority suits a typo on a page almost nobody visits, not the homepage."
+    ]
   }
 ]

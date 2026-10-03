@@ -398,5 +398,165 @@
     "explanation": "Phân quyền, mã hoá, nhật ký kiểm toán đều là quyết định kiến trúc. Thêm sau khi hệ thống đã xây thường phải sửa lại phần lớn.",
     "explanationEn": "Authorization, encryption, and audit logging are architectural decisions. Adding them after the system is built usually means large-scale rework.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Bạn nhận SMS: \"Tài khoản ngân hàng của bạn sẽ bị khóa trong 24 giờ. Xác minh ngay tại bank-secure-verify.xyz\". Bạn nên làm gì?",
+    "questionEn": "You get an SMS: \"Your bank account will be locked in 24 hours. Verify now at bank-secure-verify.xyz\". What should you do?",
+    "options": [
+      "Bấm link ngay để tránh bị khóa tài khoản",
+      "Trả lời tin nhắn để hỏi thêm thông tin",
+      "Không bấm link; mở app chính thức hoặc gọi số in trên thẻ ngân hàng để kiểm tra",
+      "Chuyển tiếp tin nhắn cho bạn bè để họ kiểm tra giúp"
+    ],
+    "optionsEn": [
+      "Click the link right away to avoid the account being locked",
+      "Reply to the message to ask for more details",
+      "Don't click; open the official app or call the number printed on your bank card to check",
+      "Forward the message to friends so they can check it for you"
+    ],
+    "answer": 2,
+    "explanation": "Tin nhắn có đủ dấu hiệu phishing: gấp gáp, đe dọa khóa tài khoản và một địa chỉ web lạ. Hãy kiểm tra qua kênh chính thức bạn tự tìm, không qua link hay số trong tin nhắn.",
+    "explanationEn": "The message has classic phishing signs: urgency, a lock threat and an unfamiliar web address. Check through an official channel you find yourself, never through the link or number in the message.",
+    "optionExplanations": [
+      "Đây chính là điều kẻ lừa đảo muốn: link dẫn tới trang đăng nhập giả để lấy mật khẩu và OTP.",
+      "Trả lời cho kẻ lừa đảo biết số của bạn đang hoạt động và mở đường cho lừa đảo tiếp.",
+      "Đúng. Liên hệ qua kênh chính thức do chính bạn tìm là cách kiểm tra an toàn.",
+      "Chuyển tiếp có thể khiến người khác bấm vào link lừa đảo."
+    ],
+    "optionExplanationsEn": [
+      "This is exactly what the scammer wants: the link leads to a fake login page that steals your password and OTP.",
+      "Replying tells the scammer your number is active and invites more scams.",
+      "Correct. Contacting the bank through a channel you find yourself is the safe way to check.",
+      "Forwarding may lead others to click the scam link."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Biểu tượng ổ khóa (HTTPS) cạnh thanh địa chỉ đảm bảo điều gì?",
+    "questionEn": "What does the padlock (HTTPS) next to the address bar guarantee?",
+    "options": [
+      "Website này chắc chắn trung thực và không phải lừa đảo",
+      "Kết nối giữa trình duyệt và địa chỉ đó được mã hóa — nhưng không nói trang đó đáng tin",
+      "Máy tính của bạn không có virus",
+      "Mật khẩu của bạn được lưu bằng hash"
+    ],
+    "optionsEn": [
+      "The website is definitely honest and not a scam",
+      "The connection between your browser and that address is encrypted — but it says nothing about whether the site is trustworthy",
+      "Your computer has no viruses",
+      "Your password is stored as a hash"
+    ],
+    "answer": 1,
+    "explanation": "Ổ khóa chỉ nghĩa là kết nối được mã hóa. Kẻ lừa đảo cũng có thể có HTTPS cho trang giả của họ, nên vẫn phải kiểm tra chính địa chỉ web.",
+    "explanationEn": "The padlock only means the connection is encrypted. Scammers can have HTTPS on their fake sites too, so you must still check the address itself.",
+    "optionExplanations": [
+      "Trang lừa đảo cũng lấy được chứng chỉ HTTPS; ổ khóa không chứng minh sự trung thực.",
+      "Đúng. HTTPS bảo vệ dữ liệu trên đường truyền, không đánh giá chủ trang web.",
+      "HTTPS không liên quan gì tới việc máy bạn có virus hay không.",
+      "Cách server lưu mật khẩu là chuyện bên trong, ổ khóa không cho biết điều đó."
+    ],
+    "optionExplanationsEn": [
+      "Scam sites can get HTTPS certificates too; the padlock does not prove honesty.",
+      "Correct. HTTPS protects data in transit; it does not vouch for the site's owner.",
+      "HTTPS has nothing to do with whether your computer has a virus.",
+      "How the server stores passwords is internal; the padlock tells you nothing about it."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Lợi ích chính của password manager (trình quản lý mật khẩu) là gì?",
+    "questionEn": "What is the main benefit of a password manager?",
+    "options": [
+      "Giúp bạn dùng một mật khẩu mạnh, khác nhau cho từng tài khoản mà chỉ cần nhớ một mật khẩu chính",
+      "Cho phép dùng chung một mật khẩu ngắn cho mọi tài khoản",
+      "Thay thế hoàn toàn việc cần 2FA",
+      "Gửi mật khẩu của bạn cho bộ phận IT để lưu giữ"
+    ],
+    "optionsEn": [
+      "It lets you use a strong, different password for every account while remembering only one master password",
+      "It lets you use one short password for every account",
+      "It completely removes the need for 2FA",
+      "It sends your passwords to the IT department for safekeeping"
+    ],
+    "answer": 0,
+    "explanation": "Dùng lại mật khẩu là rủi ro lớn nhất (credential stuffing). Password manager giữ mật khẩu riêng cho từng trang và chỉ tự điền trên đúng địa chỉ thật.",
+    "explanationEn": "Reusing passwords is the biggest risk (credential stuffing). A password manager keeps a unique password per site and only fills it in on the real address.",
+    "optionExplanations": [
+      "Đúng. Mỗi tài khoản một mật khẩu mạnh, bạn chỉ nhớ một mật khẩu chính.",
+      "Dùng chung một mật khẩu ngắn chính là điều password manager giúp bạn tránh.",
+      "2FA vẫn nên bật; hai biện pháp bổ trợ cho nhau.",
+      "Không ai, kể cả IT, nên biết mật khẩu của bạn."
+    ],
+    "optionExplanationsEn": [
+      "Correct. One strong password per account, and you only remember the master password.",
+      "One short shared password is exactly what a password manager helps you avoid.",
+      "You should still enable 2FA; the two protections complement each other.",
+      "Nobody, IT included, should know your passwords."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Vì sao nên cài bản cập nhật hệ điều hành và ứng dụng càng sớm càng tốt?",
+    "questionEn": "Why should you install operating-system and app updates as soon as possible?",
+    "options": [
+      "Vì cập nhật luôn làm máy chạy nhanh gấp đôi",
+      "Vì không cập nhật thì máy sẽ mất bảo hành",
+      "Vì cập nhật xóa các file cũ để giải phóng bộ nhớ",
+      "Vì bản cập nhật vá các lỗ hổng đã bị công khai mà kẻ tấn công đang chủ động khai thác"
+    ],
+    "optionsEn": [
+      "Because updates always make the device twice as fast",
+      "Because without updates the device loses its warranty",
+      "Because updates delete old files to free up storage",
+      "Because updates fix publicly known security holes that attackers are actively exploiting"
+    ],
+    "answer": 3,
+    "explanation": "Khi một lỗ hổng được công bố, kẻ tấn công dò tìm những thiết bị chưa vá. Cập nhật sớm đóng cánh cửa đó lại.",
+    "explanationEn": "Once a hole is published, attackers scan for devices that have not been patched. Updating promptly closes that door.",
+    "optionExplanations": [
+      "Cập nhật không đảm bảo tăng tốc độ; mục đích chính là bảo mật và sửa lỗi.",
+      "Bảo hành không phụ thuộc vào việc cài cập nhật.",
+      "Dọn dẹp bộ nhớ không phải mục đích của bản cập nhật bảo mật.",
+      "Đúng. Bản cập nhật vá những điểm yếu mà kẻ tấn công đã biết và đang tìm cách lợi dụng."
+    ],
+    "optionExplanationsEn": [
+      "Updates do not guarantee more speed; their main purpose is security and bug fixes.",
+      "Warranty does not depend on installing updates.",
+      "Freeing storage is not the purpose of a security update.",
+      "Correct. Updates patch weaknesses that attackers already know about and are trying to use."
+    ]
+  },
+  {
+    "id": "q25",
+    "question": "Một người gọi điện xưng là nhân viên ngân hàng và đề nghị bạn đọc mã OTP vừa nhận \"để hủy giao dịch đáng ngờ\". Điều gì đúng?",
+    "questionEn": "A caller claiming to be from your bank asks you to read out the OTP you just received \"to cancel a suspicious transaction\". What is true?",
+    "options": [
+      "Nên đọc mã vì nhân viên ngân hàng cần nó để bảo vệ bạn",
+      "Chỉ đọc 3 số đầu của mã là an toàn",
+      "Đây là lừa đảo: OTP chỉ để bạn tự gõ vào trang thật, ngân hàng không bao giờ hỏi mã này",
+      "Đọc mã cũng không sao nếu bạn đã bật 2FA"
+    ],
+    "optionsEn": [
+      "Read it out, because bank staff need it to protect you",
+      "Reading only the first 3 digits is safe",
+      "It is a scam: an OTP is only for you to type into the real site, and banks never ask for it",
+      "Reading it out is fine if you have 2FA enabled"
+    ],
+    "answer": 2,
+    "explanation": "OTP chính là yếu tố thứ hai của 2FA. Ai có nó cùng mật khẩu là đăng nhập hoặc xác nhận giao dịch được. Mã đó thực chất đang cho phép giao dịch, không phải hủy nó.",
+    "explanationEn": "The OTP is the second factor of 2FA. Whoever has it plus your password can log in or approve a payment. That code is actually authorising the transaction, not cancelling it.",
+    "optionExplanations": [
+      "Ngân hàng thật không bao giờ hỏi OTP; đây là kịch bản lừa đảo kinh điển.",
+      "Đưa một phần mã vẫn giúp kẻ gian, và không có lý do chính đáng nào để ai hỏi mã của bạn.",
+      "Đúng. OTP chỉ dành cho chính bạn gõ vào; ai hỏi mã đều là lừa đảo.",
+      "Đọc OTP cho người khác chính là phá bỏ lớp bảo vệ 2FA."
+    ],
+    "optionExplanationsEn": [
+      "Real banks never ask for an OTP; this is a classic scam script.",
+      "Giving away part of the code still helps the scammer, and no one has a legitimate reason to ask for it.",
+      "Correct. An OTP is only for you to type in; anyone asking for it is a scammer.",
+      "Reading the OTP to someone else is precisely what defeats 2FA."
+    ]
   }
 ]

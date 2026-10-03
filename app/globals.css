@@ -43,3 +43,67 @@ body {
 .label {
   @apply text-sm font-medium text-zinc-500 dark:text-zinc-400 mb-1 block;
 }
+
+/* Articles use blockquotes for tips ("Try it yourself", "Common misconception"),
+   not quotations, so drop the typography plugin's curly quote marks. */
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none;
+}
+
+/* Mini-lesson "Export PDF" (components/learn/LessonPdfExport.tsx). The print
+   copy is portalled into <body> and only exists while exporting; the class on
+   <body> hides the rest of the app so the PDF holds just the lesson. */
+#lesson-print-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  :root,
+  :root.dark {
+    --background: #fff;
+    --foreground: #18181b;
+  }
+
+  /* <body> carries dark:bg-* utilities; paper is always white. */
+  body.lesson-print {
+    background: #fff !important;
+    color: #18181b !important;
+  }
+
+  body.lesson-print > *:not(#lesson-print-root) {
+    display: none !important;
+  }
+
+  body.lesson-print #lesson-print-root {
+    display: block;
+  }
+
+  /* Quiz text marks code with dark: utilities (QuestionText); keep it light on paper. */
+  #lesson-print-root .font-mono {
+    background: #f4f4f5 !important;
+    border-color: #d4d4d8 !important;
+    color: #18181b !important;
+    white-space: pre-wrap;
+  }
+
+  #lesson-print-root pre,
+  #lesson-print-root table,
+  #lesson-print-root blockquote,
+  .print-avoid-break {
+    break-inside: avoid;
+  }
+
+  #lesson-print-root h2,
+  #lesson-print-root h3 {
+    break-after: avoid;
+  }
+
+  .print-page-break {
+    break-before: page;
+  }
+}

@@ -398,5 +398,101 @@
     "explanation": "Hoạt động tốt là mơ hồ và không kiểm chứng được. Phải lượng hoá điều kiện mạng thực tế thì lập trình viên mới thiết kế đúng.",
     "explanationEn": "Work well is vague and unverifiable. The real network conditions must be quantified before developers can design correctly.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Gói cước Internet 100 Mbps tải một file với tốc độ tối đa khoảng bao nhiêu MB mỗi giây?",
+    "questionEn": "A 100 Mbps Internet plan can download a file at roughly how many MB per second at most?",
+    "options": [
+      "100 MB/s",
+      "12,5 MB/s",
+      "800 MB/s",
+      "1 MB/s"
+    ],
+    "optionsEn": [
+      "100 MB/s",
+      "12.5 MB/s",
+      "800 MB/s",
+      "1 MB/s"
+    ],
+    "answer": 1,
+    "explanation": "Tốc độ mạng đo bằng bit (b), dung lượng file đo bằng byte (B). 1 byte = 8 bit, nên 100 Mbps ÷ 8 ≈ 12,5 MB/s.",
+    "explanationEn": "Network speed is measured in bits (b) and file size in bytes (B). 1 byte = 8 bits, so 100 Mbps ÷ 8 ≈ 12.5 MB/s.",
+    "optionExplanations": [
+      "Nhầm bit với byte: 100 megabit không phải 100 megabyte.",
+      "Đúng: chia 100 megabit cho 8 bit mỗi byte được khoảng 12,5 MB/s.",
+      "Phép tính bị nhân với 8 thay vì chia cho 8.",
+      "Quá thấp; 1 MB/s chỉ tương ứng khoảng 8 Mbps."
+    ],
+    "optionExplanationsEn": [
+      "Confuses bits with bytes: 100 megabits is not 100 megabytes.",
+      "Correct: 100 megabits divided by 8 bits per byte is about 12.5 MB/s.",
+      "This multiplies by 8 instead of dividing by 8.",
+      "Far too low; 1 MB/s corresponds to only about 8 Mbps."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Vì sao mọi thiết bị trong nhà bạn đều hiện ra với các website bằng cùng một địa chỉ IP công khai?",
+    "questionEn": "Why do all the devices in your home appear to websites with the same public IP address?",
+    "options": [
+      "Vì switch gộp tất cả dữ liệu thành một gói tin",
+      "Vì DHCP cấp cùng một IP cho mọi thiết bị",
+      "Vì các website không phân biệt được thiết bị",
+      "Vì router dùng NAT để thay IP nội bộ bằng IP công khai dùng chung"
+    ],
+    "optionsEn": [
+      "Because the switch merges all data into one packet",
+      "Because DHCP gives every device the same IP",
+      "Because websites cannot tell devices apart",
+      "Because the router uses NAT to replace private IPs with one shared public IP"
+    ],
+    "answer": 3,
+    "explanation": "NAT trên router thay IP nội bộ của từng thiết bị bằng IP công khai của gia đình khi gói tin đi ra, và ghi nhớ thiết bị nào đã hỏi để chuyển phản hồi về đúng chỗ.",
+    "explanationEn": "NAT on the router swaps each device's private IP for the home's public IP on outgoing packets, and remembers which device asked so it can forward the reply back.",
+    "optionExplanations": [
+      "Switch chỉ chuyển dữ liệu trong LAN, không gộp gói tin hay đổi địa chỉ.",
+      "DHCP cấp cho mỗi thiết bị một IP nội bộ khác nhau, không phải cùng một IP.",
+      "Website thấy được địa chỉ nguồn; chúng chỉ thấy cùng một địa chỉ vì NAT.",
+      "Đúng: NAT cho phép nhiều IP nội bộ dùng chung một IP công khai."
+    ],
+    "optionExplanationsEn": [
+      "A switch only forwards data inside the LAN; it does not merge packets or change addresses.",
+      "DHCP gives each device a different private IP, not the same one.",
+      "Websites do see the source address; they see the same one only because of NAT.",
+      "Correct: NAT lets many private IPs share one public IP."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Khi bạn mở một trang web ở nhà, gói tin của laptop được gửi tới đâu ĐẦU TIÊN vì đích không nằm trong LAN?",
+    "questionEn": "When you open a website at home, where does your laptop send its packets FIRST, since the destination is not in the LAN?",
+    "options": [
+      "Tới router (default gateway) của nhà bạn",
+      "Thẳng tới máy chủ của Google",
+      "Tới máy in trong mạng",
+      "Tới ISP mà không qua router"
+    ],
+    "optionsEn": [
+      "To your home router (the default gateway)",
+      "Directly to Google's server",
+      "To the printer on the network",
+      "To the ISP, bypassing the router"
+    ],
+    "answer": 0,
+    "explanation": "Thiết bị gửi mọi gói tin có đích ngoài LAN tới default gateway — chính là router — để router chuyển tiếp ra Internet.",
+    "explanationEn": "A device sends every packet whose destination is outside the LAN to the default gateway — the router — which forwards it to the Internet.",
+    "optionExplanations": [
+      "Đúng: router là cửa ngõ duy nhất từ LAN ra Internet.",
+      "Laptop không có đường trực tiếp tới Google; gói tin phải qua router và nhiều router khác.",
+      "Máy in nằm trong LAN và không chuyển tiếp gói tin ra Internet.",
+      "Gói tin phải qua router (và NAT) trước khi tới mạng của ISP."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the router is the gateway from the LAN to the Internet.",
+      "The laptop has no direct link to Google; packets pass through the router and many other routers.",
+      "The printer is inside the LAN and does not forward packets to the Internet.",
+      "Packets must go through the router (and NAT) before reaching the ISP's network."
+    ]
   }
 ]

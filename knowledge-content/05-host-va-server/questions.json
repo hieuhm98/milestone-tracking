@@ -398,5 +398,133 @@
     "explanation": "Lưu tệp nhị phân lớn trong cơ sở dữ liệu làm phình DB và chậm truy vấn. Thực hành phổ biến là lưu tệp ở kho lưu trữ, còn DB chỉ giữ đường dẫn.",
     "explanationEn": "Storing large binaries in a database bloats it and slows queries. The common practice is to keep files in storage and hold only the path in the database.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Khi bạn gõ shopee.vn và nhấn Enter, trình duyệt làm gì TRƯỚC KHI gửi request lấy trang chủ?",
+    "questionEn": "When you type shopee.vn and press Enter, what does the browser do BEFORE sending the request for the home page?",
+    "options": [
+      "Tải toàn bộ database của Shopee về máy",
+      "Hỏi DNS server địa chỉ IP của shopee.vn rồi kết nối tới server đó",
+      "Đổi IP của máy bạn thành IP tĩnh",
+      "Bật một web server trên localhost"
+    ],
+    "optionsEn": [
+      "Downloads Shopee's entire database",
+      "Asks a DNS server for the IP address of shopee.vn, then connects to that server",
+      "Changes your computer's IP to a static IP",
+      "Starts a web server on localhost"
+    ],
+    "answer": 1,
+    "explanation": "Trình duyệt cần địa chỉ IP để biết gửi request đi đâu, nên nó hỏi DNS server trước, rồi kết nối tới server ở địa chỉ đó và gửi request.",
+    "explanationEn": "The browser needs an IP address to know where to send the request, so it asks a DNS server first, then connects to the server at that address and sends the request.",
+    "optionExplanations": [
+      "Sai: client không bao giờ tải database của server; nó chỉ nhận response cho từng request.",
+      "Đúng: tra DNS để lấy IP, kết nối, rồi mới gửi request.",
+      "Sai: mở website không thay đổi loại IP của máy bạn.",
+      "Sai: trình duyệt là client; nó không cần chạy server trên máy bạn để mở một website."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a client never downloads the server's database; it only receives a response per request.",
+      "Correct: look up the IP via DNS, connect, and only then send the request.",
+      "Wrong: opening a website does not change what kind of IP your computer has.",
+      "Wrong: the browser is the client; it does not need to run a server on your machine to open a website."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Trong http://localhost:3000, con số 3000 là gì?",
+    "questionEn": "In http://localhost:3000, what is the number 3000?",
+    "options": [
+      "Số người dùng tối đa",
+      "Dung lượng RAM tính bằng MB",
+      "Port — \"số căn hộ\" của chương trình server đang nghe trên máy đó",
+      "Phần cuối của địa chỉ IP"
+    ],
+    "optionsEn": [
+      "The maximum number of users",
+      "The amount of RAM in MB",
+      "The port — the \"apartment number\" of the server program listening on that machine",
+      "The last part of the IP address"
+    ],
+    "answer": 2,
+    "explanation": "Một máy chạy được nhiều chương trình server, mỗi chương trình nghe ở một port riêng. IP (hay localhost) là số nhà, port là số căn hộ.",
+    "explanationEn": "One machine can run many server programs, each listening on its own port. The IP (or localhost) is the building address; the port is the apartment number.",
+    "optionExplanations": [
+      "Sai: port không giới hạn số người dùng.",
+      "Sai: URL không chứa thông tin về RAM.",
+      "Đúng: :3000 chỉ ra port mà ứng dụng đang nghe.",
+      "Sai: địa chỉ IP nằm trước dấu hai chấm (localhost = 127.0.0.1); số sau dấu hai chấm là port."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a port does not limit the number of users.",
+      "Wrong: a URL carries no information about RAM.",
+      "Correct: :3000 names the port the app is listening on.",
+      "Wrong: the IP address comes before the colon (localhost = 127.0.0.1); the number after the colon is the port."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Laptop của bạn hiện IP 192.168.1.23 trong ipconfig, nhưng trang \"what is my IP\" lại hiện một địa chỉ khác hẳn. Vì sao?",
+    "questionEn": "Your laptop shows IP 192.168.1.23 in ipconfig, but a \"what is my IP\" website shows a completely different address. Why?",
+    "options": [
+      "Website đó hiển thị sai",
+      "Laptop có hai card mạng",
+      "IP của laptop đã bị hack",
+      "192.168.1.23 là IP private; trên Internet, mọi thiết bị trong nhà dùng chung IP public của router (NAT)"
+    ],
+    "optionsEn": [
+      "The website is showing the wrong address",
+      "The laptop has two network cards",
+      "The laptop's IP has been hacked",
+      "192.168.1.23 is a private IP; on the Internet, all home devices share the router's public IP (NAT)"
+    ],
+    "answer": 3,
+    "explanation": "IP private chỉ dùng bên trong mạng. Router dùng NAT để mọi thiết bị bên trong chia sẻ một IP public, nên website bên ngoài chỉ thấy IP public của router.",
+    "explanationEn": "Private IPs only work inside the network. The router uses NAT so every device inside shares one public IP, so outside websites only see the router's public IP.",
+    "optionExplanations": [
+      "Sai: website hiển thị đúng — đó là IP public mà nó nhìn thấy.",
+      "Sai: hai card mạng không giải thích được vì sao bên ngoài thấy địa chỉ khác.",
+      "Sai: đây là hành vi bình thường của mọi mạng gia đình và văn phòng.",
+      "Đúng: IP private bên trong, IP public của router bên ngoài, nhờ NAT."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the website is correct — that is the public IP it sees.",
+      "Wrong: two network cards would not explain why outside sites see a different address.",
+      "Wrong: this is normal behaviour on every home and office network.",
+      "Correct: a private IP inside, the router's public IP outside, thanks to NAT."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Tester và BA cần thử một tính năng mới trước khi phát hành cho khách hàng. Họ nên dùng môi trường nào?",
+    "questionEn": "Testers and BAs need to try a new feature before it is released to customers. Which environment should they use?",
+    "options": [
+      "Môi trường test/staging — server dùng chung, gần giống production",
+      "Localhost trên laptop của developer",
+      "Production, vì đó là hệ thống thật",
+      "Máy in của văn phòng"
+    ],
+    "optionsEn": [
+      "The test/staging environment — a shared server set up close to production",
+      "Localhost on the developer's laptop",
+      "Production, because it is the real system",
+      "The office printer"
+    ],
+    "answer": 0,
+    "explanation": "Staging là server dùng chung có địa chỉ riêng, truy cập được từ máy của tester và BA, và được dựng giống production để kết quả test đáng tin.",
+    "explanationEn": "Staging is a shared server with its own address that testers and BAs can reach from their machines, set up like production so test results are trustworthy.",
+    "optionExplanations": [
+      "Đúng: staging là nơi cả nhóm test trước khi lên production.",
+      "Sai: localhost của developer chỉ truy cập được trên chính máy developer.",
+      "Sai: test trên production có thể ảnh hưởng khách hàng và dữ liệu thật.",
+      "Sai: máy in không phải môi trường chạy ứng dụng."
+    ],
+    "optionExplanationsEn": [
+      "Correct: staging is where the team tests before production.",
+      "Wrong: the developer's localhost is only reachable on the developer's own machine.",
+      "Wrong: testing on production can affect real customers and real data.",
+      "Wrong: a printer is not an environment for running the application."
+    ]
   }
 ]

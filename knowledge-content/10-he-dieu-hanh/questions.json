@@ -398,5 +398,133 @@
     "explanation": "Đây là ràng buộc môi trường vận hành. Thiếu phiên bản OS và quyền cài đặt, đội phát triển không biết mình bị giới hạn tới đâu.",
     "explanationEn": "This is an operating-environment constraint. Without the OS version and install rights, the team cannot know what limits it is working under.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Khi bạn bấm nút nguồn, thứ tự khởi động (boot) nào là đúng?",
+    "questionEn": "When you press the power button, which boot order is correct?",
+    "options": [
+      "Màn hình đăng nhập → kernel → firmware → bootloader",
+      "Kernel → firmware → driver → bootloader",
+      "Bootloader → màn hình đăng nhập → firmware → kernel",
+      "Firmware (BIOS/UEFI) → bootloader → kernel → driver và service → màn hình đăng nhập"
+    ],
+    "optionsEn": [
+      "Login screen → kernel → firmware → bootloader",
+      "Kernel → firmware → drivers → bootloader",
+      "Bootloader → login screen → firmware → kernel",
+      "Firmware (BIOS/UEFI) → bootloader → kernel → drivers and services → login screen"
+    ],
+    "answer": 3,
+    "explanation": "Firmware trên bo mạch chủ kiểm tra phần cứng, tìm bootloader; bootloader nạp kernel; kernel nạp driver và service; cuối cùng là màn hình đăng nhập.",
+    "explanationEn": "Firmware on the motherboard checks the hardware and finds the bootloader; the bootloader loads the kernel; the kernel loads drivers and services; the login screen comes last.",
+    "optionExplanations": [
+      "Sai: màn hình đăng nhập là bước cuối, không phải đầu tiên.",
+      "Sai: kernel phải được bootloader nạp, nên không thể chạy trước firmware và bootloader.",
+      "Sai: firmware luôn chạy đầu tiên, trước bootloader.",
+      "Đúng: đây là trình tự boot từ lúc bấm nguồn đến lúc đăng nhập."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the login screen is the last step, not the first.",
+      "Wrong: the kernel is loaded by the bootloader, so it cannot run before firmware and the bootloader.",
+      "Wrong: the firmware always runs first, before the bootloader.",
+      "Correct: this is the boot sequence from power button to login."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Một nhân viên cố cài phần mềm trên laptop công ty và nhận thông báo \"Access is denied\". Nguyên nhân khả năng cao nhất là gì?",
+    "questionEn": "An employee tries to install software on a company laptop and gets \"Access is denied\". What is the most likely cause?",
+    "options": [
+      "Tài khoản của họ không có quyền quản trị (admin) để cài phần mềm",
+      "Máy hết RAM",
+      "Driver máy in bị lỗi",
+      "CPU quá chậm để chạy trình cài đặt"
+    ],
+    "optionsEn": [
+      "Their account does not have administrator (admin) rights to install software",
+      "The machine is out of RAM",
+      "The printer driver is broken",
+      "The CPU is too slow to run the installer"
+    ],
+    "answer": 0,
+    "explanation": "OS quản lý tài khoản và quyền truy cập. Cài phần mềm cần quyền admin, thứ mà nhân viên thường không có trên máy công ty — nên OS từ chối.",
+    "explanationEn": "The OS manages accounts and permissions. Installing software needs admin rights, which ordinary staff often lack on company machines — so the OS refuses.",
+    "optionExplanations": [
+      "Đúng: \"Access is denied\" là thông báo về quyền; cài phần mềm cần quyền admin.",
+      "Sai: thiếu RAM làm máy chậm, không gây ra thông báo từ chối quyền.",
+      "Sai: driver máy in không liên quan đến việc cài một phần mềm khác.",
+      "Sai: CPU chậm chỉ làm cài đặt lâu hơn, không gây từ chối quyền truy cập."
+    ],
+    "optionExplanationsEn": [
+      "Correct: \"Access is denied\" is a permissions message; installing software needs admin rights.",
+      "Wrong: low RAM makes the machine slow; it does not produce a permission error.",
+      "Wrong: a printer driver has nothing to do with installing another program.",
+      "Wrong: a slow CPU only makes installation take longer; it does not deny access."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Bạn mở Notepad hai lần, được hai cửa sổ riêng. Điều nào mô tả đúng?",
+    "questionEn": "You open Notepad twice and get two separate windows. Which description is correct?",
+    "options": [
+      "Hai chương trình và một process",
+      "Một chương trình nhưng hai process",
+      "Một process với hai kernel",
+      "Hai thread dùng chung một cửa sổ"
+    ],
+    "optionsEn": [
+      "Two programs and one process",
+      "One program but two processes",
+      "One process with two kernels",
+      "Two threads sharing one window"
+    ],
+    "answer": 1,
+    "explanation": "Chương trình là file trên ổ cứng (notepad.exe); mỗi lần chạy nó tạo ra một process riêng với bộ nhớ riêng.",
+    "explanationEn": "A program is the file on disk (notepad.exe); each time it runs, it becomes a separate process with its own memory.",
+    "optionExplanations": [
+      "Sai: chỉ có một file chương trình, nhưng mỗi lần chạy là một process.",
+      "Đúng: cùng một chương trình được chạy hai lần tạo ra hai process.",
+      "Sai: cả máy chỉ có một kernel; process không có kernel riêng.",
+      "Sai: hai cửa sổ độc lập ở đây là hai process riêng, mỗi process có bộ nhớ riêng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: there is only one program file, but every run is a process.",
+      "Correct: the same program run twice gives two processes.",
+      "Wrong: the machine has one kernel; processes do not get their own kernel.",
+      "Wrong: the two independent windows here are two separate processes, each with its own memory."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Vì sao một driver lỗi có thể gây màn hình xanh (sập cả máy), còn một ứng dụng lỗi thường chỉ tự tắt?",
+    "questionEn": "Why can a faulty driver cause a blue screen (crashing the whole machine), while a faulty app usually only closes itself?",
+    "options": [
+      "Vì driver luôn lớn hơn ứng dụng",
+      "Vì ứng dụng không bao giờ có lỗi",
+      "Vì driver chạy ở kernel mode với toàn quyền, còn ứng dụng chạy ở user mode bị giới hạn",
+      "Vì driver được lưu trong RAM còn ứng dụng thì không"
+    ],
+    "optionsEn": [
+      "Because drivers are always bigger than apps",
+      "Because apps never have bugs",
+      "Because drivers run in kernel mode with full rights, while apps run in restricted user mode",
+      "Because drivers are stored in RAM and apps are not"
+    ],
+    "answer": 2,
+    "explanation": "CPU chia hai cấp: user mode (ứng dụng, bị giới hạn) và kernel mode (kernel và driver, toàn quyền). Lỗi ở kernel mode có thể làm hỏng toàn bộ hệ thống.",
+    "explanationEn": "The CPU has two levels: user mode (apps, restricted) and kernel mode (the kernel and drivers, full rights). A fault in kernel mode can bring down the whole system.",
+    "optionExplanations": [
+      "Sai: kích thước không quyết định mức độ ảnh hưởng của lỗi.",
+      "Sai: ứng dụng vẫn có lỗi, nhưng lỗi bị giới hạn trong process của nó.",
+      "Đúng: driver có quyền kernel nên lỗi của nó ảnh hưởng cả hệ thống.",
+      "Sai: cả driver và ứng dụng khi chạy đều nằm trong RAM; điểm khác là cấp đặc quyền."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: size does not decide how far a bug's damage reaches.",
+      "Wrong: apps do have bugs, but the damage stays inside their own process.",
+      "Correct: a driver has kernel rights, so its faults affect the whole system.",
+      "Wrong: both drivers and apps sit in RAM while running; the difference is the privilege level."
+    ]
   }
 ]

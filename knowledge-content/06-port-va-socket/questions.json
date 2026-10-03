@@ -398,5 +398,101 @@
     "explanation": "Cổng vẫn tồn tại, chỉ là ngầm định. Khi dịch vụ chạy ở cổng khác chuẩn, URL phải ghi rõ, ví dụ example.com:8080.",
     "explanationEn": "The port is still there, just implicit. When a service runs on a non-standard port the URL must state it, e.g. example.com:8080.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Lập trình viên khởi động app ở port 3000 và nhận lỗi \"EADDRINUSE: address already in use\". Điều này có nghĩa gì?",
+    "questionEn": "A developer starts an app on port 3000 and gets \"EADDRINUSE: address already in use\". What does this mean?",
+    "options": [
+      "Firewall đang chặn port 3000",
+      "Một chương trình khác đang lắng nghe ở port 3000",
+      "Port 3000 vượt quá giới hạn 65535",
+      "Máy tính chưa có địa chỉ IP"
+    ],
+    "optionsEn": [
+      "A firewall is blocking port 3000",
+      "Another program is already listening on port 3000",
+      "Port 3000 is above the 65535 limit",
+      "The computer has no IP address"
+    ],
+    "answer": 1,
+    "explanation": "Tại một thời điểm chỉ một chương trình được lắng nghe trên một port. Lỗi này báo port đã bị chương trình khác chiếm; dùng netstat hoặc lsof để tìm chương trình đó.",
+    "explanationEn": "Only one program can listen on a given port at a time. This error says the port is already taken; use netstat or lsof to find which program holds it.",
+    "optionExplanations": [
+      "Firewall chặn traffic đi vào, không ngăn chương trình khởi động trên máy.",
+      "Đúng: port đã có chương trình khác lắng nghe.",
+      "3000 nằm trong dải hợp lệ 0–65535.",
+      "Thiếu IP không gây lỗi \"address already in use\"; lỗi này nói port đang bị dùng."
+    ],
+    "optionExplanationsEn": [
+      "A firewall blocks incoming traffic; it does not stop a program from starting locally.",
+      "Correct: another program is already listening on that port.",
+      "3000 is well inside the valid 0–65535 range.",
+      "Having no IP would not produce \"already in use\"; the error is about the port being taken."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Bạn thử kết nối tới server-x:5432 và nhận \"Connection timed out\" (không có phản hồi nào). Nguyên nhân thường gặp nhất là gì?",
+    "questionEn": "You try to connect to server-x:5432 and get \"Connection timed out\" (no answer at all). What is the most common cause?",
+    "options": [
+      "Firewall đang âm thầm bỏ traffic tới port đó (hoặc sai IP)",
+      "Database đã trả lời rằng mật khẩu sai",
+      "Kết nối thành công nhưng chậm",
+      "Port 5432 là port của HTTPS"
+    ],
+    "optionsEn": [
+      "A firewall is silently dropping traffic to that port (or the IP is wrong)",
+      "The database replied that the password is wrong",
+      "The connection succeeded but is slow",
+      "Port 5432 is the HTTPS port"
+    ],
+    "answer": 0,
+    "explanation": "Timeout nghĩa là không có phản hồi nào — thường do firewall bỏ gói tin hoặc sai địa chỉ. Nếu máy trả lời nhưng không ai lắng nghe, bạn sẽ nhận \"connection refused\".",
+    "explanationEn": "A timeout means no reply at all — usually a firewall dropping packets or a wrong address. If the machine answered but nothing was listening, you would get \"connection refused\".",
+    "optionExplanations": [
+      "Đúng: không có phản hồi thường là do firewall hoặc sai IP.",
+      "Lỗi mật khẩu nghĩa là đã kết nối được và database có trả lời.",
+      "Timeout nghĩa là kết nối chưa bao giờ được thiết lập.",
+      "5432 là port mặc định của PostgreSQL; HTTPS dùng 443."
+    ],
+    "optionExplanationsEn": [
+      "Correct: getting no answer usually points to a firewall or a wrong IP.",
+      "A password error means you did connect and the database answered.",
+      "A timeout means the connection was never established.",
+      "5432 is PostgreSQL's default port; HTTPS uses 443."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Hàng nghìn người cùng kết nối tới port 443 của một web server. Làm sao server phân biệt các kết nối?",
+    "questionEn": "Thousands of people connect to port 443 on one web server at once. How does the server tell the connections apart?",
+    "options": [
+      "Mỗi người được cấp một port 443 riêng trên server",
+      "Server chỉ phục vụ một người một lúc",
+      "Mỗi kết nối được nhận diện bằng cả hai đầu: IP và port của client cùng IP và port của server",
+      "Trình duyệt gửi tên người dùng trong mỗi gói tin TCP"
+    ],
+    "optionsEn": [
+      "Each person gets their own copy of port 443 on the server",
+      "The server serves only one person at a time",
+      "Each connection is identified by both ends: the client's IP and port plus the server's IP and port",
+      "The browser puts the user's name in every TCP packet"
+    ],
+    "answer": 2,
+    "explanation": "Server dùng cùng một port lắng nghe, nhưng mỗi client có cặp IP/port tạm thời khác nhau, nên mỗi kết nối là duy nhất.",
+    "explanationEn": "The server uses the same listening port, but every client has a different IP/temporary-port pair, so each connection is unique.",
+    "optionExplanations": [
+      "Chỉ có một port 443 trên server; mọi kết nối đều dùng chung nó.",
+      "Server phục vụ rất nhiều kết nối đồng thời.",
+      "Đúng: hai đầu của kết nối cùng nhau làm nó trở nên duy nhất.",
+      "TCP không chứa tên người dùng; việc phân biệt dựa trên IP và port."
+    ],
+    "optionExplanationsEn": [
+      "There is only one port 443 on the server; all connections share it.",
+      "Servers handle many connections at the same time.",
+      "Correct: the two ends together make each connection unique.",
+      "TCP carries no user names; connections are told apart by IPs and ports."
+    ]
   }
 ]

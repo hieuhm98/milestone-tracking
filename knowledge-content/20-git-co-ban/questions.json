@@ -398,5 +398,165 @@
     "explanation": "Git tự hợp nhất được hầu hết thay đổi. Chỉ khi chúng chồng lấn trực tiếp thì con người mới phải quyết định giữ phiên bản nào.",
     "explanationEn": "Git merges most changes automatically. Only when they overlap directly must a human decide which version to keep.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Lệnh `git add` (stage) dùng để làm gì?",
+    "questionEn": "What is the `git add` (stage) command for?",
+    "options": [
+      "Tải toàn bộ repo từ remote về máy",
+      "Đẩy commit lên GitHub",
+      "Chọn những thay đổi sẽ được đưa vào commit tiếp theo",
+      "Xóa một branch đã merge"
+    ],
+    "optionsEn": [
+      "Download the whole repo from the remote",
+      "Upload commits to GitHub",
+      "Choose which changes go into the next commit",
+      "Delete a merged branch"
+    ],
+    "answer": 2,
+    "explanation": "Lưu một commit gồm hai bước: `git add` đưa thay đổi vào staging area (bỏ đồ vào hộp), rồi `git commit` dán kín hộp và ghi nhãn bằng message.",
+    "explanationEn": "Saving a commit has two steps: `git add` puts changes into the staging area (packing the box), then `git commit` seals the box and labels it with a message.",
+    "optionExplanations": [
+      "Tải repo về lần đầu là `git clone`.",
+      "Đẩy commit lên remote là `git push`.",
+      "Đúng: `git add` đưa thay đổi vào staging area, chờ được commit.",
+      "`git add` không xóa gì; nó chỉ chuẩn bị thay đổi cho commit."
+    ],
+    "optionExplanationsEn": [
+      "Downloading a repo for the first time is `git clone`.",
+      "Uploading commits to the remote is `git push`.",
+      "Correct: `git add` puts changes into the staging area, ready to be committed.",
+      "`git add` deletes nothing; it only prepares changes for a commit."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Developer báo \"PR đã merge vào main\". Điều nào sau đây chính xác nhất?",
+    "questionEn": "A developer says \"the PR is merged into main\". Which statement is most accurate?",
+    "options": [
+      "Người dùng chắc chắn đã dùng được tính năng ngay lúc này",
+      "PR vẫn đang chờ review",
+      "Code đã bị xóa khỏi dự án",
+      "Code đã vào nhánh chính, nhưng có lên hệ thống thật ngay hay không còn tùy bước deploy của đội"
+    ],
+    "optionsEn": [
+      "Users can definitely use the feature right now",
+      "The PR is still waiting for review",
+      "The code has been removed from the project",
+      "The code is in the main branch, but whether it is live yet depends on the team's deploy step"
+    ],
+    "answer": 3,
+    "explanation": "Merge và deploy là hai bước khác nhau. Merge đưa code vào nhánh chính; deploy mới đưa code lên server thật. Có đội deploy tự động sau mỗi merge, có đội release theo lịch.",
+    "explanationEn": "Merging and deploying are separate steps. Merging puts code into the main branch; deploying puts it on the live servers. Some teams deploy every merge automatically, others release on a schedule.",
+    "optionExplanations": [
+      "Chưa chắc: nếu đội release theo lịch, tính năng có thể chưa lên production.",
+      "Đã merge nghĩa là review đã xong và được duyệt.",
+      "Merge là gộp code vào, không phải xóa code đi.",
+      "Đúng: merge ≠ release; còn phụ thuộc vào bước deploy."
+    ],
+    "optionExplanationsEn": [
+      "Not necessarily: if the team releases on a schedule, it may not be in production yet.",
+      "Merged means the review is finished and approved.",
+      "Merging combines code in; it does not remove it.",
+      "Correct: merged ≠ released; it depends on the deploy step."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Trong Gitflow, sau khi sửa xong một nhánh hotfix, nó được merge vào đâu?",
+    "questionEn": "In Gitflow, once a hotfix branch is finished, where is it merged?",
+    "options": [
+      "Chỉ vào nhánh feature đang làm",
+      "Vào cả main và develop",
+      "Chỉ vào develop",
+      "Không merge đi đâu, chỉ deploy thẳng từ nhánh hotfix"
+    ],
+    "optionsEn": [
+      "Only into the feature branch in progress",
+      "Into both main and develop",
+      "Only into develop",
+      "Nowhere; it is deployed directly from the hotfix branch"
+    ],
+    "answer": 1,
+    "explanation": "Hotfix được merge vào main để sửa production ngay, và vào develop để lỗi không quay lại ở lần release sau.",
+    "explanationEn": "A hotfix is merged into main to fix production now, and into develop so the bug does not come back in the next release.",
+    "optionExplanations": [
+      "Nhánh feature sẽ nhận bản sửa gián tiếp qua develop; hotfix không merge vào một feature cụ thể.",
+      "Đúng: main để sửa production, develop để không mất bản sửa ở lần release sau.",
+      "Nếu chỉ merge vào develop, production vẫn còn lỗi cho tới lần release sau.",
+      "Trong Gitflow, mọi thứ lên production đều phải đi qua main."
+    ],
+    "optionExplanationsEn": [
+      "Feature branches get the fix indirectly via develop; a hotfix is not merged into one feature.",
+      "Correct: main to fix production, develop so the fix is not lost in the next release.",
+      "Merging only into develop would leave production broken until the next release.",
+      "In Gitflow, everything that reaches production goes through main."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Câu nào mô tả đúng sự khác nhau giữa Git và GitHub?",
+    "questionEn": "Which statement correctly describes the difference between Git and GitHub?",
+    "options": [
+      "Chúng là một, chỉ là hai cách gọi",
+      "GitHub là công cụ chạy trên máy bạn, Git là website",
+      "Git là công cụ quản lý phiên bản chạy trên máy bạn; GitHub là dịch vụ lưu Git repo trên mạng để cả đội cộng tác",
+      "Git chỉ dùng được khi có GitHub"
+    ],
+    "optionsEn": [
+      "They are the same thing, just two names",
+      "GitHub is a tool on your computer and Git is a website",
+      "Git is a version control tool that runs on your computer; GitHub is an online service that hosts Git repos for team collaboration",
+      "Git only works if you have GitHub"
+    ],
+    "answer": 2,
+    "explanation": "Giống email (công nghệ) và Gmail (dịch vụ): Git là công nghệ, GitHub/GitLab/Bitbucket là các dịch vụ xây dựng quanh nó.",
+    "explanationEn": "Like email (the technology) and Gmail (a service): Git is the technology; GitHub/GitLab/Bitbucket are services built around it.",
+    "optionExplanations": [
+      "Đây là hiểu lầm phổ biến; hai thứ khác nhau.",
+      "Ngược lại: Git chạy trên máy, GitHub là website.",
+      "Đúng: Git là công cụ, GitHub là nền tảng hosting.",
+      "Git chạy hoàn toàn trên máy bạn, không cần internet hay GitHub."
+    ],
+    "optionExplanationsEn": [
+      "This is a common misconception; they are different things.",
+      "It is the other way round: Git runs on your computer, GitHub is a website.",
+      "Correct: Git is the tool, GitHub is a hosting platform.",
+      "Git runs entirely on your computer without internet or GitHub."
+    ]
+  },
+  {
+    "id": "q25",
+    "question": "Khi xử lý merge conflict, developer hỏi BA: \"Ticket A ghi hạn thanh toán 30 ngày, ticket B ghi 45 ngày — cái nào đúng?\" BA nên làm gì?",
+    "questionEn": "While resolving a merge conflict, a developer asks the BA: \"Ticket A says payment is due in 30 days, ticket B says 45 — which is right?\" What should the BA do?",
+    "options": [
+      "Làm rõ với stakeholder để chốt một quy tắc đúng, rồi cập nhật lại yêu cầu",
+      "Bảo developer chọn ngẫu nhiên một trong hai",
+      "Bảo developer xóa cả hai tính năng",
+      "Bỏ qua vì merge conflict là chuyện kỹ thuật thuần túy"
+    ],
+    "optionsEn": [
+      "Clarify with stakeholders to settle the correct rule, then update the requirements",
+      "Tell the developer to pick one at random",
+      "Tell the developer to delete both features",
+      "Ignore it because merge conflicts are purely technical"
+    ],
+    "answer": 0,
+    "explanation": "Conflict này là một mâu thuẫn trong yêu cầu lộ ra qua Git. Giải quyết nó là việc của BA: xác nhận quy tắc đúng với stakeholder và sửa lại ticket/yêu cầu.",
+    "explanationEn": "This conflict is a requirements conflict surfacing through Git. Resolving it is the BA's job: confirm the correct rule with stakeholders and fix the tickets/requirements.",
+    "optionExplanations": [
+      "Đúng: đây là câu hỏi nghiệp vụ, BA cần chốt quy tắc và cập nhật yêu cầu.",
+      "Chọn ngẫu nhiên có thể đưa sai quy tắc kinh doanh lên production.",
+      "Xóa cả hai tính năng là phản ứng thái quá; chỉ cần chốt một quy tắc.",
+      "Conflict này có gốc từ yêu cầu mâu thuẫn, nên không thuần túy kỹ thuật."
+    ],
+    "optionExplanationsEn": [
+      "Correct: it is a business question; the BA must settle the rule and update the requirements.",
+      "Picking at random could ship the wrong business rule to production.",
+      "Deleting both features is an overreaction; only one rule needs settling.",
+      "This conflict comes from contradictory requirements, so it is not purely technical."
+    ]
   }
 ]

@@ -398,5 +398,133 @@
     "explanation": "Mô hình trực quan bổ sung chứ không thay thế đặc tả. Giá trị chính là phát hiện lỗi sớm khi mọi người cùng nhìn vào một bức tranh.",
     "explanationEn": "Visual models supplement rather than replace specifications. Their main value is catching errors early while everyone looks at one picture.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Trong flowchart rút tiền ATM, bước \"Nhập mã PIN\" nên được vẽ bằng ký hiệu nào?",
+    "questionEn": "In an ATM cash-withdrawal flowchart, which symbol should the \"Enter PIN\" step use?",
+    "options": [
+      "Hình oval (Terminal)",
+      "Hình thoi (Decision)",
+      "Hình trụ (Database)",
+      "Hình bình hành (Input/Output)"
+    ],
+    "optionsEn": [
+      "An oval (Terminal)",
+      "A diamond (Decision)",
+      "A cylinder (Database)",
+      "A parallelogram (Input/Output)"
+    ],
+    "answer": 3,
+    "explanation": "Người dùng gõ mã PIN vào máy — đó là thông tin đi vào hệ thống, nên dùng hình bình hành (Input/Output).",
+    "explanationEn": "The user types the PIN into the machine — information entering the system — so it is drawn as a parallelogram (Input/Output).",
+    "optionExplanations": [
+      "Oval chỉ dùng cho điểm Bắt đầu và Kết thúc, không dùng cho một bước nhập liệu.",
+      "Hình thoi dùng cho câu hỏi như \"PIN đúng?\", chứ không phải hành động nhập PIN.",
+      "Hình trụ biểu thị kho dữ liệu (database), ví dụ số dư tài khoản ngân hàng.",
+      "Đúng: nhập PIN là dữ liệu đi vào, nên dùng hình bình hành Input/Output."
+    ],
+    "optionExplanationsEn": [
+      "An oval is only for the Start and End points, not for a data-entry step.",
+      "A diamond is for a question such as \"PIN correct?\", not for the act of typing the PIN.",
+      "A cylinder represents data storage, such as the bank's account database.",
+      "Correct: typing a PIN is data coming in, so it uses the Input/Output parallelogram."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Trong flowchart đăng nhập cho phép sai tối đa 3 lần, điều gì xảy ra sau lần nhập sai mật khẩu thứ ba?",
+    "questionEn": "In a login flowchart that allows at most 3 failed attempts, what happens after the third wrong password?",
+    "options": [
+      "Người dùng được quay lại nhập mật khẩu thêm lần nữa",
+      "Điều kiện \"số lần sai < 3\" là Không, nên tài khoản bị khóa và luồng đi tới Kết thúc",
+      "Bộ đếm được đặt lại về 0 và vòng lặp bắt đầu lại",
+      "Hệ thống tự động mở trang chủ"
+    ],
+    "optionsEn": [
+      "The user is sent back to enter the password once more",
+      "The condition \"attempts < 3\" is No, so the account is locked and the flow reaches an End",
+      "The counter is reset to 0 and the loop starts again",
+      "The system opens the home page automatically"
+    ],
+    "answer": 1,
+    "explanation": "Sau lần sai thứ ba, bộ đếm bằng 3, nên \"số lần sai < 3?\" trả lời Không. Luồng rời khỏi vòng lặp: khóa tài khoản, báo cho người dùng, rồi Kết thúc.",
+    "explanationEn": "After the third failure the counter is 3, so \"attempts < 3?\" answers No. The flow leaves the loop: lock the account, tell the user, then End.",
+    "optionExplanations": [
+      "Quay lại nhập tiếp chỉ xảy ra khi số lần sai vẫn nhỏ hơn 3.",
+      "Đúng: điều kiện thoát vòng lặp được thỏa, tài khoản bị khóa và luồng kết thúc.",
+      "Nếu đặt lại bộ đếm thì vòng lặp không bao giờ dừng — đó là vòng lặp vô hạn.",
+      "Trang chủ chỉ mở khi mật khẩu đúng, không phải sau ba lần sai."
+    ],
+    "optionExplanationsEn": [
+      "Going back to try again only happens while the failure count is still below 3.",
+      "Correct: the loop's exit condition is met, the account is locked and the flow ends.",
+      "Resetting the counter would make the loop never stop — an infinite loop.",
+      "The home page only opens when the password is correct, not after three failures."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "\"Vòng lặp vô hạn\" (infinite loop) trong flowchart là gì?",
+    "questionEn": "What is an \"infinite loop\" in a flowchart?",
+    "options": [
+      "Một vòng lặp được vẽ bằng ký hiệu tròn đặc biệt",
+      "Một sơ đồ có nhiều hơn một điểm Kết thúc",
+      "Một vòng lặp không có đường thoát, nên các bước lặp lại mãi không dừng",
+      "Một vòng lặp chạy đúng 3 lần"
+    ],
+    "optionsEn": [
+      "A loop drawn with a special circular symbol",
+      "A chart with more than one End point",
+      "A loop with no way out, so its steps repeat forever",
+      "A loop that runs exactly 3 times"
+    ],
+    "answer": 2,
+    "explanation": "Vòng lặp phải có điều kiện thoát sẽ thay đổi theo thời gian (ví dụ bộ đếm tăng dần). Nếu không có lối thoát, các bước lặp lại mãi — đây là một bug kinh điển.",
+    "explanationEn": "A loop needs an exit condition that changes over time (for example, a counter that increases). Without a way out, the steps repeat forever — a classic bug.",
+    "optionExplanations": [
+      "Flowchart không có ký hiệu vòng lặp riêng; vòng lặp là mũi tên quay về bước trước.",
+      "Nhiều điểm Kết thúc là hoàn toàn hợp lệ và không liên quan đến vòng lặp vô hạn.",
+      "Đúng: không có đường thoát nghĩa là vòng lặp không bao giờ kết thúc.",
+      "Chạy đúng 3 lần là vòng lặp có giới hạn, hoàn toàn bình thường."
+    ],
+    "optionExplanationsEn": [
+      "Flowcharts have no special loop symbol; a loop is an arrow back to an earlier step.",
+      "Several End points are perfectly valid and have nothing to do with infinite loops.",
+      "Correct: no way out means the loop never finishes.",
+      "Running exactly 3 times is a bounded loop, which is perfectly normal."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Trong swimlane flowchart, mỗi khi một mũi tên vượt qua vạch chia giữa hai làn thì điều đó cho thấy gì?",
+    "questionEn": "In a swimlane flowchart, what does it mean when an arrow crosses the line between two lanes?",
+    "options": [
+      "Sơ đồ đã bị vẽ sai và cần sửa",
+      "Quy trình kết thúc tại đó",
+      "Bước đó cần lưu dữ liệu vào database",
+      "Công việc được bàn giao từ người/bộ phận này sang người/bộ phận khác"
+    ],
+    "optionsEn": [
+      "The chart is drawn incorrectly and must be fixed",
+      "The process ends there",
+      "That step must save data to a database",
+      "Work is handed off from one person/department to another"
+    ],
+    "answer": 3,
+    "explanation": "Mỗi làn thuộc về một vai trò. Mũi tên vượt làn là một điểm bàn giao — nơi hay xảy ra chậm trễ và nhầm lẫn trách nhiệm, nên rất đáng chú ý.",
+    "explanationEn": "Each lane belongs to one role. An arrow crossing lanes is a hand-off — where delays and confusion over responsibility often happen, so it deserves attention.",
+    "optionExplanations": [
+      "Mũi tên vượt làn là bình thường; nó chính là điều swimlane muốn làm nổi bật.",
+      "Điểm kết thúc được thể hiện bằng hình oval, không phải bằng việc vượt làn.",
+      "Lưu dữ liệu được thể hiện bằng hình trụ, không liên quan đến việc vượt làn.",
+      "Đúng: vượt làn nghĩa là công việc chuyển sang vai trò khác — một điểm bàn giao."
+    ],
+    "optionExplanationsEn": [
+      "Arrows crossing lanes are normal; they are exactly what a swimlane is meant to highlight.",
+      "An end point is shown with an oval, not by crossing a lane.",
+      "Saving data is shown with a cylinder and has nothing to do with crossing lanes.",
+      "Correct: crossing lanes means work moves to another role — a hand-off."
+    ]
   }
 ]

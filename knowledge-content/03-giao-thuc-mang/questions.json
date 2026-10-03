@@ -398,5 +398,133 @@
     "explanation": "Yêu cầu tích hợp phải nêu rõ định dạng, giao thức và điều gì xảy ra khi bên kia không khả dụng — đó là phần hay bị bỏ sót nhất.",
     "explanationEn": "An integration requirement must state the format, the protocol, and what happens when the other side is unavailable — the part most often omitted.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Tester thấy một yêu cầu trả về mã 503. Chỉ dựa vào chữ số đầu tiên, vấn đề nhiều khả năng nằm ở đâu?",
+    "questionEn": "A tester sees a request return status 503. Based only on the first digit, where is the problem most likely?",
+    "options": [
+      "Người dùng gõ sai địa chỉ",
+      "Người dùng chưa đăng nhập",
+      "Phía server, khi xử lý một yêu cầu hợp lệ",
+      "Yêu cầu đã thành công"
+    ],
+    "optionsEn": [
+      "The user typed a wrong address",
+      "The user is not logged in",
+      "On the server side, while handling a valid request",
+      "The request succeeded"
+    ],
+    "answer": 2,
+    "explanation": "Mã 5xx nghĩa là server gặp lỗi khi xử lý yêu cầu, nên thường do đội backend/vận hành điều tra. Mã 4xx mới là lỗi phía yêu cầu.",
+    "explanationEn": "A 5xx code means the server failed while handling the request, so the backend/operations team usually investigates. 4xx codes are the ones that point to the request.",
+    "optionExplanations": [
+      "Sai địa chỉ thường cho mã 404, thuộc nhóm 4xx.",
+      "Chưa đăng nhập thường cho mã 401, thuộc nhóm 4xx.",
+      "Đúng: nhóm 5xx báo lỗi ở phía server.",
+      "Thành công thuộc nhóm 2xx, ví dụ 200 OK."
+    ],
+    "optionExplanationsEn": [
+      "A wrong address usually gives 404, which is in the 4xx family.",
+      "Not being logged in usually gives 401, which is in the 4xx family.",
+      "Correct: the 5xx family reports a server-side failure.",
+      "Success is in the 2xx family, e.g. 200 OK."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Sau khi chuyển website sang server mới, vài người vẫn vào server cũ trong một thời gian. Nguyên nhân thường gặp nhất là gì?",
+    "questionEn": "After a website moves to a new server, some people still reach the old server for a while. What is the most common reason?",
+    "options": [
+      "Họ vẫn đang dùng câu trả lời DNS cũ đã lưu cho đến khi TTL hết hạn",
+      "TCP gửi lại gói tin tới địa chỉ cũ",
+      "Trình duyệt của họ không hỗ trợ HTTPS",
+      "SMTP server chưa được cập nhật"
+    ],
+    "optionsEn": [
+      "They still have the old DNS answer cached until its TTL expires",
+      "TCP keeps resending packets to the old address",
+      "Their browser does not support HTTPS",
+      "The SMTP server has not been updated"
+    ],
+    "answer": 0,
+    "explanation": "Câu trả lời DNS được lưu tạm theo TTL. Cho đến khi hết hạn, trình duyệt và resolver vẫn dùng IP cũ.",
+    "explanationEn": "DNS answers are cached according to their TTL. Until it expires, browsers and resolvers keep using the old IP.",
+    "optionExplanations": [
+      "Đúng: bộ nhớ đệm DNS giữ IP cũ cho đến khi TTL hết hạn.",
+      "TCP chỉ gửi lại gói trong một kết nối; nó không quyết định địa chỉ đích của tên miền.",
+      "HTTPS không liên quan đến việc tên miền trỏ tới IP nào.",
+      "SMTP dùng để gửi email, không ảnh hưởng việc truy cập website."
+    ],
+    "optionExplanationsEn": [
+      "Correct: DNS caching keeps the old IP until the TTL expires.",
+      "TCP only resends packets within a connection; it does not decide which IP a domain points to.",
+      "HTTPS has nothing to do with which IP a domain name points to.",
+      "SMTP sends email; it does not affect reaching a website."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Khi bạn mở https://shop.example.com lần đầu, bước nào xảy ra TRƯỚC TIÊN?",
+    "questionEn": "When you open https://shop.example.com for the first time, which step happens FIRST?",
+    "options": [
+      "Gửi yêu cầu HTTP GET",
+      "Bắt tay TLS để thống nhất mã hóa",
+      "Bắt tay TCP SYN / SYN-ACK / ACK",
+      "Tra cứu DNS để đổi tên miền thành địa chỉ IP"
+    ],
+    "optionsEn": [
+      "Sending the HTTP GET request",
+      "The TLS handshake to agree on encryption",
+      "The TCP SYN / SYN-ACK / ACK handshake",
+      "A DNS lookup to turn the name into an IP address"
+    ],
+    "answer": 3,
+    "explanation": "Trình duyệt phải biết địa chỉ IP trước khi kết nối được, nên DNS đi đầu; sau đó là TCP, TLS rồi mới tới HTTP.",
+    "explanationEn": "The browser must know the IP address before it can connect, so DNS comes first; then TCP, then TLS, and only then HTTP.",
+    "optionExplanations": [
+      "HTTP GET là bước cuối, sau khi đã có kết nối mã hóa.",
+      "TLS cần một kết nối TCP có sẵn nên xảy ra sau TCP.",
+      "TCP cần biết địa chỉ IP đích, nên phải chờ DNS xong.",
+      "Đúng: không có IP thì không thể kết nối, nên DNS diễn ra trước."
+    ],
+    "optionExplanationsEn": [
+      "HTTP GET is the last step, once the encrypted connection exists.",
+      "TLS needs an existing TCP connection, so it happens after TCP.",
+      "TCP needs the destination IP, so it must wait for DNS.",
+      "Correct: without an IP there is nothing to connect to, so DNS comes first."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Bạn muốn điện thoại và laptop luôn hiển thị cùng một hộp thư email. Giao thức nhận email nào phù hợp hơn?",
+    "questionEn": "You want your phone and laptop to always show the same email inbox. Which mail-receiving protocol fits better?",
+    "options": [
+      "POP3",
+      "IMAP",
+      "SMTP",
+      "FTP"
+    ],
+    "optionsEn": [
+      "POP3",
+      "IMAP",
+      "SMTP",
+      "FTP"
+    ],
+    "answer": 1,
+    "explanation": "IMAP giữ thư trên server và đồng bộ giữa các thiết bị; POP3 thường tải thư về một máy và xóa khỏi server.",
+    "explanationEn": "IMAP keeps mail on the server and syncs it across devices; POP3 usually downloads mail to one device and removes it from the server.",
+    "optionExplanations": [
+      "POP3 thường tải thư về một thiết bị, nên các thiết bị khác không thấy cùng hộp thư.",
+      "Đúng: IMAP đồng bộ hộp thư trên server cho mọi thiết bị.",
+      "SMTP dùng để gửi email, không phải để đọc hộp thư.",
+      "FTP dùng để truyền file, không phải email."
+    ],
+    "optionExplanationsEn": [
+      "POP3 usually downloads mail to one device, so others do not see the same inbox.",
+      "Correct: IMAP syncs the server-side mailbox to every device.",
+      "SMTP is for sending email, not reading a mailbox.",
+      "FTP is for transferring files, not email."
+    ]
   }
 ]

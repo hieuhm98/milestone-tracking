@@ -398,5 +398,133 @@
     "explanation": "Thay đổi chạm tới cấu trúc dữ liệu hoặc hợp đồng API thường lan rộng hơn nhiều so với thay đổi thuần giao diện.",
     "explanationEn": "Changes touching the data model or the API contract ripple much further than purely visual ones.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Team FE và BE đã thống nhất API contract, nhưng API thật chưa xong. FE có thể làm gì để không phải chờ?",
+    "questionEn": "The FE and BE teams have agreed the API contract, but the real API is not finished. What can the FE do so it does not have to wait?",
+    "options": [
+      "Tự viết logic nghiệp vụ trong trình duyệt thay cho BE",
+      "Kết nối thẳng vào database của Production",
+      "Tạm dừng dự án cho tới khi BE xong",
+      "Dùng dữ liệu giả có đúng khuôn dạng của contract để xây màn hình song song"
+    ],
+    "optionsEn": [
+      "Write the business logic in the browser instead of the BE",
+      "Connect directly to the Production database",
+      "Pause the project until the BE is done",
+      "Use fake data shaped exactly like the contract to build the screens in parallel"
+    ],
+    "answer": 3,
+    "explanation": "Lợi ích chính của API contract là cho phép làm song song: FE dựng màn hình với dữ liệu giả theo đúng định dạng đã thống nhất, rồi chỉ cần đổi sang API thật khi BE sẵn sàng.",
+    "explanationEn": "The main benefit of an API contract is parallel work: the FE builds screens with fake data in the agreed format, then simply switches to the real API when the BE is ready.",
+    "optionExplanations": [
+      "Logic nghiệp vụ quan trọng không được nằm ở FE vì dễ bị bypass.",
+      "FE không bao giờ kết nối trực tiếp database, càng không phải database Production.",
+      "Chờ đợi là điều API contract giúp tránh.",
+      "Đúng — đây chính là cách làm song song nhờ contract."
+    ],
+    "optionExplanationsEn": [
+      "Critical business logic must not live in the FE because it is easily bypassed.",
+      "The FE never connects directly to a database, least of all Production's.",
+      "Waiting is exactly what an API contract helps avoid.",
+      "Correct — this is how a contract enables parallel work."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Một nhân viên quẹt thẻ ở lễ tân thành công nhưng thẻ không mở được cửa phòng server. Theo ví von trong bài, bước nào đã chặn người này?",
+    "questionEn": "An employee's card works at reception, but it does not open the server room door. In the article's analogy, which step stopped this person?",
+    "options": [
+      "Authentication — hệ thống không biết người này là ai",
+      "Authorization — đã biết là ai nhưng không được phép vào phòng đó",
+      "Validation — dữ liệu nhập sai định dạng",
+      "Caching — thẻ đã được lưu trong cache"
+    ],
+    "optionsEn": [
+      "Authentication — the system does not know who this person is",
+      "Authorization — the person is known but is not allowed into that room",
+      "Validation — the input was in the wrong format",
+      "Caching — the card was stored in a cache"
+    ],
+    "answer": 1,
+    "explanation": "Quẹt thẻ ở lễ tân thành công nghĩa là đã xác thực danh tính (authentication). Không mở được phòng server là do thiếu quyền (authorization).",
+    "explanationEn": "A successful swipe at reception means identity was verified (authentication). Not opening the server room is a lack of permission (authorization).",
+    "optionExplanations": [
+      "Danh tính đã được xác nhận ở lễ tân, nên authentication đã thành công.",
+      "Đúng — biết bạn là ai nhưng bạn không được làm việc này.",
+      "Validation là kiểm tra định dạng dữ liệu, không liên quan tới quyền vào phòng.",
+      "Caching là lưu bản sao dữ liệu để tăng tốc, không quyết định quyền truy cập."
+    ],
+    "optionExplanationsEn": [
+      "Identity was confirmed at reception, so authentication succeeded.",
+      "Correct — you are known, but you are not allowed to do this.",
+      "Validation checks data format; it has nothing to do with room access.",
+      "Caching keeps copies of data for speed; it does not decide access."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Hệ thống cần được thiết kế sao cho khi phần thanh toán gặp sự cố, phần đăng ký người dùng và xem đơn hàng vẫn hoạt động. Kiến trúc nào phù hợp nhất với mục tiêu này?",
+    "questionEn": "A system must be designed so that when the payment part fails, user sign-up and order viewing keep working. Which architecture fits this goal best?",
+    "options": [
+      "Microservices — mỗi chức năng là một service độc lập",
+      "Monolith — mọi thứ trong một ứng dụng",
+      "Chỉ có frontend, không có backend",
+      "Một file HTML tĩnh duy nhất"
+    ],
+    "optionsEn": [
+      "Microservices — each function is an independent service",
+      "Monolith — everything in one application",
+      "Frontend only, with no backend",
+      "A single static HTML file"
+    ],
+    "answer": 0,
+    "explanation": "Giống khu ẩm thực có nhiều quầy riêng: microservices tách backend thành các service độc lập, nên một service lỗi thường không kéo theo các service khác.",
+    "explanationEn": "Like a food court with separate stalls: microservices split the backend into independent services, so one failing service usually does not take down the others.",
+    "optionExplanations": [
+      "Đúng — tách biệt giúp cô lập sự cố.",
+      "Trong monolith, một phần lỗi có thể làm sập cả ứng dụng.",
+      "Không có backend thì không thể xử lý thanh toán hay lưu đơn hàng.",
+      "File HTML tĩnh không thể xử lý đăng ký hay đơn hàng."
+    ],
+    "optionExplanationsEn": [
+      "Correct — separation helps isolate failures.",
+      "In a monolith, one broken part can bring down the whole app.",
+      "Without a backend you cannot process payments or store orders.",
+      "A static HTML file cannot handle sign-ups or orders."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Thông tin nào quan trọng nhất cần thêm vào báo cáo bug 'thanh toán bị hỏng' để team xử lý được ngay?",
+    "questionEn": "Which piece of information is most important to add to a bug report saying 'checkout is broken' so the team can act on it right away?",
+    "options": [
+      "Màu yêu thích của người báo lỗi",
+      "Tên trình soạn thảo code mà developer dùng",
+      "Lỗi xảy ra trên môi trường nào (Dev, Staging hay Production) và với dữ liệu gì",
+      "Số lượng nhân viên của công ty"
+    ],
+    "optionsEn": [
+      "The reporter's favourite colour",
+      "The name of the code editor the developers use",
+      "Which environment it happened on (Dev, Staging or Production) and with what data",
+      "The number of employees in the company"
+    ],
+    "answer": 2,
+    "explanation": "Mỗi môi trường có địa chỉ, code và database riêng. Nói rõ môi trường và dữ liệu test giúp team tái hiện lỗi ngay thay vì phải đoán.",
+    "explanationEn": "Each environment has its own address, code and database. Stating the environment and test data lets the team reproduce the bug immediately instead of guessing.",
+    "optionExplanations": [
+      "Không liên quan tới việc tái hiện lỗi.",
+      "Trình soạn thảo của developer không ảnh hưởng tới lỗi người dùng gặp.",
+      "Đúng — môi trường và dữ liệu là thông tin cốt lõi để tái hiện lỗi.",
+      "Quy mô công ty không giúp tìm ra lỗi."
+    ],
+    "optionExplanationsEn": [
+      "Irrelevant to reproducing the bug.",
+      "The developers' editor has no effect on the bug a user sees.",
+      "Correct — environment and data are core information for reproducing a bug.",
+      "Company size does not help find the bug."
+    ]
   }
 ]

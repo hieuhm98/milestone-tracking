@@ -208,5 +208,53 @@
     "answer": 1,
     "explanation": "Path có cấu trúc thể hiện rõ phân cấp danh mục (information architecture). Sitemap viết ra dễ đọc, bot hiểu mối quan hệ giữa các trang, người dùng đoán được mình đang ở đâu — tất cả đều tốt cho SEO.",
     "explanationEn": "A structured path clearly expresses the category hierarchy (information architecture). The resulting sitemap is easy to read, bots understand the relationships between pages, and users can guess where they are — all of which is good for SEO."
+  },
+  {
+    "id": "q22",
+    "question": "Khi chạy lệnh `nslookup google.com` trong Command Prompt hoặc Terminal, bạn chủ yếu nhận được thông tin gì?",
+    "questionEn": "When you run `nslookup google.com` in Command Prompt or Terminal, what do you mainly get back?",
+    "options": ["Nội dung HTML của trang chủ Google", "Tốc độ mạng hiện tại của bạn", "Resolver bạn đang dùng và (các) địa chỉ IP mà tên google.com được phân giải ra", "Ngày hết hạn của domain google.com"],
+    "optionsEn": ["The HTML content of Google's home page", "Your current network speed", "The resolver you are using and the IP address(es) that google.com resolves to", "The expiry date of the google.com domain"],
+    "answer": 2,
+    "explanation": "nslookup là công cụ tra cứu DNS: dòng Server cho biết resolver đang dùng, các dòng Address là IP mà tên miền được phân giải ra.",
+    "explanationEn": "nslookup is a DNS lookup tool: the Server line shows the resolver in use, and the Address lines are the IPs the name resolves to.",
+    "optionExplanations": ["nslookup không tải trang web; nó chỉ hỏi DNS.", "Đo tốc độ mạng cần công cụ khác (speed test), không phải nslookup.", "Đúng — đó chính là việc của một truy vấn DNS.", "Ngày hết hạn domain xem bằng tra cứu WHOIS tại registrar, không phải nslookup."],
+    "optionExplanationsEn": ["nslookup does not download web pages; it only asks DNS.", "Measuring network speed needs a different tool (a speed test), not nslookup.", "Correct — that is exactly what a DNS query returns.", "A domain's expiry date is found with a WHOIS lookup at a registrar, not nslookup."]
+  },
+  {
+    "id": "q23",
+    "question": "Chrome báo lỗi `DNS_PROBE_FINISHED_NXDOMAIN` khi bạn mở một địa chỉ. Nguyên nhân khả dĩ nhất là gì?",
+    "questionEn": "Chrome shows `DNS_PROBE_FINISHED_NXDOMAIN` when you open an address. What is the most likely cause?",
+    "options": ["Tên miền không tồn tại trong DNS — gõ sai, domain đã hết hạn hoặc chưa tạo record", "Server web bị quá tải và trả về lỗi 500", "Mật khẩu đăng nhập của bạn sai", "Trình duyệt cần được cài lại"],
+    "optionsEn": ["The name does not exist in DNS — a typo, an expired domain, or a record that was never created", "The web server is overloaded and returned a 500 error", "Your login password is wrong", "The browser needs to be reinstalled"],
+    "answer": 0,
+    "explanation": "NXDOMAIN nghĩa là 'non-existent domain': DNS không tìm thấy tên đó, nên trình duyệt không có IP để kết nối.",
+    "explanationEn": "NXDOMAIN means 'non-existent domain': DNS could not find the name, so the browser has no IP to connect to.",
+    "optionExplanations": ["Đúng — lỗi xảy ra ngay ở bước đổi tên thành IP.", "Lỗi 500 chỉ xảy ra sau khi đã kết nối được tới server, tức DNS đã thành công.", "Sai mật khẩu là lỗi của ứng dụng, xảy ra sau khi trang đã tải.", "Đây là lỗi tra cứu tên, cài lại trình duyệt không giải quyết được."],
+    "optionExplanationsEn": ["Correct — the failure happens at the name-to-IP step.", "A 500 error only happens after reaching the server, which means DNS already worked.", "A wrong password is an application error that happens after the page has loaded.", "This is a name lookup failure; reinstalling the browser will not fix it."]
+  },
+  {
+    "id": "q24",
+    "question": "Công ty vừa đăng ký domain mới nhưng gõ vào trình duyệt vẫn không thấy website. Còn thiếu gì?",
+    "questionEn": "A company has just registered a new domain, but typing it into the browser shows no website. What is still missing?",
+    "options": ["Phải đợi đúng 1 năm để domain có hiệu lực", "Phải đăng ký thêm một URN", "Phải tạo sitemap.xml trước", "Hosting (server chứa website) và các DNS record trỏ tên miền về server đó"],
+    "optionsEn": ["You must wait exactly one year for the domain to take effect", "You must also register a URN", "You must create sitemap.xml first", "Hosting (a server holding the website) and DNS records pointing the name to that server"],
+    "answer": 3,
+    "explanation": "Đăng ký chỉ giữ chỗ cái tên. Website cần nằm trên một server, và DNS (ví dụ record A) phải trỏ tên miền về IP của server đó.",
+    "explanationEn": "Registering only reserves the name. The website must live on a server, and DNS (for example an A record) must point the name to that server's IP.",
+    "optionExplanations": ["Không có thời gian chờ một năm; phí năm là thời hạn thuê, không phải thời gian kích hoạt.", "URN chỉ là một kiểu định danh, không liên quan tới việc website chạy.", "Sitemap giúp search engine index, nhưng không làm website hoạt động.", "Đúng — tên miền + hosting + DNS record mới tạo thành website truy cập được."],
+    "optionExplanationsEn": ["There is no one-year wait; the annual fee is the rental period, not an activation delay.", "A URN is just a kind of identifier and has nothing to do with a site going live.", "A sitemap helps search engines index pages, but it does not make a site work.", "Correct — domain + hosting + DNS records together make a reachable website."]
+  },
+  {
+    "id": "q25",
+    "question": "Một ngày trước khi chuyển server theo kế hoạch, team hạ TTL từ 86400 xuống 300. Mục đích là gì?",
+    "questionEn": "A day before a planned server move, the team lowers the TTL from 86400 to 300. What is the purpose?",
+    "options": ["Để website chạy nhanh hơn vĩnh viễn", "Để khi đổi IP, các resolver nhanh chóng bỏ bản cache cũ và người dùng sớm tới server mới", "Để tiết kiệm phí đăng ký domain", "Để Google index lại toàn bộ sitemap"],
+    "optionsEn": ["To make the website permanently faster", "So that when the IP changes, resolvers drop their old cached copy quickly and users reach the new server sooner", "To save on domain registration fees", "To make Google re-index the whole sitemap"],
+    "answer": 1,
+    "explanation": "TTL là thời gian cache. TTL 300 giây nghĩa là bản cũ chỉ sống tối đa 5 phút, nên thay đổi DNS tới người dùng gần như ngay lập tức.",
+    "explanationEn": "TTL is the caching time. A TTL of 300 seconds means an old copy lives at most 5 minutes, so the DNS change reaches users almost immediately.",
+    "optionExplanations": ["TTL thấp không làm trang tải nhanh hơn; ngược lại còn khiến resolver phải hỏi lại thường xuyên hơn.", "Đúng — đây là kỹ thuật chuẩn để chuyển server êm.", "Phí domain không phụ thuộc vào TTL.", "TTL thuộc về DNS, không liên quan tới việc Google index sitemap."],
+    "optionExplanationsEn": ["A low TTL does not make pages load faster; if anything resolvers must ask again more often.", "Correct — this is the standard technique for a smooth server move.", "Domain fees do not depend on TTL.", "TTL belongs to DNS and has nothing to do with Google indexing a sitemap."]
   }
 ]

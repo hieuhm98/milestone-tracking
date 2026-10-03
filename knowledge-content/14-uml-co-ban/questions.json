@@ -398,5 +398,165 @@
     "explanation": "Đừng giả định khách hàng biết đọc mô hình, nhưng cũng đừng kết luận họ không thể hiểu. Một chú giải và một ví dụ thường là đủ.",
     "explanationEn": "Do not assume customers can read models, but do not conclude they cannot understand them either. A key and one example are usually enough.",
     "id": "q20"
+  },
+  {
+    "id": "q21",
+    "question": "Trong activity diagram của FoodNow, sau thanh fork có hai nhánh: \"Nấu món\" (nhà hàng) và \"Chạy tới nhà hàng\" (tài xế). Điều này nghĩa là gì?",
+    "questionEn": "In the FoodNow activity diagram, a fork bar is followed by two branches: \"Cook food\" (restaurant) and \"Ride to restaurant\" (driver). What does this mean?",
+    "options": [
+      "Chỉ một trong hai nhánh được thực hiện, tùy điều kiện",
+      "Tài xế phải chờ nhà hàng nấu xong mới được xuất phát",
+      "Hai việc diễn ra song song, cùng lúc",
+      "Luồng kết thúc tại đây"
+    ],
+    "optionsEn": [
+      "Only one of the two branches runs, depending on a condition",
+      "The driver must wait for the food to be cooked before setting off",
+      "The two activities happen in parallel, at the same time",
+      "The flow ends here"
+    ],
+    "answer": 2,
+    "explanation": "Thanh fork tách một luồng thành nhiều luồng chạy song song. Muốn đi tiếp sau đó phải có thanh join chờ tất cả các nhánh xong.",
+    "explanationEn": "A fork bar splits one flow into several that run in parallel. Continuing afterwards needs a join bar that waits for every branch to finish.",
+    "optionExplanations": [
+      "Chọn một trong hai nhánh là việc của hình thoi decision, không phải thanh fork.",
+      "Chờ nhau là việc của thanh join ở cuối; sau fork thì không ai phải chờ ai mới bắt đầu.",
+      "Đúng: fork nghĩa là tất cả các nhánh đi ra đều chạy cùng lúc.",
+      "Điểm kết thúc là hình tròn đặc có vòng ngoài (final node), không phải thanh fork."
+    ],
+    "optionExplanationsEn": [
+      "Choosing one branch is the job of a decision diamond, not a fork bar.",
+      "Waiting is done by the join bar at the end; after a fork, nobody waits for the other to start.",
+      "Correct: a fork means all outgoing branches run at the same time.",
+      "The end is a filled circle with an outer ring (final node), not a fork bar."
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Trong sequence diagram, app FoodNow gửi \"Đơn mới\" cho nhà hàng bằng một asynchronous message. Điều đó nghĩa là gì?",
+    "questionEn": "In a sequence diagram, the FoodNow app sends \"New order\" to the restaurant as an asynchronous message. What does that mean?",
+    "options": [
+      "App dừng lại chờ nhà hàng trả lời rồi mới làm tiếp",
+      "Nhà hàng gửi câu trả lời ngược về app",
+      "Thông điệp bị lỗi và phải gửi lại",
+      "App gửi thông điệp đi rồi làm tiếp ngay, không chờ nhà hàng trả lời"
+    ],
+    "optionsEn": [
+      "The app stops and waits for the restaurant's reply before continuing",
+      "The restaurant sends a reply back to the app",
+      "The message failed and must be resent",
+      "The app sends the message and carries on immediately, without waiting for a reply"
+    ],
+    "answer": 3,
+    "explanation": "Asynchronous message (mũi tên đầu mở) giống gửi tin nhắn: gửi xong là làm tiếp. Synchronous message (mũi tên liền) mới giống gọi điện và chờ.",
+    "explanationEn": "An asynchronous message (open arrowhead) is like sending a text: send it and carry on. A synchronous message (solid arrow) is like a phone call where you wait.",
+    "optionExplanations": [
+      "Gọi và chờ là synchronous message, không phải asynchronous.",
+      "Câu trả lời ngược về là return message, vẽ bằng mũi tên nét đứt.",
+      "\"Bất đồng bộ\" không có nghĩa là lỗi; nó chỉ nói về việc có chờ hay không.",
+      "Đúng: bất đồng bộ nghĩa là gửi rồi làm tiếp, không chờ trả lời."
+    ],
+    "optionExplanationsEn": [
+      "Call-and-wait is a synchronous message, not an asynchronous one.",
+      "A reply coming back is a return message, drawn as a dashed arrow.",
+      "\"Asynchronous\" does not mean failed; it only describes whether the sender waits.",
+      "Correct: asynchronous means send and carry on, without waiting for a reply."
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Trong class diagram, đường nối giữa Customer và Order có ghi \"1\" ở đầu Customer và \"0..*\" ở đầu Order. Điều đó nghĩa là gì?",
+    "questionEn": "In a class diagram, the line between Customer and Order shows \"1\" at the Customer end and \"0..*\" at the Order end. What does it mean?",
+    "options": [
+      "Mỗi khách hàng có đúng một đơn hàng",
+      "Một khách hàng có thể có không hoặc nhiều đơn, và mỗi đơn thuộc về đúng một khách hàng",
+      "Mỗi đơn hàng có thể thuộc về nhiều khách hàng",
+      "Hệ thống chỉ cho phép một khách hàng duy nhất"
+    ],
+    "optionsEn": [
+      "Each customer has exactly one order",
+      "One customer can have zero or more orders, and each order belongs to exactly one customer",
+      "Each order can belong to many customers",
+      "The system allows only a single customer"
+    ],
+    "answer": 1,
+    "explanation": "Các con số ở hai đầu là multiplicity (\"bao nhiêu\"). \"0..*\" ở đầu Order: một khách có không hoặc nhiều đơn. \"1\" ở đầu Customer: mỗi đơn có đúng một khách.",
+    "explanationEn": "The numbers at each end are multiplicity (\"how many\"). \"0..*\" at the Order end: a customer has zero or more orders. \"1\" at the Customer end: each order has exactly one customer.",
+    "optionExplanations": [
+      "\"0..*\" nghĩa là không hoặc nhiều, không phải đúng một.",
+      "Đúng: đọc mỗi con số từ phía class đối diện — một khách nhiều đơn, một đơn một khách.",
+      "Số \"1\" ở đầu Customer cho biết mỗi đơn chỉ thuộc về đúng một khách.",
+      "Multiplicity mô tả quan hệ giữa các đối tượng, không giới hạn tổng số khách hàng."
+    ],
+    "optionExplanationsEn": [
+      "\"0..*\" means zero or more, not exactly one.",
+      "Correct: read each number from the opposite class — one customer, many orders; one order, one customer.",
+      "The \"1\" at the Customer end says each order belongs to exactly one customer.",
+      "Multiplicity describes how objects relate, not a limit on the total number of customers."
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Khác biệt giữa class và object là gì?",
+    "questionEn": "What is the difference between a class and an object?",
+    "options": [
+      "Class là khuôn mẫu (như mẫu đơn trống); object là một bản cụ thể của khuôn mẫu đó (như tờ đơn đã điền)",
+      "Class là một người dùng, object là một hệ thống bên ngoài",
+      "Class chỉ dùng trong use case diagram, object chỉ dùng trong activity diagram",
+      "Không có khác biệt, hai từ này hoàn toàn giống nhau"
+    ],
+    "optionsEn": [
+      "A class is a template (like a blank form); an object is one concrete instance of it (like a filled-in form)",
+      "A class is a user and an object is an external system",
+      "Classes are only used in use case diagrams and objects only in activity diagrams",
+      "There is no difference; the two words mean exactly the same"
+    ],
+    "answer": 0,
+    "explanation": "Class mô tả những thông tin và hành vi mà mọi đối tượng cùng loại có (ví dụ Order có id, status). Mỗi object là một bản cụ thể, ví dụ đơn số 1024 của chị Lan.",
+    "explanationEn": "A class describes the data and behaviour every object of that kind has (e.g. an Order has an id and a status). Each object is one concrete instance, e.g. Lan's order number 1024.",
+    "optionExplanations": [
+      "Đúng: class là mẫu, object là một bản cụ thể được tạo từ mẫu đó.",
+      "Người dùng hoặc hệ thống bên ngoài là actor trong use case diagram, không phải class/object.",
+      "Class được vẽ trong class diagram; nó không gắn với use case hay activity diagram như vậy.",
+      "Hai khái niệm khác nhau: một class có thể có rất nhiều object."
+    ],
+    "optionExplanationsEn": [
+      "Correct: a class is the template, an object is one concrete copy made from it.",
+      "A user or external system is an actor in a use case diagram, not a class/object.",
+      "Classes are drawn in class diagrams; they are not tied to use case or activity diagrams like that.",
+      "They are different concepts: one class can have very many objects."
+    ]
+  },
+  {
+    "id": "q25",
+    "question": "Bên kinh doanh muốn thống nhất một đơn hàng đi qua các trạng thái Mới → Đang nấu → Đang giao → Đã giao (hoặc Đã hủy). Sơ đồ nào phù hợp nhất?",
+    "questionEn": "The business wants to agree how an order moves through the statuses New → Cooking → On the way → Delivered (or Cancelled). Which diagram fits best?",
+    "options": [
+      "Use Case Diagram",
+      "Class Diagram",
+      "State Diagram (state machine)",
+      "Sequence Diagram"
+    ],
+    "optionsEn": [
+      "Use Case Diagram",
+      "Class Diagram",
+      "State Diagram (state machine)",
+      "Sequence Diagram"
+    ],
+    "answer": 2,
+    "explanation": "State diagram thể hiện vòng đời của một đối tượng: các trạng thái và sự kiện chuyển từ trạng thái này sang trạng thái khác — đúng thứ cần cho trạng thái đơn hàng.",
+    "explanationEn": "A state diagram shows the life of one object: its states and the events that move it from one state to the next — exactly what order statuses need.",
+    "optionExplanations": [
+      "Use case diagram cho biết ai làm được gì, không cho thấy trạng thái của một đơn.",
+      "Class diagram cho thấy cấu trúc dữ liệu (đơn có trường status), nhưng không mô tả các bước chuyển trạng thái.",
+      "Đúng: state diagram được tạo ra để mô tả các trạng thái và cách chuyển giữa chúng.",
+      "Sequence diagram cho thấy thứ tự thông điệp giữa các bên, không phải vòng đời trạng thái của một đơn."
+    ],
+    "optionExplanationsEn": [
+      "A use case diagram shows who can do what, not the states of one order.",
+      "A class diagram shows data structure (an order has a status field) but not the transitions between states.",
+      "Correct: a state diagram is designed to show states and the transitions between them.",
+      "A sequence diagram shows the order of messages between participants, not one order's status life cycle."
+    ]
   }
 ]

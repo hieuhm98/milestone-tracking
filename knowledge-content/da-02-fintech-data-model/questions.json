@@ -1,0 +1,578 @@
+[
+  {
+    "id": "da02-q1",
+    "question": "Trong fintech.db, cột `loans.application_id` có ràng buộc `UNIQUE`. Ràng buộc này cho bạn biết điều gì về quan hệ giữa hồ sơ vay và khoản vay?",
+    "questionEn": "In fintech.db, the column `loans.application_id` has a `UNIQUE` constraint. What does this tell you about the relationship between applications and loans?",
+    "options": [
+      "Mỗi khách hàng chỉ được có nhiều nhất một khoản vay trong bảng `loans`",
+      "Mỗi hồ sơ vay sinh ra nhiều nhất một khoản vay (quan hệ 1 : 0..1)",
+      "Mỗi hồ sơ vay bắt buộc phải sinh ra đúng một khoản vay, kể cả khi bị từ chối",
+      "Một khoản vay có thể được gắn với nhiều hồ sơ vay khác nhau của cùng khách"
+    ],
+    "optionsEn": [
+      "Each customer can have at most one loan in the `loans` table",
+      "Each application produces at most one loan (a 1 : 0..1 relationship)",
+      "Each application must produce exactly one loan, even when it is rejected",
+      "One loan can be linked to several different applications of the same customer"
+    ],
+    "answer": 1,
+    "explanation": "`UNIQUE` trên `application_id` nghĩa là không có hai khoản vay nào trỏ về cùng một hồ sơ: một hồ sơ có 0 hoặc 1 khoản vay. Hồ sơ bị từ chối hay bị hủy thì có 0.",
+    "explanationEn": "`UNIQUE` on `application_id` means no two loans point to the same application: an application has 0 or 1 loan. Rejected or cancelled applications have 0.",
+    "optionExplanations": [
+      "Sai: ràng buộc nằm trên `application_id`, không phải `customer_id`; khách 3152 có hai khoản vay.",
+      "Đúng: không có hai dòng `loans` nào cùng một `application_id`, nên mỗi hồ sơ có 0 hoặc 1 khoản vay.",
+      "Sai: `UNIQUE` chỉ chặn \"nhiều hơn một\", không bắt buộc \"ít nhất một\"; hồ sơ bị từ chối không có khoản vay.",
+      "Sai: mỗi dòng `loans` chỉ có một `application_id`, nên một khoản vay chỉ gắn với một hồ sơ."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the constraint is on `application_id`, not `customer_id`; customer 3152 has two loans.",
+      "Correct: no two `loans` rows share an `application_id`, so each application has 0 or 1 loan.",
+      "Wrong: `UNIQUE` only forbids \"more than one\"; it does not force \"at least one\". Rejected applications have no loan.",
+      "Wrong: each `loans` row holds a single `application_id`, so a loan belongs to one application only."
+    ]
+  },
+  {
+    "id": "da02-q2",
+    "question": "Bạn muốn nối mỗi giao dịch ví loại `payment` với dòng thanh toán tương ứng trong bảng `payments`. Điều kiện JOIN nào đúng với fintech.db?",
+    "questionEn": "You want to link each wallet transaction of type `payment` to its row in the `payments` table. Which JOIN condition is right for fintech.db?",
+    "options": [
+      "`wallet_transactions.txn_id = payments.payment_id`",
+      "`wallets.wallet_id = payments.customer_id`",
+      "`checkout_events.event_id = payments.payment_id`",
+      "`wallet_transactions.reference = payments.payment_id`"
+    ],
+    "optionsEn": [
+      "`wallet_transactions.txn_id = payments.payment_id`",
+      "`wallets.wallet_id = payments.customer_id`",
+      "`checkout_events.event_id = payments.payment_id`",
+      "`wallet_transactions.reference = payments.payment_id`"
+    ],
+    "answer": 3,
+    "explanation": "Với giao dịch ví loại payment và refund, cột `reference` chứa `payment_id`. Đây là một liên kết mềm: không khai báo là khóa ngoại nhưng JOIN được.",
+    "explanationEn": "For wallet payment and refund rows, the `reference` column holds the `payment_id`. It is a soft link: not declared as a foreign key, but you can join on it.",
+    "optionExplanations": [
+      "Sai: `txn_id` và `payment_id` là hai dãy số độc lập; trùng số chỉ là ngẫu nhiên.",
+      "Sai: so ID ví với ID khách hàng là so hai loại ID khác nhau.",
+      "Sai: `event_id` là ID của từng bước checkout; checkout nối với payments qua `session_id`.",
+      "Đúng: `reference` chứa `payment_id` của thanh toán (hoặc hoàn tiền) bằng ví."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `txn_id` and `payment_id` are independent number sequences; a match would be coincidence.",
+      "Wrong: this compares a wallet ID with a customer ID, two different kinds of ID.",
+      "Wrong: `event_id` identifies one checkout step; checkout links to payments through `session_id`.",
+      "Correct: `reference` holds the `payment_id` of the wallet payment (or refund)."
+    ]
+  },
+  {
+    "id": "da02-q3",
+    "question": "Kết quả query:\n`kyc_status | customers | with_wallet\npending    | 241       | 0\nrejected   | 141       | 0\nverified   | 3618      | 2235`\nMột PM nói: \"Chúng ta có 4,000 khách dùng được ví.\" Câu trả lời đúng nhất là gì?",
+    "questionEn": "Query result:\n`kyc_status | customers | with_wallet\npending    | 241       | 0\nrejected   | 141       | 0\nverified   | 3618      | 2235`\nA PM says: \"We have 4,000 customers who can use the wallet.\" What is the best reply?",
+    "options": [
+      "Chỉ khách đã KYC `verified` mới có ví; 3,618 khách đủ điều kiện và 2,235 khách thực sự có ví",
+      "Đúng, vì mọi khách hàng đã đăng ký đều được mở ví ngay khi tạo tài khoản",
+      "Chỉ có 241 khách dùng được ví, vì ví chỉ mở cho khách đang chờ KYC",
+      "Có 2,235 khách đã KYC, còn 1,765 khách còn lại chưa từng làm KYC"
+    ],
+    "optionsEn": [
+      "Only KYC-`verified` customers get a wallet; 3,618 are eligible and 2,235 actually have one",
+      "Yes, because every registered customer gets a wallet as soon as they sign up",
+      "Only 241 customers can use the wallet, since wallets open only for KYC-pending customers",
+      "2,235 customers passed KYC, and the other 1,765 never did KYC at all"
+    ],
+    "answer": 0,
+    "explanation": "KYC là cửa chặn: không khách chưa xác minh nào có ví. \"Khách hàng\" (4,000), \"khách đủ điều kiện\" (3,618) và \"khách có ví\" (2,235) là ba con số khác nhau.",
+    "explanationEn": "KYC is a gate: no unverified customer has a wallet. \"Customers\" (4,000), \"eligible customers\" (3,618) and \"customers with a wallet\" (2,235) are three different numbers.",
+    "optionExplanations": [
+      "Đúng: tách bạch số đủ điều kiện và số thực có ví.",
+      "Sai: 382 khách pending/rejected có 0 ví, nên không phải ai cũng có ví.",
+      "Sai: khách `pending` có 0 ví; 241 là số khách đang chờ KYC.",
+      "Sai: 3,618 khách đã `verified`; 2,235 là số khách có ví, không phải số đã KYC."
+    ],
+    "optionExplanationsEn": [
+      "Correct: it separates eligible customers from customers who actually have a wallet.",
+      "Wrong: the 382 pending/rejected customers have 0 wallets, so not everyone has one.",
+      "Wrong: `pending` customers have 0 wallets; 241 is the number still waiting for KYC.",
+      "Wrong: 3,618 customers are `verified`; 2,235 is the number with a wallet, not the number who passed KYC."
+    ]
+  },
+  {
+    "id": "da02-q4",
+    "question": "Bảng `journal_lines` của một ví điện tử có bút toán J77:\n`entry | account           | debit   | credit\nJ77   | cash_at_bank      | 500000  | 0\nJ77   | wallet_812        | 0       | 450000`\nBạn kết luận gì?",
+    "questionEn": "An e-wallet's `journal_lines` table has entry J77:\n`entry | account           | debit   | credit\nJ77   | cash_at_bank      | 500000  | 0\nJ77   | wallet_812        | 0       | 450000`\nWhat do you conclude?",
+    "options": [
+      "Bút toán hợp lệ, vì mỗi tài khoản chỉ xuất hiện một lần trong bút toán",
+      "Ví 812 được cộng 500,000, vì số ghi Nợ luôn là số tiền khách nhận",
+      "Bút toán không cân: tổng Nợ hơn tổng Có 50,000 VND, cần điều tra",
+      "Bút toán hợp lệ, vì phần chênh 50,000 chắc chắn là phí giao dịch"
+    ],
+    "optionsEn": [
+      "The entry is valid, because each account appears only once in it",
+      "Wallet 812 gained 500,000, because the debit is always what the customer receives",
+      "The entry does not balance: debits exceed credits by 50,000 VND, so investigate",
+      "The entry is valid, because the 50,000 difference must be a transaction fee"
+    ],
+    "answer": 2,
+    "explanation": "Quy tắc bút toán kép: trong mỗi bút toán, tổng Nợ = tổng Có. 500,000 ≠ 450,000, nên có một dòng bị thiếu hoặc sai. Nếu có phí, phí phải là một dòng riêng (ví dụ Có 50,000 vào tài khoản doanh thu phí).",
+    "explanationEn": "The double-entry rule: in every entry, total debits = total credits. 500,000 ≠ 450,000, so a line is missing or wrong. If there was a fee, it would be its own line (for example a 50,000 credit to a fee-revenue account).",
+    "optionExplanations": [
+      "Sai: số lần xuất hiện không quan trọng; điều phải kiểm là hai vế có cân không.",
+      "Sai: dòng của ví 812 ghi Có 450,000; và chiều Nợ/Có không có nghĩa \"số khách nhận\".",
+      "Đúng: hai vế lệch 50,000, đây là dấu hiệu lỗi cần điều tra.",
+      "Sai: phí cũng phải được ghi thành một dòng; không thể đoán phần chênh là gì."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: how often an account appears does not matter; what matters is whether the two sides balance.",
+      "Wrong: the wallet 812 line is a 450,000 credit, and debit does not mean \"what the customer receives\".",
+      "Correct: the sides differ by 50,000, a sign of an error to investigate.",
+      "Wrong: a fee would also be written as a line; you cannot guess what the gap is."
+    ]
+  },
+  {
+    "id": "da02-q5",
+    "question": "Ví 77 có các giao dịch:\n`txn_type     | amount   | status\ntop_up       | 300000   | success\npayment      | -120000  | success\ntransfer_out | -100000  | failed`\nBảng `wallets` lưu `balance` = 80000. Đọc thế nào là đúng?",
+    "questionEn": "Wallet 77 has these transactions:\n`txn_type     | amount   | status\ntop_up       | 300000   | success\npayment      | -120000  | success\ntransfer_out | -100000  | failed`\nThe `wallets` table stores `balance` = 80000. What is the right reading?",
+    "options": [
+      "Khớp: 300,000 − 120,000 − 100,000 = 80,000, nên không có vấn đề gì",
+      "Break 100,000: số dư tính từ giao dịch thành công là 180,000; có vẻ lần chuyển tiền thất bại vẫn bị trừ",
+      "Break 120,000: thanh toán lẽ ra không được trừ vào số dư của ví",
+      "Không kết luận được, vì số dư chỉ đúng khi cộng cả các giao dịch thất bại"
+    ],
+    "optionsEn": [
+      "It matches: 300,000 − 120,000 − 100,000 = 80,000, so nothing is wrong",
+      "A 100,000 break: successful transactions give 180,000; the failed transfer seems to have been deducted anyway",
+      "A 120,000 break: the payment should never have been deducted from the wallet balance",
+      "No conclusion is possible, because the balance is only correct when failed rows are included"
+    ],
+    "answer": 1,
+    "explanation": "Chỉ giao dịch `success` mới làm tiền dịch chuyển: 300,000 − 120,000 = 180,000. Số lưu là 80,000, lệch đúng bằng lần chuyển tiền thất bại, nên giả thuyết đầu tiên là dịch vụ ví đã trừ nhầm giao dịch đó.",
+    "explanationEn": "Only `success` rows move money: 300,000 − 120,000 = 180,000. The stored 80,000 differs by exactly the failed transfer, so the first hypothesis is that the wallet service deducted it by mistake.",
+    "optionExplanations": [
+      "Sai: phép tính này cộng cả giao dịch thất bại, vốn không làm tiền dịch chuyển.",
+      "Đúng: 180,000 tính từ giao dịch thành công khác 80,000 đã lưu; chênh 100,000.",
+      "Sai: thanh toán thành công bằng ví thì đương nhiên làm giảm số dư.",
+      "Sai: ngược lại, giao dịch thất bại phải bị loại khi tính số dư."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: this sum includes the failed transfer, which never moved money.",
+      "Correct: 180,000 from successful rows vs 80,000 stored; a 100,000 difference.",
+      "Wrong: a successful wallet payment does reduce the balance.",
+      "Wrong: it is the opposite; failed rows must be excluded when computing a balance."
+    ]
+  },
+  {
+    "id": "da02-q6",
+    "question": "Kế toán hỏi: \"Số dư ví 520 vào lúc 2026-03-01 00:00:00 (UTC) là bao nhiêu?\" `wallets.balance` chỉ lưu số dư hiện tại. Cách trả lời đúng là gì?",
+    "questionEn": "Accounting asks: \"What was the balance of wallet 520 at 2026-03-01 00:00:00 (UTC)?\" `wallets.balance` stores only the current balance. What is the right way to answer?",
+    "options": [
+      "Cộng các giao dịch `success` của ví có `created_at` trước 2026-03-01 00:00:00",
+      "Đọc `wallets.balance`, vì số dư hiện tại cũng chính là số dư ở mọi thời điểm",
+      "Không thể trả lời, vì database không lưu số dư theo từng ngày",
+      "Lấy trung bình cộng `amount` của mọi giao dịch trong tháng 2/2026"
+    ],
+    "optionsEn": [
+      "Sum the wallet's `success` transactions with `created_at` before 2026-03-01 00:00:00",
+      "Read `wallets.balance`, because the current balance is the balance at every point in time",
+      "It cannot be answered, because the database does not store a daily balance",
+      "Take the average `amount` of all transactions in February 2026"
+    ],
+    "answer": 0,
+    "explanation": "Từ event luôn dựng lại được snapshot: cộng các giao dịch thành công trước thời điểm cần hỏi. Với ví 520, đó là ba giao dịch đầu: 190,000 − 133,000 + 133,000 = 190,000.",
+    "explanationEn": "You can always rebuild a snapshot from events: sum the successful transactions before the moment asked about. For wallet 520 that is the first three rows: 190,000 − 133,000 + 133,000 = 190,000.",
+    "optionExplanations": [
+      "Đúng: dựng lại số dư từ các giao dịch thành công trước mốc thời gian.",
+      "Sai: số dư hiện tại phản ánh cả các giao dịch sau 1/3.",
+      "Sai: không lưu snapshot theo ngày, nhưng các giao dịch (event) đủ để tính.",
+      "Sai: trung bình cộng giao dịch không phải là số dư."
+    ],
+    "optionExplanationsEn": [
+      "Correct: rebuild the balance from the successful transactions before the cut-off.",
+      "Wrong: the current balance includes transactions made after 1 March.",
+      "Wrong: there is no daily snapshot, but the transactions (events) are enough to compute it.",
+      "Wrong: an average of transactions is not a balance."
+    ]
+  },
+  {
+    "id": "da02-q7",
+    "question": "Vì sao fintech.db không trả lời được câu \"Khách hàng 933 được KYC `verified` vào ngày nào?\"",
+    "questionEn": "Why can fintech.db not answer \"On which day did customer 933 become KYC-`verified`?\"",
+    "options": [
+      "Vì cột `signup_date` lưu sai múi giờ nên không dùng được",
+      "Vì khách hàng 933 không có ví nên không có dữ liệu về họ",
+      "Vì SQLite không có hàm xử lý ngày tháng như `strftime`",
+      "Vì `kyc_status` là snapshot chỉ giữ giá trị mới nhất, và không có bảng lịch sử trạng thái"
+    ],
+    "optionsEn": [
+      "Because `signup_date` is stored in the wrong time zone and cannot be used",
+      "Because customer 933 has no wallet, so there is no data about them",
+      "Because SQLite has no date functions such as `strftime`",
+      "Because `kyc_status` is a snapshot that keeps only the latest value, and there is no status history table"
+    ],
+    "answer": 3,
+    "explanation": "Bảng snapshot bị ghi đè khi trạng thái đổi, nên thời điểm đổi bị mất. Muốn trả lời được, cần một bảng lịch sử trạng thái (mỗi lần đổi một dòng, có thời điểm).",
+    "explanationEn": "A snapshot is overwritten when the status changes, so the moment of change is lost. Answering would need a status history table (one row per change, with a timestamp).",
+    "optionExplanations": [
+      "Sai: `signup_date` là ngày đăng ký, không phải ngày xác minh, dù múi giờ thế nào.",
+      "Sai: khách 933 chính là chủ ví 520.",
+      "Sai: SQLite có `strftime`, `date`, `julianday`; vấn đề là dữ liệu không tồn tại.",
+      "Đúng: dữ liệu về thời điểm đổi trạng thái chưa bao giờ được ghi lại."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `signup_date` is the sign-up date, not the verification date, whatever the time zone.",
+      "Wrong: customer 933 is the owner of wallet 520.",
+      "Wrong: SQLite has `strftime`, `date` and `julianday`; the problem is that the data does not exist.",
+      "Correct: the time of the status change was never recorded."
+    ]
+  },
+  {
+    "id": "da02-q8",
+    "question": "Một analyst chạy `SELECT COUNT(*) FROM loans l JOIN repayment_schedule r ON r.loan_id = l.loan_id` và báo cáo \"28,824 khoản vay\". Sai ở đâu?",
+    "questionEn": "An analyst runs `SELECT COUNT(*) FROM loans l JOIN repayment_schedule r ON r.loan_id = l.loan_id` and reports \"28,824 loans\". What is wrong?",
+    "options": [
+      "Phải dùng LEFT JOIN, vì một số khoản vay chưa có lịch trả nợ",
+      "Phải thêm `WHERE paid_date IS NOT NULL` để chỉ đếm khoản vay đã trả",
+      "Mỗi dòng sau JOIN là một kỳ trả, không phải một khoản vay; cần `COUNT(DISTINCT l.loan_id)`, ra 3,106",
+      "Không sai: mỗi kỳ trả nợ được tính là một khoản vay riêng"
+    ],
+    "optionsEn": [
+      "It needs a LEFT JOIN, because some loans have no repayment schedule yet",
+      "It needs `WHERE paid_date IS NOT NULL` so that only repaid loans are counted",
+      "After the JOIN each row is one installment, not one loan; use `COUNT(DISTINCT l.loan_id)`, which gives 3,106",
+      "Nothing is wrong: each installment counts as a separate loan"
+    ],
+    "answer": 2,
+    "explanation": "Grain của `repayment_schedule` là một kỳ trả. JOIN nhân mỗi khoản vay lên theo số kỳ, nên `COUNT(*)` đếm kỳ trả (28,824). Đếm khoản vay thì dùng `COUNT(DISTINCT l.loan_id)` = 3,106.",
+    "explanationEn": "The grain of `repayment_schedule` is one installment. The JOIN repeats each loan once per installment, so `COUNT(*)` counts installments (28,824). To count loans, use `COUNT(DISTINCT l.loan_id)` = 3,106.",
+    "optionExplanations": [
+      "Sai: LEFT JOIN không giải quyết việc nhân dòng; số vẫn là số kỳ trả.",
+      "Sai: bộ lọc này vẫn đếm kỳ trả, chỉ là ít kỳ hơn.",
+      "Đúng: đây là lỗi grain; đếm khoản vay khác biệt.",
+      "Sai: một khoản vay có nhiều kỳ trả; kỳ trả không phải khoản vay."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a LEFT JOIN does not stop the row multiplication; it still counts installments.",
+      "Wrong: this filter still counts installments, just fewer of them.",
+      "Correct: it is a grain mistake; count distinct loans.",
+      "Wrong: one loan has many installments; an installment is not a loan."
+    ]
+  },
+  {
+    "id": "da02-q9",
+    "question": "Các hồ sơ vay của khách hàng 3152:\n`application_id | product   | app_status | loan_id\n2645           | cash_loan | approved   | 1150\n3003           | bnpl      | cancelled  | NULL\n5440           | cash_loan | approved   | 2384`\nĐọc thế nào là đúng?",
+    "questionEn": "Customer 3152's applications:\n`application_id | product   | app_status | loan_id\n2645           | cash_loan | approved   | 1150\n3003           | bnpl      | cancelled  | NULL\n5440           | cash_loan | approved   | 2384`\nWhat is the right reading?",
+    "options": [
+      "Khách có 2 khoản vay; hồ sơ BNPL được duyệt nhưng khách không nhận lời đề nghị nên không có khoản vay",
+      "Khách có 3 khoản vay, vì hồ sơ nào đã được nộp cũng thành một khoản vay",
+      "Khách có 2 khoản vay; hồ sơ BNPL bị từ chối vì điểm tín dụng thấp",
+      "Khách có 1 khoản vay, vì `loan_id` 2384 vẫn còn đang `active`"
+    ],
+    "optionsEn": [
+      "The customer has 2 loans; the BNPL application was approved but the customer never accepted the offer, so there is no loan",
+      "The customer has 3 loans, because every submitted application becomes a loan",
+      "The customer has 2 loans; the BNPL application was rejected for a low credit score",
+      "The customer has 1 loan, because `loan_id` 2384 is still `active`"
+    ],
+    "answer": 0,
+    "explanation": "Trong fintech.db, `approved` nghĩa là được duyệt và đã thành khoản vay; `cancelled` là lời đề nghị không được nhận, nên `loan_id` là NULL. Khoản vay đang `active` vẫn là một khoản vay.",
+    "explanationEn": "In fintech.db, `approved` means approved and booked as a loan; `cancelled` is an offer that was not accepted, so `loan_id` is NULL. An `active` loan is still a loan.",
+    "optionExplanations": [
+      "Đúng: hai hồ sơ approved, mỗi hồ sơ một khoản vay; hồ sơ cancelled không có khoản vay.",
+      "Sai: hồ sơ cancelled có `loan_id` NULL, nên không thành khoản vay.",
+      "Sai: hồ sơ bị từ chối có status `rejected` và một `reject_reason`, không phải `cancelled`.",
+      "Sai: khoản vay đang trả (`active`) vẫn được tính là khoản vay."
+    ],
+    "optionExplanationsEn": [
+      "Correct: two approved applications, one loan each; the cancelled one has no loan.",
+      "Wrong: the cancelled application has a NULL `loan_id`, so it never became a loan.",
+      "Wrong: a rejected application has status `rejected` and a `reject_reason`, not `cancelled`.",
+      "Wrong: a loan still being repaid (`active`) is still a loan."
+    ]
+  },
+  {
+    "id": "da02-q10",
+    "question": "Theo máy trạng thái của `payments.status` trong bài, bước chuyển nào KHÔNG hợp lệ?",
+    "questionEn": "According to the `payments.status` state machine in the article, which transition is NOT valid?",
+    "options": [
+      "`pending` → `success`",
+      "`failed` → `refunded`",
+      "`success` → `refunded`",
+      "`pending` → `failed`"
+    ],
+    "optionsEn": [
+      "`pending` → `success`",
+      "`failed` → `refunded`",
+      "`success` → `refunded`",
+      "`pending` → `failed`"
+    ],
+    "answer": 1,
+    "explanation": "Chỉ thanh toán đã thành công mới hoàn tiền được: tiền chưa từng chuyển thì không có gì để trả lại. Một dòng `refunded` đi ra từ `failed` là dấu hiệu lỗi dữ liệu.",
+    "explanationEn": "Only a successful payment can be refunded: if no money moved, there is nothing to give back. A `refunded` row that came from `failed` signals a data error.",
+    "optionExplanations": [
+      "Sai: đây là bước chuyển bình thường khi thanh toán được xử lý xong.",
+      "Đúng: thanh toán thất bại không làm tiền dịch chuyển nên không thể hoàn tiền.",
+      "Sai: đây chính là bước chuyển của hoàn tiền.",
+      "Sai: đây là bước chuyển bình thường khi thanh toán bị từ chối."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: this is the normal move when a payment completes.",
+      "Correct: a failed payment moved no money, so it cannot be refunded.",
+      "Wrong: this is exactly the refund transition.",
+      "Wrong: this is the normal move when a payment is declined."
+    ]
+  },
+  {
+    "id": "da02-q11",
+    "question": "Bạn thấy một dòng lịch trả nợ: `due_date` 2026-05-27, `paid_date` NULL, `amount_paid` 0, thuộc một khoản vay có `loans.status = 'closed'`. Kết luận nào đúng?",
+    "questionEn": "You find a schedule row: `due_date` 2026-05-27, `paid_date` NULL, `amount_paid` 0, belonging to a loan with `loans.status = 'closed'`. Which conclusion is right?",
+    "options": [
+      "Bình thường: khoản vay `closed` vẫn có thể còn vài kỳ chưa đến hạn",
+      "Bình thường: kỳ này sẽ được tính là đã trả khi đến ngày quyết toán",
+      "Khách đã trả trước toàn bộ, nên các kỳ còn lại luôn được để trống",
+      "Vi phạm quy tắc trạng thái: khoản vay `closed` không được còn kỳ chưa trả; cần báo lỗi dữ liệu"
+    ],
+    "optionsEn": [
+      "Normal: a `closed` loan can still have a few installments that are not due yet",
+      "Normal: the installment will count as paid on the settlement date",
+      "The customer paid everything early, so the remaining installments are always left blank",
+      "It breaks a state rule: a `closed` loan must have no unpaid installments; report it as a data error"
+    ],
+    "answer": 3,
+    "explanation": "Theo máy trạng thái, `closed` nghĩa là mọi kỳ đã trả. Một dòng chưa trả, lại đã qua hạn 2026-05-27 tính đến 2026-06-30, mâu thuẫn với trạng thái đó: đây là vi phạm cần điều tra, và là một phép kiểm tra nên viết thành SQL.",
+    "explanationEn": "In the state machine, `closed` means every installment is paid. An unpaid row, already past its 2026-05-27 due date as of 2026-06-30, contradicts that status: it is a violation to investigate, and a check worth writing in SQL.",
+    "optionExplanations": [
+      "Sai: kỳ này đến hạn 2026-05-27, trước ngày snapshot 2026-06-30; và `closed` nghĩa là không còn kỳ nào chưa trả.",
+      "Sai: quyết toán là khái niệm của thanh toán merchant, không liên quan lịch trả nợ.",
+      "Sai: nếu khách trả trước, `paid_date` và `amount_paid` phải được điền.",
+      "Đúng: trạng thái và dữ liệu lịch trả nợ mâu thuẫn nhau."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it was due on 2026-05-27, before the 2026-06-30 snapshot; and `closed` means nothing is left unpaid.",
+      "Wrong: settlement is a merchant-payments concept, unrelated to loan schedules.",
+      "Wrong: if the customer paid early, `paid_date` and `amount_paid` would be filled in.",
+      "Correct: the status and the schedule data contradict each other."
+    ]
+  },
+  {
+    "id": "da02-q12",
+    "question": "Một thanh toán có `created_at` = `2026-02-12 23:26:07` (UTC). Nếu báo cáo theo ngày giờ Việt Nam (UTC+7), thanh toán này thuộc ngày nào?",
+    "questionEn": "A payment has `created_at` = `2026-02-12 23:26:07` (UTC). If the report uses Vietnam dates (UTC+7), which day does it belong to?",
+    "options": [
+      "2026-02-12",
+      "2026-02-11",
+      "2026-02-13",
+      "2026-02-14"
+    ],
+    "optionsEn": [
+      "2026-02-12",
+      "2026-02-11",
+      "2026-02-13",
+      "2026-02-14"
+    ],
+    "answer": 2,
+    "explanation": "23:26 UTC + 7 giờ = 06:26 sáng hôm sau, tức ngày 13/2 giờ Việt Nam. Trong SQLite: `date(created_at, '+7 hours')`.",
+    "explanationEn": "23:26 UTC + 7 hours = 06:26 the next morning, so 13 February in Vietnam. In SQLite: `date(created_at, '+7 hours')`.",
+    "optionExplanations": [
+      "Sai: đó là ngày UTC; giờ Việt Nam đã sang ngày hôm sau.",
+      "Sai: giờ Việt Nam đi trước UTC, không lùi về ngày trước.",
+      "Đúng: 23:26 + 7 giờ = 06:26 ngày 13/2.",
+      "Sai: cộng 7 giờ chỉ đẩy sang ngày kế tiếp, không phải hai ngày."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that is the UTC date; in Vietnam it is already the next day.",
+      "Wrong: Vietnam is ahead of UTC, so it never moves back a day.",
+      "Correct: 23:26 + 7 hours = 06:26 on 13 February.",
+      "Wrong: adding 7 hours moves it one day forward, not two."
+    ]
+  },
+  {
+    "id": "da02-q13",
+    "question": "Chị Lan mua điện thoại bằng thẻ, sau đó khiếu nại với ngân hàng phát hành thẻ rằng hàng không được giao; ngân hàng thu hồi tiền từ merchant kèm phí. Đây là gì?",
+    "questionEn": "Lan buys a phone by card, then disputes the payment with her card-issuing bank because the goods never arrived; the bank pulls the money back from the merchant with a fee. What is this?",
+    "options": [
+      "Chargeback: chủ thẻ khiếu nại qua ngân hàng và tiền bị thu hồi bắt buộc từ merchant",
+      "Refund: merchant tự nguyện trả lại tiền cho khách sau khi khách đổi ý",
+      "Settlement: công ty thanh toán chuyển tiền trong ngày cho merchant sau khi trừ phí",
+      "Double charge: hệ thống trừ tiền khách hai lần vì app gửi lại request"
+    ],
+    "optionsEn": [
+      "Chargeback: the cardholder disputes through the bank and the money is forcibly taken back from the merchant",
+      "Refund: the merchant voluntarily gives the money back after the customer changes their mind",
+      "Settlement: the payment company pays the merchant the day's money minus fees",
+      "Double charge: the system charges the customer twice because the app resent the request"
+    ],
+    "answer": 0,
+    "explanation": "Chargeback đi qua ngân hàng của chủ thẻ và quy trình tranh chấp của tổ chức thẻ, không phụ thuộc merchant có đồng ý hay không. fintech.db không có dữ liệu chargeback.",
+    "explanationEn": "A chargeback goes through the cardholder's bank and the card network's dispute process, whether or not the merchant agrees. fintech.db has no chargeback data.",
+    "optionExplanations": [
+      "Đúng: khiếu nại qua ngân hàng, tiền bị thu hồi bắt buộc.",
+      "Sai: refund là merchant tự nguyện trả lại, không qua tranh chấp với ngân hàng.",
+      "Sai: settlement là dòng tiền từ công ty thanh toán về merchant, theo chiều ngược lại.",
+      "Sai: ở đây chỉ có một lần trừ tiền; vấn đề là hàng không được giao."
+    ],
+    "optionExplanationsEn": [
+      "Correct: a dispute through the bank, with the money forcibly taken back.",
+      "Wrong: a refund is the merchant giving money back voluntarily, without a bank dispute.",
+      "Wrong: settlement is money flowing from the payment company to the merchant, the opposite direction.",
+      "Wrong: there was only one charge here; the problem is that the goods never arrived."
+    ]
+  },
+  {
+    "id": "da02-q14",
+    "question": "Một merchant có tổng thanh toán thành công trong ngày là 2,000,000 VND và MDR 1.5%. Khi quyết toán T+1, merchant nhận bao nhiêu?",
+    "questionEn": "A merchant has 2,000,000 VND of successful payments in a day and an MDR of 1.5%. How much does the merchant receive at T+1 settlement?",
+    "options": [
+      "1,700,000 VND",
+      "1,970,000 VND",
+      "2,030,000 VND",
+      "1,997,000 VND"
+    ],
+    "optionsEn": [
+      "1,700,000 VND",
+      "1,970,000 VND",
+      "2,030,000 VND",
+      "1,997,000 VND"
+    ],
+    "answer": 1,
+    "explanation": "Phí MDR = 2,000,000 × 1.5% = 30,000. Merchant nhận 2,000,000 − 30,000 = 1,970,000 VND; công ty thanh toán giữ 30,000 tiền phí.",
+    "explanationEn": "MDR fee = 2,000,000 × 1.5% = 30,000. The merchant receives 2,000,000 − 30,000 = 1,970,000 VND; the payment company keeps the 30,000 fee.",
+    "optionExplanations": [
+      "Sai: đây là trừ 15%, nhầm 1.5% thành 15%.",
+      "Đúng: 2,000,000 − 30,000.",
+      "Sai: phí MDR bị trừ khỏi tiền của merchant, không cộng thêm.",
+      "Sai: đây là trừ 0.15%, nhầm vị trí dấu thập phân."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that deducts 15%, mistaking 1.5% for 15%.",
+      "Correct: 2,000,000 − 30,000.",
+      "Wrong: the MDR fee is taken from the merchant's money, not added to it.",
+      "Wrong: that deducts 0.15%, a misplaced decimal point."
+    ]
+  },
+  {
+    "id": "da02-q15",
+    "question": "App gửi `POST /payments` với idempotency key `K-81f2`, mạng rớt, rồi app gửi lại đúng request đó với cùng key `K-81f2`. Lần đầu server đã trừ tiền thành công. Server nên làm gì?",
+    "questionEn": "The app sends `POST /payments` with idempotency key `K-81f2`, the connection drops, and the app resends the same request with the same key `K-81f2`. The first attempt was charged successfully. What should the server do?",
+    "options": [
+      "Trừ tiền lần nữa, vì mỗi request đến server đều là một lệnh thanh toán mới",
+      "Trả lỗi và yêu cầu khách bắt đầu lại checkout từ đầu",
+      "Tạo key mới cho request thứ hai rồi xử lý như một thanh toán riêng",
+      "Nhận ra key đã xử lý và trả lại kết quả lần đầu (\"success\"), không trừ tiền thêm"
+    ],
+    "optionsEn": [
+      "Charge again, because every request that reaches the server is a new payment order",
+      "Return an error and ask the customer to restart checkout from the beginning",
+      "Create a new key for the second request and process it as a separate payment",
+      "Recognise the key as already processed and return the first result (\"success\") without charging again"
+    ],
+    "answer": 3,
+    "explanation": "Idempotent nghĩa là làm hai lần có tác dụng như làm một lần. Server lưu kết quả theo key; khi key lặp lại, nó trả kết quả cũ thay vì trừ tiền lần hai.",
+    "explanationEn": "Idempotent means doing it twice has the same effect as doing it once. The server stores the result by key; when the key repeats, it returns the stored result instead of charging a second time.",
+    "optionExplanations": [
+      "Sai: đây chính là cách sinh ra trừ tiền trùng (double charge).",
+      "Sai: khách đã bị trừ tiền thành công; báo lỗi sẽ khiến họ thanh toán lại.",
+      "Sai: tạo key mới làm mất tác dụng của idempotency, dẫn tới trừ tiền hai lần.",
+      "Đúng: cùng key thì cùng kết quả, không có lần trừ tiền thứ hai."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: this is exactly how double charges happen.",
+      "Wrong: the customer was already charged; an error would make them pay again.",
+      "Wrong: a new key defeats idempotency and leads to a second charge.",
+      "Correct: same key, same result, no second charge."
+    ]
+  },
+  {
+    "id": "da02-q16",
+    "question": "Kết quả kiểm tra grain:\n`payment_rows | sessions_with_a_payment\n7630         | 7593`\nMỗi session checkout lẽ ra chỉ sinh nhiều nhất một thanh toán. Bạn kết luận gì?",
+    "questionEn": "Grain check result:\n`payment_rows | sessions_with_a_payment\n7630         | 7593`\nEach checkout session should produce at most one payment. What do you conclude?",
+    "options": [
+      "Có 37 session không có thanh toán nào, cần xóa chúng khỏi bảng",
+      "Bảng `payments` bị thiếu 37 dòng so với số session",
+      "Có session sinh ra hơn một dòng thanh toán; cần điều tra đó là retry hợp lệ hay trừ tiền trùng",
+      "Không có gì bất thường, vì hai con số chỉ chênh nhau chưa tới 1%"
+    ],
+    "optionsEn": [
+      "37 sessions have no payment at all and should be deleted from the table",
+      "The `payments` table is missing 37 rows compared with the number of sessions",
+      "Some sessions produced more than one payment row; investigate whether they are legitimate retries or double charges",
+      "Nothing unusual, because the two numbers differ by less than 1%"
+    ],
+    "answer": 2,
+    "explanation": "Số dòng (7,630) lớn hơn số session khác biệt (7,593), nên ít nhất một session có nhiều hơn một dòng. Một phép kiểm tra grain thất bại là tín hiệu phải điều tra, kể cả khi chênh lệch nhỏ: với tiền của khách, mỗi lần trừ trùng đều là một khiếu nại.",
+    "explanationEn": "There are more rows (7,630) than distinct sessions (7,593), so at least one session has more than one row. A failed grain check is a signal to investigate even when the gap is small: with customers' money, every double charge is a complaint.",
+    "optionExplanations": [
+      "Sai: session không có thanh toán thì không xuất hiện trong `payments`; và analyst không xóa dữ liệu nguồn.",
+      "Sai: ngược lại, bảng có nhiều dòng hơn số session.",
+      "Đúng: thừa dòng so với grain mong đợi; cần xem đó là retry hay trùng.",
+      "Sai: chênh nhỏ về tỷ lệ vẫn có thể là tiền trừ sai của khách thật."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a session without a payment does not appear in `payments` at all; and analysts don't delete source data.",
+      "Wrong: it is the opposite; the table has more rows than sessions.",
+      "Correct: there are extra rows for the expected grain; check whether they are retries or duplicates.",
+      "Wrong: a small percentage can still be real customers charged twice."
+    ]
+  },
+  {
+    "id": "da02-q17",
+    "question": "Trong `payments`: `success` = 6,816 dòng, `refunded` = 175, `failed` = 621, `pending` = 18. Bạn cần tử số cho \"payment success rate\" (thanh toán đã từng thành công). Tử số đúng là bao nhiêu?",
+    "questionEn": "In `payments`: `success` = 6,816 rows, `refunded` = 175, `failed` = 621, `pending` = 18. You need the numerator of \"payment success rate\" (payments that ever succeeded). What is the right numerator?",
+    "options": [
+      "6,816, chỉ các dòng có `status = 'success'`",
+      "6,991, gồm cả `success` và `refunded`",
+      "7,009, gồm `success`, `refunded` và `pending`",
+      "6,641, lấy `success` trừ đi số `refunded`"
+    ],
+    "optionsEn": [
+      "6,816, only rows with `status = 'success'`",
+      "6,991, both `success` and `refunded`",
+      "7,009, `success`, `refunded` and `pending`",
+      "6,641, `success` minus the `refunded` rows"
+    ],
+    "answer": 1,
+    "explanation": "Hoàn tiền ghi đè `success` thành `refunded`, nhưng những thanh toán đó đã thành công trước khi được hoàn. 6,816 + 175 = 6,991.",
+    "explanationEn": "A refund overwrites `success` with `refunded`, but those payments did succeed before being refunded. 6,816 + 175 = 6,991.",
+    "optionExplanations": [
+      "Sai: bỏ sót 175 thanh toán đã thành công rồi mới bị hoàn tiền.",
+      "Đúng: mọi thanh toán từng thành công, kể cả đã hoàn tiền sau đó.",
+      "Sai: `pending` chưa thành công, không được tính vào tử số.",
+      "Sai: các dòng `refunded` không nằm trong 6,816, nên trừ đi là sai hai lần."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it misses 175 payments that succeeded and were refunded later.",
+      "Correct: every payment that ever succeeded, including those refunded later.",
+      "Wrong: `pending` payments have not succeeded, so they do not belong in the numerator.",
+      "Wrong: `refunded` rows are not inside the 6,816, so subtracting them is doubly wrong."
+    ]
+  },
+  {
+    "id": "da02-q18",
+    "question": "Bộ phận tuân thủ hỏi: \"Ngày 1/3/2026 có bao nhiêu khách đang KYC `pending`?\" Database chỉ có `customers.kyc_status` (trạng thái hiện tại, 241 khách `pending`). Cách phản hồi tốt nhất là gì?",
+    "questionEn": "Compliance asks: \"How many customers were KYC-`pending` on 1 March 2026?\" The database only has `customers.kyc_status` (the current status; 241 customers are `pending`). What is the best response?",
+    "options": [
+      "Nói rõ dữ liệu hiện tại không trả lời được ngày quá khứ, đưa con số 241 kèm nhãn \"tính đến 2026-06-30\", và đề xuất bảng lịch sử trạng thái KYC",
+      "Gửi con số 241, vì số khách pending gần như không đổi theo thời gian",
+      "Đếm khách có `signup_date` trước 1/3/2026 và `kyc_status = 'pending'`, rồi gửi kết quả đó",
+      "Từ chối yêu cầu, vì câu hỏi về KYC không thuộc trách nhiệm của analyst"
+    ],
+    "optionsEn": [
+      "Explain that current data cannot answer for a past date, give 241 labelled \"as of 2026-06-30\", and propose a KYC status history table",
+      "Send 241, because the number of pending customers barely changes over time",
+      "Count customers with `signup_date` before 1 March 2026 and `kyc_status = 'pending'`, and send that",
+      "Decline, because KYC questions are not an analyst's responsibility"
+    ],
+    "answer": 0,
+    "explanation": "Snapshot chỉ cho biết hôm nay. Trung thực về giới hạn của dữ liệu, ghi rõ \"tính đến ngày nào\", và đề xuất cách sửa (bảng lịch sử) là phản hồi chuyên nghiệp.",
+    "explanationEn": "A snapshot only tells you about today. Being honest about the data's limits, labelling the \"as of\" date, and proposing a fix (a history table) is the professional response.",
+    "optionExplanations": [
+      "Đúng: trung thực, có nhãn thời điểm, và có đề xuất cho tương lai.",
+      "Sai: không có bằng chứng con số không đổi; gửi nó như số ngày 1/3 là sai lệch.",
+      "Sai: khách đăng ký trước 1/3 có thể đã được duyệt rồi đổi trạng thái; query này vẫn dùng trạng thái hôm nay.",
+      "Sai: analyst nên giúp làm rõ câu hỏi và đề xuất dữ liệu cần thiết."
+    ],
+    "optionExplanationsEn": [
+      "Correct: honest, labelled with its date, and with a proposal for the future.",
+      "Wrong: there is no evidence the number is stable; sending it as the 1 March figure is misleading.",
+      "Wrong: a customer who signed up before 1 March may have changed status since; this query still uses today's status.",
+      "Wrong: an analyst should help clarify the question and propose the data needed."
+    ]
+  }
+]

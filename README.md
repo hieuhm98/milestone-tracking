@@ -97,14 +97,14 @@ app/
   api/
     knowledge/route.ts           → lists topics from knowledge-content/
     knowledge/[slug]/route.ts    → returns one topic (VI + EN + questions)
-    sql-playground/route.ts      → GET = schema, POST {sql} = run query
+    sql-playground/route.ts      → GET ?db= = schema, POST {sql, db} = run query
     english/dictionary/route.ts  → dictionary search + one entry (word bank + course vocab)
 
 knowledge-content/<slug>/        → file-based lessons (see below)
 data/word-bank.db                → committed read-only SQLite (NOT git-ignored)
 lib/groups.ts                    → course/group definitions (id, order, labels, color)
 lib/i18n.ts + context/lang.tsx   → UI dictionary + useLang() (lang, setLang, t, pick)
-lib/server/wordBankDb.ts         → read-only SQLite clone-per-query engine
+lib/server/playgroundDb.ts       → read-only SQLite clone-per-query engine (word bank + fintech DB)
 scripts/                         → word-bank seeding & dictionary import scripts
 ```
 
@@ -123,7 +123,7 @@ Conventions:
 
 ### SQL Practice playground
 - Data is a **committed** SQLite file at **`data/word-bank.db`** (~23k English words + mock review history). Tables: `words`, `parts_of_speech`, `word_reviews`.
-- `lib/server/wordBankDb.ts` opens the file **read-only**, serialises it to a cached Buffer, and builds a **fresh in-memory clone per query** — so *any* SQL (SELECT/INSERT/UPDATE/CREATE/DELETE) is safe and the committed file is never mutated. Results cap at 1000 rows.
+- `lib/server/playgroundDb.ts` opens the chosen file (`data/word-bank.db` or `data/fintech.db`) **read-only**, serialises it to a cached Buffer, and builds a **fresh in-memory clone per query** — so *any* SQL (SELECT/INSERT/UPDATE/CREATE/DELETE) is safe and the committed file is never mutated. Results cap at 1000 rows.
 - Rebuilding the word bank (needs Node 22): `node scripts/seed-word-bank.mjs` rebuilds from scratch, then `python scripts/import_dictionary.py` re-appends ~18k bulk words from free open datasets (token-free — no LLM). **Re-run the importer after any re-seed.**
 
 ### Side-by-side bilingual reading

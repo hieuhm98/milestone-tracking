@@ -961,11 +961,15 @@ export function blitzBest(data: ProgressData, group: string, seconds: number): B
   return data.blitz[blitzKey(group, seconds)];
 }
 
-export function recordReview(prev: ProgressData, entry: Omit<ReviewEntry, "at">): ProgressData {
+export function recordReview(
+  prev: ProgressData,
+  entry: Omit<ReviewEntry, "at">,
+  answered: AnsweredQuestion[] = []
+): ProgressData {
   const now = new Date().toISOString();
   const reviews = [{ at: now, ...entry }, ...prev.reviews].slice(0, MAX_REVIEWS);
 
-  return { ...prev, updatedAt: now, reviews };
+  return { ...prev, updatedAt: now, reviews, recall: applyRecall(prev.recall, answered, now) };
 }
 
 /** One graded answer, identified by `questionKey(slug, questionId)`. */

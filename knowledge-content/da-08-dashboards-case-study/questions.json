@@ -1,0 +1,578 @@
+[
+  {
+    "id": "da08-q1",
+    "question": "Approval rate tháng trước là 40%, tháng này là 46%. Câu nào mô tả đúng mức thay đổi?",
+    "questionEn": "Last month's approval rate was 40%; this month it is 46%. Which statement describes the change correctly?",
+    "options": [
+      "Tăng 6%, vì 46 trừ 40 bằng 6",
+      "Tăng 6 điểm phần trăm, tức tăng tương đối 15%",
+      "Tăng 15 điểm phần trăm, vì 6 chia 40 bằng 0,15",
+      "Tăng 46%, vì tỷ lệ mới là 46%"
+    ],
+    "optionsEn": [
+      "Up 6%, because 46 minus 40 is 6",
+      "Up 6 percentage points, a 15% relative increase",
+      "Up 15 percentage points, because 6 divided by 40 is 0.15",
+      "Up 46%, because the new rate is 46%"
+    ],
+    "answer": 1,
+    "explanation": "Hiệu số trực tiếp giữa hai tỷ lệ là điểm phần trăm: 46 − 40 = 6 pp. Mức tăng tương đối là 6 ÷ 40 = 15%. Báo cáo phải nói rõ đang dùng cách nào.",
+    "explanationEn": "The plain difference between two rates is in percentage points: 46 − 40 = 6 pp. The relative increase is 6 ÷ 40 = 15%. A report must say which one it uses.",
+    "optionExplanations": [
+      "Sai: 6 là số điểm phần trăm, không phải phần trăm tương đối.",
+      "Đúng: 6 pp tuyệt đối, 15% tương đối.",
+      "Sai: 15 là phần trăm tương đối, không phải điểm phần trăm.",
+      "Sai: 46% là mức mới, không phải mức thay đổi."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 6 is the change in percentage points, not a relative percentage.",
+      "Correct: 6 pp in absolute terms, 15% in relative terms.",
+      "Wrong: 15 is the relative percentage, not percentage points.",
+      "Wrong: 46% is the new level, not the change."
+    ]
+  },
+  {
+    "id": "da08-q2",
+    "question": "Cho tháng 3–4/2026, đội Risk báo approval rate 49,6%, đội Growth báo 53,8%, cùng một bảng `loan_applications`. Điểm khác biệt là Growth tính cả hồ sơ `cancelled` (được duyệt nhưng khách không nhận). Trường nào của thẻ KPI lẽ ra đã ngăn được tranh cãi này?",
+    "questionEn": "For March–April 2026, Risk reports an approval rate of 49.6% and Growth reports 53.8%, from the same `loan_applications` table. The difference: Growth also counts `cancelled` applications (approved, but the customer never took the loan). Which KPI card field would have prevented this argument?",
+    "options": [
+      "Tần suất cập nhật, vì hai đội lấy dữ liệu vào hai giờ khác nhau",
+      "Nguồn dữ liệu, vì hai đội đang dùng hai bảng khác nhau",
+      "Owner, vì người có quyền cao hơn sẽ quyết định con số nào đúng",
+      "Bộ lọc, ghi rõ `cancelled` được tính là duyệt hay không duyệt"
+    ],
+    "optionsEn": [
+      "Refresh, because the two teams pulled the data at different times",
+      "Source, because the two teams are using two different tables",
+      "Owner, because the more senior person decides which number is right",
+      "Filters, stating whether `cancelled` counts as approved or not"
+    ],
+    "answer": 3,
+    "explanation": "Hai con số khác nhau chỉ vì một lựa chọn về bộ lọc: có tính `cancelled` vào tử số không. Thẻ KPI ghi rõ điều đó thì cả công ty dùng chung một định nghĩa.",
+    "explanationEn": "The two numbers differ only because of a filter choice: whether `cancelled` goes into the numerator. A KPI card that writes this down makes the whole company use one definition.",
+    "optionExplanations": [
+      "Sai: cùng bảng, cùng giai đoạn; thời điểm lấy dữ liệu không tạo ra chênh lệch này.",
+      "Sai: đề bài nói rõ cả hai dùng cùng bảng `loan_applications`.",
+      "Sai: owner quyết định định nghĩa, nhưng chính trường bộ lọc mới ghi lại định nghĩa đó.",
+      "Đúng: chênh lệch nằm ở việc tính hay không tính `cancelled`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: same table, same period; when the data was pulled does not create this gap.",
+      "Wrong: the stem says both use the same `loan_applications` table.",
+      "Wrong: the owner decides the definition, but it is the filters field that records it.",
+      "Correct: the gap is whether `cancelled` is counted."
+    ]
+  },
+  {
+    "id": "da08-q3",
+    "question": "CEO muốn đặt mục tiêu tăng approval rate. Guardrail metric nào nên được đặt ngay cạnh nó trên dashboard?",
+    "questionEn": "The CEO wants a target to raise the approval rate. Which guardrail metric should sit right next to it on the dashboard?",
+    "options": [
+      "Tỷ lệ khoản vay mới từng quá hạn 30+ ngày theo vintage, ở MOB 2–3",
+      "Tổng số hồ sơ nộp mỗi tháng, chia theo kênh",
+      "Số tiền giải ngân trung bình trên mỗi khoản vay",
+      "Số khách hàng tải app mới trong tháng"
+    ],
+    "optionsEn": [
+      "Share of new loans ever 30+ days past due by vintage, at MOB 2–3",
+      "Total applications per month, split by channel",
+      "Average amount disbursed per loan",
+      "Number of new app downloads in the month"
+    ],
+    "answer": 0,
+    "explanation": "Cách dễ nhất để đẩy approval rate lên là duyệt người rủi ro hơn. Tỷ lệ trễ hạn sớm theo vintage sẽ lộ ra ngay nếu điều đó xảy ra, nên nó là guardrail đúng.",
+    "explanationEn": "The easiest way to push the approval rate up is to approve riskier people. Early delinquency by vintage exposes that quickly, so it is the right guardrail.",
+    "optionExplanations": [
+      "Đúng: nó tăng lên nếu approval được đẩy lên bằng cách nới lỏng rủi ro.",
+      "Sai: số hồ sơ là khối lượng, không cho biết khoản vay được duyệt có tốt không.",
+      "Sai: khoản vay trung bình không phản ánh chất lượng trả nợ.",
+      "Sai: lượt tải app là chỉ số marketing, không bảo vệ chất lượng tín dụng."
+    ],
+    "optionExplanationsEn": [
+      "Correct: it rises if approvals are pushed up by loosening risk.",
+      "Wrong: application count is volume; it says nothing about the quality of approved loans.",
+      "Wrong: average ticket size does not reflect repayment quality.",
+      "Wrong: downloads are a marketing metric and do not protect credit quality."
+    ]
+  },
+  {
+    "id": "da08-q4",
+    "question": "Head of Risk hỏi: \"Mỗi lứa khoản vay giải ngân hằng tháng diễn biến thế nào khi chúng già đi?\" Cách trình bày nào phù hợp nhất?",
+    "questionEn": "The Head of Risk asks: \"How does each monthly batch of loans perform as it ages?\" Which presentation fits best?",
+    "options": [
+      "Một biểu đồ tròn, mỗi lát là một tháng giải ngân",
+      "Một ô KPI duy nhất hiện tỷ lệ nợ xấu của toàn danh mục",
+      "Các đường vintage hoặc bảng cohort: hàng là tháng giải ngân, cột là MOB",
+      "Một đường lũy kế tổng số tiền đã giải ngân từ đầu năm"
+    ],
+    "optionsEn": [
+      "A pie chart with one slice per disbursement month",
+      "A single KPI tile with the whole book's bad-loan rate",
+      "Vintage lines or a cohort table: rows are disbursement months, columns are MOB",
+      "A cumulative line of total amount disbursed since January"
+    ],
+    "answer": 2,
+    "explanation": "Câu hỏi là về cohort theo độ tuổi, nên cần đặt các lứa cạnh nhau ở cùng MOB: đường vintage hoặc bảng cohort.",
+    "explanationEn": "The question is about cohorts by age, so the batches must sit side by side at the same MOB: vintage lines or a cohort table.",
+    "optionExplanations": [
+      "Sai: biểu đồ tròn chỉ cho thấy tỷ trọng, không cho thấy diễn biến theo thời gian.",
+      "Sai: một con số chung cho toàn danh mục trộn lẫn khoản vay già và non.",
+      "Đúng: so các lứa ở cùng độ tuổi chính là mục đích của vintage.",
+      "Sai: đường lũy kế khối lượng không nói gì về chất lượng trả nợ."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a pie shows shares, not how something develops over time.",
+      "Wrong: one book-wide number mixes old and young loans together.",
+      "Correct: comparing batches at the same age is exactly what vintages are for.",
+      "Wrong: a cumulative volume line says nothing about repayment quality."
+    ]
+  },
+  {
+    "id": "da08-q5",
+    "question": "Bảng theo ngày cho thanh toán thẻ trên Android có dòng: `vn_day = 2026-04-15, attempts = 2, success_pct = 50`. Một đồng nghiệp muốn báo động ngay. Bạn nên làm gì trước?",
+    "questionEn": "A daily table for Android card payments shows the row `vn_day = 2026-04-15, attempts = 2, success_pct = 50`. A colleague wants to raise the alarm now. What should you do first?",
+    "options": [
+      "Báo động ngay, vì 50% thấp hơn nhiều so với mức thường thấy khoảng 90%",
+      "Nhìn vào số mẫu: 2 giao dịch thì tỷ lệ chỉ là nhiễu; gộp theo tuần rồi mới đánh giá",
+      "Xóa dòng này khỏi bảng vì nó là outlier làm xấu báo cáo",
+      "Đổi trục biểu đồ bắt đầu từ 40% để thấy rõ mức giảm"
+    ],
+    "optionsEn": [
+      "Raise the alarm now, because 50% is far below the usual 90% or so",
+      "Look at n: with 2 attempts the rate is noise; aggregate by week before judging",
+      "Delete the row from the table, since it is an outlier that spoils the report",
+      "Start the chart axis at 40% so the drop is easier to see"
+    ],
+    "answer": 1,
+    "explanation": "Với 2 giao dịch, một lần thất bại đã làm tỷ lệ thành 50%. Phải xem *n* cạnh mỗi tỷ lệ và gộp lên mức có đủ mẫu (theo tuần) trước khi kết luận.",
+    "explanationEn": "With 2 attempts, one failure already makes the rate 50%. Look at *n* next to every rate and aggregate to a level with enough data (weekly) before concluding.",
+    "optionExplanations": [
+      "Sai: một lần thất bại trên 2 giao dịch không phải là tín hiệu đáng tin.",
+      "Đúng: mẫu quá nhỏ; cần gộp lại trước khi đánh giá.",
+      "Sai: không được âm thầm xóa dữ liệu nguồn; vấn đề là cách đọc, không phải dòng dữ liệu.",
+      "Sai: cắt trục chỉ phóng đại nhiễu, càng dễ đánh lừa hơn."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: one failure out of 2 attempts is not a reliable signal.",
+      "Correct: the sample is too small; aggregate before judging.",
+      "Wrong: never silently delete source data; the issue is how you read it, not the row.",
+      "Wrong: truncating the axis only magnifies the noise and misleads more."
+    ]
+  },
+  {
+    "id": "da08-q6",
+    "question": "Bạn viết requirement cho một cảnh báo tỷ lệ thanh toán thẻ thành công. Phiên bản nào tốt nhất?",
+    "questionEn": "You are writing the requirement for a card payment success-rate alert. Which version is best?",
+    "options": [
+      "Cảnh báo khi tỷ lệ < 80% với ≥ 20 giao dịch trong một tuần (giờ VN); gửi #payments-oncall; người phụ trách kiểm tra nhà cung cấp OTP trong 30 phút",
+      "Cảnh báo bất cứ khi nào tỷ lệ thành công trong ngày thấp hơn hôm qua",
+      "Cảnh báo khi tỷ lệ thành công có vẻ bất thường, gửi cho ai đang trực",
+      "Cảnh báo mỗi giờ một lần với tỷ lệ hiện tại, để mọi người tự quyết định"
+    ],
+    "optionsEn": [
+      "Alert when the rate < 80% on ≥ 20 attempts in a week (VN time); send to #payments-oncall; the owner checks the OTP provider within 30 minutes",
+      "Alert whenever today's success rate is lower than yesterday's",
+      "Alert when the success rate looks unusual, and send it to whoever is on duty",
+      "Send an hourly message with the current rate so people can decide for themselves"
+    ],
+    "answer": 0,
+    "explanation": "Một cảnh báo tốt có ngưỡng rõ, khối lượng tối thiểu, khung thời gian, người nhận và hành động cần làm. Chỉ phương án đầu có đủ những thứ đó.",
+    "explanationEn": "A good alert has a clear threshold, a minimum volume, a time window, a recipient and an expected action. Only the first version has all of them.",
+    "optionExplanations": [
+      "Đúng: đủ ngưỡng, khối lượng tối thiểu, khung thời gian, người nhận và hành động.",
+      "Sai: so với hôm qua sẽ kêu gần như mỗi ngày vì nhiễu.",
+      "Sai: \"có vẻ bất thường\" không kiểm thử được và không có người phụ trách rõ ràng.",
+      "Sai: tin nhắn mỗi giờ là thông báo, không phải cảnh báo; mọi người sẽ bỏ qua nó."
+    ],
+    "optionExplanationsEn": [
+      "Correct: it has threshold, minimum volume, window, recipient and action.",
+      "Wrong: comparing with yesterday fires almost daily because of noise.",
+      "Wrong: \"looks unusual\" is not testable and has no clear owner.",
+      "Wrong: an hourly message is a report, not an alert; people will ignore it."
+    ]
+  },
+  {
+    "id": "da08-q7",
+    "question": "Trong A/B test màn hình thanh toán, vì sao nên chia ngẫu nhiên theo khách hàng thay vì theo từng phiên checkout?",
+    "questionEn": "In an A/B test of the payment screen, why randomise by customer rather than by checkout session?",
+    "options": [
+      "Vì chia theo phiên làm cỡ mẫu nhỏ đi một nửa",
+      "Vì cơ sở dữ liệu không lưu được mã phiên của nhóm variant",
+      "Vì chia theo khách hàng luôn cho ra mức tăng chuyển đổi lớn hơn",
+      "Để một người luôn thấy cùng một màn hình, không bị lẫn trải nghiệm giữa hai nhóm"
+    ],
+    "optionsEn": [
+      "Because splitting by session halves the sample size",
+      "Because the database cannot store session ids for the variant group",
+      "Because splitting by customer always produces a bigger conversion lift",
+      "So that one person always sees the same screen and the two experiences don't mix"
+    ],
+    "answer": 3,
+    "explanation": "Nếu chia theo phiên, cùng một người có thể lúc thấy màn hình cũ, lúc thấy màn hình mới, khiến hai nhóm lẫn vào nhau và kết quả khó tin.",
+    "explanationEn": "If you split by session, the same person may see the old screen one time and the new one the next, so the groups contaminate each other and the result is hard to trust.",
+    "optionExplanations": [
+      "Sai: chia theo phiên thường cho nhiều đơn vị hơn, không phải ít hơn.",
+      "Sai: đây không phải giới hạn kỹ thuật nào cả.",
+      "Sai: đơn vị chia không quyết định hiệu ứng lớn hay nhỏ; nó quyết định kết quả có sạch không.",
+      "Đúng: mỗi khách hàng chỉ thuộc một nhóm."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: splitting by session usually gives more units, not fewer.",
+      "Wrong: this is not a technical limitation at all.",
+      "Wrong: the unit does not make the effect bigger; it makes the result clean.",
+      "Correct: each customer belongs to exactly one group."
+    ]
+  },
+  {
+    "id": "da08-q8",
+    "question": "Một A/B test: control chuyển đổi 600/1.000 phiên (60,0%), variant 610/1.000 (61,0%). Biên nhiễu ≈ 1,96 × √(2 × 0,605 × 0,395 ÷ 1.000) ≈ 4,3 pp. Kết luận nào đúng?",
+    "questionEn": "An A/B test: control converts 600 of 1,000 sessions (60.0%), variant 610 of 1,000 (61.0%). The noise margin ≈ 1.96 × √(2 × 0.605 × 0.395 ÷ 1,000) ≈ 4.3 pp. Which conclusion is right?",
+    "options": [
+      "Variant thắng, vì 61% lớn hơn 60%",
+      "Variant thắng chắc chắn, vì mức tăng tương đối gần 1,7%",
+      "Chưa kết luận được: chênh 1,0 pp nhỏ hơn nhiều so với biên nhiễu 4,3 pp",
+      "Control thắng, vì variant chưa đạt mức tăng 4,3 pp"
+    ],
+    "optionsEn": [
+      "The variant wins, because 61% is higher than 60%",
+      "The variant definitely wins, because the relative lift is almost 1.7%",
+      "Inconclusive: the 1.0 pp difference is far smaller than the 4.3 pp noise margin",
+      "Control wins, because the variant did not reach a 4.3 pp lift"
+    ],
+    "answer": 2,
+    "explanation": "Chênh lệch 1,0 pp nằm gọn trong biên nhiễu 4,3 pp, nên nó hoàn toàn có thể do ngẫu nhiên. Cần mẫu lớn hơn hoặc một thay đổi mạnh hơn.",
+    "explanationEn": "The 1.0 pp difference sits well inside the 4.3 pp margin, so it may be pure chance. You need a bigger sample or a bolder change.",
+    "optionExplanations": [
+      "Sai: lớn hơn một chút chưa đủ; phải so với biên nhiễu.",
+      "Sai: đổi sang phần trăm tương đối không làm kết quả chắc chắn hơn.",
+      "Đúng: chênh lệch nhỏ hơn biên nhiễu, nên chưa thể kết luận.",
+      "Sai: không vượt biên nhiễu không có nghĩa là control tốt hơn; chỉ là chưa phân biệt được."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: slightly higher is not enough; compare it with the noise margin.",
+      "Wrong: switching to a relative percentage does not make the result more certain.",
+      "Correct: the difference is smaller than the margin, so it is inconclusive.",
+      "Wrong: not beating the margin does not mean control is better; we just cannot tell."
+    ]
+  },
+  {
+    "id": "da08-q9",
+    "question": "Câu nào là phần \"so what\" tốt nhất gửi cho ban lãnh đạo?",
+    "questionEn": "Which sentence is the best \"so what\" for senior management?",
+    "options": [
+      "Thanh toán thẻ Android thất bại bất thường tuần 11/5 (thành công 40,9% so với khoảng 90% các tuần khác); mất GMV và tăng ticket; đề nghị thêm nhà cung cấp OTP dự phòng và cảnh báo hằng tuần",
+      "Tỷ lệ thành công thẻ Android là 40,9% trong tuần 2026-05-11",
+      "Chúng tôi đã chạy 12 query trên bảng payments và checkout_events",
+      "Có vẻ có vấn đề với thanh toán, chúng ta nên xem xét thêm"
+    ],
+    "optionsEn": [
+      "Android card payments failed unusually in the week of 11 May (40.9% success vs about 90% in other weeks); lost GMV and more tickets; we recommend a backup OTP provider and a weekly alert",
+      "Android card success was 40.9% in week 2026-05-11",
+      "We ran 12 queries on the payments and checkout_events tables",
+      "There seems to be a problem with payments; we should look into it"
+    ],
+    "answer": 0,
+    "explanation": "Phần \"so what\" tốt có đủ insight (con số kèm so sánh), impact (vì sao quan trọng) và recommendation (làm gì).",
+    "explanationEn": "A good \"so what\" has insight (the number with a comparison), impact (why it matters) and a recommendation (what to do).",
+    "optionExplanations": [
+      "Đúng: có insight, impact và recommendation.",
+      "Sai: chỉ có con số, thiếu so sánh, tác động và khuyến nghị.",
+      "Sai: mô tả công việc của analyst, không nói gì về quyết định.",
+      "Sai: mơ hồ, không có con số và không có hành động cụ thể."
+    ],
+    "optionExplanationsEn": [
+      "Correct: it has insight, impact and a recommendation.",
+      "Wrong: just a number, with no comparison, impact or recommendation.",
+      "Wrong: it describes the analyst's work, not the decision.",
+      "Wrong: vague, with no number and no concrete action."
+    ]
+  },
+  {
+    "id": "da08-q10",
+    "question": "Kiểm tra dữ liệu cho kết quả: `approved_apps = 3106, loans = 3106, loans_not_approved = 0, bad_schedules = 0`. Điều này cho bạn biết gì?",
+    "questionEn": "A data check returns: `approved_apps = 3106, loans = 3106, loans_not_approved = 0, bad_schedules = 0`. What does this tell you?",
+    "options": [
+      "Mọi khoản vay đều đã được trả hết đúng hạn",
+      "Mỗi hồ sơ được duyệt có đúng một khoản vay và lịch trả nợ khớp kỳ hạn, nên có thể nối các bảng một cách an toàn",
+      "Không có hồ sơ nào bị từ chối trong toàn bộ dữ liệu",
+      "Điểm tín dụng của mọi hồ sơ đều hợp lệ, không có giá trị NULL"
+    ],
+    "optionsEn": [
+      "Every loan has been repaid in full and on time",
+      "Each approved application has exactly one loan and schedules match the terms, so the tables can be joined safely",
+      "No application was rejected anywhere in the data",
+      "Every application has a valid credit score, with no NULL values"
+    ],
+    "answer": 1,
+    "explanation": "Số hồ sơ duyệt bằng số khoản vay, không có khoản vay nào từ hồ sơ không được duyệt, và số kỳ trả góp khớp kỳ hạn: nền dữ liệu đủ tin để phân tích.",
+    "explanationEn": "Approved applications equal loans, no loan comes from a non-approved application, and installment counts match the terms: the base is trustworthy enough to analyse.",
+    "optionExplanations": [
+      "Sai: kiểm tra này không nói gì về việc trả nợ.",
+      "Đúng: quan hệ giữa hồ sơ, khoản vay và lịch trả nợ nhất quán.",
+      "Sai: kiểm tra chỉ đếm hồ sơ được duyệt, không phải tất cả hồ sơ.",
+      "Sai: cùng query đó cho thấy 307 hồ sơ không có điểm."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: this check says nothing about repayment.",
+      "Correct: applications, loans and schedules are consistent with each other.",
+      "Wrong: the check only counts approved applications, not all of them.",
+      "Wrong: the same query shows 307 applications without a score."
+    ]
+  },
+  {
+    "id": "da08-q11",
+    "question": "Chính sách mới áp dụng từ ngày 1/3/2026 theo giờ Việt Nam. Hồ sơ 4817 có `applied_at = '2026-02-28 21:28:51'` (UTC). Hồ sơ này thuộc giai đoạn nào?",
+    "questionEn": "The new policy applies from 1 March 2026, Vietnam time. Application 4817 has `applied_at = '2026-02-28 21:28:51'` (UTC). Which period does it belong to?",
+    "options": [
+      "Giai đoạn cũ, vì ngày trong cột là 28/2",
+      "Không xác định được, vì timestamp không ghi múi giờ",
+      "Giai đoạn cũ, vì quyết định được đưa ra trước khi giải ngân",
+      "Giai đoạn mới, vì cộng 7 giờ thì là 04:28 ngày 1/3 giờ Việt Nam"
+    ],
+    "optionsEn": [
+      "The old period, because the date in the column is 28 February",
+      "Impossible to tell, because the timestamp has no time zone",
+      "The old period, because the decision came before disbursement",
+      "The new period, because adding 7 hours gives 04:28 on 1 March, Vietnam time"
+    ],
+    "answer": 3,
+    "explanation": "Mọi timestamp trong fintech.db là UTC; giờ Việt Nam là UTC+7. `date(applied_at, '+7 hours')` cho ra 2026-03-01, nên hồ sơ thuộc giai đoạn chính sách mới.",
+    "explanationEn": "All timestamps in fintech.db are UTC; Vietnam is UTC+7. `date(applied_at, '+7 hours')` gives 2026-03-01, so the application falls under the new policy.",
+    "optionExplanations": [
+      "Sai: 28/2 là ngày UTC; theo giờ VN đã là 1/3.",
+      "Sai: tài liệu dữ liệu nói rõ mọi timestamp là UTC.",
+      "Sai: thứ tự quyết định và giải ngân không đổi được múi giờ của thời điểm nộp hồ sơ.",
+      "Đúng: quy đổi sang giờ VN thì hồ sơ nộp ngày 1/3."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 28 February is the UTC date; in VN time it is already 1 March.",
+      "Wrong: the data dictionary says every timestamp is UTC.",
+      "Wrong: the order of decision and disbursement does not change the time zone of the application time.",
+      "Correct: converted to VN time, the application was made on 1 March."
+    ]
+  },
+  {
+    "id": "da08-q12",
+    "question": "Bảng theo giai đoạn: trước thay đổi approval 43,2%; tháng 3–4/2026 approval 49,6%; tháng 3–4 nếu bỏ các hồ sơ được duyệt có điểm 520–559 là 44,8%. Phần tăng do hạ ngưỡng điểm vào khoảng bao nhiêu?",
+    "questionEn": "Period table: before the change, approval 43.2%; March–April 2026, 49.6%; March–April without the approvals scored 520–559, 44.8%. About how much of the rise comes from the lower cut-off?",
+    "options": [
+      "Khoảng 1,6 pp, phần còn lại là do hạ ngưỡng",
+      "Toàn bộ 6,4 pp, vì chính sách thay đổi đúng ngày 1/3",
+      "Khoảng 4,8 pp trong 6,4 pp",
+      "Không đáng kể, vì 44,8% gần với 43,2%"
+    ],
+    "optionsEn": [
+      "About 1.6 pp; the rest comes from the lower cut-off",
+      "All 6.4 pp, because the policy changed exactly on 1 March",
+      "About 4.8 of the 6.4 pp",
+      "Negligible, because 44.8% is close to 43.2%"
+    ],
+    "answer": 2,
+    "explanation": "Bỏ nhóm điểm mới thì approval rơi từ 49,6% xuống 44,8%: 4,8 pp là phần do hạ ngưỡng. 1,6 pp còn lại (44,8 − 43,2) đến từ những yếu tố khác, như xu hướng đã tăng từ trước.",
+    "explanationEn": "Removing the new band drops approval from 49.6% to 44.8%: 4.8 pp is the cut-off's share. The remaining 1.6 pp (44.8 − 43.2) comes from other things, such as the trend that was already rising.",
+    "optionExplanations": [
+      "Sai: 1,6 pp là phần không do hạ ngưỡng; đáp án đảo ngược hai phần.",
+      "Sai: approval đã tăng dần từ trước tháng 3, nên không phải toàn bộ là do chính sách.",
+      "Đúng: 49,6 − 44,8 = 4,8 pp.",
+      "Sai: 44,8% là mức khi đã bỏ nhóm mới; khoảng cách đến 49,6% mới là phần của chính sách."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 1.6 pp is the part NOT due to the cut-off; this swaps the two parts.",
+      "Wrong: approval was already rising before March, so not all of it is the policy.",
+      "Correct: 49.6 − 44.8 = 4.8 pp.",
+      "Wrong: 44.8% is the level without the new band; the gap to 49.6% is the policy's share."
+    ]
+  },
+  {
+    "id": "da08-q13",
+    "question": "Trong bảng vintage tính đến 30/6/2026, dòng `2026-04 | loans 290 | mob2 4.1 | mob3 NULL`. Ô `mob3 = NULL` nghĩa là gì?",
+    "questionEn": "In a vintage table as of 30 June 2026, the row reads `2026-04 | loans 290 | mob2 4.1 | mob3 NULL`. What does `mob3 = NULL` mean?",
+    "options": [
+      "Chưa quan sát được: các khoản vay tháng 4 chưa đến cuối MOB 3 (31/7)",
+      "Không có khoản vay tháng 4 nào trễ hạn ở MOB 3",
+      "Query bị lỗi chia cho 0 nên trả về NULL",
+      "Dữ liệu trả nợ tháng 7 đã bị xóa khỏi database"
+    ],
+    "optionsEn": [
+      "Not observable yet: April loans have not reached the end of MOB 3 (31 July)",
+      "No April loan was overdue at MOB 3",
+      "The query hit a division by zero and returned NULL",
+      "The July repayment data was deleted from the database"
+    ],
+    "answer": 0,
+    "explanation": "Đây là right-censoring: ô chỉ được điền khi mọi khoản vay đã đến ngày cuối của MOB đó. NULL không phải 0.",
+    "explanationEn": "This is right-censoring: a cell is filled only when every loan has reached the end of that MOB. NULL is not zero.",
+    "optionExplanations": [
+      "Đúng: MOB 3 của vintage tháng 4 kết thúc ngày 31/7, sau ngày chốt dữ liệu.",
+      "Sai: NULL không có nghĩa là 0%; đơn giản là chưa biết.",
+      "Sai: query cố ý trả NULL khi MOB chưa đến, không phải lỗi.",
+      "Sai: dữ liệu tháng 7 chưa tồn tại vì ngày chốt là 30/6."
+    ],
+    "optionExplanationsEn": [
+      "Correct: MOB 3 for the April vintage ends on 31 July, after the snapshot date.",
+      "Wrong: NULL does not mean 0%; it simply means unknown.",
+      "Wrong: the query deliberately returns NULL when the MOB is not reached; it is not an error.",
+      "Wrong: July data does not exist yet because the snapshot is 30 June."
+    ]
+  },
+  {
+    "id": "da08-q14",
+    "question": "So sánh tỷ lệ từng 30+ tại MOB 3 theo nhóm điểm: `560-599: before 8.8% → Mar 2026 21.4%` và `600-649: before 2.7% → Mar 2026 3.8%`. Đây là những nhóm mà quy tắc cũ cũng duyệt. Điều này cho thấy gì?",
+    "questionEn": "Ever-30+ at MOB 3 by score band: `560-599: before 8.8% → Mar 2026 21.4%` and `600-649: before 2.7% → Mar 2026 3.8%`. These are bands the old rule also approved. What does this show?",
+    "options": [
+      "Mức xấu đi của tháng 3 hoàn toàn do nhóm điểm mới 520–559 gây ra",
+      "Cả những khoản vay tương đương cũng tệ hơn, nên không thể giải thích chỉ bằng thay đổi cơ cấu",
+      "Mô hình chấm điểm đã sai hoàn toàn và phải bỏ ngay",
+      "Nhóm điểm cao hơn luôn có tỷ lệ nợ xấu cao hơn"
+    ],
+    "optionsEn": [
+      "March's deterioration is entirely caused by the new 520–559 band",
+      "Comparable loans got worse too, so mix shift alone cannot explain it",
+      "The scoring model is completely wrong and must be dropped now",
+      "Higher score bands always have higher bad rates"
+    ],
+    "answer": 1,
+    "explanation": "So sánh cùng nhóm điểm giữa hai giai đoạn (like for like) cho thấy các nhóm cũ cũng tệ đi, nên mix shift không giải thích được toàn bộ.",
+    "explanationEn": "Comparing the same band across periods (like for like) shows the old bands also got worse, so mix shift cannot explain everything.",
+    "optionExplanations": [
+      "Sai: các nhóm 560+ cũng tăng, không chỉ nhóm mới.",
+      "Đúng: cùng nhóm điểm mà vẫn tệ hơn nghĩa là có thêm nguyên nhân khác.",
+      "Sai: thứ tự giữa các nhóm vẫn đúng (điểm thấp tệ hơn); mẫu nhỏ, chưa đủ để kết luận mạnh như vậy.",
+      "Sai: dữ liệu cho thấy ngược lại: nhóm điểm cao có tỷ lệ xấu thấp hơn."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the 560+ bands rose too, not only the new band.",
+      "Correct: worse within the same band means there is another cause as well.",
+      "Wrong: the bands still rank correctly (lower scores are worse); with small samples you cannot conclude that much.",
+      "Wrong: the data shows the opposite: higher bands have lower bad rates."
+    ]
+  },
+  {
+    "id": "da08-q15",
+    "question": "Vì sao trong case study ta thêm vintage tháng 3 và tháng 4 năm 2025 vào bảng so sánh?",
+    "questionEn": "Why does the case study add the March and April 2025 vintages to the comparison table?",
+    "options": [
+      "Vì năm 2025 có nhiều khoản vay hơn nên mẫu lớn hơn",
+      "Vì chính sách mới được thử nghiệm trước vào mùa xuân năm 2025",
+      "Để thay thế nhóm \"trước\" bị thiếu dữ liệu",
+      "Để kiểm tra mùa vụ: nếu cùng kỳ năm ngoái bình thường thì mùa vụ không giải thích được mức xấu đi"
+    ],
+    "optionsEn": [
+      "Because 2025 has more loans, so the sample is bigger",
+      "Because the new policy was piloted in spring 2025",
+      "To replace the \"before\" group, which has missing data",
+      "To check seasonality: if the same months last year were normal, the season does not explain the deterioration"
+    ],
+    "answer": 3,
+    "explanation": "Tháng 3 và 4/2025 chỉ ở 3,4% và 1,6% tại MOB 3, nên mùa xuân không tự nó làm khoản vay xấu đi; mức 7,4% của tháng 3/2026 cần nguyên nhân khác.",
+    "explanationEn": "March and April 2025 were at 3.4% and 1.6% at MOB 3, so spring itself does not make loans worse; March 2026's 7.4% needs another cause.",
+    "optionExplanations": [
+      "Sai: hai vintage 2025 chỉ có 118 và 122 khoản vay, nhỏ hơn tháng 3/2026.",
+      "Sai: không có dữ liệu nào cho thấy thử nghiệm như vậy.",
+      "Sai: nhóm \"trước\" (9/2025–2/2026) đầy đủ; năm 2025 được thêm vào với mục đích khác.",
+      "Đúng: đây là phép kiểm tra cùng kỳ năm trước."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the two 2025 vintages have only 118 and 122 loans, fewer than March 2026.",
+      "Wrong: nothing in the data shows such a pilot.",
+      "Wrong: the \"before\" group (Sep 2025–Feb 2026) is complete; 2025 is added for another reason.",
+      "Correct: it is a same-period-last-year check."
+    ]
+  },
+  {
+    "id": "da08-q16",
+    "question": "Nhóm điểm mới 520–559 (vintage 3–4/2026): 42 khoản đang trả tốt có thể mang về tối đa khoảng 97 triệu đồng tiền lãi; 11 khoản đã 30+ DPD còn nợ khoảng 121 triệu đồng. Kết luận nào hợp lý nhất?",
+    "questionEn": "New 520–559 band (Mar–Apr 2026 vintages): the 42 performing loans can earn at most about 97 million VND of interest; the 11 loans already 30+ DPD still owe about 121 million VND. Which conclusion is most reasonable?",
+    "options": [
+      "Nhóm này lãi 97 triệu, vì tiền lãi là doanh thu chắc chắn",
+      "Nhóm này lỗ chính xác 24 triệu (121 − 97)",
+      "Đây là ước lượng thô: nhóm này cùng lắm chỉ hòa vốn, chưa tính chi phí, và các khoản vay còn non",
+      "Chưa nói được gì cho đến khi mọi khoản vay đáo hạn"
+    ],
+    "optionsEn": [
+      "The band makes 97 million profit, because interest is guaranteed revenue",
+      "The band loses exactly 24 million (121 − 97)",
+      "A rough estimate: the band is at best break-even before costs, and the loans are still young",
+      "Nothing can be said until every loan has matured"
+    ],
+    "answer": 2,
+    "explanation": "So sánh đơn giản này đủ để thấy nhóm mới khó có lãi, nhưng phải gọi đúng tên là ước lượng: chưa có chi phí vốn, chi phí thu hồi, khoản thu hồi và nợ xấu tương lai.",
+    "explanationEn": "This simple comparison is enough to see the new band is unlikely to be profitable, but it must be labelled an estimate: no funding cost, collection cost, recoveries or future defaults.",
+    "optionExplanations": [
+      "Sai: 97 triệu chỉ thu được nếu mọi khoản tốt trả đến cuối, và chưa trừ khoản mất từ nợ xấu.",
+      "Sai: con số chính xác là ảo tưởng; còn thu hồi, chi phí và nợ xấu tương lai.",
+      "Đúng: kết luận có hướng rõ ràng, kèm lưu ý trung thực.",
+      "Sai: chờ đến khi đáo hạn thì đã cho vay thêm nhiều khoản như vậy; quyết định cần dựa trên tín hiệu sớm."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 97 million comes only if every good loan pays to the end, and losses on bad loans are not subtracted.",
+      "Wrong: an exact figure is an illusion; recoveries, costs and future defaults are missing.",
+      "Correct: a clear direction with honest caveats.",
+      "Wrong: by the time loans mature, many more such loans will have been booked; decide on early signals."
+    ]
+  },
+  {
+    "id": "da08-q17",
+    "question": "Lưu ý (caveat) nào quan trọng nhất cần đưa vào memo về thay đổi chính sách tháng 3?",
+    "questionEn": "Which caveat is most important to include in the memo about the March policy change?",
+    "options": [
+      "Số khoản vay xấu còn nhỏ, vintage còn non, và chính sách với chiến dịch bắt đầu cùng lúc nên tác động chồng lên nhau",
+      "Các query được viết bằng SQLite thay vì PostgreSQL",
+      "Bảng `customers` có một số cách viết tên thành phố khác nhau",
+      "Dữ liệu được lấy vào buổi sáng chứ không phải buổi chiều"
+    ],
+    "optionsEn": [
+      "Bad-loan counts are small, vintages are young, and policy and campaign started together so their effects overlap",
+      "The queries were written in SQLite rather than PostgreSQL",
+      "The `customers` table has several spellings of city names",
+      "The data was pulled in the morning, not the afternoon"
+    ],
+    "answer": 0,
+    "explanation": "Caveat tốt là những điều có thể thay đổi kết luận: mẫu nhỏ, cohort còn non, và hai thay đổi xảy ra cùng lúc nên không tách bạch được.",
+    "explanationEn": "Good caveats are the things that could change the conclusion: small samples, young cohorts, and two changes at once that cannot be fully separated.",
+    "optionExplanations": [
+      "Đúng: đây là những điểm có thể làm thay đổi kết luận.",
+      "Sai: phương ngữ SQL không ảnh hưởng đến kết luận kinh doanh.",
+      "Sai: đúng là có lỗi này, nhưng phân tích không dùng cột thành phố.",
+      "Sai: ngày chốt dữ liệu là cố định (30/6), giờ lấy dữ liệu không quan trọng."
+    ],
+    "optionExplanationsEn": [
+      "Correct: these are the points that could change the conclusion.",
+      "Wrong: the SQL dialect does not affect the business conclusion.",
+      "Wrong: that issue exists, but this analysis does not use the city column.",
+      "Wrong: the snapshot date is fixed (30 June); the time of extraction does not matter."
+    ]
+  },
+  {
+    "id": "da08-q18",
+    "question": "CEO nói: \"PAR30 của toàn danh mục gần như không đổi, nên khoản vay mới không thể tệ.\" Vì sao lập luận này yếu?",
+    "questionEn": "The CEO says: \"PAR30 for the whole book barely moved, so the new loans can't be bad.\" Why is this argument weak?",
+    "options": [
+      "Vì PAR30 chỉ tính cho khoản vay BNPL, không tính khoản vay tiền mặt",
+      "Vì mẫu số gồm cả khoản vay cũ chiếm đa số, còn khoản vay mới quá non để kịp thành nợ xấu",
+      "Vì PAR30 luôn đi ngang trong mọi danh mục cho vay",
+      "Vì PAR30 tính theo số khách hàng chứ không theo số tiền"
+    ],
+    "optionsEn": [
+      "Because PAR30 only covers BNPL loans, not cash loans",
+      "Because the denominator is mostly older loans, and the new loans are too young to have gone bad yet",
+      "Because PAR30 is always flat in every loan book",
+      "Because PAR30 is counted per customer, not per amount"
+    ],
+    "answer": 1,
+    "explanation": "Một tỷ lệ của toàn danh mục pha loãng khoản vay mới trong một mẫu số lớn gồm khoản vay đã \"già\". Vintage so các khoản vay ở cùng độ tuổi nên phát hiện vấn đề sớm hơn.",
+    "explanationEn": "A whole-book rate dilutes the new loans in a large denominator of seasoned loans. Vintages compare loans at the same age, so they catch the problem earlier.",
+    "optionExplanations": [
+      "Sai: PAR30 tính cho mọi sản phẩm trong danh mục.",
+      "Đúng: khoản vay mới bị pha loãng và chưa đủ tuổi để lộ ra kết quả.",
+      "Sai: PAR30 có thể thay đổi nhiều; vấn đề là nó phản ứng chậm với khoản vay mới.",
+      "Sai: PAR30 thường tính theo dư nợ; dù tính cách nào thì vấn đề pha loãng vẫn còn."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: PAR30 covers every product in the book.",
+      "Correct: the new loans are diluted and too young to show the outcome.",
+      "Wrong: PAR30 can move a lot; the issue is that it reacts slowly to new loans.",
+      "Wrong: PAR30 is usually by outstanding amount; either way the dilution problem remains."
+    ]
+  }
+]

@@ -1,0 +1,610 @@
+[
+  {
+    "id": "da01-q1",
+    "question": "Một bảng có các cột `loan_id, installment_no, due_date, amount_due, paid_date`, và khoản vay số 2 xuất hiện trên 18 dòng. Grain của bảng là gì?",
+    "questionEn": "A table has the columns `loan_id, installment_no, due_date, amount_due, paid_date`, and loan 2 appears on 18 rows. What is the grain of the table?",
+    "options": [
+      "Mỗi dòng là một khoản vay đang còn dư nợ",
+      "Mỗi dòng là một lần khách bấm thanh toán trên app",
+      "Mỗi dòng là một kỳ trả góp của một khoản vay",
+      "Mỗi dòng là một ngày trong thời hạn khoản vay"
+    ],
+    "optionsEn": [
+      "One row per loan that is still outstanding",
+      "One row per time the customer pressed pay in the app",
+      "One row per installment of one loan",
+      "One row per day of the loan's term"
+    ],
+    "answer": 2,
+    "explanation": "Hãy hỏi \"một dòng = một cái gì?\". Một khoản vay xuất hiện 18 lần và mỗi dòng có số kỳ cùng ngày đến hạn, nên grain là một kỳ trả góp của một khoản vay.",
+    "explanationEn": "Ask \"one row = one what?\". One loan appears 18 times and each row has an installment number and a due date, so the grain is one installment of one loan.",
+    "optionExplanations": [
+      "Sai: một khoản vay xuất hiện 18 lần, nên một dòng không thể là một khoản vay.",
+      "Sai: bảng có `due_date` và `installment_no`, đó là lịch phải trả chứ không phải hành động trên app.",
+      "Đúng: `loan_id` + `installment_no` xác định một kỳ; vay 18 tháng có 18 kỳ.",
+      "Sai: 18 dòng cho khoản vay 18 tháng là theo tháng, không phải theo ngày."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: one loan appears 18 times, so a row cannot be a loan.",
+      "Wrong: the table has `due_date` and `installment_no`; it is a schedule, not app actions.",
+      "Correct: `loan_id` + `installment_no` identify one installment; an 18-month loan has 18.",
+      "Wrong: 18 rows for an 18-month loan is monthly, not daily."
+    ]
+  },
+  {
+    "id": "da01-q2",
+    "question": "Một dashboard vận hành ghi \"Số khoản vay: 28.824\" và con số này đếm số dòng của `repayment_schedule`. Con số đúng là gì?",
+    "questionEn": "An operations dashboard shows \"Loans: 28,824\", counting the rows of `repayment_schedule`. What is the right figure?",
+    "options": [
+      "3.106, đếm từ `loans`; bảng lịch trả nợ có một dòng mỗi kỳ",
+      "28.824, vì mỗi kỳ trả góp được ghi nhận như một khoản vay riêng",
+      "6.854, vì mỗi hồ sơ nộp vào đều trở thành một khoản vay",
+      "2.664, vì mỗi khách hàng chỉ được giữ một khoản vay"
+    ],
+    "optionsEn": [
+      "3,106, counted from `loans`; the schedule has one row per installment",
+      "28,824, because each installment is booked as a separate loan",
+      "6,854, because every submitted application becomes a loan",
+      "2,664, because each customer may only hold one loan"
+    ],
+    "answer": 0,
+    "explanation": "Đếm ở đúng grain: khoản vay nằm trong `loans` (3.106 dòng). 28.824 là số kỳ trả góp, 6.854 là số hồ sơ.",
+    "explanationEn": "Count at the right grain: loans live in `loans` (3,106 rows). 28,824 is installments, 6,854 is applications.",
+    "optionExplanations": [
+      "Đúng: grain của `loans` là một khoản vay; bảng lịch trả nợ đếm kỳ.",
+      "Sai: các kỳ thuộc cùng một khoản vay, không phải khoản vay riêng.",
+      "Sai: hồ sơ bị từ chối, hủy hoặc đang chờ không thành khoản vay.",
+      "Sai: 2.664 là số người nộp hồ sơ, và một khách có thể vay nhiều lần."
+    ],
+    "optionExplanationsEn": [
+      "Correct: `loans` has one row per loan; the schedule counts installments.",
+      "Wrong: installments belong to one loan; they are not separate loans.",
+      "Wrong: rejected, cancelled and pending applications never become loans.",
+      "Wrong: 2,664 is the number of applicants, and a customer can borrow more than once."
+    ]
+  },
+  {
+    "id": "da01-q3",
+    "question": "Analyst join `loans` với `repayment_schedule` rồi chạy `SUM(l.principal)` và được 395.210.700.000, trong khi `SELECT SUM(principal) FROM loans` cho 34.040.900.000. Vì sao?",
+    "questionEn": "An analyst joins `loans` to `repayment_schedule` and runs `SUM(l.principal)`, getting 395,210,700,000, while `SELECT SUM(principal) FROM loans` gives 34,040,900,000. Why?",
+    "options": [
+      "Bảng lịch trả nợ lưu tiền gốc theo đơn vị nghìn đồng",
+      "Join lặp mỗi khoản vay theo số kỳ, làm phồng tổng tiền gốc",
+      "Join tự động cộng thêm tiền lãi vào tiền gốc của từng khoản",
+      "Câu query thứ hai bỏ sót các khoản vay đã tất toán"
+    ],
+    "optionsEn": [
+      "The schedule table stores principal in thousands of VND",
+      "The join repeats each loan once per installment, inflating the sum",
+      "The join automatically adds interest to each loan's principal",
+      "The second query leaves out loans that are already closed"
+    ],
+    "answer": 1,
+    "explanation": "Sau khi join, mỗi khoản vay xuất hiện một lần cho mỗi kỳ, nên `SUM(principal)` bị phồng lên hơn mười một lần. Biết grain trước khi cộng.",
+    "explanationEn": "After the join, each loan appears once per installment, so `SUM(principal)` is inflated more than elevenfold. Know the grain before you sum.",
+    "optionExplanations": [
+      "Sai: `principal` lấy từ `loans`; join không đổi đơn vị.",
+      "Đúng: đây là fan-out, grain đã đổi từ khoản vay sang kỳ trả góp.",
+      "Sai: join chỉ ghép dòng, không tính lãi.",
+      "Sai: `SELECT SUM(principal) FROM loans` không lọc gì cả."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `principal` comes from `loans`; a join does not change units.",
+      "Correct: this is fan-out; the grain changed from loan to installment.",
+      "Wrong: a join only pairs rows; it computes no interest.",
+      "Wrong: `SELECT SUM(principal) FROM loans` has no filter at all."
+    ]
+  },
+  {
+    "id": "da01-q4",
+    "question": "`SELECT COUNT(*), COUNT(DISTINCT payment_id), COUNT(DISTINCT session_id) FROM payments` trả về `7630 | 7630 | 7593`. Cách đọc nào đúng?",
+    "questionEn": "`SELECT COUNT(*), COUNT(DISTINCT payment_id), COUNT(DISTINCT session_id) FROM payments` returns `7630 | 7630 | 7593`. Which reading is right?",
+    "options": [
+      "`payment_id` bị trùng nên không dùng làm khóa chính được",
+      "Có 37 payment không gắn với phiên checkout nào",
+      "`session_id` mới là khóa chính thật của bảng `payments`",
+      "`payment_id` duy nhất, nhưng một số phiên có hai payment"
+    ],
+    "optionsEn": [
+      "`payment_id` has duplicates, so it cannot be the primary key",
+      "37 payments are not linked to any checkout session",
+      "`session_id` is the real primary key of `payments`",
+      "`payment_id` is unique, but some sessions have two payments"
+    ],
+    "answer": 3,
+    "explanation": "So `COUNT(*)` với `COUNT(DISTINCT …)` để kiểm tra tính duy nhất. `payment_id` duy nhất; phiên checkout thì có phiên ra hai payment, điều mà bài da-03 sẽ điều tra.",
+    "explanationEn": "Compare `COUNT(*)` with `COUNT(DISTINCT …)` to test uniqueness. `payment_id` is unique; some checkout sessions produced two payments, which da-03 investigates.",
+    "optionExplanations": [
+      "Sai: 7.630 dòng và 7.630 ID khác nhau, nên `payment_id` là duy nhất.",
+      "Sai: COUNT(DISTINCT) đếm giá trị khác nhau; chênh lệch không nói gì về NULL ở đây.",
+      "Sai: `session_id` có ít giá trị hơn số dòng, nên nó không duy nhất.",
+      "Đúng: khóa chính ổn; 7.630 payment trên 7.593 phiên là một câu hỏi cần ghi lại."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 7,630 rows and 7,630 distinct IDs, so `payment_id` is unique.",
+      "Wrong: COUNT(DISTINCT) counts distinct values; the gap is not about missing sessions.",
+      "Wrong: `session_id` has fewer values than rows, so it is not unique.",
+      "Correct: the key is fine; 7,630 payments over 7,593 sessions is a question to log."
+    ]
+  },
+  {
+    "id": "da01-q5",
+    "question": "Mở file export khách hàng bằng Excel, số điện thoại hiện `912345678` và số CCCD hiện `7.91E+11`. Chuyện gì đã xảy ra và nên làm gì?",
+    "questionEn": "A customer export opened in Excel shows phone numbers as `912345678` and citizen IDs as `7.91E+11`. What happened, and what should you do?",
+    "options": [
+      "Excel đọc các cột dạng ID thành số; hãy import và đặt các cột đó là Text",
+      "Database lưu sai số điện thoại; nhờ đội kỹ thuật sửa dữ liệu gốc",
+      "File được lưu theo giờ UTC nên các con số bị lệch đi",
+      "Excel tự che số dài để bảo mật; mở khóa sheet là xem được"
+    ],
+    "optionsEn": [
+      "Excel read the ID-like columns as numbers; import them and set those columns to Text",
+      "The database stores wrong phone numbers; ask engineering to fix the source",
+      "The file was saved in UTC, so the numbers shifted",
+      "Excel hides long numbers for privacy; unlocking the sheet shows them"
+    ],
+    "answer": 0,
+    "explanation": "Số điện thoại, số tài khoản, CCCD là nhãn viết bằng chữ số. Bảng tính coi chúng là số nên mất số 0 đầu hoặc chuyển sang dạng khoa học. Import và đặt cột là Text.",
+    "explanationEn": "Phone, account and citizen ID numbers are labels written with digits. A spreadsheet treats them as numbers, dropping leading zeros or switching to scientific notation. Import and set the columns to Text.",
+    "optionExplanations": [
+      "Đúng: mã số là nhãn, phải giữ dạng text để không mất số 0 đầu và chữ số.",
+      "Sai: dữ liệu gốc đúng, lỗi xảy ra khi bảng tính tự đổi kiểu.",
+      "Sai: múi giờ chỉ ảnh hưởng thời điểm, không ảnh hưởng mã số.",
+      "Sai: đây không phải tính năng bảo mật; giá trị gốc đã bị chuyển thành số."
+    ],
+    "optionExplanationsEn": [
+      "Correct: codes are labels and must stay text to keep leading zeros and digits.",
+      "Wrong: the source is fine; the spreadsheet changed the type on opening.",
+      "Wrong: time zones affect timestamps, not codes.",
+      "Wrong: this is not a privacy feature; the values were converted to numbers."
+    ]
+  },
+  {
+    "id": "da01-q6",
+    "question": "Một khoản vay tiền mặt 10.000.000 đồng có `annual_rate_pct = 24.0`. Cách đọc nào đúng?",
+    "questionEn": "A 10,000,000 VND cash loan has `annual_rate_pct = 24.0`. Which reading is right?",
+    "options": [
+      "Lãi suất 0,24% mỗi năm",
+      "Lãi suất 24% mỗi tháng",
+      "Lãi suất danh nghĩa 24% mỗi năm",
+      "Tiền lãi 24.000 đồng phải trả mỗi tháng"
+    ],
+    "optionsEn": [
+      "An interest rate of 0.24% per year",
+      "An interest rate of 24% per month",
+      "A nominal interest rate of 24% per year",
+      "24,000 VND of interest due each month"
+    ],
+    "answer": 2,
+    "explanation": "Đọc đơn vị trước giá trị: tên cột và khoảng giá trị (vay tiền mặt từ 18 đến 38) cho thấy đây là phần trăm mỗi năm.",
+    "explanationEn": "Read the unit before the value: the column name and the range (18 to 38 for cash loans) show it is percent per year.",
+    "optionExplanations": [
+      "Sai: cột đã ở đơn vị phần trăm; 24.0 không phải phân số 0,24%.",
+      "Sai: tên cột `annual_` cho biết đây là lãi theo năm.",
+      "Đúng: `_pct` là phần trăm, `annual_` là theo năm; dải 18–38 của vay tiền mặt khớp với cách đọc này.",
+      "Sai: đây là một tỷ lệ, không phải số tiền."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the column is already in percent; 24.0 is not 0.24%.",
+      "Wrong: the `annual_` prefix says it is a yearly rate.",
+      "Correct: `_pct` means percent and `annual_` means per year; the 18–38 range for cash loans fits.",
+      "Wrong: it is a rate, not an amount of money."
+    ]
+  },
+  {
+    "id": "da01-q7",
+    "question": "Lịch sử ví của một khách trong tháng có ba dòng thành công: `top_up +100000`, `payment -657000`, `refund +657000`. Đồng nghiệp nói \"khách đã chi 1.414.000 đồng\". Nhận xét nào đúng?",
+    "questionEn": "A customer's wallet history for a month has three successful rows: `top_up +100000`, `payment -657000`, `refund +657000`. A colleague says \"the customer spent 1,414,000 VND\". Which comment is right?",
+    "options": [
+      "Đúng, vì phải cộng giá trị tuyệt đối của mọi dòng để ra chi tiêu",
+      "Sai: số tiền có dấu và khoản thanh toán đã được hoàn, nên chi tiêu ròng là 0",
+      "Sai: khách đã chi 1.314.000 vì payment và refund đều là chi tiêu",
+      "Đúng, vì refund vẫn được tính là chi tiêu cho đến khi đối soát xong"
+    ],
+    "optionsEn": [
+      "Right, because spending is the sum of the absolute values of all rows",
+      "Wrong: amounts are signed and the payment was refunded, so net spending is 0",
+      "Wrong: the customer spent 1,314,000 because payment and refund are both spending",
+      "Right, because a refund still counts as spending until settlement is done"
+    ],
+    "answer": 1,
+    "explanation": "Trong `wallet_transactions`, tiền vào là số dương và tiền ra là số âm. Cộng có dấu ra biến động ròng +100.000; khoản 657.000 đã được hoàn nên không còn là chi tiêu.",
+    "explanationEn": "In `wallet_transactions`, money in is positive and money out is negative. The signed sum is a net movement of +100,000; the 657,000 was refunded, so it is no longer spending.",
+    "optionExplanations": [
+      "Sai: cộng giá trị tuyệt đối trộn tiền vào với tiền ra.",
+      "Đúng: tiền ra là số âm, refund bù lại payment; tổng có dấu là +100.000.",
+      "Sai: refund là tiền quay lại ví, không phải chi tiêu.",
+      "Sai: refund thành công đã cộng tiền lại vào ví."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: summing absolute values mixes money in with money out.",
+      "Correct: money out is negative and the refund cancels the payment; the signed total is +100,000.",
+      "Wrong: a refund is money coming back, not spending.",
+      "Wrong: a successful refund has already put the money back in the wallet."
+    ]
+  },
+  {
+    "id": "da01-q8",
+    "question": "Một payment có `created_at = '2026-03-14 18:30:00'` (UTC). Khách ở Việt Nam đã thanh toán vào lúc nào theo giờ địa phương?",
+    "questionEn": "A payment has `created_at = '2026-03-14 18:30:00'` (UTC). When did the customer in Vietnam pay, in local time?",
+    "options": [
+      "2026-03-14 lúc 11:30",
+      "2026-03-14 lúc 18:30",
+      "2026-03-15 lúc 18:30",
+      "2026-03-15 lúc 01:30"
+    ],
+    "optionsEn": [
+      "2026-03-14 at 11:30",
+      "2026-03-14 at 18:30",
+      "2026-03-15 at 18:30",
+      "2026-03-15 at 01:30"
+    ],
+    "answer": 3,
+    "explanation": "Việt Nam là UTC+7. Mọi thời điểm từ 17:00 UTC trở đi đã sang ngày hôm sau ở Việt Nam: `datetime(created_at, '+7 hours')`.",
+    "explanationEn": "Vietnam is UTC+7. Anything from 17:00 UTC onwards is already the next day in Vietnam: `datetime(created_at, '+7 hours')`.",
+    "optionExplanations": [
+      "Sai: đó là trừ 7 giờ; Việt Nam đi trước UTC nên phải cộng.",
+      "Sai: đó là giờ UTC, chưa đổi sang giờ Việt Nam.",
+      "Sai: cộng nguyên một ngày thay vì 7 giờ.",
+      "Đúng: 18:30 + 7 giờ = 01:30 sáng hôm sau."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that subtracts 7 hours; Vietnam is ahead of UTC, so you add.",
+      "Wrong: that is the UTC time, not converted.",
+      "Wrong: it adds a whole day instead of 7 hours.",
+      "Correct: 18:30 + 7 hours = 01:30 the next morning."
+    ]
+  },
+  {
+    "id": "da01-q9",
+    "question": "Cột `created_at` có dạng `YYYY-MM-DD HH:MM:SS`. Bộ lọc nào lấy được mọi payment đến hết ngày 30/6/2026 (theo UTC)?",
+    "questionEn": "`created_at` looks like `YYYY-MM-DD HH:MM:SS`. Which filter returns every payment up to and including 30 June 2026 (UTC)?",
+    "options": [
+      "`created_at < '2026-07-01'`",
+      "`created_at <= '2026-06-30'`",
+      "`created_at = '2026-06-30'`",
+      "`created_at BETWEEN '2025-01-01' AND '2026-06-30'`"
+    ],
+    "optionsEn": [
+      "`created_at < '2026-07-01'`",
+      "`created_at <= '2026-06-30'`",
+      "`created_at = '2026-06-30'`",
+      "`created_at BETWEEN '2025-01-01' AND '2026-06-30'`"
+    ],
+    "answer": 0,
+    "explanation": "Với cột có cả giờ, dùng \"< ngày hôm sau\" để lấy trọn ngày cuối. Trên VayNhanh, `<= '2026-06-30'` trả về 7.617 thay vì 7.630.",
+    "explanationEn": "For a column with a time part, use \"< next day\" to include the whole last day. On VayNhanh, `<= '2026-06-30'` returns 7,617 instead of 7,630.",
+    "optionExplanations": [
+      "Đúng: \"nhỏ hơn ngày hôm sau\" lấy trọn mọi giờ của ngày 30/6.",
+      "Sai: so sánh chuỗi đặt `'2026-06-30 14:55:18'` sau `'2026-06-30'`, nên mất cả ngày 30/6 (13 payment).",
+      "Sai: chỉ khớp chuỗi đúng bằng ngày trần, gần như không dòng nào.",
+      "Sai: cận trên vẫn là ngày trần, nên cũng mất các payment trong ngày 30/6 như khi dùng `<=`."
+    ],
+    "optionExplanationsEn": [
+      "Correct: \"less than the next day\" keeps every hour of 30 June.",
+      "Wrong: text comparison puts `'2026-06-30 14:55:18'` after `'2026-06-30'`, losing all of 30 June (13 payments).",
+      "Wrong: it matches only the bare date string, which almost no row equals.",
+      "Wrong: the upper bound is still a bare date, so it loses the payments made on 30 June, just like `<=`."
+    ]
+  },
+  {
+    "id": "da01-q10",
+    "question": "Payment 881 thành công ngày 18/8/2025 và được hoàn tiền 10 ngày sau; giờ `payments.status = 'refunded'`. Analyst đếm `status = 'success'` cho các payment tạo trong tháng 8. Điều gì xảy ra với payment 881?",
+    "questionEn": "Payment 881 succeeded on 18 Aug 2025 and was refunded ten days later; today `payments.status = 'refunded'`. An analyst counts `status = 'success'` for payments created in August. What happens to payment 881?",
+    "options": [
+      "Nó được đếm hai lần, một lần thành công và một lần hoàn tiền",
+      "Nó được đếm vào tháng 9, tháng phát sinh refund",
+      "Nó bị bỏ sót, vì status chỉ giữ trạng thái mới nhất",
+      "Câu query báo lỗi vì `refunded` không phải trạng thái hợp lệ"
+    ],
+    "optionsEn": [
+      "It is counted twice, once as a success and once as a refund",
+      "It is counted in September, the month of the refund",
+      "It is left out, because status keeps only the latest state",
+      "The query fails because `refunded` is not a valid status"
+    ],
+    "answer": 2,
+    "explanation": "Cột trạng thái cho biết tình trạng tại ngày snapshot, không phải lịch sử. Đếm \"thành công trong tháng 8\" từ cột này sẽ thiếu những payment sau đó bị hoàn tiền.",
+    "explanationEn": "A status column shows the state as of the snapshot, not the history. Counting \"successful in August\" from it misses payments that were later refunded.",
+    "optionExplanations": [
+      "Sai: bảng `payments` chỉ có một dòng cho payment 881.",
+      "Sai: `created_at` vẫn là tháng 8; nó bị loại vì trạng thái, không phải vì ngày.",
+      "Đúng: cột status ghi đè; lịch sử nằm ở bảng sự kiện như `wallet_transactions`.",
+      "Sai: `refunded` là một giá trị hợp lệ của `payments.status`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `payments` holds a single row for payment 881.",
+      "Wrong: `created_at` is still August; it is excluded by status, not by date.",
+      "Correct: the status column is overwritten; history lives in event tables such as `wallet_transactions`.",
+      "Wrong: `refunded` is a valid value of `payments.status`."
+    ]
+  },
+  {
+    "id": "da01-q11",
+    "question": "Trong `loan_applications`, `reject_reason` là NULL trên cả 3.106 dòng `approved`. Nên kết luận gì?",
+    "questionEn": "In `loan_applications`, `reject_reason` is NULL on all 3,106 `approved` rows. What should you conclude?",
+    "options": [
+      "Dữ liệu bị thiếu, cần nhờ đội kỹ thuật điền lại lý do còn thiếu",
+      "Đúng như mong đợi: chỉ hồ sơ bị từ chối mới có lý do",
+      "Các hồ sơ này thực ra đã bị từ chối sau khi duyệt",
+      "Lý do duyệt đã bị mất khi chuyển đổi hệ thống"
+    ],
+    "optionsEn": [
+      "Data is missing; ask engineering to backfill the missing reasons",
+      "As expected: only rejected applications carry a reason",
+      "These applications were actually rejected after approval",
+      "The approval reason was lost in a system migration"
+    ],
+    "answer": 1,
+    "explanation": "Một cột chỉ được điền khi cột khác có giá trị nhất định là business rule. NULL ở đây là \"không áp dụng\", không phải thiếu dữ liệu.",
+    "explanationEn": "A column that is filled only when another column has a certain value is a business rule. NULL here means \"not applicable\", not missing data.",
+    "optionExplanations": [
+      "Sai: hồ sơ được duyệt không có lý do từ chối để điền.",
+      "Đúng: NULL ở đây nghĩa là \"không áp dụng\", và quy tắc này kiểm tra được.",
+      "Sai: không có gì trong dữ liệu cho thấy điều đó; 3.106 cũng khớp số khoản vay.",
+      "Sai: cột này chỉ lưu lý do từ chối, không có \"lý do duyệt\"."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: an approved application has no rejection reason to fill in.",
+      "Correct: NULL here means \"not applicable\", and the rule can be tested.",
+      "Wrong: nothing suggests that; 3,106 also matches the number of loans.",
+      "Wrong: the column stores rejection reasons only; there is no \"approval reason\"."
+    ]
+  },
+  {
+    "id": "da01-q12",
+    "question": "Bảng `customers` có 4.000 dòng, `COUNT(monthly_income)` = 3.768. `AVG(monthly_income)` xử lý 232 khách không khai thu nhập thế nào?",
+    "questionEn": "`customers` has 4,000 rows and `COUNT(monthly_income)` = 3,768. How does `AVG(monthly_income)` treat the 232 customers with no declared income?",
+    "options": [
+      "Coi họ có thu nhập bằng 0 và chia cho 4.000",
+      "Trả về NULL cho cả kết quả vì có giá trị thiếu",
+      "Báo lỗi và yêu cầu lọc NULL trước khi tính",
+      "Bỏ qua họ: trung bình chỉ tính trên 3.768 giá trị có khai"
+    ],
+    "optionsEn": [
+      "It treats them as earning 0 and divides by 4,000",
+      "It returns NULL for the whole result because values are missing",
+      "It raises an error and asks you to filter NULLs first",
+      "It skips them: the average is over the 3,768 declared values only"
+    ],
+    "answer": 3,
+    "explanation": "`AVG` bỏ qua NULL. Nếu coi NULL là 0 (bằng COALESCE), trung bình sẽ thấp hơn hẳn. Hãy chọn có chủ đích và ghi lại.",
+    "explanationEn": "`AVG` skips NULLs. Treating NULL as 0 (with COALESCE) gives a much lower average. Choose on purpose and write it down.",
+    "optionExplanations": [
+      "Sai: AVG không đổi NULL thành 0; muốn vậy phải dùng COALESCE.",
+      "Sai: AVG chỉ trả NULL khi mọi giá trị đều NULL.",
+      "Sai: SQL không báo lỗi; nó lặng lẽ bỏ qua NULL.",
+      "Đúng: hàm gộp bỏ qua NULL, nên mẫu số là 3.768."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: AVG does not turn NULL into 0; you need COALESCE for that.",
+      "Wrong: AVG returns NULL only when every value is NULL.",
+      "Wrong: SQL raises no error; it silently skips NULLs.",
+      "Correct: aggregate functions skip NULLs, so the denominator is 3,768."
+    ]
+  },
+  {
+    "id": "da01-q13",
+    "question": "`repayment_schedule` có 13.922 dòng `amount_paid = 0`, trong đó 446 dòng có `due_date <= '2026-06-30'`. Team rủi ro hỏi: \"Có bao nhiêu kỳ đang quá hạn?\"",
+    "questionEn": "`repayment_schedule` has 13,922 rows with `amount_paid = 0`, and 446 of them have `due_date <= '2026-06-30'`. The risk team asks: \"How many installments are overdue?\"",
+    "options": [
+      "446, vì các kỳ còn lại chưa đến hạn",
+      "13.922, vì mọi kỳ chưa trả đều là quá hạn",
+      "13.476, vì đó là số kỳ có ngày đến hạn sau snapshot",
+      "28.824, vì phải tính trên toàn bộ lịch trả nợ"
+    ],
+    "optionsEn": [
+      "446, because the other installments are not due yet",
+      "13,922, because every unpaid installment is overdue",
+      "13,476, because those are the installments due after the snapshot",
+      "28,824, because the whole schedule must be counted"
+    ],
+    "answer": 0,
+    "explanation": "`amount_paid = 0` có thể nghĩa là \"chưa đến hạn\". Quá hạn = `paid_date IS NULL AND due_date <= '2026-06-30'`, tức 446 kỳ.",
+    "explanationEn": "`amount_paid = 0` can mean \"not due yet\". Overdue = `paid_date IS NULL AND due_date <= '2026-06-30'`, which is 446 installments.",
+    "optionExplanations": [
+      "Đúng: chỉ kỳ đã đến hạn mà chưa trả mới là quá hạn.",
+      "Sai: 13.476 kỳ trong số đó chưa đến hạn.",
+      "Sai: đó là các kỳ chưa đến hạn, ngược với quá hạn.",
+      "Sai: đó là tổng số kỳ, kể cả kỳ đã trả."
+    ],
+    "optionExplanationsEn": [
+      "Correct: only installments that are due and unpaid are overdue.",
+      "Wrong: 13,476 of them are not due yet.",
+      "Wrong: those are the not-yet-due ones, the opposite of overdue.",
+      "Wrong: that is every installment, paid ones included."
+    ]
+  },
+  {
+    "id": "da01-q14",
+    "question": "Các khoản BNPL có `annual_rate_pct = 0`, và một số hồ sơ có `credit_score` là NULL. Cách hiểu nào đúng?",
+    "questionEn": "BNPL loans have `annual_rate_pct = 0`, and some applications have `credit_score` NULL. Which reading is right?",
+    "options": [
+      "Cả hai đều là dữ liệu thiếu và nên thay bằng giá trị trung bình",
+      "Lãi 0 nghĩa là chưa biết lãi suất; điểm NULL nghĩa là điểm 0",
+      "Lãi 0 là thật (không lãi); điểm NULL là chưa có lịch sử tín dụng",
+      "Cả hai đều nghĩa là khoản vay đã bị hủy trước khi giải ngân"
+    ],
+    "optionsEn": [
+      "Both are missing data and should be replaced with the average",
+      "A 0 rate means the rate is unknown; a NULL score means a score of 0",
+      "A 0 rate is real (interest-free); a NULL score means no credit history",
+      "Both mean the loan was cancelled before disbursement"
+    ],
+    "answer": 2,
+    "explanation": "NULL ≠ 0. Lãi suất 0 là một sự thật đã biết; điểm NULL mang thông tin \"chưa có lịch sử để chấm\".",
+    "explanationEn": "NULL ≠ 0. A 0 rate is a known fact; a NULL score carries the information \"no history to score\".",
+    "optionExplanations": [
+      "Sai: 0 là giá trị thật; điền trung bình vào NULL làm méo dữ liệu.",
+      "Sai: đảo ngược hoàn toàn ý nghĩa của 0 và NULL.",
+      "Đúng: 0 là đã biết bằng không; NULL là thin-file, và điểm chạy từ 300 đến 850.",
+      "Sai: khoản BNPL đã giải ngân, và hồ sơ NULL điểm vẫn có thể được duyệt."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 0 is a real value; filling NULL with an average distorts the data.",
+      "Wrong: it swaps the meanings of 0 and NULL.",
+      "Correct: 0 is a known zero; NULL is a thin-file customer, and scores run from 300 to 850.",
+      "Wrong: the BNPL loans were disbursed, and NULL-score applications can still be approved."
+    ]
+  },
+  {
+    "id": "da01-q15",
+    "question": "Trong file lịch sử ví, dòng trước có số dư 12.000. Dòng tiếp theo: `27/08/2025 08:34,5702,withdraw,-910000,failed,,12000`. Đọc thế nào cho đúng?",
+    "questionEn": "In a wallet-history export, the previous balance is 12,000. The next line is `27/08/2025 08:34,5702,withdraw,-910000,failed,,12000`. What is the right reading?",
+    "options": [
+      "Lệnh rút thành công và ví bị âm 898.000",
+      "Lệnh rút 910.000 thất bại nên số dư vẫn là 12.000",
+      "Khách chỉ rút 910 đồng vì dấu phẩy là phần thập phân",
+      "Số dư sau giao dịch bị tính sai, đúng ra phải là -898.000"
+    ],
+    "optionsEn": [
+      "The withdrawal succeeded and the wallet went to -898,000",
+      "A 910,000 withdrawal failed, so the balance stays at 12,000",
+      "The customer withdrew only 910 VND because the comma is a decimal mark",
+      "The balance after is wrong and should be -898,000"
+    ],
+    "answer": 1,
+    "explanation": "Đọc cả cột trạng thái chứ không chỉ cột số tiền: giao dịch `failed` vẫn xuất hiện trong lịch sử nhưng không làm đổi số dư.",
+    "explanationEn": "Read the status column, not just the amount: a `failed` transaction still appears in the history but does not change the balance.",
+    "optionExplanations": [
+      "Sai: trạng thái là `failed`, và số dư sau giao dịch vẫn là 12.000.",
+      "Đúng: dòng thất bại không làm thay đổi số dư.",
+      "Sai: dấu phẩy ở đây là dấu phân cách cột của CSV.",
+      "Sai: giao dịch thất bại không trừ tiền, nên 12.000 là đúng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the status is `failed`, and the balance after is still 12,000.",
+      "Correct: a failed row does not move the balance.",
+      "Wrong: the commas here are the CSV column separators.",
+      "Wrong: a failed transaction takes no money, so 12,000 is correct."
+    ]
+  },
+  {
+    "id": "da01-q16",
+    "question": "Mục nào nên có trong data dictionary cho cột `payments.failure_reason`?",
+    "questionEn": "What belongs in the data dictionary entry for `payments.failure_reason`?",
+    "options": [
+      "Biểu đồ số payment thất bại theo từng tháng trong năm",
+      "Tổng số tiền của mọi payment thất bại trong kỳ",
+      "Câu SQL dùng để dựng dashboard thanh toán hằng ngày",
+      "Giá trị hợp lệ và ghi chú \"NULL = không phải payment thất bại\""
+    ],
+    "optionsEn": [
+      "A chart of failed payments for each month of the year",
+      "The total amount of all failed payments in the period",
+      "The SQL query used to build the daily payments dashboard",
+      "Allowed values and the note \"NULL = not a failed payment\""
+    ],
+    "answer": 3,
+    "explanation": "Data dictionary mô tả từng cột: kiểu, đơn vị, ý nghĩa, giá trị hợp lệ và NULL nghĩa là gì. Biểu đồ và chỉ số là sản phẩm của phân tích.",
+    "explanationEn": "A data dictionary describes each column: type, unit, meaning, allowed values and what NULL means. Charts and metrics are outputs of analysis.",
+    "optionExplanations": [
+      "Sai: đó là phân tích, không phải mô tả cột.",
+      "Sai: đó là một chỉ số, không phải định nghĩa cột.",
+      "Sai: câu query thuộc về báo cáo, không thuộc từ điển dữ liệu.",
+      "Đúng: từ điển ghi ý nghĩa, giá trị hợp lệ và ý nghĩa của NULL."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that is analysis, not a column description.",
+      "Wrong: that is a metric, not a column definition.",
+      "Wrong: queries belong to the report, not the dictionary.",
+      "Correct: a dictionary records meaning, allowed values and what NULL means."
+    ]
+  },
+  {
+    "id": "da01-q17",
+    "question": "`SELECT COUNT(DISTINCT city) FROM customers` trả về 20, trong khi khách hàng chỉ ở chín thành phố. Bước nào trong checklist bắt được điều này, và nguyên nhân có thể là gì?",
+    "questionEn": "`SELECT COUNT(DISTINCT city) FROM customers` returns 20, yet customers live in only nine cities. Which checklist step catches this, and what is the likely cause?",
+    "options": [
+      "Bước kiểm tra enum: cùng một thành phố bị viết nhiều kiểu trong ô nhập tự do",
+      "Bước kiểm tra khóa: `customer_id` bị trùng nên thành phố bị nhân lên",
+      "Bước kiểm tra múi giờ: thành phố được ghi theo giờ UTC",
+      "Bước kiểm tra khoảng giá trị: thu nhập ngoại lai làm sai cột thành phố"
+    ],
+    "optionsEn": [
+      "The enum check: the same city is spelled several ways in a free-text field",
+      "The key check: duplicate `customer_id`s multiply the cities",
+      "The time-zone check: cities were recorded in UTC",
+      "The range check: income outliers corrupt the city column"
+    ],
+    "answer": 0,
+    "explanation": "Liệt kê giá trị khác nhau của mọi cột mã. Một cột nhập tự do có nhiều cách viết cho cùng một giá trị; da-03 sẽ làm sạch.",
+    "explanationEn": "List the distinct values of every code column. A free-text field has many spellings of the same value; da-03 cleans it.",
+    "optionExplanations": [
+      "Đúng: `hanoi`, `HN`, `TP.HCM` là biến thể chính tả của cùng thành phố.",
+      "Sai: trùng khóa không tạo ra tên thành phố mới.",
+      "Sai: múi giờ không liên quan đến tên thành phố.",
+      "Sai: hai cột độc lập; outlier thu nhập không đổi tên thành phố."
+    ],
+    "optionExplanationsEn": [
+      "Correct: `hanoi`, `HN` and `TP.HCM` are spelling variants of the same cities.",
+      "Wrong: duplicate keys do not create new city names.",
+      "Wrong: time zones have nothing to do with city names.",
+      "Wrong: the columns are independent; income outliers do not rename cities."
+    ]
+  },
+  {
+    "id": "da01-q18",
+    "question": "Trưởng nhóm marketing hỏi \"Tháng 6/2026 có bao nhiêu người nộp hồ sơ vay?\". Query trả về 453 hồ sơ và 429 `customer_id` khác nhau. Bạn trả lời thế nào?",
+    "questionEn": "The marketing lead asks, \"How many people applied for a loan in June 2026?\" The query returns 453 applications and 429 distinct `customer_id`s. What do you answer?",
+    "options": [
+      "453 người, vì mỗi hồ sơ là một người",
+      "882 người, cộng hồ sơ với khách hàng",
+      "429 người (453 hồ sơ), cắt theo UTC",
+      "24 người, là số khách nộp nhiều hơn một lần"
+    ],
+    "optionsEn": [
+      "453 people, because each application is one person",
+      "882 people, adding applications and customers",
+      "429 people (453 applications), cut in UTC",
+      "24 people, the customers who applied more than once"
+    ],
+    "answer": 2,
+    "explanation": "\"Số người\" là số `customer_id` khác nhau, không phải số dòng hồ sơ. Luôn nói rõ grain và mốc thời gian của con số.",
+    "explanationEn": "\"People\" means distinct `customer_id`s, not application rows. Always state the grain and the time cut of a number.",
+    "optionExplanations": [
+      "Sai: một người có thể nộp nhiều hồ sơ trong tháng.",
+      "Sai: cộng hai số đếm ở hai grain khác nhau là vô nghĩa.",
+      "Đúng: câu hỏi về người nên dùng COUNT(DISTINCT customer_id), và nói rõ mốc cắt.",
+      "Sai: 453 − 429 = 24 là số hồ sơ thừa, không phải số người nộp."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: one person can apply several times in a month.",
+      "Wrong: adding counts at two different grains means nothing.",
+      "Correct: the question is about people, so use COUNT(DISTINCT customer_id) and state the cut-off.",
+      "Wrong: 453 − 429 = 24 is the number of extra applications, not applicants."
+    ]
+  },
+  {
+    "id": "da01-q19",
+    "question": "Sau khi chạy checklist nhìn lần đầu trên bảng `payments`, bạn có một \"nhật ký câu hỏi\" gồm 4 điểm chưa giải thích được. Nên làm gì với nó?",
+    "questionEn": "After running the first-look checklist on `payments`, you have a \"questions log\" with four points you cannot explain. What should you do with it?",
+    "options": [
+      "Tự sửa dữ liệu gốc cho hết bất thường rồi xóa nhật ký",
+      "Mang đi hỏi người quản lý dữ liệu và ghi lại câu trả lời trước khi phân tích",
+      "Giấu đi để sếp không nghĩ rằng bạn chưa hiểu dữ liệu",
+      "Bỏ qua và phân tích tiếp, vì 4 điểm là quá ít để ảnh hưởng"
+    ],
+    "optionsEn": [
+      "Fix the source data yourself until the oddities disappear, then delete the log",
+      "Take it to the data owner and record the answers before analysing",
+      "Hide it so your manager does not think you misunderstood the data",
+      "Ignore it and keep analysing, because four points are too few to matter"
+    ],
+    "answer": 1,
+    "explanation": "Bước 10 của checklist: ghi lại mọi điều chưa giải thích được và hỏi data owner. Đừng đoán, đừng giấu, đừng tự sửa dữ liệu gốc.",
+    "explanationEn": "Step 10 of the checklist: write down everything you cannot explain and ask the data owner. Do not guess, hide it, or fix the source yourself.",
+    "optionExplanations": [
+      "Sai: không bao giờ lặng lẽ sửa dữ liệu gốc; bất thường cần được giải thích.",
+      "Đúng: nhật ký câu hỏi là sản phẩm giá trị nhất của ngày đầu tiên.",
+      "Sai: câu hỏi là dấu hiệu đọc kỹ, không phải thất bại.",
+      "Sai: một điểm như trừ tiền hai lần có thể làm sai cả báo cáo."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: never silently fix source data; oddities need an explanation.",
+      "Correct: the questions log is the most valuable output of day one.",
+      "Wrong: questions are a sign of careful reading, not failure.",
+      "Wrong: a single point such as double charges can skew a whole report."
+    ]
+  }
+]

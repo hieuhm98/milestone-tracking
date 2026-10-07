@@ -15,6 +15,8 @@ const nextConfig = {
       // The IELTS pages are statically generated, but keep their data with them
       // in case one is ever rendered on demand.
       "/english/ielts-speaking/**": ["./data/ielts-speaking/**"],
+      // Both SQL-playground databases are opened through a runtime path join.
+      "/api/sql-playground": ["./data/word-bank.db", "./data/fintech.db"],
       "/english/grammar-for-writing/**": ["./data/grammar-for-writing/**"],
     },
   },

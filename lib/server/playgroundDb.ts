@@ -1,11 +1,15 @@
 // Server-only SQLite engine backing the SQL-practice page.
 //
-// The word bank lives at `data/word-bank.db` (committed to git — NOT the
-// git-ignored `.dev-data/` dev store). To let the user run ANY SQL — SELECT,
-// INSERT, UPDATE, CREATE, ... — without ever mutating the committed file, we
-// open the file read-only, snapshot it into memory, and run the query against
-// that throwaway in-memory copy. Every request starts from the pristine file,
-// so results never persist and the committed DB stays byte-stable for git.
+// The playground offers two databases, both committed to git (NOT the
+// git-ignored `.dev-data/` dev store):
+//   * `words`   — `data/word-bank.db`, the English word bank.
+//   * `fintech` — `data/fintech.db`, a fictional digital-lending + e-wallet
+//                 company, built by `scripts/seed-fintech-db.mjs`.
+// To let the user run ANY SQL — SELECT, INSERT, UPDATE, CREATE, ... — without
+// ever mutating a committed file, we open it read-only, snapshot it into
+// memory, and run the query against that throwaway in-memory copy. Every
+// request starts from the pristine file, so results never persist and the
+// committed DBs stay byte-stable for git.
 //
 // Never imported from client components — only from the `/api/sql-playground`
 // route handler.
@@ -14,22 +18,39 @@ import Database from "better-sqlite3";
 import fs from "fs";
 import path from "path";
 
-const DB_FILE = path.join(process.cwd(), "data", "word-bank.db");
+export const PLAYGROUND_DBS = ["words", "fintech"] as const;
+export type PlaygroundDb = (typeof PLAYGROUND_DBS)[number];
 
-// Cache the on-disk snapshot as a Buffer; a fresh in-memory DB is built from it
+const DB_FILES: Record<PlaygroundDb, { file: string; seed: string }> = {
+  words: { file: "word-bank.db", seed: "scripts/seed-word-bank.mjs" },
+  fintech: { file: "fintech.db", seed: "scripts/seed-fintech-db.mjs" },
+};
+
+export function isPlaygroundDb(value: unknown): value is PlaygroundDb {
+  return typeof value === "string" && (PLAYGROUND_DBS as readonly string[]).includes(value);
+}
+
+// Cache each on-disk snapshot as a Buffer; a fresh in-memory DB is built from it
 // per query so mutations are always discarded.
-let snapshot: Buffer | null = null;
+const snapshots = new Map<PlaygroundDb, Buffer>();
 
-function getSnapshot(): Buffer {
-  if (snapshot) return snapshot;
-  if (!fs.existsSync(DB_FILE)) {
-    throw new Error(
-      "word-bank.db not found. Run `node scripts/seed-word-bank.mjs` to build it."
-    );
+function getSnapshot(which: PlaygroundDb): Buffer {
+  const cached = snapshots.get(which);
+
+  if (cached) return cached;
+
+  const { file, seed } = DB_FILES[which];
+  const dbFile = path.join(process.cwd(), "data", file);
+
+  if (!fs.existsSync(dbFile)) {
+    throw new Error(`${file} not found. Run \`node ${seed}\` to build it.`);
   }
-  const disk = new Database(DB_FILE, { readonly: true, fileMustExist: true });
-  snapshot = disk.serialize();
+
+  const disk = new Database(dbFile, { readonly: true, fileMustExist: true });
+  const snapshot = disk.serialize();
   disk.close();
+  snapshots.set(which, snapshot);
+
   return snapshot;
 }
 
@@ -52,8 +73,8 @@ export interface QueryResult {
 const MAX_ROWS = 1000;
 
 // Describe every user table so the page can render "table structures on the side".
-export function getSchema(): TableSchema[] {
-  const db = new Database(getSnapshot(), { readonly: true });
+export function getSchema(which: PlaygroundDb = "words"): TableSchema[] {
+  const db = new Database(getSnapshot(which), { readonly: true });
   try {
     const tables = db
       .prepare(
@@ -88,7 +109,7 @@ export function getSchema(): TableSchema[] {
 }
 
 // Run one user-supplied SQL statement against a disposable in-memory copy.
-export function runQuery(sql: string): QueryResult {
+export function runQuery(sql: string, which: PlaygroundDb = "words"): QueryResult {
   const empty: QueryResult = {
     columns: [],
     rows: [],
@@ -102,7 +123,7 @@ export function runQuery(sql: string): QueryResult {
   const trimmed = (sql ?? "").trim();
   if (!trimmed) return { ...empty, error: "Empty query." };
 
-  const db = new Database(getSnapshot()); // writable in-memory clone (discarded)
+  const db = new Database(getSnapshot(which)); // writable in-memory clone (discarded)
   const started = process.hrtime.bigint();
   try {
     const stmt = db.prepare(trimmed);

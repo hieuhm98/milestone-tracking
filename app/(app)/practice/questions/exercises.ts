@@ -12,7 +12,9 @@
 //     backticks (they close the template literal); use **bold** for identifiers.
 //   * Add more freely: push new objects onto EXERCISES with a unique id.
 
-export type ExerciseCategory = "database" | "api" | "aws";
+import { FINTECH_EXERCISES } from "./exercises-fintech";
+
+export type ExerciseCategory = "database" | "api" | "aws" | "fintech";
 export type Difficulty = "easy" | "medium" | "hard";
 
 export interface Exercise {
@@ -33,6 +35,7 @@ export const CATEGORIES: {
   { id: "database", label: { vi: "Thiết kế CSDL", en: "Database Design" }, icon: "▤", accent: "text-emerald-300" },
   { id: "api", label: { vi: "Thiết kế API", en: "API Routes" }, icon: "⇄", accent: "text-sky-300" },
   { id: "aws", label: { vi: "Kiến trúc AWS", en: "AWS Architecture" }, icon: "☁", accent: "text-amber-300" },
+  { id: "fintech", label: { vi: "Phân tích dữ liệu Fintech", en: "Fintech Data Analysis" }, icon: "₫", accent: "text-violet-300" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -814,4 +817,5 @@ export const EXERCISES: Exercise[] = [
   aws3Tier,
   awsDecouple,
   awsServerless,
+  ...FINTECH_EXERCISES,
 ];

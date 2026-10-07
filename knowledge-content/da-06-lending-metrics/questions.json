@@ -1,0 +1,578 @@
+[
+  {
+    "id": "da06-q1",
+    "question": "Một tháng của VayNhanh có 500 hồ sơ: 25 pending, 230 approved, 20 cancelled, 225 rejected. Theo cách tính trong bài, approval rate là bao nhiêu?",
+    "questionEn": "One VayNhanh month has 500 applications: 25 pending, 230 approved, 20 cancelled, 225 rejected. Using the article's definition, what is the approval rate?",
+    "options": [
+      "46,0% (230 ÷ 500)",
+      "52,6% (250 ÷ 475)",
+      "48,4% (230 ÷ 475)",
+      "50,0% (250 ÷ 500)"
+    ],
+    "optionsEn": [
+      "46.0% (230 ÷ 500)",
+      "52.6% (250 ÷ 475)",
+      "48.4% (230 ÷ 475)",
+      "50.0% (250 ÷ 500)"
+    ],
+    "answer": 1,
+    "explanation": "Được duyệt = approved + cancelled = 250 (cả hai đều nhận câu \"đồng ý\"). Mẫu số là hồ sơ đã có quyết định = 500 − 25 pending = 475. 250 ÷ 475 ≈ 52,6%.",
+    "explanationEn": "Approved = approved + cancelled = 250 (both got a yes). The denominator is decided applications = 500 − 25 pending = 475. 250 ÷ 475 ≈ 52.6%.",
+    "optionExplanations": [
+      "Sai: bỏ quên 20 hồ sơ cancelled (cũng đã được duyệt) và tính cả hồ sơ pending vào mẫu số.",
+      "Đúng: 250 hồ sơ được đồng ý chia cho 475 hồ sơ đã có quyết định.",
+      "Sai: mẫu số đúng, nhưng tử số thiếu 20 hồ sơ cancelled, vốn đã được công ty đồng ý.",
+      "Sai: tử số đúng, nhưng chia cho cả 25 hồ sơ pending, tức coi chúng là \"không được duyệt\"."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it forgets the 20 cancelled applications (also approved) and keeps pending ones in the denominator.",
+      "Correct: 250 yes decisions divided by 475 decided applications.",
+      "Wrong: the denominator is right, but the numerator misses the 20 cancelled ones the lender said yes to.",
+      "Wrong: the numerator is right, but dividing by 500 counts the 25 pending ones as \"not approved\"."
+    ]
+  },
+  {
+    "id": "da06-q2",
+    "question": "Trong bảng `loan_applications` của VayNhanh, status `cancelled` nghĩa là gì?",
+    "questionEn": "In VayNhanh's `loan_applications` table, what does the status `cancelled` mean?",
+    "options": [
+      "Hồ sơ bị hệ thống chống gian lận chặn lại",
+      "Hồ sơ còn đang chờ quyết định vào ngày snapshot",
+      "Khách hủy khoản vay sau khi đã nhận tiền giải ngân",
+      "Công ty đã đồng ý nhưng khách không nhận offer"
+    ],
+    "optionsEn": [
+      "The application was stopped by the fraud system",
+      "The application was still awaiting a decision on the snapshot date",
+      "The customer cancelled the loan after receiving the money",
+      "The lender said yes but the customer never accepted the offer"
+    ],
+    "answer": 3,
+    "explanation": "`cancelled` là offer đã được duyệt nhưng khách không nhận, nên nó được tính vào approval rate nhưng không có dòng nào trong `loans`, và làm take-up rate thấp hơn 100%.",
+    "explanationEn": "`cancelled` is an approved offer the customer did not take, so it counts towards the approval rate but has no row in `loans`, and it pulls the take-up rate below 100%.",
+    "optionExplanations": [
+      "Sai: hồ sơ bị chặn vì nghi gian lận có status `rejected` với `reject_reason` = fraud_suspected.",
+      "Sai: hồ sơ chưa có quyết định có status `pending`.",
+      "Sai: khoản đã giải ngân luôn có một dòng trong `loans`; hồ sơ cancelled thì không có.",
+      "Đúng: công ty nói có, khách không nhận, nên không có giải ngân."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: fraud blocks are `rejected` with `reject_reason` = fraud_suspected.",
+      "Wrong: applications without a decision have status `pending`.",
+      "Wrong: a disbursed loan always has a row in `loans`; cancelled applications have none.",
+      "Correct: the lender said yes, the customer did not accept, so nothing was disbursed."
+    ]
+  },
+  {
+    "id": "da06-q3",
+    "question": "Sau một chiến dịch, approval rate tăng từ 51% lên 57%. CEO hỏi: \"Vậy là danh mục khỏe hơn rồi đúng không?\" Câu trả lời tốt nhất là gì?",
+    "questionEn": "After a campaign, the approval rate rose from 51% to 57%. The CEO asks: \"So the portfolio is healthier, right?\" What is the best answer?",
+    "options": [
+      "Chưa biết được: approval rate chỉ cho biết duyệt nhiều hơn; chất lượng phải xem qua dữ liệu trả nợ của các khoản này trong vài tháng tới",
+      "Đúng vậy: approval rate tăng chứng tỏ khách hàng mới kéo đến có hồ sơ tốt hơn trước",
+      "Đúng vậy: duyệt nhiều hơn nghĩa là công ty có thể giảm bớt dự phòng rủi ro tín dụng",
+      "Không: approval rate tăng luôn làm take-up rate giảm, nên giải ngân sẽ đi xuống"
+    ],
+    "optionsEn": [
+      "We can't tell yet: the approval rate only says we approve more; quality shows up in these loans' repayments over the next months",
+      "Yes: a higher approval rate proves the new customers have better profiles than before",
+      "Yes: approving more means the company can reduce its credit-risk provisions",
+      "No: a higher approval rate always lowers the take-up rate, so disbursements will fall"
+    ],
+    "answer": 0,
+    "explanation": "Approval rate có thể tăng vì khách tốt hơn hoặc vì tiêu chí bị nới. Chỉ dữ liệu trả nợ (vintage) mới phân biệt được hai trường hợp, và việc đó cần thời gian.",
+    "explanationEn": "An approval rate can rise because better customers came or because the rules were loosened. Only repayment data (vintages) tells the two apart, and that takes time.",
+    "optionExplanations": [
+      "Đúng: chất lượng tín dụng chỉ lộ ra qua hành vi trả nợ sau vài tháng.",
+      "Sai: approval rate cũng tăng khi công ty nới lỏng tiêu chí, không chỉ khi khách tốt hơn.",
+      "Sai: duyệt nhiều hơn không làm giảm rủi ro; nếu có thì ngược lại.",
+      "Sai: không có quy luật như vậy; take-up phụ thuộc vào việc khách có nhận offer hay không."
+    ],
+    "optionExplanationsEn": [
+      "Correct: credit quality only shows in repayment behaviour after some months.",
+      "Wrong: the approval rate also rises when the lender loosens its rules, not only when customers improve.",
+      "Wrong: approving more does not reduce risk; if anything, the opposite.",
+      "Wrong: there is no such rule; take-up depends on whether customers accept their offers."
+    ]
+  },
+  {
+    "id": "da06-q4",
+    "question": "Khi tính PAR30 hay tỷ lệ nợ xấu, mẫu số \"danh mục\" nên là con số nào?",
+    "questionEn": "When computing PAR30 or an NPL ratio, which number should the \"book\" denominator be?",
+    "options": [
+      "Tổng số tiền đã giải ngân từ trước đến nay",
+      "Tổng các kỳ trả góp chưa trả, gồm cả lãi tương lai",
+      "Tổng dư nợ gốc còn lại của các khoản vay chưa tất toán",
+      "Tổng số khoản vay từng được giải ngân"
+    ],
+    "optionsEn": [
+      "Everything ever disbursed",
+      "All unpaid installments, including future interest",
+      "Outstanding principal of loans not yet closed",
+      "The number of loans ever disbursed"
+    ],
+    "answer": 2,
+    "explanation": "Rủi ro nằm ở số gốc khách còn nợ hôm nay. Ở VayNhanh, dư nợ khoảng 15,3 tỷ VND, chưa bằng một nửa 34,0 tỷ đã từng giải ngân.",
+    "explanationEn": "The risk sits in the principal still owed today. At VayNhanh that is about 15.3 billion VND, less than half of the 34.0 billion ever disbursed.",
+    "optionExplanations": [
+      "Sai: tổng giải ngân gồm cả khoản đã trả xong, nên làm tỷ lệ rủi ro nhỏ đi giả tạo.",
+      "Sai: các kỳ tương lai chứa lãi chưa phát sinh, không phải gốc đang gặp rủi ro.",
+      "Đúng: dư nợ gốc còn lại là nền chuẩn cho PAR và tỷ lệ NPL.",
+      "Sai: đó là số đếm của mọi khoản trong lịch sử, kể cả khoản đã tất toán, chứ không phải số tiền đang cho vay."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it includes fully repaid loans, which makes risk ratios look artificially small.",
+      "Wrong: future installments contain interest not yet earned, not principal at risk.",
+      "Correct: remaining principal is the standard base for PAR and NPL ratios.",
+      "Wrong: that is a count of every loan in history, closed ones included, not the money currently lent out."
+    ]
+  },
+  {
+    "id": "da06-q5",
+    "question": "Khoản vay 6.000.000 VND, 6 tháng, quảng cáo \"lãi phẳng 2%/tháng\". Mỗi tháng khách phải trả bao nhiêu?",
+    "questionEn": "A 6,000,000 VND loan over 6 months is advertised at a \"flat 2% a month\". How much does the customer pay each month?",
+    "options": [
+      "1.000.000 VND",
+      "1.120.000 VND",
+      "Khoảng 1.071.000 VND",
+      "1.240.000 VND"
+    ],
+    "optionsEn": [
+      "1,000,000 VND",
+      "1,120,000 VND",
+      "About 1,071,000 VND",
+      "1,240,000 VND"
+    ],
+    "answer": 1,
+    "explanation": "Lãi phẳng tính trên gốc ban đầu mỗi tháng: lãi = 6.000.000 × 2% × 6 = 720.000; trả mỗi tháng = 6.720.000 ÷ 6 = 1.120.000. Một khoản annuity 24%/năm chỉ cần khoảng 1.071.000/tháng, nên lãi phẳng 2%/tháng đắt hơn 24%/năm dư nợ giảm dần.",
+    "explanationEn": "A flat rate charges interest on the original principal every month: interest = 6,000,000 × 2% × 6 = 720,000; installment = 6,720,000 ÷ 6 = 1,120,000. A 24% annuity needs only about 1,071,000 a month, so flat 2% a month costs more than 24% a year on a reducing balance.",
+    "optionExplanations": [
+      "Sai: đó chỉ là phần gốc, chưa có đồng lãi nào.",
+      "Đúng: (6.000.000 + 720.000) ÷ 6 = 1.120.000.",
+      "Sai: đó là khoản trả annuity 24%/năm trên dư nợ giảm dần, không phải lãi phẳng.",
+      "Sai: con số này tính lãi 4%/tháng, gấp đôi mức quảng cáo."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that is principal only, with no interest at all.",
+      "Correct: (6,000,000 + 720,000) ÷ 6 = 1,120,000.",
+      "Wrong: that is a 24% reducing-balance annuity installment, not the flat-rate one.",
+      "Wrong: it charges 4% a month, twice the advertised rate."
+    ]
+  },
+  {
+    "id": "da06-q6",
+    "question": "Trong lịch trả nợ của một khoản vay annuity (trả đều hàng tháng), cấu trúc mỗi kỳ thay đổi thế nào theo thời gian?",
+    "questionEn": "In the schedule of an annuity loan (equal monthly payments), how does each payment's make-up change over time?",
+    "options": [
+      "Tổng tiền trả giữ nguyên; phần lãi giảm dần và phần gốc tăng dần",
+      "Phần lãi và phần gốc giữ nguyên bằng nhau ở mọi kỳ",
+      "Tổng tiền trả giảm dần vì dư nợ giảm dần",
+      "Phần gốc giảm dần và phần lãi tăng dần đến kỳ cuối"
+    ],
+    "optionsEn": [
+      "The total stays the same; the interest part shrinks and the principal part grows",
+      "The interest and principal parts stay equal in every payment",
+      "The total payment falls each month as the balance falls",
+      "The principal part shrinks and the interest part grows until the end"
+    ],
+    "answer": 0,
+    "explanation": "Lãi tính trên dư nợ còn lại, mà dư nợ giảm sau mỗi kỳ, nên phần lãi nhỏ dần. Vì tổng tiền trả cố định, phần gốc lớn dần. Khoản vay 519: kỳ 1 lãi 280.000, gốc 879.000; kỳ 12 lãi 26.137, gốc 1.132.863.",
+    "explanationEn": "Interest is charged on the remaining balance, which falls every month, so the interest part shrinks. Since the total is fixed, the principal part grows. Loan 519: payment 1 is 280,000 interest and 879,000 principal; payment 12 is 26,137 and 1,132,863.",
+    "optionExplanations": [
+      "Đúng: đúng như bảng khấu hao của khoản vay 519.",
+      "Sai: phần lãi và phần gốc thay đổi mỗi kỳ; chỉ tổng là cố định.",
+      "Sai: đó là kiểu trả gốc đều, không phải annuity; annuity giữ tổng cố định.",
+      "Sai: ngược chiều; lãi lớn nhất ở kỳ đầu, khi dư nợ còn cao nhất."
+    ],
+    "optionExplanationsEn": [
+      "Correct: exactly what loan 519's amortization table shows.",
+      "Wrong: the two parts change every month; only the total is fixed.",
+      "Wrong: that describes equal-principal repayment, not an annuity, which keeps the total fixed.",
+      "Wrong: it is the other way round; interest is largest at the start, when the balance is highest."
+    ]
+  },
+  {
+    "id": "da06-q7",
+    "question": "Lịch trả nợ của một khoản vay, tính tại 2026-06-30:\n`kỳ | due_date   | paid_date\n1   | 2026-03-10 | 2026-03-09\n2   | 2026-04-10 | NULL\n3   | 2026-05-10 | NULL\n4   | 2026-06-10 | NULL\n5   | 2026-07-10 | NULL`\nDPD của khoản vay là bao nhiêu?",
+    "questionEn": "A loan's schedule, as of 2026-06-30:\n`no | due_date   | paid_date\n1  | 2026-03-10 | 2026-03-09\n2  | 2026-04-10 | NULL\n3  | 2026-05-10 | NULL\n4  | 2026-06-10 | NULL\n5  | 2026-07-10 | NULL`\nWhat is the loan's DPD?",
+    "options": [
+      "20 ngày",
+      "51 ngày",
+      "−10 ngày",
+      "81 ngày"
+    ],
+    "optionsEn": [
+      "20 days",
+      "51 days",
+      "−10 days",
+      "81 days"
+    ],
+    "answer": 3,
+    "explanation": "DPD tính từ kỳ chưa trả đã đến hạn cũ nhất: kỳ 2, đến hạn 2026-04-10. Từ 10/4 đến 30/6 là 81 ngày, nên khoản vay ở bucket 61–90.",
+    "explanationEn": "DPD counts from the oldest unpaid due installment: number 2, due 2026-04-10. From 10 April to 30 June is 81 days, so the loan is in the 61–90 bucket.",
+    "optionExplanations": [
+      "Sai: tính từ kỳ chưa trả mới nhất đã đến hạn (kỳ 4), không phải cũ nhất.",
+      "Sai: tính từ kỳ 3, bỏ qua kỳ 2 cũng chưa trả và quá hạn lâu hơn.",
+      "Sai: kỳ 5 chưa đến hạn nên không được dùng để tính DPD.",
+      "Đúng: 30/6 − 10/4 = 81 ngày."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it counts from the newest due unpaid installment (number 4), not the oldest.",
+      "Wrong: it counts from installment 3 and ignores installment 2, which is unpaid and older.",
+      "Wrong: installment 5 is not due yet, so it never sets the DPD.",
+      "Correct: 30 June − 10 April = 81 days."
+    ]
+  },
+  {
+    "id": "da06-q8",
+    "question": "Một analyst viết query phân bucket DPD bằng `FROM loans l JOIN repayment_schedule r ON r.loan_id = l.loan_id AND r.due_date < '2026-06-30' AND r.paid_date IS NULL`, rồi `GROUP BY l.loan_id`. Kết quả sẽ sai thế nào?",
+    "questionEn": "An analyst builds the DPD buckets with `FROM loans l JOIN repayment_schedule r ON r.loan_id = l.loan_id AND r.due_date < '2026-06-30' AND r.paid_date IS NULL`, then `GROUP BY l.loan_id`. How will the result be wrong?",
+    "options": [
+      "Mỗi khoản vay bị đếm nhiều lần, một lần cho mỗi kỳ trả",
+      "DPD của mọi khoản vay bị âm vì so với ngày tương lai",
+      "Các khoản vay trong hạn biến mất, nên bucket \"0 current\" gần như rỗng",
+      "Khoản vay 90+ bị xếp nhầm vào bucket 61–90"
+    ],
+    "optionsEn": [
+      "Each loan is counted several times, once per installment",
+      "Every loan's DPD becomes negative because it is compared to a future date",
+      "Current loans vanish, so the \"0 current\" bucket is nearly empty",
+      "90+ loans are wrongly placed in the 61–90 bucket"
+    ],
+    "answer": 2,
+    "explanation": "Khoản vay không có kỳ quá hạn nào không khớp dòng nào, nên JOIN thường loại nó đi. Cần `LEFT JOIN` rồi `COALESCE(..., 0)` để giữ khoản vay trong hạn với DPD = 0.",
+    "explanationEn": "A loan with no overdue installment matches no row, so an inner JOIN drops it. You need a `LEFT JOIN` plus `COALESCE(..., 0)` to keep current loans with DPD = 0.",
+    "optionExplanations": [
+      "Sai: `GROUP BY l.loan_id` đã gộp mỗi khoản vay thành một dòng.",
+      "Sai: điều kiện `due_date < '2026-06-30'` đã loại các kỳ tương lai.",
+      "Đúng: JOIN thường bỏ mất mọi khoản vay không có kỳ quá hạn.",
+      "Sai: cách tính DPD và các mốc bucket không bị JOIN làm thay đổi."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `GROUP BY l.loan_id` already collapses each loan to one row.",
+      "Wrong: `due_date < '2026-06-30'` already removes future installments.",
+      "Correct: an inner JOIN drops every loan with no overdue installment.",
+      "Wrong: the JOIN does not change how DPD or the bucket edges are computed."
+    ]
+  },
+  {
+    "id": "da06-q9",
+    "question": "Danh mục có bốn khoản vay đang mở:\n`loan | outstanding | DPD\nA    | 8 triệu     | 0\nB    | 5 triệu     | 20\nC    | 4 triệu     | 40\nD    | 3 triệu     | 100`\nPAR30 theo dư nợ là bao nhiêu?",
+    "questionEn": "A book has four open loans:\n`loan | outstanding | DPD\nA    | 8 million   | 0\nB    | 5 million   | 20\nC    | 4 million   | 40\nD    | 3 million   | 100`\nWhat is PAR30 by balance?",
+    "options": [
+      "35%",
+      "60%",
+      "15%",
+      "50%"
+    ],
+    "optionsEn": [
+      "35%",
+      "60%",
+      "15%",
+      "50%"
+    ],
+    "answer": 0,
+    "explanation": "Khoản quá hạn hơn 30 ngày: C và D, dư nợ 4 + 3 = 7 triệu. Tổng dư nợ 20 triệu. PAR30 = 7 ÷ 20 = 35%.",
+    "explanationEn": "Loans more than 30 DPD: C and D, with 4 + 3 = 7 million outstanding. The book is 20 million. PAR30 = 7 ÷ 20 = 35%.",
+    "optionExplanations": [
+      "Đúng: (4 + 3) ÷ 20 = 35%.",
+      "Sai: tính cả B, nhưng 20 DPD chưa vượt mốc 30 ngày.",
+      "Sai: chỉ tính D; đó là tỷ lệ 90+, không phải PAR30.",
+      "Sai: đếm 2 trên 4 khoản vay; đó là tỷ lệ theo số khoản, không theo dư nợ."
+    ],
+    "optionExplanationsEn": [
+      "Correct: (4 + 3) ÷ 20 = 35%.",
+      "Wrong: it includes B, but 20 DPD is not past the 30-day mark.",
+      "Wrong: it counts only D; that is the 90+ ratio, not PAR30.",
+      "Wrong: it counts 2 of 4 loans; that is a ratio by count, not by balance."
+    ]
+  },
+  {
+    "id": "da06-q10",
+    "question": "Nhận định nào về năm nhóm nợ ở Việt Nam là chính xác nhất?",
+    "questionEn": "Which statement about Vietnam's five debt groups is the most accurate?",
+    "options": [
+      "Nhóm 1 là nhóm xấu nhất, nhóm 5 là các khoản vay đang trả đúng hạn",
+      "Phân loại chủ yếu theo số ngày quá hạn, nhóm 3–5 là nợ xấu, và quy tắc cụ thể phải kiểm tra theo thông tư NHNN hiện hành",
+      "Nhóm nợ được quyết định chỉ dựa trên điểm tín dụng của khách lúc nộp hồ sơ",
+      "Mỗi công ty tự đặt ra số nhóm và tên nhóm, nên không có chuẩn chung nào cả"
+    ],
+    "optionsEn": [
+      "Group 1 is the worst and group 5 is loans being repaid on time",
+      "Loans are classified mainly by days overdue, groups 3–5 are bad debt, and the exact rules come from the current SBV circular",
+      "The debt group is set only by the customer's credit score at application",
+      "Every company sets its own number and names of groups, so there is no common standard"
+    ],
+    "answer": 1,
+    "explanation": "Năm nhóm đi từ nhóm 1 (đủ tiêu chuẩn) đến nhóm 5 (có khả năng mất vốn), chủ yếu theo số ngày quá hạn; nhóm 3–5 là nợ xấu. Quy tắc do thông tư của Ngân hàng Nhà nước quy định và có thể được sửa đổi.",
+    "explanationEn": "The five groups run from group 1 (standard) to group 5 (loss), mainly by days overdue; groups 3–5 are bad debt. The rules come from a State Bank of Vietnam circular and can be revised.",
+    "optionExplanations": [
+      "Sai: ngược chiều; nhóm 1 là nợ đủ tiêu chuẩn, nhóm 5 là nợ có khả năng mất vốn.",
+      "Đúng: đúng cách bài viết mô tả, kèm lưu ý kiểm tra thông tư hiện hành.",
+      "Sai: nhóm nợ dựa trên tình trạng trả nợ (số ngày quá hạn) và tiêu chí định tính, không phải điểm lúc nộp hồ sơ.",
+      "Sai: đây là quy định chung của NHNN, không phải mỗi công ty tự đặt."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it is the other way round; group 1 is standard, group 5 is likely loss.",
+      "Correct: that is how the article describes it, with the advice to check the current circular.",
+      "Wrong: the group depends on repayment status (days overdue) and qualitative rules, not the application score.",
+      "Wrong: it is a common SBV rule, not something each company invents."
+    ]
+  },
+  {
+    "id": "da06-q11",
+    "question": "Một báo cáo \"ever 30+ tính đến nay\" theo vintage:\n`vintage | ever30_so_far\n2026-03 | 7.4%\n2026-04 | 4.1%\n2026-05 | 0.0%\n2026-06 | 0.0%`\nQuản lý nói: \"Tháng 5 và 6 là hai lứa tốt nhất từ trước tới nay.\" Bạn phản hồi thế nào?",
+    "questionEn": "A report shows \"ever 30+ so far\" by vintage:\n`vintage | ever30_so_far\n2026-03 | 7.4%\n2026-04 | 4.1%\n2026-05 | 0.0%\n2026-06 | 0.0%`\nA manager says: \"May and June are our best vintages ever.\" How do you respond?",
+    "options": [
+      "Đồng ý: 0% nghĩa là chính sách duyệt tháng 5 và 6 đã khắc phục được vấn đề",
+      "Đồng ý một phần: tháng 5 và 6 tốt hơn, nhưng tháng 4 cũng đã cải thiện rõ so với tháng 3",
+      "Không đồng ý: phải chia cho dư nợ chứ không chia cho số khoản vay thì mới đúng",
+      "Chưa kết luận được: khoản vay tháng 5 và 6 chưa đủ tuổi để thành 30+; chỉ so các vintage ở MOB mà tất cả đã đi tới"
+    ],
+    "optionsEn": [
+      "Agree: 0% means the May and June approval policy fixed the problem",
+      "Partly agree: May and June are better, and April has clearly improved on March too",
+      "Disagree: it should divide by outstanding balance, not by the number of loans",
+      "Too early to say: May and June loans are too young to be 30+; only compare vintages at a MOB they have all reached"
+    ],
+    "answer": 3,
+    "explanation": "Đây là right-censoring: vintage non trẻ chưa có thời gian để xấu đi. Tháng 4 cũng có ít hơn tháng 3 một tháng. So ở cùng MOB (ví dụ MOB 2) thì tháng 4 (4,1%) còn cao hơn tháng 3 (3,2%).",
+    "explanationEn": "This is right-censoring: young vintages have not had time to go bad. April has also had one month less than March. At the same MOB (MOB 2), April (4.1%) is actually above March (3.2%).",
+    "optionExplanations": [
+      "Sai: 0% chỉ vì khoản vay quá non, chưa thể quá hạn hơn 30 ngày.",
+      "Sai: tháng 4 trông tốt hơn chỉ vì có ít thời gian hơn; ở cùng MOB 2 nó còn xấu hơn tháng 3.",
+      "Sai: đổi mẫu số không sửa được vấn đề tuổi khoản vay khác nhau.",
+      "Đúng: phải căn theo MOB mới so sánh công bằng được."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 0% only because the loans are too young to be more than 30 days late.",
+      "Wrong: April only looks better because it has had less time; at MOB 2 it is worse than March.",
+      "Wrong: changing the denominator does not fix the different loan ages.",
+      "Correct: aligning by MOB is what makes the comparison fair."
+    ]
+  },
+  {
+    "id": "da06-q12",
+    "question": "Một phần bảng vintage (ever 30+, %):\n`vintage | mob2 | mob3\n2025-11 | 2.0  | 3.4\n2025-12 | 1.2  | 1.8\n2026-02 | 2.8  | 4.1\n2026-03 | 3.2  | 7.4`\nCách đọc nào đúng?",
+    "questionEn": "Part of a vintage table (ever 30+, %):\n`vintage | mob2 | mob3\n2025-11 | 2.0  | 3.4\n2025-12 | 1.2  | 1.8\n2026-02 | 2.8  | 4.1\n2026-03 | 3.2  | 7.4`\nWhich reading is correct?",
+    "options": [
+      "Hôm nay có 1,8% khoản vay của vintage 2025-12 đang quá hạn hơn 30 ngày",
+      "Vintage 2026-03 xấu đi từ MOB 2 sang MOB 3 vì đội thu hồi nợ làm việc kém hơn",
+      "Ở cùng tuổi MOB 3, vintage 2026-03 có tỷ lệ từng quá hạn 30+ cao nhất trong bảng",
+      "Vintage 2026-02 xấu hơn 2025-11 chỉ vì nó trẻ hơn"
+    ],
+    "optionsEn": [
+      "Today, 1.8% of the 2025-12 vintage's loans are more than 30 days past due",
+      "The 2026-03 vintage got worse from MOB 2 to MOB 3 because collections performed worse",
+      "At the same age, MOB 3, the 2026-03 vintage has the highest ever-30+ share in the table",
+      "The 2026-02 vintage is worse than 2025-11 only because it is younger"
+    ],
+    "answer": 2,
+    "explanation": "Đọc dọc cột MOB 3 là so các vintage ở cùng tuổi: 7,4% của tháng 3/2026 cao nhất. Con số dọc theo hàng chỉ có thể tăng, vì \"ever\" không quên.",
+    "explanationEn": "Reading down the MOB 3 column compares vintages at the same age: March 2026's 7.4% is the highest. Numbers along a row can only rise, because \"ever\" never forgets.",
+    "optionExplanations": [
+      "Sai: \"ever 30+ tại MOB 3\" là từng quá hạn tính đến cuối MOB 3, không phải tình trạng hôm nay.",
+      "Sai: tỷ lệ \"ever\" luôn tăng theo hàng; bảng không nói gì về hiệu quả thu hồi nợ.",
+      "Đúng: so cùng một cột là so cùng tuổi.",
+      "Sai: hai vintage được so ở cùng MOB, nên tuổi không phải lý do."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: \"ever 30+ by MOB 3\" is ever late by the end of MOB 3, not today's status.",
+      "Wrong: an \"ever\" share always rises along a row; the table says nothing about collections.",
+      "Correct: the same column means the same age.",
+      "Wrong: both are compared at the same MOB, so age is not the reason."
+    ]
+  },
+  {
+    "id": "da06-q13",
+    "question": "Cuối tháng 5 có 80 khoản vay ở bucket 31–60. Cuối tháng 6: 10 khoản về trong hạn, 2 khoản về 1–30, 6 khoản vẫn ở 31–60, 62 khoản sang 61–90. Roll rate từ 31–60 sang 61–90 là bao nhiêu?",
+    "questionEn": "At the end of May, 80 loans are in the 31–60 bucket. At the end of June: 10 are current, 2 are in 1–30, 6 are still in 31–60 and 62 moved to 61–90. What is the roll rate from 31–60 to 61–90?",
+    "options": [
+      "77,5%",
+      "88,6%",
+      "12,5%",
+      "62%"
+    ],
+    "optionsEn": [
+      "77.5%",
+      "88.6%",
+      "12.5%",
+      "62%"
+    ],
+    "answer": 0,
+    "explanation": "Roll rate = số khoản trượt sang bucket kế tiếp ÷ số khoản ở bucket xuất phát = 62 ÷ 80 = 77,5%.",
+    "explanationEn": "Roll rate = loans that moved to the next bucket ÷ loans in the starting bucket = 62 ÷ 80 = 77.5%.",
+    "optionExplanations": [
+      "Đúng: 62 ÷ 80 = 77,5%.",
+      "Sai: chia cho 70 (bỏ các khoản đã về trong hạn) là đổi mẫu số tùy tiện.",
+      "Sai: 10 ÷ 80 là tỷ lệ cure về trong hạn, không phải roll rate.",
+      "Sai: 62 là số khoản, chưa chia cho 80 khoản xuất phát."
+    ],
+    "optionExplanationsEn": [
+      "Correct: 62 ÷ 80 = 77.5%.",
+      "Wrong: dividing by 70 (dropping the cured loans) changes the denominator arbitrarily.",
+      "Wrong: 10 ÷ 80 is the cure rate back to current, not the roll rate.",
+      "Wrong: 62 is a count of loans, not yet divided by the 80 that started there."
+    ]
+  },
+  {
+    "id": "da06-q14",
+    "question": "Một khoản vay trễ tới 45 DPD ở tháng thứ 3, sang tháng thứ 4 khách trả bù toàn bộ và từ đó trả đúng hạn. Trong bảng vintage \"ever 30+ tại MOB 6\", khoản này được tính thế nào?",
+    "questionEn": "A loan reached 45 DPD in its third month, then the customer caught up fully in month 4 and paid on time afterwards. In a vintage table of \"ever 30+ by MOB 6\", how is it counted?",
+    "options": [
+      "Không tính, vì hôm nay khoản vay đang trong hạn",
+      "Có tính, vì nó đã từng quá hạn hơn 30 ngày; việc trả bù là một lần cure",
+      "Tính một nửa, vì nó đã trả bù trước MOB 6",
+      "Không tính, vì chỉ khoản vay bị xóa nợ mới vào bảng vintage"
+    ],
+    "optionsEn": [
+      "Not counted, because the loan is current today",
+      "Counted, because it was once more than 30 days late; the catch-up is a cure",
+      "Counted as half, because it caught up before MOB 6",
+      "Not counted, because only written-off loans enter a vintage table"
+    ],
+    "answer": 1,
+    "explanation": "\"Ever\" đo việc khoản vay đã từng vượt mốc 30+ chưa, không quan tâm hôm nay nó ở đâu. Việc quay lại trong hạn được đo riêng bằng cure.",
+    "explanationEn": "\"Ever\" measures whether the loan has ever crossed 30+, not where it is today. Coming back to current is measured separately, as a cure.",
+    "optionExplanations": [
+      "Sai: đó là cách đo tình trạng hiện tại (như PAR30), không phải \"ever\".",
+      "Đúng: nó đã từng vượt 30+, và trả bù là cure.",
+      "Sai: một khoản vay hoặc đã từng 30+ hoặc chưa; không có tính một nửa.",
+      "Sai: bảng vintage gồm mọi khoản giải ngân trong tháng, không chỉ khoản bị xóa nợ."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that is a current-status measure (like PAR30), not \"ever\".",
+      "Correct: it crossed 30+, and the catch-up is a cure.",
+      "Wrong: a loan either has been 30+ or not; there is no half count.",
+      "Wrong: a vintage includes every loan disbursed that month, not only written-off ones."
+    ]
+  },
+  {
+    "id": "da06-q15",
+    "question": "Bảng mô phỏng ngưỡng điểm trên các khoản vay 2025 (xấu = ever 30+ tại MOB 6):\n`cutoff | pct_kept | bad_kept | bad_rate\n560    | 100.0    | 59       | 3.6\n600    | 82.1     | 28       | 2.1\n640    | 57.1     | 7        | 0.7\n680    | 33.7     | 5        | 0.9`\nKết luận nào được bảng này ủng hộ?",
+    "questionEn": "A cut-off simulation on 2025 loans (bad = ever 30+ by MOB 6):\n`cutoff | pct_kept | bad_kept | bad_rate\n560    | 100.0    | 59       | 3.6\n600    | 82.1     | 28       | 2.1\n640    | 57.1     | 7        | 0.7\n680    | 33.7     | 5        | 0.9`\nWhich conclusion does the table support?",
+    "options": [
+      "Hạ ngưỡng xuống 520 sẽ thêm khoản vay với tỷ lệ xấu khoảng 3,6%",
+      "Ngưỡng 680 là tốt nhất vì khối lượng nhỏ thì rủi ro cũng nhỏ",
+      "Nâng ngưỡng lên 600 sẽ giữ khoảng 82% số khoản vay và loại hơn một nửa số khoản xấu",
+      "Ngưỡng điểm gần như không ảnh hưởng đến tỷ lệ xấu"
+    ],
+    "optionsEn": [
+      "Lowering the cut-off to 520 would add loans with a bad rate of about 3.6%",
+      "680 is the best cut-off because smaller volume means smaller risk",
+      "Raising the cut-off to 600 would keep about 82% of loans and remove more than half the bad ones",
+      "The cut-off barely affects the bad rate"
+    ],
+    "answer": 2,
+    "explanation": "Từ 560 lên 600: giữ 82,1% khoản vay, số khoản xấu từ 59 còn 28. Bảng không nói được gì về điểm dưới 560, vì những người đó đã bị từ chối (reject inference).",
+    "explanationEn": "From 560 to 600: 82.1% of loans kept, bad loans fall from 59 to 28. The table says nothing about scores below 560, because those applicants were rejected (reject inference).",
+    "optionExplanations": [
+      "Sai: không có khoản vay 2025 nào dưới 560, nên không biết tỷ lệ xấu của nhóm đó.",
+      "Sai: 680 cắt hai phần ba khối lượng mà tỷ lệ xấu không thấp hơn 640, và 5 khoản xấu là mẫu quá nhỏ.",
+      "Đúng: 82,1% giữ lại, khoản xấu giảm từ 59 xuống 28.",
+      "Sai: tỷ lệ xấu giảm rõ từ 3,6% xuống 0,7% khi ngưỡng tăng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: no 2025 loans exist below 560, so their bad rate is unknown.",
+      "Wrong: 680 cuts two thirds of volume with no lower bad rate than 640, and 5 bad loans is a tiny sample.",
+      "Correct: 82.1% kept, bad loans down from 59 to 28.",
+      "Wrong: the bad rate clearly falls from 3.6% to 0.7% as the cut-off rises."
+    ]
+  },
+  {
+    "id": "da06-q16",
+    "question": "Vì sao không thể tính tỷ lệ xấu của khách 520–559 điểm từ các khoản vay năm 2025 của VayNhanh?",
+    "questionEn": "Why can't you compute the bad rate of 520–559-score customers from VayNhanh's 2025 loans?",
+    "options": [
+      "Vì cột credit_score của nhóm đó bị NULL do lỗi dữ liệu",
+      "Vì các khoản vay 2025 chưa đủ tuổi để quan sát tới MOB 6",
+      "Vì nhóm điểm đó quá nhỏ, chỉ vài khoản vay nên không đủ ý nghĩa thống kê",
+      "Vì những khách đó bị từ chối nên không có khoản vay hay dữ liệu trả nợ nào (reject inference)"
+    ],
+    "optionsEn": [
+      "Because their credit_score column is NULL due to a data error",
+      "Because 2025 loans are too young to be observed at MOB 6",
+      "Because that score band is tiny, only a few loans, so it is not statistically meaningful",
+      "Because those customers were rejected, so there are no loans or repayments to observe (reject inference)"
+    ],
+    "answer": 3,
+    "explanation": "Dữ liệu trả nợ chỉ tồn tại cho người được duyệt. Năm 2025, điểm thấp nhất được duyệt là 560, nên nhóm dưới đó không có khoản vay nào. Cách trung thực là thử nghiệm nhỏ có kiểm soát.",
+    "explanationEn": "Repayment data only exists for approved people. In 2025 the lowest approved score was 560, so the band below has no loans. The honest way to learn is a small controlled test.",
+    "optionExplanations": [
+      "Sai: NULL là dấu hiệu khách thin-file; nhóm 520–559 vẫn có điểm, chỉ là không được duyệt.",
+      "Sai: mọi khoản vay 2025 đều đã tới MOB 6 tại ngày snapshot.",
+      "Sai: nhóm đó không phải nhỏ mà là bằng 0 khoản vay, vì đã bị từ chối.",
+      "Đúng: không duyệt thì không có dữ liệu trả nợ để quan sát."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: NULL marks thin-file customers; the 520–559 band has scores, it just was not approved.",
+      "Wrong: every 2025 loan has reached MOB 6 by the snapshot date.",
+      "Wrong: the band is not small, it has zero loans, because it was rejected.",
+      "Correct: no approval means no repayments to observe."
+    ]
+  },
+  {
+    "id": "da06-q17",
+    "question": "Anh Minh thu nhập 20.000.000 VND/tháng, đang trả 4.000.000/tháng cho một khoản vay mua xe máy, và xin một khoản vay mới với tiền trả 2.000.000/tháng. DTI sau khi vay là bao nhiêu?",
+    "questionEn": "Anh Minh earns 20,000,000 VND a month, already pays 4,000,000 a month on a motorbike loan, and applies for a new loan with a 2,000,000 monthly installment. What is his DTI after the new loan?",
+    "options": [
+      "30%",
+      "10%",
+      "20%",
+      "33,3%"
+    ],
+    "optionsEn": [
+      "30%",
+      "10%",
+      "20%",
+      "33.3%"
+    ],
+    "answer": 0,
+    "explanation": "DTI = tổng tiền trả nợ hàng tháng ÷ thu nhập hàng tháng = (4.000.000 + 2.000.000) ÷ 20.000.000 = 30%.",
+    "explanationEn": "DTI = all monthly debt payments ÷ monthly income = (4,000,000 + 2,000,000) ÷ 20,000,000 = 30%.",
+    "optionExplanations": [
+      "Đúng: cộng mọi khoản trả nợ rồi chia cho thu nhập.",
+      "Sai: chỉ tính khoản vay mới, bỏ quên khoản đang trả.",
+      "Sai: chỉ tính khoản đang trả, bỏ quên khoản vay mới.",
+      "Sai: chia 6 triệu cho 18 triệu là trừ khoản mới khỏi thu nhập, không đúng công thức."
+    ],
+    "optionExplanationsEn": [
+      "Correct: add every debt payment, then divide by income.",
+      "Wrong: it counts only the new loan and forgets the existing one.",
+      "Wrong: it counts only the existing loan and forgets the new one.",
+      "Wrong: dividing 6 million by 18 million subtracts the new installment from income, which is not the formula."
+    ]
+  },
+  {
+    "id": "da06-q18",
+    "question": "Một sinh viên mới đi làm, chưa từng vay ở đâu, nộp hồ sơ và mô hình trả về `credit_score` NULL. Mô tả nào đúng nhất?",
+    "questionEn": "A recent graduate who has never borrowed applies, and the model returns `credit_score` NULL. Which description fits best?",
+    "options": [
+      "Đây là lỗi hệ thống, nên điền điểm trung bình để hồ sơ được xét như bình thường",
+      "Đây là khách thin-file; công ty có thể dùng tín hiệu khác và một hạn mức nhỏ ban đầu",
+      "Đây là khách rủi ro cao nhất, nên chính sách đúng luôn là từ chối hẳn",
+      "NULL nghĩa là điểm 0, nên coi như khách thấp hơn mọi ngưỡng duyệt"
+    ],
+    "optionsEn": [
+      "It is a system error; fill in the average score so the application is treated normally",
+      "It is a thin-file customer; the lender can use other signals and a small first limit",
+      "It is the riskiest kind of customer, so the right policy is always to reject",
+      "NULL means a score of 0, so treat the customer as below every cut-off"
+    ],
+    "answer": 1,
+    "explanation": "Thin-file là thiếu lịch sử tín dụng, không phải bằng chứng rủi ro cao. VayNhanh duyệt 24 trong 123 hồ sơ BNPL không có điểm (khoản nhỏ); công ty muốn tăng trưởng thường dùng lịch sử ví, hóa đơn và hạn mức tăng dần.",
+    "explanationEn": "Thin file means missing credit history, not proof of high risk. VayNhanh approved 24 of 123 unscored BNPL applications (small amounts); lenders that want to grow use wallet history, bill payments and limits that grow over time.",
+    "optionExplanations": [
+      "Sai: điền điểm trung bình là tự bịa dữ liệu và che mất việc khách không có lịch sử.",
+      "Đúng: đó chính là định nghĩa thin-file và cách xử lý thường gặp.",
+      "Sai: thiếu lịch sử không đồng nghĩa với rủi ro cao nhất; từ chối hết là bỏ lỡ cả khách tốt.",
+      "Sai: NULL là \"không có giá trị\", không phải số 0."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: filling in an average invents data and hides the missing history.",
+      "Correct: that is exactly what thin file means and a common way to handle it.",
+      "Wrong: no history is not the same as highest risk; rejecting everyone loses good customers too.",
+      "Wrong: NULL means \"no value\", not zero."
+    ]
+  }
+]

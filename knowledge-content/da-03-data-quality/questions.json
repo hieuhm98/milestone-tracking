@@ -1,0 +1,578 @@
+[
+  {
+    "id": "da03-q1",
+    "question": "Một bạn product mở bảng `loan_applications` và than phiền: \"Cột `decided_at` có NULL, dữ liệu bẩn rồi!\". Các dòng NULL đó đều có `status = 'pending'`. Cách đọc nào đúng?",
+    "questionEn": "A product colleague opens `loan_applications` and complains: \"`decided_at` has NULLs, the data is dirty!\". Every one of those rows has `status = 'pending'`. Which reading is right?",
+    "options": [
+      "Đây là lỗi completeness, cần điền `decided_at` bằng `applied_at`",
+      "Đây là lỗi validity, cần đổi các dòng này sang `status = 'rejected'`",
+      "NULL ở đây là đúng: hồ sơ còn chờ nên chưa có thời điểm quyết định",
+      "NULL ở đây nghĩa là hồ sơ đã được quyết định lúc 00:00:00"
+    ],
+    "optionsEn": [
+      "It is a completeness error; fill `decided_at` with `applied_at`",
+      "It is a validity error; change these rows to `status = 'rejected'`",
+      "The NULL is correct: the application is still pending, so there is no decision time yet",
+      "The NULL means the application was decided at 00:00:00"
+    ],
+    "answer": 2,
+    "explanation": "Chất lượng dữ liệu nghĩa là phù hợp mục đích, không phải \"không có NULL\". Hồ sơ đang pending chưa có quyết định nên `decided_at` NULL là đúng nghiệp vụ.",
+    "explanationEn": "Data quality means fit for purpose, not \"no NULLs\". A pending application has no decision yet, so a NULL `decided_at` is correct for the business.",
+    "optionExplanations": [
+      "Sai: điền giờ nộp hồ sơ vào giờ quyết định là bịa ra một quyết định chưa xảy ra.",
+      "Sai: hồ sơ chưa bị từ chối; đổi trạng thái là sửa sai dữ liệu nguồn.",
+      "Đúng: NULL mang nghĩa \"chưa có\", khớp với trạng thái pending.",
+      "Sai: NULL không phải nửa đêm hay số 0; nó nghĩa là chưa có giá trị."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: copying the application time into the decision time invents a decision that never happened.",
+      "Wrong: the application was not rejected; changing the status corrupts the source.",
+      "Correct: NULL means \"not yet\", which matches the pending status.",
+      "Wrong: NULL is not midnight or zero; it means there is no value yet."
+    ]
+  },
+  {
+    "id": "da03-q2",
+    "question": "Kết quả query trên bảng `customers`:\n`rows_total | rows_with_income\n4000       | 3768`\n(`rows_with_income` = `COUNT(monthly_income)`). Bao nhiêu phần trăm khách chưa khai thu nhập?",
+    "questionEn": "Query result on `customers`:\n`rows_total | rows_with_income\n4000       | 3768`\n(`rows_with_income` = `COUNT(monthly_income)`). What share of customers did not declare an income?",
+    "options": [
+      "Khoảng 5,8%, vì 232 / 4.000",
+      "Khoảng 6,2%, vì 232 / 3.768",
+      "Khoảng 94,2%, vì 3.768 / 4.000",
+      "Không tính được vì `COUNT` đã bỏ qua các dòng NULL"
+    ],
+    "optionsEn": [
+      "About 5.8%, because 232 / 4,000",
+      "About 6.2%, because 232 / 3,768",
+      "About 94.2%, because 3,768 / 4,000",
+      "It cannot be computed because `COUNT` already skipped the NULL rows"
+    ],
+    "answer": 0,
+    "explanation": "Số thiếu = `COUNT(*) - COUNT(cột)` = 4.000 - 3.768 = 232. Mẫu số là tổng số khách (4.000), nên tỉ lệ thiếu ≈ 5,8%.",
+    "explanationEn": "Missing = `COUNT(*) - COUNT(column)` = 4,000 - 3,768 = 232. The denominator is all customers (4,000), so about 5.8% are missing.",
+    "optionExplanations": [
+      "Đúng: 232 khách thiếu chia cho toàn bộ 4.000 khách.",
+      "Sai: chia cho số người đã khai là chọn nhầm mẫu số.",
+      "Sai: đó là tỉ lệ khách đã khai, không phải tỉ lệ thiếu.",
+      "Sai: chính `COUNT(*)` so với `COUNT(cột)` cho ra số dòng thiếu."
+    ],
+    "optionExplanationsEn": [
+      "Correct: 232 missing customers divided by all 4,000 customers.",
+      "Wrong: dividing by those who answered uses the wrong denominator.",
+      "Wrong: that is the share who did declare an income, not the share missing.",
+      "Wrong: comparing `COUNT(*)` with `COUNT(column)` is exactly how you get the missing count."
+    ]
+  },
+  {
+    "id": "da03-q3",
+    "question": "Trên `loan_applications`, `AVG(credit_score)` = 631,2 còn `AVG(COALESCE(credit_score, 0))` = 603. Vì sao không nên dùng con số 603?",
+    "questionEn": "On `loan_applications`, `AVG(credit_score)` = 631.2 while `AVG(COALESCE(credit_score, 0))` = 603. Why should you not use 603?",
+    "options": [
+      "Vì `COALESCE` làm tròn điểm xuống số nguyên gần nhất",
+      "Vì `AVG` không chạy được trên cột có giá trị NULL",
+      "Vì 603 đã bỏ sót các hồ sơ bị từ chối khỏi phép tính",
+      "Vì nó coi khách chưa có lịch sử tín dụng là điểm 0, tự bịa ra người vay cực tệ"
+    ],
+    "optionsEn": [
+      "Because `COALESCE` rounds scores down to the nearest integer",
+      "Because `AVG` cannot run on a column that contains NULLs",
+      "Because 603 leaves rejected applications out of the calculation",
+      "Because it treats customers with no credit history as scoring 0, inventing terrible borrowers"
+    ],
+    "answer": 3,
+    "explanation": "NULL nghĩa là \"chưa biết\" (khách thin-file), không phải điểm 0. Đổi NULL thành 0 kéo trung bình xuống khoảng 28 điểm một cách giả tạo.",
+    "explanationEn": "NULL means \"unknown\" (a thin-file customer), not a score of 0. Turning NULL into 0 drags the average down by about 28 points artificially.",
+    "optionExplanations": [
+      "Sai: `COALESCE` chỉ thay NULL bằng giá trị khác, không làm tròn gì.",
+      "Sai: `AVG` chạy bình thường và tự bỏ qua NULL.",
+      "Sai: cả hai query đều tính trên mọi hồ sơ; khác nhau chỉ ở cách xử lý NULL.",
+      "Đúng: 307 khách không có điểm bị tính như điểm 0."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `COALESCE` only replaces NULL with another value; it rounds nothing.",
+      "Wrong: `AVG` runs fine and simply skips NULLs.",
+      "Wrong: both queries cover every application; they differ only in how NULL is handled.",
+      "Correct: 307 customers with no score are counted as scoring 0."
+    ]
+  },
+  {
+    "id": "da03-q4",
+    "question": "Cột `city` có các giá trị \"Ho Chi Minh City\", \"HCMC\", \"TP.HCM\" và \"ho chi minh city\" cho cùng một thành phố. Đây chủ yếu là vấn đề thuộc chiều nào?",
+    "questionEn": "The `city` column holds \"Ho Chi Minh City\", \"HCMC\", \"TP.HCM\" and \"ho chi minh city\" for the same city. Which dimension is this mainly about?",
+    "options": [
+      "Timeliness, vì tên thành phố được cập nhật quá chậm",
+      "Consistency, vì cùng một thứ được viết theo nhiều cách",
+      "Uniqueness, vì mỗi khách hàng bị ghi hai lần",
+      "Completeness, vì cột thành phố bị bỏ trống"
+    ],
+    "optionsEn": [
+      "Timeliness, because the city names are updated too slowly",
+      "Consistency, because the same thing is written in several ways",
+      "Uniqueness, because each customer is recorded twice",
+      "Completeness, because the city column is left empty"
+    ],
+    "answer": 1,
+    "explanation": "Consistency hỏi \"cùng một thứ có được viết cùng một cách không\". Các biến thể tên thành phố làm báo cáo theo thành phố đếm thiếu và sinh ra \"thành phố ma\".",
+    "explanationEn": "Consistency asks \"is the same thing written the same way?\". City-name variants make a by-city report undercount and show ghost cities.",
+    "optionExplanations": [
+      "Sai: vấn đề không nằm ở độ mới của dữ liệu.",
+      "Đúng: nhiều cách viết cho một giá trị thật là lỗi nhất quán.",
+      "Sai: mỗi khách vẫn chỉ có một dòng; chỉ cách viết thành phố khác nhau.",
+      "Sai: cột không trống, nó có giá trị nhưng viết không thống nhất."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the problem is not about how fresh the data is.",
+      "Correct: several spellings of one real value is a consistency problem.",
+      "Wrong: each customer still has one row; only the city spelling differs.",
+      "Wrong: the column is not empty; it has values written inconsistently."
+    ]
+  },
+  {
+    "id": "da03-q5",
+    "question": "Báo cáo cho thấy thu nhập trung bình ở Hải Phòng là 22 triệu, cao hơn cả Hà Nội và TP.HCM. Bước kiểm tra nào nên làm đầu tiên?",
+    "questionEn": "A report shows the average income in Hai Phong is 22 million, higher than Hanoi and Ho Chi Minh City. What should you check first?",
+    "options": [
+      "Chuyển sang dùng `SUM(monthly_income)` cho từng thành phố",
+      "Xem các giá trị lớn nhất bằng `ORDER BY monthly_income DESC LIMIT 5`",
+      "Xóa Hải Phòng khỏi báo cáo vì kết quả bất thường",
+      "Đổi mọi thu nhập NULL thành 0 rồi tính lại trung bình"
+    ],
+    "optionsEn": [
+      "Switch to `SUM(monthly_income)` for each city",
+      "Look at the largest values with `ORDER BY monthly_income DESC LIMIT 5`",
+      "Remove Hai Phong from the report because the result is unusual",
+      "Turn every NULL income into 0 and recompute the average"
+    ],
+    "answer": 1,
+    "explanation": "Một trung bình bất thường thường do vài giá trị cực đoan. Xem hai đầu cực sẽ lộ ra hai dòng 999.999.999 ở Hải Phòng; bỏ chúng đi, trung bình còn khoảng 14,7 triệu.",
+    "explanationEn": "An odd average is usually driven by a few extreme values. Looking at the extremes reveals two 999,999,999 rows in Hai Phong; without them the average is about 14.7 million.",
+    "optionExplanations": [
+      "Sai: tổng còn nhạy với giá trị cực đoan hơn và lại phụ thuộc số khách.",
+      "Đúng: nhìn giá trị lớn nhất là cách nhanh nhất để tìm lỗi gõ.",
+      "Sai: giấu kết quả lạ không giải thích được nó; cần tìm nguyên nhân.",
+      "Sai: việc đó thêm một lỗi mới (NULL thành 0) mà không chạm tới nguyên nhân."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a sum is even more sensitive to extreme values and also depends on customer count.",
+      "Correct: looking at the largest values is the fastest way to find typos.",
+      "Wrong: hiding an odd result does not explain it; find the cause.",
+      "Wrong: that adds a new error (NULL as 0) without touching the cause."
+    ]
+  },
+  {
+    "id": "da03-q6",
+    "question": "Biểu thức `AVG(NULLIF(monthly_income, 999999999))` làm gì?",
+    "questionEn": "What does `AVG(NULLIF(monthly_income, 999999999))` do?",
+    "options": [
+      "Đổi 999.999.999 thành 0 rồi tính trung bình trên mọi khách",
+      "Xóa vĩnh viễn các dòng 999.999.999 khỏi bảng `customers`",
+      "Coi 999.999.999 là chưa biết (NULL) nên `AVG` bỏ qua nó",
+      "Chỉ tính trung bình trên các dòng có thu nhập đúng bằng 999.999.999"
+    ],
+    "optionsEn": [
+      "Turns 999,999,999 into 0 and averages over every customer",
+      "Permanently deletes the 999,999,999 rows from `customers`",
+      "Treats 999,999,999 as unknown (NULL), so `AVG` skips it",
+      "Averages only the rows whose income is exactly 999,999,999"
+    ],
+    "answer": 2,
+    "explanation": "`NULLIF(x, v)` trả về NULL khi `x = v`, ngược lại trả về `x`. Kết hợp với `AVG`, giá trị lỗi bị bỏ qua mà dữ liệu gốc không bị đụng tới.",
+    "explanationEn": "`NULLIF(x, v)` returns NULL when `x = v`, otherwise `x`. Combined with `AVG`, the typo is skipped without touching the source data.",
+    "optionExplanations": [
+      "Sai: `NULLIF` trả về NULL, không phải 0.",
+      "Sai: một câu `SELECT` không xóa hay sửa gì trong bảng.",
+      "Đúng: lỗi gõ thành NULL và bị `AVG` bỏ qua.",
+      "Sai: đó là điều ngược lại; giá trị 999.999.999 chính là thứ bị loại."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `NULLIF` returns NULL, not 0.",
+      "Wrong: a `SELECT` never deletes or changes anything in the table.",
+      "Correct: the typo becomes NULL and `AVG` skips it.",
+      "Wrong: it does the opposite; the 999,999,999 values are what gets excluded."
+    ]
+  },
+  {
+    "id": "da03-q7",
+    "question": "Bạn chạy kiểm tra hợp lệ `SELECT * FROM payments WHERE amount <= 0;` và nhận về 0 dòng. Nên hiểu kết quả này thế nào?",
+    "questionEn": "You run the validity check `SELECT * FROM payments WHERE amount <= 0;` and get 0 rows. How should you read this?",
+    "options": [
+      "Kiểm tra đã đạt: không có giao dịch nào có số tiền âm hoặc bằng 0",
+      "Query bị lỗi vì một kiểm tra đúng phải trả về ít nhất một dòng",
+      "Bảng `payments` đang trống nên cần nạp lại dữ liệu",
+      "Mọi giao dịch đều hợp lệ trên tất cả sáu chiều chất lượng"
+    ],
+    "optionsEn": [
+      "The check passed: no payment has a negative or zero amount",
+      "The query is broken, because a correct check must return at least one row",
+      "The `payments` table is empty and needs reloading",
+      "Every payment is valid on all six quality dimensions"
+    ],
+    "answer": 0,
+    "explanation": "Quy tắc hợp lệ được viết để trả về các dòng sai, nên 0 dòng nghĩa là đạt. Vẫn nên giữ kiểm tra này để bắt lỗi ở các lần nạp dữ liệu sau.",
+    "explanationEn": "A validity rule is written to return the bad rows, so 0 rows means it passed. Keep the check anyway to catch problems in future loads.",
+    "optionExplanations": [
+      "Đúng: không có dòng sai nghĩa là quy tắc được thỏa mãn.",
+      "Sai: kiểm tra trả về dòng sai; không có dòng sai là kết quả tốt.",
+      "Sai: điều kiện lọc chỉ chọn số tiền ≤ 0, không nói gì về việc bảng trống.",
+      "Sai: một quy tắc chỉ kiểm một điều; trùng lặp hay treo trạng thái vẫn có thể tồn tại."
+    ],
+    "optionExplanationsEn": [
+      "Correct: no bad rows means the rule is satisfied.",
+      "Wrong: the check returns bad rows; having none is a good result.",
+      "Wrong: the filter selects only amounts ≤ 0; it says nothing about the table being empty.",
+      "Wrong: one rule checks one thing; duplicates or stuck statuses can still exist."
+    ]
+  },
+  {
+    "id": "da03-q8",
+    "question": "`GROUP BY city` trả về:\n`city    | n\nHanoi   | 1107\nhanoi   | 20\n Hanoi  | 13`\n(dòng thứ ba có một dấu cách ở đầu). Biểu thức nào gộp được cả ba dòng thành một nhóm?",
+    "questionEn": "`GROUP BY city` returns:\n`city    | n\nHanoi   | 1107\nhanoi   | 20\n Hanoi  | 13`\n(the third value has a leading space). Which expression puts all three into one group?",
+    "options": [
+      "`UPPER(city)`",
+      "`TRIM(city)`",
+      "`LOWER(city)`",
+      "`LOWER(TRIM(city))`"
+    ],
+    "optionsEn": [
+      "`UPPER(city)`",
+      "`TRIM(city)`",
+      "`LOWER(city)`",
+      "`LOWER(TRIM(city))`"
+    ],
+    "answer": 3,
+    "explanation": "Cần xử lý cả hai khác biệt: chữ hoa/thường và dấu cách thừa. `TRIM` bỏ dấu cách, `LOWER` đưa về chữ thường, kết quả cả ba thành `hanoi`.",
+    "explanationEn": "Both differences must be handled: letter case and the stray space. `TRIM` removes the space, `LOWER` fixes the case, and all three become `hanoi`.",
+    "optionExplanations": [
+      "Sai: chữ hoa gộp được 'Hanoi' và 'hanoi' nhưng ' HANOI' vẫn còn dấu cách.",
+      "Sai: bỏ dấu cách nhưng 'Hanoi' và 'hanoi' vẫn khác nhau.",
+      "Sai: ' hanoi' có dấu cách ở đầu vẫn là một nhóm riêng.",
+      "Đúng: xử lý cả dấu cách lẫn chữ hoa/thường."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: upper case merges 'Hanoi' and 'hanoi' but ' HANOI' still has its space.",
+      "Wrong: it removes the space but 'Hanoi' and 'hanoi' still differ.",
+      "Wrong: ' hanoi' with its leading space is still a separate group.",
+      "Correct: it handles both the space and the letter case."
+    ]
+  },
+  {
+    "id": "da03-q9",
+    "question": "Hai dòng trong `payments`:\n`payment_id | session_id | amount | method  | status  | created_at\n52         | S000096    | 134000 | qr_code | success | 2025-07-03 15:55:59\n7625       | S000096    | 134000 | qr_code | success | 2025-07-03 15:56:01`\nCách đọc nào hợp lý nhất?",
+    "questionEn": "Two rows in `payments`:\n`payment_id | session_id | amount | method  | status  | created_at\n52         | S000096    | 134000 | qr_code | success | 2025-07-03 15:55:59\n7625       | S000096    | 134000 | qr_code | success | 2025-07-03 15:56:01`\nWhat is the most sensible reading?",
+    "options": [
+      "Trừ tiền hai lần do retry: cùng một session, cách nhau hai giây",
+      "Khách cố ý mua hai món giống nhau trong cùng một lần thanh toán",
+      "Một giao dịch được hoàn tiền và ghi lại bằng một dòng mới",
+      "Lỗi múi giờ: cùng một giao dịch được lưu ở hai thời điểm"
+    ],
+    "optionsEn": [
+      "A double charge from a retry: same session, two seconds apart",
+      "The customer deliberately bought two identical items in one checkout",
+      "A payment that was refunded and logged again as a new row",
+      "A time-zone error: one payment stored at two times"
+    ],
+    "answer": 0,
+    "explanation": "Một session chỉ nên kết thúc bằng tối đa một giao dịch thành công. Hai dòng thành công, cùng số tiền, cách nhau vài giây là dấu vân tay của retry tự động.",
+    "explanationEn": "One session should end in at most one successful payment. Two successes with the same amount a few seconds apart are the fingerprint of an automatic retry.",
+    "optionExplanations": [
+      "Đúng: cùng session, cùng số tiền, cách nhau 2 giây.",
+      "Sai: hai món trong một lần thanh toán sẽ nằm trong cùng một giao dịch, không phải hai.",
+      "Sai: hoàn tiền thể hiện bằng `status = 'refunded'`, không phải dòng success mới.",
+      "Sai: lệch múi giờ làm lệch 7 tiếng, không phải 2 giây và không tạo thêm dòng."
+    ],
+    "optionExplanationsEn": [
+      "Correct: same session, same amount, 2 seconds apart.",
+      "Wrong: two items in one checkout would be one payment, not two.",
+      "Wrong: a refund shows up as `status = 'refunded'`, not a new success row.",
+      "Wrong: a time-zone error shifts by 7 hours, not 2 seconds, and adds no rows."
+    ]
+  },
+  {
+    "id": "da03-q10",
+    "question": "Khóa \"cùng session\" tìm ra 37 cặp trùng; khóa \"cùng khách, cùng merchant, cùng số tiền\" tìm ra 40 cặp. Ba cặp thừa là các session khác nhau, cách nhau nhiều ngày. Nên làm gì?",
+    "questionEn": "The \"same session\" key finds 37 duplicate pairs; the \"same customer, merchant and amount\" key finds 40. The extra three are different sessions days apart. What should you do?",
+    "options": [
+      "Dùng 40 cặp vì khóa rộng hơn luôn an toàn hơn",
+      "Lấy trung bình hai con số và báo cáo khoảng 38 cặp trùng",
+      "Dùng khóa theo session; ba cặp kia là khách mua lại thật",
+      "Xóa cả 40 cặp khỏi bảng `payments` để chắc chắn"
+    ],
+    "optionsEn": [
+      "Use 40, because a wider key is always safer",
+      "Average the two and report about 38 duplicate pairs",
+      "Use the session key; the other three are genuine repeat purchases",
+      "Delete all 40 pairs from `payments` to be sure"
+    ],
+    "answer": 2,
+    "explanation": "Business key quyết định thế nào là \"cùng một sự kiện\". Khóa lỏng gộp nhầm những lần mua lại thật, và loại chúng là xóa doanh thu thật.",
+    "explanationEn": "The business key decides what counts as \"the same event\". A loose key merges genuine repeat purchases, and removing them deletes real revenue.",
+    "optionExplanations": [
+      "Sai: khóa rộng hơn bắt nhầm cả giao dịch hợp lệ.",
+      "Sai: lấy trung bình hai định nghĩa không cho ra một định nghĩa đúng.",
+      "Đúng: một session chỉ có một lần mua; ba cặp kia là các lần mua riêng.",
+      "Sai: không bao giờ xóa dữ liệu nguồn, và 3 cặp trong đó là giao dịch thật."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a wider key also catches legitimate payments.",
+      "Wrong: averaging two definitions does not give a correct one.",
+      "Correct: a session is one purchase; the three extra pairs are separate purchases.",
+      "Wrong: never delete source data, and 3 of those pairs are real payments."
+    ]
+  },
+  {
+    "id": "da03-q11",
+    "question": "Giao dịch 1341 được tạo ngày 2025-09-13 và đến ngày chốt 2026-06-30 vẫn `pending`. Cách xử lý nào hợp lý nhất trong báo cáo?",
+    "questionEn": "Payment 1341 was created on 2025-09-13 and is still `pending` at the 2026-06-30 snapshot. What is the most sensible way to handle it in a report?",
+    "options": [
+      "Tính nó là thành công vì phần lớn giao dịch đều thành công",
+      "Gắn nhãn \"bị treo\", tách riêng và gửi danh sách cho vận hành kiểm tra với gateway",
+      "Tính nó là thất bại vì đã quá lâu không có kết quả",
+      "Xóa nó khỏi bảng vì giao dịch không bao giờ hoàn tất"
+    ],
+    "optionsEn": [
+      "Count it as a success, since most payments succeed",
+      "Label it \"stuck\", show it separately and send the list to operations to check with the gateway",
+      "Count it as failed, since it has had no result for too long",
+      "Delete it from the table, since the payment never completed"
+    ],
+    "answer": 1,
+    "explanation": "Analyst không tự quyết giao dịch bị treo đã thành công hay chưa. Quy tắc tốt: vượt ngưỡng đã thống nhất (ví dụ 24 giờ) thì gắn nhãn \"stuck\" và chuyển cho bên nắm bản ghi của gateway.",
+    "explanationEn": "The analyst does not decide whether a stuck payment succeeded. A good rule: past an agreed threshold (e.g. 24 hours) label it \"stuck\" and hand it to whoever holds the gateway's record.",
+    "optionExplanations": [
+      "Sai: đoán kết quả là bịa số liệu; tiền có thể chưa hề chuyển.",
+      "Đúng: hiển thị minh bạch và giao cho người có nguồn sự thật.",
+      "Sai: tiền có thể đã bị trừ; gọi là thất bại cũng là đoán.",
+      "Sai: dữ liệu gốc là bằng chứng, không được xóa."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: guessing the outcome invents data; the money may never have moved.",
+      "Correct: show it openly and hand it to whoever has the source of truth.",
+      "Wrong: the money may have been taken; calling it failed is also a guess.",
+      "Wrong: source data is evidence and must not be deleted."
+    ]
+  },
+  {
+    "id": "da03-q12",
+    "question": "Vì sao query tính số ngày pending viết `julianday('2026-06-30')` thay vì `julianday('now')`?",
+    "questionEn": "Why does the days-pending query use `julianday('2026-06-30')` instead of `julianday('now')`?",
+    "options": [
+      "Vì SQLite không hỗ trợ giá trị `'now'` trong hàm `julianday`",
+      "Vì `'now'` trả về giờ Việt Nam còn dữ liệu được lưu theo UTC",
+      "Vì viết cứng ngày giúp query chạy nhanh hơn trên bảng lớn",
+      "Vì dữ liệu được chốt ngày 2026-06-30; dùng ngày hôm nay sẽ làm kết quả đổi mỗi lần chạy"
+    ],
+    "optionsEn": [
+      "Because SQLite does not support `'now'` in `julianday`",
+      "Because `'now'` returns Vietnam time while the data is stored in UTC",
+      "Because a literal date makes the query faster on large tables",
+      "Because the data is a snapshot as of 2026-06-30; today's date would change the result on every run"
+    ],
+    "answer": 3,
+    "explanation": "Mọi trạng thái trong fintech.db được tính tại ngày chốt 2026-06-30. Dùng ngày cố định giúp kết quả lặp lại được và khớp với snapshot.",
+    "explanationEn": "Every status in fintech.db is computed as of the 2026-06-30 snapshot. A fixed date makes the result repeatable and consistent with the snapshot.",
+    "optionExplanations": [
+      "Sai: SQLite có hỗ trợ `'now'`; vấn đề là kết quả không ổn định.",
+      "Sai: `'now'` trong SQLite trả về giờ UTC, và múi giờ không phải lý do ở đây.",
+      "Sai: tốc độ gần như không khác; lý do là tính đúng và lặp lại được.",
+      "Đúng: snapshot cố định thì ngày tham chiếu cũng phải cố định."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: SQLite does support `'now'`; the problem is the result would not be stable.",
+      "Wrong: `'now'` in SQLite returns UTC, and time zone is not the reason here.",
+      "Wrong: speed is practically the same; the reason is correctness and repeatability.",
+      "Correct: a fixed snapshot needs a fixed reference date."
+    ]
+  },
+  {
+    "id": "da03-q13",
+    "question": "Một giao dịch được lưu với `created_at = '2026-06-01 17:41:03'` (UTC). Theo giờ Việt Nam (UTC+7), nó thuộc ngày nào?",
+    "questionEn": "A payment is stored with `created_at = '2026-06-01 17:41:03'` (UTC). Which day does it belong to in Vietnam time (UTC+7)?",
+    "options": [
+      "Ngày 31/5, vì phải trừ 7 tiếng",
+      "Ngày 1/6, vì ngày trong timestamp là 2026-06-01",
+      "Ngày 2/6, lúc 00:41 giờ Việt Nam",
+      "Không xác định được nếu không biết thiết bị của khách"
+    ],
+    "optionsEn": [
+      "31 May, because you subtract 7 hours",
+      "1 June, because the date in the timestamp is 2026-06-01",
+      "2 June, at 00:41 Vietnam time",
+      "It cannot be known without the customer's device"
+    ],
+    "answer": 2,
+    "explanation": "17:41 UTC + 7 tiếng = 00:41 ngày hôm sau. Mọi dòng lưu lúc 17:00–23:59 UTC thuộc về ngày tiếp theo ở Việt Nam.",
+    "explanationEn": "17:41 UTC + 7 hours = 00:41 the next day. Every row stored at 17:00–23:59 UTC belongs to the next day in Vietnam.",
+    "optionExplanations": [
+      "Sai: Việt Nam đi trước UTC nên phải cộng, không phải trừ.",
+      "Sai: đó là ngày UTC; cộng 7 tiếng sẽ sang ngày mới.",
+      "Đúng: 17:41 + 7 tiếng = 00:41 ngày 2/6.",
+      "Sai: timestamp đã theo UTC; chỉ cần cộng 7 tiếng, không cần thiết bị."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: Vietnam is ahead of UTC, so you add, not subtract.",
+      "Wrong: that is the UTC date; adding 7 hours crosses midnight.",
+      "Correct: 17:41 + 7 hours = 00:41 on 2 June.",
+      "Wrong: the timestamp is already UTC; add 7 hours, no device needed."
+    ]
+  },
+  {
+    "id": "da03-q14",
+    "question": "Báo cáo doanh thu theo ngày cần tính theo giờ Việt Nam. Trong SQLite, biểu thức nhóm nào đúng?",
+    "questionEn": "A daily revenue report must use Vietnam time. In SQLite, which grouping expression is right?",
+    "options": [
+      "`date(created_at, '+7 hours')`",
+      "`date(created_at)`",
+      "`date(created_at, '-7 hours')`",
+      "`strftime('%H', created_at) + 7`"
+    ],
+    "optionsEn": [
+      "`date(created_at, '+7 hours')`",
+      "`date(created_at)`",
+      "`date(created_at, '-7 hours')`",
+      "`strftime('%H', created_at) + 7`"
+    ],
+    "answer": 0,
+    "explanation": "Dữ liệu lưu UTC, Việt Nam là UTC+7, nên cộng 7 tiếng rồi lấy ngày. Với ngày 2026-06-01, cách tính theo UTC ra khoảng 9,1 triệu còn theo giờ Việt Nam ra khoảng 13,4 triệu.",
+    "explanationEn": "The data is UTC and Vietnam is UTC+7, so add 7 hours and then take the date. For 2026-06-01, the UTC basis gives about 9.1 million and the Vietnam basis about 13.4 million.",
+    "optionExplanations": [
+      "Đúng: chuyển sang giờ Việt Nam rồi mới lấy ngày.",
+      "Sai: đó là ngày UTC, lệch 7 tiếng so với ngày Việt Nam.",
+      "Sai: trừ 7 tiếng đi ngược chiều, lệch tới 14 tiếng.",
+      "Sai: đó là một con số giờ (có thể vượt 23), không phải một ngày."
+    ],
+    "optionExplanationsEn": [
+      "Correct: convert to Vietnam time first, then take the date.",
+      "Wrong: that is the UTC date, 7 hours off the Vietnam day.",
+      "Wrong: subtracting goes the wrong way, 14 hours off.",
+      "Wrong: that is an hour number (it can exceed 23), not a date."
+    ]
+  },
+  {
+    "id": "da03-q15",
+    "question": "Query đối soát ví:\n`FROM wallets w\nLEFT JOIN wallet_transactions t ON t.wallet_id = w.wallet_id\nWHERE t.status = 'success'`\nchỉ tìm ra 4 ví lệch, trong khi đáp án đúng là 6. Lỗi ở đâu?",
+    "questionEn": "A wallet reconciliation query:\n`FROM wallets w\nLEFT JOIN wallet_transactions t ON t.wallet_id = w.wallet_id\nWHERE t.status = 'success'`\nfinds only 4 broken wallets when the right answer is 6. Where is the bug?",
+    "options": [
+      "Phải dùng `INNER JOIN` thay vì `LEFT JOIN` để không mất dòng",
+      "Điều kiện `WHERE` loại các ví không có giao dịch thành công; phải đưa nó vào `ON`",
+      "Phải tính cả giao dịch thất bại vì chúng cũng làm đổi số dư",
+      "Phải bỏ `GROUP BY` vì đối soát cần làm trên từng giao dịch"
+    ],
+    "optionsEn": [
+      "Use `INNER JOIN` instead of `LEFT JOIN` so no rows are lost",
+      "The `WHERE` filter drops wallets with no successful transaction; it belongs in `ON`",
+      "Failed transactions must be included because they also change the balance",
+      "Remove `GROUP BY` because reconciliation must be done per transaction"
+    ],
+    "answer": 1,
+    "explanation": "`WHERE` chạy sau join nên loại các dòng có `t.status` NULL, biến `LEFT JOIN` thành inner join. Ví 377 và 1499 không có giao dịch nào nên biến mất, dù chúng là hai break đáng ngờ nhất.",
+    "explanationEn": "`WHERE` runs after the join and drops rows where `t.status` is NULL, turning the `LEFT JOIN` into an inner join. Wallets 377 and 1499 have no transactions, so they vanish, though they are the two most suspicious breaks.",
+    "optionExplanations": [
+      "Sai: `INNER JOIN` cũng loại ví không có giao dịch, cho kết quả y như lỗi hiện tại.",
+      "Đúng: đặt điều kiện trong `ON` giữ lại mọi ví, kể cả ví không có giao dịch.",
+      "Sai: giao dịch thất bại không chuyển tiền; tính chúng làm 1.035 ví trông như bị lệch.",
+      "Sai: số dư được so ở mức từng ví, nên cần `GROUP BY` theo ví."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `INNER JOIN` also drops wallets without transactions, the same result as the bug.",
+      "Correct: putting the filter in `ON` keeps every wallet, even those with no transactions.",
+      "Wrong: failed transactions move no money; counting them makes 1,035 wallets look broken.",
+      "Wrong: balances are compared per wallet, so `GROUP BY` wallet is needed."
+    ]
+  },
+  {
+    "id": "da03-q16",
+    "question": "Tổng số dư của mọi ví khớp chính xác với tổng sổ giao dịch. Một bạn kết luận: \"Đối soát xong, không có ví nào lệch.\" Vì sao kết luận này chưa an toàn?",
+    "questionEn": "The total of all wallet balances exactly matches the ledger total. A colleague concludes: \"Reconciliation done, no wallet is off.\" Why is that conclusion not safe?",
+    "options": [
+      "Vì tổng số dư luôn khác tổng giao dịch do làm tròn",
+      "Vì đối soát chỉ có nghĩa khi so với dữ liệu của ngày hôm trước",
+      "Vì ví bị khóa và ví đã đóng không được phép đối soát",
+      "Vì chênh lệch dương ở ví này và âm ở ví kia có thể triệt tiêu nhau trong tổng"
+    ],
+    "optionsEn": [
+      "Because balance totals always differ from ledger totals due to rounding",
+      "Because reconciliation only makes sense against yesterday's data",
+      "Because locked and closed wallets may not be reconciled",
+      "Because a positive break on one wallet and a negative one on another can cancel out in the total"
+    ],
+    "answer": 3,
+    "explanation": "Đối soát phải làm ở grain từng tài khoản. Lệch +200.000 ở ví này và -200.000 ở ví kia cho tổng khớp hoàn hảo nhưng vẫn là hai lỗi thật.",
+    "explanationEn": "Reconciliation must be done at the grain of each account. A +200,000 break on one wallet and -200,000 on another give a perfect total but are still two real errors.",
+    "optionExplanations": [
+      "Sai: số tiền là số nguyên VND, không có làm tròn ở đây.",
+      "Sai: đối soát so hai bản ghi của cùng một khoản tiền, không phải so với hôm qua.",
+      "Sai: ví đã đóng vẫn cần khớp; trong dữ liệu có cả ví đóng bị lệch.",
+      "Đúng: tổng khớp có thể che các chênh lệch ngược dấu."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: amounts are integer VND; no rounding is involved.",
+      "Wrong: reconciliation compares two records of the same money, not today with yesterday.",
+      "Wrong: closed wallets must still agree; the data has closed wallets that break.",
+      "Correct: a matching total can hide breaks of opposite sign."
+    ]
+  },
+  {
+    "id": "da03-q17",
+    "question": "Trưởng nhóm tài chính đề nghị: \"Chạy `DELETE` 37 giao dịch trùng trong bảng production cho báo cáo đúng.\" Phản hồi nào tốt nhất?",
+    "questionEn": "The finance lead suggests: \"Run a `DELETE` on the 37 duplicate payments in production so the reports are right.\" What is the best response?",
+    "options": [
+      "Loại chúng ở lớp làm sạch, gửi danh sách để hoàn tiền cho khách và đề nghị sửa retry bằng idempotency key",
+      "Đồng ý, vì xóa bản ghi trùng là cách nhanh nhất để GMV đúng",
+      "Giữ nguyên mọi thứ, vì 37 dòng chỉ khoảng 0,4% nên không đáng xử lý",
+      "Đổi trạng thái 37 dòng đó thành `failed` để báo cáo tự loại chúng"
+    ],
+    "optionsEn": [
+      "Exclude them in the clean layer, send the list for customer refunds and ask for an idempotency key on retries",
+      "Agree, because deleting duplicates is the fastest way to get GMV right",
+      "Leave everything as it is, because 37 rows are only about 0.4% and not worth handling",
+      "Change those 37 rows to `failed` so reports drop them automatically"
+    ],
+    "answer": 0,
+    "explanation": "Bản ghi trùng là bằng chứng khách bị trừ tiền hai lần. Không sửa dữ liệu gốc; làm sạch trên bản sao, xử lý hậu quả (hoàn tiền) và sửa nguyên nhân (retry).",
+    "explanationEn": "The duplicates are evidence that customers were charged twice. Do not edit source data; clean in a copy, deal with the impact (refunds) and fix the cause (retries).",
+    "optionExplanations": [
+      "Đúng: báo cáo đúng mà vẫn giữ bằng chứng và sửa tận gốc.",
+      "Sai: xóa đi là che mất khoản phải hoàn và con bug gây ra nó.",
+      "Sai: với 37 khách bị trừ tiền hai lần, đó là tiền thật phải trả lại.",
+      "Sai: tiền đã bị trừ thật; đổi trạng thái là ghi sai sự thật vào nguồn."
+    ],
+    "optionExplanationsEn": [
+      "Correct: reports are right while the evidence is kept and the cause is fixed.",
+      "Wrong: deleting hides the refunds owed and the bug that caused them.",
+      "Wrong: for the 37 customers charged twice it is real money owed back.",
+      "Wrong: the money really was taken; changing the status writes a falsehood into the source."
+    ]
+  },
+  {
+    "id": "da03-q18",
+    "question": "Thực hành nào KHÔNG phù hợp với nguyên tắc làm sạch dữ liệu trong bài?",
+    "questionEn": "Which practice does NOT fit the cleaning principles in this topic?",
+    "options": [
+      "Giữ cột `income_raw` ngay cạnh cột thu nhập đã làm sạch",
+      "Chạy `UPDATE customers SET city = 'Hanoi' WHERE city = 'HN'` trên bảng gốc mà không ghi lại",
+      "Thêm cột `income_flag` ghi 'missing', 'invalid_typo' hoặc 'ok'",
+      "Ghi vào cleaning log số dòng bị ảnh hưởng và team đã được báo"
+    ],
+    "optionsEn": [
+      "Keeping an `income_raw` column right next to the cleaned income",
+      "Running `UPDATE customers SET city = 'Hanoi' WHERE city = 'HN'` on the source table without writing it down",
+      "Adding an `income_flag` column of 'missing', 'invalid_typo' or 'ok'",
+      "Recording in the cleaning log how many rows were affected and which team was told"
+    ],
+    "answer": 1,
+    "explanation": "Sửa lặng lẽ dữ liệu gốc phá cả hai nguyên tắc: không bao giờ sửa nguồn và không bao giờ sửa mà không ghi lại. Các lựa chọn còn lại đều là thực hành tốt.",
+    "explanationEn": "Silently editing source data breaks two principles at once: never edit the source and never fix without writing it down. The other choices are all good practice.",
+    "optionExplanations": [
+      "Sai: giữ cột thô cạnh cột sạch là thực hành tốt.",
+      "Đúng: đây là sửa lặng lẽ trên dữ liệu gốc, đúng điều bài khuyên tránh.",
+      "Sai: gắn cờ giúp mọi người đếm được thứ đã thay đổi.",
+      "Sai: cleaning log là thứ bài khuyến khích viết."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: keeping the raw column beside the clean one is good practice.",
+      "Correct: it is a silent fix on source data, exactly what the topic warns against.",
+      "Wrong: a flag lets anyone count what was changed.",
+      "Wrong: a cleaning log is exactly what the topic recommends."
+    ]
+  }
+]

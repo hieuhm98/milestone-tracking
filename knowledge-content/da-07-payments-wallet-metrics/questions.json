@@ -1,0 +1,642 @@
+[
+  {
+    "id": "da07-q1",
+    "question": "Tháng trước GMV của một cổng thanh toán là 450 triệu đồng, phí MDR trung bình là 1,5%. CEO hỏi \"tháng trước mình có doanh thu bao nhiêu?\". Câu trả lời nào đúng nhất?",
+    "questionEn": "Last month a payment gateway's GMV was 450 million VND and the average MDR was 1.5%. The CEO asks \"what was our revenue last month?\". Which answer is best?",
+    "options": [
+      "Khoảng 450 triệu đồng, vì GMV chính là doanh thu của nền tảng",
+      "Khoảng 443 triệu đồng, tức GMV sau khi trừ phí MDR 1,5%",
+      "Khoảng 6,75 triệu đồng doanh thu MDR gộp, chưa trừ các chi phí",
+      "Không tính được nếu chưa biết số giao dịch bị hoàn tiền"
+    ],
+    "optionsEn": [
+      "About 450 million VND, because GMV is the platform's revenue",
+      "About 443 million VND, which is GMV after the 1.5% MDR fee",
+      "About 6.75 million VND of gross MDR revenue, before costs",
+      "It can't be calculated without the number of refunded payments"
+    ],
+    "answer": 2,
+    "explanation": "Doanh thu của nền tảng là phần phí giữ lại: 1,5% × 450 triệu = 6,75 triệu đồng. Đó là doanh thu gộp; doanh thu thuần còn phải trừ interchange, phí tổ chức thẻ, chi phí OTP…",
+    "explanationEn": "The platform's revenue is the fee it keeps: 1.5% × 450 million = 6.75 million VND. That is gross revenue; net revenue also subtracts interchange, scheme fees, OTP costs and so on.",
+    "optionExplanations": [
+      "Sai: GMV là tiền của người mua chảy về người bán, không phải doanh thu của nền tảng.",
+      "Sai: 443 triệu là phần người bán nhận được (gần đúng), không phải doanh thu của nền tảng.",
+      "Đúng: doanh thu MDR = GMV × MDR = 6,75 triệu đồng, trước chi phí.",
+      "Sai: hoàn tiền ảnh hưởng ít tới con số này; câu hỏi trả lời được với dữ liệu đã có."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: GMV is shoppers' money flowing to merchants, not the platform's revenue.",
+      "Wrong: 443 million is roughly what merchants receive, not the platform's revenue.",
+      "Correct: MDR revenue = GMV × MDR = 6.75 million VND, before costs.",
+      "Wrong: refunds barely change this figure; the question can be answered with the data given."
+    ]
+  },
+  {
+    "id": "da07-q2",
+    "question": "Trên các giao dịch thành công của VayNhanh, AOV (trung bình) là khoảng 733.000 đồng còn trung vị là 334.000 đồng. Cách đọc nào đúng?",
+    "questionEn": "Across VayNhanh's successful payments, the AOV (mean) is about 733,000 VND and the median is 334,000 VND. Which reading is correct?",
+    "options": [
+      "Một số đơn rất lớn kéo trung bình lên; một giỏ hàng điển hình gần 334.000 đồng hơn",
+      "Dữ liệu chắc chắn bị lỗi, vì trung bình và trung vị phải gần bằng nhau",
+      "Đa số khách mua đơn khoảng 733.000 đồng, còn trung vị bị kéo xuống bởi đơn nhỏ",
+      "Nên báo cáo trung vị thay cho GMV, vì GMV bị phóng đại bởi các đơn lớn"
+    ],
+    "optionsEn": [
+      "A few very large orders pull the mean up; a typical basket is closer to 334,000 VND",
+      "The data must be wrong, because the mean and the median should be about equal",
+      "Most shoppers spend about 733,000 VND, and small orders drag the median down",
+      "Report the median instead of GMV, because GMV is inflated by large orders"
+    ],
+    "answer": 0,
+    "explanation": "Số tiền thanh toán bị lệch phải (right-skewed): vài đơn điện tử lớn kéo trung bình lên. Trung vị mô tả giỏ hàng điển hình tốt hơn; nên báo cáo cả hai.",
+    "explanationEn": "Payment amounts are right-skewed: a few big electronics orders pull the mean up. The median describes the typical basket better; report both.",
+    "optionExplanations": [
+      "Đúng: phân phối lệch phải, trung bình bị đơn lớn kéo lên.",
+      "Sai: số tiền thanh toán gần như luôn lệch; trung bình khác trung vị là bình thường.",
+      "Sai: trung vị là giá trị ở giữa, nên một nửa số đơn thấp hơn 334.000 đồng, không phải đa số quanh 733.000.",
+      "Sai: GMV là tổng và vẫn đúng; trung vị thay cho AOV khi mô tả đơn điển hình, không thay cho GMV."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the distribution is right-skewed and big orders pull the mean up.",
+      "Wrong: payment amounts are almost always skewed; a mean above the median is normal.",
+      "Wrong: the median is the middle value, so half of all orders are below 334,000 VND, not around 733,000.",
+      "Wrong: GMV is a total and is still correct; the median complements AOV for the typical order, not GMV."
+    ]
+  },
+  {
+    "id": "da07-q3",
+    "question": "So với tháng trước, số giao dịch thành công tăng 3% nhưng GMV giảm 5%. Điều gì chắc chắn đã xảy ra?",
+    "questionEn": "Compared with last month, the number of successful payments rose 3% but GMV fell 5%. What must have happened?",
+    "options": [
+      "Tỷ lệ thanh toán thành công đã giảm trong tháng",
+      "Số giao dịch bị hoàn tiền tăng mạnh trong tháng",
+      "Số người mua khác nhau đã giảm so với tháng trước",
+      "Giá trị đơn trung bình (AOV) giảm khoảng 8%"
+    ],
+    "optionsEn": [
+      "The payment success rate fell during the month",
+      "The number of refunded payments rose sharply",
+      "The number of distinct buyers fell versus last month",
+      "Average order value (AOV) fell by about 8%"
+    ],
+    "answer": 3,
+    "explanation": "GMV = số giao dịch × AOV. 0,95 ÷ 1,03 ≈ 0,92, nên AOV giảm khoảng 8%. Các phương án khác có thể đúng hoặc sai, dữ liệu không cho biết.",
+    "explanationEn": "GMV = number of payments × AOV. 0.95 ÷ 1.03 ≈ 0.92, so AOV fell about 8%. The other options may or may not be true; the data doesn't say.",
+    "optionExplanations": [
+      "Sai: số giao dịch thành công tăng; tỷ lệ thành công không suy ra được từ hai con số này.",
+      "Sai: GMV tính trước hoàn tiền (giao dịch refunded vẫn nằm trong GMV), nên hoàn tiền không giải thích được.",
+      "Sai: số người mua có thể giảm hoặc tăng; số giao dịch tăng không cho biết điều đó.",
+      "Đúng: GMV giảm khi số giao dịch tăng nghĩa là mỗi đơn nhỏ đi, khoảng 8%."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: successful payments went up; the success rate can't be derived from these two numbers.",
+      "Wrong: GMV is before refunds (refunded payments stay in GMV), so refunds don't explain it.",
+      "Wrong: buyers may have gone up or down; the payment count says nothing about that.",
+      "Correct: GMV down while the count is up means each order got smaller, by about 8%."
+    ]
+  },
+  {
+    "id": "da07-q4",
+    "question": "Một dòng trong `payments` có `created_at = '2026-05-10 18:30:00'` (UTC). Trong báo cáo doanh số theo ngày Việt Nam, giao dịch này thuộc ngày nào?",
+    "questionEn": "A `payments` row has `created_at = '2026-05-10 18:30:00'` (UTC). In a daily sales report by Vietnam date, which day does it belong to?",
+    "options": [
+      "Ngày 10/5/2026, vì ngày ghi trong cột đã là ngày giao dịch",
+      "Ngày 11/5/2026, vì giờ Việt Nam là 01:30 sáng ngày 11",
+      "Ngày 10/5/2026, vì giờ Việt Nam là 11:30 sáng ngày 10",
+      "Tùy múi giờ của máy tính đang chạy câu query SQL"
+    ],
+    "optionsEn": [
+      "10 May 2026, because the date in the column is the payment date",
+      "11 May 2026, because Vietnam time is 01:30 on the 11th",
+      "10 May 2026, because Vietnam time is 11:30 on the 10th",
+      "It depends on the time zone of the computer running the SQL"
+    ],
+    "answer": 1,
+    "explanation": "Việt Nam là UTC+7: 18:30 + 7 giờ = 01:30 ngày hôm sau. `date(created_at, '+7 hours')` trả về '2026-05-11'.",
+    "explanationEn": "Vietnam is UTC+7: 18:30 + 7 hours = 01:30 the next day. `date(created_at, '+7 hours')` returns '2026-05-11'.",
+    "optionExplanations": [
+      "Sai: ngày trong cột là ngày UTC, không phải ngày Việt Nam.",
+      "Đúng: cộng 7 giờ sẽ sang 01:30 ngày 11/5.",
+      "Sai: đó là phép trừ 7 giờ; giờ Việt Nam đi trước UTC.",
+      "Sai: text lưu sẵn trong cột không đổi theo máy; bạn phải tự đổi múi giờ trong query."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the date in the column is the UTC date, not the Vietnam date.",
+      "Correct: adding 7 hours gives 01:30 on 11 May.",
+      "Wrong: that subtracts 7 hours; Vietnam time is ahead of UTC.",
+      "Wrong: the stored text doesn't change with the machine; you convert the time zone in the query."
+    ]
+  },
+  {
+    "id": "da07-q5",
+    "question": "Giao dịch QR hôm qua: `status | count\\nsuccess | 900\\nrefunded | 50\\nfailed | 40\\npending | 10`. Theo quy tắc trong bài, tỷ lệ thanh toán thành công là bao nhiêu?",
+    "questionEn": "Yesterday's QR payments: `status | count\\nsuccess | 900\\nrefunded | 50\\nfailed | 40\\npending | 10`. Using the rule from the lesson, what is the payment success rate?",
+    "options": [
+      "95,0% = 950 ÷ 1.000, tính trên toàn bộ dòng",
+      "96,0% = 950 ÷ 990, refunded tính thành công, bỏ pending",
+      "90,9% = 900 ÷ 990, chỉ tính status success",
+      "90,0% = 900 ÷ 1.000, chỉ success trên tất cả"
+    ],
+    "optionsEn": [
+      "95.0% = 950 ÷ 1,000, over every row",
+      "96.0% = 950 ÷ 990, refunded as success, pending excluded",
+      "90.9% = 900 ÷ 990, counting only status success",
+      "90.0% = 900 ÷ 1,000, only success over everything"
+    ],
+    "answer": 1,
+    "explanation": "Refunded đã thành công trước nên tính vào tử số; pending chưa có kết quả nên bỏ khỏi mẫu số: (900 + 50) ÷ (900 + 50 + 40) = 950 ÷ 990 ≈ 96,0%.",
+    "explanationEn": "Refunded payments succeeded first, so they count in the numerator; pending has no outcome, so it leaves the denominator: (900 + 50) ÷ (900 + 50 + 40) = 950 ÷ 990 ≈ 96.0%.",
+    "optionExplanations": [
+      "Sai: đưa 10 giao dịch pending (chưa có kết quả) vào mẫu số.",
+      "Đúng: đúng tử số và đúng mẫu số.",
+      "Sai: coi 50 giao dịch đã hoàn tiền là thất bại.",
+      "Sai: mắc cả hai lỗi: bỏ refunded khỏi tử số và giữ pending trong mẫu số."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it puts the 10 pending payments (no outcome) in the denominator.",
+      "Correct: right numerator and right denominator.",
+      "Wrong: it treats the 50 refunded payments as failures.",
+      "Wrong: both mistakes at once: refunded left out of the numerator and pending kept in the denominator."
+    ]
+  },
+  {
+    "id": "da07-q6",
+    "question": "Tuần này, lý do `otp_timeout` của giao dịch thẻ tăng gấp ba, các lý do khác giữ nguyên. Nên gọi ai trước tiên?",
+    "questionEn": "This week, card failures with reason `otp_timeout` tripled while other reasons stayed flat. Who should you call first?",
+    "options": [
+      "Đội risk, để nới lỏng các luật chặn giao dịch gian lận",
+      "Bộ phận chăm sóc khách hàng, để nhắc khách nạp thêm tiền",
+      "Issuer, để hỏi vì sao họ từ chối thẻ nhiều hơn tuần trước",
+      "Product và nhà cung cấp SMS/OTP, vì bước xác thực đang lỗi"
+    ],
+    "optionsEn": [
+      "The risk team, to loosen the fraud-blocking rules",
+      "Customer support, to remind customers to add funds",
+      "The issuers, to ask why they declined more cards than last week",
+      "Product and the SMS/OTP provider, since the authentication step is failing"
+    ],
+    "answer": 3,
+    "explanation": "`otp_timeout` nghĩa là khách không hoàn tất bước OTP / 3-D Secure. Nguyên nhân thường nằm ở việc gửi mã (SMS) hoặc trải nghiệm trong app, nên product và nhà cung cấp OTP là nơi bắt đầu.",
+    "explanationEn": "`otp_timeout` means the customer didn't complete the OTP / 3-D Secure step. The cause is usually code delivery (SMS) or the in-app experience, so product and the OTP provider are where to start.",
+    "optionExplanations": [
+      "Sai: đó là việc của lý do `fraud_blocked`, vốn không tăng.",
+      "Sai: đó là lý do `insufficient_funds`, vốn không tăng.",
+      "Sai: lệnh từ chối của issuer hiện ra là `bank_declined`, vốn giữ nguyên.",
+      "Đúng: lỗi nằm ở bước xác thực OTP, nên bắt đầu từ product và nhà cung cấp SMS/OTP."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that is for `fraud_blocked`, which didn't rise.",
+      "Wrong: that is the `insufficient_funds` reason, which didn't rise.",
+      "Wrong: issuer refusals show up as `bank_declined`, which stayed flat.",
+      "Correct: the failure is in the OTP authentication step, so start with product and the SMS/OTP provider."
+    ]
+  },
+  {
+    "id": "da07-q7",
+    "question": "Khi dựng funnel từ `checkout_events`, vì sao nên dùng `COUNT(DISTINCT session_id)` cho mỗi bước thay vì `COUNT(*)`?",
+    "questionEn": "When building a funnel from `checkout_events`, why use `COUNT(DISTINCT session_id)` per step instead of `COUNT(*)`?",
+    "options": [
+      "Một phiên có thể ghi cùng một bước nhiều lần, ví dụ bấm \"Thanh toán\" hai lần",
+      "`COUNT(*)` không chạy được trên những cột có kiểu dữ liệu text",
+      "`COUNT(DISTINCT …)` tự động loại bỏ các phiên của khách bị trùng",
+      "Để query chạy nhanh hơn trên các bảng event có kích thước lớn"
+    ],
+    "optionsEn": [
+      "A session can log the same step more than once, e.g. tapping \"Pay\" twice",
+      "`COUNT(*)` doesn't work on columns whose data type is text",
+      "`COUNT(DISTINCT …)` automatically removes duplicated customers' sessions",
+      "So that the query runs faster on large event tables"
+    ],
+    "answer": 0,
+    "explanation": "Funnel hỏi \"bao nhiêu phiên đi tới bước này\". Đếm event sẽ đếm trùng các thao tác lặp lại và làm tỷ lệ chuyển đổi sai, có khi còn vượt 100%.",
+    "explanationEn": "A funnel asks \"how many sessions reached this step\". Counting events double-counts repeated actions and distorts the conversion rates, sometimes above 100%.",
+    "optionExplanations": [
+      "Đúng: event lặp lại trong một phiên sẽ bị đếm nhiều lần nếu dùng `COUNT(*)`.",
+      "Sai: `COUNT(*)` đếm dòng, không phụ thuộc kiểu dữ liệu.",
+      "Sai: nó loại phiên trùng trong cùng một bước, không liên quan tới khách trùng.",
+      "Sai: `DISTINCT` thường còn chậm hơn; lý do là tính đúng, không phải tốc độ."
+    ],
+    "optionExplanationsEn": [
+      "Correct: repeated events in one session are counted several times with `COUNT(*)`.",
+      "Wrong: `COUNT(*)` counts rows regardless of data type.",
+      "Wrong: it removes repeated sessions within a step; it has nothing to do with duplicate customers.",
+      "Wrong: `DISTINCT` is usually slower; the reason is correctness, not speed."
+    ]
+  },
+  {
+    "id": "da07-q8",
+    "question": "Funnel của một shop: `step | sessions\\nview_cart | 1000\\nstart_checkout | 700\\nselect_payment | 600\\nsubmit_payment | 550\\npayment_success | 450`. Bước nào có tỷ lệ chuyển đổi từng bước thấp nhất?",
+    "questionEn": "A shop's funnel: `step | sessions\\nview_cart | 1000\\nstart_checkout | 700\\nselect_payment | 600\\nsubmit_payment | 550\\npayment_success | 450`. Which step has the lowest step conversion?",
+    "options": [
+      "submit_payment → payment_success, khoảng 82%",
+      "start_checkout → select_payment, khoảng 86%",
+      "view_cart → start_checkout, đúng 70%",
+      "select_payment → submit_payment, khoảng 92%"
+    ],
+    "optionsEn": [
+      "submit_payment → payment_success, about 82%",
+      "start_checkout → select_payment, about 86%",
+      "view_cart → start_checkout, exactly 70%",
+      "select_payment → submit_payment, about 92%"
+    ],
+    "answer": 2,
+    "explanation": "Tỷ lệ từng bước: 700/1000 = 70%, 600/700 ≈ 86%, 550/600 ≈ 92%, 450/550 ≈ 82%. Thấp nhất là giỏ hàng → checkout. Bước submit → success vẫn đáng ưu tiên vì khách đã muốn trả tiền, nhưng câu hỏi là tỷ lệ thấp nhất.",
+    "explanationEn": "Step rates: 700/1000 = 70%, 600/700 ≈ 86%, 550/600 ≈ 92%, 450/550 ≈ 82%. The lowest is cart → checkout. Submit → success is still worth prioritising because those shoppers wanted to pay, but the question asks for the lowest rate.",
+    "optionExplanations": [
+      "Sai: 450/550 ≈ 82%, cao hơn 70%.",
+      "Sai: 600/700 ≈ 86%.",
+      "Đúng: 700/1000 = 70% là tỷ lệ từng bước thấp nhất.",
+      "Sai: 550/600 ≈ 92% là bước tốt nhất."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: 450/550 ≈ 82%, higher than 70%.",
+      "Wrong: 600/700 ≈ 86%.",
+      "Correct: 700/1000 = 70% is the lowest step conversion.",
+      "Wrong: 550/600 ≈ 92% is the best step."
+    ]
+  },
+  {
+    "id": "da07-q9",
+    "question": "Một khách gọi cho ngân hàng phát hành thẻ: \"Tôi trả 2 triệu cho shop online nhưng không bao giờ nhận được hàng\", và ngân hàng mở hồ sơ tranh chấp. Đây là gì?",
+    "questionEn": "A customer calls their card-issuing bank: \"I paid 2 million to an online shop but never got the goods\", and the bank opens a dispute. What is this?",
+    "options": [
+      "Một refund, vì shop sẽ chủ động trả lại tiền cho khách",
+      "Một chargeback, tranh chấp đi theo quy tắc của tổ chức thẻ",
+      "Một giao dịch bị decline, vì issuer đã từ chối thanh toán",
+      "Một lỗi double charge, vì khách bị trừ tiền hai lần"
+    ],
+    "optionsEn": [
+      "A refund, because the shop will return the money itself",
+      "A chargeback, a dispute that follows the card scheme's rules",
+      "A declined payment, because the issuer refused the payment",
+      "A double charge, because the customer was charged twice"
+    ],
+    "answer": 1,
+    "explanation": "Chargeback do chủ thẻ khởi xướng qua issuer; tiền bị rút lại từ người bán theo quy tắc của tổ chức thẻ, thường kèm phí. Refund là do người bán tự nguyện trả lại.",
+    "explanationEn": "A chargeback is started by the cardholder through the issuer; money is pulled back from the merchant under the card scheme's rules, usually with a fee. A refund is the merchant returning money voluntarily.",
+    "optionExplanations": [
+      "Sai: refund do người bán chủ động; ở đây khách đi qua ngân hàng.",
+      "Đúng: tranh chấp của chủ thẻ qua ngân hàng phát hành là chargeback.",
+      "Sai: giao dịch đã thành công rồi; decline xảy ra trước khi tiền chuyển.",
+      "Sai: khách chỉ bị trừ một lần; vấn đề là không nhận được hàng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a refund is initiated by the merchant; here the customer goes through their bank.",
+      "Correct: a cardholder dispute through the issuing bank is a chargeback.",
+      "Wrong: the payment already succeeded; a decline happens before money moves.",
+      "Wrong: the customer was charged once; the problem is that the goods never arrived."
+    ]
+  },
+  {
+    "id": "da07-q10",
+    "question": "Bạn tính refund rate của ngành thời trang. Mẫu số nào đúng?",
+    "questionEn": "You are computing the refund rate for the fashion category. Which denominator is right?",
+    "options": [
+      "Tất cả các dòng payments của ngành thời trang, gồm cả failed",
+      "Số phiên checkout của ngành thời trang có bước view_cart",
+      "Số giao dịch có status = 'success' của ngành thời trang",
+      "Số giao dịch thành công, tức status IN ('success', 'refunded')"
+    ],
+    "optionsEn": [
+      "All fashion payment rows, including failed ones",
+      "Fashion checkout sessions that have a view_cart step",
+      "Fashion payments with status = 'success'",
+      "Successful payments, i.e. status IN ('success', 'refunded')"
+    ],
+    "answer": 3,
+    "explanation": "Chỉ giao dịch đã thành công mới có thể bị hoàn tiền, nên mẫu số là success + refunded. Trên fintech.db: 83 ÷ 1.152 ≈ 7,2%.",
+    "explanationEn": "Only payments that succeeded can be refunded, so the denominator is success + refunded. On fintech.db: 83 ÷ 1,152 ≈ 7.2%.",
+    "optionExplanations": [
+      "Sai: giao dịch thất bại không bao giờ bị hoàn tiền, đưa vào sẽ làm tỷ lệ thấp đi.",
+      "Sai: đó là mẫu số của funnel, không phải của hoàn tiền.",
+      "Sai: các giao dịch đã hoàn tiền mang status 'refunded', nên bị loại khỏi mẫu số dù đang được đếm ở tử số.",
+      "Đúng: mọi giao dịch thành công, kể cả những giao dịch về sau bị hoàn."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: failed payments can never be refunded; including them makes the rate look lower.",
+      "Wrong: that is a funnel denominator, not a refund one.",
+      "Wrong: refunded payments carry status 'refunded', so they'd be missing from the denominator while counted in the numerator.",
+      "Correct: every successful payment, including those later refunded."
+    ]
+  },
+  {
+    "id": "da07-q11",
+    "question": "Ngành điện tử: GMV 2,0 tỷ đồng, doanh thu MDR 30,4 triệu đồng. Take rate là bao nhiêu?",
+    "questionEn": "Electronics: GMV 2.0 billion VND, MDR revenue 30.4 million VND. What is the take rate?",
+    "options": [
+      "Khoảng 1,52%, tức doanh thu chia cho GMV",
+      "Khoảng 15,2%, tức doanh thu chia cho GMV",
+      "Khoảng 0,15%, tức doanh thu chia cho GMV",
+      "Khoảng 65,8 lần, tức GMV chia cho doanh thu"
+    ],
+    "optionsEn": [
+      "About 1.52%, revenue divided by GMV",
+      "About 15.2%, revenue divided by GMV",
+      "About 0.15%, revenue divided by GMV",
+      "About 65.8 times, GMV divided by revenue"
+    ],
+    "answer": 0,
+    "explanation": "Take rate = doanh thu ÷ GMV = 30,4 triệu ÷ 2.000 triệu ≈ 1,52%.",
+    "explanationEn": "Take rate = revenue ÷ GMV = 30.4 million ÷ 2,000 million ≈ 1.52%.",
+    "optionExplanations": [
+      "Đúng: 30,4 ÷ 2.000 = 0,0152 = 1,52%.",
+      "Sai: lệch một chữ số thập phân (gấp 10 lần).",
+      "Sai: lệch một chữ số thập phân (nhỏ hơn 10 lần).",
+      "Sai: đó là phép chia ngược, không phải take rate."
+    ],
+    "optionExplanationsEn": [
+      "Correct: 30.4 ÷ 2,000 = 0.0152 = 1.52%.",
+      "Wrong: off by one decimal place (10 times too big).",
+      "Wrong: off by one decimal place (10 times too small).",
+      "Wrong: that is the division the other way round, not a take rate."
+    ]
+  },
+  {
+    "id": "da07-q12",
+    "question": "Một shop (MDR 2%) hôm nay có tổng giao dịch thành công 2.000.000 đồng và phải hoàn 100.000 đồng cho một đơn tuần trước. Quyết toán T+1 chuyển cho shop bao nhiêu?",
+    "questionEn": "A shop (MDR 2%) had 2,000,000 VND of successful payments today and must refund 100,000 VND for an order from last week. How much does T+1 settlement pay the shop?",
+    "options": [
+      "2.000.000 đồng, phí và hoàn tiền tính vào cuối tháng",
+      "1.960.000 đồng, chỉ trừ phí MDR 2%",
+      "1.860.000 đồng, trừ phí 40.000 và hoàn tiền 100.000",
+      "1.862.000 đồng, tính phí 2% trên số tiền sau hoàn"
+    ],
+    "optionsEn": [
+      "2,000,000 VND; fees and refunds are settled at month end",
+      "1,960,000 VND, only the 2% MDR is deducted",
+      "1,860,000 VND, minus the 40,000 fee and the 100,000 refund",
+      "1,862,000 VND, with the 2% fee charged after the refund"
+    ],
+    "answer": 2,
+    "explanation": "Phí = 2% × 2.000.000 = 40.000. Quyết toán = 2.000.000 − 40.000 − 100.000 = 1.860.000 đồng (theo cách minh họa trong bài).",
+    "explanationEn": "Fee = 2% × 2,000,000 = 40,000. Settlement = 2,000,000 − 40,000 − 100,000 = 1,860,000 VND (as in the lesson's illustration).",
+    "optionExplanations": [
+      "Sai: quyết toán T+1 trừ phí và hoàn tiền ngay trong đợt chuyển.",
+      "Sai: quên trừ khoản hoàn tiền 100.000.",
+      "Đúng: trừ cả phí MDR và khoản hoàn tiền.",
+      "Sai: phí tính trên giao dịch của hôm nay, khoản hoàn là của một đơn khác."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: T+1 settlement deducts fees and refunds in the same payout.",
+      "Wrong: it forgets the 100,000 refund.",
+      "Correct: both the MDR fee and the refund are deducted.",
+      "Wrong: the fee is on today's payments; the refund belongs to a different order."
+    ]
+  },
+  {
+    "id": "da07-q13",
+    "question": "Product hỏi \"tháng 6 có bao nhiêu ví hoạt động?\". Cách tính nào đúng nhất?",
+    "questionEn": "Product asks \"how many wallets were active in June?\". Which calculation is best?",
+    "options": [
+      "Đếm số ví trong bảng `wallets` đang có `status = 'active'`",
+      "Đếm ví khác nhau có giao dịch success do khách thực hiện (bỏ cashback, refund) trong tháng 6 theo giờ VN",
+      "Đếm tất cả giao dịch success trong tháng 6, kể cả cashback và refund",
+      "Đếm số ví đã mở trong tháng 6 trong bảng `wallets`"
+    ],
+    "optionsEn": [
+      "Count wallets in `wallets` whose `status = 'active'`",
+      "Count distinct wallets with a customer-initiated success transaction (no cashback, refund) in June, VN time",
+      "Count all success transactions in June, including cashback and refunds",
+      "Count wallets opened in June in the `wallets` table"
+    ],
+    "answer": 1,
+    "explanation": "Ví hoạt động đo hành vi trong một kỳ, nên phải lấy từ `wallet_transactions`, đếm ví khác nhau, chỉ tính giao dịch do khách thực hiện. Trên fintech.db là 1.294 ví.",
+    "explanationEn": "Active wallets measure behaviour in a period, so they come from `wallet_transactions`, counting distinct wallets and only customer-initiated transactions. On fintech.db it is 1,294.",
+    "optionExplanations": [
+      "Sai: `status` là snapshot tại 2026-06-30, không nói ví có giao dịch trong tháng 6 hay không.",
+      "Đúng: đếm ví khác nhau, đúng kỳ, đúng loại giao dịch.",
+      "Sai: đếm giao dịch thay vì ví, và tính cả giao dịch do hệ thống tạo.",
+      "Sai: đó là số ví mới, không phải số ví hoạt động."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: `status` is a snapshot as of 2026-06-30; it doesn't say whether a wallet transacted in June.",
+      "Correct: distinct wallets, the right period, the right transaction types.",
+      "Wrong: it counts transactions instead of wallets and includes system-generated ones.",
+      "Wrong: that is new wallets, not active wallets."
+    ]
+  },
+  {
+    "id": "da07-q14",
+    "question": "Một đồng nghiệp chạy `strftime('%H', created_at)` và kết luận \"khách thanh toán nhiều nhất lúc 13:00, nên gửi khuyến mãi lúc 12:30\". Vấn đề là gì?",
+    "questionEn": "A colleague runs `strftime('%H', created_at)` and concludes \"customers pay most at 13:00, so send promotions at 12:30\". What's the problem?",
+    "options": [
+      "`strftime` không lấy được giờ từ một cột có kiểu text",
+      "Phải dùng giờ trung bình (AVG) thay vì đếm theo giờ",
+      "13:00 là giờ cao điểm thật, chỉ cần dời khuyến mãi sang 13:00",
+      "Giờ đó là UTC; theo giờ Việt Nam đỉnh là 20:00 tối"
+    ],
+    "optionsEn": [
+      "`strftime` can't extract an hour from a text column",
+      "They should use the average hour (AVG) instead of counting by hour",
+      "13:00 really is the peak; just move the promotion to 13:00",
+      "That hour is UTC; in Vietnam time the peak is 20:00"
+    ],
+    "answer": 3,
+    "explanation": "Thời gian lưu theo UTC. 13:00 UTC = 20:00 giờ Việt Nam. Dùng `strftime('%H', created_at, '+7 hours')`.",
+    "explanationEn": "Timestamps are stored in UTC. 13:00 UTC = 20:00 Vietnam time. Use `strftime('%H', created_at, '+7 hours')`.",
+    "optionExplanations": [
+      "Sai: SQLite đọc text dạng 'YYYY-MM-DD HH:MM:SS' bình thường.",
+      "Sai: giờ trung bình vô nghĩa khi có hai đỉnh (trưa và tối); đếm theo giờ là đúng.",
+      "Sai: 13:00 là giờ UTC, không phải giờ khách thật sự thanh toán.",
+      "Đúng: phải đổi sang giờ Việt Nam trước khi chia theo giờ."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: SQLite reads 'YYYY-MM-DD HH:MM:SS' text just fine.",
+      "Wrong: an average hour is meaningless with two peaks (lunch and evening); counting by hour is right.",
+      "Wrong: 13:00 is UTC, not the hour customers actually pay.",
+      "Correct: convert to Vietnam time before grouping by hour."
+    ]
+  },
+  {
+    "id": "da07-q15",
+    "question": "Bảng cohort mua lại trong 90 ngày cho thấy cohort tháng 7/2025 (tháng đầu tiên có dữ liệu) cao nhất, 58,9%. Vì sao nên thận trọng?",
+    "questionEn": "A 90-day repeat-purchase cohort table shows the July 2025 cohort (the first month of data) is highest, at 58.9%. Why be careful?",
+    "options": [
+      "Khách mua từ trước tháng 7 bị tính là \"mới\", nên cohort này đầy khách trung thành",
+      "Cohort tháng 7 chưa đủ 90 ngày để quan sát hành vi mua lại",
+      "Tháng 7 có nhiều ngày lễ mua sắm như 11.11 và 12.12",
+      "Cohort càng lớn thì tỷ lệ mua lại càng thấp theo quy luật"
+    ],
+    "optionsEn": [
+      "Customers who bought before July count as \"new\", so the cohort is full of loyal buyers",
+      "The July cohort hasn't had 90 days yet to show repeat behaviour",
+      "July has many shopping days such as 11.11 and 12.12",
+      "The bigger a cohort, the lower its repeat rate, as a rule"
+    ],
+    "answer": 0,
+    "explanation": "Đây là left-censoring: dữ liệu bắt đầu từ tháng 7/2025, nên lần mua \"đầu tiên\" nhìn thấy chưa chắc là lần đầu thật. Khách quen làm cohort đầu tiên trông tốt hơn.",
+    "explanationEn": "This is left-censoring: the data starts in July 2025, so the first purchase we see isn't necessarily the real first one. Regular customers make the first cohort look better.",
+    "optionExplanations": [
+      "Đúng: cohort đầu tiên lẫn khách cũ, nên tỷ lệ mua lại bị phóng đại.",
+      "Sai: cohort tháng 7/2025 có nhiều hơn 90 ngày trước 2026-06-30.",
+      "Sai: 11.11 và 12.12 nằm ở tháng 11 và 12.",
+      "Sai: không có quy luật như vậy; cỡ cohort không quyết định tỷ lệ."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the first cohort mixes in existing customers, inflating its repeat rate.",
+      "Wrong: the July 2025 cohort has far more than 90 days before 2026-06-30.",
+      "Wrong: 11.11 and 12.12 fall in November and December.",
+      "Wrong: there is no such rule; cohort size doesn't decide the rate."
+    ]
+  },
+  {
+    "id": "da07-q16",
+    "question": "Tính cả năm, tỷ lệ thành công của thẻ trên Android là 89,1% và trên iOS là 89,7%. Vì sao con số này không cho thấy sự cố OTP tháng 5?",
+    "questionEn": "Over the whole year, card success is 89.1% on Android and 89.7% on iOS. Why doesn't this reveal the May OTP outage?",
+    "options": [
+      "Vì sự cố chỉ ảnh hưởng iOS, nên Android không bị đổi",
+      "Vì phải loại các giao dịch refunded khỏi tử số trước",
+      "Vì một tuần sự cố bị pha loãng trong trung bình 12 tháng",
+      "Vì tỷ lệ thành công không đo được theo từng thiết bị"
+    ],
+    "optionsEn": [
+      "Because the outage only hit iOS, so Android didn't change",
+      "Because refunded payments must first be removed from the numerator",
+      "Because one bad week is diluted in a twelve-month average",
+      "Because success rate can't be measured per device"
+    ],
+    "answer": 2,
+    "explanation": "22 lần thử trong tuần sự cố chỉ là phần nhỏ của 1.471 lần thử thẻ Android cả năm. Muốn thấy sự cố, xem theo tuần rồi mới chia nhỏ.",
+    "explanationEn": "The 22 attempts in the outage week are a small part of the 1,471 Android card attempts over the year. To see the incident, trend by week, then slice.",
+    "optionExplanations": [
+      "Sai: sự cố xảy ra trên Android; iOS bình thường.",
+      "Sai: refunded tính là thành công; bỏ ra sẽ làm sai tỷ lệ.",
+      "Đúng: một tuần xấu bị các tuần bình thường che mất.",
+      "Sai: bài vừa tính tỷ lệ theo thiết bị bằng `GROUP BY device`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the outage was on Android; iOS was normal.",
+      "Wrong: refunded counts as success; removing it would distort the rate.",
+      "Correct: one bad week is hidden by the normal weeks.",
+      "Wrong: the lesson computes it per device with `GROUP BY device`."
+    ]
+  },
+  {
+    "id": "da07-q17",
+    "question": "Query theo ngày dùng `SUM(failure_reason = 'otp_timeout') AS otp` và cột `otp` hiện NULL ở những ngày không có giao dịch thất bại. Vì sao?",
+    "questionEn": "A daily query uses `SUM(failure_reason = 'otp_timeout') AS otp`, and `otp` shows NULL on days with no failed payments. Why?",
+    "options": [
+      "Vì SQLite không cho phép SUM trên một biểu thức so sánh",
+      "Vì `failure_reason` là NULL ở mọi dòng của ngày đó, nên so sánh ra NULL và SUM của toàn NULL là NULL",
+      "Vì những ngày đó bị thiếu dòng trong bảng payments",
+      "Vì phải viết `== 'otp_timeout'` thay cho `= 'otp_timeout'`"
+    ],
+    "optionsEn": [
+      "Because SQLite doesn't allow SUM over a comparison",
+      "Because `failure_reason` is NULL on every row that day, so each comparison is NULL and SUM of all NULLs is NULL",
+      "Because those days are missing rows in the payments table",
+      "Because you must write `== 'otp_timeout'` instead of `= 'otp_timeout'`"
+    ],
+    "answer": 1,
+    "explanation": "NULL = 'x' cho ra NULL, không phải 0. SUM bỏ qua NULL; nếu mọi giá trị đều NULL thì kết quả là NULL. Dùng `COUNT(CASE WHEN failure_reason = 'otp_timeout' THEN 1 END)` hoặc `COALESCE`.",
+    "explanationEn": "NULL = 'x' gives NULL, not 0. SUM ignores NULLs; if every value is NULL the result is NULL. Use `COUNT(CASE WHEN failure_reason = 'otp_timeout' THEN 1 END)` or `COALESCE`.",
+    "optionExplanations": [
+      "Sai: SQLite cho phép SUM trên biểu thức so sánh; bài dùng `SUM(status = 'failed')`.",
+      "Đúng: so sánh với NULL ra NULL, và SUM toàn NULL là NULL.",
+      "Sai: ngày thiếu dòng thì không xuất hiện trong kết quả, chứ không hiện NULL.",
+      "Sai: trong SQLite `=` và `==` giống nhau."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: SQLite allows SUM over a comparison; the lesson uses `SUM(status = 'failed')`.",
+      "Correct: comparing with NULL gives NULL, and SUM over only NULLs is NULL.",
+      "Wrong: a day with no rows doesn't appear in the result at all; it doesn't show NULL.",
+      "Wrong: in SQLite `=` and `==` mean the same thing."
+    ]
+  },
+  {
+    "id": "da07-q18",
+    "question": "Tuần sự cố có 22 lần thử thẻ trên Android, 9 lần thành công; tỷ lệ bình thường là 92,2%. Ước lượng số giao dịch bị mất là bao nhiêu?",
+    "questionEn": "In the outage week there were 22 Android card attempts and 9 successes; the normal rate is 92.2%. What is the estimated number of lost payments?",
+    "options": [
+      "13, tức là toàn bộ số lần thử bị thất bại trong tuần",
+      "22, vì cả tuần đó đều được tính là tuần bị sự cố",
+      "9, tức là số lần thanh toán đã thành công trong tuần",
+      "Khoảng 11, tức 22 × 92,2% − 9"
+    ],
+    "optionsEn": [
+      "13, every failed attempt in that week",
+      "22, because the whole week counts as the outage",
+      "9, the number of payments that did succeed that week",
+      "About 11, i.e. 22 × 92.2% − 9"
+    ],
+    "answer": 3,
+    "explanation": "Kỳ vọng ở mức bình thường: 22 × 0,922 ≈ 20,3 lần thành công. Thực tế 9, nên mất khoảng 11. Không phải 13, vì bình thường vẫn có khoảng 2 lần thất bại.",
+    "explanationEn": "Expected at the normal rate: 22 × 0.922 ≈ 20.3 successes. Actual 9, so about 11 lost. Not 13, because about 2 would have failed anyway.",
+    "optionExplanations": [
+      "Sai: kể cả tuần bình thường cũng có vài lần thất bại; chỉ phần vượt mức bình thường mới là thiệt hại.",
+      "Sai: 9 giao dịch vẫn thành công, không thể tính là mất.",
+      "Sai: đó là số thành công, không phải số bị mất.",
+      "Đúng: kỳ vọng trừ thực tế ≈ 20,3 − 9 ≈ 11."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: even a normal week has a few failures; only the excess over normal is the loss.",
+      "Wrong: 9 payments still succeeded and can't count as lost.",
+      "Wrong: that is the success count, not the loss.",
+      "Correct: expected minus actual ≈ 20.3 − 9 ≈ 11."
+    ]
+  },
+  {
+    "id": "da07-q19",
+    "question": "Product manager muốn rollback bản app Android vì \"thanh toán trên Android hỏng\". Bằng chứng nào cho thấy rõ nhất là app không phải nguyên nhân?",
+    "questionEn": "A product manager wants to roll back the Android app because \"payments on Android are broken\". Which evidence best shows the app is not the cause?",
+    "options": [
+      "Tỷ lệ thành công cả năm trên Android chỉ thấp hơn iOS chưa tới 1 điểm",
+      "Funnel tổng trên Android gần bằng iOS khi tính trên cả năm",
+      "Trên Android cùng tuần, ví và QR vẫn bình thường; chỉ thẻ lỗi, toàn là otp_timeout",
+      "Số lần thử thẻ trên Android trong tuần đó không giảm đi"
+    ],
+    "optionsEn": [
+      "Android's full-year success rate is less than 1 point below iOS",
+      "Android's overall funnel is close to iOS over the full year",
+      "On Android that week, wallet and QR were normal; only card failed, all otp_timeout",
+      "The number of Android card attempts that week didn't drop"
+    ],
+    "answer": 2,
+    "explanation": "Nếu app hỏng thì mọi phương thức trên Android đều bị. Ví (2/24 thất bại) và QR (0/22) bình thường, còn thẻ thất bại 13/22 toàn vì OTP: lỗi nằm ở bước OTP.",
+    "explanationEn": "If the app were broken, every method on Android would suffer. Wallet (2/24 failed) and QR (0/22) were normal while card failed 13/22, all on OTP: the fault is in the OTP step.",
+    "optionExplanations": [
+      "Sai: số liệu cả năm che mất một tuần sự cố, nên không chứng minh được gì.",
+      "Sai: cũng là số liệu cả năm, không nói gì về tuần đang xét.",
+      "Đúng: so sánh cùng thiết bị, cùng tuần, khác phương thức cô lập được nguyên nhân.",
+      "Sai: số lần thử không cho biết vì sao chúng thất bại."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: full-year numbers hide a one-week incident, so they prove nothing here.",
+      "Wrong: also a full-year number; it says nothing about the week in question.",
+      "Correct: same device, same week, different methods isolates the cause.",
+      "Wrong: attempt counts don't say why the attempts failed."
+    ]
+  },
+  {
+    "id": "da07-q20",
+    "question": "Biểu đồ GMV theo ngày có đỉnh vào một ngày thường, và marketing nói chiến dịch hôm đó thành công. Việc kiểm tra đầu tiên hợp lý nhất là gì?",
+    "questionEn": "A daily GMV chart peaks on an ordinary day, and marketing says that day's campaign worked. What is the most sensible first check?",
+    "options": [
+      "Xem số giao dịch và các đơn lớn nhất của ngày đó, vì một đơn lớn có thể tạo ra đỉnh",
+      "Đổi biểu đồ sang dạng cột chồng để thấy rõ đỉnh hơn",
+      "Tính lại GMV mà không trừ các giao dịch bị hoàn tiền",
+      "Chấp nhận kết luận, vì GMV là chỉ số quan trọng nhất"
+    ],
+    "optionsEn": [
+      "Check the payment count and the largest orders that day, since one big order can make a spike",
+      "Switch to a stacked bar chart so the peak stands out more",
+      "Recompute GMV without subtracting refunded payments",
+      "Accept the conclusion, since GMV is the most important metric"
+    ],
+    "answer": 0,
+    "explanation": "GMV theo ngày rất nhiễu vì các đơn giá trị lớn. Trên fintech.db, ngày 23/8/2025 có GMV cao nhất nhưng chỉ 18 giao dịch; một đơn điện tử 17,26 triệu đồng tạo ra đỉnh.",
+    "explanationEn": "Daily GMV is noisy because of big-ticket orders. On fintech.db, 23 Aug 2025 has the highest GMV but only 18 payments; one 17.26 million VND electronics order makes the spike.",
+    "optionExplanations": [
+      "Đúng: tách số lượng và giá trị đơn để biết đỉnh đến từ đâu.",
+      "Sai: đổi kiểu biểu đồ không trả lời được đỉnh đến từ đâu.",
+      "Sai: GMV vốn đã tính trước hoàn tiền; việc này không giải thích được đỉnh.",
+      "Sai: một đỉnh đơn lẻ cần được kiểm tra trước khi ghi công cho chiến dịch."
+    ],
+    "optionExplanationsEn": [
+      "Correct: separating count and order value shows where the spike comes from.",
+      "Wrong: changing the chart type doesn't explain where the spike comes from.",
+      "Wrong: GMV is already before refunds; this doesn't explain the spike.",
+      "Wrong: a single spike needs checking before crediting a campaign."
+    ]
+  }
+]

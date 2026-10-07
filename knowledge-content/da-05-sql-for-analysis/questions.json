@@ -1,0 +1,578 @@
+[
+  {
+    "id": "da05-q1",
+    "question": "`created_at` lưu timestamp dạng `2026-06-30 09:15:00`. Query `WHERE created_at BETWEEN '2026-06-01' AND '2026-06-30'` trả về 682 giao dịch, còn `WHERE created_at >= '2026-06-01' AND created_at < '2026-07-01'` trả về 695. Vì sao có chênh lệch?",
+    "questionEn": "`created_at` holds timestamps like `2026-06-30 09:15:00`. `WHERE created_at BETWEEN '2026-06-01' AND '2026-06-30'` returns 682 payments, while `WHERE created_at >= '2026-06-01' AND created_at < '2026-07-01'` returns 695. Why the difference?",
+    "options": [
+      "BETWEEN không tính mốc đầu, nên các giao dịch ngày 1/6 bị loại",
+      "Cách thứ hai đếm trùng các giao dịch đúng nửa đêm 1/7",
+      "Các giao dịch trong ngày 30/6 có phần giờ nên lớn hơn chuỗi '2026-06-30' và rơi ra ngoài",
+      "SQLite tự đổi BETWEEN sang giờ UTC còn phép so sánh thì không"
+    ],
+    "optionsEn": [
+      "BETWEEN excludes the start value, so payments on 1 June are dropped",
+      "The second version double-counts payments made exactly at midnight on 1 July",
+      "Payments during 30 June carry a time part, so they sort after '2026-06-30' and fall outside",
+      "SQLite converts BETWEEN to UTC but leaves the comparisons alone"
+    ],
+    "answer": 2,
+    "explanation": "So sánh chuỗi: `'2026-06-30 09:15:00'` lớn hơn `'2026-06-30'`, nên BETWEEN bỏ sót cả ngày 30/6 (13 giao dịch). Khoảng nửa mở `>= đầu AND < mốc kế tiếp` đúng cho cả ngày lẫn timestamp.",
+    "explanationEn": "Text comparison: `'2026-06-30 09:15:00'` is greater than `'2026-06-30'`, so BETWEEN misses all of 30 June (13 payments). The half-open range `>= start AND < next start` works for both dates and timestamps.",
+    "optionExplanations": [
+      "Sai: BETWEEN bao gồm cả hai đầu mút; vấn đề nằm ở mốc cuối.",
+      "Sai: `< '2026-07-01'` loại hẳn mốc 1/7, nên không thể đếm trùng.",
+      "Đúng: phần giờ làm các dòng ngày 30/6 vượt quá chuỗi '2026-06-30'.",
+      "Sai: SQLite không tự đổi múi giờ; cả hai cách đều so sánh chuỗi như nhau."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: BETWEEN includes both ends; the problem is at the end value.",
+      "Wrong: `< '2026-07-01'` excludes 1 July entirely, so nothing is double-counted.",
+      "Correct: the time part pushes 30 June rows past the text '2026-06-30'.",
+      "Wrong: SQLite never converts time zones by itself; both versions compare text the same way."
+    ]
+  },
+  {
+    "id": "da05-q2",
+    "question": "`payments.created_at` lưu theo UTC. Sếp muốn số giao dịch \"tháng 6/2026 theo giờ Việt Nam\" (UTC+7). Bộ lọc nào đúng?",
+    "questionEn": "`payments.created_at` is stored in UTC. Your manager wants payments for \"June 2026, Vietnam time\" (UTC+7). Which filter is right?",
+    "options": [
+      "`created_at >= '2026-06-01 07:00:00' AND created_at < '2026-07-01 07:00:00'`",
+      "`created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
+      "`strftime('%m', created_at) = '06'`",
+      "`date(created_at) BETWEEN '2026-06-01' AND '2026-06-30'`"
+    ],
+    "optionsEn": [
+      "`created_at >= '2026-06-01 07:00:00' AND created_at < '2026-07-01 07:00:00'`",
+      "`created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
+      "`strftime('%m', created_at) = '06'`",
+      "`date(created_at) BETWEEN '2026-06-01' AND '2026-06-30'`"
+    ],
+    "answer": 1,
+    "explanation": "0 giờ ngày 1/6 ở Việt Nam là 17:00 ngày 31/5 theo UTC, nên ranh giới phải lùi 7 giờ. Cách tương đương là lọc trên `date(created_at, '+7 hours')`.",
+    "explanationEn": "Midnight on 1 June in Vietnam is 17:00 on 31 May in UTC, so the boundaries move back 7 hours. The equivalent alternative is filtering on `date(created_at, '+7 hours')`.",
+    "optionExplanations": [
+      "Sai: cộng 7 giờ vào ranh giới là đi sai chiều; giờ VN đi trước UTC nên phải trừ.",
+      "Đúng: đây là tháng 6 theo giờ Việt Nam, viết bằng giờ UTC.",
+      "Sai: lấy tháng theo UTC, và gộp cả tháng 6 của mọi năm.",
+      "Sai: đây là tháng 6 theo ngày UTC, không phải giờ Việt Nam."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: adding 7 hours to the boundaries goes the wrong way; VN time is ahead of UTC, so you subtract.",
+      "Correct: this is June in Vietnam time, written in UTC.",
+      "Wrong: it takes the UTC month and mixes in June of every year.",
+      "Wrong: this is June by UTC date, not Vietnam time."
+    ]
+  },
+  {
+    "id": "da05-q3",
+    "question": "Bạn vừa viết xong một query tính doanh thu theo tháng; nó chạy không lỗi và con số trông hợp lý. Theo \"vòng lặp của người phân tích\", việc nên làm tiếp theo là gì?",
+    "questionEn": "You have just written a monthly revenue query; it runs without errors and the numbers look plausible. Following the analyst's loop, what should you do next?",
+    "options": [
+      "Kiểm tra kết quả: số dòng trước/sau join, tổng các phần có khớp tổng chung không",
+      "Gửi ngay cho sếp, vì query không báo lỗi nghĩa là logic đã đúng",
+      "Viết lại query bằng một database khác để chắc chắn cú pháp chuẩn",
+      "Thêm `ORDER BY` và `LIMIT` để kết quả gọn gàng hơn"
+    ],
+    "optionsEn": [
+      "Check the result: row counts before/after joins, whether parts add up to the total",
+      "Send it to the manager now, since no error means the logic is right",
+      "Rewrite the query in another database to make sure the syntax is standard",
+      "Add `ORDER BY` and `LIMIT` so the output looks tidier"
+    ],
+    "answer": 0,
+    "explanation": "SQL vui vẻ trả về đáp án sai cho câu hỏi viết sai. Bước 4 của vòng lặp là kiểm tra trước khi gửi: số dòng, tổng khớp, hai con đường cho cùng đáp án.",
+    "explanationEn": "SQL happily returns a wrong answer to a badly worded question. Step 4 of the loop is to check before sending: row counts, matching totals, two routes to the same answer.",
+    "optionExplanations": [
+      "Đúng: một con số sai trông hợp lý là rủi ro lớn nhất; kiểm tra mới bắt được nó.",
+      "Sai: không báo lỗi chỉ chứng minh cú pháp đúng, không chứng minh logic đúng.",
+      "Sai: đổi database không kiểm tra được logic nghiệp vụ của query.",
+      "Sai: sắp xếp cho gọn không giúp phát hiện con số sai."
+    ],
+    "optionExplanationsEn": [
+      "Correct: a plausible wrong number is the biggest risk, and only checking catches it.",
+      "Wrong: no error proves the syntax is valid, not that the logic is right.",
+      "Wrong: switching databases does not test the business logic of the query.",
+      "Wrong: tidy sorting does not reveal a wrong number."
+    ]
+  },
+  {
+    "id": "da05-q4",
+    "question": "Trên SQLite, query `SELECT SUM(status = 'failed') / COUNT(*) FROM payments WHERE method = 'card';` trả về `0`, dù có 305 giao dịch thẻ lỗi. Vì sao?",
+    "questionEn": "In SQLite, `SELECT SUM(status = 'failed') / COUNT(*) FROM payments WHERE method = 'card';` returns `0`, even though 305 card payments failed. Why?",
+    "options": [
+      "`status = 'failed'` luôn trả về NULL nên SUM bằng 0",
+      "SQLite không cho dùng phép so sánh bên trong SUM",
+      "Bảng không có giao dịch thẻ nào vì method lưu chữ hoa",
+      "Số nguyên chia số nguyên là phép chia nguyên, nên 305 ÷ 2,855 bị cắt thành 0"
+    ],
+    "optionsEn": [
+      "`status = 'failed'` always returns NULL, so the SUM is 0",
+      "SQLite does not allow comparisons inside SUM",
+      "There are no card rows because method is stored in upper case",
+      "Integer divided by integer is integer division, so 305 ÷ 2,855 is cut to 0"
+    ],
+    "answer": 3,
+    "explanation": "Cả tử và mẫu đều là số nguyên, nên SQLite chia nguyên. Viết `100.0 * SUM(...) / COUNT(*)` (hoặc `1.0 * ...`) để có số thập phân.",
+    "explanationEn": "Both numerator and denominator are integers, so SQLite does integer division. Write `100.0 * SUM(...) / COUNT(*)` (or `1.0 * ...`) to get a decimal.",
+    "optionExplanations": [
+      "Sai: trong SQLite phép so sánh trả về 1 hoặc 0, không phải NULL (trừ khi status là NULL).",
+      "Sai: SQLite cho phép, và `SUM(status = 'failed')` chính là lối tắt đếm dòng.",
+      "Sai: tử số là 305 nên rõ ràng có dòng thẻ; vấn đề nằm ở phép chia.",
+      "Đúng: 0.107 bị cắt phần thập phân thành 0."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: in SQLite a comparison returns 1 or 0, not NULL (unless status itself is NULL).",
+      "Wrong: SQLite allows it, and `SUM(status = 'failed')` is exactly the counting shortcut.",
+      "Wrong: the numerator is 305, so card rows clearly exist; the problem is the division.",
+      "Correct: 0.107 loses its decimals and becomes 0."
+    ]
+  },
+  {
+    "id": "da05-q5",
+    "question": "Trạng thái giao dịch thẻ: `success 2471 · refunded 70 · failed 305 · pending 9` (tổng 2,855). Tính success rate theo định nghĩa trong bài: refunded tính là trót lọt, pending loại khỏi mẫu số.",
+    "questionEn": "Card payment statuses: `success 2471 · refunded 70 · failed 305 · pending 9` (2,855 in total). Compute the success rate using the article's definition: refunded counts as went through, pending is left out of the denominator.",
+    "options": [
+      "86.5% (2,471 ÷ 2,855)",
+      "89.0% (2,541 ÷ 2,855)",
+      "89.3% (2,541 ÷ 2,846)",
+      "86.8% (2,471 ÷ 2,846)"
+    ],
+    "optionsEn": [
+      "86.5% (2,471 ÷ 2,855)",
+      "89.0% (2,541 ÷ 2,855)",
+      "89.3% (2,541 ÷ 2,846)",
+      "86.8% (2,471 ÷ 2,846)"
+    ],
+    "answer": 2,
+    "explanation": "Tử số = 2,471 + 70 = 2,541; mẫu số = 2,855 − 9 = 2,846; 2,541 ÷ 2,846 ≈ 89.3%. Hai quyết định định nghĩa làm con số chênh gần ba điểm so với cách cẩu thả.",
+    "explanationEn": "Numerator = 2,471 + 70 = 2,541; denominator = 2,855 − 9 = 2,846; 2,541 ÷ 2,846 ≈ 89.3%. The two definition choices move the number by almost three points versus the careless way.",
+    "optionExplanations": [
+      "Sai: bỏ refunded khỏi tử số và giữ pending trong mẫu số, tức là cách cẩu thả.",
+      "Sai: tử số đúng nhưng mẫu số vẫn còn 9 giao dịch pending.",
+      "Đúng: áp dụng cả hai quyết định định nghĩa.",
+      "Sai: mẫu số đúng nhưng tử số bỏ sót 70 giao dịch đã hoàn tiền."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it drops refunded from the numerator and keeps pending in the denominator, the careless way.",
+      "Wrong: the numerator is right but the denominator still holds 9 pending payments.",
+      "Correct: both definition choices are applied.",
+      "Wrong: the denominator is right but the numerator misses the 70 refunded payments."
+    ]
+  },
+  {
+    "id": "da05-q6",
+    "question": "Trên `loan_applications`: `COUNT(*)` = 6,854 nhưng `COUNT(credit_score)` = 6,547. Cách đọc đúng là gì?",
+    "questionEn": "On `loan_applications`: `COUNT(*)` = 6,854 but `COUNT(credit_score)` = 6,547. What is the right reading?",
+    "options": [
+      "307 hồ sơ có `credit_score` NULL (không có điểm) và COUNT(cột) bỏ qua chúng",
+      "307 hồ sơ bị trùng nên COUNT(cột) tự loại bớt",
+      "307 hồ sơ có điểm bằng 0 và COUNT(cột) không đếm số 0",
+      "Bảng bị hỏng: hai cách đếm phải luôn bằng nhau"
+    ],
+    "optionsEn": [
+      "307 applications have a NULL `credit_score` (no score), and COUNT(column) skips them",
+      "307 applications are duplicates, so COUNT(column) removes them",
+      "307 applications have a score of 0, and COUNT(column) does not count zeros",
+      "The table is corrupt: the two counts must always be equal"
+    ],
+    "answer": 0,
+    "explanation": "`COUNT(*)` đếm dòng; `COUNT(cột)` chỉ đếm giá trị không NULL. Chênh lệch 307 chính là số người nộp hồ sơ không có điểm tín dụng: đó là thông tin, không phải lỗi.",
+    "explanationEn": "`COUNT(*)` counts rows; `COUNT(column)` counts only non-NULL values. The gap of 307 is the number of applicants with no credit score: information, not an error.",
+    "optionExplanations": [
+      "Đúng: COUNT(cột) bỏ qua NULL.",
+      "Sai: COUNT(cột) không loại trùng; đó là việc của COUNT(DISTINCT ...).",
+      "Sai: số 0 vẫn được đếm; chỉ NULL bị bỏ qua.",
+      "Sai: hai cách đếm khác nhau là bình thường khi cột có NULL."
+    ],
+    "optionExplanationsEn": [
+      "Correct: COUNT(column) skips NULLs.",
+      "Wrong: COUNT(column) does not remove duplicates; that is COUNT(DISTINCT ...).",
+      "Wrong: zeros are counted; only NULLs are skipped.",
+      "Wrong: the counts differ normally whenever the column has NULLs."
+    ]
+  },
+  {
+    "id": "da05-q7",
+    "question": "Bảng giao dịch theo tuần (giờ VN) của tháng 6/2026: `2026-06-01: 146 · 2026-06-08: 159 · 2026-06-15: 164 · 2026-06-22: 155 · 2026-06-29: 36`. Một đồng nghiệp nói \"tuần cuối giao dịch sụt 77%, có sự cố!\". Bạn trả lời thế nào?",
+    "questionEn": "Weekly payments (VN time) for June 2026: `2026-06-01: 146 · 2026-06-08: 159 · 2026-06-15: 164 · 2026-06-22: 155 · 2026-06-29: 36`. A colleague says \"payments dropped 77% in the last week, something broke!\". What do you reply?",
+    "options": [
+      "Đồng ý, cần mở incident ngay vì mức sụt quá lớn",
+      "Tuần bắt đầu 29/6 chỉ có 2 ngày trong tháng 6, nên phải so theo trung bình ngày hoặc ghi chú là kỳ chưa đủ",
+      "Lỗi do `weekday 1` tính tuần bắt đầu từ Chủ nhật",
+      "Cần đổi sang giờ UTC thì tuần cuối sẽ đủ số liệu"
+    ],
+    "optionsEn": [
+      "Agree, open an incident now because the drop is huge",
+      "The week starting 29 June has only 2 days in June, so compare per day or label it as incomplete",
+      "It is caused by `weekday 1` starting weeks on Sunday",
+      "Switch to UTC and the last week will have full data"
+    ],
+    "answer": 1,
+    "explanation": "Bucket cuối chỉ chứa 29 và 30/6 vì tháng kết thúc. Bucket chưa đủ kỳ phải được ghi chú, bỏ đi, hoặc so theo trung bình ngày.",
+    "explanationEn": "The last bucket holds only 29 and 30 June because the month ends. A partial bucket must be labelled, dropped, or compared per day.",
+    "optionExplanations": [
+      "Sai: \"cú sụt\" do bucket thiếu ngày, không phải sự cố.",
+      "Đúng: đây là cái bẫy bucket cuối chưa đủ kỳ.",
+      "Sai: `weekday 1` là thứ Hai; tuần 29/6 vẫn bắt đầu thứ Hai.",
+      "Sai: đổi múi giờ không thêm được ngày nào sau 30/6."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the \"drop\" comes from a short bucket, not an incident.",
+      "Correct: this is the partial last bucket trap.",
+      "Wrong: `weekday 1` is Monday; the 29 June week still starts on Monday.",
+      "Wrong: changing time zone cannot add days after 30 June."
+    ]
+  },
+  {
+    "id": "da05-q8",
+    "question": "Để tính \"bao nhiêu phần trăm khách hàng có ví\", một bạn viết `SELECT COUNT(*) FROM customers c JOIN wallets w ON w.customer_id = c.customer_id` rồi chia cho chính con số đó. Vấn đề là gì?",
+    "questionEn": "To compute \"what share of customers have a wallet\", someone writes `SELECT COUNT(*) FROM customers c JOIN wallets w ON w.customer_id = c.customer_id` and divides by that same count. What is the problem?",
+    "options": [
+      "INNER JOIN đếm mỗi khách hai lần nên con số bị gấp đôi",
+      "Phải dùng `wallets.balance > 0` thì mới biết khách có ví",
+      "JOIN chạy chậm, nên kết quả bị cắt bớt",
+      "INNER JOIN chỉ giữ khách có ví, nên tỷ lệ luôn là 100%; cần LEFT JOIN từ `customers`"
+    ],
+    "optionsEn": [
+      "The INNER JOIN counts each customer twice, doubling the figure",
+      "You need `wallets.balance > 0` to know whether a customer has a wallet",
+      "The JOIN is slow, so the result gets truncated",
+      "The INNER JOIN keeps only customers with a wallet, so the share is always 100%; LEFT JOIN from `customers`"
+    ],
+    "answer": 3,
+    "explanation": "Lựa chọn JOIN quyết định ai nằm trong mẫu số. LEFT JOIN giữ đủ 4,000 khách, và `COUNT(w.wallet_id)` đếm được 2,235 người có ví (khoảng 56%).",
+    "explanationEn": "The JOIN choice decides who is in the denominator. A LEFT JOIN keeps all 4,000 customers, and `COUNT(w.wallet_id)` counts the 2,235 with a wallet (about 56%).",
+    "optionExplanations": [
+      "Sai: mỗi khách có tối đa một ví, nên không có lặp dòng.",
+      "Sai: một ví số dư 0 vẫn là một ví; số dư không phải điều kiện có ví.",
+      "Sai: JOIN không cắt bớt kết quả vì chạy chậm.",
+      "Đúng: inner join loại mất những khách không có ví khỏi mẫu số."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: each customer has at most one wallet, so no rows repeat.",
+      "Wrong: a wallet with zero balance is still a wallet; balance is not the test.",
+      "Wrong: a JOIN never truncates results for being slow.",
+      "Correct: the inner join drops customers without a wallet from the denominator."
+    ]
+  },
+  {
+    "id": "da05-q9",
+    "question": "Query `customers c LEFT JOIN wallets w ON w.customer_id = c.customer_id WHERE w.status = 'active'` trả về 2,130 dòng thay vì 4,000. Cách sửa đúng để giữ mọi khách, kèm ví active nếu có?",
+    "questionEn": "`customers c LEFT JOIN wallets w ON w.customer_id = c.customer_id WHERE w.status = 'active'` returns 2,130 rows instead of 4,000. What is the right fix to keep every customer, with their active wallet if any?",
+    "options": [
+      "Chuyển điều kiện vào ON: `ON w.customer_id = c.customer_id AND w.status = 'active'`",
+      "Đổi LEFT JOIN thành INNER JOIN",
+      "Thêm `OR w.status = 'locked'` vào WHERE",
+      "Thêm `GROUP BY c.customer_id` để giữ đủ khách"
+    ],
+    "optionsEn": [
+      "Move the condition into ON: `ON w.customer_id = c.customer_id AND w.status = 'active'`",
+      "Change the LEFT JOIN to an INNER JOIN",
+      "Add `OR w.status = 'locked'` to the WHERE",
+      "Add `GROUP BY c.customer_id` to keep every customer"
+    ],
+    "answer": 0,
+    "explanation": "Với khách không có ví, `w.status` là NULL nên `WHERE` loại họ, biến LEFT JOIN thành JOIN. Điều kiện về bảng bên phải phải nằm trong `ON`.",
+    "explanationEn": "For customers without a wallet, `w.status` is NULL, so `WHERE` drops them and the LEFT JOIN behaves like a JOIN. Conditions on the right-hand table belong in `ON`.",
+    "optionExplanations": [
+      "Đúng: giữ 4,000 dòng, trong đó 2,130 dòng có ví active.",
+      "Sai: inner join cũng loại khách không có ví, kết quả vẫn 2,130.",
+      "Sai: khách không có ví vẫn có status NULL nên vẫn bị loại.",
+      "Sai: GROUP BY không đưa lại được những dòng WHERE đã loại."
+    ],
+    "optionExplanationsEn": [
+      "Correct: 4,000 rows, 2,130 of them with an active wallet.",
+      "Wrong: an inner join also drops customers without a wallet; still 2,130.",
+      "Wrong: customers with no wallet still have a NULL status and are still dropped.",
+      "Wrong: GROUP BY cannot bring back rows that WHERE removed."
+    ]
+  },
+  {
+    "id": "da05-q10",
+    "question": "`SELECT SUM(principal) FROM loans` ra khoảng 34.0 tỷ VND. `SELECT SUM(l.principal) FROM loans l JOIN repayment_schedule r ON r.loan_id = l.loan_id` ra khoảng 395.2 tỷ. Nguyên nhân?",
+    "questionEn": "`SELECT SUM(principal) FROM loans` gives about 34.0 billion VND. `SELECT SUM(l.principal) FROM loans l JOIN repayment_schedule r ON r.loan_id = l.loan_id` gives about 395.2 billion. What happened?",
+    "options": [
+      "Bảng `repayment_schedule` cộng thêm lãi vào principal",
+      "Phép join kéo thêm các khoản vay đã đóng mà bảng `loans` không có",
+      "Fan-out: mỗi khoản vay lặp lại một lần cho mỗi kỳ trả góp, nên principal bị cộng nhiều lần",
+      "SUM trên số lớn bị tràn số nên ra kết quả sai"
+    ],
+    "optionsEn": [
+      "`repayment_schedule` adds interest to the principal",
+      "The join pulls in closed loans that are missing from `loans`",
+      "Fan-out: each loan repeats once per installment, so principal is added many times",
+      "SUM overflows on large numbers and gives a wrong result"
+    ],
+    "answer": 2,
+    "explanation": "Một khoản vay có nhiều kỳ trả góp; sau join, 3,106 khoản vay thành 28,824 dòng và principal bị cộng lặp, gấp khoảng 11.6 lần.",
+    "explanationEn": "One loan has many installments; after the join, 3,106 loans become 28,824 rows and principal is summed repeatedly, about 11.6 times too much.",
+    "optionExplanations": [
+      "Sai: query vẫn cộng cột `l.principal` của bảng loans, không cộng lãi.",
+      "Sai: mọi khoản vay đều nằm trong `loans`; join không tạo khoản vay mới.",
+      "Đúng: đây là cái bẫy fan-out kinh điển.",
+      "Sai: SQLite cộng số nguyên 64-bit, con số này còn rất xa giới hạn."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the query still sums `l.principal` from loans, not interest.",
+      "Wrong: every loan is in `loans`; a join creates no new loans.",
+      "Correct: this is the classic fan-out trap.",
+      "Wrong: SQLite sums 64-bit integers; this figure is nowhere near the limit."
+    ]
+  },
+  {
+    "id": "da05-q11",
+    "question": "Bạn cần một bảng theo `product`: tổng principal (từ `loans`) và tổng `amount_paid` (từ `repayment_schedule`). Cách nào cho kết quả đúng?",
+    "questionEn": "You need one table per `product`: total principal (from `loans`) and total `amount_paid` (from `repayment_schedule`). Which approach gives the right result?",
+    "options": [
+      "Join hai bảng rồi dùng `SUM(DISTINCT l.principal)` cho principal",
+      "Tổng hợp `repayment_schedule` về một dòng mỗi `loan_id` trong một CTE, rồi mới join với `loans`",
+      "Đổi JOIN thành LEFT JOIN để không bị lặp dòng",
+      "Join hai bảng rồi chia `SUM(l.principal)` cho 12"
+    ],
+    "optionsEn": [
+      "Join the tables and use `SUM(DISTINCT l.principal)` for principal",
+      "Aggregate `repayment_schedule` to one row per `loan_id` in a CTE, then join it to `loans`",
+      "Change the JOIN to a LEFT JOIN so rows do not repeat",
+      "Join the tables and divide `SUM(l.principal)` by 12"
+    ],
+    "answer": 1,
+    "explanation": "Tổng hợp trước, join sau: khi bảng phía \"nhiều\" đã về một dòng mỗi khoản vay, phép join là một-một và principal theo sản phẩm cộng lại đúng 34,040,900,000.",
+    "explanationEn": "Aggregate first, then join: once the \"many\" side is one row per loan, the join is one-to-one and principal by product adds up to exactly 34,040,900,000.",
+    "optionExplanations": [
+      "Sai: hai khoản vay khác nhau có thể có cùng principal, DISTINCT sẽ bỏ mất chúng.",
+      "Đúng: biến phép join thành một-một nên không còn fan-out.",
+      "Sai: LEFT JOIN vẫn lặp dòng theo từng kỳ trả góp.",
+      "Sai: kỳ hạn khác nhau giữa các khoản vay, nên không có hệ số chia cố định."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: two different loans can share the same principal, and DISTINCT would drop one.",
+      "Correct: it makes the join one-to-one, so there is no fan-out.",
+      "Wrong: a LEFT JOIN still repeats rows per installment.",
+      "Wrong: terms differ between loans, so there is no fixed divisor."
+    ]
+  },
+  {
+    "id": "da05-q12",
+    "question": "Phát biểu nào về CTE (`WITH ... AS (...)`) là đúng?",
+    "questionEn": "Which statement about CTEs (`WITH ... AS (...)`) is true?",
+    "options": [
+      "CTE tạo một bảng mới được lưu lâu dài trong database",
+      "Mỗi CTE phải được viết thành một query riêng và chạy riêng",
+      "CTE chạy nhanh hơn query lồng nhau trong mọi trường hợp",
+      "CTE là kết quả tạm có tên, chỉ tồn tại trong một query, và mỗi bước đọc được các bước trước nó"
+    ],
+    "optionsEn": [
+      "A CTE creates a new table that is stored permanently in the database",
+      "Each CTE must be written and run as a separate query",
+      "A CTE is faster than a nested query in every case",
+      "A CTE is a named, temporary result that lives within one query, and each step can read earlier steps"
+    ],
+    "answer": 3,
+    "explanation": "CTE giúp xây query thành các bước có tên, kiểm tra được từng bước và ghi rõ grain, giống các dòng công thức nối tiếp nhau trong bảng tính.",
+    "explanationEn": "CTEs let you build a query in named steps, test each step and state its grain, like successive rows of formulas in a spreadsheet.",
+    "optionExplanations": [
+      "Sai: CTE biến mất khi query kết thúc; nó không phải bảng.",
+      "Sai: tất cả các bước CTE nằm chung trong một câu lệnh.",
+      "Sai: lợi ích chính là dễ đọc và dễ kiểm tra, không phải tốc độ.",
+      "Đúng: đây chính là định nghĩa của CTE."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: a CTE disappears when the query ends; it is not a table.",
+      "Wrong: all CTE steps live together in one statement.",
+      "Wrong: the main benefit is readability and testability, not speed.",
+      "Correct: that is exactly what a CTE is."
+    ]
+  },
+  {
+    "id": "da05-q13",
+    "question": "Trong `SUM(CASE WHEN status = 'success' THEN amount ELSE 0 END) OVER (PARTITION BY wallet_id ORDER BY created_at, txn_id)`, phần `PARTITION BY wallet_id` có tác dụng gì?",
+    "questionEn": "In `SUM(CASE WHEN status = 'success' THEN amount ELSE 0 END) OVER (PARTITION BY wallet_id ORDER BY created_at, txn_id)`, what does `PARTITION BY wallet_id` do?",
+    "options": [
+      "Tính số dư lũy kế lại từ đầu cho mỗi ví, để tiền của ví này không cộng sang ví khác",
+      "Gộp mỗi ví thành một dòng duy nhất, giống GROUP BY",
+      "Chỉ giữ lại các ví có giao dịch thành công",
+      "Sắp xếp kết quả cuối theo wallet_id"
+    ],
+    "optionsEn": [
+      "Restarts the running balance for each wallet, so one wallet's money is not added to another's",
+      "Collapses each wallet into a single row, like GROUP BY",
+      "Keeps only wallets that have successful transactions",
+      "Sorts the final output by wallet_id"
+    ],
+    "answer": 0,
+    "explanation": "Window function giữ nguyên từng dòng; PARTITION BY chia dòng thành nhóm và tính lại từ đầu cho mỗi nhóm, còn ORDER BY quyết định thứ tự cộng dồn.",
+    "explanationEn": "A window function keeps every row; PARTITION BY splits rows into groups and restarts the calculation for each, while ORDER BY sets the order of the running sum.",
+    "optionExplanations": [
+      "Đúng: mỗi ví có số dư lũy kế riêng.",
+      "Sai: window function không gộp dòng; mọi giao dịch vẫn còn.",
+      "Sai: PARTITION BY không lọc dòng nào cả.",
+      "Sai: thứ tự output do ORDER BY cuối query quyết định."
+    ],
+    "optionExplanationsEn": [
+      "Correct: each wallet gets its own running balance.",
+      "Wrong: window functions do not collapse rows; every transaction remains.",
+      "Wrong: PARTITION BY filters nothing.",
+      "Wrong: output order comes from the query's final ORDER BY."
+    ]
+  },
+  {
+    "id": "da05-q14",
+    "question": "Bạn muốn danh sách khoản vay đầu tiên của mỗi khách. Cách nào chạy được trên SQLite?",
+    "questionEn": "You want a list of each customer's first loan. Which approach works in SQLite?",
+    "options": [
+      "`SELECT * FROM loans WHERE ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date) = 1`",
+      "`SELECT * FROM loans GROUP BY customer_id HAVING disbursed_date = MIN(disbursed_date) LIMIT 1`",
+      "Tính `ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date, loan_id) AS loan_seq` trong một CTE, rồi lọc `WHERE loan_seq = 1`",
+      "`SELECT * FROM loans ORDER BY disbursed_date LIMIT 1`"
+    ],
+    "optionsEn": [
+      "`SELECT * FROM loans WHERE ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date) = 1`",
+      "`SELECT * FROM loans GROUP BY customer_id HAVING disbursed_date = MIN(disbursed_date) LIMIT 1`",
+      "Compute `ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date, loan_id) AS loan_seq` in a CTE, then filter `WHERE loan_seq = 1`",
+      "`SELECT * FROM loans ORDER BY disbursed_date LIMIT 1`"
+    ],
+    "answer": 2,
+    "explanation": "Không thể đặt window function trực tiếp trong WHERE, nên cần một bước CTE để đánh số rồi lọc. Kết quả có 2,108 dòng, bằng số khách có khoản vay.",
+    "explanationEn": "A window function cannot go directly in WHERE, so a CTE step numbers the rows and the next step filters. The result has 2,108 rows, the number of customers with a loan.",
+    "optionExplanations": [
+      "Sai: window function không được phép trong WHERE; query báo lỗi.",
+      "Sai: LIMIT 1 chỉ trả về một dòng cho cả bảng, không phải mỗi khách một dòng.",
+      "Đúng: đánh số trong CTE rồi lọc ở bước sau.",
+      "Sai: chỉ trả về khoản vay sớm nhất của cả công ty."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: window functions are not allowed in WHERE; the query errors.",
+      "Wrong: LIMIT 1 returns one row for the whole table, not one per customer.",
+      "Correct: number the rows in a CTE, then filter in the next step.",
+      "Wrong: it returns only the company's earliest loan."
+    ]
+  },
+  {
+    "id": "da05-q15",
+    "question": "Một query MoM đặt `WHERE month_vn >= '2026-01'` ngay trong bước tổng hợp theo tháng, rồi mới tính `LAG(tpv) OVER (ORDER BY month_vn)`. Kết quả: `prev_tpv` của tháng 2026-01 là NULL. Vì sao?",
+    "questionEn": "A MoM query puts `WHERE month_vn >= '2026-01'` inside the monthly aggregation step, then computes `LAG(tpv) OVER (ORDER BY month_vn)`. Result: `prev_tpv` for 2026-01 is NULL. Why?",
+    "options": [
+      "Tháng 12/2025 không có giao dịch nào trong dữ liệu",
+      "Tháng 12/2025 đã bị lọc trước khi LAG chạy, nên tháng 1 không có dòng liền trước",
+      "LAG luôn trả NULL cho tháng đầu năm",
+      "LAG cần PARTITION BY nên không có thì trả NULL"
+    ],
+    "optionsEn": [
+      "December 2025 has no payments in the data",
+      "December 2025 was filtered out before LAG ran, so January has no previous row",
+      "LAG always returns NULL for the first month of a year",
+      "LAG needs a PARTITION BY and returns NULL without one"
+    ],
+    "answer": 1,
+    "explanation": "Window function chỉ thấy những dòng còn lại sau bộ lọc của chính bước đó. Đặt bộ lọc ở bước cuối (sau LAG) thì tháng 1 có prev_tpv = 388,739,000 và MoM = 22%.",
+    "explanationEn": "A window function sees only the rows that survive its own step's filters. Filter in the final step (after LAG) and January gets prev_tpv = 388,739,000 and MoM = 22%.",
+    "optionExplanations": [
+      "Sai: tháng 12/2025 có TPV 388,739,000 VND.",
+      "Đúng: bộ lọc chạy trước window function trong cùng một bước.",
+      "Sai: LAG chỉ nhìn dòng liền trước, không biết gì về năm.",
+      "Sai: PARTITION BY là tùy chọn; không có nó thì cả tập là một cửa sổ."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: December 2025 has a TPV of 388,739,000 VND.",
+      "Correct: the filter runs before the window function within the same step.",
+      "Wrong: LAG just looks at the previous row; it knows nothing about years.",
+      "Wrong: PARTITION BY is optional; without it the whole set is one window."
+    ]
+  },
+  {
+    "id": "da05-q16",
+    "question": "Kiểm tra `SELECT session_id FROM payments GROUP BY session_id HAVING COUNT(*) > 1` cho ra 37 session. Đây là loại kiểm tra gì và nó báo hiệu điều gì?",
+    "questionEn": "The check `SELECT session_id FROM payments GROUP BY session_id HAVING COUNT(*) > 1` finds 37 sessions. What kind of check is it, and what does it signal?",
+    "options": [
+      "Kiểm tra độ lớn; 37 là quá nhỏ nên có thể bỏ qua",
+      "Kiểm tra khung thời gian; 37 session này nằm ngoài tháng báo cáo",
+      "Kiểm tra fan-out; 37 là số dòng bị join lặp",
+      "Kiểm tra tính duy nhất; một checkout lẽ ra chỉ ra một payment, nên đây là các lần trừ tiền hai lần cần xử lý trước khi cộng doanh thu"
+    ],
+    "optionsEn": [
+      "A magnitude check; 37 is too small to matter",
+      "A time-window check; these 37 sessions fall outside the report month",
+      "A fan-out check; 37 is the number of rows repeated by a join",
+      "A uniqueness check; one checkout should produce one payment, so these are double charges to handle before summing revenue"
+    ],
+    "answer": 3,
+    "explanation": "`GROUP BY key HAVING COUNT(*) > 1` kiểm tra một khóa có thật sự duy nhất không. Ở đây nó lộ ra 37 double charge đã gặp trong bài chất lượng dữ liệu.",
+    "explanationEn": "`GROUP BY key HAVING COUNT(*) > 1` tests whether a key is really unique. Here it reveals the 37 double charges met in the data-quality topic.",
+    "optionExplanations": [
+      "Sai: double charge làm phồng doanh thu, dù ít vẫn phải xử lý.",
+      "Sai: query không lọc thời gian nào cả.",
+      "Sai: query chỉ đọc một bảng, không có join nào.",
+      "Đúng: đây là kiểm tra tính duy nhất và nó tìm ra double charge."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: double charges inflate revenue; even a few must be handled.",
+      "Wrong: the query applies no time filter at all.",
+      "Wrong: the query reads one table; there is no join.",
+      "Correct: it is a uniqueness check and it finds the double charges."
+    ]
+  },
+  {
+    "id": "da05-q17",
+    "question": "Trưởng bộ phận ví hỏi: \"Tháng 6/2026 (giờ VN) có bao nhiêu khách thanh toán bằng ví?\". Query nào trả lời đúng câu hỏi?",
+    "questionEn": "The head of wallet asks: \"How many customers paid with the wallet in June 2026 (VN time)?\" Which query answers it?",
+    "options": [
+      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet'`",
+      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet' AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
+      "`SELECT COUNT(DISTINCT customer_id) FROM payments WHERE method = 'e_wallet' AND status IN ('success','refunded') AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
+      "`SELECT COUNT(DISTINCT customer_id) FROM wallets WHERE status = 'active'`"
+    ],
+    "optionsEn": [
+      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet'`",
+      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet' AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
+      "`SELECT COUNT(DISTINCT customer_id) FROM payments WHERE method = 'e_wallet' AND status IN ('success','refunded') AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
+      "`SELECT COUNT(DISTINCT customer_id) FROM wallets WHERE status = 'active'`"
+    ],
+    "answer": 2,
+    "explanation": "Câu hỏi đếm *khách*, trong *tháng 6 giờ VN*, có thanh toán *trót lọt*. Chỉ query thứ ba làm đủ cả ba: kết quả 146 khách (149 giao dịch).",
+    "explanationEn": "The question counts *customers*, in *June VN time*, who *actually paid*. Only the third query does all three: 146 customers (149 payments).",
+    "optionExplanations": [
+      "Sai: không lọc ngày, đếm dòng chứ không đếm khách, gồm cả giao dịch lỗi (1,770).",
+      "Sai: đã lọc ngày nhưng vẫn đếm dòng và tính cả giao dịch lỗi.",
+      "Đúng: đếm khách khác nhau, đúng khung giờ VN, chỉ giao dịch trót lọt.",
+      "Sai: đếm khách có ví active, không phải khách đã thanh toán bằng ví trong tháng 6."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: no date filter, counts rows not customers, and includes failures (1,770).",
+      "Wrong: the dates are filtered but it still counts rows and includes failures.",
+      "Correct: distinct customers, the right VN window, only payments that went through.",
+      "Wrong: it counts customers with an active wallet, not customers who paid by wallet in June."
+    ]
+  },
+  {
+    "id": "da05-q18",
+    "question": "Một báo cáo dùng `CASE WHEN credit_score >= 650 THEN '650+' WHEN credit_score >= 560 THEN '560-649' ELSE 'under 560' END`. Có 307 hồ sơ `credit_score` là NULL. Chuyện gì xảy ra với họ?",
+    "questionEn": "A report uses `CASE WHEN credit_score >= 650 THEN '650+' WHEN credit_score >= 560 THEN '560-649' ELSE 'under 560' END`. 307 applications have a NULL `credit_score`. What happens to them?",
+    "options": [
+      "Họ bị loại khỏi kết quả vì GROUP BY bỏ qua NULL",
+      "Họ rơi vào nhánh ELSE và bị âm thầm tính là 'under 560'",
+      "Họ tạo thành một nhóm riêng tên NULL ở cuối bảng",
+      "Query báo lỗi vì không so sánh được NULL với số"
+    ],
+    "optionsEn": [
+      "They are dropped because GROUP BY ignores NULLs",
+      "They fall into the ELSE branch and are silently counted as 'under 560'",
+      "They form a separate group called NULL at the bottom",
+      "The query errors because NULL cannot be compared with a number"
+    ],
+    "answer": 1,
+    "explanation": "So sánh với NULL không đúng, nên các nhánh WHEN đều trượt và ELSE bắt lấy họ. Hãy thêm `WHEN credit_score IS NULL THEN 'no score'` lên đầu tiên.",
+    "explanationEn": "Comparisons with NULL are not true, so every WHEN misses and ELSE catches them. Add `WHEN credit_score IS NULL THEN 'no score'` first.",
+    "optionExplanations": [
+      "Sai: GROUP BY không loại dòng; nếu nhãn là NULL nó tạo nhóm NULL.",
+      "Đúng: người hồ sơ mỏng bị lẫn vào nhóm điểm thấp.",
+      "Sai: nhóm NULL chỉ xuất hiện khi CASE không có ELSE.",
+      "Sai: so sánh với NULL không báo lỗi, chỉ không đúng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: GROUP BY drops no rows; a NULL label would form a NULL group.",
+      "Correct: thin-file applicants get mixed into the low-score band.",
+      "Wrong: a NULL group appears only when the CASE has no ELSE.",
+      "Wrong: comparing with NULL raises no error; it is just not true."
+    ]
+  }
+]

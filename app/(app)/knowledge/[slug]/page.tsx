@@ -7,11 +7,13 @@ import { useLang } from "@/context/lang";
 import ArticleRenderer from "@/components/knowledge/ArticleRenderer";
 import BilingualArticle from "@/components/knowledge/BilingualArticle";
 import QuizBlock, { type Question } from "@/components/knowledge/QuizBlock";
+import { getGroup } from "@/lib/groups";
 
 interface Article {
   slug: string;
   title: string;
   titleEn?: string;
+  group?: string;
   content: string;
   contentEn?: string | null;
   questions: Question[];
@@ -53,6 +55,7 @@ export default function ArticlePage() {
   const body = lang === "en" && article.contentEn ? article.contentEn : article.content;
   const bilingual = dual && Boolean(article.contentEn);
   const missingTranslation = !article.contentEn && (lang === "en" || dual);
+  const accent = getGroup(article.group)?.accent;
 
   return (
     <div className={bilingual ? "max-w-6xl" : "max-w-3xl"}>
@@ -75,9 +78,9 @@ export default function ArticlePage() {
       )}
 
       {bilingual ? (
-        <BilingualArticle vi={article.content} en={article.contentEn!} />
+        <BilingualArticle vi={article.content} en={article.contentEn!} accent={accent} />
       ) : (
-        <ArticleRenderer content={body} />
+        <ArticleRenderer content={body} accent={accent} />
       )}
 
       <QuizBlock questions={questions} title={`${t("quiz.title")} — ${title}`} slug={slug} />

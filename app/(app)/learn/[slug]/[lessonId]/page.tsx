@@ -396,9 +396,14 @@ export default function LessonPlayerPage() {
           )}
 
           {bilingual ? (
-            <BilingualArticle vi={topicData!.content} en={topicData!.contentEn!} sections={lesson.sections} />
+            <BilingualArticle
+              vi={topicData!.content}
+              en={topicData!.contentEn!}
+              sections={lesson.sections}
+              accent={course?.accent}
+            />
           ) : (
-            <ArticleRenderer content={body} />
+            <ArticleRenderer content={body} accent={course?.accent} />
           )}
 
           <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-zinc-200 dark:border-zinc-800">

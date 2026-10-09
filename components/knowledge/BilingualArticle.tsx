@@ -1,6 +1,7 @@
 "use client";
 
 import ArticleRenderer from "./ArticleRenderer";
+import type { Accent } from "./articleTokens";
 import BilingualPair from "@/components/BilingualPair";
 import { splitArticle } from "@/lib/lessons";
 
@@ -9,6 +10,8 @@ interface Props {
   en: string;
   /** 1-based `## ` section indices to show; omit for the whole article. */
   sections?: number[];
+  /** The course accent, passed through to every section. */
+  accent?: Accent;
 }
 
 /**
@@ -20,7 +23,7 @@ interface Props {
  * for every topic; if a translation ever falls out of step we fall back to
  * whichever side has content for that row.
  */
-export default function BilingualArticle({ vi, en, sections }: Props) {
+export default function BilingualArticle({ vi, en, sections, accent }: Props) {
   const viDoc = splitArticle(vi);
   const enDoc = splitArticle(en);
 
@@ -34,8 +37,8 @@ export default function BilingualArticle({ vi, en, sections }: Props) {
       {showPreamble && (
         <BilingualPair
           labels
-          en={<ArticleRenderer content={enDoc.preamble || viDoc.preamble} />}
-          vi={<ArticleRenderer content={viDoc.preamble || enDoc.preamble} />}
+          en={<ArticleRenderer content={enDoc.preamble || viDoc.preamble} accent={accent} />}
+          vi={<ArticleRenderer content={viDoc.preamble || enDoc.preamble} accent={accent} />}
         />
       )}
 
@@ -52,8 +55,8 @@ export default function BilingualArticle({ vi, en, sections }: Props) {
           >
             <BilingualPair
               labels={row === 0 && !showPreamble}
-              en={<ArticleRenderer content={enSection} />}
-              vi={<ArticleRenderer content={viSection} />}
+              en={<ArticleRenderer content={enSection} accent={accent} />}
+              vi={<ArticleRenderer content={viSection} accent={accent} />}
             />
           </div>
         );

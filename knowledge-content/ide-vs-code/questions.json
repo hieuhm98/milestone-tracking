@@ -1,0 +1,738 @@
+[
+  {
+    "id": "ide-q1",
+    "question": "Vì sao không thể viết code trong Microsoft Word hay Google Docs?",
+    "questionEn": "Why can't you write code in Microsoft Word or Google Docs?",
+    "options": [
+      "Chúng không gõ được các ký hiệu như dấu ngoặc nhọn, dấu chấm phẩy hay dấu gạch chéo",
+      "Chúng lưu thêm định dạng ẩn và tự đổi ký tự, ví dụ nháy thẳng thành nháy cong",
+      "Chúng giới hạn độ dài tài liệu nên một chương trình thật sẽ không vừa trong một file",
+      "Chúng là phần mềm trả phí, trong khi code bắt buộc phải viết bằng công cụ miễn phí"
+    ],
+    "optionsEn": [
+      "They cannot type symbols such as angle brackets, semicolons or slashes at all",
+      "They save hidden formatting and change characters, such as straight quotes into curly ones",
+      "They limit document length, so a real program would never fit in a single file",
+      "They are paid software, while code is required to be written with free tools only"
+    ],
+    "answer": 1,
+    "explanation": "Code được lưu thành file văn bản thuần: chỉ có ký tự. Phần mềm soạn thảo văn bản lưu kèm font, style, lề và âm thầm đổi ký tự (nháy thẳng thành nháy cong), khiến chương trình ngừng chạy.",
+    "explanationEn": "Code is saved as plain text: characters only. A word processor also saves fonts, styles and margins and quietly swaps characters (straight quotes into curly ones), which breaks the program.",
+    "optionExplanations": [
+      "Sai: Word gõ được mọi ký hiệu; vấn đề nằm ở thứ nó lưu kèm và tự sửa.",
+      "Đúng: file code phải là văn bản thuần, còn Word thêm font, style và tự thay ký tự bạn gõ.",
+      "Sai: giới hạn độ dài không phải lý do; một file code thường còn ngắn hơn một báo cáo.",
+      "Sai: giá tiền không liên quan; nhiều IDE chuyên nghiệp cũng phải trả phí."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: Word can type every symbol; the problem is what it saves around them and auto-corrects.",
+      "Correct: a code file must be plain text, while Word adds fonts and styles and replaces characters you typed.",
+      "Wrong: length is not the issue; a code file is often shorter than a report.",
+      "Wrong: price has nothing to do with it; many professional IDEs are paid too."
+    ]
+  },
+  {
+    "id": "ide-q2",
+    "question": "Một đồng nghiệp soạn đoạn code trong Word rồi dán vào file. Nhìn bằng mắt thì giống hệt bản gốc, nhưng chương trình báo lỗi. Nguyên nhân dễ gặp nhất là gì?",
+    "questionEn": "A colleague drafts a piece of code in Word and pastes it into a file. It looks identical to the original, but the program reports an error. What is the most likely cause?",
+    "options": [
+      "Word đã nén đoạn code lại nên file nhận được bị thiếu mất vài dòng ở phía cuối",
+      "File đích chỉ nhận được code gõ tay, nên mọi nội dung dán vào đều bị từ chối",
+      "Máy của đồng nghiệp cài một phiên bản Word cũ hơn phiên bản dùng để viết bản gốc",
+      "Word đã đổi dấu nháy thẳng thành nháy cong, là ký tự khác đối với máy tính"
+    ],
+    "optionsEn": [
+      "Word compressed the code, so the file that received it is missing a few lines at the end",
+      "The target file only accepts code typed by hand, so any pasted content is rejected",
+      "The colleague's computer has an older version of Word than the one used for the original",
+      "Word replaced the straight quotes with curly quotes, which are different characters to a computer"
+    ],
+    "answer": 3,
+    "explanation": "Word tự thay dấu nháy thẳng `\"` bằng nháy cong. Với người thì gần như giống nhau, với máy tính thì là ký tự khác, nên code hỏng. Hãy soạn code trong một editor văn bản thuần.",
+    "explanationEn": "Word auto-replaces the straight quote `\"` with curly quotes. To a person they look alike, to a computer they are different characters, so the code breaks. Draft code in a plain text editor.",
+    "optionExplanations": [
+      "Sai: dán từ Word không cắt bớt dòng; đề bài cũng nói nội dung trông giống hệt.",
+      "Sai: file văn bản thuần không phân biệt gõ tay hay dán.",
+      "Sai: phiên bản Word không quan trọng; phiên bản nào cũng tự đổi dấu nháy.",
+      "Đúng: nháy cong trông gần giống nháy thẳng với mắt người nhưng máy tính coi là ký tự khác."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: pasting from Word does not drop lines, and the scenario says the content looks identical.",
+      "Wrong: a plain text file does not care whether text was typed or pasted.",
+      "Wrong: the Word version does not matter; every version auto-replaces quotes.",
+      "Correct: curly quotes look almost like straight ones to a human, but a computer treats them as different characters."
+    ]
+  },
+  {
+    "id": "ide-q3",
+    "question": "Điểm khác nhau chính giữa một code editor và một IDE là gì?",
+    "questionEn": "What is the main difference between a code editor and an IDE?",
+    "options": [
+      "IDE gói editor cùng các công cụ nặng như debugger; code editor nhẹ hơn và chỉ tập trung vào soạn code",
+      "IDE chỉ chạy trên trình duyệt, còn code editor luôn phải được cài đặt lên máy tính",
+      "Code editor lưu file ở định dạng riêng, còn IDE mới lưu code thành văn bản thuần",
+      "Code editor chỉ dành cho người mới học, còn developer chuyên nghiệp bắt buộc dùng IDE"
+    ],
+    "optionsEn": [
+      "An IDE bundles an editor with heavy tools such as a debugger; a code editor is lighter and focused on editing",
+      "An IDE only runs in the browser, while a code editor always has to be installed on the computer",
+      "A code editor saves files in its own format, while only an IDE saves code as plain text",
+      "A code editor is only for learners, while professional developers are required to use an IDE"
+    ],
+    "answer": 0,
+    "explanation": "Text editor chỉ gõ và lưu; code editor hiểu code (tô màu, gợi ý, báo lỗi); IDE gói thêm các công cụ nặng như debugger, hệ thống build. VS Code nằm giữa và lớn dần nhờ extension.",
+    "explanationEn": "A text editor only types and saves; a code editor understands code (colours, suggestions, warnings); an IDE adds heavy tools such as a debugger and a build system. VS Code sits in between and grows through extensions.",
+    "optionExplanations": [
+      "Đúng: IDE là \"gian bếp nhà hàng\", gói sẵn nhiều công cụ cho một loại công việc.",
+      "Sai: phần lớn IDE (IntelliJ IDEA, Android Studio) được cài trên máy.",
+      "Sai: cả hai đều lưu văn bản thuần, nên file mở được ở bất kỳ công cụ nào.",
+      "Sai: phần lớn web developer chuyên nghiệp dùng VS Code, một code editor."
+    ],
+    "optionExplanationsEn": [
+      "Correct: an IDE is the \"restaurant kitchen\", bundling many tools for one kind of work.",
+      "Wrong: most IDEs (IntelliJ IDEA, Android Studio) are installed on the computer.",
+      "Wrong: both save plain text, which is why a file opens in any tool.",
+      "Wrong: most professional web developers use VS Code, which is a code editor."
+    ]
+  },
+  {
+    "id": "ide-q4",
+    "question": "Bạn làm theo hướng dẫn \"mở VS Code\", nhưng chương trình bạn cài trông khác hẳn và hỏi về C# và .NET. Khả năng cao chuyện gì đã xảy ra?",
+    "questionEn": "You follow a tutorial that says \"open VS Code\", but the program you installed looks completely different and asks about C# and .NET. What most likely happened?",
+    "options": [
+      "Bạn đã cài đúng VS Code nhưng nó đang chạy ở Restricted Mode nên giao diện thay đổi",
+      "VS Code tự chuyển sang chế độ IDE vì máy của bạn có cấu hình đủ mạnh",
+      "Bạn đã cài Visual Studio, một IDE lớn khác hẳn với Visual Studio Code",
+      "Hướng dẫn đã cũ, và VS Code ngày nay chỉ còn hỗ trợ lập trình C# và .NET"
+    ],
+    "optionsEn": [
+      "You installed the right VS Code, but it is running in Restricted Mode, which changes the interface",
+      "VS Code switched itself into an IDE mode because your computer is powerful enough",
+      "You installed Visual Studio, a large IDE that is a different product from Visual Studio Code",
+      "The tutorial is outdated, and VS Code today only supports C# and .NET programming"
+    ],
+    "answer": 2,
+    "explanation": "Visual Studio và Visual Studio Code là hai sản phẩm khác nhau của Microsoft. Visual Studio là IDE lớn cho C#/.NET và C++; VS Code là editor nhỏ, miễn phí dùng trong khoá học này.",
+    "explanationEn": "Visual Studio and Visual Studio Code are two different Microsoft products. Visual Studio is a large IDE for C#/.NET and C++; VS Code is the small, free editor used in this course.",
+    "optionExplanations": [
+      "Sai: Restricted Mode chỉ tắt bớt tính năng, không đổi giao diện hay hỏi về .NET.",
+      "Sai: VS Code không có chế độ như vậy; nó chỉ lớn dần khi bạn cài extension.",
+      "Đúng: hai sản phẩm chỉ chung tên và chung công ty; Visual Studio nhắm tới C# và C++.",
+      "Sai: VS Code vẫn là editor đa năng cho web, JavaScript, Python và nhiều thứ khác."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: Restricted Mode only switches features off; it does not change the layout or ask about .NET.",
+      "Wrong: VS Code has no such mode; it only grows when you install extensions.",
+      "Correct: the two only share a name and a company; Visual Studio targets C# and C++.",
+      "Wrong: VS Code is still a general editor for web, JavaScript, Python and much more."
+    ]
+  },
+  {
+    "id": "ide-q5",
+    "question": "Khi cài VS Code trên Windows, ô \"Add to PATH\" có tác dụng gì?",
+    "questionEn": "When installing VS Code on Windows, what does the \"Add to PATH\" checkbox do?",
+    "options": [
+      "Thêm mục \"Open with Code\" vào menu chuột phải của mọi thư mục trong File Explorer",
+      "Tự động lưu mọi dự án của bạn vào một thư mục chung có tên là PATH",
+      "Giúp lệnh `code` chạy được trong terminal, vì Windows biết tìm chương trình ở đâu",
+      "Cho phép VS Code tự cập nhật lên phiên bản mới mà không cần hỏi lại bạn"
+    ],
+    "optionsEn": [
+      "It adds an \"Open with Code\" item to the right-click menu of every folder in File Explorer",
+      "It automatically stores all of your projects in one shared folder that is named PATH",
+      "It makes the `code` command work in a terminal, because Windows knows where to find the program",
+      "It allows VS Code to update itself to new versions without asking you again"
+    ],
+    "answer": 2,
+    "explanation": "PATH là danh sách những nơi Windows tìm kiếm khi bạn gõ tên một chương trình. Tick \"Add to PATH\" thì sau này gõ `code .` trong terminal sẽ mở được VS Code.",
+    "explanationEn": "PATH is the list of places Windows searches when you type a program name. With \"Add to PATH\" ticked, typing `code .` in a terminal later opens VS Code.",
+    "optionExplanations": [
+      "Sai: đó là tác dụng của hai ô \"Open with Code\", không phải \"Add to PATH\".",
+      "Sai: PATH không phải là thư mục chứa dự án mà là danh sách nơi tìm chương trình.",
+      "Đúng: PATH là danh sách những nơi Windows tìm khi bạn gõ tên một chương trình.",
+      "Sai: việc cập nhật không liên quan gì tới PATH."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: that is what the two \"Open with Code\" checkboxes do, not \"Add to PATH\".",
+      "Wrong: PATH is not a project folder; it is a list of places to look for programs.",
+      "Correct: PATH is the list of places Windows searches when you type a program name.",
+      "Wrong: updating has nothing to do with PATH."
+    ]
+  },
+  {
+    "id": "ide-q6",
+    "question": "Bạn tải một thư mục dự án từ một nguồn không rõ và VS Code hỏi \"Do you trust the authors of the files in this folder?\". Nên trả lời thế nào và điều gì xảy ra?",
+    "questionEn": "You download a project folder from an unknown source and VS Code asks \"Do you trust the authors of the files in this folder?\". What should you answer, and what happens?",
+    "options": [
+      "Trả lời No: thư mục mở ở Restricted Mode, vẫn đọc và sửa được nhưng tác vụ tự động bị tắt",
+      "Trả lời Yes: đó chỉ là câu hỏi về bản quyền và không ảnh hưởng gì tới máy tính của bạn",
+      "Trả lời No: VS Code sẽ xoá thư mục đó khỏi máy để bảo vệ các file khác của bạn",
+      "Trả lời Yes: nếu không thì VS Code từ chối mở và bạn không đọc được bất kỳ file nào"
+    ],
+    "optionsEn": [
+      "Answer No: the folder opens in Restricted Mode, still readable and editable, with automatic tasks off",
+      "Answer Yes: it is only a question about copyright and has no effect on your computer",
+      "Answer No: VS Code will delete that folder from your computer to protect your other files",
+      "Answer Yes: otherwise VS Code refuses to open it and you cannot read any of the files"
+    ],
+    "answer": 0,
+    "explanation": "Workspace Trust tồn tại vì một số thư mục chứa cấu hình có thể chạy chương trình. Với nguồn không rõ, chọn No: VS Code mở ở Restricted Mode, bạn vẫn đọc và sửa file được nhưng tác vụ tự động và nhiều extension bị tắt.",
+    "explanationEn": "Workspace Trust exists because some folders contain settings that can run programs. For an unknown source choose No: VS Code opens in Restricted Mode, where you can still read and edit files but automatic tasks and many extensions are off.",
+    "optionExplanations": [
+      "Đúng: Restricted Mode cho bạn xem code an toàn; tác vụ tự động và nhiều extension bị tắt.",
+      "Sai: câu hỏi này về an toàn, vì cấu hình trong thư mục có thể chạy chương trình trên máy bạn.",
+      "Sai: VS Code không xoá gì cả; nó chỉ mở thư mục với ít quyền hơn.",
+      "Sai: trả lời No vẫn mở được thư mục, chỉ là ở Restricted Mode."
+    ],
+    "optionExplanationsEn": [
+      "Correct: Restricted Mode lets you browse the code safely; automatic tasks and many extensions are off.",
+      "Wrong: the question is about safety, because settings in a folder can run programs on your computer.",
+      "Wrong: VS Code deletes nothing; it only opens the folder with fewer permissions.",
+      "Wrong: answering No still opens the folder, only in Restricted Mode."
+    ]
+  },
+  {
+    "id": "ide-q7",
+    "question": "Khu vực nào của cửa sổ VS Code quyết định Side Bar đang hiển thị gì (file, tìm kiếm, extension…)?",
+    "questionEn": "Which area of the VS Code window decides what the Side Bar is showing (files, search, extensions…)?",
+    "options": [
+      "Status Bar, dải màu mỏng nằm ở dưới cùng của cửa sổ",
+      "Panel, khu vực nằm bên dưới editor chứa Terminal và Problems",
+      "Dãy tab nằm ở phía trên cùng của vùng editor ở giữa cửa sổ",
+      "Activity Bar, dải icon hẹp nằm sát mép trái của cửa sổ"
+    ],
+    "optionsEn": [
+      "The Status Bar, the thin coloured line at the very bottom of the window",
+      "The Panel, the area below the editor that holds Terminal and Problems",
+      "The row of tabs along the top of the editor area in the middle of the window",
+      "The Activity Bar, the narrow strip of icons at the far left of the window"
+    ],
+    "answer": 3,
+    "explanation": "Activity Bar là dải icon bên trái (Explorer, Search, Source Control, Run and Debug, Extensions). Bấm một icon để hiện view của nó trong Side Bar; bấm lại để thu gọn Side Bar.",
+    "explanationEn": "The Activity Bar is the icon strip on the left (Explorer, Search, Source Control, Run and Debug, Extensions). Click an icon to show its view in the Side Bar; click it again to collapse the Side Bar.",
+    "optionExplanations": [
+      "Sai: Status Bar hiện thông tin về file hiện tại, không điều khiển Side Bar.",
+      "Sai: Panel chứa Terminal, Problems và Output chứ không đổi view của Side Bar.",
+      "Sai: các tab chuyển giữa những file đang mở, không phải giữa các view.",
+      "Đúng: bấm một icon trên Activity Bar sẽ đổi view mà Side Bar hiển thị."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the Status Bar shows facts about the current file; it does not control the Side Bar.",
+      "Wrong: the Panel holds Terminal, Problems and Output; it does not switch Side Bar views.",
+      "Wrong: tabs switch between open files, not between views.",
+      "Correct: clicking an icon in the Activity Bar changes the view the Side Bar shows."
+    ]
+  },
+  {
+    "id": "ide-q8",
+    "question": "Bạn muốn biết con trỏ đang ở dòng và cột nào, và VS Code đang coi file hiện tại là ngôn ngữ gì. Nhìn vào đâu?",
+    "questionEn": "You want to know which line and column the cursor is on, and which language VS Code thinks the current file is. Where do you look?",
+    "options": [
+      "View Explorer ở trong Side Bar",
+      "Status Bar ở dưới cùng cửa sổ",
+      "Tab Output ở trong khu vực Panel",
+      "View Extensions trên Activity Bar"
+    ],
+    "optionsEn": [
+      "The Explorer view inside the Side Bar",
+      "The Status Bar at the bottom of the window",
+      "The Output tab inside the Panel area",
+      "The Extensions view on the Activity Bar"
+    ],
+    "answer": 1,
+    "explanation": "Status Bar là dải mỏng dưới cùng, hiện các thông tin về file hiện tại: dòng và cột (ví dụ `Ln 3, Col 7`), ngôn ngữ (HTML, Plain Text…) và số lỗi, số cảnh báo.",
+    "explanationEn": "The Status Bar is the thin line at the bottom with facts about the current file: line and column (for example `Ln 3, Col 7`), the language (HTML, Plain Text…) and the error and warning counts.",
+    "optionExplanations": [
+      "Sai: Explorer liệt kê các file của dự án, không hiện vị trí con trỏ.",
+      "Đúng: Status Bar hiện dòng và cột, ngôn ngữ của file và số lỗi.",
+      "Sai: Output hiện thông báo từ các công cụ, không phải thông tin về file đang mở.",
+      "Sai: view Extensions dùng để cài tiện ích mở rộng."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the Explorer lists the project's files; it does not show the cursor position.",
+      "Correct: the Status Bar shows line and column, the file's language and the error count.",
+      "Wrong: Output shows messages from tools, not facts about the open file.",
+      "Wrong: the Extensions view is for installing add-ons."
+    ]
+  },
+  {
+    "id": "ide-q9",
+    "question": "Dấu × trên tab của một file biến thành một chấm tròn. Điều đó nghĩa là gì?",
+    "questionEn": "The × on a file's tab has turned into a round dot. What does that mean?",
+    "options": [
+      "File có thay đổi chưa được lưu xuống ổ đĩa",
+      "File đang có lỗi cú pháp cần được sửa ngay",
+      "File đang được Live Server theo dõi thay đổi",
+      "File đã bị khoá nên không ai chỉnh sửa được nữa"
+    ],
+    "optionsEn": [
+      "The file has changes that are not yet saved to disk",
+      "The file contains a syntax error that needs fixing",
+      "The file is being watched for changes by Live Server",
+      "The file has been locked so nobody can edit it now"
+    ],
+    "answer": 0,
+    "explanation": "Khi bạn sửa một file, dấu × trên tab thành chấm tròn: có thay đổi chưa lưu. Nhấn `Ctrl + S` (macOS: `Cmd + S`) hoặc bật Auto Save để chấm tròn trở lại thành ×.",
+    "explanationEn": "When you change a file, the × on its tab becomes a dot: unsaved changes. Press `Ctrl + S` (macOS: `Cmd + S`) or switch on Auto Save and the dot turns back into ×.",
+    "optionExplanations": [
+      "Đúng: chấm tròn nghĩa là có thay đổi chưa lưu; các chương trình khác vẫn thấy bản cũ.",
+      "Sai: lỗi được đánh dấu bằng squiggle và panel Problems, không phải chấm trên tab.",
+      "Sai: Live Server không thêm dấu hiệu nào lên tab.",
+      "Sai: chấm tròn xuất hiện chính vì bạn vừa sửa file."
+    ],
+    "optionExplanationsEn": [
+      "Correct: the dot means unsaved changes; other programs still see the old version.",
+      "Wrong: errors are marked by squiggles and the Problems panel, not by the dot on the tab.",
+      "Wrong: Live Server does not add any mark to the tab.",
+      "Wrong: the dot appears precisely because you have just edited the file."
+    ]
+  },
+  {
+    "id": "ide-q10",
+    "question": "Bạn tạo trang bằng Notepad trên Windows. Trong File Explorer file hiện tên `index.html`, nhưng bấm đúp thì Notepad mở ra chứ không phải trình duyệt. Nguyên nhân dễ gặp nhất là gì?",
+    "questionEn": "You created a page with Notepad on Windows. File Explorer shows the name `index.html`, but double-clicking opens Notepad instead of the browser. What is the most likely cause?",
+    "options": [
+      "File chưa được lưu, nên trình duyệt chưa thể nhận ra nó là trang web",
+      "Trình duyệt chỉ mở được trang nằm trên internet, không mở được file trong máy",
+      "Tên thật là `index.html.txt`, vì Windows đang ẩn phần đuôi file",
+      "Tên file phải viết hoa toàn bộ thì Windows mới coi nó là một trang HTML"
+    ],
+    "optionsEn": [
+      "The file is not saved yet, so the browser cannot recognise it as a web page",
+      "Browsers can only open pages from the internet, never files on your own computer",
+      "The real name is `index.html.txt`, because Windows is hiding file extensions",
+      "The file name must be all capitals before Windows treats it as an HTML page"
+    ],
+    "answer": 2,
+    "explanation": "Đuôi file quyết định file được mở bằng gì. Windows mặc định ẩn đuôi, nên `index.html.txt` trông như `index.html`. Bật *File name extensions* trong File Explorer rồi đổi tên file.",
+    "explanationEn": "The extension decides what opens a file. Windows hides extensions by default, so `index.html.txt` looks like `index.html`. Switch on *File name extensions* in File Explorer and rename the file.",
+    "optionExplanations": [
+      "Sai: file đã nằm trên ổ đĩa (bạn bấm đúp được); vấn đề nằm ở phần đuôi.",
+      "Sai: trình duyệt mở file trong máy bình thường, với địa chỉ bắt đầu bằng `file:///`.",
+      "Đúng: Notepad thêm `.txt`, và Windows mặc định ẩn đuôi file nên bạn không thấy.",
+      "Sai: chữ hoa hay thường không quyết định loại file; phần đuôi mới quyết định."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the file is on disk (you can double-click it); the problem is its extension.",
+      "Wrong: browsers open local files fine, at an address starting with `file:///`.",
+      "Correct: Notepad added `.txt`, and Windows hides extensions by default, so you cannot see it.",
+      "Wrong: capital letters do not decide the file type; the extension does."
+    ]
+  },
+  {
+    "id": "ide-q11",
+    "question": "Trong một file `index.html` còn trống, bạn gõ `!` rồi nhấn Tab. Chuyện gì xảy ra?",
+    "questionEn": "In an empty `index.html` file you type `!` and press Tab. What happens?",
+    "options": [
+      "VS Code lưu file lại và mở trang đó trong trình duyệt mặc định của bạn",
+      "Emmet bung nó thành bộ khung (boilerplate) hoàn chỉnh của một trang HTML",
+      "VS Code đánh dấu dòng đó là comment để trình duyệt bỏ qua khi hiển thị",
+      "Panel Problems mở ra và liệt kê các lỗi đang có trong file HTML đó"
+    ],
+    "optionsEn": [
+      "VS Code saves the file and opens the page in your default browser",
+      "Emmet expands it into the complete skeleton (boilerplate) of an HTML page",
+      "VS Code marks that line as a comment so the browser skips it when rendering",
+      "The Problems panel opens and lists the errors currently in that HTML file"
+    ],
+    "answer": 1,
+    "explanation": "Emmet là tính năng có sẵn giúp biến từ viết tắt ngắn thành HTML. `!` rồi Tab sinh ra boilerplate: `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`…",
+    "explanationEn": "Emmet is a built-in feature that turns short abbreviations into HTML. `!` then Tab generates the boilerplate: `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`…",
+    "optionExplanations": [
+      "Sai: lưu là `Ctrl + S`, còn mở trình duyệt là việc bạn làm riêng.",
+      "Đúng: Emmet biến từ viết tắt `!` thành phần code khởi đầu chuẩn mà trang nào cũng cần.",
+      "Sai: comment là `Ctrl + /`; dấu `!` cộng Tab là một từ viết tắt Emmet.",
+      "Sai: panel Problems mở bằng `Ctrl + Shift + M`, không liên quan tới dấu `!`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: saving is `Ctrl + S`, and opening the browser is a separate step.",
+      "Correct: Emmet turns the abbreviation `!` into the standard starting code every page needs.",
+      "Wrong: commenting is `Ctrl + /`; `!` plus Tab is an Emmet abbreviation.",
+      "Wrong: the Problems panel opens with `Ctrl + Shift + M`; it has nothing to do with `!`."
+    ]
+  },
+  {
+    "id": "ide-q12",
+    "question": "Extension Live Server làm gì cho bạn?",
+    "questionEn": "What does the Live Server extension do for you?",
+    "options": [
+      "Đưa trang web của bạn lên internet để bất kỳ ai có đường link cũng truy cập được",
+      "Tự động lưu file sau mỗi lần bạn ngừng gõ để bạn không bao giờ quên lưu nữa",
+      "Kiểm tra code HTML của bạn và gạch chân mọi thẻ viết sai trước khi mở trang",
+      "Chạy một web server nhỏ trên máy bạn và bảo trình duyệt tải lại trang mỗi khi bạn lưu file"
+    ],
+    "optionsEn": [
+      "It publishes your web page to the internet so that anyone with the link can visit it",
+      "It saves the file automatically each time you stop typing so you never forget to save",
+      "It checks your HTML code and underlines every incorrect tag before opening the page",
+      "It runs a small web server on your computer and tells the browser to reload the page on every save"
+    ],
+    "answer": 3,
+    "explanation": "Live Server chạy một web server tí hon trên máy bạn và theo dõi thư mục dự án. Mỗi lần bạn lưu, nó bảo trình duyệt tải lại trang (auto-reload), nên bạn không cần nhấn F5.",
+    "explanationEn": "Live Server runs a tiny web server on your computer and watches the project folder. Every time you save, it tells the browser to reload the page (auto-reload), so you do not need to press F5.",
+    "optionExplanations": [
+      "Sai: server chỉ chạy trên máy của bạn; không có gì được đưa lên internet.",
+      "Sai: đó là Auto Save của VS Code; Live Server chỉ phản ứng sau khi file được lưu.",
+      "Sai: Live Server không kiểm tra code; nó chỉ phục vụ và tải lại trang.",
+      "Đúng: đó là auto-reload; địa chỉ có dạng `http://127.0.0.1:5500/index.html`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the server runs only on your own computer; nothing is published to the internet.",
+      "Wrong: that is VS Code's Auto Save; Live Server only reacts after a file is saved.",
+      "Wrong: Live Server does not check code; it only serves and reloads the page.",
+      "Correct: that is auto-reload; the address looks like `http://127.0.0.1:5500/index.html`."
+    ]
+  },
+  {
+    "id": "ide-q13",
+    "question": "Trong một file CSS, dòng `colr: red;` bị gạch chân lượn sóng màu vàng. Điều đó nghĩa là gì và bạn xem chi tiết bằng cách nào?",
+    "questionEn": "In a CSS file the line `colr: red;` gets a yellow wavy underline. What does it mean, and how do you see the details?",
+    "options": [
+      "Đó là thay đổi chưa lưu; nhấn `Ctrl + S` thì đường gạch chân sẽ tự biến mất",
+      "Đó là gợi ý của IntelliSense; nhấn Tab để VS Code chấp nhận và giữ nguyên từ này",
+      "Đó là kết quả tìm kiếm; nhấn Esc để đóng ô tìm và bỏ phần được đánh dấu",
+      "Đó là một cảnh báo; rê chuột lên nó hoặc mở panel Problems để đọc lời giải thích"
+    ],
+    "optionsEn": [
+      "It is an unsaved change; press `Ctrl + S` and the underline goes away by itself",
+      "It is an IntelliSense suggestion; press Tab so VS Code accepts and keeps this word",
+      "It is a search match; press Esc to close the find box and remove the marking",
+      "It is a warning; hover over it or open the Problems panel to read the explanation"
+    ],
+    "answer": 3,
+    "explanation": "Squiggle đánh dấu một vấn đề: đỏ là lỗi, vàng là cảnh báo. Rê chuột để đọc giải thích; panel Problems (`Ctrl + Shift + M`) liệt kê mọi vấn đề của dự án.",
+    "explanationEn": "A squiggle marks a problem: red for an error, yellow for a warning. Hover to read the explanation; the Problems panel (`Ctrl + Shift + M`) lists every problem in the project.",
+    "optionExplanations": [
+      "Sai: thay đổi chưa lưu hiện bằng chấm tròn trên tab, không phải bằng gạch chân.",
+      "Sai: IntelliSense hiện thành danh sách gợi ý khi gõ, không phải đường lượn sóng.",
+      "Sai: kết quả tìm kiếm được tô nền, không gạch chân lượn sóng.",
+      "Đúng: squiggle vàng là cảnh báo, đỏ là lỗi; rê chuột hoặc panel Problems cho biết chi tiết."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: unsaved changes show as a dot on the tab, not as an underline.",
+      "Wrong: IntelliSense appears as a suggestion list while typing, not as a wavy line.",
+      "Wrong: search matches get a background highlight, not a wavy underline.",
+      "Correct: a yellow squiggle is a warning and red is an error; hovering or the Problems panel gives details."
+    ]
+  },
+  {
+    "id": "ide-q14",
+    "question": "Lệnh Format Document làm gì với file của bạn?",
+    "questionEn": "What does the Format Document command do to your file?",
+    "options": [
+      "Sửa các lỗi chính tả trong phần chữ hiển thị trên trang web",
+      "Sửa lại thụt lề và khoảng cách mà không thay đổi việc code làm",
+      "Chuyển file sang một định dạng khác, ví dụ từ HTML sang Word",
+      "Xoá những dòng code mà trình duyệt không bao giờ dùng tới"
+    ],
+    "optionsEn": [
+      "It corrects the spelling mistakes in the text shown on the web page",
+      "It fixes indentation and spacing without changing what the code does",
+      "It converts the file into another format, for example HTML to Word",
+      "It deletes the lines of code that the browser never actually uses"
+    ],
+    "answer": 1,
+    "explanation": "Formatting là sửa thụt lề và khoảng cách mà không đổi việc code làm. Chạy bằng chuột phải → Format Document hoặc `Shift + Alt + F` (macOS: `Shift + Option + F`); extension Prettier giúp cả đội dùng một phong cách.",
+    "explanationEn": "Formatting fixes indentation and spacing without changing what the code does. Run it via right-click → Format Document or `Shift + Alt + F` (macOS: `Shift + Option + F`); the Prettier extension keeps a whole team in one style.",
+    "optionExplanations": [
+      "Sai: Format Document không kiểm tra chính tả nội dung.",
+      "Đúng: formatting chỉ làm code gọn gàng, dễ đọc; hành vi của code giữ nguyên.",
+      "Sai: file vẫn là văn bản thuần cùng loại; chỉ cách trình bày thay đổi.",
+      "Sai: Format Document không xoá code nào cả."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: Format Document does not spell-check your content.",
+      "Correct: formatting only makes code tidy and readable; its behaviour stays the same.",
+      "Wrong: the file stays plain text of the same type; only the layout changes.",
+      "Wrong: Format Document removes no code at all."
+    ]
+  },
+  {
+    "id": "ide-q15",
+    "question": "Bạn muốn đổi theme màu nhưng quên phím tắt và không tìm thấy menu. Cách nhanh nhất là gì?",
+    "questionEn": "You want to change the colour theme but forgot the shortcut and cannot find the menu. What is the quickest way?",
+    "options": [
+      "Mở Quick Open bằng `Ctrl + P` (macOS: `Cmd + P`) rồi gõ tên file `theme.html`",
+      "Mở tìm kiếm bằng `Ctrl + Shift + F` (macOS: `Cmd + Shift + F`) rồi gõ `theme`",
+      "Mở Command Palette bằng `Ctrl + Shift + P` (macOS: `Cmd + Shift + P`) rồi gõ `theme`",
+      "Mở terminal bằng ``Ctrl + ` `` rồi gõ lệnh `code .` để VS Code tải lại giao diện"
+    ],
+    "optionsEn": [
+      "Open Quick Open with `Ctrl + P` (macOS: `Cmd + P`) and type the file name `theme.html`",
+      "Open search with `Ctrl + Shift + F` (macOS: `Cmd + Shift + F`) and type `theme`",
+      "Open the Command Palette with `Ctrl + Shift + P` (macOS: `Cmd + Shift + P`) and type `theme`",
+      "Open the terminal with ``Ctrl + ` `` and run `code .` so VS Code reloads its interface"
+    ],
+    "answer": 2,
+    "explanation": "Command Palette (`Ctrl + Shift + P` / `Cmd + Shift + P`) là ô tìm kiếm cho mọi hành động của VS Code. Gõ vài chữ như `theme` hay `format` là tìm thấy lệnh cần dùng.",
+    "explanationEn": "The Command Palette (`Ctrl + Shift + P` / `Cmd + Shift + P`) is a search box for every action in VS Code. Type a few letters such as `theme` or `format` to find the command you need.",
+    "optionExplanations": [
+      "Sai: Quick Open dùng để mở file theo tên, không phải để chạy lệnh.",
+      "Sai: phím tắt này tìm chữ trong các file của dự án, không tìm lệnh.",
+      "Đúng: Command Palette là ô tìm kiếm cho mọi lệnh của VS Code.",
+      "Sai: `code .` mở thư mục hiện tại trong VS Code, không đổi theme."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: Quick Open opens files by name; it does not run commands.",
+      "Wrong: that shortcut searches text inside the project's files, not commands.",
+      "Correct: the Command Palette is a search box for every VS Code command.",
+      "Wrong: `code .` opens the current folder in VS Code; it does not change the theme."
+    ]
+  },
+  {
+    "id": "ide-q16",
+    "question": "Một BA cần biết thông báo \"Payment failed\" nằm ở file nào trong một dự án có hàng trăm file. Cách nhanh nhất trong VS Code là gì?",
+    "questionEn": "A BA needs to know which file contains the message \"Payment failed\" in a project with hundreds of files. What is the fastest way in VS Code?",
+    "options": [
+      "Mở thư mục dự án rồi tìm trong tất cả file bằng `Ctrl + Shift + F` (macOS: `Cmd + Shift + F`)",
+      "Mở từng file một rồi tìm trong file đó bằng `Ctrl + F` (macOS: `Cmd + F`) cho tới khi thấy",
+      "Mở Quick Open bằng `Ctrl + P` (macOS: `Cmd + P`) rồi gõ nguyên văn thông báo lỗi đó",
+      "Mở panel Problems bằng `Ctrl + Shift + M` (macOS: `Cmd + Shift + M`) và đọc danh sách"
+    ],
+    "optionsEn": [
+      "Open the project folder and search all files with `Ctrl + Shift + F` (macOS: `Cmd + Shift + F`)",
+      "Open each file in turn and search inside it with `Ctrl + F` (macOS: `Cmd + F`) until it turns up",
+      "Open Quick Open with `Ctrl + P` (macOS: `Cmd + P`) and type the exact error message",
+      "Open the Problems panel with `Ctrl + Shift + M` (macOS: `Cmd + Shift + M`) and read the list"
+    ],
+    "answer": 0,
+    "explanation": "View Search (`Ctrl + Shift + F` / `Cmd + Shift + F`) tìm chữ trong tất cả file của thư mục đang mở. Biết file nào chứa thông báo giúp câu hỏi gửi developer chính xác hơn nhiều.",
+    "explanationEn": "The Search view (`Ctrl + Shift + F` / `Cmd + Shift + F`) finds text in all files of the open folder. Knowing which file holds the message makes your question to the developer far more precise.",
+    "optionExplanations": [
+      "Đúng: tìm kiếm trên toàn thư mục liệt kê mọi file chứa đúng đoạn chữ đó.",
+      "Sai: `Ctrl + F` chỉ tìm trong file hiện tại; với hàng trăm file thì quá chậm.",
+      "Sai: Quick Open tìm theo tên file, không tìm theo nội dung bên trong file.",
+      "Sai: panel Problems liệt kê lỗi trong code, không liệt kê các đoạn chữ hiển thị cho người dùng."
+    ],
+    "optionExplanationsEn": [
+      "Correct: searching across the folder lists every file that contains that exact text.",
+      "Wrong: `Ctrl + F` only searches the current file; that is far too slow for hundreds of files.",
+      "Wrong: Quick Open matches file names, not the text inside files.",
+      "Wrong: the Problems panel lists errors in the code, not texts that are shown to users."
+    ]
+  },
+  {
+    "id": "ide-q17",
+    "question": "Bạn tìm một extension nổi tiếng và thấy hai kết quả có tên, icon gần giống hệt nhau. Dấu hiệu nào cảnh báo rõ nhất rằng một cái là bản nhái?",
+    "questionEn": "You search for a famous extension and find two results with almost the same name and icon. Which sign warns most clearly that one is a copycat?",
+    "options": [
+      "Trang của nó được viết bằng tiếng Anh chứ không phải bằng tiếng Việt",
+      "Publisher lạ, không có dấu xác minh, và chỉ có vài trăm lượt cài",
+      "Nó vừa được cập nhật trong tháng này với một bản sửa lỗi nhỏ",
+      "Nó miễn phí và không yêu cầu bạn phải tạo tài khoản để cài"
+    ],
+    "optionsEn": [
+      "Its page is written in English rather than in the Vietnamese language",
+      "An unfamiliar publisher with no verified mark and only a few hundred installs",
+      "It was updated this very month with a small bug-fix release",
+      "It is free and does not require you to create an account to install"
+    ],
+    "answer": 1,
+    "explanation": "Extension là chương trình chạy trên máy bạn và ai cũng phát hành được. Trước khi cài hãy xem publisher (có dấu xác minh), số lượt cài, đánh giá và lần cập nhật cuối.",
+    "explanationEn": "An extension is a program that runs on your computer, and anyone can publish one. Before installing, check the publisher (verified mark), the installs, the ratings and the last update.",
+    "optionExplanations": [
+      "Sai: hầu hết extension đáng tin đều có trang tiếng Anh.",
+      "Đúng: publisher và số lượt cài là hai thứ nên so trước tiên; bản nhái hiếm khi có cả hai.",
+      "Sai: được cập nhật gần đây là dấu hiệu tốt, không phải cảnh báo.",
+      "Sai: phần lớn extension đều miễn phí và không cần tài khoản."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: almost all trustworthy extensions have English pages.",
+      "Correct: publisher and install count are the first things to compare; a copycat rarely has both.",
+      "Wrong: a recent update is a good sign, not a warning.",
+      "Wrong: most extensions are free and need no account."
+    ]
+  },
+  {
+    "id": "ide-q18",
+    "question": "Vì sao không nên cài hàng chục extension ngay ngày đầu?",
+    "questionEn": "Why should you not install dozens of extensions on day one?",
+    "options": [
+      "Mỗi cái làm VS Code khởi động chậm hơn, và các extension làm cùng một việc có thể xung đột",
+      "VS Code giới hạn tối đa mười extension cho mỗi tài khoản người dùng miễn phí",
+      "Extension đã cài thì không gỡ ra được nữa nếu không cài lại toàn bộ VS Code",
+      "Mỗi extension tự động thêm một file mới vào thư mục dự án mà bạn đang mở"
+    ],
+    "optionsEn": [
+      "Each one slows VS Code's startup, and extensions that do the same job can conflict",
+      "VS Code allows at most ten extensions for each free user account",
+      "An installed extension can never be removed without reinstalling VS Code entirely",
+      "Every extension automatically adds a new file to the project folder you have open"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi extension làm VS Code khởi động chậm hơn một chút, và hai extension làm cùng một việc có thể \"đánh nhau\". Bắt đầu với Live Server và Prettier, thêm cái khác khi có nhu cầu thật.",
+    "explanationEn": "Each extension makes VS Code start a little slower, and two that do the same job can fight each other. Start with Live Server and Prettier, and add others when a real need appears.",
+    "optionExplanations": [
+      "Đúng: chỉ nên cài khi thật sự cần và gỡ những gì không dùng.",
+      "Sai: không có giới hạn số lượng như vậy, và VS Code cũng không cần tài khoản.",
+      "Sai: trang của mỗi extension có sẵn nút Disable và Uninstall.",
+      "Sai: extension được cài vào VS Code, không phải vào thư mục dự án."
+    ],
+    "optionExplanationsEn": [
+      "Correct: install one only when you really need it, and uninstall what you do not use.",
+      "Wrong: there is no such limit, and VS Code needs no account.",
+      "Wrong: every extension's page offers Disable and Uninstall.",
+      "Wrong: extensions are installed into VS Code, not into your project folder."
+    ]
+  },
+  {
+    "id": "ide-q19",
+    "question": "Bạn mở integrated terminal bằng ``Ctrl + ` `` trên Windows khi đang mở thư mục `my-first-site`. Terminal bắt đầu ở đâu và chạy shell nào theo mặc định?",
+    "questionEn": "You open the integrated terminal with ``Ctrl + ` `` on Windows while the folder `my-first-site` is open. Where does the terminal start, and which shell does it run by default?",
+    "options": [
+      "Trong thư mục cài đặt của VS Code, và chạy zsh",
+      "Ở thư mục gốc của ổ `C:`, và chạy Git Bash",
+      "Trong thư mục Downloads, và chạy Command Prompt",
+      "Ngay trong thư mục `my-first-site`, và chạy PowerShell"
+    ],
+    "optionsEn": [
+      "Inside VS Code's own install folder, running zsh",
+      "At the root of the `C:` drive, running Git Bash",
+      "Inside the Downloads folder, running Command Prompt",
+      "Inside the `my-first-site` folder, running PowerShell"
+    ],
+    "answer": 3,
+    "explanation": "Integrated terminal mở ngay bên trong thư mục dự án nên bạn không cần di chuyển. Nó chạy một shell: PowerShell trên Windows, zsh trên macOS. `pwd` in ra thư mục hiện tại để bạn kiểm tra.",
+    "explanationEn": "The integrated terminal opens inside the project folder, so there is nothing to navigate. It runs a shell: PowerShell on Windows, zsh on macOS. `pwd` prints the current folder so you can check.",
+    "optionExplanations": [
+      "Sai: zsh là shell mặc định trên macOS, và terminal không mở ở thư mục cài đặt.",
+      "Sai: Git Bash chỉ có khi bạn cài Git và tự chọn nó; nơi bắt đầu là thư mục dự án.",
+      "Sai: mặc định là PowerShell, và terminal mở ngay trong thư mục đang mở.",
+      "Đúng: terminal mở trong thư mục dự án; shell mặc định là PowerShell trên Windows, zsh trên macOS."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: zsh is the macOS default, and the terminal does not open in the install folder.",
+      "Wrong: Git Bash exists only if you install Git and choose it; the start is the project folder.",
+      "Wrong: the default is PowerShell, and the terminal opens in the folder you have open.",
+      "Correct: the terminal opens in the project folder; the default shell is PowerShell on Windows and zsh on macOS."
+    ]
+  },
+  {
+    "id": "ide-q20",
+    "question": "`settings.json` trong VS Code là gì?",
+    "questionEn": "What is `settings.json` in VS Code?",
+    "options": [
+      "File chứa danh sách các extension đã cài, được Marketplace tải về mỗi lần VS Code mở",
+      "File mà trang web nào cũng phải có bên cạnh `index.html` thì trình duyệt mới hiển thị",
+      "File văn bản thuần nơi VS Code lưu thiết lập của bạn; Settings UI hiển thị cùng những thiết lập đó",
+      "File ghi lại lịch sử thay đổi của dự án để view Source Control có thể hiển thị"
+    ],
+    "optionsEn": [
+      "A file listing your installed extensions, downloaded from the Marketplace each time VS Code starts",
+      "A file every website must have next to `index.html` before the browser will display it",
+      "The plain text file where VS Code stores your settings; the Settings UI shows the same settings",
+      "A file recording the project's change history so the Source Control view can display it"
+    ],
+    "answer": 2,
+    "explanation": "Mở Settings bằng `Ctrl + ,` (macOS: `Cmd + ,`). Settings UI là trang có checkbox và dropdown; `settings.json` là file văn bản thuần lưu chính những lựa chọn đó, tiện để sửa trực tiếp và chia sẻ.",
+    "explanationEn": "Open Settings with `Ctrl + ,` (macOS: `Cmd + ,`). The Settings UI is a page with checkboxes and dropdowns; `settings.json` is the plain text file that stores those same choices, handy to edit directly and to share.",
+    "optionExplanations": [
+      "Sai: nó lưu các thiết lập như cỡ chữ hay Auto Save, và nằm trên máy của bạn.",
+      "Sai: trình duyệt không cần file này; nó chỉ dành cho VS Code.",
+      "Đúng: Settings UI và `settings.json` là hai cách xem cùng một bộ thiết lập.",
+      "Sai: lịch sử thay đổi là việc của Git, không phải của `settings.json`."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: it stores settings such as font size or Auto Save, and it lives on your computer.",
+      "Wrong: the browser does not need this file; it is only for VS Code.",
+      "Correct: the Settings UI and `settings.json` are two views of the same settings.",
+      "Wrong: change history is Git's job, not that of `settings.json`."
+    ]
+  },
+  {
+    "id": "ide-q21",
+    "question": "Bạn sửa tiêu đề trong `index.html`, quay sang trình duyệt nhấn F5 nhưng vẫn thấy chữ cũ. Trên tab của file trong VS Code có một chấm tròn. Nguyên nhân dễ gặp nhất là gì?",
+    "questionEn": "You change the heading in `index.html`, switch to the browser and press F5, but the old text is still there. The file's tab in VS Code shows a round dot. What is the most likely cause?",
+    "options": [
+      "Trình duyệt cần được cài lại vì nó không còn hiểu file HTML mới",
+      "VS Code đang ở Restricted Mode nên mọi thay đổi đều bị chặn lại",
+      "File chưa được lưu, nên trình duyệt vẫn đọc bản cũ trên ổ đĩa",
+      "Thẻ tiêu đề chỉ được trình duyệt đọc một lần khi trang mở lần đầu"
+    ],
+    "optionsEn": [
+      "The browser must be reinstalled because it no longer understands new HTML",
+      "VS Code is in Restricted Mode, so every change you make is being blocked",
+      "The file is not saved, so the browser still reads the old version on disk",
+      "The heading tag is read by the browser only once, when the page first opens"
+    ],
+    "answer": 2,
+    "explanation": "Sửa, lưu, tải lại: thiếu bước lưu thì trình duyệt vẫn thấy bản cũ. Hãy nhìn chấm tròn trên tab, nhấn `Ctrl + S`, hoặc bật Auto Save và dùng Live Server.",
+    "explanationEn": "Edit, save, refresh: without the save the browser still sees the old version. Look at the dot on the tab, press `Ctrl + S`, or switch on Auto Save and use Live Server.",
+    "optionExplanations": [
+      "Sai: trình duyệt vẫn hoạt động đúng; nó chỉ chưa nhận được nội dung mới.",
+      "Sai: ở Restricted Mode bạn vẫn sửa và lưu file bình thường.",
+      "Đúng: chấm tròn nghĩa là có thay đổi chưa lưu; nhấn `Ctrl + S` rồi tải lại.",
+      "Sai: mỗi lần tải lại, trình duyệt đọc lại toàn bộ file."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: the browser works fine; it simply has not received the new content.",
+      "Wrong: in Restricted Mode you can still edit and save files normally.",
+      "Correct: the dot means unsaved changes; press `Ctrl + S`, then refresh.",
+      "Wrong: on every refresh the browser reads the whole file again."
+    ]
+  },
+  {
+    "id": "ide-q22",
+    "question": "Ngay sau khi cài VS Code trên Windows, bạn gõ `code .` trong một terminal đã mở sẵn từ trước và nhận thông báo rằng `code` is not recognized. Nên thử gì trước tiên?",
+    "questionEn": "Right after installing VS Code on Windows, you type `code .` in a terminal that was already open and are told that `code` is not recognized. What should you try first?",
+    "options": [
+      "Đóng và mở lại terminal; nếu vẫn lỗi thì cài lại và tick \"Add to PATH\"",
+      "Đổi tên thư mục dự án thành `code` để terminal tìm thấy đúng lệnh này",
+      "Cài extension Live Server, vì chính nó cung cấp lệnh `code` cho terminal",
+      "Trả lời Yes ở câu hỏi Workspace Trust để VS Code mở khoá lệnh `code`"
+    ],
+    "optionsEn": [
+      "Close and reopen the terminal; if it still fails, reinstall with \"Add to PATH\" ticked",
+      "Rename the project folder to `code` so that the terminal can find the command",
+      "Install the Live Server extension, because it is what provides the `code` command",
+      "Answer Yes to the Workspace Trust prompt so that VS Code unlocks the `code` command"
+    ],
+    "answer": 0,
+    "explanation": "Thông báo này nghĩa là hệ điều hành không tìm thấy chương trình `code`: VS Code chưa nằm trong PATH, hoặc terminal được mở trước khi cài. Mở lại terminal; trên macOS chạy **Shell Command: Install 'code' command in PATH**.",
+    "explanationEn": "The message means the operating system cannot find the `code` program: VS Code is not on the PATH, or the terminal was opened before installing. Reopen the terminal; on macOS run **Shell Command: Install 'code' command in PATH**.",
+    "optionExplanations": [
+      "Đúng: terminal mở trước khi cài chưa thấy chương trình mới; PATH phải chứa VS Code.",
+      "Sai: `code` là tên chương trình, không phải tên thư mục dự án.",
+      "Sai: lệnh `code` đi kèm VS Code, không đến từ extension nào.",
+      "Sai: Workspace Trust áp dụng cho thư mục mở trong VS Code, không liên quan tới PATH."
+    ],
+    "optionExplanationsEn": [
+      "Correct: a terminal opened before the install does not see the new program; PATH must include VS Code.",
+      "Wrong: `code` is the program's name, not the name of a project folder.",
+      "Wrong: the `code` command comes with VS Code itself, not from any extension.",
+      "Wrong: Workspace Trust applies to folders opened in VS Code; it has nothing to do with PATH."
+    ]
+  },
+  {
+    "id": "ide-q23",
+    "question": "File của bạn không có màu, không có gợi ý, và góc phải Status Bar ghi \"Plain Text\". Cách sửa là gì?",
+    "questionEn": "Your file has no colours and no suggestions, and the right end of the Status Bar says \"Plain Text\". What is the fix?",
+    "options": [
+      "Gỡ VS Code rồi cài lại từ trang chính thức để lấy lại các theme màu mặc định",
+      "Bấm vào tên ngôn ngữ trên Status Bar rồi chọn HTML, và kiểm tra lại đuôi file",
+      "Tăng `Font Size` trong Settings lên 16 để các màu của code hiện ra rõ hơn",
+      "Mở terminal và chạy lệnh `ls` để VS Code quét lại các file trong thư mục"
+    ],
+    "optionsEn": [
+      "Uninstall VS Code and reinstall it from the official site to get the default themes back",
+      "Click the language name in the Status Bar and choose HTML, and check the file extension",
+      "Raise `Font Size` in Settings to 16 so the colours of the code become visible",
+      "Open the terminal and run `ls` so that VS Code rescans the files in the folder"
+    ],
+    "answer": 1,
+    "explanation": "Tô màu và gợi ý phụ thuộc vào language mode. Nếu Status Bar ghi Plain Text cho một file HTML, hãy bấm vào tên ngôn ngữ để chọn HTML và kiểm tra xem file có thật sự mang đuôi `.html` không.",
+    "explanationEn": "Colours and suggestions depend on the language mode. If the Status Bar says Plain Text for an HTML file, click the language name to choose HTML and check that the file really ends in `.html`.",
+    "optionExplanations": [
+      "Sai: không cần cài lại; theme vẫn còn, chỉ là file đang bị coi là văn bản thường.",
+      "Đúng: language mode bị sai; VS Code thường tự chọn đúng dựa vào đuôi file.",
+      "Sai: cỡ chữ không ảnh hưởng tới việc tô màu cú pháp.",
+      "Sai: `ls` chỉ liệt kê file; nó không đổi language mode."
+    ],
+    "optionExplanationsEn": [
+      "Wrong: no reinstall is needed; the theme is fine, the file is just treated as plain notes.",
+      "Correct: the language mode is wrong; VS Code normally picks it from the file extension.",
+      "Wrong: font size has no effect on syntax highlighting.",
+      "Wrong: `ls` only lists files; it does not change the language mode."
+    ]
+  }
+]

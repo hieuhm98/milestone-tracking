@@ -112,7 +112,7 @@ const vi: Dict = {
   "ielts.practice.reveal": "Hiện bài Band 9",
   "ielts.practice.hide": "Ẩn bài Band 9",
   "ielts.phrase.tooltipHint": "Chạm vào cụm từ được tô màu để xem nghĩa",
-  "ielts.search.placeholder": "Tìm câu hỏi hoặc cụm từ",
+  "ielts.search.placeholder": "Tìm chủ đề hoặc câu hỏi",
   "ielts.search.empty": "Không tìm thấy",
   "ielts.entry": "IELTS Speaking",
   "ielts.card.desc": "561 câu hỏi kèm bài mẫu, phân tích và từ vựng.",
@@ -122,6 +122,8 @@ const vi: Dict = {
   "grammar.nav.prevUnit": "← Bài trước",
   "grammar.nav.nextUnit": "Bài sau →",
   "grammar.nav.backToPath": "↑ Về lộ trình",
+  "grammar.search.placeholder": "Tìm bài hoặc điểm ngữ pháp",
+  "grammar.search.empty": "Không tìm thấy",
   "grammar.home.subtitle": "Ngữ pháp cần cho bài viết rõ ràng, kèm những lỗi người Việt hay mắc nhất và cách sửa.",
   "grammar.home.units": "bài",
   "grammar.home.parts": "phần",
@@ -380,6 +382,7 @@ const vi: Dict = {
   "blitz.pausedOnMiss": "Khi trả lời sai, đồng hồ dừng lại để bạn đọc lời giải — học không bị tính giờ.",
 
   "common.loading": "Đang tải...",
+  "common.clearSearch": "Xoá tìm kiếm",
 
   // Accounts
   "account.promptTitle": "Lưu tiến độ trên mọi thiết bị",
@@ -548,7 +551,7 @@ const en: Dict = {
   "ielts.practice.reveal": "Show Band 9 answer",
   "ielts.practice.hide": "Hide Band 9 answer",
   "ielts.phrase.tooltipHint": "Tap a highlighted phrase to see its meaning",
-  "ielts.search.placeholder": "Search questions or phrases",
+  "ielts.search.placeholder": "Search topics or questions",
   "ielts.search.empty": "No matches",
   "ielts.entry": "IELTS Speaking",
   "ielts.card.desc": "561 questions with model answers, analysis and vocabulary.",
@@ -558,6 +561,8 @@ const en: Dict = {
   "grammar.nav.prevUnit": "← Previous unit",
   "grammar.nav.nextUnit": "Next unit →",
   "grammar.nav.backToPath": "↑ Back to the path",
+  "grammar.search.placeholder": "Search units or grammar points",
+  "grammar.search.empty": "No matches",
   "grammar.home.subtitle": "Grammar you need to write clearly, with the mistakes Vietnamese writers make most, and how to fix them.",
   "grammar.home.units": "units",
   "grammar.home.parts": "parts",
@@ -816,6 +821,7 @@ const en: Dict = {
   "blitz.pausedOnMiss": "On a miss the clock stops while you read the explanation — learning is never on the clock.",
 
   "common.loading": "Loading...",
+  "common.clearSearch": "Clear search",
 
   // Accounts
   "account.promptTitle": "Keep your progress everywhere",

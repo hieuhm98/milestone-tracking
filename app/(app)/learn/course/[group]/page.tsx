@@ -9,7 +9,9 @@ import { useProgress } from "@/context/progress";
 import { summarizeCourse } from "@/lib/courses";
 import { getGroup, GROUP_ACCENT, GROUP_COVER } from "@/lib/groups";
 import { lessonKey, type LessonTopic } from "@/lib/lessons";
+import { matchesSearch, normalizeSearch } from "@/lib/search";
 import { cn } from "@/lib/utils";
+import SearchField from "@/components/SearchField";
 
 export default function CoursePage() {
   const { group: groupId } = useParams<{ group: string }>();
@@ -18,6 +20,7 @@ export default function CoursePage() {
   const [topics, setTopics] = useState<LessonTopic[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState<Set<string>>(new Set());
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetch("/api/lessons")
@@ -31,6 +34,26 @@ export default function CoursePage() {
   const course = useMemo(
     () => (group ? summarizeCourse(group, topics, progress) : null),
     [group, topics, progress]
+  );
+
+  // A topic stays in the list when its own title matches (all its lessons are
+  // kept) or when any of its lessons does (only those are kept). Both languages
+  // are searched whichever one is showing. Numbers are the positions in the full
+  // course, so a lesson is "3" whether or not the list is filtered.
+  const q = normalizeSearch(query);
+  const searching = q.length > 0;
+  const results = useMemo(
+    () =>
+      (course?.topics ?? [])
+        .map((topic, index) => {
+          const numbered = topic.lessons.map((lesson, i) => ({ lesson, number: i + 1 }));
+          const hits = numbered.filter(({ lesson }) => matchesSearch(q, lesson.title, lesson.titleEn));
+          const topicHit = matchesSearch(q, topic.title, topic.titleEn);
+
+          return { topic, number: index + 1, lessons: topicHit ? numbered : hits, lessonHit: hits.length > 0 };
+        })
+        .filter((entry) => entry.lessons.length > 0),
+    [course, q]
   );
 
   // Open the module the learner is working in, once the data has arrived.
@@ -69,6 +92,7 @@ export default function CoursePage() {
 
   const accent = GROUP_ACCENT[group.accent];
   const allOpen = open.size === course.topics.length;
+  const matchCount = results.reduce((sum, entry) => sum + entry.lessons.length, 0);
   const actionLabel =
     course.status === "completed"
       ? pick("Ôn lại từ đầu", "Review from the start")
@@ -146,18 +170,43 @@ export default function CoursePage() {
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-lg font-semibold">{pick("Nội dung khoá học", "Course content")}</h2>
-          <button
-            type="button"
-            onClick={() => setOpen(allOpen ? new Set() : new Set(course.topics.map((tp) => tp.slug)))}
-            className="px-3 py-2 sm:py-1.5 rounded-full text-xs font-medium border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-          >
-            {allOpen ? pick("Thu gọn tất cả", "Collapse all") : pick("Mở tất cả", "Expand all")}
-          </button>
+          {searching ? (
+            <span className="text-xs text-zinc-500" aria-live="polite">
+              {matchCount} {pick("bài khớp", matchCount === 1 ? "lesson found" : "lessons found")}
+            </span>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setOpen(allOpen ? new Set() : new Set(course.topics.map((tp) => tp.slug)))}
+              className="px-3 py-2 sm:py-1.5 rounded-full text-xs font-medium border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            >
+              {allOpen ? pick("Thu gọn tất cả", "Collapse all") : pick("Mở tất cả", "Expand all")}
+            </button>
+          )}
         </div>
 
-        <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden divide-y divide-zinc-200 dark:divide-zinc-800">
-          {course.topics.map((topic, index) => {
-            const isOpen = open.has(topic.slug);
+        <SearchField
+          value={query}
+          onChange={setQuery}
+          placeholder={pick("Tìm bài học hoặc chủ đề…", "Search lessons or topics…")}
+          clearLabel={pick("Xoá tìm kiếm", "Clear search")}
+        />
+
+        {results.length === 0 && (
+          <p className="rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 px-4 py-8 text-center text-sm text-zinc-500">
+            {pick("Không có bài học nào khớp với", "No lessons match")} “{query.trim()}”.
+          </p>
+        )}
+
+        <div
+          className={cn(
+            "rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden divide-y divide-zinc-200 dark:divide-zinc-800",
+            results.length === 0 && "hidden"
+          )}
+        >
+          {results.map(({ topic, number, lessons, lessonHit }) => {
+            // A search opens every topic it found a lesson in.
+            const isOpen = open.has(topic.slug) || (searching && lessonHit);
             const done = topic.lessons.filter((l) => progress.lessons[lessonKey(topic.slug, l.id)]?.completed).length;
             const finished = done === topic.lessons.length;
 
@@ -177,7 +226,7 @@ export default function CoursePage() {
                         : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
                     )}
                   >
-                    {finished ? "✓" : index + 1}
+                    {finished ? "✓" : number}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-sm font-medium truncate">{pick(topic.title, topic.titleEn)}</div>
@@ -196,7 +245,7 @@ export default function CoursePage() {
 
                 {isOpen && (
                   <ul className="bg-zinc-50 dark:bg-zinc-950/40 border-t border-zinc-200 dark:border-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800">
-                    {topic.lessons.map((lesson, i) => {
+                    {lessons.map(({ lesson, number: lessonNumber }) => {
                       const state = progress.lessons[lessonKey(topic.slug, lesson.id)];
                       const isDone = state?.completed ?? false;
                       const isNext =
@@ -219,7 +268,7 @@ export default function CoursePage() {
                                   : "border-zinc-300 dark:border-zinc-700 text-zinc-500"
                               )}
                             >
-                              {isDone ? "✓" : i + 1}
+                              {isDone ? "✓" : lessonNumber}
                             </span>
                             <span className="flex-1 min-w-0 truncate">{pick(lesson.title, lesson.titleEn)}</span>
                             {isNext && (

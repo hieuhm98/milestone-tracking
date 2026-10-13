@@ -19,6 +19,7 @@ import {
   type ReviewMode,
   type TopicMastery,
 } from "@/lib/review";
+import { normalizeSearch } from "@/lib/search";
 import { cn } from "@/lib/utils";
 
 export interface ReviewTopic {
@@ -101,15 +102,6 @@ const MASTERY_STYLE: Record<Mastery, string> = {
     "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800",
 };
 
-function normalizeText(s: string): string {
-  return s
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/Đ/g, "D")
-    .toLowerCase();
-}
-
 function matchesFilter(m: TopicMastery, filter: Filter): boolean {
   if (filter === "new") return m.level === "none";
 
@@ -177,7 +169,7 @@ export default function ReviewSetup({
     })).filter((tr) => tr.topics.length > 0);
   }, [topics]);
 
-  const q = normalizeText(query.trim());
+  const q = normalizeSearch(query);
   const narrowing = q !== "" || filter !== "all";
 
   // Topics that pass the search and the filter, per track.
@@ -194,7 +186,7 @@ export default function ReviewSetup({
 
           if (!q) return true;
 
-          return normalizeText(`${tp.title} ${tp.titleEn ?? ""} ${tp.slug}`).includes(q);
+          return normalizeSearch(`${tp.title} ${tp.titleEn ?? ""} ${tp.slug}`).includes(q);
         })
       );
     }

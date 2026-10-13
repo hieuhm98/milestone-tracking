@@ -3,10 +3,16 @@
 // The contents tree: the four Parts, their units, the Part reviews, the traps
 // page and the reference pages. Used twice — as the desktop sidebar and inside
 // the mobile drawer. The unit being read opens to show its blocks.
+//
+// The search box narrows the tree to the units whose title or grammar points
+// match, and to the reference pages whose title does.
 
+import { useState } from "react";
 import Link from "next/link";
 import { useLang } from "@/context/lang";
+import { matchesSearch, normalizeSearch } from "@/lib/search";
 import { cn } from "@/lib/utils";
+import SearchField from "@/components/SearchField";
 import type { PartId, Syllabus } from "@/lib/grammar/types";
 import { GRAMMAR_BASE, referenceHref, reviewHref, trapsHref, unitHref } from "./navigation";
 import { PART } from "./tokens";
@@ -37,19 +43,45 @@ export default function ContentsTree({
   onNavigate,
 }: Props) {
   const { t } = useLang();
-  const reference = syllabus.reference.filter((entry) => referenceSlugs.includes(entry.slug));
+  const [query, setQuery] = useState("");
+  const q = normalizeSearch(query);
+  const trapsTitle = t("grammar.traps.title");
+  const parts = syllabus.parts
+    .map((part) => ({
+      ...part,
+      units: part.units.filter((unit) => matchesSearch(q, String(unit.number), unit.title, unit.core, unit.extend)),
+    }))
+    .filter((part) => part.units.length > 0);
+  const reference = syllabus.reference.filter(
+    (entry) => referenceSlugs.includes(entry.slug) && matchesSearch(q, entry.title)
+  );
+  const showTraps = matchesSearch(q, trapsTitle);
+  const empty = parts.length === 0 && reference.length === 0 && !showTraps;
 
   return (
     <nav aria-label={t("grammar.nav.contents")} className="pb-6 text-sm">
-      <Link
-        href={GRAMMAR_BASE}
-        onClick={onNavigate}
-        className="block rounded-md px-2 py-1.5 font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
-      >
-        {t("grammar.nav.backToPath")}
-      </Link>
+      <div className="sticky top-0 z-10 bg-zinc-50 px-0.5 pb-2 pt-0.5 dark:bg-zinc-950">
+        <SearchField
+          value={query}
+          onChange={setQuery}
+          placeholder={t("grammar.search.placeholder")}
+          clearLabel={t("common.clearSearch")}
+        />
+      </div>
 
-      {syllabus.parts.map((part) => (
+      {!q && (
+        <Link
+          href={GRAMMAR_BASE}
+          onClick={onNavigate}
+          className="block rounded-md px-2 py-1.5 font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("grammar.nav.backToPath")}
+        </Link>
+      )}
+
+      {empty && <p className="px-2 py-4 text-zinc-500">{t("grammar.search.empty")}</p>}
+
+      {parts.map((part) => (
         <div key={part.id} className="mt-3">
           <p className={cn("px-2 text-xs font-bold uppercase tracking-wider", PART[part.id].text)}>
             Part {part.id} · {part.title}
@@ -100,7 +132,7 @@ export default function ContentsTree({
               );
             })}
 
-            {reviewParts.includes(part.id) && (
+            {!q && reviewParts.includes(part.id) && (
               <li>
                 <Link
                   href={reviewHref(part.id)}
@@ -115,14 +147,21 @@ export default function ContentsTree({
         </div>
       ))}
 
-      <div className="mt-4 border-t border-zinc-200 pt-2 dark:border-zinc-800">
-        <Link
-          href={trapsHref()}
-          onClick={onNavigate}
-          className="block rounded-md px-2 py-1.5 font-medium text-rose-700 hover:bg-rose-50 dark:text-rose-300 dark:hover:bg-rose-950/40"
-        >
-          {t("grammar.traps.title")}
-        </Link>
+      <div
+        className={cn(
+          "mt-4 border-t border-zinc-200 pt-2 dark:border-zinc-800",
+          !showTraps && reference.length === 0 && "hidden"
+        )}
+      >
+        {showTraps && (
+          <Link
+            href={trapsHref()}
+            onClick={onNavigate}
+            className="block rounded-md px-2 py-1.5 font-medium text-rose-700 hover:bg-rose-50 dark:text-rose-300 dark:hover:bg-rose-950/40"
+          >
+            {trapsTitle}
+          </Link>
+        )}
 
         {reference.length > 0 && (
           <>

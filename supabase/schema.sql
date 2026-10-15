@@ -150,3 +150,24 @@ create policy "staff read progress" on public.user_progress
   for select using (public.is_staff());
 
 revoke all on public.user_progress from anon;
+
+-- ------------------------------------------------------------------ api_sandboxes
+-- The /practice/api bookstore sandbox: one row per learner (owner is derived
+-- from their account by the server, never the raw user id). `day` is the
+-- Vietnam-time date the data belongs to — a row from an earlier day is read as
+-- the default dataset, and /api/cron/sandbox-reset deletes it at midnight.
+-- `version` is bumped on every save so two concurrent writes cannot clobber
+-- each other. Only the service role touches it, so RLS is on with no policies.
+
+create table if not exists public.api_sandboxes (
+  owner      text primary key,
+  day        date not null,
+  version    integer not null default 1,
+  data       jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists api_sandboxes_day_idx on public.api_sandboxes (day);
+
+alter table public.api_sandboxes enable row level security;
+revoke all on public.api_sandboxes from anon, authenticated;

@@ -118,7 +118,10 @@ export default function LessonPlayerPage() {
       const own = topicData!.questions;
       const ownById = new Map(own.map((q) => [q.id, q]));
 
-      const candidates = reviewCandidates(topics, progress, { excludeKey: key });
+      // Review stays inside the course: an IT Fundamentals lesson must never
+      // recall AWS questions just because AWS lessons were studied more recently.
+      const sameCourse = topic ? courseTopics(topics, topicGroup(topic)) : [];
+      const candidates = reviewCandidates(sameCourse, progress, { excludeKey: key });
       const otherSlugs = Array.from(new Set(candidates.map((c) => c.slug))).filter((s) => s !== slug);
 
       const fetched = await Promise.all(

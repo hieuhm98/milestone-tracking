@@ -88,6 +88,16 @@ const CARDS = [
     },
   },
   {
+    href: "/practice/api",
+    icon: "⇄",
+    accent: "text-violet-700 dark:text-violet-300",
+    title: { vi: "Luyện tập API", en: "API Practice" },
+    desc: {
+      vi: "Gọi thử API cửa hàng sách bằng Swagger: request/response, đăng nhập lấy Bearer token, đặt hàng, thanh toán. Sandbox riêng, tự làm mới mỗi ngày.",
+      en: "Call a bookstore API from Swagger: requests and responses, log in for a Bearer token, order and pay. A private sandbox that resets daily.",
+    },
+  },
+  {
     href: "/progress",
     icon: "◑",
     accent: "text-violet-700 dark:text-violet-300",

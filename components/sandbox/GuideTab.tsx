@@ -178,13 +178,13 @@ export default function GuideTab({
   mistakes,
   apiKey,
   openOperation,
-  openSwagger,
+  openClient,
 }: {
   operations: Record<string, WorkedExample>;
   mistakes: Record<string, WorkedExample>;
   apiKey: string | null;
   openOperation: (id: string) => void;
-  openSwagger: () => void;
+  openClient: () => void;
 }) {
   const { pick } = useLang();
   const order = operations.createOrder;
@@ -217,7 +217,7 @@ export default function GuideTab({
     { op: "listBooks", text: pick("Tìm sách công nghệ còn hàng: genre=technology&in_stock=true.", "Find technology books in stock: genre=technology&in_stock=true."), expect: "200" },
     { op: "listOrders", text: pick("Gọi GET /orders khi CHƯA đăng nhập.", "Call GET /orders WITHOUT logging in."), expect: "401" },
     { op: "login", text: pick("Đăng nhập bằng mai.tran@example.com và copy access_token.", "Log in as mai.tran@example.com and copy the access_token."), expect: "200" },
-    { op: "me", text: pick("Bấm Authorize, dán token vào bearerAuth, gọi GET /auth/me.", "Click Authorize, paste the token into bearerAuth, call GET /auth/me."), expect: "200" },
+    { op: "me", text: pick("Dán token vào ô Bearer Token (phần Authentication), gọi GET /auth/me.", "Paste the token into the Bearer Token box (under Authentication), call GET /auth/me."), expect: "200" },
     { op: "createOrder", text: pick("Đặt 2 cuốn sách. Ghi lại id và total_amount.", "Order 2 books. Note the id and total_amount."), expect: "201" },
     { op: "createPayment", text: pick("Thanh toán với amount sai một đồng.", "Pay with an amount one đồng off."), expect: "422" },
     { op: "createPayment", text: pick("Thanh toán đúng số tiền — xem hoá đơn trong response.", "Pay the right amount — find the invoice in the response."), expect: "201" },
@@ -297,7 +297,7 @@ export default function GuideTab({
           <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-3 space-y-1">
             <div className="font-mono text-sm font-semibold">{SANDBOX_KEY_HEADER}</div>
             <p className="text-xs text-zinc-500">{pick("Loại: API key", "Kind: API key")}</p>
-            <P>{pick("Chọn sandbox nào — cái của riêng bạn. Gửi kèm MỌI request. Trang này và Swagger điền sẵn cho bạn.", "Picks which sandbox — yours. Sent with EVERY request. This page and Swagger fill it in for you.")}</P>
+            <P>{pick("Chọn sandbox nào — cái của riêng bạn. Gửi kèm MỌI request. Trang này và Scalar điền sẵn cho bạn.", "Picks which sandbox — yours. Sent with EVERY request. This page and Scalar fill it in for you.")}</P>
           </div>
           <div className="rounded-lg border border-blue-200 dark:border-blue-900 p-3 space-y-1">
             <div className="font-mono text-sm font-semibold">Authorization: Bearer &lt;token&gt;</div>
@@ -362,17 +362,17 @@ export default function GuideTab({
         </div>
       </Section>
 
-      <Section id="swagger" title={pick("6 · Dùng Swagger để gọi thử", "6 · Calling the API from Swagger")}>
+      <Section id="client" title={pick("6 · Gọi thử API bằng Scalar", "6 · Calling the API with Scalar")}>
         <ol className="list-decimal pl-5 space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400">
-          <li>{pick("Mở tab Swagger. Key sandbox đã được điền sẵn (ổ khoá đã khoá ở các API).", "Open the Swagger tab. Your sandbox key is already filled in (the padlocks show locked).")}</li>
-          <li>{pick("Mở Auth → POST /auth/login → Try it out → sửa email/mật khẩu → Execute.", "Open Auth → POST /auth/login → Try it out → edit the email/password → Execute.")}</li>
-          <li>{pick("Copy giá trị access_token trong Response body (không lấy dấu ngoặc kép).", "Copy the access_token value from the Response body (without the quotes).")}</li>
-          <li>{pick("Bấm Authorize ở đầu trang → ô bearerAuth → dán token → Authorize → Close. Swagger tự thêm chữ “Bearer ”.", "Click Authorize at the top → the bearerAuth box → paste → Authorize → Close. Swagger adds “Bearer ” itself.")}</li>
-          <li>{pick("Chọn API bất kỳ → Try it out → điền path/query params hoặc sửa body JSON → Execute.", "Pick any endpoint → Try it out → fill path/query params or edit the JSON body → Execute.")}</li>
-          <li>{pick("Đọc phần Curl (request thật đã gửi), Request URL, rồi Server response: status, headers, body.", "Read the Curl (the real request sent), the Request URL, then the Server response: status, headers, body.")}</li>
+          <li>{pick("Mở tab Thử API (Scalar). Bên trái là danh sách API theo nhóm, giữa là mô tả, bên phải là ví dụ request (curl) và response.", "Open the Try it (Scalar) tab. On the left, the endpoints by group; in the middle, the description; on the right, a sample request (curl) and response.")}</li>
+          <li>{pick("Chọn Auth → Đăng nhập → bấm Test Request. Cửa sổ client mở ra, chia request thành từng phần: Authentication, Headers, Query Parameters, Request Body.", "Pick Auth → Log in → click Test Request. The client opens with the request split into its parts: Authentication, Headers, Query Parameters, Request Body.")}</li>
+          <li>{pick("Ở phần Authentication, X-Sandbox-Key đã được điền sẵn. Sửa email/mật khẩu trong Request Body nếu muốn, rồi bấm Send.", "Under Authentication, X-Sandbox-Key is already filled in. Edit the email/password in the Request Body if you like, then click Send.")}</li>
+          <li>{pick("Copy giá trị access_token ở khung Response (không lấy dấu ngoặc kép), dán vào ô Bearer Token trong phần Authentication. Scalar tự thêm chữ “Bearer ”, và giữ token cho mọi API khác.", "Copy the access_token value from the Response pane (without the quotes) and paste it into the Bearer Token box under Authentication. Scalar adds “Bearer ” itself and keeps the token for every other endpoint.")}</li>
+          <li>{pick("Mở API bất kỳ → Test Request → điền path/query params hoặc sửa body JSON → Send (hoặc Ctrl + Enter).", "Open any endpoint → Test Request → fill path/query params or edit the JSON body → Send (or Ctrl + Enter).")}</li>
+          <li>{pick("Đọc khung Response: status, thời gian, headers và body. Đổi ví dụ code ở góc trên (Shell Curl, JavaScript, Python…) để xem cùng request đó viết bằng ngôn ngữ khác.", "Read the Response pane: status, timing, headers and body. Switch the code sample at the top (Shell Curl, JavaScript, Python…) to see the same request in another language.")}</li>
         </ol>
         <div className="flex flex-wrap gap-2">
-          <button type="button" onClick={openSwagger} className="btn-primary text-sm">{pick("Mở Swagger →", "Open Swagger →")}</button>
+          <button type="button" onClick={openClient} className="btn-primary text-sm">{pick("Mở Scalar →", "Open Scalar →")}</button>
           <a href="/api/sandbox/openapi.json" target="_blank" rel="noreferrer" className="btn-secondary text-sm">openapi.json</a>
         </div>
         <P>
@@ -381,7 +381,7 @@ export default function GuideTab({
       </Section>
 
       <Section id="mission" title={pick("7 · Nhiệm vụ: một vòng mua hàng hoàn chỉnh", "7 · Mission: one full purchase")}>
-        <P>{pick("Làm lần lượt trong Swagger. Cột phải là status bạn nên nhận được — nhận khác thì đọc error.message.", "Do these in order in Swagger. The right column is the status you should get — if not, read error.message.")}</P>
+        <P>{pick("Làm lần lượt trong Scalar. Cột phải là status bạn nên nhận được — nhận khác thì đọc error.message.", "Do these in order in Scalar. The right column is the status you should get — if not, read error.message.")}</P>
         <ol className="space-y-1">
           {mission.map((step, i) => (
             <li key={i} className="flex items-center gap-3 border-t border-zinc-100 dark:border-zinc-800 first:border-t-0 py-1.5 text-sm">

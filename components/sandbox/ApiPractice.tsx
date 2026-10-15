@@ -11,12 +11,12 @@ import DatabaseTab from "./DatabaseTab";
 import EndpointsTab from "./EndpointsTab";
 import GuideTab from "./GuideTab";
 
-const SwaggerPanel = dynamic(() => import("./SwaggerPanel"), {
+const ScalarPanel = dynamic(() => import("./ScalarPanel"), {
   ssr: false,
-  loading: () => <div className="card text-sm text-zinc-500">Swagger…</div>,
+  loading: () => <div className="card text-sm text-zinc-500">Scalar…</div>,
 });
 
-type Tab = "guide" | "endpoints" | "database" | "swagger";
+type Tab = "guide" | "endpoints" | "database" | "client";
 
 const TAB_KEY = "sandbox:tab";
 const BROWSER_ID_KEY = "sandbox:browserId";
@@ -39,6 +39,11 @@ function browserId(): string {
   } catch {
     return crypto.randomUUID();
   }
+}
+
+/** Scalar's in-page address for one operation: #tag/<tag>/<METHOD><path>. */
+function scalarHash(op: Operation): string {
+  return `#tag/${op.tag.toLowerCase()}/${op.method}${op.path}`;
 }
 
 function useCountdown(target: string | null): string {
@@ -74,20 +79,22 @@ export default function ApiPractice({
   const [showKey, setShowKey] = useState(false);
   const [copied, setCopied] = useState(false);
   const [resetting, setResetting] = useState(false);
-  // Swagger stays mounted once opened (it holds the learner's typed token);
+  // The client stays mounted once opened (it holds the learner's typed token);
   // bumping this remounts it so a deep link to one operation takes effect.
-  const [swaggerOpened, setSwaggerOpened] = useState(false);
-  const [swaggerRun, setSwaggerRun] = useState(0);
+  const [clientOpened, setClientOpened] = useState(false);
+  const [clientRun, setClientRun] = useState(0);
   const countdown = useCountdown(summary?.resets_at ?? null);
 
   useEffect(() => {
     try {
-      const saved = window.localStorage.getItem(TAB_KEY) as Tab | null;
+      const stored = window.localStorage.getItem(TAB_KEY);
+      // "swagger" is the tab's name from before the switch to Scalar.
+      const saved = (stored === "swagger" ? "client" : stored) as Tab | null;
 
-      if (saved && ["guide", "endpoints", "database", "swagger"].includes(saved)) {
+      if (saved && ["guide", "endpoints", "database", "client"].includes(saved)) {
         setTab(saved);
 
-        if (saved === "swagger") setSwaggerOpened(true);
+        if (saved === "client") setClientOpened(true);
       }
     } catch {
       // No storage: start on the guide.
@@ -97,7 +104,7 @@ export default function ApiPractice({
   const choose = useCallback((next: Tab) => {
     setTab(next);
 
-    if (next === "swagger") setSwaggerOpened(true);
+    if (next === "client") setClientOpened(true);
 
     try {
       window.localStorage.setItem(TAB_KEY, next);
@@ -185,10 +192,10 @@ export default function ApiPractice({
     }
   };
 
-  const tryInSwagger = (op: Operation) => {
-    window.history.replaceState(null, "", `#/${op.tag}/${op.id}`);
-    setSwaggerRun((n) => n + 1);
-    choose("swagger");
+  const tryInClient = (op: Operation) => {
+    window.history.replaceState(null, "", scalarHash(op));
+    setClientRun((n) => n + 1);
+    choose("client");
     window.scrollTo({ top: 0 });
   };
 
@@ -210,11 +217,11 @@ export default function ApiPractice({
     ["guide", pick("Bắt đầu", "Start here")],
     ["endpoints", pick("API & ví dụ", "Endpoints & examples")],
     ["database", pick("Cơ sở dữ liệu", "Database")],
-    ["swagger", "Swagger"],
+    ["client", pick("Thử API (Scalar)", "Try it (Scalar)")],
   ];
 
   return (
-    <div className={cn("mx-auto space-y-5", tab === "swagger" ? "max-w-6xl" : "max-w-5xl")}>
+    <div className={cn("mx-auto space-y-5", tab === "client" ? "max-w-6xl" : "max-w-5xl")}>
       <div>
         <h1 className="text-2xl font-bold">{pick("Luyện tập API", "API Practice")}</h1>
         <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
@@ -300,23 +307,23 @@ export default function ApiPractice({
       </div>
 
       {tab === "guide" && (
-        <GuideTab operations={operations} mistakes={mistakes} apiKey={apiKey} openOperation={openOperation} openSwagger={() => choose("swagger")} />
+        <GuideTab operations={operations} mistakes={mistakes} apiKey={apiKey} openOperation={openOperation} openClient={() => choose("client")} />
       )}
 
-      {tab === "endpoints" && <EndpointsTab examples={operations} apiKey={apiKey} onTry={tryInSwagger} />}
+      {tab === "endpoints" && <EndpointsTab examples={operations} apiKey={apiKey} onTry={tryInClient} />}
 
       {tab === "database" && <DatabaseTab />}
 
-      {swaggerOpened && (
-        <div className={tab === "swagger" ? "space-y-3" : "hidden"}>
+      {clientOpened && (
+        <div className={tab === "client" ? "space-y-3" : "hidden"}>
           <p className="text-sm text-zinc-600 dark:text-zinc-400">
             {pick(
-              "Key sandbox đã điền sẵn. Đăng nhập bằng POST /auth/login, rồi bấm Authorize và dán access_token vào ô bearerAuth để gọi các API 🔑/👑.",
-              "Your sandbox key is filled in. Log in with POST /auth/login, then click Authorize and paste the access_token into bearerAuth to call 🔑/👑 endpoints."
+              "Key sandbox đã điền sẵn. Đăng nhập bằng POST /auth/login, rồi dán access_token vào ô Bearer Token trong phần Authentication để gọi các API 🔑/👑.",
+              "Your sandbox key is filled in. Log in with POST /auth/login, then paste the access_token into the Bearer Token box under Authentication to call 🔑/👑 endpoints."
             )}
           </p>
           {apiKey ? (
-            <SwaggerPanel key={`${lang}-${swaggerRun}-${apiKey}`} apiKey={apiKey} lang={lang === "en" ? "en" : "vi"} />
+            <ScalarPanel key={`${lang}-${clientRun}-${apiKey}`} apiKey={apiKey} lang={lang === "en" ? "en" : "vi"} />
           ) : (
             <div className="card text-sm text-zinc-500">{pick("Đang chờ key sandbox…", "Waiting for your sandbox key…")}</div>
           )}

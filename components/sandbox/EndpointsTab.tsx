@@ -87,7 +87,7 @@ function OperationCard({ op, example, apiKey, onTry }: { op: Operation; example:
             </span>
           ))}
           <button type="button" onClick={() => onTry(op)} className="ml-auto btn-secondary text-xs px-3 py-1.5">
-            {pick("Thử trong Swagger →", "Try it in Swagger →")}
+            {pick("Thử trong Scalar →", "Try it in Scalar →")}
           </button>
         </div>
       </div>

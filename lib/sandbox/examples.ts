@@ -6,7 +6,7 @@ import { sandboxResetsAt } from "./store";
 import type { SandboxData } from "./types";
 
 // Runs every worked example through the real engine, each on a fresh copy of
-// the default data, so the guide and Swagger show responses the API actually
+// the default data, so the guide and Scalar show responses the API actually
 // gives — they can't drift from the code the way hand-written samples do.
 
 export interface ShownRequest {

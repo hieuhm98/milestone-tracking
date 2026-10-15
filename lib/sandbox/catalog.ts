@@ -1,5 +1,5 @@
 // Every endpoint of the bookstore API, described once. The /practice/api guide,
-// its worked examples and the OpenAPI spec Swagger renders are all built from
+// its worked examples and the OpenAPI spec Scalar renders are all built from
 // this list; workedExamples() (lib/sandbox/examples.ts) fails the build if it
 // drifts from the engine's routes or their access levels.
 

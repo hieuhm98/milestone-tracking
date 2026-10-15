@@ -4,7 +4,7 @@ import { API_VERSION, MAX_ROWS } from "./engine";
 import { workedExamples } from "./examples";
 import { ORDER_STATUSES, PAYMENT_METHODS, TABLES, USER_ROLES, type Bilingual, type Column, type TableName } from "./schema";
 
-// The OpenAPI 3.0 document Swagger UI renders, built from the catalogue, the
+// The OpenAPI 3.0 document Scalar renders, built from the catalogue, the
 // table definitions and the worked examples — in Vietnamese or English.
 
 type Lang = "vi" | "en";
@@ -121,7 +121,7 @@ function components(lang: Lang) {
     LoginResponse: {
       type: "object",
       properties: {
-        access_token: { type: "string", description: L("JWT — dán vào nút Authorize (bearerAuth).", "A JWT — paste it into Authorize (bearerAuth).") },
+        access_token: { type: "string", description: L("JWT — dán vào ô Bearer Token (phần Authentication).", "A JWT — paste it into the Bearer Token box (under Authentication).") },
         token_type: { type: "string", example: "Bearer" },
         expires_in: { type: "integer", example: 3600, description: L("Số giây token còn hiệu lực.", "Seconds until the token expires.") },
         user: ref("User"),
@@ -188,7 +188,7 @@ function components(lang: Lang) {
         type: "http",
         scheme: "bearer",
         bearerFormat: "JWT",
-        description: L("access_token lấy từ POST /auth/login. Chỉ dán token, Swagger tự thêm chữ Bearer.", "The access_token from POST /auth/login. Paste only the token — Swagger adds the word Bearer."),
+        description: L("access_token lấy từ POST /auth/login. Chỉ dán token, Scalar tự thêm chữ Bearer.", "The access_token from POST /auth/login. Paste only the token — Scalar adds the word Bearer."),
       },
     },
   };
@@ -265,8 +265,8 @@ export function buildOpenApi(lang: Lang) {
       title: L("Bookstore API — sân tập", "Bookstore practice API"),
       version: API_VERSION,
       description: L(
-        `Mỗi người có một sandbox riêng, tự quay về dữ liệu mẫu lúc 00:00 giờ Việt Nam. Tối đa ${MAX_ROWS} dòng mỗi bảng.\n\n**Bắt đầu:** gọi \`POST /auth/login\` với một tài khoản bên dưới, copy \`access_token\`, bấm **Authorize** và dán vào ô **bearerAuth**.\n\n${accounts}`,
-        `Everyone gets a private sandbox that returns to the sample data at 00:00 Vietnam time. At most ${MAX_ROWS} rows per table.\n\n**Start:** call \`POST /auth/login\` with an account below, copy the \`access_token\`, click **Authorize** and paste it into **bearerAuth**.\n\n${accounts}`
+        `Mỗi người có một sandbox riêng, tự quay về dữ liệu mẫu lúc 00:00 giờ Việt Nam. Tối đa ${MAX_ROWS} dòng mỗi bảng.\n\n**Bắt đầu:** gọi \`POST /auth/login\` với một tài khoản bên dưới, copy \`access_token\` (khung Response sau khi bấm **Test Request** → **Send**) và dán vào ô **Bearer Token** ở phần **Authentication**.\n\n${accounts}`,
+        `Everyone gets a private sandbox that returns to the sample data at 00:00 Vietnam time. At most ${MAX_ROWS} rows per table.\n\n**Start:** call \`POST /auth/login\` with an account below, copy the \`access_token\` (from the Response pane after **Test Request** → **Send**) and paste it into the **Bearer Token** box under **Authentication**.\n\n${accounts}`
       ),
     },
     servers: [{ url: API_BASE_PATH, description: L("Sandbox của bạn", "Your sandbox") }],

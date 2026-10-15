@@ -39,6 +39,21 @@ interface Row {
 }
 
 const TABLE = "api_sandboxes";
+
+/** A Supabase failure, tagged when the cause is that supabase/schema.sql was never run. */
+export class SandboxStorageError extends Error {
+  constructor(
+    action: string,
+    readonly missingTable: boolean,
+    detail: string
+  ) {
+    super(`sandbox ${action} failed: ${detail}`);
+  }
+}
+
+// PGRST205: PostgREST has no such table in its schema cache; 42P01: Postgres undefined_table.
+const storageError = (action: string, error: { code?: string; message: string }) =>
+  new SandboxStorageError(action, error.code === "PGRST205" || error.code === "42P01" || error.message.includes(TABLE), `${error.code ?? ""} ${error.message}`.trim());
 const memory: Map<string, Row> =
   ((globalThis as { __apiSandboxes?: Map<string, Row> }).__apiSandboxes ??= new Map());
 
@@ -49,7 +64,7 @@ export async function loadSandbox(owner: string, day: string): Promise<LoadedSan
   if (supabase) {
     const { data, error } = await supabase.from(TABLE).select("day, version, data").eq("owner", owner).maybeSingle();
 
-    if (error) throw new Error(`sandbox load failed: ${error.message}`);
+    if (error) throw storageError("load", error);
 
     row = data as Row | null;
   } else {
@@ -88,7 +103,7 @@ export async function saveSandbox(owner: string, day: string, loaded: LoadedSand
     // 23505 = unique violation: another request created the row first.
     if (error?.code === "23505") return false;
 
-    if (error) throw new Error(`sandbox save failed: ${error.message}`);
+    if (error) throw storageError("save", error);
 
     return true;
   }
@@ -100,7 +115,7 @@ export async function saveSandbox(owner: string, day: string, loaded: LoadedSand
     .eq("version", loaded.version)
     .select("owner");
 
-  if (error) throw new Error(`sandbox save failed: ${error.message}`);
+  if (error) throw storageError("save", error);
 
   return (updated?.length ?? 0) === 1;
 }
@@ -124,7 +139,7 @@ export async function deleteStaleSandboxes(day: string): Promise<number> {
 
   const { data, error } = await supabase.from(TABLE).delete().lt("day", day).select("owner");
 
-  if (error) throw new Error(`sandbox cleanup failed: ${error.message}`);
+  if (error) throw storageError("cleanup", error);
 
   return data?.length ?? 0;
 }

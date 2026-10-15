@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { verifySandboxKey } from "@/lib/sandbox/auth";
 import { handleSandboxRequest, isWrite } from "@/lib/sandbox/engine";
-import { loadSandbox, sandboxDay, sandboxResetsAt, saveSandbox } from "@/lib/sandbox/store";
+import { loadSandbox, SandboxStorageError, sandboxDay, sandboxResetsAt, saveSandbox } from "@/lib/sandbox/store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -105,6 +105,14 @@ async function safeHandle(request: Request, ctx: { params: { path?: string[] } }
     return await handle(request, ctx);
   } catch (err) {
     console.error("[sandbox]", err);
+
+    // The usual first-deploy failure: the table was never created. Say so, so
+    // the operator doesn't have to dig through function logs.
+    if (err instanceof SandboxStorageError) {
+      return err.missingTable
+        ? error(503, "sandbox_not_set_up", "Sandbox storage is not set up: the api_sandboxes table is missing. Run supabase/schema.sql in the Supabase SQL Editor.")
+        : error(503, "sandbox_storage_unavailable", "The sandbox database did not answer. Try again in a moment.");
+    }
 
     return error(500, "internal_error", "The sandbox hit an unexpected error. Try again in a moment.");
   }

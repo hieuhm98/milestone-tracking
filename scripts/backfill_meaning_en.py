@@ -8,10 +8,12 @@ TOKEN-FREE: pulls concise, modern English definitions from the open
 
     "abandon": { "meanings": [ { "def": "...", "speech_part": "verb" }, ... ] }
 
-For each DB word with meaning_en IS NULL we pick the definition whose
-``speech_part`` matches the row's ``pos_code`` (n/v/adj/adv/…); if none matches
-we fall back to the first definition. Rows that already have meaning_en, and
-words absent from wordset, are left untouched.
+For each DB word with meaning_en IS NULL we first take WordNet's most-used
+sense (by tagged-corpus count) in the row's part of speech — wordset's own
+order put rare senses first (have = "cause to be born", perhaps = "an action
+that might occur by chance"). Words WordNet lacks fall back to the wordset
+definition whose ``speech_part`` matches the row's ``pos_code``, else its first.
+Rows that already have meaning_en are left untouched.
 
 Usage:
     python scripts/backfill_meaning_en.py            # download + backfill
@@ -81,6 +83,22 @@ def load_wordset() -> dict:
     return out
 
 
+WN_TYPES = {"n": {"n"}, "v": {"v"}, "adj": {"a", "s"}, "adv": {"r"}}
+
+
+def wordnet_def(wn, word: str, pos_code: str | None) -> str | None:
+    """WordNet's most-used sense of `word`, in `pos_code` when it has one there."""
+    ranked = [k for *_, k in sorted(wn.senses.get(wn.base(word), [])) if k in wn.synsets]
+    wanted = WN_TYPES.get(pos_code or "")
+    in_pos = [k for k in ranked if wanted and wn.synsets[k][0] in wanted]
+    keys = in_pos or ranked
+
+    if not keys:
+        return None
+
+    return wn.synsets[keys[0]][2].split('"')[0].strip().rstrip(";").strip() or None
+
+
 def choose_def(meanings: list, pos_code: str | None) -> str:
     want = POS_TO_SPEECH.get(pos_code or "")
     if want:
@@ -99,7 +117,11 @@ def main() -> int:
         log(f"✗ {DB_PATH} not found.")
         return 1
 
-    log("Loading wordset-dictionary ...")
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from repair_word_meanings import WordNet, wordnet_dir
+
+    log("Loading WordNet + wordset-dictionary ...")
+    wn = WordNet(wordnet_dir())
     ws = load_wordset()
     log(f"  wordset words: {len(ws):,}")
 
@@ -111,16 +133,23 @@ def main() -> int:
     log(f"  rows missing meaning_en: {len(targets):,}")
 
     updates = []
+    from_wordnet = 0
     for wid, word, pos in targets:
-        meanings = ws.get(word.strip().lower())
-        if not meanings:
+        key = word.strip().lower()
+        d = wordnet_def(wn, key, pos)
+
+        if d:
+            from_wordnet += 1
+        elif ws.get(key):
+            d = choose_def(ws[key], pos)
+        else:
             continue
-        d = choose_def(meanings, pos)
+
         if len(d) > MEANING_MAX:
             d = d[:MEANING_MAX].rstrip() + "…"
         updates.append((d, wid))
 
-    log(f"  will fill: {len(updates):,}  (no wordset match: {len(targets) - len(updates):,})")
+    log(f"  will fill: {len(updates):,} ({from_wordnet:,} from WordNet)  (no match: {len(targets) - len(updates):,})")
 
     if args.dry_run:
         db.close()

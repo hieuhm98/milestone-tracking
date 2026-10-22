@@ -6,14 +6,18 @@ import { useLang } from "@/context/lang";
 import { getGroup } from "@/lib/groups";
 import {
   DICT_PAGE_SIZE,
+  LEVELS,
   POS_CODES,
   highlightParts,
   type DictionaryEntry,
   type DictionaryHit,
+  type SenseGroup,
 } from "@/lib/dictionary";
 import { cn } from "@/lib/utils";
 
 const LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
+/** A long entry ("have", "take") shows this many senses until expanded. */
+const SENSES_PREVIEW = 6;
 /** Long enough that a keystroke doesn't fire a request, short enough to feel live. */
 const SEARCH_DEBOUNCE_MS = 200;
 
@@ -24,6 +28,7 @@ export default function DictionaryPage() {
   const [letter, setLetter] = useState("");
   const [pos, setPos] = useState("");
   const [courseOnly, setCourseOnly] = useState(false);
+  const [level, setLevel] = useState("");
   const [hits, setHits] = useState<DictionaryHit[]>([]);
   const [total, setTotal] = useState(0);
   const [bank, setBank] = useState(true);
@@ -58,6 +63,8 @@ export default function DictionaryPage() {
 
       if (courseOnly) params.set("course", "1");
 
+      if (level) params.set("level", level);
+
       setLoading(true);
 
       try {
@@ -73,7 +80,7 @@ export default function DictionaryPage() {
         setLoading(false);
       }
     },
-    [term, letter, pos, courseOnly]
+    [term, letter, pos, courseOnly, level]
   );
 
   useEffect(() => {
@@ -157,6 +164,17 @@ export default function DictionaryPage() {
           </button>
         </div>
 
+        <div className="flex flex-wrap gap-1.5">
+          <button type="button" className={chip(!level)} onClick={() => setLevel("")}>
+            {t("dict.allLevels")}
+          </button>
+          {LEVELS.map((code) => (
+            <button key={code} type="button" className={chip(level === code)} onClick={() => setLevel(level === code ? "" : code)}>
+              {t(`dict.level.${code}`)}
+            </button>
+          ))}
+        </div>
+
         <div className="flex flex-wrap gap-1">
           <button type="button" className={chip(!letter)} onClick={() => setLetter("")}>
             {t("dict.allLetters")}
@@ -177,7 +195,9 @@ export default function DictionaryPage() {
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
-        <div className="lg:order-2" ref={detailRef}>
+        {/* min-w-0: a grid column otherwise grows to its longest unwrapped line (the
+            truncated topic titles), which pushed the page past a phone's width. */}
+        <div className="lg:order-2 min-w-0" ref={detailRef}>
           {selected ? (
             <EntryCard word={selected} entry={entry} onClose={() => setSelected(null)} />
           ) : (
@@ -185,7 +205,7 @@ export default function DictionaryPage() {
           )}
         </div>
 
-        <div className="lg:order-1">
+        <div className="lg:order-1 min-w-0">
           <p className="text-xs text-zinc-500 mb-2" aria-live="polite">
             {loading && hits.length === 0
               ? t("common.loading")
@@ -209,6 +229,11 @@ export default function DictionaryPage() {
                     {hit.pos && (
                       <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                         {t(`dict.pos.${hit.pos}`)}
+                      </span>
+                    )}
+                    {hit.level && hit.level !== "common" && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300">
+                        {t(`dict.level.${hit.level}`)}
                       </span>
                     )}
                     {hit.courseCount > 0 && (
@@ -239,6 +264,37 @@ export default function DictionaryPage() {
           )}
         </div>
       </div>
+
+      <p className="text-xs text-zinc-500 mt-6">
+        {pick("Nguồn: ", "Sources: ")}
+        <a href="https://wordnet.princeton.edu/" className="underline hover:text-zinc-700 dark:hover:text-zinc-300">
+          Princeton WordNet 3.0
+        </a>
+        {pick(", từ điển Anh–Việt Hồ Ngọc Đức, wordset-dictionary, ", ", the Hồ Ngọc Đức English–Vietnamese dictionary, wordset-dictionary, ")}
+        <a href="https://github.com/cmusphinx/cmudict" className="underline hover:text-zinc-700 dark:hover:text-zinc-300">
+          CMUdict
+        </a>
+        {pick(" (phát âm, © Carnegie Mellon University), ", " (pronunciation, © Carnegie Mellon University), ")}
+        <a href="https://github.com/hermitdave/FrequencyWords" className="underline hover:text-zinc-700 dark:hover:text-zinc-300">
+          FrequencyWords
+        </a>
+        {pick(" (độ phổ biến) và ", " (how common) and ")}
+        <a
+          href="https://vi.wiktionary.org/"
+          className="underline hover:text-zinc-700 dark:hover:text-zinc-300"
+        >
+          Wiktionary
+        </a>
+        {" "}
+        (
+        <a
+          href="https://creativecommons.org/licenses/by-sa/4.0/"
+          className="underline hover:text-zinc-700 dark:hover:text-zinc-300"
+        >
+          CC BY-SA 4.0
+        </a>
+        ).
+      </p>
     </div>
   );
 }
@@ -252,7 +308,7 @@ function EntryCard({
   entry: DictionaryEntry | null;
   onClose: () => void;
 }) {
-  const { t, pick } = useLang();
+  const { t, pick, lang } = useLang();
 
   return (
     <div className="card lg:sticky lg:top-6">
@@ -264,6 +320,11 @@ function EntryCard({
             {entry?.pos && (
               <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                 {t(`dict.pos.${entry.pos}`)}
+              </span>
+            )}
+            {entry?.level && (
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300">
+                {t(`dict.level.${entry.level}`)}
               </span>
             )}
             <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
@@ -286,13 +347,14 @@ function EntryCard({
       ) : (
         <>
           <dl className="mt-4 space-y-3">
-            {entry.meaningVi && (
+            {/* The one-line summaries give way to the full sense lists below when those exist. */}
+            {entry.meaningVi && !entry.senses?.vi.length && (
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-400">{t("dict.meaningVi")}</dt>
                 <dd className="text-sm mt-0.5">{entry.meaningVi}</dd>
               </div>
             )}
-            {entry.meaningEn && (
+            {entry.meaningEn && !entry.senses?.en.length && (
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-400">{t("dict.meaningEn")}</dt>
                 <dd className="text-sm mt-0.5">{entry.meaningEn}</dd>
@@ -311,6 +373,20 @@ function EntryCard({
               </div>
             )}
           </dl>
+
+          {entry.senses && (
+            <div className="mt-4 space-y-5">
+              {(lang === "vi" ? (["vi", "en"] as const) : (["en", "vi"] as const)).map((which) =>
+                entry.senses![which].length > 0 ? (
+                  <SenseList
+                    key={`${entry.word}-${which}`}
+                    title={t(which === "vi" ? "dict.allSensesVi" : "dict.allSensesEn")}
+                    groups={entry.senses![which]}
+                  />
+                ) : null
+              )}
+            </div>
+          )}
 
           {entry.occurrences.length > 0 && (
             <div className="mt-5">
@@ -368,5 +444,66 @@ function EntryCard({
         </>
       )}
     </div>
+  );
+}
+
+/** Every sense of one language, grouped by part of speech, numbered within each group. */
+function SenseList({ title, groups }: { title: string; groups: SenseGroup[] }) {
+  const { t } = useLang();
+  const [expanded, setExpanded] = useState(false);
+  const total = groups.reduce((sum, group) => sum + group.senses.length, 0);
+  let budget = expanded ? Infinity : SENSES_PREVIEW;
+
+  return (
+    <section>
+      <h3 className="text-xs font-semibold uppercase tracking-wide text-zinc-400 mb-2">{title}</h3>
+      <div className="space-y-3">
+        {groups.map((group, g) => {
+          if (budget <= 0) return null;
+
+          const shown = group.senses.slice(0, budget);
+          budget -= shown.length;
+
+          return (
+            <div key={g}>
+              {group.pos && (
+                <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                  {t(`dict.pos.${group.pos}`)}
+                </span>
+              )}
+              <ol className="mt-1.5 space-y-2 list-decimal pl-5 marker:text-zinc-400 text-sm">
+                {shown.map((sense, i) => (
+                  <li key={i} className="min-w-0 break-words">
+                    {sense.phrase && <span className="font-semibold">{sense.phrase}: </span>}
+                    {sense.meaning}
+                    {sense.examples.length > 0 && (
+                      <ul className="mt-1 space-y-0.5">
+                        {sense.examples.map((example, k) => (
+                          <li key={k} className="text-xs text-zinc-500">
+                            <span className="italic text-zinc-700 dark:text-zinc-300">{example.text}</span>
+                            {example.translation && <> — {example.translation}</>}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          );
+        })}
+      </div>
+
+      {total > SENSES_PREVIEW && (
+        <button
+          type="button"
+          className="mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline py-2 -my-2"
+          aria-expanded={expanded}
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded ? t("dict.showFewerSenses") : t("dict.showAllSenses").replace("{n}", String(total))}
+        </button>
+      )}
+    </section>
   );
 }

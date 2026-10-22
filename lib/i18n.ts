@@ -48,7 +48,7 @@ const vi: Dict = {
 
   // Dictionary
   "dict.title": "Từ điển",
-  "dict.subtitle": "Kho từ tiếng Anh thông dụng cộng với toàn bộ từ vựng xuất hiện trong các khoá học.",
+  "dict.subtitle": "Gần 100.000 từ, cụm động từ và thành ngữ tiếng Anh, cùng toàn bộ từ vựng trong các khoá học.",
   "dict.search": "Tìm từ",
   "dict.searchPlaceholder": "Nhập từ tiếng Anh…",
   "dict.allTypes": "Mọi loại từ",
@@ -65,7 +65,7 @@ const vi: Dict = {
   "dict.inYourCourses": "Câu ví dụ từ bài học",
   "dict.openLesson": "Mở bài học",
   "dict.openArticle": "Mở bài viết",
-  "dict.fromWordBank": "Kho từ vựng",
+  "dict.fromWordBank": "Từ điển",
   "dict.fromCourses": "Từ khoá học",
   "dict.close": "Đóng",
   "dict.bankMissing": "Không đọc được kho từ vựng — chỉ hiển thị từ lấy từ các khoá học.",
@@ -79,6 +79,15 @@ const vi: Dict = {
   "dict.pos.int": "Thán từ",
   "dict.pos.abbr": "Viết tắt",
   "dict.pos.phrase": "Cụm từ",
+  "dict.pos.idiom": "Thành ngữ",
+  "dict.allLevels": "Mọi mức độ",
+  "dict.level.common": "Thông dụng",
+  "dict.level.uncommon": "Ít gặp",
+  "dict.level.rare": "Hiếm",
+  "dict.allSensesVi": "Tất cả nghĩa tiếng Việt",
+  "dict.allSensesEn": "Định nghĩa tiếng Anh",
+  "dict.showAllSenses": "Xem tất cả {n} nghĩa",
+  "dict.showFewerSenses": "Thu gọn",
 
   // IELTS Speaking (interface only — learning content stays English)
   "ielts.nav.contents": "Mục lục",
@@ -488,7 +497,7 @@ const en: Dict = {
 
   // Dictionary
   "dict.title": "Dictionary",
-  "dict.subtitle": "A bank of common English words plus every word used in the courses.",
+  "dict.subtitle": "Nearly 100,000 English words, phrasal verbs and idioms, plus every word used in the courses.",
   "dict.search": "Search words",
   "dict.searchPlaceholder": "Type an English word…",
   "dict.allTypes": "All types",
@@ -505,7 +514,7 @@ const en: Dict = {
   "dict.inYourCourses": "Example sentences from your lessons",
   "dict.openLesson": "Open lesson",
   "dict.openArticle": "Open article",
-  "dict.fromWordBank": "Word bank",
+  "dict.fromWordBank": "Dictionary",
   "dict.fromCourses": "From courses",
   "dict.close": "Close",
   "dict.bankMissing": "The word bank could not be read — showing course words only.",
@@ -519,6 +528,15 @@ const en: Dict = {
   "dict.pos.int": "Interjection",
   "dict.pos.abbr": "Abbreviation",
   "dict.pos.phrase": "Phrase",
+  "dict.pos.idiom": "Idioms",
+  "dict.allLevels": "Any frequency",
+  "dict.level.common": "Common",
+  "dict.level.uncommon": "Less common",
+  "dict.level.rare": "Rare",
+  "dict.allSensesVi": "All Vietnamese meanings",
+  "dict.allSensesEn": "English definitions",
+  "dict.showAllSenses": "Show all {n} meanings",
+  "dict.showFewerSenses": "Show fewer",
 
   // IELTS Speaking (interface only — learning content stays English)
   "ielts.nav.contents": "Contents",

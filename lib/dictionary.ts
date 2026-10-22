@@ -2,8 +2,9 @@
 //
 // The dictionary is built from what the project already holds, merged by word:
 //
-//   * `data/word-bank.db` — ~23k common English words with IPA, part of speech
-//     and English + Vietnamese meanings (the same bank the SQL playground queries).
+//   * `data/dictionary/<letter>.db` — ~99k entries (words, phrasal verbs, idioms)
+//     with IPA, part of speech, short English + Vietnamese meanings, how common
+//     each is, and every sense (scripts/build_dictionary.py).
 //   * every `knowledge-content/<slug>/vocab.json` — 12.5k vocabulary items, each
 //     one a real sentence from a course article plus the meaning the course
 //     teaches for that word. This is what the bank cannot give: usage in context,
@@ -13,6 +14,11 @@
 export const POS_CODES = ["n", "v", "adj", "adv", "prep", "conj", "pron", "int", "abbr", "phrase"] as const;
 
 export type PosCode = (typeof POS_CODES)[number];
+
+/** How common a word is, from its subtitle-frequency rank (see scripts/build_dictionary.py). */
+export const LEVELS = ["common", "uncommon", "rare"] as const;
+
+export type Level = (typeof LEVELS)[number];
 
 /** One appearance of a word in a course article. */
 export interface DictionaryOccurrence {
@@ -42,12 +48,42 @@ export interface DictionaryHit {
   meaningEn?: string;
   /** How many course sentences use this word. */
   courseCount: number;
-  /** True when the word bank has an entry (as opposed to course-only words). */
+  /** True when the dictionary data has an entry (as opposed to course-only words). */
   inBank: boolean;
+  level?: Level;
+}
+
+/** An example phrase under a sense, with its Vietnamese translation when the source has one. */
+export interface SenseExample {
+  text: string;
+  translation?: string;
+}
+
+export interface WordSense {
+  meaning: string;
+  /** The idiom itself, for senses in the "idiom" group. */
+  phrase?: string;
+  examples: SenseExample[];
+}
+
+/** Consecutive senses sharing a part of speech ("idiom" for the idioms group). */
+export interface SenseGroup {
+  pos?: string;
+  senses: WordSense[];
+}
+
+/** Every meaning of a word, from data/dictionary/<letter>.db (scripts/build_dictionary.py). */
+export interface WordSenses {
+  /** Hồ Ngọc Đức English–Vietnamese dictionary, or Wiktionary where it has no entry. */
+  vi: SenseGroup[];
+  /** Princeton WordNet 3.0. */
+  en: SenseGroup[];
 }
 
 export interface DictionaryEntry extends DictionaryHit {
   occurrences: DictionaryOccurrence[];
+  /** Every meaning, grouped by part of speech; absent when the senses shard has none. */
+  senses?: WordSenses;
   /**
    * The sense and pronunciation the courses teach, shown under the common ones
    * and only when they differ — for a course-only word the common fields
@@ -61,7 +97,7 @@ export interface DictionaryEntry extends DictionaryHit {
 export interface DictionarySearch {
   total: number;
   items: DictionaryHit[];
-  /** False when `data/word-bank.db` could not be read — course words only. */
+  /** False when `data/dictionary/` could not be read — course words only. */
   bank: boolean;
 }
 

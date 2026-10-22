@@ -81,6 +81,9 @@ POS_VI = [
     ("viết tắt", "abbr"),
 ]
 
+# Wrapped tails of a long "@" header that landed on "-" meaning lines:
+# "- pri'zent/" (a second IPA) and "-morrow)" (a "(to-morrow)" variant).
+HEADER_TAIL = re.compile(r"^([^\s;]+/|[^\s(]+\))$")
 CLEAN_WORD = re.compile(r"^[a-z]([a-z'-]*[a-z])?$")
 MEANING_MAX = 240  # keep meaning_vi compact
 
@@ -116,21 +119,45 @@ def map_pos(star_line: str):
     return best_code
 
 
+def parse_header(body: str) -> tuple[str, str]:
+    """Split an '@' line into (word, IPA).
+
+    Over half the headers list variants, and used to be dropped whole because
+    the line was taken as the word:
+        have /hæv, həv, v/ (has) /hæz, həz, əz, z/   -> ("have", "hæv")
+        everyone /'evribɔdi/ (everyone) /'evriwʌn/  -> ("everyone", "'evriwʌn")
+    The word is the text before the first '/'. The IPA is the word's own
+    "(word) /…/" group when there is one (the first group can belong to a
+    variant, as with everybody's above), else the first group; and of several
+    pronunciations, the first.
+    """
+    word = body.split("/", 1)[0].strip()
+    groups = re.findall(r"(?:\(([^()]*)\)\s*)?/([^/]*)/", body)
+
+    if not groups:
+        return word, ""
+
+    own = [ipa for label, ipa in groups if label.strip().lower() == word.lower()]
+    ipa = (own or [groups[0][1]])[0]
+    # Variants are split by ", " or " - " ("pə'hæps, (Àthtục) præps", "'preznt - pri'zent").
+    # A bare "," is this dictionary's secondary-stress mark (",ækju:'zeiʃn"), so keep it.
+    ipa = re.sub(r"\([^)]*\)", "", re.split(r",\s+|\s+-\s+", ipa)[0]).strip()
+
+    if " " in ipa:
+        ipa = ""  # a few headers lost characters ("utmost /' tmoust/"); better none than wrong
+
+    return word, ipa
+
+
 def parse_anhviet(path: str) -> dict:
     """Parse the Anh–Việt dictionary into {lower_word: record}. First entry wins."""
     by_word: dict[str, dict] = {}
     cur = None
-    header = re.compile(r"^(.*?)\s*/([^/]*)/\s*$")
     with open(path, encoding="utf-8", errors="replace") as f:
         for raw in f:
             line = raw.rstrip("\n").lstrip("﻿")
             if line.startswith("@"):
-                body = line[1:]
-                m = header.match(body)
-                if m:
-                    word, ipa = m.group(1).strip(), m.group(2).strip()
-                else:
-                    word, ipa = body.strip(), ""
+                word, ipa = parse_header(line[1:])
                 cur = {"word": word, "ipa": ipa, "pos": None, "meanings": []}
                 key = word.lower()
                 if key not in by_word:  # keep the first (primary) sense block
@@ -142,7 +169,7 @@ def parse_anhviet(path: str) -> dict:
                     cur["pos"] = map_pos(line)
             elif line.startswith("-"):
                 mean = line[1:].strip()
-                if mean:
+                if mean and not HEADER_TAIL.match(mean):
                     cur["meanings"].append(mean)
     return by_word
 
@@ -234,6 +261,48 @@ def main() -> int:
             }
         )
 
+    # Second source: common words the Anh–Việt dictionary lacks (eyelash, setback,
+    # newsletter) from Kaikki's Vietnamese-Wiktionary extract (CC BY-SA, credited on
+    # /english/dictionary). Same filters, plus: a real part of speech (names and
+    # places are "name" there), not an inflection of a word WordNet knows
+    # ("looks"), and no "Xem …" / "Tên …" pointer gloss. Only the first plain gloss
+    # is kept: later ones can be slang ("airbag" = a chatterbox).
+    from fill_meaning_vi import ensure_wiktionary, parse_wiktionary
+    from repair_word_meanings import WordNet, wordnet_dir
+
+    wiktionary = parse_wiktionary(ensure_wiktionary())
+    wn = WordNet(wordnet_dir())
+    taken = existing | {r["word"].lower() for r in rows}
+    pointer = re.compile(r"^(xem|tên|họ|một tên)\b", re.I)
+    from_wiktionary = 0
+
+    for key in sorted(freq):
+        if key in taken or not CLEAN_WORD.match(key) or key not in user_words or key not in wiktionary:
+            continue
+
+        if wn.base(key) != key:
+            continue
+
+        blocks = [(pos, [g for g in glosses if not pointer.match(g)]) for pos, glosses in wiktionary[key] if pos]
+        blocks = [(pos, glosses) for pos, glosses in blocks if glosses]
+
+        if not blocks:
+            continue
+
+        pos, glosses = blocks[0]
+        rows.append(
+            {
+                "word": key,
+                "pronunciation": None,
+                "pos_code": pos,
+                "meaning_en": None,
+                "meaning_vi": build_meaning_vi(glosses[:1]),
+                "first_letter": key[0].upper(),
+                "length": len(key),
+            }
+        )
+        from_wiktionary += 1
+
     # Deterministic order (alphabetical) so ids/DB bytes are stable across runs.
     rows.sort(key=lambda r: r["word"].lower())
 
@@ -242,7 +311,7 @@ def main() -> int:
     log(f"  dropped (not common / not in words.txt): {skipped_uncommon:,}")
     log(f"  dropped (already in DB): {skipped_dup:,}")
     log(f"  dropped (no Vietnamese meaning): {skipped_no_meaning:,}")
-    log(f"  --> to import: {len(rows):,}")
+    log(f"  --> to import: {len(rows):,} ({from_wiktionary:,} of them from Wiktionary)")
     with_ipa = sum(1 for r in rows if r["pronunciation"])
     with_pos = sum(1 for r in rows if r["pos_code"])
     log(f"      of which have IPA: {with_ipa:,} | have POS: {with_pos:,}")

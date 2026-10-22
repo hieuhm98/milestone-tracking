@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import Database from "better-sqlite3";
 import { DEFAULT_GROUP } from "@/lib/groups";
+import { DICTIONARY_DIR } from "@/lib/server/wordSenses";
 import {
   MAX_OCCURRENCES,
   normalizeTerm,
@@ -10,6 +11,7 @@ import {
   type DictionaryEntry,
   type DictionaryHit,
   type DictionaryOccurrence,
+  type Level,
 } from "@/lib/dictionary";
 
 const CONTENT_DIR = path.join(process.cwd(), "knowledge-content");
@@ -30,8 +32,12 @@ interface RawVocabItem {
   explanationEn?: string;
 }
 
-interface IndexedWord extends DictionaryHit {
+export interface IndexedWord extends DictionaryHit {
   occurrences: DictionaryOccurrence[];
+  /** Subtitle-frequency rank (1 = most used); search results sort by it. */
+  rank?: number;
+  /** A phrasal verb or idiom entry ("give up"), kept out of plain A–Z browsing. */
+  phrase?: boolean;
   /**
    * The two sources are kept apart until `finalizeEntries` decides what the
    * entry leads with — the common (word-bank) sense — so the course sense can
@@ -143,7 +149,67 @@ function finalizeEntries(byWord: Map<string, IndexedWord>): void {
   }
 }
 
-/** Load the committed word bank. Missing or unreadable is survivable. */
+interface DictionaryRow {
+  word: string;
+  display: string;
+  kind: "word" | "phrase";
+  pos_code: string | null;
+  ipa: string | null;
+  meaning_vi: string | null;
+  meaning_en: string | null;
+  freq_rank: number | null;
+  level: Level;
+}
+
+/**
+ * Load every entry's summary from the per-letter dictionary files
+ * (~99k rows). Missing or unreadable is survivable: false sends the caller to
+ * the word bank instead.
+ */
+function addDictionary(byWord: Map<string, IndexedWord>): boolean {
+  if (!fs.existsSync(DICTIONARY_DIR)) return false;
+
+  const files = fs.readdirSync(DICTIONARY_DIR).filter((name) => name.endsWith(".db"));
+
+  if (files.length === 0) return false;
+
+  for (const name of files) {
+    let db: Database.Database | null = null;
+
+    try {
+      db = new Database(path.join(DICTIONARY_DIR, name), { readonly: true, fileMustExist: true });
+
+      const rows = db
+        .prepare("SELECT word, display, kind, pos_code, ipa, meaning_vi, meaning_en, freq_rank, level FROM words")
+        .all() as DictionaryRow[];
+
+      for (const row of rows) {
+        // Course-only words carry senses but no summary; vocab.json supplies theirs.
+        if (!row.meaning_vi && !row.meaning_en) continue;
+
+        const entry = byWord.get(row.word) ?? blank(row.display);
+
+        entry.inBank = true;
+        entry.level = row.level;
+        entry.rank = row.freq_rank ?? undefined;
+        entry.phrase = row.kind === "phrase";
+        entry.bankIpa = row.ipa ?? undefined;
+        entry.bankPos = row.pos_code ?? undefined;
+        entry.bankMeaningEn = row.meaning_en ?? undefined;
+        entry.bankMeaningVi = row.meaning_vi ?? undefined;
+        byWord.set(row.word, entry);
+      }
+    } catch {
+      return false;
+    } finally {
+      db?.close();
+    }
+  }
+
+  return true;
+}
+
+/** Fallback when data/dictionary/ is missing: the SQL playground's word bank. */
 function addWordBank(byWord: Map<string, IndexedWord>): boolean {
   if (!fs.existsSync(DB_FILE)) return false;
 
@@ -182,7 +248,7 @@ function addWordBank(byWord: Map<string, IndexedWord>): boolean {
 
 function buildIndex(): DictionaryIndex {
   const byWord = new Map<string, IndexedWord>();
-  const bank = addWordBank(byWord);
+  const bank = addDictionary(byWord) || addWordBank(byWord);
 
   addCourseVocabulary(byWord);
   finalizeEntries(byWord);
@@ -190,8 +256,8 @@ function buildIndex(): DictionaryIndex {
   return { byWord, sorted: Array.from(byWord.keys()).sort(), bank };
 }
 
-// Content and the word bank only change on deploy, so production builds the
-// index once (~24k entries) and reuses it. Dev rebuilds so edited vocab.json
+// Content and the dictionary only change on deploy, so production builds the
+// index once (~99k entries) and reuses it. Dev rebuilds so edited vocab.json
 // files show up without a restart.
 let cached: DictionaryIndex | null = null;
 
@@ -207,7 +273,7 @@ export function lookupEntry(index: DictionaryIndex, word: string): DictionaryEnt
 
   if (!found) return null;
 
-  const { word: display, pos, ipa, meaningVi, meaningEn, courseCount, inBank } = found;
+  const { word: display, pos, ipa, meaningVi, meaningEn, courseCount, inBank, level } = found;
   /** Repeating what the entry already leads with would just be noise. */
   const distinct = (value?: string, leading?: string) => (value && value !== leading ? value : undefined);
 
@@ -219,6 +285,7 @@ export function lookupEntry(index: DictionaryIndex, word: string): DictionaryEnt
     meaningEn,
     courseCount,
     inBank,
+    level,
     courseMeaningVi: distinct(found.courseMeaningVi, meaningVi),
     courseMeaningEn: distinct(found.courseMeaningEn, meaningEn),
     courseIpa: distinct(found.courseIpa, ipa),

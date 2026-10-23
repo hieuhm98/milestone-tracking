@@ -105,6 +105,18 @@ export interface BlitzProgress {
   updatedAt: string;
 }
 
+/**
+ * One SQL challenge (/practice/sql/challenges), keyed by challenge id. Both
+ * fields only ever grow: a solve is never undone, and merging two devices keeps
+ * the earliest solve and the larger attempt count.
+ */
+export interface SqlChallengeProgress {
+  /** Graded submissions, accepted or not. */
+  attempts: number;
+  /** First accepted submission; null while unsolved. */
+  solvedAt: string | null;
+}
+
 export interface ProgressData {
   version: number;
   updatedAt: string;
@@ -118,6 +130,8 @@ export interface ProgressData {
   exams: Record<string, ExamProgress>;
   /** Blitz records, keyed by `blitzKey(group, seconds)`. */
   blitz: Record<string, BlitzProgress>;
+  /** SQL challenge results, keyed by challenge id. */
+  sqlChallenges: Record<string, SqlChallengeProgress>;
 }
 
 /** A check test at or above this score marks the mini-lesson complete. */
@@ -133,6 +147,7 @@ export function emptyProgress(): ProgressData {
     recall: {},
     exams: {},
     blitz: {},
+    sqlChallenges: {},
   };
 }
 
@@ -280,6 +295,19 @@ export function normalize(raw: unknown): ProgressData {
     }
   }
 
+  const sqlChallenges: Record<string, SqlChallengeProgress> = {};
+
+  if (isRecord(raw.sqlChallenges)) {
+    for (const [id, value] of Object.entries(raw.sqlChallenges)) {
+      if (!isRecord(value)) continue;
+
+      sqlChallenges[id] = {
+        attempts: num(value.attempts),
+        solvedAt: typeof value.solvedAt === "string" ? isoOr(value.solvedAt, epoch) : null,
+      };
+    }
+  }
+
   return {
     version: PROGRESS_VERSION,
     updatedAt: isoOr(raw.updatedAt, epoch),
@@ -289,6 +317,7 @@ export function normalize(raw: unknown): ProgressData {
     recall,
     exams,
     blitz,
+    sqlChallenges,
   };
 }
 
@@ -366,6 +395,7 @@ export function mergeProgress(a: ProgressData, b: ProgressData): ProgressData {
     recall,
     exams,
     blitz,
+    sqlChallenges: union(a.sqlChallenges, b.sqlChallenges, mergeSqlChallenge),
   };
 }
 
@@ -711,6 +741,11 @@ function mergeBlitz(a: BlitzProgress | undefined, b: BlitzProgress): BlitzProgre
   };
 }
 
+/** Monotonic both ways: the earliest solve, the larger attempt count. */
+function mergeSqlChallenge(a: SqlChallengeProgress, b: SqlChallengeProgress): SqlChallengeProgress {
+  return { attempts: Math.max(a.attempts, b.attempts), solvedAt: earliest(a.solvedAt, b.solvedAt) };
+}
+
 function mergeRecall(a: RecallStat, b: RecallStat): RecallStat {
   return {
     seen: Math.max(a.seen, b.seen),
@@ -794,6 +829,7 @@ export function mergeImport(local: ProgressData, imported: ProgressData, groups:
     recall: union(local.recall, imported.recall, mergeRecall),
     exams: union(local.exams, imported.exams, (x, y) => mergeExam(x, y)),
     blitz: union(local.blitz, imported.blitz, (x, y) => mergeBlitz(x, y)),
+    sqlChallenges: union(local.sqlChallenges, imported.sqlChallenges, mergeSqlChallenge),
   };
 
   return { data, courses: diffCourses(local, imported, data, groups), newReviews: added.length };
@@ -953,6 +989,27 @@ export function recordBlitz(prev: ProgressData, group: string, result: BlitzResu
     reviews,
     recall: applyRecall(prev.recall, result.answers, now),
     blitz: { ...prev.blitz, [key]: record },
+  };
+}
+
+/**
+ * Record a graded SQL challenge submission. An accepted one marks the challenge
+ * solved (the first solve date sticks); a rejected one only counts the attempt.
+ */
+export function recordSqlChallenge(prev: ProgressData, id: string, accepted: boolean): ProgressData {
+  const now = new Date().toISOString();
+  const existing = prev.sqlChallenges[id];
+
+  return {
+    ...prev,
+    updatedAt: now,
+    sqlChallenges: {
+      ...prev.sqlChallenges,
+      [id]: {
+        attempts: (existing?.attempts ?? 0) + 1,
+        solvedAt: existing?.solvedAt ?? (accepted ? now : null),
+      },
+    },
   };
 }
 

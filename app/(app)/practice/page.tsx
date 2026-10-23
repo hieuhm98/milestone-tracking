@@ -30,8 +30,18 @@ const CARDS = [
     accent: "text-emerald-700 dark:text-emerald-300",
     title: { vi: "Luyện tập SQL", en: "SQL Practice" },
     desc: {
-      vi: "Viết và chạy SQL thật trên kho từ vựng tiếng Anh (~23k từ). Truy vấn chạy trên bản sao trong bộ nhớ.",
-      en: "Write and run real SQL against the English word bank (~23k words). Queries run on an in‑memory copy.",
+      vi: "Viết và chạy SQL thật trên kho từ vựng tiếng Anh hoặc dữ liệu fintech, kèm sơ đồ cơ sở dữ liệu. Truy vấn chạy trên bản sao trong bộ nhớ.",
+      en: "Write and run real SQL against the English word bank or fintech data, with a database diagram. Queries run on an in‑memory copy.",
+    },
+  },
+  {
+    href: "/practice/sql/challenges",
+    icon: "◆",
+    accent: "text-teal-700 dark:text-teal-300",
+    title: { vi: "Thử thách SQL", en: "SQL Challenges" },
+    desc: {
+      vi: "36 bài từ dễ đến khó kiểu LeetCode, chấm tự động: lọc, gộp nhóm, JOIN, truy vấn con, CTE đệ quy, hàm cửa sổ, INSERT/UPDATE/CREATE…",
+      en: "36 LeetCode-style challenges from easy to hard, auto-graded: filtering, grouping, JOINs, subqueries, recursive CTEs, window functions, INSERT/UPDATE/CREATE…",
     },
   },
   {

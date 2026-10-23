@@ -113,6 +113,9 @@ function main() {
     );
 
     CREATE INDEX idx_words_pos ON words(pos_code);
+    -- Lookups by spelling (and the "-ness" self-join SQL challenge, which takes
+    -- ~25 s without it: 23k × 23k comparisons).
+    CREATE INDEX idx_words_word ON words(word);
     CREATE INDEX idx_words_letter ON words(first_letter);
     CREATE INDEX idx_reviews_word ON word_reviews(word_id);
   `);

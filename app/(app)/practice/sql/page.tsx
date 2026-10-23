@@ -1,31 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useLang } from "@/context/lang";
 import { cn } from "@/lib/utils";
-
-interface Column {
-  name: string;
-  type: string;
-  pk: boolean;
-  notnull: boolean;
-}
-interface TableSchema {
-  name: string;
-  rowCount: number;
-  columns: Column[];
-}
-interface QueryResult {
-  columns: string[];
-  rows: unknown[][];
-  rowCount: number;
-  truncated: boolean;
-  changes: number | null;
-  elapsedMs: number;
-  error: string | null;
-}
-
-type PlaygroundDb = "words" | "fintech";
+import type { PlaygroundDb, QueryResult } from "@/lib/sqlPlayground";
+import { QueryResultView } from "@/components/sql/ResultTable";
+import { SchemaDiagram } from "@/components/sql/SchemaDiagram";
+import { SqlEditor } from "@/components/sql/SqlEditor";
+import { useSchema } from "@/components/sql/useSchema";
 
 interface Example {
   vi: string;
@@ -180,6 +163,9 @@ const STORAGE_KEYS: Record<PlaygroundDb, string> = {
   fintech: "sql-practice-query:fintech",
 };
 const DB_KEY = "sql-practice-db";
+const VIEW_KEY = "sql-practice-view";
+
+type View = "editor" | "diagram";
 
 function readStorage(key: string): string | null {
   try {
@@ -199,9 +185,9 @@ function writeStorage(key: string, value: string) {
 
 export default function SqlPracticePage() {
   const { pick } = useLang();
-  const [schema, setSchema] = useState<TableSchema[]>([]);
-  const [schemaError, setSchemaError] = useState<string | null>(null);
   const [db, setDb] = useState<PlaygroundDb>("words");
+  const [view, setView] = useState<View>("editor");
+  const { tables: schema, error: schemaError } = useSchema(db);
   const [sql, setSql] = useState(WORD_EXAMPLES[0].sql);
   const [result, setResult] = useState<QueryResult | null>(null);
   const [running, setRunning] = useState(false);
@@ -215,29 +201,19 @@ export default function SqlPracticePage() {
       DB_OPTIONS.find((o) => o.id === fromUrl) ?? DB_OPTIONS.find((o) => o.id === readStorage(DB_KEY));
 
     if (initial) setDb(initial.id);
+
+    if (readStorage(VIEW_KEY) === "diagram") setView("diagram");
   }, []);
 
   useEffect(() => {
     setSql(readStorage(STORAGE_KEYS[db]) ?? EXAMPLES[db][0].sql);
     setResult(null);
-    setSchema([]);
-    setSchemaError(null);
-
-    const controller = new AbortController();
-
-    fetch(`/api/sql-playground?db=${db}`, { signal: controller.signal })
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.error) setSchemaError(d.error);
-
-        setSchema(d.tables ?? []);
-      })
-      .catch((e) => {
-        if (!controller.signal.aborted) setSchemaError(String(e));
-      });
-
-    return () => controller.abort();
   }, [db]);
+
+  function chooseView(next: View) {
+    writeStorage(VIEW_KEY, next);
+    setView(next);
+  }
 
   function chooseDb(next: PlaygroundDb) {
     if (next === db) return;
@@ -278,28 +254,28 @@ export default function SqlPracticePage() {
     }
   }, [sql, db]);
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
-      e.preventDefault();
-      run();
-    }
-  };
-
   function insertSnippet(text: string) {
     setSql(text);
-    taRef.current?.focus();
+    chooseView("editor");
+    // The editor mounts again when coming back from the diagram.
+    requestAnimationFrame(() => taRef.current?.focus());
   }
 
   return (
     <div className="max-w-[1400px] mx-auto">
-      <div className="mb-5">
-        <h1 className="text-2xl font-bold">{pick("Luyện tập SQL", "SQL Practice")}</h1>
-        <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
-          {pick(
-            "Viết truy vấn SQL và chạy trên một trong hai bộ dữ liệu. Mọi truy vấn chạy trên bản sao trong bộ nhớ — dữ liệu gốc không bị thay đổi.",
-            "Write SQL and run it against one of two datasets. Every query runs on an in-memory copy — the stored data is never changed."
-          )}
-        </p>
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0 max-w-3xl">
+          <h1 className="text-2xl font-bold">{pick("Luyện tập SQL", "SQL Practice")}</h1>
+          <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
+            {pick(
+              "Viết truy vấn SQL và chạy trên một trong hai bộ dữ liệu. Mọi truy vấn chạy trên bản sao trong bộ nhớ — dữ liệu gốc không bị thay đổi.",
+              "Write SQL and run it against one of two datasets. Every query runs on an in-memory copy — the stored data is never changed."
+            )}
+          </p>
+        </div>
+        <Link href="/practice/sql/challenges" className="btn-primary shrink-0 text-sm">
+          {pick("◆ Thử thách SQL →", "◆ SQL challenges →")}
+        </Link>
       </div>
 
       {/* Dataset switcher */}
@@ -335,33 +311,64 @@ export default function SqlPracticePage() {
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
+      {/* Editor / diagram switch */}
+      <div
+        role="tablist"
+        aria-label={pick("Chế độ xem", "View")}
+        className="inline-flex rounded-lg border border-zinc-300 dark:border-zinc-700/60 p-0.5 mb-4 bg-white dark:bg-zinc-900"
+      >
+        {(
+          [
+            ["editor", pick("Trình soạn SQL", "SQL editor")],
+            ["diagram", pick("Sơ đồ cơ sở dữ liệu", "Database diagram")],
+          ] as [View, string][]
+        ).map(([id, label]) => (
+          <button
+            key={id}
+            role="tab"
+            aria-selected={view === id}
+            onClick={() => chooseView(id)}
+            className={cn(
+              "px-3 py-2 sm:py-1.5 text-sm rounded-md transition-colors",
+              view === id
+                ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium"
+                : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+            )}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {view === "diagram" && (
+        <div className="card">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
+            {pick(
+              "Mỗi đường nối là một khoá ngoại: cột bên phải trỏ tới khoá của bảng bên trái — đó chính là điều kiện ON khi JOIN. Bấm tên bảng để mở SELECT trên bảng đó.",
+              "Each line is a foreign key: a column on the right points at a key on the left — exactly the ON condition of a JOIN. Click a table name to open a SELECT on it."
+            )}
+          </p>
+          {schemaError && <div className="text-xs text-red-600 dark:text-red-400 mb-2">{schemaError}</div>}
+          <SchemaDiagram tables={schema} pick={pick} onTableClick={(name) => insertSnippet(`SELECT * FROM ${name} LIMIT 20;`)} />
+        </div>
+      )}
+
+      <div className={cn("grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5", view === "diagram" && "hidden")}>
         {/* Editor + results */}
         <div className="space-y-4 min-w-0">
-          <div className="card p-0 overflow-hidden">
-            <textarea
-              ref={taRef}
-              value={sql}
-              onChange={(e) => setSql(e.target.value)}
-              onKeyDown={onKeyDown}
-              spellCheck={false}
-              rows={8}
-              className="w-full bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-mono text-sm p-4 resize-y focus:outline-none border-b border-zinc-200 dark:border-zinc-800"
-              placeholder={db === "fintech" ? "SELECT * FROM loans LIMIT 10;" : "SELECT * FROM words LIMIT 10;"}
-            />
-            <div className="flex items-center justify-between px-4 py-2.5 bg-white dark:bg-zinc-900">
-              <span className="text-xs text-zinc-500">
-                {pick("Nhấn", "Press")}{" "}
-                <kbd className="px-1.5 py-0.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded text-zinc-700 dark:text-zinc-300">
-                  Ctrl+Enter
-                </kbd>{" "}
-                {pick("để chạy", "to run")}
-              </span>
+          <SqlEditor
+            ref={taRef}
+            value={sql}
+            onChange={setSql}
+            onRun={run}
+            pick={pick}
+            placeholder={db === "fintech" ? "SELECT * FROM loans LIMIT 10;" : "SELECT * FROM words LIMIT 10;"}
+            actions={
               <button className="btn-primary" onClick={run} disabled={running}>
                 {running ? pick("Đang chạy...", "Running...") : pick("▶ Chạy", "▶ Run")}
               </button>
-            </div>
-          </div>
+            }
+          />
 
           {/* Example queries */}
           <div className="flex flex-wrap gap-2">
@@ -377,7 +384,7 @@ export default function SqlPracticePage() {
           </div>
 
           {/* Result */}
-          {result && <ResultView result={result} pick={pick} />}
+          {result && <QueryResultView result={result} pick={pick} />}
         </div>
 
         {/* Schema side panel */}
@@ -418,90 +425,6 @@ export default function SqlPracticePage() {
             </div>
           ))}
         </aside>
-      </div>
-    </div>
-  );
-}
-
-function ResultView({
-  result,
-  pick,
-}: {
-  result: QueryResult;
-  pick: (vi: string, en: string) => string;
-}) {
-  if (result.error) {
-    return (
-      <div className="card border-red-200 dark:border-red-900/60 bg-red-50 dark:bg-red-950/20">
-        <div className="text-xs font-semibold text-red-600 dark:text-red-400 uppercase tracking-wider mb-1">
-          {pick("Lỗi", "Error")}
-        </div>
-        <pre className="text-sm text-red-700 dark:text-red-300 whitespace-pre-wrap font-mono">
-          {result.error}
-        </pre>
-      </div>
-    );
-  }
-
-  // Non-SELECT statement (INSERT/UPDATE/CREATE/...)
-  if (result.columns.length === 0) {
-    return (
-      <div className="card text-sm text-zinc-700 dark:text-zinc-300">
-        {result.changes !== null
-          ? pick(
-              `Thực thi thành công · ${result.changes} dòng bị ảnh hưởng`,
-              `Statement executed · ${result.changes} row(s) affected`
-            )
-          : pick("Thực thi thành công.", "Statement executed.")}
-        <span className="text-zinc-400 dark:text-zinc-600 ml-2">
-          ({result.elapsedMs.toFixed(1)} ms)
-        </span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="card p-0 overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-200 dark:border-zinc-800 text-xs text-zinc-500">
-        <span>
-          {result.rowCount.toLocaleString()} {pick("dòng", "rows")}
-          {result.truncated &&
-            pick(` · hiển thị ${result.rows.length}`, ` · showing ${result.rows.length}`)}
-        </span>
-        <span>{result.elapsedMs.toFixed(1)} ms</span>
-      </div>
-      <div className="overflow-auto max-h-[60vh]">
-        <table className="w-full text-sm border-collapse">
-          <thead className="sticky top-0 bg-white dark:bg-zinc-900">
-            <tr>
-              {result.columns.map((c, i) => (
-                <th
-                  key={i}
-                  className="text-left font-semibold text-zinc-700 dark:text-zinc-300 px-3 py-2 border-b border-zinc-200 dark:border-zinc-800 whitespace-nowrap"
-                >
-                  {c}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {result.rows.map((row, ri) => (
-              <tr key={ri} className="hover:bg-zinc-200 dark:hover:bg-zinc-800/40">
-                {row.map((cell, ci) => (
-                  <td
-                    key={ci}
-                    className={cn(
-                      "px-3 py-1.5 border-b border-zinc-200 dark:border-zinc-800/60 font-mono text-xs align-top",
-                      cell === null ? "text-zinc-400 dark:text-zinc-600 italic" : "text-zinc-800 dark:text-zinc-200"
-                    )}
-                  >
-                    {cell === null ? "NULL" : String(cell)}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );

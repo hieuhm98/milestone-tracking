@@ -22,6 +22,8 @@ const nextConfig = {
       "/english/ielts-speaking/**": ["./data/ielts-speaking/**"],
       // Both SQL-playground databases are opened through a runtime path join.
       "/api/sql-playground": ["./data/word-bank.db", "./data/fintech.db"],
+      // The SQL challenges grade against the same two databases.
+      "/api/sql-challenges": ["./data/word-bank.db", "./data/fintech.db"],
       "/english/grammar-for-writing/**": ["./data/grammar-for-writing/**"],
     },
   },

@@ -5,7 +5,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // GET  /api/sql-playground?db=fintech       → table structures for the "schema" side panel
-// POST /api/sql-playground {sql, db?}       → run one statement against an in-memory clone
+// POST /api/sql-playground {sql, db?}       → run one statement against an in-memory clone,
+//                                             in a worker with a time limit (lib/server/sqlWorker.ts)
 //
 // `db` is "words" (the English word bank, the default) or "fintech" (the
 // digital-lending / e-wallet practice data). Safe to expose: queries run
@@ -50,5 +51,9 @@ export async function POST(request: Request) {
 
   if (!db) return NextResponse.json({ error: "Unknown database" }, { status: 400 });
 
-  return NextResponse.json(runQuery(body.sql, db));
+  try {
+    return NextResponse.json(await runQuery(body.sql, db));
+  } catch (e) {
+    return NextResponse.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 });
+  }
 }

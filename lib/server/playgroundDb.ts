@@ -17,6 +17,7 @@
 import Database from "better-sqlite3";
 import fs from "fs";
 import path from "path";
+import { runSqlJob } from "@/lib/server/sqlWorker";
 
 export const PLAYGROUND_DBS = ["words", "fintech"] as const;
 export type PlaygroundDb = (typeof PLAYGROUND_DBS)[number];
@@ -34,17 +35,24 @@ export function isPlaygroundDb(value: unknown): value is PlaygroundDb {
 // per query so mutations are always discarded.
 const snapshots = new Map<PlaygroundDb, Buffer>();
 
-function getSnapshot(which: PlaygroundDb): Buffer {
-  const cached = snapshots.get(which);
-
-  if (cached) return cached;
-
+/** Absolute path of a playground database; throws a helpful error when it's missing. */
+export function playgroundFile(which: PlaygroundDb): string {
   const { file, seed } = DB_FILES[which];
   const dbFile = path.join(process.cwd(), "data", file);
 
   if (!fs.existsSync(dbFile)) {
     throw new Error(`${file} not found. Run \`node ${seed}\` to build it.`);
   }
+
+  return dbFile;
+}
+
+function getSnapshot(which: PlaygroundDb): Buffer {
+  const cached = snapshots.get(which);
+
+  if (cached) return cached;
+
+  const dbFile = playgroundFile(which);
 
   const disk = new Database(dbFile, { readonly: true, fileMustExist: true });
   const snapshot = disk.serialize();
@@ -54,10 +62,20 @@ function getSnapshot(which: PlaygroundDb): Buffer {
   return snapshot;
 }
 
+export interface ForeignKey {
+  /** Column in this table… */
+  from: string;
+  /** …that points at this table's column. */
+  table: string;
+  to: string;
+}
+
 export interface TableSchema {
   name: string;
   rowCount: number;
   columns: { name: string; type: string; pk: boolean; notnull: boolean }[];
+  /** Drawn as the links of the schema diagram. */
+  foreignKeys: ForeignKey[];
 }
 
 export interface QueryResult {
@@ -65,6 +83,8 @@ export interface QueryResult {
   rows: unknown[][];
   rowCount: number;
   truncated: boolean;
+  /** More rows than COUNT_LIMIT: rowCount is a floor, shown as "100,000+". */
+  capped: boolean;
   changes: number | null; // set for non-SELECT statements (INSERT/UPDATE/...)
   elapsedMs: number;
   error: string | null;
@@ -92,6 +112,16 @@ export function getSchema(which: PlaygroundDb = "words"): TableSchema[] {
       const { c } = db.prepare(`SELECT COUNT(*) AS c FROM "${t.name}"`).get() as {
         c: number;
       };
+      const fks = db.prepare(`PRAGMA foreign_key_list("${t.name}")`).all() as {
+        table: string;
+        from: string;
+        to: string | null;
+      }[];
+      // A REFERENCES without a column name points at the parent's primary key.
+      const pkOf = (table: string) =>
+        (db.prepare(`PRAGMA table_info("${table}")`).all() as { name: string; pk: number }[]).find((col) => col.pk > 0)
+          ?.name ?? "rowid";
+
       return {
         name: t.name,
         rowCount: c,
@@ -101,6 +131,7 @@ export function getSchema(which: PlaygroundDb = "words"): TableSchema[] {
           pk: col.pk > 0,
           notnull: col.notnull > 0,
         })),
+        foreignKeys: fks.map((fk) => ({ from: fk.from, table: fk.table, to: fk.to ?? pkOf(fk.table) })),
       };
     });
   } finally {
@@ -108,57 +139,48 @@ export function getSchema(which: PlaygroundDb = "words"): TableSchema[] {
   }
 }
 
-// Run one user-supplied SQL statement against a disposable in-memory copy.
-export function runQuery(sql: string, which: PlaygroundDb = "words"): QueryResult {
+// How many rows a playground query counts before giving up ("100,000+ rows").
+const COUNT_LIMIT = 100_000;
+
+/**
+ * Run one user-supplied SQL statement against a disposable in-memory copy, in
+ * the SQL worker pool (lib/server/sqlWorker.ts) so a runaway query is stopped
+ * after a few seconds instead of blocking the server.
+ */
+export async function runQuery(sql: string, which: PlaygroundDb = "words"): Promise<QueryResult> {
   const empty: QueryResult = {
     columns: [],
     rows: [],
     rowCount: 0,
     truncated: false,
+    capped: false,
     changes: null,
     elapsedMs: 0,
     error: null,
   };
 
   const trimmed = (sql ?? "").trim();
+
   if (!trimmed) return { ...empty, error: "Empty query." };
 
-  const db = new Database(getSnapshot(which)); // writable in-memory clone (discarded)
-  const started = process.hrtime.bigint();
-  try {
-    const stmt = db.prepare(trimmed);
-    const elapsed = () => Number(process.hrtime.bigint() - started) / 1e6;
+  const job = await runSqlJob(playgroundFile(which), [{ sql: trimmed, maxRows: COUNT_LIMIT, keepRows: MAX_ROWS }]);
 
-    // `reader` is true for statements that return rows (SELECT / PRAGMA / ...).
-    if (stmt.reader) {
-      stmt.raw(true); // rows as arrays so duplicate/expression column names survive
-      const columns = stmt.columns().map((c) => c.name);
-      const all = stmt.all() as unknown[][];
-      const truncated = all.length > MAX_ROWS;
-      return {
-        columns,
-        rows: truncated ? all.slice(0, MAX_ROWS) : all,
-        rowCount: all.length,
-        truncated,
-        changes: null,
-        elapsedMs: elapsed(),
-        error: null,
-      };
-    }
+  if (!job.ok) return { ...empty, elapsedMs: job.elapsedMs, error: job.error };
 
-    const info = stmt.run();
-    return {
-      ...empty,
-      changes: info.changes,
-      elapsedMs: elapsed(),
-    };
-  } catch (e) {
-    return {
-      ...empty,
-      elapsedMs: Number(process.hrtime.bigint() - started) / 1e6,
-      error: e instanceof Error ? e.message : String(e),
-    };
-  } finally {
-    db.close();
-  }
+  const [step] = job.steps;
+
+  if (!step.reader) return { ...empty, changes: step.changes, elapsedMs: job.elapsedMs };
+
+  const capped = step.rowCount > COUNT_LIMIT;
+
+  return {
+    columns: step.columns,
+    rows: step.rows,
+    rowCount: capped ? COUNT_LIMIT : step.rowCount,
+    truncated: step.rowCount > step.rows.length,
+    capped,
+    changes: null,
+    elapsedMs: job.elapsedMs,
+    error: null,
+  };
 }

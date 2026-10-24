@@ -54,6 +54,16 @@ const CARDS = [
       en: "Call a bookstore API from Scalar: requests and responses, log in for a Bearer token, order and pay. A private sandbox that resets daily.",
     },
   },
+  {
+    href: "/practice/api/web",
+    icon: "🛒",
+    accent: "text-orange-700 dark:text-orange-300",
+    title: { vi: "Cửa hàng web (API)", en: "Web store (API)" },
+    desc: {
+      vi: "Một website bán sách chạy trên API ở trên: đăng ký, giỏ hàng, đặt hàng, thanh toán. Mở DevTools → Network để xem trang web gọi API thế nào.",
+      en: "A bookshop website built on the API above: sign up, cart, order, pay. Open DevTools → Network to see how a real web app calls an API.",
+    },
+  },
 ];
 
 export default function PracticeHomePage() {

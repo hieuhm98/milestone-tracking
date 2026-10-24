@@ -57,6 +57,19 @@ const storageError = (action: string, error: { code?: string; message: string })
 const memory: Map<string, Row> =
   ((globalThis as { __apiSandboxes?: Map<string, Row> }).__apiSandboxes ??= new Map());
 
+/**
+ * Bring a sandbox saved by an older version of the API up to date. Rows live
+ * for a day, so this only matters on the day a table is added (cart_items,
+ * 2026-10-24) — but a missing table would crash every request until midnight.
+ */
+function upgrade(data: SandboxData): SandboxData {
+  const seq = { ...data.seq };
+
+  seq.cart_items ??= 0;
+
+  return { ...data, cart_items: data.cart_items ?? [], seq };
+}
+
 export async function loadSandbox(owner: string, day: string): Promise<LoadedSandbox> {
   const supabase = getSupabaseAdmin();
   let row: Row | null;
@@ -76,7 +89,7 @@ export async function loadSandbox(owner: string, day: string): Promise<LoadedSan
   // Yesterday's (or older) data never comes back: today starts from the seed.
   if (row.day !== day) return { data: seedData(), version: row.version, exists: true };
 
-  return { data: row.data, version: row.version, exists: true };
+  return { data: upgrade(row.data), version: row.version, exists: true };
 }
 
 /**

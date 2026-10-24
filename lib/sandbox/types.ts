@@ -86,6 +86,17 @@ export interface Invoice {
   issued_at: string;
 }
 
+/** One line of a customer's shopping cart. The cart is live state, not history:
+ *  it holds no prices (those are read from books when shown or ordered). */
+export interface CartItem {
+  id: number;
+  user_id: number;
+  book_id: number;
+  quantity: number;
+  added_at: string;
+  updated_at: string;
+}
+
 /** One learner's whole sandbox — small enough to keep as a single JSON document. */
 export interface SandboxData {
   authors: Author[];
@@ -95,6 +106,7 @@ export interface SandboxData {
   order_items: OrderItem[];
   payments: Payment[];
   invoices: Invoice[];
+  cart_items: CartItem[];
   /** Last id handed out per table; ids are never reused, as in a real database. */
   seq: Record<TableName, number>;
 }

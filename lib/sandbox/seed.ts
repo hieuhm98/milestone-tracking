@@ -74,6 +74,8 @@ export function seedData(): SandboxData {
       { id: 3, invoice_number: "INV-2026-0003", order_id: 3, payment_id: 4, user_id: 3, amount: 330000, status: "issued", issued_at: at("09", "04:03") },
       { id: 4, invoice_number: "INV-2026-0004", order_id: 5, payment_id: 5, user_id: 4, amount: 650000, status: "void", issued_at: at("10", "07:01") },
     ],
-    seq: { authors: 8, books: 14, users: 5, orders: 5, order_items: 7, payments: 5, invoices: 4 },
+    // Mai left a book in her cart, so GET /cart has something to show straight away.
+    cart_items: [{ id: 1, user_id: 1, book_id: 5, quantity: 1, added_at: at("13", "09:00"), updated_at: at("13", "09:00") }],
+    seq: { authors: 8, books: 14, users: 5, orders: 5, order_items: 7, payments: 5, invoices: 4, cart_items: 1 },
   };
 }

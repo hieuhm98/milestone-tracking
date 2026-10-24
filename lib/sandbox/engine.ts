@@ -16,12 +16,14 @@ import "server-only";
 import { hashPassword, signToken, TOKEN_TTL_SECONDS, verifyToken } from "./auth";
 import { GENRES, ORDER_STATUSES, PAYMENT_METHODS, USER_ROLES, type TableName } from "./schema";
 import { seedData } from "./seed";
-import type { Author, Book, Invoice, Order, OrderItem, Payment, SandboxData, User } from "./types";
+import type { Author, Book, CartItem, Invoice, Order, OrderItem, Payment, SandboxData, User } from "./types";
 
 export const API_VERSION = "1.0.0";
 /** Rows per table a sandbox may hold, so one learner cannot grow a row without bound. */
 export const MAX_ROWS = 200;
 const MAX_ITEMS_PER_ORDER = 10;
+/** The most copies of one book a cart line (and an order line) may hold. */
+const MAX_QUANTITY = 20;
 const BASE = "/api/sandbox/v1";
 
 export interface SandboxRequest {
@@ -540,6 +542,8 @@ const books = {
     }
 
     data.books = data.books.filter((b) => b.id !== id);
+    // Carts are live state, not history: a deleted book simply leaves them.
+    data.cart_items = data.cart_items.filter((c) => c.book_id !== id);
 
     return { status: 204 };
   },
@@ -615,6 +619,7 @@ const users = {
     }
 
     data.users = data.users.filter((u) => u.id !== id);
+    data.cart_items = data.cart_items.filter((c) => c.user_id !== id);
 
     return { status: 204 };
   },
@@ -682,8 +687,8 @@ const orders = {
           issues.push({ field: `items[${i}].book_id`, issue: "must be a book id" });
         }
 
-        if (typeof line.quantity !== "number" || !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > 20) {
-          issues.push({ field: `items[${i}].quantity`, issue: "must be a whole number from 1 to 20" });
+        if (typeof line.quantity !== "number" || !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > MAX_QUANTITY) {
+          issues.push({ field: `items[${i}].quantity`, issue: `must be a whole number from 1 to ${MAX_QUANTITY}` });
         }
       });
     }
@@ -908,6 +913,104 @@ const payments = {
   },
 };
 
+/** The caller's cart, with each book's current price and stock joined in. */
+function cartView(data: SandboxData, userId: number) {
+  const items = data.cart_items
+    .filter((c) => c.user_id === userId)
+    .map((c) => {
+      const book = data.books.find((b) => b.id === c.book_id)!;
+
+      return {
+        ...c,
+        book: { id: book.id, title: book.title, author_id: book.author_id, genre: book.genre, price: book.price, stock: book.stock },
+        line_total: book.price * c.quantity,
+        // The cart doesn't reserve stock: someone else may buy the last copies first.
+        in_stock: book.stock >= c.quantity,
+      };
+    });
+
+  return {
+    items,
+    item_count: items.reduce((sum, i) => sum + i.quantity, 0),
+    subtotal: items.reduce((sum, i) => sum + i.line_total, 0),
+  };
+}
+
+function cartLine(data: SandboxData, id: number, me: User): CartItem {
+  const line = find(data.cart_items, id, "Cart item");
+
+  if (line.user_id !== me.id) throw forbidden("This cart item is in someone else's cart. Every user — admins included — only has their own cart.");
+
+  return line;
+}
+
+function checkStock(book: Book, quantity: number) {
+  if (book.stock < quantity) {
+    throw new ApiError(422, "insufficient_stock", `Only ${book.stock} cop${book.stock === 1 ? "y" : "ies"} of "${book.title}" in stock.`, { book_id: book.id, requested: quantity, in_stock: book.stock });
+  }
+}
+
+const cart = {
+  get: ({ data, me }: Ctx) => ({ status: 200, body: cartView(data, me!.id) }),
+  add: ({ data, req, now, me }: Ctx): SandboxResponse => {
+    const input = validate(
+      req.body,
+      {
+        book_id: { type: "integer", required: true, min: 1, max: 1_000_000 },
+        quantity: { type: "integer", min: 1, max: MAX_QUANTITY, fallback: 1 },
+      },
+      "create"
+    );
+    const book = data.books.find((b) => b.id === input.book_id);
+
+    if (!book) throw new ApiError(422, "book_not_found", `book_id ${input.book_id} does not match any book.`);
+
+    const existing = data.cart_items.find((c) => c.user_id === me!.id && c.book_id === book.id);
+    const quantity = (existing?.quantity ?? 0) + (input.quantity as number);
+
+    if (quantity > MAX_QUANTITY) {
+      throw new ApiError(422, "quantity_limit", `A cart line holds at most ${MAX_QUANTITY} copies (you'd have ${quantity}).`, { book_id: book.id, max: MAX_QUANTITY });
+    }
+
+    checkStock(book, quantity);
+
+    // The same book again adds to its line rather than making a second one.
+    if (existing) {
+      existing.quantity = quantity;
+      existing.updated_at = now;
+
+      return { status: 200, body: cartView(data, me!.id), headers: { Location: `${BASE}/cart/items/${existing.id}` } };
+    }
+
+    const line: CartItem = { id: nextId(data, "cart_items"), user_id: me!.id, book_id: book.id, quantity, added_at: now, updated_at: now };
+
+    data.cart_items.push(line);
+
+    return created(cartView(data, me!.id), `/cart/items/${line.id}`);
+  },
+  update: ({ data, req, id, now, me }: Ctx) => {
+    const line = cartLine(data, id, me!);
+    const input = validate(req.body, { quantity: { type: "integer", required: true, min: 1, max: MAX_QUANTITY } }, "create");
+
+    checkStock(data.books.find((b) => b.id === line.book_id)!, input.quantity as number);
+    line.quantity = input.quantity as number;
+    line.updated_at = now;
+
+    return { status: 200, body: cartView(data, me!.id) };
+  },
+  removeItem: ({ data, id, me }: Ctx) => {
+    cartLine(data, id, me!);
+    data.cart_items = data.cart_items.filter((c) => c.id !== id);
+
+    return { status: 204 };
+  },
+  clear: ({ data, me }: Ctx) => {
+    data.cart_items = data.cart_items.filter((c) => c.user_id !== me!.id);
+
+    return { status: 204 };
+  },
+};
+
 const invoices = {
   list: ({ data, req, me }: Ctx) => list(isAdmin(me) ? data.invoices : data.invoices.filter((i) => i.user_id === me!.id), req.query, invoiceList),
   get: ({ data, id, me }: Ctx) => {
@@ -929,13 +1032,13 @@ function info({ req }: Ctx): SandboxResponse {
       resets_at: req.resetsAt,
       docs: "/practice/api",
       openapi: "/api/sandbox/openapi.json",
-      resources: ["/auth", "/authors", "/books", "/users", "/orders", "/payments", "/invoices", "/sandbox"],
+      resources: ["/auth", "/authors", "/books", "/users", "/cart", "/orders", "/payments", "/invoices", "/sandbox"],
     },
   };
 }
 
 function sandboxSummary({ data, req }: Ctx): SandboxResponse {
-  const tables: TableName[] = ["authors", "books", "users", "orders", "order_items", "payments", "invoices"];
+  const tables: TableName[] = ["authors", "books", "users", "cart_items", "orders", "order_items", "payments", "invoices"];
 
   return {
     status: 200,
@@ -994,6 +1097,12 @@ const ROUTES: Route[] = [
   { method: "PATCH", pattern: "users/:id", access: "user", handler: users.update("patch"), writes: true },
   { method: "DELETE", pattern: "users/:id", access: "admin", handler: users.remove, writes: true },
   { method: "GET", pattern: "users/:id/orders", access: "user", handler: users.orders },
+
+  { method: "GET", pattern: "cart", access: "user", handler: cart.get },
+  { method: "DELETE", pattern: "cart", access: "user", handler: cart.clear, writes: true },
+  { method: "POST", pattern: "cart/items", access: "user", handler: cart.add, writes: true },
+  { method: "PATCH", pattern: "cart/items/:id", access: "user", handler: cart.update, writes: true },
+  { method: "DELETE", pattern: "cart/items/:id", access: "user", handler: cart.removeItem, writes: true },
 
   { method: "GET", pattern: "orders", access: "user", handler: orders.list },
   { method: "POST", pattern: "orders", access: "user", handler: orders.create, writes: true },

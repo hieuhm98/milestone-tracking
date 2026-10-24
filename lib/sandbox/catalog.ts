@@ -47,7 +47,7 @@ export interface Operation {
   setup?: ExampleCall[];
 }
 
-export type Tag = "Start" | "Auth" | "Authors" | "Books" | "Users" | "Orders" | "Payments" | "Invoices";
+export type Tag = "Start" | "Auth" | "Authors" | "Books" | "Users" | "Cart" | "Orders" | "Payments" | "Invoices";
 
 export const TAGS: { name: Tag; desc: Bilingual }[] = [
   { name: "Start", desc: { vi: "Thông tin API và sandbox của bạn.", en: "API info and your sandbox." } },
@@ -55,6 +55,7 @@ export const TAGS: { name: Tag; desc: Bilingual }[] = [
   { name: "Authors", desc: { vi: "Tác giả — ai cũng đọc được, chỉ admin được sửa.", en: "Authors — anyone can read, only admins change them." } },
   { name: "Books", desc: { vi: "Danh mục sách — ai cũng đọc được, chỉ admin được sửa.", en: "The catalogue — anyone can read, only admins change it." } },
   { name: "Users", desc: { vi: "Tài khoản. Khách xem/sửa hồ sơ của mình; admin quản lý tất cả.", en: "Accounts. Customers see and edit their own; admins manage everyone." } },
+  { name: "Cart", desc: { vi: "Giỏ hàng của người đang đăng nhập — mỗi người một giỏ, lưu trên server.", en: "The logged-in user's shopping cart — one per user, kept on the server." } },
   { name: "Orders", desc: { vi: "Đơn hàng — cần đăng nhập. Khách chỉ thấy đơn của mình.", en: "Orders — login required. Customers see only their own." } },
   { name: "Payments", desc: { vi: "Thanh toán đơn hàng (giả lập). Thành công thì tự xuất hoá đơn.", en: "Paying for orders (simulated). Success issues an invoice automatically." } },
   { name: "Invoices", desc: { vi: "Hoá đơn — chỉ đọc, hệ thống tự tạo.", en: "Invoices — read-only, created by the system." } },
@@ -327,6 +328,59 @@ export const OPERATIONS: Operation[] = [
     ],
     responses: [R.ok, R.unauth, R.forbidden, R.notFound],
     example: { as: "customer", method: "GET", path: "/users/1/orders" },
+  },
+
+  // ---------------------------------------------------------------- Cart
+  {
+    id: "getCart", tag: "Cart", method: "GET", path: "/cart", access: "user",
+    summary: { vi: "Xem giỏ hàng", en: "Get the cart" },
+    purpose: {
+      vi: "Không có id trong URL: \"giỏ của tôi\" được xác định bằng token. Mỗi dòng kèm thông tin sách, giá hiện tại, line_total và in_stock; cuối cùng là item_count và subtotal. Giỏ không giữ hàng — in_stock: false nghĩa là đã có người mua hết trước.",
+      en: "No id in the URL: \"my cart\" is identified by the token. Each line comes with the book, its current price, line_total and in_stock, then item_count and subtotal. A cart doesn't reserve stock — in_stock: false means someone else bought the copies first.",
+    },
+    responses: [R.ok, R.unauth],
+    example: { as: "customer", method: "GET", path: "/cart" },
+  },
+  {
+    id: "addCartItem", tag: "Cart", method: "POST", path: "/cart/items", access: "user",
+    summary: { vi: "Thêm sách vào giỏ", en: "Add a book to the cart" },
+    purpose: {
+      vi: "Sách chưa có trong giỏ → tạo dòng mới, 201. Sách đã có → cộng dồn số lượng vào dòng cũ, 200 — cùng một request, hai mã khác nhau tuỳ dữ liệu. Không đủ hàng hoặc quá 20 cuốn → 422. Trả về cả giỏ.",
+      en: "A book not yet in the cart → a new line, 201. A book already there → its quantity goes up, 200 — the same request, two different codes depending on the data. Not enough stock, or more than 20 copies → 422. Returns the whole cart.",
+    },
+    bodySchema: "CartItemInput",
+    responses: [R.created, R.ok, R.bad, R.unauth, { status: 422, desc: { vi: "Sách không tồn tại, hết hàng hoặc vượt giới hạn.", en: "Unknown book, out of stock, or over the limit." } }],
+    example: { as: "customer", method: "POST", path: "/cart/items", body: { book_id: 9, quantity: 1 } },
+  },
+  {
+    id: "updateCartItem", tag: "Cart", method: "PATCH", path: "/cart/items/{id}", access: "user",
+    summary: { vi: "Đổi số lượng", en: "Change the quantity" },
+    purpose: {
+      vi: "Đặt số lượng mới (không phải cộng thêm). Muốn bỏ một dòng thì dùng DELETE, không gửi quantity: 0 (→ 400). Dòng trong giỏ người khác → 403.",
+      en: "Sets the new quantity (it doesn't add). To drop a line use DELETE — quantity: 0 is a 400. A line in someone else's cart → 403.",
+    },
+    params: [idParam({ vi: "Mã dòng giỏ hàng (id trong GET /cart, không phải book_id).", en: "Cart line id (the id from GET /cart, not the book_id)." })],
+    bodySchema: "CartItemPatch",
+    responses: [R.ok, R.bad, R.unauth, R.forbidden, R.notFound, { status: 422, desc: { vi: "Không đủ hàng.", en: "Not enough stock." } }],
+    example: { as: "customer", method: "PATCH", path: "/cart/items/1", body: { quantity: 2 } },
+  },
+  {
+    id: "removeCartItem", tag: "Cart", method: "DELETE", path: "/cart/items/{id}", access: "user",
+    summary: { vi: "Bỏ một dòng khỏi giỏ", en: "Remove a line" },
+    purpose: { vi: "204, không có body. Giỏ hàng không phải lịch sử nên xoá thật — khác với đơn hàng chỉ được huỷ.", en: "204, no body. A cart isn't history, so the row is really deleted — unlike an order, which can only be cancelled." },
+    params: [idParam({ vi: "Mã dòng giỏ hàng.", en: "Cart line id." })],
+    responses: [R.noContent, R.unauth, R.forbidden, R.notFound],
+    example: { as: "customer", method: "DELETE", path: "/cart/items/1" },
+  },
+  {
+    id: "clearCart", tag: "Cart", method: "DELETE", path: "/cart", access: "user",
+    summary: { vi: "Làm trống giỏ", en: "Empty the cart" },
+    purpose: {
+      vi: "Xoá mọi dòng trong giỏ của bạn. Cửa hàng web gọi nó ngay sau khi POST /orders thành công — đặt hàng không tự động làm trống giỏ, client phải tự gọi.",
+      en: "Deletes every line in your cart. The web store calls it right after POST /orders succeeds — placing an order doesn't empty the cart by itself; the client has to.",
+    },
+    responses: [R.noContent, R.unauth],
+    example: { as: "customer", method: "DELETE", path: "/cart" },
   },
 
   // ---------------------------------------------------------------- Orders

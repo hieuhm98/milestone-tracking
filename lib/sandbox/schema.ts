@@ -37,7 +37,8 @@ export type TableName =
   | "orders"
   | "order_items"
   | "payments"
-  | "invoices";
+  | "invoices"
+  | "cart_items";
 
 export const ORDER_STATUSES = ["pending", "paid", "shipped", "delivered", "cancelled"] as const;
 export const PAYMENT_METHODS = ["card", "bank_transfer", "e_wallet", "cash_on_delivery"] as const;
@@ -181,6 +182,22 @@ export const TABLES: Table[] = [
       { name: "amount", type: "integer", readOnly: true, example: 190000, desc: { vi: "Tổng tiền hoá đơn (VND).", en: "Invoice total (VND)." } },
       { name: "status", type: "enum", values: INVOICE_STATUSES, readOnly: true, example: "issued", desc: { vi: "issued hoặc void.", en: "issued or void." } },
       { name: "issued_at", type: "timestamp", readOnly: true, example: "2026-10-15T08:31:00.000Z", desc: { vi: "Ngày xuất.", en: "When it was issued." } },
+    ],
+  },
+  {
+    name: "cart_items",
+    resource: "/cart",
+    desc: {
+      vi: "Giỏ hàng: mỗi dòng là một cuốn sách một khách đang định mua. Khác order_items, đây là trạng thái đang thay đổi chứ không phải lịch sử — không lưu giá (giá đọc từ books lúc hiển thị và lúc đặt hàng), và có thể sửa, xoá thoải mái.",
+      en: "The shopping cart: one row per book a customer intends to buy. Unlike order_items it's live state, not history — it stores no price (prices are read from books when shown and when ordering), and it can be edited or emptied freely.",
+    },
+    columns: [
+      id({ vi: "Mã dòng giỏ hàng.", en: "Cart line id." }),
+      { name: "user_id", type: "integer", ref: "users.id", readOnly: true, example: 1, desc: { vi: "Chủ giỏ hàng — lấy từ token, không gửi lên.", en: "Whose cart — taken from the token, never sent." } },
+      { name: "book_id", type: "integer", ref: "books.id", example: 5, desc: { vi: "Sách trong giỏ. Mỗi sách chỉ một dòng: thêm lại thì cộng dồn số lượng.", en: "The book. One line per book: adding it again adds to the quantity." } },
+      { name: "quantity", type: "integer", example: 1, desc: { vi: "Số lượng (1–20), không vượt quá tồn kho.", en: "How many (1–20), never more than in stock." } },
+      { name: "added_at", type: "timestamp", readOnly: true, example: "2026-10-15T08:30:00.000Z", desc: { vi: "Lúc thêm vào giỏ.", en: "When it was added." } },
+      { name: "updated_at", type: "timestamp", readOnly: true, example: "2026-10-15T08:30:00.000Z", desc: { vi: "Lần đổi số lượng gần nhất.", en: "Last quantity change." } },
     ],
   },
 ];

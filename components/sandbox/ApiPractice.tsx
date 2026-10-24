@@ -1,8 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { useAuth } from "@/context/auth";
 import { useLang } from "@/context/lang";
 import { API_BASE_PATH, SANDBOX_KEY_HEADER, type Operation } from "@/lib/sandbox/catalog";
 import type { WorkedExample } from "@/lib/sandbox/examples";
@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import DatabaseTab from "./DatabaseTab";
 import EndpointsTab from "./EndpointsTab";
 import GuideTab from "./GuideTab";
+import { useSandboxKey } from "./useSandboxKey";
 
 const ScalarPanel = dynamic(() => import("./ScalarPanel"), {
   ssr: false,
@@ -19,26 +20,9 @@ const ScalarPanel = dynamic(() => import("./ScalarPanel"), {
 type Tab = "guide" | "endpoints" | "database" | "client";
 
 const TAB_KEY = "sandbox:tab";
-const BROWSER_ID_KEY = "sandbox:browserId";
-
 interface Summary {
   resets_at: string;
   counts: Record<string, number>;
-}
-
-function browserId(): string {
-  try {
-    let id = window.localStorage.getItem(BROWSER_ID_KEY);
-
-    if (!id) {
-      id = crypto.randomUUID();
-      window.localStorage.setItem(BROWSER_ID_KEY, id);
-    }
-
-    return id;
-  } catch {
-    return crypto.randomUUID();
-  }
 }
 
 /** Scalar's in-page address for one operation: #tag/<tag>/<METHOD><path>. */
@@ -70,11 +54,8 @@ export default function ApiPractice({
   mistakes: Record<string, WorkedExample>;
 }) {
   const { pick, lang } = useLang();
-  const { session, ready: authReady } = useAuth();
   const [tab, setTab] = useState<Tab>("guide");
-  const [apiKey, setApiKey] = useState<string | null>(null);
-  const [keyError, setKeyError] = useState<string | null>(null);
-  const [scope, setScope] = useState<"account" | "browser" | null>(null);
+  const { key: apiKey, error: keyError, scope } = useSandboxKey();
   const [summary, setSummary] = useState<Summary | null>(null);
   const [showKey, setShowKey] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -112,44 +93,6 @@ export default function ApiPractice({
       // Remembering the tab is a convenience only.
     }
   }, []);
-
-  // The key: from the account when signed in, else from this browser.
-  useEffect(() => {
-    if (!authReady) return;
-
-    let cancelled = false;
-
-    async function load() {
-      try {
-        const res = await fetch("/api/sandbox/key", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
-          },
-          body: JSON.stringify({ browserId: browserId() }),
-        });
-        const json = await res.json().catch(() => null);
-
-        if (cancelled) return;
-
-        if (res.ok && typeof json?.key === "string") {
-          setApiKey(json.key);
-          setScope(json.scope);
-        } else {
-          setKeyError(json?.error ?? `HTTP ${res.status}`);
-        }
-      } catch {
-        if (!cancelled) setKeyError("network");
-      }
-    }
-
-    void load();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [authReady, session?.access_token]);
 
   const refresh = useCallback(async () => {
     if (!apiKey) return;
@@ -231,6 +174,28 @@ export default function ApiPractice({
           )}
         </p>
       </div>
+
+      {/* The same API behind a real shop UI — the other half of the lesson. */}
+      <Link
+        href="/practice/api/web"
+        className="card flex flex-wrap items-center gap-4 border-orange-300 dark:border-orange-500/40 bg-orange-50 dark:bg-orange-500/10 hover:border-orange-400 transition-colors"
+      >
+        <span className="text-3xl" aria-hidden="true">
+          🛒
+        </span>
+        <span className="flex-1 min-w-[220px]">
+          <span className="block font-semibold text-zinc-900 dark:text-zinc-100">
+            {pick("Mở cửa hàng web Hiên Sách", "Open the Hiên Sách web store")}
+          </span>
+          <span className="block text-sm text-zinc-600 dark:text-zinc-400 mt-0.5">
+            {pick(
+              "Một website bán sách thật chạy trên chính API này và sandbox của bạn: đăng ký, xem sách, giỏ hàng, đặt hàng, thanh toán. Mở DevTools → Network để xem từng request trang web gửi đi.",
+              "A real bookshop website running on this very API and your sandbox: sign up, browse, cart, order, pay. Open DevTools → Network to watch every request the site sends."
+            )}
+          </span>
+        </span>
+        <span className="text-sm font-semibold text-orange-700 dark:text-orange-300">{pick("Mở cửa hàng →", "Open the store →")}</span>
+      </Link>
 
       <section className="card space-y-3">
         <div className="flex flex-wrap items-start justify-between gap-3">

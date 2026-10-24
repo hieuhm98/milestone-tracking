@@ -19,6 +19,7 @@ const POSITION: Record<TableName, { x: number; y: number }> = {
   orders: { x: 300, y: 280 },
   payments: { x: 580, y: 280 },
   invoices: { x: 300, y: 530 },
+  cart_items: { x: 20, y: 530 },
 };
 
 const HEAD_FILL: Record<TableName, string> = {
@@ -29,6 +30,7 @@ const HEAD_FILL: Record<TableName, string> = {
   orders: "fill-amber-600",
   payments: "fill-rose-600",
   invoices: "fill-cyan-700",
+  cart_items: "fill-pink-600",
 };
 
 const rowY = (table: TableName, column: string) => {

@@ -45,6 +45,7 @@ const SECTION_NAV: Record<SectionId, NavGroup[]> = {
         { href: "/practice/sql", label: "nav.sqlPractice", icon: "▤" },
         { href: "/practice/sql/challenges", label: "nav.sqlChallenges", icon: "◆" },
         { href: "/practice/api", label: "nav.apiPractice", icon: "⇄" },
+        { href: "/practice/api/web", label: "nav.apiStore", icon: "🛒" },
       ],
     },
   ],

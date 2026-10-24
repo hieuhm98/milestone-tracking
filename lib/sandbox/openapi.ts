@@ -162,6 +162,40 @@ function components(lang: Lang) {
         note: { type: "string", nullable: true },
       },
     },
+    CartItemInput: {
+      type: "object",
+      additionalProperties: false,
+      required: ["book_id"],
+      properties: {
+        book_id: { type: "integer", example: 9 },
+        quantity: { type: "integer", minimum: 1, maximum: 20, default: 1, description: L("Cộng vào dòng sẵn có nếu sách đã ở trong giỏ.", "Added to the existing line when the book is already in the cart.") },
+      },
+    },
+    CartItemPatch: {
+      type: "object",
+      additionalProperties: false,
+      required: ["quantity"],
+      properties: { quantity: { type: "integer", minimum: 1, maximum: 20, example: 2, description: L("Số lượng mới (đặt lại, không cộng thêm).", "The new quantity (sets, doesn't add).") } },
+    },
+    Cart: {
+      type: "object",
+      properties: {
+        items: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              ...((tableSchema("cart_items", lang) as { properties?: Record<string, Schema> }).properties ?? {}),
+              book: { type: "object", description: L("Sách, với giá và tồn kho hiện tại.", "The book, with its current price and stock."), properties: { id: { type: "integer" }, title: { type: "string" }, author_id: { type: "integer" }, genre: { type: "string" }, price: { type: "integer" }, stock: { type: "integer" } } },
+              line_total: { type: "integer", description: L("price × quantity, tính lúc đọc.", "price × quantity, computed when read.") },
+              in_stock: { type: "boolean", description: L("false = kho không còn đủ cho số lượng này.", "false = there's no longer enough stock for this quantity.") },
+            },
+          },
+        },
+        item_count: { type: "integer", example: 3, description: L("Tổng số cuốn.", "Total copies.") },
+        subtotal: { type: "integer", example: 370000, description: L("Tổng tiền tạm tính (VND).", "Running total (VND).") },
+      },
+    },
     PaymentInput: {
       type: "object",
       additionalProperties: false,
@@ -201,6 +235,7 @@ const SUCCESS_SCHEMA: Record<string, string | null> = {
   listAuthors: "AuthorList", createAuthor: "Author", getAuthor: "Author", replaceAuthor: "Author", updateAuthor: "Author", deleteAuthor: null, listAuthorBooks: "BookList",
   listBooks: "BookList", createBook: "Book", getBook: "Book", replaceBook: "Book", updateBook: "Book", deleteBook: null,
   listUsers: "UserList", createUser: "User", getUser: "User", replaceUser: "User", updateUser: "User", deleteUser: null, listUserOrders: "OrderList",
+  getCart: "Cart", addCartItem: "Cart", updateCartItem: "Cart", removeCartItem: null, clearCart: null,
   listOrders: "OrderList", createOrder: "Order", getOrder: "Order", updateOrder: "Order",
   listPayments: "PaymentList", createPayment: "Payment", getPayment: "Payment", refundPayment: null,
   listInvoices: "InvoiceList", getInvoice: "Invoice",

@@ -35,6 +35,8 @@ const vi: Dict = {
   "nav.englishHome": "Trang tiếng Anh",
   "nav.dictionary": "Từ điển",
   "nav.sectionEnglish": "Tiếng Anh",
+  "nav.sectionAdmin": "Quản trị",
+  "nav.adminUsers": "Người dùng",
 
   // Sections
   "section.it": "IT & AWS",
@@ -486,6 +488,8 @@ const en: Dict = {
   "nav.englishHome": "English home",
   "nav.dictionary": "Dictionary",
   "nav.sectionEnglish": "English",
+  "nav.sectionAdmin": "Admin",
+  "nav.adminUsers": "Users",
 
   // Sections
   "section.it": "IT & AWS",

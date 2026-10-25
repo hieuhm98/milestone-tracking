@@ -17,6 +17,8 @@ export interface Profile {
   role: AccountRole;
   status: AccountStatus;
   telegram_chat_id: number | null;
+  /** An admin set this password; ask the user to change or keep it. */
+  must_change_password: boolean;
 }
 
 /** Which account dialog is open. `pending` / `disabled` explain why sign-in stopped. */
@@ -46,11 +48,14 @@ interface AuthContextValue {
   /** Returns the t.me deep link that connects this account's Telegram chat. */
   telegramLink: () => Promise<string | null>;
   disconnectTelegram: () => Promise<void>;
+  /** Answer the "an admin set your password" prompt: a new password, or `null` to keep it. */
+  answerPasswordPrompt: (password: string | null) => Promise<AuthResult>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-const PROFILE_COLUMNS = "id, full_name, phone, role, status, telegram_chat_id";
+const BASE_PROFILE_COLUMNS = "id, full_name, phone, role, status, telegram_chat_id";
+const PROFILE_COLUMNS = `${BASE_PROFILE_COLUMNS}, must_change_password`;
 
 /** One sign-up per browser: set after a successful sign-up, never cleared by the app. */
 const SIGNUP_TICKET_KEY = "auth:signupTicket";
@@ -133,7 +138,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return null;
     }
 
-    const { data, error } = await supabase.from("profiles").select(PROFILE_COLUMNS).eq("id", next.user.id).maybeSingle();
+    const primary = await supabase.from("profiles").select(PROFILE_COLUMNS).eq("id", next.user.id).maybeSingle();
+
+    // 42703 = the schema SQL adding must_change_password hasn't been run yet.
+    // Fall back to the old columns so sign-in keeps working until it is.
+    const result =
+      primary.error?.code === "42703"
+        ? await supabase.from("profiles").select(BASE_PROFILE_COLUMNS).eq("id", next.user.id).maybeSingle()
+        : primary;
+    const { data, error } = result;
 
     if (error || !data) {
       await supabase.auth.signOut();
@@ -143,7 +156,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return null;
     }
 
-    const loaded = data as Profile;
+    const loaded = { must_change_password: false, ...(data as unknown as Partial<Profile>) } as Profile;
 
     if (loaded.status !== "active") {
       await supabase.auth.signOut();
@@ -305,6 +318,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await refreshProfile();
   }, [authedFetch, refreshProfile]);
 
+  const answerPasswordPrompt = useCallback<AuthContextValue["answerPasswordPrompt"]>(
+    async (password) => {
+      try {
+        const res = await fetch("/api/account/password", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session?.access_token ?? ""}`,
+          },
+          body: JSON.stringify(password === null ? { keep: true } : { password }),
+        });
+
+        if (!res.ok) {
+          const json = await res.json().catch(() => null);
+
+          return { ok: false, error: json?.error ?? "update_failed" };
+        }
+
+        await refreshProfile();
+
+        return { ok: true };
+      } catch {
+        return { ok: false, error: "network" };
+      }
+    },
+    [session, refreshProfile]
+  );
+
   const value: AuthContextValue = {
     enabled: isSupabaseConfigured,
     ready,
@@ -321,6 +362,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     refreshProfile,
     telegramLink,
     disconnectTelegram,
+    answerPasswordPrompt,
   };
 
   return (

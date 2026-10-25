@@ -9,6 +9,7 @@ import { LANGS } from "@/lib/i18n";
 import { SECTIONS, sectionForPath, type SectionId } from "@/lib/sections";
 import { cn } from "@/lib/utils";
 import AccountCard from "@/components/auth/AccountCard";
+import { useAuth } from "@/context/auth";
 import { useSidebarCollapsed } from "@/lib/useSidebarCollapsed";
 
 interface NavItem {
@@ -63,6 +64,12 @@ const SECTION_NAV: Record<SectionId, NavGroup[]> = {
   ],
 };
 
+/** Shown under either half's nav, to admins only. */
+const ADMIN_NAV: NavGroup = {
+  heading: "nav.sectionAdmin",
+  items: [{ href: "/admin/users", label: "nav.adminUsers", icon: "⚙" }],
+};
+
 /**
  * The nav itself. Rendered twice — as the fixed desktop rail and inside the
  * mobile drawer — so the two can never drift apart.
@@ -72,6 +79,8 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
   const section = sectionForPath(pathname);
   const { lang, setLang, dual, toggleDual, t } = useLang();
   const { theme, toggle: toggleTheme } = useTheme();
+  const { profile } = useAuth();
+  const groups = profile?.role === "admin" ? [...SECTION_NAV[section], ADMIN_NAV] : SECTION_NAV[section];
 
   // Minimised, the rail keeps one-click navigation but drops every label; the
   // icon carries the meaning and `title` gives it back on hover.
@@ -103,7 +112,7 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
         </div>
 
         <nav className="flex-1 w-full overflow-y-auto flex flex-col items-center gap-1 pb-3">
-          {SECTION_NAV[section].flatMap((group) => group.items).map((item) => (
+          {groups.flatMap((group) => group.items).map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -231,7 +240,7 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
       </div>
 
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        {SECTION_NAV[section].map((group) => (
+        {groups.map((group) => (
           <div key={group.heading ?? "top"} className="space-y-1">
             {group.heading && (
               <div className="px-3 pt-3 pb-1 text-xs font-semibold text-zinc-400 dark:text-zinc-600 uppercase tracking-wider">

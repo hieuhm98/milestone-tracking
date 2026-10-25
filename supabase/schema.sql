@@ -6,8 +6,9 @@
 --   * Sign-up goes through the app's /api/auth/signup route (service role), which
 --     creates the auth user and lets the trigger below create the profile.
 --   * Every new profile starts as status = 'draft', role = 'learner'.
---   * An admin approves an account by editing public.profiles in the Table Editor:
---     status 'draft' → 'active'. Only active accounts can sign in and sync progress.
+--   * An admin approves an account on the app's /admin/users page (or by editing
+--     public.profiles in the Table Editor): status 'draft' → 'active'. Only active
+--     accounts can sign in and sync progress.
 --   * Learners can never change their own status or role (no UPDATE grant on those
 --     columns, and RLS only lets staff update other rows).
 
@@ -42,6 +43,14 @@ comment on column public.profiles.status is 'draft = waiting for approval, activ
 comment on column public.profiles.phone  is 'Digits only, country code included (e.g. 84901234567)';
 
 create index if not exists profiles_status_idx on public.profiles (status);
+
+-- Set when an admin resets someone's password from /admin/users. The app then
+-- asks that user, right after their next sign-in, to pick a new password or
+-- keep the one the admin gave them; either answer clears it. Only the service
+-- role writes it (no column grant to `authenticated`).
+alter table public.profiles add column if not exists must_change_password boolean not null default false;
+
+comment on column public.profiles.must_change_password is 'true = an admin set this password; ask the user to change or keep it after sign-in';
 
 -- Keep updated_at / approved_at honest whoever edits the row (app or Table Editor).
 create or replace function public.touch_profile()

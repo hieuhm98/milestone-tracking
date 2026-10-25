@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     `🆕 <b>New sign-up waiting for approval</b>\n` +
       `Name: ${escapeHtml(fullName)}\n` +
       `Phone: ${escapeHtml(formatPhone(phone))}\n\n` +
-      `Approve in Supabase → Table Editor → profiles: set <code>status</code> to <code>active</code>.`
+      `Approve on the site's <code>/admin/users</code> page (or in Supabase → Table Editor → profiles: set <code>status</code> to <code>active</code>).`
   );
 
   return NextResponse.json({ ok: true, status: "draft" }, { status: 201 });

@@ -153,7 +153,7 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
       "flex h-9 w-9 items-center justify-center rounded-lg transition-colors";
 
     return (
-      <div className="flex flex-col h-full min-h-0 items-center">
+      <div className="flex flex-col h-full items-center overflow-y-auto overscroll-contain">
         <div
           className="mt-4 mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white"
           title={APP_NAME}
@@ -186,7 +186,7 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
           })}
         </div>
 
-        <nav aria-label={t("nav.mainNav")} className="flex-1 w-full overflow-y-auto flex flex-col items-center gap-1 pb-3">
+        <nav aria-label={t("nav.mainNav")} className="w-full flex flex-col items-center gap-1 pb-3">
           {groups.map((group, index) => (
             <div
               key={group.heading ?? "top"}
@@ -232,7 +232,7 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
         </nav>
 
         {/* Language, side-by-side mode and theme stay reachable when minimised. */}
-        <div className="shrink-0 flex flex-col items-center gap-1 py-2 border-t border-zinc-200 dark:border-zinc-800">
+        <div className="mt-auto shrink-0 flex flex-col items-center gap-1 py-2 border-t border-zinc-200 dark:border-zinc-800">
           <button
             type="button"
             onClick={() => setLang(lang === "vi" ? "en" : "vi")}
@@ -276,22 +276,16 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
   }
 
   return (
-    <div className="flex flex-col h-full min-h-0">
-      <div className="flex items-center gap-2.5 px-4 pt-5 pb-4">
-        <div
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white"
-          aria-hidden="true"
-        >
-          M
-        </div>
-        <div className="min-w-0">
-          <div className="font-bold leading-tight tracking-tight truncate">{APP_NAME}</div>
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">IT · AWS · English</div>
-        </div>
+    // The whole column scrolls as one when it is taller than the screen —
+    // no separately scrolling middle section.
+    <div className="flex flex-col h-full overflow-y-auto overscroll-contain">
+      <div className="px-5 py-4 lg:py-6 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="font-bold text-lg tracking-tight">{APP_NAME}</div>
+        <div className="text-xs text-zinc-500 mt-0.5">IT · AWS · English</div>
       </div>
 
       {/* Which half of the site the nav below belongs to. */}
-      <div className="px-3">
+      <div className="px-3 pt-3">
         <div
           className="grid grid-cols-2 gap-1 p-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg"
           role="group"
@@ -307,7 +301,7 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
                 onClick={onNavigate}
                 aria-current={section === item.id ? "true" : undefined}
                 className={cn(
-                  "flex items-center justify-center gap-1.5 text-xs font-medium py-2 rounded-md transition-colors",
+                  "flex items-center justify-center gap-1.5 text-xs font-medium py-1.5 rounded-md transition-colors",
                   section === item.id
                     ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm"
                     : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
@@ -321,11 +315,69 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
         </div>
       </div>
 
-      <nav aria-label={t("nav.mainNav")} className="flex-1 px-3 pt-3 pb-4 overflow-y-auto">
+      {/* Language toggle */}
+      <div className="px-3 pt-3">
+        <div
+          className="flex gap-1 p-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg"
+          role="group"
+          aria-label={t("nav.language")}
+        >
+          {LANGS.map((l) => (
+            <button
+              key={l.id}
+              type="button"
+              onClick={() => setLang(l.id)}
+              aria-pressed={lang === l.id}
+              title={l.label}
+              className={cn(
+                "flex-1 text-xs font-medium py-1.5 rounded-md transition-colors",
+                lang === l.id
+                  ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+              )}
+            >
+              {l.short}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Side-by-side bilingual reading */}
+      <div className="px-3 pt-2">
+        <button
+          type="button"
+          onClick={toggleDual}
+          aria-pressed={dual}
+          title={t("lang.dualHint")}
+          className={cn(
+            "w-full flex items-center justify-center gap-2 text-xs font-medium py-1.5 rounded-lg border transition-colors",
+            dual
+              ? "bg-blue-100 dark:bg-blue-600/20 border-blue-300 dark:border-blue-800 text-blue-700 dark:text-blue-300"
+              : "bg-zinc-100 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+          )}
+        >
+          <Columns2 className="h-3.5 w-3.5" aria-hidden="true" />
+          {t("lang.dual")}
+        </button>
+      </div>
+
+      {/* Theme toggle */}
+      <div className="px-3 pt-2">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="w-full flex items-center justify-center gap-2 text-xs font-medium py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
+        >
+          <ThemeIcon className="h-3.5 w-3.5" aria-hidden="true" />
+          {themeLabel}
+        </button>
+      </div>
+
+      <nav aria-label={t("nav.mainNav")} className="px-3 py-4 space-y-1">
         {groups.map((group) => (
-          <div key={group.heading ?? "top"} className="space-y-0.5">
+          <div key={group.heading ?? "top"} className="space-y-1">
             {group.heading && (
-              <div className="px-3 pt-4 pb-1.5 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+              <div className="px-3 pt-3 pb-1 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                 {t(group.heading)}
               </div>
             )}
@@ -340,17 +392,14 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
                   onClick={onNavigate}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "relative flex items-center gap-3 px-3 py-2.5 lg:py-2 rounded-lg text-sm transition-colors",
+                    "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
                     active
-                      ? "bg-blue-50 dark:bg-blue-500/15 text-blue-700 dark:text-blue-300 font-medium"
-                      : "text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/70 dark:hover:bg-zinc-800/70"
+                      ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
+                      : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800/60"
                   )}
                 >
-                  {active && (
-                    <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-full bg-blue-600 dark:bg-blue-400" aria-hidden="true" />
-                  )}
-                  <Icon className={cn("h-4 w-4 shrink-0", !active && "text-zinc-500 dark:text-zinc-400")} aria-hidden="true" />
-                  <span className="truncate">{t(item.label)}</span>
+                  <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  {t(item.label)}
                 </Link>
               );
             })}
@@ -362,81 +411,16 @@ function SidebarNav({ onNavigate, collapsed = false }: { onNavigate?: () => void
           <Link
             href="/knowledge-review?quick=1"
             onClick={onNavigate}
-            className="flex items-center gap-3 px-3 py-2.5 mt-4 rounded-lg text-sm font-medium bg-amber-50 dark:bg-amber-500/10 text-amber-800 dark:text-amber-200 border border-amber-200 dark:border-amber-500/30 hover:bg-amber-100 dark:hover:bg-amber-500/20 transition-colors"
+            className="flex items-center gap-3 px-3 py-2 mt-1 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-600/15 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 hover:bg-blue-100 dark:hover:bg-blue-600/25 transition-colors"
           >
             <Zap className="h-4 w-4 shrink-0" aria-hidden="true" />
-            <span className="truncate">{t("nav.quickTest")}</span>
+            {t("nav.quickTest")}
           </Link>
         )}
       </nav>
 
-      {/* Display preferences sit under the nav, so the links come first. */}
-      <div className="shrink-0 px-3 py-3 space-y-2 border-t border-zinc-200 dark:border-zinc-800">
-        <div className="flex gap-2">
-          <div
-            className="flex flex-1 gap-1 p-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg"
-            role="group"
-            aria-label={t("nav.language")}
-          >
-            {LANGS.map((l) => (
-              <button
-                key={l.id}
-                type="button"
-                onClick={() => setLang(l.id)}
-                aria-pressed={lang === l.id}
-                title={l.label}
-                className={cn(
-                  "flex-1 text-xs font-semibold py-1.5 rounded-md transition-colors",
-                  lang === l.id
-                    ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm"
-                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
-                )}
-              >
-                {l.short}
-              </button>
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label={themeLabel}
-            title={themeLabel}
-            className="flex w-10 shrink-0 items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
-          >
-            <ThemeIcon className="h-4 w-4" aria-hidden="true" />
-          </button>
-        </div>
-
-        {/* Side-by-side bilingual reading, shown as an on/off switch. */}
-        <button
-          type="button"
-          role="switch"
-          onClick={toggleDual}
-          aria-checked={dual}
-          title={t("lang.dualHint")}
-          className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200/70 dark:hover:bg-zinc-800/70 transition-colors"
-        >
-          <Columns2 className="h-4 w-4 shrink-0 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
-          <span className="flex-1 text-left truncate">{t("lang.dual")}</span>
-          <span
-            aria-hidden="true"
-            className={cn(
-              "relative h-5 w-9 shrink-0 rounded-full transition-colors",
-              dual ? "bg-blue-600" : "bg-zinc-300 dark:bg-zinc-700"
-            )}
-          >
-            <span
-              className={cn(
-                "absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform",
-                dual && "translate-x-4"
-              )}
-            />
-          </span>
-        </button>
-      </div>
-
-      {/* Pinned under the scrolling nav so the account is always in view. */}
-      <div className="shrink-0">
+      {/* Sits at the bottom on a tall screen, after the links on a short one. */}
+      <div className="mt-auto">
         <AccountCard />
       </div>
     </div>
@@ -562,7 +546,7 @@ export default function Sidebar() {
         className={cn(
           "hidden lg:block shrink-0 border-r border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 h-screen sticky top-0",
           "transition-[width] duration-200 ease-out motion-reduce:transition-none",
-          collapsed ? "w-16" : "w-60"
+          collapsed ? "w-16" : "w-56"
         )}
       >
         <div className="relative h-full">

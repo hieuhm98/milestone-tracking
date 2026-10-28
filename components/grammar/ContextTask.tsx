@@ -79,6 +79,14 @@ export default function ContextTask({ context, tokens, answers, mark, clear, hid
                   setMisses((prev) => (prev.includes(index) ? prev : [...prev, index]));
                 }}
                 aria-pressed={hit || missed}
+                // Green and red alone don't say which is which to a screen reader.
+                aria-label={
+                  hit
+                    ? `${piece.text} (${pick("đúng", "correct")})`
+                    : missed
+                      ? `${piece.text} (${pick("không phải", "not one")})`
+                      : undefined
+                }
                 className={cn(
                   "transition-colors",
                   hit ? TOKEN.hit : missed ? TOKEN.miss : show ? TOKEN.revealed : TOKEN.idle
@@ -109,7 +117,7 @@ export default function ContextTask({ context, tokens, answers, mark, clear, hid
             <button
               type="button"
               onClick={() => setRevealed(true)}
-              className="inline-flex items-center gap-1.5 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              className="-my-2 inline-flex items-center gap-1.5 py-2 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
               <Eye className="h-3.5 w-3.5" aria-hidden="true" />
               {t("grammar.fb.showAnswer")}
@@ -120,7 +128,7 @@ export default function ContextTask({ context, tokens, answers, mark, clear, hid
             <button
               type="button"
               onClick={reset}
-              className="inline-flex items-center gap-1.5 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              className="-my-2 inline-flex items-center gap-1.5 py-2 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
               <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
               {t("grammar.fb.reset")}

@@ -78,7 +78,7 @@ export default function Pretest({
           return (
             <li key={item.id} className="card p-3 sm:p-3">
               <div className="flex flex-wrap items-start gap-x-3 gap-y-2">
-                <span className="text-sm font-semibold text-zinc-400 dark:text-zinc-500">{index + 1}.</span>
+                <span className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">{index + 1}.</span>
 
                 <p className="min-w-0 flex-1 basis-48">
                   <Rich text={item.sentence} boldClassName={tokens.target} />
@@ -95,9 +95,9 @@ export default function Pretest({
                     type="button"
                     onClick={() => answer(item, true)}
                     aria-pressed={done && said === true}
-                    aria-label={pick("Câu này đúng", "This sentence is correct")}
+                    aria-label={pick(`Câu ${index + 1} đúng`, `Sentence ${index + 1} is correct`)}
                     className={cn(
-                      "flex h-8 w-9 items-center justify-center rounded-lg border text-sm transition-colors",
+                      "flex h-10 w-11 sm:h-8 sm:w-9 items-center justify-center rounded-lg border text-sm transition-colors",
                       done && said === true
                         ? "border-green-500 bg-green-600 text-white"
                         : "border-zinc-300 text-zinc-600 hover:bg-green-50 hover:text-green-700 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-green-950/50"
@@ -110,9 +110,9 @@ export default function Pretest({
                     type="button"
                     onClick={() => answer(item, false)}
                     aria-pressed={done && said === false}
-                    aria-label={pick("Câu này sai", "This sentence has a mistake")}
+                    aria-label={pick(`Câu ${index + 1} có lỗi sai`, `Sentence ${index + 1} has a mistake`)}
                     className={cn(
-                      "flex h-8 w-9 items-center justify-center rounded-lg border text-sm transition-colors",
+                      "flex h-10 w-11 sm:h-8 sm:w-9 items-center justify-center rounded-lg border text-sm transition-colors",
                       done && said === false
                         ? "border-red-500 bg-red-600 text-white"
                         : "border-zinc-300 text-zinc-600 hover:bg-red-50 hover:text-red-700 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-red-950/50"
@@ -144,7 +144,7 @@ export default function Pretest({
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center gap-1.5 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            className="-my-2 inline-flex items-center gap-1.5 py-2 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           >
             <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
             {t("grammar.unit.retakePretest")}

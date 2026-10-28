@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { PlaygroundDb, TableSchema } from "@/lib/sqlPlayground";
 
 // The schema only changes on deploy, so each database is fetched once per page load.
@@ -20,8 +20,21 @@ function load(db: PlaygroundDb) {
 }
 
 /** Tables, columns and foreign keys of a playground database. */
-export function useSchema(db: PlaygroundDb): { tables: TableSchema[]; error: string | null; loading: boolean } {
+export function useSchema(db: PlaygroundDb): {
+  tables: TableSchema[];
+  error: string | null;
+  loading: boolean;
+  /** Drop a failed load from the cache and fetch again. */
+  retry: () => void;
+} {
   const [state, setState] = useState<{ db: PlaygroundDb; tables: TableSchema[]; error: string | null } | null>(null);
+  const [attempt, setAttempt] = useState(0);
+
+  const retry = useCallback(() => {
+    cache.delete(db);
+    setState(null);
+    setAttempt((n) => n + 1);
+  }, [db]);
 
   useEffect(() => {
     let live = true;
@@ -33,9 +46,9 @@ export function useSchema(db: PlaygroundDb): { tables: TableSchema[]; error: str
     return () => {
       live = false;
     };
-  }, [db]);
+  }, [db, attempt]);
 
   const current = state?.db === db ? state : null;
 
-  return { tables: current?.tables ?? [], error: current?.error ?? null, loading: !current };
+  return { tables: current?.tables ?? [], error: current?.error ?? null, loading: !current, retry };
 }

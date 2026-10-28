@@ -36,10 +36,10 @@ export default function SectionList({ items, part, id = "questions" }: Props) {
           <li key={item.anchor}>
             <a
               href={`#${item.anchor}`}
-              className="flex gap-2 rounded-md px-1 py-1 text-sm text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              className="flex gap-2 rounded-md px-1.5 py-1.5 text-sm text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
               <span className={cn("shrink-0 font-semibold", PART[part].text)}>{item.marker}</span>
-              <span>{item.text}</span>
+              <span className="min-w-0">{item.text}</span>
             </a>
           </li>
         ))}

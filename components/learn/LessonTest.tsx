@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check, RotateCcw, X } from "lucide-react";
 import { useLang } from "@/context/lang";
 import BilingualPair from "@/components/BilingualPair";
 import OptionRationale from "@/components/knowledge/OptionRationale";
@@ -46,6 +47,7 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
   const revealed = choice !== null;
   const isLast = idx === questions.length - 1;
   const correctSoFar = answered.filter((a) => a.correct).length;
+  const progressPct = questions.length > 0 ? ((idx + (revealed ? 1 : 0)) / questions.length) * 100 : 0;
 
   function handleSelect(option: number) {
     if (revealed) return;
@@ -75,11 +77,15 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="flex-1 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-blue-500 rounded-full transition-all"
-            style={{ width: `${((idx + (revealed ? 1 : 0)) / questions.length) * 100}%` }}
-          />
+        <div
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={questions.length}
+          aria-valuenow={idx + (revealed ? 1 : 0)}
+          aria-label={pick("Tiến độ bài kiểm tra", "Test progress")}
+          className="flex-1 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden"
+        >
+          <div className="h-full bg-blue-500 rounded-full transition-all" style={{ width: `${progressPct}%` }} />
         </div>
         <span className="text-xs text-zinc-500 font-mono shrink-0">
           {idx + 1}/{questions.length}
@@ -88,8 +94,9 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
 
       <div className="card space-y-4">
         {current.review && (
-          <span className="inline-block text-xs px-2 py-0.5 rounded border bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800">
-            ↻ {pick("Ôn lại bài trước", "Review from earlier")}
+          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded border bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800">
+            <RotateCcw className="h-3 w-3" aria-hidden="true" />
+            {pick("Ôn lại bài trước", "Review from earlier")}
           </span>
         )}
 
@@ -111,8 +118,10 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
             return (
               <div key={i}>
                 <button
+                  type="button"
                   onClick={() => handleSelect(i)}
                   disabled={revealed}
+                  aria-pressed={isChosen}
                   className={cn(
                     "w-full text-left flex items-start gap-3 px-4 py-3 rounded-lg border text-sm transition-colors",
                     revealed && isCorrect &&
@@ -144,7 +153,19 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
                       vi={<span className="text-zinc-600 dark:text-zinc-400">{qVi.options[i]}</span>}
                     />
                   ) : (
-                    <span><QuestionText text={opt} /></span>
+                    <span className="flex-1 min-w-0"><QuestionText text={opt} /></span>
+                  )}
+                  {revealed && isCorrect && (
+                    <span className="ml-auto mt-0.5 inline-flex shrink-0 items-center gap-1 text-xs font-medium">
+                      <Check className="h-4 w-4" aria-hidden="true" />
+                      <span className="sr-only sm:not-sr-only">{pick("Đáp án đúng", "Correct answer")}</span>
+                    </span>
+                  )}
+                  {revealed && isChosen && !isCorrect && (
+                    <span className="ml-auto mt-0.5 inline-flex shrink-0 items-center gap-1 text-xs font-medium">
+                      <X className="h-4 w-4" aria-hidden="true" />
+                      <span className="sr-only sm:not-sr-only">{pick("Bạn chọn", "Your answer")}</span>
+                    </span>
                   )}
                 </button>
 
@@ -189,8 +210,13 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
           </div>
         )}
 
+        {/* Announces the verdict to screen readers; the colours and icons carry it visually. */}
+        <p className="sr-only" aria-live="polite">
+          {revealed ? (choice === q.answer ? pick("Đúng.", "Correct.") : pick("Chưa đúng.", "Incorrect.")) : ""}
+        </p>
+
         {revealed && (
-          <button onClick={handleNext} className="btn-primary text-sm px-4 py-2 w-full sm:w-auto">
+          <button type="button" onClick={handleNext} className="btn-primary text-sm px-4 py-2 w-full sm:w-auto">
             {isLast ? ctaLabel : t("quiz.next")}
           </button>
         )}

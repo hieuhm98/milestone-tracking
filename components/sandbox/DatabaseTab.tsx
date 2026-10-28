@@ -78,14 +78,24 @@ function marker(col: Column): string {
 }
 
 function Diagram() {
+  const { pick } = useLang();
+
   return (
     <div className="overflow-x-auto -mx-1 px-1">
-      <svg viewBox="0 0 810 740" className="min-w-[640px] w-full h-auto" role="img" aria-label="Entity relationship diagram">
+      <svg
+        viewBox="0 0 810 740"
+        className="min-w-[640px] w-full h-auto"
+        role="img"
+        aria-label={pick(
+          "Sơ đồ quan hệ 7 bảng; chi tiết từng bảng có trong các bảng bên dưới.",
+          "Relationship diagram of the 7 tables; each table is listed in detail below."
+        )}
+      >
         {RELATIONS.map((rel) => {
           const p = edgePath(rel.from, rel.column, rel.to);
 
           return (
-            <g key={`${rel.from}.${rel.column}`} className="text-zinc-400 dark:text-zinc-500">
+            <g key={`${rel.from}.${rel.column}`} className="text-zinc-500 dark:text-zinc-400">
               <path d={p.d} fill="none" className="stroke-zinc-400 dark:stroke-zinc-500" strokeWidth={1.5} />
               <text x={p.n.x} y={p.n.y} className="fill-zinc-500 dark:fill-zinc-400" fontSize={10} fontWeight={700}>N</text>
               <text x={p.one.x} y={p.one.y} className="fill-zinc-500 dark:fill-zinc-400" fontSize={10} fontWeight={700}>1</text>
@@ -206,9 +216,9 @@ export default function DatabaseTab() {
               <table className="w-full text-xs">
                 <thead>
                   <tr className="text-left text-zinc-500">
-                    <th className="py-1 pr-3 font-medium">{pick("Cột", "Column")}</th>
-                    <th className="py-1 pr-3 font-medium">{pick("Kiểu", "Type")}</th>
-                    <th className="py-1 font-medium">{pick("Ý nghĩa", "Meaning")}</th>
+                    <th scope="col" className="py-1 pr-3 font-medium">{pick("Cột", "Column")}</th>
+                    <th scope="col" className="py-1 pr-3 font-medium">{pick("Kiểu", "Type")}</th>
+                    <th scope="col" className="py-1 font-medium">{pick("Ý nghĩa", "Meaning")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -216,12 +226,12 @@ export default function DatabaseTab() {
                     <tr key={col.name} className="border-t border-zinc-100 dark:border-zinc-800 align-top">
                       <td className="py-1.5 pr-3 font-mono whitespace-nowrap">
                         {col.name}
-                        {marker(col) && <span className={cn("ml-1.5 text-[10px] font-bold", col.pk ? "text-amber-600" : col.ref ? "text-blue-600 dark:text-blue-400" : "text-violet-600 dark:text-violet-400")}>{marker(col)}</span>}
+                        {marker(col) && <span className={cn("ml-1.5 text-[11px] font-bold", col.pk ? "text-amber-600" : col.ref ? "text-blue-600 dark:text-blue-400" : "text-violet-600 dark:text-violet-400")}>{marker(col)}</span>}
                       </td>
                       <td className="py-1.5 pr-3 font-mono text-zinc-500 whitespace-nowrap">
                         {col.type === "enum" ? `enum` : col.type}
                         {col.nullable ? "?" : ""}
-                        {col.readOnly && <span className="block text-[10px] text-zinc-400">read-only</span>}
+                        {col.readOnly && <span className="block text-[11px] text-zinc-400">{pick("chỉ đọc", "read-only")}</span>}
                       </td>
                       <td className="py-1.5 text-zinc-600 dark:text-zinc-400">
                         {pick(col.desc.vi, col.desc.en)}

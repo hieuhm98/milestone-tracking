@@ -42,7 +42,7 @@ export default function ContentsTree({
   outline,
   onNavigate,
 }: Props) {
-  const { t } = useLang();
+  const { t, pick } = useLang();
   const [query, setQuery] = useState("");
   const q = normalizeSearch(query);
   const trapsTitle = t("grammar.traps.title");
@@ -73,13 +73,18 @@ export default function ContentsTree({
         <Link
           href={GRAMMAR_BASE}
           onClick={onNavigate}
-          className="block rounded-md px-2 py-1.5 font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          className="block rounded-md px-2 py-2 lg:py-1.5 font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {t("grammar.nav.backToPath")}
         </Link>
       )}
 
-      {empty && <p className="px-2 py-4 text-zinc-500">{t("grammar.search.empty")}</p>}
+      {empty && (
+        <p className="px-2 py-4 text-zinc-500">
+          {t("grammar.search.empty")}.{" "}
+          {pick("Thử từ khoá ngắn hơn, ví dụ “tense”.", "Try a shorter word, for example “tense”.")}
+        </p>
+      )}
 
       {parts.map((part) => (
         <div key={part.id} className="mt-3">
@@ -96,8 +101,9 @@ export default function ContentsTree({
                   <Link
                     href={unitHref(unit.id)}
                     onClick={onNavigate}
+                    aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex items-start gap-2 rounded-md px-2 py-1.5 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
+                      "flex items-start gap-2 rounded-md px-2 py-2 lg:py-1.5 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
                       active ? cn("font-semibold", PART[part.id].text) : "text-zinc-700 dark:text-zinc-300"
                     )}
                   >
@@ -120,7 +126,7 @@ export default function ContentsTree({
                           <a
                             href={`#${entry.anchor}`}
                             onClick={onNavigate}
-                            className="block rounded px-2 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                            className="block rounded px-2 py-1.5 text-xs text-zinc-500 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
                           >
                             {entry.label}
                           </a>
@@ -137,7 +143,7 @@ export default function ContentsTree({
                 <Link
                   href={reviewHref(part.id)}
                   onClick={onNavigate}
-                  className="ml-4 block rounded-md px-2 py-1.5 text-xs italic text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                  className="ml-4 block rounded-md px-2 py-2 lg:py-1.5 text-xs italic text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
                 >
                   {t("grammar.home.review")} {part.id}
                 </Link>
@@ -157,7 +163,7 @@ export default function ContentsTree({
           <Link
             href={trapsHref()}
             onClick={onNavigate}
-            className="block rounded-md px-2 py-1.5 font-medium text-rose-700 hover:bg-rose-50 dark:text-rose-300 dark:hover:bg-rose-950/40"
+            className="block rounded-md px-2 py-2 lg:py-1.5 font-medium text-rose-700 hover:bg-rose-50 dark:text-rose-300 dark:hover:bg-rose-950/40"
           >
             {trapsTitle}
           </Link>
@@ -175,7 +181,7 @@ export default function ContentsTree({
                   <Link
                     href={referenceHref(entry.slug)}
                     onClick={onNavigate}
-                    className="block rounded-md px-2 py-1.5 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                    className="block rounded-md px-2 py-2 lg:py-1.5 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
                   >
                     {entry.title}
                   </Link>

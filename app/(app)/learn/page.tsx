@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import CourseCard from "@/components/learn/CourseCard";
+import GroupIcon from "@/components/GroupIcon";
+import { PageError, PageLoading } from "@/components/learn/PageState";
 import { catalogueOrder, coursesInProgress, summarizeCourses } from "@/lib/courses";
 import { GROUP_COVER } from "@/lib/groups";
 import { type LessonTopic } from "@/lib/lessons";
@@ -13,24 +15,35 @@ import { cn } from "@/lib/utils";
 type Filter = "all" | "in-progress" | "not-started" | "completed";
 
 export default function StudyPathPage() {
-  const { t, pick } = useLang();
+  const { pick } = useLang();
   const { progress, ready } = useProgress();
   const [topics, setTopics] = useState<LessonTopic[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<Filter>("all");
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    setLoading(true);
+    setError(false);
+
     fetch("/api/lessons")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+
+        return r.json();
+      })
       .then((data: LessonTopic[]) => setTopics(Array.isArray(data) ? data : []))
-      .catch(() => setTopics([]))
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, []);
+  }, [attempt]);
 
   const courses = useMemo(() => catalogueOrder(summarizeCourses(topics, progress)), [topics, progress]);
   const active = useMemo(() => coursesInProgress(courses), [courses]);
 
-  if (loading || !ready) return <div className="text-zinc-500 text-sm p-8">{t("common.loading")}</div>;
+  if (loading || !ready) return <PageLoading />;
+
+  if (error) return <PageError onRetry={() => setAttempt((n) => n + 1)} />;
 
   const lessonTotal = courses.reduce((sum, c) => sum + c.lessonCount, 0);
   const lessonDone = courses.reduce((sum, c) => sum + c.doneCount, 0);
@@ -90,7 +103,7 @@ export default function StudyPathPage() {
             )}
             aria-hidden
           >
-            {current.group.icon}
+            <GroupIcon group={current.group.id} />
           </div>
           <div className="flex-1 min-w-0 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex-1 min-w-0">
@@ -104,7 +117,14 @@ export default function StudyPathPage() {
                 {pick(current.resume.topic.title, current.resume.topic.titleEn)}
               </div>
               <div className="mt-3 flex items-center gap-3">
-                <div className="h-1.5 flex-1 max-w-xs rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+                <div
+                  role="progressbar"
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={current.pct}
+                  aria-label={pick("Tiến độ khoá học", "Course progress")}
+                  className="h-1.5 flex-1 max-w-xs rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden"
+                >
                   <div className="h-full rounded-full bg-blue-500" style={{ width: `${current.pct}%` }} />
                 </div>
                 <span className="text-xs text-zinc-500">{current.pct}%</span>
@@ -148,9 +168,22 @@ export default function StudyPathPage() {
             ))}
           </div>
         ) : (
-          <p className="text-sm text-zinc-500 py-8 text-center">
-            {pick("Không có khoá học nào ở mục này.", "No courses here yet.")}
-          </p>
+          <div className="rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 px-4 py-8 text-center text-sm text-zinc-500">
+            <p>
+              {courses.length === 0
+                ? pick("Chưa có khoá học nào.", "No courses are available yet.")
+                : pick("Không có khoá học nào ở mục này.", "No courses in this view.")}
+            </p>
+            {filter !== "all" && (
+              <button
+                type="button"
+                onClick={() => setFilter("all")}
+                className="mt-2 py-2 -my-1 text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                {pick("Xem tất cả khoá học", "Show all courses")}
+              </button>
+            )}
+          </div>
         )}
       </section>
     </div>

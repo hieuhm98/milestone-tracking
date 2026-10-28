@@ -38,7 +38,7 @@ export default function BilingualPair({
     >
       <div className={cn("min-w-0", divider && "md:pr-6")}>
         {labels && (
-          <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-600 mb-1">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1">
             EN
           </div>
         )}
@@ -46,7 +46,7 @@ export default function BilingualPair({
       </div>
       <div className={cn("min-w-0", divider && "md:pl-6")}>
         {labels && (
-          <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-600 mb-1">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1">
             VI
           </div>
         )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { KeyRound, Moon, Sun } from "lucide-react";
 import { useAuth } from "@/context/auth";
 import { useLang } from "@/context/lang";
 import { useTheme } from "@/context/theme";
@@ -37,12 +38,15 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
 }
 
 function Splash() {
+  const { t } = useLang();
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950">
       <div className="text-center">
         <div className="font-bold text-lg tracking-tight">Milestone Tracking</div>
         <div className="mt-3 text-sm text-zinc-500" role="status">
-          <span className="inline-block w-2 h-2 rounded-full bg-blue-500 animate-pulse" aria-hidden="true" /> …
+          <span className="inline-block w-2 h-2 rounded-full bg-blue-500 animate-pulse" aria-hidden="true" />
+          <span className="sr-only">{t("common.loading")}</span>
         </div>
       </div>
     </div>
@@ -115,7 +119,7 @@ function ChangePasswordScreen() {
         }}
         noValidate
       >
-        <div className="text-3xl mb-2" aria-hidden="true">🔑</div>
+        <KeyRound className="h-8 w-8 mb-2 text-blue-600 dark:text-blue-400" aria-hidden="true" />
         <h2 className="text-lg font-semibold mb-1">{pick("Đổi mật khẩu", "Change your password")}</h2>
         <p className="text-sm text-zinc-500 mb-4">
           {pick(
@@ -189,7 +193,7 @@ function ChangePasswordScreen() {
 
 /** Brand, a card for the form, and the language + theme toggles. */
 function GateFrame({ children }: { children: React.ReactNode }) {
-  const { lang, setLang, t } = useLang();
+  const { lang, setLang, t, pick } = useLang();
   const { theme, toggle: toggleTheme } = useTheme();
 
   return (
@@ -202,14 +206,19 @@ function GateFrame({ children }: { children: React.ReactNode }) {
       <div className="card w-full max-w-sm shadow-sm">{children}</div>
 
       <div className="flex items-center gap-2">
-        <div className="flex gap-1 p-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+        <div
+          role="group"
+          aria-label={pick("Ngôn ngữ", "Language")}
+          className="flex gap-1 p-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg"
+        >
           {LANGS.map((l) => (
             <button
               key={l.id}
               type="button"
               onClick={() => setLang(l.id)}
+              aria-pressed={lang === l.id}
               className={cn(
-                "text-xs font-medium px-3 py-1.5 rounded-md transition-colors",
+                "text-xs font-medium px-3 py-2 rounded-md transition-colors",
                 lang === l.id
                   ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm"
                   : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
@@ -223,9 +232,13 @@ function GateFrame({ children }: { children: React.ReactNode }) {
           type="button"
           onClick={toggleTheme}
           aria-label={theme === "dark" ? t("theme.toLight") : t("theme.toDark")}
-          className="text-sm px-3 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          className="inline-flex items-center justify-center text-sm px-3 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
         >
-          {theme === "dark" ? "☀" : "☾"}
+          {theme === "dark" ? (
+            <Sun className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <Moon className="h-4 w-4" aria-hidden="true" />
+          )}
         </button>
       </div>
     </div>

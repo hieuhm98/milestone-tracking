@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ChevronDown, Search, X } from "lucide-react";
+import { AlertCircle, ChevronDown, RefreshCw, Search, X } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import LessonTest, { type TestQuestion } from "@/components/learn/LessonTest";
@@ -25,6 +25,7 @@ import { GROUPS, GROUP_ACCENT } from "@/lib/groups";
 import { recordVocab, type AnsweredQuestion } from "@/lib/progress";
 import { type VocabItem } from "@/lib/vocab";
 import { cn } from "@/lib/utils";
+import GroupIcon from "@/components/GroupIcon";
 
 type Stage = "setup" | "loading" | "running" | "results";
 
@@ -82,6 +83,7 @@ export default function EnglishPracticePage() {
 
   const [topics, setTopics] = useState<VocabIndexTopic[]>([]);
   const [loadingIndex, setLoadingIndex] = useState(true);
+  const [indexError, setIndexError] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [open, setOpen] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState("");
@@ -97,13 +99,27 @@ export default function EnglishPracticePage() {
   const [result, setResult] = useState<{ answered: AnsweredQuestion[]; pct: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const loadIndex = useCallback(() => {
+    setLoadingIndex(true);
+    setIndexError(false);
+
     fetch("/api/vocab")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+
+        return r.json();
+      })
       .then((data: { topics?: WireTopic[] }) => setTopics(Array.isArray(data.topics) ? decodeIndex(data.topics) : []))
-      .catch(() => setTopics([]))
+      .catch(() => {
+        setTopics([]);
+        setIndexError(true);
+      })
       .finally(() => setLoadingIndex(false));
   }, []);
+
+  useEffect(() => {
+    loadIndex();
+  }, [loadIndex]);
 
   const words = useMemo(() => flattenIndex(topics), [topics]);
   const wordByKey = useMemo(() => new Map(words.map((w) => [w.key, w])), [words]);
@@ -367,7 +383,21 @@ export default function EnglishPracticePage() {
         </p>
       </div>
 
-      {words.length === 0 ? (
+      {indexError ? (
+        <div role="alert" className="card flex flex-wrap items-center gap-3 text-sm !border-red-200 dark:!border-red-900/60">
+          <AlertCircle className="h-4 w-4 shrink-0 text-red-600 dark:text-red-400" aria-hidden="true" />
+          <span className="min-w-0 flex-1 text-zinc-700 dark:text-zinc-300">
+            {pick(
+              "Không tải được danh sách từ vựng. Kiểm tra kết nối rồi thử lại.",
+              "The vocabulary list couldn't be loaded. Check your connection and try again."
+            )}
+          </span>
+          <button type="button" onClick={loadIndex} className="btn-secondary inline-flex items-center gap-1.5">
+            <RefreshCw className="h-4 w-4" aria-hidden="true" />
+            {pick("Thử lại", "Try again")}
+          </button>
+        </div>
+      ) : words.length === 0 ? (
         <div className="card text-sm text-zinc-500">{pick("Chưa có từ vựng nào.", "No vocabulary available yet.")}</div>
       ) : (
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] items-start">
@@ -380,6 +410,9 @@ export default function EnglishPracticePage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={pick("Tìm một từ ở mọi khoá học…", "Find a word across every course…")}
+                aria-label={pick("Tìm từ để luyện", "Find words to practise")}
+                autoComplete="off"
+                spellCheck={false}
                 // `.input` is unlayered CSS, so its px-3 beats plain utilities here.
                 className="input w-full !pl-9 !pr-9"
               />
@@ -388,9 +421,9 @@ export default function EnglishPracticePage() {
                   type="button"
                   onClick={() => setQuery("")}
                   aria-label={pick("Xoá tìm kiếm", "Clear search")}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-zinc-400 hover:text-zinc-600"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md p-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-4 h-4" aria-hidden="true" />
                 </button>
               )}
             </div>
@@ -406,7 +439,7 @@ export default function EnglishPracticePage() {
                 {pick("Chọn tất cả", "Select everything")}
               </label>
               {selected.size > 0 && (
-                <button type="button" onClick={() => setSelected(new Set())} className="py-1 text-xs text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200">
+                <button type="button" onClick={() => setSelected(new Set())} className="py-2 -my-1 text-xs text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200">
                   {pick("Bỏ chọn hết", "Clear selection")}
                 </button>
               )}
@@ -423,7 +456,7 @@ export default function EnglishPracticePage() {
                     <button
                       type="button"
                       onClick={() => setMany(matches.map((m) => m.key), !nodeState(matches.map((m) => m.key), selected).checked)}
-                      className="py-1 text-blue-600 dark:text-blue-400 hover:underline"
+                      className="py-2 -my-1.5 text-blue-600 dark:text-blue-400 hover:underline"
                     >
                       {nodeState(matches.map((m) => m.key), selected).checked
                         ? pick("Bỏ chọn tất cả kết quả", "Unselect all matches")
@@ -432,12 +465,17 @@ export default function EnglishPracticePage() {
                   )}
                 </div>
                 {matches.length === 0 ? (
-                  <p className="px-4 py-6 text-sm text-zinc-500 text-center">{pick("Không có từ nào khớp.", "No words match.")}</p>
+                  <p className="px-4 py-6 text-sm text-zinc-500 text-center">
+                    {pick(
+                      "Không có từ nào khớp. Thử gõ ít chữ hơn hoặc kiểm tra chính tả.",
+                      "No words match. Try fewer letters or check the spelling."
+                    )}
+                  </p>
                 ) : (
                   <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
                     {matches.slice(0, SEARCH_LIMIT).map((m) => (
                       <li key={m.key}>
-                        <label className="flex items-center gap-3 px-4 py-2 text-sm cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+                        <label className="flex items-center gap-3 px-4 py-2.5 text-sm cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
                           <TriCheckbox
                             checked={selected.has(m.key)}
                             indeterminate={false}
@@ -472,19 +510,26 @@ export default function EnglishPracticePage() {
                           type="button"
                           onClick={() => toggleOpen(group.id)}
                           aria-expanded={isOpen}
-                          className="flex flex-1 min-w-0 items-center gap-2 text-left"
+                          aria-controls={`practice-course-${group.id}`}
+                          className="flex flex-1 min-w-0 items-center gap-2 py-1.5 -my-1.5 text-left"
                         >
-                          <span className={cn("text-base", GROUP_ACCENT[group.accent].text)}>{group.icon}</span>
+                          <GroupIcon group={group.id} className={cn("text-base", GROUP_ACCENT[group.accent].text)} />
                           <span className="font-semibold text-sm truncate">{pick(group.label, group.labelEn)}</span>
                           <span className="ml-auto text-xs font-mono text-zinc-500 shrink-0">
                             {state.count}/{keys.length}
                           </span>
-                          <ChevronDown className={cn("w-4 h-4 text-zinc-500 shrink-0 transition-transform", isOpen && "rotate-180")} />
+                          <ChevronDown
+                            className={cn("w-4 h-4 text-zinc-500 shrink-0 transition-transform", isOpen && "rotate-180")}
+                            aria-hidden="true"
+                          />
                         </button>
                       </div>
 
                       {isOpen && (
-                        <div className="border-t border-zinc-200 dark:border-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800 bg-zinc-50 dark:bg-zinc-950/40">
+                        <div
+                          id={`practice-course-${group.id}`}
+                          className="border-t border-zinc-200 dark:border-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800 bg-zinc-50 dark:bg-zinc-950/40"
+                        >
                           {courseTopicList.map((topic) => {
                             const topicKeys = topic.lessons.flatMap((l) => l.words.map((w) => wordKey(topic.slug, w.id)));
                             const ts = nodeState(topicKeys, selected);
@@ -503,13 +548,16 @@ export default function EnglishPracticePage() {
                                     type="button"
                                     onClick={() => toggleOpen(topic.slug)}
                                     aria-expanded={topicOpen}
-                                    className="flex flex-1 min-w-0 items-center gap-2 text-left"
+                                    className="flex flex-1 min-w-0 items-center gap-2 py-1.5 -my-1.5 text-left"
                                   >
                                     <span className="text-sm truncate">{pick(topic.title, topic.titleEn)}</span>
                                     <span className="ml-auto text-xs font-mono text-zinc-500 shrink-0">
                                       {ts.count}/{topicKeys.length}
                                     </span>
-                                    <ChevronDown className={cn("w-4 h-4 text-zinc-500 shrink-0 transition-transform", topicOpen && "rotate-180")} />
+                                    <ChevronDown
+                                      className={cn("w-4 h-4 text-zinc-500 shrink-0 transition-transform", topicOpen && "rotate-180")}
+                                      aria-hidden="true"
+                                    />
                                   </button>
                                 </div>
 
@@ -541,7 +589,7 @@ export default function EnglishPracticePage() {
                                               <label
                                                 key={key}
                                                 className={cn(
-                                                  "flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs cursor-pointer transition-colors",
+                                                  "flex items-center gap-1.5 rounded-full border px-2.5 py-2 sm:py-1 text-xs cursor-pointer transition-colors",
                                                   on
                                                     ? "border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300"
                                                     : "border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800"
@@ -555,9 +603,16 @@ export default function EnglishPracticePage() {
                                                 />
                                                 {w.word}
                                                 {isMistake(progress, key) && (
-                                                  <span className="text-amber-600 dark:text-amber-400" title={pick("Từng trả lời sai", "Missed before")}>
-                                                    •
-                                                  </span>
+                                                  <>
+                                                    <span
+                                                      className="text-amber-600 dark:text-amber-400"
+                                                      title={pick("Từng trả lời sai", "Missed before")}
+                                                      aria-hidden="true"
+                                                    >
+                                                      •
+                                                    </span>
+                                                    <span className="sr-only">({pick("từng trả lời sai", "missed before")})</span>
+                                                  </>
                                                 )}
                                               </label>
                                             );
@@ -604,7 +659,7 @@ export default function EnglishPracticePage() {
                     onClick={() => setCount(n)}
                     aria-pressed={count === n}
                     className={cn(
-                      "px-3 py-1.5 rounded-lg text-sm border transition-colors",
+                      "min-w-[2.75rem] px-3 py-2 sm:py-1.5 rounded-lg text-sm border transition-colors",
                       count === n
                         ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100"
                         : "border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800"
@@ -661,7 +716,11 @@ export default function EnglishPracticePage() {
               </span>
             </label>
 
-            {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
+            {error && (
+              <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+                {error}
+              </p>
+            )}
 
             <button
               type="button"

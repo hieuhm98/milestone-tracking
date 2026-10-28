@@ -12,6 +12,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { matchesSearch, normalizeSearch } from "@/lib/search";
 import { cn } from "@/lib/utils";
@@ -52,8 +53,9 @@ function SectionBranch({
       <Link
         href={base}
         onClick={onNavigate}
+        aria-current={active ? "page" : undefined}
         className={cn(
-          "flex items-start gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
+          "flex items-start gap-2 rounded-md px-2 py-2 lg:py-1.5 text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
           active ? cn("font-semibold", PART[part].text) : "text-zinc-700 dark:text-zinc-300"
         )}
       >
@@ -76,8 +78,9 @@ function SectionBranch({
                 <a
                   href={`${base}#${anchor}`}
                   onClick={onNavigate}
+                  aria-current={activeAnchor === anchor ? "location" : undefined}
                   className={cn(
-                    "block rounded px-2 py-1 text-xs transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
+                    "block rounded px-2 py-1.5 text-xs transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
                     activeAnchor === anchor
                       ? cn("font-semibold", PART[part].text)
                       : "text-zinc-500 dark:text-zinc-400"
@@ -122,10 +125,13 @@ function PartBranch({
             type="button"
             onClick={() => setOpen(open === group ? null : group)}
             aria-expanded={open === group}
-            className="flex w-full items-center gap-1.5 rounded-md px-2 py-1 text-left text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+            className="flex w-full items-center gap-1.5 rounded-md px-2 py-2 lg:py-1.5 text-left text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
           >
-            <span aria-hidden="true">{open === group ? "▾" : "▸"}</span>
-            {group}
+            <ChevronRight
+              className={cn("h-3.5 w-3.5 shrink-0 transition-transform", open === group && "rotate-90")}
+              aria-hidden="true"
+            />
+            <span className="min-w-0">{group}</span>
           </button>
 
           {open === group && (
@@ -185,7 +191,7 @@ function PartResults({
               <Link
                 href={base}
                 onClick={onNavigate}
-                className="flex items-start gap-2 rounded-md px-2 py-1.5 text-sm text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                className="flex items-start gap-2 rounded-md px-2 py-2 lg:py-1.5 text-sm text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
               >
                 <span className={cn("mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full", PART[part].dot)} aria-hidden="true" />
                 <span>
@@ -200,7 +206,7 @@ function PartResults({
                       <Link
                         href={`${base}#${anchorFor(question.id)}`}
                         onClick={onNavigate}
-                        className="block rounded px-2 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                        className="block rounded px-2 py-1.5 text-xs text-zinc-500 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
                       >
                         {question.label}
                       </Link>
@@ -217,7 +223,7 @@ function PartResults({
 }
 
 export default function ContentsTree({ toc, activeSlug, onNavigate }: Props) {
-  const { t } = useLang();
+  const { t, pick } = useLang();
   const [activeAnchor, setActiveAnchor] = useState("");
   const [query, setQuery] = useState("");
   const q = normalizeSearch(query);
@@ -234,7 +240,7 @@ export default function ContentsTree({ toc, activeSlug, onNavigate }: Props) {
   }, []);
 
   return (
-    <nav aria-label="Contents">
+    <nav aria-label={pick("Mục lục IELTS Speaking", "IELTS Speaking contents")}>
       <div className="sticky top-0 z-10 bg-zinc-50 px-0.5 pb-2 pt-0.5 dark:bg-zinc-950">
         <SearchField
           value={query}
@@ -271,7 +277,10 @@ export default function ContentsTree({ toc, activeSlug, onNavigate }: Props) {
           <PartResults heading="Part 2 & 3" part="part23" hits={part23Hits} onNavigate={onNavigate} />
 
           {part1Hits.length + part23Hits.length === 0 && (
-            <p className="px-2 py-4 text-sm text-zinc-500">{t("ielts.search.empty")}</p>
+            <p className="px-2 py-4 text-sm text-zinc-500">
+              {t("ielts.search.empty")}.{" "}
+              {pick("Thử từ khoá ngắn hơn hoặc tên chủ đề.", "Try a shorter word or a topic name.")}
+            </p>
           )}
         </div>
       )}

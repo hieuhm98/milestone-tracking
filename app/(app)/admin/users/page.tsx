@@ -343,14 +343,14 @@ function UserRow({
               {formatPhone(user.phone)} · {pick("Tham gia", "Joined")} {joined}
             </div>
             <div className="flex flex-wrap gap-1.5 mt-1.5">
-              <span className={cn("text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded", STATUS_BADGE[user.status])}>
+              <span className={cn("text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded", STATUS_BADGE[user.status])}>
                 {pick(statusVi, statusEn)}
               </span>
-              <span className={cn("text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded", ROLE_BADGE[user.role])}>
+              <span className={cn("text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded", ROLE_BADGE[user.role])}>
                 {user.role}
               </span>
               {user.must_change_password && (
-                <span className="text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-600/20 text-blue-700 dark:text-blue-300">
+                <span className="text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-600/20 text-blue-700 dark:text-blue-300">
                   {pick("Chờ đổi mật khẩu", "Password reset pending")}
                 </span>
               )}

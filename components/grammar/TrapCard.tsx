@@ -42,7 +42,7 @@ export default function TrapCard({ trap, units }: { trap: Trap; units?: string }
         <Rich text={trap.right} boldClassName="font-bold" />
       </p>
 
-      <p className="text-sm text-zinc-700 dark:text-zinc-300">
+      <p className="max-w-[75ch] text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
         <Rich text={trap.why} />
       </p>
 

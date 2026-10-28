@@ -39,10 +39,10 @@ export function BlockHeading({
 
 export function WritingTip({ text }: { text: string }) {
   return (
-    <div className={cn("overflow-hidden rounded-xl", TIP.frame)}>
+    <div className={cn("max-w-[75ch] overflow-hidden rounded-xl", TIP.frame)}>
       <p className={cn("px-3 py-1 text-xs font-bold uppercase tracking-[0.18em]", TIP.stripe)}>Writing Tip</p>
 
-      <p className={cn("px-3 py-2 text-sm", TIP.text)}>
+      <p className={cn("px-3 py-2 text-sm leading-relaxed", TIP.text)}>
         <Rich text={text} />
       </p>
     </div>
@@ -51,7 +51,7 @@ export function WritingTip({ text }: { text: string }) {
 
 export function NoteCallout({ text }: { text: string }) {
   return (
-    <p className={cn("rounded-r-lg px-3 py-2 text-sm", NOTE)}>
+    <p className={cn("max-w-[75ch] rounded-r-lg px-3 py-2 text-sm leading-relaxed", NOTE)}>
       <span className="font-bold uppercase tracking-wide">Note:</span> <Rich text={text} />
     </p>
   );
@@ -59,7 +59,7 @@ export function NoteCallout({ text }: { text: string }) {
 
 export function RuleList({ rules, tokens }: { rules: Rule[]; tokens: PartTokens }) {
   return (
-    <ol className="space-y-3">
+    <ol className="max-w-[75ch] space-y-3">
       {rules.map((rule, index) => (
         <li key={index} className="flex gap-3">
           <span

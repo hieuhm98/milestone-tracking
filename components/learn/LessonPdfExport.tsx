@@ -133,7 +133,7 @@ export default function LessonPdfExport(props: Props) {
         <div
           role="dialog"
           aria-label={pick("Xuất bài học ra PDF", "Export lesson to PDF")}
-          className="absolute right-0 z-20 mt-2 w-64 card shadow-lg space-y-3 text-sm"
+          className="absolute left-0 sm:left-auto sm:right-0 z-20 mt-2 w-64 max-w-[calc(100vw-2rem)] card shadow-lg space-y-3 text-sm"
         >
           {hasEnglish && (
             <fieldset className="space-y-1">
@@ -145,7 +145,7 @@ export default function LessonPdfExport(props: Props) {
                   ["both", "Song ngữ (Việt + Anh)", "Both (Vietnamese + English)"],
                 ] as const
               ).map(([value, vi, en]) => (
-                <label key={value} className="flex items-center gap-2 py-1 cursor-pointer">
+                <label key={value} className="flex items-center gap-2 py-1.5 cursor-pointer">
                   <input
                     type="radio"
                     name="pdf-lang"
@@ -159,7 +159,7 @@ export default function LessonPdfExport(props: Props) {
           )}
 
           {props.questions.length > 0 && (
-            <label className="flex items-start gap-2 py-1 cursor-pointer">
+            <label className="flex items-start gap-2 py-1.5 cursor-pointer">
               <input
                 type="checkbox"
                 className="mt-0.5"
@@ -224,12 +224,12 @@ function LessonPrintDocument({
   return (
     <div id="lesson-print-root" className="bg-white text-zinc-900">
       <header className="border-b border-zinc-300 pb-3 mb-6">
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-zinc-600">
           {say(courseLabel, courseLabelEn)} › {say(topicTitle, topicTitleEn)}
         </p>
         <h1 className="text-2xl font-bold mt-1">{say(lessonTitle, lessonTitleEn)}</h1>
         {pdfLang === "both" && lessonTitleEn && <p className="text-base text-zinc-600 mt-0.5">{lessonTitleEn}</p>}
-        <p className="text-xs text-zinc-500 mt-1">
+        <p className="text-xs text-zinc-600 mt-1">
           {say("Bài", "Lesson")} {position}/{total}
         </p>
       </header>
@@ -247,7 +247,7 @@ function LessonPrintDocument({
             {vi && <PrintMarkdown content={vi} />}
             {english && (
               <div className="mt-3 border-l-4 border-zinc-300 pl-4">
-                <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-500">English</p>
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-zinc-600">English</p>
                 <PrintMarkdown content={english} />
               </div>
             )}
@@ -259,7 +259,7 @@ function LessonPrintDocument({
         <>
           <section className="mt-8">
             <h2 className="text-xl font-bold mb-1">{say("Câu hỏi luyện tập", "Practice questions")}</h2>
-            <p className="text-xs text-zinc-500 mb-4">
+            <p className="text-xs text-zinc-600 mb-4">
               {say("Đáp án ở trang cuối.", "Answers are on the last page.")}
             </p>
             <ol className="space-y-4">
@@ -302,7 +302,7 @@ function LessonPrintDocument({
         </>
       )}
 
-      {source && <p className="mt-10 pt-3 border-t border-zinc-300 text-[10px] text-zinc-500">{source}</p>}
+      {source && <p className="mt-10 pt-3 border-t border-zinc-300 text-[11px] text-zinc-600">{source}</p>}
     </div>
   );
 }

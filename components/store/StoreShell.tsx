@@ -63,7 +63,7 @@ export function StoreShell({ children }: { children: React.ReactNode }) {
             <span className="h-9 w-9 rounded-lg bg-orange-600 text-white flex items-center justify-center font-serif text-lg font-bold">H</span>
             <span className="hidden sm:block leading-tight">
               <span className="block font-serif font-bold text-lg text-stone-900">Hiên Sách</span>
-              <span className="block text-[10px] uppercase tracking-widest text-stone-400">Bookstore</span>
+              <span className="block text-[11px] uppercase tracking-widest text-stone-400">Bookstore</span>
             </span>
           </Link>
 
@@ -95,7 +95,7 @@ export function StoreShell({ children }: { children: React.ReactNode }) {
                 <circle cx="17.5" cy="20" r="1.3" />
               </svg>
               {(cart?.item_count ?? 0) > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] rounded-full bg-orange-600 text-white text-[10px] font-bold flex items-center justify-center px-1">
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] rounded-full bg-orange-600 text-white text-[11px] font-bold flex items-center justify-center px-1">
                   {cart!.item_count}
                 </span>
               )}
@@ -274,7 +274,7 @@ function LogRow({ entry, open, onToggle }: { entry: ApiLogEntry; open: boolean; 
         <div className="px-4 pb-3 space-y-2 text-[11px]">
           <div className="text-stone-400 break-all">{entry.url}</div>
           <div>
-            <div className="text-stone-500 uppercase tracking-wider text-[10px] mb-0.5">Request headers</div>
+            <div className="text-stone-500 uppercase tracking-wider text-[11px] mb-0.5">Request headers</div>
             {entry.requestHeaders.map(([name, value]) => (
               <div key={name} className="break-all">
                 <span className="text-sky-300">{name}</span>: {value}
@@ -283,12 +283,12 @@ function LogRow({ entry, open, onToggle }: { entry: ApiLogEntry; open: boolean; 
           </div>
           {entry.requestBody !== undefined && (
             <div>
-              <div className="text-stone-500 uppercase tracking-wider text-[10px] mb-0.5">Request body</div>
+              <div className="text-stone-500 uppercase tracking-wider text-[11px] mb-0.5">Request body</div>
               <pre className="whitespace-pre-wrap break-all bg-stone-900 rounded p-2">{JSON.stringify(entry.requestBody, null, 2)}</pre>
             </div>
           )}
           <div>
-            <div className="text-stone-500 uppercase tracking-wider text-[10px] mb-0.5">Response · {entry.status}</div>
+            <div className="text-stone-500 uppercase tracking-wider text-[11px] mb-0.5">Response · {entry.status}</div>
             <pre className="whitespace-pre-wrap break-all bg-stone-900 rounded p-2 max-h-72 overflow-auto">
               {entry.responseBody === undefined ? "(no body)" : JSON.stringify(entry.responseBody, null, 2)}
             </pre>

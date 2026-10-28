@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { AlertCircle, RefreshCw, X } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { getGroup } from "@/lib/groups";
 import {
@@ -33,8 +34,12 @@ export default function DictionaryPage() {
   const [total, setTotal] = useState(0);
   const [bank, setBank] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [listError, setListError] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const [entry, setEntry] = useState<DictionaryEntry | null>(null);
+  /** Where the open word's fetch stands, so a failure never looks like loading forever. */
+  const [entryStatus, setEntryStatus] = useState<"loading" | "ready" | "missing" | "error">("loading");
+  const [entryAttempt, setEntryAttempt] = useState(0);
   const detailRef = useRef<HTMLDivElement>(null);
 
   // `?w=` makes a word shareable. Read from the URL directly rather than with
@@ -66,16 +71,25 @@ export default function DictionaryPage() {
       if (level) params.set("level", level);
 
       setLoading(true);
+      setListError(false);
 
       try {
         const res = await fetch(`/api/english/dictionary?${params}`);
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
         const json = await res.json();
 
         setHits((prev) => (offset === 0 ? json.items ?? [] : prev.concat(json.items ?? [])));
         setTotal(json.total ?? 0);
         setBank(json.bank !== false);
       } catch {
-        if (offset === 0) setHits([]);
+        if (offset === 0) {
+          setHits([]);
+          setTotal(0);
+        }
+
+        setListError(true);
       } finally {
         setLoading(false);
       }
@@ -107,19 +121,46 @@ export default function DictionaryPage() {
 
     let cancelled = false;
 
+    setEntry(null);
+    setEntryStatus("loading");
+
     fetch(`/api/english/dictionary?word=${encodeURIComponent(selected)}`)
-      .then((res) => (res.ok ? res.json() : null))
+      .then((res) => {
+        if (res.status === 404) return null;
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        return res.json();
+      })
       .then((json) => {
-        if (!cancelled) setEntry(json?.entry ?? null);
+        if (cancelled) return;
+
+        const found: DictionaryEntry | null = json?.entry ?? null;
+
+        setEntry(found);
+        setEntryStatus(found ? "ready" : "missing");
       })
       .catch(() => {
-        if (!cancelled) setEntry(null);
+        if (cancelled) return;
+
+        setEntry(null);
+        setEntryStatus("error");
       });
 
     return () => {
       cancelled = true;
     };
-  }, [selected]);
+  }, [selected, entryAttempt]);
+
+  const hasFilters = Boolean(query.trim() || letter || pos || courseOnly);
+
+  function clearFilters() {
+    setQuery("");
+    setTerm("");
+    setLetter("");
+    setPos("");
+    setCourseOnly(false);
+  }
 
   function openWord(word: string) {
     setSelected(word);
@@ -148,42 +189,57 @@ export default function DictionaryPage() {
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("dict.searchPlaceholder")}
           aria-label={t("dict.search")}
+          autoComplete="off"
+          spellCheck={false}
         />
 
-        <div className="flex flex-wrap gap-1.5">
-          <button type="button" className={chip(!pos)} onClick={() => setPos("")}>
+        <div className="flex flex-wrap gap-1.5" role="group" aria-label={pick("Lọc theo loại từ", "Filter by word type")}>
+          <button type="button" className={chip(!pos)} aria-pressed={!pos} onClick={() => setPos("")}>
             {t("dict.allTypes")}
           </button>
           {POS_CODES.map((code) => (
-            <button key={code} type="button" className={chip(pos === code)} onClick={() => setPos(pos === code ? "" : code)}>
+            <button
+              key={code}
+              type="button"
+              className={chip(pos === code)}
+              aria-pressed={pos === code}
+              onClick={() => setPos(pos === code ? "" : code)}
+            >
               {t(`dict.pos.${code}`)}
             </button>
           ))}
-          <button type="button" className={chip(courseOnly)} onClick={() => setCourseOnly(!courseOnly)}>
+          <button type="button" className={chip(courseOnly)} aria-pressed={courseOnly} onClick={() => setCourseOnly(!courseOnly)}>
             {t("dict.courseOnly")}
           </button>
         </div>
 
-        <div className="flex flex-wrap gap-1.5">
-          <button type="button" className={chip(!level)} onClick={() => setLevel("")}>
+        <div className="flex flex-wrap gap-1.5" role="group" aria-label={pick("Lọc theo trình độ", "Filter by level")}>
+          <button type="button" className={chip(!level)} aria-pressed={!level} onClick={() => setLevel("")}>
             {t("dict.allLevels")}
           </button>
           {LEVELS.map((code) => (
-            <button key={code} type="button" className={chip(level === code)} onClick={() => setLevel(level === code ? "" : code)}>
+            <button
+              key={code}
+              type="button"
+              className={chip(level === code)}
+              aria-pressed={level === code}
+              onClick={() => setLevel(level === code ? "" : code)}
+            >
               {t(`dict.level.${code}`)}
             </button>
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-1">
-          <button type="button" className={chip(!letter)} onClick={() => setLetter("")}>
+        <div className="flex flex-wrap gap-1" role="group" aria-label={pick("Lọc theo chữ cái đầu", "Filter by first letter")}>
+          <button type="button" className={chip(!letter)} aria-pressed={!letter} onClick={() => setLetter("")}>
             {t("dict.allLetters")}
           </button>
           {LETTERS.map((l) => (
             <button
               key={l}
               type="button"
-              className={cn(chip(letter === l), "w-8 px-0 text-center uppercase")}
+              className={cn(chip(letter === l), "w-9 sm:w-8 px-0 text-center uppercase")}
+              aria-pressed={letter === l}
               onClick={() => setLetter(letter === l ? "" : l)}
             >
               {l}
@@ -199,7 +255,13 @@ export default function DictionaryPage() {
             truncated topic titles), which pushed the page past a phone's width. */}
         <div className="lg:order-2 min-w-0" ref={detailRef}>
           {selected ? (
-            <EntryCard word={selected} entry={entry} onClose={() => setSelected(null)} />
+            <EntryCard
+              word={selected}
+              entry={entry}
+              status={entryStatus}
+              onRetry={() => setEntryAttempt((n) => n + 1)}
+              onClose={() => setSelected(null)}
+            />
           ) : (
             <div className="card text-sm text-zinc-500 hidden lg:block">{t("dict.selectHint")}</div>
           )}
@@ -209,8 +271,21 @@ export default function DictionaryPage() {
           <p className="text-xs text-zinc-500 mb-2" aria-live="polite">
             {loading && hits.length === 0
               ? t("common.loading")
-              : `${total.toLocaleString(lang === "vi" ? "vi-VN" : "en-GB")} ${t("dict.words")}`}
+              : listError && hits.length === 0
+                ? pick("Không tải được danh sách từ", "Couldn't load the word list")
+                : `${total.toLocaleString(lang === "vi" ? "vi-VN" : "en-GB")} ${t("dict.words")}`}
           </p>
+
+          {loading && hits.length === 0 && (
+            <ul className="space-y-2" aria-hidden="true">
+              {[0, 1, 2, 3].map((i) => (
+                <li key={i} className="card animate-pulse">
+                  <div className="h-4 w-1/3 rounded bg-zinc-200 dark:bg-zinc-800" />
+                  <div className="h-3 w-2/3 rounded bg-zinc-100 dark:bg-zinc-800/60 mt-2" />
+                </li>
+              ))}
+            </ul>
+          )}
 
           <ul className="space-y-2">
             {hits.map((hit) => (
@@ -218,6 +293,7 @@ export default function DictionaryPage() {
                 <button
                   type="button"
                   onClick={() => openWord(hit.word)}
+                  aria-current={selected?.toLowerCase() === hit.word.toLowerCase() ? "true" : undefined}
                   className={cn(
                     "card w-full text-left hover:border-blue-400 dark:hover:border-blue-700 transition-colors",
                     selected?.toLowerCase() === hit.word.toLowerCase() && "border-blue-500 dark:border-blue-600"
@@ -227,17 +303,17 @@ export default function DictionaryPage() {
                     <span className="font-semibold">{hit.word}</span>
                     {hit.ipa && <span className="text-xs text-zinc-500">{hit.ipa}</span>}
                     {hit.pos && (
-                      <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                      <span className="text-[11px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                         {t(`dict.pos.${hit.pos}`)}
                       </span>
                     )}
                     {hit.level && hit.level !== "common" && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300">
+                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300">
                         {t(`dict.level.${hit.level}`)}
                       </span>
                     )}
                     {hit.courseCount > 0 && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-600/20 text-emerald-700 dark:text-emerald-300">
+                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-600/20 text-emerald-700 dark:text-emerald-300">
                         {hit.courseCount} {t("dict.examples")}
                       </span>
                     )}
@@ -250,9 +326,45 @@ export default function DictionaryPage() {
             ))}
           </ul>
 
-          {hits.length === 0 && !loading && <p className="text-sm text-zinc-500">{t("dict.noResults")}</p>}
+          {listError && !loading && (
+            <div
+              role="alert"
+              className="card flex flex-wrap items-center gap-3 mt-2 !border-red-200 dark:!border-red-900/60 text-sm"
+            >
+              <AlertCircle className="h-4 w-4 shrink-0 text-red-600 dark:text-red-400" aria-hidden="true" />
+              <span className="min-w-0 flex-1 text-zinc-700 dark:text-zinc-300">
+                {pick(
+                  "Không tải được từ điển. Kiểm tra kết nối rồi thử lại.",
+                  "The dictionary couldn't be loaded. Check your connection and try again."
+                )}
+              </span>
+              <button type="button" className="btn-secondary inline-flex items-center gap-1.5" onClick={() => void load(hits.length)}>
+                <RefreshCw className="h-4 w-4" aria-hidden="true" />
+                {pick("Thử lại", "Try again")}
+              </button>
+            </div>
+          )}
 
-          {hits.length < total && (
+          {hits.length === 0 && !loading && !listError && (
+            <div className="card text-sm">
+              <p className="font-medium text-zinc-700 dark:text-zinc-300">{t("dict.noResults")}</p>
+              <p className="text-zinc-500 mt-1">
+                {hasFilters
+                  ? pick(
+                      "Thử bỏ bớt bộ lọc, kiểm tra chính tả hoặc chỉ gõ phần đầu của từ.",
+                      "Try removing a filter, checking the spelling, or typing just the start of the word."
+                    )
+                  : pick("Thử gõ một từ tiếng Anh khác.", "Try a different English word.")}
+              </p>
+              {hasFilters && (
+                <button type="button" className="btn-secondary mt-3" onClick={clearFilters}>
+                  {pick("Xoá bộ lọc", "Clear filters")}
+                </button>
+              )}
+            </div>
+          )}
+
+          {hits.length < total && !listError && (
             <button
               type="button"
               className="btn-secondary w-full mt-3"
@@ -302,10 +414,14 @@ export default function DictionaryPage() {
 function EntryCard({
   word,
   entry,
+  status,
+  onRetry,
   onClose,
 }: {
   word: string;
   entry: DictionaryEntry | null;
+  status: "loading" | "ready" | "missing" | "error";
+  onRetry: () => void;
   onClose: () => void;
 }) {
   const { t, pick, lang } = useLang();
@@ -318,32 +434,51 @@ function EntryCard({
           <div className="flex items-center gap-2 flex-wrap mt-1">
             {entry?.ipa && <span className="text-sm text-zinc-500">{entry.ipa}</span>}
             {entry?.pos && (
-              <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+              <span className="text-[11px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                 {t(`dict.pos.${entry.pos}`)}
               </span>
             )}
             {entry?.level && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300">
+              <span className="text-[11px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300">
                 {t(`dict.level.${entry.level}`)}
               </span>
             )}
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
-              {entry?.inBank ? t("dict.fromWordBank") : t("dict.fromCourses")}
-            </span>
+            {entry && (
+              <span className="text-[11px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
+                {entry.inBank ? t("dict.fromWordBank") : t("dict.fromCourses")}
+              </span>
+            )}
           </div>
         </div>
         <button
           type="button"
           onClick={onClose}
           aria-label={t("dict.close")}
-          className="shrink-0 p-2 -m-1 rounded-lg text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          className="shrink-0 p-2.5 -m-1.5 rounded-lg text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800"
         >
-          ✕
+          <X className="h-4 w-4" aria-hidden="true" />
         </button>
       </div>
 
-      {!entry ? (
-        <p className="text-sm text-zinc-500 mt-4">{t("common.loading")}</p>
+      {status === "error" ? (
+        <div role="alert" className="mt-4 text-sm">
+          <p className="text-zinc-700 dark:text-zinc-300">
+            {pick("Không tải được nghĩa của từ này.", "This word's entry couldn't be loaded.")}
+          </p>
+          <button type="button" className="btn-secondary mt-3 inline-flex items-center gap-1.5" onClick={onRetry}>
+            <RefreshCw className="h-4 w-4" aria-hidden="true" />
+            {pick("Thử lại", "Try again")}
+          </button>
+        </div>
+      ) : status === "missing" ? (
+        <p className="text-sm text-zinc-500 mt-4">
+          {pick(
+            "Từ này không có trong từ điển. Thử tìm một dạng khác của từ (ví dụ dạng nguyên mẫu).",
+            "This word isn't in the dictionary. Try another form of it (for example the base form)."
+          )}
+        </p>
+      ) : !entry ? (
+        <p className="text-sm text-zinc-500 mt-4" aria-live="polite">{t("common.loading")}</p>
       ) : (
         <>
           <dl className="mt-4 space-y-3">
@@ -467,7 +602,7 @@ function SenseList({ title, groups }: { title: string; groups: SenseGroup[] }) {
           return (
             <div key={g}>
               {group.pos && (
-                <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                <span className="text-[11px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                   {t(`dict.pos.${group.pos}`)}
                 </span>
               )}

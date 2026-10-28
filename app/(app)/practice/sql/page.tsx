@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { BookA, Loader2, Play, RotateCw, Trophy, Wallet, type LucideIcon } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { cn } from "@/lib/utils";
 import type { PlaygroundDb, QueryResult } from "@/lib/sqlPlayground";
@@ -18,19 +19,19 @@ interface Example {
 
 const DB_OPTIONS: {
   id: PlaygroundDb;
-  icon: string;
+  icon: LucideIcon;
   label: { vi: string; en: string };
   hint: { vi: string; en: string };
 }[] = [
   {
     id: "words",
-    icon: "Aa",
+    icon: BookA,
     label: { vi: "Kho từ vựng tiếng Anh", en: "English word bank" },
     hint: { vi: "Từ, phiên âm, nghĩa, lịch sử ôn tập", en: "Words, IPA, meanings, review history" },
   },
   {
     id: "fintech",
-    icon: "₫",
+    icon: Wallet,
     label: { vi: "Fintech: cho vay số & ví điện tử", en: "Fintech: digital lending & e-wallet" },
     hint: {
       vi: "Khách hàng, hồ sơ vay, khoản vay, lịch trả nợ, ví, thanh toán, checkout (dữ liệu đến 30/06/2026)",
@@ -187,11 +188,15 @@ export default function SqlPracticePage() {
   const { pick } = useLang();
   const [db, setDb] = useState<PlaygroundDb>("words");
   const [view, setView] = useState<View>("editor");
-  const { tables: schema, error: schemaError } = useSchema(db);
+  const { tables: schema, error: schemaError, loading: schemaLoading, retry: retrySchema } = useSchema(db);
   const [sql, setSql] = useState(WORD_EXAMPLES[0].sql);
   const [result, setResult] = useState<QueryResult | null>(null);
   const [running, setRunning] = useState(false);
   const taRef = useRef<HTMLTextAreaElement>(null);
+  // The text last put in the editor by the app (saved query, example, table
+  // snippet). Anything else is the learner's own typing, which an example
+  // click must not silently throw away.
+  const loadedSql = useRef(WORD_EXAMPLES[0].sql);
 
   // ?db=fintech (linked from the data-analysis lessons) wins over the last choice.
   // Read via window.location rather than useSearchParams to avoid a Suspense boundary.
@@ -206,7 +211,10 @@ export default function SqlPracticePage() {
   }, []);
 
   useEffect(() => {
-    setSql(readStorage(STORAGE_KEYS[db]) ?? EXAMPLES[db][0].sql);
+    const initialSql = readStorage(STORAGE_KEYS[db]) ?? EXAMPLES[db][0].sql;
+
+    loadedSql.current = initialSql;
+    setSql(initialSql);
     setResult(null);
   }, [db]);
 
@@ -255,6 +263,15 @@ export default function SqlPracticePage() {
   }, [sql, db]);
 
   function insertSnippet(text: string) {
+    const edited = sql.trim() !== "" && sql !== loadedSql.current && sql !== text;
+
+    const replace =
+      !edited ||
+      window.confirm(pick("Thay truy vấn bạn đang viết bằng mẫu này?", "Replace the query you're writing with this one?"));
+
+    if (!replace) return;
+
+    loadedSql.current = text;
     setSql(text);
     chooseView("editor");
     // The editor mounts again when coming back from the diagram.
@@ -262,7 +279,7 @@ export default function SqlPracticePage() {
   }
 
   return (
-    <div className="max-w-[1400px] mx-auto">
+    <div className="max-w-6xl">
       <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0 max-w-3xl">
           <h1 className="text-2xl font-bold">{pick("Luyện tập SQL", "SQL Practice")}</h1>
@@ -273,25 +290,27 @@ export default function SqlPracticePage() {
             )}
           </p>
         </div>
-        <Link href="/practice/sql/challenges" className="btn-primary shrink-0 text-sm">
-          {pick("◆ Thử thách SQL →", "◆ SQL challenges →")}
+        <Link href="/practice/sql/challenges" className="btn-primary shrink-0 text-sm inline-flex items-center gap-2">
+          <Trophy className="h-4 w-4" aria-hidden="true" />
+          {pick("Thử thách SQL", "SQL challenges")}
         </Link>
       </div>
 
       {/* Dataset switcher */}
       <div
-        role="tablist"
+        role="group"
         aria-label={pick("Bộ dữ liệu", "Dataset")}
         className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5"
       >
         {DB_OPTIONS.map((o) => {
           const active = o.id === db;
+          const Icon = o.icon;
 
           return (
             <button
               key={o.id}
-              role="tab"
-              aria-selected={active}
+              type="button"
+              aria-pressed={active}
               onClick={() => chooseDb(o.id)}
               className={cn(
                 "text-left rounded-xl border px-4 py-3 transition-colors",
@@ -300,8 +319,9 @@ export default function SqlPracticePage() {
                   : "border-zinc-300 dark:border-zinc-700/60 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
               )}
             >
-              <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                {o.icon} {pick(o.label.vi, o.label.en)}
+              <div className="flex items-center gap-2 text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                <Icon className="h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+                {pick(o.label.vi, o.label.en)}
               </div>
               <div className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
                 {pick(o.hint.vi, o.hint.en)}
@@ -313,7 +333,7 @@ export default function SqlPracticePage() {
 
       {/* Editor / diagram switch */}
       <div
-        role="tablist"
+        role="group"
         aria-label={pick("Chế độ xem", "View")}
         className="inline-flex rounded-lg border border-zinc-300 dark:border-zinc-700/60 p-0.5 mb-4 bg-white dark:bg-zinc-900"
       >
@@ -325,8 +345,8 @@ export default function SqlPracticePage() {
         ).map(([id, label]) => (
           <button
             key={id}
-            role="tab"
-            aria-selected={view === id}
+            type="button"
+            aria-pressed={view === id}
             onClick={() => chooseView(id)}
             className={cn(
               "px-3 py-2 sm:py-1.5 text-sm rounded-md transition-colors",
@@ -348,7 +368,15 @@ export default function SqlPracticePage() {
               "Each line is a foreign key: a column on the right points at a key on the left — exactly the ON condition of a JOIN. Click a table name to open a SELECT on it."
             )}
           </p>
-          {schemaError && <div className="text-xs text-red-600 dark:text-red-400 mb-2">{schemaError}</div>}
+          {schemaError && (
+            <div role="alert" className="mb-2 flex flex-wrap items-center gap-2 text-xs text-red-600 dark:text-red-400">
+              {pick("Không tải được sơ đồ:", "Couldn't load the diagram:")} {schemaError}
+              <button type="button" onClick={retrySchema} className="btn-secondary text-xs inline-flex items-center gap-1.5 px-3 py-1.5">
+                <RotateCw className="h-3.5 w-3.5" aria-hidden="true" />
+                {pick("Thử lại", "Retry")}
+              </button>
+            </div>
+          )}
           <SchemaDiagram tables={schema} pick={pick} onTableClick={(name) => insertSnippet(`SELECT * FROM ${name} LIMIT 20;`)} />
         </div>
       )}
@@ -364,47 +392,97 @@ export default function SqlPracticePage() {
             pick={pick}
             placeholder={db === "fintech" ? "SELECT * FROM loans LIMIT 10;" : "SELECT * FROM words LIMIT 10;"}
             actions={
-              <button className="btn-primary" onClick={run} disabled={running}>
-                {running ? pick("Đang chạy...", "Running...") : pick("▶ Chạy", "▶ Run")}
+              <button
+                type="button"
+                className="btn-primary inline-flex items-center gap-2"
+                onClick={run}
+                disabled={running || sql.trim() === ""}
+                aria-busy={running}
+              >
+                {running ? (
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                ) : (
+                  <Play className="h-4 w-4" aria-hidden="true" />
+                )}
+                {running ? pick("Đang chạy…", "Running…") : pick("Chạy", "Run")}
               </button>
             }
           />
 
           {/* Example queries */}
-          <div className="flex flex-wrap gap-2">
-            {EXAMPLES[db].map((ex) => (
-              <button
-                key={ex.en}
-                onClick={() => insertSnippet(ex.sql)}
-                className="text-xs px-2.5 py-2 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700/60 transition-colors"
-              >
-                {pick(ex.vi, ex.en)}
-              </button>
-            ))}
+          <div>
+            <h2 id="sql-examples-label" className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
+              {pick("Truy vấn mẫu — bấm để đưa vào ô soạn", "Example queries — click to load into the editor")}
+            </h2>
+            <div role="group" aria-labelledby="sql-examples-label" className="flex flex-wrap gap-2">
+              {EXAMPLES[db].map((ex) => (
+                <button
+                  key={ex.en}
+                  type="button"
+                  onClick={() => insertSnippet(ex.sql)}
+                  className="text-xs px-2.5 py-2 sm:py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700/60 transition-colors"
+                >
+                  {pick(ex.vi, ex.en)}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Result */}
+          {/* Result — a short summary is announced; errors announce themselves */}
+          <p aria-live="polite" className="sr-only">
+            {running
+              ? pick("Đang chạy truy vấn", "Running query")
+              : result && !result.error
+                ? pick(`Xong · ${result.rowCount} dòng`, `Done · ${result.rowCount} rows`)
+                : ""}
+          </p>
           {result && <QueryResultView result={result} pick={pick} />}
         </div>
 
         {/* Schema side panel */}
         <aside className="space-y-3 lg:sticky lg:top-6 self-start">
-          <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+          <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
             {pick("Cấu trúc bảng", "Table structures")}
-          </div>
-          {schemaError && (
-            <div className="text-xs text-red-600 dark:text-red-400 card">{schemaError}</div>
+          </h2>
+          <p className="text-xs text-zinc-500">
+            {pick("Bấm tên bảng để đưa truy vấn xem 20 dòng đầu vào ô soạn.", "Click a table name to load a query for its first 20 rows.")}
+          </p>
+
+          {schemaLoading && (
+            <p role="status" className="flex items-center gap-2 text-xs text-zinc-500">
+              <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" />
+              {pick("Đang tải cấu trúc bảng…", "Loading tables…")}
+            </p>
           )}
+
+          {schemaError && (
+            <div role="alert" className="card p-3 text-xs text-red-600 dark:text-red-400 space-y-2">
+              <p>
+                {pick("Không tải được cấu trúc bảng:", "Couldn't load the tables:")} {schemaError}
+              </p>
+              <button
+                type="button"
+                onClick={retrySchema}
+                className="btn-secondary text-xs inline-flex items-center gap-1.5 px-3 py-1.5"
+              >
+                <RotateCw className="h-3.5 w-3.5" aria-hidden="true" />
+                {pick("Thử lại", "Retry")}
+              </button>
+            </div>
+          )}
+
           {schema.map((t) => (
             <div key={t.name} className="card p-3">
               <button
+                type="button"
                 onClick={() => insertSnippet(`SELECT * FROM ${t.name} LIMIT 20;`)}
-                className="flex items-baseline justify-between w-full text-left group py-1.5 sm:py-0"
+                title={pick(`Đưa SELECT * FROM ${t.name} vào ô soạn`, `Load SELECT * FROM ${t.name} into the editor`)}
+                className="flex items-baseline justify-between gap-2 w-full text-left group py-1.5 sm:py-0"
               >
-                <span className="font-mono text-sm text-blue-700 dark:text-blue-300 group-hover:text-blue-800 dark:group-hover:text-blue-200">
+                <span className="min-w-0 break-all font-mono text-sm group-hover:underline text-blue-700 dark:text-blue-300 group-hover:text-blue-800 dark:group-hover:text-blue-200">
                   {t.name}
                 </span>
-                <span className="text-[11px] text-zinc-500">
+                <span className="shrink-0 text-[11px] text-zinc-500">
                   {t.rowCount.toLocaleString()} {pick("dòng", "rows")}
                 </span>
               </button>
@@ -412,13 +490,13 @@ export default function SqlPracticePage() {
                 {t.columns.map((c) => (
                   <div
                     key={c.name}
-                    className="flex items-baseline justify-between text-xs font-mono"
+                    className="flex items-baseline justify-between gap-2 text-xs font-mono"
                   >
-                    <span className="text-zinc-700 dark:text-zinc-300">
+                    <span className="min-w-0 break-all text-zinc-700 dark:text-zinc-300">
                       {c.name}
                       {c.pk && <span className="text-amber-600 dark:text-amber-400/80 ml-1">PK</span>}
                     </span>
-                    <span className="text-zinc-400 dark:text-zinc-600">{c.type || "—"}</span>
+                    <span className="shrink-0 text-zinc-500 dark:text-zinc-400">{c.type || "—"}</span>
                   </div>
                 ))}
               </div>

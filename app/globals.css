@@ -14,6 +14,61 @@
   --foreground: #18181b;
 }
 
+/* Native controls (scrollbars, checkboxes, date pickers) follow the theme. */
+:root,
+:root.dark {
+  color-scheme: dark;
+}
+
+:root.light {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* Anchor jumps land below the sticky mobile bar instead of under it. */
+  scroll-padding-top: 4.5rem;
+}
+
+/* One visible focus ring for keyboard users, everywhere. Mouse clicks don't
+   trigger :focus-visible, so pointer users never see it. Components that draw
+   their own ring (e.g. `.input`) still win through `focus:outline-none`. */
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Readable secondary text (WCAG AA, 4.5:1). Two greys were used all over the
+   app in a mode where they are too faint:
+   - zinc-400 on a light background is 2.6:1 → shown as zinc-500 (4.8:1);
+   - zinc-500 on the dark background/cards is ~3.9:1 → lifted to 5.4:1.
+   `:where()` keeps these at plain-utility specificity, and they come after
+   the utilities, so any explicit `dark:text-*`, `hover:text-*` or
+   `group-hover:text-*` on the same element still wins. */
+:where(:root.light) .text-zinc-400 {
+  color: rgb(113 113 122);
+}
+
+:where(:root.dark) .text-zinc-500 {
+  color: rgb(143 143 153);
+}
+
+::selection {
+  background: rgb(59 130 246 / 0.3);
+}
+
+/* Respect the OS "reduce motion" setting across every animation and transition. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -29,11 +84,11 @@ body {
 }
 
 .btn-primary {
-  @apply bg-blue-600 hover:bg-blue-500 text-white font-medium px-4 py-2 rounded-lg transition-colors;
+  @apply bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600;
 }
 
 .btn-secondary {
-  @apply bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium px-4 py-2 rounded-lg transition-colors;
+  @apply bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 active:bg-zinc-300 dark:active:bg-zinc-600 text-zinc-800 dark:text-zinc-200 font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
 .input {

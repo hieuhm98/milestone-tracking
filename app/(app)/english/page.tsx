@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { BookA, Dumbbell, Mic, PenLine, type LucideIcon } from "lucide-react";
+import HubCard from "@/components/HubCard";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 
@@ -10,7 +11,8 @@ const VOCAB_KEY = /#v\d+$/;
 
 interface Card {
   href: string;
-  icon: string;
+  icon: LucideIcon;
+  tile: string;
   title: string;
   description: string;
   stat?: string;
@@ -48,28 +50,32 @@ export default function EnglishHome() {
   const cards: Card[] = [
     {
       href: "/english/dictionary",
-      icon: "▤",
+      icon: BookA,
+      tile: "bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300",
       title: t("english.dictionary"),
       description: t("english.dictionaryDesc"),
       stat: words === null ? undefined : `${words.toLocaleString("en-GB")} ${t("dict.words")}`,
     },
     {
       href: "/english/practice",
-      icon: "Ⓐ",
+      icon: Dumbbell,
+      tile: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300",
       title: t("nav.englishPractice"),
       description: t("english.practiceDesc"),
       stat: practised > 0 ? `${known}/${practised} ${t("english.wordsPractised")}` : undefined,
     },
     {
       href: "/english/ielts-speaking",
-      icon: "◍",
+      icon: Mic,
+      tile: "bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300",
       title: "IELTS Speaking — Band 6 vs Band 9",
       description: t("ielts.card.desc"),
       stat: `212 ${t("ielts.stat.part1")} · 66 ${t("ielts.stat.cards")} · 283 ${t("ielts.stat.part3")}`,
     },
     {
       href: "/english/grammar-for-writing",
-      icon: "✎",
+      icon: PenLine,
+      tile: "bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300",
       title: "Grammar for Writing",
       description: t("grammar.card.desc"),
       stat: `19 ${t("grammar.home.units")} · 48 ${t("grammar.home.traps")}`,
@@ -77,29 +83,25 @@ export default function EnglishHome() {
   ];
 
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-5xl">
       <h1 className="text-2xl font-bold tracking-tight">{t("english.title")}</h1>
-      <p className="text-zinc-600 dark:text-zinc-400 mt-1">{t("english.subtitle")}</p>
+      <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">{t("english.subtitle")}</p>
 
-      <div className="grid gap-4 sm:grid-cols-2 mt-6">
+      <div className="grid gap-3 sm:grid-cols-2 mt-6">
         {cards.map((card) => (
-          <Link
+          <HubCard
             key={card.href}
             href={card.href}
-            className="card hover:border-blue-400 dark:hover:border-blue-700 transition-colors"
-          >
-            <div className="text-2xl text-blue-600 dark:text-blue-400" aria-hidden="true">
-              {card.icon}
-            </div>
-            <h2 className="font-semibold mt-2">{card.title}</h2>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">{card.description}</p>
-            {card.stat && <p className="text-xs text-zinc-500 mt-2">{card.stat}</p>}
-            <span className="inline-block text-sm text-blue-600 dark:text-blue-400 mt-3">{pick("Mở →", "Open →")}</span>
-          </Link>
+            icon={card.icon}
+            tile={card.tile}
+            title={card.title}
+            description={card.description}
+            stat={card.stat}
+          />
         ))}
       </div>
 
-      <p className="text-xs text-zinc-500 mt-6">
+      <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-6">
         {pick(
           "Từ vựng ở đây lấy từ chính các bài học IT bạn đang học, cộng với kho từ tiếng Anh thông dụng.",
           "The words here come from the IT lessons you are studying, plus a bank of common English words."

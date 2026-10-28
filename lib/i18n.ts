@@ -397,6 +397,8 @@ const vi: Dict = {
 
   "common.loading": "Đang tải...",
   "common.clearSearch": "Xoá tìm kiếm",
+  "common.loadError": "Không tải được dữ liệu. Kiểm tra kết nối rồi thử lại.",
+  "common.retry": "Thử lại",
 
   // Accounts
   "account.promptTitle": "Lưu tiến độ trên mọi thiết bị",
@@ -418,6 +420,11 @@ const vi: Dict = {
   "nav.account": "Tài khoản",
   "nav.collapseSidebar": "Thu gọn menu",
   "nav.expandSidebar": "Mở rộng menu",
+  "nav.closeMenu": "Đóng menu",
+  "nav.mainNav": "Điều hướng chính",
+  "nav.preferences": "Hiển thị",
+  "nav.language": "Ngôn ngữ giao diện",
+  "nav.siteSection": "Chọn phần học",
   "account.ticketTitle": "Đã gửi đăng ký",
   "account.ticketBody": "Trình duyệt này đã đăng ký một tài khoản. Đăng nhập khi tài khoản được duyệt.",
   "account.login": "Đăng nhập",
@@ -850,6 +857,8 @@ const en: Dict = {
 
   "common.loading": "Loading...",
   "common.clearSearch": "Clear search",
+  "common.loadError": "Could not load this page. Check your connection and try again.",
+  "common.retry": "Try again",
 
   // Accounts
   "account.promptTitle": "Keep your progress everywhere",
@@ -871,6 +880,11 @@ const en: Dict = {
   "nav.account": "My account",
   "nav.collapseSidebar": "Collapse the menu",
   "nav.expandSidebar": "Expand the menu",
+  "nav.closeMenu": "Close the menu",
+  "nav.mainNav": "Main navigation",
+  "nav.preferences": "Display",
+  "nav.language": "Interface language",
+  "nav.siteSection": "Choose a section",
   "account.ticketTitle": "Sign-up sent",
   "account.ticketBody": "This browser has already signed up an account. Log in once it's approved.",
   "account.login": "Log in",

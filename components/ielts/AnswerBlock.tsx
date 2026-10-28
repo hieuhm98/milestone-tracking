@@ -53,7 +53,8 @@ export default function AnswerBlock({ band, answer, vocabulary, unitId, id }: Pr
           again when the reader turns IPA off. */}
       <p
         className={cn(
-          "whitespace-pre-line text-zinc-800 dark:text-zinc-100",
+          // ~75 characters a line: past that the eye loses its place on the way back.
+          "max-w-[75ch] whitespace-pre-line text-zinc-800 dark:text-zinc-100",
           showingIpa ? "leading-[2.45]" : "leading-relaxed"
         )}
       >

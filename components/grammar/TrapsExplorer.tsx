@@ -17,7 +17,7 @@ interface Props {
   syllabus: Syllabus;
 }
 
-const CHIP = "rounded-full border px-3 py-1 text-xs font-medium transition-colors";
+const CHIP = "rounded-full border px-3 py-2 sm:py-1 text-xs font-medium transition-colors";
 const CHIP_OFF =
   "border-zinc-300 text-zinc-600 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800";
 
@@ -64,7 +64,7 @@ export default function TrapsExplorer({ traps, syllabus }: Props) {
       </header>
 
       <div className="space-y-3">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2" role="group" aria-label={pick("Lọc theo phần", "Filter by part")}>
           <button
             type="button"
             onClick={() => {
@@ -96,7 +96,7 @@ export default function TrapsExplorer({ traps, syllabus }: Props) {
 
         <div className="flex flex-wrap items-center gap-3">
           <label className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-200">
-            <span className="sr-only">{t("grammar.traps.filterAll")}</span>
+            <span className="sr-only">{pick("Lọc theo bài", "Filter by unit")}</span>
             <select
               value={unitNumber === "all" ? "all" : String(unitNumber)}
               onChange={(event) =>
@@ -127,13 +127,38 @@ export default function TrapsExplorer({ traps, syllabus }: Props) {
           </label>
         </div>
 
-        <p data-testid="trap-count" className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p data-testid="trap-count" className="text-sm text-zinc-500 dark:text-zinc-400" aria-live="polite">
           {shown.length} / {traps.length}
+          <span className="sr-only"> {pick("lỗi đang hiển thị", "traps shown")}</span>
         </p>
       </div>
 
       {shown.length === 0 ? (
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("grammar.traps.none")}</p>
+        traps.length === 0 ? (
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("grammar.traps.none")}</p>
+        ) : (
+          <div className="card text-sm">
+            <p className="text-zinc-700 dark:text-zinc-300">
+              {onlyMine && wrongIds.length === 0
+                ? pick(
+                    "Bạn chưa sai lỗi nào. Làm bài tập trong các bài học, lỗi bạn mắc sẽ hiện ở đây.",
+                    "You haven't missed any traps yet. Do the exercises in the units and the ones you miss will show up here."
+                  )
+                : pick("Không có lỗi nào khớp với bộ lọc này.", "No traps match these filters.")}
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setPart("all");
+                setUnitNumber("all");
+                setOnlyMine(false);
+              }}
+              className="btn-secondary mt-3 text-sm"
+            >
+              {pick("Xem tất cả", "Show all traps")}
+            </button>
+          </div>
+        )
       ) : (
         <div className="space-y-3">
           {shown.map((trap) => (

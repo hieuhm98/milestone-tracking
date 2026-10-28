@@ -183,14 +183,14 @@ function Solver({
               )}
             </h1>
             <div className="flex flex-wrap items-center gap-2 mt-2">
-              <span className={cn("text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded font-semibold", DIFFICULTY_CLASS[challenge.difficulty])}>
+              <span className={cn("text-[11px] uppercase tracking-wide px-1.5 py-0.5 rounded font-semibold", DIFFICULTY_CLASS[challenge.difficulty])}>
                 {pick(DIFFICULTY_LABEL[challenge.difficulty].vi, DIFFICULTY_LABEL[challenge.difficulty].en)}
               </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
+              <span className="text-[11px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
                 {pick("Dữ liệu", "Data")}: {pick(DB_LABEL[challenge.db].vi, DB_LABEL[challenge.db].en)}
               </span>
               {!challenge.ordered && challenge.kind === "query" && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
+                <span className="text-[11px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
                   {pick("Không chấm thứ tự dòng", "Row order not graded")}
                 </span>
               )}
@@ -325,7 +325,7 @@ function TableList({ tables, pick }: { tables: ReturnType<typeof useSchema>["tab
                       </span>
                     )}
                   </span>
-                  <span className="text-zinc-400 dark:text-zinc-600 shrink-0">{c.type || "—"}</span>
+                  <span className="text-zinc-500 dark:text-zinc-400 shrink-0">{c.type || "—"}</span>
                 </div>
               );
             })}

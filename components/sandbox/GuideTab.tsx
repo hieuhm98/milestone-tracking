@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronRight, Crown, ExternalLink, KeyRound, LockOpen } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { DEMO_ACCOUNTS, MISTAKES, SANDBOX_KEY_HEADER } from "@/lib/sandbox/catalog";
 import type { WorkedExample } from "@/lib/sandbox/examples";
@@ -71,7 +72,7 @@ function RawRequest({ example, pick }: { example: WorkedExample; pick: Pick }) {
       <pre className="overflow-x-auto rounded-lg bg-zinc-950 p-4 font-mono text-[12.5px] leading-relaxed text-zinc-100">
         <span className="text-emerald-400 font-bold">{request.method}</span> <span className="text-sky-300">{request.url}</span> <span className="text-zinc-500">HTTP/1.1</span>
         {"\n"}
-        <span className="text-zinc-400">Host:</span> {host}
+        <span className="text-zinc-300">Host:</span> {host}
         {request.headers.map(([name, value]) => (
           <span key={name}>
             {"\n"}
@@ -302,7 +303,7 @@ export default function GuideTab({
           <div className="rounded-lg border border-blue-200 dark:border-blue-900 p-3 space-y-1">
             <div className="font-mono text-sm font-semibold">Authorization: Bearer &lt;token&gt;</div>
             <p className="text-xs text-zinc-500">{pick("Loại: token đăng nhập (JWT)", "Kind: login token (JWT)")}</p>
-            <P>{pick("Bạn là người dùng nào của cửa hàng. Lấy từ POST /auth/login, hết hạn sau 1 giờ. Chỉ các API 🔑 và 👑 cần nó.", "Which bookstore user you are. Comes from POST /auth/login and expires after 1 hour. Only 🔑 and 👑 endpoints need it.")}</P>
+            <P>{pick("Bạn là người dùng nào của cửa hàng. Lấy từ POST /auth/login, hết hạn sau 1 giờ. Chỉ các API cần đăng nhập hoặc chỉ dành cho admin mới cần nó.", "Which bookstore user you are. Comes from POST /auth/login and expires after 1 hour. Only login-only and admin-only endpoints need it.")}</P>
           </div>
         </div>
 
@@ -324,15 +325,15 @@ export default function GuideTab({
           <table className="w-full text-sm">
             <thead>
               <tr className="text-left text-xs text-zinc-500">
-                <th className="py-1 pr-3 font-medium">{pick("Mức", "Level")}</th>
-                <th className="py-1 pr-3 font-medium">{pick("Cần gì", "Needs")}</th>
-                <th className="py-1 font-medium">{pick("Ví dụ", "Examples")}</th>
+                <th scope="col" className="py-1 pr-3 font-medium">{pick("Mức", "Level")}</th>
+                <th scope="col" className="py-1 pr-3 font-medium">{pick("Cần gì", "Needs")}</th>
+                <th scope="col" className="py-1 font-medium">{pick("Ví dụ", "Examples")}</th>
               </tr>
             </thead>
             <tbody className="text-zinc-600 dark:text-zinc-400">
-              <tr className="border-t border-zinc-100 dark:border-zinc-800"><td className="py-2 pr-3">🔓 {pick("Công khai", "Public")}</td><td className="py-2 pr-3">{pick("chỉ key", "key only")}</td><td className="py-2 font-mono text-xs">GET /books, GET /authors, POST /auth/login</td></tr>
-              <tr className="border-t border-zinc-100 dark:border-zinc-800"><td className="py-2 pr-3">🔑 {pick("Đăng nhập", "Login")}</td><td className="py-2 pr-3">{pick("token bất kỳ", "any token")}</td><td className="py-2 font-mono text-xs">/orders, /payments, /invoices, /auth/me</td></tr>
-              <tr className="border-t border-zinc-100 dark:border-zinc-800"><td className="py-2 pr-3">👑 Admin</td><td className="py-2 pr-3">{pick("token admin", "admin token")}</td><td className="py-2 font-mono text-xs">POST /books, GET /users, POST /payments/{"{id}"}/refund</td></tr>
+              <tr className="border-t border-zinc-100 dark:border-zinc-800"><td className="py-2 pr-3"><span className="inline-flex items-center gap-1.5"><LockOpen className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />{pick("Công khai", "Public")}</span></td><td className="py-2 pr-3">{pick("chỉ key", "key only")}</td><td className="py-2 font-mono text-xs">GET /books, GET /authors, POST /auth/login</td></tr>
+              <tr className="border-t border-zinc-100 dark:border-zinc-800"><td className="py-2 pr-3"><span className="inline-flex items-center gap-1.5"><KeyRound className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />{pick("Đăng nhập", "Login")}</span></td><td className="py-2 pr-3">{pick("token bất kỳ", "any token")}</td><td className="py-2 font-mono text-xs">/orders, /payments, /invoices, /auth/me</td></tr>
+              <tr className="border-t border-zinc-100 dark:border-zinc-800"><td className="py-2 pr-3"><span className="inline-flex items-center gap-1.5"><Crown className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />Admin</span></td><td className="py-2 pr-3">{pick("token admin", "admin token")}</td><td className="py-2 font-mono text-xs">POST /books, GET /users, POST /payments/{"{id}"}/refund</td></tr>
             </tbody>
           </table>
         </div>
@@ -373,7 +374,16 @@ export default function GuideTab({
         </ol>
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={openClient} className="btn-primary text-sm">{pick("Mở Scalar →", "Open Scalar →")}</button>
-          <a href="/api/sandbox/openapi.json" target="_blank" rel="noreferrer" className="btn-secondary text-sm">openapi.json</a>
+          <a
+            href="/api/sandbox/openapi.json"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-secondary text-sm inline-flex items-center gap-1.5"
+          >
+            openapi.json
+            <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+            <span className="sr-only">{pick("(mở tab mới)", "(opens in a new tab)")}</span>
+          </a>
         </div>
         <P>
           {pick("Muốn dùng Postman hoặc Insomnia? Import file openapi.json ở trên, đặt header", "Prefer Postman or Insomnia? Import the openapi.json above and set the header")} <Code>{SANDBOX_KEY_HEADER}</Code> {pick("bằng key của bạn. Mỗi ví dụ ở tab API cũng có nút “Copy lệnh curl”.", "to your key. Every example in the Endpoints tab also has a “Copy as curl” button.")}
@@ -386,10 +396,14 @@ export default function GuideTab({
           {mission.map((step, i) => (
             <li key={i} className="flex items-center gap-3 border-t border-zinc-100 dark:border-zinc-800 first:border-t-0 py-1.5 text-sm">
               <span className="w-5 shrink-0 text-xs font-bold text-zinc-400">{i + 1}</span>
-              <button type="button" onClick={() => openOperation(step.op)} className="text-left text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400">
+              <button
+                type="button"
+                onClick={() => openOperation(step.op)}
+                className="min-w-0 text-left py-1 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 hover:underline underline-offset-2"
+              >
                 {step.text}
               </button>
-              <span className={cn("ml-auto font-mono text-xs font-semibold", statusTone(Number(step.expect)))}>{step.expect}</span>
+              <span className={cn("ml-auto shrink-0 font-mono text-xs font-semibold", statusTone(Number(step.expect)))}>{step.expect}</span>
             </li>
           ))}
         </ol>
@@ -407,7 +421,7 @@ export default function GuideTab({
                   <span className={cn("font-mono text-sm font-semibold w-9", statusTone(ex.response.status))}>{ex.response.status}</span>
                   <span className="text-sm font-medium">{pick(m.title.vi, m.title.en)}</span>
                   <span className="font-mono text-xs text-zinc-500">{err?.code}</span>
-                  <span className="ml-auto text-zinc-400 transition-transform group-open:rotate-90" aria-hidden>›</span>
+                  <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-90" aria-hidden="true" />
                 </summary>
                 <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 p-3">
                   <P>{pick(m.lesson.vi, m.lesson.en)}</P>

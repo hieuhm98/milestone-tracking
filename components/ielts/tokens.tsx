@@ -12,13 +12,13 @@ export const BAND = {
     frame:
       "border border-amber-200 dark:border-amber-900 border-l-4 border-l-amber-400 dark:border-l-amber-500 bg-amber-50 dark:bg-amber-950/40",
     label: "text-amber-800 dark:text-amber-200",
-    count: "text-amber-700/80 dark:text-amber-300/80",
+    count: "text-amber-700 dark:text-amber-300",
   },
   band9: {
     frame:
       "border border-emerald-200 dark:border-emerald-900 border-l-4 border-l-emerald-500 dark:border-l-emerald-400 bg-emerald-50 dark:bg-emerald-950/40",
     label: "text-emerald-800 dark:text-emerald-200",
-    count: "text-emerald-700/80 dark:text-emerald-300/80",
+    count: "text-emerald-700 dark:text-emerald-300",
   },
 } as const;
 

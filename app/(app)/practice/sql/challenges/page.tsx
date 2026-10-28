@@ -147,10 +147,10 @@ export default function SqlChallengesPage() {
                 <span className="min-w-0 flex-1">
                   <span className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold">{pick(c.title.vi, c.title.en)}</span>
-                    <span className={cn("text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded font-semibold", DIFFICULTY_CLASS[c.difficulty])}>
+                    <span className={cn("text-[11px] uppercase tracking-wide px-1.5 py-0.5 rounded font-semibold", DIFFICULTY_CLASS[c.difficulty])}>
                       {pick(DIFFICULTY_LABEL[c.difficulty].vi, DIFFICULTY_LABEL[c.difficulty].en)}
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
+                    <span className="text-[11px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
                       {pick(DB_LABEL[c.db].vi, DB_LABEL[c.db].en)}
                     </span>
                   </span>

@@ -5,12 +5,13 @@
 // what the A− / A+ setting resizes, so the tables, rules and exercises all
 // scale together while the chrome stays put.
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
-import { List, Settings2, X } from "lucide-react";
+import { List, Settings2 } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { cn } from "@/lib/utils";
 import type { PartId, Syllabus } from "@/lib/grammar/types";
+import ContentsDrawer from "@/components/ielts/ContentsDrawer";
 import ContentsTree, { type OutlineEntry } from "./ContentsTree";
 import ReaderSettings from "./ReaderSettings";
 import { FONT_STEPS, useGrammarSettings } from "./settings";
@@ -27,7 +28,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-const LINK = "rounded-md px-2 py-1 text-xs font-medium transition-colors";
+// py-2 below sm makes each link a ~32px-tall tap target; the desktop bar keeps its compact height.
+const LINK = "rounded-md px-2 py-2 sm:py-1 text-xs font-medium transition-colors";
 
 export default function GrammarShell({
   syllabus,
@@ -43,8 +45,11 @@ export default function GrammarShell({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const popover = useRef<HTMLDivElement>(null);
+  const settingsButton = useRef<HTMLButtonElement>(null);
+  const settingsId = useId();
 
   // A click anywhere else closes the popover — it covers the text underneath.
+  // Escape closes it too and hands focus back to the button that opened it.
   useEffect(() => {
     if (!settingsOpen) return;
 
@@ -52,9 +57,20 @@ export default function GrammarShell({
       if (popover.current && !popover.current.contains(event.target as Node)) setSettingsOpen(false);
     };
 
-    document.addEventListener("mousedown", onDown);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
 
-    return () => document.removeEventListener("mousedown", onDown);
+      setSettingsOpen(false);
+      settingsButton.current?.focus();
+    };
+
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, [settingsOpen]);
 
   return (
@@ -64,6 +80,8 @@ export default function GrammarShell({
           <button
             type="button"
             onClick={() => setDrawerOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={drawerOpen}
             className={cn(
               LINK,
               "flex items-center gap-1.5 border border-zinc-200 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800 lg:hidden"
@@ -111,9 +129,13 @@ export default function GrammarShell({
 
           <div className="relative ml-auto" ref={popover}>
             <button
+              ref={settingsButton}
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
               aria-expanded={settingsOpen}
+              aria-controls={settingsId}
+              // The text label is hidden on phones, so the button needs a name of its own.
+              aria-label={pick("Cài đặt", "Settings")}
               data-testid="grammar-settings-button"
               className={cn(
                 LINK,
@@ -125,7 +147,12 @@ export default function GrammarShell({
             </button>
 
             {settingsOpen && (
-              <div className="absolute right-0 top-full z-30 mt-2 rounded-xl border border-zinc-200 bg-white p-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
+              <div
+                id={settingsId}
+                role="group"
+                aria-label={pick("Cài đặt", "Settings")}
+                className="absolute right-0 top-full z-30 mt-2 rounded-xl border border-zinc-200 bg-white p-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900"
+              >
                 <ReaderSettings />
               </div>
             )}
@@ -155,39 +182,21 @@ export default function GrammarShell({
         <div className={cn("min-w-0 flex-1", FONT_STEPS[settings.font])}>{children}</div>
       </div>
 
-      {drawerOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-            onClick={() => setDrawerOpen(false)}
-            aria-hidden="true"
-          />
-
-          <div className="fixed inset-y-0 right-0 z-50 w-72 max-w-[85vw] overflow-y-auto border-l border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950 lg:hidden">
-            <div className="mb-3 flex items-center justify-between">
-              <p className="text-sm font-semibold">{t("grammar.nav.contents")}</p>
-
-              <button
-                type="button"
-                onClick={() => setDrawerOpen(false)}
-                aria-label="Close"
-                className="rounded-md p-1 text-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800"
-              >
-                <X className="h-4 w-4" aria-hidden="true" />
-              </button>
-            </div>
-
-            <ContentsTree
-              syllabus={syllabus}
-              reviewParts={reviewParts}
-              referenceSlugs={referenceSlugs}
-              activeUnitId={activeUnitId}
-              outline={outline}
-              onNavigate={() => setDrawerOpen(false)}
-            />
-          </div>
-        </>
-      )}
+      <ContentsDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        title={t("grammar.nav.contents")}
+        closeLabel={pick("Đóng mục lục", "Close contents")}
+      >
+        <ContentsTree
+          syllabus={syllabus}
+          reviewParts={reviewParts}
+          referenceSlugs={referenceSlugs}
+          activeUnitId={activeUnitId}
+          outline={outline}
+          onNavigate={() => setDrawerOpen(false)}
+        />
+      </ContentsDrawer>
     </div>
   );
 }

@@ -6,7 +6,7 @@
 // It sticks below the app's own mobile bar (min-h-14 → top-14) and at the very
 // top from lg up, where that bar is replaced by the desktop rail.
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { List, Settings2 } from "lucide-react";
 import { useLang } from "@/context/lang";
@@ -20,17 +20,23 @@ interface Props {
   toc: Toc;
   /** "Part 1 › Topics 1–10 › Topic 1 — Computers / Tablets" */
   breadcrumb?: string;
+  /** Whether the contents drawer is showing — mirrored on its button. */
+  contentsOpen?: boolean;
   onOpenContents: () => void;
 }
 
-const LINK = "rounded-md px-2 py-1 text-xs font-medium transition-colors";
+// py-2 below sm makes each link a ~32px-tall tap target; the desktop bar keeps its compact height.
+const LINK = "rounded-md px-2 py-2 sm:py-1 text-xs font-medium transition-colors";
 
-export default function TopBar({ toc, breadcrumb, onOpenContents }: Props) {
+export default function TopBar({ toc, breadcrumb, contentsOpen = false, onOpenContents }: Props) {
   const { t } = useLang();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const popover = useRef<HTMLDivElement>(null);
+  const settingsButton = useRef<HTMLButtonElement>(null);
+  const settingsId = useId();
 
   // A click anywhere else closes the popover — it covers the text underneath.
+  // Escape closes it too and hands focus back to the button that opened it.
   useEffect(() => {
     if (!settingsOpen) return;
 
@@ -38,9 +44,20 @@ export default function TopBar({ toc, breadcrumb, onOpenContents }: Props) {
       if (popover.current && !popover.current.contains(event.target as Node)) setSettingsOpen(false);
     };
 
-    document.addEventListener("mousedown", onDown);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
 
-    return () => document.removeEventListener("mousedown", onDown);
+      setSettingsOpen(false);
+      settingsButton.current?.focus();
+    };
+
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, [settingsOpen]);
 
   const firstPart1 = toc.part1[0]?.slug;
@@ -53,6 +70,8 @@ export default function TopBar({ toc, breadcrumb, onOpenContents }: Props) {
           type="button"
           onClick={onOpenContents}
           aria-label={t("ielts.nav.openToc")}
+          aria-haspopup="dialog"
+          aria-expanded={contentsOpen}
           className={cn(LINK, "flex items-center gap-1.5 border border-zinc-200 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800 lg:hidden")}
         >
           <List className="h-3.5 w-3.5" aria-hidden="true" />
@@ -80,9 +99,13 @@ export default function TopBar({ toc, breadcrumb, onOpenContents }: Props) {
 
         <div className="relative ml-auto" ref={popover}>
           <button
+            ref={settingsButton}
             type="button"
             onClick={() => setSettingsOpen(!settingsOpen)}
             aria-expanded={settingsOpen}
+            aria-controls={settingsId}
+            // The text label is hidden on phones, so the button needs a name of its own.
+            aria-label={t("ielts.settings.title")}
             className={cn(LINK, "flex items-center gap-1.5 border border-zinc-200 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800")}
           >
             <Settings2 className="h-3.5 w-3.5" aria-hidden="true" />
@@ -90,7 +113,12 @@ export default function TopBar({ toc, breadcrumb, onOpenContents }: Props) {
           </button>
 
           {settingsOpen && (
-            <div className="absolute right-0 top-full z-30 mt-2 rounded-xl border border-zinc-200 bg-white p-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
+            <div
+              id={settingsId}
+              role="group"
+              aria-label={t("ielts.settings.title")}
+              className="absolute right-0 top-full z-30 mt-2 rounded-xl border border-zinc-200 bg-white p-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900"
+            >
               <ReaderSettings />
             </div>
           )}

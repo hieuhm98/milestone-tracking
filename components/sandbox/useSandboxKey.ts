@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "@/context/auth";
 
 // The learner's personal X-Sandbox-Key, shared by /practice/api (Scalar) and
@@ -34,14 +34,23 @@ export interface SandboxKeyState {
   error: string | null;
 }
 
-export function useSandboxKey(): SandboxKeyState {
+export interface SandboxKey extends SandboxKeyState {
+  /** Ask for the key again, e.g. after a network error. */
+  retry: () => void;
+}
+
+export function useSandboxKey(): SandboxKey {
   const { session, ready } = useAuth();
   const [state, setState] = useState<SandboxKeyState>({ key: null, scope: null, error: null });
+  const [attempt, setAttempt] = useState(0);
+  const retry = useCallback(() => setAttempt((n) => n + 1), []);
 
   useEffect(() => {
     if (!ready) return;
 
     let cancelled = false;
+
+    setState((prev) => (prev.error ? { ...prev, error: null } : prev));
 
     async function load() {
       try {
@@ -72,7 +81,7 @@ export function useSandboxKey(): SandboxKeyState {
     return () => {
       cancelled = true;
     };
-  }, [ready, session?.access_token]);
+  }, [ready, session?.access_token, attempt]);
 
-  return state;
+  return { ...state, retry };
 }

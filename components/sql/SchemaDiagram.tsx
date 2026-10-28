@@ -240,7 +240,7 @@ export function SchemaDiagram({
               >
                 {box.table.name}
               </text>
-              <text x={BOX_W - 10} y={HEADER_H / 2 + 4} textAnchor="end" className="text-[10px] fill-zinc-400 dark:fill-zinc-500">
+              <text x={BOX_W - 10} y={HEADER_H / 2 + 4} textAnchor="end" className="text-[11px] fill-zinc-400 dark:fill-zinc-500">
                 {box.table.rowCount.toLocaleString()}
               </text>
               {box.table.columns.map((col, i) => {

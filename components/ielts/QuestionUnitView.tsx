@@ -37,7 +37,11 @@ interface Props {
 }
 
 const PILL =
-  "rounded-full border border-zinc-200 dark:border-zinc-700 px-2.5 py-1 text-xs font-medium transition-colors";
+  "rounded-full border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 text-xs font-medium transition-colors";
+
+/** Text links with a padded hit area that doesn't shift the line they sit on. */
+const QUIET_LINK =
+  "rounded px-1.5 py-2 -my-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100";
 
 export default function QuestionUnitView({
   unit,
@@ -96,12 +100,12 @@ export default function QuestionUnitView({
 
         <span className="ml-auto flex flex-wrap items-center gap-2 text-xs">
           {prev && (
-            <Link href={prev.href} title={prev.label} className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+            <Link href={prev.href} title={prev.label} className={QUIET_LINK}>
               {t("ielts.nav.prev")}
             </Link>
           )}
           {next && (
-            <Link href={next.href} title={next.label} className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+            <Link href={next.href} title={next.label} className={QUIET_LINK}>
               {t("ielts.nav.next")}
             </Link>
           )}
@@ -129,6 +133,7 @@ export default function QuestionUnitView({
           <button
             type="button"
             onClick={() => setRevealed(!revealed)}
+            aria-expanded={!hidden}
             className="btn-secondary inline-flex items-center gap-2 text-sm"
           >
             {hidden ? <Eye className="h-4 w-4" aria-hidden="true" /> : <EyeOff className="h-4 w-4" aria-hidden="true" />}
@@ -155,11 +160,11 @@ export default function QuestionUnitView({
         )}
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-        <a href={`#${listAnchor}`} className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <a href={`#${listAnchor}`} className={QUIET_LINK}>
           {t("ielts.nav.backToList")}
         </a>
-        <Link href={`${IELTS_BASE}#contents`} className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+        <Link href={`${IELTS_BASE}#contents`} className={QUIET_LINK}>
           {t("ielts.nav.mainContents")}
         </Link>
       </div>

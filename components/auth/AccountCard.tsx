@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Cloud, Hourglass } from "lucide-react";
 import { useAuth } from "@/context/auth";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
@@ -35,9 +36,9 @@ export default function AccountCard({ collapsed = false }: { collapsed?: boolean
           onClick={() => openDialog(signupTicket ? "login" : "signup")}
           title={signupTicket ? t("account.login") : t("account.signup")}
           aria-label={signupTicket ? t("account.login") : t("account.signup")}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300 dark:border-amber-800/60 bg-amber-50 dark:bg-amber-500/10 text-sm text-amber-700 dark:text-amber-300"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-amber-300 dark:border-amber-800/60 bg-amber-50 dark:bg-amber-500/10 text-sm text-amber-700 dark:text-amber-300"
         >
-          <span aria-hidden="true">☁</span>
+          <Cloud className="h-4 w-4" aria-hidden="true" />
         </button>
       );
     }
@@ -47,7 +48,7 @@ export default function AccountCard({ collapsed = false }: { collapsed?: boolean
         href="/account"
         title={`${profile.full_name} · ${t(`account.sync.${cloud}`)}`}
         aria-label={t("account.title")}
-        className="relative flex h-9 w-9 items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-700 text-sm font-semibold text-zinc-700 dark:text-zinc-200"
+        className="relative flex h-10 w-10 items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-700 text-sm font-semibold text-zinc-700 dark:text-zinc-200"
       >
         {initial}
         <span
@@ -63,7 +64,7 @@ export default function AccountCard({ collapsed = false }: { collapsed?: boolean
     return (
       <div className="m-3 p-3 rounded-lg border border-sky-200 dark:border-sky-800/60 bg-sky-50 dark:bg-sky-500/10">
         <div className="flex items-start gap-2">
-          <span className="text-base leading-5" aria-hidden="true">⏳</span>
+          <Hourglass className="mt-0.5 h-4 w-4 shrink-0 text-sky-700 dark:text-sky-300" aria-hidden="true" />
           <div className="min-w-0">
             <div className="text-sm font-semibold text-sky-900 dark:text-sky-200">{t("account.ticketTitle")}</div>
             <p className="text-xs text-sky-800/90 dark:text-sky-200/80 mt-1">{t("account.ticketBody")}</p>
@@ -80,7 +81,7 @@ export default function AccountCard({ collapsed = false }: { collapsed?: boolean
     return (
       <div className="m-3 p-3 rounded-lg border border-amber-200 dark:border-amber-800/60 bg-amber-50 dark:bg-amber-500/10">
         <div className="flex items-start gap-2">
-          <span className="text-base leading-5" aria-hidden="true">☁</span>
+          <Cloud className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" aria-hidden="true" />
           <div className="min-w-0">
             <div className="text-sm font-semibold text-amber-900 dark:text-amber-200">{t("account.promptTitle")}</div>
             <p className="text-xs text-amber-800/90 dark:text-amber-200/80 mt-1">{t("account.promptBodyPlain")}</p>

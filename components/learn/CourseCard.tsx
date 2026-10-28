@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { type CourseSummary } from "@/lib/courses";
 import { GROUP_ACCENT, GROUP_COVER } from "@/lib/groups";
 import { cn } from "@/lib/utils";
+import GroupIcon from "@/components/GroupIcon";
 
 interface Props {
   course: CourseSummary;
@@ -28,26 +30,25 @@ export default function CourseCard({ course }: Props) {
   const actionHref = resume ? `/learn/${resume.topic.slug}/${resume.lesson.id}` : href;
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/40 hover:border-zinc-300 dark:hover:border-zinc-700">
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-blue-500 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/40 hover:border-zinc-300 dark:hover:border-zinc-700">
       <div className={cn("relative h-20 sm:h-28 bg-gradient-to-br", GROUP_COVER[group.accent])}>
         <div
           aria-hidden
           className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,white_1px,transparent_1px)] bg-[length:14px_14px]"
         />
-        <span aria-hidden className="absolute right-4 bottom-2 text-5xl sm:text-6xl leading-none text-white/80 select-none">
-          {group.icon}
-        </span>
+        <GroupIcon group={group.id} className="absolute right-4 bottom-3 text-5xl sm:text-6xl text-white/80" />
 
         {status === "completed" && (
-          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-semibold text-green-700">
-            ✓ {pick("Hoàn thành", "Completed")}
+          <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-semibold text-green-700">
+            <Check className="h-3 w-3" aria-hidden="true" />
+            {pick("Hoàn thành", "Completed")}
           </span>
         )}
       </div>
 
       <div className="flex flex-1 flex-col p-4">
         <h3 className="text-base font-semibold leading-snug">
-          <Link href={href} className="after:absolute after:inset-0 focus:outline-none">
+          <Link href={href} className="after:absolute after:inset-0 focus-visible:outline-none">
             {pick(group.label, group.labelEn)}
           </Link>
         </h3>
@@ -73,7 +74,14 @@ export default function CourseCard({ course }: Props) {
             </span>
           </div>
 
-          <div className="h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+          <div
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={course.pct}
+            aria-label={pick(`Tiến độ ${group.label}`, `${group.labelEn} progress`)}
+            className="h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden"
+          >
             <div className={cn("h-full rounded-full transition-all", accent.bar)} style={{ width: `${course.pct}%` }} />
           </div>
 

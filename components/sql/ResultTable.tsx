@@ -63,7 +63,7 @@ export function ResultTable({
                       key={ci}
                       className={cn(
                         "px-3 py-1.5 border-b border-zinc-200 dark:border-zinc-800/60 font-mono text-xs align-top",
-                        cell === null ? "text-zinc-400 dark:text-zinc-600 italic" : "text-zinc-800 dark:text-zinc-200"
+                        cell === null ? "text-zinc-500 dark:text-zinc-400 italic" : "text-zinc-800 dark:text-zinc-200"
                       )}
                     >
                       {cell === null ? "NULL" : String(cell)}
@@ -104,7 +104,7 @@ export function QueryResultView({ result, pick }: { result: QueryResult; pick: P
               `Statement executed · ${result.changes} row(s) affected`
             )
           : pick("Thực thi thành công.", "Statement executed.")}
-        <span className="text-zinc-400 dark:text-zinc-600 ml-2">({result.elapsedMs.toFixed(1)} ms)</span>
+        <span className="text-zinc-500 dark:text-zinc-400 ml-2">({result.elapsedMs.toFixed(1)} ms)</span>
       </div>
     );
   }

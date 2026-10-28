@@ -2,7 +2,8 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Check, Copy, Eye, EyeOff, Loader2, RotateCcw, RotateCw } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { API_BASE_PATH, SANDBOX_KEY_HEADER, type Operation } from "@/lib/sandbox/catalog";
 import type { WorkedExample } from "@/lib/sandbox/examples";
@@ -12,9 +13,20 @@ import EndpointsTab from "./EndpointsTab";
 import GuideTab from "./GuideTab";
 import { useSandboxKey } from "./useSandboxKey";
 
+function ScalarLoading() {
+  const { pick } = useLang();
+
+  return (
+    <div role="status" className="card flex items-center gap-2 text-sm text-zinc-500">
+      <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+      {pick("Đang tải công cụ thử API…", "Loading the API client…")}
+    </div>
+  );
+}
+
 const ScalarPanel = dynamic(() => import("./ScalarPanel"), {
   ssr: false,
-  loading: () => <div className="card text-sm text-zinc-500">Scalar…</div>,
+  loading: () => <ScalarLoading />,
 });
 
 type Tab = "guide" | "endpoints" | "database" | "client";
@@ -55,11 +67,13 @@ export default function ApiPractice({
 }) {
   const { pick, lang } = useLang();
   const [tab, setTab] = useState<Tab>("guide");
-  const { key: apiKey, error: keyError, scope } = useSandboxKey();
+  const { key: apiKey, error: keyError, scope, retry: retryKey } = useSandboxKey();
   const [summary, setSummary] = useState<Summary | null>(null);
   const [showKey, setShowKey] = useState(false);
   const [copied, setCopied] = useState(false);
   const [resetting, setResetting] = useState(false);
+  const [resetFailed, setResetFailed] = useState(false);
+  const tabRefs = useRef<Partial<Record<Tab, HTMLButtonElement | null>>>({});
   // The client stays mounted once opened (it holds the learner's typed token);
   // bumping this remounts it so a deep link to one operation takes effect.
   const [clientOpened, setClientOpened] = useState(false);
@@ -113,11 +127,26 @@ export default function ApiPractice({
   const reset = async () => {
     if (!apiKey) return;
 
+    const ok = window.confirm(
+      pick(
+        "Đưa sandbox về dữ liệu mẫu? Mọi thứ bạn đã tạo, sửa hoặc xoá sẽ mất.",
+        "Reset your sandbox to the sample data? Everything you created, changed or deleted will be lost."
+      )
+    );
+
+    if (!ok) return;
+
     setResetting(true);
+    setResetFailed(false);
 
     try {
-      await fetch(`${API_BASE_PATH}/sandbox/reset`, { method: "POST", headers: { [SANDBOX_KEY_HEADER]: apiKey } });
+      const res = await fetch(`${API_BASE_PATH}/sandbox/reset`, { method: "POST", headers: { [SANDBOX_KEY_HEADER]: apiKey } });
+
+      if (!res.ok) setResetFailed(true);
+
       await refresh();
+    } catch {
+      setResetFailed(true);
     } finally {
       setResetting(false);
     }
@@ -163,8 +192,27 @@ export default function ApiPractice({
     ["client", pick("Thử API (Scalar)", "Try it (Scalar)")],
   ];
 
+  // Arrow keys move between tabs (WAI-ARIA tabs pattern).
+  const onTabKeyDown = (event: React.KeyboardEvent, index: number) => {
+    const keys: Record<string, number> = {
+      ArrowRight: index + 1,
+      ArrowLeft: index - 1,
+      Home: 0,
+      End: tabs.length - 1,
+    };
+
+    if (!(event.key in keys)) return;
+
+    event.preventDefault();
+
+    const next = tabs[(keys[event.key] + tabs.length) % tabs.length][0];
+
+    choose(next);
+    tabRefs.current[next]?.focus();
+  };
+
   return (
-    <div className={cn("mx-auto space-y-5", tab === "client" ? "max-w-6xl" : "max-w-5xl")}>
+    <div className={cn("space-y-5", tab === "client" ? "max-w-6xl" : "max-w-5xl")}>
       <div>
         <h1 className="text-2xl font-bold">{pick("Luyện tập API", "API Practice")}</h1>
         <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
@@ -200,25 +248,51 @@ export default function ApiPractice({
       <section className="card space-y-3">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0 space-y-1">
-            <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{pick("Sandbox của bạn", "Your sandbox")}</div>
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{pick("Sandbox của bạn", "Your sandbox")}</h2>
             {apiKey ? (
               <div className="flex flex-wrap items-center gap-2">
                 <code className="font-mono text-sm break-all">
                   {SANDBOX_KEY_HEADER}: {showKey ? apiKey : `${apiKey.slice(0, 7)}${"•".repeat(12)}${apiKey.slice(-4)}`}
                 </code>
-                <button type="button" onClick={() => setShowKey((s) => !s)} className="py-1 text-xs text-blue-600 dark:text-blue-400 hover:underline">
-                  {showKey ? pick("Ẩn", "Hide") : pick("Hiện", "Show")}
+                <button
+                  type="button"
+                  onClick={() => setShowKey((s) => !s)}
+                  aria-pressed={showKey}
+                  className="inline-flex items-center gap-1 px-1 py-2 -my-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  {showKey ? <EyeOff className="h-3.5 w-3.5" aria-hidden="true" /> : <Eye className="h-3.5 w-3.5" aria-hidden="true" />}
+                  {showKey ? pick("Ẩn key", "Hide key") : pick("Hiện key", "Show key")}
                 </button>
-                <button type="button" onClick={copyKey} className="py-1 text-xs text-blue-600 dark:text-blue-400 hover:underline">
-                  {copied ? pick("Đã copy ✓", "Copied ✓") : pick("Copy", "Copy")}
+                <button
+                  type="button"
+                  onClick={copyKey}
+                  className="inline-flex items-center gap-1 px-1 py-2 -my-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  {copied ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5" aria-hidden="true" />}
+                  <span aria-live="polite">{copied ? pick("Đã copy", "Copied") : pick("Copy key", "Copy key")}</span>
                 </button>
               </div>
             ) : (
-              <p className="text-sm text-zinc-500">
-                {keyError
-                  ? pick(`Không lấy được key (${keyError}). Hãy đăng nhập rồi tải lại trang.`, `Couldn't get a key (${keyError}). Sign in, then reload.`)
-                  : pick("Đang tạo key…", "Creating your key…")}
-              </p>
+              keyError ? (
+                <div role="alert" className="flex flex-wrap items-center gap-2 text-sm text-red-600 dark:text-red-400">
+                  <span>
+                    {pick(`Không lấy được key (${keyError}). Hãy đăng nhập rồi thử lại.`, `Couldn't get a key (${keyError}). Sign in, then try again.`)}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={retryKey}
+                    className="btn-secondary text-xs inline-flex items-center gap-1.5 px-3 py-1.5"
+                  >
+                    <RotateCw className="h-3.5 w-3.5" aria-hidden="true" />
+                    {pick("Thử lại", "Retry")}
+                  </button>
+                </div>
+              ) : (
+                <p role="status" className="flex items-center gap-2 text-sm text-zinc-500">
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  {pick("Đang tạo key…", "Creating your key…")}
+                </p>
+              )
             )}
             <p className="text-xs text-zinc-500">
               {scope === "browser"
@@ -234,11 +308,28 @@ export default function ApiPractice({
                 <div className="font-mono text-sm text-zinc-800 dark:text-zinc-200">{countdown}</div>
               </div>
             )}
-            <button type="button" onClick={reset} disabled={!apiKey || resetting} className="btn-secondary text-sm disabled:opacity-50">
+            <button
+              type="button"
+              onClick={reset}
+              disabled={!apiKey || resetting}
+              aria-busy={resetting}
+              className="btn-secondary text-sm inline-flex items-center gap-2"
+            >
+              {resetting ? (
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+              ) : (
+                <RotateCcw className="h-4 w-4" aria-hidden="true" />
+              )}
               {resetting ? pick("Đang làm mới…", "Resetting…") : pick("Về dữ liệu mẫu", "Reset to sample data")}
             </button>
           </div>
         </div>
+
+        {resetFailed && (
+          <p role="alert" className="text-xs text-red-600 dark:text-red-400">
+            {pick("Chưa làm mới được sandbox. Thử lại sau giây lát.", "Couldn't reset the sandbox. Try again in a moment.")}
+          </p>
+        )}
 
         {summary && (
           <div className="flex flex-wrap gap-1.5">
@@ -251,16 +342,27 @@ export default function ApiPractice({
         )}
       </section>
 
-      <div role="tablist" className="flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-zinc-800">
-        {tabs.map(([id, label]) => (
+      <div
+        role="tablist"
+        aria-label={pick("Phần luyện tập API", "API practice sections")}
+        className="flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-zinc-800"
+      >
+        {tabs.map(([id, label], index) => (
           <button
             key={id}
+            ref={(el) => {
+              tabRefs.current[id] = el;
+            }}
+            id={`sandbox-tab-${id}`}
             role="tab"
             type="button"
             aria-selected={tab === id}
+            aria-controls={`sandbox-panel-${id}`}
+            tabIndex={tab === id ? 0 : -1}
             onClick={() => choose(id)}
+            onKeyDown={(e) => onTabKeyDown(e, index)}
             className={cn(
-              "whitespace-nowrap px-3 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
+              "whitespace-nowrap px-3 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors",
               tab === id
                 ? "border-blue-600 text-blue-700 dark:text-blue-300"
                 : "border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
@@ -272,25 +374,43 @@ export default function ApiPractice({
       </div>
 
       {tab === "guide" && (
-        <GuideTab operations={operations} mistakes={mistakes} apiKey={apiKey} openOperation={openOperation} openClient={() => choose("client")} />
+        <div role="tabpanel" id="sandbox-panel-guide" aria-labelledby="sandbox-tab-guide">
+          <GuideTab operations={operations} mistakes={mistakes} apiKey={apiKey} openOperation={openOperation} openClient={() => choose("client")} />
+        </div>
       )}
 
-      {tab === "endpoints" && <EndpointsTab examples={operations} apiKey={apiKey} onTry={tryInClient} />}
+      {tab === "endpoints" && (
+        <div role="tabpanel" id="sandbox-panel-endpoints" aria-labelledby="sandbox-tab-endpoints">
+          <EndpointsTab examples={operations} apiKey={apiKey} onTry={tryInClient} />
+        </div>
+      )}
 
-      {tab === "database" && <DatabaseTab />}
+      {tab === "database" && (
+        <div role="tabpanel" id="sandbox-panel-database" aria-labelledby="sandbox-tab-database">
+          <DatabaseTab />
+        </div>
+      )}
 
       {clientOpened && (
-        <div className={tab === "client" ? "space-y-3" : "hidden"}>
+        <div
+          role="tabpanel"
+          id="sandbox-panel-client"
+          aria-labelledby="sandbox-tab-client"
+          className={tab === "client" ? "space-y-3" : "hidden"}
+        >
           <p className="text-sm text-zinc-600 dark:text-zinc-400">
             {pick(
-              "Key sandbox đã điền sẵn. Đăng nhập bằng POST /auth/login, rồi dán access_token vào ô Bearer Token trong phần Authentication để gọi các API 🔑/👑.",
-              "Your sandbox key is filled in. Log in with POST /auth/login, then paste the access_token into the Bearer Token box under Authentication to call 🔑/👑 endpoints."
+              "Key sandbox đã điền sẵn. Đăng nhập bằng POST /auth/login, rồi dán access_token vào ô Bearer Token trong phần Authentication để gọi các API cần đăng nhập hoặc chỉ dành cho admin.",
+              "Your sandbox key is filled in. Log in with POST /auth/login, then paste the access_token into the Bearer Token box under Authentication to call the login-only and admin-only endpoints."
             )}
           </p>
           {apiKey ? (
             <ScalarPanel key={`${lang}-${clientRun}-${apiKey}`} apiKey={apiKey} lang={lang === "en" ? "en" : "vi"} />
           ) : (
-            <div className="card text-sm text-zinc-500">{pick("Đang chờ key sandbox…", "Waiting for your sandbox key…")}</div>
+            <div role="status" className="card flex items-center gap-2 text-sm text-zinc-500">
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+              {pick("Đang chờ key sandbox…", "Waiting for your sandbox key…")}
+            </div>
           )}
         </div>
       )}

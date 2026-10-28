@@ -3,12 +3,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { Check, ChevronRight } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import ArticleRenderer from "@/components/knowledge/ArticleRenderer";
 import BilingualArticle from "@/components/knowledge/BilingualArticle";
 import LessonTest, { type TestQuestion } from "@/components/learn/LessonTest";
 import LessonPdfExport from "@/components/learn/LessonPdfExport";
+import { PageError, PageLoading } from "@/components/learn/PageState";
 import { type Question } from "@/components/knowledge/QuizBlock";
 import {
   lessonKey,
@@ -49,12 +51,14 @@ interface TopicData {
 
 export default function LessonPlayerPage() {
   const { slug, lessonId } = useParams<{ slug: string; lessonId: string }>();
-  const { pick, lang, t, dual } = useLang();
+  const { pick, lang, dual } = useLang();
   const { progress, ready, update } = useProgress();
 
   const [topics, setTopics] = useState<LessonTopic[]>([]);
   const [topicData, setTopicData] = useState<TopicData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [phase, setPhase] = useState<Phase>("warmup");
   const [warmupPct, setWarmupPct] = useState<number | null>(null);
   const [checkPct, setCheckPct] = useState<number | null>(null);
@@ -88,15 +92,38 @@ export default function LessonPlayerPage() {
     let cancelled = false;
 
     async function load() {
+      setLoading(true);
+      setLoadError(false);
+
+      // A network failure is an error worth a retry; a 404 for the article is
+      // simply "not found" and falls through to that message below.
+      let failed = false;
       const [map, data] = await Promise.all([
-        fetch("/api/lessons").then((r) => r.json()).catch(() => []),
-        fetch(`/api/knowledge/${slug}?vocab=1`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+        fetch("/api/lessons")
+          .then((r) => {
+            if (!r.ok) throw new Error(String(r.status));
+
+            return r.json();
+          })
+          .catch(() => {
+            failed = true;
+
+            return [];
+          }),
+        fetch(`/api/knowledge/${slug}?vocab=1`)
+          .then((r) => (r.ok ? r.json() : null))
+          .catch(() => {
+            failed = true;
+
+            return null;
+          }),
       ]);
 
       if (cancelled) return;
 
       setTopics(Array.isArray(map) ? map : []);
       setTopicData(data);
+      setLoadError(failed);
       setLoading(false);
     }
 
@@ -105,7 +132,7 @@ export default function LessonPlayerPage() {
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, attempt]);
 
   // Build the warm-up and check sets once — they must not reshuffle mid-session.
   useEffect(() => {
@@ -245,13 +272,15 @@ export default function LessonPlayerPage() {
     return sliceSections(source, lesson.sections);
   }, [topicData, lesson, lang]);
 
-  if (loading || !ready) return <div className="text-zinc-500 text-sm p-8">{t("common.loading")}</div>;
+  if (loading || !ready) return <PageLoading />;
+
+  if (loadError) return <PageError onRetry={() => setAttempt((n) => n + 1)} />;
 
   if (!topic || !lesson) {
     return (
       <div className="text-center py-20">
         <p className="text-zinc-500">{pick("Không tìm thấy bài học.", "Mini-lesson not found.")}</p>
-        <Link href="/learn" className="text-blue-600 dark:text-blue-400 text-sm mt-2 inline-block">
+        <Link href="/learn" className="text-blue-600 dark:text-blue-400 text-sm mt-2 py-2 inline-block hover:underline">
           {pick("← Khoá học của tôi", "← My courses")}
         </Link>
       </div>
@@ -275,20 +304,31 @@ export default function LessonPlayerPage() {
     <div className={cn("space-y-6", bilingual && phase === "read" ? "max-w-6xl" : "max-w-3xl")}>
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2 text-xs text-zinc-500">
-          <Link href={courseHref} className="hover:text-zinc-700 dark:hover:text-zinc-300 shrink-0">
+        <nav aria-label={pick("Đường dẫn", "Breadcrumb")} className="flex min-w-0 items-center gap-1 text-xs text-zinc-500">
+          <Link
+            href={courseHref}
+            className="py-2 -my-2 hover:text-zinc-700 dark:hover:text-zinc-300 shrink-0"
+          >
             {course ? pick(course.label, course.labelEn) : pick("Khoá học của tôi", "My courses")}
           </Link>
-          <span>›</span>
-          <Link href={`/learn/${slug}`} className="hover:text-zinc-700 dark:hover:text-zinc-300 truncate">
+          <ChevronRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          <Link
+            href={`/learn/${slug}`}
+            className="min-w-0 py-2 -my-2 hover:text-zinc-700 dark:hover:text-zinc-300 truncate"
+          >
             {pick(topic.title, topic.titleEn)}
           </Link>
-        </div>
+        </nav>
         <h1 className="text-2xl font-bold mt-1">{pick(lesson.title, lesson.titleEn)}</h1>
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 mt-1">
           <p className="text-xs text-zinc-500">
             {pick("Bài", "Lesson")} {position}/{topic.lessons.length}
-            {state?.completed && <span className="text-green-600 dark:text-green-400 ml-2">✓ {pick("đã hoàn thành", "completed")}</span>}
+            {state?.completed && (
+              <span className="ml-2 inline-flex items-center gap-1 text-green-600 dark:text-green-400">
+                <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                {pick("đã hoàn thành", "completed")}
+              </span>
+            )}
           </p>
 
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -344,7 +384,7 @@ export default function LessonPlayerPage() {
       </div>
 
       {/* Phase rail */}
-      <div className="flex items-center gap-2 text-xs">
+      <ol aria-label={pick("Các bước của bài", "Lesson steps")} className="flex flex-wrap items-center gap-2 text-xs">
         {[
           // The warm-up step only exists when there is earlier material to recall.
           ...(warmupQs.length > 0 ? [["warmup", pick("Khởi động", "Warm-up")] as [Phase, string]] : []),
@@ -359,23 +399,25 @@ export default function LessonPlayerPage() {
           const active = phase === id;
 
           return (
-            <span
+            <li
               key={id}
+              aria-current={active ? "step" : undefined}
               className={cn(
-                "px-2.5 py-1 rounded-full border",
+                "inline-flex items-center gap-1 px-2.5 py-1 rounded-full border",
                 active && "bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800",
                 done && "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800",
                 !active && !done && "bg-zinc-100 dark:bg-zinc-800 text-zinc-500 border-zinc-200 dark:border-zinc-700"
               )}
             >
-              {done ? "✓ " : ""}
+              {done && <Check className="h-3 w-3" aria-hidden="true" />}
               {i + 1} · {label}
-            </span>
+              {done && <span className="sr-only">{pick("(đã xong)", "(done)")}</span>}
+            </li>
           );
         })}
-      </div>
+      </ol>
 
-      {!built && <div className="text-zinc-500 text-sm">{t("common.loading")}</div>}
+      {!built && <PageLoading className="min-h-[12rem]" />}
 
       {built && phase === "warmup" && warmupQs.length > 0 && (
         <LessonTest
@@ -410,7 +452,7 @@ export default function LessonPlayerPage() {
           )}
 
           <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-zinc-200 dark:border-zinc-800">
-            <button onClick={() => setPhase("check")} className="btn-primary text-sm px-4 py-2">
+            <button type="button" onClick={() => setPhase("check")} className="btn-primary text-sm px-4 py-2">
               {pick("Làm bài kiểm tra →", "Take the check test →")}
             </button>
             <Link
@@ -456,6 +498,7 @@ export default function LessonPlayerPage() {
             onFinish={finishVocab}
           />
           <button
+            type="button"
             onClick={() => setPhase("done")}
             className="inline-block py-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
           >
@@ -520,7 +563,7 @@ export default function LessonPlayerPage() {
                       )}
                 </p>
               </div>
-              <button onClick={startVocabRound} className="btn-secondary text-sm">
+              <button type="button" onClick={startVocabRound} className="btn-secondary text-sm">
                 {vocabPct === null
                   ? pick("Luyện từ vựng", "Practise words")
                   : pick("Thêm một lượt từ", "Another round of words")}
@@ -542,6 +585,7 @@ export default function LessonPlayerPage() {
               </Link>
             )}
             <button
+              type="button"
               onClick={() => {
                 setPhase("read");
                 setCheckPct(null);

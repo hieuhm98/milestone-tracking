@@ -51,7 +51,7 @@ export default function AnalysisTable({ analysis, id }: { analysis: Analysis; id
               <tr key={row.key} className="border-t border-zinc-200 align-top dark:border-zinc-800">
                 <th scope="row" className="px-3 py-3">
                   <span className="flex items-start gap-2">
-                    <span className={cn("mt-1.5 h-2 w-2 shrink-0 rounded-full", CRITERION[row.key].bar)} />
+                    <span className={cn("mt-1.5 h-2 w-2 shrink-0 rounded-full", CRITERION[row.key].bar)} aria-hidden="true" />
                     <span className={cn("text-sm font-semibold", CRITERION[row.key].name)}>{row.name}</span>
                   </span>
                 </th>
@@ -75,7 +75,7 @@ export default function AnalysisTable({ analysis, id }: { analysis: Analysis; id
             className={cn("rounded-xl border p-3", CRITERION[row.key].cell)}
           >
             <p className="flex items-center gap-2">
-              <span className={cn("h-2 w-2 shrink-0 rounded-full", CRITERION[row.key].bar)} />
+              <span className={cn("h-2 w-2 shrink-0 rounded-full", CRITERION[row.key].bar)} aria-hidden="true" />
               <span className={cn("text-sm font-semibold", CRITERION[row.key].name)}>{row.name}</span>
             </p>
 

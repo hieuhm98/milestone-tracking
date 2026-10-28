@@ -100,17 +100,16 @@ export default function UnitView({ unit, traps, partTitle, prev, next }: Props) 
         )}
 
         {settings.showExtend && hasExtend && (
-          <div className="mt-3 flex gap-2" role="tablist" aria-label="Core / Extend">
+          <div className="mt-3 flex gap-2" role="group" aria-label={pick("Mức độ nội dung", "Content level")}>
             {(["core", "extend"] as const).map((id) => (
               <button
                 key={id}
                 type="button"
-                role="tab"
-                aria-selected={active === id}
+                aria-pressed={active === id}
                 data-testid={`grammar-tab-${id}`}
                 onClick={() => setLayer(id)}
                 className={cn(
-                  "rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors",
+                  "rounded-lg border px-3 py-2 sm:py-1.5 text-sm font-medium transition-colors",
                   active === id ? LAYER[id].on : LAYER[id].off
                 )}
               >
@@ -124,7 +123,7 @@ export default function UnitView({ unit, traps, partTitle, prev, next }: Props) 
       <section className="space-y-3">
         <BlockHeading id="focus" label="Grammar Focus" tokens={tokens} />
 
-        <p>
+        <p className="max-w-[75ch] leading-relaxed">
           <Rich text={unit.focus.text} boldClassName={tokens.target} />
         </p>
 
@@ -230,7 +229,7 @@ export default function UnitView({ unit, traps, partTitle, prev, next }: Props) 
         <Link
           href="#pretest"
           className={cn(
-            "inline-block rounded-lg border px-3 py-1.5 text-sm font-medium",
+            "inline-block rounded-lg border px-3 py-2 text-sm font-medium",
             "border-zinc-300 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
           )}
         >

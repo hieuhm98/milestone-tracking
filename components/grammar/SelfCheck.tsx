@@ -46,7 +46,7 @@ const INSTRUCTION: Record<SelfCheckData["type"], string> = {
 function Stem({ children, index }: { children: React.ReactNode; index: number }) {
   return (
     <div className="flex gap-3">
-      <span className="text-sm font-semibold text-zinc-400 dark:text-zinc-500">{index + 1}.</span>
+      <span className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">{index + 1}.</span>
       <div className="min-w-0 flex-1">{children}</div>
     </div>
   );
@@ -80,7 +80,7 @@ function ChoiceRow({ item, index, tokens, state, mark, hideAnswers, trapHref, on
               }}
               aria-pressed={chosen}
               className={cn(
-                "rounded-lg border px-3 py-1.5 text-sm transition-colors",
+                "rounded-lg border px-3 py-2 sm:py-1.5 text-sm transition-colors",
                 done && chosen && right && "border-green-500 bg-green-600 text-white",
                 done && chosen && !right && "border-red-500 bg-red-600 text-white",
                 !(done && chosen) && SELF_CHECK.option
@@ -168,7 +168,7 @@ function TypedRow({
           className="input w-auto min-w-0 flex-1 basis-40 py-1.5"
         />
 
-        <button type="button" onClick={check} className="btn-primary px-3 py-1.5 text-sm">
+        <button type="button" onClick={check} disabled={!value.trim()} className="btn-primary px-3 py-1.5 text-sm">
           {t("grammar.fb.check")}
         </button>
       </div>
@@ -234,10 +234,11 @@ function FixRow(props: RowProps) {
 }
 
 function CombineRow({ item, index, hideAnswers }: RowProps) {
-  const { t, pick } = useLang();
+  const { pick } = useLang();
   const combine = item as CombineItem;
   const [value, setValue] = useState("");
   const [shown, setShown] = useState(false);
+  const modelId = `combine-model-${combine.id}`;
 
   return (
     <Stem index={index}>
@@ -263,14 +264,16 @@ function CombineRow({ item, index, hideAnswers }: RowProps) {
         <button
           type="button"
           onClick={() => setShown(!shown)}
-          className="mt-2 text-sm text-indigo-700 underline underline-offset-2 dark:text-indigo-300"
+          aria-expanded={shown}
+          aria-controls={modelId}
+          className="mt-1 py-2 text-sm text-indigo-700 underline underline-offset-2 hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-indigo-100"
         >
-          {t("grammar.fb.model")}
+          {shown ? pick("Ẩn câu mẫu", "Hide model answer") : pick("Xem câu mẫu", "Show model answer")}
         </button>
       )}
 
       {shown && !hideAnswers && (
-        <ul className="mt-1 space-y-0.5 rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-sm dark:border-indigo-900 dark:bg-indigo-950/40">
+        <ul id={modelId} className="mt-1 space-y-0.5 rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-sm dark:border-indigo-900 dark:bg-indigo-950/40">
           {combine.model.map((model, modelIndex) => (
             <li key={modelIndex}>
               <Rich text={model} />
@@ -376,7 +379,7 @@ export default function SelfCheckBlock({
             <button
               type="button"
               onClick={() => clear(keys)}
-              className="inline-flex items-center gap-1.5 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              className="-my-2 inline-flex items-center gap-1.5 py-2 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
               <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
               {t("grammar.fb.reset")}

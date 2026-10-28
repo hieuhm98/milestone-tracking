@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { CheckCircle2, Download, Flame, Upload } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import {
@@ -22,6 +23,8 @@ import {
 } from "@/lib/progress";
 import { GROUPS, DEFAULT_GROUP, GROUP_ACCENT } from "@/lib/groups";
 import { cn } from "@/lib/utils";
+import GroupIcon from "@/components/GroupIcon";
+import { PageLoading } from "@/components/learn/PageState";
 
 interface StaticTopic {
   slug: string;
@@ -206,7 +209,7 @@ export default function ProgressPage() {
 
   function cellLabel(label: string) {
     return (
-      <span className="block sm:hidden text-[10px] uppercase tracking-wide text-zinc-400 dark:text-zinc-600">
+      <span className="block sm:hidden text-[11px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
         {label}
       </span>
     );
@@ -232,7 +235,7 @@ export default function ProgressPage() {
       <span className={cellClass}>
         {cellLabel(pick("Sau khi nhập", "After import"))}
         {isUnchanged(gain) ? (
-          <span className="block text-[11px] text-zinc-400 dark:text-zinc-600">
+          <span className="block text-[11px] text-zinc-500 dark:text-zinc-400">
             {pick("không đổi", "unchanged")}
           </span>
         ) : (
@@ -252,7 +255,7 @@ export default function ProgressPage() {
       <span className={cellClass}>
         {cellLabel(label)}
         {!snap || !snap.updatedAt ? (
-          <span className="block text-zinc-400 dark:text-zinc-600">—</span>
+          <span className="block text-zinc-500 dark:text-zinc-400">—</span>
         ) : (
           <>
             <span
@@ -263,7 +266,7 @@ export default function ProgressPage() {
             >
               {shortDate.format(new Date(snap.updatedAt))}
             </span>
-            <span className="block text-[10px] text-zinc-500">
+            <span className="block text-[11px] text-zinc-500">
               {snap.topics} {pick("chủ đề", "topics")} · {snap.answered} {pick("câu", "q")}
             </span>
           </>
@@ -272,7 +275,7 @@ export default function ProgressPage() {
     );
   }
 
-  if (!ready) return <div className="text-zinc-500 text-sm p-8">{t("common.loading")}</div>;
+  if (!ready) return <PageLoading />;
 
   return (
     <div className="max-w-4xl space-y-8">
@@ -310,7 +313,7 @@ export default function ProgressPage() {
                   href={`/exam/${group.id}`}
                   className="card flex flex-wrap items-center gap-x-3 gap-y-2 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
                 >
-                  <span className={cn("text-lg shrink-0", accent.text)}>{group.icon}</span>
+                  <GroupIcon group={group.id} className={cn("text-lg", accent.text)} />
                   <span className="flex-1 min-w-0 basis-full sm:basis-auto text-sm font-medium truncate">
                     {pick(group.label, group.labelEn)}
                   </span>
@@ -319,7 +322,10 @@ export default function ProgressPage() {
                       {t("exam.passed")}
                     </span>
                   )}
-                  <div className="h-1.5 flex-1 sm:flex-none sm:w-28 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+                  <div
+                    className="h-1.5 flex-1 sm:flex-none sm:w-28 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden"
+                    aria-hidden="true"
+                  >
                     <div
                       className={cn(
                         "h-full rounded-full",
@@ -352,15 +358,17 @@ export default function ProgressPage() {
                   href="/practice/blitz"
                   className="card flex flex-wrap items-center gap-x-3 gap-y-2 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
                 >
-                  <span className={cn("text-lg shrink-0", accent.text)}>{group.icon}</span>
+                  <GroupIcon group={group.id} className={cn("text-lg", accent.text)} />
                   <span className="flex-1 min-w-0 basis-full sm:basis-auto text-sm font-medium truncate">
                     {pick(group.label, group.labelEn)}
                   </span>
                   <span className={cn("text-lg font-bold tabular-nums shrink-0", accent.text)}>
                     {run.bestScore}
                   </span>
-                  <span className="text-xs text-zinc-500 tabular-nums shrink-0">
-                    {run.bestCombo}🔥 · {run.runs} {t("blitz.runs")}
+                  <span className="inline-flex items-center gap-1 text-xs text-zinc-500 tabular-nums shrink-0">
+                    <Flame className="h-3.5 w-3.5 text-orange-500" aria-hidden="true" />
+                    <span className="sr-only">{pick("Chuỗi đúng dài nhất", "Best streak")}: </span>
+                    {run.bestCombo} · {run.runs} {t("blitz.runs")}
                   </span>
                 </Link>
               );
@@ -374,7 +382,12 @@ export default function ProgressPage() {
         <h2 className="text-lg font-semibold">{t("progress.byTopic")}</h2>
 
         {startedTopics.length === 0 ? (
-          <div className="card text-sm text-zinc-500">{t("progress.notStarted")}</div>
+          <div className="card flex flex-wrap items-center justify-between gap-3 text-sm text-zinc-500">
+            <p>{t("progress.notStarted")}</p>
+            <Link href="/learn" className="btn-secondary text-sm">
+              {pick("Mở khoá học", "Open courses")}
+            </Link>
+          </div>
         ) : (
           <div className="space-y-2">
             {startedTopics.map(({ slug, topic, stat }) => {
@@ -391,12 +404,12 @@ export default function ProgressPage() {
                   className="card block hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
                 >
                   <div className="flex items-start sm:items-center gap-3">
-                    <span className="text-base shrink-0 leading-5">{group?.icon ?? "◉"}</span>
+                    <GroupIcon group={group?.id} className="text-base mt-0.5 sm:mt-0 text-zinc-600 dark:text-zinc-300" />
                     <div className="min-w-0 flex-1">
                       <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">
                         {topic ? pick(topic.title, topic.titleEn) : slug}
                       </div>
-                      <div className="mt-1.5 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+                      <div className="mt-1.5 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden" aria-hidden="true">
                         <div className={cn("h-full rounded-full transition-all", accent.bar)} style={{ width: `${pct}%` }} />
                       </div>
 
@@ -423,7 +436,12 @@ export default function ProgressPage() {
                           : "—"}
                       </div>
                     </div>
-                    {stat.completed && <span className="text-green-600 dark:text-green-400 shrink-0">✓</span>}
+                    {stat.completed && (
+                      <span className="shrink-0 text-green-600 dark:text-green-400">
+                        <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+                        <span className="sr-only">{pick("Hoàn thành", "Completed")}</span>
+                      </span>
+                    )}
                   </div>
                 </Link>
               );
@@ -444,7 +462,12 @@ export default function ProgressPage() {
         </div>
 
         {progress.reviews.length === 0 ? (
-          <div className="card text-sm text-zinc-500">{t("progress.noSessions")}</div>
+          <div className="card flex flex-wrap items-center justify-between gap-3 text-sm text-zinc-500">
+            <p>{t("progress.noSessions")}</p>
+            <Link href="/knowledge-review?quick=1" className="btn-secondary text-sm">
+              {t("review.quickStart")}
+            </Link>
+          </div>
         ) : (
           // Spelled out rather than `.card`: its p-5 beats any p-0 utility, and
           // the rows need to own their own padding for the divider to reach.
@@ -466,7 +489,7 @@ export default function ProgressPage() {
 
                       return (
                         <span key={id} className="text-xs text-zinc-500">
-                          {g ? `${g.icon} ${pick(g.label, g.labelEn)}` : id}
+                          {g ? <><GroupIcon group={g.id} className="inline mr-1 -mt-0.5" />{pick(g.label, g.labelEn)}</> : id}
                         </span>
                       );
                     })}
@@ -498,7 +521,7 @@ export default function ProgressPage() {
         <h2 className="text-lg font-semibold">{t("progress.storage")}</h2>
 
         <div className="card space-y-3">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span
               className={cn(
                 "text-xs px-2 py-0.5 rounded border",
@@ -521,15 +544,22 @@ export default function ProgressPage() {
           </p>
 
           <div className="flex flex-wrap gap-2 pt-1">
-            <button onClick={handleExport} className="btn-secondary text-sm">
-              ↓ {t("progress.export")}
-            </button>
-            <button onClick={() => fileInput.current?.click()} className="btn-secondary text-sm">
-              ↑ {t("progress.import")}
+            <button type="button" onClick={handleExport} className="btn-secondary inline-flex items-center gap-2 text-sm">
+              <Download className="h-4 w-4" aria-hidden="true" />
+              {t("progress.export")}
             </button>
             <button
+              type="button"
+              onClick={() => fileInput.current?.click()}
+              className="btn-secondary inline-flex items-center gap-2 text-sm"
+            >
+              <Upload className="h-4 w-4" aria-hidden="true" />
+              {t("progress.import")}
+            </button>
+            <button
+              type="button"
               onClick={handleReset}
-              className="text-sm px-3 py-1.5 rounded-lg border border-red-300 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
+              className="sm:ml-auto text-sm font-medium px-4 py-2 rounded-lg border border-red-300 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
             >
               {t("progress.reset")}
             </button>
@@ -538,6 +568,8 @@ export default function ProgressPage() {
               type="file"
               accept="application/json,.json"
               className="hidden"
+              tabIndex={-1}
+              aria-hidden="true"
               onChange={(e) => {
                 const file = e.target.files?.[0];
 
@@ -585,7 +617,7 @@ export default function ProgressPage() {
                       >
                         <span className="w-full sm:w-auto sm:flex-1 min-w-0 truncate text-sm font-medium sm:font-normal text-zinc-800 dark:text-zinc-200">
                           {group
-                            ? `${group.icon} ${pick(group.label, group.labelEn)}`
+                            ? <><GroupIcon group={group.id} className="inline mr-1.5 -mt-0.5" />{pick(group.label, group.labelEn)}</>
                             : row.course === UNKNOWN_COURSE
                               ? pick("Chủ đề ngoài danh mục", "Topics outside the catalogue")
                               : row.course}
@@ -607,20 +639,19 @@ export default function ProgressPage() {
               )}
 
               <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => void applyImport()}
-                  className="text-sm px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
-                >
+                <button type="button" onClick={() => void applyImport()} className="btn-primary text-sm">
                   {pick("Áp dụng", "Apply")}
                 </button>
-                <button onClick={() => setPending(null)} className="btn-secondary text-sm">
+                <button type="button" onClick={() => setPending(null)} className="btn-secondary text-sm">
                   {pick("Huỷ", "Cancel")}
                 </button>
               </div>
             </div>
           )}
 
-          {notice && <p className="text-xs text-zinc-600 dark:text-zinc-400">{notice}</p>}
+          <p role="status" aria-live="polite" className="text-xs text-zinc-600 dark:text-zinc-400 empty:hidden">
+            {notice}
+          </p>
         </div>
       </section>
     </div>

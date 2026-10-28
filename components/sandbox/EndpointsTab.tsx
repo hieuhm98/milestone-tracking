@@ -1,26 +1,40 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ChevronRight, Crown, KeyRound, LockOpen, type LucideIcon } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { OPERATIONS, TAGS, type Access, type Operation } from "@/lib/sandbox/catalog";
 import type { WorkedExample } from "@/lib/sandbox/examples";
 import { cn } from "@/lib/utils";
 import ExampleView, { MethodBadge, statusTone } from "./ExampleView";
 
+/** One icon per access level — the same legend in the badges and the guide. */
+export const ACCESS_ICON: Record<Access, LucideIcon> = {
+  public: LockOpen,
+  user: KeyRound,
+  admin: Crown,
+};
+
 export function AccessBadge({ access }: { access: Access }) {
   const { pick } = useLang();
+  const Icon = ACCESS_ICON[access];
   const style = {
     public: "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300",
     user: "bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200",
     admin: "bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200",
   }[access];
   const label = {
-    public: pick("🔓 Công khai", "🔓 Public"),
-    user: pick("🔑 Cần đăng nhập", "🔑 Login"),
-    admin: pick("👑 Chỉ admin", "👑 Admin"),
+    public: pick("Công khai", "Public"),
+    user: pick("Cần đăng nhập", "Login"),
+    admin: pick("Chỉ admin", "Admin"),
   }[access];
 
-  return <span className={cn("inline-block rounded-full px-2 py-0.5 text-[11px] font-medium whitespace-nowrap", style)}>{label}</span>;
+  return (
+    <span className={cn("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium whitespace-nowrap", style)}>
+      <Icon className="h-3 w-3" aria-hidden="true" />
+      {label}
+    </span>
+  );
 }
 
 function OperationCard({ op, example, apiKey, onTry }: { op: Operation; example: WorkedExample; apiKey: string | null; onTry: (op: Operation) => void }) {
@@ -30,10 +44,10 @@ function OperationCard({ op, example, apiKey, onTry }: { op: Operation; example:
     <details id={`op-${op.id}`} className="card p-0 sm:p-0 group scroll-mt-20">
       <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 sm:px-5 [&::-webkit-details-marker]:hidden">
         <MethodBadge method={op.method} className="w-14 text-center shrink-0" />
-        <code className="font-mono text-sm text-zinc-900 dark:text-zinc-100 truncate">{op.path}</code>
-        <span className="hidden md:inline text-sm text-zinc-500 truncate">— {pick(op.summary.vi, op.summary.en)}</span>
+        <code className="min-w-0 font-mono text-sm text-zinc-900 dark:text-zinc-100 truncate">{op.path}</code>
+        <span className="hidden md:inline min-w-0 text-sm text-zinc-500 truncate">— {pick(op.summary.vi, op.summary.en)}</span>
         <span className="ml-auto shrink-0"><AccessBadge access={op.access} /></span>
-        <span className="text-zinc-400 transition-transform group-open:rotate-90 shrink-0" aria-hidden>›</span>
+        <ChevronRight className="h-4 w-4 text-zinc-400 transition-transform group-open:rotate-90 shrink-0" aria-hidden="true" />
       </summary>
 
       <div className="space-y-4 border-t border-zinc-200 dark:border-zinc-800 px-4 pb-4 pt-3 sm:px-5">
@@ -47,9 +61,9 @@ function OperationCard({ op, example, apiKey, onTry }: { op: Operation; example:
             <table className="w-full text-xs">
               <thead>
                 <tr className="text-left text-zinc-500">
-                  <th className="py-1 pr-3 font-medium">{pick("Tham số", "Parameter")}</th>
-                  <th className="py-1 pr-3 font-medium">{pick("Ở đâu", "In")}</th>
-                  <th className="py-1 font-medium">{pick("Ý nghĩa", "Meaning")}</th>
+                  <th scope="col" className="py-1 pr-3 font-medium">{pick("Tham số", "Parameter")}</th>
+                  <th scope="col" className="py-1 pr-3 font-medium">{pick("Ở đâu", "In")}</th>
+                  <th scope="col" className="py-1 font-medium">{pick("Ý nghĩa", "Meaning")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -57,7 +71,11 @@ function OperationCard({ op, example, apiKey, onTry }: { op: Operation; example:
                   <tr key={`${p.in}-${p.name}`} className="border-t border-zinc-100 dark:border-zinc-800 align-top">
                     <td className="py-1.5 pr-3 font-mono whitespace-nowrap">
                       {p.name}
-                      {p.in === "path" && <span className="text-rose-600">*</span>}
+                      {p.in === "path" && (
+                        <span className="text-rose-600" title={pick("bắt buộc", "required")}>
+                          *<span className="sr-only"> ({pick("bắt buộc", "required")})</span>
+                        </span>
+                      )}
                     </td>
                     <td className="py-1.5 pr-3 whitespace-nowrap">
                       <span className={p.in === "path" ? "text-amber-700 dark:text-amber-300" : "text-violet-700 dark:text-violet-300"}>{p.in}</span>
@@ -86,7 +104,7 @@ function OperationCard({ op, example, apiKey, onTry }: { op: Operation; example:
               {r.status}
             </span>
           ))}
-          <button type="button" onClick={() => onTry(op)} className="ml-auto btn-secondary text-xs px-3 py-1.5">
+          <button type="button" onClick={() => onTry(op)} className="ml-auto btn-secondary text-xs px-3 py-2 sm:py-1.5">
             {pick("Thử trong Scalar →", "Try it in Scalar →")}
           </button>
         </div>
@@ -122,15 +140,21 @@ export default function EndpointsTab({
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center gap-3">
-        <input
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          placeholder={pick("Lọc: books, POST, thanh toán…", "Filter: books, POST, payment…")}
-          className="input max-w-xs text-sm"
-          aria-label={pick("Lọc API", "Filter endpoints")}
-        />
-        <span className="text-xs text-zinc-500">
+      <div className="flex flex-wrap items-end gap-3">
+        <div className="w-full max-w-xs">
+          <label htmlFor="endpoint-filter" className="label">
+            {pick("Lọc API", "Filter endpoints")}
+          </label>
+          <input
+            id="endpoint-filter"
+            type="search"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder={pick("books, POST, thanh toán…", "books, POST, payment…")}
+            className="input text-sm"
+          />
+        </div>
+        <span className="text-xs text-zinc-500 pb-2.5">
           {pick(`${OPERATIONS.length} API · bấm vào một dòng để xem ví dụ`, `${OPERATIONS.length} endpoints · click a row for its example`)}
         </span>
       </div>
@@ -149,7 +173,14 @@ export default function EndpointsTab({
         </section>
       ))}
 
-      {groups.length === 0 && <p className="text-sm text-zinc-500">{pick("Không có API nào khớp.", "No endpoint matches.")}</p>}
+      {groups.length === 0 && (
+        <div className="card text-sm text-zinc-500 space-y-2">
+          <p>{pick(`Không có API nào khớp “${filter.trim()}”.`, `No endpoint matches “${filter.trim()}”.`)}</p>
+          <button type="button" onClick={() => setFilter("")} className="btn-secondary text-xs px-3 py-1.5">
+            {pick("Xoá bộ lọc", "Clear filter")}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

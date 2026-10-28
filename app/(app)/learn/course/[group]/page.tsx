@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import { summarizeCourse } from "@/lib/courses";
@@ -12,23 +12,34 @@ import { lessonKey, type LessonTopic } from "@/lib/lessons";
 import { matchesSearch, normalizeSearch } from "@/lib/search";
 import { cn } from "@/lib/utils";
 import SearchField from "@/components/SearchField";
+import GroupIcon from "@/components/GroupIcon";
+import { PageError, PageLoading } from "@/components/learn/PageState";
 
 export default function CoursePage() {
   const { group: groupId } = useParams<{ group: string }>();
-  const { t, pick } = useLang();
+  const { pick } = useLang();
   const { progress, ready } = useProgress();
   const [topics, setTopics] = useState<LessonTopic[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState("");
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    setLoading(true);
+    setError(false);
+
     fetch("/api/lessons")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+
+        return r.json();
+      })
       .then((data: LessonTopic[]) => setTopics(Array.isArray(data) ? data : []))
-      .catch(() => setTopics([]))
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, []);
+  }, [attempt]);
 
   const group = getGroup(groupId);
   const course = useMemo(
@@ -77,13 +88,15 @@ export default function CoursePage() {
     });
   }
 
-  if (loading || !ready) return <div className="text-zinc-500 text-sm p-8">{t("common.loading")}</div>;
+  if (loading || !ready) return <PageLoading />;
+
+  if (error) return <PageError onRetry={() => setAttempt((n) => n + 1)} />;
 
   if (!group || !course || course.lessonCount === 0) {
     return (
       <div className="text-center py-20">
         <p className="text-zinc-500">{pick("Không tìm thấy khoá học.", "Course not found.")}</p>
-        <Link href="/learn" className="text-blue-600 dark:text-blue-400 text-sm mt-2 inline-block">
+        <Link href="/learn" className="text-blue-600 dark:text-blue-400 text-sm mt-2 py-2 inline-block hover:underline">
           {pick("← Khoá học của tôi", "← My courses")}
         </Link>
       </div>
@@ -117,9 +130,7 @@ export default function CoursePage() {
             aria-hidden
             className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,white_1px,transparent_1px)] bg-[length:14px_14px]"
           />
-          <span aria-hidden className="absolute right-5 bottom-2 text-7xl leading-none text-white/80 select-none">
-            {group.icon}
-          </span>
+          <GroupIcon group={group.id} className="absolute right-5 bottom-3 text-7xl text-white/80" />
         </div>
 
         <div className="p-4 sm:p-6 space-y-4">
@@ -144,7 +155,14 @@ export default function CoursePage() {
                 {course.topics.length} {pick("chủ đề", "topics")}
               </span>
             </div>
-            <div className="h-2 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+            <div
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={course.pct}
+              aria-label={pick("Tiến độ khoá học", "Course progress")}
+              className="h-2 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden"
+            >
               <div className={cn("h-full rounded-full transition-all", accent.bar)} style={{ width: `${course.pct}%` }} />
             </div>
           </div>
@@ -209,6 +227,7 @@ export default function CoursePage() {
             const isOpen = open.has(topic.slug) || (searching && lessonHit);
             const done = topic.lessons.filter((l) => progress.lessons[lessonKey(topic.slug, l.id)]?.completed).length;
             const finished = done === topic.lessons.length;
+            const panelId = `topic-panel-${topic.slug}`;
 
             return (
               <div key={topic.slug}>
@@ -216,6 +235,7 @@ export default function CoursePage() {
                   type="button"
                   onClick={() => toggle(topic.slug)}
                   aria-expanded={isOpen}
+                  aria-controls={panelId}
                   className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors"
                 >
                   <span
@@ -226,7 +246,14 @@ export default function CoursePage() {
                         : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
                     )}
                   >
-                    {finished ? "✓" : number}
+                    {finished ? (
+                      <>
+                        <Check className="h-4 w-4" aria-hidden="true" />
+                        <span className="sr-only">{pick("Đã xong", "Done")}</span>
+                      </>
+                    ) : (
+                      number
+                    )}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-sm font-medium truncate">{pick(topic.title, topic.titleEn)}</div>
@@ -240,11 +267,12 @@ export default function CoursePage() {
                   </span>
                   <ChevronDown
                     className={cn("w-5 h-5 text-zinc-500 shrink-0 transition-transform", isOpen && "rotate-180")}
+                    aria-hidden="true"
                   />
                 </button>
 
                 {isOpen && (
-                  <ul className="bg-zinc-50 dark:bg-zinc-950/40 border-t border-zinc-200 dark:border-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800">
+                  <ul id={panelId} className="bg-zinc-50 dark:bg-zinc-950/40 border-t border-zinc-200 dark:border-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800">
                     {lessons.map(({ lesson, number: lessonNumber }) => {
                       const state = progress.lessons[lessonKey(topic.slug, lesson.id)];
                       const isDone = state?.completed ?? false;
@@ -268,7 +296,14 @@ export default function CoursePage() {
                                   : "border-zinc-300 dark:border-zinc-700 text-zinc-500"
                               )}
                             >
-                              {isDone ? "✓" : lessonNumber}
+                              {isDone ? (
+                                <>
+                                  <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                                  <span className="sr-only">{pick("Đã xong", "Done")}</span>
+                                </>
+                              ) : (
+                                lessonNumber
+                              )}
                             </span>
                             <span className="flex-1 min-w-0 truncate">{pick(lesson.title, lesson.titleEn)}</span>
                             {isNext && (

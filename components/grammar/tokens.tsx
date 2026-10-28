@@ -47,7 +47,7 @@ export const PART: Record<PartId, PartTokens> = {
     target: "text-blue-700 dark:text-blue-300",
   },
   B: {
-    block: "bg-emerald-600 text-white",
+    block: "bg-emerald-700 text-white",
     text: "text-emerald-700 dark:text-emerald-300",
     chip: "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800",
     dot: "bg-emerald-500",
@@ -75,7 +75,7 @@ export const PART: Record<PartId, PartTokens> = {
     target: "text-violet-700 dark:text-violet-300",
   },
   D: {
-    block: "bg-amber-500 text-white",
+    block: "bg-amber-700 text-white",
     text: "text-amber-700 dark:text-amber-300",
     chip: "bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200 border border-amber-200 dark:border-amber-800",
     dot: "bg-amber-500",
@@ -84,7 +84,7 @@ export const PART: Record<PartId, PartTokens> = {
     stroke: "stroke-amber-500",
     ring: "hover:border-amber-400 dark:hover:border-amber-700",
     soft: "bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900",
-    head: "bg-amber-600 text-white dark:bg-amber-700",
+    head: "bg-amber-700 text-white dark:bg-amber-800",
     underline: "decoration-amber-500",
     target: "text-amber-700 dark:text-amber-300",
   },
@@ -98,7 +98,7 @@ export function partTokens(part: PartId | undefined): PartTokens {
 /** Core = sky, Extend = purple. */
 export const LAYER = {
   core: {
-    on: "bg-sky-600 text-white border-sky-600",
+    on: "bg-sky-700 text-white border-sky-700",
     off: "border-sky-200 text-sky-700 hover:bg-sky-50 dark:border-sky-800 dark:text-sky-300 dark:hover:bg-sky-950/50",
     chip: "bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-200 border border-sky-200 dark:border-sky-800",
   },
@@ -122,7 +122,7 @@ export const SELF_CHECK = {
 export const TIP = {
   frame: "border border-teal-200 dark:border-teal-900 bg-teal-50 dark:bg-teal-950/40",
   stripe:
-    "bg-teal-600 text-white [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.18)_0_6px,transparent_6px_12px)]",
+    "bg-teal-700 text-white [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.18)_0_6px,transparent_6px_12px)]",
   text: "text-teal-900 dark:text-teal-100",
 } as const;
 

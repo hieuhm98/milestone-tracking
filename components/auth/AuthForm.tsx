@@ -1,11 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import { Ban, Hourglass, Loader2 } from "lucide-react";
 import { useAuth, type AuthDialogMode } from "@/context/auth";
 import { useLang } from "@/context/lang";
 import { cn } from "@/lib/utils";
 
 const MIN_PASSWORD = 8;
+
+type Field = "name" | "phone" | "password" | "confirm";
+
+/** Which input an error belongs to, so the message sits under that field. */
+const ERROR_FIELD: Record<string, Field> = {
+  invalid_name: "name",
+  invalid_phone: "phone",
+  phone_taken: "phone",
+  invalid_password: "password",
+  password_mismatch: "confirm",
+};
+
+const ERROR_ID = "auth-error";
 
 /**
  * The sign-up / log-in form and the status notices. Shared by the dialog
@@ -19,7 +33,13 @@ export function StatusNotice({ mode }: { mode: "pending" | "disabled" }) {
 
   return (
     <div className="text-center pt-2">
-      <div className="text-4xl mb-3" aria-hidden="true">{pending ? "⏳" : "⛔"}</div>
+      <div className="flex justify-center mb-3" aria-hidden="true">
+        {pending ? (
+          <Hourglass className="h-10 w-10 text-amber-500" />
+        ) : (
+          <Ban className="h-10 w-10 text-red-500" />
+        )}
+      </div>
       <h2 id="auth-dialog-title" className="text-lg font-semibold mb-2">
         {pending ? t("auth.pendingTitle") : t("auth.disabledTitle")}
       </h2>
@@ -59,11 +79,16 @@ export function AuthForm({
     event.preventDefault();
     setError(null);
 
-    if (signup && fullName.trim().length === 0) return setError("invalid_name");
+    const invalid = (code: string, id: string) => {
+      setError(code);
+      document.getElementById(id)?.focus();
+    };
 
-    if (signup && password.length < MIN_PASSWORD) return setError("invalid_password");
+    if (signup && fullName.trim().length === 0) return invalid("invalid_name", "auth-name");
 
-    if (signup && password !== confirm) return setError("password_mismatch");
+    if (signup && password.length < MIN_PASSWORD) return invalid("invalid_password", "auth-password");
+
+    if (signup && password !== confirm) return invalid("password_mismatch", "auth-confirm");
 
     setBusy(true);
 
@@ -78,6 +103,27 @@ export function AuthForm({
   }
 
   const field = "block text-sm font-medium mb-1 text-zinc-700 dark:text-zinc-300";
+  const errorField = error ? ERROR_FIELD[error] : undefined;
+  const errorText = error
+    ? t(`auth.error.${error}`) === `auth.error.${error}`
+      ? t("auth.error.generic")
+      : t(`auth.error.${error}`)
+    : null;
+
+  // aria wiring for one input: flagged + described by the error when it owns it.
+  const describe = (name: Field, hintId?: string) => {
+    const owns = errorField === name;
+    const ids = [hintId, owns ? ERROR_ID : undefined].filter(Boolean).join(" ");
+
+    return { "aria-invalid": owns || undefined, "aria-describedby": ids || undefined };
+  };
+
+  const fieldError = (name: Field) =>
+    errorField === name ? (
+      <p id={ERROR_ID} role="alert" className="mt-1 text-sm text-red-600 dark:text-red-400">
+        {errorText}
+      </p>
+    ) : null;
 
   return (
     <form onSubmit={handleSubmit} noValidate>
@@ -98,7 +144,9 @@ export function AuthForm({
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
+              {...describe("name")}
             />
+            {fieldError("name")}
           </div>
         )}
         <div>
@@ -113,7 +161,9 @@ export function AuthForm({
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
+            {...describe("phone")}
           />
+          {fieldError("phone")}
         </div>
         <div>
           <label htmlFor="auth-password" className={field}>{t("auth.password")}</label>
@@ -126,8 +176,14 @@ export function AuthForm({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            {...describe("password", signup ? "auth-password-hint" : undefined)}
           />
-          {signup && <p className="text-xs text-zinc-500 mt-1">{t("auth.passwordHint")}</p>}
+          {signup && (
+            <p id="auth-password-hint" className="text-xs text-zinc-500 mt-1">
+              {t("auth.passwordHint")}
+            </p>
+          )}
+          {fieldError("password")}
         </div>
         {signup && (
           <div>
@@ -140,18 +196,26 @@ export function AuthForm({
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
               required
+              {...describe("confirm")}
             />
+            {fieldError("confirm")}
           </div>
         )}
       </div>
 
-      {error && (
-        <p role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
-          {t(`auth.error.${error}`) === `auth.error.${error}` ? t("auth.error.generic") : t(`auth.error.${error}`)}
+      {error && !errorField && (
+        <p id={ERROR_ID} role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
+          {errorText}
         </p>
       )}
 
-      <button type="submit" disabled={busy} className={cn("btn-primary w-full mt-4", busy && "opacity-60 cursor-wait")}>
+      <button
+        type="submit"
+        disabled={busy}
+        aria-busy={busy}
+        className={cn("btn-primary w-full mt-4 inline-flex items-center justify-center gap-2", busy && "cursor-wait")}
+      >
+        {busy && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
         {busy ? t("auth.working") : signup ? t("auth.signupSubmit") : t("auth.loginSubmit")}
       </button>
 

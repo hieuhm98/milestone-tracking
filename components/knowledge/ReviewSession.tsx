@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Check, Minus, X } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import BilingualPair from "@/components/BilingualPair";
@@ -10,6 +11,7 @@ import { DEFAULT_GROUP } from "@/lib/groups";
 import { questionKey } from "@/lib/lessons";
 import { pickSession, type QuestionIndex } from "@/lib/review";
 import { cn } from "@/lib/utils";
+import { PageError, PageLoading } from "@/components/learn/PageState";
 import { type Question, localizeQuestion } from "./QuizBlock";
 import QuestionText from "./QuestionText";
 import ReviewSetup, { type ReviewTopic, type SessionRequest } from "./ReviewSetup";
@@ -21,7 +23,7 @@ type SessionQuestion = Question & { topic_slug: string };
 type AnswerMap = Record<number, number | null>;
 
 export default function ReviewSession() {
-  const { t, lang, dual } = useLang();
+  const { t, pick, lang, dual } = useLang();
   const { progress, update } = useProgress();
   const [topics, setTopics] = useState<ReviewTopic[]>([]);
   const [index, setIndex] = useState<QuestionIndex>({});
@@ -33,22 +35,32 @@ export default function ReviewSession() {
   const [loading, setLoading] = useState(true);
   const [building, setBuilding] = useState(false);
   const [autoQuick, setAutoQuick] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   // Load topics + the question index; detect ?quick=1 (without useSearchParams, to avoid Suspense).
   useEffect(() => {
     const quick = new URLSearchParams(window.location.search).get("quick") === "1";
-    setAutoQuick(quick);
 
-    Promise.all([
-      fetch("/api/knowledge").then((r) => r.json() as Promise<ReviewTopic[]>),
-      fetch("/api/review").then((r) => r.json() as Promise<{ topics: QuestionIndex }>),
-    ])
+    setAutoQuick(quick);
+    setLoading(true);
+    setLoadError(false);
+
+    const getJson = <T,>(url: string) =>
+      fetch(url).then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+
+        return r.json() as Promise<T>;
+      });
+
+    Promise.all([getJson<ReviewTopic[]>("/api/knowledge"), getJson<{ topics: QuestionIndex }>("/api/review")])
       .then(([data, idx]) => {
-        setTopics(data);
+        setTopics(Array.isArray(data) ? data : []);
         setIndex(idx.topics ?? {});
       })
+      .catch(() => setLoadError(true))
       .finally(() => setLoading(false));
-  }, []);
+  }, [attempt]);
 
   // Draw the keys locally (the index carries answer indices, so past mistakes
   // can be found), then fetch only those questions.
@@ -118,7 +130,22 @@ export default function ReviewSession() {
     update((prev) => recordReview(prev, { total: sessionQ.length, correct: correctCount, groups }, answered));
   }
 
-  if (loading || building) return <div className="text-zinc-500 text-sm">{t("common.loading")}</div>;
+  // Leaving mid-session throws the answers away, so ask first once any are given.
+  function exitSession() {
+    const given = Object.keys(answers).length;
+    const message = pick(
+      "Thoát phiên ôn tập? Các câu đã trả lời sẽ không được lưu.",
+      "Leave this session? Your answers will not be saved."
+    );
+
+    if (given > 0 && !window.confirm(message)) return;
+
+    setStarted(false);
+  }
+
+  if (loading || building) return <PageLoading />;
+
+  if (loadError) return <PageError onRetry={() => setAttempt((n) => n + 1)} />;
 
   // ---- Setup screen ----
   if (!started) return <ReviewSetup topics={topics} index={index} onStart={buildSession} />;
@@ -127,15 +154,17 @@ export default function ReviewSession() {
   if (showResults) {
     return (
       <div className={cn("space-y-6", dual ? "max-w-5xl" : "max-w-2xl")}>
+        <h1 className="text-xl font-bold">{pick("Kết quả ôn tập", "Review results")}</h1>
+
         <div className="card">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <div className="text-3xl font-bold">{correctCount}/{localized.length}</div>
               <div className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
                 {localized.length > 0 ? Math.round((correctCount / localized.length) * 100) : 0}% {t("quiz.correct")}
               </div>
             </div>
-            <button onClick={() => setStarted(false)} className="btn-secondary">
+            <button type="button" onClick={() => setStarted(false)} className="btn-secondary">
               {t("review.reviewAgain")}
             </button>
           </div>
@@ -146,6 +175,7 @@ export default function ReviewSession() {
             const userAnswer = answers[i];
             const isCorrect = userAnswer === q.answer;
             const skipped = userAnswer === undefined || userAnswer === null;
+
             return (
               <div key={`${q.id}-${i}`} className={cn(
                 "card border-l-4",
@@ -153,10 +183,19 @@ export default function ReviewSession() {
               )}>
                 <div className="flex items-start gap-2 mb-3">
                   <span className={cn(
-                    "text-xs font-bold px-2 py-0.5 rounded shrink-0",
+                    "inline-flex items-center px-1.5 py-1 rounded shrink-0",
                     isCorrect ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300" : skipped ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-400" : "bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300"
                   )}>
-                    {isCorrect ? "✓" : skipped ? "—" : "✗"}
+                    {isCorrect ? (
+                      <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                    ) : skipped ? (
+                      <Minus className="h-3.5 w-3.5" aria-hidden="true" />
+                    ) : (
+                      <X className="h-3.5 w-3.5" aria-hidden="true" />
+                    )}
+                    <span className="sr-only">
+                      {isCorrect ? pick("Đúng", "Correct") : skipped ? pick("Bỏ qua", "Skipped") : pick("Sai", "Wrong")}
+                    </span>
                   </span>
                   {dual ? (
                     <BilingualPair
@@ -175,7 +214,7 @@ export default function ReviewSession() {
                   )}
                 </div>
                 {(enQs[i].optionExplanations || viQs[i].optionExplanations) && (
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-600 mb-1.5">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
                     {t("quiz.breakdown")}
                   </p>
                 )}
@@ -206,7 +245,7 @@ export default function ReviewSession() {
                                 <span><QuestionText text={opt} /></span>
                               )}
                             </div>
-                            {isCorrectOpt && <span className="shrink-0">✓</span>}
+                            {isCorrectOpt && <span className="shrink-0">{t("quiz.correctLabel")}</span>}
                             {isUserOpt && !isCorrectOpt && <span className="shrink-0">{t("quiz.yourAnswer")}</span>}
                           </div>
                           <OptionRationale
@@ -257,17 +296,20 @@ export default function ReviewSession() {
     return (
       <div className="max-w-2xl space-y-4">
         <p className="text-zinc-600 dark:text-zinc-400 text-sm">{t("review.noQuestions")}</p>
-        <button onClick={() => setStarted(false)} className="btn-secondary text-sm">{t("review.exit")}</button>
+        <button type="button" onClick={() => setStarted(false)} className="btn-secondary text-sm">
+          {t("review.exit")}
+        </button>
       </div>
     );
   }
 
   const currentQ = localized[currentIdx];
+
   return (
     <div className={cn("space-y-4", dual ? "max-w-5xl" : "max-w-2xl")}>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         <h1 className="text-xl font-bold">{t("review.title")}</h1>
-        <button onClick={() => setStarted(false)} className="inline-block py-2 -my-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">{t("review.exit")}</button>
+        <button type="button" onClick={exitSession} className="inline-block py-2 -my-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">{t("review.exit")}</button>
       </div>
 
       {/* Progress */}
@@ -276,7 +318,14 @@ export default function ReviewSession() {
           <span>{t("review.question")} {currentIdx + 1}/{localized.length}</span>
           <span>{t("review.answered")}: {Object.keys(answers).length}</span>
         </div>
-        <div className="h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full">
+        <div
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={localized.length}
+          aria-valuenow={currentIdx + 1}
+          aria-label={pick("Vị trí trong phiên ôn tập", "Position in the session")}
+          className="h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full"
+        >
           <div
             className="h-full bg-blue-500 rounded-full transition-all"
             style={{ width: `${((currentIdx + 1) / localized.length) * 100}%` }}
@@ -285,13 +334,18 @@ export default function ReviewSession() {
       </div>
 
       {/* Palette */}
-      <div className="flex flex-wrap gap-1.5">
+      <div className="flex flex-wrap gap-1.5" role="group" aria-label={pick("Danh sách câu hỏi", "Question list")}>
         {localized.map((_, i) => (
           <button
             key={i}
+            type="button"
             onClick={() => setCurrentIdx(i)}
+            aria-label={`${pick("Câu", "Question")} ${i + 1}: ${
+              answers[i] !== undefined ? pick("đã trả lời", "answered") : pick("chưa trả lời", "not answered")
+            }`}
+            aria-current={i === currentIdx ? "true" : undefined}
             className={cn(
-              "w-8 h-8 rounded text-xs font-medium border transition-colors",
+              "w-9 h-9 rounded-lg text-xs font-medium border transition-colors",
               i === currentIdx && "ring-2 ring-blue-500",
               answers[i] !== undefined ? "bg-blue-100 dark:bg-blue-900 border-blue-300 dark:border-blue-700 text-blue-800 dark:text-blue-200" : "bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 text-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-700"
             )}
@@ -323,9 +377,12 @@ export default function ReviewSession() {
         <div className="space-y-2">
           {currentQ.options.map((opt, i) => {
             const isSel = answers[currentIdx] === i;
+
             return (
               <button
                 key={i}
+                type="button"
+                aria-pressed={isSel}
                 onClick={() => setAnswers((prev) => ({ ...prev, [currentIdx]: i }))}
                 className={cn(
                   "w-full text-left flex items-start gap-3 px-4 py-3 rounded-lg border text-sm transition-colors",
@@ -335,7 +392,7 @@ export default function ReviewSession() {
                 )}
               >
                 <span className={cn(
-                  "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0",
+                  "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 mt-0.5",
                   isSel ? "bg-blue-600 border-blue-500 text-white" : "border-zinc-400 dark:border-zinc-600 text-zinc-500"
                 )}>
                   {optionLabels[i]}
@@ -347,18 +404,34 @@ export default function ReviewSession() {
                     vi={<span className="text-zinc-600 dark:text-zinc-400">{viQs[currentIdx].options[i]}</span>}
                   />
                 ) : (
-                  opt
+                  <span className="flex-1 min-w-0"><QuestionText text={opt} /></span>
                 )}
               </button>
             );
           })}
         </div>
-        <div className="flex items-center justify-between pt-1">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
           <div className="flex gap-2">
-            <button onClick={() => setCurrentIdx((i) => Math.max(0, i - 1))} disabled={currentIdx === 0} className="btn-secondary text-sm px-3 py-1.5 disabled:opacity-40">{t("quiz.prev")}</button>
-            <button onClick={() => setCurrentIdx((i) => Math.min(localized.length - 1, i + 1))} disabled={currentIdx === localized.length - 1} className="btn-secondary text-sm px-3 py-1.5 disabled:opacity-40">{t("quiz.next")}</button>
+            <button
+              type="button"
+              onClick={() => setCurrentIdx((i) => Math.max(0, i - 1))}
+              disabled={currentIdx === 0}
+              className="btn-secondary text-sm px-3 py-2"
+            >
+              {t("quiz.prev")}
+            </button>
+            <button
+              type="button"
+              onClick={() => setCurrentIdx((i) => Math.min(localized.length - 1, i + 1))}
+              disabled={currentIdx === localized.length - 1}
+              className="btn-secondary text-sm px-3 py-2"
+            >
+              {t("quiz.next")}
+            </button>
           </div>
-          <button onClick={finishSession} className="btn-primary text-sm px-4 py-1.5">{t("quiz.viewResults")}</button>
+          <button type="button" onClick={finishSession} className="btn-primary text-sm px-4 py-2">
+            {t("quiz.viewResults")}
+          </button>
         </div>
       </div>
     </div>

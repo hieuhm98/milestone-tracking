@@ -3,28 +3,42 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import { lessonKey, type LessonTopic } from "@/lib/lessons";
 import { GROUPS, DEFAULT_GROUP, GROUP_ACCENT } from "@/lib/groups";
 import { cn } from "@/lib/utils";
+import GroupIcon from "@/components/GroupIcon";
+import { PageError, PageLoading } from "@/components/learn/PageState";
 
 export default function LearnTopicPage() {
   const { slug } = useParams<{ slug: string }>();
-  const { t, pick } = useLang();
+  const { pick } = useLang();
   const { progress, ready } = useProgress();
   const [topics, setTopics] = useState<LessonTopic[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    fetch("/api/lessons")
-      .then((r) => r.json())
-      .then((data: LessonTopic[]) => setTopics(Array.isArray(data) ? data : []))
-      .catch(() => setTopics([]))
-      .finally(() => setLoading(false));
-  }, []);
+    setLoading(true);
+    setError(false);
 
-  if (loading || !ready) return <div className="text-zinc-500 text-sm p-8">{t("common.loading")}</div>;
+    fetch("/api/lessons")
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+
+        return r.json();
+      })
+      .then((data: LessonTopic[]) => setTopics(Array.isArray(data) ? data : []))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, [attempt]);
+
+  if (loading || !ready) return <PageLoading />;
+
+  if (error) return <PageError onRetry={() => setAttempt((n) => n + 1)} />;
 
   const topic = topics.find((tp) => tp.slug === slug);
 
@@ -32,7 +46,7 @@ export default function LearnTopicPage() {
     return (
       <div className="text-center py-20">
         <p className="text-zinc-500">{pick("Chủ đề này chưa chia bài nhỏ.", "This topic has no mini-lessons yet.")}</p>
-        <Link href="/learn" className="text-blue-600 dark:text-blue-400 text-sm mt-2 inline-block">
+        <Link href="/learn" className="text-blue-600 dark:text-blue-400 text-sm mt-2 py-2 inline-block hover:underline">
           {pick("← Khoá học của tôi", "← My courses")}
         </Link>
       </div>
@@ -54,18 +68,25 @@ export default function LearnTopicPage() {
           ← {group ? pick(group.label, group.labelEn) : pick("Khoá học của tôi", "My courses")}
         </Link>
         <div className="flex items-center gap-2 mt-1">
-          <span className="text-xl">{group?.icon ?? "◉"}</span>
-          <h1 className="text-2xl font-bold">{pick(topic.title, topic.titleEn)}</h1>
+          <GroupIcon group={group?.id} className="text-xl text-zinc-600 dark:text-zinc-300" />
+          <h1 className="min-w-0 text-2xl font-bold">{pick(topic.title, topic.titleEn)}</h1>
         </div>
         <p className="text-sm text-zinc-500 mt-1">
           {topic.lessons.length} {pick("bài nhỏ", "mini-lessons")} · {done} {pick("đã xong", "done")}
         </p>
       </div>
 
-      <div className="h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+      <div
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={topic.lessons.length}
+        aria-valuenow={done}
+        aria-label={pick("Bài nhỏ đã xong", "Mini-lessons done")}
+        className="h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden"
+      >
         <div
           className={cn("h-full rounded-full transition-all", accent.bar)}
-          style={{ width: `${(done / topic.lessons.length) * 100}%` }}
+          style={{ width: `${topic.lessons.length > 0 ? (done / topic.lessons.length) * 100 : 0}%` }}
         />
       </div>
 
@@ -94,7 +115,14 @@ export default function LearnTopicPage() {
                       : "border-zinc-300 dark:border-zinc-700 text-zinc-500"
                   )}
                 >
-                  {isDone ? "✓" : i + 1}
+                  {isDone ? (
+                    <>
+                      <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span className="sr-only">{pick("Đã xong", "Done")}</span>
+                    </>
+                  ) : (
+                    i + 1
+                  )}
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="truncate">{pick(lesson.title, lesson.titleEn)}</div>
@@ -115,7 +143,7 @@ export default function LearnTopicPage() {
 
       <Link
         href={`/knowledge/${topic.slug}`}
-        className="inline-block py-2 -my-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 inline-block"
+        className="inline-block py-2 -my-2 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
       >
         {pick("Xem toàn bộ bài viết & quiz đầy đủ", "View the full article & complete quiz")} →
       </Link>

@@ -59,26 +59,40 @@ export default function ReferenceView({ page }: { page: ReferencePage }) {
               onChange={(event) => setQuery(event.target.value)}
               placeholder={t("grammar.reference.search")}
               data-testid="reference-search"
-              className="input pl-9"
+              autoComplete="off"
+              spellCheck={false}
+              className="input !pl-9"
             />
           </label>
 
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400" aria-live="polite">
             {shown} / {all} {pick("dòng", "rows")}
           </p>
         </div>
       )}
 
-      <div className="space-y-6">
-        {tables.map((table, index) => (
-          <GrammarTable key={index} table={table} tokens={tokens} />
-        ))}
-      </div>
+      {page.searchable && needle && shown === 0 ? (
+        <div className="card text-sm">
+          <p className="text-zinc-700 dark:text-zinc-300">
+            {pick(`Không có dòng nào chứa “${query.trim()}”.`, `No rows contain “${query.trim()}”.`)}{" "}
+            {pick("Thử gõ ít chữ hơn hoặc kiểm tra chính tả.", "Try fewer letters or check the spelling.")}
+          </p>
+          <button type="button" onClick={() => setQuery("")} className="btn-secondary mt-3 text-sm">
+            {t("common.clearSearch")}
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {tables.map((table, index) => (
+            <GrammarTable key={index} table={table} tokens={tokens} />
+          ))}
+        </div>
+      )}
 
       {page.notes && page.notes.length > 0 && (
         <ul className="space-y-2">
           {page.notes.map((note, index) => (
-            <li key={index} className="text-sm text-zinc-700 dark:text-zinc-300">
+            <li key={index} className="max-w-[75ch] text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
               <Rich text={note} />
             </li>
           ))}

@@ -115,9 +115,9 @@ export default function GrammarHome({
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {TILES.map((tile, index) => (
             <li key={tile.key} className="card">
-              <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500">{index + 1}</p>
+              <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{index + 1}</p>
               <p className="mt-0.5 font-semibold">{tile.name}</p>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{t(tile.key)}</p>
+              <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{t(tile.key)}</p>
             </li>
           ))}
         </ol>
@@ -144,7 +144,7 @@ export default function GrammarHome({
               {reviewParts.includes(part.id) && (
                 <Link
                   href={reviewHref(part.id)}
-                  className="ml-auto text-sm underline underline-offset-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                  className="ml-auto -my-2 py-2 text-sm underline underline-offset-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
                 >
                   {t("grammar.home.review")} {part.id}
                 </Link>
@@ -169,7 +169,7 @@ export default function GrammarHome({
 
                     <div className="min-w-0 flex-1">
                       <p className="font-medium">
-                        <span className="text-zinc-400 dark:text-zinc-500">{unit.number}.</span> {unit.title}
+                        <span className="text-zinc-500 dark:text-zinc-400">{unit.number}.</span> {unit.title}
                       </p>
                       <p className="text-xs text-zinc-500 dark:text-zinc-400">{unit.core}</p>
                     </div>
@@ -190,7 +190,9 @@ export default function GrammarHome({
                         {row}
                       </Link>
                     ) : (
-                      <div className="px-1 opacity-60">{row}</div>
+                      <div className="px-1 text-zinc-500 dark:text-zinc-400">
+                        {row}
+                      </div>
                     )}
                   </li>
                 );
@@ -204,7 +206,9 @@ export default function GrammarHome({
         <Link href={trapsHref()} className="card transition-colors hover:border-rose-400 dark:hover:border-rose-700">
           <h2 className="font-semibold text-rose-700 dark:text-rose-300">{t("grammar.traps.title")}</h2>
           <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{t("grammar.traps.subtitle")}</p>
-          <p className="mt-2 text-xs text-zinc-500">{trapCount}</p>
+          <p className="mt-2 text-xs text-zinc-500">
+            {trapCount} {t("grammar.home.traps")}
+          </p>
         </Link>
 
         <div className="card">
@@ -218,7 +222,7 @@ export default function GrammarHome({
                 <li key={entry.slug}>
                   <Link
                     href={referenceHref(entry.slug)}
-                    className="text-sm text-blue-600 underline underline-offset-2 dark:text-blue-400"
+                    className="inline-block py-1 text-sm text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                   >
                     {entry.title}
                   </Link>

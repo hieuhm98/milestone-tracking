@@ -35,7 +35,7 @@ export default function FiveMoves({ id, part, title, titleVi, steps, tip }: Prop
                 {index + 1}
               </span>
 
-              <p className="text-sm text-zinc-700 dark:text-zinc-300">
+              <p className="min-w-0 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
                 <span className="font-semibold text-zinc-900 dark:text-zinc-50">{step.label} </span>
                 {step.text}
               </p>

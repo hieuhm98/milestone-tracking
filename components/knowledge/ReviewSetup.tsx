@@ -6,6 +6,7 @@
 // the session settings (mode, size, start) sit in a summary panel beside them.
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ChevronRight, Zap } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import { GROUPS, DEFAULT_GROUP, GROUP_ACCENT, type Group } from "@/lib/groups";
@@ -21,6 +22,8 @@ import {
 } from "@/lib/review";
 import { normalizeSearch } from "@/lib/search";
 import { cn } from "@/lib/utils";
+import GroupIcon from "@/components/GroupIcon";
+import SearchField from "@/components/SearchField";
 
 export interface ReviewTopic {
   slug: string;
@@ -92,6 +95,14 @@ const MODE_TEXT: Record<ReviewMode, { vi: string; en: string; descVi: string; de
     descVi: "Chỉ những câu bạn chưa làm lần nào.",
     descEn: "Only questions you have never answered.",
   },
+};
+
+/** Spoken label for the mastery chip, so the level is not carried by colour alone. */
+const MASTERY_LABEL: Record<Mastery, { vi: string; en: string }> = {
+  none: { vi: "Chưa học", en: "Not studied" },
+  weak: { vi: "Còn yếu", en: "Weak" },
+  ok: { vi: "Khá", en: "Fair" },
+  strong: { vi: "Vững", en: "Strong" },
 };
 
 const MASTERY_STYLE: Record<Mastery, string> = {
@@ -237,8 +248,8 @@ export default function ReviewSetup({
         <h1 className="text-2xl font-bold">{t("review.title")}</h1>
         <p className="text-zinc-600 dark:text-zinc-400 text-sm mt-1">
           {pick(
-            "Chọn chủ đề bên trái, chọn kiểu ôn và số câu bên phải, rồi bắt đầu.",
-            "Pick topics on the left, choose how to review on the right, then start."
+            "Chọn chủ đề, chọn kiểu ôn và số câu, rồi bấm Bắt đầu.",
+            "Pick your topics, choose how to review and how many questions, then press Start."
           )}
         </p>
       </div>
@@ -247,19 +258,22 @@ export default function ReviewSetup({
       <div className="card bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-900/60 flex flex-col sm:flex-row sm:items-center gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="text-lg" aria-hidden>
-              ⚡
-            </span>
+            <Zap className="h-5 w-5 text-blue-600 dark:text-blue-300" aria-hidden="true" />
             <h2 className="font-semibold text-blue-800 dark:text-blue-200">{t("review.quickTitle")}</h2>
           </div>
           <p className="text-xs text-blue-600/80 dark:text-blue-300/70 mt-1">
             {pick(
-              "5 câu từ mọi khoá học, ưu tiên câu mới và câu bạn hay sai. Mỗi khoá cũng có nút ⚡ 5 câu riêng.",
-              "5 questions from every course, new and weak ones first. Each track below has its own ⚡ 5 button too."
+              "5 câu từ mọi khoá học, ưu tiên câu mới và câu bạn hay sai. Mỗi khoá bên dưới cũng có nút “5 câu” riêng.",
+              "5 questions from every course, new and weak ones first. Each track below has its own “5 questions” button too."
             )}
           </p>
         </div>
-        <button onClick={() => quickTest(topics.map((tp) => tp.slug))} className="btn-primary text-sm px-4 py-2 shrink-0">
+        <button
+          type="button"
+          onClick={() => quickTest(topics.map((tp) => tp.slug))}
+          disabled={topics.length === 0}
+          className="btn-primary text-sm px-4 py-2 shrink-0"
+        >
           {t("review.quickStart")}
         </button>
       </div>
@@ -268,27 +282,22 @@ export default function ReviewSetup({
         {/* Topic picker */}
         <section className="space-y-3 min-w-0" aria-label={t("review.topics")}>
           <div className="card space-y-3">
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-sm" aria-hidden>
-                ⌕
-              </span>
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={pick("Tìm chủ đề… (vd: SQL, DPD, Docker)", "Search topics… (e.g. SQL, DPD, Docker)")}
-                className="w-full pl-8 pr-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+            <SearchField
+              value={query}
+              onChange={setQuery}
+              placeholder={pick("Tìm chủ đề… (vd: SQL, DPD, Docker)", "Search topics… (e.g. SQL, DPD, Docker)")}
+              clearLabel={t("common.clearSearch")}
+            />
             <div className="flex flex-wrap items-center gap-2 justify-between">
               <div className="flex flex-wrap gap-1.5" role="group" aria-label={pick("Lọc", "Filter")}>
                 {filters.map((f) => (
                   <button
                     key={f.id}
+                    type="button"
                     onClick={() => setFilter(f.id)}
                     aria-pressed={filter === f.id}
                     className={cn(
-                      "px-3 py-1.5 rounded-lg text-xs border transition-colors",
+                      "px-3 py-2 sm:py-1.5 rounded-lg text-xs border transition-colors",
                       filter === f.id
                         ? "bg-blue-600 border-blue-500 text-white"
                         : "bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"
@@ -303,6 +312,7 @@ export default function ReviewSetup({
                   {pick(`Đã chọn ${selected.size}/${topics.length}`, `${selected.size}/${topics.length} selected`)}
                 </span>
                 <button
+                  type="button"
                   onClick={() => setMany(visibleTopics.map((tp) => tp.slug), !allVisibleSelected)}
                   disabled={visibleTopics.length === 0}
                   className="py-1.5 -my-1.5 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 disabled:opacity-40"
@@ -321,7 +331,19 @@ export default function ReviewSetup({
 
           {visibleTopics.length === 0 && (
             <div className="card text-sm text-zinc-500">
-              {pick("Không có chủ đề nào khớp với tìm kiếm/bộ lọc.", "No topics match the search or filter.")}
+              <p>{pick("Không có chủ đề nào khớp với tìm kiếm/bộ lọc.", "No topics match the search or filter.")}</p>
+              {narrowing && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery("");
+                    setFilter("all");
+                  }}
+                  className="mt-1 py-2 -my-1 text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  {pick("Xoá tìm kiếm và bộ lọc", "Clear search and filter")}
+                </button>
+              )}
             </div>
           )}
 
@@ -405,11 +427,14 @@ export default function ReviewSetup({
           </fieldset>
 
           <div className="space-y-1.5">
-            <div className="text-xs font-medium text-zinc-600 dark:text-zinc-400">{t("review.numQuestions")}</div>
-            <div className="grid grid-cols-5 gap-1.5">
+            <div id="review-count-label" className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+              {t("review.numQuestions")}
+            </div>
+            <div className="grid grid-cols-5 gap-1.5" role="group" aria-labelledby="review-count-label">
               {COUNTS.map((c) => (
                 <button
                   key={c}
+                  type="button"
                   onClick={() => setCount(c)}
                   aria-pressed={count === c}
                   className={cn(
@@ -431,9 +456,10 @@ export default function ReviewSetup({
           </div>
 
           <button
+            type="button"
             onClick={() => onStart({ slugs: Array.from(selected), mode, count })}
             disabled={sessionSize === 0}
-            className="btn-primary w-full disabled:opacity-50"
+            className="btn-primary w-full"
           >
             {sessionSize === 0
               ? selected.size === 0
@@ -494,14 +520,13 @@ function TrackSection({
           className="accent-blue-500 w-4 h-4 shrink-0"
         />
         <button
+          type="button"
           onClick={onToggleOpen}
           aria-expanded={expanded}
           aria-controls={panelId}
-          className="flex-1 min-w-0 flex items-center gap-3 text-left py-1 -my-1"
+          className="flex-1 min-w-0 flex items-center gap-3 text-left py-2 -my-2"
         >
-          <span className={cn("text-lg shrink-0", accent.text)} aria-hidden>
-            {group.icon}
-          </span>
+          <GroupIcon group={group.id} className={cn("text-lg", accent.text)} />
           <span className="flex-1 min-w-0">
             <span className="block font-medium text-sm text-zinc-900 dark:text-zinc-100 truncate">
               {pick(group.label, group.labelEn)}
@@ -516,16 +541,20 @@ function TrackSection({
           <span className="hidden sm:block w-20 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden shrink-0" aria-hidden>
             <span className={cn("block h-full", accent.bar)} style={{ width: `${(100 * studied) / all.length}%` }} />
           </span>
-          <span className={cn("text-zinc-400 transition-transform shrink-0", expanded && "rotate-90")} aria-hidden>
-            ›
-          </span>
+          <ChevronRight
+            className={cn("h-4 w-4 text-zinc-400 transition-transform shrink-0", expanded && "rotate-90")}
+            aria-hidden="true"
+          />
         </button>
         <button
+          type="button"
           onClick={onQuick}
           title={pick("Test nhanh 5 câu của khoá này", "Quick 5-question test of this track")}
-          className="btn-secondary text-xs px-2.5 py-1.5 shrink-0"
+          aria-label={pick(`Test nhanh 5 câu: ${group.label}`, `Quick 5-question test: ${group.labelEn}`)}
+          className="btn-secondary inline-flex items-center gap-1 text-xs px-2.5 py-2 shrink-0"
         >
-          ⚡ 5
+          <Zap className="h-3.5 w-3.5" aria-hidden="true" />
+          {pick("5 câu", "5 Qs")}
         </button>
       </div>
 
@@ -557,8 +586,14 @@ function TrackSection({
                       {m.seen > 0 && pick(` · đã làm ${m.seen}`, ` · ${m.seen} answered`)}
                     </span>
                   </span>
-                  <span className={cn("shrink-0 text-[11px] px-1.5 py-0.5 rounded border tabular-nums", MASTERY_STYLE[m.level])}>
+                  <span
+                    className={cn("shrink-0 text-[11px] px-1.5 py-0.5 rounded border tabular-nums", MASTERY_STYLE[m.level])}
+                    title={pick(MASTERY_LABEL[m.level].vi, MASTERY_LABEL[m.level].en)}
+                  >
                     {m.pct === null ? pick("Mới", "New") : `${m.pct}%`}
+                    {m.pct !== null && (
+                      <span className="sr-only"> ({pick(MASTERY_LABEL[m.level].vi, MASTERY_LABEL[m.level].en)})</span>
+                    )}
                   </span>
                 </label>
               </li>

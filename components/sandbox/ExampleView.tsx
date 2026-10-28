@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Check, Copy } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { API_BASE_PATH, SANDBOX_KEY_HEADER } from "@/lib/sandbox/catalog";
 import type { WorkedExample } from "@/lib/sandbox/examples";
@@ -66,7 +67,7 @@ export function ColoredUrl({ url, pathParams }: { url: string; pathParams: Recor
 
   return (
     <code className="font-mono text-[13px] break-all">
-      <span className="text-zinc-400 dark:text-zinc-500">{API_BASE_PATH}</span>
+      <span className="text-zinc-500 dark:text-zinc-400">{API_BASE_PATH}</span>
       {rest === "/" ? (
         <span className="text-blue-700 dark:text-blue-300">/</span>
       ) : (
@@ -114,7 +115,8 @@ function Part({ label, hint, children }: { label: string; hint?: string; childre
 
 export function JsonBlock({ value, className }: { value: unknown; className?: string }) {
   return (
-    <pre className={cn("max-h-80 overflow-auto rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 font-mono text-xs leading-relaxed text-zinc-800 dark:text-zinc-200", className)}>
+    // Focusable so keyboard users can scroll a long body.
+    <pre tabIndex={0} className={cn("max-h-80 overflow-auto rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 font-mono text-xs leading-relaxed text-zinc-800 dark:text-zinc-200", className)}>
       {JSON.stringify(value, null, 2)}
     </pre>
   );
@@ -144,6 +146,7 @@ function curlFor(example: WorkedExample, apiKey: string | null): string {
 export default function ExampleView({ example, apiKey }: { example: WorkedExample; apiKey: string | null }) {
   const { pick } = useLang();
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const { request, response } = example;
   const pathParams = Object.entries(request.pathParams);
   const query = Object.entries(request.query);
@@ -151,10 +154,12 @@ export default function ExampleView({ example, apiKey }: { example: WorkedExampl
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(curlFor(example, apiKey));
+      setCopyFailed(false);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
       setCopied(false);
+      setCopyFailed(true);
     }
   };
 
@@ -163,8 +168,19 @@ export default function ExampleView({ example, apiKey }: { example: WorkedExampl
       <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-3 space-y-3 min-w-0">
         <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">→ {pick("Request (bạn gửi)", "Request (you send)")}</span>
-          <button type="button" onClick={copy} className="py-1 -my-1 text-[11px] text-blue-600 dark:text-blue-400 hover:underline">
-            {copied ? pick("Đã copy ✓", "Copied ✓") : pick("Copy lệnh curl", "Copy as curl")}
+          <button
+            type="button"
+            onClick={copy}
+            className="inline-flex items-center gap-1 px-1 py-2 -my-2 text-[11px] text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            {copied ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5" aria-hidden="true" />}
+            <span aria-live="polite">
+              {copied
+                ? pick("Đã copy", "Copied")
+                : copyFailed
+                  ? pick("Không copy được — thử lại", "Couldn't copy — try again")
+                  : pick("Copy lệnh curl", "Copy as curl")}
+            </span>
           </button>
         </div>
 

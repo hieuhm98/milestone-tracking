@@ -115,7 +115,8 @@ export default function EditingBlock({
             if (done) {
               return (
                 <span key={index} className={cn("mx-0.5 inline-flex items-baseline gap-1")}>
-                  <s className="text-zinc-400 dark:text-zinc-500">{piece.text}</s>
+                  <s className="text-zinc-500 dark:text-zinc-400">{piece.text}</s>
+                  <span className="sr-only">{pick("sửa thành", "corrected to")}</span>
                   <span className={TOKEN.hit}>{editing.errors[errorOf[piece.hit]]?.fix}</span>
                 </span>
               );
@@ -136,6 +137,7 @@ export default function EditingBlock({
                   setActive(null);
                 }}
                 aria-pressed={selected || missed}
+                aria-label={missed ? `${piece.text} (${pick("không có lỗi", "no mistake here")})` : undefined}
                 className={cn(
                   "transition-colors",
                   missed
@@ -173,6 +175,8 @@ export default function EditingBlock({
 
           <div className="flex flex-wrap items-center gap-2">
             <input
+              // Remounts per mistake, so autoFocus also fires when the learner taps the next one.
+              key={active}
               type="text"
               value={value}
               onChange={(event) => setValue(event.target.value)}
@@ -183,11 +187,13 @@ export default function EditingBlock({
                 }
               }}
               placeholder={pick("Phần sửa", "The correction")}
-              aria-label={pick("Phần sửa", "The correction")}
+              aria-label={pick(`Sửa "${error.span}" thành`, `Correct "${error.span}" to`)}
+              // Tapping a mistake means "I want to fix this" — the cursor goes straight to the box.
+              autoFocus
               className="input w-auto min-w-0 flex-1 basis-40 py-1.5"
             />
 
-            <button type="button" onClick={check} className="btn-primary px-3 py-1.5 text-sm">
+            <button type="button" onClick={check} disabled={!value.trim()} className="btn-primary px-3 py-1.5 text-sm">
               {t("grammar.fb.check")}
             </button>
           </div>
@@ -217,7 +223,7 @@ export default function EditingBlock({
             <button
               type="button"
               onClick={() => setRevealed(true)}
-              className="inline-flex items-center gap-1.5 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              className="-my-2 inline-flex items-center gap-1.5 py-2 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
               <Eye className="h-3.5 w-3.5" aria-hidden="true" />
               {t("grammar.fb.showAnswer")}
@@ -228,7 +234,7 @@ export default function EditingBlock({
             <button
               type="button"
               onClick={reset}
-              className="inline-flex items-center gap-1.5 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              className="-my-2 inline-flex items-center gap-1.5 py-2 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
               <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
               {t("grammar.fb.reset")}

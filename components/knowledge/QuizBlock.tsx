@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Check, Minus, Undo2, X } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import BilingualPair from "@/components/BilingualPair";
@@ -65,7 +66,7 @@ interface Props {
 type AnswerMap = Record<string, number | null>;
 
 export default function QuizBlock({ questions, title, slug }: Props) {
-  const { lang, t, dual } = useLang();
+  const { lang, t, pick, dual } = useLang();
   const { progress, ready, update } = useProgress();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<AnswerMap>({});
@@ -172,22 +173,36 @@ export default function QuizBlock({ questions, title, slug }: Props) {
           </span>
         )}
         {restored && (
-          <span className="text-xs text-zinc-500">↩ {t("progress.restored")}</span>
+          <span className="inline-flex items-center gap-1 text-xs text-zinc-500">
+            <Undo2 className="h-3.5 w-3.5" aria-hidden="true" />
+            {t("progress.restored")}
+          </span>
         )}
       </div>
 
       {/* Question palette */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6" role="group" aria-label={pick("Danh sách câu hỏi", "Question list")}>
         {localized.map((q, i) => {
           const answered = answers[q.id] !== undefined && answers[q.id] !== null;
           const isCorrect = showResults && answers[q.id] === q.answer;
           const isWrong = showResults && answered && answers[q.id] !== q.answer;
+          const status = isCorrect
+            ? pick("đúng", "correct")
+            : isWrong
+              ? pick("sai", "wrong")
+              : answered
+                ? pick("đã trả lời", "answered")
+                : pick("chưa trả lời", "not answered");
+
           return (
             <button
               key={q.id}
+              type="button"
               onClick={() => setCurrentIdx(i)}
+              aria-label={`${pick("Câu", "Question")} ${i + 1}: ${status}`}
+              aria-current={!showResults && i === currentIdx ? "true" : undefined}
               className={cn(
-                "w-9 h-9 rounded-lg text-sm font-medium transition-colors border",
+                "relative w-9 h-9 rounded-lg text-sm font-medium transition-colors border",
                 i === currentIdx && "ring-2 ring-blue-500",
                 isCorrect && "bg-green-100 dark:bg-green-800 border-green-400 dark:border-green-600 text-green-800 dark:text-green-200",
                 isWrong && "bg-red-100 dark:bg-red-900 border-red-400 dark:border-red-700 text-red-800 dark:text-red-200",
@@ -196,6 +211,13 @@ export default function QuizBlock({ questions, title, slug }: Props) {
               )}
             >
               {i + 1}
+              {/* Shape, not just colour, tells right from wrong. */}
+              {isCorrect && (
+                <Check className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 rounded-full bg-green-600 p-0.5 text-white" aria-hidden="true" />
+              )}
+              {isWrong && (
+                <X className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 rounded-full bg-red-600 p-0.5 text-white" aria-hidden="true" />
+              )}
             </button>
           );
         })}
@@ -236,7 +258,9 @@ export default function QuizBlock({ questions, title, slug }: Props) {
               return (
                 <button
                   key={i}
+                  type="button"
                   onClick={() => handleSelect(currentQ.id, i)}
+                  aria-pressed={selected}
                   className={cn(
                     "w-full text-left flex items-start gap-3 px-4 py-3 rounded-lg border transition-colors text-sm",
                     selected
@@ -264,28 +288,31 @@ export default function QuizBlock({ questions, title, slug }: Props) {
             })}
           </div>
 
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
             <div className="flex gap-2">
               <button
+                type="button"
                 onClick={() => setCurrentIdx((i) => Math.max(0, i - 1))}
                 disabled={currentIdx === 0}
-                className="btn-secondary text-sm px-3 py-1.5 disabled:opacity-40"
+                className="btn-secondary text-sm px-3 py-2"
               >
                 {t("quiz.prev")}
               </button>
               <button
+                type="button"
                 onClick={() => setCurrentIdx((i) => Math.min(localized.length - 1, i + 1))}
                 disabled={currentIdx === localized.length - 1}
-                className="btn-secondary text-sm px-3 py-1.5 disabled:opacity-40"
+                className="btn-secondary text-sm px-3 py-2"
               >
                 {t("quiz.next")}
               </button>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs text-zinc-500">{t("quiz.answered")}: {totalAnswered}/{localized.length}</span>
               <button
+                type="button"
                 onClick={handleViewResults}
-                className="btn-primary text-sm px-4 py-1.5"
+                className="btn-primary text-sm px-4 py-2"
               >
                 {t("quiz.viewResults")}
               </button>
@@ -298,7 +325,7 @@ export default function QuizBlock({ questions, title, slug }: Props) {
       {showResults && (
         <div className="space-y-4">
           <div className="card bg-zinc-100 dark:bg-zinc-800/80">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
                   {correctCount}/{localized.length}
@@ -307,7 +334,7 @@ export default function QuizBlock({ questions, title, slug }: Props) {
                   {Math.round((correctCount / localized.length) * 100)}% {t("quiz.correct")}
                 </div>
               </div>
-              <button onClick={handleReset} className="btn-secondary text-sm">
+              <button type="button" onClick={handleReset} className="btn-secondary text-sm">
                 {t("quiz.retry")}
               </button>
             </div>
@@ -325,10 +352,19 @@ export default function QuizBlock({ questions, title, slug }: Props) {
               )}>
                 <div className="flex items-start gap-2 mb-3">
                   <span className={cn(
-                    "text-xs font-bold px-2 py-0.5 rounded shrink-0",
+                    "inline-flex items-center px-1.5 py-1 rounded shrink-0",
                     isCorrect ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300" : skipped ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-400" : "bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300"
                   )}>
-                    {isCorrect ? "✓" : skipped ? "—" : "✗"}
+                    {isCorrect ? (
+                      <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                    ) : skipped ? (
+                      <Minus className="h-3.5 w-3.5" aria-hidden="true" />
+                    ) : (
+                      <X className="h-3.5 w-3.5" aria-hidden="true" />
+                    )}
+                    <span className="sr-only">
+                      {isCorrect ? pick("Đúng", "Correct") : skipped ? pick("Bỏ qua", "Skipped") : pick("Sai", "Wrong")}
+                    </span>
                   </span>
                   {dual ? (
                     <BilingualPair
@@ -350,7 +386,7 @@ export default function QuizBlock({ questions, title, slug }: Props) {
                 </div>
 
                 {hasRationale[i] && (
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-600 mb-1.5">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
                     {t("quiz.breakdown")}
                   </p>
                 )}

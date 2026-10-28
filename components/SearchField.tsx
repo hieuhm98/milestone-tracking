@@ -3,6 +3,7 @@
 // The search box used above a list that filters as you type: the course
 // curriculum and the English contents trees. Escape or the × clears it.
 
+import { useRef } from "react";
 import { Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +17,8 @@ interface Props {
 }
 
 export default function SearchField({ value, onChange, placeholder, clearLabel, className }: Props) {
+  const input = useRef<HTMLInputElement>(null);
+
   return (
     <div className={cn("relative", className)}>
       <Search
@@ -24,6 +27,7 @@ export default function SearchField({ value, onChange, placeholder, clearLabel, 
       />
 
       <input
+        ref={input}
         type="text"
         role="searchbox"
         value={value}
@@ -44,11 +48,15 @@ export default function SearchField({ value, onChange, placeholder, clearLabel, 
       {value && (
         <button
           type="button"
-          onClick={() => onChange("")}
+          onClick={() => {
+            onChange("");
+            // The button disappears once the box is empty; keep the keyboard in the field.
+            input.current?.focus();
+          }}
           aria-label={clearLabel}
-          className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded p-1 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+          className="absolute right-1 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
         >
-          <X className="h-3.5 w-3.5" aria-hidden="true" />
+          <X className="h-4 w-4" aria-hidden="true" />
         </button>
       )}
     </div>

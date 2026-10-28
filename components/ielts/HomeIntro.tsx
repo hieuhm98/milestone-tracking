@@ -89,7 +89,7 @@ export default function HomeIntro({ intro, stats, firstPart1, firstCard }: Props
         <h2 className="text-lg font-semibold tracking-tight">{intro.howToUse.title}</h2>
         <p className="text-sm italic text-zinc-500 dark:text-zinc-400">{intro.howToUse.titleVi}</p>
 
-        <div className="mt-3 space-y-3 text-sm text-zinc-700 dark:text-zinc-300">
+        <div className="mt-3 max-w-[75ch] space-y-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
           {intro.howToUse.paragraphs.map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}
@@ -101,10 +101,10 @@ export default function HomeIntro({ intro, stats, firstPart1, firstCard }: Props
           {pick(intro.navigate.titleVi, intro.navigate.title)}
         </h2>
 
-        <ul className="mt-3 space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+        <ul className="mt-3 max-w-[75ch] space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
           {bullets.map((bullet, index) => (
             <li key={index} className="flex gap-2">
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400 dark:bg-zinc-600" aria-hidden="true" />
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400 dark:bg-zinc-600" aria-hidden="true" />
               <span>{bulletParts(bullet)}</span>
             </li>
           ))}

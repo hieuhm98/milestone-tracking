@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { Check, Flag, Minus, Timer, X } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import BilingualPair from "@/components/BilingualPair";
@@ -20,6 +21,7 @@ import {
 } from "@/lib/exam";
 import { cn } from "@/lib/utils";
 import QuestionText from "@/components/knowledge/QuestionText";
+import GroupIcon from "@/components/GroupIcon";
 
 interface TrackTopic {
   slug: string;
@@ -238,11 +240,11 @@ export default function ExamRunner({ group, topics }: Props) {
     return (
       <div className="max-w-3xl space-y-6">
         <div>
-          <Link href="/exam" className="text-sm text-blue-600 dark:text-blue-400 py-2 -my-2 inline-block">
+          <Link href="/exam" className="text-sm text-blue-600 dark:text-blue-400 py-2 -my-2 inline-block hover:underline">
             {t("exam.backToTracks")}
           </Link>
           <div className="flex items-start gap-3 mt-2">
-            <span className={cn("text-2xl shrink-0", accent.text)}>{group.icon}</span>
+            <GroupIcon group={group.id} className={cn("text-2xl mt-0.5", accent.text)} />
             <div className="min-w-0">
               <h1 className="text-2xl font-bold">{pick(group.label, group.labelEn)}</h1>
               <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
@@ -288,12 +290,14 @@ export default function ExamRunner({ group, topics }: Props) {
           <h2 className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{t("exam.setupTitle")}</h2>
 
           <div className="space-y-2">
-            <span className="text-xs text-zinc-500">{t("exam.count")}</span>
-            <div className="flex flex-wrap gap-2">
+            <span id="exam-count-label" className="text-xs text-zinc-500">{t("exam.count")}</span>
+            <div className="flex flex-wrap gap-2" role="group" aria-labelledby="exam-count-label">
               {EXAM_COUNTS.map((n) => (
                 <button
                   key={n}
+                  type="button"
                   onClick={() => setCount(n)}
+                  aria-pressed={count === n}
                   className={cn(
                     "px-4 py-2 rounded-lg text-sm border transition-colors",
                     count === n
@@ -342,10 +346,21 @@ export default function ExamRunner({ group, topics }: Props) {
           <p className="text-xs text-zinc-500">{t("exam.coverageHint")}</p>
 
           {loadError && (
-            <p className="text-sm text-red-600 dark:text-red-400">{t("exam.poolTooSmall")}</p>
+            <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+              {pick(
+                "Không tạo được đề thi — khoá này chưa đủ câu hỏi hoặc mất kết nối. Thử lại sau.",
+                "Could not build a paper — the track has too few questions or the connection failed. Try again."
+              )}
+            </p>
           )}
 
-          <button onClick={startExam} disabled={building} className="btn-primary px-5 py-2.5 disabled:opacity-50">
+          <button
+            type="button"
+            onClick={startExam}
+            disabled={building}
+            aria-busy={building}
+            className="btn-primary px-5 py-2.5"
+          >
             {building ? t("exam.building") : record?.attempts ? t("exam.retake") : t("exam.start")}
           </button>
         </div>
@@ -363,30 +378,33 @@ export default function ExamRunner({ group, topics }: Props) {
     return (
       <div className="max-w-3xl space-y-4">
         {/* Status bar. Sticky so the clock and Submit stay reachable on a long paper. */}
-        <div className="sticky top-0 z-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-zinc-50/95 dark:bg-zinc-950/95 supports-[backdrop-filter]:backdrop-blur border-b border-zinc-200 dark:border-zinc-800">
+        {/* Below the mobile top bar (3.5rem + safe area); flush to the top from lg, where there is none. */}
+        <div className="sticky top-[calc(3.5rem+env(safe-area-inset-top))] lg:top-0 z-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-zinc-50/95 dark:bg-zinc-950/95 supports-[backdrop-filter]:backdrop-blur border-b border-zinc-200 dark:border-zinc-800">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span className="text-sm font-semibold">{pick(group.label, group.labelEn)}</span>
+            <h1 className="text-sm font-semibold">{pick(group.label, group.labelEn)}</h1>
             {timed && (
               <span
                 className={cn(
-                  "text-sm font-mono tabular-nums px-2 py-0.5 rounded border",
+                  "inline-flex items-center gap-1 text-sm font-mono tabular-nums px-2 py-0.5 rounded border",
                   lowOnTime
                     ? "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 border-red-300 dark:border-red-800"
                     : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700"
                 )}
                 aria-live={lowOnTime ? "polite" : "off"}
               >
-                ⏱ {formatClock(secondsLeft)}
+                <Timer className="h-4 w-4" aria-hidden="true" />
+                <span className="sr-only">{t("exam.timeLeft")}: </span>
+                {formatClock(secondsLeft)}
               </span>
             )}
             <span className="text-xs text-zinc-500">
               {t("exam.answeredCount")}: {answeredCount}/{paper.length}
             </span>
             <div className="flex items-center gap-2 ml-auto">
-              <button onClick={handleAbandon} className="btn-secondary text-xs px-3 py-1.5">
+              <button type="button" onClick={handleAbandon} className="btn-secondary text-xs px-3 py-2">
                 {t("exam.abandon")}
               </button>
-              <button onClick={handleSubmit} className="btn-primary text-sm px-4 py-1.5">
+              <button type="button" onClick={handleSubmit} className="btn-primary text-sm px-4 py-2">
                 {t("exam.submit")}
               </button>
             </div>
@@ -394,17 +412,25 @@ export default function ExamRunner({ group, topics }: Props) {
         </div>
 
         {/* Question palette */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5" role="group" aria-label={pick("Danh sách câu hỏi", "Question list")}>
           {paper.map((_, i) => {
             const done = answers[i] !== undefined;
+            const status = [
+              done ? pick("đã trả lời", "answered") : pick("chưa trả lời", "not answered"),
+              flagged.has(i) ? t("exam.flagged").toLowerCase() : null,
+            ]
+              .filter(Boolean)
+              .join(", ");
 
             return (
               <button
                 key={i}
+                type="button"
                 onClick={() => setIdx(i)}
-                aria-label={`${i + 1}`}
+                aria-label={`${pick("Câu", "Question")} ${i + 1}: ${status}`}
+                aria-current={i === idx ? "true" : undefined}
                 className={cn(
-                  "w-8 h-8 rounded-md text-xs font-medium border transition-colors relative",
+                  "w-9 h-9 rounded-md text-xs font-medium border transition-colors relative",
                   i === idx && "ring-2 ring-blue-500",
                   done
                     ? "bg-blue-100 dark:bg-blue-900 border-blue-300 dark:border-blue-700 text-blue-800 dark:text-blue-200"
@@ -413,9 +439,10 @@ export default function ExamRunner({ group, topics }: Props) {
               >
                 {i + 1}
                 {flagged.has(i) && (
-                  <span className="absolute -top-1 -right-1 text-[10px] text-amber-500" aria-hidden>
-                    ●
-                  </span>
+                  <Flag
+                    className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 rounded-full bg-amber-500 p-0.5 text-white"
+                    aria-hidden="true"
+                  />
                 )}
               </button>
             );
@@ -447,7 +474,9 @@ export default function ExamRunner({ group, topics }: Props) {
               return (
                 <button
                   key={i}
+                  type="button"
                   onClick={() => select(i)}
+                  aria-pressed={selected}
                   className={cn(
                     "w-full text-left flex items-start gap-3 px-4 py-3 rounded-lg border transition-colors text-sm",
                     selected
@@ -480,31 +509,35 @@ export default function ExamRunner({ group, topics }: Props) {
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
             <div className="flex gap-2">
               <button
+                type="button"
                 onClick={() => setIdx((i) => Math.max(0, i - 1))}
                 disabled={idx === 0}
-                className="btn-secondary text-sm px-3 py-1.5 disabled:opacity-40"
+                className="btn-secondary text-sm px-3 py-2"
               >
                 {t("quiz.prev")}
               </button>
               <button
+                type="button"
                 onClick={() => setIdx((i) => Math.min(paper.length - 1, i + 1))}
                 disabled={idx === paper.length - 1}
-                className="btn-secondary text-sm px-3 py-1.5 disabled:opacity-40"
+                className="btn-secondary text-sm px-3 py-2"
               >
                 {t("quiz.next")}
               </button>
             </div>
             <button
+              type="button"
               onClick={toggleFlag}
               aria-pressed={flagged.has(idx)}
               className={cn(
-                "text-sm px-3 py-1.5 rounded-lg border transition-colors",
+                "inline-flex items-center gap-1.5 text-sm px-3 py-2 rounded-lg border transition-colors",
                 flagged.has(idx)
                   ? "bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-800"
                   : "bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 text-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-700"
               )}
             >
-              ● {flagged.has(idx) ? t("exam.flagged") : t("exam.flag")}
+              <Flag className="h-4 w-4" aria-hidden="true" />
+              {flagged.has(idx) ? t("exam.flagged") : t("exam.flag")}
             </button>
           </div>
         </div>
@@ -519,12 +552,17 @@ export default function ExamRunner({ group, topics }: Props) {
 
   return (
     <div className="max-w-3xl space-y-6">
-      <Link href="/exam" className="text-sm text-blue-600 dark:text-blue-400 py-2 -my-2 inline-block">
-        {t("exam.backToTracks")}
-      </Link>
+      <div>
+        <Link href="/exam" className="text-sm text-blue-600 dark:text-blue-400 py-2 -my-2 inline-block hover:underline">
+          {t("exam.backToTracks")}
+        </Link>
+        <h1 className="text-2xl font-bold mt-2">
+          {pick("Kết quả", "Results")} · {pick(group.label, group.labelEn)}
+        </h1>
+      </div>
 
       {ranOutOfTime && (
-        <p className="card bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900 text-sm text-amber-800 dark:text-amber-200">
+        <p role="status" className="card bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900 text-sm text-amber-800 dark:text-amber-200">
           {t("exam.timeUpNotice")}
         </p>
       )}
@@ -540,10 +578,11 @@ export default function ExamRunner({ group, topics }: Props) {
           <div>
             <div
               className={cn(
-                "text-xs font-bold tracking-wider",
+                "inline-flex items-center gap-1 text-xs font-bold tracking-wider",
                 passed ? "text-green-700 dark:text-green-400" : "text-red-700 dark:text-red-400"
               )}
             >
+              {passed ? <Check className="h-4 w-4" aria-hidden="true" /> : <X className="h-4 w-4" aria-hidden="true" />}
               {passed ? t("exam.resultPass") : t("exam.resultFail")}
             </div>
             <div className="text-4xl font-bold mt-1">{scorePct}%</div>
@@ -556,7 +595,7 @@ export default function ExamRunner({ group, topics }: Props) {
                 : t("exam.resultFailNote").replace("{n}", String(PASS_PCT))}
             </p>
           </div>
-          <button onClick={() => setPhase("setup")} className="btn-secondary text-sm shrink-0">
+          <button type="button" onClick={() => setPhase("setup")} className="btn-secondary text-sm shrink-0">
             {t("exam.newPaper")}
           </button>
         </div>
@@ -576,7 +615,7 @@ export default function ExamRunner({ group, topics }: Props) {
               className="flex flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
             >
               <span className="flex-1 min-w-0 basis-full sm:basis-auto truncate">{titleOf(row.slug)}</span>
-              <div className="h-1.5 w-20 rounded-full bg-zinc-300 dark:bg-zinc-700 overflow-hidden shrink-0">
+              <div className="h-1.5 w-20 rounded-full bg-zinc-300 dark:bg-zinc-700 overflow-hidden shrink-0" aria-hidden="true">
                 <div
                   className={cn("h-full rounded-full", row.pct >= PASS_PCT ? "bg-green-500" : "bg-red-500")}
                   style={{ width: `${row.pct}%` }}
@@ -611,7 +650,7 @@ export default function ExamRunner({ group, topics }: Props) {
               <div className="flex items-start gap-2 mb-2">
                 <span
                   className={cn(
-                    "text-xs font-bold px-2 py-0.5 rounded shrink-0",
+                    "inline-flex items-center px-1.5 py-1 rounded shrink-0",
                     isCorrect
                       ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300"
                       : skipped
@@ -619,7 +658,16 @@ export default function ExamRunner({ group, topics }: Props) {
                         : "bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300"
                   )}
                 >
-                  {isCorrect ? "✓" : skipped ? "—" : "✗"}
+                  {isCorrect ? (
+                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                  ) : skipped ? (
+                    <Minus className="h-3.5 w-3.5" aria-hidden="true" />
+                  ) : (
+                    <X className="h-3.5 w-3.5" aria-hidden="true" />
+                  )}
+                  <span className="sr-only">
+                    {isCorrect ? pick("Đúng", "Correct") : skipped ? pick("Bỏ qua", "Skipped") : pick("Sai", "Wrong")}
+                  </span>
                 </span>
                 {dual ? (
                   <BilingualPair
@@ -646,7 +694,7 @@ export default function ExamRunner({ group, topics }: Props) {
               </Link>
 
               {hasRationale && (
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-600 mb-1.5">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
                   {t("quiz.breakdown")}
                 </p>
               )}

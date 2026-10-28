@@ -31,7 +31,7 @@ function Toggle({
 }
 
 export default function ReaderSettings() {
-  const { t } = useLang();
+  const { t, pick } = useLang();
   const [settings, update] = useReaderSettings();
 
   const step = (delta: number) => {
@@ -62,26 +62,28 @@ export default function ReaderSettings() {
             type="button"
             onClick={() => step(-1)}
             disabled={settings.font === 0}
-            aria-label="A−"
+            aria-label={pick("Giảm cỡ chữ", "Smaller text")}
             className={cn(
-              "h-7 w-7 rounded-md border border-zinc-300 text-sm dark:border-zinc-700",
+              "h-9 w-9 rounded-md border border-zinc-300 text-sm dark:border-zinc-700 sm:h-7 sm:w-7",
               settings.font === 0
-                ? "text-zinc-300 dark:text-zinc-600"
+                ? "cursor-not-allowed text-zinc-300 dark:text-zinc-600"
                 : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
             )}
           >
             A−
           </button>
-          <span className="w-8 text-center text-xs text-zinc-500 dark:text-zinc-400">{settings.font + 1}/{FONT_STEPS.length}</span>
+          <span className="w-8 text-center text-xs text-zinc-500 dark:text-zinc-400" aria-live="polite">
+            {settings.font + 1}/{FONT_STEPS.length}
+          </span>
           <button
             type="button"
             onClick={() => step(1)}
             disabled={settings.font === FONT_STEPS.length - 1}
-            aria-label="A+"
+            aria-label={pick("Tăng cỡ chữ", "Larger text")}
             className={cn(
-              "h-7 w-7 rounded-md border border-zinc-300 text-sm dark:border-zinc-700",
+              "h-9 w-9 rounded-md border border-zinc-300 text-sm dark:border-zinc-700 sm:h-7 sm:w-7",
               settings.font === FONT_STEPS.length - 1
-                ? "text-zinc-300 dark:text-zinc-600"
+                ? "cursor-not-allowed text-zinc-300 dark:text-zinc-600"
                 : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
             )}
           >

@@ -21,12 +21,12 @@ interface Props {
 }
 
 export default function PageNav({ part, prev, next }: Props) {
-  const { t } = useLang();
+  const { t, pick } = useLang();
   const prevLabel = part === "part1" ? t("ielts.nav.prevSection") : t("ielts.nav.prevCard");
   const nextLabel = part === "part1" ? t("ielts.nav.nextSection") : t("ielts.nav.nextCard");
 
   return (
-    <nav className="grid gap-3 sm:grid-cols-2">
+    <nav aria-label={pick("Chuyển mục", "More sections")} className="grid gap-3 sm:grid-cols-2">
       {prev ? (
         <Link href={prev.href} className={cn("card transition-colors", PART[part].ring)}>
           <p className="text-xs text-zinc-500 dark:text-zinc-400">{prevLabel}</p>

@@ -23,10 +23,10 @@ export default function PageNav({
   next: NavTarget | null;
   tokens: PartTokens;
 }) {
-  const { t } = useLang();
+  const { t, pick } = useLang();
 
   return (
-    <nav className="mt-8 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+    <nav aria-label={pick("Chuyển bài", "More units")} className="mt-8 border-t border-zinc-200 pt-4 dark:border-zinc-800">
       <div className="grid gap-3 sm:grid-cols-2">
         {prev ? (
           <Link href={prev.href} className={cn("card transition-colors", tokens.ring)}>
@@ -34,7 +34,7 @@ export default function PageNav({
             <p className="mt-0.5 text-sm font-semibold">{prev.title}</p>
           </Link>
         ) : (
-          <span />
+          <span className="hidden sm:block" />
         )}
 
         {next ? (
@@ -50,7 +50,7 @@ export default function PageNav({
       <p className="mt-4 text-center">
         <Link
           href={GRAMMAR_BASE}
-          className="text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+          className="inline-block py-2 text-sm text-zinc-600 underline underline-offset-2 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
         >
           {t("grammar.nav.backToPath")}
         </Link>

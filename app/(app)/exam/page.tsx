@@ -8,6 +8,8 @@ import { DEFAULT_GROUP, GROUPS, GROUP_ACCENT } from "@/lib/groups";
 import { MIN_POOL } from "@/lib/exam";
 import { PASS_PCT } from "@/lib/progress";
 import { cn } from "@/lib/utils";
+import GroupIcon from "@/components/GroupIcon";
+import { PageError, PageLoading } from "@/components/learn/PageState";
 
 interface CatalogueTopic {
   slug: string;
@@ -21,16 +23,23 @@ export default function ExamIndexPage() {
   const { progress, ready } = useProgress();
   const [topics, setTopics] = useState<CatalogueTopic[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    setLoading(true);
+    setError(false);
+
     fetch("/api/knowledge")
-      .then((r) => r.json())
-      .then((data: CatalogueTopic[]) => {
-        setTopics(data);
-        setLoading(false);
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+
+        return r.json();
       })
-      .catch(() => setLoading(false));
-  }, []);
+      .then((data: CatalogueTopic[]) => setTopics(Array.isArray(data) ? data : []))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, [attempt]);
 
   const tracks = useMemo(
     () =>
@@ -54,7 +63,13 @@ export default function ExamIndexPage() {
       </div>
 
       {loading ? (
-        <p className="text-sm text-zinc-500">{t("common.loading")}</p>
+        <PageLoading className="min-h-[12rem]" />
+      ) : error ? (
+        <PageError onRetry={() => setAttempt((n) => n + 1)} />
+      ) : tracks.length === 0 ? (
+        <p className="rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 px-4 py-8 text-center text-sm text-zinc-500">
+          {pick("Chưa có khoá thi nào.", "No exams are available yet.")}
+        </p>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">
           {tracks.map(({ group, topics: topicCount, pool }) => {
@@ -65,12 +80,12 @@ export default function ExamIndexPage() {
             const card = (
               <>
                 <div className="flex items-start gap-3">
-                  <span className={cn("text-xl shrink-0", accent.text)}>{group.icon}</span>
+                  <GroupIcon group={group.id} className={cn("text-xl mt-0.5", accent.text)} />
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <h2 className="font-semibold">{pick(group.label, group.labelEn)}</h2>
                       {record?.passed && (
-                        <span className="text-[11px] px-1.5 py-0.5 rounded border bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800">
+                        <span className="whitespace-nowrap text-[11px] px-1.5 py-0.5 rounded border bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800">
                           {t("exam.passed")}
                         </span>
                       )}
@@ -89,7 +104,7 @@ export default function ExamIndexPage() {
                       </span>
                       <span className="font-semibold tabular-nums">{record.bestPct}%</span>
                     </div>
-                    <div className="h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+                    <div className="h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden" aria-hidden="true">
                       <div
                         className={cn(
                           "h-full rounded-full",
@@ -109,7 +124,7 @@ export default function ExamIndexPage() {
 
             if (!ready4Exam) {
               return (
-                <div key={group.id} className="card opacity-60">
+                <div key={group.id} className="card opacity-60" aria-disabled="true">
                   {card}
                 </div>
               );
@@ -119,7 +134,7 @@ export default function ExamIndexPage() {
               <Link
                 key={group.id}
                 href={`/exam/${group.id}`}
-                className="card hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+                className="card hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 transition-colors"
               >
                 {card}
               </Link>

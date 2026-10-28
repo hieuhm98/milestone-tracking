@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { Check, Undo2, X } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { localizeQuestion } from "@/components/knowledge/QuizBlock";
 import { localizeDrill, type Drill, type DrillResponse } from "@/lib/drills";
@@ -62,7 +63,7 @@ function optionClass(state: "idle" | "picked" | "right" | "wrong" | "dim") {
       "bg-green-100 dark:bg-green-900/50 border-green-500 dark:border-green-600 text-green-800 dark:text-green-100",
     state === "wrong" &&
       "bg-red-100 dark:bg-red-900/50 border-red-500 dark:border-red-600 text-red-800 dark:text-red-100",
-    state === "dim" && "bg-zinc-100/50 dark:bg-zinc-800/30 border-zinc-200 dark:border-zinc-800 text-zinc-400 dark:text-zinc-600"
+    state === "dim" && "bg-zinc-100/50 dark:bg-zinc-800/30 border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400"
   );
 }
 
@@ -77,6 +78,34 @@ function Badge({ children, className }: { children: React.ReactNode; className?:
       {children}
     </span>
   );
+}
+
+/**
+ * Right / wrong is also shown with an icon and screen-reader text, so it never
+ * depends on telling green from red.
+ */
+function StateMark({ state }: { state: Parameters<typeof optionClass>[0] }) {
+  const { pick } = useLang();
+
+  if (state === "right") {
+    return (
+      <span className="shrink-0 self-center text-green-700 dark:text-green-300">
+        <Check className="h-4 w-4" aria-hidden="true" />
+        <span className="sr-only">{pick("Đúng", "Correct")}</span>
+      </span>
+    );
+  }
+
+  if (state === "wrong") {
+    return (
+      <span className="shrink-0 self-center text-red-700 dark:text-red-300">
+        <X className="h-4 w-4" aria-hidden="true" />
+        <span className="sr-only">{pick("Sai", "Wrong")}</span>
+      </span>
+    );
+  }
+
+  return null;
 }
 
 export default function BlitzItemCard({ item, locked, response, onSubmit }: Props) {
@@ -190,9 +219,10 @@ function McqCard({ item, locked, response, onSubmit }: Props) {
           }
 
           return (
-            <button key={canonical} onClick={() => answer(i)} disabled={locked} className={optionClass(state)}>
+            <button key={canonical} type="button" onClick={() => answer(i)} disabled={locked} className={optionClass(state)}>
               <Badge className={badgeTone(state)}>{OPTION_LABELS[i]}</Badge>
               <span className="flex-1 min-w-0 self-center">{q.options[canonical]}</span>
+              <StateMark state={state} />
             </button>
           );
         })}
@@ -306,9 +336,19 @@ function MultiCard({ keyId, prompt, options, answers, pick, pickLabel, locked, r
           }
 
           return (
-            <button key={canonical} onClick={() => toggle(i)} disabled={locked} className={optionClass(state)}>
-              <Badge className={badgeTone(state)}>{isPicked && !locked ? "✓" : OPTION_LABELS[i]}</Badge>
+            <button
+              key={canonical}
+              type="button"
+              onClick={() => toggle(i)}
+              disabled={locked}
+              aria-pressed={locked ? undefined : isPicked}
+              className={optionClass(state)}
+            >
+              <Badge className={badgeTone(state)}>
+                {isPicked && !locked ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : OPTION_LABELS[i]}
+              </Badge>
               <span className="flex-1 min-w-0 self-center">{options[canonical]}</span>
+              <StateMark state={state} />
             </button>
           );
         })}
@@ -366,6 +406,7 @@ function RecallCard({ prompt, hint, answer, locked, response, onSubmit }: Recall
           if (value.trim() !== "") onSubmit(value);
         }}
         placeholder={t("blitz.typeAnswer")}
+        aria-label={t("blitz.typeAnswer")}
         autoComplete="off"
         autoCorrect="off"
         autoCapitalize="off"
@@ -377,7 +418,8 @@ function RecallCard({ prompt, hint, answer, locked, response, onSubmit }: Recall
       />
 
       {locked && (
-        <div className="text-sm">
+        <div className="flex flex-wrap items-center gap-1 text-sm">
+          <Check className="h-4 w-4 text-green-700 dark:text-green-400" aria-hidden="true" />
           <span className="text-zinc-500">{t("blitz.theAnswer")}: </span>
           <span className="font-semibold text-green-700 dark:text-green-400">{answer}</span>
         </div>
@@ -385,8 +427,10 @@ function RecallCard({ prompt, hint, answer, locked, response, onSubmit }: Recall
 
       {!locked && hint && (
         <button
+          type="button"
           onClick={() => setShowHint(true)}
-          className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 py-2 -my-1"
+          aria-expanded={showHint}
+          className="text-left text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 py-2 -my-1"
         >
           {showHint ? `${t("blitz.hint")}: ${hint}` : `${t("blitz.hint")} ?`}
         </button>
@@ -494,14 +538,17 @@ function MatchCard({ keyId, prompt, pairs, locked, response, onSubmit }: MatchPr
             return (
               <button
                 key={canonical}
+                type="button"
                 onClick={() => tapLeft(canonical)}
                 disabled={locked}
+                aria-pressed={locked ? undefined : isActive}
                 className={cn(optionClass(state), "px-3 py-2.5")}
               >
                 {linked && !locked && (
                   <Badge className="bg-blue-600 border-blue-500 text-white">{linkNumber(canonical)}</Badge>
                 )}
-                <span className="flex-1 min-w-0 self-center font-medium">{pairs[canonical].left}</span>
+                <span className="flex-1 min-w-0 break-words self-center font-medium">{pairs[canonical].left}</span>
+                <StateMark state={state} />
               </button>
             );
           })}
@@ -523,6 +570,7 @@ function MatchCard({ keyId, prompt, pairs, locked, response, onSubmit }: MatchPr
             return (
               <button
                 key={canonical}
+                type="button"
                 onClick={() => tapRight(canonical)}
                 disabled={locked || taken}
                 className={cn(optionClass(state), "px-3 py-2.5 text-xs sm:text-sm")}
@@ -530,7 +578,7 @@ function MatchCard({ keyId, prompt, pairs, locked, response, onSubmit }: MatchPr
                 {taken && !locked && (
                   <Badge className="bg-blue-600 border-blue-500 text-white">{rightLinkNumber(canonical)}</Badge>
                 )}
-                <span className="flex-1 min-w-0 self-center">{pairs[canonical].right}</span>
+                <span className="flex-1 min-w-0 break-words self-center">{pairs[canonical].right}</span>
               </button>
             );
           })}
@@ -553,7 +601,14 @@ function MatchCard({ keyId, prompt, pairs, locked, response, onSubmit }: MatchPr
                     : "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300"
                 )}
               >
-                <span className="shrink-0 font-bold">{ok ? "✓" : "✗"}</span>
+                <span className="shrink-0 mt-px">
+                  {ok ? (
+                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                  ) : (
+                    <X className="h-3.5 w-3.5" aria-hidden="true" />
+                  )}
+                  <span className="sr-only">{ok ? t("blitz.correct") : t("blitz.wrong")}</span>
+                </span>
                 <span className="min-w-0">
                   <strong>{pair.left}</strong> → {pair.right}
                 </span>
@@ -631,22 +686,29 @@ function OrderCard({ keyId, prompt, items, locked, response, onSubmit }: OrderPr
           return (
             <button
               key={canonical}
+              type="button"
               onClick={() => tap(canonical)}
               disabled={locked || placed}
               className={cn(optionClass(state), "px-3 py-2.5")}
             >
               <Badge className={placed ? badgeTone(locked ? state : "picked") : undefined}>
-                {placed ? position + 1 : "·"}
+                {placed ? position + 1 : <span aria-hidden="true">·</span>}
               </Badge>
               <span className="flex-1 min-w-0 self-center">{items[canonical]}</span>
+              {locked && <StateMark state={state} />}
             </button>
           );
         })}
       </div>
 
       {!locked && sequence.length > 0 && (
-        <button onClick={undo} className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 py-2 -my-1">
-          ↩ {t("blitz.undo")}
+        <button
+          type="button"
+          onClick={undo}
+          className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 py-2 -my-1"
+        >
+          <Undo2 className="h-3.5 w-3.5" aria-hidden="true" />
+          {t("blitz.undo")}
         </button>
       )}
 

@@ -4,6 +4,7 @@
 // only a name and whether progress is safe; the details live here.
 
 import { useEffect, useState } from "react";
+import { Loader2, LogOut, Send } from "lucide-react";
 import { useAuth } from "@/context/auth";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
@@ -30,6 +31,8 @@ export default function AccountPage() {
   const { t, lang, pick } = useLang();
   const [linking, setLinking] = useState(false);
   const [telegramError, setTelegramError] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
 
   // The chat id arrives via the webhook while the learner is in Telegram, so
   // re-read the profile when they come back to this tab.
@@ -49,11 +52,13 @@ export default function AccountPage() {
 
   async function handleConnect() {
     setTelegramError(false);
+    setConnecting(true);
 
     // Open the tab inside the click so popup blockers allow it, then point it
     // at the deep link once the server has issued one.
     const tab = window.open("", "_blank");
     const url = await telegramLink();
+    setConnecting(false);
 
     if (!url) {
       tab?.close();
@@ -72,7 +77,37 @@ export default function AccountPage() {
     setLinking(true);
   }
 
-  if (!ready) return <p className="text-sm text-zinc-500">{t("common.loading")}</p>;
+  async function handleDisconnect() {
+    const ok = window.confirm(
+      pick(
+        "Ngắt kết nối Telegram? Bạn sẽ không nhận bản tin học tập mỗi sáng nữa.",
+        "Disconnect Telegram? You will stop getting the morning learning update."
+      )
+    );
+
+    if (!ok) return;
+
+    await disconnectTelegram();
+  }
+
+  async function handleSignOut() {
+    setSigningOut(true);
+
+    try {
+      await signOut();
+    } finally {
+      setSigningOut(false);
+    }
+  }
+
+  if (!ready) {
+    return (
+      <p role="status" className="flex items-center gap-2 text-sm text-zinc-500">
+        <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+        {t("common.loading")}
+      </p>
+    );
+  }
 
   if (!enabled) {
     return (
@@ -88,7 +123,7 @@ export default function AccountPage() {
       <div className="max-w-xl">
         <h1 className="text-2xl font-bold tracking-tight">{t("account.title")}</h1>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2">{t("account.promptBodyPlain")}</p>
-        <div className="flex gap-2 mt-4">
+        <div className="flex flex-wrap gap-2 mt-4">
           <button type="button" onClick={() => openDialog("signup")} className="btn-primary">
             {t("account.signup")}
           </button>
@@ -122,7 +157,9 @@ export default function AccountPage() {
             <div className="text-lg font-semibold truncate">{profile.full_name}</div>
             <div className="text-sm text-zinc-500">{formatPhone(profile.phone)}</div>
           </div>
-          <span className={cn("shrink-0 text-[10px] font-semibold uppercase tracking-wide px-2 py-1 rounded", ROLE_BADGE[profile.role])}>
+          <span
+            className={cn("shrink-0 text-[11px] font-semibold uppercase tracking-wide px-2 py-1 rounded", ROLE_BADGE[profile.role])}
+          >
             {t(`account.role.${profile.role}`)}
           </span>
         </div>
@@ -130,8 +167,11 @@ export default function AccountPage() {
 
       <div className="card">
         <h2 className="text-sm font-semibold">{t("account.syncTitle")}</h2>
-        <p className={cn("flex items-center gap-1.5 text-sm mt-2", cloud === "error" ? "text-amber-600 dark:text-amber-400" : "text-zinc-600 dark:text-zinc-400")}>
-          <span aria-hidden="true" className={cn("inline-block h-2 w-2 rounded-full", SYNC_DOT[cloud])} />
+        <p
+          role="status"
+          className={cn("flex items-center gap-1.5 text-sm mt-2", cloud === "error" ? "text-amber-600 dark:text-amber-400" : "text-zinc-600 dark:text-zinc-400")}
+        >
+          <span aria-hidden="true" className={cn("inline-block h-2 w-2 shrink-0 rounded-full", SYNC_DOT[cloud])} />
           {t(`account.sync.${cloud}`)}
         </p>
         {syncedAt && <p className="text-xs text-zinc-500 mt-1">{t("account.lastSynced")}: {syncedAt}</p>}
@@ -145,21 +185,39 @@ export default function AccountPage() {
 
           {profile.telegram_chat_id ? (
             <>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2">✈ {t("account.telegramConnected")}</p>
-              <button type="button" onClick={() => void disconnectTelegram()} className="btn-secondary mt-3 text-sm">
-                {t("account.telegramDisconnect")}
+              <p className="flex items-center gap-1.5 text-sm text-zinc-600 dark:text-zinc-400 mt-2">
+                <Send className="h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+                {t("account.telegramConnected")}
+              </p>
+              <button type="button" onClick={() => void handleDisconnect()} className="btn-secondary mt-3 text-sm">
+                {pick("Ngắt kết nối Telegram", "Disconnect Telegram")}
               </button>
             </>
           ) : (
             <>
               <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2">{t("account.telegramHint")}</p>
-              <button type="button" onClick={() => void handleConnect()} className="btn-primary mt-3 text-sm">
-                ✈ {t("account.telegramConnect")}
+              <button
+                type="button"
+                onClick={() => void handleConnect()}
+                disabled={connecting}
+                aria-busy={connecting}
+                className="btn-primary mt-3 text-sm inline-flex items-center gap-2"
+              >
+                {connecting ? (
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                ) : (
+                  <Send className="h-4 w-4" aria-hidden="true" />
+                )}
+                {t("account.telegramConnect")}
               </button>
             </>
           )}
 
-          {telegramError && <p className="text-xs text-red-600 dark:text-red-400 mt-2">{t("account.telegramError")}</p>}
+          {telegramError && (
+            <p role="alert" className="text-xs text-red-600 dark:text-red-400 mt-2">
+              {t("account.telegramError")}
+            </p>
+          )}
         </div>
       )}
 
@@ -171,7 +229,18 @@ export default function AccountPage() {
             "Signing out only stops syncing on this device; your progress stays in this browser."
           )}
         </p>
-        <button type="button" onClick={() => void signOut()} className="btn-secondary mt-3 text-sm">
+        <button
+          type="button"
+          onClick={() => void handleSignOut()}
+          disabled={signingOut}
+          aria-busy={signingOut}
+          className="btn-secondary mt-3 text-sm inline-flex items-center gap-2"
+        >
+          {signingOut ? (
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+          ) : (
+            <LogOut className="h-4 w-4" aria-hidden="true" />
+          )}
           {t("account.signOut")}
         </button>
       </div>

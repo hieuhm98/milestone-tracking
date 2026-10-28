@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { Check, Flame, Loader2, RotateCw, X } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
 import BlitzItemCard from "@/components/blitz/BlitzItemCard";
@@ -24,6 +25,7 @@ import {
 } from "@/lib/blitz";
 import { cn } from "@/lib/utils";
 import QuestionText from "@/components/knowledge/QuestionText";
+import GroupIcon from "@/components/GroupIcon";
 
 type Phase = "setup" | "running" | "results";
 
@@ -82,6 +84,8 @@ export default function BlitzRunner() {
   const [pools, setPools] = useState<PoolStat[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
+  const [poolsError, setPoolsError] = useState(false);
+  const [poolsAttempt, setPoolsAttempt] = useState(0);
 
   const [deck, setDeck] = useState<BlitzItem[]>([]);
   const [titles, setTitles] = useState<Record<string, string>>({});
@@ -117,17 +121,27 @@ export default function BlitzRunner() {
   useEffect(() => {
     let alive = true;
 
+    setPoolsError(false);
+
     fetch("/api/blitz")
       .then((r) => r.json())
       .then((data) => {
-        if (alive && Array.isArray(data.pools)) setPools(data.pools);
+        if (!alive) return;
+
+        if (Array.isArray(data.pools)) {
+          setPools(data.pools);
+        } else {
+          setPoolsError(true);
+        }
       })
-      .catch(() => {});
+      .catch(() => {
+        if (alive) setPoolsError(true);
+      });
 
     return () => {
       alive = false;
     };
-  }, []);
+  }, [poolsAttempt]);
 
   /** How many items the current track holds for the currently enabled formats. */
   const available = useMemo(() => {
@@ -391,6 +405,8 @@ export default function BlitzRunner() {
         formats={formats}
         toggleFormat={toggleFormat}
         pools={pools}
+        poolsError={poolsError}
+        onRetryPools={() => setPoolsAttempt((n) => n + 1)}
         pool={pool}
         available={available}
         record={record}
@@ -409,12 +425,17 @@ export default function BlitzRunner() {
     const urgent = msLeft <= 10000;
 
     return (
-      <div className="max-w-2xl mx-auto space-y-4">
+      <div className="max-w-2xl space-y-4">
         {/* HUD */}
         <div className="sticky top-0 z-10 -mx-4 px-4 pt-2 pb-3 bg-[var(--background)] space-y-2">
           <div className="flex items-center justify-between gap-3">
-            <div className="flex items-baseline gap-2 min-w-0">
+            <div
+              role="timer"
+              aria-label={`${t("blitz.timeLeft")}: ${seconds} ${t("blitz.seconds")}`}
+              className="flex items-baseline gap-2 min-w-0"
+            >
               <span
+                aria-hidden="true"
                 className={cn(
                   "text-2xl sm:text-3xl font-bold tabular-nums",
                   urgent ? "text-red-500" : "text-zinc-900 dark:text-zinc-100"
@@ -422,9 +443,9 @@ export default function BlitzRunner() {
               >
                 {seconds}
               </span>
-              <span className="text-xs text-zinc-500 shrink-0">{t("blitz.seconds")}</span>
+              <span aria-hidden="true" className="text-xs text-zinc-500 shrink-0">{t("blitz.seconds")}</span>
               {isPaused && (
-                <span className="text-[10px] uppercase tracking-wider font-semibold text-amber-600 dark:text-amber-400 shrink-0">
+                <span className="text-[11px] uppercase tracking-wider font-semibold text-amber-600 dark:text-amber-400 shrink-0">
                   {t("blitz.paused")}
                 </span>
               )}
@@ -433,29 +454,32 @@ export default function BlitzRunner() {
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {streak >= 2 && (
                 <span
+                  title="Combo"
                   className={cn(
-                    "text-xs font-bold px-2 py-1 rounded-lg border tabular-nums",
+                    "inline-flex items-center gap-0.5 text-xs font-bold px-2 py-1 rounded-lg border tabular-nums",
                     comboMultiplier(streak) >= 3
                       ? "bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-orange-300 dark:border-orange-700"
                       : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-300 dark:border-zinc-700"
                   )}
                 >
-                  {streak}🔥 ×{comboMultiplier(streak)}
+                  {streak}
+                  <Flame className="h-3.5 w-3.5" aria-hidden="true" /> ×{comboMultiplier(streak)}
                 </span>
               )}
               <span className="text-xl sm:text-2xl font-bold tabular-nums text-zinc-900 dark:text-zinc-100">
                 {score}
               </span>
               <button
+                type="button"
                 onClick={quit}
-                className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 py-2 -my-1"
+                className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 px-2 py-2.5 -my-1.5 -mr-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800"
               >
                 {t("blitz.quit")}
               </button>
             </div>
           </div>
 
-          <div className="h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+          <div aria-hidden="true" className="h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
             <div
               className={cn(
                 "h-full transition-[width] duration-100 ease-linear",
@@ -477,10 +501,10 @@ export default function BlitzRunner() {
             )}
           >
             <div className="flex items-center justify-between gap-2 mb-3">
-              <span className="text-[10px] uppercase tracking-wider font-semibold text-zinc-400 dark:text-zinc-600">
+              <span className="text-[11px] uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-400">
                 {t(`blitz.format.${item.format}`)} · {BASE_POINTS[item.format]}
               </span>
-              <span className="text-[10px] text-zinc-400 dark:text-zinc-600 truncate max-w-[55%] text-right">
+              <span className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate max-w-[55%] text-right">
                 {titles[item.slug] ?? item.slug}
               </span>
             </div>
@@ -496,8 +520,9 @@ export default function BlitzRunner() {
             {!feedback && (
               <div className="flex justify-end pt-3">
                 <button
+                  type="button"
                   onClick={skip}
-                  className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 py-2 -my-1"
+                  className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 px-2 py-2.5 -my-1.5 -mr-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800"
                 >
                   {t("blitz.skip")} →
                 </button>
@@ -506,22 +531,34 @@ export default function BlitzRunner() {
           </div>
         )}
 
-        {/* Feedback */}
-        {feedback?.correct && (
-          <div className="text-center text-sm font-semibold text-green-600 dark:text-green-400 tabular-nums">
-            +{feedback.points} {feedback.points > BASE_POINTS[deck[cursor]?.format ?? "mcq"] && `· ${t("blitz.speedBonus")}`}
-          </div>
-        )}
+        {/* Feedback — announced, and marked with an icon + word, not colour alone */}
+        <div aria-live="polite" aria-atomic="true">
+          {feedback?.correct && (
+            <div className="flex items-center justify-center gap-1.5 text-sm font-semibold text-green-600 dark:text-green-400 tabular-nums">
+              <Check className="h-4 w-4" aria-hidden="true" />
+              <span>{t("blitz.correct")}</span>
+              <span>
+                +{feedback.points}{" "}
+                {feedback.points > BASE_POINTS[deck[cursor]?.format ?? "mcq"] && `· ${t("blitz.speedBonus")}`}
+              </span>
+            </div>
+          )}
+
+          {feedback && !feedback.correct && <p className="sr-only">{t("blitz.wrong")}</p>}
+        </div>
 
         {feedback && !feedback.correct && (
           <div className="card border-l-4 border-l-red-500 space-y-3">
-            <p className="text-sm font-semibold text-red-600 dark:text-red-400">{t("blitz.wrong")}</p>
+            <p className="flex items-center gap-1.5 text-sm font-semibold text-red-600 dark:text-red-400">
+              <X className="h-4 w-4 shrink-0" aria-hidden="true" />
+              {t("blitz.wrong")}
+            </p>
             {feedback.explanation && (
               <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400"><QuestionText text={feedback.explanation} /></p>
             )}
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <span className="text-xs text-zinc-500">{t("blitz.continueHint")}</span>
-              <button onClick={advance} className="btn-primary text-sm px-4 py-2 shrink-0">
+              <button type="button" onClick={advance} className="btn-primary text-sm px-4 py-2 shrink-0">
                 {t("blitz.continue")} ↵
               </button>
             </div>
@@ -538,14 +575,14 @@ export default function BlitzRunner() {
   const perMinute = duration > 0 ? Math.round((summary.answered / duration) * 60) : 0;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-4">
+    <div className="max-w-2xl space-y-4">
       <div className="card text-center space-y-3">
         {ranOut ? (
-          <p className="text-xs uppercase tracking-wider font-semibold text-zinc-400 dark:text-zinc-600">
+          <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-400">
             {t("blitz.timeUp")}
           </p>
         ) : (
-          <p className="text-xs uppercase tracking-wider font-semibold text-zinc-400 dark:text-zinc-600">
+          <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-400">
             {t("blitz.deckEmpty")}
           </p>
         )}
@@ -567,18 +604,39 @@ export default function BlitzRunner() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
           <Stat label={t("blitz.answered")} value={String(summary.answered)} />
           <Stat label={t("blitz.accuracy")} value={`${summary.accuracy}%`} />
-          <Stat label={t("blitz.bestCombo")} value={`${summary.bestCombo}🔥`} />
+          <Stat
+            label={t("blitz.bestCombo")}
+            value={
+              <span className="inline-flex items-center gap-0.5">
+                {summary.bestCombo}
+                <Flame className="h-4 w-4 text-orange-500" aria-hidden="true" />
+              </span>
+            }
+          />
           <Stat label={t("blitz.perMinute")} value={String(perMinute)} />
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-          <button onClick={start} disabled={loading} className="btn-primary text-sm disabled:opacity-50">
+          <button
+            type="button"
+            onClick={start}
+            disabled={loading}
+            aria-busy={loading}
+            className="btn-primary text-sm inline-flex items-center gap-2"
+          >
+            {loading && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
             {loading ? t("blitz.starting") : t("blitz.playAgain")}
           </button>
-          <button onClick={() => setPhase("setup")} className="btn-secondary text-sm">
+          <button type="button" onClick={() => setPhase("setup")} className="btn-secondary text-sm">
             {t("blitz.backToSetup")}
           </button>
         </div>
+
+        {loadError && (
+          <p role="alert" className="text-xs text-red-600 dark:text-red-400">
+            {t("blitz.loadFailed")}
+          </p>
+        )}
       </div>
 
       {summary.byTopic.length > 0 && (
@@ -616,7 +674,7 @@ export default function BlitzRunner() {
               <span className="min-w-0 truncate text-zinc-600 dark:text-zinc-400">
                 {titles[answer.slug] ?? answer.slug}
               </span>
-              <span className="shrink-0 text-[10px] uppercase tracking-wider font-semibold text-zinc-400 dark:text-zinc-600">
+              <span className="shrink-0 text-[11px] uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-400">
                 {t(`blitz.format.${answer.format}`)}
                 {answer.partial.total > 1 && ` · ${answer.partial.correct}/${answer.partial.total}`}
               </span>
@@ -628,11 +686,11 @@ export default function BlitzRunner() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div>
       <div className="text-lg font-bold tabular-nums text-zinc-900 dark:text-zinc-100">{value}</div>
-      <div className="text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-600">{label}</div>
+      <div className="text-[11px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400">{label}</div>
     </div>
   );
 }
@@ -648,6 +706,8 @@ interface SetupProps {
   formats: Set<BlitzItemFormat>;
   toggleFormat: (f: BlitzItemFormat) => void;
   pools: PoolStat[] | null;
+  poolsError: boolean;
+  onRetryPools: () => void;
   pool: PoolStat | undefined;
   available: number | null;
   record: ReturnType<typeof blitzBest>;
@@ -665,6 +725,8 @@ function SetupScreen({
   formats,
   toggleFormat,
   pools,
+  poolsError,
+  onRetryPools,
   pool,
   available,
   record,
@@ -677,7 +739,7 @@ function SetupScreen({
   const blocked = formats.size === 0 || available === 0;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-4">
+    <div className="max-w-2xl space-y-4">
       <div>
         <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{t("blitz.title")}</h1>
         <p className="text-sm text-zinc-500 mt-1">{t("blitz.subtitle")}</p>
@@ -686,8 +748,8 @@ function SetupScreen({
       <div className="card space-y-5">
         {/* Track */}
         <div>
-          <span className="label">{t("blitz.pickTrack")}</span>
-          <div className="flex flex-wrap gap-2">
+          <span id="blitz-track-label" className="label">{t("blitz.pickTrack")}</span>
+          <div role="group" aria-labelledby="blitz-track-label" className="flex flex-wrap gap-2">
             {GROUPS.map((g) => {
               const stat = pools?.find((p) => p.group === g.id);
               const empty = stat !== undefined && stat.questions + stat.drills === 0;
@@ -695,16 +757,18 @@ function SetupScreen({
               return (
                 <button
                   key={g.id}
+                  type="button"
                   onClick={() => setGroupId(g.id)}
                   disabled={empty}
+                  aria-pressed={g.id === groupId}
                   className={cn(
-                    "text-sm px-3 py-2 rounded-lg border transition-colors disabled:opacity-40",
+                    "text-sm px-3 py-2 rounded-lg border transition-colors disabled:opacity-40 disabled:cursor-not-allowed",
                     g.id === groupId
                       ? GROUP_ACCENT[g.accent].badge
                       : "bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                   )}
                 >
-                  <span className="mr-1.5">{g.icon}</span>
+                  <GroupIcon group={g.id} className="inline mr-1.5 -mt-0.5" />
                   {pick(g.label, g.labelEn)}
                 </button>
               );
@@ -714,12 +778,14 @@ function SetupScreen({
 
         {/* Duration */}
         <div>
-          <span className="label">{t("blitz.duration")}</span>
-          <div className="flex flex-wrap gap-2">
+          <span id="blitz-duration-label" className="label">{t("blitz.duration")}</span>
+          <div role="group" aria-labelledby="blitz-duration-label" className="flex flex-wrap gap-2">
             {BLITZ_DURATIONS.map((d) => (
               <button
                 key={d}
+                type="button"
                 onClick={() => setDuration(d)}
+                aria-pressed={d === duration}
                 className={cn(
                   "text-sm px-4 py-2 rounded-lg border transition-colors tabular-nums",
                   d === duration
@@ -739,7 +805,8 @@ function SetupScreen({
           <div className="space-y-2">
             {FORMATS.map((f) => {
               const on = formats.has(f);
-              const count = pool?.byFormat[f] ?? 0;
+              // Unknown until the pool stats load — don't dim formats meanwhile.
+              const count = pool ? pool.byFormat[f] ?? 0 : null;
 
               return (
                 <label
@@ -763,8 +830,8 @@ function SetupScreen({
                       <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
                         {t(`blitz.format.${f}`)}
                       </span>
-                      <span className="text-[10px] tabular-nums text-zinc-400 dark:text-zinc-600 shrink-0">
-                        {count} · {BASE_POINTS[f]}pt
+                      <span className="text-[11px] tabular-nums text-zinc-500 dark:text-zinc-400 shrink-0">
+                        {count ?? "–"} · {BASE_POINTS[f]}pt
                       </span>
                     </span>
                     <span className="block text-xs text-zinc-500 mt-0.5">{t(`blitz.format.${f}Hint`)}</span>
@@ -774,20 +841,36 @@ function SetupScreen({
             })}
           </div>
           <p className="text-xs text-zinc-500 mt-2">{t("blitz.formatsHint")}</p>
+          {poolsError && (
+            <p className="flex flex-wrap items-center gap-2 text-xs text-amber-700 dark:text-amber-400 mt-2">
+              {pick("Không tải được số câu hỏi mỗi dạng.", "Couldn't load how many questions each format has.")}
+              <button
+                type="button"
+                onClick={onRetryPools}
+                className="inline-flex items-center gap-1 font-medium underline underline-offset-2 py-1"
+              >
+                <RotateCw className="h-3.5 w-3.5" aria-hidden="true" />
+                {pick("Thử lại", "Retry")}
+              </button>
+            </p>
+          )}
         </div>
 
         {/* Record + start */}
         <div className="border-t border-zinc-200 dark:border-zinc-800 pt-4 space-y-3">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <div className="text-[10px] uppercase tracking-wider font-semibold text-zinc-400 dark:text-zinc-600">
+              <div className="text-[11px] uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-400">
                 {t("blitz.personalBest")} · {duration}s
               </div>
               {record && record.runs > 0 ? (
                 <div className="flex items-baseline gap-2">
                   <span className={cn("text-2xl font-bold tabular-nums", accent.text)}>{record.bestScore}</span>
-                  <span className="text-xs text-zinc-500 tabular-nums">
-                    {record.bestCombo}🔥 · {record.runs} {t("blitz.runs")}
+                  <span className="inline-flex items-center gap-0.5 text-xs text-zinc-500 tabular-nums">
+                    {record.bestCombo}
+                    <Flame className="h-3.5 w-3.5 text-orange-500" aria-hidden="true" />
+                    <span className="sr-only">{t("blitz.bestCombo")}</span>
+                    <span>· {record.runs} {t("blitz.runs")}</span>
                   </span>
                 </div>
               ) : (
@@ -795,14 +878,23 @@ function SetupScreen({
               )}
             </div>
 
-            <button onClick={onStart} disabled={loading || blocked} className="btn-primary shrink-0 disabled:opacity-40">
+            <button
+              type="button"
+              onClick={onStart}
+              disabled={loading || blocked}
+              aria-busy={loading}
+              className="btn-primary shrink-0 inline-flex items-center gap-2"
+            >
+              {loading && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
               {loading ? t("blitz.starting") : t("blitz.start")}
             </button>
           </div>
 
-          {formats.size === 0 && <p className="text-xs text-red-500">{t("blitz.noFormats")}</p>}
-          {available === 0 && formats.size > 0 && <p className="text-xs text-red-500">{t("blitz.poolEmpty")}</p>}
-          {loadError && <p className="text-xs text-red-500">{t("blitz.loadFailed")}</p>}
+          <div role="alert" className="space-y-1 text-xs text-red-600 dark:text-red-400 empty:hidden">
+            {formats.size === 0 && <p>{t("blitz.noFormats")}</p>}
+            {available === 0 && formats.size > 0 && <p>{t("blitz.poolEmpty")}</p>}
+            {loadError && <p>{t("blitz.loadFailed")}</p>}
+          </div>
         </div>
       </div>
 

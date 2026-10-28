@@ -55,6 +55,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== "undefined") window.localStorage.setItem(STORAGE_KEY, l);
   }, []);
 
+  // Screen readers pick their voice from <html lang>; keep it in step with the UI.
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
   const toggle = useCallback(() => {
     setLang(lang === "vi" ? "en" : "vi");
   }, [lang, setLang]);

@@ -8,7 +8,7 @@
 // feel. The row is found by data attribute rather than id because the table is
 // rendered twice (table on desktop, cards on mobile).
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { cn } from "@/lib/utils";
 import { PHRASE, VOCAB } from "./tokens";
 import IpaWord from "./IpaWord";
@@ -41,6 +41,8 @@ function flash(target: string) {
 
 export default function Phrase({ text, vietnamese, target, ipa }: Props) {
   const [open, setOpen] = useState(false);
+  // A generated id: `target` is optional, and two phrases can share one row.
+  const meaningId = useId();
   const byWord = new Map((ipa ?? []).map((entry) => [entry.word, entry.ipa]));
 
   const onActivate = () => {
@@ -59,7 +61,7 @@ export default function Phrase({ text, vietnamese, target, ipa }: Props) {
         role="button"
         tabIndex={0}
         title={vietnamese}
-        aria-describedby={vietnamese ? `${target}-meaning` : undefined}
+        aria-describedby={vietnamese && open ? meaningId : undefined}
         className={cn(PHRASE, "cursor-pointer")}
         onClick={onActivate}
         onKeyDown={(event) => {
@@ -87,7 +89,7 @@ export default function Phrase({ text, vietnamese, target, ipa }: Props) {
 
       {open && vietnamese && (
         <span
-          id={`${target}-meaning`}
+          id={meaningId}
           role="tooltip"
           className="absolute bottom-full left-1/2 z-30 mb-1 w-max max-w-[min(15rem,70vw)] -translate-x-1/2 rounded-lg bg-zinc-900 px-2.5 py-1.5 text-xs font-normal leading-snug text-zinc-50 shadow-lg dark:bg-zinc-100 dark:text-zinc-900"
         >

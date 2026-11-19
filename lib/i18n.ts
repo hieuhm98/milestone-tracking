@@ -130,6 +130,8 @@ const vi: Dict = {
   "ielts.search.empty": "Không tìm thấy",
   "ielts.entry": "IELTS Speaking",
   "ielts.card.desc": "561 câu hỏi kèm bài mẫu, phân tích và từ vựng.",
+  "writing.entry": "IELTS Writing thi thử",
+  "writing.card.desc": "Viết bài có bấm giờ; Harper bắt lỗi chính tả, ngữ pháp và AI ước tính band.",
 
   // Grammar for Writing (interface only — learning content stays English)
   "grammar.nav.contents": "Mục lục",
@@ -590,6 +592,8 @@ const en: Dict = {
   "ielts.search.empty": "No matches",
   "ielts.entry": "IELTS Speaking",
   "ielts.card.desc": "561 questions with model answers, analysis and vocabulary.",
+  "writing.entry": "IELTS Writing mock test",
+  "writing.card.desc": "Timed writing; Harper flags spelling and grammar and an AI estimates your band.",
 
   // Grammar for Writing (interface only — learning content stays English)
   "grammar.nav.contents": "Contents",

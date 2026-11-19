@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BookA, Dumbbell, Mic, PenLine, type LucideIcon } from "lucide-react";
+import { BookA, Dumbbell, FileText, Mic, PenLine, type LucideIcon } from "lucide-react";
 import HubCard from "@/components/HubCard";
 import { useLang } from "@/context/lang";
 import { useProgress } from "@/context/progress";
@@ -79,6 +79,14 @@ export default function EnglishHome() {
       title: "Grammar for Writing",
       description: t("grammar.card.desc"),
       stat: `19 ${t("grammar.home.units")} · 48 ${t("grammar.home.traps")}`,
+    },
+    {
+      href: "/english/writing-test",
+      icon: FileText,
+      tile: "bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300",
+      title: t("writing.entry"),
+      description: t("writing.card.desc"),
+      stat: "Task 1 · Task 2",
     },
   ];
 

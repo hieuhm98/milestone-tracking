@@ -4,16 +4,16 @@
     "question": "Lý do chính khiến một container thường khởi động dưới một giây, còn một máy ảo mất hàng chục giây trở lên là gì?",
     "questionEn": "What is the main reason a container usually starts in under a second while a virtual machine takes tens of seconds or more?",
     "options": [
-      "Image của container được nén tốt hơn nên giải nén nhanh hơn",
+      "Image của container được nén tốt hơn ổ đĩa VM nên giải nén và nạp vào RAM nhanh hơn",
       "Container runtime giữ sẵn bộ nhớ của container trong RAM từ lần chạy trước",
-      "Container chỉ khởi chạy một process trên kernel của host đang chạy sẵn, không phải boot hệ điều hành",
-      "Container bỏ qua bước cấu hình mạng nên không phải chờ DHCP"
+      "Container chỉ là một process trên kernel host đang chạy, không phải boot OS",
+      "Container bỏ qua bước cấu hình mạng và thiết bị nên không phải chờ DHCP hay driver"
     ],
     "optionsEn": [
-      "Container images are compressed better, so they unpack faster",
+      "Container images are compressed better than VM disks, so they unpack into RAM faster",
       "The container runtime keeps the container's memory in RAM from the previous run",
-      "A container just starts a process on the host's already-running kernel; no operating system boots",
-      "Containers skip network configuration, so they never wait for DHCP"
+      "A container is just a process on the already-running host kernel; no OS has to boot",
+      "Containers skip network and device setup, so they never wait for DHCP or drivers"
     ],
     "answer": 2,
     "explanation": "Máy ảo phải boot cả một guest OS với kernel riêng. Container dùng chung kernel của host: runtime chỉ tạo namespaces, cgroups rồi exec process của app. Kích thước image ảnh hưởng thời gian pull, không phải thời gian khởi động.",
@@ -84,16 +84,16 @@
     "question": "Công ty chuẩn bị chuyển sang Amazon EKS bản mới. Một kỹ sư lo rằng Kubernetes đã gỡ dockershim từ v1.24 nên image build bằng `docker build` sẽ không chạy được. Câu trả lời đúng là gì?",
     "questionEn": "A company is moving to a recent Amazon EKS version. An engineer worries that because Kubernetes removed dockershim in v1.24, images built with `docker build` will not run. What is the correct response?",
     "options": [
-      "Đúng vậy — phải build lại mọi image bằng Podman trước khi deploy",
-      "Không sao — image tuân theo chuẩn OCI nên containerd trên node chạy nguyên vẹn",
-      "Chỉ chạy được nếu bật lại dockershim bằng một feature flag trên EKS",
+      "Đúng vậy — phải build lại mọi image bằng Podman hoặc Buildah trước khi deploy",
+      "Không sao — image theo chuẩn OCI nên containerd trên node chạy nguyên vẹn",
+      "Chỉ chạy được nếu bật lại dockershim bằng một feature flag trong cấu hình EKS",
       "Phải chuyển image sang định dạng riêng của EKS bằng lệnh `eksctl convert`"
     ],
     "optionsEn": [
-      "Correct — every image must be rebuilt with Podman before deploying",
-      "No problem — the images follow the OCI standard, so containerd on the nodes runs them unchanged",
-      "They only run if dockershim is re-enabled with a feature flag on EKS",
-      "The images must be converted to an EKS-specific format with `eksctl convert`"
+      "Correct — every image must be rebuilt with Podman or Buildah before deploying",
+      "No problem — the images are OCI-compliant, so containerd runs them as-is",
+      "They only run if dockershim is re-enabled with a feature flag in the EKS config",
+      "The images must first be converted to an EKS-specific format with `eksctl convert`"
     ],
     "answer": 1,
     "explanation": "Việc gỡ dockershim chỉ thay đổi runtime trên node (Kubernetes gọi thẳng containerd qua CRI). Docker cũng xuất image theo chuẩn OCI, nên image vẫn dùng được. Không có định dạng image riêng của EKS.",
@@ -111,9 +111,9 @@
     ],
     "optionsEn": [
       "No — the final `rm` deletes the file from every earlier layer",
-      "No — Docker automatically strips files under `/root/.ssh` when pushing",
+      "No — Docker automatically strips files under `/root/.ssh` from the image when pushing",
       "Only if the image was built with the `--no-cache` flag",
-      "Yes — the key still lives in the layer created by `COPY`; a later layer only hides it"
+      "Yes — the key still lives in the `COPY` layer; the later layer only hides it"
     ],
     "answer": 3,
     "explanation": "Layer là bất biến. `rm` chỉ tạo một whiteout ở layer mới; ai pull image đều có thể giải nén layer của `COPY` và đọc key. Cách đúng là dùng build secret hoặc SSH mount của BuildKit (bài 5).",
@@ -187,7 +187,7 @@
       "Đổi `npm ci` thành `npm install` vì lệnh này tự dùng lại `node_modules` cũ",
       "Thêm `--no-cache` vào `docker build` để builder không so sánh các layer nữa",
       "Đổi base image sang `node:22` bản đầy đủ để có sẵn nhiều package hơn",
-      "Copy `package.json` và `package-lock.json`, chạy `npm ci`, rồi mới `COPY . .`"
+      "Copy `package.json` và `package-lock.json`, `npm ci`, rồi mới `COPY . .`"
     ],
     "optionsEn": [
       "Replace `npm ci` with `npm install`, which reuses the old `node_modules` automatically",
@@ -204,16 +204,16 @@
     "question": "Một Dockerfile có hai dòng riêng biệt dưới đây. Vài tuần sau, thêm một package vào dòng thứ hai thì build lỗi \"404 Not Found\" khi tải package. Vì sao?\n`RUN apt-get update\nRUN apt-get install -y curl jq`",
     "questionEn": "A Dockerfile has the two separate lines below. Weeks later, adding a package to the second line makes the build fail with \"404 Not Found\" while downloading. Why?\n`RUN apt-get update\nRUN apt-get install -y curl jq`",
     "options": [
-      "Layer `apt-get update` được lấy từ cache vì chuỗi lệnh không đổi, nên danh sách package đã cũ",
-      "`apt-get` không được phép chạy trong hai instruction `RUN` khác nhau",
+      "Layer `apt-get update` lấy từ cache vì lệnh không đổi, nên danh sách package đã cũ",
+      "`apt-get` không được chạy trong hai instruction `RUN` khác nhau vì lock file của dpkg",
       "Mỗi `RUN` chạy trong một container mới nên mất kết nối mạng của bước trước",
-      "Builder BuildKit không hỗ trợ trình quản lý package của Debian và Ubuntu"
+      "Builder BuildKit không hỗ trợ trình quản lý package của Debian và Ubuntu khi bật cache"
     ],
     "optionsEn": [
-      "The `apt-get update` layer came from cache because its command string was unchanged, so the package index was stale",
-      "`apt-get` is not allowed to run in two different `RUN` instructions",
+      "The cached `apt-get update` layer was reused unchanged, so the package index is stale",
+      "`apt-get` cannot run in two separate `RUN` instructions because of its dpkg lock file",
       "Each `RUN` runs in a new container, so it loses the previous step's network connection",
-      "The BuildKit builder does not support Debian and Ubuntu package managers"
+      "The BuildKit builder does not support Debian and Ubuntu package managers with caching on"
     ],
     "answer": 0,
     "explanation": "Cache của `RUN` chỉ so chuỗi lệnh. Bước update được dùng lại với index cũ, còn bước install (đã đổi) tải những phiên bản không còn trên mirror. Gộp `apt-get update && apt-get install -y …` trong một `RUN`.",
@@ -244,16 +244,16 @@
     "question": "Container khởi động bình thường nhưng thư mục `/etc/app` bên trong lại rỗng, app dùng cấu hình mặc định. Trên host, file cấu hình thật nằm ở `/opt/app/config`. Chuyện gì đã xảy ra?\n`docker run -d -v /opt/app/confg:/etc/app my-app:2.1.0`",
     "questionEn": "The container starts fine, but `/etc/app` inside it is empty and the app falls back to defaults. On the host the real config lives in `/opt/app/config`. What happened?\n`docker run -d -v /opt/app/confg:/etc/app my-app:2.1.0`",
     "options": [
-      "Bind mount luôn chỉ-đọc nên app không đọc được file cấu hình",
-      "Đường dẫn gõ sai; `-v` âm thầm tạo thư mục host rỗng và thư mục đó che `/etc/app`",
+      "Bind mount mặc định chỉ-đọc nên entrypoint không copy được cấu hình vào `/etc/app`",
+      "Đường dẫn gõ sai; `-v` âm thầm tạo thư mục host rỗng che mất `/etc/app`",
       "Image đã khai báo `VOLUME /etc/app` nên mọi bind mount vào đó đều bị bỏ qua",
-      "Docker chỉ cho bind mount các thư mục nằm trong `/var/lib/docker`"
+      "Docker chỉ cho bind mount các thư mục nằm trong `/var/lib/docker` trên host"
     ],
     "optionsEn": [
-      "Bind mounts are always read-only, so the app cannot read the config",
-      "The path is misspelled; `-v` silently created an empty host directory, which hides `/etc/app`",
+      "Bind mounts are read-only by default, so the entrypoint cannot copy config into `/etc/app`",
+      "The path is misspelled; `-v` silently created an empty host directory over `/etc/app`",
       "The image declares `VOLUME /etc/app`, so any bind mount there is ignored",
-      "Docker only allows bind mounts of directories under `/var/lib/docker`"
+      "Docker only allows bind mounts of directories under the host's `/var/lib/docker`"
     ],
     "answer": 1,
     "explanation": "`confg` là lỗi chính tả. Với `-v`, đường dẫn host không tồn tại sẽ được tạo thành thư mục rỗng, và bind mount che mất nội dung của image. `--mount type=bind` sẽ báo lỗi ngay nên an toàn hơn.",
@@ -273,7 +273,7 @@
       "Sends SIGKILL immediately to free resources as fast as possible",
       "Sends SIGHUP, waits for the app to reload config, then pauses the container",
       "Freezes every process with the cgroup freezer until `docker start`",
-      "Sends SIGTERM, waits up to 10 seconds, then sends SIGKILL if it is still running"
+      "Sends SIGTERM, waits up to 10 seconds, then SIGKILL if it is still running"
     ],
     "answer": 3,
     "explanation": "Đây là cơ chế dừng êm: SIGTERM cho app cơ hội xử lý nốt request và thoát; thời gian chờ đổi bằng `-t`. SIGKILL ngay là `docker kill`, còn cgroup freezer là `docker pause`.",
@@ -284,7 +284,7 @@
     "question": "Hai container `api` và `db` được chạy bằng `docker run` mà không có cờ `--network`. Trong `api`, kết nối tới `db:5432` báo lỗi không phân giải được tên máy. Cách sửa phù hợp nhất?",
     "questionEn": "Two containers, `api` and `db`, were started with `docker run` and no `--network` flag. Inside `api`, connecting to `db:5432` fails because the hostname cannot be resolved. What is the right fix?",
     "options": [
-      "Tạo một user-defined bridge network và chạy cả hai container trong network đó",
+      "Tạo một user-defined bridge network và chạy cả hai container trong đó",
       "Publish port của database bằng `-p 5432:5432` rồi dùng `db:5432` như cũ",
       "Thêm `EXPOSE 5432` vào Dockerfile của `db` để Docker đăng ký tên DNS",
       "Chạy `api` với `--network none` để nó dùng loopback của `db`"
@@ -304,16 +304,16 @@
     "question": "Container được chạy như dưới, `docker ps` hiện `0.0.0.0:8080->3000/tcp`, nhưng `curl localhost:8080` trên host báo \"connection reset\". Trong container, `ss -tlnp` cho thấy app lắng nghe `127.0.0.1:3000`. Nguyên nhân?\n`docker run -d --name api -p 8080:3000 my-api:1.4.0`",
     "questionEn": "The container is started as below; `docker ps` shows `0.0.0.0:8080->3000/tcp`, yet `curl localhost:8080` on the host returns \"connection reset\". Inside the container, `ss -tlnp` shows the app listening on `127.0.0.1:3000`. Cause?\n`docker run -d --name api -p 8080:3000 my-api:1.4.0`",
     "options": [
-      "Dockerfile thiếu `EXPOSE 3000` nên Docker không chuyển tiếp traffic",
-      "Phải dùng `-P` thay cho `-p` thì port mới thực sự được publish",
-      "App chỉ bind vào loopback của network namespace riêng; traffic chuyển tiếp tới IP của container nên không tới được app",
-      "Host firewall ufw đang chặn port 8080 nên kết nối bị reset"
+      "Dockerfile thiếu `EXPOSE 3000` nên Docker không tạo luật chuyển tiếp traffic vào container",
+      "Phải dùng `-P` thay cho `-p` thì port mới thực sự được publish ra mọi interface của host",
+      "App chỉ bind loopback trong network namespace riêng; traffic chuyển tới IP container nên không tới app",
+      "Host firewall ufw đang chặn port 8080 nên kernel gửi gói RST và kết nối bị reset"
     ],
     "optionsEn": [
-      "The Dockerfile lacks `EXPOSE 3000`, so Docker does not forward traffic",
-      "You must use `-P` instead of `-p` for the port to really be published",
-      "The app binds only to the loopback of its own network namespace; forwarded traffic arrives on the container IP and never reaches it",
-      "The host's ufw firewall blocks port 8080, so the connection is reset"
+      "The Dockerfile lacks `EXPOSE 3000`, so Docker creates no rule to forward traffic into the container",
+      "You must use `-P` instead of `-p` for the port to really be published on every host interface",
+      "The app binds only to its namespace's loopback, but forwarded traffic hits the container IP",
+      "The host's ufw firewall blocks port 8080, so the kernel sends an RST and the connection resets"
     ],
     "answer": 2,
     "explanation": "`127.0.0.1` trong container là loopback của chính namespace đó. NAT của Docker gửi traffic tới IP của container trên bridge, nên app phải lắng nghe `0.0.0.0`. `EXPOSE` không ảnh hưởng tới `-p`, và ufw thường còn bị Docker vượt qua chứ không chặn.",
@@ -324,16 +324,16 @@
     "question": "Một developer build image trên MacBook chip Apple M3, push lên ECR. Trên EC2 `t3.medium` (x86_64), container thoát ngay với log `exec format error`. Cách sửa đúng?",
     "questionEn": "A developer builds an image on an Apple M3 MacBook and pushes it to ECR. On an EC2 `t3.medium` (x86_64), the container exits immediately logging `exec format error`. What is the right fix?",
     "options": [
-      "Thêm `--init` vào lệnh `docker run` để tini khởi động được binary",
-      "Đổi `CMD` sang shell form để `/bin/sh` tự chọn đúng kiến trúc",
+      "Thêm `--init` vào lệnh `docker run` để tini khởi động được binary đúng cách",
+      "Đổi `CMD` sang shell form để `/bin/sh` tự chọn đúng kiến trúc của binary",
       "Tăng `--memory` vì lỗi này xuất hiện khi process không đủ bộ nhớ để nạp",
-      "Build bằng `docker buildx build --platform linux/amd64,linux/arm64` và push image multi-arch"
+      "Dùng `buildx --platform linux/amd64,linux/arm64` để push image multi-arch"
     ],
     "optionsEn": [
-      "Add `--init` to `docker run` so tini can start the binary",
-      "Switch `CMD` to shell form so `/bin/sh` picks the right architecture",
+      "Add `--init` to `docker run` so that tini can exec the binary correctly as PID 1",
+      "Switch `CMD` to shell form so `/bin/sh` picks the right architecture for the binary",
       "Raise `--memory`, since this error appears when a process lacks memory to load",
-      "Build with `docker buildx build --platform linux/amd64,linux/arm64` and push a multi-arch image"
+      "Build with `buildx --platform linux/amd64,linux/arm64` and push a multi-arch image"
     ],
     "answer": 3,
     "explanation": "Image build trên Apple Silicon mặc định là `arm64`; binary ARM không chạy được trên CPU x86_64. Build multi-platform tạo một index để mỗi node tự pull đúng kiến trúc (hoặc build riêng `linux/amd64` trong CI).",
@@ -345,14 +345,14 @@
     "questionEn": "During an incident, two nodes running the same image reference `payments/api:latest` turned out to be running different code. Which architectural recommendation prevents this from recurring?",
     "options": [
       "Chạy `docker system prune` trên mọi node trước mỗi lần deploy",
-      "Deploy bằng tag phiên bản bất biến hoặc digest `@sha256:…`, và bật immutable tags trên registry",
-      "Luôn dùng `latest` nhưng thêm `--pull always` để mọi node tải bản mới cùng lúc",
+      "Deploy bằng tag phiên bản bất biến hoặc digest `@sha256:…`, bật immutable tags",
+      "Luôn dùng `latest` nhưng thêm `--pull always` để mọi node tải bản mới nhất cùng một lúc",
       "Chuyển từ ECR sang Docker Hub vì Docker Hub đồng bộ tag nhanh hơn"
     ],
     "optionsEn": [
       "Run `docker system prune` on every node before each deploy",
-      "Deploy by an immutable version tag or an `@sha256:…` digest, and enable immutable tags on the registry",
-      "Keep using `latest` but add `--pull always` so every node fetches the new build at once",
+      "Deploy by an immutable version tag or `@sha256:…` digest, with immutable tags on the registry",
+      "Keep using `latest` but add `--pull always` so every node fetches the newest build at the same time",
       "Move from ECR to Docker Hub because Docker Hub syncs tags faster"
     ],
     "answer": 1,

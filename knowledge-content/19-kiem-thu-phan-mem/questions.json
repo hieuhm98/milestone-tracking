@@ -5,15 +5,15 @@
     "questionEn": "What are the characteristics of a Unit Test?",
     "options": [
       "Test toàn bộ hệ thống từ UI đến database",
-      "Test từng function/module nhỏ nhất một cách riêng lẻ, do developer viết",
-      "Test do khách hàng thực hiện trước go-live",
-      "Test hiệu năng dưới tải cao"
+      "Test từng hàm nhỏ riêng lẻ, do developer viết",
+      "Test do khách hàng thực hiện ngay trước go-live",
+      "Test hiệu năng của hệ thống dưới tải cao"
     ],
     "optionsEn": [
-      "Testing the entire system from UI to database",
-      "Testing each smallest function/module in isolation, written by developers",
-      "Testing done by the customer before go-live",
-      "Testing performance under high load"
+      "Tests the whole system from the UI down to the database",
+      "Tests one small function in isolation, by developers",
+      "Testing done by the customer just before go-live",
+      "Tests system performance under heavy load"
     ],
     "answer": 1,
     "explanation": "Unit Test: nhỏ nhất, nhanh nhất, nhiều nhất. Test một function trong isolation — mock dependencies. Developer viết, chạy hàng trăm lần/ngày. Phát hiện bug sớm nhất, rẻ nhất.",
@@ -24,16 +24,16 @@
     "question": "UAT (User Acceptance Testing) được thực hiện bởi ai và khi nào?",
     "questionEn": "Who performs UAT (User Acceptance Testing) and when?",
     "options": [
-      "Developer, đầu dự án",
-      "QA team, sau mỗi sprint",
-      "Người dùng thực tế hoặc khách hàng, bước cuối cùng trước go-live",
-      "BA team, sau khi viết yêu cầu"
+      "Developer, ngay từ đầu dự án",
+      "QA team, sau mỗi sprint phát triển",
+      "Người dùng thật, bước cuối trước go-live",
+      "BA team, ngay sau khi viết xong tài liệu yêu cầu"
     ],
     "optionsEn": [
       "Developers, at the start of the project",
-      "The QA team, after each sprint",
-      "Real users or the customer, as the final step before go-live",
-      "The BA team, after writing the requirements"
+      "The QA team, after each development sprint",
+      "Real users, as the last step before go-live",
+      "The BA team, right after writing requirements"
     ],
     "answer": 2,
     "explanation": "UAT: end user hoặc business stakeholder test để xác nhận hệ thống đáp ứng business needs. Là bước acceptance gate cuối — pass UAT mới go-live. Không phải technical test.",
@@ -44,16 +44,16 @@
     "question": "Regression Testing quan trọng vì lý do gì?",
     "questionEn": "Why is Regression Testing important?",
     "options": [
-      "Để test tính năng mới",
-      "Đảm bảo thay đổi mới không làm hỏng những chức năng đang hoạt động",
-      "Để test hiệu năng",
-      "Để check security vulnerabilities"
+      "Để kiểm tra các tính năng mới vừa được thêm vào app",
+      "Để chắc thay đổi mới không làm hỏng chức năng cũ",
+      "Để đo hiệu năng hệ thống khi tải cao",
+      "Để tìm các lỗ hổng bảo mật trong code"
     ],
     "optionsEn": [
-      "To test new features",
-      "To ensure new changes don't break functions that were already working",
-      "To test performance",
-      "To check for security vulnerabilities"
+      "To test the new features that were just added",
+      "To check changes don't break what works",
+      "To measure system performance under load",
+      "To find security vulnerabilities in the code"
     ],
     "answer": 1,
     "explanation": "Mỗi thay đổi code có thể vô tình break thứ khác (regression). Regression test: chạy lại test suite toàn bộ sau mỗi change. Thường tự động hóa để chạy nhanh và thường xuyên.",
@@ -64,16 +64,16 @@
     "question": "Theo 'Rule of 10', chi phí sửa bug tăng như thế nào qua các giai đoạn?",
     "questionEn": "According to the 'Rule of 10', how does the cost of fixing a bug grow across phases?",
     "options": [
-      "Tuyến tính, tăng đều",
-      "Giảm dần theo thời gian",
-      "Tăng theo cấp số nhân — production đắt gấp 1000 lần requirements",
-      "Không thay đổi"
+      "Tăng tuyến tính, đều đặn qua mỗi giai đoạn",
+      "Giảm dần vì team đã quen với hệ thống",
+      "Tăng theo cấp số nhân qua mỗi giai đoạn",
+      "Không đổi, sửa lúc nào cũng tốn như nhau"
     ],
     "optionsEn": [
-      "Linearly, growing steadily",
-      "Decreasing over time",
-      "Exponentially — production is 1000 times more expensive than requirements",
-      "It doesn't change"
+      "Linearly, by the same amount each phase",
+      "It drops as the team gets used to the system",
+      "Exponentially, about 10× per phase",
+      "It stays the same whenever you fix it"
     ],
     "answer": 2,
     "explanation": "Sửa bug ở requirements: 1x. Design: 10x. Code: 100x. Production: 1000x. Vì bug phát hiện muộn cần: investigate, fix, test, deploy, communicate, rollback rủi ro... Đây là lý do cần test sớm.",
@@ -86,13 +86,13 @@
     "options": [
       "Nhiều E2E test vì chúng cover nhiều nhất",
       "Cân bằng giữa unit, integration, E2E",
-      "Nhiều Unit Test (nhanh/rẻ), ít E2E test (chậm/đắt)",
+      "Nhiều unit test, ít E2E test",
       "Chỉ cần manual test là đủ"
     ],
     "optionsEn": [
       "Many E2E tests because they cover the most",
       "A balance between unit, integration, and E2E",
-      "Many Unit Tests (fast/cheap), few E2E tests (slow/expensive)",
+      "Many unit tests, few E2E tests",
       "Manual testing alone is enough"
     ],
     "answer": 2,
@@ -104,16 +104,16 @@
     "question": "Bug ở trạng thái 'Re-opened' có nghĩa là gì?",
     "questionEn": "What does a bug in the 'Re-opened' status mean?",
     "options": [
-      "Bug mới được phát hiện",
-      "Developer từ chối fix",
-      "QA test lại thấy bug vẫn còn tồn tại sau khi developer báo đã fix",
-      "Bug bị đóng nhầm"
+      "Bug mới vừa được phát hiện lần đầu",
+      "Developer từ chối fix vì cho rằng đó không phải lỗi",
+      "QA test lại thấy bug vẫn còn sau khi báo đã fix",
+      "Bug được chuyển sang cho team khác"
     ],
     "optionsEn": [
-      "A newly discovered bug",
-      "The developer refuses to fix it",
-      "On retest, QA finds the bug still exists after the developer reported it fixed",
-      "The bug was closed by mistake"
+      "A bug that has just been found for the first time",
+      "The developer refuses to fix it, calling it not a bug",
+      "On retest, QA finds the 'fixed' bug is still there",
+      "The bug was handed over to another team"
     ],
     "answer": 2,
     "explanation": "Re-opened: QA verify và thấy bug chưa fix hoặc fix không đúng → reopen và assign lại cho developer. Quan trọng: ghi rõ lý do reopen trong comment.",
@@ -124,16 +124,16 @@
     "question": "Severity và Priority của bug khác nhau như thế nào?",
     "questionEn": "How do a bug's Severity and Priority differ?",
     "options": [
-      "Chúng hoàn toàn giống nhau",
-      "Severity = mức độ nghiêm trọng kỹ thuật; Priority = mức độ ưu tiên xử lý — không nhất thiết phải bằng nhau",
-      "Severity do dev set, Priority do QA set",
-      "Priority cao hơn Severity"
+      "Chúng giống nhau, chỉ là hai tên gọi",
+      "Severity: mức nghiêm trọng; Priority: mức gấp cần sửa",
+      "Severity do developer đặt, còn Priority do bên QA đặt",
+      "Priority luôn cao hơn hoặc bằng Severity"
     ],
     "optionsEn": [
-      "They are exactly the same",
-      "Severity = the technical severity; Priority = the handling priority — they need not be equal",
+      "They are the same thing under two names",
+      "Severity: how serious; Priority: how urgent",
       "Severity is set by the dev, Priority by QA",
-      "Priority is higher than Severity"
+      "Priority is always at least as high as Severity"
     ],
     "answer": 1,
     "explanation": "Severity: impact kỹ thuật (crash = critical). Priority: cần fix khi nào (business decision). Bug nhỏ nhưng CEO thấy → Priority critical. App crash ở tính năng ít dùng → Severity critical, Priority medium.",
@@ -144,16 +144,16 @@
     "question": "Điều gì quan trọng nhất trong một bug report tốt?",
     "questionEn": "What is the most important thing in a good bug report?",
     "options": [
-      "Title phải thật dài và chi tiết",
-      "Steps to Reproduce rõ ràng để developer có thể tái hiện bug",
-      "Phải attach video dài hơn 5 phút",
-      "Priority phải là Critical"
+      "Tiêu đề thật dài và chi tiết",
+      "Steps to Reproduce rõ ràng",
+      "Video quay màn hình dài hơn 5 phút",
+      "Priority được đặt là Critical"
     ],
     "optionsEn": [
-      "The title must be very long and detailed",
-      "Clear Steps to Reproduce so the developer can recreate the bug",
-      "A video longer than 5 minutes must be attached",
-      "The Priority must be Critical"
+      "A very long, detailed title",
+      "Clear Steps to Reproduce",
+      "A screen recording over 5 minutes",
+      "Priority set to Critical"
     ],
     "answer": 1,
     "explanation": "Steps to reproduce là linh hồn của bug report. Không reproduce được = không debug được. Bug report tốt: title rõ, environment, steps (1. 2. 3.), expected vs actual result, evidence (screenshot/log).",
@@ -164,16 +164,16 @@
     "question": "Integration Test kiểm tra điều gì?",
     "questionEn": "What does an Integration Test check?",
     "options": [
-      "Từng function riêng lẻ",
-      "Giao diện người dùng (UI)",
-      "Sự kết hợp và tương tác giữa các module/service",
-      "Hiệu năng dưới load cao"
+      "Từng function chạy riêng lẻ",
+      "Bố cục của các màn hình giao diện (UI)",
+      "Sự tương tác giữa các module/service",
+      "Hiệu năng khi có tải cao"
     ],
     "optionsEn": [
-      "Each individual function",
-      "The user interface (UI)",
-      "The combination and interaction between modules/services",
-      "Performance under high load"
+      "Each function on its own",
+      "The user interface (UI) layout",
+      "How modules connect and interact",
+      "Performance under heavy load"
     ],
     "answer": 2,
     "explanation": "Integration Test: không phải test riêng lẻ mà test how pieces work together. Ví dụ: API + Database, Frontend + API, Service A + Service B. Phát hiện interface issues mà unit test không thấy.",
@@ -184,16 +184,16 @@
     "question": "Automated testing phù hợp nhất với loại test nào?",
     "questionEn": "Which type of testing is automated testing best suited for?",
     "options": [
-      "Exploratory testing",
-      "UAT với người dùng cuối",
-      "Regression test và unit test — chạy nhanh và lặp lại nhiều lần",
-      "Test về UX/usability"
+      "Exploratory testing khám phá tự do",
+      "UAT với người dùng cuối thực tế",
+      "Regression và unit test chạy lặp lại nhiều lần",
+      "Đánh giá UX và độ dễ dùng của giao diện"
     ],
     "optionsEn": [
-      "Exploratory testing",
-      "UAT with end users",
-      "Regression and unit tests — run fast and repeated many times",
-      "UX/usability testing"
+      "Free-form exploratory testing",
+      "UAT sessions with real end users",
+      "Regression and unit tests, run often",
+      "Judging the UX and usability of screens"
     ],
     "answer": 2,
     "explanation": "Automation phù hợp: regression (chạy sau mỗi deploy), unit test (chạy khi commit code), performance test. Không phù hợp: exploratory, UAT, UX — cần human judgment.",
@@ -204,15 +204,15 @@
     "question": "Bug được đóng (Closed) khi nào?",
     "questionEn": "When is a bug Closed?",
     "options": [
-      "Khi developer báo đã fix",
-      "Khi PM quyết định đóng",
-      "Khi QA verify thành công và xác nhận bug đã được sửa",
-      "Khi khách hàng không phàn nàn nữa"
+      "Khi developer báo đã fix xong",
+      "Khi PM quyết định đóng ticket",
+      "Khi QA kiểm tra lại và xác nhận đã sửa",
+      "Khi khách hàng không còn phàn nàn gì nữa"
     ],
     "optionsEn": [
       "When the developer reports it fixed",
       "When the PM decides to close it",
-      "When QA successfully verifies and confirms the bug is fixed",
+      "When QA confirms the fix on retest",
       "When the customer stops complaining"
     ],
     "answer": 2,
@@ -224,16 +224,16 @@
     "question": "System Test khác Integration Test ở điểm gì?",
     "questionEn": "How does a System Test differ from an Integration Test?",
     "options": [
-      "Chúng hoàn toàn giống nhau",
-      "System Test test toàn bộ hệ thống end-to-end trong môi trường gần production; Integration Test chỉ test tương tác giữa các module",
-      "Integration Test test nhiều hơn System Test",
-      "System Test chỉ do developer thực hiện"
+      "Chúng giống nhau, chỉ khác người thực hiện",
+      "System: cả hệ thống end-to-end; Integration: chỗ nối module",
+      "Integration Test bao phủ nhiều hơn System Test",
+      "System: chỉ developer làm; Integration: chỉ QA làm"
     ],
     "optionsEn": [
-      "They are exactly the same",
-      "A System Test tests the whole system end-to-end in a near-production environment; an Integration Test only tests the interactions between modules",
-      "Integration Tests test more than System Tests",
-      "System Tests are performed only by developers"
+      "They are the same, only run by different people",
+      "System: the whole system end-to-end; Integration: module links",
+      "Integration Tests cover more than System Tests do",
+      "System: done only by devs; Integration: only by QA"
     ],
     "answer": 1,
     "explanation": "Integration: test specific interfaces/connections giữa components. System Test: test toàn bộ system như một black box, full end-to-end scenarios, môi trường staging gần production nhất có thể.",
@@ -244,16 +244,16 @@
     "question": "Khi nào nên dùng Manual Testing thay vì Automated?",
     "questionEn": "When should you use Manual Testing instead of Automated?",
     "options": [
-      "Luôn luôn, automated không đáng tin cậy",
-      "Khi test exploratory, UX/usability, hoặc UAT — những test cần human judgment",
-      "Chỉ khi không có budget cho automation",
-      "Khi regression test cần chạy nhanh"
+      "Khi muốn kết quả ổn định, lặp lại giống hệt nhau mỗi lần",
+      "Khi test khám phá, UX hoặc UAT cần con người đánh giá",
+      "Chỉ khi không còn ngân sách cho automation",
+      "Khi regression test cần chạy nhanh mỗi lần build"
     ],
     "optionsEn": [
-      "Always, since automation is unreliable",
-      "For exploratory testing, UX/usability, or UAT — tests that need human judgment",
-      "Only when there is no budget for automation",
-      "When regression tests need to run fast"
+      "When you want identical, repeatable results every run",
+      "Exploratory, UX or UAT work that needs human judgment",
+      "Only when there is no budget left for automation",
+      "When regression tests must run fast on every build"
     ],
     "answer": 1,
     "explanation": "Manual tốt khi: cần creativity (exploratory), cần cảm nhận con người (UX), user acceptance, test ad-hoc, test scenario mới chưa có script. Automation tốt hơn khi test lặp đi lặp lại.",
@@ -264,16 +264,16 @@
     "question": "BA cần biết gì về testing trong dự án?",
     "questionEn": "What does a BA need to know about testing in a project?",
     "options": [
-      "BA không cần biết về testing",
-      "BA chỉ cần viết acceptance criteria",
-      "BA nên tham gia UAT, đảm bảo acceptance criteria đủ rõ để test, và verify bug reports",
-      "BA chịu trách nhiệm viết unit test"
+      "BA không cần biết về testing, đó là việc của QA",
+      "BA chỉ cần viết acceptance criteria là đủ",
+      "Tham gia UAT, viết AC rõ để test, kiểm tra bug report",
+      "BA chịu trách nhiệm viết unit test cho dev"
     ],
     "optionsEn": [
-      "A BA doesn't need to know about testing",
+      "A BA doesn't need testing; that is QA's job",
       "A BA only needs to write acceptance criteria",
-      "A BA should take part in UAT, ensure the acceptance criteria are clear enough to test, and verify bug reports",
-      "A BA is responsible for writing unit tests"
+      "Join UAT, write testable AC, and check bug reports",
+      "A BA is responsible for writing developers' unit tests"
     ],
     "answer": 2,
     "explanation": "BA trong testing: (1) viết AC rõ ràng để QA có test cases tốt, (2) participate UAT để verify yêu cầu được đáp ứng, (3) khi QA report bug, BA xác nhận đây có phải lỗi hay yêu cầu chưa rõ.",
@@ -284,16 +284,16 @@
     "question": "'Won't Fix' trong bug lifecycle có nghĩa là gì?",
     "questionEn": "What does 'Won't Fix' mean in the bug lifecycle?",
     "options": [
-      "Developer chưa có thời gian fix",
-      "Team quyết định không fix bug này do impact thấp hoặc chi phí fix cao hơn lợi ích",
-      "Bug đã tự fix",
-      "Bug không thể tái hiện"
+      "Developer vẫn chưa có thời gian để sửa ngay bug này được",
+      "Team quyết định không sửa vì lợi ích thấp hơn chi phí",
+      "Bug đã tự biến mất ở bản build mới",
+      "Bug không thể tái hiện được trên máy QA"
     ],
     "optionsEn": [
-      "The developer hasn't had time to fix it",
-      "The team decides not to fix this bug because its impact is low or the fix costs more than the benefit",
-      "The bug fixed itself",
-      "The bug cannot be reproduced"
+      "The developer has not had time to fix it yet",
+      "The team chose not to fix it: cost beats benefit",
+      "The bug disappeared on its own in a new build",
+      "The bug cannot be reproduced on QA's machine"
     ],
     "answer": 1,
     "explanation": "Won't Fix là quyết định business: cost/benefit analysis cho thấy fix không đáng. Thường với: bug ít người gặp, impact nhỏ, workaround dễ, hoặc feature sắp retire. PO/PM quyết định, không phải developer.",
@@ -303,16 +303,16 @@
     "question": "Bug làm sập hệ thống nhưng chỉ xảy ra với một khách hàng nhỏ dùng cấu hình hiếm. Severity và Priority nên đặt thế nào?",
     "questionEn": "A bug crashes the system but only for one small customer on a rare configuration. How should severity and priority be set?",
     "options": [
-      "Severity cao vì tác động kỹ thuật nghiêm trọng, Priority có thể thấp hơn vì ít người ảnh hưởng",
-      "Cả hai đều phải cao",
-      "Cả hai đều phải thấp",
-      "Severity thấp, Priority cao"
+      "Severity cao, Priority có thể thấp hơn",
+      "Severity và Priority đều phải đặt mức cao",
+      "Severity và Priority đều phải đặt mức thấp",
+      "Severity thấp, Priority cao vì phải sửa ngay"
     ],
     "optionsEn": [
-      "High severity because the technical impact is serious, lower priority because few users are affected",
-      "Both must be high",
-      "Both must be low",
-      "Low severity, high priority"
+      "High severity, possibly lower priority",
+      "Severity and priority must both be high",
+      "Severity and priority must both be low",
+      "Low severity, high priority as it needs a fix now"
     ],
     "answer": 0,
     "explanation": "Severity đo mức nghiêm trọng kỹ thuật; Priority đo mức khẩn cấp phải sửa theo góc nhìn nghiệp vụ. Hai thứ này độc lập với nhau.",
@@ -323,16 +323,16 @@
     "question": "Yếu tố nào KHÔNG thể thiếu trong một bug report tốt?",
     "questionEn": "Which element is indispensable in a good bug report?",
     "options": [
-      "Các bước tái hiện, kết quả mong đợi và kết quả thực tế",
-      "Tên của lập trình viên bị nghi ngờ gây lỗi",
-      "Ước tính thời gian sửa",
-      "Ý kiến cá nhân về chất lượng mã"
+      "Các bước tái hiện, kết quả mong đợi và thực tế",
+      "Tên của lập trình viên bị nghi ngờ đã gây ra lỗi",
+      "Ước tính thời gian để sửa xong bug",
+      "Ý kiến cá nhân về chất lượng mã nguồn"
     ],
     "optionsEn": [
-      "Reproduction steps, expected result, and actual result",
+      "Repro steps, expected result and actual result",
       "The name of the developer suspected of causing it",
-      "An estimate of the fix time",
-      "A personal opinion about code quality"
+      "An estimate of how long the fix will take",
+      "A personal opinion on the quality of the code"
     ],
     "answer": 0,
     "explanation": "Không tái hiện được thì không sửa được. Bug report nên đánh giá sản phẩm chứ không đánh giá con người.",
@@ -343,16 +343,16 @@
     "question": "Test Pyramid khuyến nghị điều gì?",
     "questionEn": "What does the test pyramid recommend?",
     "options": [
-      "Nhiều unit test ở đáy, ít hơn integration test ở giữa, ít nhất end-to-end test ở đỉnh",
+      "Nhiều unit test nhất, ít end-to-end test nhất",
       "Nhiều end-to-end test nhất vì gần người dùng nhất",
-      "Chỉ cần kiểm thử thủ công",
-      "Số lượng bằng nhau ở cả ba tầng"
+      "Chỉ cần kiểm thử thủ công là đủ",
+      "Số lượng test bằng nhau ở cả ba tầng"
     ],
     "optionsEn": [
-      "Many unit tests at the base, fewer integration tests in the middle, fewest end-to-end tests at the top",
+      "Most unit tests, fewest end-to-end tests",
       "Mostly end-to-end tests because they are closest to users",
       "Manual testing alone is enough",
-      "Equal numbers at all three levels"
+      "Equal numbers of tests at all three levels"
     ],
     "answer": 0,
     "explanation": "Test ở tầng thấp chạy nhanh, rẻ và chỉ ra lỗi chính xác. Test end-to-end đắt, chậm và dễ gãy nên chỉ dùng cho luồng quan trọng nhất.",
@@ -363,16 +363,16 @@
     "question": "Vai trò của BA trong UAT là gì?",
     "questionEn": "What is the BA's role in UAT?",
     "options": [
-      "Chuẩn bị kịch bản dựa trên yêu cầu và acceptance criteria, hỗ trợ người dùng thực hiện và ghi nhận vấn đề",
-      "Tự viết toàn bộ mã kiểm thử tự động",
+      "Soạn kịch bản từ yêu cầu, hỗ trợ người dùng, ghi nhận lỗi",
+      "Tự viết toàn bộ mã kiểm thử tự động cho dự án",
       "Quyết định bug nào lập trình viên phải sửa trước",
-      "Thay mặt khách hàng ký nghiệm thu"
+      "Thay mặt khách hàng ký biên bản nghiệm thu"
     ],
     "optionsEn": [
-      "Prepare scenarios from the requirements and acceptance criteria, support real users, and log issues",
-      "Write all the automated test code",
-      "Decide which bugs developers must fix first",
-      "Sign off acceptance on the customer's behalf"
+      "Write scenarios, support users, log issues",
+      "Write all of the project's automated test code",
+      "Decide which bugs the developers have to fix first",
+      "Sign the acceptance form on the customer's behalf"
     ],
     "answer": 0,
     "explanation": "UAT là để người dùng thật xác nhận hệ thống đáp ứng nhu cầu nghiệp vụ. BA tạo điều kiện chứ không thay họ quyết định chấp nhận.",
@@ -383,15 +383,15 @@
     "question": "Vì sao test case nên được suy ra từ YÊU CẦU chứ không phải từ mã nguồn?",
     "questionEn": "Why should test cases derive from the REQUIREMENTS rather than the code?",
     "options": [
-      "Vì viết test từ mã chỉ kiểm tra được rằng mã làm những gì nó làm, không phát hiện được chức năng bị bỏ sót hoàn toàn",
-      "Vì tester không được phép xem mã",
-      "Vì mã thay đổi thường xuyên hơn",
-      "Vì yêu cầu luôn chính xác tuyệt đối"
+      "Vì test từ mã không phát hiện được chức năng bị thiếu",
+      "Vì tester không được phép đọc mã nguồn",
+      "Vì mã nguồn thay đổi thường xuyên hơn yêu cầu",
+      "Vì tài liệu yêu cầu luôn chính xác tuyệt đối"
     ],
     "optionsEn": [
-      "Because tests written from code only check that the code does what it does, missing functionality that is absent entirely",
-      "Because testers may not read code",
-      "Because code changes more often",
+      "Tests from code miss absent features",
+      "Because testers are not allowed to read the code",
+      "Because code changes more often than requirements",
       "Because requirements are always perfectly accurate"
     ],
     "answer": 0,
@@ -405,15 +405,15 @@
     "questionEn": "Checking whether an online shop still responds within 2 seconds when 5,000 people shop at once is which type of testing?",
     "options": [
       "Functional testing",
-      "Non-functional testing (performance/load)",
+      "Non-functional testing",
       "Unit testing",
-      "UAT"
+      "Acceptance testing (UAT)"
     ],
     "optionsEn": [
       "Functional testing",
-      "Non-functional testing (performance/load)",
+      "Non-functional testing",
       "Unit testing",
-      "UAT"
+      "Acceptance testing (UAT)"
     ],
     "answer": 1,
     "explanation": "Functional hỏi \"có làm đúng việc không?\"; non-functional hỏi \"làm tốt đến mức nào?\" — tốc độ dưới tải là performance/load testing.",
@@ -436,16 +436,16 @@
     "question": "Retesting khác regression testing thế nào?",
     "questionEn": "How does retesting differ from regression testing?",
     "options": [
-      "Chúng là một",
-      "Retesting do người dùng làm, regression do developer làm",
+      "Chúng là một, chỉ khác tên gọi theo từng công ty",
+      "Retesting do người dùng làm, còn regression do developer làm",
       "Regression chỉ chạy một lần trước khi go-live",
-      "Retesting kiểm tra một bug cụ thể đã hết chưa; regression kiểm tra thay đổi có làm hỏng thứ khác không"
+      "Retest: bug đó hết chưa; regression: có hỏng chỗ khác không"
     ],
     "optionsEn": [
-      "They are the same thing",
+      "They are the same, just named differently by company",
       "Retesting is done by users, regression by developers",
-      "Regression runs only once before go-live",
-      "Retesting checks that one specific bug is gone; regression checks the change didn't break anything else"
+      "Regression only runs once, right before go-live",
+      "Retest: is that bug gone; regression: did anything else break"
     ],
     "answer": 3,
     "explanation": "Retesting: \"bug này đã hết chưa?\". Regression: \"có thứ gì khác bị hỏng không?\" — thường được tự động hóa và chạy sau mỗi thay đổi.",
@@ -468,15 +468,15 @@
     "question": "Yêu cầu: mã SAVE10 giảm 10% cho đơn từ 200.000 VND. Ngoài happy path, test case nào kiểm tra giá trị biên?",
     "questionEn": "Requirement: code SAVE10 gives 10% off orders of 200,000 VND or more. Beyond the happy path, which test case checks the boundary?",
     "options": [
-      "Đơn hàng đúng 200.000 VND (được giảm) và 199.999 VND (không được giảm)",
-      "Đơn hàng 5.000.000 VND",
-      "Đăng nhập bằng mật khẩu sai",
-      "Đổi màu nút \"Áp dụng\""
+      "Đơn đúng 200.000 VND và đơn 199.999 VND",
+      "Đơn hàng 5.000.000 VND với mã SAVE10",
+      "Đăng nhập bằng mật khẩu sai rồi áp mã",
+      "Đổi màu nút \"Áp dụng\" trên trang thanh toán"
     ],
     "optionsEn": [
-      "An order of exactly 200,000 VND (discount applies) and 199,999 VND (no discount)",
-      "An order of 5,000,000 VND",
-      "Logging in with a wrong password",
+      "Orders of exactly 200,000 VND and 199,999 VND",
+      "An order of 5,000,000 VND using SAVE10",
+      "Logging in with a wrong password, then applying it",
       "Changing the colour of the \"Apply\" button"
     ],
     "answer": 0,

@@ -5,15 +5,15 @@
     "questionEn": "What is the main difference between let, const, and var in JavaScript?",
     "options": [
       "Không có sự khác biệt, chỉ là cú pháp khác nhau",
-      "let và const có block scope và được giới thiệu từ ES6; var có function scope và dễ gây lỗi",
-      "var nhanh hơn let và const",
-      "const không thể dùng trong vòng lặp"
+      "let/const có block scope; var có function scope",
+      "var chạy nhanh hơn let và const vì cũ hơn",
+      "const không thể dùng trong vòng lặp for"
     ],
     "optionsEn": [
       "There is no difference, just different syntax",
-      "let and const have block scope and were introduced in ES6; var has function scope and is more error-prone",
-      "var is faster than let and const",
-      "const cannot be used in loops"
+      "let/const are block-scoped; var is function-scoped",
+      "var runs faster than let and const because it is older",
+      "const cannot be used inside a for loop"
     ],
     "answer": 1,
     "explanation": "var có function scope và bị hoisted theo cách dễ gây bug. let và const có block scope (an toàn hơn). const không cho gán lại biến, nhưng object/array vẫn có thể thay đổi nội dung. Code hiện đại dùng const là mặc định, let khi cần thay đổi.",
@@ -44,14 +44,14 @@
     "question": "Arrow function khác function thường ở điểm gì quan trọng nhất?",
     "questionEn": "What is the most important way an arrow function differs from a regular function?",
     "options": [
-      "Arrow function nhanh hơn",
-      "Arrow function không có this riêng, dùng this từ scope bao quanh",
+      "Arrow function luôn chạy nhanh hơn",
+      "Arrow function không có this riêng",
       "Arrow function không thể có tham số",
       "Arrow function chỉ dùng được trong class"
     ],
     "optionsEn": [
-      "Arrow functions are faster",
-      "Arrow functions have no own this and use this from the surrounding scope",
+      "Arrow functions always run faster",
+      "Arrow functions have no this of their own",
       "Arrow functions cannot have parameters",
       "Arrow functions can only be used inside a class"
     ],
@@ -105,13 +105,13 @@
     "questionEn": "What is async/await used for in JavaScript?",
     "options": [
       "Làm cho code chạy nhanh hơn bằng cách dùng nhiều CPU",
-      "Viết code bất đồng bộ theo cú pháp trông như đồng bộ, dễ đọc hơn",
+      "Viết code bất đồng bộ trông như đồng bộ",
       "Tạo nhiều thread song song",
       "Ngăn JavaScript chạy bất đồng bộ"
     ],
     "optionsEn": [
       "Making code run faster by using multiple CPUs",
-      "Writing asynchronous code with a syntax that looks synchronous and is easier to read",
+      "Writing async code that reads like sync code",
       "Creating multiple parallel threads",
       "Preventing JavaScript from running asynchronously"
     ],
@@ -124,16 +124,16 @@
     "question": "Destructuring trong JavaScript là gì?",
     "questionEn": "What is destructuring in JavaScript?",
     "options": [
-      "Xóa bỏ một biến khỏi bộ nhớ",
-      "Cú pháp để trích xuất giá trị từ array hoặc object vào các biến riêng",
-      "Chia một function thành nhiều function nhỏ",
-      "Chuyển đổi object thành string"
+      "Xóa một biến khỏi bộ nhớ để giải phóng",
+      "Tách giá trị từ array/object ra các biến riêng",
+      "Chia một function lớn thành nhiều function nhỏ",
+      "Chuyển đổi object thành chuỗi JSON"
     ],
     "optionsEn": [
-      "Removing a variable from memory",
-      "Syntax for extracting values from an array or object into separate variables",
+      "Removing a variable from memory to free it",
+      "Unpacking array/object values into variables",
       "Splitting a function into several smaller functions",
-      "Converting an object into a string"
+      "Converting an object into a JSON string"
     ],
     "answer": 1,
     "explanation": "Destructuring cho phép: const { name, age } = user; hoặc const [first, second] = arr;. Giúp code ngắn gọn hơn. Rất phổ biến trong React: const { data, loading, error } = useFetch('/api');",
@@ -144,16 +144,16 @@
     "question": "Spread operator (...) trong JavaScript dùng để làm gì?",
     "questionEn": "What is the spread operator (...) used for in JavaScript?",
     "options": [
-      "Tạo vòng lặp vô hạn",
-      "Mở rộng iterable (array, object) thành các phần tử riêng lẻ",
-      "Khai báo rest parameters",
-      "Tạo function generator"
+      "Tạo một vòng lặp chạy vô hạn lần",
+      "Trải array/object ra thành từng phần tử",
+      "Khai báo giá trị tham số mặc định cho hàm",
+      "Tạo một function generator mới"
     ],
     "optionsEn": [
-      "Creating an infinite loop",
-      "Expanding an iterable (array, object) into individual elements",
-      "Declaring rest parameters",
-      "Creating a generator function"
+      "Creating a loop that runs forever",
+      "Spreading an array/object into items",
+      "Declaring default parameters for a function",
+      "Creating a new generator function"
     ],
     "answer": 1,
     "explanation": "Spread (...) mở rộng array/object. Copy array: [...arr], merge: [...arr1, ...arr2]. Copy object: {...obj}, override: {...obj, key: newValue}. Rất hay dùng để tạo bản copy tránh mutation gốc.",
@@ -165,13 +165,13 @@
     "questionEn": "What is event delegation and why should you use it?",
     "options": [
       "Gắn event listener vào mỗi phần tử con — chính xác hơn",
-      "Gắn event listener vào parent element, xử lý event của tất cả phần tử con",
+      "Gắn listener vào cha để xử lý event của các con",
       "Tự động remove event listener sau khi kích hoạt",
-      "Chuyển event từ FE lên BE xử lý"
+      "Chuyển event từ frontend lên backend xử lý"
     ],
     "optionsEn": [
       "Attaching an event listener to each child element — more precise",
-      "Attaching an event listener to the parent element to handle events from all child elements",
+      "One listener on the parent handles its children's events",
       "Automatically removing the event listener after it fires",
       "Passing the event from the FE to the BE for handling"
     ],
@@ -184,16 +184,16 @@
     "question": "Nullish coalescing operator (??) khác với OR operator (||) như thế nào?",
     "questionEn": "How does the nullish coalescing operator (??) differ from the OR operator (||)?",
     "options": [
-      "Chúng hoàn toàn giống nhau",
-      "?? chỉ fallback khi giá trị là null hoặc undefined; || fallback với mọi giá trị falsy (0, '', false...)",
+      "Chúng giống nhau, chỉ khác cách viết",
+      "?? chỉ thay khi null/undefined; || thay với mọi giá trị falsy",
       "|| chỉ dùng cho boolean, ?? dùng cho mọi kiểu",
-      "?? nhanh hơn ||"
+      "?? thay với mọi giá trị falsy; || chỉ khi null/undefined"
     ],
     "optionsEn": [
-      "They are exactly the same",
-      "?? only falls back when the value is null or undefined; || falls back on any falsy value (0, '', false...)",
+      "They are the same, just written differently",
+      "?? falls back only on null/undefined; || on any falsy value",
       "|| is only for booleans, ?? is for all types",
-      "?? is faster than ||"
+      "?? falls back on any falsy value; || only on null/undefined"
     ],
     "answer": 1,
     "explanation": "const val = 0 || 'default' → 'default' (vì 0 là falsy). const val = 0 ?? 'default' → 0 (vì 0 không phải null/undefined). ?? hữu ích khi 0, '' hoặc false là giá trị hợp lệ cần giữ lại.",
@@ -206,13 +206,13 @@
     "options": [
       "Một thư viện JavaScript phổ biến",
       "Database Of Methods — nơi lưu các phương thức JS",
-      "Document Object Model — biểu diễn cấu trúc HTML dưới dạng object để JS thao tác",
+      "Document Object Model — trang HTML dạng object cho JS",
       "Display Output Manager — quản lý hiển thị trên màn hình"
     ],
     "optionsEn": [
       "A popular JavaScript library",
       "Database Of Methods — where JS methods are stored",
-      "Document Object Model — a representation of the HTML structure as objects for JS to manipulate",
+      "Document Object Model — the HTML page as objects for JS",
       "Display Output Manager — manages what is shown on screen"
     ],
     "answer": 2,
@@ -264,15 +264,15 @@
     "question": "localStorage.setItem() và localStorage.getItem() dùng để làm gì?",
     "questionEn": "What are localStorage.setItem() and localStorage.getItem() used for?",
     "options": [
-      "Lưu và đọc dữ liệu trên server",
-      "Lưu và đọc dữ liệu trong trình duyệt của user (vĩnh viễn đến khi xóa)",
-      "Lưu dữ liệu tạm trong session hiện tại",
-      "Cache HTTP response từ server"
+      "Lưu và đọc dữ liệu trên database của server",
+      "Lưu và đọc dữ liệu trong trình duyệt, giữ đến khi xóa",
+      "Lưu dữ liệu tạm thời, tự mất ngay khi đóng tab trình duyệt",
+      "Cache các HTTP response nhận từ server"
     ],
     "optionsEn": [
-      "Saving and reading data on the server",
-      "Saving and reading data in the user's browser (persistent until cleared)",
-      "Storing temporary data for the current session",
+      "Saving and reading data in the server's database",
+      "Saving and reading data in the browser until cleared",
+      "Storing temporary data that vanishes when the tab closes",
       "Caching HTTP responses from the server"
     ],
     "answer": 1,
@@ -285,13 +285,13 @@
     "questionEn": "Why should you place the <script src='app.js'> tag at the end of the <body> rather than in the <head>?",
     "options": [
       "Không có lý do kỹ thuật, chỉ là convention",
-      "Để HTML render trước, tránh blocking — user thấy nội dung nhanh hơn",
+      "Để HTML hiển thị trước, người dùng thấy nội dung sớm hơn",
       "JavaScript không chạy được khi đặt trong <head>",
-      "SEO yêu cầu script phải ở cuối body"
+      "SEO yêu cầu mọi script phải nằm ở cuối body"
     ],
     "optionsEn": [
       "There is no technical reason, it is just a convention",
-      "So the HTML renders first, avoiding blocking — the user sees content sooner",
+      "So HTML renders first and users see content sooner",
       "JavaScript cannot run when placed in the <head>",
       "SEO requires scripts to be at the end of the body"
     ],
@@ -303,16 +303,16 @@
     "question": "Giao diện hiển thị vòng quay chờ mãi không dứt sau khi bấm Lưu. Nguyên nhân nào liên quan tới xử lý bất đồng bộ?",
     "questionEn": "The UI spins forever after clicking Save. Which cause relates to asynchronous handling?",
     "options": [
-      "Mã không xử lý trường hợp lời gọi API thất bại nên trạng thái chờ không bao giờ được tắt",
-      "Nút Lưu có màu sai",
-      "Trình duyệt thiếu bộ nhớ",
-      "CSS chưa được tải"
+      "Mã bỏ qua lỗi API nên trạng thái chờ không tắt",
+      "Nút Lưu bị đặt sai màu trong CSS",
+      "Trình duyệt bị hết bộ nhớ RAM khi đang chạy trang",
+      "File CSS của trang chưa được tải xong"
     ],
     "optionsEn": [
-      "The code does not handle the API call failing, so the loading state is never cleared",
-      "The Save button has the wrong colour",
-      "The browser is out of memory",
-      "The CSS has not loaded"
+      "Unhandled API errors leave loading on forever",
+      "The Save button has the wrong colour in CSS",
+      "The browser runs out of RAM on that page",
+      "The page's CSS file has not finished loading"
     ],
     "answer": 0,
     "explanation": "Đây là lý do mọi yêu cầu chức năng mô tả đường đi thuận lợi nên đi kèm yêu cầu mô tả hành vi khi có ngoại lệ.",
@@ -323,16 +323,16 @@
     "question": "Fetch API trong JavaScript dùng để làm gì?",
     "questionEn": "What is the JavaScript Fetch API used for?",
     "options": [
-      "Gửi HTTP request từ trình duyệt tới server và nhận dữ liệu trả về",
-      "Lưu dữ liệu vĩnh viễn trên máy người dùng",
-      "Vẽ giao diện đồ hoạ",
-      "Nén tệp trước khi tải lên"
+      "Gửi HTTP request tới server và nhận kết quả",
+      "Lưu dữ liệu vĩnh viễn trên máy của người dùng",
+      "Vẽ giao diện đồ họa và hiệu ứng",
+      "Nén tệp lại trước khi tải lên server"
     ],
     "optionsEn": [
-      "Send HTTP requests from the browser to the server and receive the response",
+      "Sending HTTP requests and receiving responses",
       "Store data permanently on the user's machine",
-      "Render graphical interfaces",
-      "Compress files before upload"
+      "Rendering graphics and visual effects",
+      "Compressing files before uploading them"
     ],
     "answer": 0,
     "explanation": "Hiểu Fetch giúp BA đọc được tab Network và tự xác minh xem lỗi nằm ở phía giao diện hay phía dữ liệu trả về.",
@@ -343,16 +343,16 @@
     "question": "LocalStorage và SessionStorage khác nhau ở điểm nào?",
     "questionEn": "How do localStorage and sessionStorage differ?",
     "options": [
-      "LocalStorage tồn tại sau khi đóng trình duyệt; SessionStorage mất khi đóng tab",
+      "LocalStorage giữ lâu dài; SessionStorage mất khi đóng tab",
       "LocalStorage được mã hoá còn SessionStorage thì không",
-      "SessionStorage lưu được dung lượng lớn hơn nhiều",
-      "Cả hai đều được gửi tự động lên server"
+      "SessionStorage lưu được nhiều dữ liệu hơn hẳn LocalStorage",
+      "Cả hai đều được tự động gửi lên server mỗi request"
     ],
     "optionsEn": [
-      "localStorage survives closing the browser; sessionStorage is cleared when the tab closes",
+      "localStorage persists; sessionStorage ends with the tab",
       "localStorage is encrypted and sessionStorage is not",
-      "sessionStorage holds far more data",
-      "Both are sent to the server automatically"
+      "sessionStorage holds far more data than localStorage",
+      "Both are sent to the server automatically with requests"
     ],
     "answer": 0,
     "explanation": "Cả hai đều lưu ở phía trình duyệt và KHÔNG được mã hoá, nên không bao giờ lưu dữ liệu nhạy cảm ở đó — đó là một yêu cầu bảo mật.",
@@ -363,16 +363,16 @@
     "question": "DOM là gì?",
     "questionEn": "What is the DOM?",
     "options": [
-      "Cấu trúc cây biểu diễn trang HTML mà JavaScript có thể đọc và thay đổi",
-      "Một cơ sở dữ liệu của trình duyệt",
-      "Giao thức truyền dữ liệu",
-      "Định dạng tệp ảnh"
+      "Cây biểu diễn trang HTML mà JavaScript đọc và sửa được",
+      "Một cơ sở dữ liệu tích hợp sẵn trong trình duyệt",
+      "Giao thức truyền dữ liệu giữa các trang",
+      "Định dạng tệp ảnh dùng trên web"
     ],
     "optionsEn": [
-      "A tree structure representing the HTML page that JavaScript can read and modify",
-      "A browser database",
-      "A data transfer protocol",
-      "An image file format"
+      "A tree of the HTML page that JS can change",
+      "A database built into the web browser",
+      "A protocol for sending data between pages",
+      "An image file format used on the web"
     ],
     "answer": 0,
     "explanation": "Mọi tương tác động trên trang — hiện thông báo, ẩn nút, thêm dòng — đều là thao tác trên DOM.",
@@ -383,16 +383,16 @@
     "question": "BA cần đặc tả hành vi khi người dùng bấm nút hai lần liên tiếp rất nhanh. Vì sao điều này quan trọng?",
     "questionEn": "A BA must specify behaviour when a user double-clicks a button very fast. Why does this matter?",
     "options": [
-      "Vì nếu không chặn, hệ thống có thể tạo hai bản ghi trùng hoặc trừ tiền hai lần",
-      "Vì trình duyệt sẽ bị treo",
-      "Vì CSS sẽ hiển thị sai",
+      "Vì có thể tạo bản ghi trùng hoặc trừ tiền hai lần",
+      "Vì trình duyệt sẽ bị treo khi nhận hai cú bấm",
+      "Vì CSS của nút sẽ hiển thị sai trạng thái",
       "Vì đây là yêu cầu bắt buộc của mọi tiêu chuẩn"
     ],
     "optionsEn": [
-      "Because without guarding, the system may create duplicate records or charge twice",
-      "Because the browser will freeze",
-      "Because CSS will render incorrectly",
-      "Because every standard mandates it"
+      "It may create duplicates or charge twice",
+      "Because the browser freezes on two quick clicks",
+      "Because the button's CSS shows the wrong state",
+      "Because every industry standard mandates it"
     ],
     "answer": 0,
     "explanation": "Đây là loại yêu cầu ngoại lệ hay bị bỏ sót nhất và cũng là nguồn của những sự cố nghiệp vụ nghiêm trọng nhất.",

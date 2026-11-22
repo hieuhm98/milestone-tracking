@@ -6,7 +6,7 @@
     "options": [
       "Một giá trị và một tham chiếu tới node kế tiếp (hoặc null)",
       "Một giá trị và index của nó trong list",
-      "Một giá trị và tham chiếu tới cả node trước lẫn node sau",
+      "Một giá trị và tham chiếu tới cả node đứng trước lẫn node đứng sau",
       "Chỉ giá trị; list giữ một mảng địa chỉ của các node"
     ],
     "optionsEn": [
@@ -24,16 +24,16 @@
     "question": "Vì sao truy cập phần tử thứ i của linked list là O(n) chứ không phải O(1) như array?",
     "questionEn": "Why is accessing the i-th element of a linked list O(n) instead of O(1) as with an array?",
     "options": [
-      "Vì object trong JavaScript không thể được lưu trong array",
-      "Vì phải so sánh giá trị của từng node với index",
-      "Vì các node không nằm liền nhau và không có index, nên phải đi theo con trỏ next từ head",
-      "Vì list phải được sắp xếp trước khi truy cập"
+      "Vì object trong JavaScript không thể được lưu liền nhau bên trong một array",
+      "Vì phải so sánh giá trị của từng node với index cần tìm",
+      "Vì node không nằm liền nhau và không có index, phải đi theo next từ head",
+      "Vì list phải được sắp xếp lại theo thứ tự chèn trước khi truy cập"
     ],
     "optionsEn": [
-      "Because JavaScript objects cannot be stored in arrays",
-      "Because each node's value must be compared with the index",
-      "Because nodes are not contiguous and have no index, so you must follow next pointers from the head",
-      "Because the list must be sorted before it can be accessed"
+      "Because JavaScript objects can never be stored contiguously inside an array",
+      "Because each node's value must be compared with the target index",
+      "Because nodes are not contiguous and have no index, so you follow next from head",
+      "Because the list must be re-sorted into insertion order before access"
     ],
     "answer": 2,
     "explanation": "Array là khối bộ nhớ liền mạch nên `arr[i]` chỉ là một phép tính địa chỉ. Node của linked list nằm rải rác trên heap, chỉ nối nhau bằng tham chiếu, nên muốn tới node thứ i phải bước i lần từ head.",
@@ -64,15 +64,15 @@
     "question": "push trên danh sách liên kết đơn là O(1). Điều gì làm được việc đó?",
     "questionEn": "push on a singly linked list is O(1). What makes that possible?",
     "options": [
-      "Các node được lưu liền nhau trong bộ nhớ",
-      "Thuộc tính length cho biết node cuối ở đâu",
-      "JavaScript engine tối ưu việc tạo object",
+      "Các node được lưu liền nhau trong bộ nhớ như một array",
+      "Thuộc tính length cho biết node cuối nằm ở địa chỉ nào",
+      "JavaScript engine tối ưu việc tạo object mới thành O(1)",
       "List giữ con trỏ tail, nên không phải đi tới cuối list"
     ],
     "optionsEn": [
-      "The nodes are stored next to each other in memory",
-      "The length property tells us where the last node is",
-      "The JavaScript engine optimises object creation",
+      "The nodes are stored next to each other in memory like an array",
+      "The length property tells us the address of the last node",
+      "The JavaScript engine optimises creating new objects to O(1)",
       "The list keeps a tail pointer, so there is no walk to the end"
     ],
     "answer": 3,
@@ -84,16 +84,16 @@
     "question": "List đã có con trỏ tail, vậy vì sao pop trên danh sách liên kết đơn vẫn là O(n)?",
     "questionEn": "The list already has a tail pointer, so why is pop on a singly linked list still O(n)?",
     "options": [
-      "Vì phải tìm node áp chót để làm tail mới, mà node không có con trỏ ngược nên phải đi từ head",
-      "Vì sau khi xoá, mọi node còn lại phải được đánh lại index",
-      "Vì giá trị của tail phải được sao chép sang một list mới",
-      "Vì garbage collector phải quét toàn bộ list"
+      "Vì phải tìm node áp chót để làm tail mới, mà node không có con trỏ ngược",
+      "Vì sau khi xoá tail, mọi node còn lại phải được đánh lại index từ đầu",
+      "Vì giá trị của tail phải được sao chép sang một list mới trước khi xoá nó",
+      "Vì garbage collector phải quét toàn bộ list để giải phóng node tail"
     ],
     "optionsEn": [
-      "Because the second-to-last node must become the new tail, and with no back pointer you must walk from the head",
-      "Because every remaining node must be re-indexed after the removal",
-      "Because the tail's value must be copied into a new list",
-      "Because the garbage collector has to scan the whole list"
+      "Because the second-to-last node must become the tail, and nodes have no back pointer",
+      "Because every remaining node must be re-indexed from the head after removal",
+      "Because the tail's value must first be copied into a new list before it is removed",
+      "Because the garbage collector must scan the whole list to free the old tail"
     ],
     "answer": 0,
     "explanation": "Xoá tail thì dễ, nhưng tail mới phải là node áp chót và `next` của nó phải thành null. Node chỉ biết node sau nó, nên cách duy nhất để tìm node áp chót là duyệt từ head. Danh sách liên kết đôi dùng `tail.prev` để làm pop O(1).",
@@ -104,16 +104,16 @@
     "question": "Method shift sau có bug. Bug đó là gì?\n`shift() {\n  if (!this.head) return undefined;\n  const oldHead = this.head;\n  this.head = oldHead.next;\n  this.length--;\n  return oldHead.val;\n}`",
     "questionEn": "This shift method has a bug. What is it?\n`shift() {\n  if (!this.head) return undefined;\n  const oldHead = this.head;\n  this.head = oldHead.next;\n  this.length--;\n  return oldHead.val;\n}`",
     "options": [
-      "Phải giảm `length` trước khi dời `head`",
-      "Phải trả về `oldHead` thay vì `oldHead.val`",
-      "Khi shift node duy nhất, `tail` không được đặt về null và vẫn trỏ vào node đã xoá",
-      "Điều kiện chặn phải là `this.length > 1`"
+      "Phải giảm `length` trước khi dời `head`, nếu không list bị lệch độ dài",
+      "Phải trả về `oldHead` thay vì `oldHead.val` để caller tự lấy giá trị ra",
+      "Khi shift node duy nhất, `tail` không được đặt về null mà vẫn trỏ node cũ",
+      "Điều kiện chặn phải là `this.length > 1` để không shift list một node"
     ],
     "optionsEn": [
-      "`length` must be decremented before moving `head`",
-      "It must return `oldHead` instead of `oldHead.val`",
-      "When the only node is shifted, `tail` is not reset to null and still points at the removed node",
-      "The guard must be `this.length > 1`"
+      "`length` must be decremented before moving `head`, or the count drifts",
+      "It must return `oldHead` rather than `oldHead.val`, so callers get the whole node",
+      "When the only node is shifted, `tail` is not reset to null and keeps the old node",
+      "The guard must be `this.length > 1` so a one-node list is never shifted"
     ],
     "answer": 2,
     "explanation": "Với list một node, sau shift thì `head` là null và `length` là 0, nhưng `tail` vẫn trỏ vào node cũ — vi phạm bất biến \"list rỗng ⇔ head và tail đều null\". Cần thêm `if (this.length === 0) this.tail = null;`. Thứ tự giảm length hay việc trả về val đều không phải lỗi.",
@@ -127,13 +127,13 @@
       "Array, dùng unshift và shift",
       "Danh sách liên kết đơn, dùng unshift và shift",
       "Array, sắp xếp lại sau mỗi lần thêm",
-      "Danh sách liên kết đơn, dùng push và pop"
+      "Danh sách liên kết đơn, dùng push và pop ở tail"
     ],
     "optionsEn": [
       "An array, using unshift and shift",
       "A singly linked list, using unshift and shift",
       "An array, re-sorting after every insert",
-      "A singly linked list, using push and pop"
+      "A singly linked list, using push and pop at the tail"
     ],
     "answer": 1,
     "explanation": "unshift và shift trên linked list chỉ nối lại head: O(1). Trên array, cả hai là O(n) vì mọi phần tử phải dịch index. push/pop làm việc ở cuối (và pop là O(n)), không phải ở đầu.",
@@ -167,13 +167,13 @@
       "newNode trỏ vào chính nó, phần còn lại của list sau prev bị mất",
       "Chạy đúng, vì thứ tự hai phép gán không quan trọng",
       "newNode được chèn vào sau vị trí mong muốn một bước",
-      "Ném ra TypeError vì prev.next là null"
+      "Ném ra TypeError vì prev.next là null ngay sau phép gán đầu tiên"
     ],
     "optionsEn": [
       "newNode points to itself and the rest of the list after prev is lost",
       "It works, because the order of the two assignments does not matter",
       "newNode is inserted one position after the intended index",
-      "It throws a TypeError because prev.next is null"
+      "It throws a TypeError because prev.next is null after the first assignment"
     ],
     "answer": 0,
     "explanation": "Sau `prev.next = newNode`, tham chiếu duy nhất tới node cũ đứng sau prev đã bị ghi đè. Dòng tiếp theo đọc `prev.next` — lúc này chính là newNode — nên tạo một vòng tự trỏ. Phải gán `newNode.next = prev.next` TRƯỚC.",
@@ -185,7 +185,7 @@
     "questionEn": "What is the worst-case time complexity of `insert(index, val)` for an index in the middle of the list?",
     "options": [
       "O(1), vì chỉ nối lại hai con trỏ",
-      "O(log n), vì có thể chia đôi list để tìm vị trí",
+      "O(log n), vì có thể chia đôi list để tìm vị trí cần chèn",
       "O(n), vì phải gọi get(index - 1) để đi tới node đứng trước",
       "O(n²), vì mỗi node phía sau phải dịch một bước"
     ],
@@ -204,16 +204,16 @@
     "question": "Method remove dùng điều kiện chặn sau. Chuyện gì xảy ra khi gọi `remove(list.length)` trên list có 4 node?\n`if (index < 0 || index > this.length) return undefined;\nif (index === 0) return this.shift();\nif (index === this.length - 1) return this.pop();\nconst prev = this.get(index - 1);\nconst removed = prev.next;\nprev.next = removed.next;`",
     "questionEn": "A remove method uses the guard below. What happens when calling `remove(list.length)` on a 4-node list?\n`if (index < 0 || index > this.length) return undefined;\nif (index === 0) return this.shift();\nif (index === this.length - 1) return this.pop();\nconst prev = this.get(index - 1);\nconst removed = prev.next;\nprev.next = removed.next;`",
     "options": [
-      "Trả về undefined vì index nằm ngoài phạm vi",
-      "Lọt qua điều kiện chặn, prev là tail, removed là null và `removed.next` ném TypeError",
-      "Xoá node tail thông qua pop",
-      "Xoá node head thông qua shift"
+      "Trả về undefined vì index bằng length nằm ngoài phạm vi của list",
+      "Lọt qua điều kiện chặn, `removed` là null và `removed.next` ném TypeError",
+      "Xoá node tail thông qua pop, vì index trỏ tới vị trí sau node cuối",
+      "Xoá node head thông qua shift, vì index quay vòng về 0 khi bằng đúng length"
     ],
     "optionsEn": [
-      "It returns undefined because the index is out of range",
-      "It passes the guard, prev is the tail, removed is null and `removed.next` throws a TypeError",
-      "It removes the tail node via pop",
-      "It removes the head node via shift"
+      "It returns undefined because an index equal to length is out of range",
+      "It passes the guard, `removed` is null and `removed.next` throws a TypeError",
+      "It removes the tail via pop, since the index points just past the very last node",
+      "It removes the head via shift, since an index equal to length wraps to 0"
     ],
     "answer": 1,
     "explanation": "Index 4 không lớn hơn length 4 nên lọt qua `>`. Nó không phải 0 cũng không phải 3, nên `get(3)` trả về tail, `tail.next` là null, và đọc `null.next` gây TypeError. Với remove, điều kiện đúng là `index >= this.length`; chỉ insert mới cho phép `index === length`.",
@@ -232,7 +232,7 @@
     "optionsEn": [
       "O(n), because every node is visited",
       "O(n²), because each pointer is flipped once per node",
-      "O(log n), because the list splits into a reversed and an unreversed part",
+      "O(log n), because the list is split into a reversed part and a not-yet-reversed part",
       "O(1), because only three pointer variables are used however long the list is"
     ],
     "answer": 3,
@@ -290,7 +290,7 @@
       "Linked list tốn ít bộ nhớ cho mỗi phần tử hơn array"
     ],
     "optionsEn": [
-      "A linked list reads the k-th element in O(1) because each node stores its position",
+      "A linked list reads the k-th element in O(1) because every node stores its own position",
       "An array reads the k-th element in O(1); a linked list needs O(k) steps from the head",
       "Array unshift is O(1), just like linked list unshift",
       "A linked list uses less memory per element than an array"

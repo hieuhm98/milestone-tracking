@@ -3,8 +3,8 @@
     "id": "q1",
     "question": "API (Application Programming Interface) là gì?",
     "questionEn": "What is an API (Application Programming Interface)?",
-    "options": ["Phần mềm thiết kế giao diện đồ họa", "Giao diện cho phép các hệ thống phần mềm giao tiếp với nhau", "Ngôn ngữ lập trình đặc biệt", "Loại database phân tán"],
-    "optionsEn": ["Software for designing graphical interfaces", "An interface that allows software systems to communicate with each other", "A special programming language", "A type of distributed database"],
+    "options": ["Phần mềm dùng để thiết kế giao diện đồ họa", "Cách để các phần mềm giao tiếp với nhau", "Một ngôn ngữ lập trình dành riêng cho web", "Một loại database phân tán trên nhiều server"],
+    "optionsEn": ["Software used to design graphical user interfaces", "A way for software systems to talk to each other", "A programming language made just for the web", "A kind of database spread across many servers"],
     "answer": 1,
     "explanation": "API là cầu nối cho phép ứng dụng này gọi chức năng của ứng dụng khác mà không cần biết cách chúng hoạt động bên trong. Grab gọi Google Maps API để lấy bản đồ.",
     "explanationEn": "An API is a bridge that lets one application call another application's functionality without needing to know how it works internally. Grab calls the Google Maps API to get maps."
@@ -23,8 +23,8 @@
     "id": "q3",
     "question": "JSON là gì?",
     "questionEn": "What is JSON?",
-    "options": ["Ngôn ngữ lập trình", "Định dạng văn bản phổ biến để trao đổi dữ liệu qua API", "Loại database", "Giao thức mạng"],
-    "optionsEn": ["A programming language", "A popular text format for exchanging data via APIs", "A type of database", "A network protocol"],
+    "options": ["Ngôn ngữ lập trình chạy trên trình duyệt", "Định dạng văn bản để trao đổi dữ liệu", "Một loại database lưu dữ liệu dạng bảng", "Giao thức mạng để truyền file"],
+    "optionsEn": ["A programming language that runs in browsers", "A text format for exchanging data", "A type of database that stores tables", "A network protocol for sending files"],
     "answer": 1,
     "explanation": "JSON (JavaScript Object Notation) là định dạng text dễ đọc, dùng để truyền dữ liệu giữa client và server. Hầu hết REST API trả về JSON.",
     "explanationEn": "JSON (JavaScript Object Notation) is a human-readable text format used to transfer data between client and server. Most REST APIs return JSON."
@@ -33,8 +33,8 @@
     "id": "q4",
     "question": "Endpoint trong API là gì?",
     "questionEn": "What is an endpoint in an API?",
-    "options": ["Địa chỉ IP của server", "URL cụ thể đại diện cho một tài nguyên hoặc hành động", "Loại token xác thực", "Định dạng dữ liệu trả về"],
-    "optionsEn": ["The server's IP address", "A specific URL representing a resource or action", "A type of authentication token", "The format of the returned data"],
+    "options": ["Địa chỉ IP của server chứa API", "URL cụ thể cho một tài nguyên hoặc hành động", "Loại token dùng để xác thực người gọi", "Định dạng dữ liệu mà API trả về"],
+    "optionsEn": ["The IP address of the API server", "A specific URL for a resource or action", "A type of token used to authenticate callers", "The data format the API sends back"],
     "answer": 1,
     "explanation": "Endpoint = URL cụ thể. Ví dụ: /api/products là endpoint để thao tác với tài nguyên 'products'. Mỗi endpoint kết hợp với HTTP method tạo ra một hành động cụ thể.",
     "explanationEn": "An endpoint is a specific URL. For example, /api/products is the endpoint for working with the 'products' resource. Each endpoint combined with an HTTP method produces a specific action."
@@ -43,8 +43,8 @@
     "id": "q5",
     "question": "GET /api/products/5 có ý nghĩa gì?",
     "questionEn": "What does GET /api/products/5 mean?",
-    "options": ["Xóa sản phẩm có id=5", "Cập nhật sản phẩm có id=5", "Lấy thông tin chi tiết sản phẩm có id=5", "Tạo mới sản phẩm với số lượng 5"],
-    "optionsEn": ["Delete the product with id=5", "Update the product with id=5", "Retrieve the details of the product with id=5", "Create a new product with quantity 5"],
+    "options": ["Xóa sản phẩm có id=5", "Cập nhật sản phẩm có id=5", "Lấy thông tin sản phẩm có id=5", "Tạo mới sản phẩm với số lượng 5"],
+    "optionsEn": ["Delete the product with id=5", "Update the product with id=5", "Fetch the product with id=5", "Create a new product with quantity 5"],
     "answer": 2,
     "explanation": "GET = đọc dữ liệu. /api/products/5 = tài nguyên sản phẩm có id=5. Kết hợp lại: lấy chi tiết sản phẩm id=5.",
     "explanationEn": "GET = read data. /api/products/5 = the product resource with id=5. Combined: retrieve the details of the product with id=5."
@@ -54,7 +54,7 @@
     "question": "Trong JSON, cặp dấu ngoặc nhọn {} biểu thị gì?",
     "questionEn": "In JSON, what do curly braces {} represent?",
     "options": ["Mảng (array) - danh sách giá trị", "Object - tập hợp cặp key-value", "Comment giải thích", "Điều kiện if-else"],
-    "optionsEn": ["An array — a list of values", "An object — a collection of key-value pairs", "An explanatory comment", "An if-else condition"],
+    "optionsEn": ["An array — a list of values", "An object — key-value pairs", "An explanatory comment", "An if-else condition"],
     "answer": 1,
     "explanation": "Trong JSON: {} = object (key-value pairs), [] = array (danh sách). Ví dụ: {\"name\": \"Alice\", \"age\": 30} là object; [1, 2, 3] là array.",
     "explanationEn": "In JSON: {} = object (key-value pairs), [] = array (a list). For example: {\"name\": \"Alice\", \"age\": 30} is an object; [1, 2, 3] is an array."
@@ -63,8 +63,8 @@
     "id": "q7",
     "question": "API Key được dùng để làm gì?",
     "questionEn": "What is an API Key used for?",
-    "options": ["Mã hóa dữ liệu JSON", "Xác thực danh tính của người gọi API", "Tăng tốc độ API", "Chuyển đổi format dữ liệu"],
-    "optionsEn": ["To encrypt JSON data", "To authenticate the identity of the API caller", "To speed up the API", "To convert data formats"],
+    "options": ["Mã hóa dữ liệu JSON khi gửi", "Xác định ai đang gọi API", "Tăng tốc độ phản hồi của API", "Chuyển đổi format dữ liệu"],
+    "optionsEn": ["Encrypting JSON data in transit", "Identifying who is calling the API", "Making the API respond faster", "Converting between data formats"],
     "answer": 1,
     "explanation": "API Key là chuỗi bí mật gửi kèm request để server biết ai đang gọi API. Mỗi developer/app có key riêng — dùng để giới hạn, tính phí, và theo dõi usage.",
     "explanationEn": "An API Key is a secret string sent with the request so the server knows who is calling the API. Each developer/app has its own key — used for rate limiting, billing, and tracking usage."
@@ -73,8 +73,8 @@
     "id": "q8",
     "question": "REST API là 'stateless' có nghĩa là gì?",
     "questionEn": "What does it mean that a REST API is 'stateless'?",
-    "options": ["API không lưu trữ dữ liệu", "Mỗi request độc lập, server không nhớ context của request trước", "API chạy nhanh không bị delay", "API không có trạng thái lỗi"],
-    "optionsEn": ["The API does not store any data", "Each request is independent; the server does not remember the context of previous requests", "The API runs fast with no delay", "The API has no error states"],
+    "options": ["API không lưu bất kỳ dữ liệu nào vào database", "Mỗi request độc lập; server không nhớ request trước đó", "API phản hồi ngay lập tức, không có độ trễ mạng", "API không trả về mã trạng thái lỗi như 404, 500"],
+    "optionsEn": ["The API does not save data to a database", "Each request stands alone; the server keeps no memory", "The API responds instantly, with no network delay", "The API does not return error codes like 404 or 500"],
     "answer": 1,
     "explanation": "Stateless: mỗi HTTP request phải chứa đầy đủ thông tin cần thiết (auth token, params...). Server không lưu session giữa các request — dễ scale horizontal.",
     "explanationEn": "Stateless: each HTTP request must contain all the information needed (auth token, params...). The server does not keep a session between requests — making it easy to scale horizontally."
@@ -83,8 +83,8 @@
     "id": "q9",
     "question": "OAuth được dùng cho mục đích gì?",
     "questionEn": "What is OAuth used for?",
-    "options": ["Tăng tốc độ API", "Cho phép đăng nhập qua bên thứ 3 (Google, Facebook) mà không chia sẻ mật khẩu", "Mã hóa database", "Định dạng JSON nâng cao"],
-    "optionsEn": ["To speed up the API", "To allow login via a third party (Google, Facebook) without sharing your password", "To encrypt the database", "An advanced JSON format"],
+    "options": ["Tăng tốc API bằng bộ nhớ đệm", "Đăng nhập bằng tài khoản bên thứ 3", "Mã hóa toàn bộ dữ liệu trong database", "Định dạng JSON nâng cao cho API"],
+    "optionsEn": ["Speeding up APIs with caching", "Logging in with a third-party account", "Encrypting all data in the database", "An advanced JSON format for APIs"],
     "answer": 1,
     "explanation": "OAuth là chuẩn ủy quyền. Ví dụ 'Đăng nhập bằng Google': app bạn không nhận mật khẩu Google — Google xác thực và cấp token. An toàn, tiện lợi cho người dùng.",
     "explanationEn": "OAuth is an authorization standard. For example 'Sign in with Google': your app never receives the Google password — Google authenticates and issues a token. Safe and convenient for users."
@@ -93,8 +93,8 @@
     "id": "q10",
     "question": "HTTP Status 201 trong response của POST request có ý nghĩa gì?",
     "questionEn": "What does HTTP Status 201 mean in the response of a POST request?",
-    "options": ["Lỗi server", "Tài nguyên không tìm thấy", "Tạo mới thành công (Created)", "Yêu cầu bị từ chối"],
-    "optionsEn": ["Server error", "Resource not found", "Successfully created (Created)", "Request denied"],
+    "options": ["Lỗi phía server", "Tài nguyên không tìm thấy", "Tạo mới thành công", "Yêu cầu bị từ chối"],
+    "optionsEn": ["A server-side error", "Resource not found", "Created successfully", "Request was denied"],
     "answer": 2,
     "explanation": "201 Created: server đã tạo tài nguyên mới thành công. Thường đi kèm header Location trỏ đến URL của tài nguyên vừa tạo.",
     "explanationEn": "201 Created: the server successfully created a new resource. It usually comes with a Location header pointing to the URL of the newly created resource."
@@ -103,8 +103,8 @@
     "id": "q11",
     "question": "PATCH /api/products/5 khác PUT /api/products/5 ở điểm gì?",
     "questionEn": "How does PATCH /api/products/5 differ from PUT /api/products/5?",
-    "options": ["PATCH xóa, PUT cập nhật", "PATCH cập nhật một phần, PUT thay thế toàn bộ tài nguyên", "Chúng hoàn toàn giống nhau", "PUT nhanh hơn PATCH"],
-    "optionsEn": ["PATCH deletes, PUT updates", "PATCH does a partial update, PUT replaces the entire resource", "They are completely identical", "PUT is faster than PATCH"],
+    "options": ["PATCH xóa tài nguyên, PUT cập nhật nó", "PATCH sửa một phần, PUT thay cả tài nguyên", "PATCH tạo mới, PUT cập nhật tài nguyên", "PUT nhanh hơn PATCH vì gửi ít dữ liệu"],
+    "optionsEn": ["PATCH deletes the resource, PUT updates it", "PATCH updates part; PUT replaces the whole", "PATCH creates it, PUT updates the resource", "PUT is faster than PATCH as it sends less data"],
     "answer": 1,
     "explanation": "PUT: gửi toàn bộ object mới thay thế hoàn toàn. PATCH: chỉ gửi các field cần thay đổi. Ví dụ chỉ đổi giá sản phẩm thì dùng PATCH, không cần gửi lại tên, mô tả...",
     "explanationEn": "PUT: sends the entire new object to fully replace the resource. PATCH: sends only the fields that need to change. For example, to change only the product price, use PATCH — you don't need to resend the name, description, etc."
@@ -113,8 +113,8 @@
     "id": "q12",
     "question": "Swagger/OpenAPI được dùng để làm gì?",
     "questionEn": "What is Swagger/OpenAPI used for?",
-    "options": ["Tạo database tự động", "Viết và hiển thị tài liệu API theo chuẩn", "Kiểm tra bảo mật API", "Tạo UI cho API"],
-    "optionsEn": ["Automatically create a database", "Write and display API documentation in a standard format", "Test API security", "Create a UI for the API"],
+    "options": ["Tạo database tự động từ API", "Viết và hiển thị tài liệu API", "Quét lỗ hổng bảo mật của API", "Tạo giao diện người dùng cho app"],
+    "optionsEn": ["Generating a database from the API", "Writing and showing API documentation", "Scanning the API for security holes", "Building the app's user interface"],
     "answer": 1,
     "explanation": "Swagger/OpenAPI là chuẩn mô tả API — liệt kê tất cả endpoint, request/response format, authentication. Giúp developer khác biết cách dùng API mà không cần đọc code.",
     "explanationEn": "Swagger/OpenAPI is a standard for describing APIs — listing all endpoints, request/response formats, and authentication. It helps other developers learn how to use the API without reading the code."
@@ -123,8 +123,8 @@
     "id": "q13",
     "question": "Khi app Shopee hiển thị bản đồ địa chỉ giao hàng, điều gì xảy ra phía sau?",
     "questionEn": "When the Shopee app displays a map of the delivery address, what happens behind the scenes?",
-    "options": ["Shopee tự xây dựng và vận hành toàn bộ hệ thống bản đồ", "Shopee gọi API bên thứ 3 như Google Maps API để lấy dữ liệu bản đồ", "Browser tự vẽ bản đồ từ GPS", "Shopee download bản đồ về server của họ"],
-    "optionsEn": ["Shopee builds and operates the entire map system itself", "Shopee calls a third-party API such as the Google Maps API to get map data", "The browser draws the map itself from GPS", "Shopee downloads the map to its own servers"],
+    "options": ["Shopee tự xây dựng và vận hành toàn bộ hệ thống bản đồ", "Shopee gọi API bản đồ bên thứ 3 như Google Maps", "Trình duyệt tự vẽ bản đồ từ dữ liệu GPS", "Shopee download bản đồ về server của họ"],
+    "optionsEn": ["Shopee builds and operates the entire map system itself", "Shopee calls a third-party map API such as Google Maps", "The browser draws the map itself from GPS data", "Shopee downloads the map to its own servers"],
     "answer": 1,
     "explanation": "Xây dựng bản đồ cực kỳ phức tạp và tốn kém. Hầu hết app dùng Google Maps API, Mapbox API... — gọi API và trả phí theo số lượng request.",
     "explanationEn": "Building maps is extremely complex and expensive. Most apps use the Google Maps API, Mapbox API, etc. — calling the API and paying per number of requests."
@@ -133,8 +133,8 @@
     "id": "q14",
     "question": "Bearer Token trong HTTP header 'Authorization: Bearer eyJhbG...' là gì?",
     "questionEn": "What is the Bearer Token in the HTTP header 'Authorization: Bearer eyJhbG...'?",
-    "options": ["Tên người dùng mã hóa base64", "Token xác thực ngắn hạn được cấp sau khi đăng nhập thành công", "Mật khẩu người dùng mã hóa", "API Key của server"],
-    "optionsEn": ["A base64-encoded username", "A short-lived authentication token issued after a successful login", "An encrypted user password", "The server's API Key"],
+    "options": ["Tên đăng nhập được mã hóa bằng base64", "Token xác thực được cấp sau khi đăng nhập", "Mật khẩu người dùng đã được mã hóa", "API Key cố định mà server dùng chung"],
+    "optionsEn": ["The username encoded in base64", "An auth token issued after logging in", "The user's password in encrypted form", "A fixed API key shared by the server"],
     "answer": 1,
     "explanation": "Bearer Token (thường là JWT) được server cấp khi user đăng nhập. Client gửi kèm mỗi request để server biết đây là ai. Token có thời hạn — hết hạn phải lấy token mới.",
     "explanationEn": "A Bearer Token (usually a JWT) is issued by the server when a user logs in. The client sends it with each request so the server knows who it is. The token has an expiry — once expired, a new one must be obtained."
@@ -143,8 +143,8 @@
     "id": "q15",
     "question": "Nếu API trả về lỗi 403 Forbidden khi bạn gọi DELETE /api/products/5, nguyên nhân có thể là gì?",
     "questionEn": "If the API returns a 403 Forbidden error when you call DELETE /api/products/5, what could be the cause?",
-    "options": ["Sản phẩm id=5 không tồn tại", "Người dùng đã xác thực nhưng không có quyền xóa sản phẩm này", "Kết nối mạng bị đứt", "JSON gửi lên bị sai định dạng"],
-    "optionsEn": ["The product with id=5 does not exist", "The user is authenticated but does not have permission to delete this product", "The network connection was lost", "The submitted JSON is malformed"],
+    "options": ["Sản phẩm id=5 không tồn tại trong database", "Người dùng đã đăng nhập nhưng không có quyền xóa", "Kết nối mạng bị đứt khi đang gửi request", "JSON gửi lên bị sai định dạng cú pháp"],
+    "optionsEn": ["Product id=5 does not exist in the database", "The user is logged in but lacks delete permission", "The network connection dropped midway", "The JSON in the request has a syntax error"],
     "answer": 1,
     "explanation": "403 Forbidden: đã xác thực (authenticated) nhưng không có quyền (authorized) thực hiện hành động này. Ví dụ: user thường không có quyền xóa sản phẩm — chỉ admin mới được.",
     "explanationEn": "403 Forbidden: authenticated but not authorized to perform this action. For example, a regular user does not have permission to delete products — only an admin does."
@@ -176,13 +176,13 @@
     "options": [
       "Request thành công",
       "Lỗi do client gửi sai",
-      "Lỗi phía server (server gặp sự cố hoặc quá tải)",
+      "Lỗi phía server",
       "Yêu cầu chuyển hướng"
     ],
     "optionsEn": [
       "The request succeeded",
-      "An error caused by the client sending something wrong",
-      "A server-side error (the server failed or is overloaded)",
+      "A client-side error",
+      "A server-side error",
       "A redirection request"
     ],
     "answer": 2,
@@ -215,13 +215,13 @@
     "questionEn": "When a BA wants a system to receive real-time order-status updates without continuously asking the server, which mechanism should be used?",
     "options": [
       "Polling mỗi giây",
-      "Webhook (server gọi ngược về Callback URL khi có sự kiện)",
+      "Webhook",
       "Tăng số lượng request GET",
       "Xóa cache trình duyệt"
     ],
     "optionsEn": [
       "Polling every second",
-      "A webhook (the server calls back to a Callback URL when an event happens)",
+      "A webhook",
       "Increasing the number of GET requests",
       "Clearing the browser cache"
     ],
@@ -266,13 +266,13 @@
     "question": "Bạn muốn xem một trang web đã gọi những API nào và nhận status code gì. Bạn mở chỗ nào trong trình duyệt?",
     "questionEn": "You want to see which API calls a web page made and what status codes came back. Where do you look in the browser?",
     "options": [
-      "Tab Network trong công cụ dành cho nhà phát triển (DevTools)",
+      "Tab Network trong DevTools",
       "Lịch sử duyệt web (History)",
       "Trang cài đặt của trình duyệt",
       "Danh sách dấu trang (Bookmarks)"
     ],
     "optionsEn": [
-      "The Network tab in the browser's developer tools (DevTools)",
+      "The Network tab in DevTools",
       "The browsing History",
       "The browser's Settings page",
       "The Bookmarks list"
@@ -301,13 +301,13 @@
       "Server bị sập và cần khởi động lại",
       "Người dùng chưa đăng nhập",
       "Bên gọi gửi quá nhiều request",
-      "Không có tài nguyên nào ở địa chỉ đó — sản phẩm 99999 không tồn tại hoặc URL sai"
+      "Không có tài nguyên nào ở địa chỉ đó"
     ],
     "optionsEn": [
       "The server has crashed and must be restarted",
       "The user is not logged in",
       "The caller sent too many requests",
-      "Nothing exists at that address — product 99999 does not exist or the URL is wrong"
+      "Nothing exists at that address"
     ],
     "answer": 3,
     "explanation": "404 thuộc nhóm 4xx (lỗi phía bên gọi): bên gọi hỏi một thứ không có ở địa chỉ đó. Server sập là 5xx, chưa đăng nhập là 401, gọi quá dày là 429.",
@@ -331,13 +331,13 @@
     "questionEn": "Why must you never paste an API key into a screenshot, a ticket or public code?",
     "options": [
       "Vì API key quá dài nên làm ảnh khó đọc",
-      "Vì ai có key là có thể gọi API dưới danh nghĩa của bạn, và API trả phí sẽ tính tiền công ty bạn",
+      "Vì ai có key là gọi được API dưới tên bạn",
       "Vì API key sẽ tự động hết hạn khi bị chụp ảnh",
       "Vì API key chỉ hoạt động trên một máy tính duy nhất"
     ],
     "optionsEn": [
       "Because API keys are long and make screenshots hard to read",
-      "Because whoever has the key can call the API as you, and paid APIs will bill your company",
+      "Because anyone with the key can call the API as you",
       "Because an API key expires automatically when it is photographed",
       "Because an API key only works on one single computer"
     ],

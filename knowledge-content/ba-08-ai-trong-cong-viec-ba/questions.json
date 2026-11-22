@@ -4,16 +4,16 @@
     "question": "AI thay đổi phần nào của công việc BA và KHÔNG thay đổi phần nào?",
     "questionEn": "Which part of BA work does AI change, and which does it not?",
     "options": [
-      "Đổi mạnh cách tạo ra sản phẩm công việc; gần như không đổi phần cốt lõi là hiểu vấn đề nghiệp vụ và xây dựng hiểu biết chung",
-      "Đổi hoàn toàn cả hai phần",
-      "Không đổi gì cả",
-      "Chỉ đổi phần giao tiếp với stakeholder"
+      "Đổi mạnh cách soạn sản phẩm công việc; gần như không đổi việc hiểu vấn đề nghiệp vụ",
+      "Đổi cả hai: AI vừa soạn tài liệu vừa tự phỏng vấn stakeholder thay BA",
+      "Gần như không đổi gì, vì AI chưa đủ chính xác cho tài liệu nghiệp vụ",
+      "Đổi chủ yếu phần giao tiếp với stakeholder, còn soạn tài liệu thì vẫn thủ công như cũ"
     ],
     "optionsEn": [
-      "It dramatically changes how work products are produced; it barely changes the core of understanding the problem and building shared understanding",
-      "It completely changes both",
-      "It changes nothing",
-      "It only changes stakeholder communication"
+      "It reshapes how documents get drafted, barely how problems get understood",
+      "Both: AI drafts the documents and interviews stakeholders in the BA's place",
+      "Almost nothing, since AI isn't accurate enough for business documents",
+      "Mainly stakeholder communication, while documents are still drafted by hand as before"
     ],
     "answer": 0,
     "explanation": "AI làm phần soạn thảo nhanh hơn rất nhiều, nhưng phần khó nhất của nghề — biết phải hỏi gì và hỏi ai — vẫn thuộc về con người.",
@@ -24,16 +24,16 @@
     "question": "Việc nào AI KHÔNG thể làm thay BA?",
     "questionEn": "Which task can AI NOT do for a BA?",
     "options": [
-      "Quan sát người dùng làm việc thật và nhận ra khoảng cách giữa quy trình trên giấy với quy trình thực tế",
-      "Soạn bản nháp user story từ ghi chú",
-      "Sinh danh sách test case từ acceptance criteria",
-      "Tóm tắt một tài liệu dài"
+      "Quan sát người dùng làm việc thật để thấy khoảng cách với quy trình trên giấy",
+      "Soạn bản nháp user story kèm acceptance criteria từ ghi chú cuộc họp",
+      "Sinh danh sách test case, gồm cả các trường hợp biên, từ acceptance criteria có sẵn",
+      "Tóm tắt một tài liệu dài và chỉ ra các điểm mâu thuẫn trong đó"
     ],
     "optionsEn": [
-      "Observing users at real work and noticing the gap between the documented and the actual process",
-      "Drafting user stories from notes",
-      "Generating test cases from acceptance criteria",
-      "Summarising a long document"
+      "Watching users at real work to spot the gap with the documented process",
+      "Drafting user stories with acceptance criteria from meeting notes",
+      "Generating test cases, boundary cases included, from acceptance criteria",
+      "Summarising a long document and flagging contradictions in it"
     ],
     "answer": 0,
     "explanation": "AI cũng không biết bối cảnh tổ chức, không xây được lòng tin để stakeholder nói ra điều họ thực sự lo, và không chịu trách nhiệm được.",
@@ -45,15 +45,15 @@
     "questionEn": "What is the general rule for using AI in BA work?",
     "options": [
       "Dùng để tạo bản NHÁP và để PHẢN BIỆN, không dùng để tạo bản cuối",
-      "Dùng để tạo bản cuối rồi gửi thẳng cho đội phát triển",
-      "Chỉ dùng cho việc dịch thuật",
-      "Không nên dùng trong bất kỳ công việc nào"
+      "Dùng để tạo bản cuối, miễn là prompt đủ chi tiết và có ví dụ mẫu",
+      "Chỉ dùng cho dịch thuật và sửa chính tả, không dùng cho nội dung",
+      "Tránh dùng hoàn toàn vì mọi đầu ra AI đều không đáng tin"
     ],
     "optionsEn": [
       "Use it for DRAFTS and to CHALLENGE your work, not to produce final output",
-      "Use it for final output sent straight to the development team",
-      "Use it only for translation",
-      "Do not use it for any task"
+      "Use it for final output as long as the prompt is detailed and has examples",
+      "Use it only for translation and spelling, never for content",
+      "Avoid it entirely, since all AI output is untrustworthy"
     ],
     "answer": 0,
     "explanation": "Bản nháp giúp bạn vượt qua trang giấy trắng; phản biện giúp bạn phát hiện điều mình bỏ sót. Cả hai đều tăng tốc mà không thay thế phán đoán của bạn.",
@@ -64,16 +64,16 @@
     "question": "Rủi ro lớn nhất của vibe coding đối với sản phẩm là gì?",
     "questionEn": "What is the biggest product risk of vibe coding?",
     "options": [
-      "Mã sinh ra có thể không nhất quán, khó bảo trì và không ai thực sự hiểu nó làm gì — một dạng nợ kỹ thuật mới",
-      "Mã chạy chậm hơn mã do người viết",
-      "Không thể triển khai lên Production",
-      "Không tương thích với hệ điều hành cũ"
+      "Mã khó bảo trì và không ai thực sự hiểu nó làm gì — một dạng nợ kỹ thuật mới",
+      "Mã sinh ra luôn chạy chậm hơn đáng kể so với mã do lập trình viên viết",
+      "Mã sinh ra không thể triển khai lên môi trường Production vì thiếu chứng chỉ bảo mật",
+      "Mã sinh ra chỉ chạy trên phiên bản hệ điều hành mới nhất"
     ],
     "optionsEn": [
-      "The generated code can be inconsistent, hard to maintain, and nobody truly understands what it does — a new form of technical debt",
-      "The code runs slower than human-written code",
-      "It cannot be deployed to production",
-      "It is incompatible with older operating systems"
+      "Code nobody truly understands or can maintain — a new kind of technical debt",
+      "Generated code always runs much slower than developer-written code",
+      "Generated code cannot go to production because it lacks security certification",
+      "Generated code only runs on the latest operating system versions"
     ],
     "answer": 0,
     "explanation": "Với BA, vibe coding rất hữu ích để thử ý tưởng với người dùng trong vài giờ, nhưng prototype đó không được đẩy vào sản xuất.",
@@ -84,16 +84,16 @@
     "question": "Vì sao spec-driven development là mô hình có ý nghĩa nhất với BA?",
     "questionEn": "Why is spec-driven development the most consequential model for a BA?",
     "options": [
-      "Vì chất lượng đặc tả trực tiếp quyết định chất lượng sản phẩm, biến kỹ năng viết chính xác và phủ hết ngoại lệ thành yếu tố quyết định",
-      "Vì BA không cần viết tài liệu nữa",
-      "Vì nó loại bỏ nhu cầu kiểm thử",
-      "Vì nó giúp BA học lập trình"
+      "Vì chất lượng đặc tả quyết định trực tiếp chất lượng sản phẩm AI tạo ra",
+      "Vì AI tự viết đặc tả từ mã nguồn, BA chỉ cần duyệt lại cho đúng định dạng",
+      "Vì đặc tả đủ chi tiết thì không cần kiểm thử sản phẩm nữa",
+      "Vì BA viết đặc tả theo cú pháp lập trình nên dần học được code"
     ],
     "optionsEn": [
-      "Because specification quality directly determines product quality, turning precise writing and exception coverage into the deciding factor",
-      "Because BAs no longer need to write documents",
-      "Because it removes the need for testing",
-      "Because it helps BAs learn to code"
+      "Because spec quality directly decides the quality of what AI builds",
+      "Because AI writes the spec from code; the BA only checks the format",
+      "Because a detailed enough spec removes the need for testing",
+      "Because BAs write specs in code syntax and so gradually learn to program"
     ],
     "answer": 0,
     "explanation": "Những kỹ năng cổ điển của BA từ chỗ tốt-nếu-có trở thành thứ quyết định chất lượng đầu ra của cả hệ thống.",
@@ -104,16 +104,16 @@
     "question": "Trong mô hình AI-DLC, vai trò của BA dịch chuyển theo hướng nào?",
     "questionEn": "In the AI-DLC model, how does the BA role shift?",
     "options": [
-      "Từ người viết đặc tả sang người xác thực và ra quyết định — kiểm tra xem thứ AI đề xuất có đúng với nhu cầu nghiệp vụ thật không",
-      "Từ người phân tích sang người lập trình",
-      "Từ người viết tài liệu sang người quản lý dự án",
-      "Vai trò BA biến mất hoàn toàn"
+      "Từ người viết đặc tả sang người xác thực và quyết định đề xuất của AI có đúng không",
+      "Từ người phân tích sang người lập trình, vì AI đã lo phần đặc tả",
+      "Từ người viết tài liệu sang người quản lý dự án và ngân sách cho đội AI",
+      "Từ người viết đặc tả sang người viết prompt, chỉ việc chuyển nguyên lời khách hàng cho AI"
     ],
     "optionsEn": [
-      "From specification writer to validator and decision-maker — checking whether AI proposals match the real business need",
-      "From analyst to programmer",
-      "From document writer to project manager",
-      "The BA role disappears entirely"
+      "From spec writer to validator who decides if AI proposals fit the real need",
+      "From analyst to programmer, since AI now handles the specs",
+      "From document writer to manager of the AI team's project and budget",
+      "From spec writer to prompt writer who simply relays the client's words to the AI"
     ],
     "answer": 0,
     "explanation": "Khi việc tạo ra nội dung rẻ đi, việc phán định nội dung nào đúng trở nên đắt hơn tương đối — và đó chính là giá trị của BA.",
@@ -124,16 +124,16 @@
     "question": "Điểm chung của vibe coding, spec-driven và AI-DLC là gì?",
     "questionEn": "What do vibe coding, spec-driven development, and AI-DLC have in common?",
     "options": [
-      "Đều làm cho việc TẠO RA phần mềm rẻ hơn, nên phần đắt còn lại chính là biết nên tạo ra CÁI GÌ",
-      "Đều loại bỏ nhu cầu về lập trình viên",
-      "Đều yêu cầu đội phải dùng cùng một công cụ AI",
-      "Đều chỉ áp dụng được cho dự án nhỏ"
+      "Đều làm việc TẠO RA phần mềm rẻ đi, nên biết tạo CÁI GÌ trở thành phần đắt",
+      "Đều loại bỏ dần nhu cầu về lập trình viên trong đội phát triển",
+      "Đều yêu cầu cả đội dùng chung một công cụ AI và một mô hình ngôn ngữ",
+      "Đều chỉ phù hợp với dự án nhỏ, không bao giờ áp dụng được cho hệ thống lớn có nhiều tích hợp"
     ],
     "optionsEn": [
-      "They all make PRODUCING software cheaper, leaving knowing WHAT to produce as the expensive part",
-      "They all remove the need for developers",
-      "They all require the team to use the same AI tool",
-      "They all apply only to small projects"
+      "They make PRODUCING software cheaper, so knowing WHAT to produce is the costly part",
+      "They gradually remove the need for developers on the team",
+      "They all require the whole team to share one AI tool and language model",
+      "They only suit small projects and never large systems with many external integrations"
     ],
     "answer": 0,
     "explanation": "Đó chính là công việc của BA, nên giá trị của vai trò này tăng lên chứ không giảm đi trong bối cảnh AI.",
@@ -144,16 +144,16 @@
     "question": "Ảo giác của AI nguy hiểm với BA vì sao?",
     "questionEn": "Why is AI hallucination dangerous for a BA?",
     "options": [
-      "AI tạo ra thông tin nghe rất hợp lý nhưng sai hoàn toàn — một quy định không tồn tại, một con số bịa, một thực hành ngành không có thật",
-      "AI từ chối trả lời các câu hỏi khó",
-      "AI trả lời quá chậm",
-      "AI chỉ hỗ trợ tiếng Anh"
+      "AI tạo thông tin nghe hợp lý nhưng sai, như một quy định không tồn tại",
+      "AI hay từ chối trả lời câu hỏi khó về nghiệp vụ chuyên ngành",
+      "AI trả lời quá chậm khi tài liệu đầu vào dài hơn vài trang",
+      "AI chỉ hiểu tốt tiếng Anh nên hay dịch sai thuật ngữ nghiệp vụ tiếng Việt"
     ],
     "optionsEn": [
-      "AI produces plausible-sounding but entirely false information — a nonexistent regulation, an invented figure, a fictitious industry practice",
-      "AI refuses to answer hard questions",
-      "AI responds too slowly",
-      "AI only supports English"
+      "AI produces plausible but false facts, like a regulation that doesn't exist",
+      "AI often refuses hard domain-specific questions",
+      "AI responds too slowly once the input runs past a few pages",
+      "AI only handles English well, so it mistranslates Vietnamese business terms"
     ],
     "answer": 0,
     "explanation": "Cách phòng: không bao giờ đưa thông tin từ AI vào tài liệu mà chưa kiểm chứng, đặc biệt là số liệu, quy định pháp luật và tên gọi kỹ thuật.",
@@ -164,16 +164,16 @@
     "question": "Rủi ro nào xảy ra khi dán tài liệu yêu cầu vào công cụ AI công cộng?",
     "questionEn": "What risk arises from pasting a requirements document into a public AI tool?",
     "options": [
-      "Rò rỉ dữ liệu, có thể vi phạm hợp đồng bảo mật và quy định về dữ liệu của khách hàng",
-      "Tài liệu sẽ bị định dạng sai",
-      "AI sẽ không hiểu nội dung tiếng Việt",
-      "Tốc độ xử lý sẽ chậm hơn"
+      "Rò rỉ dữ liệu, có thể vi phạm hợp đồng bảo mật và quy định dữ liệu",
+      "Tài liệu bị mất định dạng bảng biểu khi AI xuất lại kết quả",
+      "AI hiểu sai nội dung tiếng Việt và sinh ra yêu cầu lệch nghĩa",
+      "Bản quyền tài liệu tự động chuyển sang nhà cung cấp công cụ AI theo điều khoản sử dụng"
     ],
     "optionsEn": [
-      "Data leakage, potentially breaching confidentiality agreements and customer data regulations",
-      "The document formatting breaks",
-      "AI will not understand non-English content",
-      "Processing becomes slower"
+      "Data leakage that may breach NDAs and customer data regulations",
+      "Tables and formatting break when the AI outputs the result",
+      "AI misreads Vietnamese content and produces skewed requirements",
+      "Copyright in the document passes automatically to the AI vendor under its terms of use"
     ],
     "answer": 0,
     "explanation": "Cách phòng: biết rõ chính sách công ty, che hoặc bỏ dữ liệu nhạy cảm trước khi dán, và ưu tiên công cụ được doanh nghiệp phê duyệt.",
@@ -184,16 +184,16 @@
     "question": "Vì sao việc luôn để AI viết bản nháp có thể gây hại lâu dài cho BA?",
     "questionEn": "Why can always letting AI draft harm a BA in the long run?",
     "options": [
-      "Vì bạn có thể ngừng tự đặt câu hỏi khó, và kỹ năng phân tích teo dần vì không được dùng",
-      "Vì AI sẽ tính phí ngày càng cao",
-      "Vì đồng nghiệp sẽ đánh giá thấp bạn",
-      "Vì tài liệu sẽ thiếu định dạng chuẩn"
+      "Vì bạn ngừng tự đặt câu hỏi khó và kỹ năng phân tích teo dần",
+      "Vì chi phí thuê bao AI tăng dần theo số tài liệu bạn tạo ra",
+      "Vì đồng nghiệp và khách hàng sẽ đánh giá thấp những tài liệu do AI viết",
+      "Vì tài liệu AI viết thường thiếu định dạng chuẩn của công ty"
     ],
     "optionsEn": [
-      "Because you may stop asking the hard questions yourself, and analytical skill atrophies from disuse",
-      "Because AI pricing keeps rising",
-      "Because colleagues will think less of you",
-      "Because documents will lack standard formatting"
+      "Because you stop asking hard questions and your analytical skill atrophies",
+      "Because AI subscription cost rises with every document you produce",
+      "Because colleagues and clients will look down on documents an AI has written",
+      "Because AI documents usually miss the company's standard format"
     ],
     "answer": 0,
     "explanation": "Cách phòng: với những phần quan trọng nhất, hãy tự nghĩ trước rồi mới hỏi AI để đối chiếu. Thứ tự này giữ cho tư duy của bạn sắc.",
@@ -204,16 +204,16 @@
     "question": "Vì sao sự trôi chảy trong văn bản AI viết lại là một rủi ro?",
     "questionEn": "Why is the fluency of AI-written text a risk?",
     "options": [
-      "Vì người đọc dễ cho rằng nội dung đã được kiểm chứng, trong khi sự trôi chảy không phải bằng chứng của tính đúng đắn",
-      "Vì văn phong quá trang trọng",
-      "Vì nội dung quá dài",
-      "Vì thiếu thuật ngữ chuyên ngành"
+      "Vì người đọc tưởng nội dung đã được kiểm chứng, dù trôi chảy chưa chắc đã đúng",
+      "Vì văn phong quá trang trọng khiến các stakeholder khó tiếp nhận nội dung yêu cầu",
+      "Vì AI viết quá dài, làm tài liệu phình to so với cần thiết",
+      "Vì văn bản trôi chảy thường thiếu thuật ngữ chuyên ngành cần thiết"
     ],
     "optionsEn": [
-      "Because readers assume the content was verified, while fluency is not evidence of correctness",
-      "Because the tone is too formal",
-      "Because the content is too long",
-      "Because it lacks domain terminology"
+      "Because readers assume it was verified, yet fluency doesn't prove correctness",
+      "Because the overly formal tone makes requirements hard for stakeholders to take in",
+      "Because AI writes too much, bloating the document",
+      "Because fluent text usually lacks the needed domain terms"
     ],
     "answer": 0,
     "explanation": "Nguyên tắc trách nhiệm: bạn ký tên vào tài liệu nên bạn chịu trách nhiệm cho từng câu trong đó, kể cả câu do AI viết.",
@@ -224,16 +224,16 @@
     "question": "Bốn thành phần của một prompt tốt cho công việc BA là gì?",
     "questionEn": "What are the four components of a good BA prompt?",
     "options": [
-      "Vai trò và bối cảnh, đầu vào cụ thể, định dạng đầu ra mong muốn, ràng buộc và tiêu chí chất lượng",
-      "Lời chào, câu hỏi, lời cảm ơn, chữ ký",
-      "Tên dự án, ngày tháng, người yêu cầu, mức độ khẩn",
-      "Ngôn ngữ, độ dài, giọng văn, số lượng ví dụ"
+      "Vai trò và bối cảnh, đầu vào cụ thể, định dạng đầu ra, ràng buộc và tiêu chí chất lượng",
+      "Lời chào lịch sự, câu hỏi chính, lời cảm ơn và yêu cầu trả lời ngắn gọn",
+      "Tên dự án, ngày yêu cầu, người yêu cầu, mức độ khẩn và hạn trả kết quả",
+      "Ngôn ngữ, độ dài mong muốn, giọng văn, số lượng ví dụ cần có trong câu trả lời"
     ],
     "optionsEn": [
-      "Role and context, concrete input, desired output format, constraints and quality criteria",
-      "A greeting, the question, thanks, a signature",
-      "Project name, date, requester, urgency",
-      "Language, length, tone, number of examples"
+      "Role and context, concrete input, output format, constraints and quality bar",
+      "A polite greeting, the main question, thanks and a request for brevity",
+      "Project name, request date, requester, urgency level and the due date for results",
+      "Language, desired length, tone and number of examples wanted in the answer"
     ],
     "answer": 0,
     "explanation": "Đầu vào cụ thể nghĩa là dán ghi chú hoặc câu yêu cầu thật thay vì mô tả chung chung, vì AI không biết bối cảnh dự án của bạn.",
@@ -245,15 +245,15 @@
     "questionEn": "What is usually the most effective kind of prompt for a BA?",
     "options": [
       "Yêu cầu AI TÌM LỖI trong thứ bạn đã viết, dùng nó như một người review luôn sẵn sàng",
-      "Yêu cầu AI viết hộ toàn bộ tài liệu",
-      "Yêu cầu AI tóm tắt tài liệu càng ngắn càng tốt",
-      "Yêu cầu AI dịch tài liệu sang nhiều ngôn ngữ"
+      "Yêu cầu AI viết hộ toàn bộ tài liệu rồi BA chỉnh lại câu chữ cho tự nhiên",
+      "Yêu cầu AI tóm tắt tài liệu càng ngắn càng tốt để gửi cho lãnh đạo",
+      "Yêu cầu AI dịch tài liệu sang nhiều ngôn ngữ cho đội offshore"
     ],
     "optionsEn": [
       "Asking AI to FIND FAULTS in what you wrote, using it as an always-available reviewer",
-      "Asking AI to write the whole document for you",
-      "Asking AI to summarise as briefly as possible",
-      "Asking AI to translate into many languages"
+      "Asking AI to write the whole document, then polishing the wording yourself",
+      "Asking AI for the shortest possible summary to send to executives",
+      "Asking AI to translate documents for the offshore team"
     ],
     "answer": 0,
     "explanation": "Ví dụ: đọc yêu cầu này và liệt kê mọi cách hiểu khác nhau mà một lập trình viên có thể có. Đây chính là kỹ thuật diễn giải lại được tự động hoá.",
@@ -264,16 +264,16 @@
     "question": "Phần nào của công việc BA trở nên QUAN TRỌNG HƠN trong bối cảnh AI?",
     "questionEn": "Which part of BA work becomes MORE important in an AI context?",
     "options": [
-      "Biết phải hỏi gì và hỏi ai, xác thực và ra quyết định, xây dựng lòng tin, hiểu bối cảnh tổ chức và chịu trách nhiệm",
-      "Soạn thảo tài liệu từ đầu",
-      "Chuyển đổi định dạng thủ công",
-      "Viết biên bản họp"
+      "Biết hỏi gì và hỏi ai, xác thực và quyết định, xây lòng tin, chịu trách nhiệm",
+      "Soạn tài liệu từ đầu thật nhanh để theo kịp tốc độ của đội dùng AI",
+      "Chuyển đổi định dạng tài liệu thủ công giữa các công cụ khác nhau",
+      "Viết biên bản họp chi tiết, ghi lại từng ý kiến của mọi người tham dự"
     ],
     "optionsEn": [
-      "Knowing what to ask and whom, validating and deciding, building trust, understanding organizational context, and being accountable",
-      "Drafting documents from scratch",
-      "Converting formats by hand",
-      "Writing meeting minutes"
+      "Knowing what to ask and whom, validating, deciding, building trust, accountability",
+      "Drafting documents from scratch fast enough to keep pace with AI-assisted teams",
+      "Converting document formats by hand between different tools",
+      "Writing detailed minutes that capture every attendee's every point"
     ],
     "answer": 0,
     "explanation": "Ba phương án còn lại chính là những phần công việc bị AI thu hẹp, giải phóng thời gian cho phần khó và có giá trị hơn.",
@@ -284,16 +284,16 @@
     "question": "Cách nhìn nào ĐÚNG về tác động của AI lên năng lực của một BA?",
     "questionEn": "Which view of AI's effect on a BA's capability is correct?",
     "options": [
-      "AI khuếch đại năng lực sẵn có chứ không tạo ra năng lực mới — nó không biến người không biết hỏi gì thành BA",
-      "AI thay thế hoàn toàn nhu cầu về BA có kinh nghiệm",
-      "AI giúp người mới đạt trình độ senior trong vài tháng",
-      "AI không ảnh hưởng gì tới hiệu quả làm việc"
+      "AI khuếch đại những gì BA đã giỏi chứ không bù cho điều BA chưa biết",
+      "AI dần thay thế nhu cầu về BA có kinh nghiệm, chỉ cần người viết prompt",
+      "AI giúp người mới đạt trình độ senior chỉ sau vài tháng dùng thường xuyên",
+      "AI chỉ tiết kiệm thời gian gõ phím, không ảnh hưởng gì tới hiệu quả thật"
     ],
     "optionsEn": [
-      "AI amplifies existing capability rather than creating new capability — it will not make a BA out of someone who does not know what to ask",
-      "AI fully replaces the need for experienced BAs",
-      "AI lets beginners reach senior level in months",
-      "AI has no effect on effectiveness"
+      "AI amplifies what a BA already does well; it does not fill what they lack",
+      "AI is replacing experienced BAs; only prompt writers will be needed",
+      "AI lets newcomers reach senior level after a few months of regular use",
+      "AI only saves typing time and has no real effect on effectiveness"
     ],
     "answer": 0,
     "explanation": "AI làm một BA giỏi hiệu quả hơn nhiều, nhưng khoảng cách giữa BA giỏi và BA yếu có thể còn giãn rộng hơn chứ không thu hẹp lại.",
@@ -304,16 +304,16 @@
     "question": "Ứng dụng AI nào có tỷ lệ hữu ích cao nhất trong công việc BA?",
     "questionEn": "Which AI application has the highest hit rate in BA work?",
     "options": [
-      "Sinh danh sách test case từ acceptance criteria, đặc biệt các trường hợp biên và ngoại lệ",
-      "Ước tính công sức cho từng story",
-      "Quyết định thứ tự ưu tiên của backlog",
-      "Chọn công nghệ cho dự án"
+      "Sinh test case từ acceptance criteria, nhất là trường hợp biên",
+      "Ước tính công sức cho từng story dựa trên lịch sử velocity của đội",
+      "Quyết định thứ tự ưu tiên backlog dựa trên phân tích giá trị kinh doanh",
+      "Chọn công nghệ và kiến trúc phù hợp nhất cho dự án mới"
     ],
     "optionsEn": [
-      "Generating test cases from acceptance criteria, especially boundary and exception cases",
-      "Estimating effort for each story",
-      "Deciding backlog priority order",
-      "Choosing the project's technology"
+      "Generating test cases from acceptance criteria, especially edge cases",
+      "Estimating each story's effort from the team's velocity history",
+      "Deciding backlog priority from a business value analysis",
+      "Choosing the best technology and architecture for a new project"
     ],
     "answer": 0,
     "explanation": "Ước tính thuộc về đội phát triển và ưu tiên hoá thuộc về Product Owner — đó là những quyết định cần bối cảnh mà AI không có.",

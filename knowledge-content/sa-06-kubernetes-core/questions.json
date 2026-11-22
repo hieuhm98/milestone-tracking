@@ -4,7 +4,7 @@
     "question": "Trong một cluster Kubernetes, thành phần nào là thành phần duy nhất đọc và ghi trực tiếp vào etcd?",
     "questionEn": "In a Kubernetes cluster, which component is the only one that reads and writes etcd directly?",
     "options": [
-      "`kube-scheduler`, vì nó cần biết tài nguyên của mọi node",
+      "`kube-scheduler`, thành phần cần biết tài nguyên của mọi node",
       "`kubelet`, vì nó báo cáo trạng thái Pod trên từng node",
       "`kube-apiserver`, cửa ngõ mà mọi thành phần khác đều đi qua",
       "`kube-controller-manager`, vì nó chạy các vòng lặp reconcile"
@@ -12,7 +12,7 @@
     "optionsEn": [
       "`kube-scheduler`, because it needs to know every node's resources",
       "`kubelet`, because it reports Pod status on each node",
-      "`kube-apiserver`, the front door every other component goes through",
+      "`kube-apiserver`, the front door all other components go through",
       "`kube-controller-manager`, because it runs the reconcile loops"
     ],
     "answer": 2,
@@ -47,13 +47,13 @@
       "kubelet trên node đó tự khởi động lại 2 Pod ngay khi phát hiện container đã dừng",
       "Scheduler di chuyển nguyên 2 Pod đó, giữ nguyên tên và IP, sang một node khoẻ",
       "Không có gì xảy ra cho tới khi admin chạy `kubectl apply` lại file Deployment",
-      "Node bị đánh dấu NotReady, Pod bị thay thế, ReplicaSet tạo Pod mới và scheduler đặt chúng lên node khoẻ"
+      "Node chuyển NotReady, Pod bị evict, ReplicaSet tạo Pod mới và đặt lên node khoẻ"
     ],
     "optionsEn": [
       "The kubelet on that node restarts the 2 Pods as soon as it notices the containers stopped",
       "The scheduler moves those same 2 Pods, keeping names and IPs, to a healthy node",
       "Nothing happens until an admin runs `kubectl apply` on the Deployment file again",
-      "The node is marked NotReady, its Pods are evicted, the ReplicaSet creates new Pods and the scheduler places them on healthy nodes"
+      "The node goes NotReady, its Pods are evicted and the ReplicaSet recreates them elsewhere"
     ],
     "answer": 3,
     "explanation": "Đây là vòng reconcile đang làm việc: node không gửi heartbeat thì bị đánh dấu NotReady, Pod trên đó bị evict sau một khoảng timeout, ReplicaSet thấy thiếu Pod so với spec nên tạo Pod mới, scheduler gán chúng sang node còn sống. Pod không bao giờ được 'di chuyển' — Pod mới có tên và IP mới. kubelet của node chết thì không chạy được gì.",
@@ -65,7 +65,7 @@
     "questionEn": "In Git, Deployment `web` has `replicas: 3`, and CI runs `kubectl apply -f k8s/` after every merge. During a peak, an engineer manually runs `kubectl scale deploy/web --replicas=10`. What happens on the next merge (unrelated to web)?",
     "options": [
       "Số replica giữ nguyên 10 vì thay đổi thủ công luôn được ưu tiên hơn file",
-      "Số replica quay về 3 vì apply đưa trạng thái mong muốn về đúng những gì có trong Git",
+      "Quay về 3 vì apply đưa trạng thái về đúng những gì khai báo trong Git",
       "`kubectl apply` báo lỗi conflict và dừng pipeline cho tới khi có người xử lý",
       "Kubernetes lấy trung bình giữa hai giá trị và chạy 6 hoặc 7 replica"
     ],
@@ -85,13 +85,13 @@
     "questionEn": "A Pod has two containers: `app` listening on port 8080 and a sidecar `metrics-agent` that needs to call the app's `/metrics`. Which address should the sidecar use?",
     "options": [
       "Tên container `http://app:8080/metrics`, được Docker DNS phân giải",
-      "`http://localhost:8080/metrics`, vì các container trong Pod chung network namespace",
+      "`http://localhost:8080/metrics`, vì cùng Pod thì chung network namespace",
       "Tên Service của Deployment, vì container không bao giờ gọi thẳng nhau được",
       "IP của node cộng với cổng 8080, vì container dùng mạng của host"
     ],
     "optionsEn": [
       "The container name `http://app:8080/metrics`, resolved by Docker DNS",
-      "`http://localhost:8080/metrics`, because containers in a Pod share a network namespace",
+      "`http://localhost:8080/metrics`, since a Pod's containers share a network namespace",
       "The Deployment's Service name, because containers can never call each other directly",
       "The node IP plus port 8080, because containers use the host network"
     ],
@@ -107,13 +107,13 @@
       "Đồng ý, vì gọi qua `localhost` luôn nhanh hơn và Pod nhiều container là cách làm được khuyến nghị",
       "Đồng ý, miễn là đặt `replicas: 1` để tránh có nhiều database",
       "Chỉ cần thêm một initContainer chạy migration là mô hình này ổn cho production",
-      "Tách ra: app và DB scale, rollout và hỏng độc lập; mỗi lần deploy app sẽ khởi động lại luôn database"
+      "Tách ra: app và DB scale, rollout, hỏng độc lập; mỗi lần deploy app sẽ restart luôn database"
     ],
     "optionsEn": [
       "Agree, because `localhost` calls are always faster and multi-container Pods are the recommended pattern",
       "Agree, as long as they set `replicas: 1` to avoid multiple databases",
       "Just add an initContainer that runs migrations and this design is fine for production",
-      "Split them: the app and DB scale, roll out and fail independently; every app deploy would restart the database too"
+      "Split them: app and DB scale, roll out and fail separately; each app deploy restarts the DB"
     ],
     "answer": 3,
     "explanation": "Pod là đơn vị scale và vòng đời. Scale app lên 5 replica sẽ tạo 5 database; đổi image app sẽ thay cả Pod nên database cũng bị khởi động lại. Pod nhiều container chỉ dành cho helper gắn chặt như sidecar gửi log hay proxy.",
@@ -146,13 +146,13 @@
     "options": [
       "ReplicaSet hiện tại được sửa template và các Pod đang chạy tự đổi image tại chỗ",
       "ReplicaSet cũ bị xoá ngay, rồi ReplicaSet mới tạo đủ 3 Pod cùng một lúc",
-      "Một ReplicaSet mới được tạo và scale lên dần, ReplicaSet cũ scale xuống 0 và được giữ lại để rollback",
+      "ReplicaSet mới scale lên dần; ReplicaSet cũ về 0 và được giữ lại để rollback",
       "Deployment tạo thêm một Deployment con cho phiên bản mới và chia đôi lưu lượng"
     ],
     "optionsEn": [
       "The current ReplicaSet's template is edited and running Pods switch image in place",
       "The old ReplicaSet is deleted immediately, then a new one creates all 3 Pods at once",
-      "A new ReplicaSet is created and scaled up gradually while the old one scales to 0 and is kept for rollback",
+      "A new ReplicaSet scales up gradually; the old one scales to 0 and is kept for rollback",
       "The Deployment creates a child Deployment for the new version and splits traffic in half"
     ],
     "answer": 2,
@@ -204,16 +204,16 @@
     "question": "Một client gRPC gọi Service ClusterIP đứng trước 5 Pod. Dashboard cho thấy gần như toàn bộ request dồn vào một Pod, 4 Pod còn lại gần như rảnh. Nguyên nhân khả dĩ nhất?",
     "questionEn": "A gRPC client calls a ClusterIP Service in front of 5 Pods. Dashboards show almost every request hitting one Pod while the other 4 sit idle. What is the most likely cause?",
     "options": [
-      "Service cân bằng ở L4 theo kết nối, và gRPC dồn mọi request qua một kết nối HTTP/2 sống lâu",
+      "Service cân bằng ở L4 theo kết nối, còn gRPC dồn mọi request lên một kết nối HTTP/2",
       "ClusterIP chỉ gửi lưu lượng tới Pod đầu tiên trong EndpointSlice cho tới khi nó chết",
-      "4 Pod còn lại nằm ở namespace khác nên Service không thấy chúng",
-      "CoreDNS cache IP của Pod đầu tiên và trả cùng một IP cho mọi truy vấn"
+      "4 Pod còn lại nằm ở namespace khác nên selector của Service không thấy chúng",
+      "CoreDNS cache IP của Pod đầu tiên và trả về cùng một IP đó cho mọi truy vấn DNS"
     ],
     "optionsEn": [
-      "The Service balances at L4 per connection, and gRPC multiplexes every request over one long-lived HTTP/2 connection",
-      "ClusterIP only sends traffic to the first Pod in the EndpointSlice until it dies",
-      "The other 4 Pods are in a different namespace so the Service cannot see them",
-      "CoreDNS caches the first Pod's IP and returns the same IP for every query"
+      "The Service balances L4 connections, and gRPC sends all calls over one HTTP/2 connection",
+      "ClusterIP only sends traffic to the first Pod in the EndpointSlice until that Pod dies",
+      "The other 4 Pods live in a different namespace, so the Service selector cannot see them",
+      "CoreDNS caches the first Pod's IP and returns that same IP for every DNS query"
     ],
     "answer": 0,
     "explanation": "kube-proxy chọn backend khi kết nối được mở, không phải theo từng request. HTTP/2 giữ một kết nối và ghép kênh mọi request qua đó, nên cả luồng dính vào một Pod. Cách sửa: cân bằng ở L7 (service mesh, proxy L7), hoặc client-side load balancing với headless Service.",
@@ -232,7 +232,7 @@
     "optionsEn": [
       "Ingress only works when the backing Service is `type: LoadBalancer`",
       "You must also run `kubectl expose ingress` for the Ingress to get an address",
-      "No ingress controller is installed, or `ingressClassName` does not match the installed one",
+      "No ingress controller is installed, or `ingressClassName` matches none installed",
       "Ingress does not support TLS, so the `tls` section must be removed to get an address"
     ],
     "answer": 2,
@@ -244,15 +244,15 @@
     "question": "Trong một buổi review bảo mật, một dev nói: 'Mật khẩu DB của chúng ta nằm trong Kubernetes Secret nên đã được mã hoá rồi.' Phản hồi chính xác nhất là gì?",
     "questionEn": "In a security review, a developer says: 'Our DB password is in a Kubernetes Secret, so it is already encrypted.' What is the most accurate response?",
     "options": [
-      "Đúng, Secret luôn được mã hoá AES trong etcd và chỉ kubelet giải mã được",
-      "Chưa đủ: base64 chỉ là encoding; cần bật mã hoá etcd khi lưu, giới hạn RBAC và nên dùng kho secret bên ngoài",
-      "Đúng, miễn là manifest Secret được commit vào một repo Git private",
+      "Đúng, Secret luôn được mã hoá AES trong etcd và chỉ kubelet trên node mới giải mã được",
+      "Chưa đủ: base64 chỉ là encoding; cần mã hoá etcd, siết RBAC hoặc dùng kho secret ngoài",
+      "Đúng, miễn là manifest Secret chỉ được commit vào một repo Git private có bật 2FA",
       "Sai hoàn toàn, Secret không an toàn hơn ConfigMap nên hãy chuyển mật khẩu sang ConfigMap"
     ],
     "optionsEn": [
-      "Correct, Secrets are always AES-encrypted in etcd and only the kubelet can decrypt them",
-      "Not enough: base64 is just an encoding; enable etcd encryption at rest, restrict RBAC, and prefer an external secret store",
-      "Correct, as long as the Secret manifest is committed to a private Git repo",
+      "Correct, Secrets are always AES-encrypted in etcd and only the kubelet on the node can decrypt them",
+      "Not enough: base64 is only encoding; enable etcd encryption, tighten RBAC or use an external store",
+      "Correct, as long as the Secret manifest is only committed to a private Git repo with 2FA on",
       "Completely wrong, Secrets are no safer than ConfigMaps, so move the password to a ConfigMap"
     ],
     "answer": 1,
@@ -264,16 +264,16 @@
     "question": "Bạn đổi `LOG_LEVEL` trong ConfigMap `web-config` từ `info` sang `debug` và apply thành công. Deployment nạp ConfigMap qua `envFrom`. Một giờ sau app vẫn log ở mức `info`. Vì sao?",
     "questionEn": "You change `LOG_LEVEL` in ConfigMap `web-config` from `info` to `debug` and the apply succeeds. The Deployment loads the ConfigMap via `envFrom`. An hour later the app still logs at `info`. Why?",
     "options": [
-      "ConfigMap chỉ được đồng bộ lên node mỗi 24 giờ một lần",
+      "ConfigMap chỉ được kubelet đồng bộ lên node mỗi 24 giờ một lần, nên cần chờ thêm",
       "Phải xoá và tạo lại ConfigMap thay vì apply thì thay đổi mới có hiệu lực",
-      "`envFrom` chỉ đọc key viết thường, nên `LOG_LEVEL` bị bỏ qua",
-      "Biến môi trường chỉ được đọc lúc container khởi động; phải restart Pod, ví dụ `kubectl rollout restart`"
+      "`envFrom` chỉ đọc key viết thường theo chuẩn DNS, nên `LOG_LEVEL` bị bỏ qua",
+      "Env var chỉ được đọc lúc container khởi động; cần `rollout restart`"
     ],
     "optionsEn": [
-      "ConfigMaps are only synced to nodes once every 24 hours",
+      "ConfigMaps are only synced to nodes by the kubelet once every 24 hours, so wait longer",
       "The ConfigMap must be deleted and recreated rather than applied for changes to take effect",
-      "`envFrom` only reads lowercase keys, so `LOG_LEVEL` is ignored",
-      "Environment variables are only read when the container starts; restart the Pods, e.g. `kubectl rollout restart`"
+      "`envFrom` only reads lowercase DNS-style keys, so the `LOG_LEVEL` key is silently ignored",
+      "Env vars are read only at container start; the Pods must be restarted (`rollout restart`)"
     ],
     "answer": 3,
     "explanation": "Biến môi trường được đóng băng khi process khởi động. ConfigMap mount dạng volume thì được kubelet cập nhật dần (trừ `subPath`), nhưng env thì không. Nhiều đội đưa hash của ConfigMap vào annotation của Pod template để mỗi thay đổi config tự kích hoạt rollout.",
@@ -284,16 +284,16 @@
     "question": "Đội A và đội B có namespace riêng trong cùng một cluster. Kiểm thử bảo mật phát hiện Pod của đội A kết nối thẳng được tới `postgres.team-b.svc.cluster.local`. Giải thích nào đúng?",
     "questionEn": "Team A and team B each have their own namespace in one cluster. A security test finds that team A's Pods can connect directly to `postgres.team-b.svc.cluster.local`. Which explanation is correct?",
     "options": [
-      "Namespace mặc định không cô lập mạng; cần NetworkPolicy (và CNI hỗ trợ nó) để chặn lưu lượng giữa namespace",
-      "Đây là lỗi cấu hình DNS; CoreDNS lẽ ra không được phân giải tên của namespace khác",
-      "Hai đội đang dùng chung ServiceAccount nên RBAC cho phép kết nối",
-      "Namespace chỉ cô lập khi cluster có nhiều hơn một control plane node"
+      "Namespace mặc định không cô lập mạng; cần NetworkPolicy (với CNI hỗ trợ) để chặn",
+      "Đây là lỗi cấu hình DNS; CoreDNS lẽ ra không được phân giải tên Service của namespace khác",
+      "Hai đội đang dùng chung một ServiceAccount nên RBAC cho phép mở kết nối mạng giữa họ",
+      "Namespace chỉ cô lập mạng khi cluster có nhiều hơn một control plane node"
     ],
     "optionsEn": [
-      "Namespaces do not isolate the network by default; a NetworkPolicy (and a CNI that enforces it) is needed to block cross-namespace traffic",
-      "It is a DNS misconfiguration; CoreDNS should never resolve names from another namespace",
-      "The two teams share a ServiceAccount, so RBAC allows the connection",
-      "Namespaces only isolate when the cluster has more than one control-plane node"
+      "Namespaces don't isolate traffic by default; it takes a NetworkPolicy and a CNI enforcing it",
+      "It is a DNS misconfiguration; CoreDNS should not resolve Service names from another namespace",
+      "The two teams share one ServiceAccount, so RBAC permits network connections between them",
+      "Namespaces only isolate the network when the cluster runs more than one control-plane node"
     ],
     "answer": 0,
     "explanation": "Namespace phân vùng tên, RBAC và quota, còn mạng Pod mặc định là phẳng: mọi Pod gọi được mọi Pod. Phân giải DNS xuyên namespace là tính năng có chủ đích. RBAC kiểm soát lời gọi tới API Kubernetes, không kiểm soát kết nối TCP giữa các Pod.",
@@ -325,7 +325,7 @@
     "questionEn": "Pods on EKS need to read objects from an S3 bucket. Which way of granting access is recommended?",
     "options": [
       "Lưu access key của một IAM user vào Secret và nạp vào Pod qua biến môi trường",
-      "Dùng IRSA hoặc EKS Pod Identity để gắn một IAM role riêng cho ServiceAccount của Pod",
+      "Dùng IRSA hoặc EKS Pod Identity gắn IAM role riêng cho ServiceAccount của Pod",
       "Gắn quyền `s3:GetObject` vào IAM role của node để mọi Pod trên node đều dùng được",
       "Mở S3 bucket public-read và giới hạn truy cập bằng Security Group của node"
     ],
@@ -344,16 +344,16 @@
     "question": "Một công ty đang chạy Kubernetes on-premises với hàng chục Helm chart và Argo CD, và muốn chuyển lên AWS nhưng vẫn giữ khả năng chạy hybrid. Nền tảng container nào phù hợp nhất?",
     "questionEn": "A company runs Kubernetes on-premises with dozens of Helm charts and Argo CD, and wants to move to AWS while keeping the option to run hybrid. Which container platform fits best?",
     "options": [
-      "Amazon ECS trên Fargate, vì ít phải vận hành hơn",
-      "AWS App Runner, vì không cần quản lý cluster nào cả",
-      "EC2 chạy Docker Compose, vì đơn giản nhất để chuyển đổi",
-      "Amazon EKS, vì giữ nguyên API Kubernetes, Helm chart và quy trình GitOps"
+      "Amazon ECS trên Fargate, vì ít phải vận hành và tích hợp sâu với IAM",
+      "AWS App Runner, vì không cần quản lý cluster và tự scale theo request",
+      "EC2 chạy Docker Compose, vì đơn giản nhất để chuyển từ on-premises",
+      "Amazon EKS: giữ nguyên API Kubernetes, công cụ, có thêm EKS Anywhere"
     ],
     "optionsEn": [
-      "Amazon ECS on Fargate, because there is less to operate",
-      "AWS App Runner, because there is no cluster to manage at all",
-      "EC2 running Docker Compose, because it is the simplest to migrate to",
-      "Amazon EKS, because it keeps the Kubernetes API, Helm charts and GitOps workflow"
+      "Amazon ECS on Fargate, because there is less to operate and deep IAM integration",
+      "AWS App Runner, because there is no cluster to manage and it scales per request",
+      "EC2 running Docker Compose, because it is the simplest lift from on-premises",
+      "Amazon EKS, since it keeps the Kubernetes API and tooling, plus EKS Anywhere"
     ],
     "answer": 3,
     "explanation": "Đầu tư sẵn có (Helm, Argo CD, kỹ năng Kubernetes) cùng yêu cầu hybrid/portable là lý do điển hình để chọn EKS. ECS và App Runner đơn giản hơn nhưng dùng API riêng của AWS, buộc phải viết lại toàn bộ manifest và quy trình deploy.",

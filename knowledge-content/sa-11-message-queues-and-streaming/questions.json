@@ -4,16 +4,16 @@
     "question": "Khi checkout gọi đồng bộ tới dịch vụ gửi email xác nhận, mỗi lần nhà cung cấp email chậm là tỉ lệ đặt hàng thành công giảm. Thay đổi kiến trúc nào giải quyết đúng gốc vấn đề?",
     "questionEn": "Checkout calls the confirmation-email service synchronously, and every time the email provider is slow, successful orders drop. Which architectural change fixes the root cause?",
     "options": [
-      "Tăng timeout của lời gọi HTTP tới dịch vụ email lên 30 giây",
-      "Thêm retry đồng bộ ba lần trong checkout trước khi trả lỗi",
-      "Checkout publish event OrderPlaced vào broker, dịch vụ email tiêu thụ bất đồng bộ",
-      "Scale ngang dịch vụ checkout lên gấp đôi số instance"
+      "Tăng timeout của lời gọi HTTP tới dịch vụ email lên 30 giây để tránh lỗi giả",
+      "Thêm retry đồng bộ ba lần có backoff trong checkout trước khi trả lỗi",
+      "Checkout publish event OrderPlaced, dịch vụ email tiêu thụ bất đồng bộ",
+      "Scale ngang dịch vụ checkout lên gấp đôi số instance để hấp thụ độ trễ"
     ],
     "optionsEn": [
-      "Raise the HTTP timeout to the email service to 30 seconds",
-      "Add three synchronous retries inside checkout before failing",
-      "Checkout publishes an OrderPlaced event to a broker and the email service consumes it asynchronously",
-      "Scale the checkout service horizontally to twice the instances"
+      "Raise the HTTP timeout to the email service to 30 seconds to avoid false failures",
+      "Add three synchronous retries with backoff inside checkout before it fails",
+      "Checkout publishes OrderPlaced; the email service consumes it asynchronously",
+      "Scale checkout horizontally to twice the instances to absorb the slow calls"
     ],
     "answer": 2,
     "explanation": "Email là việc có thể làm sau khi đã phản hồi người dùng, nên không được nằm trên đường đồng bộ. Broker tách rời về thời gian: email chậm hay chết thì message chờ trong queue, checkout vẫn thành công. Tăng timeout hay retry đồng bộ chỉ làm checkout chậm thêm; scale checkout không chữa được phụ thuộc chậm.",
@@ -25,15 +25,15 @@
     "questionEn": "A new analytics team wants to re-read every order event from the last 30 days to build its initial dataset, while existing consumers keep running untouched. Which messaging model allows this?",
     "options": [
       "Log (stream) có retention đủ dài, team mới dùng consumer group riêng đọc từ offset đầu",
-      "Point-to-point queue, team mới thêm consumer vào cùng queue",
-      "Pub/sub, team mới tạo subscription mới trên topic hiện có",
-      "Queue có priority, đánh priority cao cho message của team mới"
+      "Point-to-point queue, team mới thêm consumer vào cùng queue để nhận dữ liệu",
+      "Pub/sub, team mới tạo subscription mới trên topic hiện có để nhận lại event",
+      "Queue có priority, đánh priority cao cho message của team mới để đọc trước"
     ],
     "optionsEn": [
-      "A log (stream) with long enough retention, where the new team reads from the earliest offset in its own consumer group",
-      "A point-to-point queue, with the new team adding consumers to the same queue",
-      "Pub/sub, with the new team creating a new subscription on the existing topic",
-      "A priority queue, giving the new team's messages a higher priority"
+      "A log (stream) with long retention, read from the earliest offset by a new group",
+      "A point-to-point queue, with the new team adding its consumers to the same queue",
+      "Pub/sub, with the new team creating a new subscription on the existing topic to replay",
+      "A priority queue, giving the new team's messages a higher priority so they go first"
     ],
     "answer": 0,
     "explanation": "Chỉ log giữ message sau khi đã được đọc, nên có thể replay. Consumer group riêng có offset riêng, không ảnh hưởng group khác. Thêm consumer vào queue sẽ cạnh tranh message với consumer cũ; subscription pub/sub mới chỉ nhận message từ lúc tạo trở đi.",
@@ -84,16 +84,16 @@
     "question": "Một queue RabbitMQ có 5 worker. Một worker chạy trên máy yếu nhận hàng nghìn message chưa ack trong khi 4 worker còn lại gần như rảnh. Nguyên nhân khả dĩ nhất và cách sửa?",
     "questionEn": "A RabbitMQ queue has 5 workers. One worker on a weak machine holds thousands of unacked messages while the other four sit almost idle. What is the most likely cause and fix?",
     "options": [
-      "Queue không durable; khai báo lại queue với durable=true",
-      "Exchange là fanout; đổi sang direct exchange",
-      "Không đặt prefetch nên broker đẩy không giới hạn; đặt basic.qos prefetch nhỏ, ví dụ 10",
-      "Publisher confirm đang tắt; bật publisher confirm ở producer"
+      "Queue không durable nên message dồn về một worker; khai báo lại với durable=true",
+      "Exchange là fanout nên mọi message đổ vào một worker; đổi sang direct exchange",
+      "Không đặt prefetch nên broker đẩy không giới hạn; đặt basic.qos prefetch nhỏ",
+      "Publisher confirm đang tắt nên broker không cân bằng; bật publisher confirm ở producer"
     ],
     "optionsEn": [
-      "The queue is not durable; redeclare it with durable=true",
-      "The exchange is fanout; switch to a direct exchange",
-      "No prefetch is set so the broker pushes without limit; set a small basic.qos prefetch such as 10",
-      "Publisher confirms are off; enable publisher confirms on the producer"
+      "The queue is not durable, so messages pile on one worker; redeclare it durable=true",
+      "The exchange is fanout, so every message lands on one worker; switch to direct",
+      "No prefetch is set, so the broker pushes unbounded; set a small basic.qos prefetch",
+      "Publisher confirms are off, so the broker cannot balance; enable them on the producer"
     ],
     "answer": 2,
     "explanation": "Không có prefetch, broker đẩy message cho consumer nhanh nhất có thể mà không quan tâm nó xử lý kịp hay không. Prefetch giới hạn số message chưa ack mỗi consumer giữ, nên message được chia cho worker còn rảnh. Durable, loại exchange và publisher confirm không ảnh hưởng tới việc phân phối giữa các consumer.",
@@ -164,16 +164,16 @@
     "question": "Consumer group Kafka liên tục rebalance vài phút một lần, lag tăng dần. Log cho thấy mỗi lần poll nhận 500 record và mỗi record gọi một API chậm mất khoảng 1 giây. Nguyên nhân khả dĩ nhất?",
     "questionEn": "A Kafka consumer group rebalances every few minutes and lag keeps growing. Logs show each poll returns 500 records and each record calls a slow API taking about 1 second. What is the most likely cause?",
     "options": [
-      "Thời gian xử lý một batch vượt max.poll.interval.ms nên consumer bị coi là chết và bị đá khỏi group",
-      "Topic có quá nhiều partition nên coordinator không kịp gán",
-      "Retention quá ngắn nên offset của consumer bị xoá",
-      "Producer dùng acks=all làm broker chậm xác nhận"
+      "Một batch xử lý lâu hơn max.poll.interval.ms nên consumer bị đá khỏi group",
+      "Topic có quá nhiều partition nên group coordinator không kịp gán lại sau mỗi lần poll",
+      "Retention quá ngắn nên offset đã commit của consumer bị xoá và phải đọc lại",
+      "Producer dùng acks=all làm broker chậm xác nhận và consumer phải chờ dữ liệu"
     ],
     "optionsEn": [
-      "Processing one batch exceeds max.poll.interval.ms, so the consumer is considered dead and removed from the group",
-      "The topic has too many partitions for the coordinator to assign in time",
-      "Retention is too short, so the consumer's offsets are deleted",
-      "The producer uses acks=all, which makes brokers slow to acknowledge"
+      "One batch outlasts max.poll.interval.ms, so the consumer is evicted from the group",
+      "The topic has too many partitions for the group coordinator to reassign after each poll",
+      "Retention is too short, so the consumer's committed offsets are deleted and re-read",
+      "The producer uses acks=all, so brokers ack slowly and the consumer waits for data"
     ],
     "answer": 0,
     "explanation": "500 record × 1 giây ≈ 8 phút giữa hai lần poll, vượt mặc định 5 phút của max.poll.interval.ms. Consumer bị loại, partition bị chia lại, batch dở dang được xử lý lại từ offset đã commit — lag tăng. Cách sửa: giảm max.poll.records, xử lý song song hoặc đẩy việc chậm ra ngoài vòng poll.",
@@ -184,13 +184,13 @@
     "question": "Hệ thống cần phân phối job resize ảnh cho worker: mỗi job xử lý một lần, job lỗi được retry riêng lẻ với độ trễ, job chạy lâu không được chặn job khác. Lựa chọn nào hợp lý nhất?",
     "questionEn": "A system must hand image-resize jobs to workers: each job is processed once, failed jobs are retried individually with a delay, and a long-running job must not block others. Which choice fits best?",
     "options": [
-      "Kafka topic một partition để đảm bảo mỗi job chỉ một consumer xử lý",
+      "Kafka topic một partition để mỗi job luôn chỉ có một consumer xử lý",
       "Kafka topic nhiều partition, commit offset trước khi xử lý",
-      "Queue như RabbitMQ hoặc SQS với ack từng message, retry có trễ và DLQ",
+      "Queue như RabbitMQ/SQS với ack từng message, retry có trễ và DLQ",
       "SNS topic gửi job trực tiếp tới mọi worker qua HTTP"
     ],
     "optionsEn": [
-      "A single-partition Kafka topic so only one consumer handles each job",
+      "A single-partition Kafka topic so that only one consumer ever handles any given job",
       "A multi-partition Kafka topic, committing offsets before processing",
       "A queue such as RabbitMQ or SQS with per-message acks, delayed retries and a DLQ",
       "An SNS topic pushing jobs directly to every worker over HTTP"
@@ -204,13 +204,13 @@
     "question": "Consumer đọc đoạn code dưới đây. Nếu process crash sau khi commit nhưng trước khi `saveToDb` xong, đảm bảo giao nhận là gì?\n`const records = await consumer.poll();\nawait consumer.commit();\nfor (const r of records) {\n  await saveToDb(r);\n}`",
     "questionEn": "A consumer runs the code below. If the process crashes after the commit but before `saveToDb` finishes, what delivery guarantee is this?\n`const records = await consumer.poll();\nawait consumer.commit();\nfor (const r of records) {\n  await saveToDb(r);\n}`",
     "options": [
-      "At-least-once — record sẽ được giao lại khi consumer khởi động",
+      "At-least-once — record chưa commit sẽ được giao lại khi consumer khởi động lại",
       "At-most-once — các record chưa lưu bị mất vì offset đã vượt qua chúng",
       "Exactly-once — commit và xử lý nằm trong cùng một hàm",
       "Không xác định — phụ thuộc vào acks của producer"
     ],
     "optionsEn": [
-      "At-least-once — the records are redelivered when the consumer restarts",
+      "At-least-once — the uncommitted records are redelivered when the consumer restarts",
       "At-most-once — the unsaved records are lost because the offset has moved past them",
       "Exactly-once — commit and processing happen in the same function",
       "Undefined — it depends on the producer's acks setting"
@@ -227,13 +227,13 @@
       "Đúng hướng: transaction Kafka bao gồm cả lời gọi HTTP trong vòng xử lý",
       "Chỉ cần bật enable.idempotence ở consumer là đủ",
       "Đổi sang isolation.level=read_committed sẽ ngăn trừ tiền hai lần",
-      "Transaction Kafka chỉ bao Kafka → Kafka; cần gửi idempotency key cho cổng thanh toán"
+      "Chúng chỉ bao Kafka → Kafka; gửi idempotency key cho cổng thanh toán"
     ],
     "optionsEn": [
       "Right approach: Kafka transactions cover the HTTP call inside the processing loop",
       "Enabling enable.idempotence on the consumer is enough",
       "Switching to isolation.level=read_committed will prevent double charges",
-      "Kafka transactions only cover Kafka → Kafka; send an idempotency key to the payment gateway"
+      "They only span Kafka-to-Kafka writes; send the gateway an idempotency key instead"
     ],
     "answer": 3,
     "explanation": "Transaction Kafka ghi nguyên tử record đầu ra và offset trong Kafka, nhưng không thể rollback một lời gọi tới hệ thống bên ngoài. Crash sau khi gọi API và trước khi commit vẫn gây gọi lại. Idempotence là thiết lập của producer, read_committed chỉ ẩn record của transaction bị huỷ. Cách đúng: at-least-once + idempotency key.",
@@ -244,16 +244,16 @@
     "question": "Consumer xử lý event `PaymentRequested` với lệnh `UPDATE accounts SET balance = balance - 100 WHERE id = 42`. Broker là at-least-once. Cách nào làm consumer an toàn trước message trùng?",
     "questionEn": "A consumer handles `PaymentRequested` with `UPDATE accounts SET balance = balance - 100 WHERE id = 42`. The broker is at-least-once. Which approach makes the consumer safe against duplicates?",
     "options": [
-      "Ghi event ID do producer tạo vào bảng processed_events có unique key, trong cùng transaction với lệnh UPDATE",
-      "Ghi receipt handle của message vào bảng processed_events rồi mới UPDATE",
+      "Ghi event ID của producer vào bảng processed_events (unique key) trong cùng transaction với UPDATE",
+      "Ghi receipt handle của message vào bảng processed_events có unique key rồi mới UPDATE",
       "Kiểm tra event ID trong Redis, sau đó UPDATE trong một transaction database riêng",
-      "Bật at-most-once ở consumer để không bao giờ nhận message hai lần"
+      "Bật at-most-once ở consumer để không bao giờ nhận message hai lần, kể cả khi retry"
     ],
     "optionsEn": [
-      "Insert the producer-generated event ID into a processed_events table with a unique key, in the same transaction as the UPDATE",
-      "Store the message receipt handle in processed_events, then run the UPDATE",
-      "Check the event ID in Redis, then run the UPDATE in a separate database transaction",
-      "Switch the consumer to at-most-once so it never sees a message twice"
+      "Insert the producer's event ID into a unique-keyed processed_events in the UPDATE's transaction",
+      "Store the message receipt handle in a processed_events table with a unique key, then UPDATE",
+      "Check the event ID in Redis first, then run the UPDATE in a separate database transaction",
+      "Switch the consumer to at-most-once so it never receives a message twice, even on retry"
     ],
     "answer": 0,
     "explanation": "Lệnh trừ tiền không idempotent, nên cần khử trùng bằng ID ổn định do producer tạo và thao tác đó phải nguyên tử với tác dụng phụ. Receipt handle đổi sau mỗi lần nhận; kiểm tra ở Redis rồi commit riêng để lại khe hở khi crash; at-most-once đổi trùng lặp lấy mất tiền.",
@@ -266,13 +266,13 @@
     "options": [
       "Dùng topic một partition để đảm bảo thứ tự toàn cục",
       "Gửi record không có key để producer rải đều qua các partition",
-      "Dùng orderId làm message key để mọi event của một đơn vào cùng partition",
+      "Dùng orderId làm message key để các event cùng đơn rơi vào một partition",
       "Dùng timestamp làm key để record sắp xếp theo thời gian"
     ],
     "optionsEn": [
       "Use a single-partition topic to guarantee global order",
       "Send records without a key so the producer spreads them across partitions",
-      "Use orderId as the message key so all events of an order land in the same partition",
+      "Use orderId as the message key so each order's events share a partition",
       "Use the timestamp as the key so records sort by time"
     ],
     "answer": 2,
@@ -284,16 +284,16 @@
     "question": "Consumer SQS xử lý một message mất khoảng 90 giây. Queue dùng visibility timeout mặc định. Triệu chứng dễ gặp nhất là gì?",
     "questionEn": "An SQS consumer takes about 90 seconds to process a message. The queue uses the default visibility timeout. What symptom is most likely?",
     "options": [
-      "Message bị xoá khỏi queue sau 30 giây dù chưa xử lý xong",
-      "Message hiện lại sau 30 giây và bị một consumer khác xử lý song song, gây trùng lặp",
+      "Message bị SQS xoá khỏi queue sau 30 giây dù consumer chưa xử lý xong",
+      "Message hiện lại sau 30 giây và bị consumer khác xử lý song song",
       "SQS chặn consumer nhận thêm message cho tới khi message hiện tại được xoá",
-      "Message được chuyển ngay sang DLQ vì vượt thời gian xử lý"
+      "Message được chuyển ngay sang DLQ vì vượt quá thời gian xử lý cho phép"
     ],
     "optionsEn": [
-      "The message is deleted from the queue after 30 seconds even though processing is unfinished",
-      "The message becomes visible again after 30 seconds and another consumer processes it concurrently, causing duplicates",
+      "SQS deletes the message after 30 seconds even though processing is not finished",
+      "It becomes visible after 30 s and another consumer processes it too, causing duplicates",
       "SQS blocks the consumer from receiving more messages until the current one is deleted",
-      "The message is moved straight to the DLQ for exceeding the processing time"
+      "The message moves straight to the DLQ for exceeding the allowed processing time"
     ],
     "answer": 1,
     "explanation": "Visibility timeout mặc định là 30 giây. Hết thời gian mà message chưa bị xoá thì nó hiện lại và có thể được giao cho consumer khác trong khi consumer đầu vẫn đang chạy. Nếu lặp lại đủ maxReceiveCount thì mới vào DLQ. Sửa bằng cách đặt timeout lớn hơn thời gian xử lý tệ nhất hoặc gia hạn bằng ChangeMessageVisibility.",
@@ -307,7 +307,7 @@
       "Giảm khoảng retry xuống 100 ms để hồi phục nhanh hơn",
       "Chuyển message lỗi thẳng vào DLQ ngay lần thất bại đầu tiên",
       "Tăng số consumer để xử lý backlog nhanh hơn",
-      "Dùng exponential backoff kèm jitter và giới hạn số lần retry"
+      "Exponential backoff kèm jitter và giới hạn số lần retry"
     ],
     "optionsEn": [
       "Shorten the retry interval to 100 ms to recover faster",
@@ -324,7 +324,7 @@
     "question": "Service đơn hàng chạy đoạn logic dưới đây. Rủi ro chính là gì và pattern nào sửa được?\n`await db.query('INSERT INTO orders ...');\nawait kafka.send({ topic: 'orders', messages: [event] });`",
     "questionEn": "The order service runs the logic below. What is the main risk and which pattern fixes it?\n`await db.query('INSERT INTO orders ...');\nawait kafka.send({ topic: 'orders', messages: [event] });`",
     "options": [
-      "Ghi kép: DB commit nhưng publish thất bại làm mất event; dùng transactional outbox",
+      "Ghi kép: DB commit mà publish lỗi thì mất event; dùng transactional outbox",
       "Deadlock giữa DB và Kafka; dùng distributed lock bằng Redis",
       "Kafka đổi thứ tự event; dùng topic một partition",
       "Consumer đọc event trước khi DB commit; dùng isolation.level=read_committed"
@@ -344,16 +344,16 @@
     "question": "Trên AWS, một event OrderPlaced cần tới ba hệ thống (email, billing, analytics); mỗi hệ thống xử lý theo tốc độ riêng, có retry và DLQ riêng. Kiến trúc nào phù hợp nhất?",
     "questionEn": "On AWS, an OrderPlaced event must reach three systems (email, billing, analytics), each processing at its own pace with its own retries and DLQ. Which architecture fits best?",
     "options": [
-      "Một SQS queue dùng chung với ba loại consumer cùng poll",
-      "Một SNS topic fan-out tới ba SQS queue, mỗi queue có consumer và DLQ riêng",
-      "Một SQS FIFO queue với ba MessageGroupId khác nhau",
-      "Ba Lambda gọi nhau tuần tự, cái trước gọi cái sau"
+      "Một SQS queue dùng chung với ba loại consumer cùng poll và tự lọc message",
+      "SNS topic fan-out ra ba SQS queue, từng queue có consumer và DLQ của nó",
+      "Một SQS FIFO queue với ba MessageGroupId khác nhau, mỗi hệ thống một group",
+      "Ba Lambda gọi nhau tuần tự, cái trước gọi cái sau, có retry ở mỗi bước"
     ],
     "optionsEn": [
-      "One shared SQS queue polled by all three kinds of consumer",
-      "One SNS topic fanning out to three SQS queues, each with its own consumer and DLQ",
-      "One SQS FIFO queue with three different MessageGroupIds",
-      "Three Lambdas invoking each other in sequence"
+      "One shared SQS queue polled by all three kinds of consumer, each filtering messages",
+      "An SNS topic fanning out to three SQS queues, each with its own consumer and DLQ",
+      "One SQS FIFO queue with three MessageGroupIds, one group per downstream system",
+      "Three Lambdas invoking each other in sequence, with retries at every step"
     ],
     "answer": 1,
     "explanation": "SNS + SQS là pattern fan-out chuẩn: SNS phát một bản sao cho mỗi subscriber, mỗi SQS queue đệm riêng, có visibility timeout, redrive policy và DLQ riêng. Queue dùng chung khiến các consumer cạnh tranh — mỗi message chỉ tới một hệ thống. Message group chỉ tách thứ tự chứ không nhân bản message; gọi chuỗi đồng bộ làm mất tính tách rời.",

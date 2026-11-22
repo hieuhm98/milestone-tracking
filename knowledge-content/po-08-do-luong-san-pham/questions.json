@@ -4,16 +4,16 @@
     "question": "Một đội giao hàng đều đặn suốt sáu tháng, velocity cao, backlog vơi đi. Vì sao điều đó chưa chứng minh được gì?",
     "questionEn": "A team ships steadily for six months with high velocity and a draining backlog. Why does that prove nothing?",
     "options": [
-      "Vì không có bằng chứng nào cho thấy người dùng sống tốt hơn hay doanh nghiệp kiếm được nhiều hơn — đó có thể chỉ là sự bận rộn",
-      "Vì velocity không phải chỉ số đáng tin cậy",
-      "Vì backlog vơi đi nghĩa là PO không bổ sung hạng mục mới",
-      "Vì sáu tháng là quá ngắn để đánh giá"
+      "Vì chưa có bằng chứng nào cho thấy người dùng sống tốt hơn hay doanh nghiệp kiếm được nhiều hơn — có thể chỉ là bận rộn",
+      "Vì velocity không phải chỉ số đáng tin cậy, đội có thể tăng ước tính để con số trông cao hơn mà không ai phát hiện ra trong nhiều sprint",
+      "Vì backlog vơi đi nghĩa là PO không bổ sung hạng mục mới, chứng tỏ khâu discovery đã ngừng hoạt động từ lâu rồi",
+      "Vì sáu tháng là quá ngắn để đánh giá, cần ít nhất một năm số liệu velocity mới thấy được xu hướng thật của đội"
     ],
     "optionsEn": [
       "Because there is no evidence users are better off or the business earns more — it may be pure busyness",
-      "Because velocity is not a trustworthy metric",
-      "Because a draining backlog means the PO is not adding items",
-      "Because six months is too short to judge"
+      "Because velocity is not trustworthy, as the team can inflate estimates to make it look high without anyone noticing",
+      "Because a draining backlog means the PO is not adding items, showing discovery stopped working long ago",
+      "Because six months is too short to judge, and at least a year of velocity data is needed to see the true trend"
     ],
     "answer": 0,
     "explanation": "Nếu bạn không đo, bạn không biết mình đang tạo ra giá trị hay chỉ đang bận rộn.",
@@ -25,15 +25,15 @@
     "questionEn": "What happens when a learning metric becomes an individual performance measure?",
     "options": [
       "Nó lập tức mất giá trị làm công cụ học hỏi, vì người ta bắt đầu tối ưu con số thay vì kết quả",
-      "Nó trở nên chính xác hơn vì mọi người quan tâm hơn",
-      "Nó cần được đo với tần suất cao hơn",
-      "Nó phải được công bố cho toàn tổ chức"
+      "Nó trở nên chính xác hơn vì mọi người quan tâm và kiểm tra số liệu kỹ hơn trước khi báo cáo lên",
+      "Nó cần được đo với tần suất cao hơn, vì kết quả cá nhân phải được cập nhật trước mỗi kỳ đánh giá",
+      "Nó phải được công bố cho toàn tổ chức để bảo đảm minh bạch, và mỗi người tự đối chiếu với đồng nghiệp"
     ],
     "optionsEn": [
       "It immediately loses its learning value, because people start optimising the number instead of the outcome",
-      "It becomes more accurate since people care more",
-      "It needs measuring more frequently",
-      "It must be published to the whole organisation"
+      "It becomes more accurate, since people care more and check the figures carefully before reporting them upward",
+      "It needs measuring more often, since individual results must be refreshed before every performance review",
+      "It must be published to the whole organisation for transparency, so each person can compare against peers"
     ],
     "answer": 0,
     "explanation": "Ba mục đích đo lường là học hỏi, điều hướng và trách nhiệm giải trình, và trộn lẫn chúng là nguồn gốc của nhiều tranh cãi.",
@@ -45,15 +45,15 @@
     "questionEn": "Why is total users ever registered a vanity metric?",
     "options": [
       "Vì nó chỉ có thể tăng, nên luôn trông đẹp kể cả khi sản phẩm đang chết",
-      "Vì nó khó thu thập chính xác",
-      "Vì nó không được stakeholder quan tâm",
-      "Vì nó thay đổi quá chậm để theo dõi"
+      "Vì nó khó thu thập chính xác khi người dùng tạo nhiều tài khoản trùng lặp",
+      "Vì stakeholder không quan tâm tới nó bằng doanh thu và lợi nhuận hằng quý",
+      "Vì nó thay đổi quá chậm để theo dõi được tác động của từng bản phát hành"
     ],
     "optionsEn": [
       "Because it can only rise, so it always looks good even while the product is dying",
-      "Because it is hard to collect accurately",
-      "Because stakeholders do not care about it",
-      "Because it changes too slowly to track"
+      "Because it is hard to collect accurately when users create duplicate accounts",
+      "Because stakeholders care far less about it than quarterly revenue and profit figures",
+      "Because it changes too slowly to show the effect of each individual release"
     ],
     "answer": 0,
     "explanation": "Một trong ba câu hỏi nhận diện vanity metric là con số này có thể giảm không; chỉ số cộng dồn thì không.",
@@ -64,16 +64,16 @@
     "question": "Chỉ số nào nên dùng thay cho tổng lượt tải app?",
     "questionEn": "Which metric should replace total app downloads?",
     "options": [
-      "Người dùng hoạt động hàng tuần, vì nó là tỷ lệ hành vi có thể tăng và giảm",
-      "Tổng số tài khoản đã đăng ký, vì nó chính xác hơn",
-      "Số lượt xem trang trong app, vì nó chi tiết hơn",
-      "Số tính năng đã phát hành, vì nó phản ánh nỗ lực của đội"
+      "Người dùng hoạt động hàng tuần, vì nó là hành vi có thể tăng và giảm",
+      "Tổng số tài khoản đã đăng ký, vì nó chính xác hơn và loại được lượt tải trùng",
+      "Số lượt xem trang trong app, vì nó chi tiết hơn và cho biết người dùng xem gì",
+      "Số tính năng đã phát hành mỗi quý, vì nó phản ánh trực tiếp nỗ lực của đội"
     ],
     "optionsEn": [
-      "Weekly active users, since it is a behavioural figure that can rise and fall",
-      "Total registered accounts, since it is more precise",
-      "In-app page views, since they are more granular",
-      "Features released, since it reflects the team's effort"
+      "Weekly active users, a behavioural figure that can rise and fall",
+      "Total registered accounts, since it is more precise and removes duplicate downloads",
+      "In-app page views, since they are more granular and show what users actually look at",
+      "Features released per quarter, since it directly reflects the team's effort"
     ],
     "answer": 0,
     "explanation": "Một chỉ số hữu ích thường là tỷ lệ hoặc chỉ số theo cohort, hiếm khi là một con số tuyệt đối cộng dồn.",
@@ -84,16 +84,16 @@
     "question": "Nhược điểm chính của chỉ số theo sau như doanh thu và tỷ lệ rời bỏ là gì?",
     "questionEn": "What is the main weakness of lagging indicators like revenue and churn?",
     "options": [
-      "Khi bạn nhìn thấy chúng xấu đi thì đã quá muộn để can thiệp",
-      "Chúng không phản ánh điều doanh nghiệp quan tâm",
-      "Chúng khó thu thập từ hệ thống",
-      "Chúng thay đổi quá nhanh và gây nhiễu"
+      "Lúc thấy chúng xấu đi thì đã quá muộn để can thiệp",
+      "Chúng không phản ánh điều mà doanh nghiệp thực sự quan tâm",
+      "Chúng khó thu thập tự động từ các hệ thống hiện có của công ty",
+      "Chúng thay đổi quá nhanh theo từng ngày và gây nhiễu khi đọc"
     ],
     "optionsEn": [
-      "By the time you see them worsen, it is too late to intervene",
-      "They do not reflect what the business cares about",
-      "They are hard to collect from systems",
-      "They move too fast and create noise"
+      "By the time they worsen, it is too late to act",
+      "They do not reflect what the business actually cares about",
+      "They are hard to collect automatically from existing systems",
+      "They swing too fast from day to day and create noise when read"
     ],
     "answer": 0,
     "explanation": "Vì thế cần thêm chỉ số dẫn dắt đo hành vi dự báo kết quả, để có thời gian phản ứng.",
@@ -104,16 +104,16 @@
     "question": "Cách tìm một chỉ số dẫn dắt tốt là gì?",
     "questionEn": "How do you find a good leading indicator?",
     "options": [
-      "Nhìn vào người dùng đã ở lại lâu và tìm hành vi họ làm trong tuần đầu mà người rời bỏ thì không",
-      "Chọn chỉ số dễ thu thập nhất từ hệ thống phân tích",
-      "Lấy chỉ số theo sau rồi chia cho số người dùng",
-      "Hỏi stakeholder xem họ muốn theo dõi gì"
+      "Nhìn vào người dùng ở lại lâu và tìm hành vi họ làm trong tuần đầu mà người rời bỏ thì không làm",
+      "Chọn chỉ số dễ thu thập nhất từ hệ thống phân tích, để đội có thể theo dõi hằng ngày mà không tốn công",
+      "Lấy một chỉ số theo sau như doanh thu rồi chia cho số người dùng để ra giá trị trung bình mỗi người",
+      "Hỏi stakeholder xem họ muốn theo dõi gì, vì họ hiểu rõ nhất điều gì quan trọng với doanh nghiệp"
     ],
     "optionsEn": [
       "Look at long-term users and find a week-one behaviour that leavers did not perform",
-      "Pick whatever is easiest to collect from analytics",
-      "Take a lagging indicator and divide by user count",
-      "Ask stakeholders what they want to track"
+      "Pick whatever is easiest to collect from analytics, so the team can track it daily with no effort",
+      "Take a lagging indicator like revenue and divide it by user count to get value per user",
+      "Ask stakeholders what they want to track, since they know best what matters to the business"
     ],
     "answer": 0,
     "explanation": "Mối liên hệ giữa chỉ số dẫn dắt và kết quả chỉ là giả thuyết, nên nó vẫn cần được kiểm chứng sau đó.",
@@ -124,15 +124,15 @@
     "questionEn": "A team is optimising time in app. Which counter metric should they watch alongside?",
     "options": [
       "Tỷ lệ khiếu nại và tỷ lệ gỡ cài đặt, vì chúng có thể xấu đi chính vì việc tối ưu đó",
-      "Số lượt tải app mới mỗi tuần",
-      "Doanh thu quảng cáo trên mỗi người dùng",
-      "Tốc độ tải trang trung bình"
+      "Số lượt tải app mới mỗi tuần, để biết việc tối ưu có thu hút thêm người dùng mới không",
+      "Doanh thu quảng cáo trên mỗi người dùng, vì thời gian ở lại lâu hơn phải ra tiền nhiều hơn",
+      "Tốc độ tải trang trung bình, vì app chậm sẽ làm thời gian ở lại tăng một cách giả tạo"
     ],
     "optionsEn": [
-      "Complaint rate and uninstall rate, since they can worsen precisely because of that optimisation",
-      "New app downloads per week",
-      "Ad revenue per user",
-      "Average page load time"
+      "Complaint and uninstall rates, since they can worsen precisely because of that optimisation",
+      "New app downloads per week, to see whether the optimisation attracts more new users too",
+      "Ad revenue per user, since longer time in app should translate directly into more money for the business",
+      "Average page load time, since a slow app inflates time-in-app figures artificially"
     ],
     "answer": 0,
     "explanation": "Chỉ số phản biện tồn tại để phát hiện khi việc tối ưu một con số đang gây thiệt hại ở chỗ khác.",
@@ -143,16 +143,16 @@
     "question": "Sai lầm phổ biến nhất khi dùng phễu AARRR là gì?",
     "questionEn": "What is the most common mistake when using the AARRR funnel?",
     "options": [
-      "Dồn hết nguồn lực vào Acquisition trong khi chỗ rò rỉ thật nằm ở Activation — đổ thêm người dùng vào xô có lỗ chỉ tăng chi phí",
-      "Bỏ qua bước Referral vì nó khó đo lường",
-      "Dùng cả năm bước thay vì chọn ba bước quan trọng nhất",
-      "Đo Retention theo ngày thay vì theo tuần"
+      "Dồn hết nguồn lực vào Acquisition trong khi chỗ rò rỉ thật ở Activation — đổ thêm người vào xô thủng chỉ tăng chi phí",
+      "Bỏ qua bước Referral vì nó khó đo lường, trong khi giới thiệu là kênh tăng trưởng rẻ nhất mà sản phẩm có",
+      "Dùng cả năm bước thay vì chọn ra ba bước quan trọng nhất, khiến đội bị phân tán vào quá nhiều chỉ số cùng lúc mỗi tuần",
+      "Đo Retention theo ngày thay vì theo tuần, khiến biểu đồ dao động mạnh và đội phản ứng quá mức với nhiễu"
     ],
     "optionsEn": [
-      "Piling everything into Acquisition while the real leak is at Activation — adding users to a leaking bucket only raises cost",
-      "Skipping Referral because it is hard to measure",
-      "Using all five stages instead of the three most important",
-      "Measuring retention daily rather than weekly"
+      "Piling everything into Acquisition while the real leak is Activation — more users into a leaky bucket only adds cost",
+      "Skipping Referral because it is hard to measure, when referrals are the cheapest growth channel a product has",
+      "Using all five stages instead of the three most important, spreading the team across too many metrics at once every single week",
+      "Measuring retention daily rather than weekly, so the chart swings and the team overreacts to noise"
     ],
     "answer": 0,
     "explanation": "Activation trả lời câu hỏi người dùng có đạt được giá trị lần đầu hay không, và đó thường là chỗ rơi lớn nhất.",
@@ -164,15 +164,15 @@
     "questionEn": "What are the three criteria for a good North Star Metric?",
     "options": [
       "Phản ánh giá trị cho người dùng, dự báo doanh thu dài hạn, và đội có thể ảnh hưởng tới nó",
-      "Dễ đo, dễ giải thích, và tăng đều theo thời gian",
-      "Được ban lãnh đạo phê duyệt, công bố công khai, và cập nhật hàng ngày",
-      "Phản ánh doanh thu, chi phí và lợi nhuận cùng lúc"
+      "Dễ đo, dễ giải thích cho mọi phòng ban, và có xu hướng tăng đều theo thời gian",
+      "Được ban lãnh đạo phê duyệt, công bố công khai, và cập nhật tự động hằng ngày trên dashboard chung của công ty",
+      "Phản ánh cùng lúc doanh thu, chi phí và lợi nhuận của toàn bộ sản phẩm"
     ],
     "optionsEn": [
       "It reflects user value, predicts long-term revenue, and the team can influence it",
-      "Easy to measure, easy to explain, and rising steadily",
-      "Approved by leadership, published publicly, and updated daily",
-      "Reflects revenue, cost and profit at once"
+      "Easy to measure, easy to explain to every department, and trending up steadily",
+      "Approved by leadership, published openly, and updated automatically every day on a shared company dashboard",
+      "It reflects the whole product's revenue, cost and profit all at once"
     ],
     "answer": 0,
     "explanation": "Với một nền tảng học tập, số bài học hoàn thành mỗi tuần tốt hơn số người đăng ký vì nó phản ánh giá trị thật.",
@@ -183,16 +183,16 @@
     "question": "Chỉ số bắc đẩu có thay thế các chỉ số khác không?",
     "questionEn": "Does a North Star Metric replace other metrics?",
     "options": [
-      "Không — nó là điểm hội tụ để cả tổ chức nói cùng ngôn ngữ, còn bên dưới vẫn cần chỉ số chi tiết cho từng đội",
-      "Có, đó chính là mục đích của việc chọn một chỉ số duy nhất",
-      "Có, nhưng chỉ ở cấp lãnh đạo",
-      "Không, nhưng nó thay thế được toàn bộ phễu AARRR"
+      "Không — nó là điểm hội tụ chung, bên dưới mỗi đội vẫn cần chỉ số chi tiết riêng",
+      "Có, đó chính là mục đích của việc chọn một chỉ số duy nhất: bỏ hết các chỉ số khác để cả tổ chức tập trung",
+      "Có, nhưng chỉ ở cấp lãnh đạo; các đội vẫn dùng velocity và số ticket đóng để đo kết quả công việc của mình",
+      "Không, nhưng nó thay thế được toàn bộ phễu AARRR vì đã gộp cả năm bước vào trong một con số duy nhất"
     ],
     "optionsEn": [
-      "No — it is a convergence point so the whole organisation speaks one language, while detailed team metrics remain underneath",
-      "Yes, that is the whole point of picking one metric",
-      "Yes, but only at leadership level",
-      "No, but it does replace the entire AARRR funnel"
+      "No — it is a shared convergence point, with detailed team metrics still underneath",
+      "Yes, that is the whole point of choosing one metric: drop the others so the whole organisation can focus on it alone",
+      "Yes, but only at leadership level; teams still use velocity and tickets closed to measure their own work",
+      "No, but it does replace the entire AARRR funnel, since it rolls all five stages into one single number"
     ],
     "answer": 0,
     "explanation": "Mỗi đội vẫn cần khoảng ba tới năm chỉ số chính của riêng mình để điều hướng công việc hàng ngày.",
@@ -204,15 +204,15 @@
     "questionEn": "A team changes button colour, label and position at once, then runs an A/B test. What is wrong?",
     "options": [
       "Chỉ được đổi một biến — nếu không bạn không biết yếu tố nào tạo ra kết quả",
-      "Ba thay đổi là quá ít để tạo tác động đo được",
-      "Cần chạy test trên ba nhóm thay vì hai",
-      "Không có vấn đề gì nếu kết quả cải thiện rõ rệt"
+      "Ba thay đổi là quá ít để tạo ra tác động đủ lớn mà A/B test đo được",
+      "Cần chạy test trên ba nhóm thay vì hai, mỗi nhóm cho một thay đổi",
+      "Không có vấn đề gì nếu kết quả cải thiện rõ rệt và có ý nghĩa thống kê rõ ràng"
     ],
     "optionsEn": [
       "Only one variable may change — otherwise you cannot tell which factor produced the result",
-      "Three changes are too few to create measurable impact",
-      "The test needs three groups rather than two",
-      "Nothing is wrong if the result improves clearly"
+      "Three changes are too few to create an impact big enough for the test to detect reliably",
+      "The test needs three groups rather than two, one group for each change",
+      "Nothing is wrong if the result improves clearly and is statistically significant"
     ],
     "answer": 0,
     "explanation": "Bốn điều kiện của một A/B test có nghĩa là giả thuyết viết trước, đủ mẫu, một biến, và đủ thời gian bao trọn một chu kỳ hành vi.",
@@ -224,35 +224,35 @@
     "questionEn": "Why is stopping an A/B test the moment results look good wrong?",
     "options": [
       "Đó là gian lận với chính mình — thời điểm dừng phải được quyết định trước khi bắt đầu",
-      "Vì hệ thống phân tích cần thời gian để đồng bộ dữ liệu",
-      "Vì stakeholder sẽ không tin kết quả ngắn hạn",
-      "Vì nhóm đối chứng chưa nhận đủ lưu lượng"
+      "Vì hệ thống phân tích cần thêm thời gian để đồng bộ hết dữ liệu từ các thiết bị",
+      "Vì stakeholder sẽ không tin kết quả ngắn hạn và yêu cầu chạy lại từ đầu",
+      "Vì nhóm đối chứng phải được chuyển sang phiên bản mới trước khi test được phép kết thúc"
     ],
     "optionsEn": [
       "It is cheating yourself — the stopping point must be decided before you start",
-      "Because analytics systems need time to sync data",
-      "Because stakeholders will not trust short-term results",
-      "Because the control group has not received enough traffic"
+      "Because analytics systems need more time to sync data from every device",
+      "Because stakeholders will distrust short-term results and demand a rerun",
+      "Because the control group must be switched to the new version before a test may end"
     ],
     "answer": 0,
-    "explanation": "Hành vi cuối tuần khác ngày thường, nên test phải chạy đủ dài để bao trọn một chu kỳ hành vi.",
-    "explanationEn": "Weekend behaviour differs from weekdays, so a test must run long enough to cover a full behaviour cycle.",
+    "explanation": "Nhìn kết quả liên tục rồi dừng ở lần đầu thấy đẹp (peeking) biến nhiễu ngẫu nhiên thành \"thắng\". Hành vi cuối tuần khác ngày thường, nên test phải chạy đủ dài để bao trọn một chu kỳ hành vi.",
+    "explanationEn": "Checking repeatedly and stopping at the first good-looking result (peeking) turns random noise into a \"win\". Weekend behaviour differs from weekdays, so a test must run long enough to cover a full behaviour cycle.",
     "id": "q12"
   },
   {
     "question": "Giới hạn quan trọng nhất của A/B testing là gì?",
     "questionEn": "What is A/B testing's most important limit?",
     "options": [
-      "Nó tối ưu cục bộ rất tốt nhưng không tìm ra ý tưởng mới — nó cho bạn cái nút tốt nhất, không cho bạn sản phẩm đúng",
-      "Nó yêu cầu công cụ phân tích đắt tiền",
-      "Nó chỉ áp dụng được cho sản phẩm web",
-      "Nó luôn cần ít nhất ba tháng để có kết quả"
+      "Nó tối ưu cục bộ tốt nhưng không tìm ra ý tưởng mới — cho bạn nút tốt nhất, không phải sản phẩm đúng",
+      "Nó yêu cầu công cụ phân tích đắt tiền và đội ngũ thống kê chuyên trách, nên chỉ công ty lớn mới làm được như vậy",
+      "Nó chỉ áp dụng được cho sản phẩm web, còn ứng dụng mobile phải chờ duyệt từ cửa hàng nên không chạy được",
+      "Nó cần ít nhất ba tháng để có kết quả đáng tin, nên không phù hợp với nhịp sprint hai tuần của đội agile"
     ],
     "optionsEn": [
-      "It optimises locally very well but does not find new ideas — it gives you the best button, not the right product",
-      "It requires expensive analytics tooling",
-      "It only applies to web products",
-      "It always needs at least three months"
+      "It optimises locally but finds no new ideas — the best button, not the right product",
+      "It requires expensive analytics tools and a dedicated statistics team, so only large companies can do it properly",
+      "It only works for web products, since mobile apps wait on store approval and cannot run the variants",
+      "It needs at least three months for reliable results, so it does not fit an agile team's two-week sprints"
     ],
     "answer": 0,
     "explanation": "Nó cũng không đo được tác động dài hạn: một thay đổi tăng chuyển đổi 5 phần trăm nhưng làm giảm lòng tin chỉ hiện ra sau nhiều tháng.",
@@ -263,16 +263,16 @@
     "question": "Đội bị đặt chỉ tiêu số ticket đóng mỗi tuần và bắt đầu chia nhỏ ticket. Đây là biểu hiện của điều gì?",
     "questionEn": "A team given a tickets-closed-per-week target starts splitting tickets. What is this?",
     "options": [
-      "Định luật Goodhart — khi một thước đo trở thành mục tiêu, nó ngừng là một thước đo tốt; cách chống là đo outcome chứ không đo output",
-      "Thiên kiến xác nhận trong cách đọc dữ liệu",
-      "Nhầm tương quan với nhân quả",
-      "Vấn đề của chỉ số trung bình che giấu sự thật"
+      "Định luật Goodhart — khi thước đo thành mục tiêu thì nó ngừng là thước đo tốt; cách chống là đo outcome thay vì output",
+      "Thiên kiến xác nhận trong cách đọc dữ liệu, khi đội chỉ chọn những con số ủng hộ cách làm hiện tại của mình từ trước tới nay",
+      "Nhầm tương quan với nhân quả, khi quản lý cho rằng đóng nhiều ticket hơn sẽ khiến sản phẩm tốt hơn",
+      "Vấn đề của chỉ số trung bình che giấu sự thật, khi vài ticket lớn bị lẫn giữa hàng chục ticket nhỏ"
     ],
     "optionsEn": [
-      "Goodhart's law — when a measure becomes a target it stops being a good measure; the defence is measuring outcomes rather than output",
-      "Confirmation bias in reading data",
-      "Mistaking correlation for causation",
-      "Averages hiding the truth"
+      "Goodhart's law — a measure that becomes a target stops being a good measure; defend by measuring outcomes, not output",
+      "Confirmation bias in reading data, with the team picking only the numbers that support how it already works from the start",
+      "Mistaking correlation for causation, with managers assuming more closed tickets make the product better",
+      "Averages hiding the truth, with a few large tickets buried among dozens of tiny ones"
     ],
     "answer": 0,
     "explanation": "Đo sản lượng luôn tạo áp lực bóp méo hành vi; đo kết quả thì khó hơn nhưng không bị chia nhỏ để lách.",
@@ -284,15 +284,15 @@
     "questionEn": "Data shows users of feature X retain better. Which conclusion is INVALID?",
     "options": [
       "Ép mọi người dùng X sẽ tăng tỷ lệ giữ lại, vì đó là nhầm tương quan với nhân quả",
-      "Tính năng X đáng được điều tra sâu hơn để hiểu vai trò của nó",
-      "Có thể chính người dùng gắn bó mới đi tìm tính năng X",
-      "Cần một thử nghiệm có đối chứng để xác định quan hệ nhân quả"
+      "Tính năng X đáng được điều tra sâu hơn để hiểu rõ vai trò thực sự của nó",
+      "Có thể chính những người dùng gắn bó mới là người chủ động đi tìm tính năng X trong sản phẩm",
+      "Cần một thử nghiệm có đối chứng để xác định có quan hệ nhân quả hay không"
     ],
     "optionsEn": [
       "Forcing everyone onto X will raise retention, since that mistakes correlation for causation",
-      "Feature X deserves deeper investigation to understand its role",
-      "It may be that committed users go looking for feature X",
-      "A controlled experiment is needed to establish causation"
+      "Feature X deserves deeper investigation to understand what role it really plays",
+      "It may be that already-committed users are the ones who go looking for feature X in the product",
+      "A controlled experiment is needed to establish whether there is any causal link"
     ],
     "answer": 0,
     "explanation": "Chiều nhân quả có thể ngược lại: sự gắn bó dẫn tới việc dùng X, chứ không phải X tạo ra sự gắn bó.",
@@ -304,15 +304,15 @@
     "questionEn": "Average response time is 200 milliseconds. Why can that mislead?",
     "options": [
       "Vì trung bình che giấu việc 5 phần trăm người dùng có thể đang chờ 8 giây — cần xem phân vị 95 và 99",
-      "Vì 200 mili giây là con số quá thấp để đáng tin",
-      "Vì thời gian phản hồi không liên quan tới giá trị sản phẩm",
-      "Vì trung bình chỉ đúng khi dữ liệu phân phối chuẩn"
+      "Vì 200 mili giây là con số quá thấp để đáng tin, nhiều khả năng hệ thống đo đã bị cấu hình sai",
+      "Vì thời gian phản hồi không liên quan tới giá trị sản phẩm, người dùng không cảm nhận được vài trăm mili giây",
+      "Vì trung bình chỉ đúng khi dữ liệu phân phối chuẩn, nên cần dùng trung vị thay thế trong mọi trường hợp"
     ],
     "optionsEn": [
       "Because the mean hides that 5 percent of users may be waiting 8 seconds — look at the 95th and 99th percentiles",
-      "Because 200 milliseconds is too low to be believable",
-      "Because response time is unrelated to product value",
-      "Because means only work on normally distributed data"
+      "Because 200 milliseconds is too low to be believable, so the monitoring is most likely misconfigured",
+      "Because response time is unrelated to product value, and users cannot perceive a few hundred milliseconds of delay",
+      "Because means only work on normally distributed data, so the median must replace it in every case"
     ],
     "answer": 0,
     "explanation": "Chỉ số trung bình che giấu sự thật là một trong bốn cái bẫy khi đo lường sản phẩm.",
@@ -323,16 +323,16 @@
     "question": "Vì sao đo số lượt click lại là một cái bẫy?",
     "questionEn": "Why is measuring clicks a trap?",
     "options": [
-      "Vì đó là đo cái dễ đo thay vì cái quan trọng — điều đáng biết là người dùng có giải quyết được vấn đề của họ hay không",
-      "Vì số lượt click không thể thu thập chính xác",
-      "Vì click là chỉ số theo sau chứ không phải dẫn dắt",
-      "Vì click chỉ đo được trên web mà không đo được trên mobile"
+      "Vì đó là đo cái dễ đo thay vì cái quan trọng — điều đáng biết là người dùng có giải quyết được vấn đề hay không",
+      "Vì số lượt click không thể thu thập chính xác khi người dùng bật trình chặn quảng cáo hay chặn theo dõi trên trình duyệt",
+      "Vì click là chỉ số theo sau chứ không phải dẫn dắt, nên khi nó giảm thì người dùng đã rời đi từ lâu rồi",
+      "Vì click chỉ đo được trên web mà không đo được trên mobile, nên số liệu luôn thiếu một nửa người dùng"
     ],
     "optionsEn": [
-      "Because it measures what is easy rather than what matters — the thing worth knowing is whether users solved their problem",
-      "Because clicks cannot be collected accurately",
-      "Because clicks are a lagging rather than leading indicator",
-      "Because clicks only work on web, not mobile"
+      "Because it measures what is easy rather than what matters — what is worth knowing is whether users solved their problem",
+      "Because clicks cannot be collected accurately once users turn on ad blockers or tracking protection in browsers",
+      "Because clicks are a lagging rather than a leading indicator, so by the time they drop users have long gone from the product entirely",
+      "Because clicks only work on web and not mobile, so the data always misses about half of the user base"
     ],
     "answer": 0,
     "explanation": "Cái đáng đo thường khó đo hơn, nhưng bỏ nó để lấy con số dễ sẽ khiến dashboard đầy dữ liệu mà vô nghĩa.",
@@ -344,13 +344,13 @@
     "questionEn": "What three things must every metric have to avoid being forgotten?",
     "options": [
       "Một người sở hữu, một ngưỡng mong đợi, và một nhịp xem lại",
-      "Một biểu đồ, một bộ lọc, và một quyền truy cập",
+      "Một biểu đồ trực quan, một bộ lọc theo phòng ban, và một quyền truy cập",
       "Một công thức, một nguồn dữ liệu, và một báo cáo tự động",
       "Một mục tiêu quý, một chủ đầu tư, và một cuộc họp hàng tuần"
     ],
     "optionsEn": [
       "An owner, an expected threshold, and a review cadence",
-      "A chart, a filter, and access control",
+      "A visual chart, a per-department filter, and access control",
       "A formula, a data source, and an automated report",
       "A quarterly target, a sponsor, and a weekly meeting"
     ],

@@ -24,16 +24,16 @@
     "question": "Scope Creep là gì và tại sao nguy hiểm?",
     "questionEn": "What is Scope Creep and why is it dangerous?",
     "options": [
-      "Lỗi kỹ thuật trong code",
+      "Lỗi kỹ thuật tích tụ dần trong code, khiến hệ thống chậm và khó bảo trì",
       "Phạm vi dự án mở rộng dần mà không kiểm soát, gây trễ và vượt ngân sách",
-      "Khi khách hàng thay đổi PM",
-      "Khi team quá ít người"
+      "Khi khách hàng thay đổi PM giữa chừng, làm mất thông tin và cam kết cũ",
+      "Khi đội quá ít người so với khối lượng việc, nên tiến độ trượt dần mỗi tuần"
     ],
     "optionsEn": [
-      "A technical bug in the code",
-      "The project scope gradually expanding out of control, causing delays and budget overruns",
-      "When the customer changes the PM",
-      "When the team has too few people"
+      "Technical bugs piling up in the code, making the system slow and hard to maintain",
+      "Project scope expanding gradually without control, causing delays and budget overruns",
+      "The customer replacing the PM mid-project, losing context and earlier commitments",
+      "The team being too small for the workload, so the schedule slips a little each week"
     ],
     "answer": 1,
     "explanation": "Scope creep là kẻ thù số 1 của dự án IT. Mỗi yêu cầu nhỏ thêm vào ('chỉ thêm 1 button thôi') tích lũy thành overload. Cần Change Control Process để evaluate impact trước khi approve.",
@@ -44,16 +44,16 @@
     "question": "WBS (Work Breakdown Structure) dùng để làm gì?",
     "questionEn": "What is a WBS (Work Breakdown Structure) used for?",
     "options": [
-      "Phân công công việc cho từng nhân viên",
+      "Phân công công việc cụ thể cho từng nhân viên theo tuần",
       "Phân rã dự án thành các deliverable nhỏ dần để dễ quản lý",
-      "Vẽ Gantt chart tự động",
-      "Theo dõi chi phí từng hạng mục"
+      "Vẽ Gantt chart tự động từ danh sách task và phụ thuộc",
+      "Theo dõi chi phí thực tế của từng hạng mục so với ngân sách"
     ],
     "optionsEn": [
-      "Assigning work to each employee",
-      "Decomposing the project into progressively smaller deliverables for easier management",
-      "Drawing a Gantt chart automatically",
-      "Tracking the cost of each line item"
+      "Assigning specific work to each employee and tracking it on a week-by-week basis",
+      "Breaking the project into progressively smaller deliverables for easier management",
+      "Generating a Gantt chart automatically from tasks and dependencies",
+      "Tracking the actual cost of each line item against the approved budget every month"
     ],
     "answer": 1,
     "explanation": "WBS: phân cấp dự án từ big picture xuống work packages nhỏ. Mỗi level cụ thể hơn. Giúp: ước tính chính xác, assign rõ ràng, không bỏ sót deliverable.",
@@ -64,16 +64,16 @@
     "question": "Critical Path trong dự án là gì?",
     "questionEn": "What is the Critical Path in a project?",
     "options": [
-      "Đường đi ngắn nhất trong flowchart",
+      "Đường đi ngắn nhất qua flowchart, cho biết cách hoàn thành dự án nhanh nhất",
       "Chuỗi task phụ thuộc nhau dài nhất, xác định thời gian tối thiểu của dự án",
-      "Danh sách rủi ro nghiêm trọng nhất",
-      "Path trong codebase phức tạp nhất"
+      "Danh sách các rủi ro nghiêm trọng nhất cần được theo dõi hằng ngày",
+      "Chuỗi task có nhiều người tham gia nhất, nơi cần phối hợp chặt chẽ nhất"
     ],
     "optionsEn": [
-      "The shortest path in a flowchart",
+      "The shortest path through the flowchart, showing the fastest way to finish",
       "The longest chain of dependent tasks, which determines the minimum project duration",
-      "The list of the most serious risks",
-      "The most complex path in the codebase"
+      "The list of the most serious risks that need daily monitoring by the PM",
+      "The chain of tasks involving the most people, where coordination is tightest"
     ],
     "answer": 1,
     "explanation": "Critical Path: task A → B → C (mỗi task phải đợi task trước). Nếu bất kỳ task nào trên critical path bị trễ → toàn bộ dự án trễ. Task không trên critical path có float — trễ chút không ảnh hưởng.",
@@ -84,16 +84,16 @@
     "question": "Milestone trong quản lý dự án là gì?",
     "questionEn": "What is a Milestone in project management?",
     "options": [
-      "Task quan trọng nhất của sprint",
-      "Điểm mốc quan trọng đánh dấu sự kiện hoặc deliverable lớn, không có duration",
-      "Ngân sách dự phòng",
-      "Meeting với stakeholder"
+      "Task quan trọng nhất của sprint, thường do người có kinh nghiệm nhất đảm nhận",
+      "Điểm mốc đánh dấu một sự kiện hoặc deliverable lớn, không có duration",
+      "Khoản ngân sách dự phòng được giải ngân khi dự án đạt một giai đoạn",
+      "Buổi họp định kỳ với stakeholder để báo cáo tiến độ từng giai đoạn"
     ],
     "optionsEn": [
-      "The most important task of the sprint",
-      "A key checkpoint marking a major event or deliverable, with no duration",
-      "A contingency budget",
-      "A meeting with stakeholders"
+      "The most important task of the sprint, usually given to the most senior person",
+      "A checkpoint marking a major event or deliverable, with no duration",
+      "A contingency budget released when the project reaches a new phase",
+      "A recurring stakeholder meeting to report progress on each phase"
     ],
     "answer": 1,
     "explanation": "Milestone = điểm mốc, không có duration (thời lượng = 0). Ví dụ: 'Requirements approved', 'MVP deployed', 'Go-live'. Dùng để track tiến độ lớn, communicate với stakeholder.",
@@ -107,13 +107,13 @@
       "Monitor",
       "Keep Informed",
       "Keep Satisfied",
-      "Manage Closely - engage liên tục và thường xuyên"
+      "Manage Closely"
     ],
     "optionsEn": [
       "Monitor",
       "Keep Informed",
       "Keep Satisfied",
-      "Manage Closely - engage continuously and frequently"
+      "Manage Closely"
     ],
     "answer": 3,
     "explanation": "High influence + High interest = stakeholder quan trọng nhất. Họ vừa bị ảnh hưởng nhiều vừa có thể ảnh hưởng đến dự án. Cần involve sâu: regular updates, seek input, address concerns kịp thời.",
@@ -124,16 +124,16 @@
     "question": "Chiến lược 'Transfer' trong Risk Management có nghĩa là gì?",
     "questionEn": "What does the 'Transfer' strategy mean in Risk Management?",
     "options": [
-      "Chuyển task cho team khác",
+      "Chuyển rủi ro sang giai đoạn sau của dự án để xử lý khi đủ thông tin",
       "Chuyển rủi ro cho bên thứ 3 như bảo hiểm hoặc vendor",
-      "Bỏ qua rủi ro",
-      "Thực hiện dự án ở địa điểm khác"
+      "Ghi nhận rủi ro và chấp nhận hệ quả nếu nó xảy ra",
+      "Thay đổi kế hoạch để loại bỏ hẳn nguồn gốc của rủi ro"
     ],
     "optionsEn": [
-      "Moving a task to another team",
+      "Pushing the risk to a later project phase to handle once more is known",
       "Shifting the risk to a third party such as insurance or a vendor",
-      "Ignoring the risk",
-      "Running the project at a different location"
+      "Recording the risk and accepting the consequence if it happens",
+      "Changing the plan to remove the source of the risk altogether"
     ],
     "answer": 1,
     "explanation": "Transfer: không loại bỏ rủi ro mà chuyển trách nhiệm tài chính/xử lý sang bên khác. Ví dụ: mua bảo hiểm, thuê vendor chịu trách nhiệm SLA, contract với penalty clause.",
@@ -144,16 +144,16 @@
     "question": "Bạn cần thêm tính năng mới vào giữa dự án mà không kéo dài timeline. Phải làm gì?",
     "questionEn": "You need to add a new feature mid-project without extending the timeline. What should you do?",
     "options": [
-      "Thêm tính năng và hy vọng team làm kịp",
-      "Từ chối hoàn toàn yêu cầu",
+      "Thêm tính năng và yêu cầu team tăng tốc, làm thêm giờ để kịp hạn",
+      "Từ chối hoàn toàn yêu cầu vì scope đã được chốt từ đầu dự án",
       "Giảm scope tính năng khác để bù, sau khi PO/stakeholder approve",
-      "Thuê thêm developer ngay"
+      "Thuê thêm developer ngay để làm song song mà không động tới scope"
     ],
     "optionsEn": [
-      "Add the feature and hope the team finishes in time",
-      "Reject the request outright",
+      "Add the feature and ask the team to speed up with overtime to hit the date",
+      "Reject the request outright because scope was locked at the start of the project",
       "Reduce the scope of another feature to compensate, after PO/stakeholder approval",
-      "Immediately hire more developers"
+      "Hire more developers immediately to build it in parallel without touching scope"
     ],
     "answer": 2,
     "explanation": "Iron Triangle: muốn scope tăng mà time cố định → phải giảm scope chỗ khác hoặc tăng cost (thêm người). PM/BA phải làm rõ impact và để stakeholder quyết định trade-off.",
@@ -184,16 +184,16 @@
     "question": "Khi stakeholder yêu cầu thêm tính năng, PM/BA cần làm gì trước tiên?",
     "questionEn": "When a stakeholder requests an additional feature, what should the PM/BA do first?",
     "options": [
-      "Đồng ý ngay và giao cho developer",
-      "Từ chối vì đã chốt scope",
-      "Evaluate impact lên scope/time/cost và trình bày cho stakeholder quyết định",
-      "Hỏi developer có làm được không"
+      "Đồng ý ngay và giao cho developer để giữ quan hệ tốt với stakeholder",
+      "Từ chối vì đã chốt scope, và hẹn đưa yêu cầu vào phiên bản sau",
+      "Đánh giá impact lên scope/time/cost rồi trình bày để stakeholder quyết định",
+      "Hỏi developer có làm được không, rồi báo lại thời gian hoàn thành cho stakeholder"
     ],
     "optionsEn": [
-      "Agree immediately and hand it to a developer",
-      "Refuse because the scope is already locked",
+      "Agree immediately and hand it to a developer to keep the stakeholder happy",
+      "Refuse because scope is locked, and promise to consider it for the next version",
       "Evaluate the impact on scope/time/cost and present it to the stakeholder to decide",
-      "Ask the developer whether it's feasible"
+      "Ask the developer whether it is feasible, then report a completion date back"
     ],
     "answer": 2,
     "explanation": "Change Request Process: (1) ghi nhận yêu cầu, (2) analyze impact (effort, time, cost, risk), (3) present options cho stakeholder, (4) họ decide approve/reject/modify. PM không tự quyết.",
@@ -204,16 +204,16 @@
     "question": "Gantt Chart được dùng để làm gì?",
     "questionEn": "What is a Gantt Chart used for?",
     "options": [
-      "Theo dõi bug",
+      "Theo dõi bug và trạng thái xử lý của từng lỗi theo mức độ ưu tiên đã gán",
       "Hiển thị timeline của các task theo trục thời gian dạng thanh ngang",
-      "Vẽ sơ đồ database",
-      "Phân tích rủi ro"
+      "Vẽ sơ đồ quan hệ giữa các bảng trong database của hệ thống",
+      "Phân tích rủi ro theo xác suất và tác động trên ma trận hai chiều"
     ],
     "optionsEn": [
-      "Tracking bugs",
+      "Tracking bugs and the fix status of each reported defect by priority level",
       "Displaying the timeline of tasks along a time axis as horizontal bars",
-      "Drawing a database diagram",
-      "Analyzing risks"
+      "Drawing a diagram of the relationships between database tables",
+      "Analysing risks by probability and impact on a two-axis matrix"
     ],
     "answer": 1,
     "explanation": "Gantt Chart: trục X = thời gian, trục Y = tasks. Mỗi thanh = duration của task. Thấy ngay: task nào chạy song song, task nào phụ thuộc, khi nào xong. Tool: MS Project, Jira, Asana.",
@@ -224,16 +224,16 @@
     "question": "Risk Register là gì?",
     "questionEn": "What is a Risk Register?",
     "options": [
-      "Danh sách thành viên team",
+      "Danh sách thành viên team kèm vai trò và thông tin liên hệ của từng người",
       "Tài liệu ghi nhận tất cả rủi ro đã identify, đánh giá và kế hoạch ứng phó",
-      "Log lỗi hệ thống",
-      "Lịch sử version code"
+      "Log lỗi hệ thống ghi lại mọi exception xảy ra trên môi trường production",
+      "Lịch sử các phiên bản code và người đã commit từng thay đổi vào repository"
     ],
     "optionsEn": [
-      "A list of team members",
+      "A list of team members along with each person's role and their contact details",
       "A document recording all identified risks, their assessment, and response plans",
-      "A system error log",
-      "The code version history"
+      "A system error log recording every exception raised in production",
+      "The code version history showing who committed each change to the repository"
     ],
     "answer": 1,
     "explanation": "Risk Register: bảng theo dõi rủi ro với: mô tả rủi ro, likelihood, impact, priority score, owner, response plan, status. Được update thường xuyên suốt dự án.",
@@ -244,16 +244,16 @@
     "question": "'Mitigate' trong Risk Management có nghĩa là gì?",
     "questionEn": "What does 'Mitigate' mean in Risk Management?",
     "options": [
-      "Chấp nhận rủi ro và không làm gì",
-      "Loại bỏ hoàn toàn rủi ro",
+      "Chấp nhận rủi ro, ghi lại và không làm gì cho tới khi nó xảy ra",
+      "Loại bỏ hoàn toàn rủi ro bằng cách thay đổi kế hoạch dự án",
       "Giảm probability hoặc impact của rủi ro xuống mức chấp nhận được",
-      "Chuyển rủi ro cho bên khác"
+      "Chuyển rủi ro cho bên thứ ba như công ty bảo hiểm hoặc nhà cung cấp"
     ],
     "optionsEn": [
-      "Accepting the risk and doing nothing",
-      "Eliminating the risk entirely",
+      "Accepting the risk, logging it, and doing nothing until it happens",
+      "Removing the risk entirely by changing the project plan",
       "Reducing the risk's probability or impact to an acceptable level",
-      "Shifting the risk to another party"
+      "Shifting the risk to a third party such as insurance or a vendor"
     ],
     "answer": 2,
     "explanation": "Mitigate: giảm thiểu rủi ro. Ví dụ: rủi ro server down → mitigate bằng cách setup backup server, monitoring, auto-failover. Không loại bỏ hoàn toàn nhưng giảm thiệt hại.",
@@ -264,16 +264,16 @@
     "question": "Tại sao cần Buffer (dự phòng) trong timeline dự án?",
     "questionEn": "Why is a Buffer needed in a project timeline?",
     "options": [
-      "Để team có thể nghỉ thêm",
-      "Để dự phòng cho rủi ro, sự cố không lường trước, và ước tính không chính xác",
-      "Buffer là lãng phí, không cần thiết",
-      "Để có thể add thêm tính năng sau"
+      "Để team có thể nghỉ thêm vài ngày sau mỗi giai đoạn căng thẳng",
+      "Để dự phòng cho rủi ro, sự cố không lường trước và ước tính sai",
+      "Để PM có thời gian chuẩn bị tài liệu và báo cáo cho stakeholder",
+      "Để có chỗ thêm tính năng mới mà khách hàng yêu cầu về sau"
     ],
     "optionsEn": [
-      "So the team can take extra time off",
-      "To provide a cushion for risks, unforeseen incidents, and inaccurate estimates",
-      "A buffer is wasteful and unnecessary",
-      "So that features can be added later"
+      "So the team can take a few extra days off after each intense phase",
+      "To cushion risks, unforeseen incidents and inaccurate estimates",
+      "So the PM has time to prepare documents and stakeholder reports",
+      "So there is room for new features the customer asks for later"
     ],
     "answer": 1,
     "explanation": "Estimation không bao giờ 100% chính xác. Buffer (10-20%) giúp absorb: task estimate sai, sự cố kỹ thuật, ngày nghỉ, review cycles. Dự án không có buffer → bất kỳ sự cố nhỏ nào cũng trễ.",
@@ -284,16 +284,16 @@
     "question": "Change Control Process trong quản lý dự án gồm những bước nào?",
     "questionEn": "What steps make up the Change Control Process in project management?",
     "options": [
-      "Nhận yêu cầu → implement ngay → thông báo",
-      "Nhận yêu cầu → analyze impact → đề xuất options → stakeholder decide → implement (nếu approved)",
-      "Từ chối tất cả change request",
-      "Chỉ accept change request trước khi dự án bắt đầu"
+      "Nhận yêu cầu → implement ngay để kịp sprint hiện tại → test → thông báo cho stakeholder sau khi xong",
+      "Nhận yêu cầu → phân tích impact → đề xuất options → stakeholder quyết định → implement nếu duyệt",
+      "Nhận yêu cầu → ghi vào backlog → chờ hết dự án → xem xét ở giai đoạn bảo trì",
+      "Nhận yêu cầu → developer ước tính → PM tự quyết định → cập nhật kế hoạch"
     ],
     "optionsEn": [
-      "Receive the request → implement immediately → notify",
-      "Receive the request → analyze the impact → propose options → the stakeholder decides → implement (if approved)",
-      "Reject all change requests",
-      "Only accept change requests before the project starts"
+      "Receive request → implement it right away to fit the sprint → test → notify stakeholders once done",
+      "Receive request → analyse impact → propose options → stakeholder decides → implement if approved",
+      "Receive request → add it to the backlog → wait until project end → review during maintenance",
+      "Receive request → developer estimates it → PM decides alone → update the plan accordingly"
     ],
     "answer": 1,
     "explanation": "Change Control: không reject tự động và cũng không accept tự động. Phải analyze impact đầy đủ rồi để decision maker (PO, client) decide với đầy đủ thông tin. Documented và traceable.",
@@ -304,15 +304,15 @@
     "questionEn": "The triple constraint says that if scope grows while time and resources stay fixed, what happens?",
     "options": [
       "Chất lượng suy giảm, vì có thứ phải nhường chỗ",
-      "Dự án tự động hoàn thành sớm hơn",
-      "Không có gì thay đổi",
-      "Ngân sách tự giảm xuống"
+      "Dự án vẫn đúng hạn nhờ đội tự động làm nhanh hơn",
+      "Không có gì thay đổi nếu đội đã có kinh nghiệm",
+      "Ngân sách tự giảm xuống vì phạm vi đã được chốt"
     ],
     "optionsEn": [
       "Quality degrades, because something has to give",
-      "The project finishes earlier automatically",
-      "Nothing changes",
-      "The budget shrinks by itself"
+      "The project still finishes on time as the team speeds up",
+      "Nothing changes as long as the team is experienced",
+      "The budget shrinks by itself since scope is locked"
     ],
     "answer": 0,
     "explanation": "Đây chính là dấu hiệu rõ nhất của scope creep: khối lượng công việc tăng nhưng lịch trình và nguồn lực không đổi.",
@@ -324,15 +324,15 @@
     "questionEn": "How does a risk differ from an issue?",
     "options": [
       "Rủi ro chưa xảy ra nên có xác suất và có thể giảm nhẹ trước; vấn đề thì đã xảy ra rồi",
-      "Rủi ro nghiêm trọng hơn vấn đề",
-      "Vấn đề do bên ngoài gây ra còn rủi ro do nội bộ",
-      "Hai khái niệm giống nhau"
+      "Rủi ro nghiêm trọng hơn vấn đề nên phải báo cáo lên nhà tài trợ ngay khi phát hiện",
+      "Vấn đề do bên ngoài gây ra còn rủi ro do nội bộ, nên hai bên có người sở hữu khác nhau",
+      "Hai khái niệm giống nhau, chỉ khác tên gọi giữa waterfall và agile"
     ],
     "optionsEn": [
-      "A risk has not happened yet so it has a probability and can be mitigated in advance; an issue already has",
-      "Risks are more serious than issues",
-      "Issues come from outside and risks from inside",
-      "They are the same concept"
+      "A risk has not happened yet, so it has a probability and can be mitigated; an issue already has",
+      "A risk is more serious than an issue, so it must reach the sponsor as soon as it is spotted",
+      "An issue comes from outside and a risk from inside, so the two have different kinds of owners",
+      "They are the same concept, just named differently in waterfall and in agile"
     ],
     "answer": 0,
     "explanation": "Trường bị bỏ qua nhiều nhất và giá trị nhất trong hồ sơ rủi ro là chỉ báo cảnh báo sớm — dấu hiệu cho biết rủi ro đang thành hiện thực.",
@@ -343,16 +343,16 @@
     "question": "Chỉ số nào phản ánh tiến độ dự án có ý nghĩa nhất?",
     "questionEn": "Which measure reflects project progress most meaningfully?",
     "options": [
-      "Số hạng mục đã hoàn thành, đã kiểm thử VÀ được chấp nhận",
-      "Số giờ đội đã bỏ ra",
-      "Phần trăm hoàn thành do trưởng nhóm ước lượng",
-      "Số dòng mã đã viết"
+      "Số hạng mục đã hoàn thành, đã kiểm thử và được chấp nhận",
+      "Số giờ đội đã bỏ ra so với tổng số giờ dự kiến trong kế hoạch",
+      "Phần trăm hoàn thành do trưởng nhóm ước lượng mỗi tuần",
+      "Số dòng mã và số commit đội đã đẩy lên trong sprint"
     ],
     "optionsEn": [
-      "The number of items completed, tested, AND accepted",
-      "Hours the team has spent",
-      "A percentage estimated by the team lead",
-      "Lines of code written"
+      "The number of items completed, tested and accepted",
+      "Hours the team has spent against the total planned hours",
+      "A percent-complete figure estimated by the team lead weekly",
+      "Lines of code and commits the team pushed this sprint"
     ],
     "answer": 0,
     "explanation": "Mã chưa kiểm thử là công việc chưa hoàn thành. Hai dự án cùng báo cáo 70% có thể ở hai tình trạng hoàn toàn khác nhau.",
@@ -363,16 +363,16 @@
     "question": "Stakeholder có ảnh hưởng cao nhưng ít quan tâm nên được quản lý thế nào?",
     "questionEn": "How should you manage a stakeholder with high influence but low interest?",
     "options": [
-      "Giữ họ hài lòng bằng thông tin tóm tắt định kỳ, không làm phiền bằng chi tiết vận hành",
-      "Mời họ dự mọi cuộc họp hằng ngày",
-      "Bỏ qua hoàn toàn vì họ ít quan tâm",
-      "Chuyển toàn bộ quyết định cho họ"
+      "Giữ họ hài lòng bằng tóm tắt định kỳ, không làm phiền bằng chi tiết vận hành",
+      "Mời họ dự mọi cuộc họp hằng ngày để họ luôn nắm được chi tiết tiến độ dự án",
+      "Chỉ liên hệ khi có sự cố lớn, vì họ ít quan tâm tới dự án hằng ngày",
+      "Chuyển các quyết định quan trọng cho họ, vì họ có ảnh hưởng lớn nhất"
     ],
     "optionsEn": [
-      "Keep them satisfied with periodic summaries, without burdening them with operational detail",
-      "Invite them to every daily meeting",
-      "Ignore them entirely since they show little interest",
-      "Delegate every decision to them"
+      "Keep them satisfied with periodic summaries, sparing them operational detail",
+      "Invite them to every daily meeting so they always know progress in detail",
+      "Contact them only when a major incident occurs, since they show little interest",
+      "Hand the key decisions to them, since they have the most influence"
     ],
     "answer": 0,
     "explanation": "Ma trận ảnh hưởng và quan tâm giúp phân bổ công sức giao tiếp. Nhóm ảnh hưởng cao và quan tâm cao mới cần quản lý sát sao nhất.",
@@ -383,16 +383,16 @@
     "question": "Ước tính đưa ra TRƯỚC khi có yêu cầu thường sai lệch nghiêm trọng. Vì sao?",
     "questionEn": "Estimates given BEFORE requirements exist are usually badly wrong. Why?",
     "options": [
-      "Vì bạn không thể ước tính đáng tin cậy nếu chưa biết mình sẽ xây gì; ở giai đoạn ý tưởng sai số có thể tới 4 lần theo cả hai chiều",
-      "Vì đội chưa được đào tạo ước tính",
-      "Vì lãnh đạo luôn ép giảm con số",
-      "Vì công cụ ước tính chưa chính xác"
+      "Vì chưa biết sẽ xây gì thì không thể ước tính đáng tin; ở giai đoạn ý tưởng sai số có thể tới 4 lần theo cả hai chiều",
+      "Vì đội chưa được đào tạo bài bản về kỹ thuật ước tính, nên con số đưa ra chủ yếu dựa vào cảm tính cá nhân",
+      "Vì lãnh đạo luôn ép giảm con số để thắng hợp đồng, nên ước tính ban đầu bị kéo xuống thấp hơn nhiều so với thực tế",
+      "Vì công cụ ước tính hiện nay chưa đủ chính xác, cần dữ liệu lịch sử của ít nhất vài chục dự án tương tự"
     ],
     "optionsEn": [
-      "Because you cannot estimate reliably without knowing what you will build; at concept stage the error can reach a factor of 4 either way",
-      "Because the team is untrained in estimation",
-      "Because management always pushes the number down",
-      "Because estimation tools are inaccurate"
+      "Because you cannot estimate reliably without knowing what you will build; at concept stage error can reach 4x either way",
+      "Because the team has no proper estimation training, so the numbers rest mostly on individual gut feel",
+      "Because management always pushes the number down to win the contract, dragging early estimates far below the real effort",
+      "Because today's estimation tools are not accurate enough and need history from dozens of similar projects"
     ],
     "answer": 0,
     "explanation": "Hãy nêu rõ ước tính dựa trên tập yêu cầu nào và trình bày dưới dạng khoảng. Ước tính không đi kèm baseline là lời hứa không có cơ sở.",

@@ -34,9 +34,16 @@ import { useVocabStep } from "@/lib/useVocabStep";
 import { getGroup } from "@/lib/groups";
 import { cn } from "@/lib/utils";
 
-/** How many earlier-lesson questions each phase mixes in. */
-const WARMUP_REVIEW = 2;
-const CHECK_REVIEW = 2;
+/**
+ * How many earlier-lesson questions each phase mixes in: a range, drawn per
+ * session, so warm-ups don't all look the same.
+ */
+const WARMUP_REVIEW: [number, number] = [3, 5];
+const CHECK_REVIEW: [number, number] = [1, 3];
+/** Recently studied topics the review draws from. */
+const REVIEW_TOPICS = 6;
+
+const between = ([min, max]: [number, number]) => min + Math.floor(Math.random() * (max - min + 1));
 /** Questions drawn from the whole topic for a recap lesson's check. */
 const RECAP_CHECK = 5;
 
@@ -148,7 +155,7 @@ export default function LessonPlayerPage() {
       // Review stays inside the course: an IT Fundamentals lesson must never
       // recall AWS questions just because AWS lessons were studied more recently.
       const sameCourse = topic ? courseTopics(topics, topicGroup(topic)) : [];
-      const candidates = reviewCandidates(sameCourse, progress, { excludeKey: key });
+      const candidates = reviewCandidates(sameCourse, progress, { excludeKey: key, maxTopics: REVIEW_TOPICS });
       const otherSlugs = Array.from(new Set(candidates.map((c) => c.slug))).filter((s) => s !== slug);
 
       const fetched = await Promise.all(
@@ -182,7 +189,7 @@ export default function LessonPlayerPage() {
       // the lesson about to be read. A lesson with nothing behind it (mini-lesson
       // 1 of a fresh study path) therefore has no warm-up at all, so a learner is
       // never shown a question before reading the content it is drawn from.
-      const warmReview = reviewQuestions.slice(0, WARMUP_REVIEW);
+      const warmReview = reviewQuestions.slice(0, between(WARMUP_REVIEW));
 
       // Check: this lesson's own questions (or a topic-wide draw for a recap),
       // plus review questions the warm-up did not already use.
@@ -201,7 +208,7 @@ export default function LessonPlayerPage() {
       }
 
       const usedInWarmup = new Set(warmReview.map((q) => q.key));
-      const checkReview = reviewQuestions.filter((q) => !usedInWarmup.has(q.key)).slice(0, CHECK_REVIEW);
+      const checkReview = reviewQuestions.filter((q) => !usedInWarmup.has(q.key)).slice(0, between(CHECK_REVIEW));
 
       setWarmupQs(warmReview);
       setCheckQs([...checkOwn, ...checkReview]);

@@ -4,16 +4,16 @@
     "question": "Verification và validation khác nhau như thế nào?",
     "questionEn": "How do verification and validation differ?",
     "options": [
-      "Verification do tester làm còn validation do BA làm",
-      "Verification hỏi chúng ta có đang xây sản phẩm đúng cách không, đối chiếu với tài liệu yêu cầu; validation hỏi chúng ta có đang xây đúng sản phẩm không, đối chiếu với nhu cầu thực và mục tiêu nghiệp vụ",
-      "Verification làm trước khi viết mã còn validation làm sau khi giao hàng",
-      "Chúng là hai tên gọi của cùng một hoạt động"
+      "Verification do tester làm trên hệ thống đã xây; validation do BA làm trên tài liệu",
+      "Verification kiểm tra sản phẩm so với yêu cầu; validation kiểm tra yêu cầu so với nhu cầu thực",
+      "Verification làm trên tài liệu trước khi code; validation làm cùng người dùng sau khi giao hàng",
+      "Là cùng một hoạt động, gọi là verification trong đội plan-driven và validation trong đội agile"
     ],
     "optionsEn": [
-      "Verification is done by testers and validation by BAs",
-      "Verification asks are we building the product right, checked against the requirements document; validation asks are we building the right product, checked against real needs and business objectives",
-      "Verification happens before coding and validation after delivery",
-      "They are two names for the same activity"
+      "Verification is done by testers on the built system; validation is done by BAs on the documents",
+      "Verification checks the product against the spec; validation checks the spec against real needs",
+      "Verification happens before coding on the documents; validation happens after delivery with users",
+      "They are the same activity, named verification in plan-driven teams and validation in agile ones"
     ],
     "answer": 1,
     "explanation": "Một hệ thống có thể được verified hoàn hảo, khớp chính xác với mọi câu trong SRS, mà vẫn hoàn toàn vô dụng nếu SRS mô tả sai thứ cần xây.",
@@ -24,16 +24,16 @@
     "question": "Vì sao tác giả không thể tự tìm hết lỗi trong tài liệu của mình?",
     "questionEn": "Why can authors not find all the defects in their own document?",
     "options": [
-      "Vì họ không có thời gian đọc lại",
-      "Vì họ đọc những gì họ ĐỊNH viết chứ không phải những gì họ ĐÃ viết; họ hiểu ý mình nên câu nhập nhằng vẫn có vẻ rõ ràng với họ",
-      "Vì họ thiếu kiến thức về miền nghiệp vụ",
-      "Vì công cụ soạn thảo không hỗ trợ kiểm tra ngữ nghĩa"
+      "Vì họ không bao giờ dành đủ thời gian đọc lại kỹ toàn bộ tài liệu trước khi gửi đi",
+      "Họ đọc những gì định viết chứ không phải những gì đã viết, nên câu nhập nhằng vẫn có vẻ rõ",
+      "Vì họ thiếu kiến thức miền của người dùng, nên lỗi nghiệp vụ trở nên vô hình với họ",
+      "Vì công cụ soạn thảo chỉ kiểm tra chính tả, ngữ pháp mà không bắt được lỗi ý nghĩa và logic"
     ],
     "optionsEn": [
-      "Because they have no time to reread",
-      "Because they read what they MEANT to write rather than what they ACTUALLY wrote; they know what they meant so an ambiguous sentence still looks clear",
-      "Because they lack business domain knowledge",
-      "Because editors cannot check semantics"
+      "They never leave enough time to reread the whole document carefully before handing it out",
+      "They read what they meant, not what they wrote, so an ambiguous sentence still looks clear",
+      "They lack the domain knowledge of the users, so business errors are invisible to them",
+      "Editing tools check spelling and grammar but cannot flag meaning, which hides the logic errors"
     ],
     "answer": 1,
     "explanation": "Chỉ có mắt của người khác mới bắt được điều đó. Đây là nguyên lý nền tảng của peer review.",
@@ -44,37 +44,36 @@
     "question": "Vì sao phát tài liệu cho từng người tự đọc riêng KHÔNG tương đương với một buổi review nhóm?",
     "questionEn": "Why is handing a document out for solo reading NOT equivalent to a group review?",
     "options": [
-      "Vì người đọc riêng thường lười hơn",
-      "Vì loại nhập nhằng nguy hiểm nhất là khi nhiều người hiểu khác nhau mà yêu cầu vẫn có nghĩa với từng người; khi mỗi người đọc một mình thì không ai thấy có vấn đề",
-      "Vì không có ai ghi biên bản",
-      "Vì không đo được số liệu về thời gian bỏ ra"
+      "Vì người đọc riêng chỉ lướt thay vì nghiên cứu kỹ, nên tìm được ít lỗi hơn hẳn một nhóm",
+      "Nhập nhằng tệ nhất là khi mỗi người hiểu một kiểu mà đều thấy hợp lý; đọc riêng thì không ai thấy",
+      "Vì không ai ghi lại vấn đề, nên tác giả nhận được góp ý rời rạc không theo dõi được",
+      "Vì không thu được số liệu công sức và số lỗi, nên quy trình review không cải tiến được theo thời gian"
     ],
     "optionsEn": [
-      "Because solo readers are usually lazier",
-      "Because the most dangerous ambiguity is when several people interpret differently yet the requirement makes sense to each; reading alone, nobody sees a problem",
-      "Because nobody takes minutes",
-      "Because you cannot collect effort metrics"
+      "Solo readers skim instead of studying the document, so they find far fewer defects than a group",
+      "In the worst ambiguity each reader finds a different sensible meaning; alone, nobody spots it",
+      "Nobody records the issues found, so the author receives scattered comments that cannot be tracked",
+      "Effort and defect metrics cannot be collected, so the review process cannot be improved over time"
     ],
     "answer": 1,
     "explanation": "Chỉ khi họ ngồi cùng nhau và nói ra cách hiểu của mình thì sự khác biệt mới lộ ra. Mức trang trọng của review nên tương ứng với rủi ro.",
     "explanationEn": "Only when they sit together and articulate their understanding does the difference emerge. Review formality should match risk."
-  }
-  ,
+  },
   {
     "id": "q4",
     "question": "Trong formal inspection, vì sao tác giả KHÔNG được đóng vai reader?",
     "questionEn": "In a formal inspection, why can the author NOT be the reader?",
     "options": [
-      "Vì tác giả đã quá quen với tài liệu nên sẽ đọc nhanh quá",
-      "Vì sức mạnh của reader nằm ở việc diễn giải lại bằng lời của mình; khi cách hiểu đó khác với ý tác giả, bạn vừa tìm ra một nhập nhằng thực sự mà không cách nào khác phát hiện được",
-      "Vì quy định của inspection cấm tác giả nói",
-      "Vì moderator cần tác giả tập trung ghi chép"
+      "Vì tác giả quá quen tài liệu nên sẽ đọc nhanh tới mức inspector không theo kịp",
+      "Reader diễn giải lại bằng lời của mình; chỗ nào khác với ý tác giả là chỗ tìm ra nhập nhằng",
+      "Vì quy định inspection cấm tác giả lên tiếng, để sản phẩm được đánh giá hoàn toàn khách quan",
+      "Vì moderator cần tác giả rảnh tay ghi chép, do chỉ tác giả mới sửa lỗi về sau"
     ],
     "optionsEn": [
-      "Because the author knows the document too well and would read too fast",
-      "Because the reader power lies in paraphrasing in their own words; when that interpretation differs from the author intent you have found a real ambiguity, undetectable any other way",
-      "Because inspection rules forbid the author from speaking",
-      "Because the moderator needs the author to take notes"
+      "The author knows the document too well and would read too fast for inspectors to keep up",
+      "The reader paraphrases in their own words; where that differs from the author's intent, an ambiguity is found",
+      "Inspection rules forbid the author from speaking, so that the work is judged entirely on its own",
+      "The moderator needs the author free to take notes, since only the author can fix the defects later"
     ],
     "answer": 1,
     "explanation": "Năm vai trò của inspection là author, moderator, reader, recorder và inspector. Tác giả trả lời câu hỏi khi được hỏi nhưng không bảo vệ hay biện minh.",
@@ -85,16 +84,16 @@
     "question": "Bước nào của inspection tìm ra phần lớn lỗi, và điều gì xảy ra nếu bỏ qua nó?",
     "questionEn": "Which inspection step finds most defects, and what happens if it is skipped?",
     "options": [
-      "Buổi họp; nếu bỏ qua thì không ai biết lỗi ở đâu",
-      "Bước chuẩn bị, khi mỗi người tự đọc và ghi lại vấn đề trước buổi họp; nếu người tham dự không chuẩn bị thì nên hoãn họp vì đó chỉ là một buổi đọc tài liệu tập thể tốn kém",
-      "Bước rework; nếu bỏ qua thì lỗi không được sửa",
-      "Bước overview; nếu bỏ qua thì không ai hiểu bối cảnh"
+      "Buổi họp, nơi phần lớn vấn đề lộ ra; bỏ qua nó thì lỗi tìm riêng lẻ không được xác nhận",
+      "Bước chuẩn bị, khi mỗi người ghi vấn đề từ trước; nếu chưa ai chuẩn bị thì hoãn họp",
+      "Bước rework, khi tác giả sửa lỗi; bỏ qua nó thì các lỗi đã ghi không bao giờ được sửa",
+      "Bước overview, khi tác giả giải thích bối cảnh; bỏ qua nó thì inspector đánh giá sai nội dung"
     ],
     "optionsEn": [
-      "The meeting; skipping it means nobody knows where the defects are",
-      "Preparation, where each person reads and logs issues before the meeting; if participants have not prepared, postpone, because it becomes an expensive group reading session",
-      "Rework; skipping it means defects go unfixed",
-      "Overview; skipping it means nobody understands the context"
+      "The meeting, where most issues surface; skipping it leaves defects found alone unconfirmed",
+      "Preparation, when each person logs issues beforehand; if nobody has prepared, postpone",
+      "Rework, where the author fixes defects; skipping it means the logged defects are never corrected",
+      "Overview, where the author explains the context; skipping it means inspectors misjudge the content"
     ],
     "answer": 1,
     "explanation": "Buổi họp chủ yếu để tổng hợp, phân loại và phát hiện nhập nhằng qua thảo luận. Checklist lỗi yêu cầu giúp người review tìm có hệ thống thay vì ngẫu nhiên.",
@@ -105,37 +104,36 @@
     "question": "Vì sao kết quả review KHÔNG BAO GIỜ được dùng để đánh giá hiệu suất cá nhân?",
     "questionEn": "Why must review results NEVER be used for individual performance evaluation?",
     "options": [
-      "Vì số liệu review không đủ chính xác về mặt thống kê",
-      "Vì nếu số lỗi tìm được trong tài liệu của ai đó ảnh hưởng tới đánh giá cuối năm, mọi người sẽ giấu tài liệu khỏi review và điều đó giết chết toàn bộ thực hành",
-      "Vì luật lao động cấm điều đó",
-      "Vì moderator không đủ thẩm quyền đánh giá"
+      "Vì số liệu review không đủ chính xác về thống kê để so sánh công bằng giữa các tài liệu khác nhau",
+      "Nếu số lỗi ảnh hưởng đánh giá cá nhân, người ta sẽ giấu tài liệu khỏi review và thực hành chết",
+      "Vì luật lao động cấm dùng góp ý đồng nghiệp trong đánh giá trừ khi nhân viên đồng ý",
+      "Vì moderator không đủ thẩm quyền đánh giá, chỉ quản lý trực tiếp mới được đánh giá hiệu suất"
     ],
     "optionsEn": [
-      "Because review metrics are not statistically precise enough",
-      "Because if the defect count in someone document affects their annual review, people will hide documents from review, and that kills the entire practice",
-      "Because labour law forbids it",
-      "Because the moderator lacks the authority to evaluate"
+      "Review metrics are too imprecise statistically to compare people fairly across different documents",
+      "If defect counts affect appraisals, people will hide documents from review, killing the practice",
+      "Employment law forbids using peer comments in appraisals unless the employee has given consent",
+      "The moderator lacks the authority to evaluate, so only line managers may judge performance"
     ],
     "answer": 1,
     "explanation": "Cách khắc phục văn hoá là bắt đầu từ trên xuống: khi BA kỳ cựu chủ động đưa tài liệu ra review và cảm ơn người tìm được lỗi, review trở thành dấu hiệu của sự chuyên nghiệp.",
     "explanationEn": "The cultural fix starts at the top: when a senior BA volunteers their document and thanks people for finding defects, review becomes a mark of professionalism."
-  }
-  ,
+  },
   {
     "id": "q7",
     "question": "Việc viết test case từ yêu cầu TRƯỚC khi viết mã bộc lộ điều gì?",
     "questionEn": "What does writing test cases from requirements BEFORE coding reveal?",
     "options": [
-      "Số dòng mã cần viết",
-      "Không nghĩ ra được test nào nghĩa là yêu cầu không kiểm chứng được; cần rất nhiều test đa dạng nghĩa là nhiều yêu cầu bị gộp; không biết kết quả mong đợi nghĩa là yêu cầu thiếu thông tin",
-      "Thời gian cần để kiểm thử hệ thống",
-      "Kiến trúc phần mềm phù hợp nhất"
+      "Mỗi yêu cầu cần bao nhiêu dòng mã và bao nhiêu lập trình viên để hiện thực trọn vẹn",
+      "Không nghĩ ra test là không kiểm chứng được; cần nhiều test là bị gộp; không biết kết quả là thiếu thông tin",
+      "System test sẽ mất bao lâu, để lên kế hoạch cho giai đoạn kiểm thử trước khi bắt đầu viết mã",
+      "Kiến trúc nào phù hợp nhất với hệ thống, dựa trên các môi trường kiểm thử cần chuẩn bị"
     ],
     "optionsEn": [
-      "How many lines of code will be needed",
-      "Being unable to think of any test means the requirement is unverifiable; needing many diverse tests means several requirements are combined; not knowing the expected result means information is missing",
-      "How long system testing will take",
-      "The most suitable software architecture"
+      "How many lines of code and how many developers each requirement will need",
+      "No test means unverifiable; many diverse tests mean combined requirements; unknown results mean missing info",
+      "How long system testing will take, so the test phase can be planned before coding starts",
+      "Which architecture suits the system best, based on the test environments that are needed"
     ],
     "answer": 1,
     "explanation": "Đây là lý do tester nên tham gia sớm vào phát triển yêu cầu. Tư duy kiểm thử là bộ lọc lỗi cực kỳ hiệu quả áp dụng lên yêu cầu.",
@@ -146,16 +144,16 @@
     "question": "Điều gì thường bị bỏ sót khi viết acceptance criteria?",
     "questionEn": "What is commonly omitted when writing acceptance criteria?",
     "options": [
-      "Tên của người viết",
-      "Các điều kiện ngoại lệ; một story chỉ được coi là hoàn thành khi hệ thống xử lý đúng cả những gì có thể sai, không chỉ đường đi hạnh phúc",
-      "Ước tính công sức",
-      "Ngày hết hạn"
+      "Tên và thông tin liên lạc của người viết, để câu hỏi về tiêu chí được chuyển đúng người",
+      "Các điều kiện ngoại lệ; story chỉ xong khi cả những gì có thể sai cũng được xử lý",
+      "Ước tính công sức cho mỗi tiêu chí, để đội biết một story cần bao nhiêu công kiểm thử",
+      "Ngày xem xét lại, sau đó tiêu chí phải được xác nhận lại trước khi nghiệm thu story"
     ],
     "optionsEn": [
-      "The author name",
-      "Exception conditions; a story is only done when the system correctly handles what can go wrong, not just the happy path",
-      "The effort estimate",
-      "An expiry date"
+      "The author's name and contact, so questions about a criterion can be routed to the right person",
+      "Exception conditions; a story is done only when what can go wrong is handled too",
+      "An effort estimate for each criterion, so the team knows how much testing a story will need",
+      "A review date, after which the criteria must be revalidated before the story can be accepted"
     ],
     "answer": 1,
     "explanation": "Viết acceptance criteria phải là hoạt động cộng tác: khách hàng nêu điều quan trọng, tester làm cho nó đo lường được, lập trình viên xác nhận khả thi.",
@@ -166,37 +164,36 @@
     "question": "Loại thông tin yêu cầu nào có giá trị tái sử dụng cao nhất, và vì sao?",
     "questionEn": "Which kind of requirements information has the highest reuse value, and why?",
     "options": [
-      "Use case, vì chúng mô tả hành vi người dùng",
-      "Định nghĩa dữ liệu và business rule, vì sự nhất quán ở đây ngăn ngừa lỗi tích hợp trên toàn doanh nghiệp và cùng một định nghĩa nghĩa là cùng một cách hiểu",
-      "Sơ đồ giao diện người dùng, vì chúng dễ sao chép nhất",
-      "Ước tính công sức, vì chúng dựa trên dữ liệu lịch sử"
+      "Use case, vì các mục tiêu như đăng nhập lặp lại ở gần như mọi hệ thống tổ chức xây dựng",
+      "Định nghĩa dữ liệu và business rule, vì nhất quán ở đây ngăn lỗi tích hợp trên toàn doanh nghiệp",
+      "Sơ đồ giao diện và bố cục màn hình, vì giao diện nhất quán giữa các hệ thống giảm chi phí đào tạo",
+      "Ước tính công sức, vì chúng dựa trên dữ liệu lịch sử và cải thiện kế hoạch cho mọi dự án sau"
     ],
     "optionsEn": [
-      "Use cases, because they describe user behaviour",
-      "Data definitions and business rules, because consistency there prevents integration defects enterprise-wide and the same definition means the same understanding",
-      "UI diagrams, because they are easiest to copy",
-      "Effort estimates, because they rest on historical data"
+      "Use cases, since user goals such as logging in recur in almost every system an organization builds",
+      "Data definitions and business rules, since consistency there prevents integration defects",
+      "UI diagrams and screen layouts, since a consistent look across systems cuts user training costs",
+      "Effort estimates, since they rest on historical data and improve planning for every later project"
     ],
     "answer": 1,
     "explanation": "Đây chính là lý do business rule nên được lưu ở kho cấp doanh nghiệp chứ không chôn trong SRS của từng dự án.",
     "explanationEn": "This is exactly why business rules belong in an enterprise repository rather than buried in individual project SRSs."
-  }
-  ,
+  },
   {
     "id": "q10",
     "question": "Rào cản lớn nhất đối với việc tái sử dụng yêu cầu là gì?",
     "questionEn": "What is the biggest barrier to requirements reuse?",
     "options": [
-      "Bản quyền và vấn đề pháp lý",
-      "Không tìm được: yêu cầu tồn tại đâu đó trong hàng trăm tài liệu trên ổ đĩa chung nhưng không ai biết cách tìm chúng, nên điều kiện tiên quyết là một kho lưu trữ tìm kiếm được",
-      "Lập trình viên từ chối dùng lại mã cũ",
-      "Chi phí giấy phép công cụ quá cao"
+      "Bản quyền và giấy phép, vì yêu cầu viết cho một khách hàng thường thuộc sở hữu của khách hàng đó",
+      "Không ai tìm được chúng giữa hàng trăm tài liệu trên ổ chung, nên cần kho tìm kiếm được trước",
+      "Lập trình viên ngại dùng lại mã cũ, nên yêu cầu tái dùng rốt cuộc vẫn bị hiện thực lại từ đầu",
+      "Chi phí giấy phép công cụ, vì tái sử dụng đòi hỏi mọi dự án mua cùng một công cụ quản lý yêu cầu"
     ],
     "optionsEn": [
-      "Copyright and legal issues",
-      "You cannot find them: the requirements exist somewhere among hundreds of documents on a shared drive but nobody knows how to find them, so a searchable repository is the precondition",
-      "Developers refuse to reuse old code",
-      "Tool licence costs are too high"
+      "Copyright and licensing issues, since requirements written for one client often belong to that client",
+      "Nobody can find them in hundreds of shared-drive files, so a searchable repository comes first",
+      "Developers resist reusing old code, so reused requirements end up reimplemented from scratch",
+      "Tool licence costs, since reuse requires every project to buy the same requirements management tool"
     ],
     "answer": 1,
     "explanation": "Đây là lý do requirements management tool tạo khác biệt lớn: không phải vì nó lưu trữ tốt hơn mà vì nó cho phép tìm lại.",
@@ -207,16 +204,16 @@
     "question": "Requirements pattern khác với việc tái sử dụng câu yêu cầu ở điểm nào?",
     "questionEn": "How does a requirements pattern differ from reusing a requirement statement?",
     "options": [
-      "Pattern chỉ dùng cho yêu cầu phi chức năng",
-      "Tái sử dụng câu yêu cầu cho bạn NỘI DUNG; requirements pattern cho bạn danh sách những gì cần hỏi và cần bao phủ khi đặc tả một loại yêu cầu thường gặp",
-      "Pattern do công cụ tự sinh ra còn câu yêu cầu do con người viết",
-      "Pattern chỉ áp dụng trong dự án agile"
+      "Pattern chỉ áp dụng cho yêu cầu phi chức năng, còn tái sử dụng áp dụng cho câu yêu cầu chức năng",
+      "Tái sử dụng cho nội dung; pattern cho biết cần hỏi và bao phủ gì với một loại yêu cầu thường gặp",
+      "Pattern do công cụ sinh ra từ dự án cũ, còn câu yêu cầu tái dùng do con người viết",
+      "Pattern là user story tái dùng cho đội agile, còn câu yêu cầu tái dùng thuộc về tài liệu SRS"
     ],
     "optionsEn": [
-      "Patterns only apply to nonfunctional requirements",
-      "Reusing a statement gives you CONTENT; a requirements pattern gives you the list of what to ask and cover when specifying a common requirement type",
-      "Patterns are tool-generated while statements are human-written",
-      "Patterns only apply on agile projects"
+      "Patterns apply only to nonfunctional requirements, while reuse covers functional statements",
+      "Reuse gives you content; a pattern tells you what to ask and cover for a common requirement type",
+      "Patterns are generated by tools from past projects, while reused statements are written by people",
+      "Patterns are reusable user stories for agile teams, while reused statements belong in SRS documents"
     ],
     "answer": 1,
     "explanation": "Sức mạnh của pattern là biến kinh nghiệm của một BA giỏi thành tài sản của tổ chức: một BA mới dùng pattern sẽ hỏi đúng những câu hỏi phải mất nhiều năm mới học được.",
@@ -227,37 +224,36 @@
     "question": "Vì sao ước tính đưa ra trước khi có yêu cầu luôn sai lệch nghiêm trọng?",
     "questionEn": "Why are estimates given before there are requirements always seriously wrong?",
     "options": [
-      "Vì đội chưa được đào tạo về kỹ thuật ước tính",
-      "Vì bạn không thể ước tính đáng tin cậy nếu không biết mình sẽ xây gì; trong cone of uncertainty, ước tính ở giai đoạn ý tưởng có thể sai lệch 4 lần theo cả hai chiều",
-      "Vì lãnh đạo luôn ép giảm con số xuống",
-      "Vì chưa biết ai sẽ làm việc đó"
+      "Vì đội chưa được đào tạo các kỹ thuật ước tính như planning poker hay function point",
+      "Không ước tính được thứ chưa định nghĩa; lúc mới có ý tưởng, ước tính có thể lệch 4 lần hai chiều",
+      "Vì lãnh đạo luôn ép giảm con số ban đầu, nên ước tính đầu tiên phản ánh kỳ vọng hơn là công sức",
+      "Vì chưa biết ai sẽ làm, và năng suất giữa các cá nhân chênh lệch rất lớn"
     ],
     "optionsEn": [
-      "Because the team has not been trained in estimation techniques",
-      "Because you cannot estimate reliably without knowing what you will build; in the cone of uncertainty, concept-stage estimates can be off by a factor of 4 in either direction",
-      "Because management always pressures the number down",
-      "Because you do not yet know who will do the work"
+      "The team has not yet been trained in estimation techniques such as planning poker or function points",
+      "You cannot estimate what is undefined; at the concept stage estimates can be off 4 times either way",
+      "Management always pushes early numbers down, so first estimates reflect hopes rather than effort",
+      "Nobody knows yet who will do the work, and productivity varies widely between individuals"
     ],
     "answer": 1,
     "explanation": "Hãy nêu rõ ước tính dựa trên tập yêu cầu nào và trình bày nó dưới dạng khoảng. Ước tính không đi kèm baseline yêu cầu là lời hứa không có cơ sở.",
     "explanationEn": "State which requirements set the estimate is based on and present it as a range. An estimate without a requirements baseline is a promise with no foundation."
-  }
-  ,
+  },
   {
     "id": "q13",
     "question": "Vì sao gold plating là vấn đề nghiêm trọng hơn nhiều người nghĩ?",
     "questionEn": "Why is gold plating a more serious problem than most people realise?",
     "options": [
-      "Vì nó làm mã nguồn dài hơn",
-      "Vì tính năng không ai yêu cầu vẫn phải được thiết kế, kiểm thử, tài liệu hoá, bảo trì và hỗ trợ vĩnh viễn, tiêu tốn tài nguyên đáng lẽ dành cho những gì khách hàng thực sự cần",
-      "Vì nó vi phạm hợp đồng với khách hàng",
-      "Vì lập trình viên sẽ mất hứng thú với công việc chính"
+      "Nó làm codebase phình to, khiến build chậm hơn và mọi thay đổi sau này khó review hơn",
+      "Tính năng không ai yêu cầu vẫn phải thiết kế, kiểm thử, tài liệu hoá và hỗ trợ, làm hao công sức",
+      "Nó vi phạm hợp đồng, vì giao phần việc không có trong đặc tả bị coi là lỗi về mặt pháp lý",
+      "Lập trình viên xao nhãng nhiệm vụ được giao, nên tính năng kế hoạch bị trễ trong khi phần thêm được chăm chút"
     ],
     "optionsEn": [
-      "Because it makes the source code longer",
-      "Because a feature nobody asked for still has to be designed, tested, documented, maintained, and supported forever, consuming resources that should have gone to what customers actually need",
-      "Because it breaches the customer contract",
-      "Because developers lose interest in their main work"
+      "It makes the code base larger, which slows builds and makes every later change harder to review",
+      "An unrequested feature must still be designed, tested, documented, and supported, draining effort",
+      "It breaches the customer contract, since delivering unspecified work is legally treated as a defect",
+      "Developers drift from assigned tasks, so planned features slip while the extras get polished"
     ],
     "answer": 1,
     "explanation": "Mã không có yêu cầu tương ứng có thể là gold plating hoặc là yêu cầu ngầm chưa được ghi lại. Cả hai đều đáng điều tra.",
@@ -268,16 +264,16 @@
     "question": "Vì sao test hệ thống phải được thiết kế từ YÊU CẦU chứ không phải từ mã?",
     "questionEn": "Why must system tests be designed from the REQUIREMENTS rather than from the code?",
     "options": [
-      "Vì đọc mã tốn nhiều thời gian hơn đọc yêu cầu",
-      "Vì nếu viết test bằng cách đọc mã, bạn chỉ kiểm tra được rằng mã làm những gì nó làm và không thể phát hiện chức năng bị bỏ sót hoàn toàn",
-      "Vì tester không được phép truy cập mã nguồn",
-      "Vì mã thay đổi thường xuyên hơn yêu cầu"
+      "Vì đọc mã tốn thời gian hơn đọc yêu cầu, nên thiết kế test từ mã sẽ làm chậm phát hành",
+      "Test viết từ mã chỉ xác nhận mã làm những gì nó làm và không thể lộ ra chức năng bị thiếu",
+      "Vì tester không được cấp quyền truy cập mã nguồn, nên chỉ có thể làm việc từ tài liệu",
+      "Vì mã thay đổi thường xuyên hơn yêu cầu, nên test dựa trên mã sẽ phải viết lại liên tục"
     ],
     "optionsEn": [
-      "Because reading code takes longer than reading requirements",
-      "Because writing tests from the code only checks that the code does what it does, and cannot detect functionality that is missing entirely",
-      "Because testers are not allowed to access source code",
-      "Because code changes more often than requirements"
+      "Reading code takes longer than reading requirements, so test design from code would delay release",
+      "Tests written from code only confirm the code does what it does and cannot reveal missing functionality",
+      "Testers are not given access to source code, so they can only work from the documents",
+      "Code changes more often than requirements, so code-based tests would need constant rewriting"
     ],
     "answer": 1,
     "explanation": "Ma trận truy vết yêu cầu tới test cho thấy ngay yêu cầu nào chưa có test, tức khoảng trống kiểm thử, và test nào không truy vết về yêu cầu nào.",
@@ -288,16 +284,16 @@
     "question": "Cách đo tiến độ dự án có ý nghĩa nhất dựa trên yêu cầu là gì?",
     "questionEn": "What is the most meaningful requirements-based measure of project progress?",
     "options": [
-      "Số dòng mã đã viết",
-      "Số yêu cầu đã được hiện thực VÀ kiểm thử VÀ chấp nhận, chứ không phải đã viết mã xong, vì mã chưa kiểm thử là công việc chưa hoàn thành",
-      "Số giờ đội đã bỏ ra so với kế hoạch",
-      "Phần trăm hoàn thành do trưởng nhóm ước lượng"
+      "Số dòng mã đã viết so với kích thước ước tính, vì sản lượng là dấu hiệu tiến độ rõ nhất",
+      "Số yêu cầu đã hiện thực, kiểm thử và được chấp nhận, chứ không chỉ viết mã xong",
+      "Số giờ đã bỏ ra so với kế hoạch, vì công sức tiêu tốn cho biết đã dùng bao nhiêu ngân sách",
+      "Phần trăm hoàn thành do từng lập trình viên tự ước lượng cho các task được giao"
     ],
     "optionsEn": [
-      "Lines of code written",
-      "The number of requirements implemented AND tested AND accepted, not merely coded, because untested code is unfinished work",
-      "Hours spent versus planned",
-      "The percentage complete estimated by the team lead"
+      "Lines of code written against the estimated size, since output is the clearest sign of progress",
+      "Requirements implemented, tested, and accepted, not merely coded",
+      "Hours spent against the plan, since effort consumed shows how much of the budget is used",
+      "The percentage complete estimated by each developer for the tasks assigned to them"
     ],
     "answer": 1,
     "explanation": "Cũng nên theo dõi tốc độ thay đổi yêu cầu. Nếu tốc độ này không giảm dần theo thời gian, dự án đang gặp rắc rối nghiêm trọng.",
@@ -308,16 +304,16 @@
     "question": "Thông điệp cuối cùng về vai trò của yêu cầu trong dự án là gì?",
     "questionEn": "What is the closing message about the role of requirements in a project?",
     "options": [
-      "Yêu cầu là một giai đoạn cần hoàn tất trước khi bắt đầu thiết kế",
-      "Yêu cầu không phải một giai đoạn bạn đi qua rồi bỏ lại; chúng là nền tảng mà ước tính, thiết kế, viết mã, kiểm thử, đo tiến độ và đàm phán phạm vi đều đứng lên, nên phải được dùng liên tục",
-      "Yêu cầu chỉ quan trọng với dự án lớn và có tính pháp lý",
-      "Yêu cầu nên được thay thế bằng prototype và acceptance test"
+      "Yêu cầu là giai đoạn cần hoàn tất và ký duyệt trước thiết kế, để công việc sau tiến hành không thay đổi",
+      "Yêu cầu không phải giai đoạn để bỏ lại; chúng là nền cho ước tính, thiết kế, kiểm thử và đàm phán phạm vi suốt dự án",
+      "Yêu cầu quan trọng nhất với dự án lớn hoặc có tính pháp lý; đội nhỏ có thể chủ yếu dựa vào trao đổi",
+      "Yêu cầu nên nhường chỗ cho prototype và acceptance test, vốn luôn cập nhật theo sản phẩm"
     ],
     "optionsEn": [
-      "Requirements are a phase to complete before design begins",
-      "Requirements are not a phase you pass through and leave behind; they are the foundation for estimation, design, coding, testing, progress measurement, and scope negotiation, so they must be used continuously",
-      "Requirements only matter on large or regulated projects",
-      "Requirements should be replaced by prototypes and acceptance tests"
+      "They are a phase to complete and sign off before design, so later work can proceed without changes",
+      "They are not a phase to leave behind; they underpin estimation, design, testing, and scope talks throughout",
+      "They matter most on large or regulated projects; small teams can rely mainly on conversation",
+      "They should give way to prototypes and acceptance tests, which stay current as the product evolves"
     ],
     "answer": 1,
     "explanation": "Một tài liệu yêu cầu tuyệt vời nằm im trong ngăn kéo không có giá trị gì. Hãy đầu tư vào yêu cầu tương xứng với rủi ro của dự án rồi thực sự dùng chúng.",

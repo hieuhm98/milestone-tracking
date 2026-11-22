@@ -24,16 +24,16 @@
     "question": "Đâu là điểm khác biệt đúng giữa CNAME và Alias record trong Route 53?",
     "questionEn": "Which is a correct difference between a CNAME and an Alias record in Route 53?",
     "options": [
-      "CNAME miễn phí còn Alias tính phí mỗi truy vấn",
-      "Alias dùng được ở zone apex và miễn phí, còn CNAME thì không dùng được ở apex",
-      "CNAME chỉ trỏ tới tài nguyên AWS, Alias trỏ tới hostname bất kỳ",
-      "Cả hai đều cho phép bạn tự đặt TTL tùy ý"
+      "Truy vấn CNAME miễn phí, còn truy vấn Alias bị tính phí",
+      "Alias dùng được ở zone apex; CNAME thì không dùng được ở đó",
+      "CNAME chỉ trỏ tới tài nguyên AWS; Alias trỏ tới hostname bất kỳ",
+      "Cả hai đều cho đặt TTL tùy ý, kể cả ở zone apex"
     ],
     "optionsEn": [
-      "CNAME is free while Alias is billed per query",
-      "Alias works at the zone apex and is free, while CNAME cannot be used at the apex",
-      "CNAME only points to AWS resources, Alias points to any hostname",
-      "Both let you set a custom TTL freely"
+      "CNAME queries are free, while Alias queries are billed",
+      "Alias works at the zone apex; CNAME cannot be used there",
+      "CNAME only targets AWS resources; Alias targets any hostname",
+      "Both let you set any custom TTL, including at the apex"
     ],
     "answer": 1,
     "explanation": "Alias hoạt động ở zone apex và miễn phí; CNAME không dùng được ở apex và có tính phí truy vấn. Alias chỉ trỏ tới tài nguyên AWS và KHÔNG cho đặt TTL (AWS tự quản lý), trong khi CNAME trỏ tới hostname bất kỳ và bạn tự đặt TTL.",
@@ -84,16 +84,16 @@
     "question": "Một dịch vụ chỉ được phép phục vụ người dùng ở Việt Nam do quy định pháp lý; người dùng ngoài Việt Nam phải nhận nội dung mặc định. Routing policy nào phù hợp nhất?",
     "questionEn": "A service may serve only users in Vietnam due to legal regulations; users outside Vietnam must receive default content. Which routing policy fits best?",
     "options": [
-      "Latency-based routing",
-      "Weighted routing",
+      "Geoproximity routing với bias",
+      "Weighted routing với health check",
       "Geolocation routing với một bản ghi default",
-      "Failover routing"
+      "Failover routing với bản ghi secondary"
     ],
     "optionsEn": [
-      "Latency-based routing",
-      "Weighted routing",
+      "Geoproximity routing with bias",
+      "Weighted routing with health checks",
       "Geolocation routing with a default record",
-      "Failover routing"
+      "Failover routing with a secondary record"
     ],
     "answer": 2,
     "explanation": "Geolocation routing định tuyến theo VỊ TRÍ THỰC TẾ của người dùng (lục địa/quốc gia/bang), phù hợp cho tuân thủ pháp lý và bản địa hóa. Nên tạo bản ghi default để xử lý các vị trí không khớp, ở đây là người dùng ngoài Việt Nam.",
@@ -144,16 +144,16 @@
     "question": "Một kiến trúc sư đề xuất dùng Multi-Value Answer routing để THAY THẾ hoàn toàn cho một Elastic Load Balancer. Nhận định này đúng hay sai và vì sao?",
     "questionEn": "An architect proposes using Multi-Value Answer routing to FULLY REPLACE an Elastic Load Balancer. Is this correct, and why?",
     "options": [
-      "Đúng, vì nó phân phối traffic đều như một load balancer L7",
-      "Sai, Multi-Value là cân bằng tải phía client cơ bản, không thay thế được ELB",
-      "Đúng, vì nó rẻ hơn ELB và có cùng tính năng",
-      "Sai, vì Multi-Value không hỗ trợ health check"
+      "Đúng; nó chia traffic đều như một load balancer Layer 7",
+      "Sai; đó chỉ là cân bằng tải phía client cơ bản",
+      "Đúng; nó có cùng tính năng như ELB với chi phí thấp hơn",
+      "Sai; vì Multi-Value không kết hợp được với health check"
     ],
     "optionsEn": [
-      "Correct, because it distributes traffic evenly like an L7 load balancer",
-      "Incorrect, Multi-Value is basic client-side load balancing and cannot replace an ELB",
-      "Correct, because it is cheaper than ELB with the same features",
-      "Incorrect, because Multi-Value does not support health checks"
+      "Yes; it spreads traffic evenly, like a Layer 7 load balancer",
+      "No; it is basic client-side balancing, not a real ELB",
+      "Yes; it offers the same features as ELB at a lower cost",
+      "No; because Multi-Value cannot be combined with health checks"
     ],
     "answer": 1,
     "explanation": "Multi-Value Answer chỉ trả về danh sách bản ghi healthy để client tự chọn — nó KHÔNG có các tính năng của ELB như termination TLS, phân phối theo thuật toán, sticky session, health check tầng ứng dụng phức tạp. Nó có hỗ trợ health check, nhưng vẫn không thay thế được ELB.",
@@ -184,16 +184,16 @@
     "question": "Route 53 endpoint health check hoạt động như thế nào?",
     "questionEn": "How does a Route 53 endpoint health check work?",
     "options": [
-      "Một checker duy nhất trong Region chính gửi ping mỗi giờ",
-      "Khoảng 15 health checker toàn cầu gửi request tới public endpoint và đánh giá healthy/unhealthy theo ngưỡng",
-      "Nó đọc log của ứng dụng để xác định trạng thái",
-      "Nó chỉ kiểm tra khi có truy vấn DNS đến"
+      "Một checker duy nhất ở Region chính ping endpoint mỗi giờ",
+      "Khoảng 15 checker toàn cầu gửi request và so với ngưỡng",
+      "Nó phân tích CloudWatch Logs của ứng dụng để quyết định",
+      "Nó chỉ kiểm tra endpoint khi có truy vấn DNS tới"
     ],
     "optionsEn": [
-      "A single checker in the main Region pings every hour",
-      "About 15 global health checkers send requests to the public endpoint and evaluate healthy/unhealthy against a threshold",
-      "It reads the application's logs to determine status",
-      "It only checks when a DNS query arrives"
+      "One checker in the home Region pings the endpoint every hour",
+      "About 15 global checkers probe the endpoint and apply a threshold",
+      "It parses the application's CloudWatch Logs to decide status",
+      "It probes the endpoint only when a DNS query arrives for it"
     ],
     "answer": 1,
     "explanation": "Endpoint health check dùng khoảng 15 health checker phân bố toàn cầu, gửi request HTTP/HTTPS/TCP tới public endpoint. Endpoint được coi healthy/unhealthy dựa trên ngưỡng số lần thành công/thất bại (healthy/unhealthy threshold).",
@@ -264,16 +264,16 @@
     "question": "Bạn muốn dịch chuyển thêm traffic sang Region us-east-1 vượt quá vùng địa lý mặc định của nó, bằng cách 'mở rộng' vùng phục vụ của Region đó. Routing policy nào cho phép điều này?",
     "questionEn": "You want to shift more traffic toward the us-east-1 Region beyond its default geographic area by 'expanding' that Region's serving area. Which routing policy allows this?",
     "options": [
-      "Geolocation routing",
+      "Geolocation routing với bản ghi default",
       "Geoproximity routing với bias",
-      "Latency-based routing",
-      "Weighted routing"
+      "Latency-based routing với health check",
+      "Weighted routing với weight cao hơn"
     ],
     "optionsEn": [
-      "Geolocation routing",
+      "Geolocation routing with a default record",
       "Geoproximity routing with bias",
-      "Latency-based routing",
-      "Weighted routing"
+      "Latency-based routing with health checks",
+      "Weighted routing with a higher weight"
     ],
     "answer": 1,
     "explanation": "Geoproximity routing định tuyến theo khoảng cách địa lý giữa user và tài nguyên, và cho phép đặt BIAS để mở rộng/thu hẹp vùng phục vụ của một tài nguyên, dịch chuyển traffic có chủ đích. Geolocation chỉ định tuyến theo vị trí user, không có bias, và cần bật Route 53 Traffic Flow cho Geoproximity.",
@@ -324,16 +324,16 @@
     "question": "Bản ghi NS trong một hosted zone dùng để làm gì?",
     "questionEn": "What does an NS record in a hosted zone do?",
     "options": [
-      "Chỉ ra các name server có thẩm quyền (authoritative) cho zone đó",
-      "Ánh xạ tên miền sang địa chỉ IP",
-      "Tạo bí danh cho một tên khác",
-      "Định tuyến email cho tên miền"
+      "Liệt kê các name server có thẩm quyền cho zone",
+      "Ánh xạ tên miền của zone sang địa chỉ IPv4",
+      "Tạo bí danh từ một hostname sang hostname khác",
+      "Chuyển email của tên miền tới các mail server"
     ],
     "optionsEn": [
-      "Identifies the name servers that are authoritative for that zone",
-      "Maps a domain name to an IP address",
-      "Creates an alias for another name",
-      "Routes email for the domain"
+      "Lists the authoritative name servers for the zone",
+      "Maps the zone's domain name to an IPv4 address",
+      "Creates an alias from one hostname to another",
+      "Directs the domain's email to its mail servers"
     ],
     "answer": 0,
     "explanation": "NS cho phần còn lại của Internet biết máy chủ nào trả lời cho zone. Khi tạo public hosted zone, Route 53 sinh sẵn bản ghi NS mà bạn phải khai báo ở nhà đăng ký tên miền.",
@@ -344,16 +344,16 @@
     "question": "Đặt TTL cao cho một bản ghi DNS dẫn đến hệ quả gì?",
     "questionEn": "What is the consequence of setting a high TTL on a DNS record?",
     "options": [
-      "Không ảnh hưởng gì tới chi phí hay tốc độ lan truyền",
-      "Ít truy vấn tới Route 53 hơn (rẻ hơn) nhưng thay đổi bản ghi lan truyền chậm hơn",
-      "Thay đổi lan truyền nhanh hơn nhưng tốn tiền hơn",
-      "Nhiều truy vấn hơn và lan truyền chậm hơn"
+      "Không ảnh hưởng tới chi phí truy vấn hay tốc độ lan truyền",
+      "Ít truy vấn hơn (rẻ hơn), nhưng thay đổi lan truyền chậm hơn",
+      "Thay đổi lan truyền nhanh hơn, nhưng nhiều truy vấn hơn nên tốn hơn",
+      "Nhiều truy vấn hơn (tốn hơn), và thay đổi lan truyền chậm hơn"
     ],
     "optionsEn": [
-      "No effect on either cost or propagation speed",
-      "Fewer queries reach Route 53 (lower cost) but record changes propagate more slowly",
-      "Changes propagate faster but cost more",
-      "More queries and slower propagation"
+      "No effect on either query cost or propagation speed",
+      "Fewer queries (lower cost), but changes propagate slower",
+      "Changes propagate faster, but more queries raise the cost",
+      "More queries (higher cost), and changes propagate slower"
     ],
     "answer": 1,
     "explanation": "TTL là thời gian resolver được phép cache câu trả lời. TTL cao = ít truy vấn, rẻ hơn, nhưng client giữ giá trị cũ lâu hơn — nên hạ TTL trước khi có thay đổi lớn.",
@@ -366,13 +366,13 @@
     "options": [
       "Alias tính phí theo hosted zone chứ không theo truy vấn",
       "Alias và CNAME có chi phí truy vấn giống hệt nhau",
-      "Truy vấn Alias trỏ tới tài nguyên AWS là MIỄN PHÍ",
+      "Truy vấn Alias trỏ tới tài nguyên AWS là miễn phí",
       "Truy vấn Alias tốn gấp đôi bản ghi thường"
     ],
     "optionsEn": [
       "Alias is charged per hosted zone rather than per query",
       "Alias and CNAME cost exactly the same per query",
-      "Alias queries that resolve to AWS resources are FREE",
+      "Alias queries that resolve to AWS resources are free",
       "Alias queries cost twice as much as a normal record"
     ],
     "answer": 2,

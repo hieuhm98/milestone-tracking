@@ -84,15 +84,15 @@
     "question": "Kiến trúc sư muốn bật HTTPS trực tiếp trên một EC2 instance dùng chứng chỉ do ACM cấp và gắn thẳng vào instance. Vì sao cách này KHÔNG khả thi?",
     "questionEn": "An architect wants to enable HTTPS directly on an EC2 instance using an ACM-issued certificate attached straight to the instance. Why is this NOT feasible?",
     "options": [
-      "ACM chỉ hoạt động ở region us-east-1",
-      "ACM không đẩy private key ra EC2; nên đặt ELB/CloudFront phía trước",
-      "EC2 không hỗ trợ TLS",
+      "Chứng chỉ ACM chỉ hoạt động ở region us-east-1",
+      "ACM giữ private key, máy chủ không tự cài được",
+      "EC2 instance không thể terminate kết nối TLS",
       "ACM chỉ cấp chứng chỉ cho tên miền .com"
     ],
     "optionsEn": [
-      "ACM only works in the us-east-1 region",
-      "ACM does not expose the private key to EC2; front it with an ELB/CloudFront instead",
-      "EC2 does not support TLS",
+      "ACM certificates only work in the us-east-1 region",
+      "ACM keeps the private key, so a server can't install it",
+      "EC2 instances cannot terminate TLS connections",
       "ACM only issues certificates for .com domains"
     ],
     "answer": 1,
@@ -125,15 +125,15 @@
     "questionEn": "You need to block SQL injection attacks and rate-limit requests from an IP to an API Gateway. Which service fits?",
     "options": [
       "AWS Shield Standard",
-      "AWS WAF với Web ACL (rule SQLi + rate-based)",
+      "AWS WAF với Web ACL",
       "Amazon Inspector",
-      "AWS KMS"
+      "AWS Network Firewall"
     ],
     "optionsEn": [
       "AWS Shield Standard",
-      "AWS WAF with a Web ACL (SQLi + rate-based rules)",
+      "AWS WAF with a Web ACL",
       "Amazon Inspector",
-      "AWS KMS"
+      "AWS Network Firewall"
     ],
     "answer": 1,
     "explanation": "WAF lọc ở Layer 7 và hỗ trợ rule chống SQL injection, XSS, geo-match và rate-based, gắn được vào API Gateway/ALB/CloudFront. Shield chỉ chống DDoS L3/L4; Inspector quét lỗ hổng.",
@@ -264,16 +264,16 @@
     "question": "Ứng dụng chạy đa region cần cùng một khóa mã hóa (cùng key ID) để giải mã dữ liệu được sao chép giữa us-east-1 và eu-west-1. KMS xử lý điều này thế nào?",
     "questionEn": "A multi-region application needs the same encryption key (same key ID) to decrypt data replicated between us-east-1 and eu-west-1. How does KMS handle this?",
     "options": [
-      "Khóa KMS tự động dùng chung toàn cầu mặc định",
-      "Dùng KMS Multi-Region Keys (bản sao khóa qua các region)",
-      "Export khóa và copy thủ công sang region khác",
-      "Chuyển sang CloudHSM vì KMS không hỗ trợ đa region"
+      "Mọi khóa KMS đều dùng được ở mọi region theo mặc định",
+      "Tạo multi-Region primary key và các bản replica",
+      "Copy key ID sang region khác bằng một grant",
+      "Dùng CloudHSM, vì khóa KMS không thể multi-region"
     ],
     "optionsEn": [
-      "KMS keys are automatically global by default",
-      "Use KMS Multi-Region Keys (key replicas across regions)",
-      "Export the key and manually copy it to the other region",
-      "Switch to CloudHSM because KMS does not support multi-region"
+      "Any KMS key is usable in every region by default",
+      "Create a multi-Region primary key and replica",
+      "Copy the key ID to the other region via a grant",
+      "Use CloudHSM, since KMS keys can't be multi-region"
     ],
     "answer": 1,
     "explanation": "Khóa KMS mặc định là per-region. Multi-Region Keys tạo bản sao khóa với cùng key ID ở nhiều region, cho phép mã hóa ở vùng này và giải mã ở vùng khác — phù hợp DR và dữ liệu sao chép xuyên vùng.",
@@ -284,16 +284,16 @@
     "question": "Khác biệt giữa mã hóa at rest và mã hóa in transit là gì?",
     "questionEn": "What is the difference between encryption at rest and encryption in transit?",
     "options": [
-      "At rest bảo vệ dữ liệu đang lưu trên đĩa/storage; in transit bảo vệ dữ liệu đang di chuyển trên mạng (TLS)",
-      "Hai khái niệm giống nhau, chỉ khác tên gọi",
-      "At rest dùng TLS còn in transit dùng KMS",
-      "In transit áp dụng cho ổ đĩa còn at rest cho đường truyền"
+      "At rest: dữ liệu lưu trên đĩa; in transit: dữ liệu di chuyển trên mạng",
+      "At rest: TLS giữa các dịch vụ; in transit: khóa KMS trên storage",
+      "At rest: traffic bên trong VPC; in transit: traffic ra internet",
+      "In transit: dữ liệu trên đĩa; at rest: dữ liệu di chuyển trên mạng"
     ],
     "optionsEn": [
-      "At rest protects data stored on disk/storage; in transit protects data moving over the network (TLS)",
-      "They are the same concept under two names",
-      "At rest uses TLS while in transit uses KMS",
-      "In transit applies to disks and at rest to the network"
+      "At rest: stored data on disk; in transit: data moving over the network",
+      "At rest: TLS between services; in transit: KMS keys on storage",
+      "At rest: network traffic inside a VPC; in transit: traffic to the internet",
+      "In transit: data on disks; at rest: data moving over the network"
     ],
     "answer": 0,
     "explanation": "Một kiến trúc an toàn cần cả hai: SSE cho S3/EBS/RDS (at rest) và HTTPS/TLS cho mọi kết nối (in transit). Đề thi thường hỏi bạn bổ sung vế còn thiếu.",
@@ -305,14 +305,14 @@
     "questionEn": "Which service is the central place to create and manage the encryption keys used by other AWS services?",
     "options": [
       "AWS Secrets Manager",
-      "AWS KMS (Key Management Service)",
-      "AWS IAM",
+      "AWS KMS",
+      "AWS Certificate Manager",
       "AWS CloudTrail"
     ],
     "optionsEn": [
       "AWS Secrets Manager",
-      "AWS KMS (Key Management Service)",
-      "AWS IAM",
+      "AWS KMS",
+      "AWS Certificate Manager",
       "AWS CloudTrail"
     ],
     "answer": 1,
@@ -324,16 +324,16 @@
     "question": "\"Defense in depth\" trong thiết kế bảo mật trên AWS nghĩa là gì?",
     "questionEn": "What does \"defense in depth\" mean in an AWS security design?",
     "options": [
-      "Mã hóa dữ liệu hai lần bằng hai khóa khác nhau",
-      "Triển khai ứng dụng ở nhiều Region",
-      "Xếp chồng nhiều lớp kiểm soát độc lập (mạng, danh tính, mã hóa, giám sát) để một lớp thủng không làm lộ toàn bộ",
-      "Dùng một biện pháp kiểm soát duy nhất nhưng thật mạnh"
+      "Mã hóa dữ liệu hai lần bằng hai khóa KMS khác nhau",
+      "Triển khai ứng dụng trên nhiều Region và nhiều AZ",
+      "Xếp nhiều lớp kiểm soát độc lập để một lớp thủng không lộ hết",
+      "Dựa vào một lớp kiểm soát thật mạnh ở biên mạng"
     ],
     "optionsEn": [
-      "Encrypting the data twice with two different keys",
-      "Deploying the application across multiple Regions",
-      "Layering multiple independent controls (network, identity, encryption, monitoring) so one failure doesn't expose everything",
-      "Using a single but very strong control"
+      "Encrypting the data twice, with two different KMS keys",
+      "Deploying the application across multiple Regions and AZs",
+      "Layering independent controls so one failure doesn't expose all",
+      "Relying on one very strong control at the network edge"
     ],
     "answer": 2,
     "explanation": "Ví dụ thực tế: private subnet + security group + IAM least privilege + mã hóa KMS + GuardDuty. Câu hỏi kiểu \"biện pháp nào TỐT NHẤT\" thường thưởng cho phương án thêm một lớp còn thiếu.",
@@ -344,16 +344,16 @@
     "question": "Khác biệt giữa AWS-managed key và customer-managed key (CMK) trong KMS là gì?",
     "questionEn": "What is the difference between an AWS-managed key and a customer-managed key (CMK) in KMS?",
     "options": [
-      "Không có khác biệt thực chất, chỉ khác tên hiển thị",
-      "AWS-managed key đắt hơn CMK",
-      "CMK không hỗ trợ tự động xoay vòng khóa",
-      "CMK cho bạn kiểm soát key policy, lịch xoay vòng và việc xóa khóa; AWS-managed key do dịch vụ tự tạo và kiểm soát"
+      "Không khác thực chất; chỉ khác tên hiển thị trên console",
+      "AWS-managed key tốn phí hằng tháng cao hơn CMK",
+      "CMK không tự xoay vòng được, khác với AWS-managed key",
+      "Với CMK, bạn kiểm soát key policy, xoay vòng và việc xóa"
     ],
     "optionsEn": [
-      "There is no real difference, only the display name",
-      "AWS-managed keys cost more than CMKs",
-      "CMKs do not support automatic key rotation",
-      "A CMK gives you control over the key policy, rotation schedule and deletion; AWS-managed keys are created and controlled by the service"
+      "No real difference; only the name shown in the console",
+      "AWS-managed keys cost more per month than CMKs do",
+      "CMKs cannot rotate automatically, unlike AWS-managed keys",
+      "With a CMK you control its policy, rotation, and deletion"
     ],
     "answer": 3,
     "explanation": "Khi đề bài yêu cầu \"tự kiểm soát khóa\", \"audit ai giải mã\" hay \"tự đặt lịch xoay vòng\", đáp án là customer-managed key. AWS-managed key thì miễn phí nhưng không tùy chỉnh được.",

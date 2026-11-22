@@ -61,6 +61,12 @@ export interface RecallStat {
   seen: number;
   correct: number;
   lastAt: string;
+  /**
+   * Whether the most recent answer was right. Optional: stats written before
+   * 2026-10-29 lack it. Review ranking leans on this rather than on lifetime
+   * accuracy, which never recovers from a single early miss.
+   */
+  lastCorrect?: boolean;
 }
 
 /**
@@ -252,6 +258,7 @@ export function normalize(raw: unknown): ProgressData {
         seen: num(value.seen),
         correct: num(value.correct),
         lastAt: isoOr(value.lastAt, epoch),
+        ...(typeof value.lastCorrect === "boolean" ? { lastCorrect: value.lastCorrect } : {}),
       };
     }
   }
@@ -367,11 +374,7 @@ export function mergeProgress(a: ProgressData, b: ProgressData): ProgressData {
   for (const [key, incoming] of Object.entries(b.recall)) {
     const existing = recall[key];
 
-    recall[key] = {
-      seen: Math.max(incoming.seen, existing?.seen ?? 0),
-      correct: Math.max(incoming.correct, existing?.correct ?? 0),
-      lastAt: incoming.lastAt >= (existing?.lastAt ?? "") ? incoming.lastAt : existing.lastAt,
-    };
+    recall[key] = existing ? mergeRecall(existing, incoming) : incoming;
   }
 
   const exams: Record<string, ExamProgress> = { ...a.exams };
@@ -747,10 +750,15 @@ function mergeSqlChallenge(a: SqlChallengeProgress, b: SqlChallengeProgress): Sq
 }
 
 function mergeRecall(a: RecallStat, b: RecallStat): RecallStat {
+  // The newer side knows what the latest answer was.
+  const newer = b.lastAt > a.lastAt ? b : a;
+  const lastCorrect = newer.lastCorrect ?? (newer === a ? b : a).lastCorrect;
+
   return {
     seen: Math.max(a.seen, b.seen),
     correct: Math.max(a.correct, b.correct),
-    lastAt: a.lastAt >= b.lastAt ? a.lastAt : b.lastAt,
+    lastAt: newer.lastAt,
+    ...(lastCorrect !== undefined ? { lastCorrect } : {}),
   };
 }
 
@@ -1049,6 +1057,7 @@ function applyRecall(
       seen: (existing?.seen ?? 0) + 1,
       correct: (existing?.correct ?? 0) + (correct ? 1 : 0),
       lastAt: now,
+      lastCorrect: correct,
     };
   }
 
@@ -1102,21 +1111,39 @@ export function recordVocab(prev: ProgressData, answered: AnsweredQuestion[]): P
   return { ...prev, updatedAt: now, recall: applyRecall(prev.recall, answered, now) };
 }
 
-/**
- * Order a pool of questions by how much they are worth reviewing: never-tested
- * first, then weakest by accuracy, then stalest. The jitter keeps the same
- * handful from cycling forever once everything is answered correctly.
- */
-export function rankForReview<T extends { key: string }>(data: ProgressData, pool: T[]): T[] {
-  return pool
-    .map((item) => {
-      const stat = data.recall[item.key];
-      const accuracy = stat && stat.seen > 0 ? stat.correct / stat.seen : 0;
-      const score = (stat ? accuracy * 2 : -1) + Math.random() * 0.3;
+const HOUR = 3_600_000;
 
-      return { item, score, lastAt: stat?.lastAt ?? "" };
-    })
-    .sort((a, b) => a.score - b.score || a.lastAt.localeCompare(b.lastAt))
+/**
+ * How much a question is worth asking again right now (higher = sooner).
+ *
+ * - Never answered: top of the list.
+ * - Last answer wrong: high, but not straight back — it rests for half an hour.
+ * - Last answer right: low weakness, and it rests for half a day; after that it
+ *   climbs back over about three days so old material keeps returning.
+ * - A large random share, so two sessions over the same pool differ. (The old
+ *   ranking used lifetime accuracy with a tiny jitter: one early miss kept a
+ *   question at 1/2, 2/3, 3/4… — forever below the perfect ones — so the same
+ *   couple of questions opened every warm-up.)
+ */
+export function reviewPriority(stat: RecallStat | undefined, now: number, random: number = Math.random()): number {
+  if (!stat || stat.seen === 0) return 2 + random * 0.5;
+
+  const accuracy = stat.correct / stat.seen;
+  // Old stats have no lastCorrect; a perfect record means the last one was right too.
+  const lastRight = stat.lastCorrect ?? accuracy === 1;
+  const weakness = lastRight ? (1 - accuracy) * 0.4 : 1;
+  const hours = Math.max(0, (now - Date.parse(stat.lastAt)) / HOUR);
+  const rest = lastRight ? 12 : 0.5;
+  const staleness = hours < rest ? -1 : Math.min(1, hours / 72);
+
+  return weakness + staleness + random * 0.8;
+}
+
+/** Order a pool of questions so the ones most worth reviewing come first. */
+export function rankForReview<T extends { key: string }>(data: ProgressData, pool: T[], now: number = Date.now()): T[] {
+  return pool
+    .map((item) => ({ item, score: reviewPriority(data.recall[item.key], now) }))
+    .sort((a, b) => b.score - a.score)
     .map((x) => x.item);
 }
 

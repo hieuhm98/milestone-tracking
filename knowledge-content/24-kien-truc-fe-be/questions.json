@@ -5,13 +5,13 @@
     "questionEn": "Where does the Frontend (FE) run?",
     "options": [
       "Trên server của công ty",
-      "Trong trình duyệt của người dùng",
+      "Trong trình duyệt",
       "Trong database",
       "Trên cloud (AWS, GCP)"
     ],
     "optionsEn": [
       "On the company's server",
-      "In the user's browser",
+      "In the browser",
       "In the database",
       "On the cloud (AWS, GCP)"
     ],
@@ -27,7 +27,7 @@
       "Hiển thị loading spinner khi chờ API",
       "Validate format email trong form",
       "Tính toán business rule và lưu vào database",
-      "Hiển thị error message khi API thất bại"
+      "Hiển thị error message cho user khi API thất bại"
     ],
     "optionsEn": [
       "Displaying a loading spinner while waiting for an API",
@@ -46,13 +46,13 @@
     "options": [
       "Mã hóa dữ liệu trong database",
       "Nén file JavaScript để tải nhanh hơn",
-      "Xác thực danh tính user sau khi đăng nhập (authentication token)",
+      "Xác thực user sau khi đăng nhập",
       "Kết nối FE với database trực tiếp"
     ],
     "optionsEn": [
       "Encrypting data in the database",
       "Compressing JavaScript files to load faster",
-      "Verifying a user's identity after login (an authentication token)",
+      "Proving who the user is after login",
       "Connecting the FE directly to the database"
     ],
     "answer": 2,
@@ -84,16 +84,16 @@
     "question": "HTTP status code 404 có nghĩa là gì?",
     "questionEn": "What does HTTP status code 404 mean?",
     "options": [
-      "Server lỗi nội bộ",
-      "Không có quyền truy cập",
+      "Server gặp lỗi nội bộ khi xử lý",
+      "Người dùng không có quyền truy cập vào trang",
       "Không tìm thấy resource được yêu cầu",
-      "Request thành công"
+      "Request đã được xử lý thành công"
     ],
     "optionsEn": [
-      "Internal server error",
-      "No access permission",
+      "The server hit an internal error",
+      "The user has no access permission",
       "The requested resource was not found",
-      "The request succeeded"
+      "The request was handled successfully"
     ],
     "answer": 2,
     "explanation": "404 Not Found — URL không tồn tại hoặc resource đã bị xóa. Các code quan trọng: 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 422 Validation Error, 500 Server Error.",
@@ -125,15 +125,15 @@
     "questionEn": "What is the Staging (UAT) environment used for?",
     "options": [
       "Môi trường để developer viết code hằng ngày",
-      "Môi trường để người dùng thực sử dụng",
-      "Môi trường kiểm thử nghiệm thu, giống Production nhất có thể",
-      "Môi trường để chạy automated tests"
+      "Môi trường mà người dùng thật đang sử dụng hằng ngày",
+      "Kiểm thử nghiệm thu trên môi trường giống Production",
+      "Môi trường chỉ để chạy automated tests"
     ],
     "optionsEn": [
       "An environment for developers to write code day to day",
-      "An environment for real users to use",
-      "An acceptance-testing environment, as close to Production as possible",
-      "An environment for running automated tests"
+      "An environment real users work in every day",
+      "Acceptance testing in a Production-like setup",
+      "An environment only for running automated tests"
     ],
     "answer": 2,
     "explanation": "Staging/UAT (User Acceptance Testing) là môi trường sát với Production nhất, dùng để BA, QA và stakeholder verify tính năng trước khi release. Không bao giờ test feature mới trực tiếp trên Production.",
@@ -144,16 +144,16 @@
     "question": "API Contract là gì và ai cần tham gia thống nhất?",
     "questionEn": "What is an API Contract and who needs to agree on it?",
     "options": [
-      "Hợp đồng pháp lý giữa công ty và vendor API",
-      "Thỏa thuận về format request/response giữa FE và BE team",
-      "Tài liệu kỹ thuật chỉ BE cần đọc",
-      "Test case cho API"
+      "Hợp đồng pháp lý giữa công ty và nhà cung cấp API",
+      "Thỏa thuận format request/response giữa FE và BE",
+      "Tài liệu kỹ thuật mà chỉ team BE cần đọc",
+      "Bộ test case tự động mà QA viết cho API"
     ],
     "optionsEn": [
       "A legal contract between the company and an API vendor",
-      "An agreement on the request/response format between the FE and BE teams",
+      "An FE–BE agreement on request/response format",
       "A technical document that only the BE needs to read",
-      "Test cases for the API"
+      "An automated test suite for the API"
     ],
     "answer": 1,
     "explanation": "API Contract là thỏa thuận giữa FE và BE về endpoint URL, HTTP method, request body, response format (success và error), HTTP status codes. Cần FE, BE và BA tham gia. Xong contract → FE và BE có thể làm song song.",
@@ -165,15 +165,15 @@
     "questionEn": "In an SPA (Single Page Application), what happens when the user navigates to another page?",
     "options": [
       "Trình duyệt tải lại toàn bộ trang từ server",
-      "JavaScript thay đổi nội dung trang mà không tải lại, chỉ gọi API để lấy dữ liệu",
-      "Server render HTML mới và gửi về",
-      "Trình duyệt load file HTML mới"
+      "JS đổi nội dung trang, chỉ gọi API lấy dữ liệu",
+      "Server render HTML mới rồi gửi về trình duyệt",
+      "Trình duyệt tải một file HTML mới từ server"
     ],
     "optionsEn": [
       "The browser reloads the entire page from the server",
-      "JavaScript changes the page content without reloading, only calling an API to fetch data",
+      "JS swaps the content and only calls an API for data",
       "The server renders new HTML and sends it back",
-      "The browser loads a new HTML file"
+      "The browser loads a fresh HTML file from the server"
     ],
     "answer": 1,
     "explanation": "SPA (React, Vue, Angular) dùng client-side routing. Khi chuyển trang, JS thay đổi nội dung DOM và URL (History API) mà không reload. Chỉ gọi API để lấy dữ liệu cần thiết — nhanh hơn nhưng cần xử lý SEO và deep linking đặc biệt.",
@@ -204,16 +204,16 @@
     "question": "Khi BE trả về lỗi validation (422), FE nên làm gì?",
     "questionEn": "When the BE returns a validation error (422), what should the FE do?",
     "options": [
-      "Hiển thị lỗi chung: 'Có lỗi xảy ra'",
-      "Tự sửa dữ liệu và gửi lại",
-      "Hiển thị thông báo lỗi cụ thể theo từng field từ response",
-      "Reload lại trang"
+      "Hiện thông báo chung chung kiểu 'Có lỗi xảy ra'",
+      "Tự sửa dữ liệu cho đúng rồi gửi lại",
+      "Hiện lỗi cụ thể cho từng field theo response",
+      "Tải lại trang để người dùng nhập lại từ đầu"
     ],
     "optionsEn": [
       "Show a generic error: 'Something went wrong'",
-      "Automatically fix the data and resend",
-      "Show a specific error message for each field from the response",
-      "Reload the page"
+      "Fix the data automatically and resend it",
+      "Show each field's error from the response",
+      "Reload the page so the user starts over"
     ],
     "answer": 2,
     "explanation": "FE nhận lỗi từ BE và hiển thị đúng vị trí: ví dụ lỗi 'Email đã được sử dụng' hiển thị ngay dưới field email. BE trả về error fields cụ thể, FE map vào UI. BA cần mô tả error message cụ thể trong AC.",
@@ -225,14 +225,14 @@
     "questionEn": "What is a cron job in the Backend?",
     "options": [
       "Một loại database query đặc biệt",
-      "Tác vụ tự động chạy theo lịch định kỳ (mỗi ngày, mỗi giờ...)",
-      "Cách deploy code lên server",
+      "Tác vụ tự chạy theo lịch định kỳ",
+      "Cách deploy code lên server tự động",
       "Phương thức HTTP để gọi API theo lịch"
     ],
     "optionsEn": [
       "A special kind of database query",
-      "A task that runs automatically on a recurring schedule (daily, hourly...)",
-      "A way to deploy code to the server",
+      "A task that runs automatically on a schedule",
+      "A way to auto-deploy code to the server",
       "An HTTP method for calling APIs on a schedule"
     ],
     "answer": 1,
@@ -244,14 +244,14 @@
     "question": "Tại sao phân quyền (authorization) PHẢI được kiểm tra ở Backend, không chỉ ẩn button ở Frontend?",
     "questionEn": "Why MUST authorization be checked on the Backend, not just by hiding a button on the Frontend?",
     "options": [
-      "Vì Frontend không có đủ thông tin",
-      "Vì user có thể bypass FE bằng cách gọi API trực tiếp (Postman, curl...)",
-      "Vì Backend nhanh hơn Frontend",
+      "Vì Frontend không có đủ thông tin về user đó",
+      "Vì user có thể gọi API trực tiếp, bỏ qua FE",
+      "Vì Backend xử lý nhanh hơn Frontend",
       "Không cần — ẩn button ở FE là đủ bảo mật"
     ],
     "optionsEn": [
       "Because the Frontend does not have enough information",
-      "Because the user can bypass the FE by calling the API directly (Postman, curl...)",
+      "Because users can call the API directly, skipping the FE",
       "Because the Backend is faster than the Frontend",
       "It is not needed — hiding the button on the FE is secure enough"
     ],
@@ -284,15 +284,15 @@
     "question": "Khi FE và BE cần làm song song (parallel), điều gì cần hoàn thành TRƯỚC?",
     "questionEn": "When the FE and BE need to work in parallel, what must be completed FIRST?",
     "options": [
-      "FE hoàn thành UI trước, rồi BE mới biết cần API gì",
+      "FE hoàn thành UI trước, rồi BE mới biết cần làm API gì",
       "BE hoàn thành tất cả API trước, FE mới bắt đầu",
-      "API Contract (thống nhất format request/response) phải xong trước",
+      "API Contract (format request/response) phải xong trước",
       "Database schema phải xong trước tất cả"
     ],
     "optionsEn": [
       "The FE finishes the UI first, then the BE learns what APIs are needed",
       "The BE finishes all APIs first, then the FE begins",
-      "The API Contract (agreed request/response format) must be done first",
+      "The API Contract (request/response format) comes first",
       "The database schema must be done before everything"
     ],
     "answer": 2,
@@ -303,16 +303,16 @@
     "question": "Người dùng báo dữ liệu hiển thị sai. BA nên hỏi câu nào để khoanh vùng FE hay BE?",
     "questionEn": "A user reports wrong data on screen. Which question narrows it to FE or BE?",
     "options": [
-      "Dữ liệu API trả về đã đúng chưa — nếu đúng thì lỗi ở hiển thị, nếu sai thì lỗi ở xử lý phía server",
-      "Người dùng đang dùng trình duyệt gì",
-      "Màn hình có độ phân giải bao nhiêu",
-      "Người dùng đăng nhập lúc mấy giờ"
+      "API trả dữ liệu đúng chưa — đúng là lỗi FE, sai là BE",
+      "Người dùng đang dùng trình duyệt nào và phiên bản mấy",
+      "Màn hình người dùng có độ phân giải bao nhiêu",
+      "Người dùng đăng nhập lúc mấy giờ, từ đâu"
     ],
     "optionsEn": [
-      "Is the API response already correct — if yes the bug is in rendering, if no it is in server-side processing",
-      "Which browser the user has",
-      "What screen resolution they use",
-      "What time they logged in"
+      "Is the API data right? Yes: FE bug; no: BE bug",
+      "Which browser and version the user is on",
+      "What screen resolution the user's display has",
+      "What time and from where they logged in"
     ],
     "answer": 0,
     "explanation": "Xem tab Network để đối chiếu dữ liệu trả về với dữ liệu hiển thị là cách khoanh vùng nhanh nhất và giúp bug report chính xác hơn nhiều.",
@@ -323,16 +323,16 @@
     "question": "Việc kiểm tra tính hợp lệ dữ liệu (validation) nên đặt ở đâu?",
     "questionEn": "Where should data validation live?",
     "options": [
-      "Cả frontend lẫn backend: frontend cho trải nghiệm nhanh, backend vì đó mới là lớp bảo vệ thật",
-      "Chỉ ở frontend cho nhẹ server",
-      "Chỉ ở backend vì frontend không cần",
-      "Chỉ ở cơ sở dữ liệu"
+      "Cả hai: FE cho phản hồi nhanh, BE để bảo vệ thật",
+      "Chỉ ở frontend để giảm tải cho server",
+      "Chỉ ở backend vì frontend không cần phải kiểm tra",
+      "Chỉ ở cơ sở dữ liệu thông qua ràng buộc"
     ],
     "optionsEn": [
-      "Both: the frontend for fast feedback, the backend because that is the real protection",
-      "Frontend only, to keep the server light",
-      "Backend only, since the frontend does not need it",
-      "In the database only"
+      "Both: FE for speed, BE for real protection",
+      "Frontend only, to keep the load off the server",
+      "Backend only, since the frontend need not check",
+      "In the database only, through constraints"
     ],
     "answer": 0,
     "explanation": "Kiểm tra ở frontend có thể bị bỏ qua hoàn toàn bằng cách gọi API trực tiếp. Mọi đầu vào tới server đều phải được coi là không đáng tin.",
@@ -343,15 +343,15 @@
     "question": "Trong mô hình ba lớp, lớp nào chứa quy tắc nghiệp vụ?",
     "questionEn": "In a three-layer architecture, which layer holds the business rules?",
     "options": [
-      "Lớp nghiệp vụ (business/logic layer)",
+      "Lớp nghiệp vụ (business logic)",
       "Lớp trình bày (presentation)",
-      "Lớp dữ liệu (data)",
-      "Lớp mạng"
+      "Lớp dữ liệu (data access)",
+      "Lớp mạng (network)"
     ],
     "optionsEn": [
-      "The business/logic layer",
+      "The business layer",
       "The presentation layer",
-      "The data layer",
+      "The data access layer",
       "The network layer"
     ],
     "answer": 0,
@@ -363,16 +363,16 @@
     "question": "Token xác thực hết hạn giữa lúc người dùng đang điền biểu mẫu dài. Yêu cầu nào cần được đặc tả?",
     "questionEn": "An auth token expires while a user fills a long form. Which requirement must be specified?",
     "options": [
-      "Hệ thống làm gì với dữ liệu đang nhập dở và cách người dùng đăng nhập lại mà không mất công sức",
-      "Màu của thông báo hết phiên",
-      "Độ dài của token",
-      "Thuật toán mã hoá token"
+      "Giữ dữ liệu nhập dở khi người dùng đăng nhập lại",
+      "Màu sắc hiển thị của thông báo hết phiên đăng nhập",
+      "Độ dài tối đa (số ký tự) của chuỗi token",
+      "Thuật toán mã hóa được dùng cho token"
     ],
     "optionsEn": [
-      "What happens to the partially entered data and how the user re-authenticates without losing their work",
+      "Keeping half-filled data while the user logs back in",
       "The colour of the session-expired message",
-      "The token length",
-      "The token encryption algorithm"
+      "The maximum length in characters of the token",
+      "The algorithm used to encrypt the token"
     ],
     "answer": 0,
     "explanation": "Đây là điểm giao giữa bảo mật và khả năng sử dụng — đúng loại đánh đổi phải đưa ra thảo luận với stakeholder chứ không để lập trình viên tự quyết.",
@@ -383,16 +383,16 @@
     "question": "Vì sao BA cần biết một thay đổi thuộc FE hay BE khi ước tính?",
     "questionEn": "Why does a BA need to know whether a change is FE or BE when estimating?",
     "options": [
-      "Vì nó quyết định đội nào làm, mức phụ thuộc và liệu có cần thay đổi cấu trúc dữ liệu hay không",
-      "Vì FE luôn nhanh hơn BE",
-      "Vì BE không cần kiểm thử",
-      "Vì chỉ FE mới ảnh hưởng tới người dùng"
+      "Vì nó quyết định đội nào làm và mức độ phụ thuộc",
+      "Vì phần việc FE thì không cần ước tính thời gian",
+      "Vì phần BE không cần kiểm thử sau khi làm",
+      "Vì chỉ có FE mới ảnh hưởng tới người dùng"
     ],
     "optionsEn": [
-      "Because it determines which team does the work, the dependencies, and whether the data model must change",
-      "Because FE is always faster than BE",
-      "Because BE needs no testing",
-      "Because only FE affects users"
+      "It decides which team, and the dependencies",
+      "Because FE work does not need an estimate",
+      "Because BE work needs no testing afterwards",
+      "Because only FE changes ever affect the users"
     ],
     "answer": 0,
     "explanation": "Thay đổi chạm tới cấu trúc dữ liệu hoặc hợp đồng API thường lan rộng hơn nhiều so với thay đổi thuần giao diện.",
@@ -405,15 +405,15 @@
     "questionEn": "The FE and BE teams have agreed the API contract, but the real API is not finished. What can the FE do so it does not have to wait?",
     "options": [
       "Tự viết logic nghiệp vụ trong trình duyệt thay cho BE",
-      "Kết nối thẳng vào database của Production",
-      "Tạm dừng dự án cho tới khi BE xong",
-      "Dùng dữ liệu giả có đúng khuôn dạng của contract để xây màn hình song song"
+      "Kết nối thẳng vào database Production để lấy dữ liệu",
+      "Tạm dừng phần việc FE cho tới khi BE làm xong",
+      "Dùng dữ liệu giả đúng khuôn dạng contract để làm song song"
     ],
     "optionsEn": [
       "Write the business logic in the browser instead of the BE",
-      "Connect directly to the Production database",
-      "Pause the project until the BE is done",
-      "Use fake data shaped exactly like the contract to build the screens in parallel"
+      "Connect straight to the Production database for data",
+      "Pause the FE work until the BE is completely done",
+      "Use contract-shaped fake data to build in parallel"
     ],
     "answer": 3,
     "explanation": "Lợi ích chính của API contract là cho phép làm song song: FE dựng màn hình với dữ liệu giả theo đúng định dạng đã thống nhất, rồi chỉ cần đổi sang API thật khi BE sẵn sàng.",
@@ -437,13 +437,13 @@
     "questionEn": "An employee's card works at reception, but it does not open the server room door. In the article's analogy, which step stopped this person?",
     "options": [
       "Authentication — hệ thống không biết người này là ai",
-      "Authorization — đã biết là ai nhưng không được phép vào phòng đó",
+      "Authorization — biết là ai nhưng không có quyền",
       "Validation — dữ liệu nhập sai định dạng",
       "Caching — thẻ đã được lưu trong cache"
     ],
     "optionsEn": [
       "Authentication — the system does not know who this person is",
-      "Authorization — the person is known but is not allowed into that room",
+      "Authorization — known identity, but no permission",
       "Validation — the input was in the wrong format",
       "Caching — the card was stored in a cache"
     ],
@@ -468,16 +468,16 @@
     "question": "Hệ thống cần được thiết kế sao cho khi phần thanh toán gặp sự cố, phần đăng ký người dùng và xem đơn hàng vẫn hoạt động. Kiến trúc nào phù hợp nhất với mục tiêu này?",
     "questionEn": "A system must be designed so that when the payment part fails, user sign-up and order viewing keep working. Which architecture fits this goal best?",
     "options": [
-      "Microservices — mỗi chức năng là một service độc lập",
-      "Monolith — mọi thứ trong một ứng dụng",
-      "Chỉ có frontend, không có backend",
-      "Một file HTML tĩnh duy nhất"
+      "Microservices — mỗi chức năng là service riêng",
+      "Monolith — mọi chức năng nằm trong một ứng dụng",
+      "Chỉ có frontend, bỏ hẳn phần backend",
+      "Một file HTML tĩnh duy nhất cho cả hệ thống"
     ],
     "optionsEn": [
-      "Microservices — each function is an independent service",
-      "Monolith — everything in one application",
-      "Frontend only, with no backend",
-      "A single static HTML file"
+      "Microservices — each function on its own",
+      "Monolith — every function in one application",
+      "Frontend only, dropping the backend entirely",
+      "One static HTML file for the whole system"
     ],
     "answer": 0,
     "explanation": "Giống khu ẩm thực có nhiều quầy riêng: microservices tách backend thành các service độc lập, nên một service lỗi thường không kéo theo các service khác.",
@@ -500,16 +500,16 @@
     "question": "Thông tin nào quan trọng nhất cần thêm vào báo cáo bug 'thanh toán bị hỏng' để team xử lý được ngay?",
     "questionEn": "Which piece of information is most important to add to a bug report saying 'checkout is broken' so the team can act on it right away?",
     "options": [
-      "Màu yêu thích của người báo lỗi",
+      "Giờ làm việc trong ngày của người báo lỗi",
       "Tên trình soạn thảo code mà developer dùng",
-      "Lỗi xảy ra trên môi trường nào (Dev, Staging hay Production) và với dữ liệu gì",
-      "Số lượng nhân viên của công ty"
+      "Lỗi xảy ra ở môi trường nào và với dữ liệu gì",
+      "Số người đang làm việc trong team dev"
     ],
     "optionsEn": [
-      "The reporter's favourite colour",
-      "The name of the code editor the developers use",
-      "Which environment it happened on (Dev, Staging or Production) and with what data",
-      "The number of employees in the company"
+      "The reporter's working hours that day",
+      "The name of the code editor the developers prefer",
+      "The environment (Dev/Staging/Prod) and data used",
+      "How many people work on the dev team"
     ],
     "answer": 2,
     "explanation": "Mỗi môi trường có địa chỉ, code và database riêng. Nói rõ môi trường và dữ liệu test giúp team tái hiện lỗi ngay thay vì phải đoán.",
@@ -518,13 +518,13 @@
       "Không liên quan tới việc tái hiện lỗi.",
       "Trình soạn thảo của developer không ảnh hưởng tới lỗi người dùng gặp.",
       "Đúng — môi trường và dữ liệu là thông tin cốt lõi để tái hiện lỗi.",
-      "Quy mô công ty không giúp tìm ra lỗi."
+      "Quy mô team dev không giúp tái hiện lỗi."
     ],
     "optionExplanationsEn": [
       "Irrelevant to reproducing the bug.",
       "The developers' editor has no effect on the bug a user sees.",
       "Correct — environment and data are core information for reproducing a bug.",
-      "Company size does not help find the bug."
+      "The size of the dev team does not help reproduce the bug."
     ]
   }
 ]

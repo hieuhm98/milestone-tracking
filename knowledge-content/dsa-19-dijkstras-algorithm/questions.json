@@ -7,13 +7,13 @@
       "Tìm cây khung nhỏ nhất (minimum spanning tree) của đồ thị",
       "Sắp xếp các đỉnh theo thứ tự topo trên đồ thị có hướng",
       "Tìm đường đi ngắn nhất từ một đỉnh nguồn trên đồ thị có trọng số không âm",
-      "Tìm đường đi ngắn nhất trên đồ thị có cả trọng số âm và chu trình âm"
+      "Tìm đường đi ngắn nhất trên đồ thị có cả trọng số âm lẫn các chu trình âm"
     ],
     "optionsEn": [
       "Finding the minimum spanning tree of a graph",
       "Ordering the vertices of a directed graph topologically",
       "Finding shortest paths from one source vertex in a graph with non-negative weights",
-      "Finding shortest paths in a graph with negative weights and negative cycles"
+      "Finding shortest paths in a graph that has negative weights and negative cycles"
     ],
     "answer": 2,
     "explanation": "Dijkstra tính khoảng cách ngắn nhất từ một nguồn tới các đỉnh khác (single-source shortest paths) với điều kiện mọi trọng số không âm. Cây khung nhỏ nhất là việc của Prim/Kruskal, topo sort là thuật toán khác, còn cạnh âm cần Bellman–Ford (và chu trình âm thì không có đường ngắn nhất).",
@@ -25,15 +25,15 @@
     "questionEn": "Why is BFS not enough to find the shortest route on a road map where every road segment has a distance in km?",
     "options": [
       "BFS tìm đường ít cạnh nhất, không phải đường có tổng trọng số nhỏ nhất",
-      "BFS không chạy được trên đồ thị vô hướng",
-      "BFS luôn có độ phức tạp O(V²) nên quá chậm",
-      "BFS cần đồ thị được biểu diễn bằng adjacency matrix"
+      "BFS không chạy được trên đồ thị vô hướng như mạng lưới đường bộ thực tế",
+      "BFS luôn có độ phức tạp O(V²) nên quá chậm với bản đồ lớn",
+      "BFS cần đồ thị được biểu diễn bằng adjacency matrix chứa số km"
     ],
     "optionsEn": [
       "BFS finds the path with the fewest edges, not the smallest total weight",
-      "BFS cannot run on undirected graphs",
-      "BFS is always O(V²), which is too slow",
-      "BFS requires the graph to be stored as an adjacency matrix"
+      "BFS cannot run on undirected graphs such as a road network",
+      "BFS is always O(V²), which is far too slow for a large map",
+      "BFS requires the graph to be stored as an adjacency matrix of km values"
     ],
     "answer": 0,
     "explanation": "BFS duyệt theo từng lớp số cạnh, nên nó tối ưu số cạnh. Một đường cao tốc dài 10 km (1 cạnh) sẽ thắng ba con phố 2 km (tổng 6 km) theo BFS, dù sai. BFS chạy O(V + E) và dùng được với adjacency list lẫn đồ thị vô hướng.",
@@ -44,36 +44,36 @@
     "question": "Sau khi chạy đoạn code sau, `g.adjacencyList.B` chứa gì?\n`const g = new WeightedGraph();\n['A', 'B', 'C'].forEach((v) => g.addVertex(v));\ng.addEdge('A', 'B', 5);\ng.addEdge('B', 'C', 2);`",
     "questionEn": "After running this code, what does `g.adjacencyList.B` hold?\n`const g = new WeightedGraph();\n['A', 'B', 'C'].forEach((v) => g.addVertex(v));\ng.addEdge('A', 'B', 5);\ng.addEdge('B', 'C', 2);`",
     "options": [
-      "`['A', 'C']`",
+      "`[{ node: 'A', weight: 5 }]`",
       "`[{ node: 'C', weight: 2 }]`",
-      "`{ A: 5, C: 2 }`",
+      "`[{ node: 'A', weight: 5 }, { node: 'C', weight: 7 }]`",
       "`[{ node: 'A', weight: 5 }, { node: 'C', weight: 2 }]`"
     ],
     "optionsEn": [
-      "`['A', 'C']`",
+      "`[{ node: 'A', weight: 5 }]`",
       "`[{ node: 'C', weight: 2 }]`",
-      "`{ A: 5, C: 2 }`",
+      "`[{ node: 'A', weight: 5 }, { node: 'C', weight: 7 }]`",
       "`[{ node: 'A', weight: 5 }, { node: 'C', weight: 2 }]`"
     ],
     "answer": 3,
-    "explanation": "`addEdge` của đồ thị vô hướng push vào danh sách của cả hai đỉnh, mỗi phần tử là object `{ node, weight }`. B nhận `{ node: 'A', weight: 5 }` từ lần gọi đầu và `{ node: 'C', weight: 2 }` từ lần gọi thứ hai. Chỉ lưu tên đỉnh sẽ làm mất trọng số.",
-    "explanationEn": "The undirected `addEdge` pushes into both vertices' lists, each entry being a `{ node, weight }` object. B receives `{ node: 'A', weight: 5 }` from the first call and `{ node: 'C', weight: 2 }` from the second. Storing only names would lose the weights."
+    "explanation": "`addEdge` vô hướng đẩy vào danh sách của cả hai đỉnh, mỗi mục là một object `{ node, weight }`. B nhận `{ node: 'A', weight: 5 }` từ lời gọi thứ nhất và `{ node: 'C', weight: 2 }` từ lời gọi thứ hai. Trọng số của mỗi cạnh được lưu riêng, không cộng dồn.",
+    "explanationEn": "The undirected `addEdge` pushes into both vertices' lists, each entry being a `{ node, weight }` object. B receives `{ node: 'A', weight: 5 }` from the first call and `{ node: 'C', weight: 2 }` from the second. Each edge keeps its own weight; nothing accumulates."
   },
   {
     "id": "q4",
     "question": "Ở mỗi vòng lặp, Dijkstra chọn đỉnh nào để thăm tiếp theo?",
     "questionEn": "On each iteration, which vertex does Dijkstra visit next?",
     "options": [
-      "Đỉnh có nhiều cạnh kề nhất",
+      "Đỉnh có nhiều cạnh kề nhất trong số tất cả các đỉnh chưa được thăm",
       "Đỉnh chưa thăm có khoảng cách đã biết nhỏ nhất tính từ nguồn",
-      "Đỉnh kề với đỉnh vừa thăm có cạnh nhẹ nhất",
-      "Đỉnh được thêm vào đồ thị sớm nhất"
+      "Đỉnh kề với đỉnh vừa thăm mà có cạnh nối nhẹ nhất",
+      "Đỉnh được thêm vào đồ thị sớm nhất mà chưa được thăm"
     ],
     "optionsEn": [
-      "The vertex with the most neighbours",
+      "The unvisited vertex with the most neighbouring edges",
       "The unvisited vertex with the smallest known distance from the source",
-      "The neighbour of the last visited vertex with the lightest edge",
-      "The vertex that was added to the graph first"
+      "The neighbour of the most recently visited vertex with the lightest edge",
+      "The earliest-added vertex that has not been visited yet"
     ],
     "answer": 1,
     "explanation": "Lựa chọn tham lam dựa trên tổng khoảng cách từ nguồn, không phải trọng số một cạnh đơn lẻ. Chọn cạnh nhẹ nhất từ đỉnh vừa thăm là lỗi hay gặp: nó bỏ qua quãng đường đã đi để tới đỉnh đó.",
@@ -85,15 +85,15 @@
     "questionEn": "We are visiting C with `distances.C = 2`. There is an edge C–D of weight 3, and currently `distances.D = 6`. What happens when this edge is relaxed?",
     "options": [
       "Không thay đổi gì vì D đã có khoảng cách khác Infinity",
-      "`distances.D` thành 3 và `previous.D` thành `'C'`",
-      "`distances.D` thành 5, `previous.D` thành `'C'` và D được enqueue với priority 5",
-      "`distances.D` thành 9 vì cộng dồn 6 + 3"
+      "`distances.D` thành 3 và `previous.D` thành `'C'`, D được enqueue",
+      "`distances.D` thành 5, `previous.D` thành `'C'`, D được enqueue",
+      "`distances.D` thành 9 vì cộng dồn 6 + 3, `previous.D` giữ nguyên"
     ],
     "optionsEn": [
       "Nothing, because D already has a non-Infinity distance",
-      "`distances.D` becomes 3 and `previous.D` becomes `'C'`",
-      "`distances.D` becomes 5, `previous.D` becomes `'C'`, and D is enqueued with priority 5",
-      "`distances.D` becomes 9 because 6 + 3 accumulates"
+      "`distances.D` becomes 3, `previous.D` becomes `'C'`, D is enqueued",
+      "`distances.D` becomes 5, `previous.D` becomes `'C'`, D is enqueued",
+      "`distances.D` becomes 9 since 6 + 3 accumulates; `previous.D` stays"
     ],
     "answer": 2,
     "explanation": "Ứng viên = distances.C + weight = 2 + 3 = 5 < 6, nên ta cập nhật khoảng cách, ghi lại C là đỉnh liền trước và đưa D vào queue với khoảng cách mới. Khoảng cách luôn tính từ nguồn, không phải chỉ trọng số cạnh (3).",
@@ -106,18 +106,18 @@
     "options": [
       "7, qua A → B → E",
       "7, qua A → C → D → E",
-      "5, qua A → C → D → F",
+      "5, qua A → C → D → F → E",
       "6, qua A → C → D → F → E"
     ],
     "optionsEn": [
       "7, via A → B → E",
       "7, via A → C → D → E",
-      "5, via A → C → D → F",
+      "5, via A → C → D → F → E",
       "6, via A → C → D → F → E"
     ],
     "answer": 3,
-    "explanation": "2 (A–C) + 2 (C–D) + 1 (D–F) + 1 (F–E) = 6. E được chạm tới lần đầu với 7 qua B, rồi giảm xuống 6 khi thăm F. Đường A → C → D → F dài 5 nhưng dừng ở F, không phải E.",
-    "explanationEn": "2 (A–C) + 2 (C–D) + 1 (D–F) + 1 (F–E) = 6. E is first reached with 7 via B, then drops to 6 when F is visited. The route A → C → D → F costs 5 but ends at F, not E."
+    "explanation": "2 (A–C) + 2 (C–D) + 1 (D–F) + 1 (F–E) = 6. E được chạm tới lần đầu với 7 qua B, rồi giảm xuống 6 khi thăm F. Con số 5 là khoảng cách tới F, chưa cộng cạnh F–E.",
+    "explanationEn": "2 (A–C) + 2 (C–D) + 1 (D–F) + 1 (F–E) = 6. E is first reached with 7 via B, then drops to 6 when F is visited. 5 is the distance to F, before adding the F–E edge."
   },
   {
     "id": "q7",
@@ -144,16 +144,16 @@
     "question": "Priority queue sau thêm phần tử rồi sort lại cả mảng. Mỗi lần `enqueue` tốn bao nhiêu?\n`enqueue(val, priority) {\n  this.values.push({ val, priority });\n  this.values.sort((a, b) => a.priority - b.priority);\n}`",
     "questionEn": "This priority queue pushes and then re-sorts the whole array. What does each `enqueue` cost?\n`enqueue(val, priority) {\n  this.values.push({ val, priority });\n  this.values.sort((a, b) => a.priority - b.priority);\n}`",
     "options": [
-      "O(1), vì `push` là O(1)",
+      "O(1), vì `push` là O(1) và mảng vốn đã sắp xếp",
       "O(n log n), vì sort toàn bộ mảng",
-      "O(log n), giống như binary heap",
-      "O(n²), vì sort luôn là bậc hai"
+      "O(log n), giống như enqueue của binary heap",
+      "O(n²), vì sort toàn bộ mảng luôn là bậc hai"
     ],
     "optionsEn": [
-      "O(1), because `push` is O(1)",
+      "O(1), because `push` is O(1) and the array is already sorted",
       "O(n log n), because it sorts the whole array",
-      "O(log n), just like a binary heap",
-      "O(n²), because sorting is always quadratic"
+      "O(log n), just like a binary heap's enqueue",
+      "O(n²), because sorting a whole array is always quadratic"
     ],
     "answer": 1,
     "explanation": "`push` là O(1) nhưng `sort` so sánh trên cả mảng n phần tử: O(n log n). Ta chỉ cần phần tử nhỏ nhất, nên sort toàn bộ là lãng phí — binary heap chỉ tốn O(log n) cho mỗi lần thêm.",
@@ -164,16 +164,16 @@
     "question": "Hàm Dijkstra sau luôn trả về `Infinity` cho mọi đích (kể cả khi đích chính là nguồn). Lỗi nằm ở đâu?\n`for (const vertex in graph.adjacencyList) {\n  distances[vertex] = Infinity;\n  previous[vertex] = null;\n}\nqueue.enqueue(start, 0);`",
     "questionEn": "This Dijkstra always returns `Infinity` for every target (even when the target is the source). Where is the bug?\n`for (const vertex in graph.adjacencyList) {\n  distances[vertex] = Infinity;\n  previous[vertex] = null;\n}\nqueue.enqueue(start, 0);`",
     "options": [
-      "`previous` phải khởi tạo bằng 0 thay vì `null`",
-      "Phải enqueue mọi đỉnh ngay từ đầu chứ không chỉ nguồn",
-      "`for...in` không duyệt được key của object",
-      "`distances[start]` phải là 0; để Infinity thì mọi ứng viên Infinity + w đều không nhỏ hơn Infinity"
+      "`previous` phải được khởi tạo bằng 0 thay vì `null` cho mọi đỉnh",
+      "Phải enqueue mọi đỉnh ngay từ đầu với priority Infinity chứ không chỉ đỉnh nguồn",
+      "`for...in` không duyệt được key của object nên `distances` rỗng",
+      "`distances[start]` phải là 0; để Infinity thì không ứng viên nào nhỏ hơn"
     ],
     "optionsEn": [
-      "`previous` must start as 0 instead of `null`",
-      "Every vertex must be enqueued up front, not just the source",
-      "`for...in` cannot iterate over object keys",
-      "`distances[start]` must be 0; left at Infinity, every candidate Infinity + w is never less than Infinity"
+      "`previous` must start as 0 instead of `null` for every vertex",
+      "Every vertex must be enqueued up front with priority Infinity, not just the source",
+      "`for...in` cannot iterate object keys, so `distances` stays empty",
+      "`distances[start]` must be 0; at Infinity no candidate is ever smaller"
     ],
     "answer": 3,
     "explanation": "Relaxation tính `distances[current] + weight`. Nếu nguồn là Infinity thì mọi ứng viên cũng là Infinity, phép so sánh `<` không bao giờ đúng, nên không khoảng cách nào được cập nhật. Enqueue chỉ nguồn là hợp lệ (các đỉnh khác vào queue khi được cải thiện).",
@@ -204,16 +204,16 @@
     "question": "Khi Dijkstra dùng lazy deletion (enqueue lại đỉnh khi khoảng cách giảm), gặp một phần tử lấy ra khỏi queue mà đỉnh đó đã được thăm thì nên làm gì?",
     "questionEn": "With lazy deletion (re-enqueuing a vertex whenever its distance improves), what should Dijkstra do when it dequeues an entry for a vertex that is already visited?",
     "options": [
-      "Relax lại mọi cạnh của đỉnh đó với khoảng cách cũ",
-      "Dừng thuật toán vì queue đã bị hỏng",
-      "Bỏ qua (continue) vì đó là phần tử stale, khoảng cách của đỉnh đã chốt",
-      "Đưa phần tử đó trở lại queue với priority Infinity"
+      "Relax lại mọi cạnh của đỉnh đó với khoảng cách cũ trong phần tử",
+      "Dừng thuật toán vì queue đã bị hỏng khi chứa đỉnh trùng lặp",
+      "Bỏ qua (continue) vì đó là phần tử stale, khoảng cách đã chốt",
+      "Đưa phần tử đó trở lại queue với priority Infinity để xử lý sau"
     ],
     "optionsEn": [
-      "Relax all of that vertex's edges again using the old distance",
-      "Stop the algorithm because the queue is corrupted",
-      "Skip it (continue) because it is a stale entry and the vertex's distance is already final",
-      "Put the entry back into the queue with priority Infinity"
+      "Relax all of that vertex's edges again, using the entry's older distance",
+      "Stop the algorithm, because a duplicate entry means the queue is corrupt",
+      "Skip it (continue): it is a stale entry and the distance is already final",
+      "Put the entry back into the queue with priority Infinity for later"
     ],
     "answer": 2,
     "explanation": "Phần tử cũ mang khoảng cách lớn hơn khoảng cách đã chốt. Bỏ qua nó là đúng và rẻ; relax lại chỉ tốn công mà không cải thiện được gì. Đây là cách giữ queue đơn giản mà không cần thao tác decrease-key.",
@@ -224,36 +224,36 @@
     "question": "Độ phức tạp thời gian của Dijkstra khi dùng binary heap làm priority queue là gì (V đỉnh, E cạnh)?",
     "questionEn": "What is the time complexity of Dijkstra with a binary heap priority queue (V vertices, E edges)?",
     "options": [
-      "O(V + E)",
+      "O((V · E) log V)",
       "O(V · E)",
       "O((V + E) log V)",
-      "O(V²)"
+      "O(V log V + E)"
     ],
     "optionsEn": [
-      "O(V + E)",
+      "O((V · E) log V)",
       "O(V · E)",
       "O((V + E) log V)",
-      "O(V²)"
+      "O(V log V + E)"
     ],
     "answer": 2,
-    "explanation": "Mỗi đỉnh được lấy ra một lần và mỗi cạnh có thể gây một lần enqueue; mỗi thao tác heap tốn O(log V) (log E ≤ 2 log V). O(V + E) là BFS, O(V · E) là Bellman–Ford, O(V²) là bản quét mảng không dùng heap.",
-    "explanationEn": "Each vertex is extracted once and each edge may cause one enqueue; every heap operation costs O(log V) (log E ≤ 2 log V). O(V + E) is BFS, O(V · E) is Bellman–Ford, and O(V²) is the array-scan version with no heap."
+    "explanation": "Mỗi đỉnh được lấy ra một lần và mỗi cạnh có thể gây một lần enqueue; mỗi thao tác heap tốn O(log V) (log E ≤ 2 log V), nên các số hạng cộng lại chứ không nhân. O(V · E) là Bellman–Ford, còn O(V log V + E) chỉ đạt được với Fibonacci heap, không phải binary heap.",
+    "explanationEn": "Each vertex is extracted once and each edge may cause one enqueue; every heap operation costs O(log V) (log E ≤ 2 log V), so the terms add rather than multiply. O(V · E) is Bellman–Ford, and O(V log V + E) needs a Fibonacci heap, not a binary heap."
   },
   {
     "id": "q13",
     "question": "Đồ thị rất dày, gần như mọi cặp đỉnh đều có cạnh (E ≈ V²). Nhận định nào đúng?",
     "questionEn": "The graph is very dense, with an edge between almost every pair of vertices (E ≈ V²). Which statement is true?",
     "options": [
-      "Binary heap luôn nhanh hơn, bất kể mật độ đồ thị",
+      "Binary heap luôn nhanh hơn bản quét mảng, bất kể mật độ của đồ thị ra sao",
       "Bản quét mảng O(V²) có thể nhanh hơn bản heap, vốn thành O(V² log V)",
-      "Dijkstra không chạy được trên đồ thị dày",
-      "Cả hai cách đều O(V log V) trên đồ thị dày"
+      "Dijkstra không chạy được trên đồ thị dày vì queue sẽ bị tràn",
+      "Cả hai cách đều chỉ tốn O(V log V) trên đồ thị dày như vậy"
     ],
     "optionsEn": [
-      "A binary heap is always faster, regardless of density",
+      "A binary heap always beats the array scan, regardless of how dense the graph is",
       "The O(V²) array scan can beat the heap version, which becomes O(V² log V)",
-      "Dijkstra cannot run on dense graphs",
-      "Both approaches are O(V log V) on dense graphs"
+      "Dijkstra cannot run on dense graphs because the queue overflows",
+      "Both approaches cost only O(V log V) on a graph that dense"
     ],
     "answer": 1,
     "explanation": "Thay E ≈ V² vào O((V + E) log V) được O(V² log V), còn tìm min bằng cách quét mảng `distances` luôn là O(V²). Trên đồ thị thưa thì ngược lại, heap thắng rõ rệt.",
@@ -324,16 +324,16 @@
     "question": "A* search khác Dijkstra ở điểm nào?",
     "questionEn": "How does A* search differ from Dijkstra?",
     "options": [
-      "A* dùng stack thay cho priority queue",
-      "A* chấp nhận cạnh âm còn Dijkstra thì không",
-      "A* xếp queue theo khoảng cách đã đi cộng một heuristic ước lượng quãng đường còn lại",
-      "A* luôn duyệt toàn bộ đồ thị trước khi trả lời"
+      "A* dùng stack thay cho priority queue nên đi sâu về phía đích trước",
+      "A* chấp nhận cạnh trọng số âm còn Dijkstra thì không xử lý được",
+      "A* xếp queue theo khoảng cách đã đi cộng ước lượng phần còn lại",
+      "A* luôn duyệt toàn bộ đồ thị trước khi trả về đường đi ngắn nhất"
     ],
     "optionsEn": [
-      "A* uses a stack instead of a priority queue",
-      "A* accepts negative edges while Dijkstra does not",
-      "A* orders the queue by distance so far plus a heuristic estimate of the remaining distance",
-      "A* always explores the whole graph before answering"
+      "A* uses a stack instead of a priority queue, diving towards the target",
+      "A* accepts negative edge weights while Dijkstra cannot handle them",
+      "A* orders the queue by distance so far plus an estimate of what remains",
+      "A* always explores the whole graph before it returns the shortest path"
     ],
     "answer": 2,
     "explanation": "Heuristic (ví dụ khoảng cách đường chim bay) dẫn hướng tìm kiếm về phía đích nên A* thăm ít đỉnh hơn. Nếu heuristic không bao giờ ước lượng quá, A* vẫn tìm ra đường ngắn nhất. Dijkstra chính là A* với heuristic bằng 0.",

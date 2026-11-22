@@ -4,15 +4,15 @@
     "question": "Phát biểu nào về quan hệ giữa cây (tree) và đồ thị (graph) là ĐÚNG?",
     "questionEn": "Which statement about trees and graphs is TRUE?",
     "options": [
-      "Mọi đồ thị đều phải có một đỉnh gốc (root) như cây",
-      "Đồ thị không được phép chứa chu trình, giống cây",
-      "Cây là một đồ thị đặc biệt: liên thông, không chu trình, có đúng V - 1 cạnh",
+      "Mọi đồ thị đều phải có một đỉnh gốc (root) duy nhất giống như cây",
+      "Đồ thị không được phép chứa chu trình, giống hệt như cây",
+      "Cây là đồ thị liên thông, không chu trình, có đúng V - 1 cạnh",
       "Đồ thị chỉ lưu được số, còn cây lưu được mọi kiểu dữ liệu"
     ],
     "optionsEn": [
-      "Every graph must have a root vertex, just like a tree",
-      "Graphs are not allowed to contain cycles, just like trees",
-      "A tree is a special graph: connected, acyclic, with exactly V - 1 edges",
+      "Every graph must have a single root vertex, just like a tree",
+      "Graphs are not allowed to contain cycles, exactly like trees",
+      "A tree is a connected, acyclic graph with exactly V - 1 edges",
       "Graphs can only store numbers, while trees can store any data type"
     ],
     "answer": 2,
@@ -64,16 +64,16 @@
     "question": "Một mạng xã hội có 1.000.000 người dùng, mỗi người trung bình 10 bạn. Nên lưu đồ thị bằng cách nào và vì sao?",
     "questionEn": "A social network has 1,000,000 users with about 10 friends each. How should the graph be stored, and why?",
     "options": [
-      "Ma trận kề, vì tra cạnh O(1) quan trọng hơn bộ nhớ",
-      "Danh sách kề, vì cần khoảng V + 2E ≈ 11 triệu mục thay vì 10¹² ô của ma trận",
+      "Ma trận kề, vì tra một cạnh O(1) quan trọng hơn bộ nhớ",
+      "Danh sách kề, vì chỉ cần khoảng 11 triệu mục thay vì 10¹² ô",
       "Cách nào cũng được, vì cả hai đều tốn O(V + E) bộ nhớ",
       "Ma trận kề, vì đồ thị thưa làm ma trận tự nén lại"
     ],
     "optionsEn": [
-      "An adjacency matrix, because O(1) edge lookups matter more than memory",
-      "An adjacency list, because it needs about V + 2E ≈ 11 million entries instead of 10¹² matrix cells",
-      "Either one, because both use O(V + E) memory",
-      "An adjacency matrix, because a sparse graph makes the matrix compress itself"
+      "An adjacency matrix, since O(1) edge lookups matter more than memory",
+      "An adjacency list, since it needs about 11 million entries, not 10¹² cells",
+      "Either one, because both representations use O(V + E) memory",
+      "An adjacency matrix, since a sparse graph makes the matrix compress itself"
     ],
     "answer": 1,
     "explanation": "Đồ thị này rất thưa: E ≈ 5 triệu cạnh (mỗi tình bạn được đếm từ hai phía), trong khi V² = 10¹² ô. Ma trận luôn tốn O(V²) bất kể có bao nhiêu cạnh; danh sách kề chỉ tốn O(V + E).",
@@ -144,16 +144,16 @@
     "question": "Class Graph được dùng làm đồ thị VÔ HƯỚNG, nhưng `addEdge` được viết như sau. Hậu quả là gì?\n`addEdge(v1, v2) {\n  this.adjacencyList[v1].push(v2);\n}`",
     "questionEn": "A Graph class is meant to be UNDIRECTED, but `addEdge` is written like this. What is the consequence?\n`addEdge(v1, v2) {\n  this.adjacencyList[v1].push(v2);\n}`",
     "options": [
-      "Không sao, vì duyệt đồ thị tự đi được hai chiều",
-      "Đồ thị thực chất thành có hướng: sau `addEdge(\"Tokyo\", \"Dallas\")`, duyệt từ Dallas không tới được Tokyo",
-      "Code ném lỗi ngay khi gọi `addEdge`",
-      "Mỗi cạnh bị lưu hai lần, gây trùng lặp"
+      "Không sao, vì thuật toán duyệt đồ thị tự đi theo cạnh cả hai chiều",
+      "Đồ thị thực chất thành có hướng: từ Dallas không duyệt tới được Tokyo",
+      "Code ném lỗi ngay khi gọi `addEdge` vì thiếu danh sách của `v2`",
+      "Mỗi cạnh bị lưu hai lần trong cùng một danh sách, gây trùng lặp"
     ],
     "optionsEn": [
-      "Nothing, because traversal follows edges both ways anyway",
-      "The graph silently becomes directed: after `addEdge(\"Tokyo\", \"Dallas\")`, a traversal from Dallas cannot reach Tokyo",
-      "The code throws as soon as `addEdge` is called",
-      "Every edge is stored twice, creating duplicates"
+      "Nothing, because graph traversal follows every edge both ways anyway",
+      "The graph is effectively directed: a traversal from Dallas cannot reach Tokyo",
+      "The code throws as soon as `addEdge` is called, since `v2`'s list is missing",
+      "Every edge is stored twice in the same list, creating duplicates"
     ],
     "answer": 1,
     "explanation": "Duyệt chỉ đi theo những gì có trong mảng kề. Chỉ Tokyo biết về Dallas, nên cạnh chỉ đi được một chiều. Đồ thị vô hướng phải push vào cả hai danh sách.",
@@ -164,16 +164,16 @@
     "question": "Cài đặt `removeVertex` sau có lỗi gì?\n`removeVertex(vertex) {\n  delete this.adjacencyList[vertex];\n}`",
     "questionEn": "What is wrong with this `removeVertex`?\n`removeVertex(vertex) {\n  delete this.adjacencyList[vertex];\n}`",
     "options": [
-      "`delete` không xoá được key của object",
-      "Nó xoá luôn cả các đỉnh kề khỏi đồ thị",
-      "Các đỉnh kề vẫn giữ tên đỉnh đã xoá; lần duyệt sau đọc `adjacencyList[vertex]` ra `undefined` và lỗi",
-      "Không có lỗi, đây là cách O(1) đúng chuẩn"
+      "`delete` không xoá được key của object nên đỉnh vẫn còn nguyên",
+      "Nó xoá luôn cả các đỉnh kề khỏi đồ thị, không chỉ đỉnh được chọn",
+      "Các đỉnh kề vẫn giữ tên đỉnh đã xoá, nên lần duyệt sau bị lỗi",
+      "Không có lỗi, đây là cách xoá đỉnh O(1) đúng chuẩn"
     ],
     "optionsEn": [
-      "`delete` cannot remove an object key",
-      "It also removes all the neighbouring vertices from the graph",
-      "Neighbours still list the deleted vertex; a later traversal reads `adjacencyList[vertex]` as `undefined` and crashes",
-      "Nothing is wrong; this is the correct O(1) approach"
+      "`delete` cannot remove an object key, so the vertex stays in place",
+      "It also removes every neighbouring vertex, not just the chosen one",
+      "Neighbours still list the deleted vertex, so a later traversal crashes",
+      "Nothing is wrong; this is the standard O(1) way to remove a vertex"
     ],
     "answer": 2,
     "explanation": "Key bị xoá nhưng tên đỉnh vẫn nằm trong mảng kề của các đỉnh khác — tham chiếu treo. Cách đúng: gọi `removeEdge` với từng đỉnh kề trước, rồi mới `delete` key.",
@@ -185,35 +185,35 @@
     "questionEn": "What is the time complexity of this `removeEdge` on an array-based adjacency list?\n`removeEdge(v1, v2) {\n  const list = this.adjacencyList;\n  list[v1] = list[v1].filter((v) => v !== v2);\n  list[v2] = list[v2].filter((v) => v !== v1);\n}`",
     "options": [
       "O(deg(v1) + deg(v2))",
-      "O(1)",
-      "O(V²)",
+      "O(log deg(v1) + log deg(v2))",
+      "O(deg(v1) · deg(v2))",
       "O(V · E)"
     ],
     "optionsEn": [
       "O(deg(v1) + deg(v2))",
-      "O(1)",
-      "O(V²)",
+      "O(log deg(v1) + log deg(v2))",
+      "O(deg(v1) · deg(v2))",
       "O(V · E)"
     ],
     "answer": 0,
-    "explanation": "Mỗi `filter` duyệt đúng một mảng kề, dài bằng bậc của đỉnh đó. Trường hợp xấu nhất bị chặn bởi O(E). Ma trận kề xoá cạnh được O(1) bằng cách gán ô về 0.",
-    "explanationEn": "Each `filter` walks one neighbour array, whose length is that vertex's degree. In the worst case that is bounded by O(E). An adjacency matrix removes an edge in O(1) by zeroing a cell."
+    "explanation": "Mỗi lần `filter` duyệt một mảng hàng xóm, có độ dài bằng bậc của đỉnh đó, và hai lần duyệt cộng lại chứ không nhân. `filter` duyệt tuần tự nên không phải log. Trường hợp xấu nhất bị chặn bởi O(E). Ma trận kề xoá cạnh trong O(1) bằng cách đặt một ô về 0.",
+    "explanationEn": "Each `filter` walks one neighbour array, whose length is that vertex's degree, and the two walks add rather than multiply. `filter` scans linearly, so there is no log. In the worst case that is bounded by O(E). An adjacency matrix removes an edge in O(1) by zeroing a cell."
   },
   {
     "id": "q11",
     "question": "Vì sao duyệt đồ thị cần tập `visited`, trong khi duyệt cây nhị phân từ gốc thường không cần?",
     "questionEn": "Why does graph traversal need a `visited` set, when traversing a binary tree from its root usually does not?",
     "options": [
-      "Vì đồ thị luôn có nhiều đỉnh hơn cây",
-      "Vì `visited` giúp kết quả được sắp xếp theo thứ tự",
-      "Vì đồ thị lưu bằng object còn cây lưu bằng mảng",
-      "Vì đồ thị có thể có chu trình và nhiều đường tới cùng một đỉnh, nên thiếu nó sẽ thăm lặp hoặc lặp vô hạn"
+      "Vì đồ thị luôn có nhiều đỉnh hơn cây nên dễ thăm trùng",
+      "Vì `visited` giúp kết quả duyệt được sắp xếp theo thứ tự",
+      "Vì đồ thị lưu bằng object còn cây nhị phân lưu bằng mảng",
+      "Vì đồ thị có thể có chu trình, thiếu nó sẽ thăm lặp mãi"
     ],
     "optionsEn": [
-      "Because graphs always have more vertices than trees",
-      "Because `visited` keeps the result sorted",
-      "Because graphs are stored in objects and trees in arrays",
-      "Because graphs can have cycles and several paths to the same vertex, so without it you revisit vertices or loop forever"
+      "Because graphs always have more vertices than trees, so repeats happen",
+      "Because `visited` keeps the traversal result in sorted order",
+      "Because graphs are stored in objects while binary trees use arrays",
+      "Because graphs can have cycles, so without it you revisit forever"
     ],
     "answer": 3,
     "explanation": "Trong cây mỗi node chỉ có một đường đi từ gốc, nên đi xuống không bao giờ gặp lại node cũ. Trong đồ thị, cạnh A–B nghĩa là từ B lại thấy A; không đánh dấu thì A → B → A → … không bao giờ dừng.",
@@ -304,16 +304,16 @@
     "question": "BFS sau đánh dấu `visited` khi LẤY RA khỏi queue thay vì khi đưa vào. Chuyện gì xảy ra trên một đồ thị có chu trình như A–B, A–C, B–D, C–D?\n`while (queue.length) {\n  const v = queue.shift();\n  visited[v] = true;\n  result.push(v);\n\n  for (const n of adj[v]) {\n    if (!visited[n]) queue.push(n);\n  }\n}`",
     "questionEn": "This BFS marks `visited` when a vertex is DEQUEUED instead of when it is enqueued. What happens on a graph with a cycle such as A–B, A–C, B–D, C–D?\n`while (queue.length) {\n  const v = queue.shift();\n  visited[v] = true;\n  result.push(v);\n\n  for (const n of adj[v]) {\n    if (!visited[n]) queue.push(n);\n  }\n}`",
     "options": [
-      "Vòng lặp chạy vô hạn vì có chu trình",
-      "Cùng một đỉnh có thể vào queue nhiều lần và xuất hiện nhiều lần trong `result` (ở đây D bị thăm hai lần)",
-      "Thuật toán biến thành DFS",
-      "Đỉnh xuất phát không bao giờ được thêm vào `result`"
+      "Vòng lặp chạy vô hạn vì chu trình A–B–D–C đưa A vào queue lại mãi",
+      "Một đỉnh có thể vào queue nhiều lần và xuất hiện trùng trong `result`",
+      "Thuật toán biến thành DFS vì D được thăm trước C trong `result`",
+      "Đỉnh xuất phát không bao giờ được thêm vào `result` vì chưa được đánh dấu"
     ],
     "optionsEn": [
-      "It loops forever because of the cycle",
-      "The same vertex can be enqueued several times and appear more than once in `result` (here D is visited twice)",
-      "The algorithm turns into a DFS",
-      "The start vertex is never added to `result`"
+      "It loops forever because the A–B–D–C cycle keeps re-enqueuing A",
+      "A vertex can be enqueued several times and appear twice in `result`",
+      "The algorithm turns into a DFS because D is visited before C",
+      "The start vertex never reaches `result` because it was never marked"
     ],
     "answer": 1,
     "explanation": "B và C đều thấy D chưa được đánh dấu (D còn đang chờ trong queue), nên D bị enqueue hai lần. Vòng lặp vẫn dừng vì đỉnh đã lấy ra thì không được enqueue lại, nhưng làm thừa việc và kết quả bị trùng. Đánh dấu ngay khi enqueue sẽ sửa được.",
@@ -324,16 +324,16 @@
     "question": "Vì sao nhiều cài đặt BFS trong JavaScript dùng một con trỏ `head` thay vì `queue.shift()`?",
     "questionEn": "Why do many JavaScript BFS implementations use a `head` pointer instead of `queue.shift()`?",
     "options": [
-      "Vì `shift()` là O(n) do phải dịch lại index mọi phần tử, có thể đẩy BFS lên O(V²)",
-      "Vì `shift()` lấy phần tử ở cuối mảng nên sai thứ tự FIFO",
-      "Vì `shift()` không có trên mảng rỗng",
+      "Vì `shift()` là O(n) do phải dịch index mọi phần tử còn lại",
+      "Vì `shift()` lấy phần tử ở cuối mảng nên phá vỡ thứ tự FIFO",
+      "Vì `shift()` ném lỗi khi gọi trên mảng rỗng ở cuối vòng lặp",
       "Vì con trỏ giúp BFS tìm được đường đi có trọng số nhỏ nhất"
     ],
     "optionsEn": [
-      "Because `shift()` is O(n), re-indexing every element, which can push BFS to O(V²)",
+      "Because `shift()` is O(n), re-indexing every remaining element",
       "Because `shift()` takes the last element, breaking FIFO order",
-      "Because `shift()` is not available on empty arrays",
-      "Because the pointer lets BFS find minimum-weight paths"
+      "Because `shift()` throws when called on an empty array at the end",
+      "Because the pointer lets BFS find minimum-weight paths instead"
     ],
     "answer": 0,
     "explanation": "`shift()` bỏ phần tử đầu và dịch mọi phần tử còn lại lên một vị trí: O(n). Gọi V lần có thể tốn O(V²). Đọc `queue[head++]` là O(1), giữ BFS ở O(V + E). `shift()` vẫn lấy đúng phần tử đầu, chỉ là chậm.",
@@ -344,16 +344,16 @@
     "question": "Làm sao đếm số thành phần liên thông (connected components) của một đồ thị vô hướng?",
     "questionEn": "How do you count the connected components of an undirected graph?",
     "options": [
-      "Chạy BFS một lần từ một đỉnh bất kỳ và đếm số tầng",
-      "Đếm số đỉnh có bậc bằng 0",
-      "Lặp qua mọi đỉnh, bắt đầu một lần duyệt từ mỗi đỉnh chưa thăm, và đếm số lần bắt đầu",
-      "Tính E - V + 1"
+      "Chạy BFS một lần từ một đỉnh bất kỳ và đếm số tầng của nó",
+      "Đếm số đỉnh có bậc bằng 0, mỗi đỉnh như vậy là một thành phần",
+      "Bắt đầu một lần duyệt từ mỗi đỉnh chưa thăm và đếm số lần bắt đầu",
+      "Tính E - V + 1 từ tổng số cạnh và tổng số đỉnh của đồ thị"
     ],
     "optionsEn": [
-      "Run BFS once from any vertex and count its levels",
-      "Count the vertices whose degree is 0",
-      "Loop over every vertex, start a traversal from each unvisited one, and count the starts",
-      "Compute E - V + 1"
+      "Run BFS once from any vertex and count how many levels it has",
+      "Count the vertices with degree 0, since each one is a component",
+      "Start a traversal from each unvisited vertex and count the starts",
+      "Compute E - V + 1 from the graph's total edges and vertices"
     ],
     "answer": 2,
     "explanation": "Một lần duyệt thăm trọn một thành phần. Đỉnh nào vẫn chưa thăm sau đó thuộc thành phần khác, nên mỗi lần phải bắt đầu duyệt mới là thêm một thành phần. Dùng chung tập `visited` nên tổng vẫn O(V + E). Đỉnh bậc 0 chỉ là một loại thành phần.",

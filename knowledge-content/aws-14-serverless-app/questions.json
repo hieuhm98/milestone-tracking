@@ -6,13 +6,13 @@
     "options": [
       "Cấp AWS credentials tạm thời qua STS để truy cập S3/DynamoDB",
       "Là thư mục người dùng và cơ chế đăng nhập, phát ra JWT token",
-      "Là một hàng đợi message giữa các Lambda",
+      "Là hàng đợi message trung gian giữa các hàm Lambda trong ứng dụng",
       "Là engine deploy hạ tầng thay cho CloudFormation"
     ],
     "optionsEn": [
       "Grants temporary AWS credentials via STS to access S3/DynamoDB",
       "Is a user directory and sign-in mechanism that issues JWT tokens",
-      "Is a message queue between Lambda functions",
+      "Is a message queue that passes events between Lambda functions",
       "Is an infrastructure deploy engine replacing CloudFormation"
     ],
     "answer": 1,
@@ -25,13 +25,13 @@
     "questionEn": "A mobile app needs signed-in users to access an S3 bucket DIRECTLY using temporary credentials. Which Cognito component should you use?",
     "options": [
       "Cognito User Pool",
-      "Cognito Identity Pool (Federated Identities)",
+      "Cognito Identity Pool",
       "Chỉ dùng API Gateway authorizer",
       "Cognito Sync"
     ],
     "optionsEn": [
       "Cognito User Pool",
-      "Cognito Identity Pool (Federated Identities)",
+      "Cognito Identity Pool",
       "API Gateway authorizer only",
       "Cognito Sync"
     ],
@@ -46,14 +46,14 @@
     "options": [
       "Dùng Cognito User Pool làm authorizer cho API Gateway",
       "Dùng Identity Pool để cấp credentials cho mỗi request",
-      "Đặt SQS trước API Gateway",
-      "Bật CloudFront OAC trên API Gateway"
+      "Đặt một SQS queue phía trước API Gateway để lọc request",
+      "Bật CloudFront OAC trên API Gateway để chặn người lạ"
     ],
     "optionsEn": [
       "Use a Cognito User Pool as the authorizer for API Gateway",
       "Use an Identity Pool to grant credentials per request",
-      "Put SQS in front of API Gateway",
-      "Enable CloudFront OAC on API Gateway"
+      "Put an SQS queue in front of API Gateway to filter requests",
+      "Enable CloudFront OAC on API Gateway to block strangers"
     ],
     "answer": 0,
     "explanation": "User Pool phát JWT và tích hợp làm Cognito authorizer cho API Gateway để xác thực request — đúng nhu cầu đăng nhập + bảo vệ API.",
@@ -64,16 +64,16 @@
     "question": "Người dùng muốn đăng nhập app bằng tài khoản Google và Facebook. Federated social login này được cấu hình ở đâu?",
     "questionEn": "Users want to sign in to the app with their Google and Facebook accounts. Where is this federated social login configured?",
     "options": [
-      "Trong Step Functions state machine",
-      "Là identity provider bên ngoài trong Cognito User Pool",
-      "Trong template SAM",
-      "Trong quy tắc EventBridge"
+      "Trong IAM Identity Center như một IdP bên ngoài",
+      "Là IdP bên ngoài trong Cognito User Pool",
+      "Trong Lambda authorizer của API Gateway cho từng provider",
+      "Trong EventBridge rule định tuyến sự kiện đăng nhập"
     ],
     "optionsEn": [
-      "In a Step Functions state machine",
-      "As an external identity provider in a Cognito User Pool",
-      "In the SAM template",
-      "In an EventBridge rule"
+      "In IAM Identity Center as an external IdP",
+      "As an external IdP in a Cognito User Pool",
+      "In an API Gateway Lambda authorizer per provider",
+      "In an EventBridge rule that routes sign-in events"
     ],
     "answer": 1,
     "explanation": "Social/enterprise IdP (Google, Facebook, SAML, OIDC) được cấu hình như IdP bên ngoài trong User Pool để cho phép đăng nhập liên kết.",
@@ -84,16 +84,16 @@
     "question": "Nhiệm vụ chính của AWS Step Functions là gì?",
     "questionEn": "What is the primary purpose of AWS Step Functions?",
     "options": [
-      "Lưu trữ file tĩnh với độ bền cao",
-      "Điều phối nhiều bước thành một workflow (state machine) có retry và rẽ nhánh",
-      "Cung cấp cơ sở dữ liệu NoSQL độ trễ mili-giây",
-      "Phân phối nội dung qua CDN toàn cầu"
+      "Làm bộ đệm message bền vững giữa producer và consumer",
+      "Điều phối các bước thành workflow có retry và rẽ nhánh",
+      "Định tuyến sự kiện từ ứng dụng SaaS tới target bằng rule",
+      "Chạy cron job theo lịch trên một nhóm EC2 instance được quản lý"
     ],
     "optionsEn": [
-      "Store static files with high durability",
-      "Orchestrate multiple steps into a workflow (state machine) with retries and branching",
-      "Provide a millisecond-latency NoSQL database",
-      "Distribute content via a global CDN"
+      "Buffering messages durably between producers and consumers",
+      "Orchestrating steps into a workflow with retries and branching",
+      "Routing events from SaaS apps to targets via rules",
+      "Running scheduled cron jobs on a managed fleet of EC2 instances"
     ],
     "answer": 1,
     "explanation": "Step Functions điều phối các bước thành state machine, quản lý thứ tự, retry, error handling và rẽ nhánh — không phải nơi chạy business logic thay Lambda.",
@@ -106,13 +106,13 @@
     "options": [
       "Express Workflow",
       "Standard Workflow",
-      "Cả hai đều giới hạn 5 phút nên không dùng được",
+      "Express Workflow có bật logging",
       "FIFO Workflow"
     ],
     "optionsEn": [
       "Express Workflow",
       "Standard Workflow",
-      "Both are limited to 5 minutes so neither works",
+      "Express Workflow with logging enabled",
       "FIFO Workflow"
     ],
     "answer": 1,
@@ -126,13 +126,13 @@
     "options": [
       "Standard Workflow",
       "Express Workflow",
-      "Không dùng được Step Functions cho khối lượng này",
+      "Standard Workflow với Map state",
       "Standard với chế độ FIFO"
     ],
     "optionsEn": [
       "Standard Workflow",
       "Express Workflow",
-      "Step Functions cannot handle this volume",
+      "Standard Workflow with a Map state",
       "Standard with FIFO mode"
     ],
     "answer": 1,
@@ -164,16 +164,16 @@
     "question": "Đội dev muốn test và chạy hàm Lambda cùng API cục bộ trước khi deploy. Công cụ nào hỗ trợ điều này?",
     "questionEn": "A dev team wants to test and run Lambda functions and the API locally before deploying. Which tool supports this?",
     "options": [
-      "SAM CLI (sam local invoke / sam local start-api)",
-      "Cognito Identity Pool",
-      "EventBridge Scheduler",
-      "S3 Transfer Acceleration"
+      "SAM CLI",
+      "AWS CodeDeploy",
+      "AWS CloudShell",
+      "AWS X-Ray"
     ],
     "optionsEn": [
-      "SAM CLI (sam local invoke / sam local start-api)",
-      "Cognito Identity Pool",
-      "EventBridge Scheduler",
-      "S3 Transfer Acceleration"
+      "SAM CLI",
+      "AWS CodeDeploy",
+      "AWS CloudShell",
+      "AWS X-Ray"
     ],
     "answer": 0,
     "explanation": "SAM CLI cho phép build và test cục bộ qua Docker với sam local invoke và sam local start-api, mô phỏng Lambda/API Gateway trên máy dev.",
@@ -204,16 +204,16 @@
     "question": "Một sự kiện 'đơn hàng đã tạo' cần được gửi đồng thời tới NHIỀU hệ thống độc lập (email, kho, phân tích). Mẫu nào phù hợp nhất?",
     "questionEn": "An 'order created' event must be delivered simultaneously to MANY independent systems (email, warehouse, analytics). Which pattern fits best?",
     "options": [
-      "Ghi tuần tự vào một hàng SQS duy nhất",
-      "SNS fan-out (pub/sub) tới nhiều subscriber, thường kèm SQS cho mỗi consumer",
-      "Gọi trực tiếp từng dịch vụ trong một Lambda đồng bộ",
-      "Dùng CloudFront để phát tán sự kiện"
+      "Một SQS queue chung để mọi hệ thống lần lượt poll",
+      "SNS fan-out tới các subscriber, thường kèm mỗi bên một SQS",
+      "Một Lambda đồng bộ gọi trực tiếp từng hệ thống",
+      "Một Step Functions Standard workflow cho mỗi event, chạy tuần tự"
     ],
     "optionsEn": [
-      "Write sequentially to a single SQS queue",
-      "SNS fan-out (pub/sub) to multiple subscribers, often with an SQS queue per consumer",
-      "Call each service directly inside one synchronous Lambda",
-      "Use CloudFront to broadcast the event"
+      "One shared SQS queue that every system polls in turn",
+      "SNS fan-out to subscribers, often with an SQS queue each",
+      "One synchronous Lambda that calls each system directly",
+      "A Standard Step Functions workflow per event, run in series"
     ],
     "answer": 1,
     "explanation": "SNS là pub/sub (push) fan-out một message tới nhiều subscriber. Kèm SQS cho mỗi consumer để có buffer riêng và độ bền — kiến trúc decoupled.",
@@ -224,15 +224,15 @@
     "question": "Khi người dùng upload ảnh lên S3, hệ thống cần tự động tạo thumbnail mà không cần server luôn chạy. Kiến trúc serverless phù hợp nhất là gì?",
     "questionEn": "When a user uploads an image to S3, the system must automatically generate a thumbnail without an always-on server. What is the most suitable serverless architecture?",
     "options": [
-      "S3 Event Notification kích hoạt Lambda tạo thumbnail và ghi trở lại S3",
-      "Chạy EC2 poll S3 mỗi phút để tìm ảnh mới",
-      "Dùng CloudFront để tự động resize khi phân phối",
-      "Step Functions Standard chạy liên tục quét bucket"
+      "S3 Event Notification kích hoạt Lambda tạo thumbnail",
+      "Một EC2 instance poll bucket mỗi phút để tìm ảnh mới",
+      "CloudFront tự động resize ảnh khi phân phối",
+      "Step Functions Standard chạy liên tục để quét bucket"
     ],
     "optionsEn": [
-      "An S3 Event Notification triggers a Lambda that creates the thumbnail and writes it back to S3",
-      "Run an EC2 instance polling S3 every minute for new images",
-      "Use CloudFront to auto-resize during delivery",
+      "S3 Event Notification triggers a Lambda that writes the thumbnail",
+      "An EC2 instance polls the bucket every minute for new images",
+      "CloudFront resizes images automatically during delivery",
       "A Standard Step Functions workflow continuously scans the bucket"
     ],
     "answer": 0,
@@ -245,14 +245,14 @@
     "questionEn": "You need to host a static website (HTML/CSS/JS) with a global CDN, HTTPS, and low cost. Which architecture fits best?",
     "options": [
       "EC2 Auto Scaling sau một Application Load Balancer",
-      "S3 lưu site tĩnh với CloudFront phía trước (dùng OAC)",
-      "Step Functions phục vụ các file HTML",
+      "S3 lưu site tĩnh, CloudFront phía trước (dùng OAC)",
+      "Step Functions trả về các file HTML qua một Express Workflow",
       "DynamoDB lưu HTML và trả về qua API Gateway"
     ],
     "optionsEn": [
       "EC2 Auto Scaling behind an Application Load Balancer",
-      "S3 hosting the static site with CloudFront in front (using OAC)",
-      "Step Functions serving the HTML files",
+      "S3 hosting the site with CloudFront in front (via OAC)",
+      "Step Functions returning the HTML files via an Express Workflow",
       "DynamoDB storing HTML returned via API Gateway"
     ],
     "answer": 1,
@@ -265,15 +265,15 @@
     "questionEn": "In a typical serverless mobile backend, which flow order is correct?",
     "options": [
       "Cognito xác thực → API Gateway → Lambda → DynamoDB",
-      "DynamoDB → CloudFront → SQS → Cognito",
-      "Step Functions → S3 → SNS → API Gateway",
-      "SAM → EventBridge → Cognito → S3"
+      "API Gateway → Cognito xác thực → DynamoDB → Lambda",
+      "Cognito xác thực → Lambda → DynamoDB → API Gateway",
+      "Lambda → Cognito xác thực → API Gateway → DynamoDB"
     ],
     "optionsEn": [
       "Cognito authenticates → API Gateway → Lambda → DynamoDB",
-      "DynamoDB → CloudFront → SQS → Cognito",
-      "Step Functions → S3 → SNS → API Gateway",
-      "SAM → EventBridge → Cognito → S3"
+      "API Gateway → Cognito authenticates → DynamoDB → Lambda",
+      "Cognito authenticates → Lambda → DynamoDB → API Gateway",
+      "Lambda → Cognito authenticates → API Gateway → DynamoDB"
     ],
     "answer": 0,
     "explanation": "Luồng chuẩn: app đăng nhập qua Cognito (User Pool + Identity Pool), gọi API Gateway (Cognito authorizer), Lambda xử lý và đọc/ghi DynamoDB.",
@@ -284,16 +284,16 @@
     "question": "File nào định nghĩa một ứng dụng AWS SAM?",
     "questionEn": "Which file defines an AWS SAM application?",
     "options": [
-      "`template.yaml` dùng transform `AWS::Serverless-2016-10-31`",
-      "`package.json` ở thư mục gốc",
-      "`Dockerfile`",
-      "`serverless.tf`"
+      "`template.yaml` với transform `AWS::Serverless`",
+      "`samconfig.toml` ở thư mục gốc",
+      "`package.json` có mục `sam`",
+      "`serverless.yml` của Serverless Framework"
     ],
     "optionsEn": [
-      "`template.yaml` using the `AWS::Serverless-2016-10-31` transform",
-      "`package.json` in the project root",
-      "`Dockerfile`",
-      "`serverless.tf`"
+      "`template.yaml` with the `AWS::Serverless` transform",
+      "`samconfig.toml` in the project root",
+      "`package.json` with a `sam` section",
+      "`serverless.yml` for the Serverless Framework"
     ],
     "answer": 0,
     "explanation": "SAM template là CloudFormation template có thêm dòng `Transform`. Nhờ đó bạn khai báo `AWS::Serverless::Function` ngắn gọn, và CloudFormation sẽ mở rộng thành các resource đầy đủ.",
@@ -304,16 +304,16 @@
     "question": "Một consumer serverless cần xử lý message từ SQS. Cách tích hợp chuẩn là gì?",
     "questionEn": "A serverless consumer needs to process messages from SQS. What is the standard integration?",
     "options": [
-      "Chuyển sang SNS vì Lambda không đọc được SQS",
-      "Cấu hình queue SQS làm event source mapping cho một hàm Lambda",
-      "Để Lambda tự poll queue theo lịch mỗi phút",
-      "Đặt API Gateway ở giữa queue và Lambda"
+      "Một SNS subscription, vì Lambda không đọc trực tiếp từ SQS được",
+      "Event source mapping từ queue tới hàm Lambda",
+      "EventBridge schedule chạy Lambda mỗi phút để tự poll",
+      "API Gateway đặt giữa queue và hàm Lambda"
     ],
     "optionsEn": [
-      "Switch to SNS, since Lambda cannot read from SQS",
-      "Configure the SQS queue as an event source mapping for a Lambda function",
-      "Have Lambda poll the queue on a one-minute schedule",
-      "Put API Gateway between the queue and Lambda"
+      "An SNS subscription, since Lambda cannot read from SQS directly",
+      "An event source mapping from the queue to the Lambda function",
+      "An EventBridge schedule that runs Lambda every minute to poll",
+      "API Gateway placed between the queue and the function"
     ],
     "answer": 1,
     "explanation": "Event source mapping là dịch vụ do Lambda quản lý: nó tự long-poll queue, gom message thành batch, gọi hàm, và tự xóa message khi hàm chạy thành công.",

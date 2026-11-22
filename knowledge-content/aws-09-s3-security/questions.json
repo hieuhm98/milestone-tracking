@@ -26,13 +26,13 @@
     "options": [
       "Chuyển toàn bộ sang SSE-C",
       "Bật S3 Bucket Keys cho bucket",
-      "Tắt mã hóa để giảm chi phí",
+      "Yêu cầu tăng KMS request quota",
       "Tạo một khóa KMS riêng cho mỗi object"
     ],
     "optionsEn": [
       "Migrate everything to SSE-C",
       "Enable S3 Bucket Keys for the bucket",
-      "Disable encryption to cut cost",
+      "Request a KMS request quota increase",
       "Create a separate KMS key per object"
     ],
     "answer": 1,
@@ -44,16 +44,16 @@
     "question": "Đội bảo mật muốn đảm bảo mọi request tới bucket S3 chỉ được phép qua HTTPS. Cách nào đúng?",
     "questionEn": "A security team wants to ensure all requests to an S3 bucket are only allowed over HTTPS. Which approach is correct?",
     "options": [
-      "Bật versioning trên bucket",
-      "Thêm bucket policy Deny khi aws:SecureTransport = false",
-      "Bật Block Public Access",
-      "Dùng SSE-C cho tất cả object"
+      "Bật mã hóa mặc định SSE-KMS trên bucket",
+      "Bucket policy Deny khi aws:SecureTransport = false",
+      "Thêm S3 Access Point chỉ cho phép truy cập từ VPC",
+      "Bật CloudTrail data events để ghi log mọi request HTTP"
     ],
     "optionsEn": [
-      "Enable versioning on the bucket",
-      "Add a bucket policy that denies when aws:SecureTransport = false",
-      "Enable Block Public Access",
-      "Use SSE-C for all objects"
+      "Enable default SSE-KMS encryption on the bucket",
+      "A bucket policy that denies when aws:SecureTransport is false",
+      "Add an S3 Access Point restricted to the VPC",
+      "Enable CloudTrail data events to log HTTP requests"
     ],
     "answer": 1,
     "explanation": "Điều kiện aws:SecureTransport trong bucket policy (Deny khi giá trị = false) ép mọi truy cập phải dùng TLS/HTTPS. Các lựa chọn khác không liên quan đến mã hóa in transit.",
@@ -85,15 +85,15 @@
     "questionEn": "Account A needs to grant Account B read access to objects in one of its buckets. What is the standard and LEAST-overhead approach?",
     "options": [
       "Chia sẻ access key của Account A cho Account B",
-      "Dùng bucket policy resource-based với Principal là Account B",
-      "Bật public read cho bucket",
-      "Tạo IAM user cho Account B trong Account A"
+      "Bucket policy với Principal là Account B",
+      "Một S3 ACL cấp quyền public read cho bucket",
+      "Tạo IAM user cho Account B bên trong Account A"
     ],
     "optionsEn": [
       "Share Account A's access keys with Account B",
-      "Use a resource-based bucket policy with Principal set to Account B",
-      "Enable public read on the bucket",
-      "Create an IAM user for Account B inside Account A"
+      "A bucket policy with Account B as the Principal",
+      "An S3 ACL that grants public read on the bucket",
+      "An IAM user for Account B created inside Account A"
     ],
     "answer": 1,
     "explanation": "Bucket policy là chính sách resource-based, cho phép chỉ định Principal là account/role bên ngoài để cấp quyền cross-account một cách an toàn và gọn nhẹ. Chia sẻ credential hay public read đều là thực hành xấu.",
@@ -184,15 +184,15 @@
     "question": "Một quản trị viên vô tình tạo bucket policy cấp quyền public. Cấu hình mặc định nào giúp ngăn dữ liệu thực sự trở nên public?",
     "questionEn": "An administrator accidentally creates a bucket policy granting public access. Which default configuration helps prevent the data from actually becoming public?",
     "options": [
-      "Versioning",
-      "Block Public Access (bật mặc định)",
-      "SSE-KMS",
+      "Mã hóa mặc định SSE-S3",
+      "Block Public Access",
+      "S3 Object Ownership",
       "MFA Delete"
     ],
     "optionsEn": [
-      "Versioning",
-      "Block Public Access (on by default)",
-      "SSE-KMS",
+      "Default SSE-S3 encryption",
+      "Block Public Access",
+      "S3 Object Ownership",
       "MFA Delete"
     ],
     "answer": 1,
@@ -224,16 +224,16 @@
     "question": "Bạn cần bật MFA Delete để ngăn xóa vĩnh viễn version của object. Điều kiện tiên quyết và ai được phép bật?",
     "questionEn": "You need to enable MFA Delete to prevent permanent deletion of object versions. What is the prerequisite and who can enable it?",
     "options": [
-      "Bất kỳ IAM user nào; không cần versioning",
-      "Chỉ tài khoản root; bucket phải bật versioning",
-      "Bất kỳ IAM role nào; cần Object Lock",
-      "Chỉ IAM admin; cần bật CloudTrail"
+      "Bất kỳ IAM admin nào; không cần versioning",
+      "Chỉ tài khoản root, trên bucket đã bật versioning",
+      "Bất kỳ IAM role nào, trên bucket đã bật Object Lock",
+      "Chỉ tài khoản root, sau khi đã bật CloudTrail"
     ],
     "optionsEn": [
-      "Any IAM user; versioning not required",
-      "Only the root account; the bucket must have versioning enabled",
-      "Any IAM role; requires Object Lock",
-      "Only an IAM admin; requires CloudTrail enabled"
+      "Any IAM admin; versioning is not required",
+      "Only the root account, on a versioned bucket",
+      "Any IAM role, on a bucket with Object Lock enabled",
+      "Only the root account, once CloudTrail is enabled"
     ],
     "answer": 1,
     "explanation": "MFA Delete chỉ có thể được bật bởi tài khoản root, và bucket bắt buộc phải bật versioning. Khi bật, việc xóa vĩnh viễn version hoặc tắt versioning cần mã MFA.",
@@ -264,16 +264,16 @@
     "question": "Một trang web tại `https://app.example.com` dùng JavaScript tải ảnh từ một S3 bucket, nhưng trình duyệt chặn request. Cần cấu hình gì?",
     "questionEn": "A page at `https://app.example.com` loads images from an S3 bucket via JavaScript, but the browser blocks the request. What must be configured?",
     "options": [
-      "Tạo một S3 Access Point cho ứng dụng",
-      "Cấu hình CORS trên bucket, cho phép origin `https://app.example.com`",
-      "Một bucket policy từ chối truy cập ẩn danh",
-      "Bật MFA Delete trên bucket"
+      "Một S3 Access Point riêng cho ứng dụng",
+      "Một CORS rule trên bucket cho phép origin đó",
+      "Bucket policy cho phép GET ẩn danh vào bucket",
+      "Bật static website hosting trên bucket"
     ],
     "optionsEn": [
-      "An S3 Access Point for the application",
-      "A CORS configuration on the bucket allowing the `https://app.example.com` origin",
-      "A bucket policy denying anonymous access",
-      "MFA Delete enabled on the bucket"
+      "An S3 Access Point dedicated to the application",
+      "A CORS rule on the bucket allowing that origin",
+      "A bucket policy that allows anonymous GET requests",
+      "Static website hosting enabled on the bucket"
     ],
     "answer": 1,
     "explanation": "Trình duyệt chặn request cross-origin trừ khi máy chủ đích cho phép. Cấu hình CORS trên bucket khai báo origin, method và header nào được chấp nhận.",
@@ -284,16 +284,16 @@
     "question": "Khác biệt giữa S3 Object Lock chế độ Governance và chế độ Compliance là gì?",
     "questionEn": "What is the difference between S3 Object Lock in Governance mode and Compliance mode?",
     "options": [
-      "Cả hai đều không thể bị ghi đè bởi bất kỳ ai",
-      "Compliance chỉ khác ở chỗ thời gian giữ ngắn hơn",
-      "Governance có thể bị ghi đè bởi user có quyền đặc biệt; Compliance thì KHÔNG AI ghi đè được, kể cả root",
-      "Cả hai đều có thể bị ghi đè bởi root"
+      "Không mode nào bypass được; chỉ khác thời gian giữ tối đa",
+      "Compliance cho root bypass; Governance thì không ai bypass được",
+      "Governance cho bypass nếu có quyền đặc biệt; Compliance thì không",
+      "Cả hai đều cho root bypass, nhưng chỉ Compliance ghi log"
     ],
     "optionsEn": [
-      "Neither can be overridden by anyone",
-      "Compliance simply has a shorter retention period",
-      "Governance can be overridden by users with a special permission; Compliance can be overridden by NO ONE, not even root",
-      "Both can be overridden by the root user"
+      "Neither can be bypassed; they differ only in maximum retention",
+      "Compliance lets root bypass it; Governance allows no bypass",
+      "Governance allows bypass with a special permission; Compliance does not",
+      "Both can be bypassed by root, but only Compliance logs it"
     ],
     "answer": 2,
     "explanation": "Governance = bảo vệ có cửa thoát (quyền `s3:BypassGovernanceRetention`). Compliance = WORM tuyệt đối cho tới hết hạn giữ — dùng cho yêu cầu pháp lý nghiêm ngặt.",

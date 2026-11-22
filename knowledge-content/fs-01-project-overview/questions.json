@@ -4,16 +4,16 @@
     "question": "Mục tiêu chính của chuỗi bài \"Xây website từ A–Z\" đối với một BA là gì?",
     "questionEn": "What is the main goal of the \"Build a Website A–Z\" run for a BA?",
     "options": [
-      "Chuyển nghề thành full-stack developer sau 11 bài",
-      "Hiểu một app thật chạy thế nào để viết yêu cầu tốt hơn và test tự tin",
-      "Học cách tự deploy và vận hành app trên production",
-      "Thay thế team QA bằng cách tự viết test tự động"
+      "Chuyển nghề thành full-stack developer sau khi học xong 11 bài",
+      "Hiểu app thật chạy thế nào để viết yêu cầu và test tốt hơn",
+      "Học cách tự deploy và vận hành app trên môi trường production",
+      "Thay thế team QA bằng cách tự viết các bài test tự động"
     ],
     "optionsEn": [
-      "Switch careers to full-stack developer after 11 topics",
-      "Understand how a real app works to write better requirements and test confidently",
-      "Learn to deploy and operate the app in production yourself",
-      "Replace the QA team by writing automated tests yourself"
+      "Switch careers to become a full-stack developer once the 11 topics are done",
+      "Understand how a real app works to write better requirements and tests",
+      "Learn to deploy and operate the app in production by yourself",
+      "Replace the QA team by writing all the automated tests yourself"
     ],
     "answer": 1,
     "explanation": "Mục tiêu là \"hiểu chuyện\" (literacy): có mô hình trong đầu đáng tin, viết acceptance criteria cho cả luồng lỗi và test bằng DevTools. Bài viết nói rõ bạn sẽ KHÔNG trở thành developer và không học đưa lên production.",
@@ -36,7 +36,7 @@
     "question": "Tính năng nào sau đây NẰM NGOÀI phạm vi của app To-do?",
     "questionEn": "Which feature is OUT of scope for the To-do app?",
     "options": [
-      "Lọc danh sách theo all / active / done",
+      "Lọc danh sách to-do theo all / active / done",
       "Vẫn đăng nhập sau khi tải lại trang",
       "Tick một to-do để đánh dấu đã xong",
       "Đặt lại mật khẩu khi quên (password reset)"
@@ -68,16 +68,16 @@
     "question": "Người dùng đã đăng nhập bấm F5 và vẫn thấy danh sách to-do. Điều gì làm được việc đó?",
     "questionEn": "A logged-in user presses F5 and still sees their to-do list. What makes that work?",
     "options": [
-      "Khi tải trang, app gọi `GET /api/auth/me`; cookie `token` còn hạn nên server trả về user",
-      "Mật khẩu được lưu trong `localStorage` và form tự đăng nhập lại",
-      "State của React được giữ nguyên qua lần tải lại trang",
-      "Server ghi nhớ địa chỉ IP của trình duyệt đã đăng nhập"
+      "App gọi `GET /api/auth/me`; cookie `token` còn hạn nên server trả về user",
+      "Mật khẩu được lưu trong `localStorage` và form tự đăng nhập lại mỗi lần tải",
+      "State của React được giữ nguyên qua lần tải lại trang nhờ bộ nhớ đệm",
+      "Server ghi nhớ địa chỉ IP của trình duyệt đã đăng nhập trước đó"
     ],
     "optionsEn": [
-      "On load the app calls `GET /api/auth/me`; the `token` cookie is still valid, so the server returns the user",
-      "The password is kept in `localStorage` and the form logs in again",
-      "React state survives the page reload unchanged",
-      "The server remembers the IP address of the logged-in browser"
+      "On load, `GET /api/auth/me` sends the still-valid `token` cookie and gets the user",
+      "The password is kept in `localStorage` and the login form signs in again by itself",
+      "React state survives the page reload unchanged thanks to the browser cache",
+      "The server remembers the IP address of the browser that logged in earlier"
     ],
     "answer": 0,
     "explanation": "App.jsx gọi `GET /api/auth/me` ngay khi tải. Trình duyệt tự gửi cookie `token` (HttpOnly, 7 ngày); nếu hợp lệ, server trả `{user}` và app hiện danh sách. Mật khẩu không bao giờ được lưu ở trình duyệt.",
@@ -100,15 +100,15 @@
     "question": "Minh đăng ký bằng một email đã có người dùng. Theo acceptance criteria, kết quả đúng là gì?",
     "questionEn": "Minh signs up with an email that is already registered. According to the acceptance criteria, what is the correct outcome?",
     "options": [
-      "Tài khoản thứ hai được tạo, email được thêm hậu tố để khỏi trùng",
+      "Tài khoản thứ hai vẫn được tạo, email được thêm hậu tố để khỏi bị trùng",
       "Minh được đăng nhập thẳng vào tài khoản đang có của email đó",
-      "Minh thấy \"This email is already registered.\" và không có tài khoản mới",
+      "Minh thấy lỗi báo email bị trùng và không có tài khoản mới nào được tạo",
       "Minh thấy \"Email or password is incorrect.\" kèm status 401"
     ],
     "optionsEn": [
       "A second account is created with a suffix on the email to avoid a clash",
       "Minh is logged straight into the existing account for that email",
-      "Minh sees \"This email is already registered.\" and no new account is created",
+      "Minh sees a duplicate-email error and no new account is created",
       "Minh sees \"Email or password is incorrect.\" with status 401"
     ],
     "answer": 2,
@@ -132,16 +132,16 @@
     "question": "Vì sao màn hình đăng nhập hiện CÙNG một thông báo cho \"sai mật khẩu\" và \"email không tồn tại\"?",
     "questionEn": "Why does the login screen show the SAME message for \"wrong password\" and \"unknown email\"?",
     "options": [
-      "Vì code đơn giản hơn khi chỉ có một thông báo lỗi",
+      "Vì code đơn giản và dễ bảo trì hơn khi chỉ có đúng một thông báo lỗi",
       "Để không ai dùng form đăng nhập dò xem email nào đã có tài khoản",
-      "Vì server không phân biệt được hai trường hợp đó",
-      "Để tiết kiệm một câu truy vấn vào database"
+      "Vì server không có cách nào phân biệt được hai trường hợp đó",
+      "Để tiết kiệm một câu truy vấn vào database mỗi lần đăng nhập"
     ],
     "optionsEn": [
-      "Because the code is simpler with a single error message",
-      "So nobody can use the login form to find out which emails have accounts",
-      "Because the server cannot tell the two cases apart",
-      "To save one query against the database"
+      "Because the code is simpler to write and maintain with a single error message",
+      "So nobody can use the login form to learn which emails have accounts",
+      "Because the server has no way to tell those two cases apart",
+      "To save one database query on every login attempt"
     ],
     "answer": 1,
     "explanation": "Nếu thông báo khác nhau, kẻ xấu có thể thử hàng loạt email để biết ai là khách hàng. Server phân biệt được hai trường hợp nhưng cố tình trả cùng \"Email or password is incorrect.\" (401). Đây là một yêu cầu bảo mật BA nên viết ra.",
@@ -164,16 +164,16 @@
     "question": "Acceptance criterion nào dưới đây viết tốt nhất cho tính năng thêm to-do?",
     "questionEn": "Which acceptance criterion below is best written for adding a to-do?",
     "options": [
-      "Tính năng thêm to-do phải hoạt động tốt và thân thiện",
-      "Hệ thống phải nhanh khi người dùng thêm to-do",
-      "Dev sẽ tự xử lý validation cho ô tiêu đề",
-      "Given ô tiêu đề chỉ có khoảng trắng, when bấm Add, then hiện \"Title is required.\" và không thêm gì"
+      "Tính năng thêm to-do phải hoạt động tốt, ổn định và thân thiện với mọi người dùng",
+      "Hệ thống phải phản hồi thật nhanh mỗi khi người dùng thêm một to-do mới",
+      "Dev sẽ tự xử lý phần validation cho ô tiêu đề theo cách họ thấy hợp lý",
+      "Given ô tiêu đề chỉ có khoảng trắng, when bấm Add, then hiện \"Title is required.\""
     ],
     "optionsEn": [
-      "Adding a to-do must work well and be user-friendly",
-      "The system must be fast when the user adds a to-do",
-      "The developer will handle validation for the title box",
-      "Given the title box holds only spaces, when I click Add, then \"Title is required.\" shows and nothing is added"
+      "Adding a to-do must work well, stay stable and be friendly for every user",
+      "The system must respond very fast whenever the user adds a new to-do",
+      "The developer will handle validation for the title box however they see fit",
+      "Given a title of only spaces, when I click Add, then \"Title is required.\" shows"
     ],
     "answer": 3,
     "explanation": "Tiêu chí tốt thì kiểm thử được: có ngữ cảnh (Given), hành động (When) và kết quả quan sát được (Then), kể cả luồng lỗi. Các lựa chọn còn lại mơ hồ (\"tốt\", \"nhanh\") hoặc đẩy quyết định cho dev.",
@@ -198,7 +198,7 @@
     "options": [
       "Server trả 404 \"To-do not found.\" và không có gì bị xóa",
       "Server trả 204 và to-do của Lan bị xóa",
-      "Server trả 401 vì cookie của Minh không hợp lệ",
+      "Server trả 401 vì cookie của Minh không hợp lệ với to-do đó",
       "Server trả 200 kèm to-do của Lan trong body"
     ],
     "optionsEn": [
@@ -231,7 +231,7 @@
       "Thẳng tới `http://localhost:4000/api/todos`",
       "Thẳng vào file `server/todo.db`",
       "`http://localhost:5173/api/todos`, rồi Vite chuyển tiếp sang cổng 4000",
-      "`http://localhost:5173`, rồi trình duyệt tự chuyển hướng sang 4000"
+      "`http://localhost:5173`, rồi trình duyệt tự động chuyển hướng request sang cổng 4000"
     ],
     "optionsEn": [
       "Straight to `http://localhost:4000/api/todos`",
@@ -260,16 +260,16 @@
     "question": "Lợi ích chính của proxy `/api` trong Vite ở dự án này là gì?",
     "questionEn": "What is the main benefit of the Vite `/api` proxy in this project?",
     "options": [
-      "Nó cache response nên API chạy nhanh hơn",
-      "Frontend và API trông như một site, nên cookie tự được gửi và không cần cấu hình CORS",
-      "Nó mã hóa dữ liệu giữa trình duyệt và server",
-      "React không thể hiển thị gì nếu thiếu proxy"
+      "Nó cache lại response của server nên các lời gọi API chạy nhanh hơn đáng kể",
+      "Frontend và API trông như một site, nên cookie tự được gửi, không cần CORS",
+      "Nó mã hóa toàn bộ dữ liệu đi lại giữa trình duyệt và server",
+      "React không thể hiển thị bất cứ thứ gì nếu thiếu proxy này"
     ],
     "optionsEn": [
-      "It caches responses so the API runs faster",
-      "Frontend and API look like one site, so the cookie is sent automatically and no CORS setup is needed",
-      "It encrypts the data between the browser and the server",
-      "React cannot render anything without the proxy"
+      "It caches the server's responses so the API runs noticeably faster",
+      "Frontend and API look like one site, so cookies just work without CORS",
+      "It encrypts all the data that travels between the browser and the server",
+      "React cannot render anything at all on the page without the proxy"
     ],
     "answer": 1,
     "explanation": "Như comment trong `vite.config.js`: trình duyệt chỉ thấy localhost:5173, nên với nó frontend và API là một site. Cookie đăng nhập \"tự chạy\" và không cần thiết lập gọi chéo site.",
@@ -292,16 +292,16 @@
     "question": "Vì sao khóa học chọn SQLite thay vì MySQL hay PostgreSQL?",
     "questionEn": "Why does the course choose SQLite over MySQL or PostgreSQL?",
     "options": [
-      "Nó là một file nằm trong app, không cần cài server riêng, mà vẫn dùng SQL thật",
+      "Nó là một file nằm trong app, không cần cài server riêng",
       "Nó xử lý nhiều người cùng ghi một lúc tốt nhất trong ba loại",
-      "React bắt buộc phải dùng SQLite làm database",
+      "React bắt buộc phải dùng SQLite làm database cho mọi dự án",
       "Nó lưu dữ liệu ngay trong trình duyệt của người dùng"
     ],
     "optionsEn": [
-      "It is one file inside the app, with no separate server to install, yet it is real SQL",
-      "It handles many users writing at once best of the three",
-      "React requires SQLite as its database",
-      "It stores data right inside the user's browser"
+      "It is one file inside the app, with no separate server to install",
+      "It handles many users writing at the same time better than the other two",
+      "React requires SQLite as the database for every project",
+      "It stores all the data right inside the user's own browser"
     ],
     "answer": 0,
     "explanation": "SQLite là thư viện đọc/ghi một file (`todo.db`), không cần cài hay khởi động server nào: hoàn hảo để học. Đổi lại, nó hạn chế khi nhiều người cùng ghi; MySQL/PostgreSQL mạnh hơn ở điểm đó.",
@@ -325,14 +325,14 @@
     "questionEn": "A tester reports that the \"Delete\" button label is misspelled. Which file most likely needs the fix?",
     "options": [
       "`server/src/routes/todos.js`",
-      "`server/db/schema.sql`",
-      "`client/vite.config.js`",
+      "`server/src/middleware/requireAuth.js`",
+      "`client/src/components/AuthForm.jsx`",
       "`client/src/components/TodoPage.jsx`"
     ],
     "optionsEn": [
       "`server/src/routes/todos.js`",
-      "`server/db/schema.sql`",
-      "`client/vite.config.js`",
+      "`server/src/middleware/requireAuth.js`",
+      "`client/src/components/AuthForm.jsx`",
       "`client/src/components/TodoPage.jsx`"
     ],
     "answer": 3,
@@ -340,14 +340,14 @@
     "explanationEn": "On-screen labels are a frontend concern. The Delete button lives in the `TodoPage.jsx` component. Asking \"which box?\" lets a BA point to the right place straight from the bug report.",
     "optionExplanations": [
       "Sai: route backend trả JSON, không vẽ nút.",
-      "Sai: schema.sql định nghĩa bảng, không có giao diện.",
-      "Sai: vite.config.js chỉ cấu hình cổng và proxy.",
+      "Sai: middleware này chỉ kiểm tra cookie đăng nhập, không vẽ nút nào.",
+      "Sai: AuthForm.jsx là form đăng nhập/đăng ký; nút Delete nằm ở màn hình danh sách.",
       "Đúng: TodoPage.jsx hiển thị danh sách và nút Delete."
     ],
     "optionExplanationsEn": [
       "Wrong: the backend route returns JSON; it draws no buttons.",
-      "Wrong: schema.sql defines tables, not UI.",
-      "Wrong: vite.config.js only sets the port and the proxy.",
+      "Wrong: this middleware only checks the login cookie; it draws no buttons.",
+      "Wrong: AuthForm.jsx is the log-in/sign-up form; the Delete button is on the list screen.",
       "Correct: TodoPage.jsx renders the list and the Delete button."
     ]
   },
@@ -389,14 +389,14 @@
     "questionEn": "Lan left the tab open for over a week, then clicked Add. The Network tab shows `POST /api/todos` → 401. What is the most likely cause?",
     "options": [
       "Tiêu đề to-do để trống nên server từ chối",
-      "Cookie `token` (hạn 7 ngày) đã hết hạn nên `requireAuth` từ chối",
-      "File `todo.db` đã đầy và không ghi thêm được",
+      "Cookie `token` hạn 7 ngày đã hết hạn nên bị từ chối",
+      "File `todo.db` đã đầy dung lượng và không ghi thêm được nữa",
       "Proxy của Vite đã tắt nên không chuyển tiếp được"
     ],
     "optionsEn": [
       "The to-do title was empty, so the server rejected it",
-      "The `token` cookie (7-day lifetime) has expired, so `requireAuth` rejected it",
-      "The `todo.db` file is full and cannot take more writes",
+      "The 7-day `token` cookie expired, so the request was rejected",
+      "The `todo.db` file is full and cannot take any more writes from the API",
       "The Vite proxy stopped, so nothing could be forwarded"
     ],
     "answer": 1,
@@ -420,7 +420,7 @@
     "question": "Thư mục nào tuyệt đối KHÔNG được chứa bí mật (như JWT secret), và vì sao?",
     "questionEn": "Which folder must NEVER contain secrets (such as the JWT secret), and why?",
     "options": [
-      "`client/`, vì mọi thứ trong đó rốt cuộc đều nằm trong trình duyệt",
+      "`client/`, vì mọi thứ trong đó đều tới trình duyệt",
       "`server/src/`, vì code server được commit lên Git",
       "`server/db/`, vì schema.sql ai cũng đọc được",
       "`server/`, vì Express in mọi biến môi trường ra log"
@@ -454,7 +454,7 @@
     "options": [
       "Trong `localStorage` với key `todo:lastEmail`",
       "Bên trong cookie `token` cùng với JWT",
-      "Nguyên văn trong bảng `users` để đối chiếu khi đăng nhập",
+      "Lưu nguyên văn trong bảng `users` để đối chiếu khi đăng nhập",
       "Chỉ dưới dạng hash bcrypt trong cột `users.password_hash`"
     ],
     "optionsEn": [
@@ -484,16 +484,16 @@
     "question": "Vì sao token đăng nhập nằm trong cookie HttpOnly thay vì `localStorage`?",
     "questionEn": "Why does the login token live in an HttpOnly cookie instead of `localStorage`?",
     "options": [
-      "`localStorage` quá nhỏ, không chứa nổi một JWT",
-      "Cookie được gửi nhanh hơn `localStorage`",
-      "JavaScript trên trang không đọc được cookie HttpOnly, nên script độc hại không lấy cắp được",
-      "`localStorage` bị xóa mỗi lần tải lại trang"
+      "`localStorage` quá nhỏ, không chứa nổi một chuỗi JWT dài",
+      "Cookie được gửi lên server nhanh hơn dữ liệu trong `localStorage`",
+      "Script trên trang không đọc được cookie HttpOnly để lấy cắp nó",
+      "`localStorage` bị xóa sạch mỗi lần người dùng tải lại trang"
     ],
     "optionsEn": [
-      "`localStorage` is too small to hold a JWT",
-      "Cookies are sent faster than `localStorage`",
-      "Page JavaScript cannot read an HttpOnly cookie, so an injected script cannot steal it",
-      "`localStorage` is wiped on every page reload"
+      "`localStorage` is too small to hold a long JWT string",
+      "Cookies reach the server faster than data in `localStorage`",
+      "Page scripts cannot read an HttpOnly cookie to steal it",
+      "`localStorage` is wiped clean every time the page reloads"
     ],
     "answer": 2,
     "explanation": "HttpOnly nghĩa là JavaScript không đọc được cookie; trình duyệt chỉ tự gửi nó kèm request. Token trong `localStorage` thì bất kỳ script nào chèn vào trang (lỗi XSS) cũng đọc được.",

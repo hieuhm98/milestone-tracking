@@ -68,16 +68,16 @@
     "question": "Kết quả query:\n`kyc_status | customers | with_wallet\npending    | 241       | 0\nrejected   | 141       | 0\nverified   | 3618      | 2235`\nMột PM nói: \"Chúng ta có 4,000 khách dùng được ví.\" Câu trả lời đúng nhất là gì?",
     "questionEn": "Query result:\n`kyc_status | customers | with_wallet\npending    | 241       | 0\nrejected   | 141       | 0\nverified   | 3618      | 2235`\nA PM says: \"We have 4,000 customers who can use the wallet.\" What is the best reply?",
     "options": [
-      "Chỉ khách đã KYC `verified` mới có ví; 3,618 khách đủ điều kiện và 2,235 khách thực sự có ví",
+      "Chỉ khách KYC `verified` mới có ví: 3,618 khách đủ điều kiện, 2,235 khách thực có ví",
       "Đúng, vì mọi khách hàng đã đăng ký đều được mở ví ngay khi tạo tài khoản",
       "Chỉ có 241 khách dùng được ví, vì ví chỉ mở cho khách đang chờ KYC",
-      "Có 2,235 khách đã KYC, còn 1,765 khách còn lại chưa từng làm KYC"
+      "Có 2,235 khách đã KYC xong, còn 1,765 khách còn lại thì chưa từng làm KYC lần nào cả"
     ],
     "optionsEn": [
-      "Only KYC-`verified` customers get a wallet; 3,618 are eligible and 2,235 actually have one",
+      "Only KYC-`verified` customers get wallets: 3,618 eligible, 2,235 actually have one",
       "Yes, because every registered customer gets a wallet as soon as they sign up",
       "Only 241 customers can use the wallet, since wallets open only for KYC-pending customers",
-      "2,235 customers passed KYC, and the other 1,765 never did KYC at all"
+      "2,235 customers passed KYC, and the other 1,765 customers never did KYC at all"
     ],
     "answer": 0,
     "explanation": "KYC là cửa chặn: không khách chưa xác minh nào có ví. \"Khách hàng\" (4,000), \"khách đủ điều kiện\" (3,618) và \"khách có ví\" (2,235) là ba con số khác nhau.",
@@ -132,14 +132,14 @@
     "question": "Ví 77 có các giao dịch:\n`txn_type     | amount   | status\ntop_up       | 300000   | success\npayment      | -120000  | success\ntransfer_out | -100000  | failed`\nBảng `wallets` lưu `balance` = 80000. Đọc thế nào là đúng?",
     "questionEn": "Wallet 77 has these transactions:\n`txn_type     | amount   | status\ntop_up       | 300000   | success\npayment      | -120000  | success\ntransfer_out | -100000  | failed`\nThe `wallets` table stores `balance` = 80000. What is the right reading?",
     "options": [
-      "Khớp: 300,000 − 120,000 − 100,000 = 80,000, nên không có vấn đề gì",
-      "Break 100,000: số dư tính từ giao dịch thành công là 180,000; có vẻ lần chuyển tiền thất bại vẫn bị trừ",
-      "Break 120,000: thanh toán lẽ ra không được trừ vào số dư của ví",
-      "Không kết luận được, vì số dư chỉ đúng khi cộng cả các giao dịch thất bại"
+      "Khớp: 300,000 − 120,000 − 100,000 = 80,000, nên số dư đang lưu trong bảng hoàn toàn đúng",
+      "Break 100,000: giao dịch thành công cho ra 180,000; lần chuyển thất bại có vẻ vẫn bị trừ",
+      "Break 120,000: khoản thanh toán lẽ ra không được trừ vào số dư của ví này",
+      "Không kết luận được, vì số dư chỉ đúng khi cộng cả những giao dịch thất bại"
     ],
     "optionsEn": [
-      "It matches: 300,000 − 120,000 − 100,000 = 80,000, so nothing is wrong",
-      "A 100,000 break: successful transactions give 180,000; the failed transfer seems to have been deducted anyway",
+      "It matches: 300,000 − 120,000 − 100,000 = 80,000, so the stored balance is right",
+      "A 100,000 break: successful rows give 180,000; the failed transfer seems deducted anyway",
       "A 120,000 break: the payment should never have been deducted from the wallet balance",
       "No conclusion is possible, because the balance is only correct when failed rows are included"
     ],
@@ -165,7 +165,7 @@
     "questionEn": "Accounting asks: \"What was the balance of wallet 520 at 2026-03-01 00:00:00 (UTC)?\" `wallets.balance` stores only the current balance. What is the right way to answer?",
     "options": [
       "Cộng các giao dịch `success` của ví có `created_at` trước 2026-03-01 00:00:00",
-      "Đọc `wallets.balance`, vì số dư hiện tại cũng chính là số dư ở mọi thời điểm",
+      "Đọc `wallets.balance`, vì số dư hiện tại cũng chính là số dư ở mọi thời điểm trước đó",
       "Không thể trả lời, vì database không lưu số dư theo từng ngày",
       "Lấy trung bình cộng `amount` của mọi giao dịch trong tháng 2/2026"
     ],
@@ -196,16 +196,16 @@
     "question": "Vì sao fintech.db không trả lời được câu \"Khách hàng 933 được KYC `verified` vào ngày nào?\"",
     "questionEn": "Why can fintech.db not answer \"On which day did customer 933 become KYC-`verified`?\"",
     "options": [
-      "Vì cột `signup_date` lưu sai múi giờ nên không dùng được",
-      "Vì khách hàng 933 không có ví nên không có dữ liệu về họ",
-      "Vì SQLite không có hàm xử lý ngày tháng như `strftime`",
-      "Vì `kyc_status` là snapshot chỉ giữ giá trị mới nhất, và không có bảng lịch sử trạng thái"
+      "Vì cột `signup_date` bị lưu sai múi giờ nên không thể dùng để tra ngày được",
+      "Vì khách hàng 933 chưa có ví nên database không có dữ liệu nào về họ",
+      "Vì SQLite không có hàm xử lý ngày tháng như `strftime` hay `date`",
+      "Vì `kyc_status` là snapshot chỉ giữ giá trị mới nhất, không lưu lịch sử"
     ],
     "optionsEn": [
       "Because `signup_date` is stored in the wrong time zone and cannot be used",
-      "Because customer 933 has no wallet, so there is no data about them",
-      "Because SQLite has no date functions such as `strftime`",
-      "Because `kyc_status` is a snapshot that keeps only the latest value, and there is no status history table"
+      "Because customer 933 has no wallet, so the database holds no data about them",
+      "Because SQLite has no date functions such as `strftime` or `date` to use",
+      "Because `kyc_status` is a snapshot holding only the latest value, with no history"
     ],
     "answer": 3,
     "explanation": "Bảng snapshot bị ghi đè khi trạng thái đổi, nên thời điểm đổi bị mất. Muốn trả lời được, cần một bảng lịch sử trạng thái (mỗi lần đổi một dòng, có thời điểm).",
@@ -230,14 +230,14 @@
     "options": [
       "Phải dùng LEFT JOIN, vì một số khoản vay chưa có lịch trả nợ",
       "Phải thêm `WHERE paid_date IS NOT NULL` để chỉ đếm khoản vay đã trả",
-      "Mỗi dòng sau JOIN là một kỳ trả, không phải một khoản vay; cần `COUNT(DISTINCT l.loan_id)`, ra 3,106",
-      "Không sai: mỗi kỳ trả nợ được tính là một khoản vay riêng"
+      "Sau JOIN mỗi dòng là một kỳ trả; cần `COUNT(DISTINCT l.loan_id)`, ra 3,106",
+      "Không có gì sai: mỗi kỳ trả nợ được tính là một khoản vay riêng trong hệ thống"
     ],
     "optionsEn": [
       "It needs a LEFT JOIN, because some loans have no repayment schedule yet",
       "It needs `WHERE paid_date IS NOT NULL` so that only repaid loans are counted",
-      "After the JOIN each row is one installment, not one loan; use `COUNT(DISTINCT l.loan_id)`, which gives 3,106",
-      "Nothing is wrong: each installment counts as a separate loan"
+      "After the JOIN each row is an installment; use `COUNT(DISTINCT l.loan_id)` = 3,106",
+      "Nothing is wrong: each installment is counted as a separate loan in the system"
     ],
     "answer": 2,
     "explanation": "Grain của `repayment_schedule` là một kỳ trả. JOIN nhân mỗi khoản vay lên theo số kỳ, nên `COUNT(*)` đếm kỳ trả (28,824). Đếm khoản vay thì dùng `COUNT(DISTINCT l.loan_id)` = 3,106.",
@@ -260,16 +260,16 @@
     "question": "Các hồ sơ vay của khách hàng 3152:\n`application_id | product   | app_status | loan_id\n2645           | cash_loan | approved   | 1150\n3003           | bnpl      | cancelled  | NULL\n5440           | cash_loan | approved   | 2384`\nĐọc thế nào là đúng?",
     "questionEn": "Customer 3152's applications:\n`application_id | product   | app_status | loan_id\n2645           | cash_loan | approved   | 1150\n3003           | bnpl      | cancelled  | NULL\n5440           | cash_loan | approved   | 2384`\nWhat is the right reading?",
     "options": [
-      "Khách có 2 khoản vay; hồ sơ BNPL được duyệt nhưng khách không nhận lời đề nghị nên không có khoản vay",
+      "Khách có 2 khoản vay; hồ sơ BNPL là lời đề nghị mà khách không nhận lời",
       "Khách có 3 khoản vay, vì hồ sơ nào đã được nộp cũng thành một khoản vay",
       "Khách có 2 khoản vay; hồ sơ BNPL bị từ chối vì điểm tín dụng thấp",
-      "Khách có 1 khoản vay, vì `loan_id` 2384 vẫn còn đang `active`"
+      "Khách có 1 khoản vay, vì `loan_id` 2384 vẫn còn đang `active` chưa trả xong"
     ],
     "optionsEn": [
-      "The customer has 2 loans; the BNPL application was approved but the customer never accepted the offer, so there is no loan",
+      "The customer has 2 loans; the BNPL one was an offer the customer did not accept",
       "The customer has 3 loans, because every submitted application becomes a loan",
       "The customer has 2 loans; the BNPL application was rejected for a low credit score",
-      "The customer has 1 loan, because `loan_id` 2384 is still `active`"
+      "The customer has 1 loan, because `loan_id` 2384 is still `active` and unpaid"
     ],
     "answer": 0,
     "explanation": "Trong fintech.db, `approved` nghĩa là được duyệt và đã thành khoản vay; `cancelled` là lời đề nghị không được nhận, nên `loan_id` là NULL. Khoản vay đang `active` vẫn là một khoản vay.",
@@ -324,16 +324,16 @@
     "question": "Bạn thấy một dòng lịch trả nợ: `due_date` 2026-05-27, `paid_date` NULL, `amount_paid` 0, thuộc một khoản vay có `loans.status = 'closed'`. Kết luận nào đúng?",
     "questionEn": "You find a schedule row: `due_date` 2026-05-27, `paid_date` NULL, `amount_paid` 0, belonging to a loan with `loans.status = 'closed'`. Which conclusion is right?",
     "options": [
-      "Bình thường: khoản vay `closed` vẫn có thể còn vài kỳ chưa đến hạn",
+      "Bình thường: khoản vay `closed` vẫn có thể còn vài kỳ chưa đến hạn thanh toán",
       "Bình thường: kỳ này sẽ được tính là đã trả khi đến ngày quyết toán",
       "Khách đã trả trước toàn bộ, nên các kỳ còn lại luôn được để trống",
-      "Vi phạm quy tắc trạng thái: khoản vay `closed` không được còn kỳ chưa trả; cần báo lỗi dữ liệu"
+      "Vi phạm quy tắc trạng thái: khoản `closed` không được còn kỳ chưa trả"
     ],
     "optionsEn": [
       "Normal: a `closed` loan can still have a few installments that are not due yet",
       "Normal: the installment will count as paid on the settlement date",
       "The customer paid everything early, so the remaining installments are always left blank",
-      "It breaks a state rule: a `closed` loan must have no unpaid installments; report it as a data error"
+      "A state-rule violation: a `closed` loan cannot have unpaid installments"
     ],
     "answer": 3,
     "explanation": "Theo máy trạng thái, `closed` nghĩa là mọi kỳ đã trả. Một dòng chưa trả, lại đã qua hạn 2026-05-27 tính đến 2026-06-30, mâu thuẫn với trạng thái đó: đây là vi phạm cần điều tra, và là một phép kiểm tra nên viết thành SQL.",
@@ -388,13 +388,13 @@
     "question": "Chị Lan mua điện thoại bằng thẻ, sau đó khiếu nại với ngân hàng phát hành thẻ rằng hàng không được giao; ngân hàng thu hồi tiền từ merchant kèm phí. Đây là gì?",
     "questionEn": "Lan buys a phone by card, then disputes the payment with her card-issuing bank because the goods never arrived; the bank pulls the money back from the merchant with a fee. What is this?",
     "options": [
-      "Chargeback: chủ thẻ khiếu nại qua ngân hàng và tiền bị thu hồi bắt buộc từ merchant",
+      "Chargeback: giao dịch bị đảo ngược bắt buộc qua quy trình tranh chấp thẻ",
       "Refund: merchant tự nguyện trả lại tiền cho khách sau khi khách đổi ý",
       "Settlement: công ty thanh toán chuyển tiền trong ngày cho merchant sau khi trừ phí",
       "Double charge: hệ thống trừ tiền khách hai lần vì app gửi lại request"
     ],
     "optionsEn": [
-      "Chargeback: the cardholder disputes through the bank and the money is forcibly taken back from the merchant",
+      "Chargeback: a forced reversal through the card network's dispute process",
       "Refund: the merchant voluntarily gives the money back after the customer changes their mind",
       "Settlement: the payment company pays the merchant the day's money minus fees",
       "Double charge: the system charges the customer twice because the app resent the request"
@@ -455,13 +455,13 @@
       "Trừ tiền lần nữa, vì mỗi request đến server đều là một lệnh thanh toán mới",
       "Trả lỗi và yêu cầu khách bắt đầu lại checkout từ đầu",
       "Tạo key mới cho request thứ hai rồi xử lý như một thanh toán riêng",
-      "Nhận ra key đã xử lý và trả lại kết quả lần đầu (\"success\"), không trừ tiền thêm"
+      "Nhận ra key đã xử lý, trả lại kết quả lần đầu và không trừ tiền thêm"
     ],
     "optionsEn": [
       "Charge again, because every request that reaches the server is a new payment order",
       "Return an error and ask the customer to restart checkout from the beginning",
       "Create a new key for the second request and process it as a separate payment",
-      "Recognise the key as already processed and return the first result (\"success\") without charging again"
+      "Spot the repeated key, return the first result and not charge again"
     ],
     "answer": 3,
     "explanation": "Idempotent nghĩa là làm hai lần có tác dụng như làm một lần. Server lưu kết quả theo key; khi key lặp lại, nó trả kết quả cũ thay vì trừ tiền lần hai.",
@@ -485,15 +485,15 @@
     "questionEn": "Grain check result:\n`payment_rows | sessions_with_a_payment\n7630         | 7593`\nEach checkout session should produce at most one payment. What do you conclude?",
     "options": [
       "Có 37 session không có thanh toán nào, cần xóa chúng khỏi bảng",
-      "Bảng `payments` bị thiếu 37 dòng so với số session",
-      "Có session sinh ra hơn một dòng thanh toán; cần điều tra đó là retry hợp lệ hay trừ tiền trùng",
-      "Không có gì bất thường, vì hai con số chỉ chênh nhau chưa tới 1%"
+      "Bảng `payments` đang bị thiếu mất 37 dòng so với tổng số session checkout đã ghi",
+      "Có session sinh hơn một dòng thanh toán; cần xem là retry hay trừ tiền trùng",
+      "Không có gì bất thường, vì hai con số chỉ chênh nhau chưa tới 1% tổng"
     ],
     "optionsEn": [
       "37 sessions have no payment at all and should be deleted from the table",
       "The `payments` table is missing 37 rows compared with the number of sessions",
-      "Some sessions produced more than one payment row; investigate whether they are legitimate retries or double charges",
-      "Nothing unusual, because the two numbers differ by less than 1%"
+      "Some sessions have more than one payment row; check for retries or double charges",
+      "Nothing unusual, because the two numbers differ by less than 1% overall"
     ],
     "answer": 2,
     "explanation": "Số dòng (7,630) lớn hơn số session khác biệt (7,593), nên ít nhất một session có nhiều hơn một dòng. Một phép kiểm tra grain thất bại là tín hiệu phải điều tra, kể cả khi chênh lệch nhỏ: với tiền của khách, mỗi lần trừ trùng đều là một khiếu nại.",
@@ -548,16 +548,16 @@
     "question": "Bộ phận tuân thủ hỏi: \"Ngày 1/3/2026 có bao nhiêu khách đang KYC `pending`?\" Database chỉ có `customers.kyc_status` (trạng thái hiện tại, 241 khách `pending`). Cách phản hồi tốt nhất là gì?",
     "questionEn": "Compliance asks: \"How many customers were KYC-`pending` on 1 March 2026?\" The database only has `customers.kyc_status` (the current status; 241 customers are `pending`). What is the best response?",
     "options": [
-      "Nói rõ dữ liệu hiện tại không trả lời được ngày quá khứ, đưa con số 241 kèm nhãn \"tính đến 2026-06-30\", và đề xuất bảng lịch sử trạng thái KYC",
-      "Gửi con số 241, vì số khách pending gần như không đổi theo thời gian",
+      "Nói rõ dữ liệu không trả lời được ngày quá khứ, đưa 241 kèm nhãn ngày, đề xuất bảng lịch sử",
+      "Gửi con số 241, vì số khách pending gần như không thay đổi theo thời gian nên dùng được",
       "Đếm khách có `signup_date` trước 1/3/2026 và `kyc_status = 'pending'`, rồi gửi kết quả đó",
-      "Từ chối yêu cầu, vì câu hỏi về KYC không thuộc trách nhiệm của analyst"
+      "Từ chối yêu cầu, vì câu hỏi về KYC thuộc trách nhiệm của bộ phận tuân thủ, không phải analyst"
     ],
     "optionsEn": [
-      "Explain that current data cannot answer for a past date, give 241 labelled \"as of 2026-06-30\", and propose a KYC status history table",
-      "Send 241, because the number of pending customers barely changes over time",
+      "Say current data can't answer for a past date, give 241 with its date, propose a history table",
+      "Send 241, because the number of pending customers barely changes from month to month",
       "Count customers with `signup_date` before 1 March 2026 and `kyc_status = 'pending'`, and send that",
-      "Decline, because KYC questions are not an analyst's responsibility"
+      "Decline, because KYC questions belong to the compliance team, not to the analyst"
     ],
     "answer": 0,
     "explanation": "Snapshot chỉ cho biết hôm nay. Trung thực về giới hạn của dữ liệu, ghi rõ \"tính đến ngày nào\", và đề xuất cách sửa (bảng lịch sử) là phản hồi chuyên nghiệp.",

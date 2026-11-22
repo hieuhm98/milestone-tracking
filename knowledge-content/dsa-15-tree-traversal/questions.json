@@ -24,16 +24,16 @@
     "question": "Vì sao cây cần thuật toán duyệt riêng, trong khi array chỉ cần một vòng `for`?",
     "questionEn": "Why does a tree need a dedicated traversal algorithm when an array only needs a `for` loop?",
     "options": [
-      "Cây phi tuyến tính: một node có thể có nhiều con, nên không có một phần tử 'kế tiếp' duy nhất và phải chọn nhánh nào đi trước",
-      "Các node trong cây luôn được lưu theo thứ tự đã sắp xếp nên phải duyệt bằng binary search",
-      "Truy cập node trong cây theo chỉ số tốn O(log n) nên vòng `for` sẽ quá chậm",
-      "JavaScript không cho phép dùng vòng `for` trên các object có thuộc tính left và right"
+      "Cây phi tuyến tính: một node có thể có nhiều con, nên phải chọn nhánh nào đi trước",
+      "Node trong cây luôn được lưu theo thứ tự đã sắp xếp nên phải duyệt bằng binary search",
+      "Truy cập node theo chỉ số tốn O(log n) nên duyệt bằng vòng `for` sẽ quá chậm",
+      "JavaScript không cho dùng vòng `for` trên object có thuộc tính `left` và `right`"
     ],
     "optionsEn": [
-      "A tree is non-linear: a node can have several children, so there is no single 'next' element and you must choose which branch to take first",
-      "Tree nodes are always stored in sorted order, so they must be traversed with binary search",
+      "A tree is non-linear: a node can have several children, so you must pick a branch first",
+      "Tree nodes are always stored in sorted order, so they must be walked with binary search",
       "Accessing a tree node by index costs O(log n), so a `for` loop would be too slow",
-      "JavaScript does not allow `for` loops over objects that have left and right properties"
+      "JavaScript does not allow `for` loops over objects with `left` and `right` properties"
     ],
     "answer": 0,
     "explanation": "Array và linked list có một thứ tự tự nhiên. Ở cây, sau mỗi node có thể có hai hướng đi, nên thuật toán phải quyết định thứ tự và nhớ các nhánh chưa đi — bằng queue (BFS) hoặc stack (DFS). Cây không có chỉ số, và chỉ BST mới có quan hệ thứ tự giữa các node.",
@@ -44,16 +44,16 @@
     "question": "Cặp ghép nào giữa cách duyệt và cấu trúc hỗ trợ là ĐÚNG?",
     "questionEn": "Which pairing of traversal and helper structure is CORRECT?",
     "options": [
-      "BFS – stack; DFS – queue",
-      "BFS – hash map; DFS – queue",
+      "BFS – stack (hoặc call stack); DFS – queue",
+      "BFS – hash map; DFS – queue hai đầu (deque)",
       "BFS – priority queue; DFS – mảng đã sắp xếp",
-      "BFS – queue; DFS – stack (tường minh hoặc call stack)"
+      "BFS – queue; DFS – stack (hoặc call stack)"
     ],
     "optionsEn": [
-      "BFS – stack; DFS – queue",
-      "BFS – hash map; DFS – queue",
+      "BFS – stack (or the call stack); DFS – queue",
+      "BFS – hash map; DFS – double-ended queue",
       "BFS – priority queue; DFS – sorted array",
-      "BFS – queue; DFS – stack (explicit or the call stack)"
+      "BFS – queue; DFS – stack (or the call stack)"
     ],
     "answer": 3,
     "explanation": "Queue FIFO bảo đảm các node được xử lý theo thứ tự đã phát hiện, tức theo từng tầng. Stack LIFO luôn quay về node mới nhất, nên đi sâu xuống một nhánh trước; DFS đệ quy dùng chính call stack làm stack đó.",
@@ -104,16 +104,16 @@
     "question": "Một bản BFS dùng `queue.shift()` trên array thường. Vì sao trên cây rất rộng nó có thể chậm hơn O(n)?",
     "questionEn": "A BFS uses `queue.shift()` on a plain array. Why can it be slower than O(n) on a very wide tree?",
     "options": [
-      "`shift` đánh lại chỉ số mọi phần tử còn lại nên mỗi lần dequeue tốn O(độ dài queue), tệ nhất khoảng O(n²)",
-      "`shift` tốn O(log n) vì array được cài đặt bằng cây cân bằng bên trong engine",
+      "`shift` đánh lại chỉ số mọi phần tử còn lại, nên tệ nhất khoảng O(n²)",
+      "`shift` tốn O(log n) vì engine cài array bằng cây cân bằng bên trong",
       "`push` tốn O(n) mỗi lần vì array phải cấp phát lại toàn bộ bộ nhớ",
-      "Queue buộc phải thăm mỗi node hai lần nên thời gian thành O(2n) rồi O(n²)"
+      "Queue buộc thăm mỗi node hai lần nên thời gian thành O(2n) rồi O(n²)"
     ],
     "optionsEn": [
-      "`shift` re-indexes every remaining element, so each dequeue costs O(queue length), roughly O(n²) in the worst case",
-      "`shift` costs O(log n) because arrays are balanced trees inside the engine",
-      "`push` costs O(n) every time because the array must reallocate all its memory",
-      "A queue forces every node to be visited twice, so time becomes O(2n) and then O(n²)"
+      "`shift` re-indexes every remaining element, so it is about O(n²) at worst",
+      "`shift` costs O(log n) because engines store arrays as balanced trees",
+      "`push` costs O(n) every time because the array reallocates all its memory",
+      "A queue visits every node twice, so time becomes O(2n) and then O(n²)"
     ],
     "answer": 0,
     "explanation": "Xoá phần tử đầu array buộc dịch mọi phần tử còn lại. Ở cây hoàn hảo queue chứa tới khoảng n/2 node, nên n lần dequeue có thể tốn khoảng O(n²). Dùng chỉ số head, queue bằng linked list hoặc mảng theo tầng để có O(n). `push` là amortized O(1), và O(2n) vẫn là O(n).",
@@ -165,15 +165,15 @@
     "questionEn": "What does this function check, and what does it cost?\n`function check(root) {\n  const vals = [];\n  function walk(node) {\n    if (node === null) return;\n    walk(node.left);\n    vals.push(node.value);\n    walk(node.right);\n  }\n  walk(root);\n  return vals.every((v, i) => i === 0 || vals[i - 1] < v);\n}`",
     "options": [
       "Chỉ so mỗi node với hai con trực tiếp; O(n) thời gian, O(1) bộ nhớ",
-      "Kiểm tra cây có cân bằng không; O(log n) thời gian",
-      "Kiểm tra dãy in-order tăng nghiêm ngặt, tức cây là BST hợp lệ; O(n) thời gian, O(n) bộ nhớ",
+      "Kiểm tra cây có cân bằng không; O(log n) thời gian, O(h) bộ nhớ",
+      "Kiểm tra cây là BST hợp lệ qua dãy in-order; O(n) thời gian, O(n) bộ nhớ",
       "Sai: muốn kiểm tra BST phải duyệt pre-order; O(n²) thời gian"
     ],
     "optionsEn": [
       "It only compares each node with its direct children; O(n) time, O(1) space",
-      "It checks whether the tree is balanced; O(log n) time",
-      "It checks the in-order sequence is strictly increasing, i.e. a valid BST; O(n) time, O(n) space",
-      "It is wrong: validating a BST needs pre-order; O(n²) time"
+      "It checks whether the tree is balanced; O(log n) time, O(h) space",
+      "It checks for a valid BST via the in-order sequence; O(n) time, O(n) space",
+      "It is wrong: validating a BST needs pre-order; O(n²) time overall"
     ],
     "answer": 2,
     "explanation": "`walk` là in-order, và một cây nhị phân là BST (không trùng giá trị) khi và chỉ khi dãy in-order tăng nghiêm ngặt. Nó so sánh toàn cục chứ không chỉ node cha–con. Mảng `vals` tốn O(n); chỉ giữ giá trị liền trước sẽ giảm xuống O(h).",
@@ -184,16 +184,16 @@
     "question": "Để lưu cây nhị phân thành chuỗi và dựng lại đúng hình dạng, một cách phổ biến là ghi giá trị theo pre-order kèm ký hiệu `#` cho mỗi con null. Vì sao pre-order hợp với việc này?",
     "questionEn": "To save a binary tree as a string and rebuild exactly the same shape, a common approach writes values in pre-order with a `#` for every null child. Why does pre-order suit this?",
     "options": [
-      "Root đứng trước, nên khi đọc chuỗi bên dựng có thể tạo node rồi mới đệ quy dựng cây con trái và phải",
+      "Root đứng trước, nên bên dựng tạo node rồi mới dựng cây con trái và phải",
       "Kết quả pre-order luôn đã sắp xếp, nên bên dựng có thể dùng binary search",
-      "Pre-order luôn tốn ít bộ nhớ hơn mọi cách duyệt khác trên mọi cây",
-      "Chỉ pre-order mới ghé thăm các con null, các cách khác bỏ qua chúng"
+      "Pre-order luôn tốn ít bộ nhớ hơn mọi cách duyệt khác trên mọi hình cây",
+      "Chỉ pre-order mới ghé thăm các con null, các cách duyệt khác bỏ qua chúng"
     ],
     "optionsEn": [
-      "The root comes first, so while reading the string the builder can create a node and then recursively build its left and right subtrees",
-      "Pre-order output is always sorted, so the builder can use binary search",
-      "Pre-order always uses less memory than every other traversal on every tree",
-      "Only pre-order visits null children; the other traversals skip them"
+      "The root comes first, so the builder creates a node, then its left and right subtrees",
+      "Pre-order output is always sorted, so the builder can rely on binary search",
+      "Pre-order always uses less memory than every other traversal on every tree shape",
+      "Only pre-order ever visits null children; the other traversals skip over them"
     ],
     "answer": 0,
     "explanation": "Pre-order đặt cha trước con — đúng thứ tự cần để tạo node. Đọc token: `#` là null, còn lại tạo node rồi dựng trái, dựng phải. Pre-order chỉ sắp xếp tình cờ; mọi DFS đệ quy đều tốn O(h) và đều có thể ghi ký hiệu cho null.",
@@ -244,16 +244,16 @@
     "question": "Với cây có root 10, con trái 6 (các con 3 và 8) và con phải 15 (con phải 20), hàm sau trả về gì?\n`function preOrder(root) {\n  const stack = [root];\n  const result = [];\n  while (stack.length) {\n    const node = stack.pop();\n    result.push(node.value);\n    if (node.left) stack.push(node.left);\n    if (node.right) stack.push(node.right);\n  }\n  return result;\n}`",
     "questionEn": "For the tree with root 10, left child 6 (children 3 and 8) and right child 15 (right child 20), what does this return?\n`function preOrder(root) {\n  const stack = [root];\n  const result = [];\n  while (stack.length) {\n    const node = stack.pop();\n    result.push(node.value);\n    if (node.left) stack.push(node.left);\n    if (node.right) stack.push(node.right);\n  }\n  return result;\n}`",
     "options": [
-      "[10, 6, 3, 8, 15, 20] — code đã đúng",
-      "[3, 6, 8, 10, 15, 20] — đây là in-order",
+      "[10, 6, 3, 8, 15, 20] — code đã push con trái, con phải đúng thứ tự",
+      "[3, 6, 8, 10, 15, 20] — con trái được push trước nên đây là in-order",
       "[10, 15, 20, 6, 8, 3] — cần push con phải trước con trái",
-      "[10, 6, 15, 3, 8, 20] — cần thay `pop` bằng `shift`"
+      "[10, 6, 15, 3, 8, 20] — cần thay `pop` bằng `shift` để lấy con trái trước"
     ],
     "optionsEn": [
-      "[10, 6, 3, 8, 15, 20] — the code is already correct",
-      "[3, 6, 8, 10, 15, 20] — this is in-order",
+      "[10, 6, 3, 8, 15, 20] — the code already pushes left and right children in order",
+      "[3, 6, 8, 10, 15, 20] — the left child is pushed first, so this is in-order",
       "[10, 15, 20, 6, 8, 3] — push the right child before the left",
-      "[10, 6, 15, 3, 8, 20] — replace `pop` with `shift`"
+      "[10, 6, 15, 3, 8, 20] — replace `pop` with `shift` so the left child comes out first"
     ],
     "answer": 2,
     "explanation": "Stack là LIFO: con được push sau sẽ ra trước. Push trái rồi phải thì phải được thăm trước, cho ra thứ tự N → R → L. Đổi lại thứ tự push (phải trước, trái sau) sẽ được pre-order đúng [10, 6, 3, 8, 15, 20]. Thay bằng `shift` thì thành BFS, không phải pre-order.",
@@ -264,16 +264,16 @@
     "question": "Một hàm in-order đệ quy ném `RangeError: Maximum call stack size exceeded` trên một BST dựng bằng cách insert 1, 2, 3, …, 100000 theo thứ tự. Giải thích và cách sửa hợp lý nhất?",
     "questionEn": "A recursive in-order traversal throws `RangeError: Maximum call stack size exceeded` on a BST built by inserting 1, 2, 3, …, 100000 in order. What is the best explanation and fix?",
     "options": [
-      "Insert dữ liệu đã sắp xếp tạo cây lệch cao n, nên đệ quy sâu 100000 frame; dùng DFS dạng lặp với stack tường minh (hoặc cây cân bằng)",
-      "Cây có quá nhiều node cho bất kỳ cách duyệt nào; phải chia cây làm hai",
-      "In-order tốn O(n²) trên dữ liệu đã sắp xếp; hãy chuyển sang pre-order",
-      "BFS cũng sẽ tràn call stack vì BFS luôn được viết đệ quy"
+      "Dữ liệu đã sắp xếp tạo cây lệch cao n; dùng DFS dạng lặp với stack tường minh",
+      "Cây có quá nhiều node cho bất kỳ cách duyệt nào; phải chia cây làm hai cây nhỏ",
+      "In-order tốn O(n²) trên dữ liệu đã sắp xếp; hãy chuyển sang duyệt pre-order",
+      "Đổi sang BFS cũng tràn call stack vì BFS luôn được viết đệ quy; phải tăng stack"
     ],
     "optionsEn": [
-      "Sorted inserts build a skewed tree of height n, so recursion goes 100000 frames deep; use iterative DFS with an explicit stack (or a balanced tree)",
-      "The tree has too many nodes for any traversal; split it into two trees",
-      "In-order is O(n²) on sorted data; switch to pre-order instead",
-      "BFS would overflow the call stack too, because BFS is always recursive"
+      "Sorted inserts build a skewed tree of height n; use iterative DFS with an explicit stack",
+      "The tree has too many nodes for any traversal; split it into two smaller trees",
+      "In-order is O(n²) on sorted data; switch to a pre-order traversal instead",
+      "BFS would overflow too, because BFS is always recursive; raise the stack size"
     ],
     "answer": 0,
     "explanation": "Mỗi node chỉ có con phải nên chiều cao là n, và DFS đệ quy dùng O(h) frame — vượt giới hạn call stack (cỡ khoảng mười nghìn frame). Stack tường minh nằm trên heap nên chịu được; pre-order đệ quy cũng tràn y như vậy. BFS dùng queue, không đệ quy, và trên cây lệch chỉ tốn O(1) bộ nhớ.",

@@ -4,16 +4,16 @@
     "question": "BPMN giải quyết điểm yếu nào của flowchart?",
     "questionEn": "Which flowchart weakness does BPMN address?",
     "options": [
-      "Flowchart thiếu ký hiệu cho sự kiện, thông điệp giữa các bên, quy trình con, xử lý lỗi và luồng chạy song song",
-      "Flowchart không thể hiện được điểm quyết định",
-      "Flowchart chỉ vẽ được trên giấy",
-      "Flowchart không có ký hiệu cho bước xử lý"
+      "Không có ký hiệu chuẩn cho sự kiện, thông điệp, quy trình con, lỗi và luồng song song",
+      "Flowchart không thể hiện được điểm quyết định nên mọi nhánh rẽ phải viết bằng chữ",
+      "Flowchart không chạy được, còn mọi sơ đồ BPMN đều chạy trực tiếp trên engine",
+      "Flowchart không có ký hiệu thứ tự nên trình tự các bước bị mơ hồ"
     ],
     "optionsEn": [
-      "Flowcharts lack notation for events, inter-party messages, subprocesses, error handling, and parallel paths",
-      "Flowcharts cannot show decision points",
-      "Flowcharts can only be drawn on paper",
-      "Flowcharts have no notation for process steps"
+      "No standard symbols for events, messages, subprocesses, errors or parallel paths",
+      "Flowcharts cannot show decision points, so every branch must be written as text",
+      "Flowcharts cannot be executed, while every BPMN diagram runs directly in an engine",
+      "Flowcharts have no notation for sequence, so step order is ambiguous"
     ],
     "answer": 0,
     "explanation": "Khi cố vẽ những thứ đó bằng flowchart, mỗi người vẽ một kiểu và không ai chắc mình hiểu đúng ý người khác.",
@@ -24,16 +24,16 @@
     "question": "Lỗi ký hiệu phổ biến nhất khi vẽ BPMN là gì?",
     "questionEn": "What is the most common BPMN notation error?",
     "options": [
-      "Dùng mũi tên nét liền để nối hai pool khác nhau, trong khi giữa các pool chỉ có thông điệp chứ không có luồng điều khiển",
-      "Vẽ event bằng hình tròn thay vì hình thoi",
-      "Đặt quá nhiều lane trong một pool",
-      "Không đánh số các bước"
+      "Nối hai pool khác nhau bằng mũi tên sequence flow nét liền",
+      "Vẽ gateway bằng hình tròn và event bằng hình thoi",
+      "Đặt nhiều hơn ba lane bên trong một pool",
+      "Không đánh số các activity nên sau này không tham chiếu được"
     ],
     "optionsEn": [
-      "Using a solid arrow between two pools, when only messages pass between pools, never control flow",
-      "Drawing events as circles instead of diamonds",
-      "Putting too many lanes in one pool",
-      "Not numbering the steps"
+      "Joining two pools with a solid sequence-flow arrow",
+      "Drawing gateways as circles and events as diamonds",
+      "Putting more than three lanes inside a single pool",
+      "Leaving activities unnumbered so they cannot be referenced"
     ],
     "answer": 0,
     "explanation": "Mỗi pool là một tổ chức độc lập, và bạn không điều khiển được quy trình bên trong tổ chức khác.",
@@ -44,16 +44,16 @@
     "question": "Ký hiệu BPMN nào mà BA hay bỏ sót nhất, và hậu quả là gì?",
     "questionEn": "Which BPMN element do BAs most often omit, and with what consequence?",
     "options": [
-      "Timer event; nếu không vẽ ra thì quy tắc kiểu sau 3 ngày chưa phản hồi thì sẽ không được hiện thực",
-      "Activity; nếu thiếu thì quy trình không có bước nào",
-      "Pool; nếu thiếu thì không biết ai làm",
-      "Sequence flow; nếu thiếu thì không có thứ tự"
+      "Timer event; quy tắc kiểu sau 3 ngày chưa phản hồi sẽ không được hiện thực",
+      "Data object; nếu thiếu thì không ai biết mỗi bước cần tài liệu nào",
+      "Pool; nếu thiếu thì không ai biết tổ chức nào thực hiện từng bước",
+      "Sequence flow; nếu thiếu thì lập trình viên không biết đúng thứ tự các bước"
     ],
     "optionsEn": [
-      "Timer events; undrawn, a rule like if there is no response after 3 days never gets implemented",
-      "Activities; without them the process has no steps",
-      "Pools; without them you do not know who acts",
-      "Sequence flows; without them there is no order"
+      "Timer events; a rule like no reply after 3 days never gets built",
+      "Data objects; without them nobody knows which documents each step needs",
+      "Pools; without them nobody can tell which organization performs each step",
+      "Sequence flows; without them developers cannot tell the order of steps"
     ],
     "answer": 0,
     "explanation": "Rất nhiều quy trình nghiệp vụ có bước chờ có thời hạn, và đó chính là loại yêu cầu bị bỏ sót phổ biến nhất trong đặc tả.",
@@ -64,16 +64,16 @@
     "question": "Boundary event trong BPMN dùng để thể hiện điều gì?",
     "questionEn": "What does a boundary event in BPMN express?",
     "options": [
-      "Điều gì xảy ra nếu có sự kiện xảy đến TRONG LÚC một activity đang chạy, ví dụ timeout khi chờ khách xác nhận",
-      "Ranh giới giữa hai pool",
-      "Điểm bắt đầu và kết thúc của quy trình",
-      "Giới hạn số lần lặp của một vòng lặp"
+      "Một sự kiện xảy ra trong lúc activity đang chạy và rẽ luồng xử lý",
+      "Đường ranh giới phân tách hai pool thuộc về hai tổ chức khác nhau",
+      "Các điểm bắt đầu và kết thúc đánh dấu nơi quy trình mở đầu và khép lại",
+      "Số lần lặp tối đa được phép của một activity có vòng lặp"
     ],
     "optionsEn": [
-      "What happens if an event occurs WHILE an activity is running, such as a timeout waiting for customer confirmation",
-      "The boundary between two pools",
-      "The start and end points of a process",
-      "The iteration limit of a loop"
+      "An event that interrupts or branches off an activity while it is running",
+      "The visual border separating two pools that belong to different organizations",
+      "The start and end points that mark where the process begins and finishes",
+      "The maximum number of iterations allowed for a looping activity"
     ],
     "answer": 0,
     "explanation": "Đây là cách BPMN thể hiện timeout, thứ mà flowchart rất khó diễn đạt vì không có ký hiệu cho sự kiện xảy ra song song với một bước.",
@@ -84,13 +84,13 @@
     "question": "Gateway nào phù hợp cho tình huống sau khi nhận đơn, đồng thời kiểm tra tín dụng VÀ kiểm tra tồn kho?",
     "questionEn": "Which gateway fits after receiving an order, check credit AND check stock simultaneously?",
     "options": [
-      "Parallel gateway (AND) — tất cả các nhánh cùng chạy và gateway hợp nhánh chờ tất cả hoàn thành",
+      "Parallel gateway (AND)",
       "Exclusive gateway (XOR)",
       "Inclusive gateway (OR)",
       "Event-based gateway"
     ],
     "optionsEn": [
-      "A parallel gateway (AND) — all branches run and the merge waits for all of them",
+      "A parallel gateway (AND)",
       "An exclusive gateway (XOR)",
       "An inclusive gateway (OR)",
       "An event-based gateway"
@@ -104,16 +104,16 @@
     "question": "Đơn hàng có thể cần cả xe lạnh cho hàng đông lạnh VÀ đóng gói đặc biệt cho hàng dễ vỡ. Dùng gateway nào?",
     "questionEn": "An order may need both a refrigerated vehicle for frozen goods AND special packaging for fragile items. Which gateway?",
     "options": [
-      "Inclusive gateway (OR) — một hoặc nhiều nhánh cùng chạy tuỳ điều kiện nào đúng",
+      "Inclusive gateway (OR)",
       "Exclusive gateway (XOR)",
       "Parallel gateway (AND)",
-      "Không cần gateway"
+      "Hai task nối tiếp nhau"
     ],
     "optionsEn": [
-      "An inclusive gateway (OR) — one or more branches run depending on which conditions hold",
+      "An inclusive gateway (OR)",
       "An exclusive gateway (XOR)",
       "A parallel gateway (AND)",
-      "No gateway is needed"
+      "Two tasks in sequence"
     ],
     "answer": 0,
     "explanation": "Dùng XOR ở đây sẽ khiến hệ thống bỏ sót một xử lý cần thiết khi đơn có cả hàng đông lạnh lẫn hàng dễ vỡ.",
@@ -124,16 +124,16 @@
     "question": "Ba lỗi gateway phổ biến nhất là gì?",
     "questionEn": "What are the three most common gateway errors?",
     "options": [
-      "Dùng XOR khi các nhánh có thể cùng xảy ra; quên nhánh mặc định của XOR; mở nhánh song song mà không hợp lại",
-      "Vẽ gateway quá nhỏ; dùng sai màu; đặt sai vị trí",
-      "Không đánh số gateway; không đặt tên; không ghi chú",
-      "Dùng quá nhiều gateway; dùng quá ít; đặt liền nhau"
+      "Dùng XOR khi nhánh có thể cùng xảy ra; thiếu nhánh mặc định của XOR; tách song song mà không hợp lại",
+      "Vẽ gateway quá nhỏ; dùng màu không chuẩn; đặt lệch khỏi đường chính của luồng xử lý trên sơ đồ",
+      "Không đánh số gateway; không đặt tên gateway; không ghi chú trên các luồng đi ra",
+      "Dùng quá nhiều gateway; dùng quá ít gateway; đặt hai gateway liền kề nhau"
     ],
     "optionsEn": [
-      "Using XOR where branches co-occur; forgetting the XOR default branch; splitting in parallel without merging",
-      "Drawing gateways too small; wrong colours; wrong placement",
-      "Not numbering gateways; not naming them; not annotating them",
-      "Too many gateways; too few; placing them adjacently"
+      "Using XOR where branches co-occur; no XOR default branch; splitting in parallel without merging",
+      "Drawing gateways too small; using non-standard colours; placing them off the main flow line of the diagram",
+      "Not numbering gateways; leaving them unnamed; omitting annotations on outgoing flows",
+      "Using too many gateways; using too few; placing two gateways directly adjacent"
     ],
     "answer": 0,
     "explanation": "Mọi gateway XOR phải có đủ nhánh cho mọi kết quả có thể, kể cả trường hợp không khớp điều kiện nào — đây chính là yêu cầu ngoại lệ hay bị bỏ sót.",
@@ -144,16 +144,16 @@
     "question": "Khi nào nên dùng black box pool?",
     "questionEn": "When should you use a black box pool?",
     "options": [
-      "Khi bạn chỉ quan tâm tới thông điệp trao đổi với một bên ngoài như khách hàng, ngân hàng hay nhà cung cấp, không quan tâm quy trình bên trong họ",
-      "Khi bạn chưa kịp vẽ chi tiết bên trong",
-      "Khi pool đó có quá nhiều lane",
-      "Khi bên ngoài không dùng phần mềm"
+      "Khi chỉ cần thông điệp trao đổi với bên ngoài, không cần quy trình bên trong họ",
+      "Khi bạn chưa kịp mô hình hoá bên trong và định bổ sung chi tiết vào lần sau",
+      "Khi pool có quá nhiều lane đến mức vẽ hết ra sẽ làm rối cả trang sơ đồ",
+      "Khi bên ngoài làm việc hoàn toàn trên giấy tờ và không dùng phần mềm nào"
     ],
     "optionsEn": [
-      "When you only care about the messages exchanged with an external party such as a customer, bank, or supplier, not their internal process",
-      "When you have not had time to draw the inside yet",
-      "When that pool has too many lanes",
-      "When the external party uses no software"
+      "When only the messages exchanged with an external party matter, not its internals",
+      "When you have not yet had time to model the inside and plan to fill it in later",
+      "When the pool has so many lanes that drawing them would clutter the page",
+      "When the external party works on paper and uses no software at all"
     ],
     "answer": 0,
     "explanation": "Đây là cách dùng phổ biến và đúng nhất, vì bạn không điều khiển và thường cũng không biết quy trình bên trong tổ chức khác.",
@@ -164,16 +164,16 @@
     "question": "Giá trị lớn nhất của lane trong BPMN là gì?",
     "questionEn": "What is the greatest value of lanes in BPMN?",
     "options": [
-      "Làm lộ ra các lần chuyển giao giữa vai trò — nơi hay xảy ra chậm trễ và mất thông tin nhất trong quy trình",
-      "Làm sơ đồ trông gọn gàng hơn",
-      "Cho phép vẽ nhiều bước hơn trên một trang",
-      "Giúp phân biệt bước thủ công với bước tự động"
+      "Làm lộ ra các lần chuyển giao giữa vai trò, nơi hay mất thời gian và thông tin",
+      "Làm sơ đồ gọn gàng hơn để các bên liên quan duyệt nhanh hơn",
+      "Cho phép xếp nhiều bước hơn trên một trang theo chiều ngang",
+      "Giúp dễ dàng phân biệt bước thủ công với bước tự động chỉ bằng một cái nhìn nhanh"
     ],
     "optionsEn": [
-      "Exposing the handoffs between roles — where processes most often lose time and information",
-      "Making the diagram look tidier",
-      "Fitting more steps on one page",
-      "Distinguishing manual steps from automated ones"
+      "Exposing handoffs between roles, where time and information get lost",
+      "Making the diagram tidier so stakeholders sign it off faster",
+      "Fitting more steps on one page by stacking them horizontally",
+      "Making it easy to distinguish manual steps from automated ones at a glance"
     ],
     "answer": 0,
     "explanation": "Mỗi lần chuyển giao là một cơ hội để chậm trễ và mất thông tin, nên giảm số lần chuyển giao là nguyên tắc thiết kế to-be quan trọng.",
@@ -184,16 +184,16 @@
     "question": "Rủi ro khi đầu tư quá nhiều vào mô hình as-is là gì?",
     "questionEn": "What is the risk of over-investing in an as-is model?",
     "options": [
-      "Đội dành nhiều tháng vẽ mô hình hoàn hảo tới từng chi tiết cho một quy trình sắp bị thay thế",
-      "Mô hình as-is sẽ mâu thuẫn với mô hình to-be",
-      "Khách hàng sẽ không đồng ý với mô hình",
-      "Công cụ vẽ sẽ không xử lý được sơ đồ lớn"
+      "Tốn nhiều tháng vẽ chi tiết một quy trình sắp bị thay thế",
+      "Mô hình as-is sẽ mâu thuẫn với to-be và làm người đọc bối rối",
+      "Khách hàng sẽ tranh cãi từng chi tiết và từ chối duyệt mô hình",
+      "Công cụ mô hình hoá sẽ khó hiển thị một sơ đồ lớn như vậy"
     ],
     "optionsEn": [
-      "The team spends months on an exhaustively detailed model of a process about to be replaced",
-      "The as-is model will contradict the to-be model",
-      "The customer will disagree with the model",
-      "The tool cannot handle a large diagram"
+      "Months spent detailing a process that is about to be replaced",
+      "The as-is model will contradict the to-be model and confuse readers",
+      "The customer will dispute details and refuse to approve the model",
+      "The modelling tool will struggle to render such a large diagram"
     ],
     "answer": 0,
     "explanation": "Hãy vẽ as-is đủ để hiểu vấn đề và đo lường được, rồi chuyển sang to-be. Dấu hiệu đã đủ là bạn chỉ ra được điểm đau cụ thể và định lượng được chúng.",
@@ -204,16 +204,16 @@
     "question": "Câu hỏi quan trọng nhất khi chuyển từ mô hình as-is sang to-be là gì?",
     "questionEn": "What is the most important question when moving from as-is to to-be?",
     "options": [
-      "Bước này tồn tại vì nhu cầu nghiệp vụ, hay vì hạn chế của cách làm cũ? Nếu là lý do thứ hai, hãy loại bỏ chứ đừng tự động hoá nó",
-      "Bước này mất bao nhiêu thời gian?",
-      "Ai đang thực hiện bước này?",
-      "Bước này có được ghi trong quy trình chính thức không?"
+      "Bước này phục vụ nhu cầu nghiệp vụ, hay chỉ do hạn chế cũ?",
+      "Bước này mất bao lâu, và có tự động hoá được không?",
+      "Ai đang làm bước này, và đó có đúng vai trò không?",
+      "Bước này có được ghi trong tài liệu quy trình chính thức không?"
     ],
     "optionsEn": [
-      "Does this step exist for a business need or an old limitation? If the latter, eliminate it rather than automate it",
-      "How long does this step take?",
-      "Who performs this step?",
-      "Is this step in the official process document?"
+      "Does this step serve a business need, or only an old limitation?",
+      "How long does this step take, and can it be automated?",
+      "Who performs this step today, and are they the right role?",
+      "Is this step written in the official process documentation?"
     ],
     "answer": 0,
     "explanation": "Bước phê duyệt thường tồn tại vì không có cách nào khác để kiểm soát, và bước sao chép dữ liệu tồn tại vì các hệ thống không nói chuyện với nhau.",
@@ -224,16 +224,16 @@
     "question": "Nguyên tắc thiết kế to-be nào giúp quy trình nhanh hơn cho đa số người dùng?",
     "questionEn": "Which to-be design principle speeds the process for most users?",
     "options": [
-      "Tách luồng chính khỏi luồng ngoại lệ, vì nhiều quy trình chậm cho mọi người do được thiết kế quanh 5% trường hợp hiếm",
-      "Thêm bước kiểm tra ở mỗi giai đoạn",
-      "Đưa mọi quyết định lên cấp quản lý cao nhất",
-      "Giữ trình tự tuần tự để dễ theo dõi"
+      "Tách luồng chính khỏi các trường hợp ngoại lệ hiếm gặp",
+      "Thêm bước kiểm tra chất lượng ở mỗi giai đoạn để tránh làm lại",
+      "Đưa các quyết định chính lên quản lý cấp cao để đảm bảo nhất quán",
+      "Giữ mọi bước tuần tự để quy trình dễ theo dõi"
     ],
     "optionsEn": [
-      "Separating the main flow from exception flows, since many processes are slow for everyone because they were designed around 5 percent of rare cases",
-      "Adding a check at every stage",
-      "Escalating every decision to the highest level",
-      "Keeping everything sequential for traceability"
+      "Separating the main flow from the rare exception cases",
+      "Adding a quality check at every stage to prevent rework",
+      "Escalating key decisions to senior management for consistency",
+      "Keeping all steps sequential so the process is easy to trace"
     ],
     "answer": 0,
     "explanation": "Các nguyên tắc khác là bắt đầu từ kết quả mong muốn, giảm số lần chuyển giao, hạ thấp điểm quyết định và song song hoá những gì có thể.",
@@ -244,16 +244,16 @@
     "question": "Từ một message flow trong mô hình to-be, BA nên rút ra những yêu cầu nào?",
     "questionEn": "From a message flow in a to-be model, which requirements should a BA derive?",
     "options": [
-      "Định dạng dữ liệu, đồng bộ hay bất đồng bộ, và điều gì xảy ra khi bên kia không phản hồi",
-      "Màu sắc của mũi tên và độ dày nét vẽ",
-      "Tên của người phụ trách gửi thông điệp",
-      "Số lượng thông điệp gửi mỗi ngày"
+      "Định dạng dữ liệu, đồng bộ hay không, và xử lý khi bên kia không phản hồi",
+      "Kiểu mũi tên, độ dày nét vẽ, và nhãn chữ hiển thị trên sơ đồ quy trình",
+      "Tên và chức danh của người chịu trách nhiệm gửi từng thông điệp",
+      "Mũi tên thông điệp xuất phát từ lane nào trong pool của bên gửi"
     ],
     "optionsEn": [
-      "The data format, synchronous or asynchronous, and what happens when the other side does not respond",
-      "Arrow colour and line weight",
-      "The name of whoever sends the message",
-      "How many messages are sent daily"
+      "Data format, sync or async, and behaviour when the other side is silent",
+      "Arrow style, line weight, and the label text shown on the diagram",
+      "The name and job title of the person who sends each message",
+      "Which lane in the sender's pool the message arrow starts from"
     ],
     "answer": 0,
     "explanation": "Hành vi khi hệ thống đối tác không phản hồi là phần bị bỏ sót nhiều nhất trong yêu cầu tích hợp.",
@@ -264,16 +264,16 @@
     "question": "Từ một gateway trong mô hình, câu hỏi nào dẫn tới yêu cầu?",
     "questionEn": "From a gateway in the model, which question yields a requirement?",
     "options": [
-      "Điều kiện chính xác là gì, đây là business rule nào, và có nhánh nào chưa được phủ",
-      "Gateway này nên vẽ to hay nhỏ",
-      "Ai đã thêm gateway này vào sơ đồ",
-      "Gateway này thuộc lane nào"
+      "Điều kiện chính xác là gì, thuộc business rule nào, có nhánh nào bị sót",
+      "Gateway này nên là XOR hay AND để sơ đồ dễ đọc",
+      "Ai đã thêm gateway này vào sơ đồ, và lần gần nhất đội rà soát nó là khi nào",
+      "Gateway này thuộc lane nào và ai phụ trách lane đó"
     ],
     "optionsEn": [
-      "What exactly is the condition, which business rule is this, and is any branch uncovered",
-      "Should this gateway be drawn large or small",
-      "Who added this gateway to the diagram",
-      "Which lane does this gateway belong to"
+      "What exactly is the condition, which rule is it, is any branch uncovered",
+      "Should this gateway be XOR or AND to keep the diagram readable",
+      "Who added this gateway to the diagram, and when it was last reviewed by the team",
+      "Which lane this gateway belongs to and who owns that lane"
     ],
     "answer": 0,
     "explanation": "Mỗi ký hiệu bạn vẽ ra đều sinh ra một hoặc nhiều câu hỏi cụ thể, và mỗi câu hỏi được trả lời là một yêu cầu không bị bỏ sót.",
@@ -284,16 +284,16 @@
     "question": "Phát biểu nào ĐÚNG về việc chọn giữa flowchart và BPMN?",
     "questionEn": "Which statement about choosing between flowchart and BPMN is correct?",
     "options": [
-      "Chọn theo người đọc: BPMN chính xác hơn nhưng cần đào tạo ký hiệu, còn flowchart thì gần như ai cũng đọc được ngay",
-      "Luôn dùng BPMN vì nó là chuẩn quốc tế",
-      "Luôn dùng flowchart vì nó đơn giản hơn",
-      "Hai công cụ hoàn toàn tương đương nhau"
+      "Chọn theo người đọc: BPMN chính xác hơn nhưng người đọc cần học ký hiệu",
+      "Ưu tiên BPMN trong mọi trường hợp vì nó là ký hiệu chuẩn quốc tế",
+      "Ưu tiên flowchart cho mọi quy trình nhiều actor vì nó đơn giản hơn",
+      "Hai loại tương đương nhau, nên việc chọn chỉ phụ thuộc công cụ đội đang có"
     ],
     "optionsEn": [
-      "Choose by audience: BPMN is more precise but needs notation training, while almost anyone can read a flowchart immediately",
-      "Always use BPMN since it is the international standard",
-      "Always use flowcharts since they are simpler",
-      "The two are entirely equivalent"
+      "Choose by audience: BPMN is more precise but readers need notation training",
+      "Prefer BPMN in every case because it is the international standard notation",
+      "Prefer flowcharts for any process with several actors, since they are simpler",
+      "They are equivalent, so the choice depends only on the tool the team owns"
     ],
     "answer": 0,
     "explanation": "Nếu vẽ BPMN cho nhóm chưa từng thấy nó, hãy chuẩn bị chú giải ký hiệu và cùng đi qua một ví dụ trước khi review.",
@@ -304,16 +304,16 @@
     "question": "Cần học bao nhiêu phần trăm ký hiệu BPMN để dùng được trong thực tế?",
     "questionEn": "How much of BPMN notation do you need for practical use?",
     "options": [
-      "Khoảng 20% ký hiệu là đủ để vẽ 80% quy trình thực tế",
-      "Phải thuộc toàn bộ đặc tả BPMN 2.0",
-      "Chỉ cần biết hình chữ nhật và mũi tên",
-      "Phải có chứng chỉ BPMN mới được vẽ"
+      "Khoảng 20% ký hiệu đủ cho 80% quy trình",
+      "Phần lớn đặc tả BPMN 2.0",
+      "Chỉ hình chữ nhật và mũi tên như flowchart",
+      "Đủ để thi đỗ chứng chỉ BPMN"
     ],
     "optionsEn": [
-      "About 20 percent of the notation covers 80 percent of real processes",
-      "You must know the entire BPMN 2.0 specification",
-      "Only rectangles and arrows are needed",
-      "You need a BPMN certificate to draw one"
+      "About 20 percent covers 80 percent of processes",
+      "Most of the BPMN 2.0 specification",
+      "Only rectangles and arrows, as in a flowchart",
+      "Enough to pass a BPMN certification exam"
     ],
     "answer": 0,
     "explanation": "Bốn nhóm cốt lõi là flow object, connecting object, swimlane và artifact — nắm chắc chúng là đủ cho hầu hết công việc BA.",

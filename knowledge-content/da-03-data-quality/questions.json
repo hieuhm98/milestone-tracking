@@ -12,7 +12,7 @@
     "optionsEn": [
       "It is a completeness error; fill `decided_at` with `applied_at`",
       "It is a validity error; change these rows to `status = 'rejected'`",
-      "The NULL is correct: the application is still pending, so there is no decision time yet",
+      "The NULL is correct: a pending application has no decision time yet",
       "The NULL means the application was decided at 00:00:00"
     ],
     "answer": 2,
@@ -68,16 +68,16 @@
     "question": "Trên `loan_applications`, `AVG(credit_score)` = 631,2 còn `AVG(COALESCE(credit_score, 0))` = 603. Vì sao không nên dùng con số 603?",
     "questionEn": "On `loan_applications`, `AVG(credit_score)` = 631.2 while `AVG(COALESCE(credit_score, 0))` = 603. Why should you not use 603?",
     "options": [
-      "Vì `COALESCE` làm tròn điểm xuống số nguyên gần nhất",
+      "Vì `COALESCE` làm tròn điểm tín dụng xuống số nguyên gần nhất",
       "Vì `AVG` không chạy được trên cột có giá trị NULL",
       "Vì 603 đã bỏ sót các hồ sơ bị từ chối khỏi phép tính",
-      "Vì nó coi khách chưa có lịch sử tín dụng là điểm 0, tự bịa ra người vay cực tệ"
+      "Vì nó coi khách chưa có lịch sử tín dụng như có điểm 0"
     ],
     "optionsEn": [
       "Because `COALESCE` rounds scores down to the nearest integer",
       "Because `AVG` cannot run on a column that contains NULLs",
       "Because 603 leaves rejected applications out of the calculation",
-      "Because it treats customers with no credit history as scoring 0, inventing terrible borrowers"
+      "Because it treats customers with no credit history as scoring 0"
     ],
     "answer": 3,
     "explanation": "NULL nghĩa là \"chưa biết\" (khách thin-file), không phải điểm 0. Đổi NULL thành 0 kéo trung bình xuống khoảng 28 điểm một cách giả tạo.",
@@ -100,13 +100,13 @@
     "question": "Cột `city` có các giá trị \"Ho Chi Minh City\", \"HCMC\", \"TP.HCM\" và \"ho chi minh city\" cho cùng một thành phố. Đây chủ yếu là vấn đề thuộc chiều nào?",
     "questionEn": "The `city` column holds \"Ho Chi Minh City\", \"HCMC\", \"TP.HCM\" and \"ho chi minh city\" for the same city. Which dimension is this mainly about?",
     "options": [
-      "Timeliness, vì tên thành phố được cập nhật quá chậm",
+      "Timeliness, vì tên thành phố được cập nhật quá chậm so với thực tế",
       "Consistency, vì cùng một thứ được viết theo nhiều cách",
       "Uniqueness, vì mỗi khách hàng bị ghi hai lần",
       "Completeness, vì cột thành phố bị bỏ trống"
     ],
     "optionsEn": [
-      "Timeliness, because the city names are updated too slowly",
+      "Timeliness, because the city names are updated far too slowly",
       "Consistency, because the same thing is written in several ways",
       "Uniqueness, because each customer is recorded twice",
       "Completeness, because the city column is left empty"
@@ -132,15 +132,15 @@
     "question": "Báo cáo cho thấy thu nhập trung bình ở Hải Phòng là 22 triệu, cao hơn cả Hà Nội và TP.HCM. Bước kiểm tra nào nên làm đầu tiên?",
     "questionEn": "A report shows the average income in Hai Phong is 22 million, higher than Hanoi and Ho Chi Minh City. What should you check first?",
     "options": [
-      "Chuyển sang dùng `SUM(monthly_income)` cho từng thành phố",
+      "Chuyển sang dùng `SUM(monthly_income)` cho từng thành phố để so sánh",
       "Xem các giá trị lớn nhất bằng `ORDER BY monthly_income DESC LIMIT 5`",
-      "Xóa Hải Phòng khỏi báo cáo vì kết quả bất thường",
+      "Xóa Hải Phòng khỏi báo cáo vì kết quả trông bất thường",
       "Đổi mọi thu nhập NULL thành 0 rồi tính lại trung bình"
     ],
     "optionsEn": [
       "Switch to `SUM(monthly_income)` for each city",
       "Look at the largest values with `ORDER BY monthly_income DESC LIMIT 5`",
-      "Remove Hai Phong from the report because the result is unusual",
+      "Remove Hai Phong from the report entirely because the result looks unusual",
       "Turn every NULL income into 0 and recompute the average"
     ],
     "answer": 1,
@@ -197,7 +197,7 @@
     "questionEn": "You run the validity check `SELECT * FROM payments WHERE amount <= 0;` and get 0 rows. How should you read this?",
     "options": [
       "Kiểm tra đã đạt: không có giao dịch nào có số tiền âm hoặc bằng 0",
-      "Query bị lỗi vì một kiểm tra đúng phải trả về ít nhất một dòng",
+      "Query bị lỗi, vì một phép kiểm tra đúng luôn phải trả về ít nhất một dòng",
       "Bảng `payments` đang trống nên cần nạp lại dữ liệu",
       "Mọi giao dịch đều hợp lệ trên tất cả sáu chiều chất lượng"
     ],
@@ -228,15 +228,15 @@
     "question": "`GROUP BY city` trả về:\n`city    | n\nHanoi   | 1107\nhanoi   | 20\n Hanoi  | 13`\n(dòng thứ ba có một dấu cách ở đầu). Biểu thức nào gộp được cả ba dòng thành một nhóm?",
     "questionEn": "`GROUP BY city` returns:\n`city    | n\nHanoi   | 1107\nhanoi   | 20\n Hanoi  | 13`\n(the third value has a leading space). Which expression puts all three into one group?",
     "options": [
-      "`UPPER(city)`",
-      "`TRIM(city)`",
-      "`LOWER(city)`",
+      "`DISTINCT UPPER(city)`",
+      "`REPLACE(city, ' ', '')`",
+      "`LOWER(city) AS city`",
       "`LOWER(TRIM(city))`"
     ],
     "optionsEn": [
-      "`UPPER(city)`",
-      "`TRIM(city)`",
-      "`LOWER(city)`",
+      "`DISTINCT UPPER(city)`",
+      "`REPLACE(city, ' ', '')`",
+      "`LOWER(city) AS city`",
       "`LOWER(TRIM(city))`"
     ],
     "answer": 3,
@@ -260,13 +260,13 @@
     "question": "Hai dòng trong `payments`:\n`payment_id | session_id | amount | method  | status  | created_at\n52         | S000096    | 134000 | qr_code | success | 2025-07-03 15:55:59\n7625       | S000096    | 134000 | qr_code | success | 2025-07-03 15:56:01`\nCách đọc nào hợp lý nhất?",
     "questionEn": "Two rows in `payments`:\n`payment_id | session_id | amount | method  | status  | created_at\n52         | S000096    | 134000 | qr_code | success | 2025-07-03 15:55:59\n7625       | S000096    | 134000 | qr_code | success | 2025-07-03 15:56:01`\nWhat is the most sensible reading?",
     "options": [
-      "Trừ tiền hai lần do retry: cùng một session, cách nhau hai giây",
+      "Trừ tiền hai lần do app tự động gửi lại yêu cầu thanh toán",
       "Khách cố ý mua hai món giống nhau trong cùng một lần thanh toán",
       "Một giao dịch được hoàn tiền và ghi lại bằng một dòng mới",
       "Lỗi múi giờ: cùng một giao dịch được lưu ở hai thời điểm"
     ],
     "optionsEn": [
-      "A double charge from a retry: same session, two seconds apart",
+      "A double charge: the app automatically resent the payment request",
       "The customer deliberately bought two identical items in one checkout",
       "A payment that was refunded and logged again as a new row",
       "A time-zone error: one payment stored at two times"
@@ -292,16 +292,16 @@
     "question": "Khóa \"cùng session\" tìm ra 37 cặp trùng; khóa \"cùng khách, cùng merchant, cùng số tiền\" tìm ra 40 cặp. Ba cặp thừa là các session khác nhau, cách nhau nhiều ngày. Nên làm gì?",
     "questionEn": "The \"same session\" key finds 37 duplicate pairs; the \"same customer, merchant and amount\" key finds 40. The extra three are different sessions days apart. What should you do?",
     "options": [
-      "Dùng 40 cặp vì khóa rộng hơn luôn an toàn hơn",
-      "Lấy trung bình hai con số và báo cáo khoảng 38 cặp trùng",
+      "Dùng 40 cặp, vì khóa rộng hơn luôn bắt được nhiều giao dịch trùng hơn",
+      "Lấy trung bình hai con số và báo cáo khoảng 38 cặp trùng cho cân bằng",
       "Dùng khóa theo session; ba cặp kia là khách mua lại thật",
-      "Xóa cả 40 cặp khỏi bảng `payments` để chắc chắn"
+      "Xóa cả 40 cặp khỏi bảng `payments` để chắc chắn không còn dòng trùng"
     ],
     "optionsEn": [
-      "Use 40, because a wider key is always safer",
-      "Average the two and report about 38 duplicate pairs",
+      "Use 40, because a wider key always catches more of the real duplicates",
+      "Average the two and report about 38 duplicate pairs as a fair middle",
       "Use the session key; the other three are genuine repeat purchases",
-      "Delete all 40 pairs from `payments` to be sure"
+      "Delete all 40 pairs from `payments` to be sure no duplicates remain"
     ],
     "answer": 2,
     "explanation": "Business key quyết định thế nào là \"cùng một sự kiện\". Khóa lỏng gộp nhầm những lần mua lại thật, và loại chúng là xóa doanh thu thật.",
@@ -324,14 +324,14 @@
     "question": "Giao dịch 1341 được tạo ngày 2025-09-13 và đến ngày chốt 2026-06-30 vẫn `pending`. Cách xử lý nào hợp lý nhất trong báo cáo?",
     "questionEn": "Payment 1341 was created on 2025-09-13 and is still `pending` at the 2026-06-30 snapshot. What is the most sensible way to handle it in a report?",
     "options": [
-      "Tính nó là thành công vì phần lớn giao dịch đều thành công",
-      "Gắn nhãn \"bị treo\", tách riêng và gửi danh sách cho vận hành kiểm tra với gateway",
+      "Tính nó là thành công, vì phần lớn giao dịch trong bảng đều thành công",
+      "Gắn nhãn \"bị treo\", tách riêng và chuyển cho vận hành kiểm tra",
       "Tính nó là thất bại vì đã quá lâu không có kết quả",
       "Xóa nó khỏi bảng vì giao dịch không bao giờ hoàn tất"
     ],
     "optionsEn": [
-      "Count it as a success, since most payments succeed",
-      "Label it \"stuck\", show it separately and send the list to operations to check with the gateway",
+      "Count it as a success, since most payments in the table succeed",
+      "Label it \"stuck\", show it apart and pass it to operations to check",
       "Count it as failed, since it has had no result for too long",
       "Delete it from the table, since the payment never completed"
     ],
@@ -358,14 +358,14 @@
     "options": [
       "Vì SQLite không hỗ trợ giá trị `'now'` trong hàm `julianday`",
       "Vì `'now'` trả về giờ Việt Nam còn dữ liệu được lưu theo UTC",
-      "Vì viết cứng ngày giúp query chạy nhanh hơn trên bảng lớn",
-      "Vì dữ liệu được chốt ngày 2026-06-30; dùng ngày hôm nay sẽ làm kết quả đổi mỗi lần chạy"
+      "Vì viết cứng ngày giúp câu query chạy nhanh hơn hẳn trên các bảng dữ liệu lớn",
+      "Vì dữ liệu chốt ngày 2026-06-30; dùng hôm nay thì kết quả đổi mỗi lần chạy"
     ],
     "optionsEn": [
-      "Because SQLite does not support `'now'` in `julianday`",
+      "Because SQLite does not support `'now'` inside the `julianday` function",
       "Because `'now'` returns Vietnam time while the data is stored in UTC",
-      "Because a literal date makes the query faster on large tables",
-      "Because the data is a snapshot as of 2026-06-30; today's date would change the result on every run"
+      "Because a literal date makes the query run faster on large tables",
+      "Because data is a 2026-06-30 snapshot; today's date changes results each run"
     ],
     "answer": 3,
     "explanation": "Mọi trạng thái trong fintech.db được tính tại ngày chốt 2026-06-30. Dùng ngày cố định giúp kết quả lặp lại được và khớp với snapshot.",
@@ -390,13 +390,13 @@
     "options": [
       "Ngày 31/5, vì phải trừ 7 tiếng",
       "Ngày 1/6, vì ngày trong timestamp là 2026-06-01",
-      "Ngày 2/6, lúc 00:41 giờ Việt Nam",
+      "Ngày 2/6, vì cộng 7 tiếng thì qua nửa đêm",
       "Không xác định được nếu không biết thiết bị của khách"
     ],
     "optionsEn": [
       "31 May, because you subtract 7 hours",
       "1 June, because the date in the timestamp is 2026-06-01",
-      "2 June, at 00:41 Vietnam time",
+      "2 June, because adding 7 hours passes midnight",
       "It cannot be known without the customer's device"
     ],
     "answer": 2,
@@ -452,14 +452,14 @@
     "question": "Query đối soát ví:\n`FROM wallets w\nLEFT JOIN wallet_transactions t ON t.wallet_id = w.wallet_id\nWHERE t.status = 'success'`\nchỉ tìm ra 4 ví lệch, trong khi đáp án đúng là 6. Lỗi ở đâu?",
     "questionEn": "A wallet reconciliation query:\n`FROM wallets w\nLEFT JOIN wallet_transactions t ON t.wallet_id = w.wallet_id\nWHERE t.status = 'success'`\nfinds only 4 broken wallets when the right answer is 6. Where is the bug?",
     "options": [
-      "Phải dùng `INNER JOIN` thay vì `LEFT JOIN` để không mất dòng",
-      "Điều kiện `WHERE` loại các ví không có giao dịch thành công; phải đưa nó vào `ON`",
+      "Phải dùng `INNER JOIN` thay vì `LEFT JOIN` để không bị mất dòng nào của ví",
+      "Điều kiện `WHERE` loại ví không có giao dịch thành công; phải đặt vào `ON`",
       "Phải tính cả giao dịch thất bại vì chúng cũng làm đổi số dư",
-      "Phải bỏ `GROUP BY` vì đối soát cần làm trên từng giao dịch"
+      "Phải bỏ `GROUP BY` vì đối soát cần làm trên từng giao dịch riêng lẻ"
     ],
     "optionsEn": [
-      "Use `INNER JOIN` instead of `LEFT JOIN` so no rows are lost",
-      "The `WHERE` filter drops wallets with no successful transaction; it belongs in `ON`",
+      "Use `INNER JOIN` instead of `LEFT JOIN` so no wallet rows get lost",
+      "The `WHERE` filter drops wallets with no successful row; move it into `ON`",
       "Failed transactions must be included because they also change the balance",
       "Remove `GROUP BY` because reconciliation must be done per transaction"
     ],
@@ -484,16 +484,16 @@
     "question": "Tổng số dư của mọi ví khớp chính xác với tổng sổ giao dịch. Một bạn kết luận: \"Đối soát xong, không có ví nào lệch.\" Vì sao kết luận này chưa an toàn?",
     "questionEn": "The total of all wallet balances exactly matches the ledger total. A colleague concludes: \"Reconciliation done, no wallet is off.\" Why is that conclusion not safe?",
     "options": [
-      "Vì tổng số dư luôn khác tổng giao dịch do làm tròn",
+      "Vì tổng số dư luôn khác tổng giao dịch một chút do làm tròn",
       "Vì đối soát chỉ có nghĩa khi so với dữ liệu của ngày hôm trước",
-      "Vì ví bị khóa và ví đã đóng không được phép đối soát",
-      "Vì chênh lệch dương ở ví này và âm ở ví kia có thể triệt tiêu nhau trong tổng"
+      "Vì ví bị khóa và ví đã đóng không được phép đưa vào đối soát",
+      "Vì chênh lệch dương ở ví này và âm ở ví kia có thể bù trừ nhau"
     ],
     "optionsEn": [
       "Because balance totals always differ from ledger totals due to rounding",
       "Because reconciliation only makes sense against yesterday's data",
-      "Because locked and closed wallets may not be reconciled",
-      "Because a positive break on one wallet and a negative one on another can cancel out in the total"
+      "Because locked and closed wallets may not be included in reconciliation",
+      "Because a plus break on one wallet and a minus on another can cancel out"
     ],
     "answer": 3,
     "explanation": "Đối soát phải làm ở grain từng tài khoản. Lệch +200.000 ở ví này và -200.000 ở ví kia cho tổng khớp hoàn hảo nhưng vẫn là hai lỗi thật.",
@@ -516,13 +516,13 @@
     "question": "Trưởng nhóm tài chính đề nghị: \"Chạy `DELETE` 37 giao dịch trùng trong bảng production cho báo cáo đúng.\" Phản hồi nào tốt nhất?",
     "questionEn": "The finance lead suggests: \"Run a `DELETE` on the 37 duplicate payments in production so the reports are right.\" What is the best response?",
     "options": [
-      "Loại chúng ở lớp làm sạch, gửi danh sách để hoàn tiền cho khách và đề nghị sửa retry bằng idempotency key",
-      "Đồng ý, vì xóa bản ghi trùng là cách nhanh nhất để GMV đúng",
-      "Giữ nguyên mọi thứ, vì 37 dòng chỉ khoảng 0,4% nên không đáng xử lý",
+      "Loại chúng ở lớp làm sạch, gửi danh sách để hoàn tiền và sửa retry tận gốc",
+      "Đồng ý, vì xóa bản ghi trùng là cách nhanh và gọn nhất để GMV đúng",
+      "Giữ nguyên mọi thứ, vì 37 dòng chỉ chiếm khoảng 0,4% nên không đáng để xử lý",
       "Đổi trạng thái 37 dòng đó thành `failed` để báo cáo tự loại chúng"
     ],
     "optionsEn": [
-      "Exclude them in the clean layer, send the list for customer refunds and ask for an idempotency key on retries",
+      "Exclude them in the clean layer, send the list for refunds and fix the retries",
       "Agree, because deleting duplicates is the fastest way to get GMV right",
       "Leave everything as it is, because 37 rows are only about 0.4% and not worth handling",
       "Change those 37 rows to `failed` so reports drop them automatically"
@@ -548,15 +548,15 @@
     "question": "Thực hành nào KHÔNG phù hợp với nguyên tắc làm sạch dữ liệu trong bài?",
     "questionEn": "Which practice does NOT fit the cleaning principles in this topic?",
     "options": [
-      "Giữ cột `income_raw` ngay cạnh cột thu nhập đã làm sạch",
-      "Chạy `UPDATE customers SET city = 'Hanoi' WHERE city = 'HN'` trên bảng gốc mà không ghi lại",
-      "Thêm cột `income_flag` ghi 'missing', 'invalid_typo' hoặc 'ok'",
+      "Giữ cột `income_raw` ngay cạnh cột thu nhập đã được làm sạch để đối chiếu",
+      "Chạy `UPDATE customers SET city = 'Hanoi'` trên bảng gốc mà không ghi lại",
+      "Thêm cột `income_flag` ghi 'missing', 'invalid_typo' hoặc 'ok' cho từng dòng",
       "Ghi vào cleaning log số dòng bị ảnh hưởng và team đã được báo"
     ],
     "optionsEn": [
-      "Keeping an `income_raw` column right next to the cleaned income",
-      "Running `UPDATE customers SET city = 'Hanoi' WHERE city = 'HN'` on the source table without writing it down",
-      "Adding an `income_flag` column of 'missing', 'invalid_typo' or 'ok'",
+      "Keeping an `income_raw` column right beside the cleaned income for comparison",
+      "Running `UPDATE customers SET city = 'Hanoi'` on the source table, unlogged",
+      "Adding an `income_flag` column of 'missing', 'invalid_typo' or 'ok' per row",
       "Recording in the cleaning log how many rows were affected and which team was told"
     ],
     "answer": 1,

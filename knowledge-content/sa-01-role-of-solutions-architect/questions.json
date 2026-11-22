@@ -4,16 +4,16 @@
     "question": "Mô tả nào đúng nhất về trách nhiệm cốt lõi của một Solutions Architect?",
     "questionEn": "Which description best captures the core responsibility of a Solutions Architect?",
     "options": [
-      "Viết phần lớn code lõi của hệ thống để đảm bảo chất lượng",
-      "Quản lý nhân sự và tiến độ của các đội phát triển",
-      "Biến bài toán kinh doanh thành giải pháp kỹ thuật trải qua nhiều hệ thống và bảo vệ được các quyết định",
-      "Định ra chiến lược công nghệ 5 năm cho toàn bộ tổ chức"
+      "Viết phần lớn code lõi của hệ thống và review mọi pull request để đảm bảo chất lượng",
+      "Quản lý nhân sự, tuyển dụng và tiến độ hằng tuần của các đội phát triển",
+      "Biến bài toán kinh doanh thành giải pháp kỹ thuật xuyên nhiều hệ thống và bảo vệ các quyết định",
+      "Định ra chiến lược công nghệ 5 năm và danh mục ứng dụng cho toàn bộ tổ chức"
     ],
     "optionsEn": [
-      "Write most of the core code so that quality is guaranteed",
-      "Manage the people and the schedule of the development teams",
-      "Turn a business problem into a technical solution across systems and defend the decisions",
-      "Set the five-year technology strategy for the whole organisation"
+      "Write most of the core code and review every pull request so that quality is guaranteed",
+      "Manage the hiring, the people and the weekly schedule of the development teams",
+      "Turn a business problem into a cross-system technical solution and defend the decisions",
+      "Set the five-year technology strategy and application portfolio for the whole organisation"
     ],
     "answer": 2,
     "explanation": "SA chịu trách nhiệm đầu-cuối cho một giải pháp: từ yêu cầu, phương án, đánh đổi tới quyết định và giao tiếp. Viết code lõi là việc của developer/tech lead, quản lý người là việc của engineering manager, còn chiến lược toàn tổ chức nhiều năm là phạm vi của enterprise architect.",
@@ -44,16 +44,16 @@
     "question": "Điểm khác biệt hữu ích nhất giữa software architect và Solutions Architect là gì?",
     "questionEn": "What is the most useful distinction between a software architect and a Solutions Architect?",
     "options": [
-      "Software architect chỉ làm on-premises, SA chỉ làm trên cloud",
-      "SA không cần hiểu kỹ thuật, còn software architect thì cần",
-      "Software architect chịu trách nhiệm chi phí, SA chịu trách nhiệm chất lượng code",
-      "Software architect đi sâu vào cấu trúc bên trong một hệ thống; SA nhìn một giải pháp trải qua nhiều hệ thống"
+      "Software architect thiết kế cho on-premises, còn SA là người thiết kế các giải pháp trên cloud",
+      "SA tập trung giao tiếp với khách hàng nên ít cần chiều sâu kỹ thuật như software architect",
+      "Software architect chịu trách nhiệm chi phí hạ tầng, còn SA chịu trách nhiệm chất lượng code từng module",
+      "Software architect đi sâu vào nội bộ một hệ thống; SA nhìn một giải pháp xuyên nhiều hệ thống"
     ],
     "optionsEn": [
-      "Software architects only work on-premises, SAs only in the cloud",
-      "An SA does not need technical depth, a software architect does",
-      "The software architect owns cost, the SA owns code quality",
-      "A software architect goes deep into one system's internals; an SA spans one solution across several systems"
+      "Software architects design for on-premises, whereas SAs are the ones who design cloud solutions",
+      "An SA focuses on client communication and so needs less technical depth than a software architect",
+      "The software architect owns infrastructure cost, while the SA owns the code quality of each module",
+      "A software architect goes deep inside one system; an SA spans a solution across several systems"
     ],
     "answer": 3,
     "explanation": "Phân biệt theo phạm vi: software architect quyết module, pattern, cấu trúc bên trong một codebase; SA quyết những hệ thống nào tham gia và tích hợp ra sao. Cả hai đều cần chiều sâu kỹ thuật, và không vai trò nào bị giới hạn theo nơi chạy.",
@@ -84,16 +84,16 @@
     "question": "Product owner viết: \"Trang thanh toán phải nhanh và luôn sẵn sàng.\" Cách viết lại nào hữu ích nhất cho kiến trúc sư?",
     "questionEn": "The product owner writes: \"The checkout page must be fast and always available.\" Which rewrite is most useful to an architect?",
     "options": [
-      "Trang thanh toán phải dùng cache và CDN để luôn nhanh",
-      "Trang thanh toán phải nhanh hơn trang của đối thủ",
-      "Ở đỉnh 3.000 request/s, checkout có p95 dưới 400 ms, lỗi dưới 0,1%, availability 99,95% mỗi tháng",
-      "Trang thanh toán phải chạy trên ít nhất ba server"
+      "Trang thanh toán phải dùng Redis cache và CDN cho mọi tài nguyên để luôn phản hồi nhanh",
+      "Trang thanh toán phải tải nhanh hơn trang của đối thủ chính và không được gián đoạn",
+      "Ở đỉnh 3.000 request/s: p95 dưới 400 ms, lỗi dưới 0,1%, availability 99,95%/tháng",
+      "Trang thanh toán chạy trên ít nhất ba server sau load balancer để luôn sẵn sàng"
     ],
     "optionsEn": [
-      "The checkout page must use a cache and a CDN so it is always fast",
-      "The checkout page must be faster than the competitor's",
-      "At a peak of 3,000 requests/s, checkout has p95 under 400 ms, errors under 0.1%, 99.95% monthly availability",
-      "The checkout page must run on at least three servers"
+      "The checkout page must use a Redis cache and a CDN for every asset so it always responds fast",
+      "The checkout page must load faster than the main competitor's and must not have outages",
+      "At a 3,000 req/s peak: p95 under 400 ms, errors under 0.1%, 99.95% monthly availability",
+      "The checkout page must run on at least three servers behind a load balancer to stay available"
     ],
     "answer": 2,
     "explanation": "Một kịch bản thuộc tính chất lượng tốt có môi trường (đỉnh tải), kích thích và thước đo phản hồi kiểm thử được. Các phương án khác hoặc vẫn mơ hồ, hoặc nhảy thẳng vào giải pháp (cache, số server) thay vì phát biểu yêu cầu.",
@@ -124,16 +124,16 @@
     "question": "Trong buổi discovery, bạn nghe được: \"Theo quy định, dữ liệu thanh toán của khách hàng Việt Nam phải được lưu tại Việt Nam.\" Nên xếp phát biểu này vào loại nào?",
     "questionEn": "During discovery you hear: \"By regulation, payment data of Vietnamese customers must be stored in Vietnam.\" How should you classify this statement?",
     "options": [
-      "Yêu cầu chức năng, vì nó mô tả nơi lưu dữ liệu",
-      "Giả định, cần kiểm chứng bằng load test",
+      "Yêu cầu chức năng, vì nó mô tả nơi hệ thống lưu dữ liệu",
+      "Giả định, cần kiểm chứng bằng load test trước khi chốt thiết kế",
       "Thuộc tính chất lượng có thể đánh đổi lấy chi phí thấp hơn",
-      "Ràng buộc — một điều kiện cố định mà mọi phương án thiết kế phải thoả mãn"
+      "Ràng buộc — điều kiện cố định mọi phương án phải thoả mãn"
     ],
     "optionsEn": [
       "A functional requirement, because it describes where data is stored",
-      "An assumption, to be verified with a load test",
+      "An assumption, to be verified with a load test before the design is final",
       "A quality attribute that can be traded for lower cost",
-      "A constraint — a fixed condition every design option must satisfy"
+      "A constraint — a fixed condition every option must satisfy"
     ],
     "answer": 3,
     "explanation": "Quy định pháp lý về nơi lưu dữ liệu là ràng buộc: nó không thương lượng được và loại bỏ ngay những phương án vi phạm. Coi ràng buộc như thứ có thể đánh đổi là một lỗi kinh điển; và load test không liên quan tới việc kiểm chứng một quy định.",
@@ -164,16 +164,16 @@
     "question": "Quyết định nào xứng đáng được đầu tư prototype và review kỹ nhất vì là \"cửa một chiều\" (khó đảo ngược)?",
     "questionEn": "Which decision most deserves prototypes and a thorough review because it is a \"one-way door\" (hard to reverse)?",
     "options": [
-      "Chọn thư viện logging cho một service",
-      "Chọn cỡ instance ban đầu cho môi trường staging",
+      "Chọn thư viện logging và định dạng log cho một service nội bộ",
+      "Chọn cỡ instance ban đầu cho môi trường staging của dự án",
       "Chọn mô hình dữ liệu và database engine cho dữ liệu giao dịch lõi",
-      "Chọn màu sắc cho dashboard giám sát"
+      "Chọn bố cục và màu sắc cho dashboard giám sát của đội vận hành"
     ],
     "optionsEn": [
-      "Choosing the logging library for one service",
+      "Choosing the logging library and log format for one internal service",
       "Choosing the initial instance size for the staging environment",
       "Choosing the data model and database engine for core transactional data",
-      "Choosing the colours of the monitoring dashboard"
+      "Choosing the layout and colours of the operations team's monitoring dashboard"
     ],
     "answer": 2,
     "explanation": "Dữ liệu lõi tích tụ theo thời gian, và đổi mô hình dữ liệu hay database engine sau này nghĩa là migration tốn kém, rủi ro. Thư viện logging, cỡ instance hay màu dashboard đều đổi được nhanh và rẻ — nên quyết nhanh.",
@@ -204,16 +204,16 @@
     "question": "Một năm trước, ADR-0007 (trạng thái Accepted) chọn tự vận hành Kafka. Nay đội quyết định chuyển sang một hàng đợi managed. Cách xử lý ADR đúng là gì?",
     "questionEn": "A year ago ADR-0007 (status Accepted) chose to self-host Kafka. The team has now decided to move to a managed queue. What is the right way to handle the ADRs?",
     "options": [
-      "Sửa nội dung ADR-0007 cho khớp quyết định mới để tránh gây nhầm lẫn",
-      "Xoá ADR-0007 khỏi repo vì nó không còn đúng",
+      "Sửa trực tiếp nội dung ADR-0007 cho khớp với quyết định mới để tránh gây nhầm lẫn",
+      "Xoá ADR-0007 khỏi repo vì nó không còn đúng và chỉ gây nhiễu cho người mới",
       "Chỉ ghi quyết định mới vào wiki, ADR là tài liệu lịch sử không cần cập nhật",
-      "Viết ADR mới supersede ADR-0007, đổi trạng thái ADR-0007 thành Superseded và liên kết hai chiều"
+      "Viết ADR mới supersede ADR-0007, đánh dấu ADR-0007 là Superseded, liên kết hai chiều"
     ],
     "optionsEn": [
-      "Edit ADR-0007's content to match the new decision to avoid confusion",
-      "Delete ADR-0007 from the repo because it is no longer true",
+      "Edit ADR-0007's content directly to match the new decision so nobody gets confused",
+      "Delete ADR-0007 from the repo because it is no longer true and only confuses newcomers",
       "Record the new decision only in the wiki; ADRs are history and need no updates",
-      "Write a new ADR that supersedes ADR-0007, mark ADR-0007 as Superseded and link both ways"
+      "Write a new ADR superseding ADR-0007, mark ADR-0007 Superseded and link the two"
     ],
     "answer": 3,
     "explanation": "ADR đã accepted là bất biến. Lý do ta đổi ý là thông tin quý, nên giữ bản cũ, đánh dấu Superseded và trỏ tới ADR mới. Sửa hay xoá bản cũ sẽ làm mất lịch sử đó; tách quyết định sang wiki khiến nó rời xa code.",
@@ -224,16 +224,16 @@
     "question": "Đọc bản ADR sau. Mục quan trọng nào đang bị thiếu?\n`ADR-0012: Use DynamoDB for session storage\nStatus: Accepted\nContext:\n  Sessions are read on every request, 8,000 reads/s at peak.\n  Sessions expire after 30 minutes.\nDecision:\n  Store sessions in DynamoDB with a TTL attribute.`",
     "questionEn": "Read this ADR. Which important section is missing?\n`ADR-0012: Use DynamoDB for session storage\nStatus: Accepted\nContext:\n  Sessions are read on every request, 8,000 reads/s at peak.\n  Sessions expire after 30 minutes.\nDecision:\n  Store sessions in DynamoDB with a TTL attribute.`",
     "options": [
-      "Consequences — những gì ta được, những gì ta mất và rủi ro chấp nhận",
-      "Code mẫu hiện thực việc đọc/ghi session",
-      "Danh sách toàn bộ người tham gia cuộc họp",
-      "Sơ đồ C4 mức Code của service session"
+      "Consequences — được gì, mất gì và rủi ro nào chấp nhận",
+      "Code mẫu hiện thực việc đọc/ghi session bằng AWS SDK",
+      "Danh sách người tham gia và biên bản thảo luận chi tiết",
+      "Sơ đồ C4 mức Code cho các class trong service session"
     ],
     "optionsEn": [
-      "Consequences — what we gain, what we give up and which risks we accept",
-      "Sample code implementing the session reads and writes",
-      "The full list of meeting attendees",
-      "A C4 code-level diagram of the session service"
+      "Consequences — what we gain, give up and accept as risk",
+      "Sample code implementing the session reads and writes with the AWS SDK",
+      "The full list of meeting attendees and the detailed minutes",
+      "A C4 code-level diagram of the classes in the session service"
     ],
     "answer": 0,
     "explanation": "Định dạng Nygard gồm Title, Status, Context, Decision, Consequences. Thiếu Consequences thì người đọc sau không biết đánh đổi đã chấp nhận (ví dụ TTL xoá bản ghi hết hạn không tức thì, nên ứng dụng vẫn phải tự kiểm tra thời hạn). Code mẫu, danh sách người họp hay sơ đồ mức Code không phải phần cốt lõi của ADR.",
@@ -244,16 +244,16 @@
     "question": "Trong mô hình C4, \"container\" nghĩa là gì?",
     "questionEn": "In the C4 model, what does \"container\" mean?",
     "options": [
-      "Một Docker container đang chạy trong cluster",
-      "Một đơn vị chạy hoặc lưu dữ liệu riêng rẽ, như web app, API, database hay serverless function",
-      "Một nhóm class có chung package",
-      "Một hệ thống bên ngoài mà giải pháp phụ thuộc vào"
+      "Một Docker container đang chạy trong cluster, mỗi container ứng với một image",
+      "Một đơn vị chạy hoặc lưu dữ liệu riêng, như web app, API hay database",
+      "Một nhóm class có chung package, được đóng gói thành một thư viện",
+      "Một hệ thống bên ngoài mà giải pháp phụ thuộc vào, thường vẽ màu xám"
     ],
     "optionsEn": [
-      "A Docker container running in the cluster",
-      "A separately runnable or data-storing unit such as a web app, an API, a database or a serverless function",
-      "A group of classes sharing a package",
-      "An external system the solution depends on"
+      "A Docker container running in the cluster, one per image that is deployed",
+      "A separately runnable or data-storing unit, such as a web app, API or database",
+      "A group of classes sharing a package, bundled together as one library",
+      "An external system the solution depends on, usually drawn in grey"
     ],
     "answer": 1,
     "explanation": "Container trong C4 là đơn vị chạy/deploy hoặc lưu dữ liệu riêng rẽ; khái niệm này có trước Docker. Nhóm class thuộc mức Component/Code, còn hệ thống bên ngoài xuất hiện ở sơ đồ System Context.",
@@ -264,13 +264,13 @@
     "question": "Bạn cần giải thích cho giám đốc điều hành và cán bộ tuân thủ rằng hệ thống mới phục vụ ai và trao đổi dữ liệu với những hệ thống bên ngoài nào. Nên dùng sơ đồ C4 nào?",
     "questionEn": "You must explain to the COO and the compliance officer who the new system serves and which external systems it exchanges data with. Which C4 diagram should you use?",
     "options": [
-      "System Context",
+      "Context",
       "Container",
       "Component",
       "Code"
     ],
     "optionsEn": [
-      "System Context",
+      "Context",
       "Container",
       "Component",
       "Code"
@@ -284,16 +284,16 @@
     "question": "Bạn có 15 phút trình bày với CFO về đề xuất chuyển hệ thống lõi lên cloud. Cách mở đầu nào hiệu quả nhất?",
     "questionEn": "You have 15 minutes with the CFO to present a proposal to move the core system to the cloud. Which opening works best?",
     "options": [
-      "Giải thích chi tiết kiến trúc Kubernetes và service mesh sẽ dùng",
-      "Trình chiếu sơ đồ Container và Component của toàn bộ hệ thống",
-      "Nêu khuyến nghị, khoảng chi phí, rủi ro chính và các phương án thay thế ngay từ đầu",
-      "Kể lại lịch sử kỹ thuật của hệ thống hiện tại trong 10 năm qua"
+      "Giải thích chi tiết kiến trúc Kubernetes, service mesh và pipeline CI/CD sẽ dùng",
+      "Trình chiếu sơ đồ Container và Component của toàn bộ hệ thống mục tiêu trên cloud",
+      "Nêu ngay khuyến nghị, khoảng chi phí, rủi ro chính và các phương án thay thế",
+      "Kể lại lịch sử kỹ thuật và các sự cố lớn của hệ thống hiện tại trong 10 năm"
     ],
     "optionsEn": [
-      "Explain the Kubernetes and service mesh architecture in detail",
-      "Show the Container and Component diagrams of the whole system",
+      "Explain the Kubernetes, service mesh and CI/CD pipeline architecture in detail",
+      "Show the Container and Component diagrams of the whole target system in the cloud",
       "Lead with the recommendation, the cost range, the main risks and the alternatives",
-      "Walk through the technical history of the current system over ten years"
+      "Walk through the technical history and major incidents of the current system over ten years"
     ],
     "answer": 2,
     "explanation": "CFO quan tâm kết quả, chi phí và rủi ro. Kết luận trước (bottom line up front) kèm các phương án cho họ thứ cần để ra quyết định; chi tiết kỹ thuật và lịch sử hệ thống dành cho người muốn đào sâu sau đó.",
@@ -304,16 +304,16 @@
     "question": "Đội phát triển phản đối thiết kế của bạn: họ cho rằng thư viện ORM đã chọn không chịu nổi lưu lượng ghi dự kiến. Bạn không quản lý trực tiếp đội này. Cách xử lý tốt nhất?",
     "questionEn": "The development team pushes back on your design: they believe the chosen ORM cannot handle the expected write volume. You do not manage this team. What is the best response?",
     "options": [
-      "Giữ nguyên thiết kế vì kiến trúc sư chịu trách nhiệm quyết định cuối cùng",
-      "Nhờ quản lý cấp cao ra lệnh cho đội làm theo thiết kế",
-      "Để đội tự chọn thứ họ thích mà không cần ghi lại gì",
+      "Giữ nguyên thiết kế vì kiến trúc sư chịu trách nhiệm và có quyền quyết định cuối cùng",
+      "Nhờ quản lý cấp cao ra lệnh cho đội làm đúng theo thiết kế đã được phê duyệt",
+      "Để đội tự chọn ORM họ thích, miễn kịp tiến độ, mà không cần ghi lại gì",
       "Lắng nghe, cùng làm một spike đo tải ngắn, rồi quyết theo dữ liệu và ghi vào ADR"
     ],
     "optionsEn": [
-      "Keep the design because the architect has the final say",
-      "Ask senior management to order the team to follow the design",
-      "Let the team pick whatever they prefer without recording anything",
-      "Listen, run a short load-test spike together, then decide on the data and record it in an ADR"
+      "Keep the design as it is, because the architect is accountable and has the final say",
+      "Ask senior management to order the team to follow the approved design exactly",
+      "Let the team pick whichever ORM they prefer, as long as they ship on time, recording nothing",
+      "Listen, run a short load-test spike together, decide on the data and record it in an ADR"
     ],
     "answer": 3,
     "explanation": "Kiến trúc sư gây ảnh hưởng mà không cần quyền lực: đội xây dựng có thể biết điều bạn không biết. Một spike có thời hạn biến tranh luận thành số đo, và ADR giữ lại lý do. Áp đặt làm mất niềm tin; bỏ mặc không ghi lại thì mất lịch sử quyết định.",

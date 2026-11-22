@@ -4,7 +4,7 @@
     "question": "Tháng trước GMV của một cổng thanh toán là 450 triệu đồng, phí MDR trung bình là 1,5%. CEO hỏi \"tháng trước mình có doanh thu bao nhiêu?\". Câu trả lời nào đúng nhất?",
     "questionEn": "Last month a payment gateway's GMV was 450 million VND and the average MDR was 1.5%. The CEO asks \"what was our revenue last month?\". Which answer is best?",
     "options": [
-      "Khoảng 450 triệu đồng, vì GMV chính là doanh thu của nền tảng",
+      "Khoảng 450 triệu đồng, vì toàn bộ GMV chính là doanh thu của nền tảng",
       "Khoảng 443 triệu đồng, tức GMV sau khi trừ phí MDR 1,5%",
       "Khoảng 6,75 triệu đồng doanh thu MDR gộp, chưa trừ các chi phí",
       "Không tính được nếu chưa biết số giao dịch bị hoàn tiền"
@@ -38,7 +38,7 @@
     "options": [
       "Một số đơn rất lớn kéo trung bình lên; một giỏ hàng điển hình gần 334.000 đồng hơn",
       "Dữ liệu chắc chắn bị lỗi, vì trung bình và trung vị phải gần bằng nhau",
-      "Đa số khách mua đơn khoảng 733.000 đồng, còn trung vị bị kéo xuống bởi đơn nhỏ",
+      "Đa số khách mua đơn khoảng 733.000 đồng, còn trung vị bị kéo xuống bởi vài đơn nhỏ",
       "Nên báo cáo trung vị thay cho GMV, vì GMV bị phóng đại bởi các đơn lớn"
     ],
     "optionsEn": [
@@ -133,13 +133,13 @@
     "questionEn": "Yesterday's QR payments: `status | count\\nsuccess | 900\\nrefunded | 50\\nfailed | 40\\npending | 10`. Using the rule from the lesson, what is the payment success rate?",
     "options": [
       "95,0% = 950 ÷ 1.000, tính trên toàn bộ dòng",
-      "96,0% = 950 ÷ 990, refunded tính thành công, bỏ pending",
+      "96,0% = 950 ÷ 990, tính refunded, bỏ pending",
       "90,9% = 900 ÷ 990, chỉ tính status success",
       "90,0% = 900 ÷ 1.000, chỉ success trên tất cả"
     ],
     "optionsEn": [
       "95.0% = 950 ÷ 1,000, over every row",
-      "96.0% = 950 ÷ 990, refunded as success, pending excluded",
+      "96.0% = 950 ÷ 990, refunded in, pending out",
       "90.9% = 900 ÷ 990, counting only status success",
       "90.0% = 900 ÷ 1,000, only success over everything"
     ],
@@ -166,7 +166,7 @@
     "options": [
       "Đội risk, để nới lỏng các luật chặn giao dịch gian lận",
       "Bộ phận chăm sóc khách hàng, để nhắc khách nạp thêm tiền",
-      "Issuer, để hỏi vì sao họ từ chối thẻ nhiều hơn tuần trước",
+      "Issuer, để hỏi vì sao tuần này họ từ chối thẻ nhiều hơn tuần trước",
       "Product và nhà cung cấp SMS/OTP, vì bước xác thực đang lỗi"
     ],
     "optionsEn": [
@@ -198,7 +198,7 @@
     "options": [
       "Một phiên có thể ghi cùng một bước nhiều lần, ví dụ bấm \"Thanh toán\" hai lần",
       "`COUNT(*)` không chạy được trên những cột có kiểu dữ liệu text",
-      "`COUNT(DISTINCT …)` tự động loại bỏ các phiên của khách bị trùng",
+      "`COUNT(DISTINCT …)` tự động loại bỏ các phiên của những khách hàng bị trùng",
       "Để query chạy nhanh hơn trên các bảng event có kích thước lớn"
     ],
     "optionsEn": [
@@ -262,7 +262,7 @@
     "options": [
       "Một refund, vì shop sẽ chủ động trả lại tiền cho khách",
       "Một chargeback, tranh chấp đi theo quy tắc của tổ chức thẻ",
-      "Một giao dịch bị decline, vì issuer đã từ chối thanh toán",
+      "Một giao dịch bị decline, vì ngân hàng issuer đã từ chối thanh toán",
       "Một lỗi double charge, vì khách bị trừ tiền hai lần"
     ],
     "optionsEn": [
@@ -292,7 +292,7 @@
     "question": "Bạn tính refund rate của ngành thời trang. Mẫu số nào đúng?",
     "questionEn": "You are computing the refund rate for the fashion category. Which denominator is right?",
     "options": [
-      "Tất cả các dòng payments của ngành thời trang, gồm cả failed",
+      "Tất cả các dòng payments của ngành thời trang, tính cả các dòng failed",
       "Số phiên checkout của ngành thời trang có bước view_cart",
       "Số giao dịch có status = 'success' của ngành thời trang",
       "Số giao dịch thành công, tức status IN ('success', 'refunded')"
@@ -388,15 +388,15 @@
     "question": "Product hỏi \"tháng 6 có bao nhiêu ví hoạt động?\". Cách tính nào đúng nhất?",
     "questionEn": "Product asks \"how many wallets were active in June?\". Which calculation is best?",
     "options": [
-      "Đếm số ví trong bảng `wallets` đang có `status = 'active'`",
-      "Đếm ví khác nhau có giao dịch success do khách thực hiện (bỏ cashback, refund) trong tháng 6 theo giờ VN",
-      "Đếm tất cả giao dịch success trong tháng 6, kể cả cashback và refund",
-      "Đếm số ví đã mở trong tháng 6 trong bảng `wallets`"
+      "Đếm số ví trong bảng `wallets` đang có `status = 'active'` tại ngày chốt",
+      "Đếm ví khác nhau có giao dịch success do khách tự thực hiện trong tháng 6 giờ VN",
+      "Đếm tất cả giao dịch success trong tháng 6, kể cả các giao dịch cashback và refund",
+      "Đếm số ví đã được mở trong tháng 6 theo bảng `wallets`"
     ],
     "optionsEn": [
-      "Count wallets in `wallets` whose `status = 'active'`",
-      "Count distinct wallets with a customer-initiated success transaction (no cashback, refund) in June, VN time",
-      "Count all success transactions in June, including cashback and refunds",
+      "Count wallets in `wallets` whose `status = 'active'` at the snapshot date",
+      "Count distinct wallets with a customer-made success transaction in June, VN time",
+      "Count all success transactions in June, including cashback and refund transactions",
       "Count wallets opened in June in the `wallets` table"
     ],
     "answer": 1,
@@ -452,14 +452,14 @@
     "question": "Bảng cohort mua lại trong 90 ngày cho thấy cohort tháng 7/2025 (tháng đầu tiên có dữ liệu) cao nhất, 58,9%. Vì sao nên thận trọng?",
     "questionEn": "A 90-day repeat-purchase cohort table shows the July 2025 cohort (the first month of data) is highest, at 58.9%. Why be careful?",
     "options": [
-      "Khách mua từ trước tháng 7 bị tính là \"mới\", nên cohort này đầy khách trung thành",
-      "Cohort tháng 7 chưa đủ 90 ngày để quan sát hành vi mua lại",
+      "Khách đã mua từ trước tháng 7 bị tính là \"mới\" trong cohort này",
+      "Cohort tháng 7 chưa có đủ 90 ngày để quan sát được hành vi mua lại",
       "Tháng 7 có nhiều ngày lễ mua sắm như 11.11 và 12.12",
       "Cohort càng lớn thì tỷ lệ mua lại càng thấp theo quy luật"
     ],
     "optionsEn": [
-      "Customers who bought before July count as \"new\", so the cohort is full of loyal buyers",
-      "The July cohort hasn't had 90 days yet to show repeat behaviour",
+      "Customers who bought before July are counted as \"new\" in this cohort",
+      "The July cohort hasn't had a full 90 days yet to show repeat behaviour",
       "July has many shopping days such as 11.11 and 12.12",
       "The bigger a cohort, the lower its repeat rate, as a rule"
     ],
@@ -484,7 +484,7 @@
     "question": "Tính cả năm, tỷ lệ thành công của thẻ trên Android là 89,1% và trên iOS là 89,7%. Vì sao con số này không cho thấy sự cố OTP tháng 5?",
     "questionEn": "Over the whole year, card success is 89.1% on Android and 89.7% on iOS. Why doesn't this reveal the May OTP outage?",
     "options": [
-      "Vì sự cố chỉ ảnh hưởng iOS, nên Android không bị đổi",
+      "Vì sự cố chỉ ảnh hưởng tới iOS, nên số liệu Android không bị đổi",
       "Vì phải loại các giao dịch refunded khỏi tử số trước",
       "Vì một tuần sự cố bị pha loãng trong trung bình 12 tháng",
       "Vì tỷ lệ thành công không đo được theo từng thiết bị"
@@ -517,15 +517,15 @@
     "questionEn": "A daily query uses `SUM(failure_reason = 'otp_timeout') AS otp`, and `otp` shows NULL on days with no failed payments. Why?",
     "options": [
       "Vì SQLite không cho phép SUM trên một biểu thức so sánh",
-      "Vì `failure_reason` là NULL ở mọi dòng của ngày đó, nên so sánh ra NULL và SUM của toàn NULL là NULL",
-      "Vì những ngày đó bị thiếu dòng trong bảng payments",
+      "Vì so sánh với NULL ra NULL, và SUM của toàn giá trị NULL là NULL",
+      "Vì những ngày đó bị thiếu dòng dữ liệu trong bảng payments của hệ thống",
       "Vì phải viết `== 'otp_timeout'` thay cho `= 'otp_timeout'`"
     ],
     "optionsEn": [
-      "Because SQLite doesn't allow SUM over a comparison",
-      "Because `failure_reason` is NULL on every row that day, so each comparison is NULL and SUM of all NULLs is NULL",
+      "Because SQLite doesn't allow SUM over a comparison expression",
+      "Because comparing with NULL gives NULL, and a SUM of only NULLs is NULL",
       "Because those days are missing rows in the payments table",
-      "Because you must write `== 'otp_timeout'` instead of `= 'otp_timeout'`"
+      "Because you must write `== 'otp_timeout'` instead of `= 'otp_timeout'` here"
     ],
     "answer": 1,
     "explanation": "NULL = 'x' cho ra NULL, không phải 0. SUM bỏ qua NULL; nếu mọi giá trị đều NULL thì kết quả là NULL. Dùng `COUNT(CASE WHEN failure_reason = 'otp_timeout' THEN 1 END)` hoặc `COALESCE`.",
@@ -582,14 +582,14 @@
     "options": [
       "Tỷ lệ thành công cả năm trên Android chỉ thấp hơn iOS chưa tới 1 điểm",
       "Funnel tổng trên Android gần bằng iOS khi tính trên cả năm",
-      "Trên Android cùng tuần, ví và QR vẫn bình thường; chỉ thẻ lỗi, toàn là otp_timeout",
-      "Số lần thử thẻ trên Android trong tuần đó không giảm đi"
+      "Cùng tuần trên Android, ví và QR vẫn bình thường; chỉ thẻ lỗi vì OTP",
+      "Số lần thử thanh toán thẻ trên Android trong tuần đó không hề giảm"
     ],
     "optionsEn": [
       "Android's full-year success rate is less than 1 point below iOS",
-      "Android's overall funnel is close to iOS over the full year",
-      "On Android that week, wallet and QR were normal; only card failed, all otp_timeout",
-      "The number of Android card attempts that week didn't drop"
+      "Android's overall funnel is close to iOS's when measured over the full year",
+      "On Android that week, wallet and QR were fine; only card failed, on OTP",
+      "The number of Android card payment attempts that week didn't drop at all"
     ],
     "answer": 2,
     "explanation": "Nếu app hỏng thì mọi phương thức trên Android đều bị. Ví (2/24 thất bại) và QR (0/22) bình thường, còn thẻ thất bại 13/22 toàn vì OTP: lỗi nằm ở bước OTP.",
@@ -612,13 +612,13 @@
     "question": "Biểu đồ GMV theo ngày có đỉnh vào một ngày thường, và marketing nói chiến dịch hôm đó thành công. Việc kiểm tra đầu tiên hợp lý nhất là gì?",
     "questionEn": "A daily GMV chart peaks on an ordinary day, and marketing says that day's campaign worked. What is the most sensible first check?",
     "options": [
-      "Xem số giao dịch và các đơn lớn nhất của ngày đó, vì một đơn lớn có thể tạo ra đỉnh",
+      "Xem số giao dịch và các đơn lớn nhất của ngày đó",
       "Đổi biểu đồ sang dạng cột chồng để thấy rõ đỉnh hơn",
       "Tính lại GMV mà không trừ các giao dịch bị hoàn tiền",
       "Chấp nhận kết luận, vì GMV là chỉ số quan trọng nhất"
     ],
     "optionsEn": [
-      "Check the payment count and the largest orders that day, since one big order can make a spike",
+      "Check that day's payment count and its largest orders",
       "Switch to a stacked bar chart so the peak stands out more",
       "Recompute GMV without subtracting refunded payments",
       "Accept the conclusion, since GMV is the most important metric"

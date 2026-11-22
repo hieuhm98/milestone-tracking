@@ -4,16 +4,16 @@
     "question": "Đội vận hành muốn theo dõi mức sử dụng RAM (memory) và dung lượng đĩa của các EC2 instance. Họ vào CloudWatch nhưng không thấy metric nào cho memory. Cần làm gì?",
     "questionEn": "An operations team wants to track RAM (memory) usage and disk space on their EC2 instances. They open CloudWatch but see no memory metric. What must they do?",
     "options": [
-      "Bật Detailed monitoring cho instance",
-      "Cài CloudWatch Agent (unified agent) lên instance để đẩy custom metrics memory/disk",
-      "Tạo một CloudTrail trail",
-      "Bật VPC Flow Logs"
+      "Bật Detailed monitoring để có metric memory và disk theo 1 phút",
+      "Cài CloudWatch Agent để đẩy custom metric memory/disk",
+      "Tạo CloudTrail trail ghi lại sự kiện sử dụng memory",
+      "Bật AWS Config để ghi lại thông số memory của instance"
     ],
     "optionsEn": [
-      "Enable Detailed monitoring on the instance",
-      "Install the CloudWatch Agent (unified agent) on the instance to push custom memory/disk metrics",
-      "Create a CloudTrail trail",
-      "Enable VPC Flow Logs"
+      "Enable Detailed monitoring to get 1-minute memory and disk metrics",
+      "Install the CloudWatch Agent to push memory/disk custom metrics",
+      "Create a CloudTrail trail that records memory usage events",
+      "Enable AWS Config to record the instance's memory settings"
     ],
     "answer": 1,
     "explanation": "CloudWatch không thu thập metrics memory và disk của EC2 theo mặc định vì đó là dữ liệu bên trong guest OS. Phải cài CloudWatch Agent để đẩy các custom metrics này. Detailed monitoring chỉ tăng tần suất (5 phút → 1 phút) chứ không thêm metric memory.",
@@ -44,16 +44,16 @@
     "question": "Công ty cần bảo đảm mọi EBS volume đều được mã hóa, và nếu phát hiện volume chưa mã hóa thì tự động khắc phục. Dịch vụ và tính năng nào phù hợp?",
     "questionEn": "A company needs to ensure every EBS volume is encrypted and to automatically fix any unencrypted volume. Which service and feature fits?",
     "options": [
-      "CloudTrail Insights events",
+      "CloudTrail Insights để cảnh báo khi tạo volume không mã hóa",
       "AWS Config Rules kèm remediation qua SSM Automation",
-      "CloudWatch composite alarms",
-      "EventBridge schema registry"
+      "CloudWatch composite alarm kích hoạt hành động EBS",
+      "Finding của IAM Access Analyzer với auto-archive rule"
     ],
     "optionsEn": [
-      "CloudTrail Insights events",
+      "CloudTrail Insights to flag unencrypted volume creation",
       "AWS Config Rules with remediation via SSM Automation",
-      "CloudWatch composite alarms",
-      "EventBridge schema registry"
+      "CloudWatch composite alarms that trigger an EBS action",
+      "IAM Access Analyzer findings with auto-archive rules"
     ],
     "answer": 1,
     "explanation": "AWS Config Rules đánh giá tài nguyên là compliant/non-compliant (ví dụ 'EBS phải mã hóa'), và có thể tự động khắc phục vi phạm bằng remediation qua SSM Automation. Đây đúng là bài toán tuân thủ + tự sửa của Config.",
@@ -84,16 +84,16 @@
     "question": "Bạn cần chạy một Lambda dọn dẹp dữ liệu mỗi ngày lúc 2 giờ sáng (lịch cố định). Cách chuẩn, ít quản lý nhất?",
     "questionEn": "You need to run a data-cleanup Lambda every day at 2 AM (fixed schedule). What is the standard, lowest-management approach?",
     "options": [
-      "Một EC2 chạy cron gọi Lambda",
+      "Cron job trên một EC2 nhỏ, gọi Lambda theo giờ đã đặt",
       "EventBridge rule với biểu thức cron, target là Lambda",
-      "CloudWatch alarm trên metric thời gian",
-      "AWS Config conformance pack"
+      "CloudWatch alarm trên metric giờ trong ngày để gọi Lambda",
+      "Step Functions Wait state lặp lại mỗi 24 giờ"
     ],
     "optionsEn": [
-      "An EC2 instance running cron that calls the Lambda",
-      "An EventBridge rule with a cron expression targeting the Lambda",
-      "A CloudWatch alarm on a time metric",
-      "An AWS Config conformance pack"
+      "A cron job on a small EC2 instance that invokes the Lambda",
+      "An EventBridge rule with a cron expression targeting Lambda",
+      "A CloudWatch alarm on a time-of-day metric that invokes it",
+      "A Step Functions Wait state looping every 24 hours"
     ],
     "answer": 1,
     "explanation": "EventBridge (trước là CloudWatch Events) hỗ trợ lịch cron/rate với target là Lambda — giải pháp serverless, không cần quản lý máy chủ để lập lịch. EC2 cron thêm chi phí vận hành; alarm và Config không dùng để lập lịch.",
@@ -104,16 +104,16 @@
     "question": "Bảo mật muốn ghi lại các thao tác cấp object trên một S3 bucket nhạy cảm (GetObject/PutObject) trong CloudTrail. Tại sao mặc định không thấy các sự kiện này?",
     "questionEn": "Security wants CloudTrail to record object-level operations (GetObject/PutObject) on a sensitive S3 bucket. Why are these events not present by default?",
     "options": [
-      "CloudTrail chỉ hoạt động ở một region",
-      "Đó là data events, không được log mặc định — phải bật thủ công",
-      "CloudTrail chỉ log khi tạo trail multi-region",
-      "S3 không tương thích với CloudTrail"
+      "CloudTrail chỉ ghi sự kiện ở region chính của trail",
+      "Đó là data events, mặc định không được log",
+      "Chúng chỉ xuất hiện khi đã tạo trail multi-region",
+      "Lệnh gọi object S3 do S3 Inventory ghi, không phải CloudTrail"
     ],
     "optionsEn": [
-      "CloudTrail only works in one region",
-      "Those are data events, which are not logged by default — they must be enabled manually",
-      "CloudTrail only logs when a multi-region trail is created",
-      "S3 is not compatible with CloudTrail"
+      "CloudTrail only records events in the trail's home region",
+      "They are data events, which are off by default",
+      "They appear only once a multi-region trail exists",
+      "S3 object calls are logged by S3 Inventory, not CloudTrail"
     ],
     "answer": 1,
     "explanation": "CloudTrail log management events mặc định, nhưng data events (S3 object-level, Lambda Invoke) KHÔNG được log mặc định vì khối lượng lớn và có phí. Phải bật data events cho bucket cần theo dõi.",
@@ -126,14 +126,14 @@
     "options": [
       "CloudWatch Logs Insights",
       "CloudTrail Event history",
-      "AWS Config aggregator",
-      "X-Ray service map"
+      "CloudWatch Logs subscription filter",
+      "CloudWatch Logs data protection"
     ],
     "optionsEn": [
       "CloudWatch Logs Insights",
       "CloudTrail Event history",
-      "AWS Config aggregator",
-      "X-Ray service map"
+      "CloudWatch Logs subscription filter",
+      "CloudWatch Logs data protection"
     ],
     "answer": 0,
     "explanation": "CloudWatch Logs Insights là ngôn ngữ truy vấn tương tác ngay trong CloudWatch để lọc, thống kê và phân tích log group mà không cần công cụ bên ngoài. Các lựa chọn còn lại phục vụ audit, cấu hình, hoặc tracing.",
@@ -144,16 +144,16 @@
     "question": "Một EC2 instance quan trọng cần tự khôi phục (recover) khi hạ tầng phần cứng vật lý bên dưới bị lỗi. Cách cấu hình đúng?",
     "questionEn": "A critical EC2 instance should automatically recover when the underlying physical hardware fails. What is the correct setup?",
     "options": [
-      "Tạo CloudWatch Alarm với EC2 action 'recover' trên metric StatusCheckFailed_System",
-      "Bật AWS Config rule cho EC2",
-      "Tạo CloudTrail trail multi-region",
-      "Dùng X-Ray sampling rule"
+      "CloudWatch alarm trên StatusCheckFailed_System → recover",
+      "CloudWatch alarm trên StatusCheckFailed_Instance → reboot",
+      "AWS Config rule khởi động lại instance không tuân thủ",
+      "X-Ray sampling rule theo dõi sức khỏe máy chủ vật lý"
     ],
     "optionsEn": [
-      "Create a CloudWatch Alarm with the EC2 'recover' action on the StatusCheckFailed_System metric",
-      "Enable an AWS Config rule for EC2",
-      "Create a multi-region CloudTrail trail",
-      "Use an X-Ray sampling rule"
+      "CloudWatch alarm on StatusCheckFailed_System → recover",
+      "CloudWatch alarm on StatusCheckFailed_Instance → reboot",
+      "An AWS Config rule that restarts non-compliant instances",
+      "An X-Ray sampling rule watching the physical host"
     ],
     "answer": 0,
     "explanation": "CloudWatch Alarm hỗ trợ EC2 action, trong đó có 'recover' — tự khôi phục instance khi system status check lỗi (do phần cứng vật lý). Config/CloudTrail/X-Ray không thực hiện hành động khôi phục instance.",
@@ -184,16 +184,16 @@
     "question": "Khi một đơn hàng mới được tạo, hệ thống cần đồng thời gọi một Lambda tính điểm thưởng, đẩy một message vào SQS cho kho, và gửi SNS cho khách. Kiến trúc giải ghép nối (decoupling) nào phù hợp?",
     "questionEn": "When a new order is created, the system must simultaneously invoke a rewards Lambda, push a message to SQS for the warehouse, and send an SNS notification to the customer. Which decoupling architecture fits?",
     "options": [
-      "Một EventBridge rule fan-out tới nhiều target: Lambda, SQS, SNS",
-      "Một CloudWatch Alarm với composite logic",
-      "Một AWS Config conformance pack",
-      "Một CloudTrail organization trail"
+      "Một EventBridge rule với target là Lambda, SQS và SNS",
+      "CloudWatch composite alarm thông báo tới Lambda, SQS và SNS",
+      "AWS Config rule có remediation gọi Lambda, SQS, SNS",
+      "CloudTrail trail chuyển sự kiện đơn hàng tới Lambda, SQS, SNS"
     ],
     "optionsEn": [
-      "A single EventBridge rule that fans out to multiple targets: Lambda, SQS, SNS",
-      "A CloudWatch Alarm with composite logic",
-      "An AWS Config conformance pack",
-      "A CloudTrail organization trail"
+      "One EventBridge rule with Lambda, SQS, and SNS as targets",
+      "A CloudWatch composite alarm notifying Lambda, SQS, and SNS",
+      "An AWS Config rule whose remediation calls Lambda, SQS, SNS",
+      "A CloudTrail trail delivering order events to Lambda, SQS, SNS"
     ],
     "answer": 0,
     "explanation": "EventBridge cho phép một rule fan-out tới nhiều target (Lambda, SQS, SNS, Step Functions) theo mô hình event-driven, giúp giải ghép nối các thành phần. Các dịch vụ còn lại không phải bus định tuyến sự kiện.",
@@ -205,13 +205,13 @@
     "questionEn": "Classic differentiation question: You need to know 'the application's CPU and HTTP 5xx error count over time, and be alerted when a threshold is breached'. Which service?",
     "options": [
       "AWS CloudTrail",
-      "Amazon CloudWatch (metrics + alarms)",
+      "Amazon CloudWatch",
       "AWS Config",
       "AWS X-Ray"
     ],
     "optionsEn": [
       "AWS CloudTrail",
-      "Amazon CloudWatch (metrics + alarms)",
+      "Amazon CloudWatch",
       "AWS Config",
       "AWS X-Ray"
     ],
@@ -224,16 +224,16 @@
     "question": "Doanh nghiệp cần gom toàn bộ sự kiện CloudTrail của tất cả tài khoản trong AWS Organizations về một nơi để kiểm toán tập trung. Nên dùng gì?",
     "questionEn": "An enterprise needs to aggregate all CloudTrail events from every account in AWS Organizations into one place for centralized auditing. What should they use?",
     "options": [
-      "Bật Detailed monitoring ở mỗi tài khoản",
-      "Một organization trail (multi-region) trong CloudTrail",
-      "Một CloudWatch cross-account dashboard",
-      "Một X-Ray group"
+      "Bật Detailed monitoring ở mọi tài khoản thành viên",
+      "Một organization trail trong CloudTrail",
+      "CloudWatch dashboard cross-account observability",
+      "AWS Config aggregator ở tài khoản management"
     ],
     "optionsEn": [
-      "Enable Detailed monitoring in each account",
-      "An organization trail (multi-region) in CloudTrail",
-      "A CloudWatch cross-account dashboard",
-      "An X-Ray group"
+      "Detailed monitoring enabled in every member account",
+      "An organization trail in CloudTrail",
+      "A CloudWatch cross-account observability dashboard",
+      "An AWS Config aggregator in the management account"
     ],
     "answer": 1,
     "explanation": "CloudTrail organization trail gom sự kiện của tất cả tài khoản trong AWS Organizations; kết hợp multi-region để phủ mọi vùng, giao log về một S3 bucket trung tâm. Dashboard CloudWatch chỉ hiển thị, không thu thập audit API.",
@@ -244,13 +244,13 @@
     "question": "Bạn muốn giảm 'cảnh báo giả' bằng cách chỉ báo động khi cả CPU cao VÀ độ trễ cao xảy ra đồng thời. Tính năng CloudWatch nào?",
     "questionEn": "You want to reduce false alarms by only alerting when both high CPU AND high latency occur at the same time. Which CloudWatch feature?",
     "options": [
-      "Composite alarm (kết hợp nhiều alarm bằng logic AND/OR)",
+      "Composite alarm",
       "Subscription filter",
       "High-resolution metric",
       "Metric namespace"
     ],
     "optionsEn": [
-      "Composite alarm (combining multiple alarms with AND/OR logic)",
+      "Composite alarm",
       "Subscription filter",
       "High-resolution metric",
       "Metric namespace"
@@ -264,16 +264,16 @@
     "question": "Phát biểu nào ĐÚNG về sự khác biệt giữa AWS Config và các biện pháp phòng ngừa (như IAM/SCP)?",
     "questionEn": "Which statement is TRUE about the difference between AWS Config and preventive controls (such as IAM/SCP)?",
     "options": [
-      "Config chặn hành động vi phạm trước khi chúng xảy ra",
-      "Config chỉ ghi nhận và đánh giá cấu hình sau khi thay đổi đã xảy ra, không ngăn hành động",
-      "Config thay thế hoàn toàn cho IAM",
-      "Config là dịch vụ toàn cầu, không theo region"
+      "Config chặn các API call vi phạm trước khi chúng có hiệu lực",
+      "Config đánh giá sau khi thay đổi xảy ra; không ngăn chặn nó",
+      "Config thay thế hoàn toàn IAM policy và SCP như kiểm soát phòng ngừa",
+      "Config là dịch vụ global, đánh giá mọi Region cùng lúc"
     ],
     "optionsEn": [
-      "Config blocks non-compliant actions before they happen",
-      "Config only records and evaluates configuration after a change has occurred; it does not prevent actions",
-      "Config fully replaces IAM",
-      "Config is a global service, not per-region"
+      "Config blocks non-compliant API calls before they take effect",
+      "Config evaluates after a change happens; it does not prevent it",
+      "Config fully replaces IAM policies and SCPs as a preventive control",
+      "Config is a global service that evaluates all Regions at once"
     ],
     "answer": 1,
     "explanation": "Config là công cụ detective (phát hiện) — nó ghi lại và đánh giá cấu hình SAU KHI thay đổi đã xảy ra, và có thể remediation, nhưng KHÔNG ngăn chặn hành động như IAM/SCP (preventive). Config cũng hoạt động theo từng region.",
@@ -284,16 +284,16 @@
     "question": "Với CloudWatch custom metrics, những mức độ phân giải (resolution) nào khả dụng?",
     "questionEn": "For CloudWatch custom metrics, which resolutions are available?",
     "options": [
-      "Chỉ 1 giây",
-      "Standard resolution 1 phút, hoặc high resolution xuống tới 1 giây",
-      "5 phút hoặc 1 phút",
-      "Chỉ 1 giờ"
+      "Chỉ 1 giây, vì custom metric luôn là high resolution",
+      "Standard 1 phút, hoặc high resolution xuống tới 1 giây",
+      "5 phút (basic) hoặc 1 phút (detailed), giống EC2",
+      "Chỉ 1 phút; high resolution chỉ có cho log, không cho metric"
     ],
     "optionsEn": [
-      "1 second only",
-      "Standard resolution of 1 minute, or high resolution down to 1 second",
-      "5 minutes or 1 minute",
-      "1 hour only"
+      "1 second only, as custom metrics are always high resolution",
+      "Standard at 1 minute, or high resolution down to 1 second",
+      "5 minutes (basic) or 1 minute (detailed), as for EC2",
+      "1 minute only; high resolution is for logs, not metrics"
     ],
     "answer": 1,
     "explanation": "Custom metric mặc định là 1 phút; đặt `StorageResolution=1` để có high-resolution 1 giây (đắt hơn). Đừng nhầm với EC2: basic monitoring 5 phút, detailed monitoring 1 phút.",
@@ -324,16 +324,16 @@
     "question": "Làm sao đưa log ở mức hệ điều hành từ EC2 lên CloudWatch Logs?",
     "questionEn": "How do you get OS-level logs from an EC2 instance into CloudWatch Logs?",
     "options": [
-      "Không cần làm gì, EC2 tự đẩy log lên",
-      "Bật detailed monitoring cho instance",
-      "Bật AWS CloudTrail cho Region đó",
-      "Cài và cấu hình CloudWatch agent trên instance, kèm IAM role cho phép `logs:PutLogEvents`"
+      "Không cần gì; EC2 tự động đẩy log OS lên CloudWatch",
+      "Bật detailed monitoring, vốn đã bao gồm việc gửi log OS",
+      "Bật CloudTrail data events cho Region của instance",
+      "Cài CloudWatch agent và cấp IAM role cho phép ghi log"
     ],
     "optionsEn": [
-      "Nothing — EC2 pushes them automatically",
-      "Enable detailed monitoring on the instance",
-      "Turn on AWS CloudTrail for the Region",
-      "Install and configure the CloudWatch agent on the instance, with an IAM role allowing `logs:PutLogEvents`"
+      "Nothing; EC2 streams OS logs to CloudWatch automatically",
+      "Enable detailed monitoring, which already includes OS log delivery",
+      "Turn on CloudTrail data events for the instance's Region",
+      "Install the CloudWatch agent and give it an IAM role to write logs"
     ],
     "answer": 3,
     "explanation": "Cùng một lý do với metric RAM/disk: mọi thứ BÊN TRONG hệ điều hành đều cần agent, vì hypervisor không nhìn thấy. Đây là mẫu câu hỏi rất phổ biến.",
@@ -364,16 +364,16 @@
     "question": "Một rule trong EventBridge gồm những thành phần nào?",
     "questionEn": "What is an EventBridge rule made of?",
     "options": [
-      "Một queue và một consumer",
-      "Một event pattern (hoặc lịch schedule) cộng với một hay nhiều target để gọi",
-      "Một metric và một ngưỡng cảnh báo",
-      "Một bộ lọc trên log group"
+      "Một queue nguồn cộng một consumer poll theo batch",
+      "Một event pattern hoặc schedule, cộng một hay nhiều target",
+      "Một metric, một ngưỡng alarm và một hành động SNS",
+      "Một subscription filter trên CloudWatch log group"
     ],
     "optionsEn": [
-      "A queue and a consumer",
-      "An event pattern (or a schedule) plus one or more targets to invoke",
-      "A metric and an alarm threshold",
-      "A filter over a log group"
+      "A source queue plus a consumer that polls it in batches",
+      "An event pattern or schedule, plus one or more targets",
+      "A metric, an alarm threshold, and an SNS action",
+      "A subscription filter over a CloudWatch log group"
     ],
     "answer": 1,
     "explanation": "EventBridge so khớp event đến với pattern, rồi chuyển tới target (Lambda, SQS, SNS, Step Functions...). Một rule có thể có nhiều target — đây chính là cách fan-out theo sự kiện.",
@@ -384,16 +384,16 @@
     "question": "AWS X-Ray tạo ra thứ gì để giúp tìm điểm nghẽn?",
     "questionEn": "What does AWS X-Ray produce to help you find a bottleneck?",
     "options": [
-      "Ảnh chụp cấu hình tài nguyên theo thời gian",
-      "Báo cáo chi phí theo dịch vụ",
-      "Service map và các trace, kèm độ trễ của từng segment trong đường đi của request",
-      "Các file log thô của ứng dụng"
+      "Ảnh chụp cấu hình tài nguyên theo từng thời điểm",
+      "Báo cáo chi phí theo dịch vụ kèm phát hiện bất thường",
+      "Service map và trace, kèm độ trễ từng segment",
+      "File log thô của ứng dụng, nhóm theo log stream"
     ],
     "optionsEn": [
       "Point-in-time snapshots of resource configuration",
-      "Cost reports broken down by service",
-      "A service map and traces showing per-segment latency along the request path",
-      "Raw application log files"
+      "Per-service cost reports with anomaly detection",
+      "A service map and traces with per-segment latency",
+      "Raw application log files grouped by log stream"
     ],
     "answer": 2,
     "explanation": "X-Ray theo dấu một request qua nhiều service và cho biết chặng nào tốn thời gian. CloudWatch Logs cho log, Config cho lịch sử cấu hình, CloudTrail cho ai-làm-gì.",
@@ -404,16 +404,16 @@
     "question": "Cần gì để trace một hàm Lambda bằng X-Ray?",
     "questionEn": "What is required to trace a Lambda function with X-Ray?",
     "options": [
-      "Không cần gì, Lambda luôn được trace sẵn",
-      "Bật CloudTrail data events cho hàm",
-      "Cài agent X-Ray lên máy chủ chạy hàm",
-      "Bật active tracing cho hàm và cấp cho execution role quyền ghi lên X-Ray"
+      "Không cần gì; mọi hàm Lambda đều được trace mặc định",
+      "Bật CloudTrail data events cho hàm, gửi sang X-Ray",
+      "Cài X-Ray daemon lên máy chủ đang chạy code của hàm",
+      "Bật active tracing và cấp quyền ghi X-Ray cho execution role"
     ],
     "optionsEn": [
-      "Nothing — Lambda is always traced",
-      "Enable CloudTrail data events for the function",
-      "Install the X-Ray agent on the host running the function",
-      "Enable active tracing on the function and grant its execution role permission to write to X-Ray"
+      "Nothing; every Lambda function is traced by default",
+      "CloudTrail data events for the function, sent to X-Ray",
+      "Installing the X-Ray daemon on the host that runs the function code",
+      "Active tracing plus X-Ray write permission on the execution role"
     ],
     "answer": 3,
     "explanation": "Với Lambda bạn chỉ cần bật active tracing (một checkbox) và thêm quyền; runtime lo phần daemon. Trên EC2/ECS thì bạn mới phải tự chạy X-Ray daemon.",

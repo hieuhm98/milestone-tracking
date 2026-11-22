@@ -4,16 +4,16 @@
     "question": "JSON là gì?",
     "questionEn": "What is JSON?",
     "options": [
-      "Một ngôn ngữ lập trình",
-      "Một định dạng văn bản để lưu và trao đổi dữ liệu giữa các hệ thống",
-      "Một loại cơ sở dữ liệu",
-      "Một giao thức mạng"
+      "Ngôn ngữ lập trình dùng cho trang web",
+      "Định dạng văn bản để trao đổi dữ liệu",
+      "Một loại cơ sở dữ liệu dạng bảng",
+      "Giao thức mạng để truyền tệp"
     ],
     "optionsEn": [
-      "A programming language",
-      "A text format for storing and exchanging data between systems",
-      "A type of database",
-      "A network protocol"
+      "A programming language for websites",
+      "A text format for exchanging data",
+      "A table-based type of database",
+      "A network protocol for file transfer"
     ],
     "answer": 1,
     "explanation": "JSON (JavaScript Object Notation) là định dạng văn bản phổ biến nhất để trao đổi dữ liệu qua API. Nó vừa dễ đọc với người, vừa dễ xử lý với máy.",
@@ -25,13 +25,13 @@
     "questionEn": "In JSON, what do curly braces `{}` represent?",
     "options": [
       "Một danh sách (array)",
-      "Một đối tượng (object) gồm các cặp key-value",
+      "Một object",
       "Một chú thích",
       "Một số"
     ],
     "optionsEn": [
       "A list (array)",
-      "An object made of key-value pairs",
+      "An object",
       "A comment",
       "A number"
     ],
@@ -44,14 +44,14 @@
     "question": "Trong JSON, dấu ngoặc vuông `[]` biểu thị điều gì?",
     "questionEn": "In JSON, what do square brackets `[]` represent?",
     "options": [
-      "Một đối tượng",
-      "Một danh sách (array) các giá trị",
-      "Một chuỗi",
+      "Một đối tượng (object)",
+      "Một danh sách (array)",
+      "Một chuỗi ký tự",
       "Một giá trị null"
     ],
     "optionsEn": [
       "An object",
-      "A list (array) of values",
+      "A list (array)",
       "A string",
       "A null value"
     ],
@@ -85,14 +85,14 @@
     "questionEn": "Which of these is NOT a valid JSON value type?",
     "options": [
       "Boolean (true/false)",
-      "Number",
-      "Ngày tháng (Date) như một kiểu riêng",
+      "Number (số)",
+      "Kiểu Date riêng",
       "Null"
     ],
     "optionsEn": [
       "Boolean (true/false)",
       "Number",
-      "A dedicated Date type",
+      "A Date type",
       "Null"
     ],
     "answer": 2,
@@ -144,16 +144,16 @@
     "question": "So với XML, JSON thường có đặc điểm gì?",
     "questionEn": "Compared to XML, JSON typically is:",
     "options": [
-      "Dài dòng hơn, nhiều thẻ hơn",
-      "Ngắn gọn hơn và phổ biến hơn trong các API hiện đại",
-      "Không thể lồng dữ liệu",
-      "Chỉ dùng cho hệ thống ngân hàng cũ"
+      "Dài dòng hơn, cần nhiều thẻ đóng mở hơn",
+      "Gọn hơn, phổ biến hơn trong API hiện đại",
+      "Không thể biểu diễn dữ liệu lồng nhau",
+      "Chủ yếu dùng trong hệ thống ngân hàng cũ"
     ],
     "optionsEn": [
-      "More verbose, with more tags",
-      "More compact and more common in modern APIs",
-      "Unable to nest data",
-      "Only used by legacy banking systems"
+      "More verbose, needing more opening and closing tags",
+      "More compact, more common in modern APIs",
+      "Unable to represent nested data",
+      "Mostly used by legacy banking systems"
     ],
     "answer": 1,
     "explanation": "JSON gọn hơn XML (ít ký tự thừa hơn) và là định dạng mặc định của phần lớn API hiện đại. XML vẫn còn dùng ở hệ thống cũ, SOAP.",
@@ -164,16 +164,16 @@
     "question": "Header `Content-Type: application/json` trong một request có ý nghĩa gì?",
     "questionEn": "What does the header `Content-Type: application/json` in a request mean?",
     "options": [
-      "Yêu cầu server trả về HTML",
-      "Báo rằng dữ liệu trong body của request đang ở định dạng JSON",
-      "Mã hóa mật khẩu",
-      "Giới hạn số lượng kết quả"
+      "Yêu cầu server trả kết quả dạng JSON",
+      "Body đang chứa dữ liệu JSON",
+      "Mã hóa body bằng JSON",
+      "Giới hạn kích thước body JSON"
     ],
     "optionsEn": [
-      "Requests that the server return HTML",
-      "States that the data in the request body is in JSON format",
-      "Encrypts the password",
-      "Limits the number of results"
+      "Asks the server to reply in JSON",
+      "The body contains JSON data",
+      "Encrypts the body as JSON",
+      "Limits the size of the JSON body"
     ],
     "answer": 1,
     "explanation": "`Content-Type` cho server biết định dạng dữ liệu đang gửi. `application/json` nghĩa là body là JSON. Header `Accept` thì yêu cầu định dạng muốn nhận về.",
@@ -184,16 +184,16 @@
     "question": "Đâu là lỗi cú pháp JSON thường gặp?",
     "questionEn": "Which is a common JSON syntax error?",
     "options": [
-      "Đặt key trong nháy kép",
-      "Dùng dấu phẩy thừa sau phần tử cuối cùng, ví dụ `[1, 2, 3,]`",
-      "Dùng object lồng nhau",
-      "Viết số không có nháy kép"
+      "Đặt key trong nháy kép, như `{\"id\": 1}`",
+      "Dấu phẩy thừa ở cuối, như `[1, 2, 3,]`",
+      "Lồng object trong object, như `{\"a\": {}}`",
+      "Số không có nháy kép, như `{\"age\": 25}`"
     ],
     "optionsEn": [
-      "Putting keys in double quotes",
-      "A trailing comma after the last element, e.g. `[1, 2, 3,]`",
-      "Using nested objects",
-      "Writing numbers without quotes"
+      "Keys in double quotes, as in `{\"id\": 1}`",
+      "A trailing comma, as in `[1, 2, 3,]`",
+      "Nested objects, as in `{\"a\": {}}`",
+      "Numbers without quotes, as in `{\"age\": 25}`"
     ],
     "answer": 1,
     "explanation": "Dấu phẩy thừa ở cuối array/object là lỗi phổ biến khiến JSON không hợp lệ. Đặt key trong nháy kép và số không có nháy là ĐÚNG.",
@@ -204,13 +204,13 @@
     "question": "Một 'mảng các object' (array of objects) trong response API thường tương ứng với điều gì?",
     "questionEn": "An 'array of objects' in an API response usually corresponds to what?",
     "options": [
-      "Một danh sách bản ghi, mỗi object là một bản ghi",
+      "Một danh sách bản ghi",
       "Một trường duy nhất",
       "Một mật khẩu đã mã hóa",
       "Một mã trạng thái HTTP"
     ],
     "optionsEn": [
-      "A list of records, where each object is one record",
+      "A list of records",
       "A single field",
       "An encrypted password",
       "An HTTP status code"
@@ -224,16 +224,16 @@
     "question": "Một BA có thể dùng JSON để làm gì trong công việc?",
     "questionEn": "How might a BA use JSON in their work?",
     "options": [
-      "Mapping trường dữ liệu giữa hai hệ thống và viết acceptance criteria dựa trên response",
+      "Mapping trường dữ liệu và viết acceptance criteria",
       "Thay thế cho việc viết tài liệu nghiệp vụ",
-      "Cấu hình phần cứng máy chủ",
-      "Thiết kế giao diện đồ họa"
+      "Cấu hình phần cứng cho máy chủ production",
+      "Thiết kế giao diện đồ họa cho ứng dụng"
     ],
     "optionsEn": [
-      "Mapping data fields between two systems and writing acceptance criteria based on the response",
+      "Mapping data fields and writing acceptance criteria",
       "Replacing the need to write business documentation",
-      "Configuring server hardware",
-      "Designing graphical interfaces"
+      "Configuring the production server hardware",
+      "Designing the app's graphical interface"
     ],
     "answer": 0,
     "explanation": "BA dùng JSON để đối chiếu (mapping) trường dữ liệu khi tích hợp, viết acceptance criteria rõ ràng (\"response có trường status = confirmed\") và kiểm thử nhanh trong Postman.",
@@ -243,16 +243,16 @@
     "question": "Trong JSON, giá trị `\"active\": \"false\"` khác `\"active\": false` như thế nào?",
     "questionEn": "In JSON, how does `\"active\": \"false\"` differ from `\"active\": false`?",
     "options": [
-      "Cái đầu là chuỗi ký tự, cái sau là boolean; mã kiểm tra kiểu boolean sẽ hiểu chuỗi \"false\" là có giá trị",
+      "Cái đầu là chuỗi, cái sau là boolean",
       "Hai cách viết hoàn toàn tương đương",
-      "Cái đầu không hợp lệ trong JSON",
-      "Cái sau chỉ dùng được trong XML"
+      "Cái đầu là boolean, cái sau là chuỗi",
+      "Cái đầu bị lỗi cú pháp, không hợp lệ"
     ],
     "optionsEn": [
-      "The first is a string, the second a boolean; code testing for a boolean will treat the string \"false\" as truthy",
-      "They are exactly equivalent",
-      "The first is invalid JSON",
-      "The second only works in XML"
+      "The first is a string, the second a boolean",
+      "The two forms mean exactly the same",
+      "The first is a boolean, the second a string",
+      "The first is a syntax error, not valid JSON"
     ],
     "answer": 0,
     "explanation": "Đây là lỗi tích hợp kinh điển. Chuỗi \"false\" không rỗng nên nhiều ngôn ngữ coi là đúng, khiến logic chạy ngược hoàn toàn.",
@@ -283,16 +283,16 @@
     "question": "Vì sao JSON thường được chọn thay XML cho API hiện đại?",
     "questionEn": "Why is JSON usually chosen over XML for modern APIs?",
     "options": [
-      "Gọn hơn, dễ đọc hơn và ánh xạ thẳng sang cấu trúc dữ liệu của hầu hết ngôn ngữ lập trình",
-      "JSON hỗ trợ mã hoá còn XML thì không",
-      "XML không truyền được qua HTTP",
-      "JSON tự động kiểm tra tính hợp lệ dữ liệu"
+      "Gọn, dễ đọc, khớp với kiểu dữ liệu của ngôn ngữ",
+      "JSON hỗ trợ mã hóa sẵn, còn XML thì không",
+      "XML không gửi được qua giao thức HTTP",
+      "JSON tự kiểm tra tính hợp lệ của dữ liệu"
     ],
     "optionsEn": [
-      "It is more compact, easier to read, and maps directly onto native data structures in most languages",
-      "JSON supports encryption and XML does not",
-      "XML cannot travel over HTTP",
-      "JSON validates data automatically"
+      "Compact, readable, and maps onto language data types",
+      "JSON has built-in encryption, while XML does not",
+      "XML cannot be sent over the HTTP protocol",
+      "JSON checks that the data is valid by itself"
     ],
     "answer": 0,
     "explanation": "XML vẫn mạnh ở nơi cần schema và chữ ký chặt chẽ. Nhưng cho API web thông thường, JSON nhẹ và tiện hơn nhiều.",
@@ -303,13 +303,13 @@
     "question": "Lỗi cú pháp nào khiến JSON không parse được?",
     "questionEn": "Which syntax mistake makes JSON fail to parse?",
     "options": [
-      "Dấu phẩy thừa sau phần tử cuối cùng của object hoặc mảng",
+      "Dấu phẩy thừa sau phần tử cuối",
       "Dùng dấu ngoặc kép cho key",
       "Xuống dòng giữa các cặp key-value",
       "Dùng số âm làm giá trị"
     ],
     "optionsEn": [
-      "A trailing comma after the last element of an object or array",
+      "A trailing comma after the last item",
       "Using double quotes around keys",
       "A line break between key-value pairs",
       "Using a negative number as a value"
@@ -323,16 +323,16 @@
     "question": "BA nhận payload có trường `\"discount\": null`. Yêu cầu nên làm rõ điều gì?",
     "questionEn": "A BA receives a payload with `\"discount\": null`. What should the requirement clarify?",
     "options": [
-      "null nghĩa là không có chiết khấu hay là chưa xác định, và hệ thống hiển thị gì trong mỗi trường hợp",
-      "Màu sắc hiển thị của trường discount",
-      "Tên biến mà lập trình viên phải đặt",
-      "Cơ sở dữ liệu nào lưu trường này"
+      "null là không chiết khấu hay chưa xác định, và hiển thị gì",
+      "Màu sắc hiển thị của trường discount trên màn hình",
+      "Tên biến mà lập trình viên bắt buộc phải đặt",
+      "Cơ sở dữ liệu và bảng nào sẽ lưu trường này"
     ],
     "optionsEn": [
-      "Whether null means no discount or not yet determined, and what the system displays in each case",
-      "The display colour of the discount field",
-      "The variable name developers must use",
-      "Which database stores the field"
+      "Whether null means no discount or unknown, and what to show",
+      "The colour used to display the discount field on screen",
+      "The exact variable name developers are required to use",
+      "Which database and table will store this field"
     ],
     "answer": 0,
     "explanation": "null, 0 và trường vắng mặt là ba trạng thái khác nhau. Không phân biệt rõ sẽ dẫn tới hiển thị sai hoặc tính toán sai.",
@@ -343,15 +343,15 @@
     "question": "Cấu trúc nào đúng để biểu diễn một danh sách nhiều đơn hàng trong JSON?",
     "questionEn": "Which structure correctly represents a list of several orders in JSON?",
     "options": [
-      "Một mảng chứa các object, mỗi object là một đơn hàng",
-      "Một object chứa nhiều key trùng tên order",
+      "Một mảng các object, mỗi object một đơn hàng",
+      "Một object chứa nhiều key cùng trùng tên order",
       "Một chuỗi ký tự ngăn cách bằng dấu phẩy",
       "Một mảng chứa các mảng rỗng"
     ],
     "optionsEn": [
-      "An array of objects, each object being one order",
+      "An array of objects, one object per order",
       "One object with several keys all named order",
-      "A comma-separated string",
+      "A string with orders separated by commas",
       "An array of empty arrays"
     ],
     "answer": 0,
@@ -363,16 +363,16 @@
     "question": "Trong đặc tả API, vì sao BA nên đính kèm một payload JSON mẫu?",
     "questionEn": "In an API specification, why should a BA attach a sample JSON payload?",
     "options": [
-      "Vì ví dụ cụ thể loại bỏ nhập nhằng về tên trường, kiểu dữ liệu và cấu trúc lồng nhau nhanh hơn mọi đoạn mô tả",
-      "Vì lập trình viên không đọc được bảng",
-      "Vì payload thay thế được acceptance criteria",
-      "Vì JSON tự sinh ra mã nguồn"
+      "Vì ví dụ cụ thể làm rõ tên trường, kiểu và cấu trúc lồng",
+      "Vì lập trình viên không đọc được bảng mô tả trường",
+      "Vì payload mẫu thay thế được acceptance criteria",
+      "Vì JSON mẫu tự sinh ra mã nguồn cho API"
     ],
     "optionsEn": [
-      "Because a concrete example removes ambiguity about field names, types, and nesting faster than any prose",
-      "Because developers cannot read tables",
-      "Because a payload replaces acceptance criteria",
-      "Because JSON generates source code automatically"
+      "Because a real example makes field names, types and nesting clear",
+      "Because developers cannot read field description tables",
+      "Because a sample payload replaces acceptance criteria",
+      "Because the sample JSON generates the API code automatically"
     ],
     "answer": 0,
     "explanation": "Một ví dụ đầu vào và đầu ra cụ thể là cách hiệu quả nhất để hai bên xác nhận cùng cách hiểu, đặc biệt khi làm việc xuyên đội hoặc với nhà cung cấp.",
@@ -383,16 +383,16 @@
     "question": "Kiểu giá trị nào KHÔNG hợp lệ trong JSON chuẩn?",
     "questionEn": "Which value type is NOT valid in standard JSON?",
     "options": [
-      "Ngày tháng dạng Date riêng biệt",
-      "Chuỗi",
-      "Số",
-      "null"
+      "Kiểu Date riêng",
+      "Giá trị chuỗi (string)",
+      "Giá trị số",
+      "Giá trị null"
     ],
     "optionsEn": [
-      "A dedicated Date type",
-      "String",
-      "Number",
-      "null"
+      "A Date type",
+      "A string value",
+      "A number value",
+      "The null value"
     ],
     "answer": 0,
     "explanation": "JSON không có kiểu ngày tháng. Ngày luôn được truyền dưới dạng chuỗi, nên đặc tả phải nêu rõ định dạng, ví dụ ISO 8601.",
@@ -405,15 +405,15 @@
     "questionEn": "How do `{\"name\":\"An\",\"age\":25}` (squashed on one line) and the same content spread over several indented lines differ?",
     "options": [
       "Bản viết dồn bị lỗi vì JSON bắt buộc xuống dòng",
-      "Bản thụt lề chứa nhiều dữ liệu hơn",
-      "Chúng là cùng một dữ liệu; dấu cách và xuống dòng ngoài dấu nháy không quan trọng",
-      "Bản viết dồn chỉ dùng được cho XML"
+      "Bản thụt lề chứa nhiều dữ liệu hơn bản dồn",
+      "Cùng một dữ liệu; khoảng trắng ngoài nháy không quan trọng",
+      "Bản viết dồn chỉ dùng được khi chuyển sang XML"
     ],
     "optionsEn": [
       "The squashed one is invalid because JSON requires line breaks",
-      "The indented one contains more data",
-      "They are the same data; spaces and line breaks outside quotes do not matter",
-      "The squashed one only works for XML"
+      "The indented one holds more data than the squashed one",
+      "The same data; whitespace outside quotes does not matter",
+      "The squashed one only works when converted to XML"
     ],
     "answer": 2,
     "explanation": "JSON bỏ qua dấu cách và xuống dòng nằm ngoài dấu nháy. Bản viết dồn (minified) tiết kiệm dung lượng; bản thụt lề (pretty-printed) dễ đọc cho người — nhưng dữ liệu là một.",
@@ -436,13 +436,13 @@
     "question": "Vì sao số điện thoại `0901234567` nên được lưu trong JSON dưới dạng string `\"0901234567\"` thay vì number?",
     "questionEn": "Why should the phone number `0901234567` be stored in JSON as the string `\"0901234567\"` rather than as a number?",
     "options": [
-      "Vì nếu là number, số 0 ở đầu sẽ bị mất và ta không bao giờ làm phép tính với số điện thoại",
+      "Vì number sẽ làm mất số 0 ở đầu",
       "Vì JSON không cho phép number dài quá 5 chữ số",
       "Vì string được mã hóa nên an toàn hơn",
       "Vì number chỉ dùng được trong XML"
     ],
     "optionsEn": [
-      "Because as a number the leading 0 would be lost, and you never do arithmetic on a phone number",
+      "Because a number would drop the leading 0",
       "Because JSON does not allow numbers longer than 5 digits",
       "Because strings are encrypted and therefore safer",
       "Because numbers only work in XML"
@@ -469,15 +469,15 @@
     "questionEn": "You need to format a real API response that contains customer names and phone numbers. What is the most appropriate approach?",
     "options": [
       "Dán vào trang định dạng JSON công cộng đầu tiên tìm được trên Google",
-      "Gửi cho bạn bè nhờ đọc giúp",
-      "Đăng lên diễn đàn để hỏi cộng đồng",
-      "Dùng công cụ có sẵn của công ty (Postman, VS Code, DevTools) hoặc xóa dữ liệu cá nhân trước khi dùng công cụ online"
+      "Gửi cho một người bạn rành kỹ thuật nhờ đọc giúp",
+      "Đăng lên diễn đàn lập trình để hỏi cộng đồng",
+      "Dùng công cụ nội bộ hoặc xóa dữ liệu cá nhân trước"
     ],
     "optionsEn": [
       "Paste it into the first public JSON formatter website found on Google",
-      "Send it to a friend to read for you",
-      "Post it on a forum to ask the community",
-      "Use the company's own tools (Postman, VS Code, DevTools) or remove personal data before using an online tool"
+      "Send it to a tech-savvy friend to read for you",
+      "Post it on a developer forum to ask the community",
+      "Use in-house tools, or remove personal data first"
     ],
     "answer": 3,
     "explanation": "Response thật thường chứa dữ liệu cá nhân của khách hàng. Dán vào website công cộng là đưa dữ liệu đó ra ngoài công ty. Hãy dùng công cụ nội bộ hoặc ẩn dữ liệu cá nhân trước.",

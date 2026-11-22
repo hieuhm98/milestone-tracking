@@ -124,16 +124,16 @@
     "question": "Một ECS Service chạy sau một Application Load Balancer cần tự động tăng số task khi lưu lượng request tăng. Cách cấu hình phù hợp NHẤT là gì?",
     "questionEn": "An ECS Service behind an Application Load Balancer needs to automatically increase the number of tasks as request traffic rises. What is the MOST suitable configuration?",
     "options": [
-      "ECS Service Auto Scaling target tracking theo ALBRequestCountPerTarget",
-      "Tăng thủ công desired count mỗi khi có tải",
-      "EC2 Auto Scaling theo số instance, không đổi số task",
-      "Bật EBS auto scaling cho volume"
+      "Service Auto Scaling target tracking theo ALBRequestCountPerTarget",
+      "Tăng desired count thủ công mỗi khi lưu lượng tăng lên",
+      "EC2 Auto Scaling theo số instance, giữ nguyên số task đang chạy",
+      "Tăng CPU và memory trong task definition khi tải tăng"
     ],
     "optionsEn": [
-      "ECS Service Auto Scaling target tracking on ALBRequestCountPerTarget",
-      "Manually increase the desired count whenever load rises",
-      "EC2 Auto Scaling by instance count, leaving task count unchanged",
-      "Enable EBS auto scaling for the volume"
+      "Service Auto Scaling target tracking on ALBRequestCountPerTarget",
+      "Raise the desired count manually whenever traffic increases",
+      "EC2 Auto Scaling on instance count, leaving task count unchanged",
+      "Raise the task definition's CPU and memory as load grows"
     ],
     "answer": 0,
     "explanation": "ECS Service Auto Scaling với Target Tracking có thể dùng chỉ số ALBRequestCountPerTarget (số request/target) để tự động điều chỉnh số task theo lưu lượng.",
@@ -205,13 +205,13 @@
     "questionEn": "In the ECS EC2 launch type, which component grants permission for the ECS agent on the host to register with the cluster and pull images from ECR?",
     "options": [
       "ECS Task Role",
-      "EC2 Instance Role (instance profile)",
+      "EC2 Instance Role",
       "S3 bucket policy",
       "Security group của instance"
     ],
     "optionsEn": [
       "ECS Task Role",
-      "EC2 Instance Role (instance profile)",
+      "EC2 Instance Role",
       "An S3 bucket policy",
       "The instance's security group"
     ],
@@ -244,16 +244,16 @@
     "question": "Một ECS Service cần luôn duy trì đúng 4 task chạy song song, tự thay thế task bị lỗi và đăng ký task vào một target group của ALB. Thành phần nào của ECS đảm nhiệm việc này?",
     "questionEn": "An ECS Service must always maintain exactly 4 tasks running in parallel, replace failed tasks, and register tasks into an ALB target group. Which ECS component handles this?",
     "options": [
-      "Task Definition",
+      "Task Definition với 4 container definition",
       "ECS Service với desired count = 4",
-      "Một task đơn lẻ chạy standalone",
-      "Cluster capacity provider"
+      "Bốn task standalone chạy bằng RunTask",
+      "Capacity provider với minimum là 4"
     ],
     "optionsEn": [
-      "The Task Definition",
+      "A Task Definition with 4 container definitions",
       "An ECS Service with desired count = 4",
-      "A single standalone task",
-      "The cluster capacity provider"
+      "Four standalone tasks started with RunTask",
+      "A capacity provider with a minimum of 4"
     ],
     "answer": 1,
     "explanation": "ECS Service duy trì số task mong muốn (desired count), tự thay thế task chết và tích hợp với ALB (target group). Task Definition chỉ là bản thiết kế, không tự duy trì số lượng task.",
@@ -264,16 +264,16 @@
     "question": "Trong ECS, một Task Definition mô tả điều gì?",
     "questionEn": "In ECS, what does a Task Definition describe?",
     "options": [
-      "Một container đang chạy thực tế",
-      "Nhóm hạ tầng compute nơi container chạy",
-      "Cấu hình của load balancer phía trước",
-      "Bản thiết kế: image nào chạy, CPU/memory, port mapping, volume và IAM role"
+      "Một container đang chạy thực tế, được lập lịch trên cluster",
+      "Nhóm capacity EC2 hoặc Fargate nơi các container chạy",
+      "Cấu hình listener và target group của load balancer",
+      "Bản thiết kế: image, CPU/memory, port, volume, IAM role"
     ],
     "optionsEn": [
-      "An actually running container",
-      "The pool of compute where containers run",
-      "The configuration of the load balancer in front",
-      "The blueprint: which images to run, CPU/memory, port mappings, volumes and IAM role"
+      "A running instance of a container, scheduled on the cluster",
+      "The pool of EC2 or Fargate capacity where containers run",
+      "The listener and target group config of the load balancer",
+      "A blueprint: images, CPU/memory, ports, volumes, IAM role"
     ],
     "answer": 3,
     "explanation": "Task Definition là bản thiết kế (như Dockerfile ở mức deployment). Task là một lần chạy cụ thể của bản thiết kế đó; Service giữ cho N task luôn chạy.",
@@ -284,16 +284,16 @@
     "question": "ECS Cluster là gì?",
     "questionEn": "What is an ECS Cluster?",
     "options": [
-      "Một nhóm logic của hạ tầng compute (EC2 instance hoặc Fargate) nơi các task được chạy",
-      "Một registry lưu Docker image",
-      "Một container đơn lẻ đang chạy",
-      "Một phiên bản của task definition"
+      "Nhóm logic của hạ tầng compute nơi task được chạy",
+      "Một registry lưu trữ và quản lý version Docker image",
+      "Một nhóm task giống nhau được giữ ở desired count",
+      "Một template có version mô tả container và port"
     ],
     "optionsEn": [
-      "A logical grouping of compute capacity (EC2 instances or Fargate) where tasks are placed",
-      "A registry that stores Docker images",
-      "A single running container",
-      "A version of a task definition"
+      "A logical grouping of capacity where tasks are placed",
+      "A registry that stores and versions Docker images",
+      "A group of identical tasks kept at a desired count",
+      "A versioned template describing containers and ports"
     ],
     "answer": 0,
     "explanation": "Cluster là nơi task chạy. Với launch type EC2 bạn quản lý các instance trong cluster; với Fargate thì AWS lo phần compute, cluster chỉ còn là ranh giới logic.",
@@ -304,16 +304,16 @@
     "question": "ECS *task execution role* dùng để làm gì?",
     "questionEn": "What is the ECS *task execution role* used for?",
     "options": [
-      "Cho phép service tự động scale số task",
-      "Cho phép ECS agent kéo image từ ECR và ghi log lên CloudWatch thay mặt task",
-      "Cho phép code trong container gọi S3, DynamoDB...",
-      "Cho phép EC2 instance đăng ký vào cluster"
+      "Cho phép service tự scale số task dựa trên alarm",
+      "Cho ECS agent kéo image từ ECR và gửi log lên CloudWatch",
+      "Cho code ứng dụng trong container gọi S3, DynamoDB...",
+      "Cho EC2 container instance đăng ký vào cluster"
     ],
     "optionsEn": [
-      "Letting the service scale the number of tasks",
-      "Letting the ECS agent pull images from ECR and write logs to CloudWatch on the task's behalf",
-      "Letting the code inside the container call S3, DynamoDB, and so on",
-      "Letting an EC2 instance register itself with the cluster"
+      "Letting the service scale its task count based on alarms",
+      "Letting the agent pull ECR images and send logs to CloudWatch",
+      "Letting app code in the container call S3, DynamoDB, etc.",
+      "Letting the EC2 container instance register with the cluster"
     ],
     "answer": 1,
     "explanation": "Đừng nhầm ba role: *execution role* để khởi động task (kéo image, ghi log), *task role* cho code trong container gọi AWS service, *instance role* cho host EC2 đăng ký vào cluster.",

@@ -4,14 +4,14 @@
     "question": "Cấu trúc nào dưới đây KHÔNG phải là một cây?",
     "questionEn": "Which of these structures is NOT a tree?",
     "options": [
-      "Một nút duy nhất, không có con nào",
-      "Một singly linked list gồm 5 nút",
+      "Một nút duy nhất đứng một mình, không có con nào",
+      "Một singly linked list gồm 5 nút nối tiếp nhau",
       "Các nút cha/con, trong đó có một nút có hai cha",
-      "Một gốc có ba con, mỗi con là một lá"
+      "Một gốc có ba con, mỗi con là một nút lá"
     ],
     "optionsEn": [
-      "A single node with no children",
-      "A singly linked list of 5 nodes",
+      "A single node standing alone with no children",
+      "A singly linked list of 5 nodes chained together",
       "Parent/child nodes where one node has two parents",
       "A root with three children, each of them a leaf"
     ],
@@ -44,16 +44,16 @@
     "question": "Phát biểu nào về cây và danh sách (list) là ĐÚNG?",
     "questionEn": "Which statement about trees and lists is TRUE?",
     "options": [
-      "Cây là cấu trúc tuyến tính, còn list là phi tuyến",
-      "Cây có n nút luôn có đúng n cạnh",
-      "Mọi cây đều phải là cây nhị phân",
-      "Singly linked list có thể xem là một cây suy biến, mỗi nút có tối đa một con"
+      "Cây là cấu trúc tuyến tính, còn list là cấu trúc phi tuyến",
+      "Cây có n nút luôn có đúng n cạnh, mỗi nút một cạnh đi lên",
+      "Mọi cây đều phải là cây nhị phân, tối đa hai con mỗi nút",
+      "Singly linked list có thể xem là cây suy biến, mỗi nút một con"
     ],
     "optionsEn": [
-      "Trees are linear structures, while lists are non-linear",
-      "A tree with n nodes always has exactly n edges",
-      "Every tree must be a binary tree",
-      "A singly linked list can be seen as a degenerate tree where each node has at most one child"
+      "Trees are linear structures, while lists are non-linear ones",
+      "A tree with n nodes always has exactly n edges, one per node",
+      "Every tree must be a binary tree, with at most two children",
+      "A singly linked list can be seen as a degenerate one-child tree"
     ],
     "answer": 3,
     "explanation": "List là tuyến tính (mỗi phần tử có tối đa một phần tử kế tiếp), cây là phi tuyến (có thể rẽ nhiều nhánh). Cây n nút có n − 1 cạnh, và cây như DOM hay hệ thống file có thể có nhiều con. Linked list là trường hợp đặc biệt của cây — cũng là hình dạng BST suy biến thành.",
@@ -65,15 +65,15 @@
     "questionEn": "What distinguishes a binary tree from a binary search tree (BST)?",
     "options": [
       "Cây nhị phân có tối đa hai con mỗi nút, còn BST có thể có nhiều hơn",
-      "BST là cây nhị phân có thêm ràng buộc thứ tự: cây con trái nhỏ hơn, cây con phải lớn hơn nút",
-      "BST luôn cân bằng, còn cây nhị phân thì không",
+      "BST thêm ràng buộc thứ tự: cây con trái nhỏ hơn, cây con phải lớn hơn",
+      "BST luôn tự cân bằng sau mỗi lần chèn, còn cây nhị phân thì không",
       "Cây nhị phân lưu giá trị đã sắp xếp, còn BST lưu theo thứ tự chèn"
     ],
     "optionsEn": [
       "A binary tree has at most two children per node, while a BST may have more",
-      "A BST is a binary tree with an extra ordering rule: left subtree smaller, right subtree larger than the node",
-      "A BST is always balanced, while a binary tree is not",
-      "A binary tree stores sorted values, while a BST stores them in insertion order"
+      "A BST adds an ordering rule: left subtree smaller, right subtree larger",
+      "A BST rebalances itself after every insert, while a binary tree does not",
+      "A binary tree stores sorted values, while a BST keeps insertion order"
     ],
     "answer": 1,
     "explanation": "Cả hai đều giới hạn tối đa hai con mỗi nút. BST thêm tính chất thứ tự áp dụng cho toàn bộ cây con. BST không tự cân bằng — chèn dữ liệu đã sắp xếp sẽ tạo ra một chuỗi dài.",
@@ -144,16 +144,16 @@
     "question": "Hàm chèn đệ quy sau có bug. Hậu quả là gì khi gọi `root = insert(root, v)` trên một cây đã có gốc?\n`function insert(node, value) {\n  if (node === null) return new Node(value);\n\n  if (value < node.value) insert(node.left, value);\n  else insert(node.right, value);\n\n  return node;\n}`",
     "questionEn": "This recursive insert has a bug. What happens when you call `root = insert(root, v)` on a tree that already has a root?\n`function insert(node, value) {\n  if (node === null) return new Node(value);\n\n  if (value < node.value) insert(node.left, value);\n  else insert(node.right, value);\n\n  return node;\n}`",
     "options": [
-      "Đệ quy vô hạn và stack overflow",
-      "Giá trị mới thay thế giá trị ở gốc",
+      "Đệ quy vô hạn vì `node` không bao giờ thành null, gây stack overflow",
+      "Giá trị mới thay thế giá trị ở gốc vì hàm luôn trả về `node`",
       "Nút mới được tạo ra nhưng không bao giờ được gắn vào cây",
-      "Nút mới luôn bị gắn vào bên phải của gốc"
+      "Nút mới luôn bị gắn vào bên phải của gốc, bất kể giá trị"
     ],
     "optionsEn": [
-      "Infinite recursion and a stack overflow",
-      "The new value replaces the root's value",
+      "Infinite recursion, since `node` never becomes null, and a stack overflow",
+      "The new value replaces the root's value, since the function returns `node`",
       "The new node is created but never linked into the tree",
-      "The new node is always attached to the right of the root"
+      "The new node always ends up to the right of the root, whatever its value"
     ],
     "answer": 2,
     "explanation": "Kết quả của lời gọi đệ quy bị bỏ đi. Khi chạm `null`, nút mới được trả về nhưng nơi gọi không gán nó vào `node.left` hay `node.right`, nên nó bị mất. Sửa bằng `node.left = insert(node.left, value)` và tương tự bên phải.",
@@ -184,15 +184,15 @@
     "question": "Làm thế nào để tìm giá trị nhỏ nhất trong một BST?",
     "questionEn": "How do you find the minimum value in a BST?",
     "options": [
-      "Duyệt mọi nút và giữ lại giá trị nhỏ nhất",
-      "Đó luôn là giá trị ở gốc",
-      "Đó luôn là con trái trực tiếp của gốc",
-      "Đi theo con trỏ `left` từ gốc cho tới khi `left` là `null`"
+      "Duyệt mọi nút và giữ lại giá trị nhỏ nhất đã gặp",
+      "Đó luôn là giá trị ở gốc, vì gốc được chèn đầu tiên",
+      "Đó luôn là con trái trực tiếp của gốc trong mọi BST",
+      "Đi theo con trỏ `left` từ gốc tới khi `left` là `null`"
     ],
     "optionsEn": [
-      "Visit every node and keep the smallest value",
-      "It is always the root's value",
-      "It is always the root's direct left child",
+      "Visit every node and keep the smallest value seen so far",
+      "It is always the root's value, since the root was inserted first",
+      "It is always the root's direct left child in any BST",
       "Follow `left` pointers from the root until `left` is `null`"
     ],
     "answer": 3,
@@ -224,16 +224,16 @@
     "question": "Phát biểu nào mô tả CHÍNH XÁC nhất độ phức tạp của insert và find trong một BST thường?",
     "questionEn": "Which statement MOST accurately describes insert and find in a plain BST?",
     "options": [
-      "Luôn là O(log n) trong mọi trường hợp",
-      "Luôn là O(n) vì có thể phải duyệt toàn bộ cây",
-      "O(h) với h là chiều cao: O(log n) khi cân bằng, O(n) trong trường hợp xấu nhất",
-      "O(1) trung bình, giống hash table"
+      "Luôn là O(log n) trong mọi trường hợp vì mỗi bước loại một nửa cây",
+      "Luôn là O(n) vì trong mọi trường hợp có thể phải duyệt toàn bộ cây",
+      "O(h) với h là chiều cao: O(log n) khi cân bằng, O(n) khi xấu nhất",
+      "O(1) trung bình giống hash table, O(log n) khi cây bị lệch nhiều"
     ],
     "optionsEn": [
-      "Always O(log n) in every case",
-      "Always O(n) because the whole tree may need to be visited",
-      "O(h), where h is the height: O(log n) when balanced, O(n) in the worst case",
-      "O(1) on average, like a hash table"
+      "Always O(log n) in every case, because each step discards half the tree",
+      "Always O(n), because in every case the whole tree may need visiting",
+      "O(h), where h is the height: O(log n) when balanced, O(n) at worst",
+      "O(1) on average like a hash table, O(log n) when the tree is skewed"
     ],
     "answer": 2,
     "explanation": "Cả hai chỉ đi trên một đường từ gốc xuống, nên chi phí tỉ lệ với chiều cao h. Chiều cao nằm giữa ⌊log₂ n⌋ và n − 1 tuỳ hình dạng cây, vì vậy O(log n) là cam kết chỉ khi cây được giữ cân bằng.",
@@ -244,16 +244,16 @@
     "question": "Cây AVL và cây red-black mang lại điều gì so với BST thường?",
     "questionEn": "What do AVL and red-black trees provide over a plain BST?",
     "options": [
-      "Chiều cao luôn là O(log n) nhờ phép xoay, nên insert/find/remove là O(log n) ngay cả trong trường hợp xấu nhất",
-      "Tra cứu O(1) giống hash table",
-      "Không cần so sánh giá trị khi tìm kiếm",
-      "Cho phép mỗi nút có nhiều hơn hai con để giảm chiều cao"
+      "Chiều cao luôn là O(log n) nhờ phép xoay, kể cả trường hợp xấu nhất",
+      "Tra cứu O(1) giống hash table nhờ lưu thêm bảng băm ở mỗi nút",
+      "Không cần so sánh giá trị khi tìm kiếm vì vị trí được tính trực tiếp",
+      "Cho phép mỗi nút có nhiều hơn hai con để giảm chiều cao của cây"
     ],
     "optionsEn": [
-      "Height is always O(log n) thanks to rotations, so insert/find/remove are O(log n) even in the worst case",
-      "O(1) lookups like a hash table",
-      "Search no longer needs to compare values",
-      "Each node may have more than two children to reduce height"
+      "Height stays O(log n) thanks to rotations, even in the worst case",
+      "O(1) lookups like a hash table, thanks to a small hash table per node",
+      "Search needs no value comparisons because positions are computed directly",
+      "Each node may have more than two children to reduce the tree's height"
     ],
     "answer": 0,
     "explanation": "Cây tự cân bằng làm thêm các phép xoay O(1) khi insert/remove để giữ chiều cao O(log n) (AVL ≈ 1,44 log₂ n, red-black ≤ 2 log₂(n + 1)). Vẫn là BST nên vẫn so sánh và vẫn là O(log n), không phải O(1). Nhiều key mỗi nút là đặc điểm của B-tree.",
@@ -284,16 +284,16 @@
     "question": "Khi xoá một nút có HAI con trong BST, cách làm chuẩn là gì?",
     "questionEn": "When removing a node that has TWO children from a BST, what is the standard approach?",
     "options": [
-      "Xoá nút đó cùng toàn bộ cây con của nó",
-      "Thay giá trị của nút bằng in-order successor (nhỏ nhất trong cây con phải), rồi xoá successor",
-      "Thay nút bằng con trái trực tiếp của nó",
-      "Thay giá trị của nút bằng giá trị lớn nhất trong cây con phải"
+      "Xoá nút đó cùng toàn bộ cây con của nó rồi chèn lại từng giá trị",
+      "Thay giá trị bằng in-order successor (nhỏ nhất bên phải), rồi xoá nó",
+      "Thay nút bằng con trái trực tiếp của nó và giữ nguyên cây con phải",
+      "Thay giá trị bằng giá trị lớn nhất trong cây con phải, rồi xoá nó"
     ],
     "optionsEn": [
-      "Delete the node together with its whole subtree",
-      "Replace its value with the in-order successor (smallest in the right subtree), then delete the successor",
-      "Replace the node with its direct left child",
-      "Replace its value with the largest value in the right subtree"
+      "Delete the node with its whole subtree, then re-insert each value",
+      "Replace its value with the in-order successor (right-side minimum), then delete it",
+      "Replace the node with its direct left child and keep the right subtree",
+      "Replace its value with the largest value in the right subtree, then delete it"
     ],
     "answer": 1,
     "explanation": "Successor là giá trị nhỏ nhất vẫn lớn hơn mọi giá trị bên trái, nên đặt vào vị trí đó vẫn giữ tính chất BST; nó không có con trái nên xoá nó thuộc trường hợp 0 hoặc 1 con. Lấy con trái trực tiếp lên có thể làm mất cây con phải; giá trị lớn nhất bên phải thì vi phạm thứ tự.",

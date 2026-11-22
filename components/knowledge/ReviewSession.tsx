@@ -10,6 +10,7 @@ import { recordReview } from "@/lib/progress";
 import { DEFAULT_GROUP } from "@/lib/groups";
 import { questionKey } from "@/lib/lessons";
 import { pickSession, type QuestionIndex } from "@/lib/review";
+import { useOptionOrder } from "@/lib/useOptionOrder";
 import { cn } from "@/lib/utils";
 import { PageError, PageLoading } from "@/components/learn/PageState";
 import { type Question, localizeQuestion } from "./QuizBlock";
@@ -102,6 +103,8 @@ export default function ReviewSession() {
   }, [autoQuick, loading, topics]);
 
   const optionLabels = ["A", "B", "C", "D", "E"];
+  const orderFor = useOptionOrder();
+  const optionOrder = (i: number) => orderFor(questionKey(sessionQ[i].topic_slug, sessionQ[i].id), sessionQ[i].options.length);
   const localized = sessionQ.map((q) => localizeQuestion(q, lang));
   // Display-only alternates for side-by-side mode; `answer` is a shared index.
   const enQs = sessionQ.map((q) => localizeQuestion(q, "en"));
@@ -220,7 +223,8 @@ export default function ReviewSession() {
                 )}
 
                 <div className="space-y-1 mb-3">
-                  {q.options.map((opt, oi) => {
+                  {optionOrder(i).map((oi, pos) => {
+                    const opt = q.options[oi];
                     const isCorrectOpt = oi === q.answer;
                     const isUserOpt = oi === userAnswer;
 
@@ -230,7 +234,7 @@ export default function ReviewSession() {
                         isCorrectOpt ? "bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300" :
                         isUserOpt ? "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300" : "text-zinc-500"
                       )}>
-                        <span className="font-bold shrink-0">{optionLabels[oi]}.</span>
+                        <span className="font-bold shrink-0">{optionLabels[pos]}.</span>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start gap-2">
                             <div className="flex-1 min-w-0">
@@ -375,7 +379,8 @@ export default function ReviewSession() {
           <p className="text-zinc-900 dark:text-zinc-100 font-medium leading-relaxed"><QuestionText text={currentQ.question} /></p>
         )}
         <div className="space-y-2">
-          {currentQ.options.map((opt, i) => {
+          {optionOrder(currentIdx).map((i, pos) => {
+            const opt = currentQ.options[i];
             const isSel = answers[currentIdx] === i;
 
             return (
@@ -395,7 +400,7 @@ export default function ReviewSession() {
                   "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 mt-0.5",
                   isSel ? "bg-blue-600 border-blue-500 text-white" : "border-zinc-400 dark:border-zinc-600 text-zinc-500"
                 )}>
-                  {optionLabels[i]}
+                  {optionLabels[pos]}
                 </span>
                 {dual ? (
                   <BilingualPair

@@ -4,7 +4,7 @@
     "question": "Bạn gửi đồng nghiệp link `http://localhost:5173` để khoe app đang chạy trên máy mình. Khi họ mở link, chuyện gì xảy ra?",
     "questionEn": "You send a colleague the link `http://localhost:5173` to show the app running on your machine. What happens when they open it?",
     "options": [
-      "Họ thấy app của bạn, vì link localhost dùng được trong cùng mạng văn phòng",
+      "Họ thấy được app của bạn, vì link localhost dùng được cho mọi máy trong cùng mạng văn phòng",
       "Trình duyệt của họ tìm trên chính máy họ, nơi không có gì chạy ở 5173, nên lỗi",
       "Họ được tự động chuyển sang server staging có cùng port",
       "Họ thấy app của bạn nếu máy họ cũng đã cài Node.js và Chrome"
@@ -68,13 +68,13 @@
     "question": "Vì sao dự án To-do yêu cầu Node.js 22 trở lên?",
     "questionEn": "Why does the To-do project require Node.js 22 or newer?",
     "options": [
-      "Script của server dùng cờ `--env-file-if-exists` và `--watch` mà bản Node cũ không có",
-      "Node bản cũ không mở được port lớn hơn 1024 như 4000 hay 5173",
+      "Script server dùng cờ `--watch` và `--env-file-if-exists` của Node mới",
+      "Node bản cũ không mở được các port có số lớn hơn 1024 như 4000 hay 5173",
       "Dự án dùng SQLite có sẵn trong Node 22 thay vì cài gói riêng",
-      "npm từ chối tải gói về cho những máy đang chạy Node bản cũ"
+      "npm từ chối tải gói về cho những máy đang chạy Node bản cũ hơn 22"
     ],
     "optionsEn": [
-      "The server scripts use the `--env-file-if-exists` and `--watch` flags that older Node lacks",
+      "The server scripts use `--watch` and `--env-file-if-exists`, new Node flags",
       "Older Node cannot open ports above 1024 such as 4000 or 5173",
       "The project uses the SQLite built into Node 22 instead of installing a package",
       "npm refuses to download packages onto machines running an older Node"
@@ -102,7 +102,7 @@
     "options": [
       "Nhấn Tab để chuyển sang một dấu nhắc lệnh mới",
       "Nhấn mũi tên lên để lấy lại dấu nhắc lệnh",
-      "Đóng VS Code; server vẫn chạy ngầm và terminal được giải phóng",
+      "Đóng cửa sổ VS Code đi; server vẫn chạy ngầm và terminal được giải phóng",
       "Nhấn Ctrl + C để dừng server, terminal rảnh lại (hoặc mở terminal thứ hai)"
     ],
     "optionsEn": [
@@ -134,13 +134,13 @@
     "options": [
       "`cd client`",
       "`cd /client`",
-      "`cd ..\\client` (hoặc `cd ../client`)",
+      "`cd ..\\client`",
       "`cd server\\client`"
     ],
     "optionsEn": [
       "`cd client`",
       "`cd /client`",
-      "`cd ..\\client` (or `cd ../client`)",
+      "`cd ..\\client`",
       "`cd server\\client`"
     ],
     "answer": 2,
@@ -164,16 +164,16 @@
     "question": "Giải nén `todo-auth-app.zip` xong, bạn không thấy thư mục `node_modules` và file `todo.db`. Vì sao?",
     "questionEn": "After unzipping `todo-auth-app.zip` you see no `node_modules` folder and no `todo.db` file. Why?",
     "options": [
-      "File zip bị lỗi khi tải, cần tải lại",
-      "Chúng được tạo trên máy bạn bởi `npm install` và lần chạy server đầu tiên, nên không bao giờ được chia sẻ",
-      "Chúng là file ẩn; cần bật hiển thị file ẩn trong Explorer",
-      "Phần mềm diệt virus đã xóa chúng khi giải nén"
+      "File zip bị lỗi trong lúc tải về, cần xóa đi và tải lại từ đầu",
+      "Chúng được tạo trên máy bạn bởi `npm install` và lần chạy server đầu tiên",
+      "Chúng là file ẩn; cần bật hiển thị file ẩn trong File Explorer thì mới thấy được",
+      "Phần mềm diệt virus đã tự động xóa chúng trong lúc giải nén"
     ],
     "optionsEn": [
       "The zip was damaged during download and must be downloaded again",
-      "They are created on your machine by `npm install` and the first server start, so they are never shared",
-      "They are hidden files; turn on hidden items in Explorer",
-      "The antivirus deleted them while unzipping"
+      "They are created on your machine by `npm install` and the first server start",
+      "They are hidden files; turn on hidden items in File Explorer to see both of them",
+      "The antivirus deleted them automatically while the zip was extracting"
     ],
     "answer": 1,
     "explanation": "`node_modules` là hàng nghìn file thư viện mà `npm install` tải về theo `package.json`; `todo.db` là file database được `db.js` tạo khi server khởi động. Cả hai đều sinh ra trên từng máy.",
@@ -198,14 +198,14 @@
     "options": [
       "`.env` quá lớn so với giới hạn dung lượng file của Git",
       "Git không lưu được các file có tên bắt đầu bằng dấu chấm",
-      "`.env.example` mới là file server đọc khi chạy, còn `.env` chỉ là bản nháp",
-      "`.env` có thể chứa secret thật và giá trị riêng của từng máy; file example chỉ cho biết cần biến nào, với giá trị giả"
+      "`.env.example` mới là file server đọc khi chạy, còn `.env` chỉ là một bản nháp cá nhân",
+      "`.env` có thể chứa secret thật; file example chỉ liệt kê biến với giá trị giả"
     ],
     "optionsEn": [
-      "`.env` is too large for Git's file size limit",
+      "`.env` grows too large for Git's file size limit after a while",
       "Git cannot store files whose names start with a dot",
-      "`.env.example` is the file the server reads at runtime, `.env` is just a draft",
-      "`.env` may hold real secrets and per-machine values; the example only lists the variables, with placeholder values"
+      "`.env.example` is the file the server reads at runtime; `.env` is just a draft copy",
+      "`.env` may hold real secrets; the example only lists variables with fake values"
     ],
     "answer": 3,
     "explanation": "Secret (mật khẩu database, API key, JWT_SECRET) lọt lên Git là sự cố bảo mật. `.gitignore` có dòng `.env`; `.env.example` được commit để người mới biết cần những biến nào.",
@@ -228,15 +228,15 @@
     "question": "Một dev đổi giá trị `JWT_SECRET` trong `.env` rồi khởi động lại server. Tester sẽ thấy gì?",
     "questionEn": "A developer changes `JWT_SECRET` in `.env` and restarts the server. What do testers notice?",
     "options": [
-      "Mọi người đang đăng nhập bị đăng xuất, vì token cũ không còn xác minh được",
-      "Toàn bộ to-do trong database bị xóa sạch",
-      "Server chuyển sang chạy ở một port khác",
+      "Mọi người đang đăng nhập bị đăng xuất vì token cũ không còn hợp lệ",
+      "Toàn bộ to-do trong database bị xóa sạch mỗi khi server khởi động lại",
+      "Server chuyển sang chạy ở một port khác do secret đã thay đổi",
       "Không có gì, vì `JWT_SECRET` chỉ có tác dụng ở production"
     ],
     "optionsEn": [
-      "Everyone who was logged in is logged out, because old tokens no longer verify",
-      "All to-dos in the database are wiped",
-      "The server moves to a different port",
+      "Everyone logged in gets logged out, since old tokens no longer verify",
+      "All to-dos in the database are wiped clean when the server restarts",
+      "The server moves to a different port because the secret changed",
       "Nothing, because `JWT_SECRET` only matters in production"
     ],
     "answer": 0,
@@ -260,14 +260,14 @@
     "question": "Sau `npm run dev` trong `server`, terminal hiện `API running on http://localhost:4000` và không trả lại dấu nhắc lệnh. Điều đó nghĩa là gì?",
     "questionEn": "After `npm run dev` in `server`, the terminal shows `API running on http://localhost:4000` and does not return to the prompt. What does it mean?",
     "options": [
-      "npm bị treo; nhấn Enter vài lần cho tới khi xong",
-      "Đúng như mong đợi: server đang chạy và chờ request; cứ để terminal mở",
+      "npm đang bị treo; hãy nhấn Enter vài lần cho tới khi nó chạy xong",
+      "Đúng như mong đợi: server đang chạy và chờ request; cứ để mở",
       "Cài đặt thất bại âm thầm; cần chạy lại `npm install`",
       "Database đang được xây; chờ đến khi hiện chữ \"Done\""
     ],
     "optionsEn": [
       "npm is stuck; press Enter a few times until it finishes",
-      "As expected: the server is running and waiting for requests; leave the terminal open",
+      "As expected: the server is running and waiting; leave it open",
       "The install failed silently; run `npm install` again",
       "The database is being built; wait until it prints \"Done\""
     ],
@@ -292,15 +292,15 @@
     "question": "Bạn mở http://localhost:4000 và thấy `Cannot GET /`. Khả năng cao nhất là gì?",
     "questionEn": "You open http://localhost:4000 and see `Cannot GET /`. What is most likely going on?",
     "options": [
-      "Backend đã crash; cần khởi động lại terminal 1",
+      "Backend đã bị crash; cần khởi động lại server ở terminal 1",
       "Thiếu file `.env` nên các route không được nạp",
-      "Bình thường: backend chỉ trả lời URL dưới `/api`; app nằm ở port 5173",
+      "Bình thường: backend chỉ trả lời các URL dưới `/api`",
       "Tường lửa đang chặn port 4000 trên máy bạn"
     ],
     "optionsEn": [
-      "The backend crashed; restart terminal 1",
+      "The backend crashed; restart it in terminal 1",
       "The `.env` file is missing, so no routes were loaded",
-      "Normal: the backend only answers URLs under `/api`; the app is on port 5173",
+      "Normal: the backend only answers URLs under `/api`",
       "A firewall is blocking port 4000 on your machine"
     ],
     "answer": 2,
@@ -324,13 +324,13 @@
     "question": "Trình duyệt chỉ nói chuyện với port 5173. Vậy request `GET /api/todos` đến được Express ở port 4000 bằng cách nào?",
     "questionEn": "The browser only talks to port 5173. So how does a `GET /api/todos` request reach Express on port 4000?",
     "options": [
-      "Proxy trong `vite.config.js` chuyển mọi request bắt đầu bằng `/api` sang `http://localhost:4000`",
+      "Proxy trong `vite.config.js` chuyển request `/api` sang port 4000",
       "Trình duyệt tự thử sang port 4000 khi port 5173 trả về 404",
       "Code React gọi thẳng `http://localhost:4000` và dựa vào cấu hình CORS",
       "Express theo dõi port 5173 và tự sao chép các request ở đó"
     ],
     "optionsEn": [
-      "The proxy in `vite.config.js` forwards every request starting with `/api` to `http://localhost:4000`",
+      "The proxy in `vite.config.js` forwards `/api` requests to port 4000",
       "The browser automatically tries port 4000 when port 5173 returns 404",
       "The React code calls `http://localhost:4000` directly and relies on CORS setup",
       "Express watches port 5173 and copies the requests it sees there"
@@ -356,16 +356,16 @@
     "question": "Lần đầu mở app, terminal 1 in ra `GET /api/auth/me → 401` hai lần. Chuyện gì đang xảy ra?",
     "questionEn": "When you first open the app, terminal 1 prints `GET /api/auth/me → 401` twice. What is going on?",
     "options": [
-      "Bạn đã nhập sai mật khẩu hai lần liên tiếp",
-      "Proxy của Vite bị lỗi và đang tự thử lại request",
-      "Lỗi server: `/api/auth/me` lẽ ra phải trả 200 cho mọi người",
-      "Bình thường: app hỏi \"đã đăng nhập chưa?\" (chưa → 401), và StrictMode ở chế độ dev chạy effect hai lần"
+      "Bạn đã nhập sai mật khẩu hai lần liên tiếp ở form đăng nhập",
+      "Proxy của Vite bị lỗi và đang tự động thử gửi lại request đó",
+      "Lỗi server: endpoint `/api/auth/me` lẽ ra phải trả 200 cho mọi người dùng",
+      "Bình thường: app hỏi đã đăng nhập chưa, và StrictMode chạy effect hai lần"
     ],
     "optionsEn": [
-      "You typed a wrong password twice in a row",
-      "The Vite proxy is broken and retrying the request",
-      "A server bug: `/api/auth/me` should return 200 for everyone",
-      "Normal: the app asks \"am I logged in?\" (not yet → 401), and StrictMode in dev runs effects twice"
+      "You typed a wrong password twice in a row on the login form",
+      "The Vite proxy is broken and keeps retrying the same request",
+      "A server bug: the `/api/auth/me` endpoint should return 200 for every visitor",
+      "Normal: the app checks the session, and dev StrictMode runs effects twice"
     ],
     "answer": 3,
     "explanation": "`App.jsx` gọi `GET /auth/me` khi tải trang để khôi phục phiên. Chưa có cookie thì 401 là đúng. React StrictMode (chỉ ở dev) cố ý chạy effect hai lần để bắt lỗi.",
@@ -388,14 +388,14 @@
     "question": "Bạn đổi chữ tiêu đề trong `AuthForm.jsx` rồi lưu. Chuyện gì xảy ra?",
     "questionEn": "You change the heading text in `AuthForm.jsx` and save. What happens?",
     "options": [
-      "Phải dừng Vite rồi chạy lại `npm run dev` mới thấy thay đổi",
-      "Trình duyệt cập nhật ngay nhờ HMR, không tải lại cả trang; terminal 2 in một dòng `hmr update`",
+      "Phải dừng Vite rồi chạy lại `npm run dev` thì mới thấy được thay đổi",
+      "Trình duyệt cập nhật ngay nhờ HMR, không cần tải lại cả trang",
       "`node --watch` khởi động lại backend ở terminal 1",
       "Không có gì thay đổi cho tới khi bạn chạy lại `npm install`"
     ],
     "optionsEn": [
       "You must stop Vite and run `npm run dev` again to see the change",
-      "The browser updates at once via HMR, without a full reload; terminal 2 logs an `hmr update` line",
+      "The browser updates at once via HMR, with no full page reload",
       "`node --watch` restarts the backend in terminal 1",
       "Nothing changes until you run `npm install` again"
     ],
@@ -422,13 +422,13 @@
     "options": [
       "`hmr update /src/index.js`, và module được thay tại chỗ",
       "Không gì cả; sửa backend phải khởi động lại máy tính",
-      "`Restarting 'src/index.js'` rồi `API running on http://localhost:4000`: `node --watch` đã khởi động lại server",
-      "`Database emptied.` vì mỗi lần khởi động lại đều xóa dữ liệu"
+      "`node --watch` khởi động lại server và in lại dòng `API running`",
+      "`Database emptied.` vì mỗi lần khởi động lại server đều xóa sạch dữ liệu"
     ],
     "optionsEn": [
       "`hmr update /src/index.js`, and the module is swapped in place",
       "Nothing; backend edits need a reboot of the computer",
-      "`Restarting 'src/index.js'` then `API running on http://localhost:4000`: `node --watch` restarted the server",
+      "`node --watch` restarts the server and prints `API running` again",
       "`Database emptied.` because every restart wipes the data"
     ],
     "answer": 2,
@@ -452,16 +452,16 @@
     "question": "Form đăng nhập hiện `Request failed (500)`, còn terminal 2 báo `[vite] http proxy error: /api/auth/login` kèm `ECONNREFUSED`. Nguyên nhân khả dĩ nhất?",
     "questionEn": "The login form shows `Request failed (500)` and terminal 2 reports `[vite] http proxy error: /api/auth/login` with `ECONNREFUSED`. What is the most likely cause?",
     "options": [
-      "Backend không chạy (terminal 1 đã dừng hoặc bị đóng), nên proxy không có ai để chuyển tiếp",
-      "Bạn nhập sai mật khẩu nên server từ chối",
+      "Backend không chạy, nên proxy không có ai để chuyển tiếp",
+      "Bạn nhập sai mật khẩu nên server từ chối đăng nhập",
       "Thiếu file `.env.example` trong thư mục `server`",
-      "Bộ nhớ đệm (cache) của trình duyệt đã đầy"
+      "Bộ nhớ đệm (cache) của trình duyệt đã đầy nên request bị hủy"
     ],
     "optionsEn": [
-      "The backend is not running (terminal 1 was stopped or closed), so the proxy has nobody to forward to",
+      "The backend is not running, so the proxy has nobody to forward to",
       "You typed the wrong password, so the server refused it",
       "The `.env.example` file is missing from the `server` folder",
-      "The browser cache is full"
+      "The browser cache is full, so the request was dropped"
     ],
     "answer": 0,
     "explanation": "ECONNREFUSED nghĩa là không có chương trình nào lắng nghe ở port 4000. Vite trả 500 dạng text, `api.js` không đọc được JSON nên hiện `Request failed (500)`. Bật lại `npm run dev` trong `server`.",
@@ -484,16 +484,16 @@
     "question": "Chạy `npm run dev` trong `server`, bạn thấy `Port 4000 is already in use. Stop the other server (Ctrl + C in its terminal) or set PORT in .env.` rồi `Failed running 'src/index.js'. Waiting for file changes before restarting...`. Cách xử lý đúng nhất?",
     "questionEn": "Running `npm run dev` in `server`, you see `Port 4000 is already in use. Stop the other server (Ctrl + C in its terminal) or set PORT in .env.` followed by `Failed running 'src/index.js'. Waiting for file changes before restarting...`. What is the best fix?",
     "options": [
-      "Không cần làm gì; `--watch` sẽ tự khởi động lại server sau vài giây",
+      "Không cần làm gì cả; `--watch` sẽ tự khởi động lại server sau vài giây nữa thôi",
       "Thiếu file `.env`; cần copy từ `.env.example` rồi chạy lại",
-      "Node quá cũ; cài lại Node LTS rồi chạy lại",
-      "Port 4000 đang bị chương trình khác chiếm (thường là server cũ); tìm bằng `netstat -ano | findstr :4000` rồi `taskkill /PID <pid> /F`"
+      "Node quá cũ; cần gỡ ra, cài lại Node LTS rồi chạy lại lệnh",
+      "Port 4000 đang bị chương trình khác chiếm; tìm PID bằng `netstat` rồi tắt nó"
     ],
     "optionsEn": [
-      "Nothing; `--watch` will restart the server by itself in a few seconds",
+      "Nothing to do; `--watch` will restart the server on its own after a few seconds",
       "The `.env` file is missing; copy it from `.env.example` and run again",
-      "Node is too old; reinstall Node LTS and run again",
-      "Port 4000 is taken by another program (often an old server); find it with `netstat -ano | findstr :4000`, then `taskkill /PID <pid> /F`"
+      "Node is too old; uninstall it, reinstall Node LTS and run again",
+      "Port 4000 is taken by another program; find its PID with `netstat` and stop it"
     ],
     "answer": 3,
     "explanation": "Server không khởi động được vì port 4000 đã có chương trình khác lắng nghe (thường là server cũ bạn quên tắt). `--watch` chỉ chạy lại khi bạn lưu file, và sẽ lại thất bại nếu port vẫn bận. Tắt chương trình đang giữ port rồi chạy lại.",
@@ -516,16 +516,16 @@
     "question": "Đứng ở thư mục gốc `todo-auth-app`, bạn chạy `npm install` và nhận `npm error enoent Could not read package.json`. Cách sửa?",
     "questionEn": "In the root folder `todo-auth-app` you run `npm install` and get `npm error enoent Could not read package.json`. How do you fix it?",
     "options": [
-      "Gỡ và cài lại Node.js",
+      "Gỡ và cài lại Node.js, vì npm không đọc được file",
       "Chạy `Set-ExecutionPolicy` để cho phép script",
-      "`cd server` (hoặc `cd client`), vì `package.json` nằm trong từng thư mục đó",
-      "Xóa thư mục `node_modules` rồi chạy lại"
+      "`cd server` (hoặc `cd client`) trước, rồi mới chạy lệnh",
+      "Xóa thư mục `node_modules` đi rồi chạy lại lệnh `npm install`"
     ],
     "optionsEn": [
-      "Uninstall and reinstall Node.js",
+      "Uninstall and reinstall Node.js, since npm cannot read files",
       "Run `Set-ExecutionPolicy` to allow scripts",
-      "`cd server` (or `cd client`), because `package.json` lives in each of those folders",
-      "Delete the `node_modules` folder and run again"
+      "`cd server` (or `cd client`) first, then run the command",
+      "Delete the `node_modules` folder and run `npm install` again"
     ],
     "answer": 2,
     "explanation": "Thư mục gốc không có `package.json`; mỗi phần (client, server) là một chương trình riêng với `package.json` riêng. Dùng `pwd` để biết mình đang ở đâu.",
@@ -548,14 +548,14 @@
     "question": "Với vai trò BA, bug report nào giúp dev xử lý nhanh nhất?",
     "questionEn": "As a BA, which bug report helps a developer act fastest?",
     "options": [
-      "\"Đăng nhập bị hỏng trên máy em, nhờ anh sửa gấp giúp em nhé.\"",
-      "Môi trường (staging, commit/build), trình duyệt & OS, điều kiện ban đầu, các bước đánh số, mong đợi vs thực tế, bằng chứng",
-      "Chỉ một ảnh chụp màn hình lỗi, không kèm chữ, để dev tự xem",
+      "\"Đăng nhập bị hỏng trên máy em rồi, anh xem giúp em và sửa gấp trong hôm nay nhé, cảm ơn anh.\"",
+      "Môi trường, trình duyệt & OS, điều kiện ban đầu, các bước đánh số, mong đợi vs thực tế",
+      "Chỉ một ảnh chụp màn hình lỗi, không kèm chữ nào, để dev tự xem và đoán",
       "\"Đăng ký thỉnh thoảng lỗi, em thử nhiều cách rồi, bị khá thường xuyên.\""
     ],
     "optionsEn": [
       "\"Login is broken on my machine, please fix it urgently.\"",
-      "Environment (staging, commit/build), browser & OS, preconditions, numbered steps, expected vs actual, evidence",
+      "Environment, browser & OS, preconditions, numbered steps, expected vs actual",
       "Only a screenshot of the error with no text, so the dev can look for themselves",
       "\"Sign-up fails sometimes, I tried many things, it happens quite often.\""
     ],

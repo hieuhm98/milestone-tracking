@@ -4,16 +4,16 @@
     "question": "Một công ty phần mềm ngân hàng định phân nhóm người dùng thành ngân hàng thương mại lớn, ngân hàng nhỏ, quỹ tiết kiệm và quỹ tín dụng. Sai lầm ở đây là gì?",
     "questionEn": "A banking software company plans to group users into large commercial banks, small banks, savings institutions, and credit unions. What is wrong with that?",
     "options": [
-      "Chia như vậy quá chi tiết, nên gộp lại thành một nhóm",
-      "Đó là phân khúc thị trường chứ không phải user class; user class nên phân theo TÁC VỤ người dùng thực hiện",
-      "Thiếu nhóm người dùng quản trị hệ thống",
-      "Không tính tới người dùng gián tiếp"
+      "Chia như vậy quá chi tiết; nên gộp các tổ chức thành một user class để việc phân tích đơn giản hơn",
+      "Đó là phân khúc thị trường chứ không phải user class; user class nên phân theo tác vụ người dùng làm",
+      "Nên xếp hạng các nhóm theo doanh thu trước, để ngân hàng thương mại lớn trở thành favored user class",
+      "Nó bỏ qua người dùng gián tiếp, và các nhóm nên được tổ chức theo vùng địa lý và mạng lưới chi nhánh"
     ],
     "optionsEn": [
-      "The split is too granular and should be merged into one group",
+      "The split is too granular; the institutions should be merged into one user class to keep analysis simple",
       "Those are market segments, not user classes; user classes should be based on the TASKS users perform",
-      "It omits system administrator users",
-      "It does not account for indirect users"
+      "The groups should be ranked by revenue first, so the large commercial banks become the favored user class",
+      "It ignores indirect users, and the classes should instead be organised by region and branch network"
     ],
     "answer": 1,
     "explanation": "Mọi tổ chức tài chính đó đều có teller, loan officer, business banker và branch manager. Những người làm cùng loại công việc có nhu cầu chức năng tương tự trên toàn bộ các tổ chức.",
@@ -24,16 +24,16 @@
     "question": "Favored user class được xác định dựa trên tiêu chí nào?",
     "questionEn": "On what basis is a favored user class identified?",
     "options": [
-      "Nhóm trả tiền cho hệ thống",
-      "Nhóm có quyền lực chính trị lớn nhất trong tổ chức",
+      "Nhóm chi tiền cho hệ thống, vì quyết định ngân sách của họ quyết định dự án giao được gì",
+      "Nhóm có ảnh hưởng chính trị lớn nhất, vì cần sự ủng hộ của họ để hệ thống được chấp nhận",
       "Nhóm mà sự hài lòng của họ gắn chặt nhất với việc đạt business objectives",
-      "Nhóm có số lượng người dùng đông nhất"
+      "Nhóm đông người dùng nhất, vì làm hài lòng số đông đem lại lợi ích tổng thể lớn nhất"
     ],
     "optionsEn": [
-      "The group paying for the system",
-      "The group with the most political clout in the organization",
-      "The group whose satisfaction is most closely aligned with achieving the business objectives",
-      "The group with the largest number of users"
+      "The group that funds the system, since its budget decisions decide what the project can deliver",
+      "The group with the most political influence, since its support is needed to get the system adopted",
+      "The class whose satisfaction is most tightly linked to achieving the project's business objectives",
+      "The group with the most users, since satisfying the majority yields the largest overall benefit"
     ],
     "answer": 2,
     "explanation": "Khi giải quyết xung đột yêu cầu hoặc quyết định độ ưu tiên, favored user class được ưu tiên. Đây là vấn đề thẳng hàng với mục tiêu kinh doanh, không phải quyền lực hay tiền bạc.",
@@ -45,7 +45,7 @@
     "questionEn": "Locking an account after four failed login attempts exists primarily because of which group?",
     "options": [
       "Favored user class là quản trị viên hệ thống",
-      "Disfavored user class là những người giả mạo danh tính",
+      "Disfavored user class: kẻ giả mạo danh tính",
       "Indirect user class nhận báo cáo bảo mật",
       "Ignored user class là người dùng thử nghiệm"
     ],
@@ -64,16 +64,16 @@
     "question": "Trong mô hình product champion, ai chịu trách nhiệm VIẾT tài liệu yêu cầu?",
     "questionEn": "In the product champion model, who is responsible for WRITING the requirements documents?",
     "options": [
-      "Product champion, vì họ hiểu nghiệp vụ rõ nhất",
-      "Business analyst, dù việc phát triển yêu cầu là trách nhiệm chung của BA và product champion",
-      "Lập trình viên, dựa trên ghi chép của champion",
-      "Nhà tài trợ dự án"
+      "Product champion, vì họ hiểu nghiệp vụ nhất và BA chỉ review những gì họ viết",
+      "Business analyst, dù BA và champion cùng chia sẻ công việc phát triển yêu cầu",
+      "Lập trình viên, chuyển ghi chép của champion thành tài liệu vì đằng nào họ cũng phải hiện thực",
+      "Nhà tài trợ dự án, người sở hữu tài liệu và uỷ quyền việc review cho champion"
     ],
     "optionsEn": [
-      "The product champion, since they understand the business best",
-      "The business analyst, even though requirements development is a shared responsibility of the BA and the champion",
-      "The developers, based on the champion notes",
-      "The project sponsor"
+      "The product champion, since they know the business best and the BA only reviews what they write",
+      "The business analyst, although requirements development is shared between the BA and the champion",
+      "The developers, who turn the champion's notes into documents because they must implement them anyway",
+      "The project sponsor, who owns the documents and delegates their review to the champion"
     ],
     "answer": 1,
     "explanation": "Viết yêu cầu tốt đã khó với người làm nghề. Không thực tế khi kỳ vọng người dùng chưa từng viết yêu cầu làm tốt việc đó.",
@@ -84,16 +84,16 @@
     "question": "Một công ty bảo hiểm lớn thấy không thể có MỘT product owner duy nhất hiểu đủ chi tiết mọi thứ. Giải pháp họ dùng là gì?",
     "questionEn": "A large insurance company found no SINGLE product owner could understand everything in enough detail. What solution did they use?",
     "options": [
-      "Bỏ hoàn toàn vai trò product owner và dùng workshop",
-      "Chọn một product owner cho mỗi phòng ban, với CIO làm product owner trưởng để ra quyết định khi xung đột",
-      "Thuê tư vấn bên ngoài làm product owner",
-      "Để đội phát triển tự quyết mọi thứ"
+      "Bỏ vai trò product owner và tổ chức workshop liên phòng ban, nơi cả nhóm quyết định theo đồng thuận",
+      "Mỗi phòng ban một product owner, với CIO làm product owner trưởng quyết định khi xung đột",
+      "Thuê một tư vấn giàu kinh nghiệm bên ngoài làm product owner duy nhất, có SME từng phòng ban hỗ trợ",
+      "Để kiến trúc sư của đội phát triển quyết định ưu tiên, tham khảo từng phòng ban khi cần"
     ],
     "optionsEn": [
-      "Drop the product owner role entirely and rely on workshops",
-      "Select a product owner per department, with the CIO as lead product owner deciding when they conflicted",
-      "Hire an external consultant as product owner",
-      "Let the development team decide everything"
+      "Drop the product owner role and run cross-department workshops where the group decides by consensus",
+      "A product owner per department, with the CIO as lead product owner settling their conflicts",
+      "Hire an experienced external consultant as the single product owner, backed by department SMEs",
+      "Let the development team's architect decide priorities, consulting each department as needed"
     ],
     "answer": 1,
     "explanation": "CIO hiểu toàn bộ vision sản phẩm nên có thể bảo đảm các phòng ban đi đúng hướng, và có trách nhiệm ra quyết định khi các product owner cấp phòng ban bất đồng.",
@@ -124,16 +124,16 @@
     "question": "Phát biểu nào mô tả ĐÚNG bản chất của elicitation?",
     "questionEn": "Which statement correctly describes the nature of elicitation?",
     "options": [
-      "Đó là việc thu thập yêu cầu bằng cách chép lại chính xác lời người dùng nói",
+      "Thu thập yêu cầu bằng cách ghi lại chính xác lời người dùng, để BA không thêm diễn giải của riêng mình",
       "Đó là quá trình cộng tác và phân tích để thu thập, khám phá, bóc tách và định nghĩa yêu cầu",
-      "Đó là bước một lần ở đầu dự án, kết thúc khi SRS được ký duyệt",
-      "Đó là công việc riêng của product owner trong dự án agile"
+      "Một bước làm một lần ở đầu dự án, sau đó SRS đã ký thay thế việc tiếp xúc thêm với người dùng",
+      "Trong agile, đó là việc riêng của product owner, vì backlog là nguồn yêu cầu duy nhất"
     ],
     "optionsEn": [
-      "It is gathering requirements by transcribing exactly what users say",
-      "It is a collaborative and analytical process to collect, discover, extract, and define requirements",
-      "It is a one-time step at project start that ends when the SRS is signed off",
-      "It is the sole job of the product owner on agile projects"
+      "Gathering requirements by recording exactly what users say, so the BA adds no interpretation of their own",
+      "It is a collaborative and analytical process to collect, discover, extract, and define the requirements",
+      "A one-time step at project start, after which the signed-off SRS replaces further contact with users",
+      "On agile projects, the product owner's job alone, since the backlog is the single source of requirements"
     ],
     "answer": 1,
     "explanation": "Elicitation có bản chất chu kỳ: khai thác, nghiên cứu điều đã học, viết yêu cầu, phát hiện thiếu thông tin, rồi khai thác thêm.",
@@ -144,16 +144,16 @@
     "question": "Vì sao KHÔNG nên bắt đầu một workshop với tờ giấy trắng?",
     "questionEn": "Why should you NOT start a workshop with a completely blank slate?",
     "options": [
-      "Vì người tham gia sẽ không biết nói gì",
-      "Vì workshop tốn nhiều nguồn lực; hãy mang straw man model để nhóm review thay vì cùng nhau tạo từ đầu",
-      "Vì quy trình yêu cầu bắt buộc phải có tài liệu trước",
-      "Vì facilitator không được phép đóng góp ý kiến"
+      "Vì người tham gia sẽ lúng túng nếu thiếu agenda, nên phải gửi bản nháp SRS trước một tuần",
+      "Vì workshop tốn kém; hãy mang straw man model để nhóm review thay vì cùng tạo từ đầu",
+      "Vì quy trình yêu cầu bắt buộc có một bản nháp đã ký trước khi được lên lịch workshop",
+      "Vì facilitator phải trung lập, nên nội dung phải đến từ bản tóm tắt do nhà tài trợ soạn sẵn"
     ],
     "optionsEn": [
-      "Because participants will not know what to say",
-      "Because workshops are resource intensive; bring straw man models so the group reviews rather than creates from scratch",
-      "Because the requirements process mandates prior documentation",
-      "Because the facilitator is not allowed to contribute ideas"
+      "Participants feel unsure without an agenda, so a draft SRS must be sent to them a week in advance",
+      "Workshops are costly, so bring straw man models for the group to review rather than create from scratch",
+      "The requirements process requires a signed-off draft document before any workshop can be scheduled",
+      "The facilitator must stay neutral, so the content has to come from a brief prepared by the sponsor"
     ],
     "answer": 1,
     "explanation": "Người ta phê bình dễ hơn sáng tạo. Hãy dùng kỹ thuật khác trước workshop, rồi đưa nhóm lại để giải quyết những vùng thực sự cần thảo luận chung.",
@@ -184,16 +184,16 @@
     "question": "Ví dụ mô tả các bước làm bánh minh hoạ giá trị của kỹ thuật elicitation nào?",
     "questionEn": "The cake-baking example illustrates the value of which elicitation technique?",
     "options": [
-      "Bảng hỏi, vì có thể khảo sát nhiều người làm bánh",
-      "Quan sát, vì người dùng quá quen với tác vụ tới mức không diễn đạt nổi các bước hiển nhiên",
-      "Phân tích tài liệu, vì công thức đã có sẵn",
-      "Focus group, vì cần nhiều ý kiến khác nhau"
+      "Bảng hỏi, vì khảo sát nhiều người làm bánh cho thấy những bước mà đa số hay quên",
+      "Quan sát, vì người dùng quá quen tác vụ nên không diễn đạt nổi các bước hiển nhiên",
+      "Phân tích tài liệu, vì công thức có sẵn đã ghi đủ mọi bước mà người mới làm bánh cần",
+      "Focus group, vì thảo luận nhóm giúp mọi người nhớ lại những bước họ hay bỏ qua"
     ],
     "optionsEn": [
-      "Questionnaires, since you can survey many bakers",
-      "Observation, because users are so familiar with a task that they cannot articulate the obvious steps",
-      "Document analysis, since the recipe already exists",
-      "Focus groups, since many opinions are needed"
+      "Questionnaires, because surveying many bakers reveals which steps most people tend to forget",
+      "Observation, since users know the task so well they cannot articulate the obvious steps",
+      "Document analysis, because the existing recipe already records every step a new baker needs",
+      "Focus groups, because discussing the task as a group helps people recall the steps they skip"
     ],
     "answer": 1,
     "explanation": "Bạn nhớ nói thêm nguyên liệu, nhưng có nhớ nói mở túi bột, đập vỏ trứng và bỏ vỏ đi không? Những bước tưởng hiển nhiên lại không hiển nhiên với người chưa từng làm.",
@@ -204,16 +204,16 @@
     "question": "Lợi ích lớn nhất mà system interface analysis mang lại là gì?",
     "questionEn": "What is the biggest payoff from system interface analysis?",
     "options": [
-      "Xác định giao diện người dùng đẹp hơn",
+      "Thiết kế giao diện người dùng nhất quán hơn bằng cách tái dùng màn hình của hệ thống khác",
       "Phát hiện chức năng bạn KHÔNG cần xây vì hệ thống khác đã làm rồi",
-      "Giảm số lượng stakeholder cần phỏng vấn",
-      "Tự động sinh ra test case cho các giao diện"
+      "Giảm số stakeholder cần phỏng vấn, vì giao diện đã ghi lại phần lớn hiểu biết của họ",
+      "Tự động sinh test case giao diện từ định dạng thông điệp mà hệ thống khác công bố"
     ],
     "optionsEn": [
-      "Designing a better-looking user interface",
-      "Discovering functionality you do NOT need to build because another system already does it",
-      "Reducing the number of stakeholders to interview",
-      "Automatically generating test cases for the interfaces"
+      "Designing a more consistent user interface by reusing screens that other systems already provide",
+      "Discovering functionality you do NOT need to build, because another system already provides it",
+      "Cutting the number of stakeholders to interview, since interfaces document most of what they know",
+      "Generating interface test cases automatically from the message formats other systems publish"
     ],
     "answer": 1,
     "explanation": "Ví dụ: bạn tưởng cần kiểm tra tính hợp lệ đơn hàng trước khi đẩy sang hệ thống quản lý đơn hàng, nhưng phát hiện hệ thống kia đã tự kiểm tra cho mọi nguồn đẩy vào.",
@@ -225,15 +225,15 @@
     "questionEn": "For mass-market software, which elicitation technique is usually more appropriate than workshops?",
     "options": [
       "Focus group, vì tập người dùng lớn nhưng khó tiếp cận đại diện cụ thể",
-      "Phân tích giao diện hệ thống",
-      "Quan sát tại chỗ làm việc của từng khách hàng",
-      "Phỏng vấn lãnh đạo cấp cao"
+      "Phân tích giao diện hệ thống, vì sản phẩm đại chúng phải chạy cùng nhiều ứng dụng khác",
+      "Quan sát tại chỗ, vì theo dõi vài khách hàng điển hình làm việc cho thấy nhu cầu của mọi người",
+      "Phỏng vấn lãnh đạo cấp cao, người có thể nói thay cả thị trường dựa trên số liệu bán hàng"
     ],
     "optionsEn": [
-      "Focus groups, because the user base is large but representatives are hard to reach",
-      "System interface analysis",
-      "On-site observation at every customer workplace",
-      "Interviews with senior executives"
+      "Focus groups, because the user base is large but specific representatives are hard to reach",
+      "System interface analysis, because mass-market products must work with many other applications",
+      "On-site observation, because watching a few typical customers at work reveals what everyone needs",
+      "Interviews with senior executives, who can speak for the whole market based on sales data"
     ],
     "answer": 0,
     "explanation": "Với dự án thay thế hệ thống cũ thì phân tích tài liệu, phân tích giao diện người dùng và quan sát lại là những kỹ thuật hiệu quả nhất.",
@@ -264,16 +264,16 @@
     "question": "Người dùng nói: Rồi tôi chọn bang muốn gửi hàng tới từ một drop-down list. BA nên làm gì?",
     "questionEn": "A user says: Then I select the state where I want to send the package from a drop-down list. What should the BA do?",
     "options": [
-      "Ghi nguyên văn thành functional requirement",
+      "Ghi một functional requirement rằng hệ thống shall cung cấp drop-down list các bang",
       "Hỏi vì sao lại là drop-down list, vì đây có thể là solution idea che khuất nhu cầu thật",
-      "Bỏ qua vì đó là vấn đề thiết kế giao diện",
-      "Chuyển thẳng cho UI designer quyết định"
+      "Bỏ qua, vì chọn drop-down list là chuyện thiết kế giao diện nằm ngoài công việc yêu cầu",
+      "Chuyển ý tưởng drop-down list thẳng cho UI designer, người quyết định mọi thứ ở cấp màn hình"
     ],
     "optionsEn": [
-      "Record it verbatim as a functional requirement",
-      "Ask why a drop-down list, since this may be a solution idea masking the real need",
-      "Ignore it because it is a UI design matter",
-      "Pass it straight to the UI designer to decide"
+      "Record a functional requirement that the system shall provide a drop-down list of states",
+      "Ask why a drop-down list, since this may be a solution idea that hides the real underlying need",
+      "Skip it, because choosing a drop-down list is a UI design matter outside requirements work",
+      "Pass the drop-down list idea straight to the UI designer, who owns all screen-level decisions"
     ],
     "answer": 1,
     "explanation": "Nếu lý do chỉ là thấy hay thì yêu cầu thật là cho phép người dùng chỉ định bang. Nếu lý do là nhất quán với chỗ khác và ngăn nhập sai, thì đó là design constraint chính đáng.",
@@ -284,16 +284,16 @@
     "question": "Assumed requirement khác implied requirement như thế nào?",
     "questionEn": "How does an assumed requirement differ from an implied requirement?",
     "options": [
-      "Assumed do khách hàng nêu, implied do lập trình viên nêu",
-      "Assumed là điều người ta kỳ vọng mà không nói ra; implied là điều cần thiết vì một yêu cầu khác nhưng không được nêu tường minh",
-      "Assumed luôn sai, implied luôn đúng",
-      "Hai khái niệm này giống nhau"
+      "Assumed đến từ kinh nghiệm cũ của khách hàng; implied do lập trình viên đề xuất khi thiết kế",
+      "Assumed là điều được kỳ vọng mà không nói ra; implied là điều cần vì yêu cầu khác nhưng không ai nêu",
+      "Assumed là phỏng đoán chưa kiểm chứng cần loại bỏ; implied là sự thật đã xác nhận, không cần review",
+      "Hai khái niệm là một: đều là yêu cầu BA tự đặt ra để lấp chỗ trống stakeholder bỏ lại"
     ],
     "optionsEn": [
-      "Assumed ones come from customers, implied ones from developers",
-      "Assumed requirements are what people expect without expressing; implied ones are necessary because of another requirement but are never stated",
-      "Assumed ones are always wrong and implied ones always right",
-      "They mean the same thing"
+      "Assumed ones come from customers' past experience; implied ones are proposed by developers during design",
+      "Assumed ones are expected but unvoiced; implied ones follow from another requirement but go unstated",
+      "Assumed ones are unverified guesses to be removed; implied ones are confirmed facts needing no review",
+      "They are the same: both are requirements the BA invents to fill gaps stakeholders left in the spec"
     ],
     "answer": 1,
     "explanation": "Cả hai đều tạo rủi ro giao sai thứ khách hàng kỳ vọng. Hãy hỏi chúng ta đang giả định điều gì trong buổi khai thác, và ghi lại rồi xác nhận mọi giả định gặp phải.",
@@ -304,16 +304,16 @@
     "question": "Yêu cầu nói phí ship là 5,95 nếu đơn dưới 100, và 6% giá trị nếu đơn trên 100. Vấn đề là gì?",
     "questionEn": "One requirement says shipping is 5.95 if the order is under 100, another says 6 percent if the order is over 100. What is the problem?",
     "options": [
-      "Hai yêu cầu mâu thuẫn nhau hoàn toàn",
-      "Giá trị biên đúng bằng 100 không được đặc tả, nên đang thiếu một yêu cầu",
-      "Công thức tính phần trăm chưa rõ ràng",
-      "Không có vấn đề gì, lập trình viên sẽ tự xử lý"
+      "Hai yêu cầu mâu thuẫn nhau, vì một bên dùng phí cố định còn bên kia dùng phần trăm",
+      "Mức biên đúng bằng 100 chưa được đặc tả, nên còn thiếu một yêu cầu",
+      "Phần trăm cũng nên đổi thành phí cố định, vì không được trộn hai kiểu phí trong một yêu cầu",
+      "Không có vấn đề thật: với đơn đúng bằng 100, lập trình viên sẽ tự chọn quy tắc hợp lý khi code"
     ],
     "optionsEn": [
-      "The two requirements contradict each other entirely",
-      "The boundary value of exactly 100 is unspecified, so a requirement is missing",
-      "The percentage formula is unclear",
-      "No problem, developers will handle it"
+      "The two requirements contradict each other, since one uses a flat fee and the other a percentage",
+      "The boundary case of exactly 100 is unspecified, so a requirement is missing",
+      "The percentage should be a flat fee too, since mixing fee types within a requirement is not allowed",
+      "No real problem: for an order of exactly 100, developers will pick a sensible rule while coding"
     ],
     "answer": 1,
     "explanation": "Kiểm tra giá trị biên là một trong những cách hệ thống để tìm yêu cầu thiếu, cùng với truy vết, biểu diễn nhiều góc nhìn, decision table và CRUD analysis.",

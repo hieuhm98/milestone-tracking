@@ -44,16 +44,16 @@
     "question": "Một team vận hành 60 server bằng cách SSH vào vá package và sửa config. Sau hai năm, không có hai server nào giống nhau và rollback một lần nâng cấp lỗi mất nhiều giờ. Hướng thiết kế nào giải quyết gốc rễ vấn đề?",
     "questionEn": "A team runs 60 servers by SSHing in to patch packages and edit config. After two years no two servers are alike and rolling back a bad upgrade takes hours. Which design direction fixes the root cause?",
     "options": [
-      "Viết thêm runbook chi tiết cho từng lần SSH vào sửa server",
-      "Bật thêm CloudWatch alarm cho mỗi server để phát hiện lỗi sớm hơn",
+      "Viết thêm runbook chi tiết cho từng lần SSH vào sửa server và lưu vào wiki",
+      "Bật thêm CloudWatch alarm cho mỗi server để phát hiện lỗi cấu hình sớm hơn",
       "Chạy một script Bash hằng đêm để đồng bộ file config giữa các server",
       "Bake cấu hình vào image có version rồi thay instance thay vì vá tại chỗ"
     ],
     "optionsEn": [
-      "Write more detailed runbooks for every SSH maintenance session",
-      "Add CloudWatch alarms per server to detect failures sooner",
-      "Run a nightly Bash script that syncs config files across servers",
-      "Bake configuration into versioned images and replace instances instead of patching"
+      "Write more detailed runbooks for every SSH maintenance session and store them in a wiki",
+      "Add CloudWatch alarms on every server to detect configuration failures sooner",
+      "Run a nightly Bash script that syncs config files across all 60 servers",
+      "Bake config into versioned images and replace instances rather than patch"
     ],
     "answer": 3,
     "explanation": "Vấn đề gốc là hạ tầng mutable trôi thành snowflake. Hạ tầng immutable (build image, thay instance) làm mọi server giống hệt nhau theo cấu trúc, và rollback chỉ là deploy lại image trước. Runbook, alarm hay script đồng bộ chỉ chữa triệu chứng.",
@@ -64,16 +64,16 @@
     "question": "Không có `depends_on` nào trong đoạn cấu hình sau. Làm sao Terraform biết phải tạo VPC trước subnet?\n`resource \"aws_vpc\" \"main\" {\n  cidr_block = \"10.0.0.0/16\"\n}\n\nresource \"aws_subnet\" \"app\" {\n  vpc_id     = aws_vpc.main.id\n  cidr_block = \"10.0.1.0/24\"\n}`",
     "questionEn": "There is no `depends_on` in this configuration. How does Terraform know to create the VPC before the subnet?\n`resource \"aws_vpc\" \"main\" {\n  cidr_block = \"10.0.0.0/16\"\n}\n\nresource \"aws_subnet\" \"app\" {\n  vpc_id     = aws_vpc.main.id\n  cidr_block = \"10.0.1.0/24\"\n}`",
     "options": [
-      "Nó tạo resource theo thứ tự xuất hiện từ trên xuống trong file",
+      "Nó tạo resource theo thứ tự xuất hiện từ trên xuống trong file, như một script",
       "Tham chiếu `aws_vpc.main.id` tạo một phụ thuộc ngầm trong dependency graph",
       "Provider AWS có sẵn danh sách thứ tự cố định cho mọi loại resource",
-      "Nó thử tạo subnet trước và tự thử lại khi API báo lỗi"
+      "Nó thử tạo subnet trước và tự thử lại khi API báo VPC chưa tồn tại"
     ],
     "optionsEn": [
-      "It creates resources in top-to-bottom order of the file",
-      "The reference `aws_vpc.main.id` creates an implicit dependency in the dependency graph",
+      "It creates resources in top-to-bottom order of the file, like a script",
+      "The reference `aws_vpc.main.id` adds an implicit edge to the dependency graph",
       "The AWS provider ships a fixed ordering list for every resource type",
-      "It tries the subnet first and retries when the API returns an error"
+      "It tries the subnet first and retries when the API says the VPC does not exist"
     ],
     "answer": 1,
     "explanation": "Terraform đọc các tham chiếu giữa block để dựng dependency graph, tạo theo thứ tự phụ thuộc và chạy song song những node độc lập. Thứ tự trong file không có ý nghĩa; `depends_on` chỉ cần cho phụ thuộc ẩn không thể hiện qua tham chiếu.",
@@ -110,7 +110,7 @@
       "Chạy `terraform init -upgrade` trước apply để lấy provider mới nhất"
     ],
     "optionsEn": [
-      "Save the plan with `terraform plan -out=tfplan`, then run `terraform apply tfplan`",
+      "Save it with `terraform plan -out=tfplan`, then run `terraform apply tfplan`",
       "Run `terraform apply -auto-approve` straight after merge to shorten the gap",
       "Run `terraform validate` before apply to be sure nothing changed",
       "Run `terraform init -upgrade` before apply to get the newest providers"
@@ -151,7 +151,7 @@
     ],
     "optionsEn": [
       "Terraform encrypts the password with KMS itself before writing it to state",
-      "The password is still stored in plain text in state, so state must be protected like a secret",
+      "The password still sits in plain text in state, so protect state like a secret",
       "The password is never written to state when the variable is marked sensitive",
       "Only the `.terraform.lock.hcl` file contains the password, so that file must be kept secret"
     ],
@@ -184,16 +184,16 @@
     "question": "Một job CI apply bị huỷ giữa chừng khi runner mất kết nối. Từ đó mọi job Terraform đều lỗi với 'Error acquiring the state lock'. Bước đầu tiên hợp lý là gì?",
     "questionEn": "A CI apply job was cancelled mid-run when its runner lost connectivity. Since then every Terraform job fails with 'Error acquiring the state lock'. What is the sensible first step?",
     "options": [
-      "Xác nhận không còn tiến trình nào đang chạy, rồi dùng `terraform force-unlock` với lock ID",
-      "Xoá object state trong bucket S3 để Terraform tạo một state mới sạch sẽ",
-      "Thêm `-lock=false` vĩnh viễn vào mọi lệnh apply trong pipeline",
-      "Chuyển backend về local, apply, rồi chuyển ngược lại remote backend"
+      "Xác nhận không còn tiến trình nào chạy, rồi `terraform force-unlock` với lock ID",
+      "Xoá object state trong bucket S3 để Terraform tạo một state mới sạch sẽ từ đầu",
+      "Thêm `-lock=false` vĩnh viễn vào mọi lệnh apply trong pipeline để tránh bị kẹt lần nữa",
+      "Chuyển backend về local, apply, rồi chuyển ngược lại remote bằng `-migrate-state`"
     ],
     "optionsEn": [
       "Confirm no process is still running, then use `terraform force-unlock` with the lock ID",
       "Delete the state object in the S3 bucket so Terraform starts with a clean state",
-      "Add `-lock=false` permanently to every apply command in the pipeline",
-      "Switch the backend to local, apply, then switch back to the remote backend"
+      "Add `-lock=false` permanently to every apply in the pipeline so it never gets stuck again",
+      "Switch the backend to local, apply, then move back to remote with `-migrate-state`"
     ],
     "answer": 0,
     "explanation": "Job bị kill không kịp nhả lock. `force-unlock` giải phóng nó — nhưng chỉ sau khi chắc chắn không ai đang apply. Xoá state khiến Terraform quên mọi resource (và sẽ tạo trùng); tắt lock vĩnh viễn hay đổi backend tạm thời đều mở cửa cho hỏng state.",
@@ -264,16 +264,16 @@
     "question": "Công ty yêu cầu dev và prod nằm ở hai AWS account khác nhau, chỉ nhóm SRE được apply lên prod. Một kỹ sư đề xuất dùng chung một thư mục Terraform với `terraform workspace select dev|prod`. Đánh giá nào đúng?",
     "questionEn": "The company requires dev and prod in separate AWS accounts, with only the SRE group allowed to apply to prod. An engineer proposes one Terraform directory with `terraform workspace select dev|prod`. Which assessment is right?",
     "options": [
-      "Phù hợp, vì mỗi workspace có credential và backend riêng biệt theo mặc định",
-      "Phù hợp, vì workspace ngăn không cho apply nhầm sang môi trường khác",
-      "Không phù hợp: workspace dùng chung backend và credential; nên tách thư mục mỗi môi trường với backend, account riêng",
-      "Không phù hợp: Terraform không thể quản lý hạ tầng nằm ở nhiều AWS account"
+      "Phù hợp, vì mỗi workspace mặc định có credential và backend riêng biệt cho từng môi trường",
+      "Phù hợp, vì workspace ngăn không cho apply nhầm sang môi trường khác nhờ khoá state",
+      "Không phù hợp: workspace chung backend và credential; nên tách thư mục và backend theo môi trường",
+      "Không phù hợp: Terraform không thể quản lý hạ tầng nằm ở nhiều AWS account cùng lúc"
     ],
     "optionsEn": [
-      "Fine, because each workspace gets its own credentials and backend by default",
-      "Fine, because workspaces prevent applying to the wrong environment",
-      "Not suitable: workspaces share a backend and credentials; use a directory per environment with its own backend and account",
-      "Not suitable: Terraform cannot manage infrastructure spread across AWS accounts"
+      "Fine, because each workspace gets its own credentials and its own backend by default",
+      "Fine, because workspaces stop you applying to the wrong environment via state locking",
+      "Not suitable: workspaces share backend and credentials; use a directory per environment",
+      "Not suitable: Terraform cannot manage infrastructure spread across several AWS accounts"
     ],
     "answer": 2,
     "explanation": "CLI workspace chỉ tạo thêm state trong cùng backend, dùng cùng credential — chính tài liệu HashiCorp nói nó không hợp cho deployment cần credential và kiểm soát truy cập riêng. Thư mục riêng cho mỗi môi trường (hoặc một nền tảng như Terragrunt/HCP Terraform) cho backend, role và quyền tách biệt.",
@@ -284,16 +284,16 @@
     "question": "Ansible được gọi là 'agentless'. Điều đó nghĩa là gì trong thực tế?",
     "questionEn": "Ansible is called 'agentless'. What does that mean in practice?",
     "options": [
-      "Máy đích kéo cấu hình định kỳ từ một Ansible server trung tâm",
-      "Ansible gọi thẳng API của cloud nên không bao giờ đăng nhập vào máy",
-      "Ansible chỉ quản lý được container, không quản lý được VM hay server",
-      "Control node kết nối qua SSH (WinRM với Windows) và chạy module bằng Python trên máy đích"
+      "Máy đích kéo cấu hình định kỳ từ một Ansible server trung tâm qua HTTPS",
+      "Ansible gọi thẳng API của cloud nên không cần đăng nhập vào máy để cấu hình",
+      "Ansible chỉ quản lý được container qua Docker API, không quản lý được VM hay server",
+      "Control node kết nối qua SSH (hoặc WinRM) và chạy module bằng Python trên máy đích"
     ],
     "optionsEn": [
       "Target machines periodically pull configuration from a central Ansible server",
-      "Ansible calls cloud APIs directly and so never logs in to machines",
-      "Ansible can only manage containers, not VMs or servers",
-      "The control node connects over SSH (WinRM for Windows) and runs modules with Python on the target"
+      "Ansible calls cloud APIs directly, so it never needs to log in to configure machines",
+      "Ansible can only manage containers via the Docker API, not VMs or physical servers",
+      "The control node uses SSH (or WinRM) and runs modules with the target's Python"
     ],
     "answer": 3,
     "explanation": "Không cần cài daemon trên máy đích: Ansible push qua SSH, đẩy module sang và chạy bằng Python có sẵn. Mô hình agent kéo cấu hình định kỳ là của Puppet/Chef. Ansible có module gọi API cloud, nhưng thế mạnh chính là cấu hình bên trong máy.",
@@ -306,13 +306,13 @@
     "options": [
       "Task báo `changed` vì file luôn được ghi lại, và nginx được reload",
       "Task báo `ok`, không có thay đổi nên handler không chạy và nginx không bị reload",
-      "Task báo `ok` nhưng handler vẫn luôn chạy ở cuối mỗi playbook",
+      "Task báo `ok` nhưng handler vẫn luôn chạy ở cuối mỗi lần chạy playbook nên nginx vẫn reload",
       "Playbook lỗi vì file đích đã tồn tại từ lần chạy trước"
     ],
     "optionsEn": [
       "The task reports `changed` because the file is always rewritten, and nginx reloads",
       "The task reports `ok`; with no change the handler does not run and nginx is not reloaded",
-      "The task reports `ok` but handlers always run at the end of every playbook",
+      "The task reports `ok` but handlers always run at the end of a playbook, so nginx reloads anyway",
       "The playbook fails because the destination file already exists from the last run"
     ],
     "answer": 1,
@@ -344,15 +344,15 @@
     "question": "Phát biểu nào về giấy phép Terraform và OpenTofu là chính xác?",
     "questionEn": "Which statement about Terraform and OpenTofu licensing is accurate?",
     "options": [
-      "OpenTofu là bản thương mại trả phí của Terraform do HashiCorp phát hành",
+      "OpenTofu là bản thương mại trả phí của Terraform do HashiCorp phát hành cho doanh nghiệp",
       "Terraform vẫn dùng MPL 2.0, còn OpenTofu mới là bản chuyển sang BSL",
-      "Năm 2023 HashiCorp chuyển Terraform sang BSL; OpenTofu là fork cộng đồng từ bản MPL cuối, thuộc Linux Foundation",
+      "Năm 2023 Terraform chuyển sang BSL; OpenTofu là fork cộng đồng từ bản MPL cuối",
       "Giấy phép BSL cấm mọi công ty dùng Terraform để quản lý hạ tầng nội bộ"
     ],
     "optionsEn": [
-      "OpenTofu is HashiCorp's paid commercial edition of Terraform",
-      "Terraform still uses MPL 2.0, while OpenTofu is the one that moved to BSL",
-      "In 2023 HashiCorp moved Terraform to the BSL; OpenTofu is a community fork of the last MPL version under the Linux Foundation",
+      "OpenTofu is HashiCorp's paid commercial edition of Terraform for enterprises",
+      "Terraform still uses MPL 2.0, while OpenTofu is the fork that moved to the BSL",
+      "In 2023 Terraform moved to the BSL; OpenTofu is a community fork of the MPL code",
       "The BSL forbids any company from using Terraform to manage its own infrastructure"
     ],
     "answer": 2,

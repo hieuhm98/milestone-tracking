@@ -4,16 +4,16 @@
     "question": "Vì sao một worker nginx có thể giữ hàng nghìn kết nối đồng thời mà không cần hàng nghìn thread?",
     "questionEn": "Why can a single nginx worker hold thousands of concurrent connections without thousands of threads?",
     "options": [
-      "Mỗi kết nối được giao cho một thread lấy từ thread pool dùng chung",
-      "Worker chạy event loop không blocking, dùng epoll/kqueue để chỉ xử lý socket đã sẵn sàng",
-      "Master process nhận hết request rồi chia lần lượt cho worker theo lô",
-      "Nginx đóng mọi kết nối keep-alive ngay sau khi gửi xong response"
+      "Mỗi kết nối được giao cho một thread lấy từ thread pool dùng chung, trả lại khi xong",
+      "Worker chạy event loop không blocking, dùng epoll/kqueue chỉ xử lý socket sẵn sàng",
+      "Master process nhận hết request rồi chia lần lượt cho các worker theo lô nhỏ",
+      "Nginx đóng mọi kết nối keep-alive ngay sau khi gửi xong response để giải phóng slot"
     ],
     "optionsEn": [
-      "Each connection is handed to a thread taken from a shared thread pool",
-      "The worker runs a non-blocking event loop and uses epoll/kqueue to handle only ready sockets",
+      "Each connection is handed to a thread from a shared thread pool and returned when done",
+      "The worker runs a non-blocking event loop, using epoll/kqueue to serve only ready sockets",
       "The master process receives every request and passes them to workers in batches",
-      "Nginx closes every keep-alive connection right after the response is sent"
+      "Nginx closes every keep-alive connection right after the response to free the slot"
     ],
     "answer": 1,
     "explanation": "Mỗi worker là một thread chạy event loop: nó hỏi kernel socket nào sẵn sàng rồi xử lý từng cái, không bao giờ ngồi chờ một socket. Kết nối rảnh chỉ tốn vài KB. Thread pool chỉ dùng tuỳ chọn cho file I/O blocking, và master không xử lý request.",
@@ -44,16 +44,16 @@
     "question": "Nginx có cấu hình dưới đây. Một request tới cổng 80 với header `Host: unknown.com` sẽ được block nào xử lý?\n`server {\n  listen 80;\n  server_name blog.example.com;\n}\nserver {\n  listen 80;\n  server_name shop.example.com;\n}`",
     "questionEn": "Nginx has the config below. A request on port 80 with `Host: unknown.com` is handled by which block?\n`server {\n  listen 80;\n  server_name blog.example.com;\n}\nserver {\n  listen 80;\n  server_name shop.example.com;\n}`",
     "options": [
-      "Block `blog.example.com`, vì nó là server đầu tiên cho cổng 80 và không có `default_server`",
-      "Block `shop.example.com`, vì nginx chọn block được khai báo cuối cùng",
-      "Không block nào; nginx trả 404 ngay ở tầng kết nối",
-      "Nginx chọn ngẫu nhiên giữa hai block để chia tải"
+      "Block `blog.example.com`, server đầu tiên cho cổng 80, vì không có `default_server`",
+      "Block `shop.example.com`, vì nginx chọn block được khai báo cuối cùng cho mỗi cổng",
+      "Không block nào; nginx trả 404 ngay ở tầng kết nối vì không có `server_name` khớp",
+      "Nginx chọn ngẫu nhiên giữa hai block cùng cổng để chia đều tải"
     ],
     "optionsEn": [
       "The `blog.example.com` block, as the first server for port 80 with no `default_server`",
-      "The `shop.example.com` block, because nginx picks the last one declared",
-      "Neither block; nginx returns 404 at the connection level",
-      "Nginx picks one of the two blocks at random to spread load"
+      "The `shop.example.com` block, because nginx picks the last one declared for the port",
+      "Neither block; nginx returns 404 at connection level because no `server_name` matches",
+      "Nginx picks one of the two same-port blocks at random to spread the load"
     ],
     "answer": 0,
     "explanation": "Khi không `server_name` nào khớp, default server của cặp địa chỉ:cổng sẽ trả lời. Nếu không có `default_server`, đó là block đầu tiên. Cách chuẩn là thêm một block `listen 80 default_server;` trả `444` để domain lạ không rơi vào website thật.",
@@ -64,16 +64,16 @@
     "question": "Với các location sau, request `/static/logo.png` được xử lý bởi location nào?\n`location / { proxy_pass http://app; }\nlocation /static/ { root /var/www; }\nlocation ~* \\.png$ { root /var/images; }`",
     "questionEn": "Given these locations, which one handles the request `/static/logo.png`?\n`location / { proxy_pass http://app; }\nlocation /static/ { root /var/www; }\nlocation ~* \\.png$ { root /var/images; }`",
     "options": [
-      "`location /static/`, vì đó là prefix dài nhất",
-      "`location /`, vì nó được khai báo đầu tiên",
+      "`location /static/`, vì đó là prefix dài nhất khớp với URI",
+      "`location /`, vì nó được khai báo đầu tiên và khớp mọi URI",
       "`location ~* \\.png$`, vì regex khớp được ưu tiên hơn prefix thường",
-      "Nginx báo lỗi xung đột location khi chạy `nginx -t`"
+      "Nginx báo lỗi xung đột location khi chạy `nginx -t` và không khởi động"
     ],
     "optionsEn": [
-      "`location /static/`, because it is the longest prefix",
-      "`location /`, because it is declared first",
+      "`location /static/`, because it is the longest matching prefix for the URI",
+      "`location /`, because it is declared first and matches every URI",
       "`location ~* \\.png$`, because a matching regex beats a plain prefix",
-      "Nginx reports a location conflict when running `nginx -t`"
+      "Nginx reports a location conflict on `nginx -t` and refuses to start"
     ],
     "answer": 2,
     "explanation": "Nginx nhớ prefix dài nhất (`/static/`) nhưng vẫn thử các regex; regex đầu tiên khớp sẽ thắng. Muốn `/static/` thắng thì phải viết `location ^~ /static/`, khi đó regex bị bỏ qua.",
@@ -104,16 +104,16 @@
     "question": "Sau khi chuyển TLS termination sang nginx, trình duyệt báo \"too many redirects\" trên trang đăng nhập. App vẫn cấu hình \"bắt buộc HTTPS\". Nguyên nhân khả dĩ nhất là gì?",
     "questionEn": "After moving TLS termination to nginx, browsers show \"too many redirects\" on the login page. The app is still configured to \"require HTTPS\". What is the most likely cause?",
     "options": [
-      "Nginx không gửi `X-Forwarded-Proto`, nên app thấy mọi request là HTTP và liên tục redirect sang HTTPS",
-      "Chứng chỉ thiếu intermediate nên trình duyệt redirect lại từ đầu",
-      "`proxy_read_timeout` quá ngắn khiến request bị gửi lại",
-      "HTTP/2 không hỗ trợ redirect 301 giữa các scheme"
+      "Nginx không gửi `X-Forwarded-Proto`, app tưởng mọi request là HTTP nên redirect mãi",
+      "Chứng chỉ thiếu intermediate nên trình duyệt redirect lại từ đầu sau mỗi handshake",
+      "`proxy_read_timeout` quá ngắn khiến trình duyệt gửi lại request đăng nhập liên tục",
+      "HTTP/2 không hỗ trợ redirect 301 giữa các scheme nên trình duyệt lặp lại mãi"
     ],
     "optionsEn": [
-      "Nginx does not send `X-Forwarded-Proto`, so the app sees every request as HTTP and keeps redirecting to HTTPS",
-      "The certificate lacks intermediates, so the browser restarts the redirect",
-      "`proxy_read_timeout` is too short, so requests are being resent",
-      "HTTP/2 does not support 301 redirects between schemes"
+      "Nginx omits `X-Forwarded-Proto`, so the app thinks every request is HTTP and redirects",
+      "The certificate lacks intermediates, so the browser restarts the redirect after each handshake",
+      "`proxy_read_timeout` is too short, so the browser keeps resending the login request",
+      "HTTP/2 does not support 301 redirects across schemes, so the browser loops forever"
     ],
     "answer": 0,
     "explanation": "Nginx giải mã rồi proxy HTTP thường; app chỉ thấy HTTP và redirect sang HTTPS, trình duyệt quay lại nginx, và vòng lặp tiếp diễn. Đặt `proxy_set_header X-Forwarded-Proto $scheme;` và cho framework tin proxy (trust proxy).",
@@ -165,15 +165,15 @@
     "questionEn": "Under heavy load the nginx host has tens of thousands of `TIME_WAIT` sockets to the backends, even though the upstream declares `keepalive 64;`. What is missing?\n`location / {\n  proxy_pass http://app_backend;\n}`",
     "options": [
       "`proxy_http_version 1.1;` và `proxy_set_header Connection \"\";`",
-      "`keepalive_timeout 65;` trong khối `http`",
-      "Tăng `worker_connections` lên 65535",
-      "Chuyển thuật toán sang `least_conn`"
+      "`keepalive_timeout 65;` và `keepalive_requests 1000;` trong khối `http`",
+      "Tăng `worker_connections` lên 65535 và `worker_rlimit_nofile` tương ứng",
+      "Chuyển thuật toán sang `least_conn` và thêm `max_fails=3` cho mỗi server"
     ],
     "optionsEn": [
       "`proxy_http_version 1.1;` and `proxy_set_header Connection \"\";`",
-      "`keepalive_timeout 65;` in the `http` block",
-      "Raising `worker_connections` to 65535",
-      "Switching the method to `least_conn`"
+      "`keepalive_timeout 65;` and `keepalive_requests 1000;` in the `http` block",
+      "Raising `worker_connections` to 65535 and `worker_rlimit_nofile` to match",
+      "Switching to `least_conn` and adding `max_fails=3` to each server"
     ],
     "answer": 0,
     "explanation": "Mặc định nginx nói HTTP/1.0 với upstream và gửi `Connection: close`, nên mỗi request mở rồi đóng một kết nối TCP bất chấp `keepalive`. `keepalive_timeout` chỉ áp dụng cho kết nối phía client.",
@@ -184,16 +184,16 @@
     "question": "Website HTTPS mới chạy tốt trên Chrome desktop, nhưng `curl` và một số app Android báo \"unable to get local issuer certificate\". Nguyên nhân khả dĩ nhất?",
     "questionEn": "A new HTTPS site works in desktop Chrome, but `curl` and some Android apps report \"unable to get local issuer certificate\". What is the most likely cause?",
     "options": [
-      "`ssl_protocols` chưa bật TLSv1.3",
+      "`ssl_protocols` chưa bật TLSv1.3 nên client mới không xác thực được chuỗi",
       "`ssl_certificate` chỉ chứa chứng chỉ lá, thiếu các chứng chỉ intermediate",
-      "Chưa bật `http2 on;` nên client cũ không kết nối được",
-      "`ssl_session_cache` quá nhỏ nên handshake bị huỷ"
+      "Chưa bật `http2 on;` nên curl và client Android cũ không kết nối được",
+      "`ssl_session_cache` quá nhỏ nên handshake bị huỷ giữa chừng"
     ],
     "optionsEn": [
-      "`ssl_protocols` does not enable TLSv1.3",
+      "`ssl_protocols` does not enable TLSv1.3, so newer clients cannot verify the chain",
       "`ssl_certificate` holds only the leaf certificate, without the intermediates",
-      "`http2 on;` is not set, so older clients cannot connect",
-      "`ssl_session_cache` is too small, so handshakes are aborted"
+      "`http2 on;` is not set, so curl and older Android clients cannot connect",
+      "`ssl_session_cache` is too small, so handshakes are aborted midway"
     ],
     "answer": 1,
     "explanation": "Trình duyệt desktop thường tự tải intermediate còn thiếu, còn `curl` và nhiều client di động thì không, nên chuỗi tin cậy bị đứt. Hãy trỏ `ssl_certificate` vào file full chain (chứng chỉ lá + intermediate).",
@@ -224,16 +224,16 @@
     "question": "Trang danh mục sản phẩm được nginx cache 5 phút. Mỗi lần cache hết hạn vào giờ cao điểm, hàng trăm request cùng lúc đập vào backend và database tăng vọt CPU. Directive nào giải quyết trực tiếp nhất?",
     "questionEn": "A product listing page is cached by nginx for 5 minutes. Every time the entry expires at peak hours, hundreds of simultaneous requests hit the backend and database CPU spikes. Which directive addresses this most directly?",
     "options": [
-      "`proxy_cache_valid 200 1h;` để cache lâu hơn",
-      "`proxy_buffering off;` để trả response nhanh hơn",
-      "`proxy_cache_lock on;` để chỉ một request mỗi key đi lên backend, số còn lại chờ",
-      "`gzip_comp_level 9;` để giảm kích thước response"
+      "`proxy_cache_valid 200 1h;` để cache lâu hơn và giảm số lần hết hạn",
+      "`proxy_buffering off;` để backend trả response nhanh hơn tới client",
+      "`proxy_cache_lock on;` để mỗi key chỉ một request lên backend, số còn lại chờ",
+      "`gzip_comp_level 9;` để giảm kích thước và thời gian truyền response"
     ],
     "optionsEn": [
-      "`proxy_cache_valid 200 1h;` to cache for longer",
-      "`proxy_buffering off;` to return responses faster",
-      "`proxy_cache_lock on;` so only one request per key goes upstream while the rest wait",
-      "`gzip_comp_level 9;` to shrink responses"
+      "`proxy_cache_valid 200 1h;` to cache longer so entries expire less often",
+      "`proxy_buffering off;` so the backend streams responses to clients faster",
+      "`proxy_cache_lock on;` so one request per key goes upstream and the rest wait",
+      "`gzip_comp_level 9;` to shrink responses and their transfer time"
     ],
     "answer": 2,
     "explanation": "Đây là cache stampede: nhiều request cùng miss một key. `proxy_cache_lock` cho đúng một request đi làm mới cache. Kết hợp `proxy_cache_use_stale updating` và `proxy_cache_background_update on` còn trả được bản cũ trong lúc làm mới. Cache lâu hơn chỉ làm stampede thưa đi chứ không hết.",
@@ -244,16 +244,16 @@
     "question": "Team bật proxy cache cho `/account/` với `proxy_ignore_headers Set-Cookie Cache-Control;` và key mặc định. Vài phút sau có người dùng báo thấy thông tin tài khoản của người khác. Chuyện gì đã xảy ra?",
     "questionEn": "A team enabled proxy caching on `/account/` with `proxy_ignore_headers Set-Cookie Cache-Control;` and the default key. Minutes later a user reports seeing someone else's account details. What happened?",
     "options": [
-      "Response cá nhân hoá được cache theo key chỉ gồm URL, nên người sau nhận bản của người trước",
-      "Nginx trộn lẫn cookie của hai request trong cùng một worker",
-      "`keys_zone` quá nhỏ nên các key bị ghi đè lẫn nhau",
-      "Upstream keepalive khiến hai response đi nhầm kết nối"
+      "Response cá nhân hoá bị lưu dưới khoá chỉ gồm URL rồi phục vụ cho các request sau",
+      "Nginx trộn lẫn cookie của hai request đồng thời trong cùng một worker process",
+      "`keys_zone` quá nhỏ nên các key cache bị băm trùng và ghi đè lẫn nhau",
+      "Upstream keepalive tái dùng kết nối nên một response bị gửi nhầm sang client khác"
     ],
     "optionsEn": [
-      "A personalised response was cached under a URL-only key, so later users got the first user's copy",
-      "Nginx mixed the cookies of two requests inside the same worker",
-      "`keys_zone` was too small, so keys overwrote each other",
-      "Upstream keepalive sent two responses down the wrong connections"
+      "A personalised response was cached under a URL-only key and served to later users",
+      "Nginx mixed the cookies of two concurrent requests inside the same worker process",
+      "`keys_zone` was too small, so cache keys collided and overwrote each other",
+      "Upstream keepalive reused a connection, sending one response to the wrong client"
     ],
     "answer": 0,
     "explanation": "Mặc định nginx không cache response có `Set-Cookie` hay `Cache-Control: private` chính là để tránh việc này; bỏ qua các header đó với key `$scheme$proxy_host$request_uri` là rò rỉ dữ liệu. Trang cá nhân hoá không nên cache chung, hoặc key phải chứa định danh user.",
@@ -264,16 +264,16 @@
     "question": "Nginx đứng sau một AWS ALB, cấu hình `limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;`. Sau khi deploy, gần như toàn bộ người dùng nhận lỗi giới hạn tốc độ vào giờ cao điểm. Cách sửa đúng là gì?",
     "questionEn": "Nginx sits behind an AWS ALB with `limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;`. After deploy, nearly all users get rate-limit errors at peak hours. What is the right fix?",
     "options": [
-      "Tăng `rate` lên 1000r/s để đủ cho mọi người",
-      "Đổi `$binary_remote_addr` thành `$remote_addr`",
-      "Tăng kích thước zone từ 10m lên 100m",
-      "Dùng `set_real_ip_from` với dải IP của ALB và `real_ip_header X-Forwarded-For` để lấy IP thật của client"
+      "Tăng `rate` lên 1000r/s và thêm `burst=500` để đủ cho mọi người dùng",
+      "Đổi `$binary_remote_addr` thành `$remote_addr` để key khớp với IP người dùng",
+      "Tăng kích thước zone từ 10m lên 100m để chứa được nhiều IP người dùng hơn",
+      "Dùng `set_real_ip_from` (dải IP của ALB) và `real_ip_header X-Forwarded-For`"
     ],
     "optionsEn": [
-      "Raise `rate` to 1000r/s so there is enough for everyone",
-      "Change `$binary_remote_addr` to `$remote_addr`",
-      "Grow the zone from 10m to 100m",
-      "Use `set_real_ip_from` with the ALB's IP range and `real_ip_header X-Forwarded-For` to recover the client IP"
+      "Raise `rate` to 1000r/s and add `burst=500` so there is enough for every user",
+      "Change `$binary_remote_addr` to `$remote_addr` so the key matches each user's IP",
+      "Grow the zone from 10m to 100m so it can track many more client IPs",
+      "Use `set_real_ip_from` for the ALB range with `real_ip_header X-Forwarded-For`"
     ],
     "answer": 3,
     "explanation": "Mọi kết nối tới nginx đều đến từ vài IP của ALB, nên mọi người dùng chia chung một bucket. Module real_ip thay địa chỉ bằng IP client lấy từ `X-Forwarded-For` (chỉ tin khi đến từ ALB). Tăng rate thì làm mất tác dụng của giới hạn cho từng client.",
@@ -304,15 +304,15 @@
     "question": "Ứng dụng chat qua nginx kết nối WebSocket thành công, nhưng các phòng chat yên lặng bị ngắt kết nối đúng sau khoảng 60 giây. Nguyên nhân khả dĩ nhất?",
     "questionEn": "A chat app behind nginx opens its WebSocket successfully, but quiet rooms disconnect after almost exactly 60 seconds. What is the most likely cause?",
     "options": [
-      "Thiếu `proxy_set_header Upgrade $http_upgrade;`",
-      "`client_max_body_size` mặc định 1m quá nhỏ cho frame WebSocket",
-      "`proxy_read_timeout` mặc định 60s đóng kết nối khi upstream không gửi gì trong 60 giây",
+      "Thiếu `proxy_set_header Upgrade $http_upgrade;` nên kết nối rơi về HTTP thường",
+      "`client_max_body_size` mặc định 1m quá nhỏ cho các frame WebSocket dồn lại",
+      "`proxy_read_timeout` mặc định 60s đóng kết nối khi upstream im lặng 60 giây",
       "`worker_connections` đã chạm giới hạn nên nginx đóng kết nối cũ nhất"
     ],
     "optionsEn": [
-      "`proxy_set_header Upgrade $http_upgrade;` is missing",
+      "`proxy_set_header Upgrade $http_upgrade;` is missing, so it falls back to plain HTTP",
       "The default 1m `client_max_body_size` is too small for WebSocket frames",
-      "The default 60s `proxy_read_timeout` closes the connection when upstream sends nothing for 60 seconds",
+      "The default 60s `proxy_read_timeout` closes it when upstream stays silent that long",
       "`worker_connections` hit its limit, so nginx closes the oldest connections"
     ],
     "answer": 2,
@@ -324,16 +324,16 @@
     "question": "Người dùng báo lỗi khi xuất báo cáo lớn. Error log của nginx ghi \"upstream timed out (110: Connection timed out) while reading response header from upstream\". Client nhận mã nào và nên xem xét gì?",
     "questionEn": "Users report errors when exporting large reports. The nginx error log says \"upstream timed out (110: Connection timed out) while reading response header from upstream\". What code do clients get, and what should you look at?",
     "options": [
-      "504 Gateway Timeout — backend còn sống nhưng chậm hơn `proxy_read_timeout`; tối ưu hoặc chuyển báo cáo sang xử lý bất đồng bộ",
-      "502 Bad Gateway — backend đã chết; khởi động lại container",
-      "499 — client đóng kết nối; tăng `keepalive_timeout`",
-      "413 — response quá lớn; tăng `client_max_body_size`"
+      "504 Gateway Timeout — backend còn sống nhưng chậm hơn `proxy_read_timeout`",
+      "502 Bad Gateway — backend đã chết hoặc từ chối kết nối; khởi động lại container",
+      "499 — client tự đóng kết nối trước; tăng `keepalive_timeout` phía nginx",
+      "413 — response báo cáo quá lớn; tăng `client_max_body_size` cho location đó"
     ],
     "optionsEn": [
-      "504 Gateway Timeout — the backend is alive but slower than `proxy_read_timeout`; optimise it or move reports to async processing",
-      "502 Bad Gateway — the backend is dead; restart the container",
-      "499 — the client closed the connection; raise `keepalive_timeout`",
-      "413 — the response is too large; raise `client_max_body_size`"
+      "504 Gateway Timeout — the backend is alive but slower than `proxy_read_timeout`",
+      "502 Bad Gateway — the backend is dead or refusing connections; restart the container",
+      "499 — the client closed the connection first; raise nginx's `keepalive_timeout`",
+      "413 — the report response is too large; raise `client_max_body_size` there"
     ],
     "answer": 0,
     "explanation": "\"Timed out while reading response header\" nghĩa là kết nối tới được backend nhưng nó không trả lời kịp: 504. Tăng timeout chỉ là giải pháp tạm; kiến trúc tốt hơn là trả job id rồi xử lý báo cáo bất đồng bộ. 502 là không kết nối được hoặc bị reset; 413 liên quan tới request body.",
@@ -364,16 +364,16 @@
     "question": "Header HSTS được đặt ở cấp `server` và xuất hiện ở mọi trang, trừ các trang dưới `/products/`. Vì sao?\n`server {\n  add_header Strict-Transport-Security \"max-age=63072000\" always;\n  location /products/ {\n    add_header X-Cache-Status $upstream_cache_status;\n    proxy_pass http://app;\n  }\n}`",
     "questionEn": "An HSTS header is set at `server` level and appears on every page except those under `/products/`. Why?\n`server {\n  add_header Strict-Transport-Security \"max-age=63072000\" always;\n  location /products/ {\n    add_header X-Cache-Status $upstream_cache_status;\n    proxy_pass http://app;\n  }\n}`",
     "options": [
-      "Header HSTS không được gửi kèm response đã qua proxy",
-      "Location có `add_header` riêng nên không kế thừa bất kỳ `add_header` nào từ cấp server",
-      "Biến `$upstream_cache_status` rỗng làm nginx bỏ toàn bộ header",
-      "Backend ghi đè header HSTS bằng giá trị rỗng"
+      "Nginx bỏ header HSTS khỏi response qua `proxy_pass` nếu backend không chạy HTTPS",
+      "Location có `add_header` riêng nên không kế thừa `add_header` nào từ cấp server",
+      "Biến `$upstream_cache_status` rỗng làm nginx bỏ toàn bộ header thêm ở cấp server",
+      "Backend ghi đè header HSTS bằng giá trị rỗng trong mọi response của `/products/`"
     ],
     "optionsEn": [
-      "HSTS headers are never sent on proxied responses",
-      "The location has its own `add_header`, so it inherits no `add_header` from server level",
-      "The empty `$upstream_cache_status` variable makes nginx drop every header",
-      "The backend overwrites the HSTS header with an empty value"
+      "Nginx strips HSTS from `proxy_pass` responses unless the backend itself speaks HTTPS",
+      "The location has its own `add_header`, so none are inherited from server level",
+      "The empty `$upstream_cache_status` variable makes nginx drop all server-level headers",
+      "The backend overwrites the HSTS header with an empty value on every `/products/` response"
     ],
     "answer": 1,
     "explanation": "`add_header` chỉ được kế thừa khi cấp hiện tại không khai báo `add_header` nào. Một header thêm trong location là làm mất mọi header ở cấp ngoài. Cách sửa: lặp lại header cần thiết trong location, hoặc gom chúng vào một file `include` dùng chung.",

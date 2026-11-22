@@ -4,16 +4,16 @@
     "question": "Git là gì?",
     "questionEn": "What is Git?",
     "options": [
-      "Ngôn ngữ lập trình",
-      "Hệ thống version control theo dõi thay đổi code theo thời gian",
-      "Công cụ deploy lên server",
-      "Framework phát triển web"
+      "Một ngôn ngữ lập trình dùng để làm web",
+      "Hệ thống theo dõi thay đổi của code",
+      "Công cụ deploy code lên server",
+      "Framework để phát triển web"
     ],
     "optionsEn": [
-      "A programming language",
-      "A version control system that tracks code changes over time",
-      "A tool for deploying to servers",
-      "A web development framework"
+      "A programming language for the web",
+      "A system that tracks changes to code",
+      "A tool for deploying code to servers",
+      "A framework for building web apps"
     ],
     "answer": 1,
     "explanation": "Git là distributed VCS (Version Control System) — theo dõi mọi thay đổi, ai thay đổi, khi nào, tại sao. Cho phép nhiều người cùng làm việc và rollback khi cần.",
@@ -24,15 +24,15 @@
     "question": "'Commit' trong Git là gì?",
     "questionEn": "What is a 'Commit' in Git?",
     "options": [
-      "Gửi code lên production",
-      "Snapshot của code tại một thời điểm, kèm message, author và timestamp",
-      "Tạo branch mới",
-      "Merge code từ branch này sang branch khác"
+      "Gửi code mới lên môi trường production",
+      "Bản chụp code tại một thời điểm, kèm message",
+      "Tạo một branch mới từ branch hiện tại",
+      "Merge code từ một branch này sang branch khác"
     ],
     "optionsEn": [
-      "Sending code to production",
-      "A snapshot of the code at a point in time, with a message, author, and timestamp",
-      "Creating a new branch",
+      "Sending new code to the production environment",
+      "A snapshot of the code, with a message",
+      "Creating a new branch from the current one",
       "Merging code from one branch into another"
     ],
     "answer": 1,
@@ -44,16 +44,16 @@
     "question": "Branch trong Git dùng để làm gì?",
     "questionEn": "What is a branch in Git used for?",
     "options": [
-      "Lưu trữ database",
-      "Tạo luồng phát triển độc lập mà không ảnh hưởng nhánh chính",
-      "Backup code",
-      "Tăng tốc độ commit"
+      "Lưu trữ dữ liệu database đi kèm với mã nguồn",
+      "Làm việc riêng, không ảnh hưởng nhánh chính",
+      "Sao lưu code sang một máy chủ khác",
+      "Giúp commit và push code nhanh hơn"
     ],
     "optionsEn": [
-      "Storing a database",
-      "Creating an independent line of development without affecting the main branch",
-      "Backing up code",
-      "Speeding up commits"
+      "Storing the database data that goes with the code",
+      "Working apart from the main branch",
+      "Backing up code onto a separate server",
+      "Making commits and pushes run faster"
     ],
     "answer": 1,
     "explanation": "Branch: như bản copy song song. Developer làm feature A trên branch riêng → không ảnh hưởng main. Khi xong → merge vào main. Nhiều developer làm song song trên nhiều branch.",
@@ -64,16 +64,16 @@
     "question": "Pull Request (PR) là gì và BA có thể tham gia như thế nào?",
     "questionEn": "What is a Pull Request (PR) and how can a BA take part?",
     "options": [
-      "Yêu cầu nhận payment",
-      "Yêu cầu merge code từ branch feature vào main kèm code review — BA có thể review xem AC được implement đúng không",
-      "Chỉ developer mới hiểu được PR",
-      "PR là lệnh để pull code về máy"
+      "Yêu cầu thanh toán cho phần việc đã làm",
+      "Yêu cầu merge code kèm review; BA kiểm tra AC",
+      "Chỉ developer đọc được PR, BA không cần tham gia",
+      "Lệnh để pull code mới nhất về máy, BA không dùng"
     ],
     "optionsEn": [
-      "A request to receive a payment",
-      "A request to merge code from a feature branch into main with a code review — the BA can review whether the AC is implemented correctly",
-      "Only developers can understand a PR",
-      "A PR is a command to pull code to your machine"
+      "A request to get paid for completed work",
+      "A merge request with review; the BA checks the AC",
+      "Only developers can read a PR; BAs need not join",
+      "A command to pull the latest code; BAs don't use it"
     ],
     "answer": 1,
     "explanation": "PR là cơ chế review trước khi merge. BA/PO có thể review PR về mặt business: feature có đúng acceptance criteria không? Có missing edge case nào không? Không cần đọc code, có thể test trực tiếp.",
@@ -85,14 +85,14 @@
     "questionEn": "What is the difference between 'Pull' and 'Push' in Git?",
     "options": [
       "Pull = tạo branch, Push = xóa branch",
-      "Pull = lấy thay đổi từ remote về local, Push = đẩy thay đổi local lên remote",
-      "Pull = tạo PR, Push = merge",
+      "Pull lấy thay đổi về, Push đẩy thay đổi lên remote",
+      "Pull = tạo PR, Push = merge PR vào main",
       "Chúng giống nhau nhưng dùng ở các bước khác nhau"
     ],
     "optionsEn": [
       "Pull = create a branch, Push = delete a branch",
-      "Pull = fetch changes from the remote to local, Push = push local changes up to the remote",
-      "Pull = create a PR, Push = merge",
+      "Pull brings changes down; Push sends yours up",
+      "Pull = open a PR, Push = merge the PR into main",
       "They are the same but used at different steps"
     ],
     "answer": 1,
@@ -104,16 +104,16 @@
     "question": "Nhánh 'main' (hay 'master') thường đại diện cho điều gì?",
     "questionEn": "What does the 'main' (or 'master') branch usually represent?",
     "options": [
-      "Branch mới nhất, chưa test",
-      "Code ổn định nhất, thường là phiên bản đang chạy trên production",
-      "Branch chỉ dùng cho hotfix",
-      "Branch của project manager"
+      "Branch mới nhất, chứa code chưa được test",
+      "Code ổn định, thường là bản đang chạy production",
+      "Branch chỉ dùng riêng để sửa lỗi khẩn cấp (hotfix)",
+      "Branch riêng để project manager theo dõi"
     ],
     "optionsEn": [
-      "The newest branch, not yet tested",
-      "The most stable code, usually the version running in production",
-      "A branch used only for hotfixes",
-      "The project manager's branch"
+      "The newest branch, with code not yet tested",
+      "Stable code, usually what runs in production",
+      "A branch used only for urgent fixes (hotfixes)",
+      "A private branch for the project manager to watch"
     ],
     "answer": 1,
     "explanation": "main/master = source of truth, code đã được review và test. Không ai commit trực tiếp vào main — luôn qua PR để đảm bảo chất lượng. Khi merge vào main → thường trigger deploy.",
@@ -124,16 +124,16 @@
     "question": "'Merge conflict' xảy ra khi nào?",
     "questionEn": "When does a 'merge conflict' occur?",
     "options": [
-      "Khi internet bị đứt giữa chừng push",
-      "Khi hai người thay đổi cùng một đoạn code trên hai branch khác nhau",
-      "Khi repo quá lớn",
-      "Khi commit message bị trùng"
+      "Khi mạng internet bị đứt giữa lúc đang push",
+      "Khi hai người sửa cùng một đoạn code",
+      "Khi repo vượt quá dung lượng cho phép",
+      "Khi hai commit có message trùng nhau"
     ],
     "optionsEn": [
       "When the internet drops in the middle of a push",
-      "When two people change the same piece of code on two different branches",
-      "When the repo is too large",
-      "When commit messages are duplicated"
+      "When two people edit the same code",
+      "When the repo grows too large in size",
+      "When two commits share the same message"
     ],
     "answer": 1,
     "explanation": "Merge conflict: Git không tự quyết được version nào đúng khi cùng vị trí code bị sửa bởi hai người khác nhau. Developer phải resolve manually — chọn version nào hoặc kết hợp cả hai.",
@@ -144,16 +144,16 @@
     "question": "Hotfix branch được tạo ra để làm gì?",
     "questionEn": "What is a hotfix branch created for?",
     "options": [
-      "Phát triển tính năng mới",
-      "Sửa lỗi khẩn cấp trực tiếp từ main, cần fix nhanh trên production",
-      "Thử nghiệm công nghệ mới",
-      "Merge nhiều feature cùng lúc"
+      "Phát triển tính năng mới cho bản phát hành sau",
+      "Sửa lỗi khẩn cấp trên production, tách từ main",
+      "Thử nghiệm một công nghệ mới cho dự án",
+      "Gộp nhiều feature cùng lúc trước khi release"
     ],
     "optionsEn": [
-      "Developing a new feature",
-      "An emergency fix taken directly from main, needing a quick production fix",
-      "Experimenting with new technology",
-      "Merging multiple features at once"
+      "Building a large new feature for the next release",
+      "An urgent production fix, branched from main",
+      "Trying out a new technology for the project",
+      "Merging several features together before release"
     ],
     "answer": 1,
     "explanation": "Hotfix: production có bug nghiêm trọng cần fix ngay, không thể chờ feature branch thông thường. Tạo từ main, fix, test nhanh, merge ngay vào main (và develop để đồng bộ).",
@@ -164,16 +164,16 @@
     "question": "GitHub, GitLab, Bitbucket có vai trò gì?",
     "questionEn": "What is the role of GitHub, GitLab, and Bitbucket?",
     "options": [
-      "Ngôn ngữ lập trình khác nhau",
-      "Nền tảng hosting Git repository online, cho phép collaborate và review code",
-      "Công cụ test tự động",
-      "Môi trường chạy ứng dụng"
+      "Ba ngôn ngữ lập trình khác nhau cho web",
+      "Nền tảng lưu trữ Git repo online",
+      "Công cụ chạy test tự động cho code",
+      "Môi trường chạy ứng dụng trên server"
     ],
     "optionsEn": [
-      "Different programming languages",
-      "Online Git repository hosting platforms that enable collaboration and code review",
-      "Automated testing tools",
-      "Application runtime environments"
+      "Three different programming languages for the web",
+      "Online hosting for Git repos",
+      "Tools that run automated tests on code",
+      "Runtime environments for apps on servers"
     ],
     "answer": 1,
     "explanation": "Chúng là remote Git hosting platform: lưu repo online, giao diện web để xem code/PR/issues, CI/CD integration, access control. GitHub phổ biến nhất; Bitbucket tích hợp tốt với Jira.",
@@ -184,15 +184,15 @@
     "question": "Khi developer nói 'tôi đã merge PR vào main rồi', điều đó có nghĩa gì với BA?",
     "questionEn": "When a developer says 'I've merged the PR into main', what does that mean to a BA?",
     "options": [
-      "Developer đang test tính năng",
-      "Code đã được review và tích hợp vào nhánh chính — có thể sắp được deploy",
-      "Developer xóa branch cũ",
-      "Developer bắt đầu sprint mới"
+      "Developer vẫn đang tự test tính năng",
+      "Code đã được review và vào nhánh chính",
+      "Developer đã xóa các branch cũ khỏi repo",
+      "Developer bắt đầu một sprint mới"
     ],
     "optionsEn": [
-      "The developer is testing the feature",
-      "The code has been reviewed and integrated into the main branch — it may be about to be deployed",
-      "The developer deleted an old branch",
+      "The developer is still testing the feature",
+      "The code was reviewed and is now in main",
+      "The developer removed old branches from the repo",
       "The developer is starting a new sprint"
     ],
     "answer": 1,
@@ -205,15 +205,15 @@
     "questionEn": "What should a good commit message be like?",
     "options": [
       "Càng ngắn càng tốt, một từ là đủ",
-      "Mô tả rõ thay đổi gì và tại sao, thường theo convention như feat/fix/docs",
-      "Viết bằng tiếng kỹ thuật phức tạp",
-      "Chỉ cần ghi ngày tháng"
+      "Nói rõ đổi gì và vì sao, như feat/fix/docs",
+      "Dùng thuật ngữ kỹ thuật phức tạp cho chuyên nghiệp",
+      "Chỉ cần ghi ngày giờ commit"
     ],
     "optionsEn": [
       "As short as possible, one word is enough",
-      "Clearly describe what changed and why, usually following a convention like feat/fix/docs",
-      "Written in complex technical jargon",
-      "Just note the date"
+      "Says what changed and why, e.g. feat/fix/docs",
+      "Written in dense technical jargon only experts know",
+      "Just the date and time of the commit"
     ],
     "answer": 1,
     "explanation": "Commit message tốt: 'feat: add user login with email/password' hoặc 'fix: resolve cart total calculation bug'. Convention phổ biến: feat (feature), fix (bug), docs, refactor, test, chore.",
@@ -224,16 +224,16 @@
     "question": "Clone repository nghĩa là gì?",
     "questionEn": "What does cloning a repository mean?",
     "options": [
-      "Xóa repository",
-      "Tạo bản sao local của remote repository trên máy tính của mình",
-      "Tạo repository mới trống",
-      "Backup repository lên cloud"
+      "Xóa repository khỏi máy chủ",
+      "Sao chép remote repo về máy mình",
+      "Tạo một repository mới hoàn toàn trống",
+      "Sao lưu repository lên dịch vụ cloud"
     ],
     "optionsEn": [
-      "Deleting a repository",
-      "Creating a local copy of a remote repository on your own computer",
-      "Creating a new empty repository",
-      "Backing up a repository to the cloud"
+      "Deleting a repository from the server",
+      "Copying a remote repo to your machine",
+      "Creating a brand-new empty repository",
+      "Backing up a repository to a cloud service"
     ],
     "answer": 1,
     "explanation": "Clone: download toàn bộ repo (code + lịch sử commit) về máy. Sau đó làm việc local (tạo branch, commit...) rồi push lên remote khi xong.",
@@ -244,16 +244,16 @@
     "question": "Trong Gitflow, nhánh 'develop' có vai trò gì?",
     "questionEn": "In Gitflow, what is the role of the 'develop' branch?",
     "options": [
-      "Nhánh chính cho production",
-      "Integration branch - nơi tích hợp tất cả feature branches trước khi release",
-      "Nhánh cho hotfix",
-      "Nhánh chỉ để review code"
+      "Nhánh chính chứa code chạy production",
+      "Nhánh tích hợp các feature trước khi release",
+      "Nhánh dùng để sửa lỗi khẩn cấp",
+      "Nhánh chỉ dùng để review code trước khi merge"
     ],
     "optionsEn": [
-      "The main branch for production",
-      "An integration branch — where all feature branches are integrated before a release",
-      "A branch for hotfixes",
-      "A branch only for code review"
+      "The main branch holding production code",
+      "Where features are integrated before release",
+      "A branch reserved for urgent hotfixes",
+      "A branch used only to review code before merging"
     ],
     "answer": 1,
     "explanation": "Gitflow: develop = staging area. Feature branches merge vào develop trước. Khi đủ tính năng cho release → tạo release branch từ develop → test → merge vào main (production).",
@@ -265,14 +265,14 @@
     "questionEn": "What should a BA do when there is a PR to review?",
     "options": [
       "Không cần làm gì, đó là việc của developer",
-      "Review xem code implement có đúng acceptance criteria không, test thử trên staging",
-      "Viết code thêm vào PR",
-      "Approve PR chỉ khi hiểu 100% code"
+      "Đối chiếu với acceptance criteria, thử trên staging",
+      "Viết thêm code vào PR để hoàn thiện tính năng",
+      "Chỉ approve PR khi hiểu hết 100% code"
     ],
     "optionsEn": [
-      "Nothing, it's the developer's job",
-      "Review whether the implementation matches the acceptance criteria, and test it on staging",
-      "Write additional code into the PR",
+      "Nothing — reviewing code is the developer's job",
+      "Check it meets the acceptance criteria; try it on staging",
+      "Write extra code into the PR to complete it",
       "Approve the PR only when they understand 100% of the code"
     ],
     "answer": 1,
@@ -284,16 +284,16 @@
     "question": "'git log' cho bạn thấy gì?",
     "questionEn": "What does 'git log' show you?",
     "options": [
-      "Lỗi trong code",
-      "Lịch sử tất cả commit của repository: ai commit, khi nào, message gì",
-      "Danh sách branch hiện tại",
-      "Trạng thái file đã thay đổi"
+      "Danh sách lỗi cú pháp trong code hiện tại",
+      "Lịch sử commit: ai, khi nào, message gì",
+      "Danh sách branch hiện có trên máy và remote",
+      "Trạng thái các file đã thay đổi chưa commit"
     ],
     "optionsEn": [
-      "Errors in the code",
-      "The history of all commits in the repository: who committed, when, and with what message",
-      "The list of current branches",
-      "The status of changed files"
+      "A list of syntax errors in the current code",
+      "The commit history: who, when, what",
+      "The list of branches, local and remote",
+      "The status of changed files not yet committed"
     ],
     "answer": 1,
     "explanation": "git log hiển thị lịch sử commit: hash, author, date, message. Hữu ích để: xem ai thay đổi gì, khi nào introduce bug, rollback về commit cụ thể. PM/BA dùng để hiểu lịch sử phát triển.",
@@ -303,16 +303,16 @@
     "question": "Vì sao BA hoặc PM nên biết đọc Pull Request dù không viết mã?",
     "questionEn": "Why should a BA or PM be able to read a pull request even without writing code?",
     "options": [
-      "Vì PR cho thấy thay đổi nào đang chờ duyệt, gắn với yêu cầu nào và ai đang chờ ai — thông tin tiến độ chính xác hơn báo cáo miệng",
-      "Vì BA phải phê duyệt mã trước khi merge",
-      "Vì PR thay thế cho tài liệu yêu cầu",
-      "Vì PR quyết định ngân sách dự án"
+      "Vì PR cho thấy việc gì đang chờ duyệt và vì sao",
+      "Vì BA phải phê duyệt mã trước khi merge vào main",
+      "Vì PR thay thế cho toàn bộ tài liệu yêu cầu",
+      "Vì PR quyết định ngân sách và tiến độ dự án"
     ],
     "optionsEn": [
-      "Because a PR shows which change awaits review, which requirement it links to, and who is waiting on whom — more accurate progress data than a verbal status",
-      "Because the BA must approve code before merge",
-      "Because PRs replace the requirements document",
-      "Because PRs determine the project budget"
+      "PRs show what awaits review and why",
+      "Because the BA must approve the code before it is merged",
+      "Because PRs replace the whole requirements document",
+      "Because PRs determine the project's budget and timeline"
     ],
     "answer": 0,
     "explanation": "Khi commit message tham chiếu ID của story, liên kết yêu cầu tới mã được tạo tự động như tác dụng phụ của công việc bình thường.",
@@ -323,16 +323,16 @@
     "question": "Branch trong Git dùng để làm gì?",
     "questionEn": "What is a Git branch for?",
     "options": [
-      "Tách một nhánh làm việc độc lập để phát triển tính năng mà không ảnh hưởng mã đang chạy",
-      "Sao lưu mã sang máy khác",
-      "Nén mã nguồn cho nhẹ hơn",
-      "Mã hoá mã nguồn"
+      "Làm tính năng riêng, không ảnh hưởng code đang chạy",
+      "Sao lưu toàn bộ mã sang máy chủ khác cho an toàn",
+      "Nén mã nguồn lại để repository nhẹ hơn",
+      "Mã hóa mã nguồn để không ai đọc trộm"
     ],
     "optionsEn": [
-      "To split off an independent line of work so a feature can be built without affecting running code",
-      "To back up code to another machine",
-      "To compress the source code",
-      "To encrypt the source code"
+      "Building a feature without breaking live code",
+      "Backing up code to another server for safety",
+      "Compressing source code so the repo is smaller",
+      "Encrypting source code so nobody can read it"
     ],
     "answer": 0,
     "explanation": "Nhánh cho phép nhiều người làm song song. Merge đưa công việc trở lại nhánh chính sau khi đã được review và kiểm thử.",
@@ -343,13 +343,13 @@
     "question": "Trong Gitflow, nhánh nào thường chứa mã đã sẵn sàng phát hành cho người dùng cuối?",
     "questionEn": "In Gitflow, which branch usually holds code ready for release to end users?",
     "options": [
-      "main hoặc master",
+      "main",
       "feature",
       "develop",
       "hotfix"
     ],
     "optionsEn": [
-      "main or master",
+      "main",
       "feature",
       "develop",
       "hotfix"
@@ -363,16 +363,16 @@
     "question": "Version control giúp giải quyết vấn đề nào của tài liệu dự án?",
     "questionEn": "Which project documentation problem does version control solve?",
     "options": [
-      "Không ai biết phiên bản nào là mới nhất và ai đã thay đổi gì, khi nào, vì sao",
-      "Tài liệu quá dài",
-      "Tài liệu thiếu hình ảnh minh hoạ",
-      "Tài liệu không được dịch sang tiếng Anh"
+      "Không rõ bản nào mới nhất, ai sửa gì và khi nào",
+      "Tài liệu quá dài nên không ai đọc hết",
+      "Tài liệu thiếu các hình ảnh minh họa để dễ hiểu hơn",
+      "Tài liệu chưa được dịch sang tiếng Anh"
     ],
     "optionsEn": [
-      "Nobody knows which version is current, or who changed what, when, and why",
-      "Documents are too long",
-      "Documents lack illustrations",
-      "Documents are not translated"
+      "No one knows the latest copy or who changed it",
+      "Documents are too long for anyone to finish",
+      "Documents lack pictures that make them clearer",
+      "Documents have not been translated into English"
     ],
     "answer": 0,
     "explanation": "Tên tệp kiểu SRS_final_v2_REALLY_final.docx là dấu hiệu của một quy trình đã hỏng. Trường vì sao trong lịch sử là trường giá trị nhất.",
@@ -383,16 +383,16 @@
     "question": "Merge conflict xảy ra khi nào?",
     "questionEn": "When does a merge conflict occur?",
     "options": [
-      "Khi hai người sửa cùng một vùng của cùng một tệp theo hai cách khác nhau",
-      "Khi có quá nhiều nhánh trong kho mã",
+      "Khi hai người sửa cùng một chỗ trong cùng một tệp",
+      "Khi kho mã có quá nhiều nhánh cùng lúc",
       "Khi kho mã vượt quá dung lượng cho phép",
-      "Khi ai đó quên viết commit message"
+      "Khi có người quên viết commit message lúc lưu thay đổi"
     ],
     "optionsEn": [
-      "When two people change the same part of the same file in different ways",
-      "When the repository has too many branches",
+      "When two people edit the same spot in a file",
+      "When the repository has too many branches at once",
       "When the repository exceeds its size limit",
-      "When someone forgets a commit message"
+      "When someone forgets to write a commit message"
     ],
     "answer": 0,
     "explanation": "Git tự hợp nhất được hầu hết thay đổi. Chỉ khi chúng chồng lấn trực tiếp thì con người mới phải quyết định giữ phiên bản nào.",
@@ -405,15 +405,15 @@
     "questionEn": "What is the `git add` (stage) command for?",
     "options": [
       "Tải toàn bộ repo từ remote về máy",
-      "Đẩy commit lên GitHub",
-      "Chọn những thay đổi sẽ được đưa vào commit tiếp theo",
-      "Xóa một branch đã merge"
+      "Đẩy các commit mới lên GitHub cho cả đội cùng xem",
+      "Chọn thay đổi sẽ đưa vào commit tiếp theo",
+      "Xóa một branch đã merge xong"
     ],
     "optionsEn": [
       "Download the whole repo from the remote",
-      "Upload commits to GitHub",
-      "Choose which changes go into the next commit",
-      "Delete a merged branch"
+      "Upload new commits to GitHub for the team",
+      "Pick changes for the next commit",
+      "Delete a branch that has been merged"
     ],
     "answer": 2,
     "explanation": "Lưu một commit gồm hai bước: `git add` đưa thay đổi vào staging area (bỏ đồ vào hộp), rồi `git commit` dán kín hộp và ghi nhãn bằng message.",
@@ -437,15 +437,15 @@
     "questionEn": "A developer says \"the PR is merged into main\". Which statement is most accurate?",
     "options": [
       "Người dùng chắc chắn đã dùng được tính năng ngay lúc này",
-      "PR vẫn đang chờ review",
-      "Code đã bị xóa khỏi dự án",
-      "Code đã vào nhánh chính, nhưng có lên hệ thống thật ngay hay không còn tùy bước deploy của đội"
+      "PR vẫn đang chờ người khác review",
+      "Code đã bị xóa khỏi nhánh chính của dự án",
+      "Code đã vào main, nhưng chưa chắc đã lên hệ thống thật"
     ],
     "optionsEn": [
       "Users can definitely use the feature right now",
-      "The PR is still waiting for review",
+      "The PR is still waiting for someone's review",
       "The code has been removed from the project",
-      "The code is in the main branch, but whether it is live yet depends on the team's deploy step"
+      "The code is in main, but may not be live yet"
     ],
     "answer": 3,
     "explanation": "Merge và deploy là hai bước khác nhau. Merge đưa code vào nhánh chính; deploy mới đưa code lên server thật. Có đội deploy tự động sau mỗi merge, có đội release theo lịch.",
@@ -500,16 +500,16 @@
     "question": "Câu nào mô tả đúng sự khác nhau giữa Git và GitHub?",
     "questionEn": "Which statement correctly describes the difference between Git and GitHub?",
     "options": [
-      "Chúng là một, chỉ là hai cách gọi",
+      "Chúng là một, chỉ là hai cách gọi khác nhau",
       "GitHub là công cụ chạy trên máy bạn, Git là website",
-      "Git là công cụ quản lý phiên bản chạy trên máy bạn; GitHub là dịch vụ lưu Git repo trên mạng để cả đội cộng tác",
-      "Git chỉ dùng được khi có GitHub"
+      "Git quản lý phiên bản trên máy; GitHub lưu repo online cho đội",
+      "Git chỉ dùng được khi đã có tài khoản GitHub"
     ],
     "optionsEn": [
-      "They are the same thing, just two names",
+      "They are the same thing, just two different names",
       "GitHub is a tool on your computer and Git is a website",
-      "Git is a version control tool that runs on your computer; GitHub is an online service that hosts Git repos for team collaboration",
-      "Git only works if you have GitHub"
+      "Git tracks versions locally; GitHub hosts repos online",
+      "Git only works if you have a GitHub account"
     ],
     "answer": 2,
     "explanation": "Giống email (công nghệ) và Gmail (dịch vụ): Git là công nghệ, GitHub/GitLab/Bitbucket là các dịch vụ xây dựng quanh nó.",
@@ -532,15 +532,15 @@
     "question": "Khi xử lý merge conflict, developer hỏi BA: \"Ticket A ghi hạn thanh toán 30 ngày, ticket B ghi 45 ngày — cái nào đúng?\" BA nên làm gì?",
     "questionEn": "While resolving a merge conflict, a developer asks the BA: \"Ticket A says payment is due in 30 days, ticket B says 45 — which is right?\" What should the BA do?",
     "options": [
-      "Làm rõ với stakeholder để chốt một quy tắc đúng, rồi cập nhật lại yêu cầu",
-      "Bảo developer chọn ngẫu nhiên một trong hai",
-      "Bảo developer xóa cả hai tính năng",
+      "Hỏi stakeholder để chốt một quy tắc, rồi cập nhật yêu cầu",
+      "Bảo developer chọn đại một trong hai cho kịp",
+      "Bảo developer xóa cả hai tính năng cho an toàn",
       "Bỏ qua vì merge conflict là chuyện kỹ thuật thuần túy"
     ],
     "optionsEn": [
-      "Clarify with stakeholders to settle the correct rule, then update the requirements",
-      "Tell the developer to pick one at random",
-      "Tell the developer to delete both features",
+      "Settle one rule with stakeholders, then update the docs",
+      "Tell the developer to just pick one to save time",
+      "Tell the developer to delete both features to be safe",
       "Ignore it because merge conflicts are purely technical"
     ],
     "answer": 0,

@@ -4,16 +4,16 @@
     "question": "Theo định nghĩa của Sommerville và Sawyer, yêu cầu (requirement) là gì?",
     "questionEn": "According to Sommerville and Sawyer, what is a requirement?",
     "options": [
-      "Chỉ là danh sách các chức năng mà lập trình viên phải code",
-      "Đặc tả về những gì cần được hiện thực: hành vi hệ thống, thuộc tính hệ thống, hoặc ràng buộc lên quá trình phát triển",
-      "Bản thiết kế kỹ thuật chi tiết của hệ thống",
-      "Kế hoạch dự án gồm lịch trình và ngân sách"
+      "Chỉ gồm các chức năng người dùng nhìn thấy; thuộc tính chất lượng và ràng buộc quy trình được xem là ghi chú thiết kế",
+      "Đặc tả những gì cần hiện thực: một hành vi, thuộc tính của hệ thống, hoặc ràng buộc lên quá trình phát triển",
+      "Mô tả cách hệ thống sẽ được xây dựng: kiến trúc, các thành phần và công nghệ được chọn để hiện thực chúng",
+      "Thoả thuận về phạm vi, lịch trình và ngân sách của dự án, được nhà tài trợ ký trước khi bắt đầu phát triển"
     ],
     "optionsEn": [
-      "Just a list of functions the developer has to code",
-      "A specification of what should be implemented: system behaviour, a system property, or a constraint on the development process",
-      "The detailed technical design of the system",
-      "The project plan with schedule and budget"
+      "Only the user-visible functions of the system; quality properties and process constraints are treated as design notes",
+      "What is to be implemented: a behaviour or property of the system, or a constraint on development",
+      "A description of how the system will be built: its architecture, components, and the technologies chosen for them",
+      "An agreement on the project's scope, schedule, and budget, signed by the sponsor before development begins"
     ],
     "answer": 1,
     "explanation": "Định nghĩa này bao trùm cả ba loại thông tin: hành vi nhìn thấy được, thuộc tính hoặc đặc tính hệ thống, và ràng buộc lên quá trình phát triển.",
@@ -24,16 +24,16 @@
     "question": "Business requirement trả lời câu hỏi nào?",
     "questionEn": "Which question does a business requirement answer?",
     "options": [
-      "Hệ thống phải làm gì khi người dùng bấm nút?",
-      "Người dùng cần hoàn thành tác vụ nào?",
+      "Hệ thống phải thể hiện hành vi gì trong từng điều kiện cụ thể, như được ghi trong SRS?",
+      "Mỗi nhóm người dùng cần hoàn thành những tác vụ hay mục tiêu nào với sản phẩm?",
       "Vì sao tổ chức làm dự án này và mong đợi lợi ích kinh doanh gì?",
-      "Lập trình viên nên dùng ngôn ngữ nào?"
+      "Sản phẩm phải đạt các mức chất lượng nào, như hiệu năng và tính sẵn sàng?"
     ],
     "optionsEn": [
-      "What must the system do when the user clicks a button?",
-      "Which task does the user need to complete?",
+      "What behaviour must the system exhibit under specific conditions, as written in the SRS?",
+      "Which tasks or goals must each user class be able to accomplish with the product?",
       "Why is the organization doing this project and what business benefit does it expect?",
-      "Which programming language should developers use?"
+      "Which quality levels, such as performance and availability, must the product achieve?"
     ],
     "answer": 2,
     "explanation": "Business requirement mô tả lợi ích kinh doanh (vì sao), thường đến từ nhà tài trợ hoặc marketing, và được lưu trong vision and scope document.",
@@ -64,16 +64,16 @@
     "question": "Câu Nếu hồ sơ hành khách không có sở thích chỗ ngồi, hệ thống shall tự gán ghế là loại yêu cầu gì?",
     "questionEn": "The statement If the passenger profile does not indicate a seating preference, the system shall assign a seat is what kind of requirement?",
     "options": [
-      "User requirement, vì nó nói về hành khách",
-      "Business requirement, vì nó ảnh hưởng doanh thu",
+      "User requirement, vì nó mô tả mục tiêu mà hành khách muốn đạt được với sản phẩm",
+      "Business requirement, vì việc tự gán ghế giúp hãng giảm chi phí làm thủ tục",
       "Functional requirement, vì nó mô tả hành vi hệ thống trong một điều kiện cụ thể",
-      "Quality attribute, vì nó nói về trải nghiệm"
+      "Quality attribute, vì nó tăng usability khi hành khách không phải tự chọn ghế"
     ],
     "optionsEn": [
-      "A user requirement, because it mentions the passenger",
-      "A business requirement, because it affects revenue",
+      "A user requirement, because it describes a goal the passenger wants to achieve with the product",
+      "A business requirement, because automatic seat assignment cuts the airline's check-in costs",
       "A functional requirement, because it describes system behaviour under a specific condition",
-      "A quality attribute, because it is about experience"
+      "A quality attribute, because it improves usability by sparing passengers from picking a seat"
     ],
     "answer": 2,
     "explanation": "Functional requirement mô tả hành vi hệ thống sẽ thể hiện dưới một điều kiện cụ thể, và đây chính là thứ lập trình viên hiện thực.",
@@ -84,16 +84,16 @@
     "question": "Vì sao business rule KHÔNG được coi là yêu cầu phần mềm?",
     "questionEn": "Why is a business rule NOT considered a software requirement?",
     "options": [
-      "Vì nó luôn quá mơ hồ để hiện thực",
-      "Vì nó tồn tại độc lập với mọi ứng dụng phần mềm; nó chỉ là nguồn gốc dẫn tới các yêu cầu",
-      "Vì nó chỉ do bộ phận pháp chế viết",
-      "Vì nó không bao giờ ảnh hưởng tới mã nguồn"
+      "Vì business rule quá mơ hồ để hiện thực trực tiếp và phải được viết lại thành user story trước",
+      "Vì nó tồn tại độc lập với mọi ứng dụng; nó là nguồn gốc, từ đó mới suy ra các yêu cầu",
+      "Vì business rule thuộc về bộ phận pháp chế nên BA ghi chúng vào hợp đồng thay vì đặc tả",
+      "Vì business rule được thực thi bằng quy trình thủ công nên không dẫn tới dòng code nào"
     ],
     "optionsEn": [
-      "Because it is always too vague to implement",
-      "Because it exists independently of any software application; it is only the origin of requirements",
-      "Because only the legal department writes them",
-      "Because it never affects the source code"
+      "Because business rules are too vague to implement and must first be rewritten as user stories",
+      "Because it exists independently of any software application; it is an origin of requirements",
+      "Because business rules are owned by legal, so the BA records them in contracts, not specs",
+      "Because a business rule is enforced by manual procedures, so it never leads to any code"
     ],
     "answer": 1,
     "explanation": "Business rule vẫn đúng kể cả khi công ty làm thủ công. Nó buộc phần mềm phải có chức năng tuân thủ, và chính chức năng đó mới là yêu cầu phần mềm.",
@@ -104,16 +104,16 @@
     "question": "Nhóm nonfunctional requirement bao gồm những gì?",
     "questionEn": "What does the nonfunctional requirements category include?",
     "options": [
-      "Chỉ gồm yêu cầu hiệu năng",
+      "Quality attributes, business rules và user requirements",
       "Quality attributes, external interfaces và constraints",
-      "Chỉ gồm các yêu cầu bảo mật và pháp lý",
-      "Mọi yêu cầu chưa được duyệt"
+      "Hiệu năng, bảo mật và các yêu cầu pháp lý, cùng với business rules",
+      "Mọi yêu cầu chưa được duyệt hoặc chưa được ưu tiên"
     ],
     "optionsEn": [
-      "Only performance requirements",
+      "Quality attributes, business rules, and user requirements",
       "Quality attributes, external interfaces, and constraints",
-      "Only security and legal requirements",
-      "Any requirement that has not been approved yet"
+      "Performance, security, and legal requirements, plus business rules",
+      "Any requirement that is not yet approved or prioritised"
     ],
     "answer": 1,
     "explanation": "Nonfunctional là nhóm rộng: đặc tính chất lượng (hệ thống làm tốt tới mức nào), giao diện với thế giới bên ngoài, và ràng buộc thiết kế hoặc hiện thực.",
@@ -124,16 +124,16 @@
     "question": "Quan hệ giữa feature, user requirement và functional requirement là gì?",
     "questionEn": "What is the relationship between a feature, a user requirement, and a functional requirement?",
     "options": [
-      "Ba khái niệm này là đồng nghĩa",
-      "Một feature tách thành nhiều user requirement, mỗi user requirement dẫn tới nhiều functional requirement",
-      "Một functional requirement chứa nhiều feature",
-      "Feature chỉ tồn tại trong dự án agile"
+      "Một user requirement gom nhiều feature, và mỗi feature được chi tiết hoá thành functional requirement",
+      "Một feature tách thành các user requirement, rồi từ đó dẫn tới các functional requirement",
+      "Functional requirement được tinh chỉnh thành feature, rồi được xác nhận bằng cách viết user requirement",
+      "Đó là ba tên gọi cho cùng một thứ, được các vai trò khác nhau dùng ở các giai đoạn khác nhau"
     ],
     "optionsEn": [
-      "The three terms are synonyms",
-      "A feature decomposes into several user requirements, and each user requirement leads to several functional requirements",
-      "A functional requirement contains several features",
-      "Features only exist on agile projects"
+      "A user requirement groups several features, and each feature is detailed into functional requirements",
+      "A feature breaks down into user requirements, which in turn lead to functional requirements",
+      "A functional requirement is refined into features, which are then validated by writing user requirements",
+      "They are three names for the same thing, used by different roles at different stages of a project"
     ],
     "answer": 1,
     "explanation": "Feature là nhóm năng lực có giá trị với người dùng; nó được phân rã xuống user requirement rồi tới functional requirement để hiện thực.",
@@ -144,16 +144,16 @@
     "question": "Đào tạo người dùng, chuyển đổi dữ liệu và mua giấy phép thư viện bên thứ ba thuộc loại nào?",
     "questionEn": "User training, data conversion, and licensing a third-party library belong to which category?",
     "options": [
-      "Product requirement, phải viết trong SRS",
+      "Product requirement, thuộc SRS vì phần mềm phụ thuộc vào chúng",
       "Project requirement, thuộc project management plan chứ không thuộc SRS",
-      "Functional requirement cấp thấp",
-      "Business rule"
+      "Functional requirement, thuộc SRS dưới dạng chi tiết cấp thấp cho lập trình viên",
+      "Business rule, thuộc business rules catalog dùng chung giữa các dự án"
     ],
     "optionsEn": [
-      "Product requirements, to be written in the SRS",
+      "Product requirements, which belong in the SRS because the software depends on them",
       "Project requirements, which belong in the project management plan rather than the SRS",
-      "Low-level functional requirements",
-      "Business rules"
+      "Functional requirements, which belong in the SRS as low-level detail for developers",
+      "Business rules, which belong in the business rules catalog shared across projects"
     ],
     "answer": 1,
     "explanation": "Chúng cần cho thành công của dự án nhưng không phải thuộc tính của phần mềm. Tách chúng ra giúp SRS chỉ trả lời câu hỏi chúng ta xây cái gì.",
@@ -184,16 +184,16 @@
     "question": "Mục tiêu của requirements management là gì?",
     "questionEn": "What is the objective of requirements management?",
     "options": [
-      "Ngăn chặn mọi thay đổi sau khi baseline được duyệt",
+      "Đóng băng yêu cầu sau khi baseline được duyệt để nhóm có thể xây dựng mà không bị xáo trộn",
       "Dự đoán và hấp thụ thay đổi để giảm thiểu tác động phá vỡ lên dự án",
-      "Đảm bảo yêu cầu được viết bằng câu shall",
-      "Thay thế hoàn toàn nhu cầu trao đổi với khách hàng"
+      "Đảm bảo mọi yêu cầu được viết bằng câu shall và được review trước khi lập trình",
+      "Tài liệu hoá yêu cầu đầy đủ đến mức không cần trao đổi thêm với khách hàng về sau"
     ],
     "optionsEn": [
-      "To block every change once the baseline is approved",
+      "To freeze requirements once the baseline is approved so the team can build without disruption",
       "To anticipate and accommodate change so as to minimise its disruptive impact on the project",
-      "To ensure requirements are written using shall statements",
-      "To remove the need to talk to customers"
+      "To make sure every requirement is written as a shall statement and reviewed before coding",
+      "To document requirements so fully that later conversations with customers become unnecessary"
     ],
     "answer": 1,
     "explanation": "Requirements management không nhằm chặn thay đổi hay làm thay đổi khó khăn, mà để thay đổi diễn ra một cách có kiểm soát và ít gây tổn thất nhất.",
@@ -204,16 +204,16 @@
     "question": "Requirements baseline là gì?",
     "questionEn": "What is a requirements baseline?",
     "options": [
-      "Bản nháp đầu tiên của SRS trước khi review",
-      "Ảnh chụp tại một thời điểm của tập yêu cầu đã được review và duyệt, thường cho một release hoặc iteration cụ thể",
-      "Danh sách mọi yêu cầu từng được đề xuất, kể cả bị từ chối",
-      "Bộ test case dùng để nghiệm thu"
+      "Bản nháp hoàn chỉnh đầu tiên của SRS, được gửi cho các bên liên quan trước khi review chính thức",
+      "Ảnh chụp của tập yêu cầu đã được review và duyệt, thường cho một release hoặc iteration cụ thể",
+      "Toàn bộ lịch sử mọi yêu cầu từng được đề xuất, kể cả các yêu cầu bị từ chối hoặc hoãn lại",
+      "Bộ acceptance test mà khách hàng ký duyệt để xác định phạm vi của release"
     ],
     "optionsEn": [
-      "The first draft of the SRS before any review",
-      "A snapshot in time of a reviewed and approved set of requirements, usually for a specific release or iteration",
-      "A list of every requirement ever proposed, including rejected ones",
-      "The set of test cases used for acceptance"
+      "The first complete draft of the SRS, sent to stakeholders before the formal review starts",
+      "A snapshot of a reviewed and approved set of requirements, usually for one release or iteration",
+      "The full history of every requirement ever proposed, including rejected and deferred ones",
+      "The set of acceptance tests the customer signs off on to define the release scope"
     ],
     "answer": 1,
     "explanation": "Sau khi baseline, mọi thay đổi phải đi qua quy trình change control. Baseline là mốc tham chiếu để đo tác động của thay đổi.",
@@ -224,16 +224,16 @@
     "question": "Gold plating là hiện tượng gì?",
     "questionEn": "What is gold plating?",
     "options": [
-      "Khách hàng liên tục đổi ý về yêu cầu đã duyệt",
+      "Khách hàng liên tục thêm yêu cầu vào phạm vi đã duyệt, khiến phạm vi phình ra không kiểm soát",
       "Lập trình viên hoặc BA thêm chức năng ngoài đặc tả vì tin rằng người dùng sẽ thích",
-      "Viết yêu cầu quá chi tiết tới mức không ai đọc",
-      "Dùng công nghệ mới chưa được kiểm chứng"
+      "Viết yêu cầu chi tiết tới mức tài liệu dài đến nỗi không ai đọc hết",
+      "Chọn một công nghệ đắt tiền, chưa được kiểm chứng vì tin rằng nó sẽ gây ấn tượng với khách hàng"
     ],
     "optionsEn": [
-      "Customers repeatedly changing their minds about approved requirements",
-      "A developer or BA adding functionality beyond the specification because they believe users will love it",
-      "Writing requirements in so much detail that nobody reads them",
-      "Adopting an unproven new technology"
+      "Customers keep adding requests to approved requirements, so the scope grows out of control",
+      "A developer or BA adding functionality beyond the spec because they believe users will love it",
+      "Writing requirements in such exhaustive detail that the document is too long for anyone to read",
+      "Choosing a costly, unproven technology because the team believes it will impress the customer"
     ],
     "answer": 1,
     "explanation": "Nếu người dùng không cần chức năng đó, toàn bộ công sức là lãng phí. Cách trị là truy vết mỗi mẩu chức năng về nguồn gốc và lý do kinh doanh của nó.",
@@ -244,16 +244,16 @@
     "question": "Dạng nhập nhằng nào của yêu cầu là NGUY HIỂM nhất và khó phát hiện nhất?",
     "questionEn": "Which kind of requirement ambiguity is the MOST dangerous and hardest to detect?",
     "options": [
-      "Khi một người đọc tự nhận ra câu đó có thể hiểu theo nhiều cách",
-      "Khi nhiều người đọc hiểu theo những cách khác nhau mà mỗi người đều thấy cách hiểu của mình hợp lý",
-      "Khi câu yêu cầu có lỗi chính tả",
-      "Khi yêu cầu quá dài"
+      "Khi một người đọc nhận ra câu đó có thể hiểu nhiều cách và hỏi lại tác giả ý nào mới đúng",
+      "Khi nhiều người đọc hiểu theo cách khác nhau mà ai cũng thấy cách hiểu của mình hợp lý",
+      "Khi câu yêu cầu có lỗi chính tả hoặc dùng sai thuật ngữ làm nghĩa thay đổi một cách tinh vi",
+      "Khi yêu cầu quá dài và ghép nhiều ý đến mức người review không theo dõi được nó đòi hỏi gì"
     ],
     "optionsEn": [
-      "When a single reader notices the statement can be read several ways",
-      "When several readers each arrive at a different interpretation that makes perfect sense to them",
-      "When the requirement contains a typo",
-      "When the requirement is too long"
+      "When a reader notices the statement can be read several ways and asks the author which is meant",
+      "When several readers each reach a different interpretation that makes perfect sense to them",
+      "When the requirement has a typo or a wrong term that subtly changes its meaning",
+      "When the requirement is so long and compound that reviewers lose track of what it requires"
     ],
     "answer": 1,
     "explanation": "Loại này sống sót qua review cá nhân vì không ai thấy có vấn đề. Chỉ có review tập thể với nhiều góc nhìn khác nhau mới lộ ra khác biệt trong cách hiểu.",
@@ -304,16 +304,16 @@
     "question": "Mục tiêu thực dụng của requirements development là gì?",
     "questionEn": "What is the practical goal of requirements development?",
     "options": [
-      "Đạt bộ yêu cầu hoàn hảo, không còn lỗi nào trước khi bắt đầu lập trình",
+      "Đạt bộ yêu cầu đầy đủ, không còn lỗi trước khi bắt đầu thiết kế hay lập trình để tránh làm lại",
       "Tích luỹ hiểu biết chung đủ tốt để xây phần tiếp theo của sản phẩm ở mức rủi ro chấp nhận được",
-      "Viết càng nhiều yêu cầu càng tốt để tránh bị đổ lỗi về sau",
-      "Đóng băng yêu cầu để không ai được thay đổi nữa"
+      "Ghi lại càng nhiều yêu cầu càng tốt để trách nhiệm rõ ràng nếu có vấn đề phát sinh về sau",
+      "Đóng băng yêu cầu sớm để nhóm phát triển lập kế hoạch và ước lượng trên một mục tiêu ổn định"
     ],
     "optionsEn": [
-      "Achieving a perfect, defect-free set of requirements before any coding starts",
-      "Accumulating a shared understanding good enough to build the next portion of the product at an acceptable level of risk",
-      "Writing as many requirements as possible to avoid blame later",
-      "Freezing the requirements so nobody can change them"
+      "Achieving a complete, defect-free set of requirements before any design or coding, so rework is avoided",
+      "Building a shared understanding good enough to build the next part of the product at acceptable risk",
+      "Documenting as many requirements as possible so responsibility is clear if problems appear later",
+      "Freezing requirements early so developers can plan and estimate against a stable target"
     ],
     "answer": 1,
     "explanation": "Bạn sẽ không bao giờ có yêu cầu hoàn hảo. Rủi ro lớn nhất là phải rework nhiều ngoài kế hoạch vì nhóm chưa hiểu đủ trước khi thiết kế và lập trình.",

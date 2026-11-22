@@ -4,14 +4,14 @@
     "question": "Primary Key (Khóa chính) có đặc điểm gì?",
     "questionEn": "What are the characteristics of a Primary Key?",
     "options": [
-      "Có thể null và trùng lặp",
-      "Giá trị duy nhất và không null, xác định từng bản ghi trong bảng",
-      "Có thể có nhiều primary key trong một bảng",
+      "Có thể null và trùng lặp giữa các bản ghi",
+      "Duy nhất, không null, định danh từng bản ghi",
+      "Có thể có nhiều primary key trong cùng một bảng",
       "Chỉ dùng cho bảng có dữ liệu lớn"
     ],
     "optionsEn": [
-      "Can be null and duplicated",
-      "A unique, non-null value that identifies each record in the table",
+      "Can be null and repeated across records",
+      "Unique, never null, identifies each record",
       "A table can have multiple primary keys",
       "Only used for tables with large amounts of data"
     ],
@@ -24,16 +24,16 @@
     "question": "Foreign Key dùng để làm gì?",
     "questionEn": "What is a Foreign Key used for?",
     "options": [
-      "Tạo index tăng tốc tìm kiếm",
-      "Tham chiếu đến Primary Key của bảng khác, tạo quan hệ giữa các bảng",
-      "Mã hóa dữ liệu nhạy cảm",
-      "Giới hạn số hàng trong bảng"
+      "Tạo index để tăng tốc độ tìm kiếm",
+      "Trỏ tới Primary Key của bảng khác để liên kết",
+      "Mã hóa các cột chứa dữ liệu nhạy cảm của bảng",
+      "Giới hạn số hàng tối đa trong bảng"
     ],
     "optionsEn": [
       "Creating an index to speed up searches",
-      "Referencing the Primary Key of another table to create relationships between tables",
-      "Encrypting sensitive data",
-      "Limiting the number of rows in a table"
+      "Pointing to another table's Primary Key to link them",
+      "Encrypting columns that hold sensitive data",
+      "Limiting the maximum number of rows in a table"
     ],
     "answer": 1,
     "explanation": "Foreign Key tạo liên kết. orders.user_id là FK trỏ đến users.id → biết đơn hàng nào thuộc user nào. FK đảm bảo referential integrity — không tạo order cho user không tồn tại.",
@@ -64,16 +64,16 @@
     "question": "Index trong database giúp ích gì?",
     "questionEn": "What does an index help with in a database?",
     "options": [
-      "Giảm dung lượng database",
+      "Giảm dung lượng lưu trữ của database",
       "Tăng tốc độ tìm kiếm và truy vấn",
-      "Tự động backup dữ liệu",
-      "Mã hóa cột dữ liệu"
+      "Tự động sao lưu dữ liệu mỗi ngày",
+      "Mã hóa dữ liệu trong từng cột"
     ],
     "optionsEn": [
-      "Reducing database size",
+      "Reducing how much space the database uses",
       "Speeding up searches and queries",
-      "Automatically backing up data",
-      "Encrypting data columns"
+      "Backing up data automatically every day",
+      "Encrypting the data in each column"
     ],
     "answer": 1,
     "explanation": "Index như mục lục sách. Thay vì quét toàn bộ bảng (table scan), database dùng index để tìm trực tiếp. Đặc biệt hiệu quả với bảng có hàng triệu bản ghi.",
@@ -84,15 +84,15 @@
     "question": "NoSQL database phù hợp với tình huống nào?",
     "questionEn": "Which situation is a NoSQL database best suited for?",
     "options": [
-      "Hệ thống tài chính cần ACID nghiêm ngặt",
-      "Dữ liệu có quan hệ phức tạp nhiều bảng",
-      "Cần schema linh hoạt, scale ngang lớn, hoặc dữ liệu dạng document",
-      "ERP doanh nghiệp cần báo cáo phức tạp"
+      "Hệ thống tài chính cần đảm bảo ACID nghiêm ngặt",
+      "Dữ liệu có quan hệ phức tạp giữa rất nhiều bảng",
+      "Schema linh hoạt, cần scale ngang, dữ liệu document",
+      "Hệ thống ERP doanh nghiệp cần báo cáo phức tạp"
     ],
     "optionsEn": [
       "Financial systems that require strict ACID guarantees",
       "Data with complex relationships across many tables",
-      "Needing a flexible schema, large horizontal scaling, or document-style data",
+      "Flexible schema, big horizontal scale, document data",
       "Enterprise ERP that requires complex reporting"
     ],
     "answer": 2,
@@ -104,16 +104,16 @@
     "question": "ACID trong database là gì?",
     "questionEn": "What is ACID in a database?",
     "options": [
-      "Loại ngôn ngữ truy vấn",
-      "Bộ tính chất đảm bảo tính toàn vẹn và tin cậy của transaction",
-      "Loại index đặc biệt",
-      "Giao thức kết nối database"
+      "Một loại ngôn ngữ truy vấn dữ liệu",
+      "Các tính chất giúp transaction đáng tin cậy",
+      "Một loại index đặc biệt để tìm kiếm",
+      "Giao thức kết nối giữa ứng dụng và database"
     ],
     "optionsEn": [
-      "A type of query language",
-      "A set of properties that guarantee the integrity and reliability of transactions",
-      "A special type of index",
-      "A database connection protocol"
+      "A type of language for querying data",
+      "Properties that make transactions reliable",
+      "A special kind of index for searching",
+      "A protocol for connecting apps to databases"
     ],
     "answer": 1,
     "explanation": "ACID: Atomicity (all-or-nothing), Consistency (trạng thái hợp lệ), Isolation (transaction độc lập), Durability (commit không mất). Quan trọng cho hệ thống tài chính, giao dịch.",
@@ -126,13 +126,13 @@
     "options": [
       "VARCHAR",
       "INTEGER",
-      "DECIMAL hoặc NUMERIC",
+      "DECIMAL",
       "BOOLEAN"
     ],
     "optionsEn": [
       "VARCHAR",
       "INTEGER",
-      "DECIMAL or NUMERIC",
+      "DECIMAL",
       "BOOLEAN"
     ],
     "answer": 2,
@@ -145,7 +145,7 @@
     "questionEn": "What is needed to resolve a Many-to-Many relationship?",
     "options": [
       "Tạo một bảng trung gian (junction table)",
-      "Thêm nhiều foreign key vào một cột",
+      "Thêm nhiều foreign key vào trong cùng một cột",
       "Dùng NoSQL thay vì SQL",
       "Tạo view kết hợp hai bảng"
     ],
@@ -204,16 +204,16 @@
     "question": "Schema của database là gì?",
     "questionEn": "What is a database schema?",
     "options": [
-      "Dữ liệu thực tế trong database",
-      "Cấu trúc của database: bảng, cột, kiểu dữ liệu, ràng buộc",
-      "Ngôn ngữ truy vấn",
-      "Bản backup dữ liệu"
+      "Toàn bộ dữ liệu thực tế đang lưu trong database",
+      "Cấu trúc: bảng, cột, kiểu dữ liệu, ràng buộc",
+      "Ngôn ngữ dùng để truy vấn dữ liệu",
+      "Bản sao lưu định kỳ của dữ liệu"
     ],
     "optionsEn": [
-      "The actual data in the database",
-      "The structure of the database: tables, columns, data types, and constraints",
-      "A query language",
-      "A data backup"
+      "All the actual data stored in the database",
+      "The structure: tables, columns, types, constraints",
+      "The language used to query the data",
+      "A periodic backup copy of the data"
     ],
     "answer": 1,
     "explanation": "Schema định nghĩa 'blueprint' của database: tên bảng, tên cột, kiểu dữ liệu, primary/foreign key, constraints. Tách biệt với dữ liệu thực tế (data).",
@@ -224,16 +224,16 @@
     "question": "Trade-off của việc tạo Index là gì?",
     "questionEn": "What is the trade-off of creating an index?",
     "options": [
-      "Tăng tốc đọc nhưng tốn thêm bộ nhớ và làm chậm thao tác ghi",
-      "Tăng tốc tất cả mọi thứ nhưng phức tạp hơn",
-      "Giảm tốc đọc nhưng tăng tốc ghi",
-      "Không có trade-off nào"
+      "Đọc nhanh hơn nhưng tốn chỗ và ghi chậm hơn",
+      "Tăng tốc mọi thao tác nhưng khó bảo trì hơn",
+      "Đọc chậm hơn nhưng ghi dữ liệu nhanh hơn",
+      "Không có trade-off, chỉ có lợi ích"
     ],
     "optionsEn": [
-      "It speeds up reads but consumes more memory and slows down writes",
-      "It speeds up everything but is more complex",
-      "It slows down reads but speeds up writes",
-      "There is no trade-off"
+      "Faster reads, but more storage and slower writes",
+      "Everything gets faster, but it is harder to maintain",
+      "Reads get slower, but writes get faster",
+      "There is no trade-off, only benefits"
     ],
     "answer": 0,
     "explanation": "Index cần được cập nhật mỗi khi có INSERT/UPDATE/DELETE → tốn thêm thời gian ghi và bộ nhớ. Bảng có quá nhiều index có thể ghi chậm hơn bảng không có index.",
@@ -286,14 +286,14 @@
     "options": [
       "Many-to-Many",
       "One-to-One",
-      "Many-to-One (orders Many → users One)",
+      "Many-to-One",
       "Không cần quan hệ"
     ],
     "optionsEn": [
       "Many-to-Many",
       "One-to-One",
-      "Many-to-One (many orders → one user)",
-      "No relationship is needed"
+      "Many-to-One",
+      "No relationship needed"
     ],
     "answer": 2,
     "explanation": "Mỗi đơn hàng thuộc về đúng 1 user (Many orders → 1 user). Một user có thể có nhiều đơn hàng. Bảng orders có cột user_id là foreign key trỏ đến users.id.",
@@ -323,16 +323,16 @@
     "question": "Một sản phẩm thuộc nhiều đơn hàng, một đơn hàng chứa nhiều sản phẩm. Đây là quan hệ gì và cần gì để hiện thực?",
     "questionEn": "A product appears in many orders and an order contains many products. What relationship is this and what does it need?",
     "options": [
-      "Nhiều-nhiều, cần một bảng trung gian nối hai bảng",
+      "Nhiều-nhiều, cần bảng trung gian",
       "Một-một, chỉ cần thêm một cột",
-      "Một-nhiều, không cần gì thêm",
-      "Không phải quan hệ hợp lệ"
+      "Một-nhiều, chỉ cần một khóa ngoại",
+      "Nhiều-nhiều, chỉ cần thêm một cột"
     ],
     "optionsEn": [
-      "Many-to-many, which needs a junction table linking the two",
+      "Many-to-many, needing a junction table",
       "One-to-one, needing just an extra column",
-      "One-to-many, needing nothing extra",
-      "Not a valid relationship"
+      "One-to-many, needing only a foreign key",
+      "Many-to-many, needing just an extra column"
     ],
     "answer": 0,
     "explanation": "Cơ sở dữ liệu quan hệ không biểu diễn trực tiếp quan hệ nhiều-nhiều. Bảng trung gian như order_items giữ cặp khoá của cả hai bên.",
@@ -343,16 +343,16 @@
     "question": "Báo cáo lọc theo email chạy rất chậm trên bảng vài triệu dòng. Giải pháp phù hợp nhất?",
     "questionEn": "A report filtering by email is very slow on a multi-million-row table. Best fix?",
     "options": [
-      "Tạo index trên cột email để cơ sở dữ liệu không phải quét toàn bảng",
-      "Xoá bớt dữ liệu lịch sử",
-      "Đổi tên cột email",
-      "Tăng độ dài cột email"
+      "Tạo index trên cột email",
+      "Xóa bớt dữ liệu lịch sử cũ",
+      "Đổi tên cột email cho ngắn hơn",
+      "Tăng độ dài tối đa của cột email"
     ],
     "optionsEn": [
-      "Create an index on the email column so the database need not scan the whole table",
-      "Delete historical data",
-      "Rename the email column",
-      "Increase the email column length"
+      "Add an index on the email column",
+      "Delete old historical data",
+      "Rename the email column to something shorter",
+      "Increase the email column's maximum length"
     ],
     "answer": 0,
     "explanation": "Index như mục lục sách: tìm nhanh hơn nhiều. Cái giá là tốn thêm dung lượng và làm chậm thao tác ghi, nên không index bừa mọi cột.",
@@ -363,16 +363,16 @@
     "question": "Hệ thống chuyển tiền trừ tiền tài khoản A nhưng lỗi trước khi cộng vào B. Tính chất ACID nào bảo đảm điều này không xảy ra?",
     "questionEn": "A transfer debits account A but fails before crediting B. Which ACID property prevents this?",
     "options": [
-      "Atomicity — giao dịch hoặc thành công trọn vẹn hoặc quay lui hoàn toàn",
+      "Atomicity — giao dịch thành công trọn vẹn hoặc quay lui",
       "Durability — dữ liệu tồn tại sau khi mất điện",
       "Isolation — các giao dịch không thấy nhau khi đang chạy",
-      "Consistency — dữ liệu luôn đúng ràng buộc"
+      "Consistency — dữ liệu thỏa mọi ràng buộc đã khai báo"
     ],
     "optionsEn": [
-      "Atomicity — the transaction either fully succeeds or is rolled back entirely",
-      "Durability — data survives a power loss",
+      "Atomicity — all of the transaction happens, or none of it",
+      "Durability — data survives a power loss or crash",
       "Isolation — concurrent transactions do not see each other mid-flight",
-      "Consistency — data always satisfies its constraints"
+      "Consistency — data meets every declared constraint"
     ],
     "answer": 0,
     "explanation": "Atomicity là tính nguyên tử: không có trạng thái nửa vời. Đây là lý do các nghiệp vụ tài chính bắt buộc dùng cơ sở dữ liệu hỗ trợ giao dịch.",
@@ -383,13 +383,13 @@
     "question": "Khi nào NoSQL là lựa chọn hợp lý hơn cơ sở dữ liệu quan hệ?",
     "questionEn": "When is NoSQL a more reasonable choice than a relational database?",
     "options": [
-      "Khi cấu trúc dữ liệu thay đổi linh hoạt, khối lượng rất lớn và không cần giao dịch phức tạp nhiều bảng",
+      "Khi cấu trúc dữ liệu hay thay đổi và khối lượng rất lớn",
       "Khi cần bảo đảm ACID nghiêm ngặt cho giao dịch tài chính",
       "Khi dữ liệu có nhiều quan hệ ràng buộc chặt chẽ",
-      "Khi đội đã quen SQL và dữ liệu nhỏ"
+      "Khi đội đã quen SQL và dữ liệu khá nhỏ"
     ],
     "optionsEn": [
-      "When the data shape varies, volume is very large, and complex multi-table transactions are not needed",
+      "When the data shape keeps changing and volume is huge",
       "When strict ACID guarantees are required for financial transactions",
       "When data has many tightly constrained relationships",
       "When the team knows SQL well and the data is small"
@@ -405,15 +405,15 @@
     "questionEn": "Why does a real app use a database instead of an Excel spreadsheet file?",
     "options": [
       "Vì Excel không thể hiển thị dữ liệu dạng bảng",
-      "Vì database luôn miễn phí còn Excel phải trả tiền",
-      "Vì database phục vụ an toàn nhiều người dùng cùng lúc, xử lý hàng triệu dòng và từ chối dữ liệu sai kiểu",
-      "Vì database không cần cột và hàng"
+      "Vì database miễn phí còn Excel phải trả tiền bản quyền",
+      "Vì database phục vụ nhiều người cùng lúc và kiểm tra kiểu dữ liệu",
+      "Vì database lưu dữ liệu mà không cần cột và hàng"
     ],
     "optionsEn": [
       "Because Excel cannot display data as a table",
-      "Because databases are always free while Excel costs money",
-      "Because a database safely serves many users at once, handles millions of rows, and rejects wrongly typed data",
-      "Because a database does not need columns and rows"
+      "Because databases are free while Excel needs a paid licence",
+      "Because a database serves many users at once and checks data types",
+      "Because a database stores data without columns or rows"
     ],
     "answer": 2,
     "explanation": "Bảng tính hợp với một người và lượng dữ liệu nhỏ. Database được xây cho nhiều người sửa cùng lúc, khối lượng rất lớn, kiểm tra dữ liệu theo schema và khôi phục đúng sau sự cố.",
@@ -436,15 +436,15 @@
     "question": "Trong bảng customers, cột phone của một khách có giá trị NULL. Điều đó nghĩa là gì?",
     "questionEn": "In a customers table, one customer's phone column is NULL. What does that mean?",
     "options": [
-      "Chưa có giá trị — khách chưa cung cấp số điện thoại",
+      "Chưa ai nhập dữ liệu cho ô đó",
       "Số điện thoại là 0",
-      "Số điện thoại là một chuỗi rỗng đã được nhập cố ý",
+      "Số điện thoại là chuỗi rỗng được nhập cố ý",
       "Bản ghi đó bị lỗi và phải xóa"
     ],
     "optionsEn": [
-      "There is no value yet — the customer has not given a phone number",
+      "Nothing has been entered yet",
       "The phone number is 0",
-      "The phone number is an empty string that was entered on purpose",
+      "The number is an empty string entered on purpose",
       "The record is broken and must be deleted"
     ],
     "answer": 0,
@@ -471,13 +471,13 @@
       "customers",
       "products",
       "orders",
-      "order_items — bảng trung gian giữa orders và products"
+      "order_items"
     ],
     "optionsEn": [
       "customers",
       "products",
       "orders",
-      "order_items — the junction table between orders and products"
+      "order_items"
     ],
     "answer": 3,
     "explanation": "Một đơn có nhiều sản phẩm và một sản phẩm nằm trong nhiều đơn (nhiều-nhiều), nên mỗi dòng của order_items ghi một cặp (order_id, product_id) kèm quantity.",

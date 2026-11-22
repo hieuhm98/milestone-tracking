@@ -4,16 +4,16 @@
     "question": "Một công ty dùng Athena truy vấn log lưu dạng CSV không nén trong S3 và thấy chi phí rất cao. Cách nào giảm chi phí HIỆU QUẢ NHẤT?",
     "questionEn": "A company uses Athena to query uncompressed CSV logs in S3 and finds costs very high. Which approach reduces cost MOST effectively?",
     "options": [
-      "Chuyển dữ liệu sang định dạng cột Parquet, nén và partition",
-      "Tăng số truy vấn đồng thời",
-      "Chuyển toàn bộ dữ liệu sang EBS",
-      "Đổi sang dùng RDS để truy vấn"
+      "Chuyển sang Parquet dạng cột, nén và partition",
+      "Tăng số truy vấn đồng thời trong cấu hình workgroup",
+      "Chuyển log sang S3 Glacier Flexible Retrieval để rẻ hơn",
+      "Nạp file CSV vào RDS rồi truy vấn ở đó thay thế"
     ],
     "optionsEn": [
-      "Convert data to columnar Parquet, compress it, and partition it",
-      "Increase the number of concurrent queries",
-      "Move all data to EBS",
-      "Switch to using RDS for queries"
+      "Convert to compressed, partitioned Parquet (columnar)",
+      "Raise the workgroup's concurrent query limit",
+      "Move the logs to S3 Glacier Flexible Retrieval",
+      "Load the CSV files into RDS and query them there"
     ],
     "answer": 0,
     "explanation": "Athena tính tiền theo lượng dữ liệu QUÉT. Dùng Parquet (columnar) + nén + partition giúp quét ít byte hơn nhiều → giảm chi phí và tăng tốc.",
@@ -64,13 +64,13 @@
     "question": "Thành phần nào của AWS Glue đóng vai trò kho metadata/schema trung tâm, được dùng chung bởi Athena, Redshift Spectrum và EMR?",
     "questionEn": "Which AWS Glue component acts as the central metadata/schema store shared by Athena, Redshift Spectrum, and EMR?",
     "options": [
-      "Glue Crawler",
+      "Glue Schema Registry",
       "Glue DataBrew",
       "Glue Data Catalog",
       "Glue Studio"
     ],
     "optionsEn": [
-      "Glue Crawler",
+      "Glue Schema Registry",
       "Glue DataBrew",
       "Glue Data Catalog",
       "Glue Studio"
@@ -104,16 +104,16 @@
     "question": "Business user cần dashboard trực quan hóa nhanh với engine trong bộ nhớ, trả tiền theo phiên và không quản lý server. Dịch vụ nào?",
     "questionEn": "Business users need fast visualization dashboards with an in-memory engine, per-session billing, and no server management. Which service?",
     "options": [
-      "Amazon Athena",
+      "Amazon Managed Grafana",
       "Amazon QuickSight",
-      "Amazon EMR",
-      "AWS Glue"
+      "OpenSearch Dashboards",
+      "AWS Glue DataBrew"
     ],
     "optionsEn": [
-      "Amazon Athena",
+      "Amazon Managed Grafana",
       "Amazon QuickSight",
-      "Amazon EMR",
-      "AWS Glue"
+      "OpenSearch Dashboards",
+      "AWS Glue DataBrew"
     ],
     "answer": 1,
     "explanation": "QuickSight là dịch vụ BI serverless, dùng engine trong bộ nhớ SPICE, tính tiền per-session, phù hợp làm dashboard cho business user.",
@@ -124,16 +124,16 @@
     "question": "Đội dữ liệu cần chạy job Apache Spark tùy biến sâu trên khối lượng rất lớn và muốn tiết kiệm chi phí compute cho phần việc chịu được gián đoạn. Lựa chọn TỐT NHẤT?",
     "questionEn": "A data team needs to run deeply customized Apache Spark jobs on very large volumes and wants to save compute cost for interruption-tolerant work. BEST choice?",
     "options": [
-      "Amazon Athena",
+      "Amazon Athena for Apache Spark",
       "Amazon EMR trên EC2 Spot Instances",
-      "Amazon QuickSight",
-      "Amazon OpenSearch Service"
+      "Amazon EMR trên On-Demand Instances",
+      "Redshift với Concurrency Scaling"
     ],
     "optionsEn": [
-      "Amazon Athena",
+      "Amazon Athena for Apache Spark",
       "Amazon EMR on EC2 Spot Instances",
-      "Amazon QuickSight",
-      "Amazon OpenSearch Service"
+      "Amazon EMR on On-Demand Instances",
+      "Redshift with Concurrency Scaling"
     ],
     "answer": 1,
     "explanation": "EMR là cluster big data được quản lý cho Hadoop/Spark, cho phép tùy biến sâu; dùng EC2 Spot Instances giúp giảm mạnh chi phí cho công việc chịu được gián đoạn.",
@@ -165,15 +165,15 @@
     "questionEn": "An application needs to analyze a clickstream event stream in real time using SQL/Apache Flink as data arrives. Which service?",
     "options": [
       "Amazon Athena",
-      "Amazon Kinesis Data Analytics (Managed Service for Apache Flink)",
-      "Amazon Redshift",
-      "AWS Glue"
+      "Amazon Kinesis Data Analytics",
+      "Amazon Kinesis Data Firehose",
+      "Amazon Redshift Spectrum"
     ],
     "optionsEn": [
       "Amazon Athena",
-      "Amazon Kinesis Data Analytics (Managed Service for Apache Flink)",
-      "Amazon Redshift",
-      "AWS Glue"
+      "Amazon Kinesis Data Analytics",
+      "Amazon Kinesis Data Firehose",
+      "Amazon Redshift Spectrum"
     ],
     "answer": 1,
     "explanation": "Kinesis Data Analytics (nay là Managed Service for Apache Flink) phân tích dữ liệu streaming real-time bằng SQL/Flink ngay khi dữ liệu tới, không cần batch.",
@@ -204,16 +204,16 @@
     "question": "Đội vận hành cần thu thập và phân tích log ứng dụng gần thời gian thực với khả năng full-text search và dashboard kiểu Kibana. Dịch vụ nào?",
     "questionEn": "An ops team needs to collect and analyze application logs near real time with full-text search and Kibana-style dashboards. Which service?",
     "options": [
-      "Amazon Redshift",
+      "Amazon Redshift Serverless",
       "Amazon Athena",
       "Amazon OpenSearch Service",
-      "Amazon QuickSight"
+      "Amazon QuickSight với SPICE"
     ],
     "optionsEn": [
-      "Amazon Redshift",
+      "Amazon Redshift Serverless",
       "Amazon Athena",
       "Amazon OpenSearch Service",
-      "Amazon QuickSight"
+      "Amazon QuickSight with SPICE"
     ],
     "answer": 2,
     "explanation": "OpenSearch Service (trước là Elasticsearch) mạnh cho full-text search và phân tích log theo mô hình ELK, với dashboard kiểu Kibana. Không phải công cụ SQL analytics.",
@@ -264,7 +264,7 @@
     "question": "Phát biểu nào ĐÚNG về Amazon Redshift?",
     "questionEn": "Which statement is TRUE about Amazon Redshift?",
     "options": [
-      "Là database OLTP tối ưu cho giao dịch ghi nhỏ tần suất cao",
+      "Là database OLTP tối ưu cho các giao dịch ghi nhỏ với tần suất cao",
       "Là data warehouse OLAP columnar dựa trên PostgreSQL, không dùng cho OLTP",
       "Là dịch vụ tìm kiếm full-text thay thế cho OpenSearch",
       "Là dịch vụ ETL serverless thay thế cho Glue"
@@ -284,16 +284,16 @@
     "question": "Amazon Athena tính phí như thế nào?",
     "questionEn": "How is Amazon Athena billed?",
     "options": [
-      "Theo giờ chạy của cluster",
-      "Theo số GB dữ liệu lưu trữ",
-      "Theo số người dùng",
-      "Theo số TB dữ liệu mà mỗi truy vấn QUÉT"
+      "Theo số giờ cluster truy vấn hoạt động",
+      "Theo số GB dữ liệu lưu trong các bảng",
+      "Theo số người dùng mỗi tháng, như QuickSight",
+      "Theo số TB dữ liệu mà mỗi truy vấn quét"
     ],
     "optionsEn": [
-      "Per hour of cluster uptime",
-      "Per GB of data stored",
-      "Per user",
-      "Per TB of data SCANNED by each query"
+      "Per hour that the query cluster is running",
+      "Per GB of data stored in the tables",
+      "Per user per month, like QuickSight",
+      "Per TB of data scanned by each query"
     ],
     "answer": 3,
     "explanation": "Vì tính theo lượng dữ liệu quét, nên nén dữ liệu, dùng định dạng cột (Parquet/ORC) và partition sẽ giảm chi phí trực tiếp — đây là điểm thi rất hay gặp.",
@@ -304,16 +304,16 @@
     "question": "Khác biệt vận hành chính giữa Amazon MSK và Kinesis Data Streams là gì?",
     "questionEn": "What is the main operational difference between Amazon MSK and Kinesis Data Streams?",
     "options": [
-      "MSK là Apache Kafka được quản lý (dùng Kafka API, bạn quản lý topic/partition); KDS là dịch vụ stream gốc của AWS với API riêng",
-      "Hai dịch vụ giống hệt nhau, chỉ khác tên",
-      "MSK chỉ có chế độ serverless còn KDS thì không",
-      "KDS hỗ trợ đầy đủ Kafka API còn MSK thì không"
+      "MSK: Kafka được quản lý, dùng Kafka API; KDS: dịch vụ gốc AWS, API riêng",
+      "Cả hai đều dùng Kafka API; chỉ khác mô hình tính giá",
+      "MSK chỉ có chế độ serverless, còn KDS phải quản lý broker",
+      "KDS: Kafka được quản lý, dùng Kafka API; MSK: dịch vụ gốc AWS, API riêng"
     ],
     "optionsEn": [
-      "MSK is managed Apache Kafka (Kafka APIs, you manage topics/partitions); KDS is an AWS-native stream with its own API",
-      "They are identical apart from the name",
-      "MSK is serverless-only while KDS is not",
-      "KDS speaks the full Kafka API while MSK does not"
+      "MSK: managed Kafka with Kafka APIs; KDS: AWS-native with its own API",
+      "Both expose Kafka APIs; only the pricing model differs",
+      "MSK is serverless-only, while KDS requires managing brokers",
+      "KDS: managed Kafka with Kafka APIs; MSK: AWS-native with its own API"
     ],
     "answer": 0,
     "explanation": "Chọn MSK khi đã có code/công cụ Kafka và muốn giữ nguyên. Chọn KDS khi làm mới trên AWS và muốn tích hợp sẵn với Lambda, Firehose, Data Analytics.",

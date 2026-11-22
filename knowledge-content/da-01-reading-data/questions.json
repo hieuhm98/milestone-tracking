@@ -39,13 +39,13 @@
       "3.106, đếm từ `loans`; bảng lịch trả nợ có một dòng mỗi kỳ",
       "28.824, vì mỗi kỳ trả góp được ghi nhận như một khoản vay riêng",
       "6.854, vì mỗi hồ sơ nộp vào đều trở thành một khoản vay",
-      "2.664, vì mỗi khách hàng chỉ được giữ một khoản vay"
+      "2.664, vì mỗi khách hàng chỉ được phép giữ một khoản vay tại một thời điểm"
     ],
     "optionsEn": [
       "3,106, counted from `loans`; the schedule has one row per installment",
       "28,824, because each installment is booked as a separate loan",
       "6,854, because every submitted application becomes a loan",
-      "2,664, because each customer may only hold one loan"
+      "2,664, because each customer is only allowed to hold one loan at a time"
     ],
     "answer": 0,
     "explanation": "Đếm ở đúng grain: khoản vay nằm trong `loans` (3.106 dòng). 28.824 là số kỳ trả góp, 6.854 là số hồ sơ.",
@@ -133,13 +133,13 @@
     "questionEn": "A customer export opened in Excel shows phone numbers as `912345678` and citizen IDs as `7.91E+11`. What happened, and what should you do?",
     "options": [
       "Excel đọc các cột dạng ID thành số; hãy import và đặt các cột đó là Text",
-      "Database lưu sai số điện thoại; nhờ đội kỹ thuật sửa dữ liệu gốc",
+      "Database lưu sai số điện thoại; nhờ đội kỹ thuật vào sửa lại dữ liệu gốc ngay",
       "File được lưu theo giờ UTC nên các con số bị lệch đi",
       "Excel tự che số dài để bảo mật; mở khóa sheet là xem được"
     ],
     "optionsEn": [
       "Excel read the ID-like columns as numbers; import them and set those columns to Text",
-      "The database stores wrong phone numbers; ask engineering to fix the source",
+      "The database stores wrong phone numbers; ask engineering to fix the source records",
       "The file was saved in UTC, so the numbers shifted",
       "Excel hides long numbers for privacy; unlocking the sheet shows them"
     ],
@@ -357,13 +357,13 @@
     "questionEn": "`customers` has 4,000 rows and `COUNT(monthly_income)` = 3,768. How does `AVG(monthly_income)` treat the 232 customers with no declared income?",
     "options": [
       "Coi họ có thu nhập bằng 0 và chia cho 4.000",
-      "Trả về NULL cho cả kết quả vì có giá trị thiếu",
+      "Trả về NULL cho cả kết quả vì cột có giá trị bị thiếu",
       "Báo lỗi và yêu cầu lọc NULL trước khi tính",
       "Bỏ qua họ: trung bình chỉ tính trên 3.768 giá trị có khai"
     ],
     "optionsEn": [
       "It treats them as earning 0 and divides by 4,000",
-      "It returns NULL for the whole result because values are missing",
+      "It returns NULL for the whole result because some values are missing",
       "It raises an error and asks you to filter NULLs first",
       "It skips them: the average is over the 3,768 declared values only"
     ],
@@ -518,14 +518,14 @@
     "options": [
       "Bước kiểm tra enum: cùng một thành phố bị viết nhiều kiểu trong ô nhập tự do",
       "Bước kiểm tra khóa: `customer_id` bị trùng nên thành phố bị nhân lên",
-      "Bước kiểm tra múi giờ: thành phố được ghi theo giờ UTC",
+      "Bước kiểm tra múi giờ: thành phố bị ghi theo giờ UTC nên lệch sang tên khác",
       "Bước kiểm tra khoảng giá trị: thu nhập ngoại lai làm sai cột thành phố"
     ],
     "optionsEn": [
       "The enum check: the same city is spelled several ways in a free-text field",
-      "The key check: duplicate `customer_id`s multiply the cities",
-      "The time-zone check: cities were recorded in UTC",
-      "The range check: income outliers corrupt the city column"
+      "The key check: duplicate `customer_id`s multiply each city into extra values",
+      "The time-zone check: cities were recorded in UTC and shifted to new names",
+      "The range check: income outliers spill over and corrupt the city column"
     ],
     "answer": 0,
     "explanation": "Liệt kê giá trị khác nhau của mọi cột mã. Một cột nhập tự do có nhiều cách viết cho cùng một giá trị; da-03 sẽ làm sạch.",
@@ -580,10 +580,10 @@
     "question": "Sau khi chạy checklist nhìn lần đầu trên bảng `payments`, bạn có một \"nhật ký câu hỏi\" gồm 4 điểm chưa giải thích được. Nên làm gì với nó?",
     "questionEn": "After running the first-look checklist on `payments`, you have a \"questions log\" with four points you cannot explain. What should you do with it?",
     "options": [
-      "Tự sửa dữ liệu gốc cho hết bất thường rồi xóa nhật ký",
+      "Tự sửa dữ liệu gốc cho hết các bất thường đó, rồi xóa nhật ký đi cho gọn",
       "Mang đi hỏi người quản lý dữ liệu và ghi lại câu trả lời trước khi phân tích",
-      "Giấu đi để sếp không nghĩ rằng bạn chưa hiểu dữ liệu",
-      "Bỏ qua và phân tích tiếp, vì 4 điểm là quá ít để ảnh hưởng"
+      "Giấu nhật ký đi để sếp không nghĩ rằng bạn vẫn chưa hiểu được dữ liệu",
+      "Bỏ qua và phân tích tiếp, vì chỉ 4 điểm thì quá ít để ảnh hưởng kết quả"
     ],
     "optionsEn": [
       "Fix the source data yourself until the oddities disappear, then delete the log",

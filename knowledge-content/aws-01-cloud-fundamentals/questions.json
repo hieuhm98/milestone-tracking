@@ -4,16 +4,16 @@
     "question": "Trong mô hình IaaS, khách hàng chịu trách nhiệm quản lý phần nào?",
     "questionEn": "In the IaaS model, what is the customer responsible for managing?",
     "options": [
-      "Chỉ dữ liệu người dùng, còn lại AWS lo hết",
+      "Chỉ code ứng dụng và dữ liệu; AWS lo vá hệ điều hành guest",
       "Hệ điều hành, runtime, ứng dụng và dữ liệu",
-      "Phần cứng vật lý và ảo hóa",
-      "Không quản lý gì cả"
+      "Phần cứng vật lý, hypervisor và mạng nền tảng bên dưới",
+      "Chỉ firewall mạng và IAM; AWS quản lý hệ điều hành"
     ],
     "optionsEn": [
-      "Only user data; AWS handles the rest",
+      "Only the application code and data; AWS patches the guest OS",
       "The operating system, runtime, application, and data",
-      "Physical hardware and virtualization",
-      "Nothing at all"
+      "Physical hardware, the hypervisor, and the underlying network",
+      "Only the network firewall and IAM; AWS manages the OS"
     ],
     "answer": 1,
     "explanation": "IaaS (ví dụ EC2) cung cấp hạ tầng ảo hóa; khách hàng tự quản lý OS, runtime, ứng dụng và dữ liệu. AWS lo phần cứng, mạng nền tảng và ảo hóa.",
@@ -24,16 +24,16 @@
     "question": "Một Availability Zone (AZ) được định nghĩa chính xác nhất là gì?",
     "questionEn": "What is the most accurate definition of an Availability Zone (AZ)?",
     "options": [
-      "Một data center vật lý duy nhất",
-      "Một hoặc nhiều data center riêng biệt với điện, làm mát và mạng độc lập",
-      "Một khu vực địa lý chứa nhiều Region",
-      "Một điểm cache nội dung của CloudFront"
+      "Một data center vật lý duy nhất, dùng chung cho cả Region",
+      "Một hoặc nhiều data center riêng biệt, có điện và mạng độc lập",
+      "Một vùng địa lý chứa nhiều Region, ví dụ châu Âu hoặc châu Á",
+      "Một edge location của CloudFront cache nội dung gần người dùng"
     ],
     "optionsEn": [
-      "A single physical data center",
-      "One or more discrete data centers with independent power, cooling, and networking",
-      "A geographic area that contains multiple Regions",
-      "A CloudFront content cache point"
+      "A single physical data center shared by the whole Region",
+      "One or more discrete data centers with separate power and networking",
+      "A geographic area containing several Regions, such as Europe",
+      "A CloudFront edge location that caches content near users"
     ],
     "answer": 1,
     "explanation": "Một AZ gồm 1 HOẶC NHIỀU data center riêng biệt trong một Region, với nguồn điện/làm mát/mạng độc lập. Đây là fact hay bị hỏi trong SAA-C03.",
@@ -64,16 +64,16 @@
     "question": "Một công ty y tế ở Đức bắt buộc phải lưu dữ liệu bệnh nhân trong lãnh thổ EU theo GDPR. Yếu tố nào QUAN TRỌNG NHẤT khi chọn Region?",
     "questionEn": "A German healthcare company must store patient data within the EU under GDPR. Which factor is MOST important when choosing a Region?",
     "options": [
-      "Giá (Region rẻ nhất)",
-      "Compliance / data residency (vị trí pháp lý của dữ liệu)",
-      "Số lượng Edge Location",
-      "Băng thông Internet"
+      "Giá, vì Region rẻ nhất giúp giảm hóa đơn",
+      "Yêu cầu compliance và data residency",
+      "Số lượng Edge Location gần người dùng",
+      "Số lượng dịch vụ có sẵn trong Region"
     ],
     "optionsEn": [
-      "Price (the cheapest Region)",
-      "Compliance / data residency (the legal location of data)",
-      "The number of Edge Locations",
-      "Internet bandwidth"
+      "Price, since the cheapest Region lowers the bill",
+      "Compliance and data residency requirements",
+      "The number of Edge Locations near the users",
+      "The number of services offered in the Region"
     ],
     "answer": 1,
     "explanation": "Khi có yêu cầu pháp lý về nơi lưu dữ liệu (GDPR), compliance/data residency là yếu tố bắt buộc quyết định Region — phải chọn Region trong EU trước, rồi mới xét latency/giá.",
@@ -124,16 +124,16 @@
     "question": "Theo mô hình trách nhiệm chung (Shared Responsibility Model), khách hàng chịu trách nhiệm về điều gì?",
     "questionEn": "Under the Shared Responsibility Model, what is the customer responsible for?",
     "options": [
-      "Bảo mật vật lý của các data center",
-      "Bảo trì phần cứng máy chủ",
-      "Bảo mật dữ liệu, cấu hình IAM, patch OS và security group",
-      "Cung cấp điện và làm mát cho Region"
+      "Bảo mật vật lý data center và tầng hypervisor",
+      "Bảo trì phần cứng máy chủ và mạng backbone toàn cầu",
+      "Dữ liệu, cấu hình IAM, vá guest OS và security group",
+      "Điện, làm mát và vá database engine của RDS"
     ],
     "optionsEn": [
-      "Physical security of the data centers",
-      "Server hardware maintenance",
-      "Securing data, IAM configuration, OS patching, and security groups",
-      "Providing power and cooling for the Region"
+      "Physical security of data centers and the hypervisor layer",
+      "Server hardware maintenance and the global network backbone",
+      "Data, IAM configuration, guest OS patching, and security groups",
+      "Power, cooling, and patching the managed RDS database engine"
     ],
     "answer": 2,
     "explanation": "Khách hàng lo bảo mật 'IN the cloud': dữ liệu, IAM, patch OS, mã hóa, security group. AWS lo 'OF the cloud': hạ tầng vật lý, phần cứng, ảo hóa.",
@@ -144,16 +144,16 @@
     "question": "Để đạt tính sẵn sàng cao (high availability) cho một ứng dụng web trong một Region, cách chuẩn là gì?",
     "questionEn": "To achieve high availability for a web application within a Region, what is the standard approach?",
     "options": [
-      "Chạy tất cả instance trong một AZ duy nhất",
-      "Triển khai instance trên nhiều Availability Zone (Multi-AZ)",
-      "Chỉ dùng Edge Location",
-      "Tắt bớt instance để tiết kiệm chi phí"
+      "Chạy mọi instance trong một AZ để giảm độ trễ",
+      "Phân bổ instance trên nhiều Availability Zone",
+      "Chỉ phục vụ ứng dụng từ các Edge Location",
+      "Dùng một instance cỡ lớn hơn trong một subnet"
     ],
     "optionsEn": [
-      "Run all instances in a single AZ",
-      "Deploy instances across multiple Availability Zones (Multi-AZ)",
-      "Use only Edge Locations",
-      "Shut down instances to save cost"
+      "Run all instances in one AZ to minimize latency",
+      "Spread instances across multiple Availability Zones",
+      "Serve the application from Edge Locations only",
+      "Use one larger instance type in a single subnet"
     ],
     "answer": 1,
     "explanation": "Multi-AZ là chuẩn cho high availability: nếu một AZ hỏng, instance ở AZ khác vẫn phục vụ. Các AZ được cách ly lỗi vật lý nhưng kết nối độ trễ thấp.",
@@ -164,16 +164,16 @@
     "question": "Lệnh nào dùng để cấu hình AWS CLI với Access Key, Secret Key và Region?",
     "questionEn": "Which command is used to configure the AWS CLI with Access Key, Secret Key, and Region?",
     "options": [
-      "aws login",
+      "aws credentials",
       "aws configure",
-      "aws init",
-      "aws setup"
+      "aws init-profile",
+      "aws setup-keys"
     ],
     "optionsEn": [
-      "aws login",
+      "aws credentials",
       "aws configure",
-      "aws init",
-      "aws setup"
+      "aws init-profile",
+      "aws setup-keys"
     ],
     "answer": 1,
     "explanation": "`aws configure` yêu cầu nhập Access Key ID, Secret Access Key, Region mặc định và định dạng output. CLI và SDK dùng Access Key để xác thực, không dùng mật khẩu console.",
@@ -187,13 +187,13 @@
       "Reserved Instances trả trước 3 năm",
       "AWS Free Tier",
       "Dedicated Hosts",
-      "Mua trọn một Region"
+      "Savings Plans cam kết 1 năm"
     ],
     "optionsEn": [
       "3-year prepaid Reserved Instances",
       "AWS Free Tier",
       "Dedicated Hosts",
-      "Purchasing an entire Region"
+      "Savings Plans with a 1-year commitment"
     ],
     "answer": 1,
     "explanation": "AWS Free Tier gồm gói 12 tháng miễn phí (EC2 t2.micro 750 giờ/tháng, S3 5GB) và Always Free — phù hợp để học và thử nghiệm với chi phí thấp nhất.",
@@ -204,16 +204,16 @@
     "question": "Khẳng định nào ĐÚNG về mối quan hệ giữa Region và dữ liệu?",
     "questionEn": "Which statement is TRUE about the relationship between Regions and data?",
     "options": [
-      "Dữ liệu tự động sao chép giữa tất cả các Region",
-      "Region độc lập; dữ liệu không tự sao chép giữa Region trừ khi được cấu hình",
-      "Mọi Region chia sẻ chung một tập dữ liệu",
-      "Xóa dữ liệu ở một Region sẽ xóa ở mọi Region"
+      "Dữ liệu tự động sao chép sang mọi Region để tăng độ bền",
+      "Region độc lập; dữ liệu chỉ sao chép khi bạn cấu hình replication",
+      "Mọi Region dùng chung một tập dữ liệu qua backbone của AWS",
+      "Xóa dữ liệu ở một Region cũng xóa bản sao ở mọi Region khác"
     ],
     "optionsEn": [
-      "Data is automatically replicated across all Regions",
-      "Regions are independent; data is not auto-replicated between Regions unless configured",
-      "All Regions share one common dataset",
-      "Deleting data in one Region deletes it in every Region"
+      "Data is automatically replicated to every Region for durability",
+      "Regions are isolated; data stays put unless you set up replication",
+      "All Regions share one dataset over the AWS global backbone",
+      "Deleting data in one Region also deletes its copies everywhere"
     ],
     "answer": 1,
     "explanation": "Các Region độc lập và cách ly. Dữ liệu KHÔNG tự sao chép giữa các Region — bạn phải chủ động bật cross-Region replication (ví dụ S3 CRR) nếu cần.",
@@ -227,13 +227,13 @@
       "Management Console",
       "AWS SDK (ví dụ boto3)",
       "Chỉ dùng CLI thủ công",
-      "Không thể làm bằng code"
+      "AWS CloudShell trên trình duyệt"
     ],
     "optionsEn": [
       "The Management Console",
       "The AWS SDK (e.g., boto3)",
       "The CLI manually only",
-      "It cannot be done in code"
+      "AWS CloudShell in the browser"
     ],
     "answer": 1,
     "explanation": "SDK là thư viện lập trình (boto3 cho Python) để gọi AWS API từ trong ứng dụng. Console dùng cho thao tác thủ công qua web; SDK phù hợp cho tự động hóa trong code.",
@@ -244,16 +244,16 @@
     "question": "Lợi ích 'Stop guessing capacity' (không phải đoán dung lượng) của cloud có nghĩa là gì?",
     "questionEn": "What does the cloud advantage 'stop guessing capacity' mean?",
     "options": [
-      "Luôn phải mua thừa server để dự phòng",
-      "Scale tài nguyên lên/xuống theo nhu cầu thực, tránh thừa hoặc thiếu",
-      "Không bao giờ cần thêm tài nguyên",
-      "AWS tự động chọn Region cho bạn"
+      "Mua dư server từ đầu để làm vùng đệm an toàn",
+      "Scale tài nguyên lên/xuống theo nhu cầu thực tế",
+      "Mua dung lượng cố định một lần, không bao giờ phải đổi",
+      "Để AWS tự chọn loại instance và Region cho bạn"
     ],
     "optionsEn": [
-      "Always over-provision servers as a buffer",
-      "Scale resources up/down to match real demand, avoiding excess or shortage",
-      "You never need to add resources",
-      "AWS automatically chooses the Region for you"
+      "Over-provision servers up front as a safety buffer",
+      "Scale resources up or down to match actual demand",
+      "Buy fixed capacity once so it never needs changing",
+      "Let AWS pick the instance type and Region for you"
     ],
     "answer": 1,
     "explanation": "Trên on-premises bạn phải đoán trước dung lượng (thừa thì lãng phí, thiếu thì nghẽn). Cloud cho phép scale linh hoạt theo nhu cầu thực tế, chỉ trả cho phần dùng.",
@@ -264,16 +264,16 @@
     "question": "Khẳng định nào ĐÚNG về một Amazon S3 bucket?",
     "questionEn": "Which statement is TRUE about an Amazon S3 bucket?",
     "options": [
-      "Tên bucket chỉ cần duy nhất trong một Region",
-      "Tên bucket là duy nhất toàn cầu, nhưng dữ liệu được lưu trong một Region cụ thể",
-      "S3 là dịch vụ global và dữ liệu nằm ở mọi Region",
-      "S3 bucket không thuộc Region nào"
+      "Tên bucket chỉ cần duy nhất trong Region nơi nó được tạo",
+      "Tên bucket duy nhất toàn cầu, nhưng dữ liệu nằm ở một Region",
+      "S3 là dịch vụ global nên dữ liệu được sao chép tới mọi Region",
+      "Bucket không thuộc Region nào; object được lưu ở edge location"
     ],
     "optionsEn": [
-      "The bucket name only needs to be unique within a Region",
-      "The bucket name is globally unique, but the data is stored in a specific Region",
-      "S3 is a global service and data lives in every Region",
-      "An S3 bucket does not belong to any Region"
+      "Its name only has to be unique within its own Region",
+      "Its name is globally unique, but its data lives in one Region",
+      "S3 is a global service, so data is copied to every Region",
+      "A bucket has no Region; objects are stored at edge locations"
     ],
     "answer": 1,
     "explanation": "Tên S3 bucket phải duy nhất trên TOÀN CẦU, nhưng dữ liệu thực tế được lưu trong Region bạn chọn khi tạo bucket. Đây là điểm dễ nhầm giữa 'global namespace' và 'Region-scoped data'.",
@@ -284,16 +284,16 @@
     "question": "Trong mô hình SaaS, khách hàng chịu trách nhiệm quản lý phần nào?",
     "questionEn": "In the SaaS model, what is the customer responsible for managing?",
     "options": [
-      "Chỉ dữ liệu của mình và cấu hình người dùng bên trong ứng dụng",
-      "Hệ điều hành và runtime của ứng dụng",
-      "Tầng ảo hóa và máy chủ vật lý",
-      "Hạ tầng mạng và storage"
+      "Dữ liệu và cấu hình người dùng của mình trong ứng dụng",
+      "Hệ điều hành và runtime mà ứng dụng chạy trên đó",
+      "Tầng ảo hóa và các máy chủ vật lý bên dưới",
+      "Mạng, storage và việc scale ứng dụng"
     ],
     "optionsEn": [
-      "Only their own data and user configuration inside the application",
+      "Their own data and user settings within the app",
       "The operating system and the application runtime",
-      "The virtualization layer and physical servers",
-      "Networking and storage infrastructure"
+      "The virtualization layer and the physical servers",
+      "Networking, storage, and scaling of the app"
     ],
     "answer": 0,
     "explanation": "SaaS: nhà cung cấp quản lý toàn bộ từ hạ tầng lên tới ứng dụng. Khách hàng chỉ quản lý dữ liệu và cách sử dụng (ví dụ Gmail, Salesforce).",

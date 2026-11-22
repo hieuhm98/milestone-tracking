@@ -104,16 +104,16 @@
     "question": "Để căn giữa một div theo cả chiều ngang lẫn chiều dọc trong viewport, cách đơn giản nhất với Flexbox là gì?",
     "questionEn": "To center a div both horizontally and vertically within the viewport, what is the simplest approach with Flexbox?",
     "options": [
-      "margin: auto trên div đó",
-      "text-align: center và vertical-align: middle",
+      "display: block; margin: 0 auto; text-align: center trên div con",
+      "text-align: center; vertical-align: middle; line-height: 100% trên container",
       "display: flex; justify-content: center; align-items: center trên container",
-      "position: absolute; top: 50%; left: 50%"
+      "display: flex; flex-direction: column; text-align: center trên container"
     ],
     "optionsEn": [
-      "margin: auto on that div",
-      "text-align: center and vertical-align: middle",
+      "display: block; margin: 0 auto; text-align: center on the child div",
+      "text-align: center; vertical-align: middle; line-height: 100% on the container",
       "display: flex; justify-content: center; align-items: center on the container",
-      "position: absolute; top: 50%; left: 50%"
+      "display: flex; flex-direction: column; text-align: center on the container"
     ],
     "answer": 2,
     "explanation": "Áp dụng display: flex; justify-content: center; align-items: center lên container là cách đơn giản và phổ biến nhất để căn giữa hoàn hảo. Nhiều dev dùng body { display: flex; min-height: 100vh; }.",
@@ -144,15 +144,15 @@
     "question": "Sự khác biệt giữa display: none và visibility: hidden là gì?",
     "questionEn": "What is the difference between display: none and visibility: hidden?",
     "options": [
-      "Không có sự khác biệt",
-      "display: none ẩn nhưng vẫn chiếm không gian, visibility: hidden không chiếm không gian",
-      "display: none ẩn hoàn toàn và không chiếm không gian, visibility: hidden ẩn nhưng vẫn chiếm không gian",
+      "Không có khác biệt, chỉ là hai cách viết",
+      "display: none ẩn nhưng giữ chỗ; visibility: hidden ẩn và bỏ luôn chỗ trống",
+      "display: none ẩn và bỏ luôn chỗ trống; visibility: hidden ẩn nhưng giữ chỗ",
       "display: none chỉ ẩn nội dung, visibility: hidden ẩn cả element"
     ],
     "optionsEn": [
-      "There is no difference",
-      "display: none hides but still takes up space, visibility: hidden takes up no space",
-      "display: none hides completely and takes up no space, visibility: hidden hides but still takes up space",
+      "No difference, just two ways to write it",
+      "display: none hides but keeps the space; visibility: hidden hides and frees it",
+      "display: none hides and frees the space; visibility: hidden hides but keeps it",
       "display: none only hides the content, visibility: hidden hides the whole element"
     ],
     "answer": 2,
@@ -185,15 +185,15 @@
     "questionEn": "In CSS Grid, what unit is fr?",
     "options": [
       "Frame — đơn vị chiều rộng cố định",
-      "Fraction — phần chia của không gian còn lại",
-      "Flex ratio — tỷ lệ flex",
-      "Full — 100% của container"
+      "Fraction — một phần không gian còn lại",
+      "Flex ratio — tỷ lệ co giãn kiểu flex",
+      "Full — luôn bằng 100% của container"
     ],
     "optionsEn": [
-      "Frame — a fixed width unit",
-      "Fraction — a share of the remaining space",
-      "Flex ratio — a flex proportion",
-      "Full — 100% of the container"
+      "Frame — a fixed-width unit of measure",
+      "Fraction — a share of the free space",
+      "Flex ratio — a flex-style stretch factor",
+      "Full — always 100% of the container"
     ],
     "answer": 1,
     "explanation": "fr (fraction) là đơn vị chia phần không gian còn lại. grid-template-columns: 1fr 2fr 1fr tạo 3 cột với tỷ lệ 1:2:1 — cột giữa rộng gấp đôi hai cột còn lại.",
@@ -206,13 +206,13 @@
     "options": [
       "Giống position: fixed — luôn cố định theo viewport",
       "Giống position: relative — theo luồng bình thường",
-      "Hoạt động như relative cho đến khi scroll đến ngưỡng, sau đó thành fixed",
+      "Như relative, tới ngưỡng cuộn thì dính lại như fixed",
       "Dán phần tử vào góc trên bên trái màn hình"
     ],
     "optionsEn": [
       "Like position: fixed — always fixed to the viewport",
       "Like position: relative — follows the normal flow",
-      "Behaves like relative until scrolling reaches a threshold, then becomes fixed",
+      "Like relative until a scroll threshold, then like fixed",
       "Sticks the element to the top-left corner of the screen"
     ],
     "answer": 2,
@@ -225,14 +225,14 @@
     "questionEn": "What is the rem unit in CSS relative to?",
     "options": [
       "Kích thước font của phần tử cha (parent)",
-      "Kích thước font của phần tử gốc (root — thường là <html>)",
-      "Chiều rộng của viewport",
+      "Kích thước font của phần tử gốc (<html>)",
+      "Chiều rộng của viewport trình duyệt",
       "Chiều rộng của phần tử hiện tại"
     ],
     "optionsEn": [
       "The font size of the parent element",
-      "The font size of the root element (root — usually <html>)",
-      "The width of the viewport",
+      "The font size of the root element (<html>)",
+      "The width of the browser viewport",
       "The width of the current element"
     ],
     "answer": 1,
@@ -264,14 +264,14 @@
     "question": "Thuộc tính transition: all 0.3s ease dùng để làm gì?",
     "questionEn": "What is the property transition: all 0.3s ease used for?",
     "options": [
-      "Tạo animation lặp lại vô hạn",
-      "Tạo chuyển đổi mượt mà khi CSS properties thay đổi",
+      "Tạo animation lặp lại vô hạn liên tục",
+      "Chuyển đổi mượt khi giá trị CSS thay đổi",
       "Di chuyển phần tử đến vị trí khác",
       "Thay đổi thứ tự hiển thị của phần tử"
     ],
     "optionsEn": [
       "Creates an infinitely repeating animation",
-      "Creates a smooth transition when CSS properties change",
+      "Smooth change when CSS properties change",
       "Moves the element to a different position",
       "Changes the display order of the element"
     ],
@@ -284,15 +284,15 @@
     "question": "Khi nào nên dùng CSS Grid thay vì Flexbox?",
     "questionEn": "When should you use CSS Grid instead of Flexbox?",
     "options": [
-      "Grid luôn tốt hơn Flexbox trong mọi trường hợp",
-      "Grid khi cần layout 2 chiều (hàng VÀ cột), Flexbox khi 1 chiều",
-      "Flexbox luôn tốt hơn Grid",
+      "Grid khi có ít phần tử, Flexbox khi có nhiều phần tử",
+      "Grid cho bố cục 2 chiều, Flexbox cho 1 chiều",
+      "Flexbox cho bố cục 2 chiều, Grid cho 1 chiều",
       "Grid chỉ dùng được trên desktop, Flexbox dùng được trên mobile"
     ],
     "optionsEn": [
-      "Grid is always better than Flexbox in every case",
-      "Grid when you need a two-dimensional layout (rows AND columns), Flexbox when one-dimensional",
-      "Flexbox is always better than Grid",
+      "Grid for few items, Flexbox for many items",
+      "Grid for 2D layouts, Flexbox for 1D",
+      "Flexbox for 2D layouts, Grid for 1D",
       "Grid only works on desktop, Flexbox only works on mobile"
     ],
     "answer": 1,
@@ -303,16 +303,16 @@
     "question": "Yêu cầu giao diện phải hiển thị tốt trên điện thoại liên quan trực tiếp tới khái niệm CSS nào?",
     "questionEn": "A requirement that the interface must display well on phones relates directly to which CSS concept?",
     "options": [
-      "Responsive design với media query và bố cục linh hoạt",
+      "Responsive design (media query)",
       "Transitions và animations",
-      "Typography",
-      "Specificity"
+      "Typography và font chữ",
+      "Specificity của selector"
     ],
     "optionsEn": [
-      "Responsive design with media queries and flexible layout",
-      "Transitions and animations",
-      "Typography",
-      "Specificity"
+      "Responsive design (media queries)",
+      "CSS transitions and animations",
+      "Typography and fonts",
+      "Selector specificity"
     ],
     "answer": 0,
     "explanation": "BA nên nêu rõ các điểm ngắt (breakpoint) và hành vi mong đợi ở mỗi kích thước màn hình, thay vì chỉ nói hiển thị tốt.",
@@ -343,16 +343,16 @@
     "question": "Hai quy tắc CSS cùng nhắm một phần tử nhưng khác nhau. Cái nào thắng?",
     "questionEn": "Two CSS rules target the same element differently. Which wins?",
     "options": [
-      "Quy tắc có specificity cao hơn; nếu bằng nhau thì quy tắc viết sau thắng",
-      "Quy tắc viết trước luôn thắng",
-      "Quy tắc ngắn hơn thắng",
-      "Cả hai đều bị bỏ qua"
+      "Specificity cao hơn; bằng nhau thì quy tắc viết sau",
+      "Quy tắc viết trước thắng nếu cùng selector",
+      "Quy tắc ngắn hơn, ít thuộc tính hơn thắng",
+      "Cả hai bị bỏ qua, dùng giá trị mặc định"
     ],
     "optionsEn": [
-      "The rule with higher specificity; if equal, the one declared later wins",
-      "The earlier rule always wins",
-      "The shorter rule wins",
-      "Both are ignored"
+      "Higher specificity; if tied, the later rule",
+      "The earlier rule wins when selectors match",
+      "The shorter rule with fewer properties wins",
+      "Both are ignored and defaults are used"
     ],
     "answer": 0,
     "explanation": "Đây là nguyên nhân của rất nhiều bug giao diện khó hiểu: kiểu đã viết đúng nhưng bị một quy tắc khác có specificity cao hơn ghi đè.",
@@ -363,16 +363,16 @@
     "question": "Flexbox và Grid khác nhau ở điểm nào?",
     "questionEn": "How do Flexbox and Grid differ?",
     "options": [
-      "Flexbox bố trí theo một chiều (hàng hoặc cột); Grid bố trí theo hai chiều đồng thời",
-      "Flexbox chỉ chạy trên điện thoại",
-      "Grid không hỗ trợ responsive",
-      "Hai công nghệ hoàn toàn tương đương"
+      "Flexbox bố trí một chiều; Grid bố trí hai chiều",
+      "Flexbox chỉ chạy trên trình duyệt điện thoại",
+      "Grid không hỗ trợ bố cục responsive",
+      "Grid bố trí một chiều; Flexbox bố trí hai chiều"
     ],
     "optionsEn": [
-      "Flexbox lays out in one dimension (row or column); Grid lays out in two dimensions at once",
-      "Flexbox only works on phones",
+      "Flexbox lays out in one dimension; Grid in two",
+      "Flexbox only works in mobile browsers",
       "Grid does not support responsive layouts",
-      "They are entirely equivalent"
+      "Grid lays out in one dimension; Flexbox in two"
     ],
     "answer": 0,
     "explanation": "Thanh điều hướng hay hàng nút hợp với Flexbox; bố cục trang nhiều vùng như dashboard hợp với Grid.",
@@ -383,15 +383,15 @@
     "question": "Khi góp ý thiết kế, cách diễn đạt nào hữu ích nhất cho lập trình viên?",
     "questionEn": "When giving design feedback, which phrasing helps developers most?",
     "options": [
-      "Nêu vấn đề quan sát được và bối cảnh, ví dụ nút Lưu bị đẩy xuống dưới màn hình khi cửa sổ hẹp hơn 768px",
+      "Nêu vấn đề thấy được và bối cảnh xảy ra",
       "Nói chung chung là giao diện nhìn chưa đẹp",
       "Chỉ gửi ảnh chụp màn hình không kèm mô tả",
       "Đề xuất trực tiếp giá trị CSS cần sửa"
     ],
     "optionsEn": [
-      "State the observable problem and its context, e.g. the Save button drops below the fold under 768px width",
+      "State the visible problem and when it happens",
       "Say generally that the interface does not look nice",
-      "Send a screenshot with no description",
+      "Send only a screenshot with no description",
       "Prescribe the exact CSS value to change"
     ],
     "answer": 0,

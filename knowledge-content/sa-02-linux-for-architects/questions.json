@@ -4,16 +4,16 @@
     "question": "`ps` cho thấy hàng trăm tiến trình ở trạng thái `Z`, tất cả có cùng một PPID là worker manager của ứng dụng. Cách xử lý đúng là gì?",
     "questionEn": "`ps` shows hundreds of processes in state `Z`, all with the same PPID — the application's worker manager. What is the right way to deal with them?",
     "options": [
-      "Chạy `kill -9` lên từng PID zombie để giải phóng chúng",
-      "Tăng RAM cho máy vì zombie đang chiếm nhiều bộ nhớ",
-      "Sửa (hoặc restart) tiến trình cha vì nó không gọi `wait()` cho con",
-      "Tăng `ulimit -n` để có thêm chỗ cho tiến trình mới"
+      "Chạy `kill -9` lên từng PID zombie để buộc kernel thu hồi chúng ngay lập tức",
+      "Tăng RAM cho máy vì mỗi zombie vẫn giữ toàn bộ bộ nhớ của nó",
+      "Sửa hoặc restart tiến trình cha vì nó không gọi `wait()` cho con",
+      "Tăng `ulimit -n` để kernel có thêm chỗ cho các tiến trình con mới"
     ],
     "optionsEn": [
-      "Run `kill -9` on each zombie PID to release them",
-      "Add RAM, because the zombies are holding a lot of memory",
-      "Fix (or restart) the parent, because it never calls `wait()` on its children",
-      "Raise `ulimit -n` to make room for new processes"
+      "Run `kill -9` on each zombie PID to force the kernel to reap them right away",
+      "Add RAM, because every zombie still holds all of its memory allocation",
+      "Fix or restart the parent, since it never calls `wait()` on its children",
+      "Raise `ulimit -n` so the kernel has room for new child processes"
     ],
     "answer": 2,
     "explanation": "Zombie đã chết rồi nên không kill được và gần như không giữ bộ nhớ — nó chỉ chiếm một ô trong bảng tiến trình chờ cha đọc exit status. Nguyên nhân là tiến trình cha không gọi `wait()`; sửa cha, hoặc kill cha để PID 1 nhận nuôi và dọn các zombie.",
@@ -25,15 +25,15 @@
     "questionEn": "A container keeps terminating with exit code 137. The application log stops abruptly with no shutdown message. What is the most likely explanation?",
     "options": [
       "Tiến trình bị `SIGKILL` — thường do OOM killer hoặc hết grace period",
-      "Ứng dụng nhận `SIGTERM` và tự thoát sạch sẽ",
-      "Ứng dụng bị lỗi segmentation fault khi truy cập bộ nhớ",
-      "Lệnh khởi động của container không tìm thấy file thực thi"
+      "Ứng dụng nhận `SIGTERM` và tự thoát sạch sẽ sau khi xử lý xong request",
+      "Ứng dụng bị segmentation fault (`SIGSEGV`) khi truy cập vùng nhớ không hợp lệ trong thư viện native",
+      "Lệnh khởi động của container không tìm thấy file thực thi trong image"
     ],
     "optionsEn": [
       "The process received `SIGKILL` — usually the OOM killer or an expired grace period",
-      "The application received `SIGTERM` and exited cleanly on its own",
-      "The application hit a segmentation fault while accessing memory",
-      "The container's start command could not find its executable"
+      "The application received `SIGTERM` and exited cleanly after draining requests",
+      "The application hit a segmentation fault (`SIGSEGV`) on an invalid memory access in native code",
+      "The container's start command could not find its executable in the image"
     ],
     "answer": 0,
     "explanation": "Exit code khi chết vì signal là 128 + số hiệu signal: 137 = 128 + 9 (SIGKILL). SIGKILL không bắt được nên ứng dụng không kịp ghi log. SIGTERM cho 143, segfault (SIGSEGV) cho 139, còn 'command not found' là 127.",
@@ -64,16 +64,16 @@
     "question": "Một dịch vụ lưu session thành file nhỏ bắt đầu báo lỗi \"No space left on device\", nhưng `df -h` cho thấy phân vùng mới dùng 40 %. Khả năng cao nhất là gì?",
     "questionEn": "A service that stores sessions as small files starts failing with \"No space left on device\", yet `df -h` shows the partition only 40 % used. What is most likely?",
     "options": [
-      "RAM đã đầy nên kernel không ghi được file mới",
-      "Filesystem đã hết inode do có hàng triệu file nhỏ — kiểm tra bằng `df -i`",
-      "Thư mục session thiếu quyền `w` cho user của dịch vụ",
-      "Thư mục `/proc` đã đầy và chặn mọi thao tác ghi"
+      "RAM đã đầy nên kernel không còn page cache để ghi file mới xuống đĩa",
+      "Filesystem hết inode vì hàng triệu file nhỏ — kiểm tra bằng `df -i`",
+      "Thư mục session mất quyền `w` cho user của dịch vụ sau lần deploy gần nhất",
+      "Thư mục `/proc` đã đầy và kernel chặn mọi thao tác ghi trên phân vùng"
     ],
     "optionsEn": [
-      "RAM is full, so the kernel cannot write new files",
-      "The filesystem ran out of inodes because of millions of small files — check with `df -i`",
-      "The session directory lacks `w` permission for the service user",
-      "The `/proc` directory is full and blocks every write"
+      "RAM is full, so the kernel has no page cache left to write new files to disk",
+      "The filesystem ran out of inodes from millions of small files — check `df -i`",
+      "The session directory lost `w` permission for the service user in the last deploy",
+      "The `/proc` directory is full, so the kernel blocks every write on the partition"
     ],
     "answer": 1,
     "explanation": "Mỗi file cần một inode, và số inode của filesystem là cố định. Hàng triệu file nhỏ có thể dùng hết inode trong khi dung lượng còn nhiều; `df -i` sẽ báo 100 %. Thiếu quyền cho lỗi 'Permission denied' chứ không phải 'No space left', còn `/proc` là filesystem ảo không chiếm đĩa.",
@@ -127,7 +127,7 @@
       "Khởi động lại dịch vụ sau 5 giây",
       "Khởi động lại dịch vụ ngay lập tức, bỏ qua `RestartSec`",
       "Đánh dấu dịch vụ là `failed` vì tiến trình chính đã thoát",
-      "Không khởi động lại — thoát với code 0 không được coi là lỗi"
+      "Không restart — thoát với code 0 không được coi là lỗi"
     ],
     "optionsEn": [
       "Restart the service after 5 seconds",
@@ -144,15 +144,15 @@
     "question": "Kỹ sư cài một dịch vụ mới trên EC2, chạy `sudo systemctl start orders-api` và kiểm tra thấy hoạt động tốt. Sau lần bảo trì có reboot, dịch vụ không chạy; `systemctl status` báo `inactive (dead)` và `disabled`. Cách sửa đúng?",
     "questionEn": "An engineer installs a new service on EC2, runs `sudo systemctl start orders-api`, and confirms it works. After a maintenance reboot the service is not running; `systemctl status` shows `inactive (dead)` and `disabled`. What is the right fix?",
     "options": [
-      "Chạy `systemctl daemon-reload` để systemd nhớ dịch vụ",
+      "Chạy `systemctl daemon-reload` để systemd nhớ dịch vụ orders-api",
       "Chạy `systemctl enable --now orders-api` để dịch vụ chạy cả lúc boot",
-      "Thêm `Restart=always` vào unit để nó tự khởi động sau reboot",
+      "Thêm `Restart=always` vào unit orders-api để nó tự khởi động sau reboot",
       "Thêm lệnh start vào `~/.bashrc` của user quản trị"
     ],
     "optionsEn": [
-      "Run `systemctl daemon-reload` so systemd remembers the service",
+      "Run `systemctl daemon-reload` so systemd remembers orders-api",
       "Run `systemctl enable --now orders-api` so it also starts at boot",
-      "Add `Restart=always` to the unit so it comes back after a reboot",
+      "Add `Restart=always` to the orders-api unit so it comes back after a reboot",
       "Add the start command to the admin user's `~/.bashrc`"
     ],
     "answer": 1,
@@ -164,13 +164,13 @@
     "question": "Lệnh nào hiển thị các log mức error trở lên của dịch vụ systemd `orders-api` trong một giờ qua?",
     "questionEn": "Which command shows error-level (and more severe) logs from the systemd service `orders-api` for the last hour?",
     "options": [
-      "`systemctl logs orders-api --last 1h --level error`",
+      "`systemctl logs orders-api --last 1h --level error --no-pager`",
       "`dmesg -u orders-api --since 1h`",
       "`journalctl -u orders-api --since \"1 hour ago\" -p err`",
       "`tail -f /var/log/orders-api --errors`"
     ],
     "optionsEn": [
-      "`systemctl logs orders-api --last 1h --level error`",
+      "`systemctl logs orders-api --last 1h --level error --no-pager`",
       "`dmesg -u orders-api --since 1h`",
       "`journalctl -u orders-api --since \"1 hour ago\" -p err`",
       "`tail -f /var/log/orders-api --errors`"
@@ -184,16 +184,16 @@
     "question": "Auto Scaling group chạy `apt-get install -y nginx nodejs` trong user data mỗi khi scale-out. Một hôm instance mới hoạt động khác instance cũ vì repository đã có phiên bản mới. Hướng xử lý tốt nhất về mặt kiến trúc?",
     "questionEn": "An Auto Scaling group runs `apt-get install -y nginx nodejs` in user data on every scale-out. One day new instances behave differently from old ones because the repository shipped newer versions. What is the best architectural fix?",
     "options": [
-      "Đóng image (AMI) có phiên bản gói cố định, deploy image đó, và build lại định kỳ để vá lỗi",
-      "Tắt vĩnh viễn mọi bản cập nhật gói để phiên bản không bao giờ thay đổi",
-      "Chuyển sang base Alpine vì `apk` không bao giờ đổi phiên bản",
+      "Đóng AMI với phiên bản gói cố định, deploy image đó và build lại định kỳ",
+      "Tắt vĩnh viễn mọi bản cập nhật gói trên instance để phiên bản không thay đổi",
+      "Chuyển sang base Alpine vì repository `apk` giữ phiên bản ổn định lâu hơn",
       "Cho mọi instance cũ chạy `apt-get upgrade` mỗi giờ để luôn giống instance mới"
     ],
     "optionsEn": [
-      "Bake an AMI with pinned package versions, deploy that image, and rebuild it regularly for patches",
-      "Disable all package updates permanently so versions never change",
-      "Switch to an Alpine base because `apk` never changes versions",
-      "Have every old instance run `apt-get upgrade` hourly to match new ones"
+      "Bake an AMI with pinned package versions, deploy it, and rebuild it regularly",
+      "Permanently disable package updates on every instance so versions stay fixed",
+      "Switch to an Alpine base because the `apk` repositories keep versions stable longer",
+      "Have every old instance run `apt-get upgrade` hourly so it matches the new ones"
     ],
     "answer": 0,
     "explanation": "Cài 'bản mới nhất' lúc boot khiến fleet không tái lập được. Image đóng sẵn biến cấu hình thành một artifact có phiên bản, giống hệt nhau trên mọi instance; build lại định kỳ giữ được việc vá bảo mật. Tắt cập nhật vĩnh viễn để lại lỗ hổng, còn upgrade hàng giờ vẫn là thay đổi không kiểm soát trên production.",
@@ -224,16 +224,16 @@
     "question": "Hệ thống giám sát cảnh báo \"bộ nhớ gần đầy\" trên server 16 GB dựa vào cột `free`. Bạn thấy kết quả dưới. Đánh giá đúng là gì?\n`$ free -h\n        total  used  free   buff/cache  available\nMem:     15Gi  5.1Gi 312Mi     10Gi       9.9Gi`",
     "questionEn": "Monitoring raises \"memory almost full\" on a 16 GB server based on the `free` column. You see the output below. What is the correct assessment?\n`$ free -h\n        total  used  free   buff/cache  available\nMem:     15Gi  5.1Gi 312Mi     10Gi       9.9Gi`",
     "options": [
-      "Server sắp bị OOM — cần nâng lên instance lớn hơn ngay",
-      "Bình thường — phần lớn là page cache thu hồi được; nên cảnh báo theo cột `available`",
-      "Có rò rỉ bộ nhớ trong kernel vì buff/cache quá lớn",
-      "Cần chạy lệnh xoá cache định kỳ để giữ cột `free` luôn cao"
+      "Server sắp bị OOM vì cột `free` chỉ còn 312Mi — cần nâng instance ngay",
+      "Không sao — phần lớn là page cache thu hồi được; cảnh báo theo `available`",
+      "Có rò rỉ bộ nhớ trong kernel vì buff/cache đã lên tới 10Gi và vẫn tăng",
+      "Cần cron job ghi vào `drop_caches` định kỳ để giữ cột `free` luôn ở mức cao"
     ],
     "optionsEn": [
-      "The server is about to OOM — upgrade to a bigger instance now",
-      "It is healthy — most of it is reclaimable page cache; alert on `available` instead",
-      "There is a kernel memory leak, since buff/cache is so large",
-      "Schedule a job that drops caches so the `free` column stays high"
+      "The server is about to OOM since `free` shows only 312Mi — upgrade the instance now",
+      "Healthy — most of it is reclaimable page cache; alert on `available` instead",
+      "There is a kernel memory leak, since buff/cache has reached 10Gi and keeps growing",
+      "Schedule a cron job that writes to `drop_caches` so the `free` column stays high"
     ],
     "answer": 1,
     "explanation": "Linux dùng RAM nhàn rỗi làm page cache để tăng tốc đọc đĩa và trả lại ngay khi ứng dụng cần. Còn khoảng 9.9 GiB `available` nên server khoẻ. Xoá cache định kỳ chỉ làm I/O chậm hơn; cảnh báo nên dựa trên `available` (hoặc MemAvailable).",
@@ -264,16 +264,16 @@
     "question": "`df -h` báo phân vùng `/` 50 GB đã đầy 100 %, nhưng `du -sh /*` cộng lại chỉ khoảng 12 GB. Sáng nay có người chạy `rm` xoá một file log 38 GB của ứng dụng đang chạy. Chuyện gì đang xảy ra?",
     "questionEn": "`df -h` shows the 50 GB `/` partition 100 % full, but `du -sh /*` only adds up to about 12 GB. This morning someone ran `rm` on a 38 GB log file of a running application. What is going on?",
     "options": [
-      "Ứng dụng vẫn giữ file mở nên block chưa được giải phóng — tìm bằng `lsof +L1`, rồi restart hoặc truncate qua fd",
-      "Filesystem đã hết inode nên `df` báo đầy dù dữ liệu thực tế nhỏ",
-      "Filesystem bị hỏng sau lệnh `rm` và cần chạy `fsck` ngay",
-      "`du` không đếm file ẩn nên bỏ sót 38 GB dữ liệu"
+      "Ứng dụng vẫn mở file nên block chưa được giải phóng — tìm bằng `lsof +L1`",
+      "Filesystem đã hết inode nên `df` báo đầy dù dữ liệu thực tế chỉ có 12 GB",
+      "Filesystem bị hỏng metadata sau lệnh `rm` và cần unmount để chạy `fsck` ngay",
+      "`du` không đếm file ẩn (dotfile) nên bỏ sót 38 GB nằm trong các thư mục ẩn"
     ],
     "optionsEn": [
-      "The app still holds the file open, so its blocks are not freed — find it with `lsof +L1`, then restart or truncate via the fd",
-      "The filesystem is out of inodes, so `df` reports full although data is small",
-      "The filesystem was corrupted by the `rm` and needs `fsck` right away",
-      "`du` does not count hidden files, so it misses the 38 GB"
+      "The running app still holds the file open, so its blocks are not freed yet",
+      "The filesystem is out of inodes, so `df` reports full although only 12 GB is used",
+      "The `rm` corrupted filesystem metadata, so it must be unmounted for `fsck` right away",
+      "`du` skips hidden dotfiles, so it misses the 38 GB sitting in hidden directories"
     ],
     "answer": 0,
     "explanation": "`rm` chỉ xoá tên file; inode và dữ liệu còn đó cho tới khi file descriptor cuối cùng đóng. `du` duyệt theo tên nên không thấy, còn `df` đếm block đã cấp phát nên thấy. Hết inode sẽ hiện trong `df -i`, không làm `df -h` báo 100 %.",
@@ -284,16 +284,16 @@
     "question": "Một reverse proxy nginx bắt đầu ghi log dưới khi đạt khoảng 1 000 kết nối đồng thời. CPU và RAM vẫn thấp. Nguyên nhân gốc?\n`accept4() failed (24: Too many open files)`",
     "questionEn": "An nginx reverse proxy starts logging the line below at around 1,000 concurrent connections. CPU and RAM are still low. Root cause?\n`accept4() failed (24: Too many open files)`",
     "options": [
-      "Instance thiếu RAM nên kernel từ chối cấp bộ nhớ cho socket mới",
-      "Security group chưa mở đủ port cho số kết nối đó",
-      "Dải cổng ephemeral trên máy client đã bị dùng hết",
-      "Tiến trình chạm giới hạn file descriptor (`nofile`, thường 1024) — mỗi kết nối client và upstream tốn một fd"
+      "Instance thiếu RAM nên kernel từ chối cấp socket buffer cho kết nối mới",
+      "Security group chưa mở đủ port cho số lượng kết nối đồng thời đó",
+      "Dải cổng ephemeral trên máy client đã bị dùng hết ở mức 1 000 kết nối",
+      "Tiến trình chạm giới hạn `nofile` — mỗi kết nối tốn một file descriptor"
     ],
     "optionsEn": [
-      "The instance is short of RAM, so the kernel refuses memory for new sockets",
-      "The security group does not open enough ports for that many connections",
-      "The ephemeral port range on the client machines is exhausted",
-      "The process hit its file descriptor limit (`nofile`, often 1024) — every client and upstream connection costs an fd"
+      "The instance is short of RAM, so the kernel refuses socket buffers for new connections",
+      "The security group does not open enough ports for that many concurrent connections",
+      "The ephemeral port range on the client machines ran out at about 1,000 connections",
+      "The process hit its file descriptor limit (`nofile`) — each connection costs an fd"
     ],
     "answer": 3,
     "explanation": "Lỗi 24 là `EMFILE`: tiến trình đã dùng hết số fd được phép. Proxy tốn khoảng hai fd cho mỗi request (phía client và phía upstream), nên 1 000 kết nối nhanh chóng chạm soft limit 1024. Nâng `nofile` ở nơi dịch vụ khởi động (ví dụ `LimitNOFILE=` trong unit). Security group chỉ lọc theo port đích, không giới hạn số kết nối.",
@@ -304,16 +304,16 @@
     "question": "Kỹ sư thêm `* soft nofile 65536` vào `/etc/security/limits.conf`, SSH lại, thấy `ulimit -n` báo 65536, rồi chạy `systemctl restart orders-api`. Nhưng `/proc/<pid>/limits` của dịch vụ vẫn báo 1024. Vì sao?",
     "questionEn": "An engineer adds `* soft nofile 65536` to `/etc/security/limits.conf`, logs in again over SSH, sees `ulimit -n` report 65536, and runs `systemctl restart orders-api`. The service's `/proc/<pid>/limits` still shows 1024. Why?",
     "options": [
-      "Thay đổi trong `limits.conf` chỉ có hiệu lực sau khi reboot toàn bộ máy",
-      "`limits.conf` áp dụng cho phiên đăng nhập qua PAM; dịch vụ systemd lấy giới hạn từ `LimitNOFILE=` trong unit",
-      "Giá trị `fs.file-max` của hệ thống thấp hơn 65536 nên bị cắt về 1024",
-      "Soft limit không bao giờ được vượt quá 4096 trên Linux"
+      "Thay đổi trong `limits.conf` chỉ có hiệu lực sau khi reboot toàn bộ máy, không phải restart dịch vụ",
+      "`limits.conf` áp dụng cho phiên login qua PAM; dịch vụ systemd dùng `LimitNOFILE=` trong unit",
+      "Giá trị `fs.file-max` toàn hệ thống thấp hơn 65536 nên giới hạn tiến trình bị cắt về 1024",
+      "`ulimit -n` chỉ đổi shell hiện tại; phải chạy `sysctl -p` thì giới hạn mới áp dụng cho dịch vụ"
     ],
     "optionsEn": [
-      "Changes to `limits.conf` only take effect after a full reboot",
-      "`limits.conf` applies to PAM login sessions; systemd services take their limit from `LimitNOFILE=` in the unit",
-      "The system's `fs.file-max` is below 65536, so the value is clamped to 1024",
-      "A soft limit can never exceed 4096 on Linux"
+      "Changes to `limits.conf` only take effect after a full reboot, not after a service restart",
+      "`limits.conf` covers PAM login sessions; systemd services use `LimitNOFILE=` in the unit",
+      "The system-wide `fs.file-max` is below 65536, so the per-process value is clamped to 1024",
+      "`ulimit -n` only changes the current shell; `sysctl -p` must run to apply it to services"
     ],
     "answer": 1,
     "explanation": "Dịch vụ được systemd (PID 1) khởi động chứ không đi qua phiên đăng nhập, nên `pam_limits` và `limits.conf` không liên quan, kể cả sau reboot. Đặt `LimitNOFILE=65536` trong unit (hoặc drop-in qua `systemctl edit`), `daemon-reload` rồi restart.",
@@ -324,16 +324,16 @@
     "question": "Một container được đặt memory limit 512 MiB. Host còn trống 8 GB RAM, nhưng container vẫn bị kill với exit code 137 khi xử lý file lớn. Tính năng kernel nào đang thực thi giới hạn này?",
     "questionEn": "A container is given a 512 MiB memory limit. The host still has 8 GB of free RAM, yet the container is killed with exit code 137 while processing a large file. Which kernel feature is enforcing this?",
     "options": [
-      "cgroups — memory controller của cgroup kích hoạt OOM kill khi group vượt `memory.max`",
-      "Mount namespace — nó giới hạn dung lượng file container được đọc",
+      "cgroups — memory controller kích hoạt OOM kill khi group vượt `memory.max`",
+      "Mount namespace — nó giới hạn dung lượng file mà container được đọc vào bộ nhớ",
       "User namespace — nó ánh xạ root trong container thành user không có quyền",
-      "PID namespace — nó giới hạn số tiến trình và bộ nhớ của container"
+      "PID namespace — nó giới hạn số tiến trình và tổng bộ nhớ mà container được cấp"
     ],
     "optionsEn": [
-      "cgroups — the cgroup memory controller triggers an OOM kill when the group exceeds `memory.max`",
-      "The mount namespace — it limits how much file data the container can read",
+      "cgroups — the memory controller OOM-kills the group when it exceeds `memory.max`",
+      "The mount namespace — it caps how much file data the container may load into memory",
       "The user namespace — it maps root in the container to an unprivileged user",
-      "The PID namespace — it limits the container's process count and memory"
+      "The PID namespace — it limits the container's process count and its total memory"
     ],
     "answer": 0,
     "explanation": "Namespaces quyết định tiến trình **thấy** gì; cgroups quyết định nó **được dùng** bao nhiêu. Memory limit của container là giá trị trong cgroup, và khi group vượt giới hạn thì OOM killer chạy trong phạm vi group đó, bất kể host còn trống bao nhiêu.",
@@ -344,15 +344,15 @@
     "question": "Trong buổi review kiến trúc, reviewer bảo mật nói: \"Chạy dữ liệu của hai khách hàng trong hai container trên cùng host không cô lập bằng hai VM riêng.\" Lập luận nào ủng hộ nhận định đó chính xác nhất?",
     "questionEn": "In an architecture review, the security reviewer says: \"Running two customers' workloads in two containers on one host is not as isolated as two separate VMs.\" Which argument best supports that claim?",
     "options": [
-      "Container không thể có địa chỉ IP và network stack riêng",
-      "Container luôn chạy bằng root và không có cách nào đổi user",
-      "Container dùng chung kernel của host; namespaces chỉ đổi góc nhìn, nên lỗ hổng kernel có thể vượt ranh giới",
+      "Container không thể có địa chỉ IP và network stack riêng nên lưu lượng bị trộn lẫn",
+      "Container lưu dữ liệu trong một thư mục `/var/lib/docker` chung mà mọi container đều đọc được",
+      "Container dùng chung kernel của host; lỗ hổng kernel có thể vượt ranh giới namespace",
       "cgroups cho phép mọi container đọc bộ nhớ của container khác trên cùng host"
     ],
     "optionsEn": [
-      "Containers cannot have their own IP address and network stack",
-      "Containers always run as root and there is no way to change the user",
-      "Containers share the host kernel; namespaces only change the view, so a kernel exploit can cross the boundary",
+      "Containers cannot have their own IP address and network stack, so traffic gets mixed",
+      "Containers store data in one shared `/var/lib/docker` directory that every container can read",
+      "Containers share the host kernel, so a kernel exploit can cross the namespace boundary",
       "cgroups let any container read the memory of other containers on the same host"
     ],
     "answer": 2,

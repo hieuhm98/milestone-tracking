@@ -36,16 +36,16 @@
     "question": "Nếu xóa dòng `event.preventDefault()` trong `handleSubmit`, điều gì có khả năng xảy ra nhất khi bấm \"Log in\"?",
     "questionEn": "If you delete the line `event.preventDefault()` in `handleSubmit`, what is most likely to happen when you click \"Log in\"?",
     "options": [
-      "Không có gì thay đổi, React tự chặn submit mặc định",
-      "Server trả 400 vì body không phải JSON",
-      "Nút bị disable vĩnh viễn",
-      "Trình duyệt submit form theo kiểu cũ và tải lại cả trang, làm mất state React"
+      "Không có gì thay đổi, vì React tự chặn submit mặc định của form",
+      "Server trả 400 vì body gửi lên không phải là JSON hợp lệ",
+      "Nút Log in bị disable vĩnh viễn sau lần bấm đầu tiên",
+      "Trình duyệt submit kiểu cũ và tải lại cả trang, mất hết state"
     ],
     "optionsEn": [
-      "Nothing changes, React blocks the default submit on its own",
-      "The server answers 400 because the body is not JSON",
-      "The button stays disabled forever",
-      "The browser submits the old way and reloads the whole page, losing React state"
+      "Nothing changes, because React blocks the form's default submit itself",
+      "The server answers 400 because the body is not valid JSON",
+      "The Log in button stays disabled forever after the first click",
+      "The browser submits the old way and reloads the page, losing state"
     ],
     "answer": 3,
     "explanation": "Hành vi mặc định của form là gửi dữ liệu và tải một trang mới. `preventDefault()` hủy hành vi đó để JavaScript gửi request ở nền mà trang vẫn giữ nguyên.",
@@ -68,16 +68,16 @@
     "question": "Form đăng ký đã kiểm tra \"mật khẩu ≥ 8 ký tự\". Vì sao server trong `routes/auth.js` vẫn kiểm tra lại?",
     "questionEn": "The sign-up form already checks \"password ≥ 8 characters\". Why does the server in `routes/auth.js` check it again?",
     "options": [
-      "Vì ai cũng có thể bỏ qua form và gọi API trực tiếp, nên chỉ server mới đáng tin",
+      "Vì ai cũng có thể bỏ qua form và gọi API trực tiếp",
       "Vì React đôi khi quên chạy các lệnh `if` trong handler",
       "Vì trình duyệt cắt ngắn mật khẩu trước khi gửi",
-      "Vì kiểm tra hai lần giúp trang tải nhanh hơn"
+      "Vì kiểm tra hai lần giúp trang đăng ký tải nhanh hơn"
     ],
     "optionsEn": [
-      "Because anyone can skip the form and call the API directly, so only the server can be trusted",
+      "Because anyone can skip the form and call the API directly",
       "Because React sometimes forgets to run the `if` checks in a handler",
       "Because the browser shortens passwords before sending them",
-      "Because checking twice makes the page load faster"
+      "Because checking twice makes the sign-up page load faster"
     ],
     "answer": 0,
     "explanation": "Validation phía client chỉ để tiện (phản hồi tức thì). Trình duyệt thuộc về người dùng: họ có thể dùng Console, Postman hay curl để gửi bất cứ thứ gì. Server là tuyến phòng thủ thật.",
@@ -102,14 +102,14 @@
     "options": [
       "`201` và một user không tên được tạo, vì form đã bị bỏ qua",
       "Console hiện \"Please enter your name.\" từ `AuthForm.jsx`",
-      "`400` với `{error: 'Name is required.'}` và terminal ghi `POST /api/auth/signup → 400`",
-      "`401` vì chưa đăng nhập nên không được đăng ký"
+      "`400` kèm thông báo `Name is required.` từ server",
+      "`401` vì phải đăng nhập trước thì mới được đăng ký tài khoản"
     ],
     "optionsEn": [
       "`201` and a nameless user is created, because the form was skipped",
       "The Console shows \"Please enter your name.\" from `AuthForm.jsx`",
-      "`400` with `{error: 'Name is required.'}` and the terminal logs `POST /api/auth/signup → 400`",
-      "`401` because you must be logged in to sign up"
+      "`400` with the server's `Name is required.` message",
+      "`401` because you must be logged in before you can sign up"
     ],
     "answer": 2,
     "explanation": "Lời gọi trực tiếp bỏ qua kiểm tra của form, nhưng server kiểm tra lại và trả `400 Name is required.`. Terminal backend in một dòng cho mỗi request.",
@@ -132,13 +132,13 @@
     "question": "Login sai mật khẩu, server trả `401`. `fetch` xử lý thế nào?",
     "questionEn": "A login with a wrong password gets `401` from the server. How does `fetch` treat it?",
     "options": [
-      "`fetch` tự throw lỗi với message `Unauthorized`",
-      "`fetch` tự chuyển người dùng về trang đăng nhập",
-      "`fetch` trả về response bình thường với `ok: false`; `api.js` phải tự throw",
-      "`fetch` thử lại request cho tới khi nhận được `200`"
+      "`fetch` tự throw lỗi với message `Unauthorized` để code bên ngoài bắt",
+      "`fetch` tự chuyển người dùng về trang đăng nhập ngay lập tức",
+      "`fetch` trả response bình thường với `ok: false`; `api.js` tự throw",
+      "`fetch` tự thử lại request đó cho tới khi nhận được `200`"
     ],
     "optionsEn": [
-      "`fetch` throws an error with the message `Unauthorized` on its own",
+      "`fetch` throws an `Unauthorized` error by itself for the calling code to catch",
       "`fetch` redirects the user to the login page on its own",
       "`fetch` resolves normally with `ok: false`; `api.js` has to throw itself",
       "`fetch` retries the request until it gets a `200`"
@@ -164,16 +164,16 @@
     "question": "Trong `api.js`, vì sao có đoạn `response.status === 204 ? null : …`?",
     "questionEn": "In `api.js`, why is there `response.status === 204 ? null : …`?",
     "options": [
-      "Vì `204 No Content` không có body, gọi `.json()` sẽ lỗi, nên bỏ qua",
+      "Vì `204 No Content` không có body, gọi `.json()` sẽ lỗi",
       "Vì 204 nghĩa là lỗi và cần được throw ngay",
-      "Vì 204 chỉ dùng cho request `GET`",
-      "Vì body của 204 là HTML, không phải JSON"
+      "Vì 204 chỉ được dùng cho các request `GET` thành công",
+      "Vì body của 204 là HTML thay vì JSON như các status khác"
     ],
     "optionsEn": [
-      "Because `204 No Content` has no body and `.json()` would fail, so it is skipped",
+      "Because `204 No Content` has no body, so `.json()` would fail",
       "Because 204 means an error that must be thrown at once",
-      "Because 204 is only used for `GET` requests",
-      "Because a 204 body is HTML, not JSON"
+      "Because 204 is only ever used for successful `GET` requests in REST",
+      "Because a 204 body is HTML instead of JSON like the others"
     ],
     "answer": 0,
     "explanation": "Logout (`POST /api/auth/logout`) và `DELETE /api/todos/:id` trả `204`: thành công nhưng không có nội dung. Không có gì để đọc nên `data` là `null`.",
@@ -229,14 +229,14 @@
     "questionEn": "In `handleSubmit`, why is `setSubmitting(false)` inside `finally` rather than at the end of `try`?",
     "options": [
       "Vì `finally` chạy trước `try` nên nút được mở sớm hơn",
-      "Vì `finally` luôn chạy, dù thành công hay lỗi, nên nút không bị khóa mãi",
-      "Vì React cấm gọi setState bên trong `try`",
-      "Vì `finally` chỉ chạy khi request thành công"
+      "Vì `finally` luôn chạy, dù thành công hay lỗi",
+      "Vì React cấm gọi setState ở bên trong khối `try`",
+      "Vì `finally` chỉ chạy khi request đã thành công"
     ],
     "optionsEn": [
       "Because `finally` runs before `try`, so the button is re-enabled sooner",
-      "Because `finally` always runs, success or failure, so the button is never stuck",
-      "Because React forbids calling setState inside `try`",
+      "Because `finally` always runs, on success or failure",
+      "Because React forbids calling setState inside a `try` block",
       "Because `finally` only runs when the request succeeds"
     ],
     "answer": 1,
@@ -260,16 +260,16 @@
     "question": "Tester double-click nút \"Add\" trong `TodoPage.jsx` rất nhanh và thấy hai to-do giống hệt. Nguyên nhân gốc?",
     "questionEn": "A tester double-clicks the \"Add\" button in `TodoPage.jsx` very fast and sees two identical to-dos. What is the root cause?",
     "options": [
-      "StrictMode chạy mọi handler click hai lần",
-      "Server nhân đôi mọi request `POST`",
-      "Vite proxy gửi lại request khi nó chậm",
-      "Nút \"Add\" không có cờ kiểu `submitting` để disable trong lúc request đang chạy"
+      "StrictMode chạy mọi handler click hai lần khi ở chế độ dev",
+      "Server nhân đôi mọi request `POST` mà nó nhận được",
+      "Vite proxy tự gửi lại request khi thấy nó chạy chậm",
+      "Nút không bị khóa (disable) trong lúc request đang chạy"
     ],
     "optionsEn": [
-      "StrictMode runs every click handler twice",
-      "The server duplicates every `POST` request",
-      "The Vite proxy resends slow requests",
-      "The \"Add\" button has no `submitting`-style flag to disable it while the request is in flight"
+      "StrictMode runs every click handler twice while in dev mode",
+      "The server duplicates every `POST` request it receives",
+      "The Vite proxy resends any request that seems slow",
+      "The button is not disabled while the request is in flight"
     ],
     "answer": 3,
     "explanation": "`AuthForm` disable nút bằng `submitting`, nhưng form Add trong `TodoPage` thì không. Hai lần click gửi hai `POST /api/todos`, và server tạo hai bản ghi đúng như được yêu cầu.",
@@ -292,16 +292,16 @@
     "question": "`useEffect(() => { api('GET', '/auth/me')… }, [])` trong `App.jsx` dùng để làm gì?",
     "questionEn": "What is `useEffect(() => { api('GET', '/auth/me')… }, [])` in `App.jsx` for?",
     "options": [
-      "Khi trang tải, hỏi server cookie còn hợp lệ không, để giữ đăng nhập sau khi refresh",
-      "Tạo cookie `token` mới mỗi lần người dùng gõ phím",
-      "Kiểm tra mật khẩu người dùng mỗi 5 giây",
-      "Xóa `localStorage` khi người dùng đóng tab"
+      "Hỏi server cookie còn hợp lệ không, để giữ đăng nhập sau refresh",
+      "Tạo cookie `token` mới mỗi lần người dùng gõ phím vào form",
+      "Kiểm tra lại mật khẩu của người dùng cứ mỗi 5 giây một lần",
+      "Xóa sạch `localStorage` mỗi khi đóng tab trình duyệt"
     ],
     "optionsEn": [
-      "On page load, ask the server whether the cookie is still valid, to stay logged in after a refresh",
-      "Create a new `token` cookie every time the user types",
-      "Check the user's password every 5 seconds",
-      "Clear `localStorage` when the user closes the tab"
+      "Ask the server if the cookie is still valid, to stay logged in after refresh",
+      "Create a fresh `token` cookie every time the user types in the form",
+      "Re-check the user's password with the server every 5 seconds",
+      "Wipe everything in `localStorage` whenever the user closes the browser tab"
     ],
     "answer": 0,
     "explanation": "`[]` rỗng nghĩa là chạy một lần khi component xuất hiện. `GET /api/auth/me` trả `200 {user}` nếu cookie hợp lệ, ngược lại `401`, và `App` chọn màn hình tương ứng.",
@@ -325,15 +325,15 @@
     "questionEn": "Running `npm run dev`, the Network tab shows two `GET /api/auth/me` requests on every refresh. A new BA wants to file a bug. What do you say?",
     "options": [
       "Đúng là bug: `useEffect` bị viết sai và sẽ gây tải gấp đôi trên production",
-      "Server đang bị tấn công, cần báo ngay cho team bảo mật",
-      "Đó là StrictMode ở môi trường development cố ý chạy effect hai lần; bản build production không như vậy",
-      "Do Vite proxy luôn gửi mỗi request hai lần"
+      "Server đang bị tấn công, cần báo ngay cho team bảo mật xử lý",
+      "Đó là StrictMode ở môi trường dev cố ý chạy effect hai lần",
+      "Do Vite proxy luôn tự động gửi mỗi request lên server hai lần"
     ],
     "optionsEn": [
       "It is a real bug: `useEffect` is written wrongly and will double the load in production",
       "The server is under attack, report it to the security team now",
-      "It is StrictMode in development running effects twice on purpose; a production build does not",
-      "The Vite proxy always sends every request twice"
+      "It is dev-mode StrictMode running effects twice on purpose",
+      "The Vite proxy always sends every request to the server twice"
     ],
     "answer": 2,
     "explanation": "`main.jsx` bọc app trong `<StrictMode>`. Ở development, React cố ý chạy effect hai lần để lộ lỗi cleanup. Đây là hành vi mong đợi, không phải bug.",
@@ -356,16 +356,16 @@
     "question": "Người dùng để trang to-do mở hơn 7 ngày rồi tick một to-do. Server trả `401`. Người dùng sẽ thấy gì?",
     "questionEn": "A user leaves the to-do page open for over 7 days, then ticks a to-do. The server answers `401`. What does the user see?",
     "options": [
-      "Form đăng nhập, vì `handleError` gọi `onSessionExpired()` và `App` đặt `user` về `null`",
+      "Form đăng nhập, vì `handleError` gọi `onSessionExpired()`",
       "Thông báo đỏ `Request failed (401)` bên dưới ô Add",
-      "Checkbox vẫn được tick vì sample dùng optimistic update",
-      "Trang trắng vì app bị crash"
+      "Checkbox vẫn được tick, vì sample dùng kiểu optimistic update",
+      "Một trang trắng trơn vì app bị crash hoàn toàn"
     ],
     "optionsEn": [
-      "The login form, because `handleError` calls `onSessionExpired()` and `App` sets `user` to `null`",
+      "The login form, because `handleError` calls `onSessionExpired()`",
       "A red `Request failed (401)` message under the Add box",
       "The checkbox stays ticked because the sample uses optimistic updates",
-      "A blank page because the app crashed"
+      "A completely blank page because the whole app crashed"
     ],
     "answer": 0,
     "explanation": "Cookie sống 7 ngày. Khi hết hạn, server trả 401 và `handleError` đưa người dùng về form đăng nhập thay vì hiện message.",
@@ -391,7 +391,7 @@
       "`Request failed (400)`",
       "Form đăng nhập",
       "`Title is required.` trong đoạn thông báo lỗi",
-      "Không có gì, lỗi chỉ hiện trong Console"
+      "Không có gì, lỗi chỉ hiện trong tab Console thôi"
     ],
     "optionsEn": [
       "`Request failed (400)`",
@@ -420,16 +420,16 @@
     "question": "Vì sao `http://localhost:5173` và `http://localhost:4000` là hai origin khác nhau?",
     "questionEn": "Why are `http://localhost:5173` and `http://localhost:4000` two different origins?",
     "options": [
-      "Vì một bên là frontend, một bên là backend",
+      "Vì một bên là frontend, còn một bên là backend",
       "Vì origin gồm scheme + host + port, và port khác nhau",
-      "Vì localhost luôn bị coi là cross-origin",
-      "Vì chỉ một trong hai dùng HTTPS"
+      "Vì localhost luôn bị coi là cross-origin trong trình duyệt",
+      "Vì chỉ một trong hai địa chỉ đó dùng HTTPS"
     ],
     "optionsEn": [
-      "Because one is the frontend and the other the backend",
+      "Because one is the frontend and the other one is the backend",
       "Because an origin is scheme + host + port, and the ports differ",
-      "Because localhost is always treated as cross-origin",
-      "Because only one of them uses HTTPS"
+      "Because localhost is always treated as cross-origin by browsers",
+      "Because only one of the two addresses uses HTTPS"
     ],
     "answer": 1,
     "explanation": "Hai URL cùng scheme `http`, cùng host `localhost`, nhưng port 5173 khác 4000. Chỉ cần một phần khác là khác origin.",
@@ -452,16 +452,16 @@
     "question": "Một dev đổi `api.js` để gọi thẳng `http://localhost:4000/api/todos`, không qua proxy, và server không có header CORS. Console hiện gì?",
     "questionEn": "A developer changes `api.js` to call `http://localhost:4000/api/todos` directly, skipping the proxy, and the server sends no CORS headers. What appears in the Console?",
     "options": [
-      "`404 No route for GET /api/todos`",
-      "`401 Please log in first.` vì cookie đã bị xóa",
-      "`ECONNREFUSED` vì port 4000 bị đóng",
-      "`… has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present …`"
+      "`404 No route for GET /api/todos` vì route đó chỉ tồn tại trong proxy của Vite",
+      "`401 Please log in first.` vì cookie đã bị trình duyệt xóa đi",
+      "`ECONNREFUSED` vì port 4000 đã bị đóng với bên ngoài",
+      "`… blocked by CORS policy: No 'Access-Control-Allow-Origin' header …`"
     ],
     "optionsEn": [
-      "`404 No route for GET /api/todos`",
-      "`401 Please log in first.` because the cookie was deleted",
-      "`ECONNREFUSED` because port 4000 is closed",
-      "`… has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present …`"
+      "`404 No route for GET /api/todos` because that route only exists in the proxy",
+      "`401 Please log in first.` because the browser deleted the cookie",
+      "`ECONNREFUSED` because port 4000 is closed to outside calls",
+      "`… blocked by CORS policy: No 'Access-Control-Allow-Origin' header …`"
     ],
     "answer": 3,
     "explanation": "Trang ở origin 5173 gọi origin 4000. Không có `Access-Control-Allow-Origin`, trình duyệt chặn việc đọc response và báo lỗi CORS. Proxy của Vite tránh được chuyện này vì làm cho mọi thứ cùng một origin.",
@@ -484,7 +484,7 @@
     "question": "Hàm `toggleTodo` trong sample chỉ gọi `setTodos` sau khi `PATCH` thành công. Đây là kiểu cập nhật nào?",
     "questionEn": "The sample's `toggleTodo` calls `setTodos` only after the `PATCH` succeeds. Which kind of update is this?",
     "options": [
-      "Optimistic: cập nhật màn hình trước, hoàn tác nếu lỗi",
+      "Optimistic: cập nhật màn hình trước, rồi hoàn tác nếu có lỗi",
       "Pessimistic: chờ server xác nhận rồi mới cập nhật màn hình",
       "Polling: hỏi server liên tục cho tới khi dữ liệu đổi",
       "Offline-first: lưu vào `localStorage` rồi đồng bộ sau"
@@ -516,16 +516,16 @@
     "question": "Với tính năng \"Xác nhận thanh toán\", BA nên đề xuất kiểu cập nhật nào?",
     "questionEn": "For a \"Confirm payment\" feature, which update style should a BA recommend?",
     "options": [
-      "Pessimistic: chỉ hiện \"Đã thanh toán\" khi server xác nhận",
+      "Pessimistic: chỉ đổi trạng thái khi server báo thành công",
       "Optimistic: hiện \"Đã thanh toán\" ngay để trải nghiệm nhanh hơn",
-      "Không cần quyết định, dev sẽ tự chọn",
-      "Optimistic, nhưng không cần hoàn tác nếu lỗi"
+      "Không cần quyết định, dev sẽ tự chọn cách nào tiện nhất",
+      "Optimistic, nhưng không cần hoàn tác lại nếu thanh toán lỗi"
     ],
     "optionsEn": [
-      "Pessimistic: show \"Paid\" only once the server confirms",
-      "Optimistic: show \"Paid\" immediately for a faster experience",
-      "No decision needed, developers will choose",
-      "Optimistic, with no rollback if it fails"
+      "Pessimistic: change the status only once the server reports success",
+      "Optimistic: show \"Paid\" immediately for a faster, smoother experience",
+      "No decision needed, developers will pick whichever is easiest",
+      "Optimistic, with no rollback if the payment later fails"
     ],
     "answer": 0,
     "explanation": "Thao tác dính tới tiền không được \"nói dối\" dù chỉ trong chốc lát. Optimistic hợp với thao tác rẻ và đảo ngược được như like hay checkbox.",
@@ -548,16 +548,16 @@
     "question": "Acceptance criterion nào sau đây là cụ thể và kiểm thử được nhất cho form đăng ký?",
     "questionEn": "Which acceptance criterion is the most specific and testable for the sign-up form?",
     "options": [
-      "Form phải thân thiện và dễ dùng",
-      "Form phải xử lý lỗi một cách hợp lý",
-      "Given email đã tồn tại, when submit, then API trả `409` và hiện `This email is already registered.`",
-      "Form phải nhanh trên mọi thiết bị"
+      "Form phải thân thiện, dễ dùng và mang lại trải nghiệm tốt cho mọi người dùng",
+      "Form phải xử lý mọi lỗi một cách hợp lý và luôn hiện thông báo phù hợp, dễ hiểu cho người dùng",
+      "Given email đã tồn tại, when submit, then trả `409` và hiện `This email is already registered.`",
+      "Form phải phản hồi nhanh trên mọi thiết bị, kể cả điện thoại đời cũ và mạng yếu"
     ],
     "optionsEn": [
-      "The form must be friendly and easy to use",
-      "The form must handle errors sensibly",
-      "Given the email already exists, when submitting, then the API answers `409` and `This email is already registered.` appears",
-      "The form must be fast on every device"
+      "The form must be friendly, easy to use and give every user a great experience",
+      "The form must handle every error sensibly and show the user a suitable message",
+      "Given an existing email, on submit, then `409` and `This email is already registered.` shows",
+      "The form must respond fast on every device, even old phones on weak networks"
     ],
     "answer": 2,
     "explanation": "Một criterion tốt có điều kiện, hành động và kết quả đo được (status code, câu chữ chính xác). Tester kiểm được trong tab Network mà không cần tranh luận.",

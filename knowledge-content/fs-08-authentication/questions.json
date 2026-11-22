@@ -4,7 +4,7 @@
     "question": "User B đã đăng nhập thành công, nhưng khi gọi `PATCH /api/todos/5` (to-do của user A) thì nhận `404 To-do not found.`. Đây là gì?",
     "questionEn": "User B is logged in, but calling `PATCH /api/todos/5` (user A's to-do) returns `404 To-do not found.`. What is this?",
     "options": [
-      "Authentication thất bại vì cookie sai",
+      "Authentication thất bại vì cookie bị sai",
       "Quy tắc authorization đang hoạt động đúng",
       "Token JWT của user B đã hết hạn",
       "Lỗi của bcrypt khi so sánh mật khẩu"
@@ -36,7 +36,7 @@
     "question": "\"HTTP là stateless\" nghĩa là gì?",
     "questionEn": "What does \"HTTP is stateless\" mean?",
     "options": [
-      "Server lưu mọi request vào database để nhớ user",
+      "Server lưu mọi request vào database để nhớ được user",
       "Trình duyệt không được phép gửi cookie",
       "Response không được chứa dữ liệu trạng thái",
       "Mỗi request đứng độc lập, server không nhớ request trước"
@@ -70,7 +70,7 @@
     "options": [
       "Không thu hồi ngay được token trước khi nó hết hạn",
       "Không chạy được khi có nhiều server",
-      "Phải lưu mọi token vào một bảng trong database",
+      "Phải lưu mọi token vào một bảng riêng trong database",
       "Trình duyệt không thể gửi JWT trong cookie"
     ],
     "optionsEn": [
@@ -100,14 +100,14 @@
     "question": "Đã có tài khoản `an@example.com`. Một người đăng ký với email `AN@Example.com`. Kết quả?",
     "questionEn": "An account `an@example.com` exists. Someone signs up with `AN@Example.com`. What happens?",
     "options": [
-      "201, một tài khoản mới được tạo",
-      "400 \"Email is not valid.\"",
+      "201, một tài khoản mới được tạo với email viết hoa",
+      "400 \"Email is not valid.\" vì có chữ in hoa",
       "409 \"This email is already registered.\"",
-      "500 vì vi phạm ràng buộc UNIQUE"
+      "500 vì vi phạm ràng buộc UNIQUE trong database"
     ],
     "optionsEn": [
-      "201, a new account is created",
-      "400 \"Email is not valid.\"",
+      "201, a new account is created with the uppercase email",
+      "400 \"Email is not valid.\" because of the capitals",
       "409 \"This email is already registered.\"",
       "500 because the UNIQUE constraint fails"
     ],
@@ -134,7 +134,7 @@
     "options": [
       "Để request chạy nhanh hơn gấp đôi",
       "Vì React không có khả năng kiểm tra dữ liệu",
-      "Vì trình duyệt tự xóa phần kiểm tra khi gửi form",
+      "Vì trình duyệt tự xóa phần kiểm tra của form khi gửi request đi",
       "Vì bất kỳ ai cũng có thể bỏ qua form và gọi API trực tiếp"
     ],
     "optionsEn": [
@@ -164,16 +164,16 @@
     "question": "Hai user cùng chọn mật khẩu `secret123`. Cột `password_hash` của họ chứa gì?",
     "questionEn": "Two users both pick the password `secret123`. What does their `password_hash` column contain?",
     "options": [
-      "Hai hash giống hệt nhau",
+      "Hai hash giống hệt nhau, vì cùng một mật khẩu",
       "Hai hash khác nhau, vì mỗi hash có salt ngẫu nhiên riêng",
       "Chính chuỗi `secret123` ở dạng chữ thường",
-      "Chuỗi mã hóa giải được bằng `JWT_SECRET`"
+      "Một chuỗi mã hóa, có thể giải ngược lại được bằng `JWT_SECRET`"
     ],
     "optionsEn": [
-      "Two identical hashes",
+      "Two identical hashes, since the password is the same",
       "Two different hashes, because each has its own random salt",
-      "The plain string `secret123`",
-      "An encrypted string that `JWT_SECRET` can decrypt"
+      "The plain string `secret123`, stored as typed",
+      "An encrypted string that `JWT_SECRET` can decrypt again later"
     ],
     "answer": 1,
     "explanation": "bcrypt sinh salt ngẫu nhiên cho mỗi lần hash và lưu salt ngay trong chuỗi `$2b$10$...`. Cùng mật khẩu nhưng hash khác nhau, nên kẻ tấn công không nhận ra ai dùng chung mật khẩu.",
@@ -197,15 +197,15 @@
     "questionEn": "In the hash `$2b$10$XKAMQ...`, what does `10` mean?",
     "options": [
       "Cost factor: 2^10 vòng băm, cố tình làm chậm",
-      "Độ dài tối thiểu của mật khẩu",
-      "Số ký tự của salt",
-      "Id của user trong bảng users"
+      "Độ dài tối thiểu của mật khẩu người dùng",
+      "Số ký tự của phần salt đứng phía sau",
+      "Id của user trong bảng users của database hiện tại"
     ],
     "optionsEn": [
       "The cost factor: 2^10 rounds, deliberately slow",
-      "The minimum password length",
-      "The number of characters in the salt",
-      "The user's id in the users table"
+      "The minimum length of the user's password",
+      "The number of characters in the salt part",
+      "The user's id in the users table of the database"
     ],
     "answer": 0,
     "explanation": "`bcrypt.hashSync(password, 10)` dùng cost 10 = 1.024 vòng, khoảng 70 ms mỗi lần. Tăng cost thêm 1 là gấp đôi công sức, làm việc đoán mật khẩu hàng loạt rất tốn kém.",
@@ -292,16 +292,16 @@
     "question": "Một đồng nghiệp dán token của bạn vào jwt.io và đọc được email của bạn. Điều này cho thấy gì?",
     "questionEn": "A colleague pastes your token into jwt.io and reads your email. What does this show?",
     "options": [
-      "Token được mã hóa bằng một key quá yếu",
+      "Token được mã hóa bằng một key quá yếu nên rất dễ bị bẻ khóa",
       "Payload chỉ được encode base64url, nên ai cũng đọc được",
-      "JWT_SECRET đã bị lộ ra ngoài",
-      "Cookie không được đặt cờ HttpOnly"
+      "JWT_SECRET của server đã bị lộ ra ngoài",
+      "Cookie chứa token không được đặt cờ HttpOnly"
     ],
     "optionsEn": [
       "The token was encrypted with a key that is too weak",
       "The payload is only base64url-encoded, so anyone can read it",
-      "JWT_SECRET has leaked",
-      "The cookie was not marked HttpOnly"
+      "The server's JWT_SECRET must have leaked out to the public somehow",
+      "The cookie holding the token was not marked HttpOnly"
     ],
     "answer": 1,
     "explanation": "JWT được ký, không được mã hóa. Đọc payload không cần secret; secret chỉ cần để tạo chữ ký hợp lệ. Vì vậy không bao giờ đặt bí mật vào JWT.",
@@ -324,14 +324,14 @@
     "question": "Ai đó sửa `sub` từ 1 thành 2 trong một token đã copy rồi gọi `GET /api/todos`. Kết quả?",
     "questionEn": "Someone changes `sub` from 1 to 2 in a copied token and calls `GET /api/todos`. What happens?",
     "options": [
-      "401 \"Your session has expired. Please log in again.\" vì chữ ký không còn khớp",
+      "401, vì chữ ký không còn khớp với nội dung",
       "200 kèm danh sách to-do của user 2",
       "403 Forbidden vì user 1 không có quyền",
-      "409 vì token bị trùng"
+      "409, vì token đó bị trùng với một token khác"
     ],
     "optionsEn": [
-      "401 \"Your session has expired. Please log in again.\" because the signature no longer matches",
-      "200 with user 2's to-dos",
+      "401, because the signature no longer matches",
+      "200 with user 2's to-do list",
       "403 Forbidden because user 1 lacks permission",
       "409 because the token is a duplicate"
     ],
@@ -388,16 +388,16 @@
     "question": "`SameSite=Lax` chủ yếu bảo vệ khỏi kiểu tấn công nào?",
     "questionEn": "What does `SameSite=Lax` mainly protect against?",
     "options": [
-      "Nghe lén cookie trên Wi-Fi công cộng",
-      "SQL injection qua form đăng nhập",
-      "Đoán mật khẩu hàng loạt (brute force)",
-      "CSRF: website khác khiến trình duyệt POST tới API kèm cookie của bạn"
+      "Nghe lén cookie trên mạng Wi-Fi công cộng ở quán cà phê",
+      "SQL injection qua các ô nhập của form đăng nhập",
+      "Đoán mật khẩu hàng loạt bằng công cụ tự động (brute force)",
+      "CSRF: trang web khác lợi dụng cookie của bạn để gọi API"
     ],
     "optionsEn": [
-      "Sniffing the cookie on public Wi-Fi",
-      "SQL injection through the login form",
-      "Mass password guessing (brute force)",
-      "CSRF: another site making your browser POST to the API with your cookie"
+      "Sniffing the cookie on public Wi-Fi in a café",
+      "SQL injection through the login form's input boxes",
+      "Mass password guessing with automated tools (brute force)",
+      "CSRF: another site using your cookie to call the API"
     ],
     "answer": 3,
     "explanation": "Với Lax, cookie không được gửi kèm request POST xuyên site, nhưng vẫn được gửi khi bạn bấm một link bình thường tới website.",
@@ -420,16 +420,16 @@
     "question": "Bạn refresh trang và vẫn thấy danh sách to-do của mình. Điều gì làm được việc đó?",
     "questionEn": "You refresh the page and still see your to-dos. What made that possible?",
     "options": [
-      "Mật khẩu được lưu trong localStorage và gửi lại",
-      "`App` gọi `GET /api/auth/me` khi tải trang và cookie vẫn còn hợp lệ",
-      "React giữ nguyên state qua các lần tải lại trang",
-      "Vite lưu cache thông tin user giữa các lần tải"
+      "Mật khẩu được lưu trong localStorage và gửi lại mỗi lần tải",
+      "`App` gọi `GET /api/auth/me` khi tải trang, cookie còn hạn",
+      "React giữ nguyên state qua các lần tải lại trang nhờ bộ nhớ",
+      "Vite lưu cache thông tin user giữa các lần tải trang"
     ],
     "optionsEn": [
-      "The password is kept in localStorage and sent again",
-      "`App` calls `GET /api/auth/me` on load and the cookie is still valid",
-      "React keeps its state across page reloads",
-      "Vite caches the user between loads"
+      "The password is kept in localStorage and sent again on each page load",
+      "`App` calls `GET /api/auth/me` on load; the cookie is still valid",
+      "React keeps its state in memory across page reloads",
+      "Vite caches the logged-in user between page loads"
     ],
     "answer": 1,
     "explanation": "Sau refresh, `user` bắt đầu là `null`. `useEffect` trong App.jsx gọi `/api/auth/me`; cookie còn hạn thì server trả 200 kèm user và danh sách hiện ra.",
@@ -452,15 +452,15 @@
     "question": "Sau khi đăng xuất, tester dùng lại một token đã copy từ trước bằng curl và `GET /api/auth/me` vẫn trả 200. Nguyên nhân?",
     "questionEn": "After logging out, a tester replays a token copied earlier with curl, and `GET /api/auth/me` still returns 200. Why?",
     "options": [
-      "Endpoint logout bị lỗi 500 nên không chạy",
-      "Cookie không có cờ HttpOnly",
-      "JWT stateless còn hiệu lực đến `exp` vì server không giữ danh sách token",
-      "bcrypt cost quá thấp nên token dễ đoán"
+      "Endpoint logout bị lỗi 500 nên không thể xóa được token đã cấp trước đó",
+      "Cookie chứa token không được đặt cờ HttpOnly như yêu cầu",
+      "Token còn hiệu lực tới `exp` vì server không lưu danh sách token",
+      "bcrypt cost quá thấp nên token dễ bị đoán ra"
     ],
     "optionsEn": [
-      "The logout endpoint failed with a 500",
-      "The cookie was not HttpOnly",
-      "A stateless JWT stays valid until `exp` because the server keeps no token list",
+      "The logout endpoint failed with a 500, so the token survived",
+      "The cookie holding the token was not marked HttpOnly",
+      "The token stays valid until `exp`; the server keeps no token list",
       "The bcrypt cost is too low, so tokens are guessable"
     ],
     "answer": 2,
@@ -484,16 +484,16 @@
     "question": "User báo: \"Tôi đang gõ một to-do, bấm Add thì bỗng thấy form đăng nhập, chữ đã gõ mất hết.\" Tab Network có `POST /api/todos → 401`. Nguyên nhân khả dĩ nhất?",
     "questionEn": "A user reports: \"I was typing a to-do, clicked Add, and suddenly saw the login form; my text was gone.\" The Network tab shows `POST /api/todos → 401`. Most likely cause?",
     "options": [
-      "Phiên (JWT/cookie) đã hết hạn nên requireAuth trả 401 và FE gọi `onSessionExpired()`",
-      "Tiêu đề dài hơn 200 ký tự",
-      "Server bị sập giữa chừng",
-      "Email của user bị đổi sang chữ hoa"
+      "Phiên làm việc đã hết hạn nên server từ chối request",
+      "Tiêu đề to-do dài hơn giới hạn 200 ký tự nên bị từ chối",
+      "Server bị sập giữa chừng trong lúc đang lưu to-do mới",
+      "Email của user đã bị server tự đổi sang chữ hoa khi lưu"
     ],
     "optionsEn": [
-      "The session (JWT/cookie) expired, so requireAuth returned 401 and the FE called `onSessionExpired()`",
-      "The title was longer than 200 characters",
-      "The server crashed mid-request",
-      "The user's email was changed to uppercase"
+      "The session expired, so the server rejected the request",
+      "The to-do title went over the 200-character limit, so it was refused",
+      "The server crashed halfway through saving the new to-do item",
+      "The server quietly changed the user's email to uppercase on save"
     ],
     "answer": 0,
     "explanation": "TodoPage coi mọi 401 là hết phiên: `onSessionExpired()` đặt user về null và hiện form đăng nhập, không có thông báo. Đây là ứng viên tốt cho một user story cải thiện UX.",
@@ -516,16 +516,16 @@
     "question": "User story nào đúng cho tình huống user quên mật khẩu?",
     "questionEn": "Which user story is right for users who forget their password?",
     "options": [
-      "Gửi mật khẩu hiện tại của tôi qua email",
-      "Hiện gợi ý mật khẩu dựa trên hash",
-      "Cho bộ phận hỗ trợ đọc mật khẩu từ database",
-      "Gửi link đặt lại dùng một lần, hết hạn nhanh, để tôi đặt mật khẩu mới"
+      "Gửi lại mật khẩu hiện tại của tôi qua email đã đăng ký",
+      "Hiện một gợi ý mật khẩu được tạo ra từ chuỗi hash",
+      "Cho bộ phận hỗ trợ đọc mật khẩu của tôi từ database",
+      "Gửi link đặt lại dùng một lần, hết hạn nhanh"
     ],
     "optionsEn": [
-      "Email me my current password",
-      "Show a password hint based on the hash",
-      "Let support read my password from the database",
-      "Send a one-time, short-lived reset link so I can set a new password"
+      "Email my current password to my registered address",
+      "Show a password hint generated from the stored hash",
+      "Let the support team read my password from the database",
+      "Send a one-time, short-lived reset link"
     ],
     "answer": 3,
     "explanation": "Hệ thống chỉ có hash một chiều, không có mật khẩu gốc để gửi. Cách đúng là link/token đặt lại dùng một lần, có thời hạn ngắn.",
@@ -548,16 +548,16 @@
     "question": "App mẫu lưu \"email gõ lần cuối\" và token đăng nhập ở đâu?",
     "questionEn": "Where does the sample keep the \"last email typed\" and the login token?",
     "options": [
-      "Cả hai trong localStorage",
-      "Email trong localStorage (`todo:lastEmail`), token trong cookie HttpOnly",
-      "Cả hai trong cookie HttpOnly",
-      "Email trong cookie, token trong localStorage"
+      "Cả hai đều được lưu trong localStorage của trình duyệt",
+      "Email trong localStorage, token trong cookie HttpOnly",
+      "Cả hai đều nằm chung trong một cookie HttpOnly",
+      "Email trong cookie, còn token trong localStorage"
     ],
     "optionsEn": [
-      "Both in localStorage",
-      "Email in localStorage (`todo:lastEmail`), token in an HttpOnly cookie",
-      "Both in an HttpOnly cookie",
-      "Email in a cookie, token in localStorage"
+      "Both of them in the browser's localStorage",
+      "Email in localStorage, token in an HttpOnly cookie",
+      "Both of them together in one HttpOnly cookie",
+      "Email in a cookie, and the login token in localStorage"
     ],
     "answer": 1,
     "explanation": "Email chỉ là tùy chọn vô hại để điền sẵn form, nên để trong localStorage. Token là chìa khóa đăng nhập, nên nằm trong cookie HttpOnly mà JavaScript không đọc được.",

@@ -13,7 +13,7 @@
       "They cannot type symbols such as angle brackets, semicolons or slashes at all",
       "They save hidden formatting and change characters, such as straight quotes into curly ones",
       "They limit document length, so a real program would never fit in a single file",
-      "They are paid software, while code is required to be written with free tools only"
+      "They are paid software, while code is legally required to be written with free tools only"
     ],
     "answer": 1,
     "explanation": "Code được lưu thành file văn bản thuần: chỉ có ký tự. Phần mềm soạn thảo văn bản lưu kèm font, style, lề và âm thầm đổi ký tự (nháy thẳng thành nháy cong), khiến chương trình ngừng chạy.",
@@ -45,7 +45,7 @@
       "Word compressed the code, so the file that received it is missing a few lines at the end",
       "The target file only accepts code typed by hand, so any pasted content is rejected",
       "The colleague's computer has an older version of Word than the one used for the original",
-      "Word replaced the straight quotes with curly quotes, which are different characters to a computer"
+      "Word replaced straight quotes with curly ones, which are different characters"
     ],
     "answer": 3,
     "explanation": "Word tự thay dấu nháy thẳng `\"` bằng nháy cong. Với người thì gần như giống nhau, với máy tính thì là ký tự khác, nên code hỏng. Hãy soạn code trong một editor văn bản thuần.",
@@ -68,13 +68,13 @@
     "question": "Điểm khác nhau chính giữa một code editor và một IDE là gì?",
     "questionEn": "What is the main difference between a code editor and an IDE?",
     "options": [
-      "IDE gói editor cùng các công cụ nặng như debugger; code editor nhẹ hơn và chỉ tập trung vào soạn code",
+      "IDE gói editor cùng công cụ nặng như debugger; code editor nhẹ và tập trung soạn code",
       "IDE chỉ chạy trên trình duyệt, còn code editor luôn phải được cài đặt lên máy tính",
       "Code editor lưu file ở định dạng riêng, còn IDE mới lưu code thành văn bản thuần",
       "Code editor chỉ dành cho người mới học, còn developer chuyên nghiệp bắt buộc dùng IDE"
     ],
     "optionsEn": [
-      "An IDE bundles an editor with heavy tools such as a debugger; a code editor is lighter and focused on editing",
+      "An IDE bundles an editor with heavy tools like a debugger; an editor is lighter",
       "An IDE only runs in the browser, while a code editor always has to be installed on the computer",
       "A code editor saves files in its own format, while only an IDE saves code as plain text",
       "A code editor is only for learners, while professional developers are required to use an IDE"
@@ -140,7 +140,7 @@
     "optionsEn": [
       "It adds an \"Open with Code\" item to the right-click menu of every folder in File Explorer",
       "It automatically stores all of your projects in one shared folder that is named PATH",
-      "It makes the `code` command work in a terminal, because Windows knows where to find the program",
+      "It makes the `code` command work in a terminal, since Windows can find the program",
       "It allows VS Code to update itself to new versions without asking you again"
     ],
     "answer": 2,
@@ -164,13 +164,13 @@
     "question": "Bạn tải một thư mục dự án từ một nguồn không rõ và VS Code hỏi \"Do you trust the authors of the files in this folder?\". Nên trả lời thế nào và điều gì xảy ra?",
     "questionEn": "You download a project folder from an unknown source and VS Code asks \"Do you trust the authors of the files in this folder?\". What should you answer, and what happens?",
     "options": [
-      "Trả lời No: thư mục mở ở Restricted Mode, vẫn đọc và sửa được nhưng tác vụ tự động bị tắt",
+      "Trả lời No: thư mục mở ở Restricted Mode, vẫn đọc và sửa được, tác vụ tự động bị tắt",
       "Trả lời Yes: đó chỉ là câu hỏi về bản quyền và không ảnh hưởng gì tới máy tính của bạn",
       "Trả lời No: VS Code sẽ xoá thư mục đó khỏi máy để bảo vệ các file khác của bạn",
       "Trả lời Yes: nếu không thì VS Code từ chối mở và bạn không đọc được bất kỳ file nào"
     ],
     "optionsEn": [
-      "Answer No: the folder opens in Restricted Mode, still readable and editable, with automatic tasks off",
+      "Answer No: it opens in Restricted Mode, still editable, with automatic tasks off",
       "Answer Yes: it is only a question about copyright and has no effect on your computer",
       "Answer No: VS Code will delete that folder from your computer to protect your other files",
       "Answer Yes: otherwise VS Code refuses to open it and you cannot read any of the files"
@@ -359,13 +359,13 @@
       "Đưa trang web của bạn lên internet để bất kỳ ai có đường link cũng truy cập được",
       "Tự động lưu file sau mỗi lần bạn ngừng gõ để bạn không bao giờ quên lưu nữa",
       "Kiểm tra code HTML của bạn và gạch chân mọi thẻ viết sai trước khi mở trang",
-      "Chạy một web server nhỏ trên máy bạn và bảo trình duyệt tải lại trang mỗi khi bạn lưu file"
+      "Chạy một web server nhỏ trên máy và tải lại trang mỗi khi bạn lưu file"
     ],
     "optionsEn": [
       "It publishes your web page to the internet so that anyone with the link can visit it",
       "It saves the file automatically each time you stop typing so you never forget to save",
       "It checks your HTML code and underlines every incorrect tag before opening the page",
-      "It runs a small web server on your computer and tells the browser to reload the page on every save"
+      "It runs a small local web server and reloads the page every time you save"
     ],
     "answer": 3,
     "explanation": "Live Server chạy một web server tí hon trên máy bạn và theo dõi thư mục dự án. Mỗi lần bạn lưu, nó bảo trình duyệt tải lại trang (auto-reload), nên bạn không cần nhấn F5.",
@@ -455,13 +455,13 @@
       "Mở Quick Open bằng `Ctrl + P` (macOS: `Cmd + P`) rồi gõ tên file `theme.html`",
       "Mở tìm kiếm bằng `Ctrl + Shift + F` (macOS: `Cmd + Shift + F`) rồi gõ `theme`",
       "Mở Command Palette bằng `Ctrl + Shift + P` (macOS: `Cmd + Shift + P`) rồi gõ `theme`",
-      "Mở terminal bằng ``Ctrl + ` `` rồi gõ lệnh `code .` để VS Code tải lại giao diện"
+      "Mở terminal bằng ``Ctrl + ` `` rồi gõ lệnh `code .` để VS Code tải lại toàn bộ giao diện"
     ],
     "optionsEn": [
       "Open Quick Open with `Ctrl + P` (macOS: `Cmd + P`) and type the file name `theme.html`",
       "Open search with `Ctrl + Shift + F` (macOS: `Cmd + Shift + F`) and type `theme`",
       "Open the Command Palette with `Ctrl + Shift + P` (macOS: `Cmd + Shift + P`) and type `theme`",
-      "Open the terminal with ``Ctrl + ` `` and run `code .` so VS Code reloads its interface"
+      "Open the terminal with ``Ctrl + ` `` and run `code .` so that VS Code reloads its whole interface"
     ],
     "answer": 2,
     "explanation": "Command Palette (`Ctrl + Shift + P` / `Cmd + Shift + P`) là ô tìm kiếm cho mọi hành động của VS Code. Gõ vài chữ như `theme` hay `format` là tìm thấy lệnh cần dùng.",
@@ -522,7 +522,7 @@
       "Nó miễn phí và không yêu cầu bạn phải tạo tài khoản để cài"
     ],
     "optionsEn": [
-      "Its page is written in English rather than in the Vietnamese language",
+      "Its page is written in English rather than in the Vietnamese language you use",
       "An unfamiliar publisher with no verified mark and only a few hundred installs",
       "It was updated this very month with a small bug-fix release",
       "It is free and does not require you to create an account to install"
@@ -549,14 +549,14 @@
     "questionEn": "Why should you not install dozens of extensions on day one?",
     "options": [
       "Mỗi cái làm VS Code khởi động chậm hơn, và các extension làm cùng một việc có thể xung đột",
-      "VS Code giới hạn tối đa mười extension cho mỗi tài khoản người dùng miễn phí",
+      "VS Code giới hạn tối đa mười extension cho mỗi tài khoản người dùng miễn phí của nó",
       "Extension đã cài thì không gỡ ra được nữa nếu không cài lại toàn bộ VS Code",
       "Mỗi extension tự động thêm một file mới vào thư mục dự án mà bạn đang mở"
     ],
     "optionsEn": [
       "Each one slows VS Code's startup, and extensions that do the same job can conflict",
       "VS Code allows at most ten extensions for each free user account",
-      "An installed extension can never be removed without reinstalling VS Code entirely",
+      "An installed extension can never be removed without reinstalling VS Code completely",
       "Every extension automatically adds a new file to the project folder you have open"
     ],
     "answer": 0,
@@ -583,13 +583,13 @@
       "Trong thư mục cài đặt của VS Code, và chạy zsh",
       "Ở thư mục gốc của ổ `C:`, và chạy Git Bash",
       "Trong thư mục Downloads, và chạy Command Prompt",
-      "Ngay trong thư mục `my-first-site`, và chạy PowerShell"
+      "Ngay trong thư mục dự án đang mở, và chạy PowerShell"
     ],
     "optionsEn": [
       "Inside VS Code's own install folder, running zsh",
       "At the root of the `C:` drive, running Git Bash",
       "Inside the Downloads folder, running Command Prompt",
-      "Inside the `my-first-site` folder, running PowerShell"
+      "Inside the project folder you have open, running PowerShell"
     ],
     "answer": 3,
     "explanation": "Integrated terminal mở ngay bên trong thư mục dự án nên bạn không cần di chuyển. Nó chạy một shell: PowerShell trên Windows, zsh trên macOS. `pwd` in ra thư mục hiện tại để bạn kiểm tra.",
@@ -646,13 +646,13 @@
     "options": [
       "Trình duyệt cần được cài lại vì nó không còn hiểu file HTML mới",
       "VS Code đang ở Restricted Mode nên mọi thay đổi đều bị chặn lại",
-      "File chưa được lưu, nên trình duyệt vẫn đọc bản cũ trên ổ đĩa",
+      "Thay đổi vẫn chưa được lưu xuống ổ đĩa bằng `Ctrl + S`",
       "Thẻ tiêu đề chỉ được trình duyệt đọc một lần khi trang mở lần đầu"
     ],
     "optionsEn": [
       "The browser must be reinstalled because it no longer understands new HTML",
       "VS Code is in Restricted Mode, so every change you make is being blocked",
-      "The file is not saved, so the browser still reads the old version on disk",
+      "The change has not been written to disk with `Ctrl + S` yet",
       "The heading tag is read by the browser only once, when the page first opens"
     ],
     "answer": 2,
@@ -685,7 +685,7 @@
       "Close and reopen the terminal; if it still fails, reinstall with \"Add to PATH\" ticked",
       "Rename the project folder to `code` so that the terminal can find the command",
       "Install the Live Server extension, because it is what provides the `code` command",
-      "Answer Yes to the Workspace Trust prompt so that VS Code unlocks the `code` command"
+      "Answer Yes to the Workspace Trust prompt so that VS Code unlocks the `code` command for you"
     ],
     "answer": 0,
     "explanation": "Thông báo này nghĩa là hệ điều hành không tìm thấy chương trình `code`: VS Code chưa nằm trong PATH, hoặc terminal được mở trước khi cài. Mở lại terminal; trên macOS chạy **Shell Command: Install 'code' command in PATH**.",
@@ -709,13 +709,13 @@
     "questionEn": "Your file has no colours and no suggestions, and the right end of the Status Bar says \"Plain Text\". What is the fix?",
     "options": [
       "Gỡ VS Code rồi cài lại từ trang chính thức để lấy lại các theme màu mặc định",
-      "Bấm vào tên ngôn ngữ trên Status Bar rồi chọn HTML, và kiểm tra lại đuôi file",
+      "Đổi language mode của file sang HTML và kiểm tra lại đuôi file",
       "Tăng `Font Size` trong Settings lên 16 để các màu của code hiện ra rõ hơn",
       "Mở terminal và chạy lệnh `ls` để VS Code quét lại các file trong thư mục"
     ],
     "optionsEn": [
       "Uninstall VS Code and reinstall it from the official site to get the default themes back",
-      "Click the language name in the Status Bar and choose HTML, and check the file extension",
+      "Switch the file's language mode to HTML and check its extension",
       "Raise `Font Size` in Settings to 16 so the colours of the code become visible",
       "Open the terminal and run `ls` so that VS Code rescans the files in the folder"
     ],

@@ -267,13 +267,13 @@
       "Backup Plan lifecycle",
       "AWS Backup Vault Lock",
       "Cross-Region backup",
-      "DataSync task scheduling"
+      "Backup Vault access policy"
     ],
     "optionsEn": [
       "Backup Plan lifecycle",
       "AWS Backup Vault Lock",
       "Cross-Region backup",
-      "DataSync task scheduling"
+      "Backup Vault access policy"
     ],
     "answer": 1,
     "explanation": "AWS Backup Vault Lock áp dụng mô hình WORM (Write Once Read Many) cho backup vault: backup không thể bị xóa/sửa trước khi hết hạn giữ, giúp chống ransomware và đáp ứng yêu cầu tuân thủ.",
@@ -304,16 +304,16 @@
     "question": "Trong AWS Backup, một Backup Plan là gì?",
     "questionEn": "In AWS Backup, what is a Backup Plan?",
     "options": [
-      "Chính sách định nghĩa tần suất sao lưu, vòng đời/thời gian giữ và vault đích, áp dụng cho tài nguyên theo tag hoặc ARN",
-      "Một bản snapshot đơn lẻ tại một thời điểm",
-      "Kho lưu trữ nơi các bản sao lưu được đặt vào",
-      "Một IAM role cấp quyền sao lưu"
+      "Chính sách gồm lịch, thời gian giữ và vault đích, gán theo tag",
+      "Một recovery point đơn lẻ tại một thời điểm của một tài nguyên",
+      "Container được mã hóa nơi lưu trữ các recovery point",
+      "IAM role mà AWS Backup assume để tạo bản sao lưu"
     ],
     "optionsEn": [
-      "A policy defining backup frequency, lifecycle/retention and the destination vault, applied to resources by tag or ARN",
-      "A single point-in-time snapshot",
-      "The store where backups are placed",
-      "An IAM role that grants backup permissions"
+      "A policy of schedule, retention, and target vault, assigned by tag",
+      "A single point-in-time recovery point of one resource",
+      "The encrypted container where recovery points are stored",
+      "An IAM role that AWS Backup assumes to create backups"
     ],
     "answer": 0,
     "explanation": "Phân biệt: Backup Plan là CHÍNH SÁCH, Backup Vault là NƠI CHỨA, và Vault Lock làm cho bản sao lưu không thể bị xóa trong thời gian giữ. Gán tài nguyên vào plan bằng tag là cách mở rộng dễ nhất.",

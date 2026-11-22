@@ -4,15 +4,15 @@
     "question": "Điểm khác biệt cốt lõi giữa backtracking và greedy là gì?",
     "questionEn": "What is the core difference between backtracking and greedy?",
     "options": [
-      "Backtracking luôn chạy O(n log n), còn greedy luôn tốn hàm mũ",
+      "Backtracking luôn chạy O(n log n), còn greedy luôn tốn thời gian hàm mũ",
       "Greedy dùng đệ quy, còn backtracking bắt buộc phải viết bằng vòng lặp",
-      "Backtracking hoàn tác lựa chọn để thử phương án khác; greedy chốt một lựa chọn mỗi bước và không xem lại",
+      "Backtracking hoàn tác lựa chọn để thử nhánh khác; greedy chốt và không xem lại",
       "Greedy liệt kê mọi lời giải, còn backtracking chỉ trả về một lời giải tối ưu"
     ],
     "optionsEn": [
       "Backtracking always runs in O(n log n), while greedy is always exponential",
-      "Greedy uses recursion, while backtracking must be written with loops",
-      "Backtracking undoes choices to try alternatives; greedy commits to one choice per step and never revisits it",
+      "Greedy uses recursion, while backtracking must be written with plain loops",
+      "Backtracking undoes choices to try alternatives; greedy commits and never revisits",
       "Greedy lists every solution, while backtracking returns only one optimal solution"
     ],
     "answer": 2,
@@ -24,19 +24,19 @@
     "question": "Hàm sau trả về gì khi gọi `subsets([1, 2])`?\n`function subsets(nums) {\n  const result = [];\n  const path = [];\n  function bt(start) {\n    result.push(path);\n    for (let i = start; i < nums.length; i++) {\n      path.push(nums[i]); bt(i + 1); path.pop();\n    }\n  }\n  bt(0);\n  return result;\n}`",
     "questionEn": "What does this return for `subsets([1, 2])`?\n`function subsets(nums) {\n  const result = [];\n  const path = [];\n  function bt(start) {\n    result.push(path);\n    for (let i = start; i < nums.length; i++) {\n      path.push(nums[i]); bt(i + 1); path.pop();\n    }\n  }\n  bt(0);\n  return result;\n}`",
     "options": [
-      "`[[], [], [], []]` — bốn tham chiếu tới cùng một mảng đã rỗng",
+      "`[[], [], [], []]`",
       "`[[], [1], [1, 2], [2]]`",
-      "`[[1, 2]]`",
-      "`[[], [1], [2]]`"
+      "`[[1, 2], [1, 2], [1, 2]]`",
+      "`[[], [1], [2], [1, 2]]`"
     ],
     "optionsEn": [
-      "`[[], [], [], []]` — four references to the same, now empty, array",
+      "`[[], [], [], []]`",
       "`[[], [1], [1, 2], [2]]`",
-      "`[[1, 2]]`",
-      "`[[], [1], [2]]`"
+      "`[[1, 2], [1, 2], [1, 2]]`",
+      "`[[], [1], [2], [1, 2]]`"
     ],
     "answer": 0,
-    "explanation": "`result.push(path)` lưu tham chiếu chứ không phải bản sao. Hàm ghi lại 4 lần (4 tập con) nhưng cả 4 phần tử đều trỏ tới cùng `path`, và sau khi mọi `pop()` chạy xong thì `path` rỗng. Sửa bằng `result.push([...path])`.",
+    "explanation": "`result.push(path)` lưu một tham chiếu chứ không phải bản sao. Hàm ghi 4 lần (4 tập con), nhưng cả 4 phần tử đều trỏ tới cùng một mảng `path`, mà mảng này đã rỗng sau khi mọi `pop()` chạy xong. Sửa bằng `result.push([...path])`.",
     "explanationEn": "`result.push(path)` stores a reference, not a copy. It records 4 times (4 subsets), but all 4 entries point at the same `path`, which is empty once every `pop()` has run. Fix it with `result.push([...path])`."
   },
   {
@@ -44,16 +44,16 @@
     "question": "Trong khuôn mẫu backtracking, vì sao phải có bước \"huỷ chọn\" (ví dụ `path.pop()`) sau lời gọi đệ quy?",
     "questionEn": "In the backtracking template, why is the \"un-choose\" step (e.g. `path.pop()`) needed after the recursive call?",
     "options": [
-      "Để giải phóng stack frame, tránh stack overflow",
-      "Để biến thời gian chạy từ hàm mũ thành đa thức",
-      "Để sort lại input sau mỗi lời gọi",
-      "Để trạng thái dùng chung trở lại như trước khi chọn, nhánh anh em kế tiếp không bị lẫn lựa chọn cũ"
+      "Để giải phóng stack frame của lời gọi vừa xong, tránh stack overflow",
+      "Để biến thời gian chạy từ hàm mũ thành đa thức nhờ cắt bớt nhánh",
+      "Để sort lại input về thứ tự ban đầu sau mỗi lời gọi đệ quy",
+      "Để trạng thái dùng chung trở lại như cũ trước nhánh anh em kế tiếp"
     ],
     "optionsEn": [
-      "To free the stack frame and avoid a stack overflow",
-      "To turn an exponential running time into a polynomial one",
-      "To re-sort the input after each call",
-      "To restore the shared state so the next sibling branch does not inherit the old choice"
+      "To free the finished call's stack frame and avoid a stack overflow",
+      "To turn an exponential running time into a polynomial one by pruning",
+      "To re-sort the input back to its original order after each call",
+      "To restore the shared state before the next sibling branch runs"
     ],
     "answer": 3,
     "explanation": "Mọi nhánh cùng dùng chung một `path` (và các biến như `used`, các Set). Nếu không hoàn tác, lựa chọn của nhánh vừa khám phá sẽ rò rỉ sang nhánh sau và sinh ra kết quả sai. Stack frame tự được giải phóng khi hàm trả về; huỷ chọn không thay đổi độ phức tạp.",
@@ -104,16 +104,16 @@
     "question": "Trong code sinh hoán vị, một bạn thay mảng `used` bằng start index (`for (let i = start; …)` và gọi `backtrack(i + 1)`), vẫn ghi kết quả khi `path.length === nums.length`. Với `[1, 2, 3]` hàm giờ trả về gì?",
     "questionEn": "In the permutations code, a colleague replaces the `used` array with a start index (`for (let i = start; …)` and `backtrack(i + 1)`), still recording when `path.length === nums.length`. What does it now return for `[1, 2, 3]`?",
     "options": [
-      "Chỉ `[[1, 2, 3]]` — start index chỉ cho phép thứ tự tăng dần của chỉ số",
-      "Vẫn đủ 6 hoán vị",
-      "Tám tập con",
-      "Vòng lặp vô hạn"
+      "Chỉ `[[1, 2, 3]]` — start index chỉ cho chỉ số tăng dần",
+      "Vẫn đủ 6 hoán vị, vì mọi chỉ số vẫn được duyệt tới",
+      "Tám tập con của `[1, 2, 3]`, kể cả tập rỗng",
+      "Vòng lặp vô hạn, vì `i + 1` không bao giờ chạm cuối mảng"
     ],
     "optionsEn": [
-      "Only `[[1, 2, 3]]` — a start index only allows indices in increasing order",
-      "All 6 permutations, unchanged",
-      "The eight subsets",
-      "An infinite loop"
+      "Only `[[1, 2, 3]]` — a start index only allows increasing indices",
+      "All 6 permutations, since every index is still reached",
+      "The eight subsets of `[1, 2, 3]`, including the empty one",
+      "An infinite loop, because `i + 1` never reaches the end"
     ],
     "answer": 0,
     "explanation": "Start index buộc mỗi phần tử chỉ được chọn sau các phần tử đứng trước nó — đó là cách tránh lặp cho tập con và tổ hợp, nơi thứ tự không quan trọng. Chỉ có một cách chọn đủ 3 phần tử theo thứ tự chỉ số tăng dần. Hoán vị cần xét lại mọi phần tử chưa dùng ở mỗi vị trí, nên phải dùng `used`.",
@@ -124,36 +124,36 @@
     "question": "Mảng `[1, 2, 3, 4, 5]` có bao nhiêu hoán vị?",
     "questionEn": "How many permutations does `[1, 2, 3, 4, 5]` have?",
     "options": [
-      "25",
+      "125",
       "32",
       "60",
       "120"
     ],
     "optionsEn": [
-      "25",
+      "125",
       "32",
       "60",
       "120"
     ],
     "answer": 3,
-    "explanation": "5! = 5 · 4 · 3 · 2 · 1 = 120: vị trí đầu có 5 lựa chọn, vị trí hai còn 4, và cứ thế. 32 = 2⁵ là số tập con; 25 = 5² không liên quan tới bài toán này.",
-    "explanationEn": "5! = 5 · 4 · 3 · 2 · 1 = 120: 5 options for the first slot, 4 for the second, and so on. 32 = 2⁵ is the number of subsets; 25 = 5² has nothing to do with this problem."
+    "explanation": "5! = 5 · 4 · 3 · 2 · 1 = 120: 5 lựa chọn cho vị trí đầu, 4 cho vị trí thứ hai, và cứ thế. 32 = 2⁵ là số tập con; 125 = 5³ và 60 = 5 · 4 · 3 là số cách chọn có thứ tự chỉ 3 vị trí (có hoặc không lặp lại).",
+    "explanationEn": "5! = 5 · 4 · 3 · 2 · 1 = 120: 5 options for the first slot, 4 for the second, and so on. 32 = 2⁵ is the number of subsets; 125 = 5³ and 60 = 5 · 4 · 3 count ordered picks of only 3 slots (with and without repetition)."
   },
   {
     "id": "q8",
     "question": "Trong combination sum (mỗi số được dùng lại nhiều lần), lời gọi đệ quy là `backtrack(i, remaining - sorted[i])` chứ không phải `backtrack(i + 1, …)` hay `backtrack(0, …)`. Vì sao?",
     "questionEn": "In combination sum (numbers may be reused), the recursive call is `backtrack(i, remaining - sorted[i])`, not `backtrack(i + 1, …)` or `backtrack(0, …)`. Why?",
     "options": [
-      "`i` giúp thuật toán chạy O(n) thay vì hàm mũ",
-      "`i` cho phép dùng lại chính số đó, nhưng không quay về số nhỏ hơn nên không sinh cả `[2, 3]` lẫn `[3, 2]`",
-      "`i + 1` sẽ gây stack overflow với mọi input",
-      "`0` và `i` cho kết quả giống hệt nhau; chọn `i` chỉ vì dễ đọc"
+      "`i` giúp thuật toán chạy O(n) thay vì hàm mũ vì không quay lại số cũ",
+      "`i` cho phép dùng lại chính số đó nhưng không quay về số nhỏ hơn",
+      "`i + 1` sẽ gây stack overflow với mọi input vì không có base case",
+      "`0` và `i` cho kết quả giống hệt nhau; chọn `i` chỉ vì dễ đọc hơn"
     ],
     "optionsEn": [
-      "`i` makes the algorithm O(n) instead of exponential",
-      "`i` allows reusing the same number, but never going back to smaller ones, so it cannot emit both `[2, 3]` and `[3, 2]`",
-      "`i + 1` would overflow the stack for every input",
-      "`0` and `i` give identical results; `i` is only for readability"
+      "`i` makes the algorithm O(n) instead of exponential, as it never looks back",
+      "`i` allows reusing the same number but never going back to smaller ones",
+      "`i + 1` would overflow the stack for every input, as it has no base case",
+      "`0` and `i` give identical results; `i` is chosen only for readability"
     ],
     "answer": 1,
     "explanation": "`i + 1` cấm dùng lại số hiện tại (sẽ mất `[2, 2, 3]`). `0` cho phép quay lại số trước, nên cùng một tổ hợp xuất hiện theo nhiều thứ tự. `i` là điểm cân bằng: được lặp lại, nhưng các số trong path luôn không giảm.",
@@ -164,15 +164,15 @@
     "question": "Để sinh tập con không trùng từ `[1, 2, 2]` (đã sort), code dùng `if (i > start && sorted[i] === sorted[i - 1]) continue;`. Nếu đổi `i > start` thành `i > 0` thì sao?",
     "questionEn": "To generate unique subsets of `[1, 2, 2]` (sorted), the code uses `if (i > start && sorted[i] === sorted[i - 1]) continue;`. What happens if `i > start` becomes `i > 0`?",
     "options": [
-      "Không đổi gì — hai điều kiện tương đương",
-      "Kết quả lại bị trùng `[2]`",
-      "Hàm chạy vô hạn",
+      "Không đổi gì — hai điều kiện tương đương khi mảng đã sort",
+      "Kết quả lại bị trùng tập con `[2]` như khi chưa có điều kiện",
+      "Hàm chạy vô hạn vì `continue` bỏ qua bước tăng `start`",
       "Mất các tập con hợp lệ như `[2, 2]` và `[1, 2, 2]`"
     ],
     "optionsEn": [
-      "Nothing changes — the two conditions are equivalent",
-      "The result contains `[2]` twice again",
-      "The function loops forever",
+      "Nothing changes — the two conditions are equivalent on sorted input",
+      "The subset `[2]` shows up twice again, as with no check at all",
+      "It loops forever, because `continue` skips advancing `start`",
       "Valid subsets like `[2, 2]` and `[1, 2, 2]` are lost"
     ],
     "answer": 3,
@@ -264,15 +264,15 @@
     "question": "`canJump([2, 0, 0, 1])` trả về gì?\n`function canJump(nums) {\n  let farthest = 0;\n  for (let i = 0; i < nums.length; i++) {\n    if (i > farthest) return false;\n    farthest = Math.max(farthest, i + nums[i]);\n  }\n  return true;\n}`",
     "questionEn": "What does `canJump([2, 0, 0, 1])` return?\n`function canJump(nums) {\n  let farthest = 0;\n  for (let i = 0; i < nums.length; i++) {\n    if (i > farthest) return false;\n    farthest = Math.max(farthest, i + nums[i]);\n  }\n  return true;\n}`",
     "options": [
-      "`true`, vì phần tử cuối là 1",
-      "`true`, vì từ vị trí 0 nhảy được 2 bước",
-      "`false`, vì dừng ngay ở vị trí 1",
+      "`true`, vì phần tử cuối là 1 nên vẫn còn bước nhảy",
+      "`true`, vì từ vị trí 0 nhảy được 2 bước tới vị trí 2",
+      "`false`, vì vòng lặp dừng ngay ở vị trí 1 có giá trị 0",
       "`false`, vì vị trí 3 vượt quá tầm với xa nhất là 2"
     ],
     "optionsEn": [
-      "`true`, because the last element is 1",
-      "`true`, because index 0 can jump 2 steps",
-      "`false`, because it stops at index 1",
+      "`true`, because the last element is 1, so a jump remains",
+      "`true`, because index 0 can jump 2 steps to reach index 2",
+      "`false`, because the loop stops right at index 1, which holds 0",
       "`false`, because index 3 lies beyond the farthest reach of 2"
     ],
     "answer": 3,

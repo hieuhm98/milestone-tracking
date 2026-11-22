@@ -4,16 +4,16 @@
     "question": "Vì sao mô hình hoá quy trình dùng bốn sơ đồ thay vì một?",
     "questionEn": "Why does process modeling use four diagrams instead of one?",
     "options": [
-      "Mỗi sơ đồ trả lời một câu hỏi ở một mức phóng khác nhau; nhồi tất cả vào một hình tạo ra bức tranh không ai đọc nổi",
-      "Vì các công cụ vẽ không hỗ trợ sơ đồ lớn",
+      "Mỗi sơ đồ trả lời một câu hỏi ở một mức phóng; gộp lại thì không ai đọc nổi",
+      "Các công cụ vẽ phổ biến không hiển thị nổi một sơ đồ đủ lớn để chứa mọi thứ",
       "Vì chuẩn BABOK bắt buộc phải có đủ bốn sơ đồ trong mọi tài liệu",
-      "Vì mỗi sơ đồ dành cho một ngôn ngữ trình bày khác nhau"
+      "Mỗi sơ đồ phải do một vai trò khác nhau trong đội vẽ ra"
     ],
     "optionsEn": [
-      "Each diagram answers one question at a different zoom level; cramming everything into one picture produces something nobody can read",
-      "Because drawing tools cannot handle large diagrams",
-      "Because BABOK requires all four diagrams in every document",
-      "Because each diagram targets a different presentation language"
+      "Each answers one question at its own zoom level; one picture becomes unreadable",
+      "Common drawing tools cannot render a single diagram large enough to hold everything",
+      "BABOK requires all four diagrams in every requirements document",
+      "Each diagram must be produced by a different role on the team"
     ],
     "answer": 0,
     "explanation": "Bốn mức phóng — context, functional flow, cross-functional flow, flowchart — mỗi mức làm lộ ra một loại yêu cầu bị bỏ sót khác nhau.",
@@ -24,16 +24,16 @@
     "question": "Thứ tự vẽ được khuyến nghị là gì, và vì sao?",
     "questionEn": "What is the recommended order to draw them in, and why?",
     "options": [
-      "Từ ngoài vào trong — chốt ranh giới trước, chi tiết sau; vẽ ngược lại dễ khiến bạn phát hiện muộn rằng đã bỏ sót một bên tham gia",
-      "Từ trong ra ngoài — có chi tiết thao tác trước thì mới suy ra được phạm vi",
-      "Vẽ song song cả bốn để tiết kiệm thời gian họp",
-      "Thứ tự không quan trọng, chỉ cần đủ bốn sơ đồ"
+      "Từ ngoài vào trong: chốt ranh giới trước, chi tiết sau",
+      "Từ trong ra ngoài: phạm vi chỉ suy ra được từ chi tiết thao tác",
+      "Vẽ song song cả bốn để chỉ cần một buổi workshop là xong",
+      "Thứ tự nào cũng được, miễn là đủ cả bốn sơ đồ"
     ],
     "optionsEn": [
-      "Outside in — settle the boundary first and the detail last; going the other way is how you discover a missing participant far too late",
-      "Inside out — you can only infer scope once you have the operational detail",
-      "All four in parallel, to save meeting time",
-      "The order does not matter as long as all four exist"
+      "Outside in: settle the boundary first, detail last",
+      "Inside out: scope can only be inferred from operational detail",
+      "All four in parallel, so one workshop covers everything",
+      "Any order works, as long as all four are finished"
     ],
     "answer": 0,
     "explanation": "Bắt đầu bằng flowchart chi tiết là cách phổ biến nhất để phát hiện ở tuần thứ sáu rằng cả một bên tham gia chưa từng được đưa vào phạm vi.",
@@ -44,16 +44,16 @@
     "question": "Context model cố tình KHÔNG thể hiện điều gì?",
     "questionEn": "What does a context model deliberately NOT show?",
     "options": [
-      "Những gì xảy ra bên trong tổ chức — nó chỉ cho thấy các luồng trao đổi với bên ngoài",
+      "Những gì xảy ra bên trong tổ chức",
       "Tên của các bên tham gia bên ngoài",
       "Nội dung của các luồng dữ liệu",
-      "Chiều của các mũi tên"
+      "Chiều của các mũi tên luồng"
     ],
     "optionsEn": [
-      "What happens inside the organization — it only shows the flows exchanged with the outside",
+      "What happens inside the organization",
       "The names of the external parties",
       "The content of the data flows",
-      "The direction of the arrows"
+      "The direction of each of the flow arrows"
     ],
     "answer": 0,
     "explanation": "Đó là điểm mạnh chứ không phải thiếu sót: bỏ chi tiết bên trong giúp cuộc thảo luận tập trung vào phạm vi và các bên liên quan.",
@@ -104,15 +104,15 @@
     "question": "Functional flow diagram khác context model ở điểm nào?",
     "questionEn": "How does a functional flow diagram differ from a context model?",
     "options": [
-      "Nó bước vào bên trong ranh giới và cho thấy các bộ phận trao đổi thông tin gì với nhau — nhưng chưa thể hiện thứ tự thời gian",
-      "Nó thêm thứ tự thời gian và các làn trách nhiệm",
-      "Nó chỉ khác ở ký hiệu, nội dung là như nhau",
-      "Nó thay thế context model khi quy trình có nhiều hơn ba bên"
+      "Nó cho thấy các bộ phận trao đổi gì với nhau, vẫn chưa có thứ tự thời gian",
+      "Nó bổ sung thứ tự thời gian và làn trách nhiệm vào góc nhìn context",
+      "Chỉ khác nhau ở ký hiệu; còn nội dung được thể hiện là như nhau",
+      "Nó thay thế hẳn context model khi quy trình có từ bốn bên tham gia trở lên"
     ],
     "optionsEn": [
-      "It steps inside the boundary and shows which departments exchange what information — but still shows no time order",
-      "It adds time order and lanes of responsibility",
-      "Only the notation differs; the content is the same",
+      "It shows which departments exchange what, still without time order",
+      "It adds time order and lanes of responsibility to the context view",
+      "Only the notation differs; the content shown is the same",
       "It replaces the context model once a process has more than three parties"
     ],
     "answer": 0,
@@ -124,13 +124,13 @@
     "question": "“Thông tin mồ côi” mà functional flow diagram làm lộ ra là gì?",
     "questionEn": "What is the \"orphan\" information that a functional flow diagram exposes?",
     "options": [
-      "Dữ liệu được gửi từ bộ phận này sang bộ phận khác mà không sơ đồ nào cho thấy bên nhận dùng nó vào việc gì",
+      "Dữ liệu gửi tới một bộ phận mà không thấy bên đó dùng vào việc gì",
       "Dữ liệu không có chủ sở hữu hợp pháp theo quy định bảo mật",
       "Dữ liệu bị mất trong lúc chuyển giao giữa hai hệ thống",
-      "Dữ liệu chỉ tồn tại trong bản as-is mà không có trong bản to-be"
+      "Dữ liệu chỉ tồn tại trong bản as-is mà hoàn toàn không có trong bản to-be"
     ],
     "optionsEn": [
-      "Data sent from one department to another where no diagram shows the receiver using it for anything",
+      "Data sent to a department that never visibly uses it",
       "Data with no lawful owner under privacy regulation",
       "Data lost during a handoff between two systems",
       "Data that exists only in the as-is model and not in the to-be"
@@ -144,16 +144,16 @@
     "question": "Trên cross-functional flow diagram, thứ đáng đọc nhất là gì?",
     "questionEn": "On a cross-functional flow diagram, what is the most informative thing to read?",
     "options": [
-      "Các lần mũi tên cắt ngang làn — mỗi lần chuyển giao là một điểm chờ đợi, mất thông tin và đổi trách nhiệm",
-      "Số lượng bước trong làn dài nhất",
-      "Tên của quy trình ghi trên hộp bao ngoài",
-      "Màu sắc dùng để phân biệt các làn"
+      "Những chỗ mũi tên cắt ngang từ làn này sang làn khác",
+      "Số lượng bước nằm trong làn dài nhất của toàn sơ đồ",
+      "Tên quy trình và người phụ trách ghi trên hộp bao ngoài",
+      "Màu sắc dùng để phân biệt làn này với làn khác"
     ],
     "optionsEn": [
-      "Every time an arrow crosses a lane — each handoff is a point of waiting, information loss, and changed ownership",
-      "The number of steps in the longest lane",
-      "The process name written on the outer box",
-      "The colors used to distinguish the lanes"
+      "Every place an arrow crosses from one lane to another",
+      "The number of steps in the longest lane of the diagram",
+      "The process name and owner written on the outer box",
+      "The colours used to distinguish one lane from another"
     ],
     "answer": 0,
     "explanation": "Ở mỗi lần cắt làn hãy hỏi: chuyển giao này mất bao lâu, truyền đi dữ liệu gì, và nếu bên nhận không phản hồi thì sao.",
@@ -184,15 +184,15 @@
     "question": "Vì sao làn (lane) phải đặt theo vai trò chứ không theo tên người?",
     "questionEn": "Why must a lane be named after a role rather than a person?",
     "options": [
-      "Vì sơ đồ theo tên người sẽ hỏng ngay khi người đó đổi việc, và nó mô tả nhân sự chứ không mô tả quy trình",
-      "Vì tên người là dữ liệu cá nhân không được đưa vào tài liệu",
-      "Vì công cụ vẽ không cho phép tên có dấu",
-      "Vì mỗi người thường làm nhiều bước nên không đủ chỗ ghi"
+      "Vì nó hỏng khi người đó đổi việc, và mô tả nhân sự chứ không phải quy trình",
+      "Vì tên người là dữ liệu cá nhân, không được phép đưa vào tài liệu dự án",
+      "Vì phần lớn công cụ vẽ không xử lý được tên tiếng Việt có dấu",
+      "Vì mỗi người thường làm nhiều bước nên không đủ chỗ ghi tên trên làn"
     ],
     "optionsEn": [
-      "A diagram named after people breaks the day that person changes jobs, and it describes staffing rather than the process",
+      "It breaks when people change jobs and describes staffing, not process",
       "Personal names are personal data and cannot appear in documentation",
-      "Drawing tools cannot handle names with accents",
+      "Most drawing tools cannot handle Vietnamese names with accents",
       "One person usually performs many steps, so there is not enough space"
     ],
     "answer": 0,
@@ -204,16 +204,16 @@
     "question": "Trong ví dụ flowchart của công ty tư vấn, vòng lặp khi không có consultant phù hợp quay về đâu, và vì sao?",
     "questionEn": "In the consulting firm flowchart, where does the loop return to when no qualified consultant is available, and why?",
     "options": [
-      "Quay về “Confirm type of service needed” — một bước có thể thay đổi kết quả, chứ không quay thẳng về chính câu hỏi vừa trả lời",
-      "Quay về “Customer calls” để bắt đầu lại toàn bộ quy trình",
+      "Quay về “Confirm type of service needed”, một bước có thể đổi kết quả",
+      "Quay về “Customer calls” để bắt đầu lại quy trình với thông tin mới",
       "Quay thẳng về chính hình thoi “Is a qualified consultant available?”",
-      "Quay về “Determine cost of service” để báo giá lại"
+      "Quay về “Determine cost of service” để báo giá lại ở mức cao hơn"
     ],
     "optionsEn": [
-      "Back to \"Confirm type of service needed\" — a step that can change the outcome, rather than straight back to the question it just answered",
-      "Back to \"Customer calls\" to restart the whole process",
+      "Back to \"Confirm type of service needed\", a step that can change the outcome",
+      "Back to \"Customer calls\", restarting the process with fresh details",
       "Straight back to the \"Is a qualified consultant available?\" diamond itself",
-      "Back to \"Determine cost of service\" to re-quote"
+      "Back to \"Determine cost of service\" to re-quote at a higher rate"
     ],
     "answer": 0,
     "explanation": "Một vòng lặp quay về đúng điểm cũ mà không đổi gì là vòng lặp vô hạn — quy trình sẽ treo trong thực tế, không chỉ trên giấy.",
@@ -224,15 +224,15 @@
     "question": "Vì sao ví dụ flowchart đó có hai điểm kết thúc khác nhau thay vì một?",
     "questionEn": "Why does that flowchart have two different end points rather than one?",
     "options": [
-      "Vì “Done” là kết thúc không có việc còn “JOB form to assistant” là kết thúc có việc — gộp lại sẽ xoá mất thông tin quan trọng nhất",
+      "Vì một điểm kết thúc không còn việc, một điểm còn việc; gộp lại sẽ mất điều đó",
       "Vì flowchart bắt buộc phải có số điểm kết thúc bằng số hình thoi",
-      "Vì hai nhánh chạy trên hai hệ thống khác nhau",
-      "Vì một điểm dành cho luồng chính và một điểm dành cho luồng lỗi kỹ thuật"
+      "Vì hai nhánh kết thúc trên hai hệ thống phần mềm khác nhau",
+      "Vì một điểm dành cho luồng chính và một điểm dành riêng cho luồng lỗi kỹ thuật"
     ],
     "optionsEn": [
-      "\"Done\" is an ending with no work while \"JOB form to assistant\" is an ending with work — collapsing them erases the most important thing the process tells you",
-      "A flowchart must have as many end points as it has diamonds",
-      "The two branches run on two different systems",
+      "One ends with no work and one ends with work; merging hides that",
+      "A flowchart must have exactly as many end points as it has diamond shapes",
+      "The two branches finish on two different software systems",
       "One is for the happy path and one is for technical errors"
     ],
     "answer": 0,
@@ -244,16 +244,16 @@
     "question": "Cách kiểm tra một process flowchart đã hoàn chỉnh là gì?",
     "questionEn": "How do you check that a process flowchart is complete?",
     "options": [
-      "Đi theo mọi nhánh cho tới khi chạm terminator; nhánh cụt giữa chừng hoặc hình thoi chỉ có một đường ra nghĩa là chưa xong",
-      "Đếm số hình chữ nhật và so với số yêu cầu chức năng",
-      "Kiểm tra sơ đồ vừa trong một trang A4",
-      "Bảo đảm không có nhánh nào dài quá năm bước"
+      "Đi theo mọi nhánh tới terminator; còn nhánh cụt nghĩa là chưa xong",
+      "Đếm số hình chữ nhật rồi so với số lượng yêu cầu chức năng đã được duyệt",
+      "Kiểm tra xem toàn bộ sơ đồ có vừa trong một trang A4 không",
+      "Bảo đảm không có nhánh nào dài quá năm bước liên tiếp"
     ],
     "optionsEn": [
-      "Walk every branch until it reaches a terminator; a dead-end branch or a diamond with only one way out means it is unfinished",
+      "Follow every branch to a terminator; dead ends mean it is unfinished",
       "Count the rectangles and compare with the number of functional requirements",
-      "Check that the diagram fits on one A4 page",
-      "Make sure no branch is longer than five steps"
+      "Check that the whole diagram fits on a single A4 page",
+      "Make sure no single branch runs longer than five steps"
     ],
     "answer": 0,
     "explanation": "Process flowchart là sơ đồ duy nhất trong bốn loại buộc bạn phủ mọi kết quả có thể của mọi quyết định.",
@@ -264,15 +264,15 @@
     "question": "Quan hệ giữa BPMN và cross-functional flow diagram là gì?",
     "questionEn": "How does BPMN relate to the cross-functional flow diagram?",
     "options": [
-      "BPMN là bản chuẩn hoá của nó, thêm sự kiện, thông điệp, quy trình con và xử lý lỗi — chứ không thay thế bộ bốn sơ đồ",
-      "BPMN thay thế hoàn toàn bốn sơ đồ cổ điển và khiến chúng lỗi thời",
-      "Hai loại hoàn toàn độc lập, không có điểm chung nào",
-      "Cross-functional flow diagram là bản chuẩn hoá của BPMN"
+      "BPMN là bản chuẩn hoá của nó, thêm sự kiện, thông điệp và xử lý lỗi",
+      "BPMN thay thế hoàn toàn bốn sơ đồ cổ điển và khiến chúng trở nên lỗi thời",
+      "Hai loại là ký hiệu độc lập, không chung khái niệm nào",
+      "Cross-functional flow diagram là bản chuẩn hoá chính thức của BPMN"
     ],
     "optionsEn": [
-      "BPMN is its standardized form, adding events, messages, subprocesses, and error handling — it does not replace the set of four",
+      "BPMN standardizes it, adding events, messages and error handling",
       "BPMN fully replaces the four classic diagrams and makes them obsolete",
-      "They are entirely independent and share nothing",
+      "They are independent notations that share no concepts",
       "The cross-functional flow diagram is the standardized form of BPMN"
     ],
     "answer": 0,
@@ -284,16 +284,16 @@
     "question": "Lời khuyên thực dụng khi chọn giữa swimlane diagram và BPMN là gì?",
     "questionEn": "What is the practical rule for choosing between a swimlane diagram and BPMN?",
     "options": [
-      "Dùng swimlane để thảo luận với nghiệp vụ, dùng BPMN để đặc tả cho đội phát triển — chọn theo người sẽ đọc bản vẽ",
-      "Luôn dùng BPMN vì nó là chuẩn quốc tế",
-      "Luôn dùng swimlane vì nó dễ đọc hơn trong mọi trường hợp",
-      "Chọn theo công cụ mà công ty đã mua bản quyền"
+      "Swimlane để thảo luận với nghiệp vụ, BPMN để đặc tả cho đội phát triển",
+      "Dùng BPMN cho mọi trường hợp, vì đó là chuẩn ký hiệu quốc tế",
+      "Dùng swimlane ở mọi nơi, vì cả nghiệp vụ lẫn lập trình viên đọc nhanh hơn",
+      "Chọn theo ký hiệu mà công cụ công ty đã mua bản quyền hỗ trợ"
     ],
     "optionsEn": [
-      "Use swimlanes to discuss with the business and BPMN to specify for the delivery team — choose by who will read the drawing",
-      "Always use BPMN because it is the international standard",
-      "Always use swimlanes because they are easier to read in every case",
-      "Choose whichever tool the company already has a license for"
+      "Swimlanes for business discussion, BPMN for the delivery team",
+      "BPMN in every case, because it is the international standard",
+      "Swimlanes everywhere, because business and developers read them faster",
+      "Whichever notation the company's licensed tool supports"
     ],
     "answer": 0,
     "explanation": "Nhiều BA phí thời gian tranh cãi nên dùng loại nào, trong khi câu trả lời phụ thuộc vào người đọc.",
@@ -304,16 +304,16 @@
     "question": "Vì sao “làm đẹp” bản as-is là một lỗi nghiêm trọng?",
     "questionEn": "Why is quietly \"tidying up\" the as-is model a serious mistake?",
     "options": [
-      "Bạn mất cơ sở đo lường cải tiến, và người trực tiếp vận hành sẽ không nhận ra quy trình của họ",
-      "Nó làm sơ đồ khó vẽ hơn về mặt kỹ thuật",
-      "Nó vi phạm quy ước ký hiệu BPMN",
-      "Nó khiến bản to-be phải vẽ lại từ đầu"
+      "Mất cơ sở đo cải tiến, và người vận hành không nhận ra quy trình của họ",
+      "Nó khiến sơ đồ khó vẽ hơn và về sau khó giữ được tính nhất quán",
+      "Nó vi phạm các quy ước ký hiệu BPMN áp dụng riêng cho bản as-is",
+      "Nó buộc bản to-be phải được vẽ lại hoàn toàn từ đầu về sau"
     ],
     "optionsEn": [
-      "You lose the baseline for proving improvement, and the people who actually run the process will not recognize it",
-      "It makes the diagram technically harder to draw",
-      "It violates BPMN notation conventions",
-      "It forces the to-be model to be redrawn from scratch"
+      "You lose the improvement baseline, and operators won't recognize it",
+      "It makes the diagram harder to draw and to keep consistent later",
+      "It breaks the BPMN notation conventions that apply to as-is models",
+      "It forces the to-be model to be redrawn from scratch later"
     ],
     "answer": 0,
     "explanation": "As-is là thực tế, kể cả khi thực tế lộn xộn. Hãy đi bộ qua sơ đồ cùng người trực tiếp thực hiện để xác nhận.",

@@ -4,16 +4,16 @@
     "question": "Sự khác biệt chính giữa Functional Requirements và Non-Functional Requirements là gì?",
     "questionEn": "What is the main difference between Functional Requirements and Non-Functional Requirements?",
     "options": [
-      "FR do BA viết, NFR do dev viết",
-      "FR mô tả hệ thống làm gì; NFR mô tả hệ thống tốt đến mức nào (tốc độ, độ tin cậy, bảo mật...)",
-      "FR quan trọng hơn NFR",
-      "NFR chỉ liên quan đến hệ thống lớn"
+      "FR do khách hàng nêu trong hợp đồng; NFR do đội dev tự đặt ra khi thiết kế",
+      "FR là hệ thống làm gì; NFR là hệ thống làm điều đó tốt tới mức nào",
+      "FR bắt buộc cho bản đầu tiên; NFR là phần tối ưu có thể làm ở giai đoạn sau",
+      "FR hiện ra trên giao diện; NFR chỉ là cấu hình server do DevOps lo"
     ],
     "optionsEn": [
-      "FRs are written by the BA, NFRs are written by devs",
-      "FRs describe what the system does; NFRs describe how well the system does it (speed, reliability, security, etc.)",
-      "FRs are more important than NFRs",
-      "NFRs only apply to large systems"
+      "FRs come from the client contract; NFRs are set by the dev team during design",
+      "FRs are what the system does; NFRs are how well it does it",
+      "FRs are mandatory for v1; NFRs are optimisations that can come later",
+      "FRs show up in the UI; NFRs are just server configuration DevOps handles"
     ],
     "answer": 1,
     "explanation": "FR: 'User có thể tìm kiếm sản phẩm.' NFR: 'Kết quả tìm kiếm trả về trong < 500ms.' Cả hai đều quan trọng — FR đúng mà NFR sai = hệ thống build đúng tính năng nhưng quá chậm, hay crash, hoặc không bảo mật. NFR hay bị bỏ sót vì không hiện ra trực tiếp trên UI.",
@@ -44,16 +44,16 @@
     "question": "Tại sao NFR cần được xác định SỚM trong dự án, không phải sau?",
     "questionEn": "Why do NFRs need to be defined EARLY in a project rather than later?",
     "options": [
-      "Để viết tài liệu cho đầy đủ",
-      "Vì NFR ảnh hưởng đến kiến trúc hệ thống — thay đổi kiến trúc sau khi build rất tốn kém",
-      "Vì dev không làm được nếu không có NFR từ đầu",
-      "Vì stakeholder yêu cầu"
+      "Để tài liệu SRS đầy đủ mục trước khi khách hàng ký nghiệm thu",
+      "Vì NFR định hình kiến trúc, mà đổi kiến trúc sau khi build rất tốn kém",
+      "Vì dev cần NFR để ước tính story point cho từng tính năng một",
+      "Vì sau khi go-live thì hợp đồng không cho phép sửa đổi NFR nữa"
     ],
     "optionsEn": [
-      "To make the documentation complete",
-      "Because NFRs shape the system architecture — changing the architecture after building is very expensive",
-      "Because devs can't do anything without NFRs from the start",
-      "Because stakeholders demand it"
+      "So the SRS has every section filled before the client signs off",
+      "Because NFRs shape the architecture, which is costly to change later",
+      "Because devs need NFRs to estimate story points for each and every feature",
+      "Because contracts forbid changing NFRs once the system goes live"
     ],
     "answer": 1,
     "explanation": "NFR 'xử lý 10,000 đơn/phút' cần message queue, async processing, database sharding — quyết định kiến trúc. Nếu biết muộn, phải rewrite. Giống xây nhà: muốn thêm tầng sau khi xây xong phải phá móng. BA phải khai thác NFR trong phase discovery, không phải sprint 5.",
@@ -64,16 +64,16 @@
     "question": "Database Index giải quyết vấn đề gì?",
     "questionEn": "What problem does a database index solve?",
     "options": [
-      "Giảm dung lượng lưu trữ",
-      "Tăng tốc độ query bằng cách tạo cấu trúc lookup thay vì scan toàn bộ bảng",
-      "Tự động backup dữ liệu",
-      "Ngăn duplicate data"
+      "Nén dữ liệu trong bảng để giảm dung lượng lưu trữ trên đĩa",
+      "Tăng tốc truy vấn nhờ tra cứu thay vì quét toàn bảng",
+      "Tạo bản sao dữ liệu tự động để khôi phục khi có sự cố",
+      "Chia bảng lớn thành nhiều database nhỏ trên các server khác nhau"
     ],
     "optionsEn": [
-      "Reducing storage size",
-      "Speeding up queries by creating a lookup structure instead of scanning the whole table",
-      "Automatically backing up data",
-      "Preventing duplicate data"
+      "Compressing table data to reduce storage space on disk",
+      "Speeding up queries via lookups instead of full-table scans",
+      "Making automatic copies of data to restore after an incident",
+      "Splitting a large table into smaller databases on different servers"
     ],
     "answer": 1,
     "explanation": "Không có index: query 1 triệu rows phải scan tất cả = chậm. Có index: lookup trực tiếp = nhanh hơn 100-1000x. NFR 'danh sách đơn hàng < 1s với 1 triệu records' = signal cần index. BA không cần biết tạo index thế nào, nhưng cần specify performance requirement để dev biết cần index.",
@@ -84,16 +84,16 @@
     "question": "Caching có thể không phù hợp cho tính năng nào?",
     "questionEn": "For which feature might caching be inappropriate?",
     "options": [
-      "Dashboard báo cáo tổng quan",
-      "Danh sách sản phẩm (cập nhật mỗi giờ)",
+      "Dashboard báo cáo tổng quan cập nhật mỗi sáng",
+      "Danh sách sản phẩm, giá cập nhật mỗi giờ một lần",
       "Số dư tài khoản ngân hàng cần real-time",
-      "Danh sách tỉnh thành"
+      "Danh sách tỉnh thành dùng trong form địa chỉ"
     ],
     "optionsEn": [
-      "An overview reporting dashboard",
-      "A product list (updated hourly)",
+      "An overview dashboard refreshed every morning",
+      "A product list whose prices update hourly",
       "A bank account balance that needs to be real-time",
-      "A list of provinces/cities"
+      "The province list used in address forms"
     ],
     "answer": 2,
     "explanation": "Cache = dữ liệu có thể trễ một chút. Số dư tài khoản phải real-time — hiển thị sai số dư là lỗi nghiêm trọng. BA cần specify: 'dữ liệu này có thể trễ tối đa bao nhiêu?' Câu trả lời xác định có dùng cache không và TTL (time-to-live) bao lâu.",
@@ -104,16 +104,16 @@
     "question": "Availability và Reliability khác nhau như thế nào?",
     "questionEn": "How do Availability and Reliability differ?",
     "options": [
-      "Chúng giống nhau, chỉ khác tên",
+      "Hai từ đồng nghĩa, đều đo phần trăm thời gian hệ thống hoạt động",
       "Availability: hệ thống có mặt; Reliability: hệ thống xử lý đúng khi có mặt",
-      "Reliability: hệ thống có mặt; Availability: xử lý đúng",
-      "Availability chỉ dùng cho cloud, Reliability cho on-premise"
+      "Reliability: hệ thống có mặt; Availability: hệ thống xử lý đúng khi chạy",
+      "Availability đo phía server; Reliability đo trải nghiệm phía người dùng"
     ],
     "optionsEn": [
-      "They are the same thing, just different names",
-      "Availability: the system is up; Reliability: the system processes correctly while it is up",
-      "Reliability: the system is up; Availability: it processes correctly",
-      "Availability is only for cloud, Reliability is for on-premise"
+      "Synonyms; both measure the percentage of time the system is up",
+      "Availability: the system is up; Reliability: it works correctly while up",
+      "Reliability: the system is up; Availability: it processes correctly while running",
+      "Availability is measured server-side; Reliability on the user's side"
     ],
     "answer": 1,
     "explanation": "Hệ thống tính tiền sai 100% thời gian = available nhưng không reliable. Hệ thống đôi khi down nhưng khi chạy luôn tính đúng = unreliable (availability) nhưng reliable. Thanh toán cần cả hai: luôn có mặt VÀ luôn tính đúng, không charge 2 lần (idempotent).",
@@ -124,16 +124,16 @@
     "question": "Peak time là gì và tại sao BA cần xác định?",
     "questionEn": "What is peak time and why does the BA need to identify it?",
     "options": [
-      "Giờ cao điểm khi nhiều user dùng hệ thống cùng lúc — ảnh hưởng đến scalability và infrastructure",
-      "Thời điểm team làm việc hiệu quả nhất",
-      "Giờ deploy code lên production",
-      "Thời gian backup database"
+      "Lúc nhiều user dùng hệ thống nhất, quyết định capacity cần chuẩn bị",
+      "Khung giờ team làm việc hiệu quả nhất, nên xếp các việc khó vào đó",
+      "Khung giờ ít người dùng nhất, dùng để deploy code lên production",
+      "Thời điểm database chạy backup, cần tránh cho user thao tác"
     ],
     "optionsEn": [
-      "The peak hours when many users use the system at the same time — affecting scalability and infrastructure",
-      "The time when the team works most productively",
-      "The time when code is deployed to production",
-      "The time when the database is backed up"
+      "When the most users are on the system, which sets the capacity needed",
+      "The hours the team is most productive, so hard work goes there",
+      "The quietest hours, used for deploying code to production",
+      "When the database backup runs and users should be kept off"
     ],
     "answer": 0,
     "explanation": "Peak time quyết định capacity cần chuẩn bị: e-commerce peak vào 12h trưa và 20h tối, hoặc Flash Sale, Black Friday. Fintech peak vào cuối tháng (thanh toán lương). BA cần hỏi: 'Gấp bao nhiêu lần so với average?' để dev plan auto-scaling hoặc cấu hình infrastructure đúng.",
@@ -144,16 +144,16 @@
     "question": "Soft Delete khác Hard Delete như thế nào và khi nào dùng Soft Delete?",
     "questionEn": "How does Soft Delete differ from Hard Delete, and when should you use Soft Delete?",
     "options": [
-      "Soft Delete xóa chậm hơn Hard Delete",
-      "Soft Delete đánh dấu deleted_at thay vì xóa thật — dùng khi cần lưu lịch sử, audit trail hoặc cho phép khôi phục",
-      "Hard Delete an toàn hơn vì xóa hoàn toàn",
-      "Soft Delete chỉ dùng cho file, Hard Delete cho database"
+      "Soft delete xóa dần theo lô vào ban đêm để không làm chậm hệ thống",
+      "Soft delete chỉ đánh dấu deleted_at, dùng khi cần audit hoặc khôi phục",
+      "Hard delete an toàn hơn vì dữ liệu biến mất hoàn toàn, không ai khôi phục được",
+      "Soft delete chuyển bản ghi vào thùng rác của OS, hard delete xóa trong database"
     ],
     "optionsEn": [
-      "Soft Delete removes records more slowly than Hard Delete",
-      "Soft Delete marks deleted_at instead of truly deleting — used when you need to keep history, an audit trail, or allow restoration",
-      "Hard Delete is safer because it removes the record completely",
-      "Soft Delete is only for files, Hard Delete is for databases"
+      "Soft delete removes records in nightly batches so the system isn't slowed",
+      "Soft delete just sets deleted_at; use it when you need audit or restore",
+      "Hard delete is safer because the data is gone and nobody can restore it",
+      "Soft delete moves records to the OS recycle bin; hard delete removes them in the DB"
     ],
     "answer": 1,
     "explanation": "Soft delete: thêm cột deleted_at, query có WHERE deleted_at IS NULL. Dùng khi: cần audit (ai xóa, khi nào), user cần undo, compliance yêu cầu lưu trữ X năm, dữ liệu liên quan đến giao dịch tài chính. Hard delete: khi data không còn giá trị và không cần comply.",
@@ -164,15 +164,15 @@
     "question": "NFR về Maintainability 'code coverage tối thiểu 70%' có nghĩa là gì với BA?",
     "questionEn": "What does the Maintainability NFR 'minimum 70% code coverage' mean for a BA?",
     "options": [
-      "70% code phải được comment đầy đủ",
-      "70% logic code phải có automated test — giúp dev refactor an toàn và giảm regression bugs",
-      "70% tính năng phải được hoàn thành",
-      "70% user phải có thể dùng hệ thống không cần training"
+      "70% code phải có comment giải thích để người mới dễ đọc hiểu",
+      "70% logic code có automated test, giúp refactor an toàn hơn",
+      "70% tính năng phải được QA test thủ công trước mỗi lần release",
+      "70% user phải dùng được hệ thống mà không cần đào tạo"
     ],
     "optionsEn": [
-      "70% of the code must be fully commented",
-      "70% of the logic code must have automated tests — helping devs refactor safely and reducing regression bugs",
-      "70% of features must be completed",
+      "70% of the code must carry comments so newcomers can follow it",
+      "70% of the logic is covered by automated tests, making refactoring safer",
+      "70% of all features must be manually tested by QA before every single release",
       "70% of users must be able to use the system without training"
     ],
     "answer": 1,
@@ -184,20 +184,20 @@
     "question": "Câu nào dưới đây là NFR được viết TỐT?",
     "questionEn": "Which of the following is a WELL-written NFR?",
     "options": [
-      "Hệ thống phải nhanh và ổn định",
-      "API thanh toán phải trả kết quả trong < 3 giây ở percentile 99 với 1,000 concurrent users",
-      "Dashboard phải load nhanh",
-      "Hệ thống phải bảo mật và đáng tin cậy"
+      "Hệ thống phải nhanh và ổn định với 1,000 người dùng đồng thời vào giờ cao điểm",
+      "API thanh toán trả kết quả < 3 giây ở p99 với 1,000 concurrent users",
+      "Dashboard phải load nhanh hơn hệ thống cũ, đo bằng cảm nhận của người dùng",
+      "API thanh toán phải bảo mật tuyệt đối và luôn sẵn sàng 100% thời gian"
     ],
     "optionsEn": [
-      "The system must be fast and stable",
-      "The payment API must return results in < 3 seconds at the 99th percentile with 1,000 concurrent users",
-      "The dashboard must load fast",
-      "The system must be secure and reliable"
+      "The system must be fast and stable with 1,000 concurrent users at peak time",
+      "The payment API responds in < 3 s at p99 with 1,000 concurrent users",
+      "The dashboard must load faster than the old system, judged by users' perception",
+      "The payment API must be absolutely secure and available 100% of the time"
     ],
     "answer": 1,
-    "explanation": "NFR tốt phải: có ngưỡng cụ thể (< 3 giây), có điều kiện đo lường (percentile 99), có context (1,000 concurrent users). Percentile 99 nghĩa là 99% requests phải đáp ứng — chấp nhận 1% chậm hơn. Các option còn lại quá mơ hồ, không ai biết khi nào 'pass'.",
-    "explanationEn": "A good NFR must have: a concrete threshold (< 3 seconds), a measurable condition (99th percentile), and context (1,000 concurrent users). The 99th percentile means 99% of requests must meet the target — tolerating 1% being slower. The other options are too vague; nobody can tell when they 'pass'."
+    "explanation": "NFR tốt phải: có ngưỡng cụ thể (< 3 giây), có điều kiện đo lường (percentile 99), có context (1,000 concurrent users). Percentile 99 nghĩa là 99% requests phải đáp ứng — chấp nhận 1% chậm hơn. Các câu còn lại hoặc thiếu ngưỡng đo được ('nhanh', 'cảm nhận'), hoặc đòi hỏi tuyệt đối (100%) không thể kiểm chứng.",
+    "explanationEn": "A good NFR has a concrete threshold (< 3 seconds), a measurement condition (99th percentile), and context (1,000 concurrent users). The 99th percentile means 99% of requests must meet it — 1% may be slower. The other statements either lack a measurable threshold ('fast', 'perception') or demand absolutes (100%) that cannot be verified."
   },
   {
     "id": "nfr-11",
@@ -205,15 +205,15 @@
     "questionEn": "What are RTO and RPO in disaster recovery?",
     "options": [
       "RTO: thời gian recover tối đa; RPO: lượng data loss chấp nhận được",
-      "RTO: dung lượng backup; RPO: tần suất backup",
-      "RTO: số lượng replica; RPO: kích thước log",
-      "Cả hai đều liên quan đến database indexing"
+      "RTO: dung lượng tối đa của bản backup; RPO: tần suất chạy backup",
+      "RTO: số replica cần có; RPO: thời gian giữ log giao dịch",
+      "RTO: lượng data loss chấp nhận được; RPO: thời gian recover tối đa"
     ],
     "optionsEn": [
       "RTO: maximum recovery time; RPO: acceptable amount of data loss",
-      "RTO: backup size; RPO: backup frequency",
-      "RTO: number of replicas; RPO: log size",
-      "Both are related to database indexing"
+      "RTO: maximum backup size; RPO: how often backups run",
+      "RTO: number of replicas needed; RPO: how long transaction logs are kept",
+      "RTO: acceptable data loss; RPO: maximum recovery time"
     ],
     "answer": 0,
     "explanation": "RTO (Recovery Time Objective): hệ thống phải recover trong bao lâu sau incident. RPO (Recovery Point Objective): có thể chấp nhận mất data tối đa bao lâu. Banking: RTO < 1h, RPO = 0 (không mất data). Blog: RTO < 24h, RPO < 1h là chấp nhận được. BA cần xác định với business stakeholder.",
@@ -224,16 +224,16 @@
     "question": "Tại sao BA cần hỏi 'có peak time cụ thể không?' khi viết requirement?",
     "questionEn": "Why does the BA need to ask 'is there a specific peak time?' when writing requirements?",
     "options": [
-      "Để lên lịch deploy code",
-      "Để team biết khi nào nên làm overtime",
-      "Để dev và infra plan capacity đúng — peak traffic quyết định architecture và infrastructure cost",
-      "Để tính ngày delivery của feature"
+      "Để tính số giờ overtime team cần làm trong các đợt cao điểm",
+      "Để chọn ngày release tính năng trùng với lúc đông người dùng nhất",
+      "Để dev và infra chuẩn bị đủ capacity cho lúc tải cao nhất",
+      "Để tính ngày delivery dựa trên số sprint còn lại trước đợt sale"
     ],
     "optionsEn": [
-      "To schedule code deployments",
-      "So the team knows when to work overtime",
-      "So devs and infra can plan capacity correctly — peak traffic drives architecture and infrastructure cost",
-      "To calculate the feature's delivery date"
+      "To work out how much overtime the team must do during peaks",
+      "To time the feature release for when users are most numerous",
+      "So dev and infra can provision enough capacity for the highest load",
+      "To compute the delivery date from the sprints left before the sale"
     ],
     "answer": 2,
     "explanation": "Peak traffic 10x average = cần infrastructure 10x hoặc auto-scaling. Không biết peak = under-provision (hệ thống sập vào Flash Sale) hoặc over-provision (tốn tiền mãi mãi). BA hỏi: bình thường bao nhiêu user? Peak bao nhiêu? Peak kéo dài bao lâu? → Infra team plan đúng.",
@@ -244,16 +244,16 @@
     "question": "NFR về Usability 'tuân thủ WCAG 2.1 AA' liên quan đến điều gì?",
     "questionEn": "What does the Usability NFR 'comply with WCAG 2.1 AA' relate to?",
     "options": [
-      "Tốc độ tải trang web",
-      "Bảo mật xác thực người dùng",
-      "Accessibility — hệ thống có thể dùng được bởi người khuyết tật (khiếm thị, khiếm thính...)",
-      "Tương thích với các trình duyệt khác nhau"
+      "Performance — tốc độ tải trang trên mạng di động",
+      "Security — chuẩn xác thực và mã hóa mật khẩu",
+      "Accessibility — người khuyết tật cũng dùng được",
+      "Compatibility — hiển thị đúng trên mọi trình duyệt"
     ],
     "optionsEn": [
-      "Web page load speed",
-      "User authentication security",
-      "Accessibility — the system can be used by people with disabilities (visual, hearing, etc.)",
-      "Compatibility with different browsers"
+      "Performance — page load speed on mobile networks",
+      "Security — authentication and password hashing standards",
+      "Accessibility — usable by people with disabilities",
+      "Compatibility — rendering correctly on every browser"
     ],
     "answer": 2,
     "explanation": "WCAG (Web Content Accessibility Guidelines) là chuẩn accessibility cho web: alt text cho ảnh (screen reader), contrast ratio đủ (người khiếm thị màu), keyboard navigation (không dùng chuột được), caption cho video (người khiếm thính). Level AA là mức thường được yêu cầu trong compliance.",
@@ -264,16 +264,16 @@
     "question": "Khi BA write NFR cho e-commerce vs hệ thống nội bộ 50 người, điều gì ĐÚNG?",
     "questionEn": "When a BA writes NFRs for e-commerce vs an internal 50-person system, what is TRUE?",
     "options": [
-      "NFR giống nhau, chỉ khác về tính năng",
+      "NFR giống nhau vì chuẩn chất lượng phần mềm không phụ thuộc quy mô hệ thống",
       "E-commerce cần NFR nghiêm ngặt hơn về performance, availability và security",
-      "Hệ thống nội bộ không cần NFR",
-      "Chỉ cần NFR cho hệ thống có thanh toán"
+      "Hệ thống nội bộ không cần NFR vì người dùng là nhân viên công ty",
+      "Chỉ hệ thống có thanh toán mới cần NFR, còn lại chỉ cần FR"
     ],
     "optionsEn": [
-      "The NFRs are the same, only the features differ",
+      "The NFRs are the same, since quality standards don't depend on a system's scale",
       "E-commerce needs stricter NFRs for performance, availability, and security",
-      "An internal system doesn't need NFRs",
-      "Only systems with payments need NFRs"
+      "An internal system needs no NFRs since its users are employees",
+      "Only systems with payments need NFRs; the rest only need FRs"
     ],
     "answer": 1,
     "explanation": "NFR phải phù hợp với business context: hệ thống nội bộ 50 user, 8h-17h có thể chấp nhận response 3s, 99% uptime, maintenance ban đêm. E-commerce 10,000 user 24/7 cần response < 2s, 99.9% uptime, PCI DSS nếu có card payment. Over-engineering NFR = lãng phí; under-engineering = system fail.",
@@ -303,16 +303,16 @@
     "question": "Vì sao NFR hay bị bỏ sót trong quá trình khai thác yêu cầu?",
     "questionEn": "Why are NFRs so often missed during elicitation?",
     "options": [
-      "Vì stakeholder rất quan tâm tới chúng nhưng hiếm khi nói ra — họ giả định hệ thống đương nhiên nhanh, đáng tin và an toàn",
-      "Vì NFR không quan trọng bằng yêu cầu chức năng",
-      "Vì NFR chỉ áp dụng cho hệ thống lớn",
-      "Vì lập trình viên tự xử lý NFR"
+      "Vì stakeholder coi chúng là hiển nhiên nên hiếm khi nói ra",
+      "Vì NFR ít quan trọng hơn yêu cầu chức năng nên thường để sau",
+      "Vì NFR chỉ thật sự cần khi hệ thống đạt quy mô lớn",
+      "Vì lập trình viên tự lo NFR khi chọn framework và hạ tầng"
     ],
     "optionsEn": [
-      "Because stakeholders care deeply about them yet rarely state them — they assume the system will obviously be fast, reliable, and secure",
-      "Because NFRs matter less than functional requirements",
-      "Because NFRs only apply to large systems",
-      "Because developers handle NFRs themselves"
+      "Because stakeholders take them for granted and rarely state them",
+      "Because NFRs matter less than functional ones and get deferred",
+      "Because NFRs only really matter once a system is large",
+      "Because developers cover NFRs when choosing the framework and infra"
     ],
     "answer": 0,
     "explanation": "Đừng hỏi cần nhanh tới mức nào vì câu trả lời luôn là nhanh nhất có thể. Hãy hỏi về kịch bản cụ thể và hậu quả khi không đạt.",
@@ -323,16 +323,16 @@
     "question": "NFR nào có ảnh hưởng lớn nhất tới kiến trúc và vì sao phải biết sớm?",
     "questionEn": "Which NFRs most shape the architecture, and why must they be known early?",
     "options": [
-      "Hiệu năng, khả năng mở rộng, bảo mật và khả năng chuyển đổi — phát hiện muộn có thể buộc phải viết lại phần lớn hệ thống",
-      "Màu sắc và phông chữ giao diện",
-      "Ngôn ngữ hiển thị",
-      "Tên miền của website"
+      "Hiệu năng, mở rộng, bảo mật — biết muộn có thể phải viết lại hệ thống",
+      "Màu sắc và phông chữ — đổi muộn phải sửa lại toàn bộ giao diện",
+      "Tên miền — đổi tên miền muộn phải build lại toàn bộ backend",
+      "Định dạng báo cáo — đổi muộn phải thiết kế lại database"
     ],
     "optionsEn": [
-      "Performance, scalability, security, and portability — discovering them late can force a large-scale rewrite",
-      "Interface colours and fonts",
-      "The display language",
-      "The website domain name"
+      "Performance, scalability, security — learning them late can force a rewrite",
+      "Colours and fonts — changing them late means redoing the whole UI",
+      "The domain name — changing it late means rebuilding the whole backend",
+      "Report formats — changing them late means redesigning the database"
     ],
     "answer": 0,
     "explanation": "Biết muộn rằng hệ thống phải phục vụ 10.000 người dùng đồng thời thay vì 100 có thể làm hỏng toàn bộ kiến trúc đã xây.",
@@ -343,16 +343,16 @@
     "question": "Cách viết NFR nào là kiểm chứng được?",
     "questionEn": "Which NFR phrasing is verifiable?",
     "options": [
-      "95% truy vấn tìm kiếm trả kết quả trong 2 giây với tối đa 500 người dùng đồng thời",
-      "Hệ thống phải có hiệu năng tốt",
-      "Giao diện phải thân thiện với người dùng",
-      "Hệ thống phải an toàn tuyệt đối"
+      "95% truy vấn tìm kiếm trả về trong 2 giây khi có 500 người dùng đồng thời",
+      "Hệ thống phải có hiệu năng tốt, tương đương các sàn thương mại điện tử lớn",
+      "Giao diện phải thân thiện để người dùng mới thấy dễ chịu ngay lần đầu",
+      "Hệ thống phải an toàn tuyệt đối, không bao giờ bị tấn công thành công"
     ],
     "optionsEn": [
-      "95 percent of search queries return within 2 seconds with up to 500 concurrent users",
-      "The system must have good performance",
-      "The interface must be user-friendly",
-      "The system must be absolutely secure"
+      "95% of searches return within 2 seconds with 500 concurrent users",
+      "The system must perform well, on par with the big e-commerce platforms",
+      "The interface must be friendly so new users feel at ease the first time",
+      "The system must be absolutely secure and never successfully attacked"
     ],
     "answer": 0,
     "explanation": "Luôn nêu ba điều: đo cái gì, dưới điều kiện nào, và ngưỡng chấp nhận là bao nhiêu. Thiếu bất kỳ điều nào là không kiểm chứng được.",
@@ -363,16 +363,16 @@
     "question": "Dễ học và dễ dùng là hai mục tiêu khác nhau. Điều đó có nghĩa gì với BA?",
     "questionEn": "Ease of learning and efficiency of use are different goals. What does that mean for a BA?",
     "options": [
-      "Phải biết user class nào quan trọng hơn, vì wizard dẫn dắt giúp người mới nhưng làm chậm người thành thạo",
-      "Cả hai luôn đạt được cùng lúc",
-      "Chỉ cần tối ưu dễ học là đủ",
-      "Đây là quyết định của nhà thiết kế, BA không cần quan tâm"
+      "Cần biết user class nào ưu tiên: wizard giúp người mới, làm chậm người quen",
+      "Thiết kế tốt luôn đạt cả hai cùng lúc, nên BA không cần chọn",
+      "Luôn ưu tiên dễ học, vì người thành thạo sẽ tự quen dần với mọi luồng",
+      "Đây là quyết định của designer, BA chỉ cần chuyển nguyên yêu cầu sang cho họ"
     ],
     "optionsEn": [
-      "You must know which user class matters more, since guiding wizards help newcomers but slow experts",
-      "Both are always achieved together",
-      "Optimising for ease of learning is enough",
-      "It is a designer decision the BA need not consider"
+      "Know which user class matters more: wizards help newcomers but slow experts",
+      "Good design always achieves both at once, so the BA need not choose",
+      "Always favour ease of learning, since experts adapt to any flow anyway",
+      "It is the designer's call; the BA just forwards the requirement on to them as is"
     ],
     "answer": 0,
     "explanation": "Đây là một trong những đánh đổi phải đưa ra thảo luận với stakeholder, vì người chịu hậu quả phải là người quyết định.",
@@ -383,16 +383,16 @@
     "question": "Yêu cầu availability 99% nghe rất tốt. Thực tế nó nghĩa là gì?",
     "questionEn": "A 99 percent availability requirement sounds excellent. What does it actually mean?",
     "options": [
-      "Khoảng 3,65 ngày ngừng hoạt động mỗi năm; mỗi chữ số 9 thêm vào làm chi phí tăng vọt",
-      "Chỉ khoảng 1 giờ ngừng hoạt động mỗi năm",
-      "Hệ thống chỉ hỏng một lần mỗi năm",
-      "1% giao dịch bị thất bại"
+      "Khoảng 3,65 ngày ngừng hoạt động mỗi năm",
+      "Chỉ khoảng 9 giờ ngừng hoạt động mỗi năm",
+      "Hệ thống chỉ được phép hỏng một lần mỗi năm",
+      "1% giao dịch được phép thất bại mỗi ngày"
     ],
     "optionsEn": [
-      "About 3.65 days of downtime a year; each additional nine makes the cost soar",
-      "Only about 1 hour of downtime a year",
-      "The system fails once a year",
-      "1 percent of transactions fail"
+      "About 3.65 days of downtime a year",
+      "Only about 9 hours of downtime a year",
+      "The system may fail only once a year",
+      "1 percent of transactions may fail each day"
     ],
     "answer": 0,
     "explanation": "Hãy hỏi stakeholder thiệt hại thực tế của mỗi giờ ngừng hoạt động để chọn mức hợp lý, thay vì mặc định đòi con số cao nhất.",

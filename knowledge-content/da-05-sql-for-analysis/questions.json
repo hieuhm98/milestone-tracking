@@ -5,14 +5,14 @@
     "questionEn": "`created_at` holds timestamps like `2026-06-30 09:15:00`. `WHERE created_at BETWEEN '2026-06-01' AND '2026-06-30'` returns 682 payments, while `WHERE created_at >= '2026-06-01' AND created_at < '2026-07-01'` returns 695. Why the difference?",
     "options": [
       "BETWEEN không tính mốc đầu, nên các giao dịch ngày 1/6 bị loại",
-      "Cách thứ hai đếm trùng các giao dịch đúng nửa đêm 1/7",
-      "Các giao dịch trong ngày 30/6 có phần giờ nên lớn hơn chuỗi '2026-06-30' và rơi ra ngoài",
+      "Cách thứ hai đếm trùng những giao dịch diễn ra đúng vào lúc nửa đêm ngày 1/7",
+      "Giao dịch trong ngày 30/6 có phần giờ nên lớn hơn '2026-06-30' và bị loại",
       "SQLite tự đổi BETWEEN sang giờ UTC còn phép so sánh thì không"
     ],
     "optionsEn": [
       "BETWEEN excludes the start value, so payments on 1 June are dropped",
       "The second version double-counts payments made exactly at midnight on 1 July",
-      "Payments during 30 June carry a time part, so they sort after '2026-06-30' and fall outside",
+      "Payments on 30 June carry a time, so they sort after '2026-06-30' and drop out",
       "SQLite converts BETWEEN to UTC but leaves the comparisons alone"
     ],
     "answer": 2,
@@ -68,16 +68,16 @@
     "question": "Bạn vừa viết xong một query tính doanh thu theo tháng; nó chạy không lỗi và con số trông hợp lý. Theo \"vòng lặp của người phân tích\", việc nên làm tiếp theo là gì?",
     "questionEn": "You have just written a monthly revenue query; it runs without errors and the numbers look plausible. Following the analyst's loop, what should you do next?",
     "options": [
-      "Kiểm tra kết quả: số dòng trước/sau join, tổng các phần có khớp tổng chung không",
+      "Kiểm tra lại kết quả, ví dụ tổng các phần có khớp tổng chung không",
       "Gửi ngay cho sếp, vì query không báo lỗi nghĩa là logic đã đúng",
-      "Viết lại query bằng một database khác để chắc chắn cú pháp chuẩn",
-      "Thêm `ORDER BY` và `LIMIT` để kết quả gọn gàng hơn"
+      "Viết lại query bằng một database khác để chắc chắn cú pháp là chuẩn",
+      "Thêm `ORDER BY` và `LIMIT` để kết quả gọn gàng, dễ đọc hơn"
     ],
     "optionsEn": [
-      "Check the result: row counts before/after joins, whether parts add up to the total",
+      "Check the result, e.g. whether the parts add up to the overall total",
       "Send it to the manager now, since no error means the logic is right",
       "Rewrite the query in another database to make sure the syntax is standard",
-      "Add `ORDER BY` and `LIMIT` so the output looks tidier"
+      "Add `ORDER BY` and `LIMIT` so the output looks tidier and easier to read"
     ],
     "answer": 0,
     "explanation": "SQL vui vẻ trả về đáp án sai cho câu hỏi viết sai. Bước 4 của vòng lặp là kiểm tra trước khi gửi: số dòng, tổng khớp, hai con đường cho cùng đáp án.",
@@ -102,14 +102,14 @@
     "options": [
       "`status = 'failed'` luôn trả về NULL nên SUM bằng 0",
       "SQLite không cho dùng phép so sánh bên trong SUM",
-      "Bảng không có giao dịch thẻ nào vì method lưu chữ hoa",
-      "Số nguyên chia số nguyên là phép chia nguyên, nên 305 ÷ 2,855 bị cắt thành 0"
+      "Bảng không có giao dịch thẻ nào vì cột method lưu bằng chữ hoa",
+      "Số nguyên chia số nguyên nên 305 ÷ 2,855 bị cắt thành 0"
     ],
     "optionsEn": [
       "`status = 'failed'` always returns NULL, so the SUM is 0",
       "SQLite does not allow comparisons inside SUM",
       "There are no card rows because method is stored in upper case",
-      "Integer divided by integer is integer division, so 305 ÷ 2,855 is cut to 0"
+      "Integer ÷ integer is integer division, so 305 ÷ 2,855 becomes 0"
     ],
     "answer": 3,
     "explanation": "Cả tử và mẫu đều là số nguyên, nên SQLite chia nguyên. Viết `100.0 * SUM(...) / COUNT(*)` (hoặc `1.0 * ...`) để có số thập phân.",
@@ -164,13 +164,13 @@
     "question": "Trên `loan_applications`: `COUNT(*)` = 6,854 nhưng `COUNT(credit_score)` = 6,547. Cách đọc đúng là gì?",
     "questionEn": "On `loan_applications`: `COUNT(*)` = 6,854 but `COUNT(credit_score)` = 6,547. What is the right reading?",
     "options": [
-      "307 hồ sơ có `credit_score` NULL (không có điểm) và COUNT(cột) bỏ qua chúng",
-      "307 hồ sơ bị trùng nên COUNT(cột) tự loại bớt",
+      "307 hồ sơ không có điểm (NULL) và COUNT(cột) bỏ qua chúng",
+      "307 hồ sơ bị trùng lặp nên COUNT(cột) tự động loại bớt chúng",
       "307 hồ sơ có điểm bằng 0 và COUNT(cột) không đếm số 0",
-      "Bảng bị hỏng: hai cách đếm phải luôn bằng nhau"
+      "Bảng bị hỏng: hai cách đếm này lúc nào cũng phải bằng nhau"
     ],
     "optionsEn": [
-      "307 applications have a NULL `credit_score` (no score), and COUNT(column) skips them",
+      "307 applications have no score (NULL), and COUNT(column) skips them",
       "307 applications are duplicates, so COUNT(column) removes them",
       "307 applications have a score of 0, and COUNT(column) does not count zeros",
       "The table is corrupt: the two counts must always be equal"
@@ -196,16 +196,16 @@
     "question": "Bảng giao dịch theo tuần (giờ VN) của tháng 6/2026: `2026-06-01: 146 · 2026-06-08: 159 · 2026-06-15: 164 · 2026-06-22: 155 · 2026-06-29: 36`. Một đồng nghiệp nói \"tuần cuối giao dịch sụt 77%, có sự cố!\". Bạn trả lời thế nào?",
     "questionEn": "Weekly payments (VN time) for June 2026: `2026-06-01: 146 · 2026-06-08: 159 · 2026-06-15: 164 · 2026-06-22: 155 · 2026-06-29: 36`. A colleague says \"payments dropped 77% in the last week, something broke!\". What do you reply?",
     "options": [
-      "Đồng ý, cần mở incident ngay vì mức sụt quá lớn",
-      "Tuần bắt đầu 29/6 chỉ có 2 ngày trong tháng 6, nên phải so theo trung bình ngày hoặc ghi chú là kỳ chưa đủ",
-      "Lỗi do `weekday 1` tính tuần bắt đầu từ Chủ nhật",
-      "Cần đổi sang giờ UTC thì tuần cuối sẽ đủ số liệu"
+      "Đồng ý, cần mở incident ngay vì mức sụt 77% là quá lớn để bỏ qua",
+      "Tuần 29/6 chỉ có 2 ngày của tháng 6; hãy so theo trung bình ngày",
+      "Lỗi do `weekday 1` tính tuần bắt đầu từ Chủ nhật thay vì thứ Hai",
+      "Cần đổi sang giờ UTC thì tuần cuối cùng sẽ có đủ số liệu"
     ],
     "optionsEn": [
-      "Agree, open an incident now because the drop is huge",
-      "The week starting 29 June has only 2 days in June, so compare per day or label it as incomplete",
-      "It is caused by `weekday 1` starting weeks on Sunday",
-      "Switch to UTC and the last week will have full data"
+      "Agree, open an incident now because a 77% drop is too big to ignore",
+      "The 29 June week has only 2 June days; compare it per day instead",
+      "It is caused by `weekday 1` starting weeks on Sunday instead of Monday",
+      "Switch to UTC and the last week will have its full data back"
     ],
     "answer": 1,
     "explanation": "Bucket cuối chỉ chứa 29 và 30/6 vì tháng kết thúc. Bucket chưa đủ kỳ phải được ghi chú, bỏ đi, hoặc so theo trung bình ngày.",
@@ -230,14 +230,14 @@
     "options": [
       "INNER JOIN đếm mỗi khách hai lần nên con số bị gấp đôi",
       "Phải dùng `wallets.balance > 0` thì mới biết khách có ví",
-      "JOIN chạy chậm, nên kết quả bị cắt bớt",
-      "INNER JOIN chỉ giữ khách có ví, nên tỷ lệ luôn là 100%; cần LEFT JOIN từ `customers`"
+      "JOIN chạy chậm trên bảng lớn, nên kết quả bị cắt bớt đi giữa chừng",
+      "INNER JOIN chỉ giữ khách có ví nên tỷ lệ luôn 100%; cần LEFT JOIN"
     ],
     "optionsEn": [
       "The INNER JOIN counts each customer twice, doubling the figure",
       "You need `wallets.balance > 0` to know whether a customer has a wallet",
-      "The JOIN is slow, so the result gets truncated",
-      "The INNER JOIN keeps only customers with a wallet, so the share is always 100%; LEFT JOIN from `customers`"
+      "The JOIN is slow on big tables, so the result gets cut off midway",
+      "The INNER JOIN keeps only wallet owners, so the share is always 100%"
     ],
     "answer": 3,
     "explanation": "Lựa chọn JOIN quyết định ai nằm trong mẫu số. LEFT JOIN giữ đủ 4,000 khách, và `COUNT(w.wallet_id)` đếm được 2,235 người có ví (khoảng 56%).",
@@ -260,16 +260,16 @@
     "question": "Query `customers c LEFT JOIN wallets w ON w.customer_id = c.customer_id WHERE w.status = 'active'` trả về 2,130 dòng thay vì 4,000. Cách sửa đúng để giữ mọi khách, kèm ví active nếu có?",
     "questionEn": "`customers c LEFT JOIN wallets w ON w.customer_id = c.customer_id WHERE w.status = 'active'` returns 2,130 rows instead of 4,000. What is the right fix to keep every customer, with their active wallet if any?",
     "options": [
-      "Chuyển điều kiện vào ON: `ON w.customer_id = c.customer_id AND w.status = 'active'`",
-      "Đổi LEFT JOIN thành INNER JOIN",
-      "Thêm `OR w.status = 'locked'` vào WHERE",
-      "Thêm `GROUP BY c.customer_id` để giữ đủ khách"
+      "Chuyển `w.status = 'active'` từ WHERE vào điều kiện ON của LEFT JOIN",
+      "Đổi LEFT JOIN thành INNER JOIN và giữ nguyên điều kiện trong WHERE",
+      "Thêm `OR w.status = 'locked'` vào WHERE để lấy thêm các khách còn thiếu",
+      "Thêm `GROUP BY c.customer_id` ở cuối query để giữ đủ 4,000 khách"
     ],
     "optionsEn": [
-      "Move the condition into ON: `ON w.customer_id = c.customer_id AND w.status = 'active'`",
-      "Change the LEFT JOIN to an INNER JOIN",
-      "Add `OR w.status = 'locked'` to the WHERE",
-      "Add `GROUP BY c.customer_id` to keep every customer"
+      "Move `w.status = 'active'` from WHERE into the LEFT JOIN's ON clause",
+      "Change the LEFT JOIN to an INNER JOIN and keep the WHERE condition",
+      "Add `OR w.status = 'locked'` to the WHERE to bring back missing customers",
+      "Add `GROUP BY c.customer_id` at the end to keep all 4,000 customers"
     ],
     "answer": 0,
     "explanation": "Với khách không có ví, `w.status` là NULL nên `WHERE` loại họ, biến LEFT JOIN thành JOIN. Điều kiện về bảng bên phải phải nằm trong `ON`.",
@@ -294,13 +294,13 @@
     "options": [
       "Bảng `repayment_schedule` cộng thêm lãi vào principal",
       "Phép join kéo thêm các khoản vay đã đóng mà bảng `loans` không có",
-      "Fan-out: mỗi khoản vay lặp lại một lần cho mỗi kỳ trả góp, nên principal bị cộng nhiều lần",
+      "Fan-out: mỗi khoản vay lặp lại một lần cho mỗi kỳ trả góp",
       "SUM trên số lớn bị tràn số nên ra kết quả sai"
     ],
     "optionsEn": [
       "`repayment_schedule` adds interest to the principal",
       "The join pulls in closed loans that are missing from `loans`",
-      "Fan-out: each loan repeats once per installment, so principal is added many times",
+      "Fan-out: each loan repeats once for every installment row",
       "SUM overflows on large numbers and gives a wrong result"
     ],
     "answer": 2,
@@ -324,16 +324,16 @@
     "question": "Bạn cần một bảng theo `product`: tổng principal (từ `loans`) và tổng `amount_paid` (từ `repayment_schedule`). Cách nào cho kết quả đúng?",
     "questionEn": "You need one table per `product`: total principal (from `loans`) and total `amount_paid` (from `repayment_schedule`). Which approach gives the right result?",
     "options": [
-      "Join hai bảng rồi dùng `SUM(DISTINCT l.principal)` cho principal",
-      "Tổng hợp `repayment_schedule` về một dòng mỗi `loan_id` trong một CTE, rồi mới join với `loans`",
-      "Đổi JOIN thành LEFT JOIN để không bị lặp dòng",
-      "Join hai bảng rồi chia `SUM(l.principal)` cho 12"
+      "Join hai bảng rồi dùng `SUM(DISTINCT l.principal)` để tính tổng principal",
+      "Tổng hợp lịch trả nợ về một dòng mỗi khoản vay trong CTE, rồi mới join",
+      "Đổi JOIN thành LEFT JOIN để các dòng không bị lặp lại nữa",
+      "Join hai bảng rồi chia `SUM(l.principal)` cho 12 kỳ mỗi năm"
     ],
     "optionsEn": [
       "Join the tables and use `SUM(DISTINCT l.principal)` for principal",
-      "Aggregate `repayment_schedule` to one row per `loan_id` in a CTE, then join it to `loans`",
-      "Change the JOIN to a LEFT JOIN so rows do not repeat",
-      "Join the tables and divide `SUM(l.principal)` by 12"
+      "Aggregate the schedule to one row per loan in a CTE, then join",
+      "Change the JOIN to a LEFT JOIN so the rows stop repeating",
+      "Join the tables and divide `SUM(l.principal)` by 12 installments"
     ],
     "answer": 1,
     "explanation": "Tổng hợp trước, join sau: khi bảng phía \"nhiều\" đã về một dòng mỗi khoản vay, phép join là một-một và principal theo sản phẩm cộng lại đúng 34,040,900,000.",
@@ -359,13 +359,13 @@
       "CTE tạo một bảng mới được lưu lâu dài trong database",
       "Mỗi CTE phải được viết thành một query riêng và chạy riêng",
       "CTE chạy nhanh hơn query lồng nhau trong mọi trường hợp",
-      "CTE là kết quả tạm có tên, chỉ tồn tại trong một query, và mỗi bước đọc được các bước trước nó"
+      "CTE là kết quả tạm có tên, chỉ tồn tại trong một query"
     ],
     "optionsEn": [
       "A CTE creates a new table that is stored permanently in the database",
       "Each CTE must be written and run as a separate query",
       "A CTE is faster than a nested query in every case",
-      "A CTE is a named, temporary result that lives within one query, and each step can read earlier steps"
+      "A CTE is a named, temporary result that lives within one query"
     ],
     "answer": 3,
     "explanation": "CTE giúp xây query thành các bước có tên, kiểm tra được từng bước và ghi rõ grain, giống các dòng công thức nối tiếp nhau trong bảng tính.",
@@ -388,16 +388,16 @@
     "question": "Trong `SUM(CASE WHEN status = 'success' THEN amount ELSE 0 END) OVER (PARTITION BY wallet_id ORDER BY created_at, txn_id)`, phần `PARTITION BY wallet_id` có tác dụng gì?",
     "questionEn": "In `SUM(CASE WHEN status = 'success' THEN amount ELSE 0 END) OVER (PARTITION BY wallet_id ORDER BY created_at, txn_id)`, what does `PARTITION BY wallet_id` do?",
     "options": [
-      "Tính số dư lũy kế lại từ đầu cho mỗi ví, để tiền của ví này không cộng sang ví khác",
+      "Tính số dư lũy kế lại từ đầu cho từng ví riêng",
       "Gộp mỗi ví thành một dòng duy nhất, giống GROUP BY",
       "Chỉ giữ lại các ví có giao dịch thành công",
-      "Sắp xếp kết quả cuối theo wallet_id"
+      "Sắp xếp kết quả cuối cùng theo wallet_id tăng dần"
     ],
     "optionsEn": [
-      "Restarts the running balance for each wallet, so one wallet's money is not added to another's",
+      "Restarts the running balance separately for each wallet",
       "Collapses each wallet into a single row, like GROUP BY",
       "Keeps only wallets that have successful transactions",
-      "Sorts the final output by wallet_id"
+      "Sorts the final output by wallet_id in ascending order"
     ],
     "answer": 0,
     "explanation": "Window function giữ nguyên từng dòng; PARTITION BY chia dòng thành nhóm và tính lại từ đầu cho mỗi nhóm, còn ORDER BY quyết định thứ tự cộng dồn.",
@@ -422,14 +422,14 @@
     "options": [
       "`SELECT * FROM loans WHERE ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date) = 1`",
       "`SELECT * FROM loans GROUP BY customer_id HAVING disbursed_date = MIN(disbursed_date) LIMIT 1`",
-      "Tính `ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date, loan_id) AS loan_seq` trong một CTE, rồi lọc `WHERE loan_seq = 1`",
-      "`SELECT * FROM loans ORDER BY disbursed_date LIMIT 1`"
+      "Đánh số `ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date)` trong CTE rồi lọc 1",
+      "`SELECT * FROM loans ORDER BY customer_id, disbursed_date LIMIT 1`"
     ],
     "optionsEn": [
       "`SELECT * FROM loans WHERE ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date) = 1`",
       "`SELECT * FROM loans GROUP BY customer_id HAVING disbursed_date = MIN(disbursed_date) LIMIT 1`",
-      "Compute `ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date, loan_id) AS loan_seq` in a CTE, then filter `WHERE loan_seq = 1`",
-      "`SELECT * FROM loans ORDER BY disbursed_date LIMIT 1`"
+      "Number rows with `ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY disbursed_date)` in a CTE, then keep 1",
+      "`SELECT * FROM loans ORDER BY customer_id, disbursed_date LIMIT 1`"
     ],
     "answer": 2,
     "explanation": "Không thể đặt window function trực tiếp trong WHERE, nên cần một bước CTE để đánh số rồi lọc. Kết quả có 2,108 dòng, bằng số khách có khoản vay.",
@@ -438,13 +438,13 @@
       "Sai: window function không được phép trong WHERE; query báo lỗi.",
       "Sai: LIMIT 1 chỉ trả về một dòng cho cả bảng, không phải mỗi khách một dòng.",
       "Đúng: đánh số trong CTE rồi lọc ở bước sau.",
-      "Sai: chỉ trả về khoản vay sớm nhất của cả công ty."
+      "Sai: LIMIT 1 chỉ trả về một dòng cho cả bảng, không phải mỗi khách một dòng."
     ],
     "optionExplanationsEn": [
       "Wrong: window functions are not allowed in WHERE; the query errors.",
       "Wrong: LIMIT 1 returns one row for the whole table, not one per customer.",
       "Correct: number the rows in a CTE, then filter in the next step.",
-      "Wrong: it returns only the company's earliest loan."
+      "Wrong: LIMIT 1 returns one row for the whole table, not one per customer."
     ]
   },
   {
@@ -453,13 +453,13 @@
     "questionEn": "A MoM query puts `WHERE month_vn >= '2026-01'` inside the monthly aggregation step, then computes `LAG(tpv) OVER (ORDER BY month_vn)`. Result: `prev_tpv` for 2026-01 is NULL. Why?",
     "options": [
       "Tháng 12/2025 không có giao dịch nào trong dữ liệu",
-      "Tháng 12/2025 đã bị lọc trước khi LAG chạy, nên tháng 1 không có dòng liền trước",
+      "Tháng 12/2025 đã bị lọc trước khi LAG chạy",
       "LAG luôn trả NULL cho tháng đầu năm",
       "LAG cần PARTITION BY nên không có thì trả NULL"
     ],
     "optionsEn": [
       "December 2025 has no payments in the data",
-      "December 2025 was filtered out before LAG ran, so January has no previous row",
+      "December 2025 was filtered out before LAG ran",
       "LAG always returns NULL for the first month of a year",
       "LAG needs a PARTITION BY and returns NULL without one"
     ],
@@ -485,15 +485,15 @@
     "questionEn": "The check `SELECT session_id FROM payments GROUP BY session_id HAVING COUNT(*) > 1` finds 37 sessions. What kind of check is it, and what does it signal?",
     "options": [
       "Kiểm tra độ lớn; 37 là quá nhỏ nên có thể bỏ qua",
-      "Kiểm tra khung thời gian; 37 session này nằm ngoài tháng báo cáo",
-      "Kiểm tra fan-out; 37 là số dòng bị join lặp",
-      "Kiểm tra tính duy nhất; một checkout lẽ ra chỉ ra một payment, nên đây là các lần trừ tiền hai lần cần xử lý trước khi cộng doanh thu"
+      "Kiểm tra khung thời gian; 37 session này nằm ngoài tháng cần báo cáo",
+      "Kiểm tra fan-out; 37 là số dòng bị phép join nhân lặp lên",
+      "Kiểm tra tính duy nhất; đây là các lần trừ tiền hai lần cần xử lý"
     ],
     "optionsEn": [
-      "A magnitude check; 37 is too small to matter",
+      "A magnitude check; 37 sessions are too few to matter here",
       "A time-window check; these 37 sessions fall outside the report month",
       "A fan-out check; 37 is the number of rows repeated by a join",
-      "A uniqueness check; one checkout should produce one payment, so these are double charges to handle before summing revenue"
+      "A uniqueness check; these are double charges to handle first"
     ],
     "answer": 3,
     "explanation": "`GROUP BY key HAVING COUNT(*) > 1` kiểm tra một khóa có thật sự duy nhất không. Ở đây nó lộ ra 37 double charge đã gặp trong bài chất lượng dữ liệu.",
@@ -516,31 +516,31 @@
     "question": "Trưởng bộ phận ví hỏi: \"Tháng 6/2026 (giờ VN) có bao nhiêu khách thanh toán bằng ví?\". Query nào trả lời đúng câu hỏi?",
     "questionEn": "The head of wallet asks: \"How many customers paid with the wallet in June 2026 (VN time)?\" Which query answers it?",
     "options": [
-      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet'`",
-      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet' AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
+      "`SELECT COUNT(DISTINCT customer_id) FROM payments WHERE method = 'e_wallet' AND status IN ('success','refunded') AND created_at >= '2026-06-01' AND created_at < '2026-07-01'`",
+      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet' AND status IN ('success','refunded') AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
       "`SELECT COUNT(DISTINCT customer_id) FROM payments WHERE method = 'e_wallet' AND status IN ('success','refunded') AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
-      "`SELECT COUNT(DISTINCT customer_id) FROM wallets WHERE status = 'active'`"
+      "`SELECT COUNT(DISTINCT customer_id) FROM payments WHERE method = 'e_wallet' AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`"
     ],
     "optionsEn": [
-      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet'`",
-      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet' AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
+      "`SELECT COUNT(DISTINCT customer_id) FROM payments WHERE method = 'e_wallet' AND status IN ('success','refunded') AND created_at >= '2026-06-01' AND created_at < '2026-07-01'`",
+      "`SELECT COUNT(*) FROM payments WHERE method = 'e_wallet' AND status IN ('success','refunded') AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
       "`SELECT COUNT(DISTINCT customer_id) FROM payments WHERE method = 'e_wallet' AND status IN ('success','refunded') AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`",
-      "`SELECT COUNT(DISTINCT customer_id) FROM wallets WHERE status = 'active'`"
+      "`SELECT COUNT(DISTINCT customer_id) FROM payments WHERE method = 'e_wallet' AND created_at >= '2026-05-31 17:00:00' AND created_at < '2026-06-30 17:00:00'`"
     ],
     "answer": 2,
-    "explanation": "Câu hỏi đếm *khách*, trong *tháng 6 giờ VN*, có thanh toán *trót lọt*. Chỉ query thứ ba làm đủ cả ba: kết quả 146 khách (149 giao dịch).",
-    "explanationEn": "The question counts *customers*, in *June VN time*, who *actually paid*. Only the third query does all three: 146 customers (149 payments).",
+    "explanation": "Câu hỏi đếm *khách*, trong *tháng 6 giờ VN*, có thanh toán *trót lọt*. Chỉ query vừa đếm `DISTINCT customer_id`, vừa lọc `status IN ('success','refunded')`, vừa dùng mốc giờ VN (17:00 UTC) mới làm đủ cả ba: kết quả 146 khách (149 giao dịch).",
+    "explanationEn": "The question counts *customers*, in *June VN time*, who *actually paid*. Only the query that counts `DISTINCT customer_id`, filters `status IN ('success','refunded')` and uses the VN boundaries (17:00 UTC) does all three: 146 customers (149 payments).",
     "optionExplanations": [
-      "Sai: không lọc ngày, đếm dòng chứ không đếm khách, gồm cả giao dịch lỗi (1,770).",
-      "Sai: đã lọc ngày nhưng vẫn đếm dòng và tính cả giao dịch lỗi.",
+      "Sai: mốc '2026-06-01' đến '2026-07-01' là tháng 6 theo UTC, lệch 7 tiếng so với tháng 6 giờ VN.",
+      "Sai: đúng khung giờ và trạng thái, nhưng `COUNT(*)` đếm giao dịch (149) chứ không đếm khách.",
       "Đúng: đếm khách khác nhau, đúng khung giờ VN, chỉ giao dịch trót lọt.",
-      "Sai: đếm khách có ví active, không phải khách đã thanh toán bằng ví trong tháng 6."
+      "Sai: đếm khách đúng khung giờ VN nhưng tính cả người chỉ có giao dịch lỗi hoặc đang chờ."
     ],
     "optionExplanationsEn": [
-      "Wrong: no date filter, counts rows not customers, and includes failures (1,770).",
-      "Wrong: the dates are filtered but it still counts rows and includes failures.",
+      "Wrong: '2026-06-01' to '2026-07-01' is June in UTC, 7 hours off June in VN time.",
+      "Wrong: the window and statuses are right, but `COUNT(*)` counts payments (149), not customers.",
       "Correct: distinct customers, the right VN window, only payments that went through.",
-      "Wrong: it counts customers with an active wallet, not customers who paid by wallet in June."
+      "Wrong: it counts customers in the VN window but includes people whose payments only failed or are pending."
     ]
   },
   {
@@ -549,13 +549,13 @@
     "questionEn": "A report uses `CASE WHEN credit_score >= 650 THEN '650+' WHEN credit_score >= 560 THEN '560-649' ELSE 'under 560' END`. 307 applications have a NULL `credit_score`. What happens to them?",
     "options": [
       "Họ bị loại khỏi kết quả vì GROUP BY bỏ qua NULL",
-      "Họ rơi vào nhánh ELSE và bị âm thầm tính là 'under 560'",
+      "Họ bị âm thầm tính vào nhóm điểm thấp nhất",
       "Họ tạo thành một nhóm riêng tên NULL ở cuối bảng",
       "Query báo lỗi vì không so sánh được NULL với số"
     ],
     "optionsEn": [
       "They are dropped because GROUP BY ignores NULLs",
-      "They fall into the ELSE branch and are silently counted as 'under 560'",
+      "They are silently counted in the lowest score band",
       "They form a separate group called NULL at the bottom",
       "The query errors because NULL cannot be compared with a number"
     ],

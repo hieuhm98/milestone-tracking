@@ -64,15 +64,15 @@
     "question": "Thuộc tính 'alt' trong thẻ <img> có tác dụng gì?",
     "questionEn": "What is the purpose of the 'alt' attribute in the <img> tag?",
     "options": [
-      "Xác định kích thước ảnh",
-      "Hiển thị văn bản thay thế khi ảnh không tải được và hỗ trợ accessibility",
-      "Căn chỉnh ảnh trên trang",
-      "Đặt tiêu đề tooltip khi hover vào ảnh"
+      "Xác định kích thước hiển thị của ảnh",
+      "Văn bản thay thế khi ảnh lỗi, giúp trình đọc màn hình",
+      "Căn chỉnh vị trí của ảnh trên trang",
+      "Đặt chú thích tooltip hiện ra khi rê chuột vào ảnh"
     ],
     "optionsEn": [
-      "Defines the image dimensions",
-      "Displays alternative text when the image fails to load and supports accessibility",
-      "Aligns the image on the page",
+      "Defines the image's display dimensions",
+      "Fallback text if the image fails, read by screen readers",
+      "Aligns the image's position on the page",
       "Sets a tooltip title when hovering over the image"
     ],
     "answer": 1,
@@ -85,13 +85,13 @@
     "questionEn": "What is the difference between <strong> and <b> in HTML?",
     "options": [
       "Không có sự khác biệt, hoàn toàn giống nhau",
-      "<strong> có ý nghĩa ngữ nghĩa (quan trọng), <b> chỉ là kiểu chữ in đậm",
+      "<strong> mang ý nghĩa quan trọng, <b> chỉ là in đậm",
       "<b> có ý nghĩa ngữ nghĩa hơn <strong>",
       "<strong> chỉ dùng cho tiêu đề, <b> dùng cho nội dung thường"
     ],
     "optionsEn": [
       "There is no difference, they are exactly the same",
-      "<strong> carries semantic meaning (importance), while <b> is purely bold styling",
+      "<strong> means importance; <b> is just bold styling",
       "<b> carries more semantic meaning than <strong>",
       "<strong> is only for headings, <b> is for regular content"
     ],
@@ -144,15 +144,15 @@
     "question": "Trong form HTML, sự khác biệt giữa method='GET' và method='POST' là gì?",
     "questionEn": "In an HTML form, what is the difference between method='GET' and method='POST'?",
     "options": [
-      "GET nhanh hơn POST",
-      "POST gửi dữ liệu trong URL, GET gửi trong request body",
-      "GET gửi dữ liệu qua URL (visible), POST gửi trong request body (ẩn hơn)",
+      "GET nhanh hơn POST vì không cần body",
+      "POST gửi dữ liệu qua URL, GET gửi trong request body",
+      "GET gửi dữ liệu qua URL, POST gửi trong request body",
       "Không có sự khác biệt, chỉ là tên khác nhau"
     ],
     "optionsEn": [
-      "GET is faster than POST",
-      "POST sends data in the URL, GET sends it in the request body",
-      "GET sends data via the URL (visible), POST sends it in the request body (more hidden)",
+      "GET is faster than POST because it has no body",
+      "POST sends data in the URL, GET in the request body",
+      "GET sends data in the URL, POST in the request body",
       "There is no difference, just different names"
     ],
     "answer": 2,
@@ -164,16 +164,16 @@
     "question": "Thẻ <meta name='viewport'> có tác dụng gì?",
     "questionEn": "What does the <meta name='viewport'> tag do?",
     "options": [
-      "Đặt màu nền cho trang",
-      "Kiểm soát cách trình duyệt mobile hiển thị trang web (responsive)",
-      "Khai báo encoding ký tự",
-      "Khai báo tác giả của trang"
+      "Đặt màu nền mặc định cho trang",
+      "Điều chỉnh hiển thị trên điện thoại",
+      "Khai báo bảng mã ký tự (encoding)",
+      "Khai báo tác giả và mô tả của trang"
     ],
     "optionsEn": [
-      "Sets the background color of the page",
-      "Controls how mobile browsers display the web page (responsive)",
-      "Declares the character encoding",
-      "Declares the author of the page"
+      "Sets the default page background colour",
+      "Controls how the page fits phone screens",
+      "Declares the page's character encoding",
+      "Declares the page's author and description"
     ],
     "answer": 1,
     "explanation": "<meta name='viewport' content='width=device-width, initial-scale=1.0'> cho phép trình duyệt mobile hiển thị đúng tỷ lệ. Nếu thiếu thẻ này, mobile sẽ zoom out hiển thị như desktop thu nhỏ.",
@@ -204,16 +204,16 @@
     "question": "Thuộc tính 'data-*' trong HTML dùng để làm gì?",
     "questionEn": "What is the 'data-*' attribute in HTML used for?",
     "options": [
-      "Lưu dữ liệu CSS tùy chỉnh",
-      "Lưu dữ liệu tùy chỉnh trên phần tử HTML để JavaScript có thể đọc",
-      "Xác định loại dữ liệu của input",
-      "Liên kết đến database"
+      "Lưu giá trị CSS tùy chỉnh cho phần tử",
+      "Lưu dữ liệu riêng trên phần tử để JavaScript đọc",
+      "Quy định kiểu dữ liệu được nhập vào input",
+      "Liên kết phần tử với một bảng trong database"
     ],
     "optionsEn": [
-      "Stores custom CSS data",
-      "Stores custom data on an HTML element that JavaScript can read",
-      "Defines the data type of an input",
-      "Links to a database"
+      "Storing custom CSS values for an element",
+      "Storing custom data on an element for JavaScript",
+      "Setting what data type an input accepts",
+      "Linking an element to a database table"
     ],
     "answer": 1,
     "explanation": "data-* attributes cho phép lưu thông tin tùy chỉnh trên element. Ví dụ: <button data-user-id='42' data-action='delete'>. JS đọc bằng element.dataset.userId. Rất hữu ích để truyền dữ liệu mà không cần biến JS global.",
@@ -225,13 +225,13 @@
     "questionEn": "What is the difference between id and class in HTML?",
     "options": [
       "id dùng cho CSS, class dùng cho JavaScript",
-      "id phải là duy nhất trong trang, class có thể dùng cho nhiều phần tử",
+      "id là duy nhất trong trang, class dùng lại được nhiều lần",
       "id và class hoàn toàn giống nhau",
       "class phải là duy nhất trong trang, id có thể dùng nhiều lần"
     ],
     "optionsEn": [
       "id is for CSS, class is for JavaScript",
-      "id must be unique within a page, while class can be used on multiple elements",
+      "id is unique on a page; a class can be reused",
       "id and class are exactly the same",
       "class must be unique within a page, while id can be reused"
     ],
@@ -244,16 +244,16 @@
     "question": "Thẻ <article> trong semantic HTML dùng cho nội dung gì?",
     "questionEn": "What kind of content is the <article> tag in semantic HTML used for?",
     "options": [
-      "Bất kỳ nội dung văn bản nào",
-      "Chỉ dùng cho trang blog",
-      "Nội dung độc lập, có thể đứng riêng (bài viết, card, comment, widget)",
-      "Chỉ dùng cho trang tin tức"
+      "Bất kỳ đoạn văn bản nào trong trang",
+      "Chỉ dùng cho bài viết trên trang blog",
+      "Nội dung độc lập, tự đứng riêng được",
+      "Chỉ dùng cho bài báo trên trang tin tức"
     ],
     "optionsEn": [
-      "Any text content",
-      "Only for blog pages",
-      "Self-contained, standalone content (articles, cards, comments, widgets)",
-      "Only for news pages"
+      "Any block of text anywhere on the page",
+      "Used only for posts on a blog website",
+      "Self-contained content that stands alone",
+      "Used only for stories on a news website"
     ],
     "answer": 2,
     "explanation": "<article> dùng cho nội dung độc lập, tự đủ ý nghĩa khi tách ra khỏi trang. Ví dụ: bài blog, review sản phẩm, comment, card tin tức. Không phải chỉ dành riêng cho trang báo.",
@@ -265,13 +265,13 @@
     "questionEn": "In an input type='file', what is the 'accept' attribute used for?",
     "options": [
       "Giới hạn kích thước file được upload",
-      "Chỉ định loại file được chấp nhận (MIME type hoặc extension)",
+      "Chỉ định loại file được chấp nhận",
       "Tự động upload file sau khi chọn",
       "Cho phép upload nhiều file cùng lúc"
     ],
     "optionsEn": [
       "Limits the size of the uploaded file",
-      "Specifies the accepted file types (MIME type or extension)",
+      "Specifies which file types are accepted",
       "Automatically uploads the file once selected",
       "Allows uploading multiple files at once"
     ],
@@ -303,16 +303,16 @@
     "question": "Vì sao Semantic HTML quan trọng với yêu cầu về khả năng tiếp cận (accessibility)?",
     "questionEn": "Why does semantic HTML matter for accessibility requirements?",
     "options": [
-      "Vì trình đọc màn hình dựa vào thẻ ngữ nghĩa như nav, main, header để giúp người khiếm thị điều hướng trang",
-      "Vì thẻ ngữ nghĩa làm trang tải nhanh hơn",
-      "Vì thẻ ngữ nghĩa tự động dịch nội dung",
-      "Vì thẻ ngữ nghĩa mã hoá dữ liệu biểu mẫu"
+      "Vì trình đọc màn hình dựa vào thẻ như nav, main để điều hướng",
+      "Vì thẻ ngữ nghĩa làm trang tải nhanh hơn đáng kể",
+      "Vì thẻ ngữ nghĩa tự động dịch nội dung sang ngôn ngữ khác",
+      "Vì thẻ ngữ nghĩa tự mã hóa dữ liệu trong biểu mẫu"
     ],
     "optionsEn": [
-      "Because screen readers rely on semantic tags such as nav, main, and header to help blind users navigate",
-      "Because semantic tags make pages load faster",
-      "Because semantic tags translate content automatically",
-      "Because semantic tags encrypt form data"
+      "Because screen readers use tags like nav and main to navigate",
+      "Because semantic tags make pages load much faster",
+      "Because semantic tags auto-translate content into other languages",
+      "Because semantic tags encrypt the data in forms"
     ],
     "answer": 0,
     "explanation": "Dùng div cho mọi thứ khiến trang trông giống nhau nhưng vô nghĩa với công nghệ hỗ trợ. Yêu cầu tuân thủ WCAG thường bắt đầu từ đây.",
@@ -363,15 +363,15 @@
     "question": "Vì sao BA nên biết đọc cấu trúc HTML của trang khi viết bug report?",
     "questionEn": "Why should a BA read a page's HTML structure when writing bug reports?",
     "options": [
-      "Vì mô tả chính xác phần tử nào bị lỗi giúp lập trình viên tái hiện nhanh hơn nhiều so với mô tả chung chung",
-      "Vì BA phải tự sửa mã HTML",
-      "Vì HTML quyết định logic nghiệp vụ",
+      "Vì chỉ đúng phần tử lỗi giúp dev tái hiện nhanh hơn",
+      "Vì BA phải tự sửa mã HTML khi thấy lỗi",
+      "Vì HTML quyết định logic nghiệp vụ của hệ thống",
       "Vì bug report bắt buộc phải chứa mã nguồn"
     ],
     "optionsEn": [
-      "Because naming the exact element that fails helps developers reproduce it far faster than a vague description",
-      "Because the BA must fix the HTML",
-      "Because HTML determines business logic",
+      "Naming the exact failing element helps devs reproduce it",
+      "Because the BA must fix the HTML when it breaks",
+      "Because HTML decides the system's business logic",
       "Because bug reports must contain source code"
     ],
     "answer": 0,
@@ -383,16 +383,16 @@
     "question": "Thuộc tính alt của thẻ img phục vụ mục đích nào?",
     "questionEn": "What purpose does the alt attribute on an img tag serve?",
     "options": [
-      "Mô tả nội dung ảnh cho trình đọc màn hình và hiển thị khi ảnh không tải được",
-      "Đặt kích thước ảnh",
-      "Nén dung lượng ảnh",
-      "Đặt vị trí ảnh trên trang"
+      "Mô tả ảnh cho trình đọc màn hình và khi ảnh lỗi",
+      "Đặt chiều rộng và chiều cao của ảnh",
+      "Nén dung lượng ảnh cho trang tải nhanh",
+      "Đặt vị trí hiển thị của ảnh trên trang"
     ],
     "optionsEn": [
-      "Describe the image for screen readers and display when the image fails to load",
-      "Set the image dimensions",
-      "Compress the image",
-      "Position the image on the page"
+      "Describes the image to screen readers and on errors",
+      "Set the image's width and height",
+      "Compress the image so the page loads faster",
+      "Set where the image appears on the page"
     ],
     "answer": 0,
     "explanation": "alt là yêu cầu khả năng tiếp cận cơ bản nhất và cũng là thứ hay bị bỏ sót nhất khi đặc tả nội dung có hình ảnh.",

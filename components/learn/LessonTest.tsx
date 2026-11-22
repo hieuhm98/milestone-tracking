@@ -7,6 +7,7 @@ import BilingualPair from "@/components/BilingualPair";
 import OptionRationale from "@/components/knowledge/OptionRationale";
 import { localizeQuestion, type Question } from "@/components/knowledge/QuizBlock";
 import { type AnsweredQuestion } from "@/lib/progress";
+import { useOptionOrder } from "@/lib/useOptionOrder";
 import { cn } from "@/lib/utils";
 import QuestionText from "@/components/knowledge/QuestionText";
 
@@ -38,6 +39,7 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
   const [answered, setAnswered] = useState<AnsweredQuestion[]>([]);
 
   const optionLabels = ["A", "B", "C", "D", "E"];
+  const orderFor = useOptionOrder();
   const current = questions[idx];
   const q = localizeQuestion(current, lang);
   // The answer index is shared across languages, so either localization works
@@ -111,7 +113,8 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
         )}
 
         <div className="space-y-2">
-          {q.options.map((opt, i) => {
+          {orderFor(current.key, q.options.length).map((i, pos) => {
+            const opt = q.options[i];
             const isCorrect = i === q.answer;
             const isChosen = i === choice;
 
@@ -144,7 +147,7 @@ export default function LessonTest({ questions, heading, blurb, ctaLabel, onFini
                           : "border-zinc-400 dark:border-zinc-600 text-zinc-500"
                     )}
                   >
-                    {optionLabels[i]}
+                    {optionLabels[pos]}
                   </span>
                   {dual ? (
                     <BilingualPair

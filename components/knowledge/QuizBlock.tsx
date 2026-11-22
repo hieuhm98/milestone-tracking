@@ -8,6 +8,7 @@ import BilingualPair from "@/components/BilingualPair";
 import OptionRationale from "@/components/knowledge/OptionRationale";
 import { clearTopic, recordQuiz } from "@/lib/progress";
 import { type Lang } from "@/lib/i18n";
+import { useOptionOrder } from "@/lib/useOptionOrder";
 import { cn } from "@/lib/utils";
 import QuestionText from "./QuestionText";
 
@@ -158,6 +159,9 @@ export default function QuizBlock({ questions, title, slug }: Props) {
   }
 
   const optionLabels = ["A", "B", "C", "D", "E"];
+  // Options show in a random order per visit. Saved answers are content
+  // indices, so a restored answer still points at the option it chose.
+  const orderFor = useOptionOrder();
 
   return (
     <div className="mt-10 border-t border-zinc-300 dark:border-zinc-700 pt-8">
@@ -253,8 +257,10 @@ export default function QuizBlock({ questions, title, slug }: Props) {
           </div>
 
           <div className="space-y-2">
-            {currentQ.options.map((opt, i) => {
+            {orderFor(currentQ.id, currentQ.options.length).map((i, pos) => {
+              const opt = currentQ.options[i];
               const selected = answers[currentQ.id] === i;
+
               return (
                 <button
                   key={i}
@@ -272,7 +278,7 @@ export default function QuizBlock({ questions, title, slug }: Props) {
                     "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 mt-0.5",
                     selected ? "bg-blue-600 border-blue-500 text-white" : "border-zinc-400 dark:border-zinc-600 text-zinc-500"
                   )}>
-                    {optionLabels[i]}
+                    {optionLabels[pos]}
                   </span>
                   {dual ? (
                     <BilingualPair
@@ -392,7 +398,8 @@ export default function QuizBlock({ questions, title, slug }: Props) {
                 )}
 
                 <div className="space-y-1.5 mb-3">
-                  {q.options.map((opt, oi) => {
+                  {orderFor(q.id, q.options.length).map((oi, pos) => {
+                    const opt = q.options[oi];
                     const isCorrectOpt = oi === q.answer;
                     const isUserOpt = oi === userAnswer;
 
@@ -403,7 +410,7 @@ export default function QuizBlock({ questions, title, slug }: Props) {
                         isUserOpt && !isCorrectOpt ? "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300" :
                         "text-zinc-500"
                       )}>
-                        <span className="font-bold shrink-0">{optionLabels[oi]}.</span>
+                        <span className="font-bold shrink-0">{optionLabels[pos]}.</span>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start gap-2">
                             <div className="flex-1 min-w-0">

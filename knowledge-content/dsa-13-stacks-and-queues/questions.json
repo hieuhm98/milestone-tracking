@@ -45,15 +45,15 @@
     "questionEn": "Which scenario is NOT a natural fit for a stack?",
     "options": [
       "Chức năng undo trong trình soạn thảo văn bản",
-      "Nút Back của trình duyệt",
-      "Kiểm tra một chuỗi ngoặc có cân bằng không",
-      "Máy in xử lý các lệnh in theo đúng thứ tự được gửi"
+      "Nút Back của trình duyệt khi quay lại trang trước",
+      "Kiểm tra một chuỗi ngoặc có cân bằng hay không",
+      "Máy in xử lý các lệnh in theo thứ tự được gửi"
     ],
     "optionsEn": [
-      "The undo feature in a text editor",
-      "A browser's Back button",
+      "The undo feature in a text editor, step by step",
+      "A browser's Back button returning to the previous page",
       "Checking whether a string of brackets is balanced",
-      "A printer handling print jobs in the order they were submitted"
+      "A printer handling print jobs in the order submitted"
     ],
     "answer": 3,
     "explanation": "Undo, nút Back và kiểm tra ngoặc đều cần \"việc gần đây nhất\" trước — đúng LIFO. Lệnh in phải xử lý theo thứ tự đến, tức FIFO, nên đó là việc của queue.",
@@ -84,16 +84,16 @@
     "question": "Khi cài đặt stack bằng singly linked list, vì sao ta push và pop ở head thay vì ở tail?",
     "questionEn": "When implementing a stack with a singly linked list, why do we push and pop at the head instead of the tail?",
     "options": [
-      "Vì node ở tail không có thuộc tính `value`",
+      "Vì node ở tail không có thuộc tính `value` để trả về khi pop",
       "Vì thêm vào tail luôn tốn O(n) kể cả khi có con trỏ `last`",
-      "Vì xoá tail cần đi từ head để tìm node cuối mới, tốn O(n)",
-      "Vì head luôn là node có giá trị nhỏ nhất"
+      "Vì xoá tail phải đi từ head để tìm node cuối mới, tốn O(n)",
+      "Vì head luôn là node có giá trị nhỏ nhất nên lấy ra nhanh hơn"
     ],
     "optionsEn": [
-      "Because the tail node has no `value` property",
+      "Because the tail node has no `value` property to return on pop",
       "Because adding at the tail is always O(n), even with a `last` pointer",
-      "Because removing the tail requires walking from the head to find the new last node, O(n)",
-      "Because the head always holds the smallest value"
+      "Because removing the tail means walking from head to find the new last",
+      "Because the head always holds the smallest value, so it is faster to take"
     ],
     "answer": 2,
     "explanation": "Node trong singly linked list không biết node đứng trước nó. Thêm vào tail là O(1) nếu có `last`, nhưng xoá tail thì phải duyệt cả danh sách để cập nhật `last`. Ở head, cả thêm và xoá chỉ cần đổi vài con trỏ: O(1).",
@@ -124,15 +124,15 @@
     "question": "Method `pop` sau của một stack dựa trên linked list có lỗi gì?\n`pop() {\n  if (!this.top) return null;\n  const removed = this.top;\n  this.top = removed.next;\n  return removed.value;\n}`",
     "questionEn": "What is wrong with this `pop` method of a linked-list stack?\n`pop() {\n  if (!this.top) return null;\n  const removed = this.top;\n  this.top = removed.next;\n  return removed.value;\n}`",
     "options": [
-      "Nó trả về node thay vì giá trị",
-      "Nó bị lỗi khi stack chỉ còn một node",
-      "Nó xoá node ở đáy thay vì ở đỉnh",
+      "Nó trả về node thay vì giá trị được lưu trong node",
+      "Nó bị lỗi khi stack chỉ còn đúng một node vì `next` là null",
+      "Nó xoá node ở đáy stack thay vì node ở đỉnh",
       "Nó không giảm `size`, nên `size` ngày càng sai"
     ],
     "optionsEn": [
-      "It returns the node instead of the value",
-      "It crashes when the stack has exactly one node",
-      "It removes the bottom node instead of the top",
+      "It returns the node instead of the value stored in it",
+      "It crashes when exactly one node is left, since `next` is null",
+      "It removes the bottom node of the stack instead of the top",
       "It never decrements `size`, so `size` drifts out of sync"
     ],
     "answer": 3,
@@ -164,16 +164,16 @@
     "question": "Vì sao `arr.shift()` trên array của JavaScript là O(n)?",
     "questionEn": "Why is `arr.shift()` on a JavaScript array O(n)?",
     "options": [
-      "Vì nó phải tìm phần tử nhỏ nhất trước khi xoá",
-      "Vì nó sao chép array sang một vùng nhớ mới rồi mới xoá",
-      "Vì mọi phần tử còn lại phải dịch sang trái một vị trí và được đánh lại index",
-      "Vì nó phải duyệt đến cuối array để cập nhật `length`"
+      "Vì nó phải tìm phần tử nhỏ nhất trong array trước khi xoá",
+      "Vì nó sao chép toàn bộ array sang một vùng nhớ mới rồi mới xoá",
+      "Vì mọi phần tử còn lại phải dịch sang trái và được đánh lại index",
+      "Vì nó phải duyệt đến cuối array để tính lại và cập nhật `length`"
     ],
     "optionsEn": [
-      "Because it must find the smallest element before removing it",
-      "Because it copies the array into new memory before removing",
-      "Because every remaining element must slide left one slot and be re-indexed",
-      "Because it walks to the end of the array to update `length`"
+      "Because it must find the smallest element in the array before removing",
+      "Because it copies the whole array into new memory before removing",
+      "Because every remaining element must slide left and be re-indexed",
+      "Because it walks to the end of the array to recompute and update `length`"
     ],
     "answer": 2,
     "explanation": "Phần tử của array gắn với index. Xoá index 0 nghĩa là phần tử ở index 1 thành index 0, index 2 thành 1, v.v. — n−1 lần dịch chuyển. `pop` thì chỉ bỏ ô cuối nên là O(1).",
@@ -224,16 +224,16 @@
     "question": "Queue dưới đây có `enqueue` gắn node mới sau `this.last` (nếu `last` khác null). Queue đang có đúng một phần tử; ta gọi `dequeue()` rồi `enqueue(5)`. Chuyện gì xảy ra?\n`dequeue() {\n  if (!this.first) return null;\n  const removed = this.first;\n  this.first = removed.next;\n  this.size--;\n  return removed.value;\n}`",
     "questionEn": "This queue's `enqueue` attaches the new node after `this.last` (when `last` is not null). The queue holds exactly one item; we call `dequeue()` then `enqueue(5)`. What happens?\n`dequeue() {\n  if (!this.first) return null;\n  const removed = this.first;\n  this.first = removed.next;\n  this.size--;\n  return removed.value;\n}`",
     "options": [
-      "Mọi thứ hoạt động bình thường, 5 nằm ở đầu hàng",
-      "5 bị gắn vào node đã xoá; `first` vẫn null nên queue trông như rỗng dù size là 1",
-      "`dequeue()` ném lỗi vì `removed.next` là null",
-      "`enqueue(5)` tạo ra một vòng lặp vô hạn trong danh sách"
+      "Mọi thứ hoạt động bình thường, 5 nằm ở đầu hàng và `first` trỏ vào nó",
+      "5 bị gắn vào node đã xoá; `first` vẫn null nên queue trông như rỗng",
+      "`dequeue()` ném lỗi vì `removed.next` là null khi chỉ còn một phần tử",
+      "`enqueue(5)` tạo ra một vòng lặp vô hạn vì node mới trỏ ngược về `last`"
     ],
     "optionsEn": [
-      "Everything works, 5 is at the front",
-      "5 is attached to the removed node; `first` stays null, so the queue looks empty while size is 1",
-      "`dequeue()` throws because `removed.next` is null",
-      "`enqueue(5)` creates an infinite cycle in the list"
+      "Everything works: 5 sits at the front and `first` points to it",
+      "5 is attached to the removed node; `first` stays null, so it looks empty",
+      "`dequeue()` throws because `removed.next` is null with only one item",
+      "`enqueue(5)` creates an infinite cycle because the new node points back to `last`"
     ],
     "answer": 1,
     "explanation": "Khi phần tử cuối rời đi, `first` thành null nhưng `last` vẫn trỏ vào node cũ. `enqueue` thấy `last` khác null nên gắn node 5 vào sau node đã bị tách rời, không ai trỏ tới nó từ `first`. Cần thêm `if (!this.first) this.last = null;`.",

@@ -4,16 +4,16 @@
     "question": "Một ứng dụng web đọc rất nhiều nhưng database RDS chính đang quá tải truy vấn đọc. Giải pháp phù hợp nhất là gì?",
     "questionEn": "A web app is very read-heavy and the primary RDS database is overloaded with read queries. What is the most appropriate solution?",
     "options": [
-      "Bật Multi-AZ để standby phục vụ đọc",
-      "Tạo Read Replica và trỏ truy vấn đọc vào đó",
-      "Tăng kích thước storage của database",
-      "Chuyển sang Memcached để thay thế RDS"
+      "Bật Multi-AZ và gửi truy vấn đọc tới standby",
+      "Tạo Read Replica và chuyển truy vấn đọc sang đó",
+      "Tăng storage để truy vấn đọc có nhiều IOPS hơn",
+      "Thay RDS bằng Memcached cho mọi truy vấn đọc"
     ],
     "optionsEn": [
-      "Enable Multi-AZ so the standby serves reads",
-      "Create a Read Replica and point read queries to it",
-      "Increase the database storage size",
-      "Switch to Memcached to replace RDS"
+      "Enable Multi-AZ and send read queries to the standby",
+      "Add a Read Replica and route reads to it",
+      "Grow the storage so read queries get more IOPS",
+      "Replace RDS with Memcached for all read queries"
     ],
     "answer": 1,
     "explanation": "Read Replica được thiết kế để mở rộng đọc bằng cách sao chép bất đồng bộ. Multi-AZ standby KHÔNG phục vụ đọc — nó chỉ chờ failover.",
@@ -24,16 +24,16 @@
     "question": "Điểm khác biệt cốt lõi giữa RDS Multi-AZ và Read Replica là gì?",
     "questionEn": "What is the core difference between RDS Multi-AZ and a Read Replica?",
     "options": [
-      "Multi-AZ dùng để scale đọc, Read Replica dùng cho HA",
-      "Multi-AZ đồng bộ và dùng cho HA/failover; Read Replica bất đồng bộ và dùng để scale đọc",
-      "Cả hai đều phục vụ đọc và tự failover",
-      "Read Replica chỉ đặt trong cùng một AZ"
+      "Multi-AZ: bất đồng bộ, để scale đọc; Read Replica: đồng bộ, để failover",
+      "Multi-AZ: đồng bộ, để failover; Read Replica: bất đồng bộ, để scale đọc",
+      "Cả hai đều đồng bộ, đều phục vụ đọc và tự động failover",
+      "Multi-AZ trải trên nhiều Region; Read Replica phải ở cùng AZ"
     ],
     "optionsEn": [
-      "Multi-AZ scales reads, Read Replica is for HA",
-      "Multi-AZ is synchronous and for HA/failover; Read Replica is asynchronous and for read scaling",
-      "Both serve reads and fail over automatically",
-      "Read Replicas can only be placed in the same AZ"
+      "Multi-AZ: async, for read scaling; Read Replica: sync, for failover",
+      "Multi-AZ: sync, for failover; Read Replica: async, for read scaling",
+      "Both are synchronous, serve reads, and fail over automatically",
+      "Multi-AZ spans Regions; Read Replicas must stay in the same AZ"
     ],
     "answer": 1,
     "explanation": "Multi-AZ = sao chép đồng bộ, tự động failover, chỉ phục vụ HA (không đọc). Read Replica = sao chép bất đồng bộ, để scale đọc, có thể cross-region.",
@@ -104,16 +104,16 @@
     "question": "Ngoài connection pooling, RDS Proxy còn mang lại lợi ích nào?",
     "questionEn": "Beyond connection pooling, what other benefit does RDS Proxy provide?",
     "options": [
-      "Cho phép truy cập SSH vào database",
+      "Cho phép SSH vào host database để tinh chỉnh",
       "Giảm thời gian failover và có thể bắt buộc xác thực IAM",
-      "Sao chép dữ liệu cross-region dưới 1 giây",
-      "Tự động tăng storage lên 128 TB"
+      "Sao chép dữ liệu sang Region khác trong dưới 1 giây",
+      "Cache kết quả truy vấn trong bộ nhớ để giảm tải đọc"
     ],
     "optionsEn": [
-      "Grants SSH access to the database",
+      "Gives SSH access to the database host for tuning",
       "Reduces failover time and can enforce IAM authentication",
-      "Replicates data cross-region in under 1 second",
-      "Auto-grows storage to 128 TB"
+      "Replicates data to another Region in under a second",
+      "Caches query results in memory to offload reads"
     ],
     "answer": 1,
     "explanation": "RDS Proxy giảm thời gian failover (tới ~66%) vì giữ kết nối và tự trỏ lại database mới, đồng thời có thể bắt buộc IAM authentication.",
@@ -226,14 +226,14 @@
     "options": [
       "Memcached",
       "Redis",
-      "Cả hai đều giống nhau",
-      "Không engine nào hỗ trợ HA"
+      "Memcached với Auto Discovery",
+      "Memcached với cluster nhiều node"
     ],
     "optionsEn": [
       "Memcached",
       "Redis",
-      "Both are identical",
-      "Neither engine supports HA"
+      "Memcached with Auto Discovery",
+      "Memcached in a multi-node cluster"
     ],
     "answer": 1,
     "explanation": "Redis hỗ trợ Multi-AZ + replication (HA), persistence và backup. Memcached là cache thuần, không persistence và không replication.",
@@ -246,34 +246,34 @@
     "options": [
       "Redis",
       "Memcached",
-      "Aurora",
-      "DynamoDB"
+      "DynamoDB Accelerator (DAX)",
+      "Amazon MemoryDB"
     ],
     "optionsEn": [
       "Redis",
       "Memcached",
-      "Aurora",
-      "DynamoDB"
+      "DynamoDB Accelerator (DAX)",
+      "Amazon MemoryDB"
     ],
     "answer": 1,
-    "explanation": "Memcached là đa luồng, chia shard trên nhiều node và là cache thuần (không persistence, không replication) — đúng với yêu cầu này.",
-    "explanationEn": "Memcached is multi-threaded, shards across multiple nodes, and is a pure cache (no persistence, no replication) — exactly matching these requirements."
+    "explanation": "Memcached đa luồng (multi-threaded), shard trên nhiều node và là cache thuần (không persistence, không replication) — đúng với yêu cầu. Redis đơn luồng và có persistence; DAX chỉ cache cho DynamoDB; MemoryDB là database in-memory bền vững, thừa so với nhu cầu.",
+    "explanationEn": "Memcached is multi-threaded, shards across multiple nodes, and is a pure cache (no persistence, no replication) — exactly matching these requirements. Redis is single-threaded and offers persistence; DAX only caches DynamoDB; MemoryDB is a durable in-memory database, more than this workload needs."
   },
   {
     "id": "q14",
     "question": "Với chiến lược Lazy Loading (Cache-Aside), dữ liệu được đưa vào cache khi nào?",
     "questionEn": "With the Lazy Loading (Cache-Aside) strategy, when is data loaded into the cache?",
     "options": [
-      "Mỗi khi ghi vào database",
-      "Khi đọc bị cache miss thì mới nạp từ database vào cache",
-      "Theo lịch định kỳ mỗi giờ",
-      "Ngay khi database khởi động"
+      "Mỗi lần ghi, ngay khi database được cập nhật",
+      "Chỉ khi bị cache miss, nạp từ database",
+      "Theo lịch định kỳ, ví dụ mỗi giờ",
+      "Toàn bộ một lần, khi cache cluster khởi động"
     ],
     "optionsEn": [
-      "On every write to the database",
-      "Only on a cache miss, when data is then loaded from the database into the cache",
-      "On a periodic hourly schedule",
-      "As soon as the database starts"
+      "On every write, as the database is updated",
+      "Only on a cache miss, from the database",
+      "On a periodic schedule, e.g. hourly",
+      "All at once, when the cache cluster starts"
     ],
     "answer": 1,
     "explanation": "Lazy Loading chỉ nạp cache khi có cache miss, nên chỉ dữ liệu được yêu cầu mới nằm trong cache. Nhược điểm: lần miss đầu chậm và dữ liệu có thể cũ (dùng TTL để giảm).",
@@ -304,16 +304,16 @@
     "question": "Cơ chế nhân bản của RDS Read Replica hoạt động thế nào?",
     "questionEn": "How does replication to an RDS Read Replica work?",
     "options": [
-      "Bất đồng bộ (asynchronous), nên dữ liệu đọc từ replica có thể trễ vài giây",
-      "Đồng bộ (synchronous), luôn nhất quán tuyệt đối",
-      "Luôn là cross-region",
-      "Hai chiều, ghi được ở cả hai phía"
+      "Bất đồng bộ, nên dữ liệu trên replica có thể trễ vài giây",
+      "Đồng bộ, nên replica luôn nhất quán tuyệt đối",
+      "Qua snapshot hằng đêm được khôi phục lên replica",
+      "Hai chiều, nên cả hai phía đều nhận ghi"
     ],
     "optionsEn": [
-      "Asynchronously, so reads from the replica can lag by seconds",
-      "Synchronously, always perfectly consistent",
-      "Always cross-region",
-      "Bidirectionally, writable on both sides"
+      "Asynchronously, so replica reads can lag by a few seconds",
+      "Synchronously, so the replica is always fully consistent",
+      "Through nightly snapshots restored onto the replica",
+      "Bidirectionally, so both sides accept writes"
     ],
     "answer": 0,
     "explanation": "Read Replica dùng replication bất đồng bộ → eventual consistency. Multi-AZ mới là đồng bộ, nhưng standby của Multi-AZ không phục vụ đọc.",
@@ -324,16 +324,16 @@
     "question": "Khi RDS Multi-AZ failover sang standby, điều gì xảy ra với endpoint kết nối?",
     "questionEn": "When an RDS Multi-AZ deployment fails over to its standby, what happens to the connection endpoint?",
     "options": [
-      "Ứng dụng phải kết nối trực tiếp tới standby bằng IP",
-      "Bản ghi DNS được trỏ sang standby — tên endpoint không đổi, ứng dụng chỉ cần kết nối lại",
-      "Bạn phải cập nhật endpoint mới trong ứng dụng",
-      "Một endpoint hoàn toàn mới được sinh ra"
+      "Ứng dụng phải kết nối lại tới địa chỉ IP riêng của standby",
+      "DNS được trỏ sang standby; tên endpoint giữ nguyên",
+      "Bạn phải cập nhật endpoint của standby vào ứng dụng",
+      "Một endpoint mới được sinh ra và công bố lên Route 53"
     ],
     "optionsEn": [
-      "The application must connect directly to the standby by IP",
-      "The DNS record is repointed to the standby — the endpoint name stays the same, the app just reconnects",
-      "You must update the application with a new endpoint",
-      "A brand-new endpoint is generated"
+      "The app must reconnect to the standby's own IP address",
+      "DNS is repointed to the standby; the endpoint name stays the same",
+      "You must update the app with the standby's own endpoint",
+      "A new endpoint is generated and published to Route 53"
     ],
     "answer": 1,
     "explanation": "Failover được xử lý bằng DNS: cùng một endpoint, trỏ sang instance mới. Ứng dụng chỉ cần có logic reconnect — đây là lý do Multi-AZ trong suốt với ứng dụng.",
@@ -344,16 +344,16 @@
     "question": "Standby của RDS Multi-AZ có phục vụ được truy vấn đọc không?",
     "questionEn": "Can the standby in an RDS Multi-AZ deployment serve read queries?",
     "options": [
-      "Có, nhưng chỉ cho truy vấn báo cáo",
-      "Chỉ được với Aurora",
-      "Không — standby hoàn toàn thụ động, chỉ để failover; muốn scale đọc thì dùng Read Replica",
+      "Có, nhưng chỉ cho truy vấn báo cáo chỉ-đọc",
+      "Chỉ khi bật Performance Insights",
+      "Không; standby thụ động, chỉ để failover",
       "Có, standby tự động chia tải đọc"
     ],
     "optionsEn": [
-      "Yes, but only for reporting queries",
-      "Only in Aurora",
-      "No — the standby is entirely passive and exists for failover; use Read Replicas to scale reads",
-      "Yes, the standby automatically shares read traffic"
+      "Yes, but only for read-only reporting queries",
+      "Only if Performance Insights is enabled",
+      "No; it is passive and exists for failover",
+      "Yes, it automatically shares the read traffic"
     ],
     "answer": 2,
     "explanation": "Đây là điểm phân biệt kinh điển: Multi-AZ = tính sẵn sàng (standby thụ động, đồng bộ), Read Replica = mở rộng đọc (bất đồng bộ, đọc được).",

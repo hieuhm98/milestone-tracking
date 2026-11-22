@@ -24,14 +24,14 @@
     "question": "Frontend (giao diện web) chạy ở đâu?",
     "questionEn": "Where does the frontend (the web interface) run?",
     "options": [
-      "Trên server",
-      "Trong trình duyệt của người dùng",
+      "Trên web server",
+      "Trong trình duyệt",
       "Trong database",
       "Trên CDN server"
     ],
     "optionsEn": [
-      "On the server",
-      "In the user's browser",
+      "On the web server",
+      "In the browser",
       "In the database",
       "On the CDN server"
     ],
@@ -44,16 +44,16 @@
     "question": "CDN (Content Delivery Network) mang lại lợi ích gì?",
     "questionEn": "What benefit does a CDN (Content Delivery Network) provide?",
     "options": [
-      "Tăng bảo mật database",
-      "Giảm độ trễ bằng cách phục vụ nội dung từ server gần người dùng nhất",
-      "Thay thế backend server",
-      "Mã hóa dữ liệu người dùng"
+      "Tăng bảo mật cho database bằng cách mã hóa",
+      "Giảm độ trễ nhờ server gần người dùng",
+      "Thay thế backend server để xử lý logic nghiệp vụ",
+      "Tăng dung lượng ổ cứng cho máy người dùng"
     ],
     "optionsEn": [
-      "Increases database security",
-      "Reduces latency by serving content from the server closest to the user",
-      "Replaces the backend server",
-      "Encrypts user data"
+      "Stronger database security through encryption",
+      "Less latency via servers close to users",
+      "Replacing the backend server for business logic",
+      "Adding disk space on users' computers"
     ],
     "answer": 1,
     "explanation": "CDN đặt bản sao nội dung tĩnh (ảnh, JS, CSS) tại nhiều server khắp thế giới. User ở đâu nhận từ server gần đó — giảm độ trễ đáng kể.",
@@ -64,16 +64,16 @@
     "question": "Dynamic website khác Static website ở điểm gì?",
     "questionEn": "How does a dynamic website differ from a static website?",
     "options": [
-      "Dynamic website không dùng database",
-      "Static website cần backend phức tạp hơn",
-      "Dynamic website tạo HTML theo request dựa trên dữ liệu, Static website phục vụ HTML có sẵn",
-      "Static website chỉ dùng cho game online"
+      "Dynamic không dùng database, Static thì luôn cần database",
+      "Static cần backend phức tạp hơn để tạo trang",
+      "Dynamic tạo HTML theo từng request; Static trả HTML có sẵn",
+      "Dynamic có nhiều hiệu ứng chuyển động, còn Static thì đứng yên"
     ],
     "optionsEn": [
-      "A dynamic website does not use a database",
-      "A static website needs a more complex backend",
-      "A dynamic website generates HTML per request based on data, while a static website serves prebuilt HTML",
-      "A static website is only used for online games"
+      "Dynamic sites use no database, while static sites need one",
+      "Static sites need a more complex backend to build pages",
+      "Dynamic builds HTML per request; static serves prebuilt HTML",
+      "Dynamic sites have animations, while static sites do not move"
     ],
     "answer": 2,
     "explanation": "Static: HTML cố định, gửi thẳng. Dynamic: server chạy code, query database, tạo HTML phù hợp từng user từng thời điểm. Facebook, Shopee là dynamic.",
@@ -124,16 +124,16 @@
     "question": "Bước nào xảy ra SAU KHI browser nhận được HTML từ server?",
     "questionEn": "Which step happens AFTER the browser receives the HTML from the server?",
     "options": [
-      "Browser gửi thêm request DNS",
-      "Browser tải thêm CSS, JavaScript, ảnh được tham chiếu trong HTML",
+      "Browser gửi lại request DNS để lấy IP mới",
+      "Browser tải thêm CSS, JS, ảnh mà HTML tham chiếu",
       "Browser đóng kết nối TCP ngay lập tức",
-      "Browser gửi response về server"
+      "Browser gửi response xác nhận ngược về cho server"
     ],
     "optionsEn": [
-      "The browser sends another DNS request",
-      "The browser loads additional CSS, JavaScript, and images referenced in the HTML",
+      "The browser repeats the DNS lookup to get a new IP",
+      "The browser fetches the CSS, JS and images the HTML uses",
       "The browser closes the TCP connection immediately",
-      "The browser sends a response back to the server"
+      "The browser sends a confirming response back to the server"
     ],
     "answer": 1,
     "explanation": "Sau khi nhận HTML, browser parse thấy các thẻ <link>, <script>, <img>... và gửi thêm request để tải CSS, JS, ảnh. Đây là lý do Network tab có nhiều request khi tải 1 trang.",
@@ -144,16 +144,16 @@
     "question": "Fragment '#reviews' trong URL https://example.com/product#reviews dùng để làm gì?",
     "questionEn": "What is the fragment '#reviews' in the URL https://example.com/product#reviews used for?",
     "options": [
-      "Gửi tham số đến server",
-      "Xác định vị trí cụ thể trong trang web (xử lý bởi browser)",
-      "Mã hóa địa chỉ trang",
-      "Trỏ đến subdomain reviews"
+      "Gửi tham số lọc dữ liệu lên server",
+      "Cuộn tới một vị trí trong trang",
+      "Mã hóa địa chỉ của trang",
+      "Trỏ tới subdomain reviews"
     ],
     "optionsEn": [
-      "To send parameters to the server",
-      "To identify a specific position within the page (handled by the browser)",
-      "To encrypt the page address",
-      "To point to a 'reviews' subdomain"
+      "Sending filter parameters to the server",
+      "Jumping to a spot within the page",
+      "Encrypting the page address",
+      "Pointing to a 'reviews' subdomain"
     ],
     "answer": 1,
     "explanation": "Fragment (#) xử lý ở phía browser, KHÔNG gửi đến server. Browser tự cuộn đến element có id='reviews' trong trang.",
@@ -164,16 +164,16 @@
     "question": "Backend developer thường làm việc với gì?",
     "questionEn": "What does a backend developer typically work with?",
     "options": [
-      "HTML và CSS",
-      "JavaScript chạy trong browser",
-      "Logic nghiệp vụ, database và API phía server",
-      "Thiết kế giao diện người dùng"
+      "HTML và CSS để dựng bố cục trang",
+      "JavaScript chạy trong trình duyệt",
+      "Logic nghiệp vụ, database và API",
+      "Thiết kế giao diện và trải nghiệm người dùng"
     ],
     "optionsEn": [
-      "HTML and CSS",
-      "JavaScript running in the browser",
-      "Business logic, databases, and server-side APIs",
-      "Designing the user interface"
+      "HTML and CSS for building page layouts",
+      "JavaScript that runs in the browser",
+      "Business logic, databases and APIs",
+      "Designing the user interface and experience"
     ],
     "answer": 2,
     "explanation": "Backend xử lý logic phức tạp: xác thực, tính toán, truy vấn database, bảo mật. Người dùng không tương tác trực tiếp với backend — họ tương tác qua frontend.",
@@ -204,15 +204,15 @@
     "question": "Trong Network tab của Dev Tools, bạn có thể xem gì?",
     "questionEn": "In the Network tab of Dev Tools, what can you view?",
     "options": [
-      "Mã nguồn của backend server",
-      "Tất cả HTTP requests và responses khi tải trang",
-      "Lịch sử duyệt web",
+      "Mã nguồn chạy trên server backend của trang",
+      "Các HTTP request và response của trang",
+      "Lịch sử các trang bạn đã truy cập",
       "Cài đặt bảo mật của browser"
     ],
     "optionsEn": [
-      "The backend server's source code",
-      "All HTTP requests and responses when loading the page",
-      "Browsing history",
+      "The source code running on the backend",
+      "The page's HTTP requests and responses",
+      "The history of pages you have visited",
       "The browser's security settings"
     ],
     "answer": 1,
@@ -224,16 +224,16 @@
     "question": "Path '/products/detail' trong URL có ý nghĩa gì với server?",
     "questionEn": "What does the path '/products/detail' in a URL mean to the server?",
     "options": [
-      "Tên file cụ thể trên ổ cứng server",
-      "Đường dẫn đến tài nguyên/trang cụ thể trên server",
-      "Tên database cần truy vấn",
-      "Tên người dùng đang đăng nhập"
+      "Tên một file cụ thể nằm trên ổ cứng của server",
+      "Đường dẫn tới tài nguyên cụ thể trên server",
+      "Tên database mà server cần truy vấn",
+      "Tên tài khoản người dùng đang đăng nhập"
     ],
     "optionsEn": [
-      "A specific file name on the server's disk",
-      "The path to a specific resource/page on the server",
-      "The name of the database to query",
-      "The name of the logged-in user"
+      "The name of one specific file on the server's disk",
+      "The path to a specific resource on the server",
+      "The name of the database the server must query",
+      "The username of whoever is logged in"
     ],
     "answer": 1,
     "explanation": "Path chỉ định tài nguyên cụ thể cần lấy. Server dùng path để routing — quyết định code nào xử lý request này và trả về dữ liệu gì.",
@@ -244,15 +244,15 @@
     "question": "Full-stack developer là gì?",
     "questionEn": "What is a full-stack developer?",
     "options": [
-      "Developer chỉ làm frontend",
-      "Developer chỉ làm backend",
-      "Developer có thể làm cả frontend lẫn backend",
-      "Developer chuyên về database"
+      "Developer làm frontend trên nhiều nền tảng",
+      "Developer chuyên viết backend và API",
+      "Developer làm được cả frontend lẫn backend",
+      "Developer chuyên quản trị database"
     ],
     "optionsEn": [
-      "A developer who only does frontend",
-      "A developer who only does backend",
-      "A developer who can do both frontend and backend",
+      "A developer who does frontend on many platforms",
+      "A developer who specialises in backend and APIs",
+      "A developer who works on frontend and backend",
       "A developer who specializes in databases"
     ],
     "answer": 2,
@@ -264,16 +264,16 @@
     "question": "Tại sao HTTPS cần thêm bước TLS handshake so với HTTP?",
     "questionEn": "Why does HTTPS need an extra TLS handshake step compared to HTTP?",
     "options": [
-      "Để tăng tốc độ tải trang",
-      "Để thiết lập kênh mã hóa an toàn trước khi truyền dữ liệu",
-      "Để xác thực người dùng",
-      "Để kiểm tra DNS record"
+      "Để tăng tốc độ tải trang bằng cách nén dữ liệu",
+      "Để tạo kênh mã hóa trước khi gửi dữ liệu",
+      "Để kiểm tra mật khẩu của người dùng",
+      "Để kiểm tra DNS record của tên miền"
     ],
     "optionsEn": [
-      "To speed up page loading",
-      "To establish a secure encrypted channel before transmitting data",
-      "To authenticate the user",
-      "To check DNS records"
+      "To speed up page loading through compression",
+      "To encrypt the channel before sending data",
+      "To check the user's login password",
+      "To verify the domain's DNS records"
     ],
     "answer": 1,
     "explanation": "TLS handshake: client và server trao đổi certificate, xác thực danh tính, và thỏa thuận khóa mã hóa. Sau đó mọi dữ liệu truyền đi đều được mã hóa.",
@@ -284,16 +284,16 @@
     "question": "CDN phù hợp nhất để phục vụ loại nội dung nào?",
     "questionEn": "Which type of content is a CDN best suited to serve?",
     "options": [
-      "Dữ liệu cá nhân người dùng như giỏ hàng",
-      "Nội dung tĩnh như ảnh, CSS, JavaScript library",
+      "Giỏ hàng riêng của từng người dùng",
+      "Ảnh, CSS và thư viện JavaScript",
       "Kết quả truy vấn database real-time",
-      "Thông tin thanh toán"
+      "Thông tin thanh toán của khách"
     ],
     "optionsEn": [
-      "Personal user data such as a shopping cart",
-      "Static content such as images, CSS, and JavaScript libraries",
+      "Each user's personal shopping cart",
+      "Images, CSS and JavaScript libraries",
       "Real-time database query results",
-      "Payment information"
+      "Customers' payment details"
     ],
     "answer": 1,
     "explanation": "CDN phù hợp với nội dung tĩnh (không thay đổi theo user). Nội dung động hay dữ liệu nhạy cảm cần xử lý ở origin server, không nên cache tại CDN.",
@@ -303,16 +303,16 @@
     "question": "Người dùng ở Việt Nam báo website tải chậm dù máy chủ đặt ở Mỹ chạy tốt. Giải pháp hạ tầng nào phù hợp nhất?",
     "questionEn": "Users in Vietnam report a slow site although the US-hosted server performs well. Which infrastructure fix fits best?",
     "options": [
-      "Dùng CDN để phục vụ tài nguyên tĩnh từ máy chủ gần người dùng",
-      "Tăng RAM cho máy chủ ở Mỹ",
-      "Đổi tên miền sang đuôi .vn",
-      "Nén cơ sở dữ liệu"
+      "Dùng CDN đặt nội dung tĩnh gần người dùng",
+      "Tăng RAM và CPU cho máy chủ ở Mỹ",
+      "Đổi tên miền sang đuôi .vn cho gần hơn",
+      "Nén và chia nhỏ cơ sở dữ liệu ở Mỹ"
     ],
     "optionsEn": [
-      "Use a CDN so static assets are served from a node near the user",
-      "Add RAM to the US server",
-      "Change the domain to a .vn suffix",
-      "Compress the database"
+      "Use a CDN to cache static files nearby",
+      "Add more RAM and CPU to the US server",
+      "Switch the domain to .vn so it is closer",
+      "Compress and split the database in the US"
     ],
     "answer": 0,
     "explanation": "Khoảng cách địa lý tạo độ trễ. CDN nhân bản ảnh, CSS, JS ra các điểm gần người dùng nên giảm mạnh thời gian tải.",
@@ -324,15 +324,15 @@
     "questionEn": "What is the correct order when a user types a web address and presses Enter?",
     "options": [
       "Phân giải DNS → thiết lập kết nối tới server → gửi HTTP request → nhận response → trình duyệt render",
-      "Gửi HTTP request → phân giải DNS → render → kết nối server",
-      "Trình duyệt render → phân giải DNS → gửi request",
-      "Kết nối server → render → phân giải DNS → gửi request"
+      "Gửi HTTP request → phân giải DNS → thiết lập kết nối tới server → nhận response → trình duyệt render",
+      "Phân giải DNS → gửi HTTP request → thiết lập kết nối tới server → trình duyệt render → nhận response",
+      "Thiết lập kết nối tới server → phân giải DNS → gửi HTTP request → nhận response → trình duyệt render"
     ],
     "optionsEn": [
       "DNS resolution → connect to the server → send the HTTP request → receive the response → the browser renders",
-      "Send the HTTP request → DNS resolution → render → connect",
-      "Browser renders → DNS resolution → send request",
-      "Connect → render → DNS resolution → send request"
+      "Send the HTTP request → DNS resolution → connect to the server → receive the response → the browser renders",
+      "DNS resolution → send the HTTP request → connect to the server → the browser renders → receive the response",
+      "Connect to the server → DNS resolution → send the HTTP request → receive the response → the browser renders"
     ],
     "answer": 0,
     "explanation": "Trình duyệt phải biết địa chỉ IP trước khi kết nối được, nên phân giải DNS luôn đứng đầu chuỗi.",
@@ -383,16 +383,16 @@
     "question": "Server trả về mã trạng thái 404. Điều đó nghĩa là gì?",
     "questionEn": "The server returns status code 404. What does that mean?",
     "options": [
-      "Máy chủ nhận được yêu cầu nhưng không tìm thấy tài nguyên ở đường dẫn đó",
-      "Máy chủ bị lỗi nội bộ",
-      "Người dùng chưa đăng nhập",
-      "Yêu cầu thành công"
+      "Không tìm thấy tài nguyên ở đường dẫn đó",
+      "Máy chủ gặp lỗi nội bộ khi xử lý",
+      "Người dùng chưa đăng nhập vào hệ thống",
+      "Yêu cầu đã được xử lý thành công"
     ],
     "optionsEn": [
-      "The server got the request but found no resource at that path",
-      "The server had an internal error",
-      "The user is not logged in",
-      "The request succeeded"
+      "No resource was found at that path",
+      "The server crashed while handling it",
+      "The user has not logged in yet",
+      "The request was handled successfully"
     ],
     "answer": 0,
     "explanation": "Nhóm 4xx là lỗi phía client: 404 không tìm thấy, 401 chưa xác thực, 403 không đủ quyền. Nhóm 5xx là lỗi phía server.",
@@ -438,13 +438,13 @@
     "options": [
       "Request thành công",
       "Trang đã chuyển sang địa chỉ khác",
-      "Có lỗi xảy ra ở phía server — bug hoặc sự cố mà developer cần sửa",
+      "Lỗi xảy ra ở phía server",
       "Người dùng chưa đăng nhập"
     ],
     "optionsEn": [
       "The request succeeded",
       "The page has moved to another address",
-      "Something broke on the server side — a bug or outage for developers to fix",
+      "Something failed on the server side",
       "The user is not logged in"
     ],
     "answer": 2,
@@ -468,29 +468,29 @@
     "question": "Vì sao việc kiểm tra quyền và tính giá tiền phải nằm ở backend, không chỉ ở frontend?",
     "questionEn": "Why must permission checks and price calculations live on the backend, not only on the frontend?",
     "options": [
-      "Vì ai cũng có thể mở, đọc và sửa code frontend trong trình duyệt của chính họ",
-      "Vì frontend không thể hiển thị con số",
-      "Vì backend luôn nhanh hơn frontend",
-      "Vì HTML không hỗ trợ tiếng Việt"
+      "Vì người dùng sửa được code frontend trên trình duyệt",
+      "Vì frontend không thể tính toán và hiển thị con số",
+      "Vì backend chạy nhanh hơn frontend khi tính toán",
+      "Vì HTML không hỗ trợ hiển thị tiếng Việt có dấu"
     ],
     "optionsEn": [
-      "Because anyone can open, read and change the frontend code in their own browser",
-      "Because the frontend cannot display numbers",
-      "Because the backend is always faster than the frontend",
-      "Because HTML does not support Vietnamese"
+      "Because users can change frontend code in their own browser",
+      "Because the frontend cannot calculate or display numbers",
+      "Because the backend calculates faster than the frontend",
+      "Because HTML cannot display Vietnamese accented text"
     ],
     "answer": 0,
     "explanation": "Code frontend chạy trên máy người dùng nên có thể bị xem và chỉnh sửa. Những quy tắc không được phép bị qua mặt phải được kiểm tra trên server, nơi người dùng không chạm tới.",
     "explanationEn": "Frontend code runs on the user's machine, so it can be viewed and changed. Rules that must not be bypassed have to be checked on the server, which users cannot touch.",
     "optionExplanations": [
       "Đúng — frontend 'thấy được' và sửa được trên máy người dùng.",
-      "Frontend hiển thị số hoàn toàn bình thường; vấn đề là độ tin cậy, không phải hiển thị.",
+      "Frontend tính toán và hiển thị số hoàn toàn bình thường; vấn đề là độ tin cậy, không phải khả năng.",
       "Tốc độ không phải lý do; đây là vấn đề bảo mật.",
       "HTML hỗ trợ tiếng Việt (UTF-8); điều này không liên quan."
     ],
     "optionExplanationsEn": [
       "Correct — the frontend is visible and editable on the user's machine.",
-      "The frontend displays numbers just fine; the issue is trust, not display.",
+      "The frontend can calculate and display numbers just fine; the issue is trust, not ability.",
       "Speed is not the reason; this is about security.",
       "HTML supports Vietnamese (UTF-8); this is unrelated."
     ]
@@ -503,13 +503,13 @@
       "Website bị thay đổi cho mọi người dùng",
       "Server ghi lại thay đổi vào database",
       "Trình duyệt bị khoá cho tới khi bạn hoàn tác",
-      "Chỉ màn hình của bạn thay đổi, và thay đổi biến mất khi tải lại trang"
+      "Chỉ màn hình của bạn đổi, tải lại là mất"
     ],
     "optionsEn": [
       "The website changes for every user",
       "The server saves the change to the database",
       "The browser is locked until you undo it",
-      "Only your own screen changes, and the change disappears when you reload"
+      "Only your screen changes, until you reload"
     ],
     "answer": 3,
     "explanation": "Dev Tools chỉ sửa bản sao của trang trong trình duyệt của bạn. Không có gì được gửi lên server, nên tải lại trang là mọi thứ trở về như cũ.",

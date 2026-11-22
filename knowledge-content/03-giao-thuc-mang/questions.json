@@ -4,16 +4,16 @@
     "question": "Giao thức mạng (protocol) là gì?",
     "questionEn": "What is a network protocol?",
     "options": [
-      "Phần mềm cài trên router",
-      "Tập hợp quy tắc và quy ước để các thiết bị giao tiếp với nhau",
-      "Loại cáp mạng vật lý",
-      "Địa chỉ IP của thiết bị"
+      "Phần mềm cài trên router để quản lý mạng",
+      "Bộ quy tắc chung để các thiết bị giao tiếp",
+      "Loại cáp vật lý dùng để nối các thiết bị với nhau",
+      "Địa chỉ định danh riêng của mỗi thiết bị"
     ],
     "optionsEn": [
-      "Software installed on a router",
-      "A set of rules and conventions that lets devices communicate with one another",
-      "A type of physical network cable",
-      "The IP address of a device"
+      "Software installed on a router to manage traffic",
+      "A shared set of rules devices use to communicate",
+      "A type of physical cable that links devices",
+      "The unique address that identifies a device"
     ],
     "answer": 1,
     "explanation": "Giao thức là 'ngôn ngữ chung' — tập quy tắc mà tất cả thiết bị phải tuân theo để có thể hiểu và giao tiếp với nhau.",
@@ -24,16 +24,16 @@
     "question": "TCP khác UDP ở điểm quan trọng nào nhất?",
     "questionEn": "What is the most important way TCP differs from UDP?",
     "options": [
-      "TCP nhanh hơn UDP",
-      "TCP đảm bảo dữ liệu đến đủ và đúng thứ tự, UDP không đảm bảo điều này",
-      "UDP mã hóa dữ liệu, TCP không",
-      "TCP dùng cho video, UDP dùng cho web"
+      "TCP nhanh hơn UDP vì không cần chờ xác nhận gói tin",
+      "TCP đảm bảo dữ liệu đến đủ và đúng thứ tự, UDP thì không",
+      "UDP mã hóa dữ liệu khi truyền, còn TCP gửi dạng rõ",
+      "TCP dùng cho video trực tuyến, UDP dùng cho web"
     ],
     "optionsEn": [
-      "TCP is faster than UDP",
-      "TCP guarantees that data arrives completely and in the correct order, while UDP does not",
-      "UDP encrypts data while TCP does not",
-      "TCP is used for video while UDP is used for the web"
+      "TCP is faster than UDP since it skips acknowledgements",
+      "TCP guarantees complete, in-order delivery; UDP does not",
+      "UDP encrypts data in transit, while TCP sends it in plain text",
+      "TCP is used for live video, while UDP is used for the web"
     ],
     "answer": 1,
     "explanation": "TCP có cơ chế xác nhận (acknowledgment) và gửi lại khi mất gói — đáng tin cậy nhưng chậm hơn. UDP không xác nhận — nhanh hơn nhưng có thể mất gói.",
@@ -44,16 +44,16 @@
     "question": "Ứng dụng nào phù hợp dùng UDP thay vì TCP?",
     "questionEn": "Which application is best suited to use UDP instead of TCP?",
     "options": [
-      "Tải file quan trọng",
-      "Gửi email",
+      "Tải về file tài liệu quan trọng",
+      "Gửi email cho khách hàng",
       "Video call thời gian thực",
-      "Giao dịch ngân hàng"
+      "Thực hiện giao dịch ngân hàng"
     ],
     "optionsEn": [
-      "Downloading an important file",
-      "Sending email",
+      "Downloading an important document",
+      "Sending email to customers",
       "A real-time video call",
-      "A banking transaction"
+      "Making a banking transaction"
     ],
     "answer": 2,
     "explanation": "Video call chấp nhận mất vài gói hình ảnh (không ai để ý) nhưng cần tốc độ cao. TCP gửi lại gói mất gây giật lag, UDP chấp nhận mất gói để duy trì tốc độ.",
@@ -84,16 +84,16 @@
     "question": "HTTPS khác HTTP ở điểm gì?",
     "questionEn": "How does HTTPS differ from HTTP?",
     "options": [
-      "HTTPS nhanh hơn HTTP",
-      "HTTPS mã hóa dữ liệu truyền tải bằng TLS/SSL",
+      "HTTPS nhanh hơn vì nén dữ liệu",
+      "HTTPS mã hóa dữ liệu khi truyền",
       "HTTPS chỉ dùng cho trang web tĩnh",
-      "HTTPS không cần DNS"
+      "HTTPS không cần tra cứu DNS"
     ],
     "optionsEn": [
-      "HTTPS is faster than HTTP",
-      "HTTPS encrypts transmitted data using TLS/SSL",
+      "HTTPS is faster because it compresses data",
+      "HTTPS encrypts data in transit",
       "HTTPS is only used for static websites",
-      "HTTPS does not need DNS"
+      "HTTPS does not need a DNS lookup"
     ],
     "answer": 1,
     "explanation": "HTTPS = HTTP + TLS/SSL encryption. Dữ liệu được mã hóa trước khi gửi, kẻ nghe lén không đọc được nội dung.",
@@ -184,16 +184,16 @@
     "question": "Giao thức SSH dùng để làm gì?",
     "questionEn": "What is the SSH protocol used for?",
     "options": [
-      "Gửi email bảo mật",
-      "Điều khiển server từ xa qua kết nối mã hóa",
-      "Truyền file qua mạng nội bộ",
-      "Phát sóng WiFi bảo mật"
+      "Gửi email bảo mật giữa các server",
+      "Điều khiển server từ xa an toàn",
+      "Phân giải tên miền thành địa chỉ IP",
+      "Phát sóng WiFi được bảo mật"
     ],
     "optionsEn": [
-      "Sending secure email",
-      "Controlling a server remotely over an encrypted connection",
-      "Transferring files within the local network",
-      "Broadcasting secure WiFi"
+      "Sending secure email between servers",
+      "Securely controlling a remote server",
+      "Resolving domain names to IP addresses",
+      "Broadcasting a secured WiFi network"
     ],
     "answer": 1,
     "explanation": "SSH (Secure Shell) cho phép quản trị viên kết nối và điều khiển server từ xa qua terminal, với mọi lệnh được mã hóa.",
@@ -204,16 +204,16 @@
     "question": "3-Way Handshake trong TCP diễn ra khi nào?",
     "questionEn": "When does the 3-Way Handshake in TCP take place?",
     "options": [
-      "Khi truyền file kết thúc",
+      "Khi truyền file đã kết thúc",
       "Khi thiết lập kết nối TCP ban đầu",
       "Khi có lỗi mạng xảy ra",
-      "Khi DNS phân giải địa chỉ IP"
+      "Khi DNS phân giải tên miền thành IP"
     ],
     "optionsEn": [
-      "When a file transfer ends",
-      "When the initial TCP connection is established",
+      "When a file transfer has finished",
+      "When a TCP connection is first set up",
       "When a network error occurs",
-      "When DNS resolves an IP address"
+      "When DNS resolves a name to an IP"
     ],
     "answer": 1,
     "explanation": "TCP dùng 3-Way Handshake (SYN → SYN-ACK → ACK) để thiết lập kết nối đáng tin cậy TRƯỚC khi truyền bất kỳ dữ liệu nào.",
@@ -264,15 +264,15 @@
     "question": "Tầng nào trong TCP/IP chịu trách nhiệm định tuyến gói tin?",
     "questionEn": "Which layer in TCP/IP is responsible for routing packets?",
     "options": [
-      "Tầng ứng dụng",
-      "Tầng vận chuyển",
+      "Tầng ứng dụng (Application)",
+      "Tầng vận chuyển (Transport)",
       "Tầng mạng (Internet)",
-      "Tầng liên kết"
+      "Tầng liên kết (Link)"
     ],
     "optionsEn": [
       "The Application layer",
       "The Transport layer",
-      "The Internet (Network) layer",
+      "The Internet layer",
       "The Link layer"
     ],
     "answer": 2,
@@ -285,15 +285,15 @@
     "questionEn": "When you see the padlock icon 🔒 in the browser's address bar, what does it mean?",
     "options": [
       "Trang web yêu cầu mật khẩu đăng nhập",
-      "Kết nối đang dùng HTTPS - dữ liệu được mã hóa",
-      "Trang web đã được chặn",
-      "WiFi đang kết nối"
+      "Kết nối được mã hóa bằng HTTPS",
+      "Trang web đã bị trình duyệt chặn",
+      "Trang web đã được xác nhận là không lừa đảo"
     ],
     "optionsEn": [
       "The website requires a login password",
-      "The connection is using HTTPS - the data is encrypted",
-      "The website has been blocked",
-      "WiFi is connecting"
+      "The connection is encrypted with HTTPS",
+      "The browser has blocked the website",
+      "The website is verified as not being a scam"
     ],
     "answer": 1,
     "explanation": "Icon ổ khóa xác nhận trang web dùng HTTPS với chứng chỉ SSL/TLS hợp lệ — mọi dữ liệu trao đổi giữa browser và server được mã hóa.",
@@ -303,16 +303,16 @@
     "question": "Ứng dụng gọi video trực tuyến thường chọn UDP thay vì TCP. Vì sao?",
     "questionEn": "Live video-calling apps usually pick UDP over TCP. Why?",
     "options": [
-      "Vì UDP không chờ gửi lại gói mất, nên giữ được độ trễ thấp — một khung hình mất đi ít hại hơn cả cuộc gọi bị khựng",
-      "Vì UDP mã hoá dữ liệu còn TCP thì không",
-      "Vì UDP nhanh hơn nhờ nén dữ liệu",
-      "Vì TCP không hoạt động trên internet"
+      "Vì UDP không chờ gửi lại gói mất, nên độ trễ thấp",
+      "Vì UDP mã hóa luồng video còn TCP gửi dạng rõ",
+      "Vì UDP nén dữ liệu nên dùng ít băng thông hơn",
+      "Vì TCP không truyền được dữ liệu âm thanh, hình ảnh"
     ],
     "optionsEn": [
-      "Because UDP does not wait to retransmit lost packets, keeping latency low — one dropped frame hurts less than the whole call freezing",
-      "Because UDP encrypts data and TCP does not",
-      "Because UDP is faster thanks to compression",
-      "Because TCP does not work over the internet"
+      "Because UDP skips resending lost packets, keeping delay low",
+      "Because UDP encrypts the stream while TCP sends it in plain text",
+      "Because UDP compresses data, so it uses less bandwidth",
+      "Because TCP cannot carry audio and video data at all"
     ],
     "answer": 0,
     "explanation": "TCP bảo đảm mọi gói tin đến đủ và đúng thứ tự, nhưng cái giá là chờ gửi lại. Với thoại và video thời gian thực, độ trễ quan trọng hơn tính toàn vẹn tuyệt đối.",
@@ -323,16 +323,16 @@
     "question": "Khách hàng yêu cầu website phải chạy HTTPS. Điều đó mang lại gì mà HTTP không có?",
     "questionEn": "A customer requires the site to run on HTTPS. What does that give that HTTP does not?",
     "options": [
-      "Mã hoá dữ liệu trên đường truyền và xác thực rằng máy chủ đúng là bên nó tuyên bố",
-      "Tốc độ tải trang nhanh gấp đôi",
-      "Tự động sao lưu dữ liệu người dùng",
-      "Loại bỏ nhu cầu xác thực người dùng"
+      "Mã hóa dữ liệu khi truyền và xác thực danh tính máy chủ",
+      "Tốc độ tải trang nhanh gấp đôi nhờ nén dữ liệu",
+      "Tự động sao lưu dữ liệu người dùng lên máy chủ",
+      "Không còn cần người dùng đăng nhập bằng mật khẩu"
     ],
     "optionsEn": [
-      "Encryption of data in transit plus verification that the server really is who it claims to be",
-      "Twice the page load speed",
-      "Automatic backup of user data",
-      "It removes the need to authenticate users"
+      "Encrypted traffic and proof of the server's identity",
+      "Pages load twice as fast thanks to compression",
+      "Automatic backup of user data to the server",
+      "Users no longer need to log in with a password"
     ],
     "answer": 0,
     "explanation": "HTTPS bọc HTTP trong TLS: dữ liệu được mã hoá và chứng chỉ xác thực danh tính máy chủ. Nó không thay thế việc đăng nhập hay phân quyền.",
@@ -363,36 +363,36 @@
     "question": "Hệ thống cần gửi email xác nhận đơn hàng tự động. Giao thức nào liên quan trực tiếp nhất?",
     "questionEn": "A system must send automatic order confirmation emails. Which protocol is most directly involved?",
     "options": [
-      "FTP",
-      "SSH",
+      "SNMP",
+      "IMAP",
       "SMTP",
       "DNS"
     ],
     "optionsEn": [
-      "FTP",
-      "SSH",
+      "SNMP",
+      "IMAP",
       "SMTP",
       "DNS"
     ],
     "answer": 2,
-    "explanation": "SMTP là giao thức gửi email. FTP truyền tệp, SSH đăng nhập máy chủ từ xa an toàn, DNS phân giải tên miền.",
-    "explanationEn": "SMTP is the mail-sending protocol. FTP transfers files, SSH gives secure remote server access, and DNS resolves domain names.",
+    "explanation": "SMTP là giao thức gửi email. IMAP dùng để đọc (nhận) email từ hộp thư, SNMP dùng để giám sát thiết bị mạng, DNS phân giải tên miền.",
+    "explanationEn": "SMTP is the mail-sending protocol. IMAP is for reading (receiving) mail from a mailbox, SNMP monitors network devices, and DNS resolves domain names.",
     "id": "q19"
   },
   {
     "question": "Vì sao BA nên biết một tính năng dùng giao thức nào khi viết yêu cầu tích hợp?",
     "questionEn": "Why should a BA know which protocol a feature uses when writing an integration requirement?",
     "options": [
-      "Vì giao thức quyết định định dạng dữ liệu, cách xử lý lỗi và hành vi khi hệ thống đối tác không phản hồi",
-      "Vì mỗi giao thức có một màu sắc riêng trên sơ đồ",
-      "Vì lập trình viên không được phép chọn giao thức",
-      "Vì giao thức quyết định ngân sách dự án"
+      "Vì giao thức quyết định định dạng dữ liệu và cách xử lý lỗi",
+      "Vì mỗi giao thức có một màu riêng trên sơ đồ kiến trúc",
+      "Vì lập trình viên không được phép tự chọn giao thức",
+      "Vì giao thức quyết định ngân sách và thời hạn dự án"
     ],
     "optionsEn": [
-      "Because the protocol determines the data format, error handling, and behaviour when the partner system does not respond",
-      "Because each protocol has its own colour on diagrams",
-      "Because developers are not allowed to choose the protocol",
-      "Because the protocol determines the project budget"
+      "Because the protocol sets the data format and error handling",
+      "Because each protocol has its own colour on architecture diagrams",
+      "Because developers are not allowed to pick the protocol themselves",
+      "Because the protocol decides the project's budget and deadline"
     ],
     "answer": 0,
     "explanation": "Yêu cầu tích hợp phải nêu rõ định dạng, giao thức và điều gì xảy ra khi bên kia không khả dụng — đó là phần hay bị bỏ sót nhất.",
@@ -406,13 +406,13 @@
     "options": [
       "Người dùng gõ sai địa chỉ",
       "Người dùng chưa đăng nhập",
-      "Phía server, khi xử lý một yêu cầu hợp lệ",
+      "Lỗi ở phía server",
       "Yêu cầu đã thành công"
     ],
     "optionsEn": [
       "The user typed a wrong address",
       "The user is not logged in",
-      "On the server side, while handling a valid request",
+      "A server-side fault",
       "The request succeeded"
     ],
     "answer": 2,
@@ -436,16 +436,16 @@
     "question": "Sau khi chuyển website sang server mới, vài người vẫn vào server cũ trong một thời gian. Nguyên nhân thường gặp nhất là gì?",
     "questionEn": "After a website moves to a new server, some people still reach the old server for a while. What is the most common reason?",
     "options": [
-      "Họ vẫn đang dùng câu trả lời DNS cũ đã lưu cho đến khi TTL hết hạn",
-      "TCP gửi lại gói tin tới địa chỉ cũ",
-      "Trình duyệt của họ không hỗ trợ HTTPS",
-      "SMTP server chưa được cập nhật"
+      "Họ vẫn dùng câu trả lời DNS cũ đã lưu cho đến khi TTL hết hạn",
+      "TCP vẫn gửi lại gói tin tới địa chỉ cũ một thời gian",
+      "Trình duyệt của họ không hỗ trợ HTTPS của server mới",
+      "SMTP server chưa được cập nhật địa chỉ server mới"
     ],
     "optionsEn": [
-      "They still have the old DNS answer cached until its TTL expires",
-      "TCP keeps resending packets to the old address",
-      "Their browser does not support HTTPS",
-      "The SMTP server has not been updated"
+      "They still have the old DNS answer cached until the TTL expires",
+      "TCP keeps resending packets to the old address for a while",
+      "Their browser does not support the new server's HTTPS",
+      "The SMTP server has not been told the new server's address"
     ],
     "answer": 0,
     "explanation": "Câu trả lời DNS được lưu tạm theo TTL. Cho đến khi hết hạn, trình duyệt và resolver vẫn dùng IP cũ.",
@@ -471,13 +471,13 @@
       "Gửi yêu cầu HTTP GET",
       "Bắt tay TLS để thống nhất mã hóa",
       "Bắt tay TCP SYN / SYN-ACK / ACK",
-      "Tra cứu DNS để đổi tên miền thành địa chỉ IP"
+      "Tra cứu DNS để lấy địa chỉ IP"
     ],
     "optionsEn": [
       "Sending the HTTP GET request",
       "The TLS handshake to agree on encryption",
       "The TCP SYN / SYN-ACK / ACK handshake",
-      "A DNS lookup to turn the name into an IP address"
+      "A DNS lookup to get the IP address"
     ],
     "answer": 3,
     "explanation": "Trình duyệt phải biết địa chỉ IP trước khi kết nối được, nên DNS đi đầu; sau đó là TCP, TLS rồi mới tới HTTP.",

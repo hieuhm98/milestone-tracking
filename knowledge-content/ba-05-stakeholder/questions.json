@@ -4,16 +4,16 @@
     "question": "Định nghĩa stakeholder rộng nhất và chính xác nhất là gì?",
     "questionEn": "What is the broadest and most accurate definition of a stakeholder?",
     "options": [
-      "Bất kỳ ai bị ảnh hưởng bởi dự án, có ảnh hưởng tới dự án, hoặc có quyền lợi liên quan tới kết quả",
-      "Người trả tiền cho dự án",
-      "Người sẽ trực tiếp sử dụng phần mềm hằng ngày",
-      "Người ký duyệt tài liệu yêu cầu"
+      "Ai bị dự án ảnh hưởng, ảnh hưởng tới dự án, hoặc có quyền lợi ở kết quả",
+      "Người trả tiền và ký hợp đồng cho dự án, cùng đại diện được họ ủy quyền",
+      "Người sẽ trực tiếp sử dụng phần mềm hằng ngày sau khi hệ thống go-live",
+      "Người có tên trong danh sách ký duyệt tài liệu yêu cầu của dự án"
     ],
     "optionsEn": [
       "Anyone affected by the project, able to affect it, or with an interest in its outcome",
-      "Whoever pays for the project",
-      "Whoever will use the software daily",
-      "Whoever signs off the requirements document"
+      "Whoever pays for and signs the project contract, plus their authorised representatives",
+      "Whoever will use the software directly every day once it goes live",
+      "Whoever appears on the sign-off list for the requirements document"
     ],
     "answer": 0,
     "explanation": "Định nghĩa này rộng hơn nhiều so với khách hàng và người dùng, và chính sự rộng đó khiến nhiều nhóm quan trọng bị bỏ sót.",
@@ -25,15 +25,15 @@
     "questionEn": "Which stakeholder group holds a late veto if not consulted early?",
     "options": [
       "Bộ phận tuân thủ: pháp chế, kiểm toán, an ninh thông tin",
-      "Người dùng cuối",
-      "Đội phát triển",
-      "Nhà cung cấp hạ tầng"
+      "Người dùng cuối: nhân viên vận hành, chăm sóc khách hàng",
+      "Đội phát triển: lập trình viên, tester, kiến trúc sư giải pháp",
+      "Nhà cung cấp: hạ tầng cloud, cổng thanh toán, đối tác vận chuyển"
     ],
     "optionsEn": [
       "Compliance functions: legal, audit, information security",
-      "End users",
-      "The development team",
-      "Infrastructure vendors"
+      "End users: operations staff and customer care",
+      "The delivery team: developers, testers, solution architects",
+      "Vendors: cloud infrastructure, payment gateway, shipping partners"
     ],
     "answer": 0,
     "explanation": "Chi phí của việc pháp chế xuất hiện ở tuần cuối và nói tính năng này vi phạm quy định thường lớn hơn nhiều so với chi phí mời họ dự một buổi họp ở tuần đầu.",
@@ -45,15 +45,15 @@
     "questionEn": "Which question is the most effective and least costly for finding missed stakeholders?",
     "options": [
       "Ngoài anh chị ra, em còn nên nói chuyện với ai nữa về việc này?",
-      "Anh chị có bao nhiêu năm kinh nghiệm?",
-      "Dự án này quan trọng thế nào với anh chị?",
-      "Anh chị muốn hệ thống có tính năng gì?"
+      "Anh chị đã làm ở bộ phận này bao lâu và phụ trách những gì?",
+      "Dự án này quan trọng thế nào với mục tiêu của bộ phận anh chị?",
+      "Anh chị mong hệ thống mới có những tính năng gì nhất?"
     ],
     "optionsEn": [
       "Besides you, who else should I talk to about this?",
-      "How many years of experience do you have?",
-      "How important is this project to you?",
-      "What features do you want in the system?"
+      "How long have you worked here and what are you responsible for?",
+      "How important is this project to your department's goals?",
+      "Which features do you want most from the new system?"
     ],
     "answer": 0,
     "explanation": "Hỏi câu này ở cuối mỗi buổi phỏng vấn tạo ra hiệu ứng lan toả, giúp bạn dần phủ hết mạng lưới người liên quan.",
@@ -64,16 +64,16 @@
     "question": "Kỹ thuật đi theo dữ liệu để tìm stakeholder hoạt động thế nào?",
     "questionEn": "How does the follow-the-data technique for finding stakeholders work?",
     "options": [
-      "Với mỗi loại dữ liệu quan trọng, hỏi ai tạo, ai đọc, ai sửa, ai xoá và ai chịu trách nhiệm về chất lượng của nó",
-      "Đọc toàn bộ cơ sở dữ liệu hiện có",
-      "Xem nhật ký truy cập hệ thống trong một tháng",
-      "Đếm số bản ghi trong mỗi bảng"
+      "Với mỗi loại dữ liệu, hỏi ai tạo, đọc, sửa, xoá và ai chịu trách nhiệm chất lượng",
+      "Đọc toàn bộ schema cơ sở dữ liệu để suy ra bộ phận nào dùng bảng nào",
+      "Xem nhật ký truy cập một tháng để liệt kê mọi tài khoản đã từng đăng nhập vào hệ thống",
+      "Vẽ sơ đồ luồng dữ liệu giữa các hệ thống để tìm điểm tích hợp cần làm"
     ],
     "optionsEn": [
-      "For each important data type ask who creates, reads, changes, deletes it, and who is accountable for its quality",
-      "Read the entire existing database",
-      "Review a month of system access logs",
-      "Count the records in each table"
+      "For each data type, ask who creates, reads, changes, deletes and owns its quality",
+      "Read the whole database schema to infer which department uses which table",
+      "Review a month of access logs to list every account that logged in to the system",
+      "Draw data flows between systems to find the integrations needed"
     ],
     "answer": 0,
     "explanation": "Đây chính là tư duy của CRUD matrix áp dụng vào việc tìm người thay vì tìm chức năng thiếu.",
@@ -84,36 +84,36 @@
     "question": "Trong ma trận ảnh hưởng và quan tâm, nhóm nào nguy hiểm nhất nếu bị bỏ quên?",
     "questionEn": "In the influence-interest matrix, which group is most dangerous if forgotten?",
     "options": [
-      "Ảnh hưởng cao nhưng quan tâm thấp — họ không tham gia nhưng có quyền phủ quyết",
-      "Ảnh hưởng thấp và quan tâm thấp",
-      "Ảnh hưởng thấp nhưng quan tâm cao",
-      "Ảnh hưởng cao và quan tâm cao"
+      "Ảnh hưởng cao, quan tâm thấp",
+      "Ảnh hưởng thấp, quan tâm thấp",
+      "Ảnh hưởng thấp, quan tâm cao",
+      "Ảnh hưởng cao, quan tâm cao"
     ],
     "optionsEn": [
-      "High influence, low interest — they do not participate but can veto",
+      "High influence, low interest",
       "Low influence, low interest",
       "Low influence, high interest",
       "High influence, high interest"
     ],
     "answer": 0,
-    "explanation": "Hãy giữ họ được thông tin đủ để không bao giờ bất ngờ, bằng báo cáo tóm tắt định kỳ thay vì chi tiết vận hành.",
-    "explanationEn": "Keep them informed enough never to be surprised, with periodic summaries rather than operational detail."
+    "explanation": "Nhóm ảnh hưởng cao nhưng quan tâm thấp không tham gia dự án nhưng vẫn có quyền phủ quyết. Hãy giữ họ được thông tin đủ để không bao giờ bất ngờ, bằng báo cáo tóm tắt định kỳ thay vì chi tiết vận hành.",
+    "explanationEn": "The high-influence, low-interest group does not take part in the project but can still veto it. Keep them informed enough never to be surprised, with periodic summaries rather than operational detail."
   },
   {
     "id": "q6",
     "question": "Vì sao không nên nhầm chức vụ với ảnh hưởng?",
     "questionEn": "Why should you not confuse job title with influence?",
     "options": [
-      "Vì một chuyên viên vận hành lâu năm mà mọi người đều hỏi ý kiến có thể có ảnh hưởng thực tế lớn hơn một trưởng phòng mới nhận việc",
-      "Vì chức vụ trong sơ đồ tổ chức thường sai",
-      "Vì trưởng phòng không tham gia dự án",
-      "Vì chuyên viên luôn hiểu nghiệp vụ hơn quản lý"
+      "Vì chuyên viên lâu năm được mọi người hỏi ý có thể ảnh hưởng hơn trưởng phòng mới",
+      "Vì sơ đồ tổ chức thường lỗi thời, nên phải tự vẽ lại trước khi gặp ai",
+      "Vì trưởng phòng thường ủy quyền hết cho cấp dưới nên gần như ít ảnh hưởng tới dự án",
+      "Vì chuyên viên luôn hiểu nghiệp vụ hơn quản lý nên ý họ phải được ưu tiên"
     ],
     "optionsEn": [
-      "Because a long-serving specialist whom everyone consults may hold more real influence than a newly appointed department head",
-      "Because org charts are usually wrong",
-      "Because department heads do not join projects",
-      "Because specialists always understand the business better than managers"
+      "Because a veteran specialist everyone consults may outweigh a new department head",
+      "Because org charts are often outdated, so you must redraw one before meeting anyone",
+      "Because department heads delegate everything, so they barely affect projects",
+      "Because specialists always know the business better, so their views come first"
     ],
     "answer": 0,
     "explanation": "Ảnh hưởng thực tế đến từ uy tín và mạng lưới quan hệ, không chỉ từ vị trí trên sơ đồ tổ chức.",
@@ -124,16 +124,16 @@
     "question": "Vì sao cần product champion thay vì cố gặp toàn bộ người dùng?",
     "questionEn": "Why use a product champion instead of trying to meet every user?",
     "options": [
-      "Vì bạn không thể phỏng vấn 500 nhân viên, nhưng có thể làm việc sâu với hai đại diện có trách nhiệm mang tiếng nói tập thể tới bạn",
-      "Vì người dùng thường không muốn tham gia",
-      "Vì champion rẻ hơn về chi phí",
-      "Vì quản lý không cho phép gặp nhân viên"
+      "Vì không thể phỏng vấn 500 người, nhưng có thể làm sâu với vài đại diện",
+      "Vì người dùng thường ngại góp ý trực tiếp nên cần một người nói thay họ",
+      "Vì champion được trả phụ cấp riêng nên chi phí khai thác thấp hơn nhiều",
+      "Vì quản lý thường không cho BA gặp nhân viên trong giờ làm việc"
     ],
     "optionsEn": [
-      "Because you cannot interview 500 staff, but you can work deeply with two representatives who bring the collective voice",
-      "Because users usually do not want to participate",
-      "Because champions are cheaper",
-      "Because managers do not allow access to staff"
+      "Because you can't interview 500 staff but can work deeply with a few representatives",
+      "Because users are shy about direct feedback, so someone must speak for them",
+      "Because champions get a separate allowance, making elicitation far cheaper",
+      "Because managers usually won't let BAs meet staff during work hours"
     ],
     "answer": 0,
     "explanation": "Product champion còn trở thành người bảo vệ sản phẩm trong chính bộ phận của họ khi triển khai, giúp giảm kháng cự thay đổi.",
@@ -144,16 +144,16 @@
     "question": "Bẫy phổ biến khi chọn product champion là gì?",
     "questionEn": "What is the common trap when selecting a product champion?",
     "options": [
-      "Chọn người rảnh nhất thay vì người hiểu nhất — người rảnh thường rảnh vì không nắm vai trò quan trọng trong quy trình",
-      "Chọn người có thâm niên cao nhất",
-      "Chọn người giỏi công nghệ nhất",
-      "Chọn người nói tiếng Anh tốt nhất"
+      "Chọn người rảnh nhất thay vì người hiểu quy trình nhất",
+      "Chọn người thâm niên cao nhất, vì họ thường quá bận để tham gia đều đặn",
+      "Chọn người nói tiếng Anh tốt nhất để tiện trao đổi với đội offshore",
+      "Chọn hai người từ hai bộ phận khác nhau khiến ý kiến dễ mâu thuẫn"
     ],
     "optionsEn": [
-      "Picking the most available rather than the most knowledgeable — availability often means no critical role in the process",
-      "Picking the most senior person",
-      "Picking the most technically able person",
-      "Picking whoever speaks the best English"
+      "Picking the most available person rather than the most knowledgeable",
+      "Picking the most senior person, who is usually too busy to attend regularly",
+      "Picking the best English speaker to ease talks with the offshore team",
+      "Picking two people from different departments, so views may conflict"
     ],
     "answer": 0,
     "explanation": "Yêu cầu bạn thu thập được sẽ phản ánh đúng mức độ hiểu biết của người bạn nói chuyện cùng.",
@@ -164,16 +164,16 @@
     "question": "Bất đồng do hai bên hiểu khác nhau nên được xử lý thế nào?",
     "questionEn": "How should a disagreement caused by different understandings be handled?",
     "options": [
-      "Làm rõ bằng ví dụ cụ thể và mô hình trực quan — nhiều bất đồng biến mất khi mọi người cùng nhìn vào một sơ đồ",
-      "Đưa lên lãnh đạo quyết định ngay",
-      "Chọn theo ý người có chức vụ cao hơn",
-      "Bỏ qua và làm theo cách của BA"
+      "Làm rõ bằng ví dụ cụ thể và sơ đồ để mọi người cùng nhìn một thứ",
+      "Đưa lên lãnh đạo quyết định ngay để không làm chậm tiến độ của đội",
+      "Chọn theo ý người có chức vụ cao hơn vì họ chịu trách nhiệm cuối cùng",
+      "Ghi cả hai cách hiểu vào tài liệu để dev chọn cách dễ làm hơn"
     ],
     "optionsEn": [
-      "Clarify with concrete examples and visual models — many disagreements evaporate once everyone sees the same diagram",
-      "Escalate to management immediately",
-      "Follow whoever holds the higher position",
-      "Ignore it and proceed the BA's way"
+      "Clarify with concrete examples and a diagram everyone can look at",
+      "Escalate to management at once so the team isn't slowed down",
+      "Go with the more senior person, since they bear final accountability",
+      "Document both readings and let devs pick the easier one"
     ],
     "answer": 0,
     "explanation": "Rất nhiều bất đồng thực chất là hai bên muốn cùng một thứ nhưng dùng từ khác nhau, hoặc mỗi bên nhìn một phần của vấn đề.",
@@ -184,16 +184,16 @@
     "question": "Khi hai bộ phận muốn hai tính năng khác nhau mà nguồn lực chỉ đủ một, vai trò của BA là gì?",
     "questionEn": "When two departments want different features and there is capacity for one, what is the BA's role?",
     "options": [
-      "Làm rõ đánh đổi bằng dữ liệu về giá trị, chi phí và rủi ro của mỗi phương án, rồi đưa lên người có thẩm quyền quyết định",
-      "Tự chọn phương án hợp lý nhất theo đánh giá của mình",
-      "Chọn theo bộ phận nào yêu cầu trước",
-      "Chia đôi nguồn lực cho cả hai tính năng"
+      "Làm rõ đánh đổi bằng dữ liệu về giá trị, chi phí, rủi ro rồi đưa người có quyền quyết",
+      "Tự chọn phương án hợp lý nhất vì BA hiểu rõ cả hai bộ phận nhất",
+      "Ưu tiên bộ phận gửi yêu cầu trước để đảm bảo công bằng quy trình",
+      "Chia đôi nguồn lực để mỗi bên có một phiên bản rút gọn của tính năng mình muốn"
     ],
     "optionsEn": [
-      "Make the trade-off explicit with data on value, cost, and risk of each option, then take it to whoever has authority",
-      "Choose whichever option seems most sensible to you",
-      "Choose whichever department asked first",
-      "Split resources between both features"
+      "Lay out value, cost and risk of each option, then take it to whoever has authority",
+      "Pick the most sensible option yourself, since the BA knows both sides best",
+      "Favour whichever department asked first, to keep the process fair",
+      "Split capacity so each side gets a cut-down version of the feature it wants"
     ],
     "answer": 0,
     "explanation": "Nếu bạn tự quyết định thay họ, bạn chịu trách nhiệm cho một quyết định bạn không có quyền đưa ra, và nó sẽ bị đảo ngược ở giai đoạn muộn.",
@@ -204,16 +204,16 @@
     "question": "Khi tự động hoá làm giảm vai trò của một bộ phận, BA nên làm gì?",
     "questionEn": "When automation reduces a department's importance, what should the BA do?",
     "options": [
-      "Nhận diện thẳng thắn nhưng tôn trọng, và KHÔNG đóng gói vấn đề tổ chức thành yêu cầu phần mềm",
-      "Bỏ qua vì đó không phải việc của BA",
-      "Thêm các tính năng phê duyệt để bộ phận đó vẫn có việc",
-      "Trì hoãn dự án cho tới khi mọi người đồng ý"
+      "Nêu thẳng thắn nhưng tôn trọng, và không biến vấn đề tổ chức thành yêu cầu phần mềm",
+      "Bỏ qua, vì cơ cấu tổ chức là việc của nhân sự và lãnh đạo, không phải BA",
+      "Thêm các bước phê duyệt để bộ phận đó vẫn giữ một vai trò có ý nghĩa trong quy trình mới",
+      "Trì hoãn dự án cho tới khi mọi bộ phận đều đồng ý với thay đổi"
     ],
     "optionsEn": [
-      "Name it honestly but respectfully, and do NOT package the organizational problem as a software requirement",
-      "Ignore it since it is not the BA's concern",
-      "Add approval features so the department still has work",
-      "Delay the project until everyone agrees"
+      "Name it honestly but kindly, and don't turn the org issue into a software requirement",
+      "Ignore it; org structure is for HR and leadership, not the BA",
+      "Add approval steps so that department still keeps a meaningful role in the new process",
+      "Delay the project until every department agrees to the change"
     ],
     "answer": 0,
     "explanation": "Đóng gói vấn đề tổ chức thành yêu cầu phần mềm tạo ra phần mềm phức tạp hơn mà không giải quyết được vấn đề thật.",
@@ -224,16 +224,16 @@
     "question": "Vì sao đóng vòng lặp với người đề xuất là bắt buộc?",
     "questionEn": "Why is closing the loop with a requester mandatory?",
     "options": [
-      "Vì người không bao giờ nhận được phản hồi sẽ ngừng đóng góp và bắt đầu đi đường vòng",
-      "Vì quy định công ty yêu cầu như vậy",
-      "Vì cần có bằng chứng cho kiểm toán",
-      "Vì phản hồi giúp tăng số lượng yêu cầu thu thập được"
+      "Vì không nhận phản hồi, họ sẽ ngừng góp ý và tìm đường vòng",
+      "Vì quy trình quản lý yêu cầu của công ty bắt buộc phải có email xác nhận",
+      "Vì kiểm toán cần bằng chứng mọi yêu cầu đều đã được xử lý đúng hạn",
+      "Vì phản hồi khuyến khích họ gửi thêm nhiều yêu cầu mới cho dự án"
     ],
     "optionsEn": [
-      "Because people who never hear back stop contributing and start working around you",
-      "Because company policy requires it",
-      "Because auditors need the evidence",
-      "Because feedback increases the number of requirements gathered"
+      "Because people who never hear back stop contributing and work around you",
+      "Because the company's requirements process mandates a confirmation email",
+      "Because auditors need proof every request was handled on time",
+      "Because feedback encourages them to send in more new requests"
     ],
     "answer": 0,
     "explanation": "Điều này đúng kể cả khi câu trả lời là không. Sự im lặng gây hại nhiều hơn một lời từ chối có giải thích.",
@@ -244,16 +244,16 @@
     "question": "Vì sao danh sách stakeholder phải được xem lại định kỳ?",
     "questionEn": "Why must the stakeholder list be revisited periodically?",
     "options": [
-      "Vì người mới xuất hiện, người cũ đổi vai trò và mức độ quan tâm thay đổi trong suốt dự án",
-      "Vì công cụ quản lý yêu cầu bắt buộc cập nhật",
-      "Vì danh sách bị mất nếu không cập nhật",
-      "Vì stakeholder yêu cầu được xác nhận lại"
+      "Vì người mới xuất hiện, vai trò thay đổi và mức quan tâm dịch chuyển theo dự án",
+      "Vì công cụ quản lý yêu cầu sẽ tự khóa danh sách nếu không cập nhật sau mỗi sprint",
+      "Vì tiêu chuẩn BABOK quy định phải duyệt lại danh sách mỗi tháng một lần",
+      "Vì stakeholder cần ký xác nhận lại vai trò của mình ở mỗi giai đoạn"
     ],
     "optionsEn": [
-      "Because new people appear, old ones change roles, and interest levels shift during the project",
-      "Because the requirements tool forces updates",
-      "Because the list is lost if not updated",
-      "Because stakeholders ask to be reconfirmed"
+      "Because people join, roles change and interest levels shift over the project",
+      "Because the requirements tool locks the list unless it is updated every sprint",
+      "Because BABOK mandates re-approving the list once a month",
+      "Because stakeholders must re-sign their roles at every phase"
     ],
     "answer": 0,
     "explanation": "Một giám đốc ban đầu ít quan tâm có thể trở nên rất quan tâm khi ngân sách bị vượt, và vị trí của họ trên ma trận thay đổi theo.",
@@ -264,16 +264,16 @@
     "question": "Vì sao BA nên xây dựng uy tín TRƯỚC khi cần tới nó?",
     "questionEn": "Why should a BA build credibility BEFORE needing it?",
     "options": [
-      "Vì khi phải nói không hoặc bảo vệ một quyết định khó, uy tín tích luỹ từ những lần bạn đúng và trung thực trước đó là thứ giúp bạn được lắng nghe",
-      "Vì uy tín quyết định mức lương",
-      "Vì công ty đánh giá uy tín hằng quý",
-      "Vì uy tín thay thế được dữ liệu khi tranh luận"
+      "Vì khi phải nói không, uy tín tích lũy từ trước mới giúp bạn được lắng nghe",
+      "Vì uy tín là tiêu chí chính khi xét tăng lương và thăng chức cho BA",
+      "Vì công ty đánh giá uy tín của BA qua khảo sát stakeholder mỗi quý",
+      "Vì khi đã có uy tín rồi thì không cần dữ liệu khi tranh luận với stakeholder"
     ],
     "optionsEn": [
-      "Because when you must say no or defend a hard call, the credit earned by being right and honest earlier is what buys you a hearing",
-      "Because credibility determines salary",
-      "Because the company reviews credibility quarterly",
-      "Because credibility substitutes for data in an argument"
+      "Because when you must say no, earlier earned trust is what gets you heard",
+      "Because credibility is the main criterion for BA raises and promotions",
+      "Because the company rates BA credibility via quarterly stakeholder surveys",
+      "Because once trusted, you no longer need data when arguing with stakeholders"
     ],
     "answer": 0,
     "explanation": "BA chịu trách nhiệm mà không có thẩm quyền, nên ảnh hưởng phải đến từ uy tín chuyên môn chứ không từ chức vụ.",
@@ -284,16 +284,16 @@
     "question": "Chỉ báo nào cho thấy quan hệ giữa BA và stakeholder đã thực sự tốt?",
     "questionEn": "What indicates the BA-stakeholder relationship has become genuinely good?",
     "options": [
-      "Stakeholder chủ động tìm bạn để hỏi ý kiến TRƯỚC khi quyết định, nghĩa là bạn đã thành đối tác thay vì người ghi chép",
-      "Stakeholder không còn phản đối yêu cầu nào",
-      "Số cuộc họp giảm xuống",
-      "Tài liệu được ký duyệt nhanh hơn"
+      "Stakeholder chủ động hỏi ý kiến bạn TRƯỚC khi quyết định",
+      "Stakeholder không còn phản đối hay góp ý gì với các yêu cầu bạn đưa ra",
+      "Số cuộc họp giảm hẳn vì mọi người đã quen cách làm việc của bạn",
+      "Tài liệu được ký duyệt nhanh hơn, thường ngay trong ngày gửi"
     ],
     "optionsEn": [
-      "Stakeholders seek your opinion BEFORE deciding, meaning you have become a partner rather than a note-taker",
-      "Stakeholders stop objecting to any requirement",
-      "The number of meetings drops",
-      "Documents get signed off faster"
+      "Stakeholders seek your opinion BEFORE they decide",
+      "Stakeholders no longer object to or question any requirement you raise",
+      "Meetings drop sharply as everyone gets used to how you work",
+      "Documents get signed off faster, often the same day"
     ],
     "answer": 0,
     "explanation": "Không còn phản đối gì không phải dấu hiệu tốt — nó thường có nghĩa là họ đã ngừng quan tâm hoặc đang đi đường vòng.",
@@ -304,16 +304,16 @@
     "question": "Kỹ thuật hỏi ai sẽ phản đối phục vụ mục đích gì?",
     "questionEn": "What purpose does the ask-who-will-object technique serve?",
     "options": [
-      "Tìm ra những người có ảnh hưởng mà bạn cần thuyết phục sớm, trước khi họ trở thành rào cản ở giai đoạn muộn",
-      "Lập danh sách những người cần loại khỏi dự án",
-      "Xác định ai sẽ không tham gia họp",
-      "Đo mức độ hài lòng của tổ chức"
+      "Tìm người có ảnh hưởng cần thuyết phục sớm, trước khi họ thành rào cản",
+      "Lập danh sách người cần hạn chế quyền tiếp cận thông tin dự án",
+      "Xác định ai không nên được mời họp để buổi làm việc ít tranh cãi",
+      "Đo mức độ hài lòng của tổ chức với hệ thống cũ trước khi thay thế"
     ],
     "optionsEn": [
-      "Finding influential people you must win over early, before they become a late obstacle",
-      "Listing people to exclude from the project",
-      "Identifying who will skip meetings",
-      "Measuring organizational satisfaction"
+      "Finding influential people to win over early, before they become obstacles",
+      "Listing people whose access to project information should be limited",
+      "Identifying whom not to invite so sessions have less arguing",
+      "Measuring the organisation's satisfaction with the old system before replacing it"
     ],
     "answer": 0,
     "explanation": "Người phản đối thường có lý do chính đáng mà bạn chưa biết, và lý do đó thường là một yêu cầu hoặc ràng buộc chưa được nhận diện.",

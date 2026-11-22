@@ -4,7 +4,7 @@
     "question": "Agile Manifesto ưu tiên điều gì hơn 'Quy trình và công cụ'?",
     "questionEn": "What does the Agile Manifesto prioritize over 'processes and tools'?",
     "options": [
-      "Tài liệu đầy đủ",
+      "Tài liệu đầy đủ, chi tiết",
       "Cá nhân và tương tác",
       "Đàm phán hợp đồng",
       "Bám theo kế hoạch"
@@ -24,15 +24,15 @@
     "question": "Sự khác biệt chính giữa Waterfall và Agile là gì?",
     "questionEn": "What is the main difference between Waterfall and Agile?",
     "options": [
-      "Waterfall nhanh hơn Agile",
-      "Waterfall làm tuần tự một lần, Agile làm theo vòng lặp ngắn liên tục",
-      "Agile không có kế hoạch, Waterfall có",
-      "Waterfall phù hợp cho dự án nhỏ, Agile cho dự án lớn"
+      "Waterfall nhanh hơn Agile vì ít họp hơn",
+      "Waterfall làm tuần tự một lần, Agile làm từng vòng ngắn",
+      "Agile không có kế hoạch, còn Waterfall thì có",
+      "Waterfall phù hợp cho dự án nhỏ, còn Agile cho dự án lớn"
     ],
     "optionsEn": [
-      "Waterfall is faster than Agile",
-      "Waterfall runs sequentially once, while Agile runs in continuous short iterations",
-      "Agile has no plan, Waterfall does",
+      "Waterfall is faster than Agile because it has fewer meetings",
+      "Waterfall runs once in sequence; Agile runs short cycles",
+      "Agile has no plan at all, while Waterfall does",
       "Waterfall suits small projects, Agile suits large ones"
     ],
     "answer": 1,
@@ -44,16 +44,16 @@
     "question": "Tại sao Waterfall thường thất bại trong dự án phần mềm?",
     "questionEn": "Why does Waterfall often fail in software projects?",
     "options": [
-      "Waterfall đòi hỏi team quá lớn",
-      "Yêu cầu phần mềm thay đổi liên tục và khách hàng chỉ thấy sản phẩm cuối — quá muộn để sửa",
-      "Waterfall không cho phép test phần mềm",
-      "Waterfall quá phức tạp cho developer"
+      "Waterfall đòi hỏi team quá lớn và tốn kém",
+      "Yêu cầu hay đổi, mà khách chỉ thấy sản phẩm ở cuối",
+      "Waterfall không cho phép kiểm thử phần mềm",
+      "Waterfall quá phức tạp để đội developer có thể làm theo"
     ],
     "optionsEn": [
-      "Waterfall requires too large a team",
-      "Software requirements change constantly and customers only see the final product — too late to fix",
-      "Waterfall does not allow software testing",
-      "Waterfall is too complex for developers"
+      "Waterfall needs a team that is too large and costly",
+      "Requirements shift, yet customers only see the end",
+      "Waterfall does not allow any software testing",
+      "Waterfall is too complex for developers to follow"
     ],
     "answer": 1,
     "explanation": "Vấn đề cốt lõi: 'cone of uncertainty' — đầu dự án không thể biết chính xác yêu cầu. Waterfall đóng băng yêu cầu từ đầu → khi build xong thì market hoặc yêu cầu đã thay đổi.",
@@ -84,16 +84,16 @@
     "question": "Kanban phù hợp nhất với loại công việc nào?",
     "questionEn": "What type of work is Kanban best suited for?",
     "options": [
-      "Phát triển sản phẩm mới từ đầu",
-      "Ops, support, maintenance — công việc liên tục, không có sprint",
-      "Dự án có deadline cố định",
-      "Dự án nghiên cứu R&D"
+      "Phát triển sản phẩm mới hoàn toàn từ đầu",
+      "Ops, support, bảo trì — việc liên tục",
+      "Dự án có deadline và phạm vi cố định",
+      "Dự án nghiên cứu R&D dài hạn"
     ],
     "optionsEn": [
-      "Building a new product from scratch",
-      "Ops, support, and maintenance — continuous work with no sprints",
-      "Projects with a fixed deadline",
-      "R&D research projects"
+      "Building a brand-new product from scratch",
+      "Ops, support, maintenance — ongoing tasks",
+      "Projects with a fixed deadline and scope",
+      "Long-term R&D research projects"
     ],
     "answer": 1,
     "explanation": "Kanban: visualize work trên board, limit WIP (Work In Progress), optimize flow. Không có sprint cố định — phù hợp với team support, ops, maintenance có công việc đến liên tục.",
@@ -104,16 +104,16 @@
     "question": "Agile Manifesto được viết vào năm nào và bởi ai?",
     "questionEn": "When was the Agile Manifesto written, and by whom?",
     "options": [
-      "1990, bởi Microsoft",
-      "2001, bởi 17 chuyên gia phần mềm tại Utah, Mỹ",
+      "1990, bởi một nhóm kỹ sư Microsoft",
+      "2001, bởi 17 chuyên gia phần mềm",
       "2010, bởi Google và Amazon",
-      "1995, bởi IEEE"
+      "1995, bởi tổ chức IEEE"
     ],
     "optionsEn": [
-      "1990, by Microsoft",
-      "2001, by 17 software experts in Utah, USA",
+      "1990, by Microsoft engineers",
+      "2001, by 17 software experts",
       "2010, by Google and Amazon",
-      "1995, by the IEEE"
+      "1995, by the IEEE committee"
     ],
     "answer": 1,
     "explanation": "2001: 17 practitioner (Kent Beck, Martin Fowler, Ken Schwaber...) họp tại Snowbird, Utah → viết Agile Manifesto với 4 giá trị và 12 nguyên tắc. Đây là nền tảng của mọi Agile framework.",
@@ -125,15 +125,15 @@
     "questionEn": "What does 'responding to change' mean in practice in Agile?",
     "options": [
       "Team được phép thay đổi stack kỹ thuật bất cứ lúc nào",
-      "Yêu cầu có thể được điều chỉnh giữa chừng dựa trên feedback, không nhất thiết bám cứng vào kế hoạch ban đầu",
+      "Có thể điều chỉnh yêu cầu giữa chừng dựa trên feedback",
       "Khách hàng có thể thay đổi toàn bộ scope mà không ảnh hưởng timeline",
-      "Developer có thể từ chối mọi yêu cầu thay đổi"
+      "Developer được quyền từ chối các yêu cầu thay đổi"
     ],
     "optionsEn": [
-      "The team may change the tech stack at any time",
-      "Requirements can be adjusted midway based on feedback, without rigidly sticking to the original plan",
+      "The team may switch the tech stack whenever it likes",
+      "Requirements can be adjusted midway based on feedback",
       "The customer can change the entire scope without affecting the timeline",
-      "Developers may reject every change request"
+      "Developers are entitled to refuse change requests"
     ],
     "answer": 1,
     "explanation": "Agile accept change — nhưng có kiểm soát: thay đổi được welcome vào Product Backlog, ưu tiên hóa, và build trong sprint tiếp theo. Không phải thay đổi tùy tiện không có quy trình.",
@@ -164,16 +164,16 @@
     "question": "SAFe (Scaled Agile Framework) được dùng cho tình huống nào?",
     "questionEn": "What situation is SAFe (Scaled Agile Framework) used for?",
     "options": [
-      "Startup 5 người",
-      "Team phát triển game mobile nhỏ",
-      "Triển khai Agile ở quy mô doanh nghiệp lớn với nhiều team",
-      "Dự án freelance cá nhân"
+      "Một startup 5 người đang làm sản phẩm đầu tiên",
+      "Một team nhỏ phát triển game mobile",
+      "Agile ở quy mô doanh nghiệp lớn, nhiều team",
+      "Dự án freelance của một cá nhân"
     ],
     "optionsEn": [
-      "A 5-person startup",
+      "A 5-person startup building its first product",
       "A small mobile game development team",
-      "Rolling out Agile at large enterprise scale with many teams",
-      "An individual freelance project"
+      "Agile at large enterprise scale, many teams",
+      "A solo freelancer's personal project"
     ],
     "answer": 2,
     "explanation": "SAFe là framework để scale Agile lên cấp enterprise: nhiều team cùng làm một sản phẩm lớn, cần coordination phức tạp. Overhead lớn hơn Scrum/Kanban đơn giản.",
@@ -184,15 +184,15 @@
     "question": "Sau Sprint 1, team nên giao gì cho khách hàng?",
     "questionEn": "After Sprint 1, what should the team deliver to the customer?",
     "options": [
-      "Bản design mockup",
-      "Phần mềm hoạt động được (dù chưa đầy đủ tính năng) để nhận phản hồi",
-      "Tài liệu yêu cầu đầy đủ",
+      "Bản thiết kế mockup cho toàn bộ app",
+      "Phần mềm chạy được, dù chưa đủ tính năng",
+      "Tài liệu yêu cầu đầy đủ đã được ký duyệt",
       "Kế hoạch chi tiết cho Sprint 2-10"
     ],
     "optionsEn": [
-      "A design mockup",
-      "Working software (even if the features are incomplete) to gather feedback",
-      "A complete requirements document",
+      "A design mockup of the whole app",
+      "Working software, even if incomplete",
+      "A complete, signed-off requirements document",
       "A detailed plan for Sprints 2-10"
     ],
     "answer": 1,
@@ -204,15 +204,15 @@
     "question": "'Iterative' trong Agile có nghĩa là gì?",
     "questionEn": "What does 'iterative' mean in Agile?",
     "options": [
-      "Mỗi sprint thêm chức năng mới",
-      "Cải tiến liên tục sản phẩm đã có qua nhiều vòng lặp",
+      "Mỗi sprint thêm vào chức năng mới hoàn toàn",
+      "Cải tiến dần sản phẩm qua nhiều vòng lặp",
       "Lặp lại các sprint giống hệt nhau",
-      "Tăng số người trong team"
+      "Tăng dần số người trong team mỗi vòng"
     ],
     "optionsEn": [
-      "Each sprint adds new features",
-      "Continuously improving the existing product across multiple iterations",
-      "Repeating identical sprints",
+      "Each sprint adds brand-new features",
+      "Refining the product over many rounds",
+      "Repeating sprints that are exactly identical",
       "Increasing the number of people on the team"
     ],
     "answer": 1,
@@ -224,16 +224,16 @@
     "question": "Trong bối cảnh nào Waterfall phù hợp hơn Agile?",
     "questionEn": "In what context is Waterfall more suitable than Agile?",
     "options": [
-      "Khi team nhỏ hơn 5 người",
-      "Khi yêu cầu rõ ràng, ổn định, ít thay đổi (ví dụ: xây cầu, phần mềm nhúng với spec cố định)",
-      "Khi có nhiều stakeholder",
-      "Khi dùng nhiều công nghệ mới"
+      "Khi team nhỏ, chỉ có dưới 5 người",
+      "Khi yêu cầu rõ ràng, ổn định, ít thay đổi",
+      "Khi dự án có nhiều stakeholder",
+      "Khi dự án dùng nhiều công nghệ mới"
     ],
     "optionsEn": [
       "When the team is smaller than 5 people",
-      "When requirements are clear, stable, and rarely change (e.g., building a bridge, embedded software with a fixed spec)",
-      "When there are many stakeholders",
-      "When using a lot of new technology"
+      "When requirements are clear, stable and rarely change",
+      "When the project has many stakeholders",
+      "When the project relies on lots of brand-new technology"
     ],
     "answer": 1,
     "explanation": "Waterfall phù hợp: yêu cầu đóng băng từ đầu, chi phí thay đổi cao, domain predictable (construction, manufacturing). Phần mềm thường predictable ít hơn, nên Agile phổ biến hơn.",
@@ -264,15 +264,15 @@
     "question": "XP (Extreme Programming) tập trung vào điều gì?",
     "questionEn": "What does XP (Extreme Programming) focus on?",
     "options": [
-      "Quy trình project management",
-      "Kỹ thuật phát triển: TDD, pair programming, continuous integration",
-      "Scale Agile lên doanh nghiệp",
+      "Quy trình quản lý dự án và báo cáo",
+      "Kỹ thuật code: TDD, pair programming, CI",
+      "Mở rộng Agile lên quy mô toàn doanh nghiệp",
       "Visualize workflow bằng Kanban board"
     ],
     "optionsEn": [
-      "Project management processes",
-      "Engineering practices: TDD, pair programming, continuous integration",
-      "Scaling Agile to the enterprise",
+      "Project management and reporting processes",
+      "Coding practices: TDD, pair programming, CI",
+      "Scaling Agile up to the whole enterprise",
       "Visualizing workflow with a Kanban board"
     ],
     "answer": 1,
@@ -284,15 +284,15 @@
     "question": "Điều gì xảy ra với yêu cầu mới phát sinh GIỮA một sprint đang chạy trong Agile?",
     "questionEn": "What happens to a new requirement that arises IN THE MIDDLE of a running sprint in Agile?",
     "options": [
-      "Team phải dừng sprint và làm ngay",
-      "Yêu cầu được thêm vào Product Backlog và xem xét ưu tiên cho sprint tiếp theo",
-      "Team bỏ qua hoàn toàn",
-      "Team mở rộng sprint để thêm yêu cầu mới"
+      "Team phải dừng sprint hiện tại để làm ngay",
+      "Đưa vào Product Backlog, xếp ưu tiên cho sprint sau",
+      "Team bỏ qua hoàn toàn yêu cầu đó",
+      "Team kéo dài sprint hiện tại để thêm yêu cầu mới vào"
     ],
     "optionsEn": [
       "The team must stop the sprint and do it immediately",
-      "The requirement is added to the Product Backlog and considered for prioritization in the next sprint",
-      "The team ignores it entirely",
+      "It goes into the Product Backlog for a later sprint",
+      "The team ignores the request completely",
       "The team extends the sprint to add the new requirement"
     ],
     "answer": 1,
@@ -303,16 +303,16 @@
     "question": "Giá trị Agile nói phản hồi thay đổi hơn là bám theo kế hoạch. Cách hiểu ĐÚNG là gì?",
     "questionEn": "Agile values responding to change over following a plan. What is the correct reading?",
     "options": [
-      "Cả hai đều có giá trị, nhưng khi phải chọn thì ưu tiên vế trái — không có nghĩa là bỏ lập kế hoạch",
-      "Agile nghĩa là không lập kế hoạch",
-      "Kế hoạch chỉ dành cho dự án Waterfall",
-      "Mọi thay đổi đều phải được chấp nhận ngay lập tức"
+      "Cả hai có giá trị, nhưng ưu tiên vế trái khi phải chọn",
+      "Agile nghĩa là không cần lập kế hoạch nào",
+      "Kế hoạch chỉ dành cho các dự án Waterfall",
+      "Mọi yêu cầu thay đổi đều phải được chấp nhận ngay lập tức"
     ],
     "optionsEn": [
-      "Both have value, but when forced to choose the left side wins — it does not mean abandoning planning",
-      "Agile means no planning",
-      "Plans are only for waterfall projects",
-      "Every change must be accepted immediately"
+      "Both have value, but the left side wins when you must choose",
+      "Agile means you do not need any planning",
+      "Plans are only meant for waterfall projects",
+      "Every change request must be accepted immediately"
     ],
     "answer": 0,
     "explanation": "Tuyên ngôn Agile ghi rõ trong khi các mục bên phải có giá trị, chúng tôi coi trọng các mục bên trái hơn. Đội agile lập kế hoạch liên tục thay vì một lần.",
@@ -323,15 +323,15 @@
     "question": "Vì sao Waterfall thường thất bại với phần mềm có yêu cầu chưa rõ?",
     "questionEn": "Why does waterfall often fail on software with unclear requirements?",
     "options": [
-      "Vì nó đòi hỏi chốt toàn bộ yêu cầu trước khi xây, trong khi hiểu biết chỉ tăng lên khi người dùng nhìn thấy sản phẩm thật",
-      "Vì Waterfall không cho phép kiểm thử",
-      "Vì Waterfall không có tài liệu",
+      "Vì phải chốt hết yêu cầu khi chưa ai thấy sản phẩm",
+      "Vì Waterfall không cho phép kiểm thử phần mềm",
+      "Vì Waterfall không tạo ra bất kỳ tài liệu yêu cầu nào",
       "Vì Waterfall không dùng được cho dự án lớn"
     ],
     "optionsEn": [
-      "Because it requires locking all requirements before building, while understanding only grows once users see the real product",
-      "Because waterfall forbids testing",
-      "Because waterfall has no documentation",
+      "It locks all requirements before anyone sees the product",
+      "Because waterfall does not allow software testing",
+      "Because waterfall produces no documentation",
       "Because waterfall cannot be used on large projects"
     ],
     "answer": 0,
@@ -343,16 +343,16 @@
     "question": "Iterative và incremental khác nhau thế nào?",
     "questionEn": "How do iterative and incremental differ?",
     "options": [
-      "Incremental là thêm dần từng phần chức năng; iterative là làm mịn dần cùng một phần qua nhiều vòng phản hồi",
-      "Hai từ này hoàn toàn đồng nghĩa",
-      "Iterative chỉ dùng trong Waterfall",
-      "Incremental nghĩa là không kiểm thử"
+      "Incremental thêm dần chức năng; iterative làm mịn dần một phần",
+      "Hai từ này hoàn toàn đồng nghĩa, dùng thay nhau",
+      "Incremental làm mịn dần một phần; iterative thêm dần chức năng",
+      "Incremental nghĩa là bỏ qua bước kiểm thử"
     ],
     "optionsEn": [
-      "Incremental adds functionality piece by piece; iterative refines the same piece across feedback rounds",
-      "They are exact synonyms",
-      "Iterative is only used in waterfall",
-      "Incremental means no testing"
+      "Incremental adds pieces; iterative refines the same piece",
+      "They are exact synonyms and can be swapped freely",
+      "Incremental refines the same piece; iterative adds pieces",
+      "Incremental means the testing step is skipped"
     ],
     "answer": 0,
     "explanation": "Agile kết hợp cả hai: mỗi vòng lặp vừa thêm chức năng mới vừa cải thiện những gì đã có dựa trên phản hồi thực tế.",
@@ -383,16 +383,16 @@
     "question": "Điều kiện nào quan trọng nhất để một dự án Agile thành công?",
     "questionEn": "What condition matters most for an Agile project to succeed?",
     "options": [
-      "Có người ra quyết định sẵn sàng và có thẩm quyền để đội lấy được câu trả lời kịp thời",
-      "Đội phải dùng đúng công cụ quản lý backlog",
-      "Sprint phải dài đúng hai tuần",
-      "Phải có ít nhất mười thành viên"
+      "Có người ra quyết định luôn sẵn sàng trả lời đội",
+      "Đội phải dùng đúng công cụ để quản lý và theo dõi backlog",
+      "Mỗi sprint phải dài đúng hai tuần",
+      "Đội phải có ít nhất mười thành viên"
     ],
     "optionsEn": [
-      "An available decision-maker with authority so the team can get timely answers",
-      "The team must use the right backlog tool",
-      "Sprints must be exactly two weeks",
-      "There must be at least ten members"
+      "A decision-maker who is available to answer the team",
+      "The team must use the right backlog tool for tracking",
+      "Each sprint must last exactly two weeks",
+      "The team must have at least ten members"
     ],
     "answer": 0,
     "explanation": "Không có người quyết định sẵn sàng, đội bị chặn hoặc phải tự đoán — tái tạo lại chính vấn đề mà Agile định giải quyết.",
@@ -405,14 +405,14 @@
     "questionEn": "What does the 'cone of uncertainty' say about software estimates?",
     "options": [
       "Ước tính luôn chính xác nếu tài liệu yêu cầu đủ dài",
-      "Chỉ dự án Agile mới có sự bất định",
-      "Ước tính lúc đầu rất thô (có thể lệch tới khoảng 4 lần) và chỉ chính xác dần khi công việc thật được làm",
+      "Chỉ dự án Agile mới có sự bất định trong ước tính",
+      "Ước tính ban đầu rất thô, chính xác dần khi làm thật",
       "Dự án càng kéo dài thì ước tính càng sai"
     ],
     "optionsEn": [
       "Estimates are always accurate if the requirements document is long enough",
-      "Only Agile projects have uncertainty",
-      "Early estimates are very rough (they can be off by about 4×) and only become accurate as real work is done",
+      "Only Agile projects have uncertainty in their estimates",
+      "Early estimates are rough and sharpen as real work is done",
       "The longer a project runs, the worse its estimates get"
     ],
     "answer": 2,
@@ -436,16 +436,16 @@
     "question": "Trong ví dụ sửa nhà, điểm mạnh chính của cách làm Agile là gì?",
     "questionEn": "In the house-renovation analogy, what is the main strength of the Agile approach?",
     "options": [
-      "Chủ nhà thấy kết quả từng phòng sớm và sửa được vấn đề (như đảo bếp chắn đường) trước khi tốn kém",
-      "Không cần ngân sách hay hạn chót",
-      "Thợ không cần bản vẽ nào cả",
+      "Chủ nhà thấy từng phòng sớm, sửa lỗi khi còn rẻ",
+      "Dự án không cần ngân sách hay hạn chót cụ thể nào",
+      "Thợ không cần bất kỳ bản vẽ thiết kế nào",
       "Cả căn nhà được làm xong nhanh gấp đôi"
     ],
     "optionsEn": [
-      "The owner sees each room early and can fix problems (like the island blocking the way) before they become expensive",
-      "No budget or deadline is needed",
-      "The builders need no plans at all",
-      "The whole house is finished twice as fast"
+      "The owner sees rooms early and fixes issues cheaply",
+      "The project needs no budget or deadline",
+      "The builders need no design drawings at all",
+      "The whole house gets finished twice as fast"
     ],
     "answer": 0,
     "explanation": "Agile không làm nhanh hơn một cách thần kỳ; nó giúp phát hiện sai sót sớm khi sửa còn rẻ, trong khi ngân sách và hạn chót vẫn giữ nguyên.",
@@ -468,14 +468,14 @@
     "question": "\"WIP limit\" trong Kanban có tác dụng gì?",
     "questionEn": "What does a WIP limit do in Kanban?",
     "options": [
-      "Giới hạn số giờ làm việc mỗi ngày",
-      "Giới hạn số việc được ở trạng thái \"đang làm\" cùng lúc, để làm xong việc cũ trước khi nhận việc mới",
+      "Giới hạn số giờ làm việc của mỗi người trong ngày",
+      "Giới hạn số việc đang làm cùng lúc",
       "Giới hạn số người trong team",
       "Quy định độ dài của mỗi sprint"
     ],
     "optionsEn": [
-      "It limits the number of working hours per day",
-      "It caps how many items can be \"in progress\" at once, so work gets finished before new work starts",
+      "It limits each person's working hours per day",
+      "It caps how much work is in progress",
       "It limits the number of people on the team",
       "It sets the length of each sprint"
     ],
@@ -500,16 +500,16 @@
     "question": "Giữa sprint, một developer báo chưa được cấp quyền truy cập tài khoản test của đối tác. Trong ví dụ, ai xử lý và vì sao?",
     "questionEn": "Mid-sprint a developer reports that the partner has not granted test account access. In the example, who handles it and why?",
     "options": [
-      "Developer tự chờ đến sprint sau",
-      "Tester bỏ qua phần thanh toán",
-      "Product Owner hủy sprint",
-      "Scrum Master nhận vướng mắc và liên hệ đối tác, để developer tiếp tục làm việc"
+      "Developer tự chờ đến sprint sau mới làm tiếp",
+      "Tester bỏ qua phần kiểm thử thanh toán",
+      "Product Owner hủy sprint hiện tại và lên kế hoạch lại",
+      "Scrum Master gỡ vướng mắc bằng cách liên hệ đối tác"
     ],
     "optionsEn": [
       "The developer simply waits until the next sprint",
-      "The tester skips testing payments",
-      "The Product Owner cancels the sprint",
-      "The Scrum Master takes the blocker and chases the partner, so the developer can keep working"
+      "The tester skips testing the payment part",
+      "The Product Owner cancels the sprint and replans",
+      "The Scrum Master removes the blocker by chasing the partner"
     ],
     "answer": 3,
     "explanation": "Gỡ trở ngại là việc của Scrum Master. Team Agile cần đường tắt nhanh tới sự hỗ trợ và quyết định, nếu không sẽ bị chặn.",

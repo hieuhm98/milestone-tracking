@@ -4,16 +4,16 @@
     "question": "Format chuẩn của một User Story là gì?",
     "questionEn": "What is the standard format of a User Story?",
     "options": [
-      "What / Why / How",
+      "Feature [name]: The system shall [behavior] for [user]",
       "As a [user type], I want [action], So that [benefit]",
-      "Given / When / Then",
-      "Problem / Solution / Outcome"
+      "Given [context], When [action], Then [expected result]",
+      "Problem [pain], Solution [feature], Outcome [metric]"
     ],
     "optionsEn": [
-      "What / Why / How",
+      "Feature [name]: The system shall [behavior] for [user]",
       "As a [user type], I want [action], So that [benefit]",
-      "Given / When / Then",
-      "Problem / Solution / Outcome"
+      "Given [context], When [action], Then [expected result]",
+      "Problem [pain], Solution [feature], Outcome [metric]"
     ],
     "answer": 1,
     "explanation": "Format Connextra: 'As a [loại người dùng], I want [hành động/tính năng], So that [lợi ích].' Giúp xác định rõ: ai cần (persona), cần gì (action), tại sao cần (value). Given/When/Then là format của Acceptance Criteria, không phải User Story.",
@@ -25,13 +25,13 @@
     "questionEn": "What does INVEST stand for in the context of User Stories?",
     "options": [
       "Independent, Negotiable, Valuable, Estimable, Small, Testable",
-      "Important, New, Verified, Efficient, Scalable, Trackable",
+      "Independent, Negotiable, Verifiable, Efficient, Scalable, Traceable",
       "Integrated, Noted, Verified, Executed, Structured, Tested",
       "Iterative, Named, Validated, Estimated, Separated, Tested"
     ],
     "optionsEn": [
       "Independent, Negotiable, Valuable, Estimable, Small, Testable",
-      "Important, New, Verified, Efficient, Scalable, Trackable",
+      "Independent, Negotiable, Verifiable, Efficient, Scalable, Traceable",
       "Integrated, Noted, Verified, Executed, Structured, Tested",
       "Iterative, Named, Validated, Estimated, Separated, Tested"
     ],
@@ -44,16 +44,16 @@
     "question": "Format Given-When-Then dùng để viết gì?",
     "questionEn": "What is the Given-When-Then format used to write?",
     "options": [
-      "User Stories",
-      "Test Plans",
-      "Acceptance Criteria theo BDD style",
-      "Sprint Goals"
+      "User Story cho product backlog",
+      "Test Plan cho cả một release",
+      "Acceptance Criteria của story",
+      "Sprint Goal trong sprint planning"
     ],
     "optionsEn": [
-      "User Stories",
-      "Test Plans",
-      "Acceptance Criteria in the BDD style",
-      "Sprint Goals"
+      "User Stories for the product backlog",
+      "Test Plans for a whole release",
+      "A story's Acceptance Criteria",
+      "Sprint Goals in sprint planning"
     ],
     "answer": 2,
     "explanation": "Given-When-Then (Gherkin syntax) dùng để viết Acceptance Criteria theo BDD (Behavior Driven Development). Given = điều kiện ban đầu, When = hành động của user, Then = kết quả mong đợi.",
@@ -65,35 +65,35 @@
     "questionEn": "Which of the following User Stories is written INCORRECTLY (violates the principles)?",
     "options": [
       "As a customer, I want to reset my password via email so that I can regain access if I forget it.",
-      "As a user, I want a dropdown for date selection.",
+      "As a user, I want a dropdown to select dates on the orders page so that I can choose a date.",
       "As an admin, I want to export the user list to CSV so that I can analyze data offline.",
       "As a new user, I want to verify my email so that my account is secured."
     ],
     "optionsEn": [
       "As a customer, I want to reset my password via email so that I can regain access if I forget it.",
-      "As a user, I want a dropdown for date selection.",
+      "As a user, I want a dropdown to select dates on the orders page so that I can choose a date.",
       "As an admin, I want to export the user list to CSV so that I can analyze data offline.",
       "As a new user, I want to verify my email so that my account is secured."
     ],
     "answer": 1,
-    "explanation": "Story B vi phạm nguyên tắc — nó mô tả GIẢI PHÁP (dropdown) thay vì NHU CẦU. Đúng phải là: 'As a user, I want to filter orders by date range so that I can find specific transactions quickly.' Solution (dropdown, calendar...) là quyết định của designer/dev.",
-    "explanationEn": "Story B violates the principle — it describes a SOLUTION (a dropdown) instead of a NEED. It should be: 'As a user, I want to filter orders by date range so that I can find specific transactions quickly.' The solution (dropdown, calendar...) is the designer's/dev's decision."
+    "explanation": "Story về dropdown vi phạm nguyên tắc — nó mô tả GIẢI PHÁP (dropdown) thay vì NHU CẦU, và phần 'so that' chỉ lặp lại hành động chứ không nêu giá trị. Đúng phải là: 'As a user, I want to filter orders by date range so that I can find specific transactions quickly.' Solution (dropdown, calendar...) là quyết định của designer/dev.",
+    "explanationEn": "The dropdown story violates the principle — it describes a SOLUTION (a dropdown) instead of a NEED, and its 'so that' only restates the action instead of giving a value. It should be: 'As a user, I want to filter orders by date range so that I can find specific transactions quickly.' The solution (dropdown, calendar...) is the designer's/dev's decision."
   },
   {
     "id": "us-05",
     "question": "Sự khác biệt giữa Acceptance Criteria và Definition of Done là gì?",
     "questionEn": "What is the difference between Acceptance Criteria and Definition of Done?",
     "options": [
-      "Chúng hoàn toàn giống nhau",
+      "Chúng là một, chỉ khác tên gọi: Scrum gọi là DoD, còn BDD gọi là AC",
       "AC là điều kiện riêng của từng story; DoD là điều kiện chung cho mọi story",
-      "DoD là điều kiện riêng của từng story; AC là điều kiện chung",
-      "AC do BA viết; DoD do QA viết"
+      "DoD là điều kiện riêng của từng story; còn AC là checklist chung cho cả team",
+      "AC do BA viết cho phần nghiệp vụ; DoD do QA viết cho phần kiểm thử"
     ],
     "optionsEn": [
-      "They are exactly the same",
+      "They are the same thing named differently: Scrum says DoD, BDD says AC",
       "AC is specific to each story; DoD is a shared condition for all stories",
-      "DoD is specific to each story; AC is a shared condition",
-      "AC is written by the BA; DoD is written by QA"
+      "DoD is specific to each story; AC is a shared checklist for the whole team",
+      "AC is written by the BA for business logic; DoD by QA for testing"
     ],
     "answer": 1,
     "explanation": "AC (Acceptance Criteria) mô tả 'khi nào tính năng này hoàn thành?' — riêng cho từng story. DoD (Definition of Done) là checklist chung áp dụng cho MỌI story: code review, tests pass, deploy staging, BA verify... Không cần viết DoD vào mỗi story.",
@@ -104,16 +104,16 @@
     "question": "Khi một User Story quá lớn (Epic), kỹ thuật nào dưới đây dùng để chia nhỏ?",
     "questionEn": "When a User Story is too big (an Epic), which of the following techniques is used to split it?",
     "options": [
-      "Chỉ cần estimate thêm story points",
+      "Giữ nguyên, chỉ tăng story points để phản ánh đúng độ lớn",
       "Chia theo workflow steps, business rules, hoặc happy path trước",
-      "Gộp với story khác để cân bằng",
-      "Xóa bỏ và viết lại từ đầu"
+      "Chia theo tầng kỹ thuật: một story FE, một story BE, một story DB",
+      "Giao cho developer giỏi nhất để làm xong trong một sprint"
     ],
     "optionsEn": [
-      "Just estimate more story points",
+      "Keep it whole and just raise the story points to reflect its size",
       "Split by workflow steps, business rules, or happy path first",
-      "Merge it with another story to balance out",
-      "Delete it and rewrite from scratch"
+      "Split by technical layer: one FE story, one BE story, one DB story",
+      "Give it to the strongest developer to finish within one sprint"
     ],
     "answer": 1,
     "explanation": "Các kỹ thuật split: theo workflow steps (tìm SP → xem chi tiết → thêm giỏ → checkout), theo business rules (thanh toán COD vs thẻ vs ví), theo happy path trước (email/password trước, rồi Google/Facebook login).",
@@ -124,16 +124,16 @@
     "question": "BA viết AC: 'Hệ thống load nhanh'. Đây là AC tốt hay xấu và tại sao?",
     "questionEn": "A BA writes the AC: 'The system loads fast'. Is this a good or bad AC, and why?",
     "options": [
-      "Tốt — ngắn gọn và dễ hiểu",
-      "Xấu — quá mơ hồ, không đo lường được, không ai biết 'nhanh' là bao nhiêu",
-      "Tốt — để dev tự quyết định implementation",
-      "Xấu — không nên đề cập đến performance trong AC"
+      "Tốt — ngắn gọn, ai đọc cũng hiểu ngay yêu cầu là gì",
+      "Xấu — không đo lường được nên không kiểm thử được",
+      "Tốt — để dev tự chọn ngưỡng phù hợp với kiến trúc",
+      "Xấu — performance là NFR, không được đưa vào AC của story"
     ],
     "optionsEn": [
-      "Good — concise and easy to understand",
-      "Bad — too vague, not measurable, no one knows how fast 'fast' is",
-      "Good — it lets the dev decide the implementation",
-      "Bad — performance should not be mentioned in AC"
+      "Good — it is concise and everyone understands it immediately",
+      "Bad — it is not measurable, so it cannot be tested",
+      "Good — it lets devs choose a threshold that suits the architecture",
+      "Bad — performance is an NFR and must not appear in a story's AC"
     ],
     "answer": 1,
     "explanation": "AC phải Testable — phải có tiêu chí đo lường được. Đúng phải là: 'Trang danh sách sản phẩm load hoàn toàn trong vòng 3 giây ở kết nối 4G (20 Mbps) với 100 sản phẩm.' Mơ hồ = không ai biết khi nào story được coi là done.",
@@ -144,16 +144,16 @@
     "question": "Story Points đo lường điều gì?",
     "questionEn": "What do Story Points measure?",
     "options": [
-      "Số giờ cần để hoàn thành",
-      "Số dòng code cần viết",
-      "Độ phức tạp và nỗ lực tương đối (complexity + effort)",
-      "Số lần test cần thực hiện"
+      "Số giờ làm việc lý tưởng cần để hoàn thành",
+      "Giá trị nghiệp vụ mà story mang lại cho user",
+      "Độ phức tạp và nỗ lực tương đối của story",
+      "Mức độ ưu tiên của story trong backlog"
     ],
     "optionsEn": [
-      "The number of hours needed to complete it",
-      "The number of lines of code to write",
-      "Relative complexity and effort (complexity + effort)",
-      "The number of tests that need to be run"
+      "The ideal working hours needed to finish it",
+      "The business value the story delivers to users",
+      "The story's relative complexity and effort",
+      "The story's priority in the backlog"
     ],
     "answer": 2,
     "explanation": "Story Points đo độ phức tạp tương đối (relative complexity), không phải thời gian tuyệt đối. Story 3 điểm không nhất thiết mất 3 giờ. Đây là estimate của team — BA không nên tự estimate story points mà nên để dev/QA estimate sau khi có đủ thông tin.",
@@ -164,16 +164,16 @@
     "question": "Điều gì BẮT BUỘC phải có trong Acceptance Criteria ngoài 'happy path'?",
     "questionEn": "What MUST be included in Acceptance Criteria besides the 'happy path'?",
     "options": [
-      "Technical implementation details",
-      "Database schema design",
-      "Error cases, edge cases và UI states (loading/empty/error)",
-      "Code review checklist"
+      "Chi tiết implementation: gọi API nào, hàm nào",
+      "Schema database của tính năng",
+      "Error case, edge case và các trạng thái UI",
+      "Checklist code review và unit test coverage"
     ],
     "optionsEn": [
-      "Technical implementation details",
-      "Database schema design",
-      "Error cases, edge cases, and UI states (loading/empty/error)",
-      "Code review checklist"
+      "Implementation details: which API, which function",
+      "The feature's database schema",
+      "Error cases, edge cases and the UI states",
+      "The code review checklist and unit test coverage"
     ],
     "answer": 2,
     "explanation": "Happy path (mọi thứ đúng) là chưa đủ. AC cần: error cases (API fail, validation fail), edge cases (empty input, max length, concurrent access), UI states (loading spinner, empty state message, error message với retry button).",
@@ -184,16 +184,16 @@
     "question": "User Story Mapping giúp làm gì trong dự án?",
     "questionEn": "What does User Story Mapping help with in a project?",
     "options": [
-      "Vẽ sơ đồ database",
+      "Vẽ quan hệ giữa các bảng dữ liệu mà mỗi story đọc và ghi vào",
       "Nhìn toàn cảnh user journey và ưu tiên MVP theo từng sprint",
-      "Tạo wireframe tự động",
-      "Assign task cho từng developer"
+      "Chuyển story thành wireframe từng màn hình cho designer",
+      "Phân công story cho từng developer theo năng lực"
     ],
     "optionsEn": [
-      "Drawing a database diagram",
+      "Mapping the relationships between the data tables each story reads and writes",
       "Seeing the whole user journey and prioritizing the MVP by sprint",
-      "Automatically generating wireframes",
-      "Assigning tasks to each developer"
+      "Turning stories into per-screen wireframes for the designer",
+      "Assigning stories to each developer by skill"
     ],
     "answer": 1,
     "explanation": "Story Map trực quan hóa toàn bộ user journey (backbone) và breakdown các stories theo từng giai đoạn. Giúp team quyết định MVP (minimum để ship) và sprint plan bằng cách slice theo chiều ngang — mỗi slice là một release.",
@@ -204,16 +204,16 @@
     "question": "Phần 'So that' trong User Story dùng để làm gì?",
     "questionEn": "What is the 'So that' part of a User Story used for?",
     "options": [
-      "Mô tả technical solution",
-      "Xác định người dùng",
-      "Giải thích giá trị/lợi ích mà user nhận được — lý do tồn tại của story",
-      "Liệt kê các bước thực hiện"
+      "Gợi ý giải pháp kỹ thuật cho dev",
+      "Xác định ai là người dùng của story",
+      "Nêu giá trị mà user nhận được",
+      "Mô tả các bước user thao tác"
     ],
     "optionsEn": [
-      "Describing the technical solution",
-      "Identifying the user",
-      "Explaining the value/benefit the user gains — the reason the story exists",
-      "Listing the steps to perform"
+      "Hinting the technical solution to devs",
+      "Identifying who the story's user is",
+      "Stating the value the user gains",
+      "Describing the steps the user takes"
     ],
     "answer": 2,
     "explanation": "'So that' là phần quan trọng nhất — giải thích 'tại sao' tính năng này cần tồn tại. Nếu không thể viết được 'so that', story đó có thể không có giá trị. Phần này cũng giúp team hiểu context để đưa ra giải pháp phù hợp hơn.",
@@ -224,16 +224,16 @@
     "question": "Khi nào story nên được đưa vào trạng thái 'Ready for Development'?",
     "questionEn": "When should a story be moved to the 'Ready for Development' state?",
     "options": [
-      "Khi BA vừa viết xong story",
-      "Khi story có đầy đủ AC, estimate, đã qua refinement và team hiểu rõ",
-      "Khi PO approve story",
-      "Khi sprint bắt đầu"
+      "Ngay khi BA viết xong story và đính kèm mockup lên ticket",
+      "Khi đã qua refinement, có AC, có estimate và team không còn câu hỏi lớn",
+      "Khi PO đã approve và kéo story lên đầu product backlog",
+      "Khi sprint planning chọn story vào sprint, dù chưa estimate"
     ],
     "optionsEn": [
-      "As soon as the BA finishes writing the story",
-      "When the story has complete AC, an estimate, has gone through refinement, and the team understands it clearly",
-      "When the PO approves the story",
-      "When the sprint starts"
+      "As soon as the BA finishes the story and attaches mockups to the ticket",
+      "When it has been refined, has AC and an estimate, and the team has no big questions",
+      "When the PO approves it and moves it to the top of the product backlog",
+      "When sprint planning pulls it into the sprint, even without an estimate"
     ],
     "answer": 1,
     "explanation": "Ready for Dev (READY criteria): story đã được refinement, có AC rõ ràng và testable, team đã estimate và không còn câu hỏi lớn, design đã sẵn sàng (nếu cần), dependencies được xác định. Story không ready = sprint bị trễ vì dev phải dừng hỏi.",
@@ -244,16 +244,16 @@
     "question": "BA nên làm gì khi dev estimate story quá cao (ví dụ 13 points)?",
     "questionEn": "What should a BA do when the dev estimates a story too high (for example, 13 points)?",
     "options": [
-      "Chấp nhận và không làm gì",
-      "Ép dev giảm estimate",
-      "Thảo luận để hiểu nguyên nhân, sau đó xem xét split story hoặc làm rõ AC",
-      "Xóa story đó khỏi sprint"
+      "Chấp nhận con số vì estimate là việc của dev, BA không nên can thiệp vào",
+      "Đề nghị dev estimate lại thấp hơn để story vừa sprint",
+      "Thảo luận để hiểu nguyên nhân, rồi cân nhắc split story hoặc làm rõ AC",
+      "Bỏ story khỏi sprint và chờ PO quyết định lại thứ tự ưu tiên"
     ],
     "optionsEn": [
-      "Accept it and do nothing",
-      "Pressure the dev to lower the estimate",
-      "Discuss to understand the cause, then consider splitting the story or clarifying the AC",
-      "Remove the story from the sprint"
+      "Accept the number, since estimating is the devs' job and BAs should not interfere",
+      "Ask the devs to re-estimate lower so the story fits the sprint",
+      "Discuss to find the cause, then consider splitting the story or clarifying the AC",
+      "Drop it from the sprint and wait for the PO to re-prioritise"
     ],
     "answer": 2,
     "explanation": "Story 13 points thường nghĩa là quá lớn hoặc còn nhiều điểm chưa rõ. BA cần hỏi: 'Điều gì làm bạn nghĩ đây là task phức tạp?' Nguyên nhân thường là: AC mơ hồ, dependency phức tạp, cần research. Giải pháp: làm rõ AC hoặc split story.",
@@ -264,16 +264,16 @@
     "question": "'Out of Scope' trong User Story dùng để làm gì?",
     "questionEn": "What is 'Out of Scope' in a User Story used for?",
     "options": [
-      "Liệt kê những tính năng bị hủy bỏ",
-      "Xác định rõ những gì KHÔNG thuộc phạm vi của story này để tránh scope creep",
-      "Mô tả lỗi đã biết của hệ thống",
-      "Danh sách technical debt cần xử lý"
+      "Liệt kê các tính năng đã bị PO hủy khỏi roadmap",
+      "Ghi rõ những gì story này không làm, để không ai tự thêm việc",
+      "Ghi lại các lỗi đã biết mà story chấp nhận chưa sửa",
+      "Danh sách technical debt dev sẽ xử lý ở sprint sau"
     ],
     "optionsEn": [
-      "Listing features that have been cancelled",
-      "Clearly defining what is NOT within the scope of this story to prevent scope creep",
-      "Describing known bugs in the system",
-      "A list of technical debt to address"
+      "Listing features the PO has cut from the roadmap",
+      "Stating what this story won't do, so nobody quietly adds extras",
+      "Recording known bugs the story accepts leaving unfixed",
+      "Listing technical debt devs will handle next sprint"
     ],
     "answer": 1,
     "explanation": "Out of Scope ngăn scope creep — dev tự thêm tính năng 'vì tiện'. Ví dụ: 'Out of scope: export PDF (sprint sau), mobile app (phase 2).' Giúp team focused và tránh over-engineering.",
@@ -284,16 +284,16 @@
     "question": "Planning Poker dùng để làm gì trong Scrum?",
     "questionEn": "What is Planning Poker used for in Scrum?",
     "options": [
-      "Lập kế hoạch budget cho sprint",
+      "Lập kế hoạch ngân sách và nhân lực cho sprint sắp tới",
       "Team estimate story points đồng thời để tránh anchoring bias",
-      "Sắp xếp thứ tự ưu tiên backlog",
-      "Assign story cho từng developer"
+      "Cả team bỏ phiếu để sắp thứ tự ưu tiên của backlog",
+      "Chia story cho developer bằng cách rút thẻ ngẫu nhiên"
     ],
     "optionsEn": [
-      "Planning the sprint budget",
+      "Planning the budget and headcount needed for the upcoming sprint",
       "The team estimates story points simultaneously to avoid anchoring bias",
-      "Prioritizing the backlog order",
-      "Assigning stories to each developer"
+      "The whole team votes to set the order of the backlog",
+      "Assigning stories to developers by drawing cards at random"
     ],
     "answer": 1,
     "explanation": "Planning Poker: mỗi người chọn card estimate ĐỒNG THỜI (không bị ảnh hưởng bởi người khác). Nếu chênh lệch lớn (ví dụ 2 vs 8), team thảo luận để hiểu rõ story hơn. Kết quả: estimate chính xác hơn và cả team hiểu story như nhau.",
@@ -303,16 +303,16 @@
     "question": "Story Là người dùng, tôi muốn hệ thống nhanh hơn vi phạm tiêu chí INVEST nào nặng nhất?",
     "questionEn": "The story As a user I want the system to be faster most seriously violates which INVEST criterion?",
     "options": [
-      "Testable — không có cách nào xác minh khi nào thì coi là xong",
-      "Independent",
-      "Negotiable",
-      "Small"
+      "Testable — không xác minh được khi nào là xong",
+      "Independent — nó phụ thuộc vào các story hiệu năng khác",
+      "Negotiable — nó không để dev thương lượng cách làm",
+      "Valuable — người dùng không được lợi gì từ tốc độ"
     ],
     "optionsEn": [
-      "Testable — there is no way to verify when it is done",
-      "Independent",
-      "Negotiable",
-      "Small"
+      "Testable — there is no way to verify it is done",
+      "Independent — it depends on other performance stories",
+      "Negotiable — it leaves devs no room to negotiate",
+      "Valuable — users gain nothing from speed"
     ],
     "answer": 0,
     "explanation": "Đây cũng không phải story mà là một quality attribute. Nó nên thành ràng buộc hoặc acceptance criteria có ngưỡng đo được.",
@@ -323,16 +323,16 @@
     "question": "Phần để trong mẫu user story quan trọng ở chỗ nào?",
     "questionEn": "Why does the so that clause of a user story matter?",
     "options": [
-      "Nó nêu giá trị nghiệp vụ; nếu không viết được thì nên tự hỏi vì sao lại làm story này",
-      "Nó xác định người thực hiện",
-      "Nó thay thế acceptance criteria",
-      "Nó quyết định story point"
+      "Nó nêu giá trị nghiệp vụ, lý do story tồn tại",
+      "Nó xác định ai sẽ là người thực hiện story",
+      "Nó thay cho acceptance criteria khi story nhỏ",
+      "Nó là căn cứ chính để team chấm story point"
     ],
     "optionsEn": [
-      "It states the business value; if you cannot write it, ask why you are doing the story at all",
-      "It identifies who does the work",
-      "It replaces acceptance criteria",
-      "It determines the story points"
+      "It states the business value, the reason the story exists",
+      "It identifies who will carry out the story",
+      "It replaces acceptance criteria for small stories",
+      "It is the main basis for sizing story points"
     ],
     "answer": 0,
     "explanation": "Phần này hay bị bỏ qua nhất nhưng lại là bộ lọc tốt nhất chống lại việc xây tính năng không ai cần.",
@@ -343,16 +343,16 @@
     "question": "Cách chia nhỏ story nào là SAI?",
     "questionEn": "Which way of splitting a story is WRONG?",
     "options": [
-      "Chia theo tầng kỹ thuật: một story cho giao diện, một story cho API, một story cho cơ sở dữ liệu",
-      "Chia theo bước quy trình nghiệp vụ",
-      "Chia theo loại dữ liệu, hỗ trợ một loại trước",
-      "Chia theo trường hợp đơn giản trước, ngoại lệ sau"
+      "Chia theo tầng kỹ thuật: giao diện, API, rồi cơ sở dữ liệu",
+      "Chia theo bước quy trình: tìm kiếm, xem chi tiết, đặt hàng",
+      "Chia theo loại dữ liệu: hỗ trợ thanh toán thẻ trước, ví sau",
+      "Chia theo độ khó: trường hợp đơn giản trước, ngoại lệ sau"
     ],
     "optionsEn": [
-      "Split by technical layer: one story for the UI, one for the API, one for the database",
-      "Split by business process step",
-      "Split by data type, supporting one type first",
-      "Split by simple case first, exceptions later"
+      "Split by technical layer: UI first, then API, then database",
+      "Split by process step: search, view details, order",
+      "Split by data type: support card payments first, wallets later",
+      "Split by difficulty: simple case first, exceptions later"
     ],
     "answer": 0,
     "explanation": "Chia theo tầng khiến không story nào mang giá trị riêng lẻ và không story nào trình diễn được. Hãy xây một lát cắt dọc mỏng đi xuyên mọi tầng.",
@@ -363,16 +363,16 @@
     "question": "Acceptance criteria tốt phải phủ điều gì mà nhiều người hay bỏ sót?",
     "questionEn": "Good acceptance criteria must cover what many people forget?",
     "options": [
-      "Các điều kiện ngoại lệ và trường hợp lỗi, không chỉ đường đi thuận lợi",
-      "Tên biến mà lập trình viên sẽ dùng",
-      "Ước tính công sức",
-      "Công nghệ sẽ được chọn"
+      "Các trường hợp lỗi và ngoại lệ",
+      "Tên API và tên biến dev sẽ dùng",
+      "Ước tính công sức cho từng AC",
+      "Công nghệ và thư viện sẽ được chọn"
     ],
     "optionsEn": [
-      "Exception conditions and error cases, not just the happy path",
-      "The variable names developers will use",
-      "The effort estimate",
-      "The technology to be chosen"
+      "Error and exception cases",
+      "API and variable names devs will use",
+      "An effort estimate for each criterion",
+      "The tech and libraries to be chosen"
     ],
     "answer": 0,
     "explanation": "Một story chỉ thực sự xong khi hệ thống xử lý đúng cả những gì có thể sai. Định dạng Given-When-Then giúp buộc phải nêu rõ điều này.",
@@ -383,16 +383,16 @@
     "question": "Vì sao story point dùng đơn vị tương đối thay vì giờ?",
     "questionEn": "Why do story points use relative units instead of hours?",
     "options": [
-      "Vì con người ước tính kích thước tương đối tốt hơn nhiều so với thời gian tuyệt đối, và điểm tách kích thước khỏi tốc độ của đội",
-      "Vì giờ làm việc là thông tin bí mật",
-      "Vì story point luôn chính xác hơn",
-      "Vì công cụ không hỗ trợ nhập số giờ"
+      "Vì con người ước lượng kích thước tương đối tốt hơn thời gian tuyệt đối",
+      "Vì quy đổi ra giờ sẽ làm lộ năng suất cá nhân của từng dev",
+      "Vì story point luôn chính xác hơn số giờ khi đội đã đủ kinh nghiệm làm việc cùng nhau",
+      "Vì Scrum cấm ghi số giờ vào bất kỳ công cụ quản lý nào"
     ],
     "optionsEn": [
-      "Because people judge relative size far better than absolute duration, and points separate size from the team's speed",
-      "Because working hours are confidential",
-      "Because story points are always more accurate",
-      "Because tools cannot accept hours"
+      "Because people judge relative size better than absolute duration",
+      "Because hours would expose each developer's personal productivity",
+      "Because points are always more accurate than hours for experienced teams",
+      "Because Scrum forbids recording hours in any tracking tool"
     ],
     "answer": 0,
     "explanation": "Một story 5 điểm vẫn là 5 điểm dù đội mới hay đội có kinh nghiệm làm nó. Tốc độ được nắm bắt riêng bằng velocity.",

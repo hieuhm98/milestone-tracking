@@ -4,16 +4,16 @@
     "question": "Với một object JavaScript, thao tác nào KHÔNG phải O(1) trung bình?",
     "questionEn": "For a JavaScript object, which operation is NOT O(1) on average?",
     "options": [
-      "Thêm một key mới: `obj.city = \"Hue\"`",
-      "Đọc giá trị theo key: `obj.city`",
-      "Tìm xem có key nào đang giữ giá trị `\"Hue\"` hay không",
-      "Xoá một key: `delete obj.city`"
+      "Thêm một key mới vào object: `obj.city = \"Hue\"`",
+      "Đọc giá trị đang lưu theo key: `obj.city`",
+      "Tìm xem có key nào giữ giá trị `\"Hue\"`",
+      "Xoá một key khỏi object: `delete obj.city`"
     ],
     "optionsEn": [
-      "Adding a new key: `obj.city = \"Hue\"`",
-      "Reading a value by key: `obj.city`",
-      "Finding whether any key currently holds the value `\"Hue\"`",
-      "Removing a key: `delete obj.city`"
+      "Adding a new key to the object: `obj.city = \"Hue\"`",
+      "Reading the value stored under a key: `obj.city`",
+      "Finding whether any key holds the value `\"Hue\"`",
+      "Removing a key from the object: `delete obj.city`"
     ],
     "answer": 2,
     "explanation": "Thêm, đọc và xoá theo key đều dẫn thẳng tới vị trí nhờ băm key, nên là O(1) trung bình. Giá trị thì không được đánh chỉ mục: muốn biết giá trị nào đó có tồn tại không, bạn phải kiểm tra từng key — O(n).",
@@ -44,16 +44,16 @@
     "question": "Độ phức tạp thời gian của hàm sau là gì, với n là số key của `counts`?\n`function countKeysBelow(counts, limit) {\n  let total = 0;\n  for (const key in counts) {\n    if (Object.keys(counts).length > limit) break;\n    total++;\n  }\n  return total;\n}`",
     "questionEn": "What is the time complexity of this function, where n is the number of keys in `counts`?\n`function countKeysBelow(counts, limit) {\n  let total = 0;\n  for (const key in counts) {\n    if (Object.keys(counts).length > limit) break;\n    total++;\n  }\n  return total;\n}`",
     "options": [
-      "O(n), vì chỉ có một vòng lặp",
-      "O(1), vì `.length` là O(1)",
-      "O(n log n), vì vòng lặp có thể dừng sớm",
-      "O(n²), vì `Object.keys` là O(n) và được gọi ở mỗi lần lặp"
+      "O(n), vì trong hàm chỉ có một vòng lặp `for...in`",
+      "O(1), vì `.length` luôn là O(1) với mọi mảng",
+      "O(n log n), vì vòng lặp có thể `break` sớm",
+      "O(n²), vì `Object.keys` là O(n) ở mỗi vòng lặp"
     ],
     "optionsEn": [
-      "O(n), because there is only one loop",
-      "O(1), because `.length` is O(1)",
-      "O(n log n), because the loop may break early",
-      "O(n²), because `Object.keys` is O(n) and runs on every iteration"
+      "O(n), because the function has only one `for...in` loop",
+      "O(1), because `.length` is always O(1) on any array",
+      "O(n log n), because the loop may `break` out early",
+      "O(n²), because `Object.keys` is O(n) on every pass"
     ],
     "answer": 3,
     "explanation": "`.length` của mảng đúng là O(1), nhưng trước đó `Object.keys` phải dựng cả mảng n key — O(n) — ở mỗi vòng. n vòng × O(n) = O(n²) trong trường hợp xấu nhất (không break). Hãy tính số key một lần trước vòng lặp.",
@@ -164,20 +164,20 @@
     "question": "Thao tác mảng nào sau đây có độ phức tạp thời gian O(n log n)?",
     "questionEn": "Which of these array operations has O(n log n) time complexity?",
     "options": [
-      "`arr.reverse()`",
+      "`arr.map((x) => x * 2)`",
       "`arr.concat(other)`",
-      "`arr.indexOf(x)`",
+      "`arr.reduce((s, x) => s + x, 0)`",
       "`arr.sort((a, b) => a - b)`"
     ],
     "optionsEn": [
-      "`arr.reverse()`",
+      "`arr.map((x) => x * 2)`",
       "`arr.concat(other)`",
-      "`arr.indexOf(x)`",
+      "`arr.reduce((s, x) => s + x, 0)`",
       "`arr.sort((a, b) => a - b)`"
     ],
     "answer": 3,
-    "explanation": "`sort` là sắp xếp dựa trên so sánh (V8 dùng TimSort), tốn O(n log n). `reverse` là một lượt đảo tại chỗ O(n), `concat` chép hai mảng O(n + m), còn `indexOf` là quét tuyến tính O(n).",
-    "explanationEn": "`sort` is a comparison sort (V8 uses TimSort) and costs O(n log n). `reverse` is a single in-place pass, O(n); `concat` copies both arrays, O(n + m); and `indexOf` is a linear scan, O(n)."
+    "explanation": "`sort` là thuật toán sắp xếp so sánh (V8 dùng TimSort) nên tốn O(n log n). `map` và `reduce` đều duyệt mảng đúng một lần — O(n); `concat` chép cả hai mảng — O(n + m).",
+    "explanationEn": "`sort` is a comparison sort (V8 uses TimSort) and costs O(n log n). `map` and `reduce` each walk the array exactly once — O(n); `concat` copies both arrays, O(n + m)."
   },
   {
     "id": "q10",
@@ -206,14 +206,14 @@
     "options": [
       "Gọi `products.find((p) => p.id === id)` cho mỗi truy vấn",
       "Sắp xếp mảng theo id trước mỗi truy vấn rồi dùng `find`",
-      "Dựng một object hoặc Map từ id sang sản phẩm một lần, rồi tra theo key",
-      "Dùng `products.indexOf(id)` cho mỗi truy vấn"
+      "Dựng một Map từ id sang sản phẩm một lần rồi tra theo key",
+      "Gọi `products.indexOf(id)` cho từng truy vấn riêng lẻ"
     ],
     "optionsEn": [
       "Call `products.find((p) => p.id === id)` for every query",
       "Sort the array by id before each query, then use `find`",
-      "Build an object or Map from id to product once, then look up by key",
-      "Use `products.indexOf(id)` for every query"
+      "Build a Map from id to product once, then look up by key",
+      "Call `products.indexOf(id)` separately for every query"
     ],
     "answer": 2,
     "explanation": "Dựng bảng tra tốn O(n) một lần, sau đó mỗi truy vấn là O(1): tổng O(n + q). `find` mỗi truy vấn là O(n · q); sắp xếp mỗi lần còn tệ hơn, O(q · n log n); còn `indexOf(id)` so sánh id với chính các object nên thậm chí không tìm đúng.",
@@ -304,15 +304,15 @@
     "question": "Vì sao cách dựng chuỗi sau thường được coi là O(n²) trên lý thuyết?\n`let out = \"\";\nfor (let i = 0; i < n; i++) {\n  out += \"x\";\n}`",
     "questionEn": "Why is this way of building a string considered O(n²) on paper?\n`let out = \"\";\nfor (let i = 0; i < n; i++) {\n  out += \"x\";\n}`",
     "options": [
-      "Vì `+=` trên string phải sắp xếp các ký tự",
-      "Vì string là bất biến: mỗi lần `+=` tạo chuỗi mới và chép lại toàn bộ phần đã có",
-      "Vì vòng lặp `for` trên string luôn là O(n²)",
+      "Vì `+=` trên string phải sắp xếp lại toàn bộ ký tự sau mỗi lần nối",
+      "Vì string bất biến: mỗi `+=` tạo chuỗi mới, chép lại phần đã có",
+      "Vì vòng lặp `for` chạy trên một string luôn có chi phí O(n²)",
       "Vì `out.length` phải được đếm lại từ đầu sau mỗi lần nối"
     ],
     "optionsEn": [
-      "Because `+=` on a string has to sort the characters",
-      "Because strings are immutable: each `+=` creates a new string copying everything so far",
-      "Because a `for` loop over a string is always O(n²)",
+      "Because `+=` on a string re-sorts every character after each append",
+      "Because strings are immutable: each `+=` copies everything so far",
+      "Because a `for` loop that runs over a string always costs O(n²)",
       "Because `out.length` must be recounted from scratch after each append"
     ],
     "answer": 1,

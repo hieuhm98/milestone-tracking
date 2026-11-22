@@ -19,6 +19,7 @@ import {
   formatClock,
   topicBreakdown,
 } from "@/lib/exam";
+import { useOptionOrder } from "@/lib/useOptionOrder";
 import { cn } from "@/lib/utils";
 import QuestionText from "@/components/knowledge/QuestionText";
 import GroupIcon from "@/components/GroupIcon";
@@ -86,6 +87,8 @@ export default function ExamRunner({ group, topics }: Props) {
   // ------------------------------------------------------------------ grading
   const localized = useMemo(() => paper.map((q) => localizeQuestion(q, lang)), [paper, lang]);
   const enQs = useMemo(() => paper.map((q) => localizeQuestion(q, "en")), [paper]);
+  const orderFor = useOptionOrder();
+  const optionOrder = (q: PaperQuestion) => orderFor(questionKey(q.slug, q.id), q.options.length);
   const viQs = useMemo(() => paper.map((q) => localizeQuestion(q, "vi")), [paper]);
 
   const correctFlags = useMemo(
@@ -468,7 +471,8 @@ export default function ExamRunner({ group, topics }: Props) {
           </div>
 
           <div className="space-y-2">
-            {current.options.map((opt, i) => {
+            {optionOrder(paper[idx]).map((i, pos) => {
+              const opt = current.options[i];
               const selected = answers[idx] === i;
 
               return (
@@ -490,7 +494,7 @@ export default function ExamRunner({ group, topics }: Props) {
                       selected ? "bg-blue-600 border-blue-500 text-white" : "border-zinc-400 dark:border-zinc-600 text-zinc-500"
                     )}
                   >
-                    {OPTION_LABELS[i]}
+                    {OPTION_LABELS[pos]}
                   </span>
                   {dual ? (
                     <BilingualPair
@@ -700,7 +704,8 @@ export default function ExamRunner({ group, topics }: Props) {
               )}
 
               <div className="space-y-1.5 mb-3">
-                {q.options.map((opt, oi) => {
+                {optionOrder(paper[i]).map((oi, pos) => {
+                  const opt = q.options[oi];
                   const isCorrectOpt = oi === q.answer;
                   const isUserOpt = oi === chosen;
 
@@ -716,7 +721,7 @@ export default function ExamRunner({ group, topics }: Props) {
                             : "text-zinc-500"
                       )}
                     >
-                      <span className="font-bold shrink-0">{OPTION_LABELS[oi]}.</span>
+                      <span className="font-bold shrink-0">{OPTION_LABELS[pos]}.</span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start gap-2">
                           <div className="flex-1 min-w-0">

@@ -4,16 +4,16 @@
     "question": "Vì sao test hệ thống phải được suy ra từ YÊU CẦU chứ không phải từ mã nguồn?",
     "questionEn": "Why must system tests derive from REQUIREMENTS rather than from code?",
     "options": [
-      "Vì viết test từ mã chỉ kiểm tra được rằng mã làm những gì nó làm, không phát hiện được chức năng bị bỏ sót hoàn toàn",
-      "Vì tester không được phép đọc mã nguồn",
-      "Vì mã thay đổi thường xuyên hơn yêu cầu",
-      "Vì đọc mã tốn nhiều thời gian hơn"
+      "Test suy ra từ mã không phát hiện được chức năng bị bỏ sót hoàn toàn",
+      "Theo hầu hết chính sách, tester không được phép đọc mã nguồn",
+      "Mã thay đổi thường xuyên hơn yêu cầu rất nhiều nên các test đó liên tục bị hỏng",
+      "Đọc mã tốn thời gian hơn đọc yêu cầu nên làm chậm kiểm thử"
     ],
     "optionsEn": [
-      "Because tests from code only verify the code does what it does, missing functionality that is absent entirely",
-      "Because testers may not read source code",
-      "Because code changes more often than requirements",
-      "Because reading code takes longer"
+      "Code-derived tests cannot reveal functionality that is missing entirely",
+      "Testers are not permitted to read source code under most policies",
+      "Code changes far more often than requirements, so such tests break constantly",
+      "Reading code takes longer than reading requirements, slowing testing"
     ],
     "answer": 0,
     "explanation": "Chức năng bị bỏ sót không tồn tại trong mã nên không thể lộ ra khi đọc mã, dù bạn đọc kỹ tới đâu.",
@@ -26,14 +26,14 @@
     "options": [
       "Đường đi thuận lợi, trường hợp biên, trường hợp lỗi và phân quyền",
       "Chức năng, hiệu năng, bảo mật và khả năng sử dụng",
-      "Unit test, integration test, system test và UAT",
+      "Unit test, integration test, system test và acceptance test",
       "Test thủ công, test tự động, test hồi quy và test khói"
     ],
     "optionsEn": [
       "Happy path, boundary cases, failure cases, and permissions",
       "Functional, performance, security, and usability",
-      "Unit, integration, system, and UAT",
-      "Manual, automated, regression, and smoke"
+      "Unit, integration, system, and user acceptance testing",
+      "Manual, automated, regression, and smoke test runs"
     ],
     "answer": 0,
     "explanation": "Trường hợp biên là nhóm bị bỏ sót nhiều thứ hai sau trường hợp lỗi, và rất nhiều bug nằm đúng ở ranh giới như giá trị bằng ngưỡng hay danh sách rỗng.",
@@ -44,13 +44,13 @@
     "question": "Trường nào trong test case là quan trọng nhất mà nhiều đội bỏ qua?",
     "questionEn": "Which test case field is most important yet often skipped?",
     "options": [
-      "Yêu cầu liên quan, vì nó cho biết ngay yêu cầu nào chưa được kiểm thử và test nào không truy vết về yêu cầu nào",
+      "Yêu cầu liên quan",
       "Người viết test case",
       "Ngày tạo test case",
       "Thời gian ước tính để chạy test"
     ],
     "optionsEn": [
-      "The related requirement, since it instantly reveals which requirement is untested and which test traces to nothing",
+      "The related requirement",
       "Who wrote the test case",
       "The creation date",
       "The estimated execution time"
@@ -64,16 +64,16 @@
     "question": "Khi nào nên dùng checklist thay vì test case đầy đủ?",
     "questionEn": "When should you use a checklist instead of full test cases?",
     "options": [
-      "Cho kiểm tra hồi quy nhanh, kiểm tra tính nhất quán giao diện, kiểm tra khả năng tiếp cận và các yêu cầu lặp lại trên nhiều màn hình",
-      "Cho mọi loại kiểm thử để tiết kiệm thời gian",
-      "Chỉ khi không có tester chuyên nghiệp",
-      "Chỉ cho dự án nhỏ dưới ba tháng"
+      "Kiểm tra hồi quy nhanh và các mục lặp lại trên nhiều màn hình",
+      "Cho hầu hết kiểm thử, vì checklist đỡ tốn công viết",
+      "Khi dự án không có sẵn tester chuyên nghiệp nào để viết test case đầy đủ",
+      "Cho các dự án ngắn có thời gian dưới ba tháng"
     ],
     "optionsEn": [
-      "For quick regression, interface consistency, accessibility checks, and requirement types repeated across screens",
-      "For all testing, to save time",
-      "Only when there is no professional tester",
-      "Only for projects under three months"
+      "Quick regression and checks repeated across many screens",
+      "For most testing, since checklists save writing time",
+      "When the project has no professional tester available to write them",
+      "For short projects of under three months in length"
     ],
     "answer": 0,
     "explanation": "Checklist áp dụng cho mọi màn hình thuộc về definition of done chứ không phải acceptance criteria của từng story riêng lẻ.",
@@ -84,13 +84,13 @@
     "question": "Mục nào KHÔNG thuộc checklist kiểm tra cho mỗi màn hình mới?",
     "questionEn": "Which item does NOT belong on a per-screen checklist?",
     "options": [
-      "Lập trình viên nào đã xây màn hình này",
+      "Tên lập trình viên đã xây dựng nó",
       "Trạng thái rỗng hiển thị đúng và có hướng dẫn hành động tiếp theo",
       "Bấm hai lần liên tiếp không tạo hai bản ghi",
       "Dữ liệu lớn một nghìn dòng vẫn dùng được"
     ],
     "optionsEn": [
-      "Which developer built this screen",
+      "The name of the developer who built it",
       "The empty state displays correctly with a next-action hint",
       "Double-clicking does not create two records",
       "A thousand rows of data remains usable"
@@ -104,16 +104,16 @@
     "question": "UAT khác system testing ở câu hỏi trung tâm nào?",
     "questionEn": "What central question separates UAT from system testing?",
     "options": [
-      "System testing hỏi hệ thống có làm đúng đặc tả không; UAT hỏi hệ thống có giúp tôi làm được việc của mình không",
+      "System testing: có đúng đặc tả không? UAT: có giúp tôi làm việc không?",
       "System testing hỏi hệ thống có nhanh không; UAT hỏi hệ thống có đẹp không",
-      "System testing do người dùng làm; UAT do tester làm",
-      "Hai loại kiểm thử này trả lời cùng một câu hỏi"
+      "System testing do người dùng làm; UAT do tester chuyên nghiệp làm",
+      "Cả hai hỏi cùng một câu, chỉ khác thời điểm trong lịch dự án"
     ],
     "optionsEn": [
-      "System testing asks whether the system matches the specification; UAT asks whether it helps me do my job",
+      "System testing: does it match the spec? UAT: does it help me do my job?",
       "System testing asks whether it is fast; UAT asks whether it is attractive",
-      "System testing is done by users; UAT by testers",
-      "Both answer the same question"
+      "System testing is done by users; UAT is done by professional testers",
+      "Both ask the same question, just at different points in the schedule"
     ],
     "answer": 0,
     "explanation": "Vì thế UAT tìm ra khoảng cách giữa đặc tả và nhu cầu thật, chứ không phải lỗi so với đặc tả.",
@@ -124,16 +124,16 @@
     "question": "Nếu UAT phát hiện toàn bug kỹ thuật cơ bản, điều đó nghĩa là gì?",
     "questionEn": "If UAT surfaces mostly basic technical defects, what does that mean?",
     "options": [
-      "System testing chưa làm tốt, và bạn đang lãng phí thời gian quý giá của người dùng nghiệp vụ",
-      "Người dùng đã kiểm thử rất kỹ",
-      "Đội phát triển cần thêm thời gian",
-      "UAT đã đạt được mục tiêu của nó"
+      "System testing chưa tốt và thời gian người dùng nghiệp vụ đang bị phí",
+      "Người dùng đã kiểm thử rất kỹ lưỡng và buổi UAT diễn ra đúng như kế hoạch",
+      "Đội phát triển cần thêm thời gian trước khi phát hành",
+      "UAT đang làm đúng vai trò khi bắt lỗi trước khi go-live"
     ],
     "optionsEn": [
-      "System testing was inadequate, and you are wasting valuable business users' time",
-      "The users tested very thoroughly",
-      "The team needs more time",
-      "UAT achieved its purpose"
+      "System testing fell short and business users' time is being wasted",
+      "The users tested very thoroughly and the UAT session went exactly as planned",
+      "The development team needs more time before release",
+      "UAT is doing its job by catching defects before go-live"
     ],
     "answer": 0,
     "explanation": "UAT tồn tại để tìm những gì đặc tả đã bỏ sót, chứ không phải để làm thay việc của tester chuyên nghiệp.",
@@ -144,16 +144,16 @@
     "question": "Kịch bản UAT nên được viết theo cách nào?",
     "questionEn": "How should UAT scenarios be written?",
     "options": [
-      "Theo tác vụ nghiệp vụ, ví dụ xử lý đơn hàng cho khách ABC giao tới kho Bình Dương trước thứ Sáu",
-      "Theo màn hình, ví dụ mở màn hình A, nhập trường B, bấm nút C",
-      "Theo thứ tự các bảng dữ liệu bị tác động",
-      "Theo danh sách yêu cầu chức năng"
+      "Theo tác vụ nghiệp vụ, ví dụ xử lý đơn của khách ABC trước thứ Sáu",
+      "Theo màn hình, ví dụ mở màn hình A, nhập trường B, bấm nút C, kiểm tra D",
+      "Theo thứ tự các bảng dữ liệu được ghi trong quá trình xử lý",
+      "Theo danh sách yêu cầu chức năng, mỗi yêu cầu một kịch bản"
     ],
     "optionsEn": [
-      "Around business tasks, e.g. process an order for customer ABC delivered to Binh Duong before Friday",
-      "Around screens, e.g. open screen A, enter field B, press button C",
-      "In the order of the data tables affected",
-      "As a list of functional requirements"
+      "Around business tasks, e.g. process customer ABC's order by Friday",
+      "Around screens, e.g. open screen A, enter field B, press button C, check D",
+      "In the order the data tables are written during processing",
+      "As a list of the functional requirements, one per scenario"
     ],
     "answer": 0,
     "explanation": "Kịch bản theo màn hình biến UAT thành bài kiểm tra khả năng làm theo chỉ dẫn, chứ không kiểm tra được hệ thống có phù hợp với công việc thật không.",
@@ -164,16 +164,16 @@
     "question": "Vì sao phải dùng dữ liệu thật đã che thông tin nhạy cảm trong UAT?",
     "questionEn": "Why use masked real data in UAT?",
     "options": [
-      "Vì dữ liệu giả làm người dùng không nhận ra vấn đề, chẳng hạn tên sản phẩm dài thật làm vỡ bố cục",
-      "Vì quy định bắt buộc dùng dữ liệu thật",
-      "Vì dữ liệu giả làm hệ thống chạy chậm",
-      "Vì người dùng không biết cách tạo dữ liệu giả"
+      "Dữ liệu giả che giấu vấn đề thật, như tên dài làm vỡ bố cục",
+      "Quy định bảo vệ dữ liệu bắt buộc dùng dữ liệu thật khi nghiệm thu",
+      "Dữ liệu giả làm môi trường kiểm thử chạy chậm rõ rệt",
+      "Người dùng nghiệp vụ không biết cách tạo dữ liệu giả hợp lý"
     ],
     "optionsEn": [
-      "Because fake data hides problems, such as a genuinely long product name breaking the layout",
-      "Because regulations mandate real data",
-      "Because fake data slows the system",
-      "Because users cannot create fake data"
+      "Fake data hides real problems, like long names breaking layout",
+      "Data protection regulations mandate real data in acceptance tests",
+      "Fake data makes the test environment run noticeably slower",
+      "Business users do not know how to create realistic fake data"
     ],
     "answer": 0,
     "explanation": "Che thông tin nhạy cảm là bắt buộc: sao chép dữ liệu thật xuống môi trường kiểm thử mà không che số điện thoại hay số thẻ là vi phạm quyền riêng tư.",
@@ -184,16 +184,16 @@
     "question": "Trong buổi UAT, vì sao KHÔNG nên giải thích khi người dùng mắc kẹt?",
     "questionEn": "During UAT, why should you NOT explain when a user gets stuck?",
     "options": [
-      "Vì nếu bạn phải giải thích thì sản phẩm thật cũng sẽ cần bạn ngồi cạnh mỗi người dùng",
-      "Vì quy trình UAT cấm trao đổi",
-      "Vì giải thích làm buổi UAT kéo dài",
-      "Vì người dùng sẽ tự tìm ra sau vài phút"
+      "Vì sản phẩm thật sẽ không có bạn ngồi cạnh để giải thích",
+      "Vì quy trình UAT không cho phép trao đổi với người tham gia",
+      "Vì giải thích làm buổi UAT vượt quá khung thời gian",
+      "Vì người dùng thường tự tìm ra cách chỉ sau vài phút"
     ],
     "optionsEn": [
-      "Because if you must explain, the real product will need you sitting beside every user",
-      "Because UAT protocol forbids talking",
-      "Because explaining lengthens the session",
-      "Because users will figure it out shortly"
+      "Because the real product will not have you there to explain",
+      "Because UAT protocol forbids talking to the participants",
+      "Because explaining pushes the session past its time slot",
+      "Because users usually work it out by themselves in minutes"
     ],
     "answer": 0,
     "explanation": "Sự lúng túng của người dùng chính là dữ liệu bạn cần thu thập, và can thiệp sẽ xoá mất chính thông tin đó.",
@@ -204,16 +204,16 @@
     "question": "Vì sao nên ghi lại cả những gì người dùng NÓI và những gì họ LÀM trong UAT?",
     "questionEn": "Why record both what users SAY and what they DO in UAT?",
     "options": [
-      "Vì hai thứ này thường khác nhau — người dùng có thể nói mọi thứ ổn trong khi hành vi cho thấy họ đã lúng túng nhiều lần",
-      "Vì cần đủ hai loại bằng chứng cho báo cáo",
-      "Vì quy trình yêu cầu ghi cả hai",
-      "Vì người dùng thường quên những gì mình đã làm"
+      "Vì ý kiến nêu ra và hành vi quan sát được thường không khớp",
+      "Vì mẫu báo cáo UAT yêu cầu có đủ cả hai loại bằng chứng",
+      "Vì thủ tục nghiệm thu đòi hỏi phải có hai nguồn bằng chứng độc lập",
+      "Vì người dùng thường nhanh quên mình đã làm những bước nào"
     ],
     "optionsEn": [
-      "Because the two often differ — a user may say everything is fine while their behaviour showed repeated confusion",
-      "Because reports need both kinds of evidence",
-      "Because the process requires both",
-      "Because users forget what they did"
+      "Because stated opinions and observed behaviour often disagree",
+      "Because the UAT report template needs both kinds of evidence",
+      "Because sign-off procedures require two independent sources",
+      "Because users soon forget which steps they actually took"
     ],
     "answer": 0,
     "explanation": "Đây cũng là lý do quan sát là kỹ thuật khai thác yêu cầu có giá trị cao: nó cho thấy điều người dùng thực sự làm chứ không phải điều họ nói.",
@@ -224,15 +224,15 @@
     "question": "Năm loại kết quả UAT cần phân loại là gì?",
     "questionEn": "What are the five categories for classifying UAT results?",
     "options": [
-      "Lỗi mã, yêu cầu bị bỏ sót, yêu cầu mới, hiểu lầm cần đào tạo và sở thích cá nhân",
-      "Nghiêm trọng, cao, trung bình, thấp và không đáng kể",
-      "Giao diện, chức năng, hiệu năng, bảo mật và dữ liệu",
+      "Lỗi mã, yêu cầu bỏ sót, yêu cầu mới, cần đào tạo, sở thích cá nhân",
+      "Nghiêm trọng, cao, trung bình, thấp và không đáng kể, xếp theo tác động tới nghiệp vụ",
+      "Lỗi giao diện, chức năng, hiệu năng, bảo mật và dữ liệu",
       "Đã sửa, đang sửa, chưa sửa, không sửa và cần thêm thông tin"
     ],
     "optionsEn": [
-      "Code defect, missed requirement, new requirement, misunderstanding needing training, and personal preference",
-      "Critical, high, medium, low, and trivial",
-      "Interface, functional, performance, security, and data",
+      "Code defect, missed requirement, new requirement, training need, preference",
+      "Critical, high, medium, low, and trivial, ranked by their impact on the business",
+      "Interface, functional, performance, security, and data defects",
       "Fixed, fixing, unfixed, will not fix, and needs information"
     ],
     "answer": 0,
@@ -244,16 +244,16 @@
     "question": "Nếu nhiều vấn đề UAT thuộc loại yêu cầu bị bỏ sót, điều đó nghĩa là gì?",
     "questionEn": "If many UAT issues fall into the missed-requirement category, what does that mean?",
     "options": [
-      "Đó là tín hiệu quy trình: khâu khai thác yêu cầu và grooming chưa phủ tốt các trường hợp ngoại lệ",
-      "Người dùng đã thay đổi ý kiến so với ban đầu",
-      "Đội phát triển đã hiện thực sai",
-      "UAT được tổ chức quá muộn"
+      "Tín hiệu quy trình: khâu khai thác chưa phủ các trường hợp ngoại lệ",
+      "Người dùng đã thay đổi ý kiến nhiều so với lúc dự án mới bắt đầu",
+      "Lập trình viên đã hiện thực sai so với nội dung bản đặc tả",
+      "UAT được tổ chức quá muộn nên không kịp ảnh hưởng thiết kế"
     ],
     "optionsEn": [
-      "It is a process signal: elicitation and grooming did not cover exception cases well",
-      "Users changed their minds since the start",
-      "The team implemented it incorrectly",
-      "UAT was scheduled too late"
+      "A process signal that elicitation missed exception cases",
+      "Users have changed their minds since the project started",
+      "The developers implemented the specification incorrectly",
+      "UAT was scheduled too late to influence the design"
     ],
     "answer": 0,
     "explanation": "Đây là điều đáng cải tiến cho dự án sau chứ không chỉ là một loạt bug cần sửa cho dự án hiện tại.",
@@ -284,16 +284,16 @@
     "question": "Vì sao việc không báo lại kết quả cho người tham gia UAT là lỗi nghiêm trọng?",
     "questionEn": "Why is failing to report back to UAT participants a serious error?",
     "options": [
-      "Vì lần sau bạn mời họ sẽ không đến, do họ tin rằng ý kiến của mình không dẫn tới điều gì",
-      "Vì quy trình kiểm thử yêu cầu phải có báo cáo",
-      "Vì cần bằng chứng cho việc nghiệm thu",
-      "Vì lãnh đạo cần biết kết quả"
+      "Họ sẽ không đến nữa vì tin rằng ý kiến của mình vô ích",
+      "Quy trình kiểm thử yêu cầu có báo cáo đóng chính thức",
+      "Không thể ký nghiệm thu nếu thiếu bằng chứng đó",
+      "Lãnh đạo cần kết quả đó để đánh giá hiệu suất làm việc của đội"
     ],
     "optionsEn": [
-      "Because next time they will not come, believing their input leads nowhere",
-      "Because the test process requires a report",
-      "Because acceptance needs the evidence",
-      "Because management needs to know the results"
+      "They will stop coming, believing their input leads nowhere",
+      "The test process requires a formal closing report for audit",
+      "Formal acceptance cannot be signed without that evidence",
+      "Management needs the results to judge the team's performance"
     ],
     "answer": 0,
     "explanation": "Đóng vòng lặp là bắt buộc kể cả khi câu trả lời là không sửa — hãy nêu rõ lý do thay vì im lặng.",
@@ -304,16 +304,16 @@
     "question": "Ai nên là người thực hiện UAT?",
     "questionEn": "Who should perform UAT?",
     "options": [
-      "Người dùng nghiệp vụ THẬT, gồm cả người thành thạo lẫn người mới, không phải quản lý của họ",
-      "Tester chuyên nghiệp của đội",
-      "Quản lý bộ phận đại diện cho người dùng",
-      "BA thay mặt người dùng"
+      "Người dùng nghiệp vụ thật, cả người thạo lẫn người mới",
+      "Tester chuyên nghiệp của đội, có BA hướng dẫn",
+      "Quản lý bộ phận đại diện cho người dùng của mình",
+      "BA thay mặt cho người dùng"
     ],
     "optionsEn": [
-      "REAL business users, including both experts and newcomers, not their managers",
-      "The team's professional testers",
-      "Department managers representing users",
-      "The BA on the users' behalf"
+      "Real business users, both experts and newcomers",
+      "The team's professional testers, guided by the BA",
+      "Department managers representing their users",
+      "The BA, acting on the users' behalf"
     ],
     "answer": 0,
     "explanation": "Người thành thạo và người mới gặp những vấn đề rất khác nhau, nên cần cả hai để phủ đủ các góc nhìn về khả năng sử dụng.",

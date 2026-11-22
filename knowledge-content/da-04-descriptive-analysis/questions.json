@@ -7,13 +7,13 @@
       "3.106 người, vì mỗi dòng trong bảng loans là một người vay",
       "2.108 người; 3.106 là số khoản vay, vì có khách vay nhiều lần",
       "Khoảng 2.600 người, lấy trung bình của hai con số cho an toàn",
-      "Không trả lời được nếu chưa JOIN sang bảng customers"
+      "Không trả lời được nếu chưa JOIN sang bảng customers để lấy tên"
     ],
     "optionsEn": [
       "3,106 people, because each row in loans is one borrower",
-      "2,108 people; 3,106 is the number of loans, as some customers borrowed more than once",
+      "2,108 people; 3,106 counts loans, and some people borrowed twice",
       "About 2,600 people, averaging the two numbers to be safe",
-      "It cannot be answered without joining to the customers table"
+      "It cannot be answered without first joining to the customers table"
     ],
     "answer": 1,
     "explanation": "Grain của `loans` là một khoản vay, không phải một người. \"Bao nhiêu người vay\" cần đếm khách hàng khác nhau: `COUNT(DISTINCT customer_id)` = 2.108.",
@@ -36,16 +36,16 @@
     "question": "`AVG(monthly_income)` trên 4.000 khách trả về khoảng 17,07 triệu; 232 khách để trống thu nhập (NULL) và có ba dòng 999.999.999 do gõ nhầm. Nhận định nào đúng?",
     "questionEn": "`AVG(monthly_income)` over 4,000 customers returns about 17.07 million; 232 customers left income empty (NULL) and three rows hold the typo 999,999,999. Which statement is true?",
     "options": [
-      "AVG coi NULL là 0 nên con số thật sự cao hơn 17,07 triệu",
-      "Ba dòng gõ nhầm quá ít để ảnh hưởng tới trung bình của gần 4.000 dòng",
-      "AVG chia cho 4.000 dòng nên mọi khách đều được tính",
-      "AVG bỏ qua 232 dòng NULL, còn ba dòng gõ nhầm đẩy trung bình lên gần 0,8 triệu"
+      "AVG coi 232 dòng NULL là 0, nên con số thật sự phải cao hơn 17,07 triệu",
+      "Ba dòng gõ nhầm quá ít để ảnh hưởng đáng kể tới trung bình của gần 4.000 dòng",
+      "AVG chia cho đủ 4.000 dòng, nên mọi khách đều được tính vào trung bình",
+      "AVG bỏ qua 232 dòng NULL; ba dòng gõ nhầm đẩy trung bình lên gần 0,8 triệu"
     ],
     "optionsEn": [
-      "AVG treats NULL as 0, so the true figure is above 17.07 million",
-      "Three typo rows are too few to affect the mean of almost 4,000 rows",
-      "AVG divides by 4,000 rows, so every customer is included",
-      "AVG skips the 232 NULL rows, and the three typos push the mean up by almost 0.8 million"
+      "AVG treats the 232 NULLs as 0, so the true figure is above 17.07 million",
+      "Three typo rows are far too few to have any real effect on a mean of 4,000 rows",
+      "AVG divides by all 4,000 rows, so every customer is included in the mean",
+      "AVG skips the 232 NULLs, and the three typos push the mean up almost 0.8 million"
     ],
     "answer": 3,
     "explanation": "AVG chỉ tính trên 3.768 dòng có giá trị. Bỏ ba dòng 999.999.999 thì trung bình còn khoảng 16,29 triệu: ba giá trị sai làm lệch gần 0,8 triệu.",
@@ -68,16 +68,16 @@
     "question": "Team tài chính muốn \"tổng số tiền thanh toán đã thực sự chuyển\". Bảng `payments` có status `success`, `refunded`, `failed`, `pending`. Điều kiện lọc nào hợp lý nhất?",
     "questionEn": "Finance wants \"the total payment value that actually moved\". The `payments` table has statuses `success`, `refunded`, `failed`, `pending`. Which filter makes most sense?",
     "options": [
-      "`WHERE status IN ('success', 'refunded')`, vì tiền của giao dịch refunded cũng đã chuyển trước khi được hoàn",
+      "`WHERE status IN ('success', 'refunded')`, vì tiền refunded cũng đã chuyển",
       "Không cần WHERE, vì SUM(amount) tự bỏ qua giao dịch thất bại",
       "`WHERE status <> 'refunded'`, để loại phần tiền đã trả lại",
-      "`WHERE status = 'pending'`, vì đó là các giao dịch đang xử lý tiền"
+      "`WHERE status = 'pending'`, vì đó là các giao dịch đang xử lý tiền ngay lúc này"
     ],
     "optionsEn": [
-      "`WHERE status IN ('success', 'refunded')`, since refunded money also moved before it was returned",
+      "`WHERE status IN ('success', 'refunded')`, since refunded money moved too",
       "No WHERE needed, because SUM(amount) skips failed payments by itself",
       "`WHERE status <> 'refunded'`, to drop the money that was given back",
-      "`WHERE status = 'pending'`, since those payments are moving money"
+      "`WHERE status = 'pending'`, since those payments are moving money right now"
     ],
     "answer": 0,
     "explanation": "Giao dịch refunded đã thành công rồi mới được hoàn, nên tiền đã chuyển. Failed và pending thì chưa có tiền nào chuyển. Bỏ WHERE sẽ cộng cả 7.630 dòng, gồm cả lần thất bại.",
@@ -101,15 +101,15 @@
     "questionEn": "For payments that went through, the mean is 733,060 VND and the median is 334,000 VND. What does this tell you?",
     "options": [
       "Dữ liệu chắc chắn bị lỗi vì trung bình và trung vị phải gần bằng nhau",
-      "Đa số giao dịch lớn hơn 733.060 VND",
-      "Phân phối lệch phải: đa số giao dịch nhỏ, một đuôi giao dịch lớn kéo trung bình lên",
-      "Trung vị bị kéo xuống bởi các giao dịch thất bại"
+      "Đa số giao dịch lớn hơn 733.060 VND, nên trung vị thấp là do vài đơn nhỏ",
+      "Phân phối lệch phải: đa số giao dịch nhỏ, vài đơn lớn kéo trung bình lên",
+      "Trung vị bị kéo xuống bởi các giao dịch thất bại có số tiền bằng 0"
     ],
     "optionsEn": [
-      "The data must be broken, since mean and median should be close",
-      "Most payments are larger than 733,060 VND",
-      "The distribution is right-skewed: most payments are small and a tail of big ones pulls the mean up",
-      "The median is dragged down by failed payments"
+      "The data must be broken, since mean and median should always be close",
+      "Most payments are above 733,060 VND, and a few tiny ones pull the median down",
+      "Right-skewed: most payments are small and a few big ones pull the mean up",
+      "The median is dragged down by failed payments recorded with zero amounts"
     ],
     "answer": 2,
     "explanation": "Trung bình gấp đôi trung vị là dấu hiệu lệch phải điển hình của dữ liệu tiền. Chỉ khoảng một phần tư số giao dịch cao hơn mức trung bình.",
@@ -141,7 +141,7 @@
       "Rows 5.5 and 6, since SQLite keeps the decimals",
       "Only row 5, since both expressions equal 5",
       "Rows 5 and 6, since integer division gives 5 and 6",
-      "Rows 1 and 10, the minimum and the maximum"
+      "Rows 1 and 10, which hold the minimum and the maximum"
     ],
     "answer": 2,
     "explanation": "(10 + 1) / 2 = 5 và (10 + 2) / 2 = 6 khi chia số nguyên. Trung bình của dòng 5 và 6 chính là trung vị khi số dòng chẵn, giống MEDIAN của Excel.",
@@ -165,13 +165,13 @@
     "questionEn": "A product manager asks: \"What does a typical customer of ours earn?\" Income data is right-skewed and has a few huge typos. Which number should you report?",
     "options": [
       "Trung vị, vì nó không bị đuôi hay lỗi gõ kéo lệch",
-      "Trung bình, vì nó dùng tới mọi giá trị trong bảng",
+      "Trung bình, vì nó dùng tới mọi giá trị có trong bảng dữ liệu",
       "Giá trị lớn nhất, vì nó cho thấy tiềm năng của khách",
       "Tổng thu nhập chia cho số thành phố"
     ],
     "optionsEn": [
       "The median, because neither the tail nor typos pull it around",
-      "The mean, because it uses every value in the table",
+      "The mean, because it makes use of every single value in the table",
       "The maximum, because it shows customers' potential",
       "Total income divided by the number of cities"
     ],
@@ -196,16 +196,16 @@
     "question": "Phân vị số tiền thanh toán: P25 = 167.000, P75 = 747.000, P90 = 1.731.000 VND. Cách đọc nào đúng?",
     "questionEn": "Payment amount percentiles: P25 = 167,000, P75 = 747,000, P90 = 1,731,000 VND. Which reading is correct?",
     "options": [
-      "90% số giao dịch lớn hơn 1.731.000 VND",
-      "Giao dịch trung bình nằm giữa 167.000 và 747.000, nên trung bình là 457.000",
-      "P90 là số tiền của giao dịch thứ 90 trong bảng",
-      "Khoảng 10% số giao dịch từ 1.731.000 VND trở lên, và nửa ở giữa nằm trong khoảng 167.000–747.000"
+      "90% số giao dịch lớn hơn 1.731.000 VND, và một phần tư nhỏ hơn 167.000",
+      "Giao dịch trung bình nằm giữa 167.000 và 747.000, nên giá trị trung bình là 457.000",
+      "P90 là số tiền của giao dịch thứ 90 trong bảng sau khi sắp xếp theo ngày",
+      "Khoảng 10% giao dịch từ 1.731.000 VND trở lên; nửa giữa nằm trong 167.000–747.000"
     ],
     "optionsEn": [
-      "90% of payments are above 1,731,000 VND",
+      "90% of payments are above 1,731,000 VND, and a quarter are below 167,000",
       "The average payment sits between 167,000 and 747,000, so the mean is 457,000",
-      "P90 is the amount of the 90th payment in the table",
-      "About 10% of payments are 1,731,000 VND or more, and the middle half lies between 167,000 and 747,000"
+      "P90 is the amount of the 90th payment in the table when sorted by date",
+      "About 10% are 1,731,000 VND or more; the middle half sits in 167,000–747,000"
     ],
     "answer": 3,
     "explanation": "P90 nghĩa là 90% giá trị nhỏ hơn hoặc bằng nó, nên khoảng 10% từ đó trở lên. P25–P75 bao một nửa số giao dịch ở giữa.",
@@ -228,16 +228,16 @@
     "question": "Bảng: `electronics: paid 613, refunded 26` và `grocery: paid 1493, refunded 23`. Stakeholder nói: \"Hai ngành có vấn đề hoàn tiền như nhau.\" Bạn phản hồi thế nào?",
     "questionEn": "Table: `electronics: paid 613, refunded 26` and `grocery: paid 1493, refunded 23`. A stakeholder says: \"Both categories have the same refund problem.\" How do you respond?",
     "options": [
-      "Đồng ý, vì 26 và 23 gần bằng nhau",
-      "Không đồng ý: tính theo tỷ lệ, điện tử hoàn 4,2% còn tạp hóa 1,5%, gần gấp ba",
+      "Đồng ý, vì 26 và 23 lần hoàn tiền là gần bằng nhau",
+      "Không đồng ý: theo tỷ lệ, điện tử hoàn 4,2% còn tạp hóa chỉ 1,5%",
       "Không đồng ý: tạp hóa tệ hơn vì có nhiều giao dịch hơn",
-      "Không kết luận được vì hai ngành có giá trị đơn khác nhau"
+      "Không kết luận được vì hai ngành có giá trị đơn trung bình khác nhau"
     ],
     "optionsEn": [
-      "Agree, since 26 and 23 are close",
-      "Disagree: as rates, electronics refunds 4.2% and grocery 1.5%, almost three times as much",
+      "Agree, since 26 and 23 refunds are almost the same",
+      "Disagree: as rates, electronics refunds 4.2% against grocery's 1.5%",
       "Disagree: grocery is worse because it has more payments",
-      "No conclusion is possible because basket sizes differ"
+      "No conclusion is possible because the two categories have different basket sizes"
     ],
     "answer": 1,
     "explanation": "Số đếm gần nhau nhưng quy mô hai nhóm khác nhau. 26 ÷ 613 ≈ 4,2% và 23 ÷ 1.493 ≈ 1,5%: so tỷ lệ mới thấy khác biệt.",
@@ -261,15 +261,15 @@
     "questionEn": "You need to define \"refund rate\" for a dashboard. Which denominator makes most sense?",
     "options": [
       "Tất cả các dòng trong bảng payments, kể cả failed và pending",
-      "Số khách hàng đã đăng ký app",
-      "Số giao dịch đã bị hoàn tiền",
-      "Các giao dịch đã đi qua (success hoặc refunded), vì chỉ chúng mới có thể bị hoàn tiền"
+      "Số khách hàng đã đăng ký app trong kỳ",
+      "Số giao dịch đã bị hoàn tiền trong cùng kỳ",
+      "Các giao dịch đã đi qua (success hoặc refunded)"
     ],
     "optionsEn": [
       "All rows in payments, failed and pending included",
       "The number of customers who signed up to the app",
-      "The number of refunded payments",
-      "Payments that went through (success or refunded), since only they can be refunded"
+      "The number of refunded payments in the same period",
+      "Payments that went through (success or refunded)"
     ],
     "answer": 3,
     "explanation": "Mẫu số là tất cả những ai có thể gặp kết quả. Giao dịch thất bại không thể được hoàn tiền. Trên fintech.db: 175 ÷ 6.991 = 2,50% thay vì 175 ÷ 7.630 = 2,29%.",
@@ -292,16 +292,16 @@
     "question": "Với thẻ, `SUM(status = 'success') / COUNT(*)` cho 86,5%, còn `SUM(status IN ('success','refunded')) / SUM(status <> 'pending')` cho 89,3%. Vì sao cách đầu thấp hơn?",
     "questionEn": "For cards, `SUM(status = 'success') / COUNT(*)` gives 86.5%, while `SUM(status IN ('success','refunded')) / SUM(status <> 'pending')` gives 89.3%. Why is the first lower?",
     "options": [
-      "Vì cách đầu loại bỏ giao dịch failed khỏi mẫu số",
-      "Vì cách đầu coi giao dịch đã hoàn tiền là thất bại và tính cả pending vào mẫu số",
-      "Vì SQLite làm tròn sai khi chia cho COUNT(*)",
-      "Vì cách thứ hai chỉ tính giao dịch trên Android"
+      "Vì cách đầu đã loại bỏ hết các giao dịch failed ra khỏi mẫu số của phép chia",
+      "Vì cách đầu coi giao dịch đã hoàn tiền là thất bại và tính cả giao dịch chờ",
+      "Vì SQLite làm tròn sai mỗi khi chia một tổng cho COUNT(*) ở mỗi dòng",
+      "Vì cách thứ hai chỉ tính các giao dịch được thực hiện trên Android"
     ],
     "optionsEn": [
       "Because the first one removes failed payments from the denominator",
-      "Because the first one counts refunded payments as failures and keeps pending in the denominator",
-      "Because SQLite rounds badly when dividing by COUNT(*)",
-      "Because the second one only counts Android payments"
+      "Because the first treats refunds as failures and also counts unfinished ones",
+      "Because SQLite rounds badly whenever a sum is divided by COUNT(*) on each row",
+      "Because the second one only counts payments made on Android phones"
     ],
     "answer": 1,
     "explanation": "Giao dịch refunded đã thành công, và pending chưa có kết quả. Cách ngây thơ phạt cả hai, nên chênh lệch đến hoàn toàn từ định nghĩa.",
@@ -324,14 +324,14 @@
     "question": "Câu query `SELECT method, SUM(status = 'refunded') / COUNT(*) AS refund_rate FROM payments GROUP BY method;` trả về 0 cho mọi dòng. Nguyên nhân chính là gì?",
     "questionEn": "The query `SELECT method, SUM(status = 'refunded') / COUNT(*) AS refund_rate FROM payments GROUP BY method;` returns 0 on every row. What is the main cause?",
     "options": [
-      "Chia số nguyên cho số nguyên nên SQLite bỏ phần thập phân; cần nhân với 100.0 trước",
-      "Không có giao dịch nào có status 'refunded' trong bảng",
+      "Chia số nguyên cho số nguyên nên phần thập phân bị bỏ; nhân 100.0 trước",
+      "Không có giao dịch nào mang status 'refunded' trong bảng payments cả, nên tử số bằng 0",
       "`SUM(status = 'refunded')` luôn trả về NULL trong SQLite",
-      "Thiếu mệnh đề ORDER BY nên kết quả không được tính"
+      "Thiếu mệnh đề ORDER BY nên SQLite không tính được tỷ lệ"
     ],
     "optionsEn": [
-      "Integer divided by integer, so SQLite drops the decimals; multiply by 100.0 first",
-      "No payment in the table has the status 'refunded'",
+      "Integer division drops the decimals; multiply by 100.0 first",
+      "No payment in the payments table has the status 'refunded' at all",
       "`SUM(status = 'refunded')` always returns NULL in SQLite",
       "The ORDER BY clause is missing, so nothing gets computed"
     ],
@@ -356,16 +356,16 @@
     "question": "Theo ngành hàng: giao đồ ăn chiếm 26,4% số giao dịch nhưng 4,8% giá trị; điện tử chiếm 8,8% số giao dịch nhưng 39,1% giá trị. Team tài chính hỏi ngành nào quan trọng nhất với doanh thu phí (phí tính theo % giá trị). Bạn trả lời gì?",
     "questionEn": "By category: food delivery is 26.4% of payments but 4.8% of value; electronics is 8.8% of payments but 39.1% of value. Finance asks which category matters most for fee revenue (fees are a % of value). What do you answer?",
     "options": [
-      "Giao đồ ăn, vì nó có nhiều giao dịch nhất",
+      "Giao đồ ăn, vì chiếm tỷ trọng số giao dịch lớn nhất",
       "Hai ngành ngang nhau vì tổng tỷ lệ của chúng gần bằng nhau",
-      "Điện tử, vì phí tính theo giá trị và điện tử chiếm phần lớn giá trị",
-      "Không ngành nào, vì phải tính trung vị trước"
+      "Điện tử, vì chiếm tỷ trọng giá trị lớn nhất",
+      "Không ngành nào, vì phải tính trung vị giá trị trước"
     ],
     "optionsEn": [
-      "Food delivery, because it has the most payments",
+      "Food delivery, as it holds the largest share of payments",
       "They are equal because their shares add up to similar totals",
-      "Electronics, because fees follow value and electronics carries the most value",
-      "Neither, because the median must be computed first"
+      "Electronics, as it holds the largest share of value",
+      "Neither, because the median value must be computed first"
     ],
     "answer": 2,
     "explanation": "\"Lớn nhất\" phụ thuộc câu hỏi. Phí tính theo % giá trị nên phải nhìn tỷ trọng giá trị: điện tử 39,1%. Số lượng giao dịch quan trọng hơn với team vận hành, chăm sóc khách hàng.",
@@ -373,13 +373,13 @@
     "optionExplanations": [
       "Sai: nhiều giao dịch nhỏ không tạo nhiều phí khi phí tính theo giá trị.",
       "Sai: cộng tỷ lệ số lượng với tỷ lệ giá trị là trộn hai thước đo.",
-      "Đúng: chọn thước đo khớp với câu hỏi của stakeholder.",
+      "Đúng: phí tính theo giá trị, nên chọn thước đo giá trị cho khớp câu hỏi.",
       "Sai: trung vị không trả lời câu hỏi về tổng doanh thu phí."
     ],
     "optionExplanationsEn": [
       "Wrong: many small payments don't generate much fee when fees follow value.",
       "Wrong: adding count share and value share mixes two measures.",
-      "Correct: pick the measure that matches the stakeholder's question.",
+      "Correct: fees follow value, so pick the value measure to match the question.",
       "Wrong: a median doesn't answer a question about total fee revenue."
     ]
   },
@@ -391,13 +391,13 @@
       "QR cao hơn 5,6 điểm phần trăm, tức khoảng 6,3% xét tương đối",
       "QR cao hơn 5,6%, tức khoảng 6,3 điểm phần trăm",
       "QR cao hơn 94,9 ÷ 89,3 = 1,063 điểm phần trăm",
-      "QR cao hơn 5,6 điểm phần trăm, tức tốt hơn gấp 5,6 lần"
+      "QR cao hơn 5,6 điểm phần trăm, tức là tốt hơn thẻ gấp 5,6 lần"
     ],
     "optionsEn": [
       "QR is 5.6 percentage points higher, about 6.3% in relative terms",
       "QR is 5.6% higher, about 6.3 percentage points",
       "QR is 94.9 ÷ 89.3 = 1.063 percentage points higher",
-      "QR is 5.6 percentage points higher, so 5.6 times better"
+      "QR is 5.6 percentage points higher, so it is 5.6 times better than card"
     ],
     "answer": 0,
     "explanation": "Hiệu số 94,9 − 89,3 = 5,6 là điểm phần trăm (pp). Thay đổi tương đối là 5,6 ÷ 89,3 ≈ 6,3%.",
@@ -420,7 +420,7 @@
     "question": "Giá trị nạp ví tháng 6/2026 tăng khoảng 220% so với tháng 6/2025. Số ví đã mở tăng từ 708 lên 2.235; số lần nạp trên mỗi ví là khoảng 0,63 ở cả hai tháng. Kết luận nào hợp lý nhất?",
     "questionEn": "Wallet top-up value in June 2026 is up about 220% on June 2025. Wallets opened went from 708 to 2,235; top-ups per wallet are about 0.63 in both months. Which conclusion is most reasonable?",
     "options": [
-      "Khách hàng nạp ví thường xuyên hơn gấp ba lần so với năm ngoái",
+      "Mỗi khách hàng nạp ví thường xuyên hơn gấp ba lần so với cùng tháng năm ngoái",
       "Tăng trưởng 220% là do hiệu ứng nền thấp nên không có ý nghĩa",
       "Tăng trưởng đến từ việc có thêm ví; mức dùng trên mỗi ví gần như không đổi",
       "Không so được vì hai tháng có số ngày khác nhau"
@@ -429,7 +429,7 @@
       "Customers top up three times as often as last year",
       "The 220% growth is a base effect and therefore meaningless",
       "Growth came from more wallets; usage per wallet is roughly unchanged",
-      "They can't be compared because the months have different lengths"
+      "They can't be compared because the two months have different lengths"
     ],
     "answer": 2,
     "explanation": "Chuẩn hóa theo số ví cho thấy hành vi mỗi ví đi ngang. Cả hai nhận định (tổng tăng mạnh, mỗi ví đi ngang) đều đúng và dẫn tới các quyết định khác nhau.",
@@ -452,16 +452,16 @@
     "question": "Ví dụ giả định: Gateway A thành công 95,0% với thẻ nội địa và 60,0% với thẻ quốc tế, tổng 91,8%. Gateway B đạt 96,0% và 62,2%, tổng 70,7%. Vì sao B thua ở tổng?",
     "questionEn": "Invented example: Gateway A succeeds 95.0% for domestic cards and 60.0% for international, 91.8% in total. Gateway B gets 96.0% and 62.2%, 70.7% in total. Why does B lose in total?",
     "options": [
-      "Vì B thực sự kém hơn A ở cả hai loại thẻ",
-      "Vì B nhận chủ yếu thẻ quốc tế, loại thẻ thất bại nhiều ở mọi cổng: cơ cấu khác nhau",
-      "Vì tỷ lệ tổng phải bằng trung bình cộng của hai tỷ lệ nhóm",
-      "Vì phép chia số nguyên làm tròn tỷ lệ của B xuống"
+      "Vì B thực ra kém hơn A ở cả thẻ nội địa lẫn thẻ quốc tế",
+      "Vì B nhận chủ yếu thẻ quốc tế, loại khó thành công ở mọi cổng",
+      "Vì tỷ lệ tổng luôn phải bằng trung bình cộng của hai tỷ lệ nhóm",
+      "Vì phép chia số nguyên làm tròn tỷ lệ tổng của B xuống"
     ],
     "optionsEn": [
-      "Because B really is worse than A for both card types",
-      "Because B gets mostly international cards, which fail more at every gateway: a different mix",
+      "Because B is actually worse than A for both domestic and international cards",
+      "Because B gets mostly international cards, which fail more everywhere",
       "Because the total rate must equal the simple average of the two group rates",
-      "Because integer division rounds B's rate down"
+      "Because integer division rounds B's total rate down too far"
     ],
     "answer": 1,
     "explanation": "Đây là nghịch lý Simpson: B tốt hơn ở từng nhóm nhưng tổng thấp hơn vì 900/1.200 giao dịch của B là thẻ quốc tế. Hãy so sánh trong từng nhóm khi cơ cấu khác nhau.",
@@ -484,16 +484,16 @@
     "question": "Ví có cashback trung bình 0,95 giao dịch, ví không có cashback 0,6. Tách theo thời gian mở ví thì chênh lệch còn 0,11 và 0,14, và phần lớn ví có cashback là ví cũ. Điều này cho thấy gì?",
     "questionEn": "Wallets with cashback average 0.95 payments, those without 0.6. Split by when the wallet was opened, the gap falls to 0.11 and 0.14, and most cashback wallets are old. What does this show?",
     "options": [
-      "Cashback chắc chắn làm tăng số giao dịch khoảng 60%",
-      "Cashback làm giảm số giao dịch của ví mới",
-      "Dữ liệu sai vì chênh lệch không được phép thay đổi khi tách nhóm",
-      "Tuổi ví là biến gây nhiễu: ví cũ có nhiều thời gian hơn để vừa nhận cashback vừa thanh toán"
+      "Cashback chắc chắn làm tăng số giao dịch của mỗi ví khoảng 60%",
+      "Cashback làm giảm số giao dịch của ví mới so với ví cũ",
+      "Dữ liệu bị sai, vì chênh lệch không được phép thay đổi khi tách thành nhóm",
+      "Tuổi ví là biến gây nhiễu tác động lên cả cashback lẫn số giao dịch"
     ],
     "optionsEn": [
-      "Cashback certainly increases payments by about 60%",
-      "Cashback reduces payments for new wallets",
-      "The data is wrong, since a gap can't change when you split groups",
-      "Wallet age is a confounder: old wallets had more time both to get cashback and to pay"
+      "Cashback certainly increases each wallet's payments by about 60%",
+      "Cashback reduces payments for new wallets compared with old ones",
+      "The data is wrong, since a gap can't change when you split into groups",
+      "Wallet age is a confounder driving both cashback and payment counts"
     ],
     "answer": 3,
     "explanation": "Một yếu tố thứ ba (tuổi ví) tác động lên cả hai. Phần chênh còn lại có thể do biến gây nhiễu khác; chỉ A/B test mới chứng minh được nhân quả.",
@@ -516,16 +516,16 @@
     "question": "Giá trị thanh toán theo tháng có MoM lần lượt +28,4%, −15,7%, +24,5%, −0,8%… Tháng 6/2026 là +6,0%. PM muốn báo cáo \"tháng 6 tăng trưởng mạnh\". Bạn khuyên gì?",
     "questionEn": "Monthly payment value has MoM of +28.4%, −15.7%, +24.5%, −0.8%… June 2026 is +6.0%. The PM wants to report \"strong growth in June\". What do you advise?",
     "options": [
-      "Báo cáo như vậy, vì +6% là con số dương",
-      "So các khoảng dài hơn như quý (Quý 2 so với Quý 1 khoảng +3,4%) và kèm số giao dịch, vì MoM của chuỗi này rất nhiễu",
-      "Dùng tháng có MoM cao nhất (+28,4%) để làm nổi bật tăng trưởng",
-      "Bỏ MoM, chỉ báo cáo tổng giá trị từ trước đến nay"
+      "Báo cáo như vậy, vì +6% là con số dương nên đã là tăng trưởng",
+      "So theo quý (Quý 2 so với Quý 1 khoảng +3,4%) và kèm số giao dịch, vì MoM rất nhiễu",
+      "Dùng tháng có MoM cao nhất (+28,4%) để làm nổi bật mức tăng trưởng của cả năm nay",
+      "Bỏ MoM, chỉ báo cáo tổng giá trị thanh toán cộng dồn từ trước đến nay"
     ],
     "optionsEn": [
-      "Report it, since +6% is positive",
-      "Compare longer windows such as quarters (Q2 vs Q1 about +3.4%) and add payment counts, since this series' MoM is very noisy",
-      "Use the month with the highest MoM (+28.4%) to highlight growth",
-      "Drop MoM and only report the all-time total value"
+      "Report it, since +6% is a positive figure and that counts as growth",
+      "Compare quarters (Q2 vs Q1 about +3.4%) and add counts, since MoM is very noisy",
+      "Use the month with the highest MoM (+28.4%) to highlight the whole year's growth",
+      "Drop MoM and only report the all-time cumulative payment value"
     ],
     "answer": 1,
     "explanation": "Với 500–650 giao dịch mỗi tháng và đuôi lệch phải, vài đơn lớn làm lệch cả tháng. So theo quý hoặc cùng kỳ năm trước cho tín hiệu ổn định hơn.",
@@ -612,16 +612,16 @@
     "question": "Với 9 giao dịch thành công, `PERCENTILE.INC(…, 0.9)` trong Excel cho 966.800, còn câu SQL nearest-rank cho 2.218.000. Nhận định nào đúng?",
     "questionEn": "With 9 successful payments, Excel's `PERCENTILE.INC(…, 0.9)` gives 966,800 while the SQL nearest-rank query gives 2,218,000. Which statement is right?",
     "options": [
-      "Excel nội suy giữa hai giá trị liền kề, SQL lấy một giá trị có thật; với mẫu nhỏ như vậy P90 không đáng tin, nên nêu rõ phương pháp",
-      "SQL sai vì phân vị phải luôn khớp với Excel",
-      "Excel sai vì 966.800 không có trong bảng",
-      "Hai số khác nhau chứng tỏ dữ liệu bị trùng dòng"
+      "Excel nội suy, SQL lấy giá trị có thật; với 9 dòng P90 không đáng tin, nên ghi rõ phương pháp",
+      "SQL sai vì phân vị phải luôn khớp với Excel, công cụ chuẩn của ngành tài chính",
+      "Excel sai vì 966.800 không có trong bảng, nên mọi kết quả nội suy đều không dùng được để báo cáo",
+      "Hai số khác nhau chứng tỏ dữ liệu bị trùng dòng giữa Excel và SQLite"
     ],
     "optionsEn": [
-      "Excel interpolates between neighbouring values, SQL picks a real value; with so few rows P90 is shaky, so state the method",
-      "SQL is wrong because percentiles must always match Excel",
-      "Excel is wrong because 966,800 isn't in the table",
-      "The different numbers prove the data has duplicate rows"
+      "Excel interpolates, SQL picks a real value; with 9 rows P90 is shaky, so name the method",
+      "SQL is wrong because percentiles must always match Excel, the finance standard",
+      "Excel is wrong because 966,800 isn't in the table, so any interpolated value is useless",
+      "The different numbers prove rows were duplicated between Excel and SQLite"
     ],
     "answer": 0,
     "explanation": "Hai phương pháp hợp lệ khác nhau. Với 9 dòng, khoảng cách giữa giá trị thứ 8 và 9 rất lớn nên P90 dao động mạnh; chỉ nêu phân vị khi có đủ dữ liệu và luôn ghi phương pháp.",

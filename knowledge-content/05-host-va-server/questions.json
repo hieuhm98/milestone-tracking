@@ -44,16 +44,16 @@
     "question": "Lập trình viên dùng localhost để làm gì?",
     "questionEn": "What do developers use localhost for?",
     "options": [
-      "Kết nối với server production",
-      "Chạy và test ứng dụng trên máy tính cá nhân mà không cần deploy",
-      "Kiểm tra tốc độ mạng nội bộ",
-      "Cài đặt domain mới"
+      "Kết nối thẳng tới server production",
+      "Chạy thử ứng dụng ngay trên máy mình",
+      "Đo tốc độ mạng nội bộ trong văn phòng",
+      "Đăng ký và cài đặt domain mới cho web"
     ],
     "optionsEn": [
-      "Connecting to the production server",
-      "Running and testing an application on their personal computer without needing to deploy",
-      "Checking the internal network speed",
-      "Setting up a new domain"
+      "Connecting directly to the production server",
+      "Testing the app on their own machine",
+      "Measuring the office network speed",
+      "Registering and setting up a new domain"
     ],
     "answer": 1,
     "explanation": "Localhost cho phép dev chạy web server ngay trên máy, test thay đổi ngay lập tức mà không cần push lên Internet.",
@@ -66,13 +66,13 @@
     "options": [
       "Shared Hosting",
       "Dedicated Server",
-      "Cloud Hosting (AWS/GCP/Azure)",
+      "Cloud Hosting",
       "FTP Server"
     ],
     "optionsEn": [
       "Shared Hosting",
       "Dedicated Server",
-      "Cloud Hosting (AWS/GCP/Azure)",
+      "Cloud Hosting",
       "FTP Server"
     ],
     "answer": 2,
@@ -84,16 +84,16 @@
     "question": "VPS (Virtual Private Server) khác Shared Hosting ở điểm gì?",
     "questionEn": "How does a VPS (Virtual Private Server) differ from Shared Hosting?",
     "options": [
-      "VPS rẻ hơn Shared Hosting",
-      "VPS cung cấp tài nguyên riêng (RAM, CPU) dù vẫn trên phần cứng chung",
-      "VPS chỉ dùng cho database",
-      "Shared Hosting bảo mật hơn VPS"
+      "VPS rẻ hơn Shared Hosting vì dùng chung tài nguyên",
+      "VPS có tài nguyên riêng dù chạy trên máy vật lý chung",
+      "VPS chỉ dùng để chạy database, không chạy web",
+      "Shared Hosting cho bạn toàn quyền cấu hình server hơn VPS"
     ],
     "optionsEn": [
-      "A VPS is cheaper than Shared Hosting",
-      "A VPS provides dedicated resources (RAM, CPU) even though it is still on shared hardware",
-      "A VPS is only used for databases",
-      "Shared Hosting is more secure than a VPS"
+      "A VPS is cheaper than Shared Hosting because resources are pooled",
+      "A VPS has its own resources on shared physical hardware",
+      "A VPS can only run databases, not websites",
+      "Shared Hosting gives you more control over server settings than a VPS"
     ],
     "answer": 1,
     "explanation": "Shared Hosting chia sẻ tài nguyên với nhiều website khác — có thể bị ảnh hưởng lẫn nhau. VPS có tài nguyên riêng, kiểm soát cao hơn, hiệu năng ổn định hơn.",
@@ -104,16 +104,16 @@
     "question": "Web Server (như Nginx, Apache) có chức năng chính là gì?",
     "questionEn": "What is the main function of a web server (such as Nginx or Apache)?",
     "options": [
-      "Lưu trữ dữ liệu trong database",
+      "Lưu trữ và truy vấn dữ liệu trong database",
       "Phục vụ file HTML/CSS/JS khi browser yêu cầu",
-      "Xử lý logic nghiệp vụ phức tạp",
-      "Quản lý địa chỉ email"
+      "Xử lý logic nghiệp vụ phức tạp như tính giá tiền",
+      "Gửi và nhận email cho tên miền"
     ],
     "optionsEn": [
-      "Storing data in a database",
-      "Serving HTML/CSS/JS files when the browser requests them",
-      "Handling complex business logic",
-      "Managing email addresses"
+      "Storing and querying data in a database",
+      "Serving HTML/CSS/JS files to browsers",
+      "Running complex business logic such as pricing",
+      "Sending and receiving email for the domain"
     ],
     "answer": 1,
     "explanation": "Web server nhận HTTP request từ browser và trả về các file tĩnh (HTML, CSS, JS) hoặc chuyển tiếp request đến application server.",
@@ -144,16 +144,16 @@
     "question": "Server cần IP tĩnh hay IP động? Tại sao?",
     "questionEn": "Does a server need a static IP or a dynamic IP? Why?",
     "options": [
-      "IP động — để bảo mật hơn",
+      "IP động — để kẻ tấn công khó tìm thấy server",
       "IP tĩnh — để domain luôn trỏ đúng đến server",
-      "IP động — để tiết kiệm chi phí",
-      "Không quan trọng loại IP nào"
+      "IP động — để tiết kiệm chi phí thuê hằng tháng",
+      "IP tĩnh — để server truy cập Internet nhanh hơn"
     ],
     "optionsEn": [
-      "A dynamic IP — for better security",
-      "A static IP — so the domain always points correctly to the server",
-      "A dynamic IP — to save costs",
-      "The type of IP does not matter"
+      "A dynamic IP — so attackers have a harder time finding it",
+      "A static IP — so the domain keeps pointing to it",
+      "A dynamic IP — to save on the monthly rental cost",
+      "A static IP — so the server browses the Internet faster"
     ],
     "answer": 1,
     "explanation": "Server cần IP tĩnh vì domain (DNS A record) trỏ đến một IP cố định. Nếu IP thay đổi, domain không còn trỏ đúng và website bị ngắt.",
@@ -164,16 +164,16 @@
     "question": "IPv6 ra đời để giải quyết vấn đề gì của IPv4?",
     "questionEn": "What IPv4 problem was IPv6 created to solve?",
     "options": [
-      "IPv4 quá chậm",
-      "IPv4 không bảo mật",
-      "IPv4 gần cạn kiệt địa chỉ (~4.3 tỷ địa chỉ không đủ",
-      "IPv4 không hỗ trợ WiFi"
+      "IPv4 truyền dữ liệu quá chậm",
+      "IPv4 không mã hóa được dữ liệu",
+      "IPv4 sắp hết địa chỉ để cấp",
+      "IPv4 không hoạt động qua WiFi"
     ],
     "optionsEn": [
-      "IPv4 is too slow",
-      "IPv4 is not secure",
-      "IPv4 is nearly out of addresses (~4.3 billion addresses is not enough)",
-      "IPv4 does not support WiFi"
+      "IPv4 moves data too slowly",
+      "IPv4 cannot encrypt data at all",
+      "IPv4 is running out of addresses",
+      "IPv4 does not work over WiFi"
     ],
     "answer": 2,
     "explanation": "Với hàng tỷ thiết bị kết nối Internet, 4.3 tỷ địa chỉ IPv4 không đủ. IPv6 cung cấp 340 undecillion địa chỉ — thực tế là vô hạn.",
@@ -185,14 +185,14 @@
     "questionEn": "How does an application server differ from a web server?",
     "options": [
       "Application Server phục vụ file tĩnh, Web Server xử lý logic",
-      "Application Server xử lý logic nghiệp vụ (business logic), Web Server phục vụ file tĩnh",
-      "Chúng hoàn toàn giống nhau",
+      "Application Server xử lý logic nghiệp vụ, Web Server phục vụ file tĩnh",
+      "Chúng giống nhau, chỉ khác tên gọi của nhà cung cấp",
       "Application Server chỉ dùng cho mobile app"
     ],
     "optionsEn": [
       "The application server serves static files while the web server handles logic",
       "The application server handles business logic while the web server serves static files",
-      "They are exactly the same",
+      "They are the same thing, just named differently by vendors",
       "The application server is only used for mobile apps"
     ],
     "answer": 1,
@@ -204,16 +204,16 @@
     "question": "Serverless hosting có ưu điểm gì so với VPS truyền thống?",
     "questionEn": "What advantage does serverless hosting have over a traditional VPS?",
     "options": [
-      "Serverless nhanh hơn trong mọi trường hợp",
-      "Không cần quản lý server, trả tiền theo số lần thực thi thực tế",
-      "Serverless rẻ hơn trong mọi trường hợp",
-      "Serverless hỗ trợ mọi ngôn ngữ lập trình"
+      "Ứng dụng serverless chạy liên tục nên không có độ trễ khởi động",
+      "Không phải quản lý server, trả tiền theo lượt chạy",
+      "Bạn được toàn quyền truy cập hệ điều hành của server",
+      "Phù hợp nhất cho tác vụ chạy dài nhiều giờ liền"
     ],
     "optionsEn": [
-      "Serverless is faster in every case",
-      "No server management is needed, and you pay based on the actual number of executions",
-      "Serverless is cheaper in every case",
-      "Serverless supports every programming language"
+      "Serverless apps run continuously, so there is no startup delay",
+      "No servers to manage; you pay per execution",
+      "You get full access to the server's operating system",
+      "Best suited to jobs that run for many hours straight"
     ],
     "answer": 1,
     "explanation": "Serverless (AWS Lambda, Vercel Functions...) tự động scale, không cần cấu hình server, billing theo mỗi lần function được gọi — tiết kiệm khi traffic thấp hoặc không đều.",
@@ -224,16 +224,16 @@
     "question": "Dedicated Server phù hợp với tình huống nào nhất?",
     "questionEn": "Which situation is a dedicated server best suited for?",
     "options": [
-      "Blog cá nhân với 100 lượt xem/ngày",
-      "Website thương mại điện tử lớn cần hiệu năng cao và kiểm soát hoàn toàn",
+      "Blog cá nhân với khoảng 100 lượt xem mỗi ngày",
+      "Sàn thương mại điện tử lớn cần hiệu năng cao",
       "Startup mới ra mắt cần tiết kiệm chi phí",
-      "Ứng dụng mobile với 10 người dùng"
+      "Ứng dụng mobile nội bộ chỉ có 10 người dùng"
     ],
     "optionsEn": [
-      "A personal blog with 100 views per day",
-      "A large e-commerce website that needs high performance and full control",
+      "A personal blog with about 100 views a day",
+      "A large e-commerce site needing high performance",
       "A newly launched startup that needs to save costs",
-      "A mobile app with 10 users"
+      "An internal mobile app with only 10 users"
     ],
     "answer": 1,
     "explanation": "Dedicated Server (thuê nguyên máy vật lý) đắt nhưng mang lại hiệu năng tối đa và kiểm soát hoàn toàn — phù hợp với hệ thống lớn, yêu cầu cao về bảo mật và hiệu năng.",
@@ -244,16 +244,16 @@
     "question": "Database Server có vai trò gì trong kiến trúc 3-tier?",
     "questionEn": "What role does a database server play in a 3-tier architecture?",
     "options": [
-      "Xử lý giao diện người dùng",
-      "Lưu trữ và quản lý dữ liệu, trả lời truy vấn từ application server",
+      "Hiển thị giao diện cho người dùng cuối",
+      "Lưu trữ dữ liệu và trả lời truy vấn",
       "Phục vụ file tĩnh cho browser",
       "Quản lý phiên đăng nhập người dùng"
     ],
     "optionsEn": [
-      "Handling the user interface",
-      "Storing and managing data, and answering queries from the application server",
+      "Rendering the interface for end users",
+      "Storing data and answering queries",
       "Serving static files to the browser",
-      "Managing user login sessions"
+      "Managing users' login sessions"
     ],
     "answer": 1,
     "explanation": "Trong kiến trúc 3-tier: Tier 1 = Web/Client, Tier 2 = Application Server (logic), Tier 3 = Database Server (dữ liệu). Database server chuyên lưu và truy vấn data.",
@@ -264,16 +264,16 @@
     "question": "Khi bạn truy cập http://localhost:3000, điều đó có nghĩa là?",
     "questionEn": "When you access http://localhost:3000, what does that mean?",
     "options": [
-      "Truy cập server tại địa chỉ IP 3000",
-      "Truy cập ứng dụng đang chạy trên máy của bạn tại cổng 3000",
-      "Kết nối đến 3000 thiết bị trong mạng",
-      "Tải trang web từ CDN"
+      "Truy cập server có địa chỉ IP là 3000",
+      "Mở ứng dụng chạy trên máy bạn, ở cổng 3000",
+      "Kết nối tới 3000 thiết bị trong cùng mạng LAN",
+      "Tải trang web từ CDN gần bạn nhất"
     ],
     "optionsEn": [
-      "Accessing a server at IP address 3000",
-      "Accessing an application running on your machine at port 3000",
-      "Connecting to 3,000 devices in the network",
-      "Loading the web page from a CDN"
+      "Reaching a server whose IP address is 3000",
+      "Opening an app on your own machine, port 3000",
+      "Connecting to 3,000 devices on the LAN",
+      "Loading the page from the nearest CDN"
     ],
     "answer": 1,
     "explanation": "localhost = chính máy bạn. :3000 = cổng (port) 3000. Nghĩa là: kết nối đến ứng dụng đang lắng nghe trên cổng 3000 của máy bạn.",
@@ -284,16 +284,16 @@
     "question": "Sự khác biệt giữa File Server và Web Server là gì?",
     "questionEn": "What is the difference between a file server and a web server?",
     "options": [
-      "File Server lưu trữ và chia sẻ file trong mạng nội bộ; Web Server phục vụ nội dung qua HTTP cho browser",
-      "Chúng hoàn toàn giống nhau",
-      "Web Server lưu file, File Server phục vụ web",
-      "File Server chỉ dùng cho email"
+      "File Server chia sẻ file trong mạng nội bộ; Web Server phục vụ web qua HTTP",
+      "Chúng giống nhau; File Server chỉ là tên cũ của Web Server",
+      "Web Server chia sẻ file trong mạng nội bộ; File Server phục vụ web qua HTTP",
+      "File Server chỉ dùng để lưu email; Web Server lưu mọi loại file khác"
     ],
     "optionsEn": [
-      "A file server stores and shares files within the internal network; a web server serves content over HTTP to the browser",
-      "They are exactly the same",
-      "A web server stores files while a file server serves the web",
-      "A file server is only used for email"
+      "A file server shares files on the internal network; a web server serves sites over HTTP",
+      "They are the same; file server is just the old name for web server",
+      "A web server shares files on the internal network; a file server serves sites over HTTP",
+      "A file server only stores email; a web server stores every other kind of file"
     ],
     "answer": 0,
     "explanation": "File Server (Samba, NFS) chia sẻ file trong LAN — thường dùng trong doanh nghiệp. Web Server phục vụ nội dung qua HTTP/HTTPS cho bất kỳ browser nào.",
@@ -303,16 +303,16 @@
     "question": "Lập trình viên nói API chạy được ở localhost nhưng tester không truy cập được. Vì sao?",
     "questionEn": "A developer says the API works on localhost but the tester cannot reach it. Why?",
     "options": [
-      "localhost luôn trỏ về chính máy đang chạy, nên máy của tester trỏ về máy của tester chứ không phải máy lập trình viên",
-      "Vì tester dùng trình duyệt khác",
-      "Vì localhost chỉ hoạt động vào ban ngày",
-      "Vì API chưa được nén"
+      "Với tester, localhost là máy của tester, không phải máy dev",
+      "Vì tester dùng trình duyệt khác với lập trình viên",
+      "Vì localhost chỉ chấp nhận kết nối qua HTTPS",
+      "Vì tester chưa được cấp quyền truy cập localhost"
     ],
     "optionsEn": [
-      "localhost always points at the machine you are on, so the tester's localhost is the tester's own machine, not the developer's",
-      "Because the tester uses a different browser",
-      "Because localhost only works during the day",
-      "Because the API is not compressed"
+      "For the tester, localhost means the tester's own machine",
+      "Because the tester uses a different browser from the developer",
+      "Because localhost only accepts HTTPS connections",
+      "Because the tester has no permission to use localhost"
     ],
     "answer": 0,
     "explanation": "localhost (127.0.0.1) là địa chỉ vòng lặp trỏ về chính thiết bị hiện tại. Muốn người khác truy cập, ứng dụng phải được triển khai lên một máy chủ có địa chỉ mạng thật.",
@@ -323,16 +323,16 @@
     "question": "Trong mô hình Client – Server, phát biểu nào ĐÚNG?",
     "questionEn": "In the client–server model, which statement is correct?",
     "options": [
-      "Client khởi tạo yêu cầu, server chờ và phản hồi; một máy có thể đóng cả hai vai trò tuỳ ngữ cảnh",
-      "Server luôn phải là phần cứng vật lý riêng biệt",
-      "Client và server phải nằm cùng một mạng nội bộ",
-      "Server luôn khởi tạo yêu cầu trước"
+      "Client gửi yêu cầu, server phản hồi; một máy có thể đóng cả hai vai",
+      "Server là một máy vật lý riêng biệt, không chạy trên máy ảo",
+      "Client và server phải nằm trong cùng một mạng nội bộ",
+      "Server gửi yêu cầu trước, client chờ rồi phản hồi lại"
     ],
     "optionsEn": [
-      "The client initiates requests and the server waits and responds; one machine can play both roles depending on context",
-      "A server must always be separate physical hardware",
-      "Client and server must be on the same local network",
-      "The server always initiates the request first"
+      "The client requests, the server responds; one machine can be both",
+      "A server is a separate physical machine and cannot be virtual",
+      "The client and server have to be on the same local network",
+      "The server sends the request first; the client waits and replies"
     ],
     "answer": 0,
     "explanation": "Client – server là vai trò trong một cuộc trao đổi, không phải loại phần cứng. Một backend gọi API bên thứ ba chính là client trong cuộc gọi đó.",
@@ -343,16 +343,16 @@
     "question": "Vì sao địa chỉ IP riêng (private IP) như 192.168.1.10 không truy cập được từ internet?",
     "questionEn": "Why can a private IP such as 192.168.1.10 not be reached from the internet?",
     "options": [
-      "Vì dải IP riêng được dành cho mạng nội bộ và không được định tuyến trên internet công cộng",
-      "Vì địa chỉ đó đã bị chặn bởi trình duyệt",
-      "Vì IP riêng chỉ dùng cho máy in",
-      "Vì IP riêng luôn thay đổi mỗi giây"
+      "Vì IP riêng không được định tuyến trên internet công cộng",
+      "Vì trình duyệt tự chặn mọi địa chỉ bắt đầu bằng 192",
+      "Vì IP riêng chỉ dành cho máy in và thiết bị ngoại vi",
+      "Vì IP riêng thay đổi liên tục nên không thể kết nối"
     ],
     "optionsEn": [
-      "Because private ranges are reserved for internal networks and are not routed on the public internet",
-      "Because browsers block that address",
-      "Because private IPs are only for printers",
-      "Because private IPs change every second"
+      "Because private ranges are not routed on the public internet",
+      "Because browsers block any address starting with 192",
+      "Because private IPs are reserved for printers and peripherals",
+      "Because private IPs keep changing, so nobody can connect"
     ],
     "answer": 0,
     "explanation": "Các dải như 10.x, 172.16–31.x và 192.168.x là IP riêng. Router dùng NAT để nhiều thiết bị nội bộ chia sẻ một IP công cộng khi ra internet.",
@@ -363,16 +363,16 @@
     "question": "Hệ thống cần một địa chỉ cố định để đối tác cấu hình vào danh sách cho phép (whitelist). Yêu cầu hạ tầng nào là đúng?",
     "questionEn": "A partner must whitelist your system by address. Which infrastructure requirement is right?",
     "options": [
-      "Máy chủ phải dùng IP tĩnh, vì IP động có thể đổi và làm hỏng whitelist",
-      "Máy chủ phải dùng IP động để bảo mật hơn",
-      "Không cần quan tâm vì DNS tự xử lý",
-      "Cần đổi IP mỗi tuần một lần"
+      "Máy chủ cần IP tĩnh, vì IP động có thể đổi",
+      "Máy chủ nên dùng IP động để khó bị tấn công hơn",
+      "Không cần IP cố định vì DNS tự cập nhật cho đối tác",
+      "Nên đổi IP mỗi tuần để tăng bảo mật cho whitelist"
     ],
     "optionsEn": [
-      "The server needs a static IP, because a dynamic one can change and break the whitelist",
-      "The server should use a dynamic IP for better security",
-      "It does not matter because DNS handles it",
-      "The IP should be rotated weekly"
+      "The server needs a static IP; a dynamic one can change",
+      "The server should use a dynamic IP so it is harder to attack",
+      "No fixed IP is needed because DNS updates the partner automatically",
+      "The IP should be rotated weekly to keep the whitelist secure"
     ],
     "answer": 0,
     "explanation": "IP động do nhà mạng cấp lại theo chu kỳ. Khi đối tác lọc theo IP, chỉ IP tĩnh mới bảo đảm kết nối không đứt bất ngờ.",
@@ -383,16 +383,16 @@
     "question": "Loại server nào phù hợp nhất để lưu và phục vụ ảnh sản phẩm dung lượng lớn?",
     "questionEn": "Which server type best stores and serves large product images?",
     "options": [
-      "File/Storage server hoặc dịch vụ lưu trữ đối tượng",
-      "Database server",
-      "Mail server",
-      "DNS server"
+      "Server lưu trữ file (object storage)",
+      "Database server quan hệ (SQL)",
+      "Mail server nội bộ của công ty",
+      "DNS server có cache lớn"
     ],
     "optionsEn": [
-      "A file/storage server or object storage service",
-      "A database server",
-      "A mail server",
-      "A DNS server"
+      "A file or object storage server",
+      "A relational (SQL) database server",
+      "The company mail server",
+      "A DNS server with a large cache"
     ],
     "answer": 0,
     "explanation": "Lưu tệp nhị phân lớn trong cơ sở dữ liệu làm phình DB và chậm truy vấn. Thực hành phổ biến là lưu tệp ở kho lưu trữ, còn DB chỉ giữ đường dẫn.",
@@ -405,13 +405,13 @@
     "questionEn": "When you type shopee.vn and press Enter, what does the browser do BEFORE sending the request for the home page?",
     "options": [
       "Tải toàn bộ database của Shopee về máy",
-      "Hỏi DNS server địa chỉ IP của shopee.vn rồi kết nối tới server đó",
+      "Hỏi DNS địa chỉ IP của shopee.vn",
       "Đổi IP của máy bạn thành IP tĩnh",
       "Bật một web server trên localhost"
     ],
     "optionsEn": [
       "Downloads Shopee's entire database",
-      "Asks a DNS server for the IP address of shopee.vn, then connects to that server",
+      "Asks DNS for shopee.vn's IP address",
       "Changes your computer's IP to a static IP",
       "Starts a web server on localhost"
     ],
@@ -438,13 +438,13 @@
     "options": [
       "Số người dùng tối đa",
       "Dung lượng RAM tính bằng MB",
-      "Port — \"số căn hộ\" của chương trình server đang nghe trên máy đó",
+      "Số port mà server đang nghe",
       "Phần cuối của địa chỉ IP"
     ],
     "optionsEn": [
       "The maximum number of users",
       "The amount of RAM in MB",
-      "The port — the \"apartment number\" of the server program listening on that machine",
+      "The port the server listens on",
       "The last part of the IP address"
     ],
     "answer": 2,
@@ -468,16 +468,16 @@
     "question": "Laptop của bạn hiện IP 192.168.1.23 trong ipconfig, nhưng trang \"what is my IP\" lại hiện một địa chỉ khác hẳn. Vì sao?",
     "questionEn": "Your laptop shows IP 192.168.1.23 in ipconfig, but a \"what is my IP\" website shows a completely different address. Why?",
     "options": [
-      "Website đó hiển thị sai",
-      "Laptop có hai card mạng",
-      "IP của laptop đã bị hack",
-      "192.168.1.23 là IP private; trên Internet, mọi thiết bị trong nhà dùng chung IP public của router (NAT)"
+      "Website đó đọc nhầm địa chỉ IP của một máy tính khác",
+      "Laptop có hai card mạng, mỗi card một địa chỉ IP khác nhau",
+      "IP của laptop đã bị hacker thay đổi từ xa qua mạng",
+      "IP đó là private; ra Internet cả nhà dùng IP public của router"
     ],
     "optionsEn": [
-      "The website is showing the wrong address",
-      "The laptop has two network cards",
-      "The laptop's IP has been hacked",
-      "192.168.1.23 is a private IP; on the Internet, all home devices share the router's public IP (NAT)"
+      "The website picked up another machine's address by mistake",
+      "The laptop has two network cards, each with a different IP",
+      "A hacker has remotely changed the laptop's IP over the network",
+      "A private IP; online, the home shares the router's public IP"
     ],
     "answer": 3,
     "explanation": "IP private chỉ dùng bên trong mạng. Router dùng NAT để mọi thiết bị bên trong chia sẻ một IP public, nên website bên ngoài chỉ thấy IP public của router.",
@@ -500,16 +500,16 @@
     "question": "Tester và BA cần thử một tính năng mới trước khi phát hành cho khách hàng. Họ nên dùng môi trường nào?",
     "questionEn": "Testers and BAs need to try a new feature before it is released to customers. Which environment should they use?",
     "options": [
-      "Môi trường test/staging — server dùng chung, gần giống production",
+      "Môi trường staging",
       "Localhost trên laptop của developer",
-      "Production, vì đó là hệ thống thật",
-      "Máy in của văn phòng"
+      "Môi trường production, vì đó là hệ thống thật",
+      "Bản demo trên máy của khách hàng"
     ],
     "optionsEn": [
-      "The test/staging environment — a shared server set up close to production",
+      "The staging environment",
       "Localhost on the developer's laptop",
-      "Production, because it is the real system",
-      "The office printer"
+      "The production environment, because it is real",
+      "A demo copy on the customer's computer"
     ],
     "answer": 0,
     "explanation": "Staging là server dùng chung có địa chỉ riêng, truy cập được từ máy của tester và BA, và được dựng giống production để kết quả test đáng tin.",
@@ -518,13 +518,13 @@
       "Đúng: staging là nơi cả nhóm test trước khi lên production.",
       "Sai: localhost của developer chỉ truy cập được trên chính máy developer.",
       "Sai: test trên production có thể ảnh hưởng khách hàng và dữ liệu thật.",
-      "Sai: máy in không phải môi trường chạy ứng dụng."
+      "Sai: bản demo trên máy khách hàng không phải môi trường test chung của nhóm, và khách chưa nên thấy tính năng chưa kiểm thử."
     ],
     "optionExplanationsEn": [
       "Correct: staging is where the team tests before production.",
       "Wrong: the developer's localhost is only reachable on the developer's own machine.",
       "Wrong: testing on production can affect real customers and real data.",
-      "Wrong: a printer is not an environment for running the application."
+      "Wrong: a demo copy on the customer's computer is not the team's shared test environment, and customers should not see untested features yet."
     ]
   }
 ]

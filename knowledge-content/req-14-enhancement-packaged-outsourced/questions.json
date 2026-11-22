@@ -4,16 +4,16 @@
     "question": "Vì sao cách tiếp cận làm cho hệ thống mới giống hệt hệ thống cũ là sai lầm?",
     "questionEn": "Why is the approach of making the new system exactly like the old one a mistake?",
     "options": [
-      "Vì công nghệ mới không hỗ trợ các tính năng cũ",
-      "Vì bạn sẽ sao chép cả tính năng không ai còn dùng, cả cách làm vòng vo mà người dùng tạo ra để né hạn chế đã không còn tồn tại, và bỏ lỡ cơ hội cải tiến",
-      "Vì người dùng luôn muốn giao diện mới",
-      "Vì hệ thống cũ chắc chắn có lỗi kiến trúc"
+      "Vì nền tảng mới không tái tạo trung thực được tính năng cũ, nên người dùng vẫn sẽ thấy mọi khác biệt",
+      "Bạn sao chép cả tính năng không ai dùng lẫn cách làm vòng vo đã lỗi thời, và bỏ lỡ cơ hội cải tiến",
+      "Vì người dùng mong giao diện hiện đại, nên hệ thống giống hệt sẽ bị từ chối dù chạy tốt đến đâu",
+      "Vì hệ thống cũ chắc chắn có lỗi kiến trúc, mà bản sao giống hệt sẽ mang sang hệ thống mới"
     ],
     "optionsEn": [
-      "Because new technology cannot support old features",
-      "Because you replicate features nobody uses, the workarounds users invented to dodge limitations that no longer exist, and you miss the improvement opportunity",
-      "Because users always want a new interface",
-      "Because the old system certainly has architectural defects"
+      "New platforms cannot reproduce old features faithfully, so users will notice every difference anyway",
+      "You copy unused features and obsolete workarounds, and miss the chance to improve",
+      "Users expect a modern interface, so an identical system will be rejected however well it works",
+      "The old system surely has architectural defects, which an exact copy would carry into the new one"
     ],
     "answer": 1,
     "explanation": "Cách tiếp cận đúng là dùng hệ thống cũ như một NGUỒN THÔNG TIN chứ không phải một BẢN THIẾT KẾ, và với mỗi chức năng hãy hỏi nhu cầu nghiệp vụ nào nó đang phục vụ.",
@@ -24,16 +24,16 @@
     "question": "Khi người dùng lâu năm nói tôi cần màn hình F7 giống hiện tại nhưng thêm một cột, BA nên làm gì?",
     "questionEn": "When a long-time user says I need screen F7 as it is now but with one more column, what should the BA do?",
     "options": [
-      "Ghi lại đúng như vậy vì người dùng biết rõ nhu cầu của mình",
-      "Nhận ra họ đang mô tả giải pháp hiện tại chứ không phải nhu cầu, và hỏi vì sao nhiều lần cho tới khi chạm tới vấn đề nghiệp vụ thật",
-      "Từ chối vì đó là yêu cầu thiết kế chứ không phải yêu cầu",
-      "Chuyển câu hỏi cho lập trình viên đánh giá khả thi"
+      "Ghi lại đúng như vậy, vì người dùng lâu năm hiểu công việc nhất và thay đổi nhỏ, ít rủi ro",
+      "Nhận ra đó là giải pháp, không phải nhu cầu, và hỏi vì sao tới khi lộ ra vấn đề nghiệp vụ thật",
+      "Từ chối vì đó là yêu cầu thiết kế, và đề nghị người dùng phát biểu lại thành business requirement",
+      "Chuyển cho lập trình viên đánh giá khả thi, vì thêm cột có thể ảnh hưởng cơ sở dữ liệu"
     ],
     "optionsEn": [
-      "Record it exactly as stated since users know their own needs best",
-      "Recognise they are describing the current solution rather than the need, and ask why repeatedly until reaching the real business problem",
-      "Reject it because it is a design request, not a requirement",
-      "Pass the question to developers for feasibility assessment"
+      "Record it exactly, since a long-time user knows the work best and the change is small and low-risk",
+      "Recognise a described solution, not a need, and ask why until the real business problem appears",
+      "Reject it as a design request and ask the user to restate it as a business requirement instead",
+      "Pass it to developers for a feasibility check, since adding a column may affect the database"
     ],
     "answer": 1,
     "explanation": "Vì sao bạn cần cột đó, để biết đơn hàng nào ưu tiên, bạn quyết định ưu tiên thế nào. Đến đây bạn mới chạm nhu cầu thật và có thể có cách tốt hơn nhiều để đáp ứng nó.",
@@ -44,37 +44,36 @@
     "question": "Vì sao mỗi bảng tính Excel mà người dùng duy trì song song với hệ thống lại quan trọng?",
     "questionEn": "Why does every Excel spreadsheet a user maintains alongside the system matter?",
     "options": [
-      "Vì nó cho thấy người dùng chưa được đào tạo đủ",
-      "Vì nó là một lời tố cáo về chức năng còn thiếu; mỗi cách làm vòng vo là một yêu cầu chưa được đáp ứng đang chờ được phát hiện",
-      "Vì nó vi phạm chính sách bảo mật dữ liệu",
-      "Vì nó cho biết hệ thống hiện tại quá chậm"
+      "Nó cho thấy người dùng chưa được đào tạo tốt, nên quay về công cụ họ đã quen dùng",
+      "Nó tố cáo chức năng còn thiếu; mỗi cách làm vòng vo là một yêu cầu chưa được đáp ứng",
+      "Nó vi phạm chính sách bảo mật dữ liệu, nên BA phải báo cáo và yêu cầu gỡ bỏ bảng tính",
+      "Nó cho thấy hệ thống hiện tại quá chậm, nên hiệu năng phải là quality attribute then chốt"
     ],
     "optionsEn": [
-      "Because it shows the user was not trained enough",
-      "Because it is an indictment of missing functionality; every workaround is an unmet requirement waiting to be found",
-      "Because it violates data security policy",
-      "Because it indicates the current system is too slow"
+      "It shows users were not trained well, so they fall back on tools they already know how to use",
+      "It indicts missing functionality; each workaround is an unmet requirement waiting to be found",
+      "It breaches data security policy, so the BA must report it and have the spreadsheet removed",
+      "It shows the current system is too slow, so performance must be a key quality attribute"
     ],
     "answer": 1,
     "explanation": "Quan sát người dùng thực làm việc là nguồn giá trị cao nhất vì bạn thấy những gì họ thực sự làm, khác với những gì họ nói, và cả các bước họ làm bên ngoài hệ thống.",
     "explanationEn": "Observing real users is the highest-value source because you see what they actually do, as opposed to what they say, including steps performed outside the system."
-  }
-  ,
+  },
   {
     "id": "q4",
     "question": "Việc quyết định xử lý dữ liệu bẩn khi di trú thuộc về ai?",
     "questionEn": "Who owns the decision about how to handle dirty data during migration?",
     "options": [
-      "Đội kỹ thuật, vì họ hiểu cấu trúc cơ sở dữ liệu",
-      "Nghiệp vụ, vì ba lựa chọn làm sạch trước, di trú nguyên trạng rồi làm sạch sau, hay từ chối và báo cáo đều có hệ quả khác nhau về thời gian và chất lượng dữ liệu",
-      "Nhà cung cấp công cụ ETL",
-      "Quản lý dự án, vì nó ảnh hưởng tới lịch trình"
+      "Đội kỹ thuật, vì họ hiểu rõ nhất cấu trúc cơ sở dữ liệu và công cụ di trú",
+      "Nghiệp vụ, vì mỗi lựa chọn đánh đổi giữa thời gian và chất lượng dữ liệu theo cách khác nhau",
+      "Nhà cung cấp công cụ ETL, vì quy tắc chuyển đổi của họ quyết định bản ghi nào làm sạch được",
+      "Quản lý dự án, vì lựa chọn này chủ yếu ảnh hưởng tới lịch trình và kế hoạch chuyển đổi"
     ],
     "optionsEn": [
-      "The technical team, because they understand the database structure",
-      "The business, because the three options of cleaning first, migrating as-is then cleaning, or rejecting and reporting each carry different time and data-quality consequences",
-      "The ETL tool vendor",
-      "The project manager, because it affects the schedule"
+      "The technical team, since they understand the database structure and the migration tooling best",
+      "The business, since each option trades time against data quality in different ways",
+      "The ETL tool vendor, since its transformation rules determine which records can be cleaned at all",
+      "The project manager, since the choice mainly affects the schedule and the cutover plan"
     ],
     "answer": 1,
     "explanation": "Bài học thực tiễn là đưa phân tích chất lượng dữ liệu vào giai đoạn yêu cầu chứ không đợi tới hiện thực. Điều bạn phát hiện có thể thay đổi cả phạm vi dự án.",
@@ -85,16 +84,16 @@
     "question": "Yêu cầu nào về dữ liệu lịch sử thường bị bỏ quên trong dự án thay thế?",
     "questionEn": "Which historical-data requirement is routinely forgotten in replacement projects?",
     "options": [
-      "Yêu cầu sao lưu dữ liệu lịch sử hằng ngày",
-      "Cách người dùng truy cập dữ liệu lịch sử SAU khi chuyển đổi nếu nó không được di trú; đây là một yêu cầu chức năng thật",
-      "Yêu cầu mã hoá dữ liệu lịch sử",
-      "Yêu cầu xoá dữ liệu lịch sử sau 7 năm"
+      "Sao lưu dữ liệu lịch sử hằng ngày, để khôi phục được nếu việc di trú làm hỏng bản ghi",
+      "Cách truy cập dữ liệu lịch sử không di trú sau chuyển đổi, một yêu cầu chức năng thật",
+      "Mã hoá dữ liệu lịch sử khi lưu trữ, vì bản ghi cũ thường chứa thông tin cá nhân",
+      "Xoá dữ liệu lịch sử sau bảy năm, theo yêu cầu của phần lớn quy định lưu trữ"
     ],
     "optionsEn": [
-      "Daily backup of historical data",
-      "How users access historical data AFTER cutover if it is not migrated; this is a real functional requirement",
-      "Encryption of historical data",
-      "Deleting historical data after 7 years"
+      "Daily backup of historical data, so records can be restored if the migration corrupts them",
+      "How users reach unmigrated historical data after cutover, a real functional requirement",
+      "Encryption of historical data at rest, since old records often hold personal information",
+      "Deletion of historical data after seven years, as most retention regulations require"
     ],
     "answer": 1,
     "explanation": "Các câu hỏi khác về di trú gồm quy tắc biến đổi, tiêu chí xác minh thành công, kế hoạch quay lui, và có cần chạy song song hai hệ thống hay không.",
@@ -105,37 +104,36 @@
     "question": "Nguyên tắc quan trọng nhất khi quyết định mua gói hay tự xây là gì?",
     "questionEn": "What is the most important principle when deciding to buy a package or build?",
     "options": [
-      "Luôn mua nếu có gói rẻ hơn chi phí phát triển",
-      "Đừng mua gói cho thứ TẠO RA lợi thế cạnh tranh của bạn; hãy mua cho những gì mọi công ty đều làm giống nhau và xây cho những gì làm bạn khác biệt",
-      "Luôn xây nếu đội có đủ năng lực kỹ thuật",
-      "Quyết định dựa trên tốc độ triển khai là chính"
+      "Mua bất cứ khi nào gói rẻ hơn tự xây, vì khi đó bảo trì là việc của nhà cung cấp",
+      "Đừng mua thứ tạo ra lợi thế cạnh tranh; mua thứ ai cũng làm giống nhau và xây thứ làm bạn khác biệt",
+      "Tự xây bất cứ khi nào đội đủ năng lực, vì mã riêng khớp chính xác với quy trình nghiệp vụ",
+      "Quyết định chủ yếu theo tốc độ triển khai, vì thời gian ra thị trường quan trọng hơn độ khớp"
     ],
     "optionsEn": [
-      "Always buy if a package costs less than development",
-      "Do not buy a package for what CREATES your competitive advantage; buy for what every company does the same way and build for what makes you different",
-      "Always build if the team has the technical capability",
-      "Decide primarily on deployment speed"
+      "Buy whenever a package costs less than building, since maintenance is then the vendor's problem",
+      "Do not buy what creates your competitive edge; buy what everyone does alike and build what sets you apart",
+      "Build whenever the team has the skills, since custom code fits the business processes exactly",
+      "Decide mainly on deployment speed, since time to market outweighs fit for most businesses"
     ],
     "answer": 1,
     "explanation": "Nếu bạn mua cùng phần mềm mà đối thủ mua, bạn có cùng năng lực với họ. Ngoài ra mua gói không loại bỏ nhu cầu về yêu cầu, vì thiếu chúng bạn sẽ chọn theo buổi trình diễn ấn tượng nhất.",
     "explanationEn": "If you buy the same software your competitors buy, you have the same capability. Also, buying does not remove the need for requirements, or you will pick the most impressive demo."
-  }
-  ,
+  },
   {
     "id": "q7",
     "question": "Vì sao phải giữ danh sách must-have NGẮN khi đánh giá gói giải pháp?",
     "questionEn": "Why must you keep the must-have list SHORT when evaluating packages?",
     "options": [
-      "Vì nhà cung cấp không chịu đọc danh sách dài",
-      "Vì nếu bạn có 80 must-have thì không gói nào đạt hết và bạn không phân biệt được gì; must-have thật sự thường chỉ có 5 tới 15 mục",
-      "Vì hợp đồng giới hạn số tiêu chí đánh giá",
-      "Vì càng nhiều tiêu chí thì càng khó cho điểm"
+      "Vì nhà cung cấp sẽ không trả lời danh sách dài cẩn thận, khiến câu trả lời khó so sánh",
+      "80 must-have thì không gói nào đạt, không phân biệt được; danh sách thật chỉ 5 tới 15 mục",
+      "Vì quy định mua sắm giới hạn số must-have được phép trong một đợt đánh giá chính thức",
+      "Vì mỗi tiêu chí thêm vào đòi hỏi công gán trọng số, khiến việc chấm điểm kéo dài quá hạn"
     ],
     "optionsEn": [
-      "Because vendors will not read a long list",
-      "Because with 80 must-haves no package meets them all and you cannot discriminate at all; a real must-have list is usually 5 to 15 items",
-      "Because contracts limit the number of evaluation criteria",
-      "Because more criteria makes scoring harder"
+      "Vendors will not answer a long list carefully, so their responses become unreliable to compare",
+      "With 80 must-haves nothing qualifies and nothing discriminates; real lists hold 5 to 15 items",
+      "Procurement rules cap how many must-haves a formal evaluation of packages may include",
+      "Every extra criterion adds weighting work, so scoring takes too long to finish on schedule"
     ],
     "answer": 1,
     "explanation": "Phân loại còn lại gồm should-have ảnh hưởng tới điểm đánh giá và nice-to-have dùng để phân định khi các gói ngang nhau.",
@@ -146,16 +144,16 @@
     "question": "Bước nào trong lựa chọn gói bị làm sai nhiều nhất, và cách làm đúng là gì?",
     "questionEn": "Which package selection step is most often done wrong, and what is the right way?",
     "options": [
-      "Kiểm tra tham chiếu; nên gọi cho càng nhiều khách hàng càng tốt",
-      "Buổi trình diễn: đừng để nhà cung cấp trình diễn theo kịch bản của họ vì họ đã tối ưu nó qua hàng trăm lần; hãy đưa kịch bản và dữ liệu của bạn",
-      "Xây ma trận đánh giá; nên dùng thang điểm 100 thay vì 10",
-      "Đàm phán giá; nên đàm phán trước khi đánh giá kỹ thuật"
+      "Kiểm tra tham chiếu: gọi càng nhiều khách hàng càng tốt, vì mẫu lớn cho cái nhìn công bằng hơn",
+      "Buổi demo: đừng để nhà cung cấp chạy kịch bản trau chuốt; hãy đưa kịch bản và dữ liệu của bạn",
+      "Ma trận đánh giá: dùng thang 100 thay vì 10, để thấy được những khác biệt nhỏ",
+      "Đàm phán giá: đàm phán trước khi đánh giá kỹ thuật, khi bạn còn nắm thế mạnh"
     ],
     "optionsEn": [
-      "Reference checking; call as many customers as possible",
-      "The demonstration: do not let the vendor run their own script since they have optimised it over hundreds of runs; give them your scenarios and your data",
-      "Building the evaluation matrix; use a 100-point scale instead of 10",
-      "Price negotiation; negotiate before the technical evaluation"
+      "Reference checks: call as many customers as possible, since a larger sample gives a fairer view",
+      "The demo: do not let the vendor run its polished script; give them your own scenarios and data",
+      "The evaluation matrix: use a 100-point scale instead of 10, so small differences become visible",
+      "Price negotiation: negotiate before the technical evaluation, while you still have leverage"
     ],
     "answer": 1,
     "explanation": "Câu hỏi hay dành cho khách hàng tham chiếu là nếu được chọn lại bạn có chọn gói này nữa không, và điều gì bạn ước mình đã biết trước khi mua.",
@@ -166,37 +164,36 @@
     "question": "Vì sao tuỳ biến mã nguồn của gói giải pháp lại nguy hiểm tới vậy?",
     "questionEn": "Why is customizing a package source code so dangerous?",
     "options": [
-      "Vì nó vi phạm giấy phép sử dụng phần mềm",
-      "Vì bạn tạo ra một phiên bản riêng, phải làm lại tuỳ biến mỗi lần nâng cấp, dần không dám nâng cấp nữa rồi bị kẹt ở phiên bản cũ không có bản vá bảo mật",
-      "Vì lập trình viên nội bộ không hiểu mã của nhà cung cấp",
-      "Vì nó làm chậm hiệu năng của gói"
+      "Vì tuỳ biến mã nguồn thường vi phạm giấy phép, khiến nhà cung cấp có thể huỷ hợp đồng hỗ trợ",
+      "Bạn tạo bản riêng, làm lại thay đổi mỗi lần nâng cấp, rồi ngừng nâng cấp và mất bản vá bảo mật",
+      "Vì lập trình viên nội bộ không hiểu mã của nhà cung cấp, nên phần tuỳ biến đầy lỗi ẩn",
+      "Vì mã đã tuỳ biến làm chậm gói, do tối ưu của nhà cung cấp không còn áp dụng cho module bị sửa"
     ],
     "optionsEn": [
-      "Because it violates the software licence",
-      "Because you create a private version, must redo customizations at every upgrade, gradually stop upgrading, and get stuck on an old version with no security patches",
-      "Because in-house developers do not understand vendor code",
-      "Because it slows the package performance"
+      "Customizing source code usually breaches the licence, so the vendor can void the support contract",
+      "You fork a private version, redo changes each upgrade, stop upgrading, and lose security patches",
+      "In-house developers do not understand vendor code, so customizations are full of hidden defects",
+      "Customized code slows the package, since vendor optimisations no longer apply to modified modules"
     ],
     "answer": 1,
     "explanation": "Nhiều tổ chức đã tuỳ biến nặng tới mức tổng chi phí vượt qua chi phí tự xây từ đầu mà vẫn không có sự linh hoạt của hệ thống tự xây. Hãy hỏi liệu có thể thay đổi quy trình thay vì phần mềm.",
     "explanationEn": "Many organizations customized so heavily the total cost exceeded building from scratch, without the flexibility of a custom system. Ask whether the process can change instead of the software."
-  }
-  ,
+  },
   {
     "id": "q10",
     "question": "Nguyên tắc nền tảng về yêu cầu trong dự án thuê ngoài là gì?",
     "questionEn": "What is the founding principle about requirements on outsourced projects?",
     "options": [
-      "Yêu cầu nên ngắn gọn để nhà cung cấp dễ đọc",
-      "Khoảng cách càng lớn về tổ chức, địa lý, ngôn ngữ, văn hoá và múi giờ thì yêu cầu càng phải rõ ràng và đầy đủ",
-      "Yêu cầu nên được viết bằng tiếng Anh chuẩn quốc tế",
-      "Yêu cầu nên do nhà cung cấp viết vì họ hiểu năng lực của mình"
+      "Yêu cầu nên ngắn gọn, ở mức cao, để chuyên gia của nhà cung cấp tự điền chi tiết",
+      "Càng cách xa về văn hoá, địa lý, múi giờ thì yêu cầu càng phải rõ ràng",
+      "Yêu cầu nên viết bằng tiếng Anh chuẩn quốc tế, điều giúp loại bỏ nhập nhằng",
+      "Nhà cung cấp nên viết yêu cầu, vì họ hiểu năng lực và ràng buộc của chính mình"
     ],
     "optionsEn": [
-      "Requirements should be brief so the vendor can read them easily",
-      "The greater the organizational, geographic, linguistic, cultural, and time-zone distance, the clearer and more complete the requirements must be",
-      "Requirements should be written in international standard English",
-      "The vendor should write the requirements since they know their own capability"
+      "Requirements should be brief and high level, so the vendor's experts can fill in the details",
+      "The more distance in culture, geography, and time zone, the clearer requirements must be",
+      "Requirements should be written in standard international English, which removes ambiguity",
+      "The vendor should write the requirements, since they know their own capability and constraints"
     ],
     "answer": 1,
     "explanation": "Trong đội ngồi cùng phòng, một yêu cầu mơ hồ được giải quyết bằng cách quay ghế lại và hỏi. Xuyên múi giờ, cùng câu hỏi đó có thể mất hai ngày để có câu trả lời.",
@@ -207,16 +204,16 @@
     "question": "Vì sao KHÔNG nên hỏi nhà cung cấp các bạn đã hiểu chưa?",
     "questionEn": "Why should you NOT ask a vendor do you understand?",
     "options": [
-      "Vì câu hỏi đó quá dài dòng",
-      "Vì ở nhiều văn hoá làm việc, nói tôi không hiểu với khách hàng bị coi là không lịch sự nên câu trả lời sẽ luôn là rồi; hãy hỏi hãy giải thích lại các bạn sẽ hiện thực thế nào",
-      "Vì nhà cung cấp sẽ tính phí cho câu hỏi đó",
-      "Vì hợp đồng cấm trao đổi trực tiếp về yêu cầu"
+      "Vì câu hỏi nghe có vẻ coi thường đối tác, làm hỏng quan hệ và khiến nhà cung cấp trở nên phòng thủ",
+      "Nhiều văn hoá coi việc nói chưa hiểu với khách hàng là bất lịch sự; hãy bảo họ giải thích lại",
+      "Vì nhà cung cấp tính câu hỏi làm rõ là công việc phát sinh theo phần lớn hợp đồng thuê ngoài",
+      "Vì hợp đồng quy định mọi trao đổi về yêu cầu phải qua account manager, không qua BA"
     ],
     "optionsEn": [
-      "Because the question is too wordy",
-      "Because in many working cultures saying I do not understand to a client is impolite so the answer will always be yes; instead ask them to explain back how they will implement it",
-      "Because the vendor will bill you for the question",
-      "Because the contract forbids direct requirement discussions"
+      "Because it sounds condescending, which damages the relationship and makes vendors defensive",
+      "Many cultures see admitting confusion to a client as impolite, so ask them to explain it back",
+      "Because vendors bill clarification questions as extra effort under most outsourcing contracts",
+      "Because the contract routes all requirement discussion through the account manager, not the BA"
     ],
     "answer": 1,
     "explanation": "Nhà cung cấp cũng có thể không có động lực hỏi: trong hợp đồng giá cố định, mỗi câu hỏi làm chậm tiến độ của họ nên im lặng và tự đoán có thể hợp lý về kinh tế cho họ nhưng thảm hoạ cho bạn.",
@@ -227,37 +224,36 @@
     "question": "Nguồn tranh chấp lớn nhất trong dự án thuê ngoài là gì?",
     "questionEn": "What is the biggest source of dispute on outsourced projects?",
     "options": [
-      "Chất lượng mã nguồn được bàn giao",
-      "Ranh giới giữa làm rõ, thường miễn phí, và thay đổi phạm vi, thường tính phí; hãy định nghĩa nó trước chứ không phải khi tranh chấp đã nổ ra",
-      "Múi giờ họp không phù hợp",
-      "Quyền sở hữu trí tuệ đối với thiết kế"
+      "Chất lượng mã bàn giao, vì acceptance criteria hiếm khi bao quát chi tiết chuẩn viết mã",
+      "Ranh giới giữa làm rõ miễn phí và thay đổi phạm vi tính phí, cần được định nghĩa từ trước",
+      "Giờ họp lệch múi giờ, khiến một bên luôn phải làm khuya và sinh ra bất mãn",
+      "Quyền sở hữu thiết kế và mã, vì nhà cung cấp thường tái dùng thành phần cho nhiều khách hàng"
     ],
     "optionsEn": [
-      "The quality of the delivered source code",
-      "The boundary between a clarification, usually free, and a scope change, usually billable; define it beforehand rather than after the dispute erupts",
-      "Inconvenient meeting time zones",
-      "Intellectual property ownership of the design"
+      "The quality of delivered code, since acceptance criteria rarely cover coding standards in detail",
+      "The line between a free clarification and a billable scope change, which must be defined in advance",
+      "Meeting times across time zones, which leave one side always working late and resenting it",
+      "Ownership of the design and code, since vendors often reuse components across their clients"
     ],
     "answer": 1,
     "explanation": "Hợp đồng cũng phải nêu rõ ai được phép yêu cầu thay đổi, thay đổi được định giá thế nào, và thời gian phản hồi cho việc đánh giá tác động.",
     "explanationEn": "The contract must also state who may request changes, how changes are priced, and the response time for impact assessment."
-  }
-  ,
+  },
   {
     "id": "q13",
     "question": "Nghịch lý của hợp đồng giá cố định trong dự án phần mềm là gì?",
     "questionEn": "What is the paradox of fixed-price contracts on software projects?",
     "options": [
-      "Nó luôn rẻ hơn hợp đồng theo thời gian và vật liệu",
-      "Nó hứa hẹn loại bỏ rủi ro chi phí cho bạn nhưng đòi hỏi bạn phải biết chính xác mình muốn gì trước khi bắt đầu, điều mà hầu hết dự án phần mềm không thể làm được",
-      "Nó buộc nhà cung cấp phải giao hàng đúng hạn",
-      "Nó khiến nhà cung cấp phải chịu mọi rủi ro kỹ thuật"
+      "Nó chắc chắn rẻ hơn hợp đồng theo thời gian và vật liệu, vì nhà cung cấp đã tính hiệu suất vào giá",
+      "Nó chỉ loại bỏ rủi ro chi phí nếu bạn biết chính xác mình muốn gì từ đầu, điều ít dự án làm được",
+      "Nó buộc nhà cung cấp giao đúng hạn, vì điều khoản phạt áp dụng cho từng ngày trễ",
+      "Nó chuyển mọi rủi ro kỹ thuật sang nhà cung cấp, nên khách hàng không cần review thiết kế nữa"
     ],
     "optionsEn": [
-      "It is always cheaper than time and materials",
-      "It promises to remove cost risk from you but requires you to know exactly what you want before starting, which most software projects cannot do",
-      "It forces the vendor to deliver on time",
-      "It makes the vendor bear all technical risk"
+      "It is reliably cheaper than time and materials, since the vendor prices in its own efficiency",
+      "It removes your cost risk only if you know exactly what you want up front, which few projects do",
+      "It forces the vendor to deliver on time, since contract penalties apply to every single day of delay",
+      "It shifts all technical risk to the vendor, so the client no longer needs to review the design"
     ],
     "answer": 1,
     "explanation": "Kết quả thực tế thường thấy là một chuỗi dài các change order tốn kém, chi phí cuối cùng vượt xa dự tính ban đầu, cộng thêm mối quan hệ đối kháng với nhà cung cấp.",
@@ -268,16 +264,16 @@
     "question": "Vì sao KHÔNG nên thuê ngoài cả việc phân tích yêu cầu?",
     "questionEn": "Why should you NOT outsource requirements analysis itself?",
     "options": [
-      "Vì chi phí BA bên ngoài quá cao",
-      "Vì nhà cung cấp không thể biết nghiệp vụ của bạn tốt hơn bạn; bạn cần một người phía mình đủ hiểu để biết khi nào nhà cung cấp đang đi sai hướng",
-      "Vì quy định bảo mật cấm chia sẻ thông tin nghiệp vụ",
-      "Vì BA bên ngoài không được phép gặp người dùng cuối"
+      "Vì BA bên ngoài đắt hơn BA nội bộ, nên thuê ngoài phân tích xoá sạch khoản tiết kiệm của dự án",
+      "Nhà cung cấp không thể hiểu nghiệp vụ của bạn hơn bạn; cần người phía mình biết khi nào họ đi sai",
+      "Vì quy định bảo mật cấm chia sẻ thông tin nghiệp vụ chi tiết với bên thứ ba trước khi ký hợp đồng",
+      "Vì BA bên ngoài thường không được gặp người dùng cuối, nên chỉ làm việc từ tài liệu"
     ],
     "optionsEn": [
-      "Because external BAs cost too much",
-      "Because the vendor cannot know your business better than you do; you need someone on your side who understands enough to know when the vendor is heading the wrong way",
-      "Because security regulations forbid sharing business information",
-      "Because external BAs may not meet end users"
+      "External BAs cost more than internal ones, so outsourcing analysis erases the project's savings",
+      "The vendor cannot know your business better than you; you need someone to spot when it strays",
+      "Security rules forbid sharing detailed business information with a third party before contract",
+      "External BAs are usually not allowed to meet end users, so they work only from documents"
     ],
     "answer": 1,
     "explanation": "Nếu bạn giao cả việc hiểu vấn đề cho họ, bạn đang giao đi thứ duy nhất mà chỉ bạn mới có. Hai thực hành giảm rủi ro khác là bàn giao tăng dần và đầu tư vào mô hình trực quan.",
@@ -288,16 +284,16 @@
     "question": "Vì sao mô hình trực quan đặc biệt giá trị trong dự án thuê ngoài xuyên biên giới?",
     "questionEn": "Why are visual models especially valuable on cross-border outsourced projects?",
     "options": [
-      "Vì chúng nhanh hơn để tạo ra so với văn bản",
-      "Vì sơ đồ, wireframe, dữ liệu mẫu và acceptance test vượt qua rào cản ngôn ngữ tốt hơn nhiều so với văn bản; một swimlane diagram được hiểu giống nhau ở hai châu lục",
-      "Vì chúng không cần dịch sang ngôn ngữ khác",
-      "Vì chúng được công cụ tự động kiểm tra tính đúng đắn"
+      "Vì chúng tạo nhanh hơn văn bản, điều quan trọng khi nhà cung cấp phải chờ qua đêm",
+      "Sơ đồ, wireframe, dữ liệu mẫu và test vượt rào cản ngôn ngữ tốt hơn văn bản",
+      "Vì chúng không cần dịch, do ký hiệu mô hình hoá được định nghĩa bởi tiêu chuẩn quốc tế",
+      "Vì công cụ mô hình hoá tự kiểm tra tính đúng đắn, nên nhập nhằng không thể lọt qua"
     ],
     "optionsEn": [
-      "Because they are faster to create than prose",
-      "Because diagrams, wireframes, sample data, and acceptance tests cross language barriers far better than prose; a swimlane diagram is understood the same way on two continents",
-      "Because they need no translation",
-      "Because tools verify their correctness automatically"
+      "They are faster to create than prose, which matters when the vendor is waiting overnight",
+      "Diagrams, wireframes, sample data, and tests cross language barriers far better than prose",
+      "They need no translation, since modelling notations are defined by international standards",
+      "Modelling tools check them for correctness automatically, so ambiguity cannot slip through"
     ],
     "answer": 1,
     "explanation": "Kỹ thuật xác minh hiểu biết khác gồm diễn giải lại, đưa ví dụ cụ thể với đầu vào và kết quả mong đợi, acceptance test viết trước, và prototype sớm.",
@@ -308,16 +304,16 @@
     "question": "Điểm chung nào áp dụng cho cả ba loại dự án nâng cấp, gói giải pháp và thuê ngoài?",
     "questionEn": "Which principle applies to all three project types: enhancement, packaged solution, and outsourcing?",
     "options": [
-      "Cả ba đều cần hợp đồng giá cố định",
-      "Cả ba đều đẩy bạn về phía mô tả giải pháp thay vì hiểu vấn đề, đều đòi hỏi phân biệt cần với quen, và đều có kiến thức ngầm là kẻ thù chính",
-      "Cả ba đều không cần mô hình phân tích",
-      "Cả ba đều nên dùng phương pháp waterfall"
+      "Cả ba hợp với hợp đồng giá cố định nhất, vì phạm vi đã biết từ hệ thống cũ hoặc gói giải pháp",
+      "Cả ba dễ khiến bạn mô tả giải pháp, đòi tách cần khỏi quen, và phải chống kiến thức ngầm",
+      "Cả ba không cần mô hình phân tích, vì hệ thống cũ, gói hoặc nhà cung cấp đã định sẵn thiết kế",
+      "Cả ba hợp với waterfall, vì yêu cầu có thể biết đầy đủ từ hệ thống hoặc sản phẩm có sẵn"
     ],
     "optionsEn": [
-      "All three need fixed-price contracts",
-      "All three push you toward describing a solution rather than understanding the problem, all require separating need from habit, and in all three implicit knowledge is the main enemy",
-      "None of the three needs analysis models",
-      "All three should use waterfall"
+      "All three work best under fixed-price contracts, since scope is known from the existing system or package",
+      "All tempt you to describe solutions, require separating need from habit, and fight implicit knowledge",
+      "None of the three needs analysis models, since an existing system, package, or vendor defines the design",
+      "All three suit waterfall, since requirements can be fully known from an existing system or product"
     ],
     "answer": 1,
     "explanation": "Kiến thức ngầm nằm trong đầu người dùng lâu năm, trong giả định của nhà cung cấp gói, và trong tất cả những gì ai cũng biết trong tổ chức bạn. Công việc của BA là làm nó trở nên tường minh.",

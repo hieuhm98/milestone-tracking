@@ -4,16 +4,16 @@
     "question": "Một IAM user trong tài khoản thành viên có IAM policy cho phép s3:* nhưng SCP gắn ở OU chỉ cho phép các hành động EC2. User có thể gọi API S3 không?",
     "questionEn": "An IAM user in a member account has an IAM policy allowing s3:* but the SCP attached at the OU only allows EC2 actions. Can the user call S3 APIs?",
     "options": [
-      "Có, vì IAM policy đã cấp quyền s3:*",
-      "Không, vì quyền hiệu dụng là giao của SCP và IAM; SCP không cho phép S3",
-      "Có, vì SCP tự động cấp thêm quyền S3",
-      "Không, vì SCP luôn ghi đè và xóa mọi IAM policy"
+      "Có; IAM policy đã cấp s3:*, còn SCP chỉ tác động tới EC2",
+      "Không; quyền hiệu dụng là giao của SCP và IAM",
+      "Có; SCP chỉ giới hạn root user của member account",
+      "Không; SCP ghi đè rồi xóa luôn IAM policy của user"
     ],
     "optionsEn": [
-      "Yes, because the IAM policy granted s3:*",
-      "No, because effective permissions are the intersection of SCP and IAM; the SCP doesn't allow S3",
-      "Yes, because the SCP automatically grants extra S3 permissions",
-      "No, because an SCP always overrides and deletes any IAM policy"
+      "Yes; the IAM policy grants s3:*, and SCPs only affect EC2",
+      "No; the effective permission is the SCP–IAM intersection",
+      "Yes; SCPs only restrict the root user of a member account",
+      "No; the SCP overwrites the IAM policy and deletes it"
     ],
     "answer": 1,
     "explanation": "Quyền hiệu dụng = SCP ∩ IAM. IAM cho phép S3 nhưng SCP (rào chắn) không liệt kê S3, nên hành động S3 bị chặn. SCP không cấp quyền và cũng không xóa IAM policy — nó chỉ giới hạn trần.",
@@ -24,16 +24,16 @@
     "question": "Phát biểu nào ĐÚNG về Service Control Policies (SCP)?",
     "questionEn": "Which statement is TRUE about Service Control Policies (SCP)?",
     "options": [
-      "SCP cấp quyền trực tiếp cho principal mà không cần IAM policy",
-      "SCP đặt trần quyền tối đa nhưng không tự cấp quyền, và không áp dụng cho management account",
-      "SCP thay thế hoàn toàn IAM và làm IAM không còn cần thiết",
-      "SCP chỉ áp dụng cho management account chứ không cho member account"
+      "Cấp quyền trực tiếp cho principal, nên không cần IAM policy",
+      "Đặt trần quyền, không tự cấp quyền, không áp cho management account",
+      "Đặt trần quyền ở mọi tài khoản, kể cả management account",
+      "Chỉ áp dụng cho management account, không bao giờ cho member account"
     ],
     "optionsEn": [
-      "An SCP grants permissions directly to a principal without needing an IAM policy",
-      "An SCP sets a maximum permission ceiling but grants nothing itself, and does not apply to the management account",
-      "An SCP fully replaces IAM and makes IAM unnecessary",
-      "An SCP only applies to the management account, not member accounts"
+      "It grants permissions directly, so no IAM policy is needed",
+      "It caps permissions, grants none, and skips the management account",
+      "It caps permissions in every account, including management",
+      "It applies only to the management account, never to member accounts"
     ],
     "answer": 1,
     "explanation": "SCP là guardrail đặt quyền tối đa; nó không cấp quyền (vẫn cần IAM policy) và không áp dụng cho management account. Vì thế không nên đặt tài nguyên quan trọng trong management account.",
@@ -44,16 +44,16 @@
     "question": "Một công ty vận hành 20 tài khoản AWS riêng lẻ và muốn giảm chi phí tổng thể. Lợi ích chi phí chính khi gom chúng vào một AWS Organization với consolidated billing là gì?",
     "questionEn": "A company runs 20 separate AWS accounts and wants to reduce overall cost. What is the main cost benefit of combining them into an AWS Organization with consolidated billing?",
     "options": [
-      "AWS tự động giảm 50% mọi hóa đơn khi dùng Organizations",
-      "Mức sử dụng được gộp để đạt volume discounts, và RI/Savings Plans được chia sẻ giữa các tài khoản",
-      "Mỗi tài khoản được một máy EC2 miễn phí vĩnh viễn",
-      "Consolidated billing tắt toàn bộ chi phí data transfer"
+      "AWS giảm cố định 50% cho mọi hóa đơn trong organization",
+      "Gộp usage để đạt volume discount; RI/Savings Plans được chia sẻ",
+      "Mỗi member account được một EC2 instance miễn phí vĩnh viễn",
+      "Consolidated billing xóa toàn bộ phí data transfer giữa các tài khoản"
     ],
     "optionsEn": [
-      "AWS automatically cuts every bill by 50% when using Organizations",
-      "Usage is aggregated to reach volume discounts, and RIs/Savings Plans are shared across accounts",
-      "Each account gets one permanently free EC2 instance",
-      "Consolidated billing turns off all data transfer charges"
+      "AWS applies a flat 50% discount to every bill in the organization",
+      "Pooled usage hits volume discounts; RIs/Savings Plans are shared",
+      "Each member account gets one permanently free EC2 instance",
+      "Consolidated billing removes data transfer charges between accounts"
     ],
     "answer": 1,
     "explanation": "Consolidated billing gộp mức sử dụng của tất cả tài khoản để tính bậc giá (volume discounts) và cho phép chia sẻ Reserved Instances/Savings Plans giữa các tài khoản, giúp tối ưu chi phí.",
@@ -64,16 +64,16 @@
     "question": "Tài khoản A cần cho phép các ứng dụng trong tài khoản B đọc một bảng DynamoDB thuộc tài khoản A. Cách làm theo best practice là gì?",
     "questionEn": "Account A needs to let applications in account B read a DynamoDB table that belongs to account A. What is the best-practice approach?",
     "options": [
-      "Tạo IAM user trong tài khoản A và chia sẻ access key dài hạn cho tài khoản B",
-      "Tạo IAM role trong tài khoản A với trust policy cho phép tài khoản B; principal ở B gọi sts:AssumeRole để lấy credentials tạm thời",
-      "Bật public access cho bảng DynamoDB",
-      "Gắn SCP ở tài khoản B để tự động cấp quyền đọc DynamoDB của A"
+      "IAM user trong A, access key dài hạn được giao cho B",
+      "Role trong A tin cậy tài khoản B, được assume qua sts:AssumeRole",
+      "Bật public access cho bảng DynamoDB của tài khoản A",
+      "SCP ở tài khoản B cấp quyền đọc bảng của tài khoản A"
     ],
     "optionsEn": [
-      "Create an IAM user in account A and share long-term access keys with account B",
-      "Create an IAM role in account A with a trust policy allowing account B; a principal in B calls sts:AssumeRole to get temporary credentials",
-      "Enable public access on the DynamoDB table",
-      "Attach an SCP in account B to automatically grant read access to A's DynamoDB"
+      "An IAM user in A whose long-term access keys are given to B",
+      "A role in A trusting account B, assumed via sts:AssumeRole",
+      "Enabling public read access on the DynamoDB table",
+      "An SCP in account B that grants read access to A's table"
     ],
     "answer": 1,
     "explanation": "Cross-account chuẩn: tài khoản sở hữu tài nguyên (A) tạo IAM role với trust policy cho phép tài khoản B assume; principal ở B gọi STS AssumeRole nhận credentials tạm thời. Tránh chia sẻ long-term keys; SCP không cấp quyền.",
@@ -84,16 +84,16 @@
     "question": "Một tổ chức muốn nhân viên đăng nhập một lần (SSO) để truy cập nhiều tài khoản AWS trong Organizations và một vài ứng dụng SaaS hỗ trợ SAML. Dịch vụ nào phù hợp nhất?",
     "questionEn": "An organization wants employees to sign in once (SSO) to access multiple AWS accounts in Organizations and a few SAML business apps. Which service fits best?",
     "options": [
-      "Amazon Cognito User Pools",
+      "Amazon Cognito User Pools với SAML",
       "IAM Identity Center với permission sets",
-      "AWS Simple AD standalone",
-      "AWS RAM"
+      "AWS Directory Service Simple AD",
+      "AWS Resource Access Manager"
     ],
     "optionsEn": [
-      "Amazon Cognito User Pools",
+      "Amazon Cognito User Pools with SAML",
       "IAM Identity Center with permission sets",
-      "AWS Simple AD standalone",
-      "AWS RAM"
+      "AWS Directory Service Simple AD",
+      "AWS Resource Access Manager"
     ],
     "answer": 1,
     "explanation": "IAM Identity Center (trước là AWS SSO) cung cấp SSO cho nhân viên vào nhiều tài khoản AWS và ứng dụng doanh nghiệp (SAML 2.0), dùng permission sets để cấp quyền theo tài khoản. Cognito dành cho người dùng cuối của ứng dụng.",
@@ -104,16 +104,16 @@
     "question": "Một ứng dụng mobile cần cho phép người dùng đã đăng nhập upload ảnh trực tiếp lên S3. Sau khi xác thực bằng Cognito User Pool, thành phần nào cấp AWS credentials tạm thời để gọi S3?",
     "questionEn": "A mobile app needs to let signed-in users upload photos directly to S3. After authenticating with a Cognito User Pool, which component issues temporary AWS credentials to call S3?",
     "options": [
-      "Cognito User Pool trực tiếp trả về AWS credentials",
-      "Cognito Identity Pool đổi danh tính lấy AWS credentials tạm thời qua STS",
+      "Chính Cognito User Pool, qua ID token",
+      "Cognito Identity Pool, thông qua STS",
       "IAM Identity Center permission set",
-      "AD Connector"
+      "Lambda authorizer của API Gateway"
     ],
     "optionsEn": [
-      "The Cognito User Pool directly returns AWS credentials",
-      "A Cognito Identity Pool exchanges the identity for temporary AWS credentials via STS",
+      "The Cognito User Pool itself, in its ID token",
+      "A Cognito Identity Pool, via STS",
       "An IAM Identity Center permission set",
-      "AD Connector"
+      "An API Gateway Lambda authorizer"
     ],
     "answer": 1,
     "explanation": "User Pool xử lý xác thực và trả JWT token. Identity Pool (Federated Identities) đổi token đó lấy AWS credentials tạm thời (qua STS) để app truy cập trực tiếp dịch vụ AWS như S3.",
@@ -124,16 +124,16 @@
     "question": "Phát biểu nào mô tả đúng nhất sự khác biệt giữa Cognito User Pool và Identity Pool?",
     "questionEn": "Which statement best describes the difference between a Cognito User Pool and an Identity Pool?",
     "options": [
-      "User Pool cấp AWS credentials; Identity Pool chỉ lưu mật khẩu",
-      "User Pool dùng để xác thực/đăng nhập (trả JWT); Identity Pool đổi danh tính lấy AWS credentials tạm thời",
-      "Cả hai đều giống nhau, chỉ khác tên gọi",
-      "User Pool dành cho nhân viên nội bộ; Identity Pool dành cho tài khoản AWS management"
+      "User Pool cấp AWS credentials; Identity Pool đăng nhập người dùng (JWT)",
+      "User Pool đăng nhập người dùng (JWT); Identity Pool cấp AWS credentials",
+      "User Pool cho ứng dụng mobile; Identity Pool chỉ cho ứng dụng web",
+      "User Pool cho nhân viên nội bộ; Identity Pool cho tài khoản management"
     ],
     "optionsEn": [
-      "The User Pool issues AWS credentials; the Identity Pool only stores passwords",
-      "The User Pool is for authentication/sign-in (returns JWT); the Identity Pool exchanges an identity for temporary AWS credentials",
-      "They are identical, only the names differ",
-      "The User Pool is for internal employees; the Identity Pool is for the AWS management account"
+      "User Pool gives AWS credentials; Identity Pool signs users in (JWT)",
+      "User Pool signs users in (JWT); Identity Pool gives AWS credentials",
+      "User Pool is for mobile apps; Identity Pool is for web apps only",
+      "User Pool is for employees; Identity Pool is for the management account"
     ],
     "answer": 1,
     "explanation": "User Pool = authentication (sign-in/sign-up, trả JWT, có thể làm authorizer API Gateway). Identity Pool = authorization vào AWS (đổi danh tính lấy AWS credentials tạm thời). Hai vai trò khác nhau.",
@@ -184,16 +184,16 @@
     "question": "Đội mạng trung tâm tạo một VPC với các subnet và muốn nhiều tài khoản ứng dụng khác khởi tạo tài nguyên vào chính các subnet đó mà không tạo lại VPC. Dịch vụ nào giải quyết?",
     "questionEn": "A central networking team creates a VPC with subnets and wants several other application accounts to launch resources into those same subnets without recreating the VPC. Which service solves this?",
     "options": [
-      "AWS Resource Access Manager (RAM) để chia sẻ subnet giữa các tài khoản",
-      "AWS Organizations SCP",
-      "Cognito Identity Pool",
-      "VPC Peering cho từng cặp tài khoản là cách duy nhất"
+      "AWS RAM, chia sẻ subnet cho các tài khoản khác",
+      "Một SCP cho phép các member account dùng VPC trung tâm",
+      "VPC Peering giữa VPC của từng cặp tài khoản",
+      "Transit Gateway attachment để mở các subnet cho tài khoản khác"
     ],
     "optionsEn": [
-      "AWS Resource Access Manager (RAM) to share subnets across accounts",
-      "AWS Organizations SCP",
-      "Cognito Identity Pool",
-      "VPC Peering per account pair is the only way"
+      "AWS RAM, sharing the subnets with the other accounts",
+      "An SCP that lets member accounts use the central VPC",
+      "VPC Peering between each pair of accounts' VPCs",
+      "A Transit Gateway attachment that exposes the subnets"
     ],
     "answer": 0,
     "explanation": "AWS RAM chia sẻ tài nguyên (VPC subnets, Transit Gateway, Route 53 Resolver rules...) giữa các tài khoản mà không nhân bản. Các tài khoản có thể khởi tạo tài nguyên trong subnet được chia sẻ.",
@@ -207,13 +207,13 @@
       "AWS Control Tower",
       "AWS STS",
       "AWS RAM",
-      "Amazon Cognito"
+      "AWS Organizations SCPs"
     ],
     "optionsEn": [
       "AWS Control Tower",
       "AWS STS",
       "AWS RAM",
-      "Amazon Cognito"
+      "AWS Organizations SCPs"
     ],
     "answer": 0,
     "explanation": "AWS Control Tower tự động dựng landing zone multi-account trên nền Organizations, áp guardrails preventive (SCP) và detective (AWS Config), và cung cấp Account Factory để cấp phát tài khoản chuẩn hóa.",
@@ -284,16 +284,16 @@
     "question": "Trong AWS Organizations, \"root\" là gì?",
     "questionEn": "In AWS Organizations, what is the \"root\"?",
     "options": [
-      "Container cấp cao nhất chứa toàn bộ OU và account của tổ chức",
-      "Root user của management account",
-      "Account đứng ra trả tiền cho cả tổ chức",
-      "Một IAM role đặc quyền"
+      "Container cấp cao nhất chứa mọi OU và account",
+      "Root user của management account trong tổ chức",
+      "Management account trả tiền cho cả tổ chức",
+      "Một IAM role đặc quyền dùng chung cho mọi member account"
     ],
     "optionsEn": [
-      "The top-level container that holds all the organization's OUs and accounts",
-      "The root user of the management account",
-      "The account that pays the bill for the organization",
-      "A privileged IAM role"
+      "The top-level container for all OUs and accounts",
+      "The root user of the organization's management account",
+      "The management account that pays the organization's bill",
+      "A privileged IAM role shared by all member accounts"
     ],
     "answer": 0,
     "explanation": "Cẩn thận với từ đồng âm: \"root\" của Organizations là node gốc trong cây OU (nơi gắn SCP ở cấp cao nhất), khác hoàn toàn với \"root user\" của một account.",
@@ -304,16 +304,16 @@
     "question": "Lời gọi `sts:AssumeRole` trả về cái gì?",
     "questionEn": "What does an `sts:AssumeRole` call return?",
     "options": [
-      "Một IAM user mới được tạo",
-      "Credentials tạm thời: access key, secret key và session token, kèm thời điểm hết hạn",
-      "Một cặp access key vĩnh viễn",
-      "Mật khẩu đăng nhập Console"
+      "Một IAM user mới được gắn các policy của role",
+      "Access key, secret key và session token có thời hạn",
+      "Một cặp access key vĩnh viễn gắn với role",
+      "Một URL đăng nhập console đã ký kèm mật khẩu MFA dùng một lần"
     ],
     "optionsEn": [
-      "A newly created IAM user",
-      "Temporary credentials: an access key, a secret key and a session token, with an expiry",
-      "A permanent pair of access keys",
-      "A Console sign-in password"
+      "A new IAM user with the role's policies attached",
+      "An access key, secret key, and session token that expire",
+      "A permanent access key pair bound to the role",
+      "A signed console sign-in URL and a one-time MFA password"
     ],
     "answer": 1,
     "explanation": "Điểm mấu chốt là TẠM THỜI: credentials tự hết hạn (15 phút tới 12 giờ) nên không có bí mật lâu dài để rò rỉ. Đây là nền tảng của cross-account access và IAM Role cho EC2.",
@@ -324,16 +324,16 @@
     "question": "Trong federation dùng SAML tới AWS, bên nào khẳng định danh tính người dùng?",
     "questionEn": "In SAML federation to AWS, which party asserts the user's identity?",
     "options": [
-      "Amazon Cognito User Pool",
-      "EC2 instance mà người dùng kết nối tới",
-      "Identity Provider bên ngoài (ADFS, Okta...) mà AWS tin cậy qua một IAM identity provider entity",
-      "Chính IAM, dựa trên IAM user tương ứng"
+      "Amazon Cognito User Pool được cấu hình làm IdP",
+      "AWS STS, sau khi tự kiểm tra mật khẩu người dùng",
+      "IdP bên ngoài (ADFS, Okta...), được AWS tin cậy qua IAM",
+      "Chính IAM, bằng cách khớp người dùng với IAM user"
     ],
     "optionsEn": [
-      "An Amazon Cognito User Pool",
-      "The EC2 instance the user connects to",
-      "The external Identity Provider (ADFS, Okta…), which AWS trusts via an IAM identity provider entity",
-      "IAM itself, based on a matching IAM user"
+      "An Amazon Cognito User Pool configured as the IdP",
+      "AWS STS, after checking the user's password itself",
+      "The external IdP (ADFS, Okta…), trusted via IAM",
+      "IAM itself, by matching the user to an IAM user"
     ],
     "answer": 2,
     "explanation": "Federation nghĩa là AWS KHÔNG lưu người dùng. IdP xác thực rồi phát SAML assertion; AWS đổi nó lấy credentials tạm thời cho một role — nên không cần tạo IAM user cho từng nhân viên.",
@@ -344,16 +344,16 @@
     "question": "Sau khi đăng nhập thành công, Cognito User Pool cấp cho ứng dụng thứ gì?",
     "questionEn": "After a successful sign-in, what does a Cognito User Pool issue?",
     "options": [
-      "Cặp IAM access key và secret key",
-      "Chỉ một session cookie",
-      "ARN của một IAM role",
-      "Các JWT token (ID token, access token, refresh token)"
+      "IAM access key, secret key và session token",
+      "Một session cookie đã ký, hiệu lực 12 giờ",
+      "ARN của một IAM role kèm SAML assertion",
+      "JWT: ID token, access token và refresh token"
     ],
     "optionsEn": [
-      "An IAM access key and secret key pair",
-      "Only a session cookie",
-      "The ARN of an IAM role",
-      "JWT tokens (an ID token, an access token and a refresh token)"
+      "An IAM access key, secret key, and session token",
+      "A signed session cookie valid for 12 hours",
+      "The ARN of an IAM role plus a SAML assertion",
+      "JWTs: an ID token, access token, and refresh token"
     ],
     "answer": 3,
     "explanation": "User Pool = xác thực, trả về JWT (dùng trực tiếp cho API Gateway authorizer). Identity Pool mới là thứ đổi token đó lấy credentials AWS tạm thời để gọi thẳng S3, DynamoDB...",

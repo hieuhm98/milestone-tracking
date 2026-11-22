@@ -39,13 +39,13 @@
       "Tần suất cập nhật, vì hai đội lấy dữ liệu vào hai giờ khác nhau",
       "Nguồn dữ liệu, vì hai đội đang dùng hai bảng khác nhau",
       "Owner, vì người có quyền cao hơn sẽ quyết định con số nào đúng",
-      "Bộ lọc, ghi rõ `cancelled` được tính là duyệt hay không duyệt"
+      "Bộ lọc, ghi rõ trạng thái hồ sơ nào được tính là duyệt"
     ],
     "optionsEn": [
       "Refresh, because the two teams pulled the data at different times",
       "Source, because the two teams are using two different tables",
       "Owner, because the more senior person decides which number is right",
-      "Filters, stating whether `cancelled` counts as approved or not"
+      "Filters, stating which application statuses count as approved"
     ],
     "answer": 3,
     "explanation": "Hai con số khác nhau chỉ vì một lựa chọn về bộ lọc: có tính `cancelled` vào tử số không. Thẻ KPI ghi rõ điều đó thì cả công ty dùng chung một định nghĩa.",
@@ -68,16 +68,16 @@
     "question": "CEO muốn đặt mục tiêu tăng approval rate. Guardrail metric nào nên được đặt ngay cạnh nó trên dashboard?",
     "questionEn": "The CEO wants a target to raise the approval rate. Which guardrail metric should sit right next to it on the dashboard?",
     "options": [
-      "Tỷ lệ khoản vay mới từng quá hạn 30+ ngày theo vintage, ở MOB 2–3",
-      "Tổng số hồ sơ nộp mỗi tháng, chia theo kênh",
-      "Số tiền giải ngân trung bình trên mỗi khoản vay",
-      "Số khách hàng tải app mới trong tháng"
+      "Tỷ lệ khoản vay mới từng quá hạn 30+ ngày ở MOB 2–3",
+      "Tổng số hồ sơ nộp vào mỗi tháng, chia theo từng kênh marketing",
+      "Số tiền giải ngân trung bình trên mỗi khoản vay mới theo tháng",
+      "Số khách hàng tải app mới trong tháng, theo từng hệ điều hành"
     ],
     "optionsEn": [
-      "Share of new loans ever 30+ days past due by vintage, at MOB 2–3",
-      "Total applications per month, split by channel",
-      "Average amount disbursed per loan",
-      "Number of new app downloads in the month"
+      "Share of new loans ever 30+ days past due at MOB 2–3",
+      "Total applications submitted per month, split by marketing channel",
+      "Average amount disbursed per new loan, tracked month by month",
+      "Number of new app downloads in the month, by operating system"
     ],
     "answer": 0,
     "explanation": "Cách dễ nhất để đẩy approval rate lên là duyệt người rủi ro hơn. Tỷ lệ trễ hạn sớm theo vintage sẽ lộ ra ngay nếu điều đó xảy ra, nên nó là guardrail đúng.",
@@ -100,16 +100,16 @@
     "question": "Head of Risk hỏi: \"Mỗi lứa khoản vay giải ngân hằng tháng diễn biến thế nào khi chúng già đi?\" Cách trình bày nào phù hợp nhất?",
     "questionEn": "The Head of Risk asks: \"How does each monthly batch of loans perform as it ages?\" Which presentation fits best?",
     "options": [
-      "Một biểu đồ tròn, mỗi lát là một tháng giải ngân",
-      "Một ô KPI duy nhất hiện tỷ lệ nợ xấu của toàn danh mục",
-      "Các đường vintage hoặc bảng cohort: hàng là tháng giải ngân, cột là MOB",
-      "Một đường lũy kế tổng số tiền đã giải ngân từ đầu năm"
+      "Một biểu đồ tròn, mỗi lát là một tháng giải ngân của năm",
+      "Một ô KPI duy nhất hiện tỷ lệ nợ xấu hiện tại của toàn bộ danh mục cho vay",
+      "Đường vintage hoặc bảng cohort: hàng là tháng giải ngân, cột là MOB",
+      "Một đường lũy kế tổng số tiền đã giải ngân từ đầu năm đến nay"
     ],
     "optionsEn": [
       "A pie chart with one slice per disbursement month",
       "A single KPI tile with the whole book's bad-loan rate",
-      "Vintage lines or a cohort table: rows are disbursement months, columns are MOB",
-      "A cumulative line of total amount disbursed since January"
+      "Vintage lines or a cohort table: disbursement month by MOB",
+      "A cumulative line of total amount disbursed since January this year"
     ],
     "answer": 2,
     "explanation": "Câu hỏi là về cohort theo độ tuổi, nên cần đặt các lứa cạnh nhau ở cùng MOB: đường vintage hoặc bảng cohort.",
@@ -132,7 +132,7 @@
     "question": "Bảng theo ngày cho thanh toán thẻ trên Android có dòng: `vn_day = 2026-04-15, attempts = 2, success_pct = 50`. Một đồng nghiệp muốn báo động ngay. Bạn nên làm gì trước?",
     "questionEn": "A daily table for Android card payments shows the row `vn_day = 2026-04-15, attempts = 2, success_pct = 50`. A colleague wants to raise the alarm now. What should you do first?",
     "options": [
-      "Báo động ngay, vì 50% thấp hơn nhiều so với mức thường thấy khoảng 90%",
+      "Báo động ngay lập tức, vì 50% thấp hơn rất nhiều so với mức thường thấy là khoảng 90%",
       "Nhìn vào số mẫu: 2 giao dịch thì tỷ lệ chỉ là nhiễu; gộp theo tuần rồi mới đánh giá",
       "Xóa dòng này khỏi bảng vì nó là outlier làm xấu báo cáo",
       "Đổi trục biểu đồ bắt đầu từ 40% để thấy rõ mức giảm"
@@ -164,16 +164,16 @@
     "question": "Bạn viết requirement cho một cảnh báo tỷ lệ thanh toán thẻ thành công. Phiên bản nào tốt nhất?",
     "questionEn": "You are writing the requirement for a card payment success-rate alert. Which version is best?",
     "options": [
-      "Cảnh báo khi tỷ lệ < 80% với ≥ 20 giao dịch trong một tuần (giờ VN); gửi #payments-oncall; người phụ trách kiểm tra nhà cung cấp OTP trong 30 phút",
-      "Cảnh báo bất cứ khi nào tỷ lệ thành công trong ngày thấp hơn hôm qua",
-      "Cảnh báo khi tỷ lệ thành công có vẻ bất thường, gửi cho ai đang trực",
-      "Cảnh báo mỗi giờ một lần với tỷ lệ hiện tại, để mọi người tự quyết định"
+      "Cảnh báo khi tỷ lệ < 80% trên ≥ 20 giao dịch/tuần; gửi #payments-oncall; người phụ trách xử lý trong 30 phút",
+      "Cảnh báo bất cứ khi nào tỷ lệ thành công trong ngày thấp hơn hôm qua, gửi cho cả công ty",
+      "Cảnh báo khi tỷ lệ thành công có vẻ bất thường, gửi cho ai đang trực để họ tự xem xét",
+      "Gửi tin nhắn mỗi giờ một lần kèm tỷ lệ hiện tại lên kênh chung của cả team, để mọi người tự quyết định"
     ],
     "optionsEn": [
-      "Alert when the rate < 80% on ≥ 20 attempts in a week (VN time); send to #payments-oncall; the owner checks the OTP provider within 30 minutes",
-      "Alert whenever today's success rate is lower than yesterday's",
-      "Alert when the success rate looks unusual, and send it to whoever is on duty",
-      "Send an hourly message with the current rate so people can decide for themselves"
+      "Alert when rate < 80% on ≥ 20 attempts/week; send to #payments-oncall; owner acts within 30 minutes",
+      "Alert whenever today's success rate is below yesterday's, and send it to the whole company",
+      "Alert when the success rate looks unusual, and send it to whoever is on duty to look at",
+      "Send an hourly message with the current rate to a shared channel so that people decide for themselves"
     ],
     "answer": 0,
     "explanation": "Một cảnh báo tốt có ngưỡng rõ, khối lượng tối thiểu, khung thời gian, người nhận và hành động cần làm. Chỉ phương án đầu có đủ những thứ đó.",
@@ -196,16 +196,16 @@
     "question": "Trong A/B test màn hình thanh toán, vì sao nên chia ngẫu nhiên theo khách hàng thay vì theo từng phiên checkout?",
     "questionEn": "In an A/B test of the payment screen, why randomise by customer rather than by checkout session?",
     "options": [
-      "Vì chia theo phiên làm cỡ mẫu nhỏ đi một nửa",
+      "Vì chia theo phiên làm cỡ mẫu của mỗi nhóm nhỏ đi một nửa",
       "Vì cơ sở dữ liệu không lưu được mã phiên của nhóm variant",
-      "Vì chia theo khách hàng luôn cho ra mức tăng chuyển đổi lớn hơn",
-      "Để một người luôn thấy cùng một màn hình, không bị lẫn trải nghiệm giữa hai nhóm"
+      "Vì chia theo khách hàng luôn cho ra mức tăng tỷ lệ chuyển đổi lớn hơn chia theo phiên",
+      "Để một người luôn thấy cùng một màn hình, không bị lẫn hai trải nghiệm"
     ],
     "optionsEn": [
-      "Because splitting by session halves the sample size",
+      "Because splitting by session halves the sample size of each group",
       "Because the database cannot store session ids for the variant group",
       "Because splitting by customer always produces a bigger conversion lift",
-      "So that one person always sees the same screen and the two experiences don't mix"
+      "So one person always sees the same screen and never mixes both versions"
     ],
     "answer": 3,
     "explanation": "Nếu chia theo phiên, cùng một người có thể lúc thấy màn hình cũ, lúc thấy màn hình mới, khiến hai nhóm lẫn vào nhau và kết quả khó tin.",
@@ -228,15 +228,15 @@
     "question": "Một A/B test: control chuyển đổi 600/1.000 phiên (60,0%), variant 610/1.000 (61,0%). Biên nhiễu ≈ 1,96 × √(2 × 0,605 × 0,395 ÷ 1.000) ≈ 4,3 pp. Kết luận nào đúng?",
     "questionEn": "An A/B test: control converts 600 of 1,000 sessions (60.0%), variant 610 of 1,000 (61.0%). The noise margin ≈ 1.96 × √(2 × 0.605 × 0.395 ÷ 1,000) ≈ 4.3 pp. Which conclusion is right?",
     "options": [
-      "Variant thắng, vì 61% lớn hơn 60%",
+      "Variant thắng, vì 61% lớn hơn 60% trên cùng 1.000 phiên",
       "Variant thắng chắc chắn, vì mức tăng tương đối gần 1,7%",
-      "Chưa kết luận được: chênh 1,0 pp nhỏ hơn nhiều so với biên nhiễu 4,3 pp",
+      "Chưa kết luận được: mức chênh nằm gọn trong biên nhiễu",
       "Control thắng, vì variant chưa đạt mức tăng 4,3 pp"
     ],
     "optionsEn": [
-      "The variant wins, because 61% is higher than 60%",
+      "The variant wins, because 61% beats 60% on the same 1,000 sessions",
       "The variant definitely wins, because the relative lift is almost 1.7%",
-      "Inconclusive: the 1.0 pp difference is far smaller than the 4.3 pp noise margin",
+      "Inconclusive: the difference sits well inside the noise margin",
       "Control wins, because the variant did not reach a 4.3 pp lift"
     ],
     "answer": 2,
@@ -260,16 +260,16 @@
     "question": "Câu nào là phần \"so what\" tốt nhất gửi cho ban lãnh đạo?",
     "questionEn": "Which sentence is the best \"so what\" for senior management?",
     "options": [
-      "Thanh toán thẻ Android thất bại bất thường tuần 11/5 (thành công 40,9% so với khoảng 90% các tuần khác); mất GMV và tăng ticket; đề nghị thêm nhà cung cấp OTP dự phòng và cảnh báo hằng tuần",
-      "Tỷ lệ thành công thẻ Android là 40,9% trong tuần 2026-05-11",
-      "Chúng tôi đã chạy 12 query trên bảng payments và checkout_events",
-      "Có vẻ có vấn đề với thanh toán, chúng ta nên xem xét thêm"
+      "Thẻ Android lỗi bất thường tuần 11/5 (40,9% so với ~90%); mất GMV; đề nghị thêm nhà cung cấp OTP dự phòng",
+      "Tỷ lệ thành công thẻ Android là 40,9% trong tuần 2026-05-11, thấp hơn các tuần khác",
+      "Chúng tôi đã chạy 12 query trên bảng payments và checkout_events để tìm nguyên nhân",
+      "Có vẻ có vấn đề với thanh toán thẻ trên Android trong tháng này, chúng ta nên xem xét thêm khi có thời gian"
     ],
     "optionsEn": [
-      "Android card payments failed unusually in the week of 11 May (40.9% success vs about 90% in other weeks); lost GMV and more tickets; we recommend a backup OTP provider and a weekly alert",
-      "Android card success was 40.9% in week 2026-05-11",
-      "We ran 12 queries on the payments and checkout_events tables",
-      "There seems to be a problem with payments; we should look into it"
+      "Android card failures spiked in the 11 May week (40.9% vs ~90%); GMV lost; add a backup OTP provider",
+      "Android card success was 40.9% in week 2026-05-11, lower than in other weeks",
+      "We ran 12 queries on the payments and checkout_events tables to find the cause",
+      "There seems to be a problem with Android card payments this month; we should look into it when we can"
     ],
     "answer": 0,
     "explanation": "Phần \"so what\" tốt có đủ insight (con số kèm so sánh), impact (vì sao quan trọng) và recommendation (làm gì).",
@@ -292,16 +292,16 @@
     "question": "Kiểm tra dữ liệu cho kết quả: `approved_apps = 3106, loans = 3106, loans_not_approved = 0, bad_schedules = 0`. Điều này cho bạn biết gì?",
     "questionEn": "A data check returns: `approved_apps = 3106, loans = 3106, loans_not_approved = 0, bad_schedules = 0`. What does this tell you?",
     "options": [
-      "Mọi khoản vay đều đã được trả hết đúng hạn",
-      "Mỗi hồ sơ được duyệt có đúng một khoản vay và lịch trả nợ khớp kỳ hạn, nên có thể nối các bảng một cách an toàn",
-      "Không có hồ sơ nào bị từ chối trong toàn bộ dữ liệu",
-      "Điểm tín dụng của mọi hồ sơ đều hợp lệ, không có giá trị NULL"
+      "Mọi khoản vay đều đã được trả hết đúng hạn, không có kỳ nào quá hạn",
+      "Mỗi hồ sơ được duyệt có đúng một khoản vay và lịch trả nợ khớp, nên join an toàn",
+      "Không có hồ sơ nào bị từ chối trong toàn bộ dữ liệu, nên duyệt 100%",
+      "Điểm tín dụng của mọi hồ sơ đều hợp lệ, không có giá trị NULL nào cả, nên dùng được ngay"
     ],
     "optionsEn": [
-      "Every loan has been repaid in full and on time",
-      "Each approved application has exactly one loan and schedules match the terms, so the tables can be joined safely",
-      "No application was rejected anywhere in the data",
-      "Every application has a valid credit score, with no NULL values"
+      "Every loan has already been repaid in full and on time, with no overdue installments",
+      "Each approved application has exactly one loan with a matching schedule; joins are safe",
+      "No application was rejected anywhere in the data, so approval is 100%",
+      "Every application has a valid credit score, with no NULL values at all"
     ],
     "answer": 1,
     "explanation": "Số hồ sơ duyệt bằng số khoản vay, không có khoản vay nào từ hồ sơ không được duyệt, và số kỳ trả góp khớp kỳ hạn: nền dữ liệu đủ tin để phân tích.",
@@ -327,13 +327,13 @@
       "Giai đoạn cũ, vì ngày trong cột là 28/2",
       "Không xác định được, vì timestamp không ghi múi giờ",
       "Giai đoạn cũ, vì quyết định được đưa ra trước khi giải ngân",
-      "Giai đoạn mới, vì cộng 7 giờ thì là 04:28 ngày 1/3 giờ Việt Nam"
+      "Giai đoạn mới, vì cộng 7 tiếng là đã qua nửa đêm"
     ],
     "optionsEn": [
       "The old period, because the date in the column is 28 February",
       "Impossible to tell, because the timestamp has no time zone",
       "The old period, because the decision came before disbursement",
-      "The new period, because adding 7 hours gives 04:28 on 1 March, Vietnam time"
+      "The new period, because adding 7 hours passes midnight"
     ],
     "answer": 3,
     "explanation": "Mọi timestamp trong fintech.db là UTC; giờ Việt Nam là UTC+7. `date(applied_at, '+7 hours')` cho ra 2026-03-01, nên hồ sơ thuộc giai đoạn chính sách mới.",
@@ -388,16 +388,16 @@
     "question": "Trong bảng vintage tính đến 30/6/2026, dòng `2026-04 | loans 290 | mob2 4.1 | mob3 NULL`. Ô `mob3 = NULL` nghĩa là gì?",
     "questionEn": "In a vintage table as of 30 June 2026, the row reads `2026-04 | loans 290 | mob2 4.1 | mob3 NULL`. What does `mob3 = NULL` mean?",
     "options": [
-      "Chưa quan sát được: các khoản vay tháng 4 chưa đến cuối MOB 3 (31/7)",
+      "Chưa quan sát được: khoản vay tháng 4 chưa đi hết MOB 3",
       "Không có khoản vay tháng 4 nào trễ hạn ở MOB 3",
-      "Query bị lỗi chia cho 0 nên trả về NULL",
-      "Dữ liệu trả nợ tháng 7 đã bị xóa khỏi database"
+      "Query bị lỗi chia cho 0 nên trả về giá trị NULL",
+      "Dữ liệu trả nợ tháng 7 đã bị ai đó xóa nhầm khỏi database"
     ],
     "optionsEn": [
-      "Not observable yet: April loans have not reached the end of MOB 3 (31 July)",
-      "No April loan was overdue at MOB 3",
+      "Not observable yet: April loans have not finished MOB 3",
+      "No April loan was overdue at the end of MOB 3",
       "The query hit a division by zero and returned NULL",
-      "The July repayment data was deleted from the database"
+      "The July repayment data was deleted from the database by mistake"
     ],
     "answer": 0,
     "explanation": "Đây là right-censoring: ô chỉ được điền khi mọi khoản vay đã đến ngày cuối của MOB đó. NULL không phải 0.",
@@ -420,16 +420,16 @@
     "question": "So sánh tỷ lệ từng 30+ tại MOB 3 theo nhóm điểm: `560-599: before 8.8% → Mar 2026 21.4%` và `600-649: before 2.7% → Mar 2026 3.8%`. Đây là những nhóm mà quy tắc cũ cũng duyệt. Điều này cho thấy gì?",
     "questionEn": "Ever-30+ at MOB 3 by score band: `560-599: before 8.8% → Mar 2026 21.4%` and `600-649: before 2.7% → Mar 2026 3.8%`. These are bands the old rule also approved. What does this show?",
     "options": [
-      "Mức xấu đi của tháng 3 hoàn toàn do nhóm điểm mới 520–559 gây ra",
-      "Cả những khoản vay tương đương cũng tệ hơn, nên không thể giải thích chỉ bằng thay đổi cơ cấu",
+      "Mức xấu đi của tháng 3 hoàn toàn do nhóm điểm mới 520–559 kéo xuống mà thôi",
+      "Cả những khoản vay tương đương cũng tệ hơn, nên không chỉ do thay đổi cơ cấu",
       "Mô hình chấm điểm đã sai hoàn toàn và phải bỏ ngay",
-      "Nhóm điểm cao hơn luôn có tỷ lệ nợ xấu cao hơn"
+      "Nhóm điểm cao hơn luôn có tỷ lệ nợ xấu cao hơn nhóm điểm thấp"
     ],
     "optionsEn": [
       "March's deterioration is entirely caused by the new 520–559 band",
       "Comparable loans got worse too, so mix shift alone cannot explain it",
       "The scoring model is completely wrong and must be dropped now",
-      "Higher score bands always have higher bad rates"
+      "Higher score bands always have higher bad rates than lower ones"
     ],
     "answer": 1,
     "explanation": "So sánh cùng nhóm điểm giữa hai giai đoạn (like for like) cho thấy các nhóm cũ cũng tệ đi, nên mix shift không giải thích được toàn bộ.",
@@ -455,13 +455,13 @@
       "Vì năm 2025 có nhiều khoản vay hơn nên mẫu lớn hơn",
       "Vì chính sách mới được thử nghiệm trước vào mùa xuân năm 2025",
       "Để thay thế nhóm \"trước\" bị thiếu dữ liệu",
-      "Để kiểm tra mùa vụ: nếu cùng kỳ năm ngoái bình thường thì mùa vụ không giải thích được mức xấu đi"
+      "Để kiểm tra mùa vụ: so với cùng kỳ năm ngoái"
     ],
     "optionsEn": [
       "Because 2025 has more loans, so the sample is bigger",
       "Because the new policy was piloted in spring 2025",
       "To replace the \"before\" group, which has missing data",
-      "To check seasonality: if the same months last year were normal, the season does not explain the deterioration"
+      "To check seasonality against the same months last year"
     ],
     "answer": 3,
     "explanation": "Tháng 3 và 4/2025 chỉ ở 3,4% và 1,6% tại MOB 3, nên mùa xuân không tự nó làm khoản vay xấu đi; mức 7,4% của tháng 3/2026 cần nguyên nhân khác.",
@@ -484,15 +484,15 @@
     "question": "Nhóm điểm mới 520–559 (vintage 3–4/2026): 42 khoản đang trả tốt có thể mang về tối đa khoảng 97 triệu đồng tiền lãi; 11 khoản đã 30+ DPD còn nợ khoảng 121 triệu đồng. Kết luận nào hợp lý nhất?",
     "questionEn": "New 520–559 band (Mar–Apr 2026 vintages): the 42 performing loans can earn at most about 97 million VND of interest; the 11 loans already 30+ DPD still owe about 121 million VND. Which conclusion is most reasonable?",
     "options": [
-      "Nhóm này lãi 97 triệu, vì tiền lãi là doanh thu chắc chắn",
-      "Nhóm này lỗ chính xác 24 triệu (121 − 97)",
-      "Đây là ước lượng thô: nhóm này cùng lắm chỉ hòa vốn, chưa tính chi phí, và các khoản vay còn non",
+      "Nhóm này lãi 97 triệu, vì tiền lãi là doanh thu chắc chắn sẽ thu được đủ",
+      "Nhóm này lỗ chính xác 24 triệu đồng (121 − 97), không hơn không kém",
+      "Ước lượng thô: cùng lắm chỉ hòa vốn trước chi phí, và khoản vay còn non",
       "Chưa nói được gì cho đến khi mọi khoản vay đáo hạn"
     ],
     "optionsEn": [
-      "The band makes 97 million profit, because interest is guaranteed revenue",
-      "The band loses exactly 24 million (121 − 97)",
-      "A rough estimate: the band is at best break-even before costs, and the loans are still young",
+      "The band makes 97 million profit, because interest is guaranteed revenue for us",
+      "The band loses exactly 24 million VND (121 − 97), no more, no less",
+      "A rough estimate: at best break-even before costs, and the loans are young",
       "Nothing can be said until every loan has matured"
     ],
     "answer": 2,
@@ -516,16 +516,16 @@
     "question": "Lưu ý (caveat) nào quan trọng nhất cần đưa vào memo về thay đổi chính sách tháng 3?",
     "questionEn": "Which caveat is most important to include in the memo about the March policy change?",
     "options": [
-      "Số khoản vay xấu còn nhỏ, vintage còn non, và chính sách với chiến dịch bắt đầu cùng lúc nên tác động chồng lên nhau",
-      "Các query được viết bằng SQLite thay vì PostgreSQL",
-      "Bảng `customers` có một số cách viết tên thành phố khác nhau",
-      "Dữ liệu được lấy vào buổi sáng chứ không phải buổi chiều"
+      "Số khoản xấu còn nhỏ, vintage còn non, và chiến dịch chạy cùng lúc với chính sách",
+      "Các query được viết bằng SQLite thay vì PostgreSQL như hệ thống production",
+      "Bảng `customers` có một số cách viết tên thành phố khác nhau vẫn cần được làm sạch",
+      "Dữ liệu được lấy vào buổi sáng chứ không phải buổi chiều như mọi khi"
     ],
     "optionsEn": [
-      "Bad-loan counts are small, vintages are young, and policy and campaign started together so their effects overlap",
-      "The queries were written in SQLite rather than PostgreSQL",
-      "The `customers` table has several spellings of city names",
-      "The data was pulled in the morning, not the afternoon"
+      "Few bad loans, young vintages, and a campaign running at the same time as the policy",
+      "The queries were written in SQLite rather than PostgreSQL like production",
+      "The `customers` table has several different spellings of city names that need cleaning",
+      "The data was pulled in the morning rather than the afternoon as usual"
     ],
     "answer": 0,
     "explanation": "Caveat tốt là những điều có thể thay đổi kết luận: mẫu nhỏ, cohort còn non, và hai thay đổi xảy ra cùng lúc nên không tách bạch được.",
@@ -548,16 +548,16 @@
     "question": "CEO nói: \"PAR30 của toàn danh mục gần như không đổi, nên khoản vay mới không thể tệ.\" Vì sao lập luận này yếu?",
     "questionEn": "The CEO says: \"PAR30 for the whole book barely moved, so the new loans can't be bad.\" Why is this argument weak?",
     "options": [
-      "Vì PAR30 chỉ tính cho khoản vay BNPL, không tính khoản vay tiền mặt",
-      "Vì mẫu số gồm cả khoản vay cũ chiếm đa số, còn khoản vay mới quá non để kịp thành nợ xấu",
-      "Vì PAR30 luôn đi ngang trong mọi danh mục cho vay",
+      "Vì PAR30 chỉ tính cho các khoản vay BNPL, hoàn toàn không tính khoản vay tiền mặt",
+      "Vì mẫu số chủ yếu là khoản vay cũ, còn khoản vay mới chưa kịp thành nợ xấu",
+      "Vì PAR30 luôn đi ngang trong mọi danh mục cho vay, dù tốt hay xấu",
       "Vì PAR30 tính theo số khách hàng chứ không theo số tiền"
     ],
     "optionsEn": [
-      "Because PAR30 only covers BNPL loans, not cash loans",
-      "Because the denominator is mostly older loans, and the new loans are too young to have gone bad yet",
-      "Because PAR30 is always flat in every loan book",
-      "Because PAR30 is counted per customer, not per amount"
+      "Because PAR30 only covers BNPL loans and leaves out all cash loans",
+      "Because old loans dominate the denominator and new loans are too young to go bad",
+      "Because PAR30 is always flat in every loan book, good or bad",
+      "Because PAR30 is counted per customer, rather than by the amount of money still owed"
     ],
     "answer": 1,
     "explanation": "Một tỷ lệ của toàn danh mục pha loãng khoản vay mới trong một mẫu số lớn gồm khoản vay đã \"già\". Vintage so các khoản vay ở cùng độ tuổi nên phát hiện vấn đề sớm hơn.",

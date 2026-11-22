@@ -4,9 +4,10 @@
 // instant per-item feedback. The rows are exported on their own because the
 // Part review pages mix choose-one and find-and-fix items in one list.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RotateCcw } from "lucide-react";
 import { useLang } from "@/context/lang";
+import { shuffledIndices } from "@/lib/useOptionOrder";
 import { cn } from "@/lib/utils";
 import type {
   ChoiceItem,
@@ -55,6 +56,15 @@ function Stem({ children, index }: { children: React.ReactNode; index: number })
 function ChoiceRow({ item, index, tokens, state, mark, hideAnswers, trapHref, onWrongTrap }: RowProps) {
   const choice = item as ChoiceItem;
   const [picked, setPicked] = useState<number | null>(null);
+  // Shown in a random order: two thirds of the authored answers sit in the second slot.
+  // Shuffled after mount — these pages are pre-rendered, and a random order during
+  // render would not match between the server HTML and the browser.
+  const [order, setOrder] = useState(() => choice.options.map((_, i) => i));
+
+  useEffect(() => {
+    setOrder(shuffledIndices(choice.options.length));
+  }, [choice.options.length]);
+
   const done = state !== undefined;
 
   return (
@@ -64,7 +74,8 @@ function ChoiceRow({ item, index, tokens, state, mark, hideAnswers, trapHref, on
       </p>
 
       <div className="mt-2 flex flex-wrap gap-2">
-        {choice.options.map((option, optionIndex) => {
+        {order.map((optionIndex) => {
+          const option = choice.options[optionIndex];
           const chosen = picked === optionIndex;
           const right = optionIndex === choice.answer;
 

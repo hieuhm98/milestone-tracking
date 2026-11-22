@@ -104,16 +104,16 @@
     "question": "Điểm khác biệt CHÍNH giữa Global Secondary Index (GSI) và Local Secondary Index (LSI) trong DynamoDB là gì?",
     "questionEn": "What is the KEY difference between a Global Secondary Index (GSI) and a Local Secondary Index (LSI) in DynamoDB?",
     "options": [
-      "GSI phải có cùng partition key với bảng gốc, LSI thì không",
-      "GSI có thể có partition key khác và tạo bất kỳ lúc nào; LSI cùng partition key và chỉ tạo khi tạo bảng",
-      "LSI có RCU/WCU riêng, GSI dùng chung với bảng",
-      "GSI chỉ hỗ trợ strong consistency, LSI thì eventually consistent"
+      "GSI: cùng partition key, thêm bất cứ lúc nào; LSI: key riêng, chỉ lúc tạo bảng",
+      "GSI: key riêng, thêm bất cứ lúc nào; LSI: cùng partition key, chỉ lúc tạo bảng",
+      "LSI: RCU/WCU riêng, thêm bất cứ lúc nào; GSI: dùng chung capacity với bảng",
+      "GSI: chỉ đọc strong consistency; LSI: chỉ eventually consistent"
     ],
     "optionsEn": [
-      "GSI must share the base table's partition key, LSI does not",
-      "GSI can have a different partition key and be created any time; LSI shares the partition key and is created only at table creation",
-      "LSI has its own RCU/WCU, GSI shares capacity with the table",
-      "GSI supports only strong consistency, LSI is eventually consistent"
+      "GSI: same partition key, add anytime; LSI: own key, creation only",
+      "GSI: own partition key, add anytime; LSI: same key, creation only",
+      "LSI: own RCU/WCU, add anytime; GSI: shares the table's capacity",
+      "GSI: strongly consistent reads only; LSI: eventually consistent only"
     ],
     "answer": 1,
     "explanation": "GSI dùng partition key bất kỳ, tạo được bất cứ lúc nào, có capacity riêng, eventually consistent; LSI dùng cùng partition key, chỉ tạo lúc tạo bảng và hỗ trợ strong consistency.",
@@ -185,15 +185,15 @@
     "questionEn": "You want to authorize requests to API Gateway using custom logic that validates a token from a third-party identity provider. Which mechanism?",
     "options": [
       "Lambda authorizer",
-      "IAM policy trên bảng DynamoDB",
-      "Security group",
-      "S3 bucket policy"
+      "IAM authorization (SigV4)",
+      "API key kèm usage plan",
+      "Resource policy trên API"
     ],
     "optionsEn": [
       "Lambda authorizer",
-      "IAM policy on the DynamoDB table",
-      "Security group",
-      "S3 bucket policy"
+      "IAM authorization (SigV4)",
+      "API keys with a usage plan",
+      "A resource policy on the API"
     ],
     "answer": 0,
     "explanation": "Lambda authorizer chạy code tùy chỉnh để xác thực token và quyết định cho phép/từ chối request, phù hợp khi tích hợp identity provider bên thứ ba.",
@@ -284,16 +284,16 @@
     "question": "Trong mẫu S3 → Lambda, S3 được cấp quyền gọi hàm Lambda bằng cách nào?",
     "questionEn": "In the S3 → Lambda pattern, how is S3 permitted to invoke the Lambda function?",
     "options": [
-      "Bằng một ACL trên bucket",
-      "Bằng một security group cho phép S3",
-      "Bằng resource-based policy trên chính hàm Lambda, cho phép service principal của S3",
-      "Bằng access key của một IAM user lưu trong cấu hình bucket"
+      "ACL trên bucket cấp quyền invoke cho Lambda",
+      "Security group trên hàm Lambda cho phép traffic từ S3",
+      "Resource-based policy trên hàm, chỉ định S3 làm principal",
+      "Access key của IAM user lưu trong cấu hình event của bucket"
     ],
     "optionsEn": [
-      "By an ACL on the bucket",
-      "By a security group that permits S3",
-      "By a resource-based policy on the Lambda function itself allowing the S3 service principal",
-      "By an IAM user's access key stored in the bucket configuration"
+      "An ACL on the bucket granting invoke rights to Lambda",
+      "A security group on the function that allows S3 traffic",
+      "A resource-based policy on the function naming S3 as principal",
+      "An IAM user's access key stored in the bucket's event config"
     ],
     "answer": 2,
     "explanation": "Lambda có resource-based policy (khác với execution role). Khi bạn tạo S3 event notification, AWS tự thêm permission cho `s3.amazonaws.com` gọi hàm. Execution role là quyền để hàm gọi ra ngoài.",
@@ -304,16 +304,16 @@
     "question": "Một Lambda được kích hoạt khi upload lên S3 và ghi kết quả trở lại S3. Làm sao tránh vòng lặp vô hạn?",
     "questionEn": "A Lambda is triggered by an S3 upload and writes its output back to S3. How do you avoid an infinite loop?",
     "options": [
-      "Tăng timeout của hàm Lambda",
-      "Cấp thêm memory cho hàm",
-      "Bật versioning trên bucket",
-      "Ghi kết quả sang bucket khác hoặc prefix khác không nằm trong phạm vi trigger"
+      "Tăng timeout của hàm để mỗi lần chạy hoàn tất trước",
+      "Đặt reserved concurrency = 1 để chỉ một bản chạy mỗi lúc",
+      "Bật versioning để việc ghi đè không phát sinh event mới",
+      "Lưu sang bucket khác hoặc prefix ngoài phạm vi trigger"
     ],
     "optionsEn": [
-      "Increase the Lambda function's timeout",
-      "Give the function more memory",
-      "Enable versioning on the bucket",
-      "Write the output to a different bucket, or a prefix that the trigger does not cover"
+      "Raise the function's timeout so each run completes first",
+      "Set reserved concurrency to 1 so only one copy runs at a time",
+      "Enable versioning so overwrites don't fire a new event",
+      "Send results to another bucket or a prefix outside the trigger"
     ],
     "answer": 3,
     "explanation": "Đây là bẫy kinh điển: hàm ghi vào chính nơi nó đang lắng nghe → tự kích hoạt lại mãi mãi. Tách bucket đích, hoặc giới hạn trigger bằng prefix/suffix filter.",

@@ -4,16 +4,16 @@
     "question": "API của một startup chạy trên một instance PostgreSQL. p99 latency tăng vọt khi lượng user tăng gấp đôi, CPU của database ở mức 90%. CTO đề xuất shard database ngay. Architect nên làm gì TRƯỚC?",
     "questionEn": "A startup's API runs on a single PostgreSQL instance. p99 latency spikes after users double, and database CPU sits at 90%. The CTO proposes sharding right away. What should the architect do FIRST?",
     "options": [
-      "Shard theo `user_id` ngay để chia tải ra bốn node",
-      "Tìm query tốn kém bằng `pg_stat_statements` và `EXPLAIN ANALYZE`, rồi thêm index và sửa query",
-      "Chuyển toàn bộ dữ liệu sang Cassandra vì nó scale ngang tốt hơn",
-      "Bật multi-leader replication để mọi node đều nhận ghi"
+      "Shard theo `user_id` ngay để chia tải ra bốn node trước khi lượng user tăng tiếp",
+      "Tìm query tốn kém bằng `pg_stat_statements`/`EXPLAIN ANALYZE`, rồi thêm index và sửa query",
+      "Chuyển toàn bộ dữ liệu sang Cassandra vì nó scale ngang tốt hơn PostgreSQL",
+      "Bật multi-leader replication để mọi node đều nhận ghi và chia sẻ CPU"
     ],
     "optionsEn": [
-      "Shard by `user_id` immediately to spread the load over four nodes",
-      "Find the expensive queries with `pg_stat_statements` and `EXPLAIN ANALYZE`, then add indexes and fix queries",
-      "Move all data to Cassandra because it scales out better",
-      "Enable multi-leader replication so every node accepts writes"
+      "Shard by `user_id` immediately to spread the load over four nodes before users grow again",
+      "Find costly queries with `pg_stat_statements`/`EXPLAIN ANALYZE`, then index and fix them",
+      "Move all data to Cassandra because it scales out better than PostgreSQL does",
+      "Enable multi-leader replication so every node accepts writes and shares the CPU"
     ],
     "answer": 1,
     "explanation": "Sharding là nấc cuối của thang scale và mang theo chi phí vĩnh viễn. CPU cao trên một instance thường do seq scan, thiếu index hoặc N+1 query — những thứ sửa rẻ hơn rất nhiều. Đổi sang Cassandra hay multi-leader đều thêm độ phức tạp lớn mà chưa hề chẩn đoán nguyên nhân.",
@@ -44,16 +44,16 @@
     "question": "Điểm khác biệt cốt lõi khi thiết kế dữ liệu cho DynamoDB hoặc Cassandra so với database quan hệ là gì?",
     "questionEn": "What is the core difference when designing data for DynamoDB or Cassandra compared with a relational database?",
     "options": [
-      "Bắt đầu từ các access pattern đã biết rồi phi chuẩn hoá dữ liệu cho vừa; một kiểu query mới có thể cần index mới hoặc nặn lại dữ liệu",
-      "Chuẩn hoá tới 3NF rồi dựa vào join để phục vụ mọi query về sau",
+      "Bắt đầu từ access pattern đã biết rồi phi chuẩn hoá; query mới có thể cần index mới",
+      "Chuẩn hoá tới 3NF rồi dựa vào join phía server để phục vụ mọi query về sau",
       "Vì không có schema cố định nên query nào cũng nhanh như nhau mà không cần thiết kế",
-      "Phải khai báo foreign key giữa các bảng để engine tự tối ưu truy vấn"
+      "Phải khai báo foreign key giữa các bảng để engine tự tối ưu đường truy vấn"
     ],
     "optionsEn": [
-      "Start from the known access patterns and denormalise data to fit them; a new query pattern may need a new index or reshaped data",
-      "Normalise to 3NF and rely on joins to serve any query later",
+      "Start from known access patterns and denormalise; a new query may need a new index",
+      "Normalise to 3NF and rely on server-side joins to serve any query that comes later",
       "Because there is no fixed schema, every query is equally fast without any design",
-      "Declare foreign keys between tables so the engine optimises queries itself"
+      "Declare foreign keys between tables so the engine optimises access paths by itself"
     ],
     "answer": 0,
     "explanation": "Relational: mô hình hoá dữ liệu, query sau. DynamoDB/Cassandra: mô hình hoá query trước, dữ liệu theo sau. Đổi lại độ trễ ổn định ở quy mô lớn, chúng không có join hay foreign key, và schema linh hoạt không có nghĩa là query nào cũng nhanh.",
@@ -84,16 +84,16 @@
     "question": "Một query chạy mất gần 1 giây. Kết quả `EXPLAIN ANALYZE` cho thấy gì là nguyên nhân khả dĩ nhất?\n`Seq Scan on orders (actual time=0.015..912.300 rows=3 loops=1)\n  Filter: (customer_id = 42)\n  Rows Removed by Filter: 4999997`",
     "questionEn": "A query takes almost 1 second. What does this `EXPLAIN ANALYZE` output point to as the most likely cause?\n`Seq Scan on orders (actual time=0.015..912.300 rows=3 loops=1)\n  Filter: (customer_id = 42)\n  Rows Removed by Filter: 4999997`",
     "options": [
-      "Thống kê cũ khiến planner chọn hash join thay vì nested loop",
-      "Không có index dùng được trên `customer_id`, nên engine đọc 5 triệu dòng để lấy 3",
-      "Bảng đang bị một transaction khác khoá độc quyền",
-      "`work_mem` quá nhỏ nên phép sắp xếp tràn xuống đĩa"
+      "Thống kê cũ khiến planner chọn hash join thay vì nested loop cho bảng orders",
+      "Không có index dùng được trên `customer_id` nên đọc 5 triệu dòng để lấy 3",
+      "Bảng đang bị một transaction khác khoá độc quyền nên query phải chờ gần 1 giây",
+      "`work_mem` quá nhỏ nên phép sắp xếp kết quả tràn xuống đĩa tạm"
     ],
     "optionsEn": [
-      "Stale statistics made the planner pick a hash join instead of a nested loop",
-      "There is no usable index on `customer_id`, so the engine reads 5 million rows to return 3",
-      "The table is exclusively locked by another transaction",
-      "`work_mem` is too small so a sort spills to disk"
+      "Stale statistics made the planner pick a hash join instead of a nested loop here",
+      "No usable index on `customer_id`, so the engine reads 5 million rows to return 3",
+      "The table is exclusively locked by another transaction, so the query waits ~1 second",
+      "`work_mem` is too small, so sorting the result spills to temporary disk files"
     ],
     "answer": 1,
     "explanation": "Seq Scan cộng với gần 5 triệu dòng bị filter loại bỏ để trả về 3 dòng là dấu hiệu kinh điển của thiếu index. Plan không có join hay sort nào, và thời gian nằm ở chính việc quét chứ không phải chờ lock.",
@@ -104,16 +104,16 @@
     "question": "Bảng `users` có index B-tree trên `email`, nhưng query đăng nhập `WHERE lower(email) = 'lan@example.com'` vẫn chạy Seq Scan trên 20 triệu dòng. Cách sửa đúng là gì?",
     "questionEn": "The `users` table has a B-tree index on `email`, yet the login query `WHERE lower(email) = 'lan@example.com'` still does a Seq Scan over 20 million rows. What is the right fix?",
     "options": [
-      "Tạo expression index trên `lower(email)` (hoặc lưu email đã chuẩn hoá chữ thường)",
-      "Tăng `shared_buffers` để bảng nằm gọn trong bộ nhớ",
-      "Chạy `VACUUM FULL` để xây lại bảng và index",
-      "Thêm một read replica và chuyển query đăng nhập sang đó"
+      "Tạo expression index trên `lower(email)`, hoặc lưu email ở dạng chữ thường",
+      "Tăng `shared_buffers` để toàn bộ bảng và index nằm gọn trong bộ nhớ",
+      "Chạy `VACUUM FULL` để xây lại bảng và index rồi cập nhật thống kê",
+      "Thêm một read replica và chuyển query đăng nhập sang đó để giảm tải primary"
     ],
     "optionsEn": [
-      "Create an expression index on `lower(email)` (or store the email already lower-cased)",
-      "Increase `shared_buffers` so the table fits in memory",
-      "Run `VACUUM FULL` to rebuild the table and index",
-      "Add a read replica and send the login query there"
+      "Create an expression index on `lower(email)`, or store emails lower-cased",
+      "Increase `shared_buffers` so the whole table and index fit in memory",
+      "Run `VACUUM FULL` to rebuild the table and index, then refresh statistics",
+      "Add a read replica and route the login query there to offload the primary"
     ],
     "answer": 0,
     "explanation": "Index lưu giá trị gốc của `email`; bọc cột trong hàm `lower()` khiến engine không so khớp được với index đó. Expression index lưu sẵn kết quả `lower(email)` nên query dùng được. Thêm bộ nhớ, VACUUM hay replica chỉ làm cú quét toàn bảng rẻ hơn chút hoặc chuyển nó sang chỗ khác.",
@@ -124,16 +124,16 @@
     "question": "Trong một đợt flash sale, sản phẩm chỉ còn 1 chiếc nhưng bị bán cho 2 khách. Code đọc `stock`, kiểm tra `stock > 0` trong app, rồi ghi `stock = stock_cũ - 1`. Cách sửa gọn và an toàn nhất?",
     "questionEn": "During a flash sale a product with 1 unit left was sold to 2 customers. The code reads `stock`, checks `stock > 0` in the app, then writes `stock = old_stock - 1`. What is the simplest safe fix?",
     "options": [
-      "Chuyển bước đọc `stock` sang read replica để giảm tải cho leader",
-      "Tăng kích thước connection pool để các request xử lý nhanh hơn",
-      "Thêm index trên `product_id` để bước đọc nhanh hơn",
-      "Dùng một lệnh nguyên tử `UPDATE ... SET stock = stock - 1 WHERE id = ? AND stock > 0` và kiểm tra số dòng bị ảnh hưởng"
+      "Chuyển bước đọc `stock` sang read replica để giảm tải cho leader trong giờ cao điểm",
+      "Tăng kích thước connection pool để các request xử lý nhanh hơn và ít chồng chéo",
+      "Thêm index trên `product_id` để bước đọc nhanh hơn, thu hẹp khoảng race condition",
+      "Một lệnh nguyên tử `UPDATE ... SET stock = stock - 1 WHERE id = ? AND stock > 0`, kiểm tra số dòng"
     ],
     "optionsEn": [
-      "Move the `stock` read to a read replica to offload the leader",
-      "Increase the connection pool size so requests finish faster",
-      "Add an index on `product_id` so the read is faster",
-      "Use one atomic `UPDATE ... SET stock = stock - 1 WHERE id = ? AND stock > 0` and check the affected row count"
+      "Move the `stock` read to a read replica to offload the leader during the peak traffic",
+      "Increase the connection pool size so requests finish faster and overlap less often",
+      "Add an index on `product_id` so the read is faster and the race window shrinks",
+      "One atomic `UPDATE ... SET stock = stock - 1 WHERE id = ? AND stock > 0`, checking rows affected"
     ],
     "answer": 3,
     "explanation": "Đây là lost update do đọc–sửa–ghi. Đưa điều kiện và phép trừ vào cùng một lệnh để database kiểm tra và khoá dòng một cách nguyên tử; 0 dòng bị ảnh hưởng nghĩa là hết hàng. Đọc từ replica còn tệ hơn vì dữ liệu có thể cũ; làm nhanh hơn không xoá được race condition.",
@@ -184,16 +184,16 @@
     "question": "Một dịch vụ thanh toán yêu cầu không được mất bất kỳ giao dịch đã commit nào khi database chính chết (RPO = 0), và chấp nhận commit chậm hơn vài mili giây. Thiết kế replication nào phù hợp?",
     "questionEn": "A payment service must not lose any committed transaction when the primary database dies (RPO = 0) and accepts commits being a few milliseconds slower. Which replication design fits?",
     "options": [
-      "Replication đồng bộ tới ít nhất một standby trước khi xác nhận commit",
-      "Nhiều read replica bất đồng bộ ở các AZ khác nhau",
-      "Snapshot toàn bộ database mỗi đêm sang một region khác",
-      "Multi-leader replication với last-write-wins"
+      "Replication đồng bộ tới ít nhất một standby trước khi báo commit thành công",
+      "Nhiều read replica bất đồng bộ ở các AZ khác nhau với failover tự động",
+      "Snapshot toàn bộ database mỗi đêm sang region khác kèm WAL archive hằng giờ",
+      "Multi-leader replication giữa hai AZ, xử lý xung đột bằng last-write-wins"
     ],
     "optionsEn": [
       "Synchronous replication to at least one standby before acknowledging a commit",
-      "Several asynchronous read replicas in different AZs",
-      "A nightly full snapshot copied to another region",
-      "Multi-leader replication with last-write-wins"
+      "Several asynchronous read replicas in different AZs with automatic failover",
+      "A nightly full snapshot copied to another region plus hourly WAL archiving",
+      "Multi-leader replication across two AZs with last-write-wins conflict handling"
     ],
     "answer": 0,
     "explanation": "Với replication đồng bộ, leader chỉ xác nhận commit khi standby đã ghi nhận, nên failover không làm mất commit — cái giá là thêm độ trễ mỗi lần ghi. Replica async có thể thiếu các commit cuối, snapshot hằng đêm có RPO tới 24 giờ, còn last-write-wins âm thầm vứt bỏ bản ghi.",
@@ -224,16 +224,16 @@
     "question": "Mọi lệnh đọc của app được chuyển sang read replica bất đồng bộ. User đổi tên hiển thị, trang tải lại vẫn hiện tên cũ, vài giây sau mới đúng. Nguyên nhân và cách sửa phù hợp?",
     "questionEn": "All reads go to asynchronous read replicas. A user changes their display name; the reloaded page still shows the old name, and it becomes correct a few seconds later. What is the cause and a suitable fix?",
     "options": [
-      "Cache bị evict quá sớm; tăng TTL của cache",
+      "Cache ứng dụng bị evict quá sớm nên đọc lại giá trị cũ; tăng TTL của cache",
       "Hai transaction bị deadlock; giảm mức cô lập xuống Read Uncommitted",
-      "Replication lag; đảm bảo read-your-writes, ví dụ đọc từ leader một lúc sau khi user vừa ghi",
-      "Index trên bảng users bị hỏng; chạy `REINDEX`"
+      "Replication lag; cần read-your-writes, ví dụ đọc từ leader ngay sau khi ghi",
+      "Index trên bảng users bị hỏng nên trả về dòng cũ; chạy `REINDEX` để sửa"
     ],
     "optionsEn": [
-      "The cache was evicted too early; raise the cache TTL",
-      "Two transactions deadlocked; lower isolation to Read Uncommitted",
-      "Replication lag; provide read-your-writes, for example read from the leader for a while after the user writes",
-      "The users table index is corrupt; run `REINDEX`"
+      "The app cache was evicted too early and reloaded an old value; raise the cache TTL",
+      "Two transactions deadlocked on the row; lower isolation to Read Uncommitted",
+      "Replication lag; provide read-your-writes, e.g. leader reads just after a write",
+      "The users table index is corrupt and returns stale rows; run `REINDEX` to fix it"
     ],
     "answer": 2,
     "explanation": "Dữ liệu cũ rồi tự đúng sau vài giây là dấu hiệu điển hình của replica chưa bắt kịp leader. Sửa bằng read-your-writes: đọc từ leader trong một khoảng ngắn sau khi ghi, hoặc chờ replica đạt tới LSN/GTID của lần ghi. Deadlock sinh lỗi chứ không trả dữ liệu cũ, và index hỏng không tự lành.",
@@ -244,16 +244,16 @@
     "question": "Bảng `logs` có 2 tỷ dòng trên một server PostgreSQL; CPU và thông lượng ghi vẫn ổn, nhưng xoá dữ liệu cũ hơn 12 tháng mất hàng giờ và làm bảng phình to. Giải pháp phù hợp nhất?",
     "questionEn": "A `logs` table holds 2 billion rows on one PostgreSQL server; CPU and write throughput are fine, but deleting data older than 12 months takes hours and bloats the table. What is the best fit?",
     "options": [
-      "Shard bảng ra 8 node bằng hash của `id`",
-      "Partition theo khoảng thời gian (mỗi tháng một partition) ngay trên database đó và drop partition cũ",
-      "Thêm ba read replica để chia tải",
-      "Chuyển bảng logs sang Redis với TTL 12 tháng"
+      "Shard bảng ra 8 node bằng hash của `id` để mỗi node xoá ít dữ liệu hơn",
+      "Partition theo tháng ngay trên database đó và drop các partition cũ",
+      "Thêm ba read replica để chia tải xoá và đọc khỏi server chính",
+      "Chuyển bảng logs sang Redis với TTL 12 tháng để dữ liệu cũ tự hết hạn"
     ],
     "optionsEn": [
-      "Shard the table across 8 nodes by hash of `id`",
-      "Range-partition by time (one partition per month) on the same database and drop old partitions",
-      "Add three read replicas to share the load",
-      "Move the logs table to Redis with a 12-month TTL"
+      "Shard the table across 8 nodes by hash of `id` so each node deletes less data",
+      "Range-partition by month on the same database and drop old partitions",
+      "Add three read replicas to take the delete and read load off the primary",
+      "Move the logs table to Redis with a 12-month TTL so old data expires itself"
     ],
     "answer": 1,
     "explanation": "Vấn đề là quản lý bảng lớn và xoá theo thời gian, không phải vượt năng lực một node. Partition theo tháng cho phép drop cả partition gần như tức thì và planner bỏ qua partition không liên quan. Sharding thêm phức tạp không cần thiết, replica không giúp việc xoá, còn Redis giữ mọi thứ trong RAM.",
@@ -284,16 +284,16 @@
     "question": "Một hệ thống định tuyến bằng `shard = hash(key) mod 4`. Khi thêm shard thứ năm, gần như mọi key đổi shard và phải di chuyển. Kỹ thuật nào giới hạn lượng dữ liệu phải dời khi thêm node?",
     "questionEn": "A system routes with `shard = hash(key) mod 4`. When a fifth shard is added, almost every key changes shard and must move. Which technique limits how much data moves when nodes are added?",
     "options": [
-      "Chuyển sang chia theo khoảng của `created_at`",
-      "Tăng số replica trên mỗi shard",
-      "Dùng two-phase commit cho mọi lệnh ghi",
-      "Consistent hashing, hoặc chia sẵn thành nhiều shard logic ánh xạ lên ít node vật lý"
+      "Chuyển sang chia theo khoảng của `created_at` để key mới luôn vào shard mới",
+      "Tăng số replica trên mỗi shard để dữ liệu sẵn có ở nhiều node hơn",
+      "Dùng two-phase commit cho mọi lệnh ghi trong lúc di chuyển dữ liệu",
+      "Consistent hashing, hoặc chia sẵn nhiều shard logic lên ít node vật lý"
     ],
     "optionsEn": [
-      "Switch to range partitioning on `created_at`",
-      "Increase the number of replicas per shard",
-      "Use two-phase commit for every write",
-      "Consistent hashing, or pre-splitting into many logical shards mapped onto few physical nodes"
+      "Switch to range partitioning on `created_at` so new keys always go to the new shard",
+      "Increase replicas per shard so the data already lives on more nodes",
+      "Use two-phase commit for every write while the data is being moved",
+      "Consistent hashing, or many pre-split logical shards mapped onto few nodes"
     ],
     "answer": 3,
     "explanation": "Với consistent hashing, thêm một node chỉ dời khoảng 1/N số key; với shard logic chia sẵn, tăng trưởng chỉ là dời nguyên shard logic sang node mới mà công thức định tuyến không đổi. Chia theo thời gian tạo điểm nóng, còn replica và two-phase commit không liên quan tới việc key nằm ở shard nào.",
@@ -304,15 +304,15 @@
     "question": "Mạng giữa hai data center bị đứt, chia cụm database làm hai phía. Một hệ thống CP theo định lý CAP sẽ hành xử thế nào?",
     "questionEn": "The network between two data centres fails, splitting a database cluster into two sides. How does a CP system in CAP terms behave?",
     "options": [
-      "Tiếp tục phục vụ cả hai phía bằng dữ liệu có thể đã cũ",
+      "Tiếp tục phục vụ cả hai phía bằng dữ liệu cục bộ, chấp nhận có thể đã cũ",
       "Nhận ghi ở cả hai phía rồi hợp nhất xung đột khi mạng phục hồi",
-      "Từ chối hoặc timeout các request ở phía không đạt được quorum, thay vì trả dữ liệu có thể sai",
+      "Từ chối hoặc timeout request ở phía không đạt quorum, thay vì trả dữ liệu có thể sai",
       "Tắt vĩnh viễn replication và để mỗi phía thành một database độc lập"
     ],
     "optionsEn": [
-      "Keep serving both sides with possibly stale data",
+      "Keep serving both sides from local data, accepting that it may be stale",
       "Accept writes on both sides and merge conflicts when the network heals",
-      "Reject or time out requests on the side that cannot reach a quorum, rather than return possibly wrong data",
+      "Refuse or time out requests on the minority side rather than risk wrong data",
       "Permanently disable replication and make each side an independent database"
     ],
     "answer": 2,
@@ -324,16 +324,16 @@
     "question": "Vì sao PACELC thường được xem là cách diễn đạt hữu ích hơn CAP khi thảo luận kiến trúc?",
     "questionEn": "Why is PACELC often seen as a more useful framing than CAP in architecture discussions?",
     "options": [
-      "Vì PACELC thay thế ACID cho các hệ thống phân tán",
-      "Vì CAP chỉ nói về lúc có partition, còn PACELC thêm đánh đổi latency và consistency khi hệ thống chạy bình thường",
-      "Vì PACELC chứng minh một hệ phân tán có thể vừa CA vừa chịu được partition",
-      "Vì PACELC mô tả đánh đổi giữa lưu trên đĩa và lưu trong bộ nhớ"
+      "Vì PACELC thay thế ACID làm mô hình đảm bảo cho các hệ thống chạy trên nhiều region",
+      "CAP chỉ xét lúc partition; PACELC thêm đánh đổi latency/consistency lúc ổn định",
+      "Vì PACELC chứng minh một hệ phân tán có thể vừa CA vừa chịu được partition mạng",
+      "Vì PACELC mô tả đánh đổi giữa lưu trên đĩa và lưu trong bộ nhớ khi xảy ra partition"
     ],
     "optionsEn": [
-      "Because PACELC replaces ACID for distributed systems",
-      "Because CAP only covers partitions, while PACELC adds the latency vs consistency trade-off during normal operation",
+      "Because PACELC replaces ACID as the guarantee model for multi-region systems",
+      "CAP covers only partitions; PACELC adds the latency vs consistency trade-off otherwise",
       "Because PACELC proves a distributed system can be CA and tolerate partitions",
-      "Because PACELC describes the trade-off between disk and in-memory storage"
+      "Because PACELC describes the disk vs in-memory storage trade-off under a partition"
     ],
     "answer": 1,
     "explanation": "Phần lớn thời gian mạng không bị partition, và lúc đó câu hỏi thật là: chờ đồng thuận hoặc đồng bộ để nhất quán, hay trả lời nhanh với dữ liệu có thể cũ? Ví dụ Cassandra/DynamoDB mặc định là PA/EL, còn Spanner là PC/EC. PACELC không liên quan tới ACID hay đĩa/bộ nhớ.",

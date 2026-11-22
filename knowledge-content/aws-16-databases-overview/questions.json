@@ -184,16 +184,16 @@
     "question": "Một hệ thống đặt hàng cần transaction ACID, JOIN phức tạp và schema quan hệ cố định, với engine PostgreSQL được quản lý. Chọn database nào?",
     "questionEn": "An order-processing system needs ACID transactions, complex JOINs, and a fixed relational schema, using a managed PostgreSQL engine. Which database should be chosen?",
     "options": [
-      "Amazon DynamoDB",
-      "Amazon Timestream",
+      "Amazon DynamoDB với transactions",
+      "Amazon Redshift (nền PostgreSQL)",
       "Amazon RDS for PostgreSQL",
-      "Amazon ElastiCache"
+      "Amazon DocumentDB"
     ],
     "optionsEn": [
-      "Amazon DynamoDB",
-      "Amazon Timestream",
+      "Amazon DynamoDB with transactions",
+      "Amazon Redshift (PostgreSQL-based)",
       "Amazon RDS for PostgreSQL",
-      "Amazon ElastiCache"
+      "Amazon DocumentDB"
     ],
     "answer": 2,
     "explanation": "RDS for PostgreSQL là database quan hệ được quản lý, hỗ trợ ACID, JOIN và schema cố định — đúng cho workload OLTP truyền thống.",
@@ -304,16 +304,16 @@
     "question": "Câu hỏi nào phân biệt rõ nhất workload OLTP với OLAP?",
     "questionEn": "Which question best separates an OLTP workload from an OLAP one?",
     "options": [
-      "Triển khai trong một Region hay toàn cầu?",
-      "Nhiều giao dịch đọc/ghi nhỏ và nhanh, hay truy vấn phân tích phức tạp trên khối lượng lịch sử lớn?",
-      "Dữ liệu là SQL hay NoSQL?",
-      "Dịch vụ được quản lý hay tự vận hành?"
+      "Triển khai trong một Region, hay được nhân bản ra nhiều Region?",
+      "Nhiều giao dịch đọc/ghi nhỏ, hay truy vấn phân tích nặng trên lịch sử?",
+      "Dữ liệu lưu dạng bảng SQL, hay dạng document và key NoSQL?",
+      "Database do AWS quản lý, hay tự vận hành trên EC2 instance?"
     ],
     "optionsEn": [
-      "Is it deployed in one Region or globally?",
-      "Many small, fast read/write transactions, or complex analytical queries over large history?",
-      "Is the data SQL or NoSQL?",
-      "Is the service managed or self-operated?"
+      "Is it deployed in one Region, or replicated across Regions globally?",
+      "Many small read/write transactions, or heavy analytics over history?",
+      "Is the data stored as SQL tables, or as NoSQL documents and keys?",
+      "Is the database managed by AWS, or self-operated on EC2 instances?"
     ],
     "answer": 1,
     "explanation": "OLTP (RDS, Aurora, DynamoDB) tối ưu cho nhiều giao dịch nhỏ. OLAP (Redshift, Athena) tối ưu cho quét và tổng hợp lượng lớn dữ liệu. Nhận diện đúng vế này thường quyết định đáp án.",
@@ -324,16 +324,16 @@
     "question": "Với database \"được quản lý\" (managed) trên AWS, AWS lo phần nào?",
     "questionEn": "For a \"managed\" database on AWS, which parts does AWS handle?",
     "options": [
-      "Không phần nào — managed chỉ là tên gọi thương mại",
-      "Chỉ mỗi backup",
-      "Provisioning, vá lỗi, backup và failover — bạn vẫn tự thiết kế schema và tối ưu truy vấn",
-      "Toàn bộ, kể cả thiết kế schema và index"
+      "Chỉ phần cứng; bạn vẫn phải vá OS và tự chạy backup",
+      "Chỉ backup; vá lỗi và failover vẫn là việc của bạn",
+      "Provisioning, vá lỗi, backup, failover; schema vẫn do bạn lo",
+      "Toàn bộ, kể cả thiết kế schema và tối ưu truy vấn"
     ],
     "optionsEn": [
-      "None of it — 'managed' is only a marketing label",
-      "Backups only",
-      "Provisioning, patching, backups and failover — you still design the schema and tune queries",
-      "Everything, including schema and index design"
+      "Only the hardware; you still patch the OS and run backups",
+      "Backups only; patching and failover remain your job",
+      "Provisioning, patching, backups, failover; you still own the schema",
+      "Everything, including schema design and query tuning"
     ],
     "answer": 2,
     "explanation": "Managed = AWS lo phần vận hành hạ tầng. Mô hình dữ liệu, schema, index và chất lượng truy vấn vẫn là trách nhiệm của bạn — đúng theo mô hình trách nhiệm chung.",

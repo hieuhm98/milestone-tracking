@@ -24,16 +24,16 @@
     "question": "Thuật toán nào dưới đây có bài toán con chồng lấp (overlapping subproblems)?",
     "questionEn": "Which of these algorithms has overlapping subproblems?",
     "options": [
-      "Fibonacci đệ quy: `fib(n - 1)` và `fib(n - 2)` cùng cần tính `fib(n - 3)`",
-      "Merge sort: mỗi lời gọi sắp xếp một đoạn mảng khác nhau",
-      "Binary search: mỗi bước chỉ đi vào một nửa của mảng",
-      "Tìm giá trị lớn nhất bằng một vòng lặp duyệt mảng"
+      "Fibonacci đệ quy: `fib(n - 1)` và `fib(n - 2)` cùng cần `fib(n - 3)`",
+      "Merge sort: mỗi lời gọi sắp xếp một nửa mảng rồi trộn hai nửa lại",
+      "Binary search: mỗi bước so sánh phần tử giữa rồi đi vào một nửa mảng",
+      "Tìm giá trị lớn nhất bằng một vòng lặp so sánh từng phần tử của mảng"
     ],
     "optionsEn": [
       "Recursive Fibonacci: `fib(n - 1)` and `fib(n - 2)` both need `fib(n - 3)`",
-      "Merge sort: every call sorts a different slice of the array",
-      "Binary search: each step goes into only one half of the array",
-      "Finding the maximum with a single loop over the array"
+      "Merge sort: every call sorts one half of the array, then merges both halves",
+      "Binary search: each step checks the middle and goes into one half of the array",
+      "Finding the maximum with one loop that compares every element of the array"
     ],
     "answer": 0,
     "explanation": "Trong cây gọi của Fibonacci, cùng một `fib(k)` xuất hiện ở nhiều nhánh. Merge sort chia thành các đoạn rời nhau nên không lặp; binary search chỉ đi một nhánh; vòng lặp tìm max thậm chí không có bài toán con.",
@@ -44,16 +44,16 @@
     "question": "Vì sao bài toán \"đường đi đơn dài nhất\" (longest simple path) KHÔNG giải trực tiếp được bằng DP?",
     "questionEn": "Why can't \"longest simple path\" be solved directly with DP?",
     "options": [
-      "Vì nó không có bài toán con nào cả",
-      "Vì đồ thị có trọng số âm",
-      "Vì số đỉnh quá lớn để lưu vào bảng",
-      "Vì ghép các đường dài nhất của từng đoạn có thể lặp lại đỉnh, nên thiếu cấu trúc con tối ưu"
+      "Vì nó không có bài toán con nào để chia nhỏ và lưu kết quả",
+      "Vì trọng số âm khiến đường dài nhất không bao giờ hội tụ",
+      "Vì đường dài nhất đi qua quá nhiều đỉnh để lưu hết vào bảng",
+      "Vì ghép các đường dài nhất từng đoạn có thể lặp lại đỉnh"
     ],
     "optionsEn": [
-      "Because it has no subproblems at all",
-      "Because the graph has negative edge weights",
-      "Because there are too many vertices to store in a table",
-      "Because gluing the longest paths of the pieces can repeat a vertex, so it lacks optimal substructure"
+      "Because it has no subproblems to split off and store results for",
+      "Because negative weights stop the longest path from ever converging",
+      "Because a longest path visits too many vertices to store in a table",
+      "Because gluing the longest path of each piece can repeat a vertex"
     ],
     "answer": 3,
     "explanation": "Trong đồ thị A–B–D với C nối vào B, đường dài nhất A→C là A→B→C và C→D là C→B→D; ghép lại được A→B→C→B→D, lặp B nên không hợp lệ. Đáp án tối ưu của các phần không ghép thành đáp án tối ưu của cả bài: thiếu cấu trúc con tối ưu. Ngược lại, đường đi ngắn nhất thì có.",
@@ -64,16 +64,16 @@
     "question": "Một bạn thêm cache (memo) vào merge sort để tăng tốc. Nhận định nào đúng?",
     "questionEn": "A colleague adds a memo cache to merge sort to speed it up. Which assessment is correct?",
     "options": [
-      "Merge sort sẽ chạy trong O(n) nhờ cache",
-      "Hầu như không có lợi, vì các bài toán con của merge sort là các đoạn khác nhau và không lặp lại",
-      "Merge sort sẽ chuyển từ O(n²) xuống O(n log n)",
+      "Merge sort sẽ chạy trong O(n) nhờ cache lưu các đoạn đã sắp xếp",
+      "Hầu như không có lợi, vì các đoạn con của merge sort không lặp lại",
+      "Merge sort sẽ chuyển từ O(n²) xuống O(n log n) nhờ tránh tính lại",
       "Cache giúp merge sort trở thành thuật toán ổn định (stable)"
     ],
     "optionsEn": [
-      "Merge sort will run in O(n) thanks to the cache",
-      "There is essentially no gain, because merge sort's subproblems are different slices that don't repeat",
-      "Merge sort will drop from O(n²) to O(n log n)",
-      "The cache makes merge sort a stable sort"
+      "Merge sort will run in O(n) thanks to caching the sorted slices",
+      "Essentially no gain, because merge sort's slices never repeat",
+      "Merge sort will drop from O(n²) to O(n log n) by avoiding recomputation",
+      "The cache turns merge sort into a stable sorting algorithm"
     ],
     "answer": 1,
     "explanation": "Memoization chỉ có ích khi cùng một bài toán con bị giải lại. Merge sort là chia để trị với các bài toán con rời nhau, nên cache gần như không bao giờ trúng mà chỉ tốn thêm bộ nhớ. Merge sort vốn đã là O(n log n) và vốn đã stable.",
@@ -124,16 +124,16 @@
     "question": "Hàm memoized sau vẫn chạy rất chậm với `n = 45`. Lỗi nằm ở đâu?\n`function fib(n, memo = {}) {\n  if (memo[n] !== undefined) return memo[n];\n  if (n <= 2) return 1;\n  memo[n] = fib(n - 1) + fib(n - 2);\n  return memo[n];\n}`",
     "questionEn": "This memoized function is still very slow for `n = 45`. Where is the bug?\n`function fib(n, memo = {}) {\n  if (memo[n] !== undefined) return memo[n];\n  if (n <= 2) return 1;\n  memo[n] = fib(n - 1) + fib(n - 2);\n  return memo[n];\n}`",
     "options": [
-      "Lời gọi đệ quy không truyền `memo`, nên mỗi lời gọi nhận một cache rỗng mới và vẫn là O(2ⁿ)",
-      "Phải dùng mảng thay vì object cho `memo`",
-      "Kiểm tra memo phải đặt sau base case",
-      "Base case phải là `n <= 1` thay vì `n <= 2`"
+      "Lời gọi đệ quy không truyền `memo`, nên mỗi lời gọi nhận cache rỗng mới",
+      "Phải dùng mảng thay vì object cho `memo` vì key số bị đổi thành chuỗi",
+      "Kiểm tra memo phải đặt sau base case, nếu không cache bị đọc sai",
+      "Base case phải là `n <= 1` thay vì `n <= 2`, nên đệ quy đi quá sâu"
     ],
     "optionsEn": [
-      "The recursive calls don't pass `memo`, so each call gets a fresh empty cache and it stays O(2ⁿ)",
-      "`memo` must be an array rather than an object",
-      "The memo check must come after the base case",
-      "The base case must be `n <= 1` instead of `n <= 2`"
+      "The recursive calls don't pass `memo`, so each call gets a fresh empty cache",
+      "`memo` must be an array, not an object, because numeric keys become strings",
+      "The memo check must come after the base case, or the cache is read wrongly",
+      "The base case must be `n <= 1` rather than `n <= 2`, so it recurses too deep"
     ],
     "answer": 0,
     "explanation": "Tham số mặc định `memo = {}` được tạo mới ở mỗi lời gọi không truyền đối số. Vì `fib(n - 1)` và `fib(n - 2)` không truyền `memo`, không lời gọi con nào thấy kết quả đã lưu. Sửa thành `fib(n - 1, memo) + fib(n - 2, memo)`. Mảng hay object, thứ tự kiểm tra hay base case đều không phải nguyên nhân.",
@@ -144,16 +144,16 @@
     "question": "Với Fibonacci dùng memoization (top-down) đúng cách, độ phức tạp là gì?",
     "questionEn": "For a correctly memoized (top-down) Fibonacci, what is the complexity?",
     "options": [
-      "O(log n) thời gian, O(1) bộ nhớ",
-      "O(2ⁿ) thời gian, O(n) bộ nhớ",
-      "O(n) thời gian, O(1) bộ nhớ",
-      "O(n) thời gian, O(n) bộ nhớ (memo cộng call stack)"
+      "O(log n) thời gian, O(log n) bộ nhớ",
+      "O(2ⁿ) thời gian, O(n) bộ nhớ cho memo",
+      "O(n) thời gian, O(1) bộ nhớ ngoài memo",
+      "O(n) thời gian, O(n) bộ nhớ"
     ],
     "optionsEn": [
-      "O(log n) time, O(1) space",
-      "O(2ⁿ) time, O(n) space",
-      "O(n) time, O(1) space",
-      "O(n) time, O(n) space (memo plus call stack)"
+      "O(log n) time, O(log n) space",
+      "O(2ⁿ) time, O(n) space for the memo",
+      "O(n) time, O(1) space besides the memo",
+      "O(n) time, O(n) space"
     ],
     "answer": 3,
     "explanation": "Mỗi giá trị từ 1 đến n chỉ được tính một lần với O(1) việc, mọi lần gặp lại đều trúng cache: O(n) thời gian. Memo giữ n kết quả và đệ quy sâu n tầng, cả hai đều O(n) bộ nhớ. Muốn O(1) bộ nhớ phải chuyển sang bottom-up với hai biến.",
@@ -184,16 +184,16 @@
     "question": "Bản tabulation của Fibonacci chỉ đọc hai ô liền trước. Tận dụng điều đó, bộ nhớ phụ tốt nhất đạt được là bao nhiêu?",
     "questionEn": "Fibonacci tabulation only ever reads the previous two cells. Exploiting that, what is the best auxiliary space you can reach?",
     "options": [
-      "O(log n)",
+      "O(log n), chỉ giữ hai ô cho mỗi lần chia đôi n",
       "O(1), chỉ giữ hai biến cuốn chiếu",
       "O(n), vì bảng luôn phải có n ô",
-      "O(√n)"
+      "O(n/2), chỉ giữ một nửa số ô của bảng"
     ],
     "optionsEn": [
-      "O(log n)",
+      "O(log n), keeping two cells per halving of n",
       "O(1), keeping just two rolling variables",
       "O(n), because the table must always have n cells",
-      "O(√n)"
+      "O(n/2), keeping only every other table cell"
     ],
     "answer": 1,
     "explanation": "Vì `table[i]` chỉ phụ thuộc `table[i - 1]` và `table[i - 2]`, ta giữ hai biến `prev` và `curr` rồi cập nhật mỗi vòng: O(n) thời gian, O(1) bộ nhớ. Đây là lý do tabulation thường tối ưu bộ nhớ dễ hơn memoization.",
@@ -204,16 +204,16 @@
     "question": "Trong Node.js, `fibMemo(100000)` (đệ quy + memo) ném lỗi `RangeError: Maximum call stack size exceeded`. Cách khắc phục phù hợp nhất là gì?",
     "questionEn": "In Node.js, `fibMemo(100000)` (recursion + memo) throws `RangeError: Maximum call stack size exceeded`. What is the most appropriate fix?",
     "options": [
-      "Chuyển sang tabulation bottom-up bằng vòng lặp, không dùng call stack",
-      "Dùng `Map` thay cho mảng làm memo",
+      "Chuyển sang tabulation bottom-up bằng vòng lặp",
+      "Dùng `Map` thay cho mảng làm memo để tra cứu nhanh hơn",
       "Đảo thứ tự hai lời gọi thành `fib(n - 2) + fib(n - 1)`",
-      "Xoá memo để hàm nhẹ hơn"
+      "Xoá memo để mỗi frame trên call stack nhẹ hơn"
     ],
     "optionsEn": [
-      "Switch to bottom-up tabulation with a loop, which uses no call stack",
-      "Use a `Map` instead of an array for the memo",
-      "Swap the calls to `fib(n - 2) + fib(n - 1)`",
-      "Remove the memo so the function is lighter"
+      "Switch to bottom-up tabulation with a loop",
+      "Use a `Map` instead of an array as the memo for faster lookups",
+      "Swap the two calls to `fib(n - 2) + fib(n - 1)`",
+      "Remove the memo so each call-stack frame is lighter"
     ],
     "answer": 0,
     "explanation": "Memoization vẫn đệ quy sâu khoảng n tầng, nên n rất lớn sẽ tràn stack. Tabulation điền bảng bằng vòng lặp nên không có vấn đề độ sâu. Đổi kiểu memo không đổi độ sâu; đảo thứ tự lời gọi vẫn phải đi sâu xuống; xoá memo thì quay về O(2ⁿ).",
@@ -224,16 +224,16 @@
     "question": "Phát biểu nào về memoization (top-down) và tabulation (bottom-up) là ĐÚNG?",
     "questionEn": "Which statement about memoization (top-down) and tabulation (bottom-up) is TRUE?",
     "options": [
-      "Tabulation luôn nhanh hơn memoization về Big O",
+      "Tabulation luôn có Big O thời gian tốt hơn memoization",
       "Memoization bắt đầu từ base case và đi dần lên bài toán gốc",
       "Chỉ tabulation mới yêu cầu bài toán có bài toán con chồng lấp",
-      "Memoization chỉ giải những bài toán con thực sự được chạm tới, còn tabulation thường điền mọi ô của bảng"
+      "Memoization chỉ giải những bài toán con thực sự được chạm tới"
     ],
     "optionsEn": [
-      "Tabulation always has a better Big O than memoization",
-      "Memoization starts from the base cases and works up to the original problem",
-      "Only tabulation requires overlapping subproblems",
-      "Memoization solves only the subproblems actually reached, while tabulation usually fills every cell"
+      "Tabulation always has a better time Big O than memoization",
+      "Memoization starts from the base cases and works up to the original",
+      "Only tabulation needs the problem to have overlapping subproblems",
+      "Memoization solves only the subproblems that are actually reached"
     ],
     "answer": 3,
     "explanation": "Top-down bắt đầu từ bài toán gốc và đệ quy xuống, nên chỉ giải các trạng thái cần thiết; bottom-up đi từ base case lên và thường điền cả bảng. Hai cách thường có cùng Big O thời gian, và cả hai đều cần bài toán con chồng lấp mới có lợi.",
@@ -284,20 +284,20 @@
     "question": "Bài leo cầu thang được sửa: mỗi lần có thể bước 1, 2 HOẶC 3 bậc. Công thức truy hồi đúng là gì?",
     "questionEn": "The stairs problem changes: you may now climb 1, 2 OR 3 stairs at a time. What is the correct recurrence?",
     "options": [
-      "ways(n) = 3 · ways(n − 1)",
+      "ways(n) = ways(n − 1) + ways(n − 2) + ways(n − 3) + 1",
       "ways(n) = ways(n − 1) + ways(n − 2)",
-      "ways(n) = ways(n − 3) + 3",
+      "ways(n) = ways(n − 1) + 2 · ways(n − 3)",
       "ways(n) = ways(n − 1) + ways(n − 2) + ways(n − 3)"
     ],
     "optionsEn": [
-      "ways(n) = 3 · ways(n − 1)",
+      "ways(n) = ways(n − 1) + ways(n − 2) + ways(n − 3) + 1",
       "ways(n) = ways(n − 1) + ways(n − 2)",
-      "ways(n) = ways(n − 3) + 3",
+      "ways(n) = ways(n − 1) + 2 · ways(n − 3)",
       "ways(n) = ways(n − 1) + ways(n − 2) + ways(n − 3)"
     ],
     "answer": 3,
-    "explanation": "Hỏi \"bước cuối cùng là gì?\": bước cuối lên bậc n có thể từ n − 1, n − 2 hoặc n − 3, và các trường hợp này không trùng nhau, nên cộng cả ba. Nhân 3 sẽ đếm cả những bước vượt quá bậc n; bỏ số hạng n − 3 là bài gốc chỉ cho bước 1 hoặc 2.",
-    "explanationEn": "Ask \"what was the last move?\": the final step onto stair n comes from n − 1, n − 2 or n − 3, and these cases don't overlap, so add all three. Multiplying by 3 would count moves that overshoot; dropping the n − 3 term is the original 1-or-2 problem."
+    "explanation": "Hỏi \"bước cuối cùng là gì?\": bước lên bậc n đến từ n − 1, n − 2 hoặc n − 3, và các trường hợp này không trùng nhau, nên cộng đúng ba số hạng đó. Cộng thêm 1 hay nhân thêm hệ số sẽ đếm dư những cách không tồn tại; bỏ số hạng n − 3 là bài gốc 1 hoặc 2 bậc.",
+    "explanationEn": "Ask \"what was the last move?\": the final step onto stair n comes from n − 1, n − 2 or n − 3, and these cases don't overlap, so add exactly those three terms. Adding 1 or extra multipliers counts ways that don't exist; dropping the n − 3 term is the original 1-or-2 problem."
   },
   {
     "id": "q16",
@@ -324,15 +324,15 @@
     "question": "Trong hàm đếm cách đổi tiền, ta ĐẢO hai vòng lặp: vòng ngoài duyệt số tiền `a`, vòng trong duyệt từng đồng xu. Kết quả thay đổi thế nào?",
     "questionEn": "In the coin-change counting function we SWAP the loops: the outer loop walks amounts `a`, the inner loop walks coins. How does the result change?",
     "options": [
-      "Không đổi, thứ tự vòng lặp không ảnh hưởng tới phép cộng",
-      "Hàm luôn trả về 0",
-      "Hàm đếm các dãy có thứ tự, nên `1+2` và `2+1` bị tính là hai cách khác nhau",
-      "Hàm trả về số đồng xu ít nhất thay vì số cách"
+      "Không đổi, vì thứ tự hai vòng lặp không ảnh hưởng tới phép cộng",
+      "Hàm luôn trả về 0 vì `dp[a]` được đọc trước khi được cập nhật",
+      "Hàm đếm các dãy có thứ tự, nên `1+2` và `2+1` thành hai cách",
+      "Hàm trả về số đồng xu ít nhất thay vì số cách đổi tiền"
     ],
     "optionsEn": [
-      "Nothing changes; loop order does not affect addition",
-      "The function always returns 0",
-      "It counts ordered sequences, so `1+2` and `2+1` become two different ways",
+      "Nothing changes, since loop order does not affect the additions",
+      "It always returns 0 because `dp[a]` is read before it is updated",
+      "It counts ordered sequences, so `1+2` and `2+1` become two ways",
       "It returns the minimum number of coins instead of the number of ways"
     ],
     "answer": 2,

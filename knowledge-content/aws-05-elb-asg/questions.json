@@ -64,16 +64,16 @@
     "question": "Về cross-zone load balancing, phát biểu nào ĐÚNG?",
     "questionEn": "Regarding cross-zone load balancing, which statement is TRUE?",
     "options": [
-      "ALB luôn bật cross-zone và miễn phí; NLB tắt mặc định và tính phí data giữa AZ khi bật",
-      "NLB luôn bật cross-zone và miễn phí; ALB tắt mặc định",
-      "Cả ALB và NLB đều tắt cross-zone mặc định",
-      "Cross-zone không tồn tại trên ALB"
+      "ALB: luôn bật, miễn phí; NLB: tắt mặc định, tính phí data giữa AZ",
+      "NLB: luôn bật, miễn phí; ALB: tắt mặc định, tính phí data giữa AZ",
+      "Cả hai đều tắt mặc định và tính phí data giữa AZ khi bật",
+      "Cả hai luôn bật và miễn phí; không thể tắt trên loại nào"
     ],
     "optionsEn": [
-      "ALB always has cross-zone on and free; NLB is off by default and charges inter-AZ data when enabled",
-      "NLB always has cross-zone on and free; ALB is off by default",
-      "Both ALB and NLB have cross-zone off by default",
-      "Cross-zone does not exist on ALB"
+      "ALB: always on and free; NLB: off by default, inter-AZ data charged",
+      "NLB: always on and free; ALB: off by default, inter-AZ data charged",
+      "Both are off by default and charge for inter-AZ data when on",
+      "Both are always on and free; neither lets you turn it off"
     ],
     "answer": 0,
     "explanation": "ALB luôn bật cross-zone và không tính phí. NLB (và CLB) tắt cross-zone mặc định; riêng NLB khi bật sẽ phát sinh phí truyền dữ liệu giữa các AZ.",
@@ -105,15 +105,15 @@
     "questionEn": "When an EC2 instance is removed from a target group, you want in-flight requests to finish rather than be cut abruptly. Which setting handles this on ALB?",
     "options": [
       "Cooldown period",
-      "Deregistration delay (connection draining)",
+      "Deregistration delay",
       "Health check interval",
-      "Target tracking policy"
+      "Connection idle timeout"
     ],
     "optionsEn": [
       "Cooldown period",
-      "Deregistration delay (connection draining)",
+      "Deregistration delay",
       "Health check interval",
-      "Target tracking policy"
+      "Connection idle timeout"
     ],
     "answer": 1,
     "explanation": "Deregistration delay (tên cũ trên CLB là connection draining) cho phép request đang chạy hoàn tất trước khi instance bị gỡ hẳn, mặc định 300 giây. Cooldown là khái niệm của ASG, không liên quan.",
@@ -124,16 +124,16 @@
     "question": "Khi tạo Auto Scaling Group mới trên AWS hiện nay (2023+), nên dùng cái nào để định nghĩa cấu hình instance?",
     "questionEn": "When creating a new Auto Scaling Group on AWS today (2023+), what should you use to define the instance configuration?",
     "options": [
-      "Launch configuration (được khuyến nghị)",
-      "Launch template (launch configuration đã deprecated)",
-      "AMI trực tiếp không cần template",
-      "CloudFormation stack là bắt buộc"
+      "Launch configuration",
+      "Launch template",
+      "Một AMI ID khai báo trực tiếp trên ASG",
+      "Một CloudFormation stack"
     ],
     "optionsEn": [
-      "Launch configuration (recommended)",
-      "Launch template (launch configuration is deprecated)",
-      "An AMI directly with no template",
-      "A CloudFormation stack is required"
+      "A launch configuration",
+      "A launch template",
+      "An AMI ID set directly on the ASG",
+      "A CloudFormation stack"
     ],
     "answer": 1,
     "explanation": "Launch template được ưu tiên và hỗ trợ versioning, mix instance type và spot. Launch configuration đã bị deprecated và AWS khuyến nghị không dùng cho thiết kế mới.",
@@ -164,16 +164,16 @@
     "question": "Bạn muốn ASG giữ mức sử dụng CPU trung bình quanh 50% và để AWS tự động tính toán số instance cần thêm/bớt. Chính sách scaling nào ĐƠN GIẢN NHẤT?",
     "questionEn": "You want ASG to keep average CPU utilization around 50% and let AWS automatically compute how many instances to add/remove. Which scaling policy is the SIMPLEST?",
     "options": [
-      "Simple scaling",
-      "Step scaling",
+      "Simple scaling policy",
+      "Step scaling policy",
       "Target tracking scaling",
-      "Scheduled scaling"
+      "Scheduled scaling action"
     ],
     "optionsEn": [
-      "Simple scaling",
-      "Step scaling",
+      "Simple scaling policy",
+      "Step scaling policy",
       "Target tracking scaling",
-      "Scheduled scaling"
+      "Scheduled scaling action"
     ],
     "answer": 2,
     "explanation": "Target tracking chỉ cần chọn metric và giá trị mục tiêu (ví dụ CPU 50%), AWS tự tính toán và điều chỉnh — đơn giản và phổ biến nhất. Simple/step cần cấu hình alarm và bước thủ công.",
@@ -187,13 +187,13 @@
       "Scheduled scaling",
       "Chỉ dùng target tracking với CPU",
       "Tăng maximum lên rất cao vĩnh viễn",
-      "Dùng NLB thay cho ASG"
+      "Step scaling theo số request"
     ],
     "optionsEn": [
       "Scheduled scaling",
       "Use only target tracking on CPU",
       "Permanently raise the maximum very high",
-      "Use NLB instead of ASG"
+      "Step scaling on request count"
     ],
     "answer": 0,
     "explanation": "Vì tải có quy luật thời gian rõ ràng (8h sáng ngày làm việc), scheduled scaling cho phép tăng desired capacity trước thời điểm cao điểm, đảm bảo sẵn sàng ngay mà không chờ metric phản ứng.",
@@ -204,15 +204,15 @@
     "question": "Một ASG có nhu cầu tải mang tính chu kỳ nhưng biến động, và bạn muốn scale CHỦ ĐỘNG (trước khi tải tăng) dựa trên dữ liệu lịch sử. Chính sách nào phù hợp nhất?",
     "questionEn": "An ASG has cyclic but variable load, and you want to scale PROACTIVELY (before load rises) based on historical data. Which policy fits best?",
     "options": [
-      "Simple scaling",
+      "Scheduled scaling",
       "Predictive scaling",
-      "Manual scaling",
+      "Target tracking scaling",
       "Step scaling"
     ],
     "optionsEn": [
-      "Simple scaling",
+      "Scheduled scaling",
       "Predictive scaling",
-      "Manual scaling",
+      "Target tracking scaling",
       "Step scaling"
     ],
     "answer": 1,
@@ -244,16 +244,16 @@
     "question": "Để đạt tính sẵn sàng cao (HA) cho tầng web chạy trên ASG, cấu hình nào là quan trọng nhất?",
     "questionEn": "To achieve high availability (HA) for a web tier running on an ASG, which configuration is most important?",
     "options": [
-      "Đặt tất cả instance trong một AZ duy nhất để giảm độ trễ",
-      "Cấu hình ASG trải trên nhiều AZ với subnet ở mỗi AZ",
-      "Dùng vertical scaling thay vì horizontal",
+      "Đặt mọi instance trong một AZ để giảm độ trễ",
+      "Trải trên nhiều AZ, mỗi AZ có một subnet",
+      "Scale dọc lên một instance lớn hơn",
       "Tắt health check để tránh thay thế instance"
     ],
     "optionsEn": [
-      "Place all instances in a single AZ to reduce latency",
-      "Configure the ASG to span multiple AZs with subnets in each AZ",
-      "Use vertical scaling instead of horizontal",
-      "Disable health checks to avoid instance replacement"
+      "Keep all instances in one AZ to reduce latency",
+      "Span multiple AZs, with a subnet in each AZ",
+      "Scale vertically to one larger instance",
+      "Disable health checks to avoid replacements"
     ],
     "answer": 1,
     "explanation": "ASG trải trên nhiều AZ (mỗi AZ một subnet) đảm bảo nếu một AZ chết, instance vẫn chạy ở AZ khác. Đây là nền tảng của HA: multi-AZ để chịu lỗi.",
@@ -265,13 +265,13 @@
     "questionEn": "An application stores sessions locally on each instance, so each user must always be routed to the same instance that created their session. Which ELB feature solves this?",
     "options": [
       "Cross-zone load balancing",
-      "Stickiness (session affinity)",
+      "Stickiness",
       "SNI",
       "Deregistration delay"
     ],
     "optionsEn": [
       "Cross-zone load balancing",
-      "Stickiness (session affinity)",
+      "Stickiness",
       "SNI",
       "Deregistration delay"
     ],
@@ -284,16 +284,16 @@
     "question": "Trong Auto Scaling Group, ba giá trị min, desired, max có ý nghĩa gì?",
     "questionEn": "In an Auto Scaling Group, what do the three values min, desired, and max mean?",
     "options": [
-      "min là số instance mục tiêu, desired là trần, max là sàn",
-      "min là số tối thiểu luôn duy trì, desired là số mong muốn hiện tại, max là trần khi scale-out",
-      "Cả ba đều phải bằng nhau",
-      "desired là số instance tối đa AWS cho phép trên toàn account"
+      "min: mục tiêu hiện tại; desired: trần scale-out; max: sàn luôn giữ",
+      "min: sàn luôn giữ; desired: mục tiêu hiện tại; max: trần scale-out",
+      "min: sàn luôn giữ; desired: bước scale-in; max: bước scale-out",
+      "min: sàn mỗi AZ; desired: quota của account; max: trần mỗi AZ"
     ],
     "optionsEn": [
-      "min is the target count, desired is the ceiling, max is the floor",
-      "min is the minimum always maintained, desired is the current target count, max is the ceiling when scaling out",
-      "All three must be equal",
-      "desired is the maximum instances AWS allows across the whole account"
+      "min: current target; desired: scale-out ceiling; max: floor kept",
+      "min: floor kept; desired: current target; max: scale-out ceiling",
+      "min: floor kept; desired: scale-in step; max: scale-out step",
+      "min: per-AZ floor; desired: account quota; max: per-AZ ceiling"
     ],
     "answer": 1,
     "explanation": "min = số instance tối thiểu luôn duy trì; desired = số mong muốn hiện tại mà ASG cố giữ; max = giới hạn trên khi scale-out. Scaling policy điều chỉnh desired trong khoảng [min, max].",
@@ -305,15 +305,15 @@
     "questionEn": "What does vertical scaling mean?",
     "options": [
       "Thêm read replica cho database",
-      "Tăng kích thước/sức mạnh của MỘT instance (ví dụ t3.medium → t3.2xlarge)",
+      "Nâng một instance lên loại lớn hơn",
       "Thêm nhiều instance vào phía sau load balancer",
-      "Trải instance ra nhiều Availability Zone"
+      "Trải instance ra nhiều AZ"
     ],
     "optionsEn": [
       "Adding read replicas to a database",
-      "Increasing the size/power of a SINGLE instance (e.g. t3.medium → t3.2xlarge)",
+      "Resizing a single instance to a larger type",
       "Adding more instances behind a load balancer",
-      "Spreading instances across multiple Availability Zones"
+      "Spreading instances across multiple AZs"
     ],
     "answer": 1,
     "explanation": "Vertical = to hơn (scale up), bị giới hạn bởi instance type lớn nhất. Horizontal = nhiều hơn (scale out), là cách chính để đạt HA và mở rộng trên cloud.",
@@ -324,16 +324,16 @@
     "question": "Điều gì làm cho bản thân Elastic Load Balancer có tính sẵn sàng cao?",
     "questionEn": "What makes the Elastic Load Balancer itself highly available?",
     "options": [
-      "ELB có một địa chỉ IP tĩnh duy nhất",
-      "ELB phải được đặt trong một Auto Scaling Group",
-      "ELB là dịch vụ được quản lý, triển khai node ở mọi AZ bạn bật và tự mở rộng theo tải",
-      "ELB chạy trên một EC2 instance duy nhất do bạn quản lý"
+      "Dùng một IP tĩnh mà AWS failover giữa các Region",
+      "Phải được đặt trong một Auto Scaling Group riêng của nó",
+      "Là dịch vụ managed, chạy node ở mỗi AZ được bật và tự scale",
+      "Chạy trên một EC2 instance được AWS khởi động lại khi lỗi"
     ],
     "optionsEn": [
-      "It has one single static IP address",
-      "It must be placed inside an Auto Scaling Group",
-      "It is a managed service that deploys nodes in every AZ you enable and scales itself with load",
-      "It runs on a single EC2 instance that you manage"
+      "It uses one static IP that AWS fails over between Regions",
+      "It must be placed inside an Auto Scaling Group of its own",
+      "It is managed, runs nodes in each enabled AZ, and scales itself",
+      "It runs on one EC2 instance that AWS restarts if it fails"
     ],
     "answer": 2,
     "explanation": "ELB do AWS vận hành, đặt node ở từng AZ được bật và tự scale — bạn không phải quản lý hay scale nó. Bạn chỉ cần bật đủ AZ để có HA.",
@@ -344,16 +344,16 @@
     "question": "Một ASG có min=2, desired=4, max=8. Hai instance trượt health check và bị terminate. ASG làm gì?",
     "questionEn": "An ASG has min=2, desired=4, max=8. Two instances fail their health checks and are terminated. What does the ASG do?",
     "options": [
-      "Không làm gì vì vẫn còn ≥ min",
-      "Scale thẳng lên max là 8",
-      "Hạ desired capacity xuống 2",
-      "Launch 2 instance mới để quay lại đúng desired capacity là 4"
+      "Không làm gì, vì vẫn còn ≥ min",
+      "Scale lên max là 8 để bù sự cố",
+      "Hạ desired capacity xuống 2 cho khớp thực tế",
+      "Launch 2 instance thay thế để quay về 4"
     ],
     "optionsEn": [
-      "Nothing, because it is still at or above min",
-      "Scales straight up to max, 8",
-      "Lowers the desired capacity to 2",
-      "Launches 2 replacements to return to the desired capacity of 4"
+      "Nothing, since it is still at or above min",
+      "Scales out to the max of 8 to absorb the failure",
+      "Lowers desired capacity to 2 to match reality",
+      "Launches 2 replacements to get back to 4"
     ],
     "answer": 3,
     "explanation": "ASG luôn cố duy trì ĐÚNG desired capacity. Instance không khỏe sẽ bị thay thế; min/max chỉ là biên cho các scaling policy.",

@@ -4,16 +4,16 @@
     "question": "Khi BA nhận được yêu cầu 'user có thể tìm kiếm sản phẩm', task nào là của Backend?",
     "questionEn": "When a BA receives the requirement 'users can search for products', which task belongs to the Backend?",
     "options": [
-      "Tạo thanh search bar với giao diện đẹp",
-      "Xử lý debounce 300ms khi user gõ",
-      "Xây dựng search query logic, index database và trả về kết quả qua API",
-      "Hiển thị loading spinner khi đang search"
+      "Tạo thanh search bar, ô nhập và nút xóa nhanh từ khóa đã gõ",
+      "Xử lý debounce 300ms để không gọi API mỗi lần user gõ phím",
+      "Viết logic truy vấn, đánh index database và trả kết quả qua API",
+      "Hiển thị loading spinner và thông báo khi không tìm thấy kết quả nào"
     ],
     "optionsEn": [
-      "Build a search bar with a nice interface",
-      "Handle 300ms debounce while the user types",
-      "Build the search query logic, database indexing, and return results via API",
-      "Show a loading spinner while searching"
+      "Build the search bar with an input and a quick-clear button for the keyword",
+      "Handle a 300ms debounce so the API isn't called on every keystroke",
+      "Write the query logic, index the database and return results via API",
+      "Show a loading spinner and a message when nothing matches"
     ],
     "answer": 2,
     "explanation": "FE: UI search bar, debounce, hiển thị kết quả, loading state. BE: query logic (full-text search, filter, sort), database index để search nhanh, API endpoint trả về kết quả có pagination. BE cũng quyết định algorithm search (LIKE, full-text, Elasticsearch...).",
@@ -24,16 +24,16 @@
     "question": "Tại sao API Contract cần được thống nhất TRƯỚC khi FE và BE bắt đầu code?",
     "questionEn": "Why should the API Contract be agreed upon BEFORE FE and BE start coding?",
     "options": [
-      "Vì BA yêu cầu như vậy",
+      "Vì BA cần đưa API contract vào tài liệu để khách hàng ký duyệt",
       "Để FE và BE có thể làm song song — FE dùng mock, BE build API thật",
-      "Vì đây là yêu cầu pháp lý",
-      "Để tránh phải viết documentation sau"
+      "Vì sau khi bắt đầu code thì API không được phép thay đổi bất kỳ trường nào",
+      "Để BE chốt format trước, sau đó FE chỉ việc đọc code BE để làm theo"
     ],
     "optionsEn": [
-      "Because the BA requires it",
-      "So FE and BE can work in parallel — FE uses mocks while BE builds the real API",
-      "Because it is a legal requirement",
-      "To avoid having to write documentation later"
+      "Because the BA must put the contract in the documents for client sign-off",
+      "So FE and BE work in parallel — FE on mocks, BE on the real API",
+      "Because once coding starts, no API field may ever be changed",
+      "So BE fixes the format first and FE just reads the BE code to follow it"
     ],
     "answer": 1,
     "explanation": "API Contract = thỏa thuận về format request/response. Sau khi có contract, FE dùng mock data để làm UI, BE build API thật. Khi cả hai xong, integration nhanh vì format đã thống nhất. Không có contract → FE phải chờ BE hoặc sau này phải sửa nhiều.",
@@ -64,16 +64,16 @@
     "question": "Khi tạo ticket kỹ thuật cho FE, thông tin nào QUAN TRỌNG nhất cần cung cấp?",
     "questionEn": "When creating a technical ticket for FE, which information is the MOST important to provide?",
     "options": [
-      "Màu sắc chính xác theo mã hex",
-      "Link Figma design, API endpoint cần gọi và Acceptance Criteria đầy đủ",
-      "Tên thư viện JavaScript cần dùng",
-      "Số lần component sẽ được render"
+      "Bảng màu hex, font chữ và khoảng cách pixel của từng phần tử",
+      "Link Figma, API endpoint cần gọi và Acceptance Criteria đầy đủ",
+      "Tên thư viện JavaScript, cách quản lý state và cấu trúc thư mục component",
+      "Số giờ ước tính và tên developer sẽ nhận ticket"
     ],
     "optionsEn": [
-      "The exact colors by hex code",
-      "The Figma design link, the API endpoint to call, and complete Acceptance Criteria",
-      "The name of the JavaScript library to use",
-      "How many times the component will be rendered"
+      "The hex palette, fonts and pixel spacing of every element",
+      "The Figma link, the API endpoint to call, and full Acceptance Criteria",
+      "Which JavaScript library, state manager and component folder structure to use",
+      "The estimated hours and the name of the developer taking it"
     ],
     "answer": 1,
     "explanation": "Ticket FE cần: Figma link (visual reference), API contract/link (biết data format), Acceptance Criteria rõ ràng (biết khi nào xong), responsive requirements, và dependencies (API nào cần ready trước). Thiếu một trong các thứ này, dev phải dừng lại để hỏi.",
@@ -84,16 +84,16 @@
     "question": "Dependency trong task breakdown là gì và tại sao quan trọng?",
     "questionEn": "What is a dependency in a task breakdown, and why is it important?",
     "options": [
-      "Thư viện JavaScript được dùng trong project",
+      "Các thư viện bên ngoài mà task cần cài thêm vào project",
       "Mối quan hệ 'task A phải xong trước task B mới bắt đầu được'",
-      "Số lượng developer cần cho một task",
-      "Danh sách bug cần fix trước khi release"
+      "Số developer và kỹ năng cần có để làm xong một task",
+      "Mức độ ảnh hưởng của task tới các module khác khi deploy"
     ],
     "optionsEn": [
-      "The JavaScript libraries used in the project",
+      "The external libraries the task needs to add to the project",
       "The relationship 'task A must finish before task B can start'",
-      "The number of developers needed for a task",
-      "The list of bugs to fix before release"
+      "The number of developers and skills needed to finish a task",
+      "How much a task affects other modules when it is deployed"
     ],
     "answer": 1,
     "explanation": "Dependency là ràng buộc thứ tự: ví dụ FE hiển thị danh sách sản phẩm phụ thuộc BE có API GET /products. Nếu không xác định dependency, sprint plan sẽ sai — một task có thể blocked vì task khác chưa xong. BA cần liệt kê dependency khi viết ticket.",
@@ -104,16 +104,16 @@
     "question": "Validation rule 'giá sản phẩm phải lớn hơn 0' cần được xử lý ở đâu?",
     "questionEn": "Where should the validation rule 'product price must be greater than 0' be handled?",
     "options": [
-      "Chỉ ở FE — validate trên form trước khi submit",
-      "Chỉ ở BE — FE không cần quan tâm",
-      "Cả FE (UX tốt hơn) và BE (bảo mật, bắt buộc)",
-      "Ở Database bằng constraint"
+      "Chỉ ở FE — chặn ngay trên form nên request sai không tới server",
+      "Chỉ ở BE — để mọi rule nghiệp vụ nằm ở một chỗ duy nhất",
+      "Cả FE (phản hồi nhanh) và BE (bắt buộc, vì FE có thể bị bypass)",
+      "Chỉ ở database bằng CHECK constraint là chắc chắn nhất"
     ],
     "optionsEn": [
-      "Only on FE — validate on the form before submitting",
-      "Only on BE — FE doesn't need to care",
-      "Both FE (better UX) and BE (security, mandatory)",
-      "In the Database via a constraint"
+      "Only on FE — blocking it on the form so bad requests never reach the server",
+      "Only on BE — so every business rule lives in a single place",
+      "Both FE (fast feedback) and BE (mandatory, since FE can be bypassed)",
+      "Only in the database, via a CHECK constraint, is the safest"
     ],
     "answer": 2,
     "explanation": "FE validate để user nhận phản hồi nhanh (không cần chờ API). BE validate bắt buộc vì FE có thể bị bypass. BA cần chỉ rõ trong AC: loại validate nào (format, business rule), thông báo lỗi cụ thể, và validate ở cả hai tầng.",
@@ -124,16 +124,16 @@
     "question": "Khi BA thấy dev estimate một task rất cao, nguyên nhân phổ biến nhất là gì?",
     "questionEn": "When a BA sees a developer estimate a task very high, what is the most common cause?",
     "options": [
-      "Dev đang lười biếng",
+      "Dev cộng thêm buffer an toàn vì sợ bị đánh giá thấp nếu trễ deadline",
       "AC chưa rõ ràng, có dependency phức tạp, hoặc cần tích hợp bên thứ ba",
-      "Task đó không cần thiết",
-      "Dev thiếu kỹ năng"
+      "Task bị chia quá nhỏ nên chi phí chuyển đổi giữa các task cao",
+      "Dev chưa quen codebase nên cần nhiều thời gian đọc code cũ"
     ],
     "optionsEn": [
-      "The developer is being lazy",
-      "The AC is unclear, there are complex dependencies, or a third-party integration is needed",
-      "The task is unnecessary",
-      "The developer lacks skills"
+      "The dev pads in a safety buffer for fear of being judged on missed deadlines",
+      "Unclear AC, complex dependencies, or a third-party integration",
+      "The task is split too small, so switching overhead between tasks is high",
+      "The dev is new to the codebase and needs time to read old code"
     ],
     "answer": 1,
     "explanation": "Estimate cao thường do: AC mơ hồ (dev không biết khi nào xong), dependency chưa rõ (cần chờ API khác), tích hợp phức tạp (payment gateway, third-party API), hoặc technical debt cần giải quyết. BA nên hỏi: 'Điều gì làm task này phức tạp?' để làm rõ.",
@@ -164,16 +164,16 @@
     "question": "Upload ảnh cần task nào ở Backend?",
     "questionEn": "What Backend task is needed for image upload?",
     "options": [
-      "Chỉ lưu URL ảnh vào database",
+      "Lưu thẳng file ảnh dạng binary vào bảng database cùng sản phẩm",
       "Validate file type/size, lưu file vào storage (S3/GCS), trả về URL",
-      "Không cần — FE tự xử lý upload",
-      "Chỉ tạo API nhận URL từ FE"
+      "Không cần — FE upload thẳng lên CDN rồi tự hiển thị ảnh",
+      "Chỉ tạo API nhận URL ảnh mà FE đã tự lưu ở đâu đó"
     ],
     "optionsEn": [
-      "Just store the image URL in the database",
-      "Validate file type/size, store the file in storage (S3/GCS), and return a URL",
-      "Nothing needed — FE handles the upload itself",
-      "Only create an API that receives a URL from FE"
+      "Store the image as binary directly in the database table with the product",
+      "Validate type/size, store the file in S3/GCS and return a URL",
+      "Nothing — FE uploads straight to the CDN and displays the image itself",
+      "Just an API that accepts an image URL FE has stored somewhere itself"
     ],
     "answer": 1,
     "explanation": "BE upload task bao gồm: nhận file từ FE, validate (type: jpg/png/webp, size: max 5MB), xử lý nếu cần (resize, convert), lưu vào storage service (S3, GCS), trả về URL. BA cần specify: định dạng cho phép, kích thước tối đa, có cần resize không.",
@@ -184,16 +184,16 @@
     "question": "Điều gì nên được xác định ĐẦU TIÊN khi phân tích một feature mới?",
     "questionEn": "What should be identified FIRST when analyzing a new feature?",
     "options": [
-      "Màu sắc và font chữ",
-      "Số lượng developer cần",
+      "Màu sắc, font chữ và style guide của feature",
+      "Số developer cần và ai sẽ nhận phần nào",
       "Các màn hình FE và API endpoint BE cần thiết",
-      "Timeline release"
+      "Ngày release để lùi lại tính số sprint cần"
     ],
     "optionsEn": [
-      "Colors and fonts",
-      "The number of developers needed",
+      "Colours, fonts and the feature's style guide",
+      "How many developers are needed and who takes what",
       "The required FE screens and BE API endpoints",
-      "The release timeline"
+      "The release date, to work back to the sprints needed"
     ],
     "answer": 2,
     "explanation": "Bước đầu: xác định màn hình (FE scope) và API cần thiết (BE scope). Từ đó mới chia task, xác định dependency, estimate effort, và plan sprint. Thiếu bước này, team sẽ phát hiện ra 'còn thiếu API' hoặc 'UI cần thêm màn hình' giữa sprint.",
@@ -204,16 +204,16 @@
     "question": "BA cần mô tả gì trong AC để giúp FE xử lý pagination đúng?",
     "questionEn": "What does a BA need to describe in the AC to help FE handle pagination correctly?",
     "options": [
-      "Chỉ cần nói 'có pagination' là đủ",
-      "Số items mỗi trang, vị trí phân trang (top/bottom), các trường hợp edge (1 trang, trang cuối)",
-      "Màu sắc và style của nút Next/Prev",
-      "Tên thư viện pagination cần dùng"
+      "Chỉ cần ghi 'có pagination', mọi thứ còn lại để FE tự quyết dựa theo design",
+      "Số item mỗi trang, kiểu phân trang và các edge case như trang cuối",
+      "Màu sắc, kích thước và trạng thái hover của nút Next/Prev",
+      "Tên thư viện pagination và phiên bản FE nên cài đặt"
     ],
     "optionsEn": [
-      "Just saying 'has pagination' is enough",
-      "Items per page, pagination position (top/bottom), and edge cases (single page, last page)",
-      "The color and style of the Next/Prev buttons",
-      "The name of the pagination library to use"
+      "Just writing 'has pagination' and letting FE decide everything else from the design",
+      "Items per page, the pagination style, and edge cases like the last page",
+      "The colour, size and hover state of the Next/Prev buttons",
+      "Which pagination library and version FE should install"
     ],
     "answer": 1,
     "explanation": "Pagination AC cần: số items/trang (20? 50?), style (page numbers? load more? infinite scroll?), edge cases (chỉ 1 trang thì ẩn pagination, trang cuối disable nút Next), và API format (server-side hay client-side pagination?).",
@@ -224,16 +224,16 @@
     "question": "Khi FE cần hiển thị dữ liệu real-time (ví dụ: số người đang online), cần thêm task gì ở BE?",
     "questionEn": "When FE needs to display real-time data (e.g., the number of people online), what additional BE task is needed?",
     "options": [
-      "Không cần gì thêm, FE tự poll API định kỳ là đủ",
-      "Thêm WebSocket server hoặc Server-Sent Events để push data real-time",
-      "Chỉ cần tạo thêm GET API",
-      "Dùng thêm database cache"
+      "Không cần task BE nào, FE tự xử lý hoàn toàn phía trình duyệt",
+      "Thêm WebSocket hoặc Server-Sent Events để server chủ động đẩy dữ liệu",
+      "Tăng cache TTL của API hiện có để dữ liệu trả về nhanh hơn",
+      "Thêm database cache để FE đọc thẳng số liệu từ Redis"
     ],
     "optionsEn": [
-      "Nothing extra needed; FE just polls the API periodically",
-      "Add a WebSocket server or Server-Sent Events to push data in real time",
-      "Just create another GET API",
-      "Add a database cache"
+      "No BE task at all; FE can handle it entirely in the browser",
+      "Add WebSocket or Server-Sent Events so the server pushes updates",
+      "Raise the cache TTL on the existing API so data returns faster",
+      "Add a database cache so the FE can read the numbers straight out of Redis"
     ],
     "answer": 1,
     "explanation": "Real-time data cần BE implement WebSocket (hai chiều) hoặc Server-Sent Events (một chiều từ server). Polling (FE gọi API mỗi X giây) là giải pháp đơn giản hơn nhưng tốn tài nguyên hơn. BA cần chỉ rõ: độ trễ chấp nhận được và volume user.",
@@ -244,16 +244,16 @@
     "question": "Phân quyền 'admin mới xóa được user, member chỉ được xem' cần task nào?",
     "questionEn": "The permission rule 'only admins can delete users, members can only view' requires which task?",
     "options": [
-      "Chỉ FE: ẩn nút Xóa với non-admin",
-      "Chỉ BE: kiểm tra role trước khi xử lý DELETE request",
-      "Cả FE (ẩn nút) và BE (kiểm tra role trong API) — cả hai bắt buộc",
-      "Chỉ database: constraint không cho xóa"
+      "Chỉ FE: ẩn nút Xóa với non-admin là user không thể xóa được",
+      "Chỉ BE: kiểm tra role là đủ, hiện nút cho mọi người cũng không sao",
+      "Cả FE ẩn nút và BE kiểm tra role trong API",
+      "Chỉ database: trigger chặn lệnh xóa từ tài khoản member"
     ],
     "optionsEn": [
-      "FE only: hide the Delete button for non-admins",
-      "BE only: check the role before handling the DELETE request",
-      "Both FE (hide the button) and BE (check the role in the API) — both are mandatory",
-      "Database only: a constraint that prevents deletion"
+      "FE only: hiding Delete from non-admins means they cannot delete",
+      "BE only: the role check suffices; showing the button to all is fine",
+      "Both: FE hides the button and BE checks the role in the API",
+      "Database only: a trigger that blocks deletes from member accounts"
     ],
     "answer": 2,
     "explanation": "FE ẩn nút Xóa là UX — ngăn user vô tình click. BE kiểm tra role là bảo mật — bắt buộc. Vì user có thể gọi API DELETE trực tiếp bỏ qua UI. BA cần specify trong AC: cả 'ẩn UI' lẫn 'BE trả về 403 Forbidden khi non-admin gọi DELETE'.",
@@ -264,16 +264,16 @@
     "question": "Task nào dưới đây là BACKEND task?",
     "questionEn": "Which of the following is a BACKEND task?",
     "options": [
-      "Hiển thị skeleton loader khi đang tải",
-      "Tạo responsive grid 3 cột trên desktop",
+      "Hiển thị skeleton loader trong lúc chờ API trả dữ liệu về",
+      "Dựng responsive grid 3 cột trên desktop, 1 cột trên mobile",
       "Gửi thông báo push đến mobile app khi có tin nhắn mới",
-      "Xử lý animation khi hover vào card"
+      "Xử lý animation và đổi bóng đổ khi hover vào card sản phẩm"
     ],
     "optionsEn": [
-      "Show a skeleton loader while loading",
-      "Build a responsive 3-column grid on desktop",
+      "Show a skeleton loader while waiting for the API to return data",
+      "Build a responsive grid: 3 columns on desktop, 1 on mobile",
       "Send a push notification to the mobile app when a new message arrives",
-      "Handle the animation when hovering over a card"
+      "Handle the animation and shadow change when hovering a product card"
     ],
     "answer": 2,
     "explanation": "Push notification đến mobile là task BE: tích hợp Firebase Cloud Messaging (FCM) hoặc APNs, tạo notification payload, trigger khi có event (tin nhắn mới). FE chỉ cần đăng ký nhận token và xử lý notification khi nhận được.",
@@ -284,16 +284,16 @@
     "question": "Khi viết ticket kỹ thuật, phần 'Out of Scope' dùng để làm gì?",
     "questionEn": "When writing a technical ticket, what is the 'Out of Scope' section used for?",
     "options": [
-      "Liệt kê bugs đã biết",
-      "Mô tả technical debt",
-      "Ngăn scope creep bằng cách xác định rõ những gì KHÔNG thuộc task này",
-      "Liệt kê tasks cho sprint sau"
+      "Liệt kê bug đã biết mà ticket chấp nhận chưa sửa",
+      "Ghi lại technical debt phát sinh trong lúc làm task",
+      "Ghi rõ những gì task này không làm, tránh scope creep",
+      "Liệt kê các ticket khác phải xong trước khi bắt đầu task này"
     ],
     "optionsEn": [
-      "Listing known bugs",
-      "Describing technical debt",
-      "Preventing scope creep by clearly defining what is NOT part of this task",
-      "Listing tasks for the next sprint"
+      "Listing known bugs the ticket accepts leaving unfixed",
+      "Recording technical debt incurred while doing the task",
+      "Stating what this task will not cover, to prevent scope creep",
+      "Listing other tickets that must finish before this task can start"
     ],
     "answer": 2,
     "explanation": "'Out of Scope' rất quan trọng để ngăn dev tự thêm tính năng 'vì tiện' (scope creep). Ví dụ: 'Out of scope: Export PDF (ticket riêng), push notification (phase 2), search auto-complete (sprint sau).' Giúp team focused vào đúng phạm vi đã estimate.",
@@ -304,15 +304,15 @@
     "questionEn": "What must FE and BE teams agree on FIRST when starting a feature?",
     "options": [
       "API contract: đường dẫn, tham số, cấu trúc dữ liệu trả về và mã lỗi",
-      "Màu sắc của nút bấm",
-      "Tên nhánh Git",
-      "Thứ tự các cuộc họp"
+      "Design system: màu sắc, font chữ và kích thước nút bấm dùng chung",
+      "Quy ước Git: cách đặt tên nhánh, mẫu commit message và quy trình review code",
+      "Lịch họp: daily, refinement và demo giữa hai đội"
     ],
     "optionsEn": [
       "The API contract: endpoints, parameters, response shape, and error codes",
-      "Button colours",
-      "Git branch names",
-      "The meeting schedule"
+      "The design system: shared colours, fonts and button sizes",
+      "Git conventions: branch naming, commit message format and the code review flow",
+      "The meeting schedule: dailies, refinement and demos between teams"
     ],
     "answer": 0,
     "explanation": "Chốt hợp đồng API trước cho phép hai đội làm song song. Thiếu nó, FE phải chờ BE hoặc cả hai đoán và phải sửa lại.",
@@ -323,16 +323,16 @@
     "question": "Task hiển thị danh sách đơn hàng có phân trang và lọc theo ngày nên được chia thế nào?",
     "questionEn": "How should a task to list orders with pagination and date filtering be split?",
     "options": [
-      "BE cung cấp endpoint hỗ trợ phân trang và tham số lọc; FE dựng giao diện bảng, bộ lọc và trạng thái tải",
-      "Chỉ cần một task FE vì đây là giao diện",
-      "Chỉ cần một task BE vì đây là dữ liệu",
-      "Không chia mà để một người làm cả hai"
+      "BE làm endpoint có phân trang và tham số lọc; FE làm bảng, bộ lọc, trạng thái tải",
+      "Một task FE: tải toàn bộ đơn hàng một lần rồi phân trang và lọc ngay trên trình duyệt",
+      "Một task BE: server trả về HTML đã phân trang sẵn, FE chỉ việc nhúng vào trang",
+      "Chia theo tuần: một task làm phân trang tuần này, một task làm bộ lọc tuần sau"
     ],
     "optionsEn": [
-      "BE provides an endpoint supporting pagination and filter parameters; FE builds the table, filters, and loading states",
-      "One FE task only, since it is a UI",
-      "One BE task only, since it is data",
-      "Do not split; let one person do both"
+      "BE builds an endpoint with paging and filter params; FE builds the table, filters and loading states",
+      "One FE task: load all orders at once, then paginate and filter in the browser",
+      "One BE task: the server returns ready-paginated HTML and FE simply embeds it in the page",
+      "Split by week: one task for pagination this week, another for filters next week"
     ],
     "answer": 0,
     "explanation": "Phân trang phải làm ở phía server với dữ liệu lớn. Nếu FE tải hết rồi cắt, hệ thống sẽ sập khi dữ liệu tăng.",
@@ -343,16 +343,16 @@
     "question": "Câu hỏi nào BA nên đặt trong buổi grooming để lộ ra công việc ẩn?",
     "questionEn": "Which question should a BA ask in grooming to surface hidden work?",
     "options": [
-      "Điều gì xảy ra khi API lỗi, khi dữ liệu rỗng, hoặc khi người dùng không đủ quyền",
-      "Ai sẽ làm task này",
-      "Chúng ta dùng thư viện nào",
-      "Sprint này dài bao nhiêu ngày"
+      "Khi API lỗi, dữ liệu rỗng hoặc user thiếu quyền thì sao?",
+      "Ai trong team đã từng làm tính năng tương tự để nhận task này?",
+      "Chúng ta nên dùng thư viện nào để làm nhanh nhất có thể?",
+      "Story này có kịp xong trước ngày demo cuối sprint không?"
     ],
     "optionsEn": [
-      "What happens when the API fails, the data is empty, or the user lacks permission",
-      "Who will take this task",
-      "Which library we will use",
-      "How long this sprint is"
+      "What if the API fails, the data is empty or the user lacks permission?",
+      "Who on the team has built something similar and can take this task?",
+      "Which library would let us build this as fast as possible?",
+      "Can this story be finished before the end-of-sprint demo?"
     ],
     "answer": 0,
     "explanation": "Trạng thái rỗng, trạng thái lỗi và phân quyền là ba nguồn công việc ẩn lớn nhất, thường không xuất hiện trong mô tả story ban đầu.",
@@ -363,16 +363,16 @@
     "question": "Dependency giữa task FE và BE ảnh hưởng tới sprint planning thế nào?",
     "questionEn": "How does an FE-BE dependency affect sprint planning?",
     "options": [
-      "Nếu FE phụ thuộc endpoint chưa có, nên đưa task BE vào sprint trước hoặc thống nhất mock data để FE không bị chặn",
-      "Không ảnh hưởng gì vì hai đội độc lập",
-      "Phải luôn làm FE trước BE",
-      "Phải gộp cả hai thành một task duy nhất"
+      "Đưa task BE vào sprint sớm hơn hoặc chốt mock data để FE không bị chặn",
+      "Không ảnh hưởng, vì hai đội có backlog riêng và tự lập kế hoạch độc lập",
+      "Luôn làm FE trước để khách hàng sớm thấy giao diện, BE làm sau",
+      "Gộp FE và BE thành một task duy nhất để không còn dependency"
     ],
     "optionsEn": [
-      "If FE depends on a missing endpoint, schedule the BE task earlier or agree on mock data so FE is not blocked",
-      "No effect, since the teams are independent",
-      "FE must always be done before BE",
-      "Both must be merged into one task"
+      "Schedule the BE task earlier or agree mock data so FE is not blocked",
+      "No effect, since the two teams have separate backlogs and plan independently",
+      "Always do FE first so the client sees the UI early, then BE",
+      "Merge FE and BE into a single task so no dependency remains"
     ],
     "answer": 0,
     "explanation": "Một số hạng mục ưu tiên thấp vẫn phải làm sớm vì hạng mục ưu tiên cao phụ thuộc vào chúng. Thứ tự kỹ thuật bắt buộc là đầu vào của kế hoạch.",
@@ -383,16 +383,16 @@
     "question": "Ticket kỹ thuật tốt nên chứa gì ngoài mô tả chức năng?",
     "questionEn": "Beyond the functional description, what should a good technical ticket contain?",
     "options": [
-      "Acceptance criteria, mô tả API liên quan, trạng thái lỗi và rỗng, cùng liên kết tới story cha",
-      "Tên người viết ticket và ngày tạo là đủ",
-      "Ước tính ngân sách chi tiết",
-      "Sơ đồ tổ chức của công ty"
+      "Acceptance criteria, API liên quan, trạng thái lỗi/rỗng và link story cha",
+      "Người viết, ngày tạo, độ ưu tiên và nhãn sprint là đủ để dev bắt đầu làm ngay",
+      "Ước tính ngân sách và số giờ chi tiết cho từng bước code",
+      "Đoạn code mẫu mà BA gợi ý để dev copy vào cho nhanh"
     ],
     "optionsEn": [
-      "Acceptance criteria, the related API description, error and empty states, plus a link to the parent story",
-      "The author name and creation date are enough",
-      "A detailed budget estimate",
-      "The company org chart"
+      "Acceptance criteria, the related API, error/empty states and a parent story link",
+      "Author, creation date, priority and sprint label — that's enough for a dev to get started",
+      "A budget estimate and detailed hours for every coding step",
+      "Sample code the BA suggests for devs to copy in quickly"
     ],
     "answer": 0,
     "explanation": "Liên kết tới story cha giúp truy vết được vì sao task tồn tại — thông tin cần thiết khi phân tích tác động của thay đổi về sau.",

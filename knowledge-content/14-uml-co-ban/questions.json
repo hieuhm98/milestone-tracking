@@ -24,16 +24,16 @@
     "question": "Trong Use Case Diagram, 'Actor' là gì?",
     "questionEn": "In a Use Case Diagram, what is an 'Actor'?",
     "options": [
-      "Chức năng của hệ thống",
-      "Người dùng hoặc hệ thống bên ngoài tương tác với hệ thống",
-      "Bước xử lý bên trong hệ thống",
-      "Database của hệ thống"
+      "Một chức năng mà hệ thống cung cấp",
+      "Người hoặc hệ thống bên ngoài dùng hệ thống",
+      "Một bước xử lý chạy ngầm ở bên trong hệ thống",
+      "Database lưu dữ liệu của hệ thống"
     ],
     "optionsEn": [
-      "A feature of the system",
-      "A user or external system that interacts with the system",
-      "A processing step inside the system",
-      "The system's database"
+      "A feature that the system provides",
+      "A person or outside system using it",
+      "A processing step that runs inside the system",
+      "The database that stores the system's data"
     ],
     "answer": 1,
     "explanation": "Actor là thực thể bên ngoài tương tác với hệ thống: người dùng, admin, hệ thống khác (payment gateway, email service...). Biểu thị bằng hình người que.",
@@ -44,15 +44,15 @@
     "question": "Sequence Diagram mô tả điều gì?",
     "questionEn": "What does a Sequence Diagram describe?",
     "options": [
-      "Chức năng tổng quan của hệ thống",
+      "Các chức năng tổng quan của hệ thống",
       "Quy trình nghiệp vụ step-by-step",
-      "Thứ tự tương tác giữa các đối tượng theo thời gian",
-      "Cấu trúc class và kế thừa"
+      "Thứ tự tương tác giữa các đối tượng",
+      "Cấu trúc class và quan hệ kế thừa"
     ],
     "optionsEn": [
       "The high-level features of the system",
-      "A step-by-step business process",
-      "The order of interactions between objects over time",
+      "A step-by-step business process flow",
+      "How objects interact, in time order",
       "The class structure and inheritance"
     ],
     "answer": 2,
@@ -64,16 +64,16 @@
     "question": "Trong UML, `<<include>>` có nghĩa là gì?",
     "questionEn": "In UML, what does `<<include>>` mean?",
     "options": [
-      "Use case mở rộng tùy chọn",
-      "Use case này bắt buộc bao gồm use case kia mỗi khi thực thi",
-      "Use case thay thế nhau",
-      "Actor kế thừa actor khác"
+      "Use case kia chỉ chạy thêm khi có điều kiện",
+      "Use case này luôn gọi kèm use case kia",
+      "Hai use case có thể thay thế cho nhau",
+      "Một actor kế thừa quyền của actor khác"
     ],
     "optionsEn": [
-      "An optional use case extension",
-      "This use case mandatorily includes the other use case whenever it executes",
-      "The use cases replace each other",
-      "An actor inherits from another actor"
+      "The other use case runs only under a condition",
+      "This use case always runs the other one too",
+      "The two use cases can replace each other",
+      "One actor inherits another actor's rights"
     ],
     "answer": 1,
     "explanation": "<<include>>: use case A include use case B nghĩa là B luôn được gọi khi A chạy. Ví dụ: 'Đặt hàng' <<include>> 'Xác thực người dùng' — đặt hàng luôn cần xác thực.",
@@ -85,13 +85,13 @@
     "questionEn": "What is the notable difference between an Activity Diagram and a regular flowchart?",
     "options": [
       "Activity Diagram không có decision node",
-      "Activity Diagram có Fork/Join để mô tả hoạt động song song",
-      "Flowchart có swimlane, Activity Diagram không",
+      "Activity Diagram có Fork/Join cho việc song song",
+      "Flowchart có swimlane, còn Activity Diagram thì không",
       "Chúng hoàn toàn giống nhau"
     ],
     "optionsEn": [
       "An Activity Diagram has no decision node",
-      "An Activity Diagram has Fork/Join to describe parallel activities",
+      "An Activity Diagram has Fork/Join for parallel work",
       "A flowchart has swimlanes, an Activity Diagram does not",
       "They are exactly the same"
     ],
@@ -104,16 +104,16 @@
     "question": "Khi nào nên dùng Sequence Diagram trong dự án?",
     "questionEn": "When should a Sequence Diagram be used in a project?",
     "options": [
-      "Khi kick-off để xác định scope",
+      "Khi kick-off dự án để xác định phạm vi",
       "Khi mô tả quy trình nghiệp vụ cho người dùng",
-      "Khi làm việc với developer về cách các component/API tương tác",
-      "Khi thiết kế giao diện"
+      "Khi bàn với developer cách các API tương tác",
+      "Khi thiết kế giao diện người dùng"
     ],
     "optionsEn": [
-      "At kick-off to define scope",
+      "At project kick-off to define the scope",
       "When describing business processes for users",
-      "When working with developers on how components/APIs interact",
-      "When designing the user interface"
+      "When agreeing with devs how APIs interact",
+      "When designing the user interface screens"
     ],
     "answer": 2,
     "explanation": "Sequence Diagram tốt cho: thiết kế API integration, mô tả flow kỹ thuật (browser→server→database), làm rõ thứ tự xử lý khi implement feature phức tạp.",
@@ -124,16 +124,16 @@
     "question": "Trong Sequence Diagram, 'Lifeline' là gì?",
     "questionEn": "In a Sequence Diagram, what is a 'Lifeline'?",
     "options": [
-      "Thời gian sống của toàn bộ hệ thống",
-      "Đường đứt dọc biểu thị sự tồn tại của một đối tượng trong khoảng thời gian",
-      "Số lượng message tối đa",
-      "Thời gian timeout của request"
+      "Tổng thời gian hệ thống chạy từ lúc khởi động",
+      "Đường đứt dọc thể hiện đối tượng tồn tại theo thời gian",
+      "Số lượng message tối đa giữa hai đối tượng",
+      "Thời gian chờ tối đa (timeout) của mỗi request gửi tới server"
     ],
     "optionsEn": [
-      "The lifetime of the entire system",
-      "A vertical dashed line representing an object's existence over a period of time",
-      "The maximum number of messages",
-      "A request's timeout duration"
+      "The total time the system runs from startup",
+      "A vertical dashed line showing an object over time",
+      "The maximum number of messages between two objects",
+      "The maximum wait time (timeout) of a request to the server"
     ],
     "answer": 1,
     "explanation": "Lifeline = đường đứt dọc xuống từ tên đối tượng. Biểu thị đối tượng tồn tại suốt khoảng thời gian đó. Activation box (hình chữ nhật hẹp) trên lifeline = đang xử lý.",
@@ -164,16 +164,16 @@
     "question": "Trong Use Case Diagram, `<<extend>>` khác `<<include>>` thế nào?",
     "questionEn": "In a Use Case Diagram, how does `<<extend>>` differ from `<<include>>`?",
     "options": [
-      "Chúng hoàn toàn giống nhau",
-      "<<extend>> là tùy chọn (điều kiện), <<include>> là bắt buộc",
+      "Chúng giống nhau, chỉ khác tên gọi",
+      "<<extend>> là tùy chọn, <<include>> là bắt buộc",
       "<<include>> là tùy chọn, <<extend>> là bắt buộc",
-      "<<extend>> chỉ dùng cho actor"
+      "<<extend>> chỉ dùng giữa các actor"
     ],
     "optionsEn": [
-      "They are exactly the same",
-      "<<extend>> is optional (conditional), <<include>> is mandatory",
+      "They are the same, only named differently",
+      "<<extend>> is optional, <<include>> is mandatory",
       "<<include>> is optional, <<extend>> is mandatory",
-      "<<extend>> is only used for actors"
+      "<<extend>> is only used between actors"
     ],
     "answer": 1,
     "explanation": "<<include>>: luôn luôn chạy. <<extend>>: chỉ chạy trong điều kiện cụ thể. Ví dụ: 'Thanh toán' <<extend>> 'Áp mã giảm giá' — chỉ khi user nhập coupon mới trigger use case đó.",
@@ -184,16 +184,16 @@
     "question": "'System boundary' trong Use Case Diagram là gì?",
     "questionEn": "What is the 'system boundary' in a Use Case Diagram?",
     "options": [
-      "Giới hạn quyền của admin",
-      "Hình chữ nhật bao quanh các use case, biểu thị ranh giới của hệ thống",
-      "Số lượng actor tối đa",
-      "Phạm vi database"
+      "Giới hạn quyền hạn của tài khoản admin",
+      "Hình chữ nhật bao quanh các use case",
+      "Số lượng actor tối đa được phép vẽ",
+      "Phạm vi dữ liệu mà database lưu trữ"
     ],
     "optionsEn": [
-      "The admin's permission limits",
-      "A rectangle surrounding the use cases that represents the system's boundary",
-      "The maximum number of actors",
-      "The database's scope"
+      "The limits on the admin account's permissions",
+      "A rectangle drawn around the use cases",
+      "The maximum number of actors you may draw",
+      "The range of data the database stores"
     ],
     "answer": 1,
     "explanation": "System boundary (hình chữ nhật) phân chia: trong = thuộc hệ thống (use cases), ngoài = bên ngoài (actors). Rõ ràng scope: cái gì build, cái gì không.",
@@ -205,15 +205,15 @@
     "questionEn": "What does a dashed arrow represent in a Sequence Diagram?",
     "options": [
       "Lỗi xảy ra trong quá trình xử lý",
-      "Return message — thông điệp trả về từ bên nhận về bên gọi",
-      "Asynchronous call",
-      "Kết thúc lifeline"
+      "Thông điệp trả về (return)",
+      "Lời gọi bất đồng bộ (asynchronous call)",
+      "Kết thúc lifeline của đối tượng"
     ],
     "optionsEn": [
       "An error occurring during processing",
-      "A return message — the response sent from the receiver back to the caller",
-      "An asynchronous call",
-      "The end of a lifeline"
+      "A return message (reply)",
+      "An asynchronous call (no waiting)",
+      "The end of an object's lifeline"
     ],
     "answer": 1,
     "explanation": "Quy ước: mũi tên liền = gọi (request/synchronous message), mũi tên đứt = trả về (return message). Giúp phân biệt chiều của communication.",
@@ -224,14 +224,14 @@
     "question": "Khi nào Activity Diagram phù hợp hơn Use Case Diagram?",
     "questionEn": "When is an Activity Diagram more appropriate than a Use Case Diagram?",
     "options": [
-      "Khi cần xác định scope hệ thống",
-      "Khi cần mô tả chi tiết từng bước của một quy trình",
-      "Khi cần mô tả tương tác API",
-      "Khi cần thiết kế database"
+      "Khi cần xác định phạm vi tổng thể của hệ thống",
+      "Khi cần mô tả từng bước của một quy trình",
+      "Khi cần mô tả tương tác giữa các API",
+      "Khi cần thiết kế cấu trúc database"
     ],
     "optionsEn": [
       "When you need to define the system's scope",
-      "When you need to describe each step of a process in detail",
+      "When you must show each step of a process",
       "When you need to describe API interactions",
       "When you need to design the database"
     ],
@@ -245,15 +245,15 @@
     "questionEn": "In an Activity Diagram, what does a Fork (horizontal black bar) represent?",
     "options": [
       "Điểm kết thúc quy trình",
-      "Bắt đầu các hoạt động song song (parallel)",
-      "Quyết định Yes/No",
-      "Bắt đầu quy trình"
+      "Bắt đầu các nhánh chạy song song",
+      "Điểm quyết định Yes/No",
+      "Điểm bắt đầu của quy trình"
     ],
     "optionsEn": [
       "The end point of the process",
       "The start of parallel activities",
-      "A Yes/No decision",
-      "The start of the process"
+      "A Yes/No decision point",
+      "The starting point of the process"
     ],
     "answer": 1,
     "explanation": "Fork: một luồng chia thành nhiều luồng chạy song song. Join: nhiều luồng song song hội tụ lại một. Cặp Fork-Join mô tả concurrent execution — không có trong flowchart thông thường.",
@@ -284,14 +284,14 @@
     "question": "Ví dụ nào minh họa đúng quan hệ `<<include>>` trong Use Case Diagram?",
     "questionEn": "Which example correctly illustrates the `<<include>>` relationship in a Use Case Diagram?",
     "options": [
-      "'Đặt hàng' <<include>> 'Áp mã giảm giá' (chỉ khi có coupon)",
-      "'Đặt hàng' <<include>> 'Xác thực đăng nhập' (luôn cần đăng nhập để đặt hàng)",
+      "'Đặt hàng' <<include>> 'Áp dụng mã giảm giá'",
+      "'Đặt hàng' <<include>> 'Xác thực đăng nhập'",
       "'Admin' <<include>> 'Khách hàng'",
       "'Thanh toán' <<include>> 'Xem lịch sử'"
     ],
     "optionsEn": [
-      "'Place order' <<include>> 'Apply discount code' (only when there is a coupon)",
-      "'Place order' <<include>> 'Authenticate login' (login is always required to place an order)",
+      "'Place order' <<include>> 'Apply discount code'",
+      "'Place order' <<include>> 'Authenticate login'",
       "'Admin' <<include>> 'Customer'",
       "'Make payment' <<include>> 'View history'"
     ],
@@ -323,13 +323,13 @@
     "question": "Use case diagram thể hiện điều gì và KHÔNG thể hiện điều gì?",
     "questionEn": "What does a use case diagram show, and what does it not?",
     "options": [
-      "Thể hiện actor nào dùng chức năng nào; không thể hiện thứ tự các bước bên trong chức năng",
+      "Ai dùng chức năng nào; không thể hiện thứ tự các bước",
       "Thể hiện chi tiết từng bước xử lý; không thể hiện actor",
       "Thể hiện cấu trúc cơ sở dữ liệu; không thể hiện chức năng",
       "Thể hiện giao diện màn hình; không thể hiện logic"
     ],
     "optionsEn": [
-      "It shows which actor uses which capability; it does not show the step order inside a capability",
+      "Which actor uses which feature; not the step order",
       "It shows every processing step; it does not show actors",
       "It shows the database structure; it does not show functionality",
       "It shows screen layouts; it does not show logic"
@@ -343,16 +343,16 @@
     "question": "Activity diagram phù hợp nhất khi nào?",
     "questionEn": "When is an activity diagram the best fit?",
     "options": [
-      "Khi cần mô tả luồng công việc có rẽ nhánh, chạy song song và nhiều vai trò tham gia",
-      "Khi cần liệt kê các trường dữ liệu",
+      "Khi luồng công việc có rẽ nhánh, song song, nhiều vai trò",
+      "Khi cần liệt kê các trường dữ liệu của bảng",
       "Khi cần thể hiện thứ tự thông điệp giữa hệ thống",
-      "Khi cần vẽ bố cục màn hình"
+      "Khi cần vẽ bố cục màn hình và vị trí nút"
     ],
     "optionsEn": [
-      "When describing a workflow with branching, parallel paths, and several participating roles",
-      "When listing data fields",
-      "When showing message order between systems",
-      "When sketching a screen layout"
+      "Workflows with branches, parallel paths and several roles",
+      "When listing the data fields of a table",
+      "When showing the order of messages between systems",
+      "When sketching a screen layout and button positions"
     ],
     "answer": 0,
     "explanation": "Activity diagram gần với flowchart nhưng chuẩn hoá hơn và hỗ trợ luồng song song cùng phân làn theo vai trò.",
@@ -363,16 +363,16 @@
     "question": "Lời khuyên thực tế nào đúng khi BA dùng UML trong dự án?",
     "questionEn": "Which practical advice is right when a BA uses UML on a project?",
     "options": [
-      "Chỉ vẽ diagram nào thực sự làm rõ được điều mà văn bản không làm rõ nổi, và chỉ ở mức chi tiết cần thiết",
-      "Phải vẽ đủ mọi loại diagram UML cho mỗi tính năng",
+      "Chỉ vẽ diagram khi nó làm rõ điều văn bản khó diễn tả",
+      "Phải vẽ đầy đủ mọi loại diagram UML cho từng tính năng",
       "Diagram thay thế hoàn toàn cho đặc tả yêu cầu",
-      "Chỉ lập trình viên mới được đọc diagram"
+      "Chỉ lập trình viên mới cần đọc các diagram"
     ],
     "optionsEn": [
-      "Draw only the diagrams that genuinely clarify what prose cannot, and only to the necessary detail",
-      "Draw every UML diagram type for each feature",
+      "Draw a diagram only when it clarifies what prose cannot",
+      "Draw every UML diagram type for each and every feature",
       "Diagrams fully replace the requirements specification",
-      "Only developers may read diagrams"
+      "Only developers need to read the diagrams"
     ],
     "answer": 0,
     "explanation": "Vẽ thừa tốn công bảo trì mà không ai đọc. Hãy chọn biểu diễn theo loại thông tin cần làm rõ và theo mức rủi ro của phần đó.",
@@ -383,16 +383,16 @@
     "question": "Khách hàng không quen ký hiệu UML. BA nên làm gì?",
     "questionEn": "The customer is unfamiliar with UML notation. What should the BA do?",
     "options": [
-      "Cung cấp chú giải ký hiệu, giải thích mục đích của mô hình và cùng đi qua một ví dụ mẫu trước khi review",
-      "Bỏ hẳn mô hình và chỉ dùng văn bản",
-      "Giả định khách hàng sẽ tự học",
-      "Chỉ review mô hình với lập trình viên"
+      "Kèm chú giải ký hiệu và cùng đi qua một ví dụ mẫu",
+      "Bỏ hẳn mô hình, chỉ gửi tài liệu văn bản dài",
+      "Giả định khách hàng sẽ tự học ký hiệu UML",
+      "Chỉ review mô hình với các lập trình viên trong nhóm"
     ],
     "optionsEn": [
-      "Provide a notation key, explain the model's purpose, and walk through a sample together before the review",
-      "Drop models entirely and use only prose",
-      "Assume the customer will learn on their own",
-      "Review models only with developers"
+      "Add a notation key and walk through a sample together",
+      "Drop the models and send only long written documents",
+      "Assume the customer will learn UML on their own",
+      "Review the models only with the team's developers"
     ],
     "answer": 0,
     "explanation": "Đừng giả định khách hàng biết đọc mô hình, nhưng cũng đừng kết luận họ không thể hiểu. Một chú giải và một ví dụ thường là đủ.",
@@ -439,13 +439,13 @@
       "App dừng lại chờ nhà hàng trả lời rồi mới làm tiếp",
       "Nhà hàng gửi câu trả lời ngược về app",
       "Thông điệp bị lỗi và phải gửi lại",
-      "App gửi thông điệp đi rồi làm tiếp ngay, không chờ nhà hàng trả lời"
+      "App gửi đi rồi làm tiếp ngay, không chờ trả lời"
     ],
     "optionsEn": [
       "The app stops and waits for the restaurant's reply before continuing",
       "The restaurant sends a reply back to the app",
       "The message failed and must be resent",
-      "The app sends the message and carries on immediately, without waiting for a reply"
+      "The app sends it and carries on without waiting"
     ],
     "answer": 3,
     "explanation": "Asynchronous message (mũi tên đầu mở) giống gửi tin nhắn: gửi xong là làm tiếp. Synchronous message (mũi tên liền) mới giống gọi điện và chờ.",
@@ -468,16 +468,16 @@
     "question": "Trong class diagram, đường nối giữa Customer và Order có ghi \"1\" ở đầu Customer và \"0..*\" ở đầu Order. Điều đó nghĩa là gì?",
     "questionEn": "In a class diagram, the line between Customer and Order shows \"1\" at the Customer end and \"0..*\" at the Order end. What does it mean?",
     "options": [
-      "Mỗi khách hàng có đúng một đơn hàng",
-      "Một khách hàng có thể có không hoặc nhiều đơn, và mỗi đơn thuộc về đúng một khách hàng",
-      "Mỗi đơn hàng có thể thuộc về nhiều khách hàng",
-      "Hệ thống chỉ cho phép một khách hàng duy nhất"
+      "Mỗi khách có đúng một đơn; mỗi đơn thuộc một khách",
+      "Một khách có không hoặc nhiều đơn; mỗi đơn thuộc một khách",
+      "Mỗi đơn có thể thuộc về nhiều khách hàng cùng lúc",
+      "Hệ thống chỉ cho phép một khách hàng duy nhất đặt đơn"
     ],
     "optionsEn": [
-      "Each customer has exactly one order",
-      "One customer can have zero or more orders, and each order belongs to exactly one customer",
-      "Each order can belong to many customers",
-      "The system allows only a single customer"
+      "Each customer has exactly one order; each order has one customer",
+      "A customer has zero or more orders; each order has one customer",
+      "Each order can belong to many customers at once",
+      "The system allows only one single customer to order"
     ],
     "answer": 1,
     "explanation": "Các con số ở hai đầu là multiplicity (\"bao nhiêu\"). \"0..*\" ở đầu Order: một khách có không hoặc nhiều đơn. \"1\" ở đầu Customer: mỗi đơn có đúng một khách.",
@@ -500,13 +500,13 @@
     "question": "Khác biệt giữa class và object là gì?",
     "questionEn": "What is the difference between a class and an object?",
     "options": [
-      "Class là khuôn mẫu (như mẫu đơn trống); object là một bản cụ thể của khuôn mẫu đó (như tờ đơn đã điền)",
+      "Class là khuôn mẫu; object là một bản cụ thể tạo từ nó",
       "Class là một người dùng, object là một hệ thống bên ngoài",
       "Class chỉ dùng trong use case diagram, object chỉ dùng trong activity diagram",
       "Không có khác biệt, hai từ này hoàn toàn giống nhau"
     ],
     "optionsEn": [
-      "A class is a template (like a blank form); an object is one concrete instance of it (like a filled-in form)",
+      "A class is a template; an object is one concrete instance of it",
       "A class is a user and an object is an external system",
       "Classes are only used in use case diagrams and objects only in activity diagrams",
       "There is no difference; the two words mean exactly the same"
@@ -534,13 +534,13 @@
     "options": [
       "Use Case Diagram",
       "Class Diagram",
-      "State Diagram (state machine)",
+      "State Diagram",
       "Sequence Diagram"
     ],
     "optionsEn": [
       "Use Case Diagram",
       "Class Diagram",
-      "State Diagram (state machine)",
+      "State Diagram",
       "Sequence Diagram"
     ],
     "answer": 2,

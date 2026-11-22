@@ -4,16 +4,16 @@
     "question": "Product backlog được định nghĩa chính xác nhất là gì?",
     "questionEn": "What is the most accurate definition of a product backlog?",
     "options": [
-      "Danh sách được SẮP XẾP của mọi thứ đội CÓ THỂ làm cho sản phẩm",
-      "Danh sách mọi việc đội phải hoàn thành trước khi phát hành",
-      "Danh sách user story do Product Owner viết",
-      "Kho lưu trữ mọi ý tưởng từng được đề xuất"
+      "Danh sách được sắp xếp của mọi thứ đội có thể làm cho sản phẩm",
+      "Danh sách mọi việc đội phải hoàn thành trước khi phát hành bản tiếp theo",
+      "Danh sách user story do Product Owner viết và đội cam kết làm trong quý",
+      "Kho lưu trữ mọi ý tưởng từng được đề xuất, kể cả những ý tưởng đã bị loại"
     ],
     "optionsEn": [
-      "An ORDERED list of everything the team COULD do for the product",
-      "A list of everything the team must finish before release",
-      "A list of user stories written by the Product Owner",
-      "A repository of every idea ever proposed"
+      "An ordered list of everything the team could do for the product",
+      "A list of everything the team must finish before the next release",
+      "A list of user stories written by the PO and committed for the quarter",
+      "A repository of every idea ever proposed, including rejected ones"
     ],
     "answer": 0,
     "explanation": "Từ có thể quan trọng: nhiều mục sẽ không bao giờ được làm, và đó là kết quả đúng đắn vì chúng có giá trị thấp hơn những gì đã được làm.",
@@ -25,15 +25,15 @@
     "questionEn": "Why is UNEVEN detail in a backlog efficiency rather than sloppiness?",
     "options": [
       "Vì chi tiết hoá một mục sẽ thay đổi hoặc bị loại bỏ trước khi đến lượt là lãng phí thuần tuý",
-      "Vì công cụ quản lý không hỗ trợ chi tiết cho mọi mục",
-      "Vì Product Owner không có thời gian viết hết",
-      "Vì đội chỉ đọc phần đầu backlog"
+      "Vì công cụ quản lý thường giới hạn dung lượng mô tả, nên không thể chi tiết hoá cho mọi mục",
+      "Vì Product Owner không đủ thời gian viết hết, nên chỉ ưu tiên viết kỹ cho những mục quan trọng",
+      "Vì Scrum Guide quy định chỉ các mục trong sprint tới mới được phép có acceptance criteria"
     ],
     "optionsEn": [
       "Because detailing an item that will change or be dropped before its turn is pure waste",
-      "Because tools cannot hold detail for every item",
-      "Because the PO lacks time to write it all",
-      "Because the team only reads the top"
+      "Because tools usually cap description length, so not every item can hold full detail",
+      "Because the PO lacks time to write it all, so only the important items get written up fully",
+      "Because the Scrum Guide allows acceptance criteria only on items for the next sprint"
     ],
     "answer": 0,
     "explanation": "Mục ở đầu phải chi tiết và sẵn sàng hiện thực; mục ở cuối chỉ cần một dòng mô tả ý tưởng.",
@@ -45,15 +45,15 @@
     "questionEn": "Besides user stories, what else does a backlog hold?",
     "options": [
       "Lỗi cần sửa, công việc kỹ thuật, spike nghiên cứu và nợ kỹ thuật cần trả",
-      "Chỉ chứa user story để giữ backlog sạch",
-      "Biên bản họp và tài liệu yêu cầu",
-      "Kế hoạch dự án và ngân sách"
+      "Chỉ chứa user story, còn lỗi và việc kỹ thuật được quản lý ở hệ thống riêng",
+      "Biên bản họp, tài liệu yêu cầu và các quyết định thiết kế đã được thống nhất",
+      "Kế hoạch dự án, ngân sách từng giai đoạn và danh sách rủi ro của sản phẩm"
     ],
     "optionsEn": [
       "Defects to fix, technical work, research spikes, and technical debt to repay",
-      "Only user stories, to keep it clean",
-      "Meeting minutes and requirements documents",
-      "Project plans and budgets"
+      "Only user stories, while defects and technical work live in a separate system",
+      "Meeting minutes, requirements documents and every agreed design decision",
+      "Project plans, per-phase budgets and the product's full risk register"
     ],
     "answer": 0,
     "explanation": "Đưa nợ kỹ thuật vào backlog làm nó cạnh tranh công khai với tính năng mới, thay vì bị làm lén hoặc không bao giờ được làm.",
@@ -64,16 +64,16 @@
     "question": "Ai nên tham gia buổi backlog refinement?",
     "questionEn": "Who should attend a backlog refinement session?",
     "options": [
-      "Product Owner, BA và ít nhất một vài thành viên đội phát triển, vì chính họ đặt câu hỏi làm lộ ra công việc ẩn",
-      "Chỉ Product Owner và BA để buổi họp gọn nhẹ",
-      "Toàn bộ đội cộng với mọi stakeholder",
-      "Chỉ Scrum Master và Product Owner"
+      "Product Owner, BA và ít nhất vài thành viên đội phát triển, vì chính họ đặt câu hỏi làm lộ ra việc ẩn",
+      "Chỉ Product Owner và BA để buổi họp gọn nhẹ, rồi chuyển kết quả cho đội đọc trước buổi sprint planning",
+      "Toàn bộ đội cộng với mọi stakeholder liên quan, để mọi yêu cầu được làm rõ ngay tại chỗ mà không phải hỏi lại",
+      "Chỉ Scrum Master và Product Owner, vì đây là buổi sắp xếp thứ tự chứ không phải buổi thảo luận kỹ thuật"
     ],
     "optionsEn": [
-      "The Product Owner, the BA, and at least some developers, since they ask the questions that surface hidden work",
-      "Only the PO and BA, to keep it short",
-      "The whole team plus every stakeholder",
-      "Only the Scrum Master and PO"
+      "The PO, the BA and at least some developers, since they ask the questions that surface hidden work",
+      "Only the PO and BA to keep it lean, then share the result for the team to read before sprint planning",
+      "The whole team plus every related stakeholder, so every requirement gets clarified on the spot",
+      "Only the Scrum Master and PO, since it is an ordering session rather than a technical discussion"
     ],
     "answer": 0,
     "explanation": "Công việc ẩn mà đội hay chỉ ra gồm trạng thái rỗng, trạng thái lỗi, phân quyền và di trú dữ liệu.",
@@ -85,15 +85,15 @@
     "questionEn": "What is the practical rule for how far ahead to prepare the backlog?",
     "options": [
       "Giữ khoảng hai tới ba sprint tiếp theo ở trạng thái sẵn sàng",
-      "Chuẩn bị sẵn toàn bộ backlog tới cuối dự án",
-      "Chỉ chuẩn bị đúng sprint đang chạy",
-      "Chuẩn bị sẵn sáu tháng công việc"
+      "Chuẩn bị sẵn toàn bộ backlog tới cuối dự án để ước tính tổng",
+      "Chỉ chuẩn bị đúng sprint đang chạy để tránh lãng phí công sức",
+      "Chuẩn bị sẵn khoảng sáu tháng công việc để lập roadmap chắc chắn"
     ],
     "optionsEn": [
       "Keep about two to three sprints of work in a ready state",
-      "Prepare the whole backlog to project end",
-      "Prepare only the current sprint",
-      "Prepare six months of work"
+      "Prepare the whole backlog to project end to estimate the total",
+      "Prepare only the current sprint to avoid any wasted effort",
+      "Prepare about six months of work so the roadmap is solid"
     ],
     "answer": 0,
     "explanation": "Ít hơn thì đội có nguy cơ bị chặn ở đầu sprint; nhiều hơn thì bạn đang lãng phí công sức vào những thứ sẽ thay đổi trước khi đến lượt.",
@@ -105,15 +105,15 @@
     "questionEn": "What does a refinement session running too long signal?",
     "options": [
       "Bạn đang chi tiết hoá những thứ ở quá xa trong backlog",
-      "Đội chưa hiểu sản phẩm",
-      "Product Owner chuẩn bị chưa kỹ",
-      "Backlog có quá ít mục"
+      "Đội chưa hiểu sản phẩm nên phải giải thích lại từ đầu",
+      "Product Owner chuẩn bị chưa kỹ trước khi vào buổi họp",
+      "Backlog có quá ít mục nên đội phải thảo luận kỹ từng mục"
     ],
     "optionsEn": [
       "You are detailing things too far away in the backlog",
-      "The team does not understand the product",
-      "The PO prepared poorly",
-      "The backlog has too few items"
+      "The team does not understand the product well enough",
+      "The PO did not prepare well enough beforehand",
+      "The backlog has too few items, so each gets over-discussed"
     ],
     "answer": 0,
     "explanation": "Thường một tới hai buổi mỗi sprint, mỗi buổi không quá một giờ là đủ nếu bạn chỉ làm mịn phần sắp tới.",
@@ -124,16 +124,16 @@
     "question": "Definition of Ready mang lại lợi ích chính nào cho đội?",
     "questionEn": "What is the main benefit of a definition of ready for a team?",
     "options": [
-      "Cho phép đội từ chối một story chưa sẵn sàng một cách KHÁCH QUAN, thay vì nhận vào rồi mắc kẹt giữa sprint",
-      "Giúp Product Owner viết story nhanh hơn",
-      "Giảm số lượng story cần ước tính",
-      "Bảo đảm mọi story đều hoàn thành đúng hạn"
+      "Cho phép đội từ chối một story chưa sẵn sàng một cách khách quan, thay vì nhận vào rồi mắc kẹt giữa sprint",
+      "Giúp Product Owner viết story nhanh hơn nhờ có mẫu soạn sẵn, nên backlog luôn đủ việc cho các sprint tiếp theo",
+      "Giảm số lượng story cần ước tính, vì chỉ những story đạt chuẩn mới được đưa vào buổi planning poker",
+      "Bảo đảm mọi story đưa vào sprint đều hoàn thành đúng hạn, vì mọi rủi ro đã được loại bỏ từ trước"
     ],
     "optionsEn": [
-      "It lets the team OBJECTIVELY refuse an unready story rather than accepting it and getting stuck mid-sprint",
-      "It helps the PO write stories faster",
-      "It reduces the number of stories to estimate",
-      "It guarantees every story finishes on time"
+      "It lets the team objectively refuse an unready story rather than accepting it and getting stuck mid-sprint",
+      "It helps the PO write stories faster from a ready template, so the backlog always has work for the coming sprints",
+      "It reduces the number of stories to estimate, since only compliant ones reach planning poker",
+      "It guarantees every story entering a sprint finishes on time, since all risk was removed beforehand"
     ],
     "answer": 0,
     "explanation": "Không có tiêu chí khách quan, việc từ chối một story trở thành tranh cãi cá nhân giữa đội và Product Owner.",
@@ -144,16 +144,16 @@
     "question": "Rủi ro khi Definition of Ready quá nghiêm ngặt là gì?",
     "questionEn": "What is the risk of an overly strict definition of ready?",
     "options": [
-      "Nó biến thành một cổng kiểm soát làm chậm mọi thứ và tái tạo lại mô hình chuyển giao tài liệu của Waterfall",
-      "Đội sẽ không hiểu các tiêu chí",
-      "Product Owner sẽ mất quyền quyết định thứ tự",
-      "Công cụ quản lý không hỗ trợ nhiều tiêu chí"
+      "Nó thành một cổng kiểm soát làm chậm mọi thứ và tái tạo mô hình chuyển giao tài liệu của Waterfall",
+      "Đội sẽ không hiểu hết các tiêu chí, nên mỗi người áp dụng một kiểu và kết quả không còn nhất quán",
+      "Product Owner sẽ mất quyền quyết định thứ tự, vì đội có thể từ chối bất kỳ mục nào ở đầu backlog",
+      "Công cụ quản lý không hỗ trợ nhiều tiêu chí, nên phải theo dõi thủ công trên bảng tính riêng"
     ],
     "optionsEn": [
       "It becomes a control gate slowing everything and recreating waterfall's document-handoff model",
-      "The team will not understand the criteria",
-      "The PO loses the right to decide order",
-      "Tools cannot support many criteria"
+      "The team will not grasp all the criteria, so each applies them differently and consistency is lost",
+      "The PO loses the right to decide order, since the team can refuse any item at the top of the backlog",
+      "Tools cannot support many criteria, so they must be tracked by hand in a separate spreadsheet"
     ],
     "answer": 0,
     "explanation": "Hãy giữ Definition of Ready ngắn và tập trung vào những gì thực sự chặn đội, chứ không phải mọi thứ có thể hữu ích.",
@@ -164,16 +164,16 @@
     "question": "Vì sao backlog có 800 mục là một vấn đề thật?",
     "questionEn": "Why is an 800-item backlog a real problem?",
     "options": [
-      "Không ai đọc hết, tìm kiếm trở nên vô vọng, và các mục cũ ở cuối chỉ tạo ảo giác rằng chúng sẽ được làm",
-      "Công cụ quản lý sẽ chạy chậm",
-      "Chi phí giấy phép tăng theo số mục",
-      "Đội sẽ mất động lực khi thấy danh sách dài"
+      "Không ai đọc hết, tìm kiếm trở nên vô vọng, và mục cũ ở cuối chỉ tạo ảo giác rằng chúng sẽ được làm",
+      "Công cụ quản lý sẽ chạy chậm và tìm kiếm bị lỗi khi số mục vượt quá giới hạn khuyến nghị",
+      "Chi phí giấy phép của công cụ tăng theo số mục, nên backlog lớn làm đội vượt quá ngân sách vận hành hằng năm",
+      "Đội sẽ mất động lực khi nhìn thấy danh sách dài và cảm giác công việc không bao giờ kết thúc"
     ],
     "optionsEn": [
-      "Nobody reads it all, searching becomes hopeless, and old bottom items merely create the illusion they will be built",
-      "The tool runs slowly",
-      "Licence costs scale with item count",
-      "The team loses motivation seeing a long list"
+      "Nobody reads it all, search becomes hopeless, and old items at the bottom only create an illusion they will be built",
+      "The tool slows down and search breaks once the item count passes the vendor's recommended limit",
+      "Licence costs scale with item count, so a large backlog pushes the team well over its annual operating budget",
+      "The team loses motivation facing such a long list and the constant feeling that the work will never end"
     ],
     "answer": 0,
     "explanation": "Ảo giác này gây hại thật: stakeholder tin rằng yêu cầu của họ đang chờ tới lượt trong khi thực tế nó sẽ không bao giờ được làm.",
@@ -185,15 +185,15 @@
     "questionEn": "How should you handle items that sat at the bottom over a year without prioritization?",
     "options": [
       "Đóng chúng kèm lý do — nếu chúng thực sự quan trọng, chúng sẽ quay lại",
-      "Giữ lại vì có thể sau này sẽ cần",
-      "Xoá hẳn khỏi hệ thống để backlog gọn",
-      "Chuyển hết sang một backlog phụ"
+      "Giữ lại vì có thể sau này sẽ cần tới, chỉ cần gắn thêm nhãn ưu tiên thấp",
+      "Xoá hẳn khỏi hệ thống không cần ghi chú, để backlog gọn gàng hơn",
+      "Chuyển hết sang một backlog phụ để xem lại vào cuối mỗi năm"
     ],
     "optionsEn": [
       "Close them with a reason — if they truly matter, they will come back",
-      "Keep them in case they are needed later",
-      "Delete them entirely to keep it clean",
-      "Move them all to a secondary backlog"
+      "Keep them in case they are needed later, just tagged as low priority",
+      "Delete them outright without notes to keep the backlog tidy",
+      "Move them all to a secondary backlog reviewed at year end"
     ],
     "answer": 0,
     "explanation": "Đóng thay vì xoá vì ý tưởng bị từ chối có xu hướng quay lại, và giữ lại lý do giúp lần sau bạn có ngay câu trả lời.",
@@ -204,16 +204,16 @@
     "question": "Cách nói trung thực nhất với stakeholder khi đóng một mục backlog là gì?",
     "questionEn": "What is the most honest way to tell a stakeholder you are closing their item?",
     "options": [
-      "Chúng tôi chưa thấy đủ giá trị để ưu tiên việc này trong 12 tháng qua; nếu tình hình đã thay đổi, hãy cho tôi biết điều gì mới để xem lại",
-      "Mục này đã bị hệ thống tự động lưu trữ",
-      "Chúng tôi sẽ xem xét lại trong tương lai",
-      "Đội hiện đang quá tải nên chưa làm được"
+      "Chúng tôi chưa thấy đủ giá trị để ưu tiên việc này trong 12 tháng; nếu tình hình đã đổi, hãy cho tôi biết điều gì mới",
+      "Mục này đã được hệ thống tự động lưu trữ theo quy định dọn dẹp định kỳ, nếu vẫn cần thì anh chị có thể tạo lại mục mới",
+      "Chúng tôi sẽ xem xét lại mục này trong tương lai, khi đội có thêm người và lộ trình sản phẩm rõ ràng hơn",
+      "Đội hiện đang quá tải với các cam kết khác nên chưa làm được, nhưng mục này vẫn nằm trong danh sách chờ"
     ],
     "optionsEn": [
-      "We have not seen enough value to prioritize this in twelve months; if something changed, tell me what is new and we will revisit",
-      "The system archived it automatically",
-      "We will look at it again in future",
-      "The team is currently overloaded"
+      "We have not seen enough value to prioritise this in twelve months; if something changed, tell me what is new",
+      "The system archived it automatically under the routine clean-up policy; you can recreate it if still needed",
+      "We will look at it again in future, once the team grows and the product roadmap becomes clearer",
+      "The team is overloaded with other commitments right now, but the item remains on the waiting list"
     ],
     "answer": 0,
     "explanation": "Điều này trung thực hơn nhiều so với việc để mục đó nằm mãi ở cuối danh sách và tạo hy vọng giả cho người đề xuất.",
@@ -225,15 +225,15 @@
     "questionEn": "Why is splitting an epic by technical layer WRONG?",
     "options": [
       "Vì không story nào mang giá trị riêng lẻ và không story nào trình diễn được ở sprint review",
-      "Vì lập trình viên không thích làm việc theo tầng",
-      "Vì công cụ không hỗ trợ phân loại theo tầng",
-      "Vì nó làm tăng số lượng story"
+      "Vì lập trình viên không thích làm việc theo tầng, dẫn tới tranh chấp về việc ai làm phần nào",
+      "Vì công cụ quản lý không hỗ trợ phân loại theo tầng, khiến việc theo dõi trở nên rối rắm",
+      "Vì nó làm tăng số lượng story gấp ba, khiến buổi refinement và planning kéo dài hơn nhiều"
     ],
     "optionsEn": [
       "Because no story delivers value alone and none can be demonstrated at a sprint review",
-      "Because developers dislike working by layer",
-      "Because tools cannot classify by layer",
-      "Because it increases the story count"
+      "Because developers dislike working by layer, leading to disputes over who builds which part",
+      "Because tools cannot classify stories by layer, which makes tracking progress confusing",
+      "Because it triples the story count, making refinement and planning drag on"
     ],
     "answer": 0,
     "explanation": "Mỗi story sau khi chia phải là một lát cắt dọc mỏng đi xuyên qua mọi tầng kỹ thuật cho một chức năng thật.",
@@ -264,16 +264,16 @@
     "question": "Thuộc tính nào quan trọng nhất của một product backlog?",
     "questionEn": "Which property of a product backlog matters most?",
     "options": [
-      "Được sắp xếp theo thứ tự — một backlog không có thứ tự không giúp được ai",
-      "Chứa đầy đủ mọi ý tưởng đã được đề xuất",
-      "Mọi mục đều đã được ước tính",
-      "Mọi mục đều có acceptance criteria"
+      "Được sắp xếp theo thứ tự — backlog không có thứ tự không giúp được ai",
+      "Chứa đầy đủ mọi ý tưởng đã được đề xuất, để không bỏ sót cơ hội nào",
+      "Mọi mục đều đã được ước tính, để dự báo được ngày phát hành chính xác",
+      "Mọi mục đều có acceptance criteria rõ ràng trước khi được thêm vào"
     ],
     "optionsEn": [
       "Being ordered — an unordered backlog helps nobody",
-      "Containing every idea ever proposed",
-      "Every item having an estimate",
-      "Every item having acceptance criteria"
+      "Containing every idea proposed, so no opportunity is lost",
+      "Every item being estimated, so release dates can be forecast",
+      "Every item having clear acceptance criteria before it is added"
     ],
     "answer": 0,
     "explanation": "Ước tính và acceptance criteria chỉ cần cho phần đầu backlog; thứ tự thì cần cho toàn bộ vì đó là thứ trả lời câu hỏi làm gì tiếp theo.",
@@ -284,16 +284,16 @@
     "question": "Nguyên tắc bao trùm khi chia nhỏ epic là gì?",
     "questionEn": "What is the overarching principle when splitting epics?",
     "options": [
-      "Mỗi story phải là một lát cắt dọc mỏng đi xuyên mọi tầng kỹ thuật cho một chức năng thật, để nó trình diễn được và mang lại phản hồi thật",
-      "Mỗi story phải có kích thước bằng nhau",
-      "Mỗi story phải thuộc về một lập trình viên duy nhất",
-      "Mỗi story phải hoàn thành trong một ngày"
+      "Mỗi story là một lát cắt dọc mỏng xuyên mọi tầng kỹ thuật cho một chức năng thật, để trình diễn được và có phản hồi thật",
+      "Mỗi story phải có kích thước bằng nhau về story point, để velocity giữa các sprint ổn định và dễ dự báo hơn",
+      "Mỗi story phải thuộc về một lập trình viên duy nhất từ đầu tới cuối, để trách nhiệm luôn rõ ràng và không ai có thể đổ lỗi",
+      "Mỗi story phải hoàn thành trong một ngày làm việc, để daily standup luôn có kết quả cụ thể để báo cáo"
     ],
     "optionsEn": [
-      "Every story must be a thin vertical slice through every layer for one real function, so it is demonstrable and yields real feedback",
-      "Every story must be the same size",
-      "Every story must belong to one developer",
-      "Every story must finish in one day"
+      "Every story is a thin vertical slice through every layer for one real function, so it can be demoed and yield real feedback",
+      "Every story must be the same size in points, so velocity stays stable and forecasting gets easier",
+      "Every story must belong to one developer end to end, so accountability is clear and nobody shifts blame",
+      "Every story must finish within one working day, so the daily standup always has concrete, finished results to report"
     ],
     "answer": 0,
     "explanation": "Đây cũng là lý do phương pháp agile nhấn mạnh việc xây một lát cắt dọc ngay từ iteration đầu để phơi bày vấn đề kiến trúc sớm.",
@@ -305,15 +305,15 @@
     "questionEn": "Which statement about many backlog items never being built is correct?",
     "options": [
       "Đó là kết quả đúng đắn, vì chúng có giá trị thấp hơn những gì đã được làm",
-      "Đó là thất bại của Product Owner trong việc lập kế hoạch",
-      "Đó là dấu hiệu đội làm việc không đủ nhanh",
-      "Đó là lý do nên xoá backlog và bắt đầu lại"
+      "Đó là thất bại của Product Owner trong việc lập kế hoạch và ước tính năng lực đội",
+      "Đó là dấu hiệu đội làm việc không đủ nhanh so với tốc độ yêu cầu được thêm vào",
+      "Đó là lý do nên xoá toàn bộ backlog và bắt đầu lại từ danh sách sạch mỗi quý"
     ],
     "optionsEn": [
       "It is the correct outcome, since they were worth less than what was built",
-      "It is a PO planning failure",
-      "It signals the team works too slowly",
-      "It is a reason to delete the backlog and start over"
+      "It is a PO planning failure in forecasting what the team can really deliver",
+      "It signals the team works too slowly for the rate requests are added",
+      "It is a reason to delete the whole backlog and restart clean each quarter"
     ],
     "answer": 0,
     "explanation": "Coi backlog là danh sách cần làm hết là một trong những hiểu lầm phổ biến nhất khi tổ chức chuyển sang agile.",

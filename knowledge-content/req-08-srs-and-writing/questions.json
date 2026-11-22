@@ -4,16 +4,16 @@
     "question": "Quy tắc quyết định về việc có nên ghi lại một mẩu thông tin yêu cầu hay không là gì?",
     "questionEn": "What is the decision rule for whether to record a piece of requirements information?",
     "options": [
-      "Luôn ghi lại mọi thứ để tránh rủi ro pháp lý",
-      "Nếu bạn 100% chắc chắn không stakeholder nào cần nó vượt quá trí nhớ ngắn hạn của chính họ thì không cần ghi; ngược lại hãy lưu vào bộ nhớ nhóm",
-      "Chỉ ghi lại những gì lập trình viên yêu cầu",
-      "Chỉ ghi lại yêu cầu chức năng, bỏ qua phi chức năng"
+      "Ghi lại mọi thứ thật chi tiết, vì hồ sơ văn bản đầy đủ là cách bảo vệ tốt nhất khi có tranh chấp",
+      "Chỉ bỏ qua khi chắc chắn không ai cần nó vượt quá trí nhớ ngắn hạn; ngược lại hãy ghi lại",
+      "Chỉ ghi những gì lập trình viên yêu cầu, vì họ là người dùng chính của tài liệu yêu cầu",
+      "Ghi đầy đủ yêu cầu chức năng, còn phi chức năng chỉ ghi khi có người nêu ra mối lo ngại"
     ],
     "optionsEn": [
-      "Always record everything to avoid legal risk",
-      "If you are 100 percent certain no stakeholder will need it beyond their own short-term memory, skip it; otherwise store it in a group memory",
-      "Only record what developers ask for",
-      "Only record functional requirements and skip nonfunctional ones"
+      "Record everything in full detail, since a complete written record is the best protection against disputes",
+      "Skip it only if you are certain no stakeholder will need it beyond short-term memory; otherwise record it",
+      "Record only what developers ask for, since they are the main consumers of requirements documents",
+      "Record functional requirements in full and capture nonfunctional ones only when someone raises a concern"
     ],
     "answer": 1,
     "explanation": "Chi phí ghi lại tri thức là nhỏ so với chi phí thu thập nó hoặc tái tạo nó trong tương lai. Hành động đặc tả cũng buộc người tham gia suy nghĩ thấu đáo.",
@@ -24,16 +24,16 @@
     "question": "SRS KHÔNG nên chứa nội dung nào?",
     "questionEn": "What should an SRS NOT contain?",
     "options": [
-      "Yêu cầu phi chức năng và quality attribute",
+      "Quality attribute và các yêu cầu phi chức năng khác, vốn thuộc về một quality plan riêng",
       "Chi tiết thiết kế, xây dựng, kiểm thử và quản lý dự án, ngoại trừ các ràng buộc đã biết",
-      "Mô tả hành vi hệ thống trong các điều kiện khác nhau",
-      "External interface requirement"
+      "Mô tả hành vi hệ thống trong các điều kiện lỗi, vốn thuộc về test plan",
+      "Hành vi người dùng thấy được trong các alternative flow, vốn để lập trình viên tự quyết khi code"
     ],
     "optionsEn": [
-      "Nonfunctional requirements and quality attributes",
+      "Quality attributes and other nonfunctional requirements, which belong in a separate quality plan",
       "Design, construction, testing, and project management details, other than known constraints",
-      "Descriptions of system behaviour under various conditions",
-      "External interface requirements"
+      "Descriptions of system behaviour under error conditions, which belong in the test plan instead",
+      "User-visible behaviour for alternative flows, which is left to developers to decide while coding"
     ],
     "answer": 1,
     "explanation": "Tách những mục này ra giúp hoạt động phát triển yêu cầu tập trung vào việc hiểu đội định xây gì. Ràng buộc thiết kế và hiện thực đã biết là ngoại lệ hợp lệ.",
@@ -44,16 +44,16 @@
     "question": "Khi dùng template SRS, một mục còn trống giữa dự án nên được hiểu như thế nào?",
     "questionEn": "When using an SRS template, how should an empty section partway through a project be interpreted?",
     "options": [
-      "Đó là dấu hiệu template quá phức tạp, nên xoá mục đó đi",
-      "Đó là dấu hiệu quý giá về khoảng trống tri thức, buộc bạn tự hỏi liệu thông tin đó có tồn tại, nằm ở nơi khác, hay chưa từng được khai thác",
-      "Không có ý nghĩa gì, template luôn có mục thừa",
-      "Nghĩa là dự án đang đi trước tiến độ"
+      "Dấu hiệu template quá nặng so với dự án, nên xoá mục đó để tài liệu gọn nhẹ",
+      "Dấu hiệu thiếu tri thức: thông tin có tồn tại, nằm chỗ khác, hay chưa được khai thác?",
+      "Không có ý nghĩa gì, vì template mang tính chung và luôn có những mục dự án không cần tới",
+      "Dấu hiệu mục đó nằm ngoài phạm vi, nên cứ để nguyên trống là được"
     ],
     "optionsEn": [
-      "A sign the template is too complex; delete the section",
-      "A valuable signal of a knowledge gap, prompting you to ask whether the information exists, lives elsewhere, or was never explored",
-      "Nothing meaningful; templates always have surplus sections",
-      "It means the project is ahead of schedule"
+      "A sign the template is too heavy for the project, so the section should be deleted to keep it lean",
+      "A signal of a knowledge gap: does the information exist, live elsewhere, or was it never explored?",
+      "Nothing meaningful, since templates are generic and always contain sections a project will not need",
+      "A sign that section is out of scope, so it can simply be left blank as it is"
     ],
     "answer": 1,
     "explanation": "Nếu mục thực sự không áp dụng, đừng để trống và cũng đừng xoá hẳn. Hãy ghi thông điệp tường minh như không xác định được rủi ro kinh doanh nào.",
@@ -64,16 +64,16 @@
     "question": "Nhược điểm lớn nhất của hierarchical numbering (3.2.4.3) khi dùng trong trình soạn thảo văn bản là gì?",
     "questionEn": "What is the biggest drawback of hierarchical numbering (3.2.4.3) in a word processor?",
     "options": [
-      "Nhãn quá ngắn nên khó phân biệt",
-      "Nhãn không bền vững: chèn, xoá hay di chuyển một yêu cầu sẽ làm thay đổi số của nhiều yêu cầu khác, phá vỡ mọi tham chiếu tới chúng",
-      "Trình soạn thảo không hỗ trợ đánh số tự động",
-      "Nó không cho phép phân cấp"
+      "Nhãn trở nên dài và khó đọc ở các cấp sâu, khiến người review nhầm các số giống nhau như 3.2.4.3",
+      "Nhãn không bền vững: thêm, xoá hay dời một yêu cầu làm đánh số lại và phá vỡ tham chiếu",
+      "Trình soạn thảo không giữ được đánh số nhiều cấp nhất quán khi gộp tài liệu từ nhiều tác giả",
+      "Con số không mang ý nghĩa về độ ưu tiên, nên người đọc không biết yêu cầu nào quan trọng nhất"
     ],
     "optionsEn": [
-      "The labels are too short to distinguish",
-      "The labels are not persistent: inserting, deleting, or moving a requirement changes many other numbers, breaking every reference to them",
-      "Word processors cannot auto-number",
-      "It does not allow hierarchy"
+      "Labels grow long and hard to read at deep levels, so reviewers confuse similar numbers like 3.2.4.3",
+      "Labels are not persistent: adding, deleting, or moving one renumbers others and breaks references",
+      "Word processors cannot keep multi-level numbering consistent when merging documents from several authors",
+      "The numbers carry no meaning about priority, so readers cannot tell which requirements matter most"
     ],
     "answer": 1,
     "explanation": "Một BA từng nói nghiêm túc rằng họ không cho phép chèn yêu cầu vì nó làm rối việc đánh số. Đừng để một thực hành kém hiệu quả cản trở khả năng làm việc hợp lý.",
@@ -84,16 +84,16 @@
     "question": "Trong tổ chức phân cấp, yêu cầu CHA nên được viết như thế nào?",
     "questionEn": "In a hierarchical organization, how should a PARENT requirement be written?",
     "options": [
-      "Như một functional requirement đầy đủ với câu shall",
-      "Như một tiêu đề, heading hoặc tên feature; các yêu cầu con khi gộp lại sẽ cung cấp năng lực mà cha mô tả",
-      "Như một business rule",
-      "Như một acceptance test"
+      "Như một functional requirement đầy đủ với câu shall riêng, rồi các yêu cầu con tinh chỉnh nó",
+      "Như một heading hoặc tên feature; các yêu cầu con gộp lại cung cấp năng lực mà nó mô tả",
+      "Như một business rule, vì cha thể hiện chính sách mà mọi yêu cầu con phải tuân theo",
+      "Như một acceptance test, vì cha xác định khi nào cả nhóm yêu cầu con được coi là xong"
     ],
     "optionsEn": [
-      "As a full functional requirement with a shall statement",
-      "As a title, heading, or feature name; its children in aggregate deliver the capability the parent describes",
-      "As a business rule",
-      "As an acceptance test"
+      "As a full functional requirement with its own shall statement, which the children then refine",
+      "As a heading or feature name; together its children deliver the capability it describes",
+      "As a business rule, since the parent expresses the policy that all its children must obey",
+      "As an acceptance test, since the parent defines when the whole group of children is done"
     ],
     "answer": 1,
     "explanation": "Nếu cha được viết như một functional requirement, quan hệ giữa con và cha trở nên khó hiểu. Nhãn chữ phân cấp giúp giải quyết vấn đề này.",
@@ -104,16 +104,16 @@
     "question": "Nếu đội agile loại bỏ user story gốc sau khi hiện thực, hệ quả là gì?",
     "questionEn": "If an agile team discards the original user stories after implementation, what is the consequence?",
     "options": [
-      "Không có hệ quả gì vì mã nguồn tự tài liệu hoá",
-      "Tài liệu bền vững duy nhất của yêu cầu có khả năng chỉ còn là acceptance test, nếu chúng được lưu trong một công cụ",
-      "Dự án sẽ không thể kiểm thử hồi quy",
-      "Product owner phải viết lại toàn bộ backlog"
+      "Không đáng kể, vì mã nguồn có cấu trúc tốt cùng comment đã đủ để tài liệu hoá yêu cầu",
+      "Acceptance test, nếu lưu trong công cụ, có lẽ là bản ghi bền vững duy nhất của yêu cầu",
+      "Không thể kiểm thử hồi quy nữa, vì test không còn truy ngược được về story nào",
+      "Product owner phải dựng lại backlog từ các tính năng đã phát hành trước release kế tiếp"
     ],
     "optionsEn": [
-      "No consequence, since the code documents itself",
-      "The only persistent documentation of the requirements is likely to be the acceptance tests, if they are stored in a tool",
-      "The project can no longer perform regression testing",
-      "The product owner must rewrite the entire backlog"
+      "Little, because well-structured code and its comments document the requirements well enough",
+      "The acceptance tests, if kept in a tool, are probably the only lasting record of requirements",
+      "Regression testing becomes impossible, since tests can no longer be traced back to any story",
+      "The product owner must rebuild the backlog from the released features before the next release"
     ],
     "answer": 1,
     "explanation": "Đây là lý do acceptance test trong agile phải phủ cả điều kiện ngoại lệ, không chỉ hành vi mong đợi, và nên được tự động hoá.",
@@ -144,16 +144,16 @@
     "question": "Loại nhập nhằng nào KHÓ phát hiện nhất, và cách nào bắt được nó?",
     "questionEn": "Which kind of ambiguity is HARDEST to catch, and what catches it?",
     "options": [
-      "Lỗi chính tả; bắt bằng công cụ kiểm tra tự động",
-      "Khi nhiều người đọc hiểu khác nhau mà yêu cầu vẫn có nghĩa với từng người; chỉ inspection hoặc peer review chính thức mới bắt được",
-      "Khi câu quá dài; bắt bằng cách đếm số từ",
-      "Khi thiếu số thứ tự; bắt bằng cách rà soát nhãn"
+      "Thuật ngữ nghiệp vụ dùng sai, bắt được bằng cách đối chiếu cẩn thận từng thuật ngữ với glossary",
+      "Mỗi người hiểu một kiểu mà đều thấy hợp lý; chỉ inspection hay review chính thức mới bắt được",
+      "Câu ghép quá dài, bắt được bằng cách tách mọi yêu cầu vượt quá giới hạn số từ",
+      "Từ mơ hồ như nhanh hay dễ, bắt được bằng công cụ quét tự động theo danh sách từ cấm"
     ],
     "optionsEn": [
-      "Typos, caught by an automated checker",
-      "When several readers interpret differently yet the requirement makes sense to each; only inspection or a formal peer review catches it",
-      "When the sentence is too long, caught by counting words",
-      "When labels are missing, caught by reviewing identifiers"
+      "Misused domain terms, which a careful check of every term against the glossary will catch",
+      "Each reader finds a different, sensible meaning; only inspection or formal review exposes it",
+      "Overly long compound sentences, caught by splitting any requirement that exceeds a word limit",
+      "Vague words such as fast or easy, caught by an automated scan for a list of banned terms"
     ],
     "answer": 1,
     "explanation": "Nếu chỉ phát tài liệu cho từng cá nhân tự đọc, không ai thấy có vấn đề. Peer review chính thức cho mỗi người cơ hội so sánh cách hiểu của mình với người khác.",
@@ -164,16 +164,16 @@
     "question": "Phát biểu nào ĐÚNG về đặc tính traceable của một tập yêu cầu?",
     "questionEn": "Which statement about the traceable characteristic of a requirement set is CORRECT?",
     "options": [
-      "Bạn phải định nghĩa đầy đủ mọi liên kết truy vết thì yêu cầu mới được coi là traceable",
-      "Truy vết được là TÍNH CHẤT khiến việc truy vết khả thi; bạn không cần thực sự định nghĩa hết mọi liên kết",
-      "Chỉ yêu cầu chức năng mới cần truy vết được",
-      "Truy vết được đồng nghĩa với việc có nhãn số thứ tự"
+      "Mọi liên kết truy vết tới thiết kế, code và test phải được định nghĩa thì yêu cầu mới được coi là traceable",
+      "Traceable là tính chất khiến việc truy vết khả thi; bạn không cần thực sự định nghĩa hết mọi liên kết",
+      "Chỉ yêu cầu chức năng mới cần traceable, vì quality attribute không thể liên kết tới code",
+      "Traceable đơn giản là mỗi yêu cầu có số thứ tự, để có thể trích dẫn vị trí của nó"
     ],
     "optionsEn": [
-      "You must define every trace link before a requirement counts as traceable",
-      "Traceable is the PROPERTY that makes tracing possible; you do not have to actually define all the links",
-      "Only functional requirements need to be traceable",
-      "Traceable simply means having a sequence-number label"
+      "Every trace link to design, code, and tests must be defined before a requirement counts as traceable",
+      "Traceable is the property that makes tracing possible; you do not have to actually define all the links",
+      "Only functional requirements need to be traceable, since quality attributes cannot be linked to code",
+      "Traceable simply means each requirement has a sequence number, so its position can be cited"
     ],
     "answer": 1,
     "explanation": "Yêu cầu truy vết được có nhãn duy nhất bền vững và được viết hạt mịn, không phải dạng đoạn văn dài. Tránh gộp nhiều yêu cầu vì chúng có thể truy vết tới thành phần khác nhau.",
@@ -184,16 +184,16 @@
     "question": "Vì sao việc lặp lại một yêu cầu ở nhiều nơi trong tài liệu là vấn đề?",
     "questionEn": "Why is repeating a requirement in several places in a document a problem?",
     "options": [
-      "Nó làm tài liệu dài hơn và tốn giấy in",
-      "Nó làm tài liệu dễ đọc hơn nhưng khó bảo trì hơn: mọi bản sao phải được sửa cùng lúc để tránh sinh ra thiếu nhất quán",
-      "Nó vi phạm quy ước đánh nhãn",
-      "Nó khiến tester phải viết test trùng lặp"
+      "Nó làm tài liệu dài và khó review hơn, dù mỗi bản sao có thể phát triển độc lập an toàn",
+      "Có thể dễ đọc hơn nhưng khó bảo trì hơn, vì mọi bản sao phải được sửa cùng lúc",
+      "Nó phá vỡ quy ước đánh nhãn, vì một yêu cầu không thể có hai định danh trong tài liệu",
+      "Nó buộc tester viết test case trùng lặp, mỗi chỗ yêu cầu xuất hiện một bộ"
     ],
     "optionsEn": [
-      "It makes the document longer and wastes paper",
-      "It makes the document easier to read but harder to maintain: all instances must be modified at the same time to avoid inconsistencies",
-      "It violates the labelling convention",
-      "It forces testers to write duplicate tests"
+      "It makes the document longer and harder to review, though each copy can safely evolve on its own",
+      "It may read more easily but is harder to maintain, since every copy must be changed together",
+      "It breaks the labelling scheme, because one requirement cannot have two identifiers in a document",
+      "It forces testers to write duplicate test cases, one for each place the requirement appears"
     ],
     "answer": 1,
     "explanation": "Hãy dùng cross-reference để giữ các mục liên quan đồng bộ. Lưu mỗi yêu cầu một lần duy nhất trong requirements management tool giải quyết triệt để vấn đề này.",
@@ -204,16 +204,16 @@
     "question": "Vì sao KHÔNG nên dùng shall, should và may để hàm ý độ ưu tiên?",
     "questionEn": "Why should you NOT use shall, should, and may to connote priority?",
     "options": [
-      "Vì chúng không phải từ tiếng Anh chuẩn",
-      "Vì người đọc có thể không nắm được sự phân biệt, và độ ưu tiên sẽ thay đổi theo iteration nên không nên gắn vào cách diễn đạt của yêu cầu",
-      "Vì công cụ requirements management không hỗ trợ chúng",
-      "Vì chúng làm câu yêu cầu dài hơn"
+      "Vì người đọc quốc tế dịch chúng không nhất quán, nên độ ưu tiên bị mất trong tài liệu bản địa hoá",
+      "Người đọc có thể bỏ lỡ sự phân biệt, và ưu tiên đổi theo iteration nên không nên gắn vào câu chữ",
+      "Vì công cụ quản lý yêu cầu không lọc được theo từ khoá, nên ưu tiên phải lưu ở attribute riêng",
+      "Vì should và may hàm ý phạm vi tuỳ chọn, mà hợp đồng coi là hoàn toàn không có độ ưu tiên"
     ],
     "optionsEn": [
-      "Because they are not standard English words",
-      "Because readers may miss the distinction, and priorities change across iterations so they should not be tied to the requirement wording",
-      "Because requirements management tools do not support them",
-      "Because they make the sentence longer"
+      "Because international readers translate them inconsistently, so priority is lost in localised documents",
+      "Readers may miss the distinction, and priorities shift each iteration, so keep them out of the wording",
+      "Because requirements tools cannot filter by keyword, so priority must be stored as a separate attribute",
+      "Because should and may imply optional scope, which contracts treat as having no priority at all"
     ],
     "answer": 1,
     "explanation": "Rõ ràng hơn là luôn dùng shall hoặc must rồi gán độ ưu tiên cao, trung, thấp một cách tường minh. Cái must hôm nay có thể thành cái should ngày mai.",
@@ -224,16 +224,16 @@
     "question": "Yêu cầu Khi giao hàng nâng cấp sản phẩm, số sê-ri sẽ được cập nhật trên dòng hợp đồng mắc lỗi gì?",
     "questionEn": "What is wrong with: Upon product upgrade shipment, the serial number will be updated on the contract line?",
     "options": [
-      "Nó thiếu số thứ tự định danh",
-      "Nó viết ở thể bị động nên không cho biết AI thực hiện hành động: hệ thống tự cập nhật hay người dùng phải làm",
-      "Nó quá dài",
-      "Nó dùng từ shall thay vì must"
+      "Nó thiếu định danh duy nhất, nên việc cập nhật không truy vết được tới module hợp đồng",
+      "Nó ở thể bị động, nên không rõ hệ thống tự cập nhật hay người dùng phải làm",
+      "Nó nêu số sê-ri, là chi tiết thiết kế không nên xuất hiện trong một yêu cầu",
+      "Nó mô tả business rule về hợp đồng, nên thuộc về rules catalog chứ không thuộc SRS"
     ],
     "optionsEn": [
-      "It lacks an identifier",
-      "It is in the passive voice so it does not say WHO performs the action: does the system update it or must the user",
-      "It is too long",
-      "It uses shall instead of must"
+      "It lacks a unique identifier, so the update cannot be traced to the contract module",
+      "It is passive, so it does not say whether the system updates the number or the user must",
+      "It names a serial number, which is a design detail that does not belong in a requirement",
+      "It describes a business rule about contracts, so it belongs in the rules catalog, not the SRS"
     ],
     "answer": 1,
     "explanation": "Viết lại ở thể chủ động làm rõ cả actor lẫn sự kiện kích hoạt: khi bộ phận Fulfillment xác nhận đã giao hàng, hệ thống shall cập nhật hợp đồng với số sê-ri mới.",
@@ -244,16 +244,16 @@
     "question": "Bài kiểm tra thực dụng nào cho biết mức chi tiết của một yêu cầu là VỪA ĐÚNG?",
     "questionEn": "Which pragmatic test tells you a requirement level of detail is JUST RIGHT?",
     "options": [
-      "Yêu cầu không dài quá hai câu",
-      "Lập trình viên có thể nghĩ ra vài cách khác nhau để thoả mãn nó và tất cả đều chấp nhận được",
-      "Yêu cầu chứa ít nhất một con số cụ thể",
-      "Khách hàng đã ký duyệt nó"
+      "Nó gói gọn trong một hai câu, nên đọc và ước lượng được mà không cần giải thích thêm",
+      "Lập trình viên nghĩ ra được vài cách để thoả mãn nó và cách nào cũng chấp nhận được",
+      "Nó chứa ít nhất một con số cụ thể, nên tester viết được điều kiện pass hoặc fail",
+      "Khách hàng và lập trình viên đều đã review và ký duyệt câu chữ của nó"
     ],
     "optionsEn": [
-      "The requirement is no longer than two sentences",
+      "It fits in one or two sentences, so it can be read and estimated without further explanation",
       "A developer can think of several possible ways to satisfy it and all of them are acceptable",
-      "The requirement contains at least one specific number",
-      "The customer has signed off on it"
+      "It contains at least one specific number, so testers can write a pass or fail condition for it",
+      "The customer and the developers have both reviewed it and signed off on the wording"
     ],
     "answer": 1,
     "explanation": "Một hướng dẫn bổ trợ là viết yêu cầu kiểm chứng được riêng lẻ: nếu bạn hình dung ra rất nhiều test đa dạng, có lẽ nhiều yêu cầu đang bị gộp lại.",
@@ -264,16 +264,16 @@
     "question": "Yêu cầu Background Task Manager shall cung cấp thông báo trạng thái ở các khoảng đều đặn không ít hơn mỗi 60 giây mắc vấn đề gì?",
     "questionEn": "What is wrong with: The Background Task Manager shall provide status messages at regular intervals not less than every 60 seconds?",
     "options": [
-      "Nó thiếu tên user class",
-      "Khoảng thời gian nhập nhằng tới mức có thể diễn giải là mỗi năm một lần hoặc mỗi mili-giây, và nó không nói thông báo là gì hay hiển thị bao lâu, nên KHÔNG kiểm chứng được",
-      "Nó dùng thể bị động",
-      "Nó chứa cấu trúc A/B"
+      "Nó nêu tên một thành phần thay vì hệ thống, nên mô tả thiết kế chứ không phải hành vi người dùng thấy",
+      "Có thể hiểu là mỗi năm hay mỗi mili-giây, và thông báo chưa định nghĩa, nên không kiểm chứng được",
+      "Nó viết ở thể bị động, nên không cho biết ai phải cung cấp thông báo trạng thái",
+      "Mức tối thiểu 60 giây quá chậm với người dùng, nên phải rút ngắn khoảng thời gian"
     ],
     "optionsEn": [
-      "It omits the user class name",
-      "The interval is so ambiguous it could mean once a year or every millisecond, and it says nothing about what the messages are or how long they display, so it is NOT verifiable",
-      "It uses the passive voice",
-      "It contains an A/B construct"
+      "It names a component instead of the system, so it describes design rather than user-visible behaviour",
+      "It could mean yearly or every millisecond, and the messages are undefined, so it is not verifiable",
+      "It is written in the passive voice, so it does not say who must provide the status messages",
+      "It sets a 60-second minimum that is too slow for users, so the interval must be shortened"
     ],
     "answer": 1,
     "explanation": "Bài kiểm tra hữu ích là nghĩ ra một cách diễn giải lố bịch nhưng hợp lệ về câu chữ. Nếu cách đó không ổn với người dùng, yêu cầu cần được viết lại.",
@@ -304,16 +304,16 @@
     "question": "Ba nguồn chính của yêu cầu THIẾU được nêu trong chương là gì?",
     "questionEn": "What are the three main sources of MISSING requirements described in the chapter?",
     "options": [
-      "Lỗi chính tả, thiếu nhãn, thiếu độ ưu tiên",
-      "Thao tác đối xứng chưa có vế đối ứng, logic phức hợp chưa phủ hết tổ hợp, và ngoại lệ chưa được đặc tả",
-      "Thiếu use case, thiếu prototype, thiếu glossary",
-      "Thiếu chữ ký, thiếu review, thiếu baseline"
+      "Tính từ mơ hồ, từ viết tắt chưa định nghĩa và câu bị động che giấu ai thực hiện",
+      "Thao tác đối xứng thiếu vế đối ứng, logic phức hợp thiếu tổ hợp, và ngoại lệ chưa đặc tả",
+      "Thiếu use case, thiếu prototype và glossary không định nghĩa các thuật ngữ chính",
+      "Baseline chưa ký, peer review bị bỏ qua và change request bị đóng khi chưa phân tích"
     ],
     "optionsEn": [
-      "Typos, missing labels, missing priorities",
-      "Symmetrical operations lacking their counterpart, compound logic not covering all combinations, and unspecified exceptions",
-      "Missing use cases, missing prototypes, missing glossary",
-      "Missing signatures, missing reviews, missing baselines"
+      "Vague adjectives, undefined acronyms, and passive-voice statements that hide who acts",
+      "Symmetric operations without a counterpart, compound logic missing cases, and unspecified exceptions",
+      "Missing use cases, missing prototypes, and a glossary that does not define key terms",
+      "Unsigned baselines, skipped peer reviews, and change requests closed without analysis"
     ],
     "answer": 1,
     "explanation": "Ví dụ lưu hợp đồng dở dang mà không có yêu cầu truy xuất lại; hoặc hai quyết định nhị phân cho bốn tổ hợp nhưng đặc tả chỉ nói về một. Decision table giúp phủ hết mọi tình huống.",

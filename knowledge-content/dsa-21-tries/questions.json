@@ -4,16 +4,16 @@
     "question": "Bạn có 1 triệu từ trong một hash set. Vì sao hash set KHÔNG phù hợp để gợi ý mọi từ bắt đầu bằng `\"car\"`?",
     "questionEn": "You keep 1 million words in a hash set. Why is the set a POOR fit for suggesting every word that starts with `\"car\"`?",
     "options": [
-      "Vì hash set không lưu được chuỗi có độ dài khác nhau",
-      "Vì `Set.has` tốn O(N) cho mỗi lần tra cứu chính xác",
-      "Vì hash làm mất thông tin tiền tố, nên phải quét toàn bộ N từ để lọc",
-      "Vì hash set tự động sắp xếp lại các từ sau mỗi lần chèn"
+      "Vì hash set không lưu được các chuỗi có độ dài khác nhau trong cùng bảng",
+      "Vì `Set.has` tốn O(N) cho mỗi lần tra cứu chính xác một từ",
+      "Vì hash làm mất thông tin tiền tố, nên phải quét cả N từ để lọc",
+      "Vì hash set tự động sắp xếp lại các từ sau mỗi lần chèn từ mới"
     ],
     "optionsEn": [
-      "Because a hash set cannot store strings of different lengths",
-      "Because `Set.has` costs O(N) for each exact lookup",
-      "Because hashing discards prefix structure, so you must scan all N words to filter",
-      "Because a hash set re-sorts its words after every insert"
+      "Because a hash set cannot keep strings of different lengths in one table",
+      "Because `Set.has` costs O(N) for every exact single-word lookup",
+      "Because hashing discards prefix structure, so all N words must be scanned",
+      "Because a hash set re-sorts all of its words after every new insert"
     ],
     "answer": 2,
     "explanation": "Hai chuỗi có chung tiền tố vẫn có hash hoàn toàn khác nhau, nên set không thể nhảy tới \"vùng các từ bắt đầu bằng car\". Nó chỉ trả lời tốt câu hỏi khớp chính xác. Trie đặt các từ chung tiền tố vào cùng một cây con, nên chỉ cần đi 3 bước rồi duyệt cây con đó.",
@@ -24,16 +24,16 @@
     "question": "Trong trie chứa hai từ `\"car\"` và `\"cart\"`, cờ `isEnd` trên mỗi node dùng để làm gì?",
     "questionEn": "In a trie holding the words `\"car\"` and `\"cart\"`, what is the `isEnd` flag on each node for?",
     "options": [
-      "Đánh dấu một từ hoàn chỉnh kết thúc tại node đó, để phân biệt từ thật với tiền tố như `\"ca\"`",
-      "Đánh dấu node lá, tức node không còn con nào",
+      "Đánh dấu một từ hoàn chỉnh kết thúc tại node đó",
+      "Đánh dấu node lá, tức node không còn con nào bên dưới",
       "Cho biết node đó đã được duyệt trong DFS hay chưa",
       "Lưu độ dài của từ dài nhất đi qua node đó"
     ],
     "optionsEn": [
-      "It marks that a complete word ends at that node, separating real words from prefixes like `\"ca\"`",
-      "It marks a leaf node, meaning a node with no children",
-      "It records whether the node has been visited during a DFS",
-      "It stores the length of the longest word passing through the node"
+      "It marks that a complete word ends at that node",
+      "It marks a leaf node, meaning one with no children below it",
+      "It records whether the node was already visited in a DFS",
+      "It stores the length of the longest word passing through it"
     ],
     "answer": 0,
     "explanation": "Node `r` của `\"car\"` vẫn có con `t` (vì `\"cart\"`), nên nó không phải lá nhưng vẫn là điểm kết thúc từ. Ngược lại, node `a` nằm trên đường đi nhưng `\"ca\"` không phải từ. Chỉ cờ `isEnd` mới phân biệt được hai trường hợp này.",
@@ -64,16 +64,16 @@
     "question": "Đề bài ghi \"mọi từ chỉ gồm chữ cái tiếng Anh viết thường\". Lý do chính để dùng mảng 26 phần tử thay vì `Map` cho `children` là gì?",
     "questionEn": "The problem says \"all words consist of lowercase English letters\". What is the main reason to use a 26-slot array instead of a `Map` for `children`?",
     "options": [
-      "Mảng 26 phần tử luôn tốn ít bộ nhớ hơn `Map` ở mọi node",
-      "Truy cập con bằng index trực tiếp, nhanh và đơn giản, và các con có sẵn thứ tự chữ cái",
-      "`Map` không thể dùng ký tự làm key",
-      "Mảng giúp `search` chạy O(1) thay vì O(L)"
+      "Mảng 26 phần tử luôn tốn ít bộ nhớ hơn `Map` ở mọi node của trie",
+      "Truy cập con bằng index trực tiếp, nhanh, và có sẵn thứ tự chữ cái",
+      "`Map` không thể dùng ký tự làm key nên phải đổi sang mã số trước",
+      "Mảng giúp `search` chạy O(1) thay vì O(L) vì không phải băm ký tự"
     ],
     "optionsEn": [
-      "A 26-slot array always uses less memory than a `Map` at every node",
-      "Children are reached by direct index, which is fast and simple, and come in alphabetical order for free",
-      "A `Map` cannot use characters as keys",
-      "The array makes `search` run in O(1) instead of O(L)"
+      "A 26-slot array always uses less memory than a `Map` at every trie node",
+      "Children are reached by direct index, fast, and in alphabetical order for free",
+      "A `Map` cannot use characters as keys, so they must become numbers first",
+      "The array makes `search` O(1) instead of O(L), since nothing is hashed"
     ],
     "answer": 1,
     "explanation": "`ch.charCodeAt(0) - 97` cho index trực tiếp, không cần hashing, và duyệt index 0→25 chính là thứ tự chữ cái. Nhưng mỗi node luôn giữ 26 ô kể cả khi chỉ có một con, nên thường tốn bộ nhớ HƠN. `search` vẫn là O(L) vì phải đi qua L ký tự.",
@@ -104,16 +104,16 @@
     "question": "Trie chỉ chứa từ `\"apple\"`. Với cài đặt `search` sau, `search(\"app\")` trả về gì?\n`search(word) {\n  return this.findNode(word) !== null;\n}`",
     "questionEn": "A trie contains only the word `\"apple\"`. With this `search`, what does `search(\"app\")` return?\n`search(word) {\n  return this.findNode(word) !== null;\n}`",
     "options": [
-      "`false`, vì `\"app\"` chưa từng được chèn",
-      "Ném lỗi vì `findNode` trả về `undefined`",
-      "`true` — bug: hàm này thực chất là `startsWith`, vì quên kiểm tra `isEnd`",
-      "`false`, vì `findNode` chỉ khớp được từ hoàn chỉnh"
+      "`false`, vì `\"app\"` chưa từng được chèn vào trie",
+      "Ném lỗi vì `findNode` trả về `undefined` khi thiếu `isEnd`",
+      "`true` — bug: hàm này thực chất là `startsWith`",
+      "`false`, vì `findNode` chỉ khớp được những từ hoàn chỉnh"
     ],
     "optionsEn": [
-      "`false`, because `\"app\"` was never inserted",
-      "It throws because `findNode` returns `undefined`",
-      "`true` — a bug: this is really `startsWith`, because it never checks `isEnd`",
-      "`false`, because `findNode` only matches complete words"
+      "`false`, because `\"app\"` was never inserted into the trie",
+      "It throws because `findNode` returns `undefined` without `isEnd`",
+      "`true` — a bug: this is really `startsWith`",
+      "`false`, because `findNode` only ever matches complete words"
     ],
     "answer": 2,
     "explanation": "Đường đi a → p → p tồn tại vì là tiền tố của `\"apple\"`, nên `findNode` trả về node `p` thứ hai. Hàm không kiểm tra `isEnd` nên báo nhầm là có từ. Cài đặt đúng: `node !== null && node.isEnd`.",
@@ -184,14 +184,14 @@
     "question": "Trie chứa `\"car\"` và `\"cart\"`. Sau khi gọi `delete(\"car\")` bằng cách cài đặt có cắt tỉa (prune), điều gì xảy ra?",
     "questionEn": "A trie holds `\"car\"` and `\"cart\"`. What happens after `delete(\"car\")` using the pruning implementation?",
     "options": [
-      "Chỉ `isEnd` của node `r` bị gỡ; không node nào bị xoá vì `r` vẫn còn con `t`",
+      "Chỉ `isEnd` của node `r` bị gỡ; không node nào bị xoá",
       "Các node `c`, `a`, `r` bị xoá, kéo theo `\"cart\"` cũng mất",
-      "Node `r` bị xoá và `t` được nối thẳng vào `a`",
-      "Không có gì thay đổi vì `\"car\"` là tiền tố của một từ khác"
+      "Node `r` bị xoá và `t` được nối thẳng vào node `a`",
+      "Không có gì thay đổi vì `\"car\"` là tiền tố của từ khác"
     ],
     "optionsEn": [
-      "Only the `r` node's `isEnd` is cleared; no node is removed because `r` still has the child `t`",
-      "Nodes `c`, `a` and `r` are removed, taking `\"cart\"` with them",
+      "Only the `r` node's `isEnd` is cleared; no node is removed",
+      "Nodes `c`, `a` and `r` are removed, taking `\"cart\"` along",
       "Node `r` is removed and `t` is attached directly to `a`",
       "Nothing changes because `\"car\"` is a prefix of another word"
     ],
@@ -224,16 +224,16 @@
     "question": "Một bạn nói: \"Trie tra cứu O(L) nên chậm hơn hash set vì hash set là O(1).\" Nhận định chính xác nhất là gì?",
     "questionEn": "A colleague says: \"A trie lookup is O(L), so it is slower than a hash set, which is O(1).\" What is the most accurate response?",
     "options": [
-      "Đúng — hash set luôn O(1) bất kể độ dài chuỗi",
-      "Sai — trie là O(1) vì độ sâu cây luôn cố định",
-      "Sai — hash set là O(log N) với chuỗi",
-      "Chưa chính xác — tính hash một chuỗi phải đọc đủ L ký tự nên cũng là O(L); trie thắng ở truy vấn tiền tố"
+      "Đúng — hash set luôn O(1) bất kể độ dài chuỗi, nên luôn nhanh hơn trie",
+      "Sai — trie cũng là O(1) vì độ sâu của cây luôn cố định là 26",
+      "Sai — với chuỗi, hash set là O(log N) nên còn chậm hơn cả trie",
+      "Chưa chính xác — băm một chuỗi cũng phải đọc đủ L ký tự, tức O(L)"
     ],
     "optionsEn": [
-      "Right — a hash set is always O(1) regardless of string length",
-      "Wrong — a trie is O(1) because the tree depth is fixed",
-      "Wrong — a hash set is O(log N) for strings",
-      "Imprecise — hashing a string reads all L characters, so it is O(L) too; a trie wins on prefix queries"
+      "Right — a hash set is O(1) whatever the string length, so it always wins",
+      "Wrong — a trie is O(1) as well, because its depth is always fixed at 26",
+      "Wrong — for strings a hash set is O(log N), which is slower than a trie",
+      "Imprecise — hashing a string also reads all L characters, so it is O(L)"
     ],
     "answer": 3,
     "explanation": "\"O(1)\" của hash set là tính theo số phần tử, nhưng hàm hash và phép so sánh chuỗi khi khớp đều tốn O(L). Cả hai đều O(L) cho tra cứu chính xác, và thực tế set thường nhanh hơn nhờ ít cấp phát. Lợi thế thật của trie là startsWith, autocomplete và khớp tiền tố dài nhất.",
@@ -284,16 +284,16 @@
     "question": "Ô tìm kiếm cần hiện gợi ý sau MỖI phím người dùng gõ, từ bộ từ điển 200.000 từ. Cấu trúc nào phù hợp nhất?",
     "questionEn": "A search box must show suggestions after EVERY keystroke from a 200,000-word dictionary. Which structure fits best?",
     "options": [
-      "Hash set, lọc bằng `startsWith` trên từng từ",
-      "Trie: mỗi phím chỉ đi thêm một bước từ node trước, rồi duyệt cây con",
-      "Stack chứa các từ theo thứ tự chèn",
-      "Min-heap theo độ dài từ"
+      "Hash set, lọc mọi từ bằng `startsWith` sau mỗi phím gõ",
+      "Trie: mỗi phím đi thêm một bước từ node trước, rồi duyệt cây con",
+      "Stack chứa các từ theo thứ tự chèn, pop dần để tìm gợi ý",
+      "Min-heap theo độ dài từ, lấy ra các từ ngắn nhất trước"
     ],
     "optionsEn": [
-      "A hash set, filtering every word with `startsWith`",
-      "A trie: each keystroke moves one step from the previous node, then traverses the subtree",
-      "A stack holding the words in insertion order",
-      "A min-heap ordered by word length"
+      "A hash set, filtering every word with `startsWith` per keystroke",
+      "A trie: each keystroke steps from the previous node, then walks the subtree",
+      "A stack of words in insertion order, popped to find suggestions",
+      "A min-heap ordered by word length, taking the shortest words first"
     ],
     "answer": 1,
     "explanation": "Tìm kiếm tăng dần từng ký tự là điểm mạnh nhất của trie: giữ node hiện tại, phím mới chỉ tốn O(1) để đi tiếp, và gợi ý nằm sẵn trong cây con. Lọc hash set là O(N · L) mỗi phím. Stack và heap không hỗ trợ truy vấn tiền tố.",
@@ -304,16 +304,16 @@
     "question": "Radix tree (Patricia trie) khác trie thông thường ở điểm nào?",
     "questionEn": "How does a radix tree (Patricia trie) differ from a standard trie?",
     "options": [
-      "Nó lưu các từ trong một bảng hash thay vì cây",
-      "Mỗi node luôn có đúng hai con",
-      "Nó chỉ lưu hậu tố của các từ, không lưu tiền tố",
-      "Các chuỗi node chỉ có một con được gộp thành một cạnh mang cả chuỗi con, nên ít node hơn"
+      "Nó lưu các từ trong một bảng hash ở mỗi node thay vì mảng con",
+      "Mỗi node luôn có đúng hai con, giống như cây nhị phân tìm kiếm",
+      "Nó chỉ lưu hậu tố của các từ, không lưu các tiền tố của chúng",
+      "Các chuỗi node chỉ có một con được gộp thành một cạnh mang chuỗi con"
     ],
     "optionsEn": [
-      "It stores the words in a hash table instead of a tree",
-      "Every node always has exactly two children",
-      "It stores only suffixes of the words, not prefixes",
-      "Chains of single-child nodes are merged into one edge labelled with a substring, so there are fewer nodes"
+      "It keeps each node's words in a hash table instead of a child array",
+      "Every node always has exactly two children, like a binary search tree",
+      "It stores only the suffixes of the words, never their prefixes",
+      "Chains of single-child nodes merge into one edge labelled with a substring"
     ],
     "answer": 3,
     "explanation": "Ví dụ `c → a` (không rẽ nhánh) được nén thành một cạnh `\"ca\"`. Các thao tác vẫn như trie nhưng tiết kiệm bộ nhớ đáng kể; radix tree được dùng trong bảng định tuyến IP và HTTP router. \"Đúng hai con\" là trie nhị phân; lưu hậu tố là suffix trie.",
@@ -324,16 +324,16 @@
     "question": "Mỗi node lưu thêm `count` = số từ đi qua node đó (tăng dọc đường đi khi insert). Độ phức tạp của `countWordsWithPrefix(p)` với |p| = P là gì?",
     "questionEn": "Each node also stores `count` = the number of words passing through it (incremented along the path on insert). What is the complexity of `countWordsWithPrefix(p)` with |p| = P?",
     "options": [
-      "O(P) — đi tới node tiền tố và đọc `count` của nó",
+      "O(P) — đi tới node tiền tố và đọc `count`",
       "O(P + M) — vẫn phải DFS cây con để đếm",
-      "O(N) — phải kiểm tra từng từ",
-      "O(1) — không cần đi xuống trie"
+      "O(N) — phải kiểm tra từng từ trong trie",
+      "O(1) — chỉ cần đọc `count` ở node gốc"
     ],
     "optionsEn": [
-      "O(P) — walk to the prefix node and read its `count`",
-      "O(P + M) — the subtree still has to be DFSed to count",
-      "O(N) — every word must be checked",
-      "O(1) — no need to walk the trie"
+      "O(P) — walk to the prefix node, read `count`",
+      "O(P + M) — the subtree must still be DFSed",
+      "O(N) — every word in the trie must be checked",
+      "O(1) — just read the `count` at the root"
     ],
     "answer": 0,
     "explanation": "`count` đã tổng hợp sẵn số từ trong cây con, nên chỉ cần P bước đi tới node rồi đọc giá trị. Đây là ví dụ đổi bộ nhớ (một số nguyên mỗi node) lấy thời gian. Lưu ý kiểm tra từ đã tồn tại trước khi insert để không đếm trùng.",
@@ -344,16 +344,16 @@
     "question": "Bài \"tìm XOR lớn nhất của hai số trong mảng n số nguyên 32-bit\" thường được giải trong O(n · 32) bằng cấu trúc nào?",
     "questionEn": "\"Find the maximum XOR of two numbers in an array of n 32-bit integers\" is typically solved in O(n · 32) with which structure?",
     "options": [
-      "Radix tree chứa các số dưới dạng chuỗi thập phân",
-      "Hash set chứa mọi cặp XOR đã tính",
-      "Trie nhị phân: chèn các bit từ cao xuống thấp, rồi tham lam đi về phía bit ngược lại",
-      "Max-heap chứa các số, lấy hai phần tử lớn nhất"
+      "Radix tree chứa các số dưới dạng chuỗi thập phân, so khớp tiền tố dài nhất",
+      "Hash set chứa mọi cặp XOR đã tính, tra nhanh giá trị lớn nhất",
+      "Trie nhị phân: chèn bit từ cao xuống thấp, tham lam đi về bit ngược lại",
+      "Max-heap chứa các số, lấy hai phần tử lớn nhất rồi XOR chúng với nhau"
     ],
     "optionsEn": [
-      "A radix tree holding the numbers as decimal strings",
-      "A hash set of every XOR pair computed so far",
-      "A binary trie: insert bits from most to least significant, then greedily walk towards the opposite bit",
-      "A max-heap of the numbers, taking the two largest"
+      "A radix tree of the numbers as decimal strings, matching longest prefixes",
+      "A hash set of every XOR pair computed so far, to look up the largest",
+      "A binary trie: insert bits high to low, then greedily seek the opposite bit",
+      "A max-heap of the numbers, taking the two largest and XORing them together"
     ],
     "answer": 2,
     "explanation": "XOR lớn nhất khi các bit cao khác nhau. Với mỗi số, đi xuống trie nhị phân (σ = 2) và ở mỗi bit ưu tiên nhánh có bit ngược lại: 32 bước mỗi số. Lưu mọi cặp là O(n²); hai số lớn nhất không đảm bảo XOR lớn nhất (với [1, 4, 5]: 4 XOR 5 = 1, còn 1 XOR 4 = 5).",

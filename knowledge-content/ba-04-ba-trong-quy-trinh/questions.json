@@ -4,16 +4,16 @@
     "question": "Điều gì thay đổi và điều gì KHÔNG thay đổi trong công việc BA giữa Waterfall và Scrum?",
     "questionEn": "What changes and what does NOT change in BA work between waterfall and Scrum?",
     "options": [
-      "Công việc phân tích không đổi; cái đổi là nhịp làm việc, mức chi tiết và nơi lưu trữ thông tin",
-      "Công việc phân tích hoàn toàn khác nhau ở hai mô hình",
-      "Scrum bỏ hẳn việc khai thác yêu cầu",
-      "Waterfall không cần xác định stakeholder"
+      "Phân tích giữ nguyên; thứ đổi là nhịp làm việc, mức chi tiết và nơi lưu thông tin",
+      "Công việc phân tích khác hẳn: Waterfall phân tích tài liệu, Scrum phân tích dữ liệu sử dụng",
+      "Scrum bỏ khai thác yêu cầu vì PO đã nắm hết nhu cầu, BA chỉ còn viết story",
+      "Waterfall không cần xác định stakeholder vì phạm vi đã ghi trong hợp đồng"
     ],
     "optionsEn": [
-      "The analysis work is unchanged; the rhythm, level of detail, and storage location change",
-      "The analysis work is completely different in each model",
-      "Scrum eliminates elicitation entirely",
-      "Waterfall does not need stakeholder identification"
+      "The analysis stays; the rhythm, detail level and where information lives change",
+      "Analysis differs entirely: waterfall analyses documents, Scrum analyses usage data",
+      "Scrum drops elicitation because the PO knows every need; the BA just writes stories",
+      "Waterfall skips stakeholder identification since scope is in the contract"
     ],
     "answer": 0,
     "explanation": "Ở mô hình nào bạn cũng phải hiểu vấn đề nghiệp vụ, khai thác nhu cầu, làm rõ chi tiết trước khi lập trình và xác nhận thứ giao ra.",
@@ -24,16 +24,16 @@
     "question": "Sai lầm điển hình của BA khi chuyển từ Waterfall sang Scrum là gì?",
     "questionEn": "What is the typical mistake when a BA moves from waterfall to Scrum?",
     "options": [
-      "Vẫn cố viết đặc tả đầy đủ cho cả sản phẩm trước sprint 1, tốn công vô ích vì phần lớn sẽ thay đổi",
-      "Ghi chép quá ít khiến đội thiếu thông tin",
-      "Tham gia quá nhiều cuộc họp",
-      "Không dùng công cụ quản lý backlog"
+      "Vẫn cố đặc tả toàn bộ sản phẩm trước sprint 1, trong khi phần lớn sẽ đổi",
+      "Ghi chép quá ít khiến đội ở xa thiếu thông tin để xây",
+      "Tham dự mọi sự kiện Scrum nên không còn chút thời gian nào để gặp người dùng cuối",
+      "Viết acceptance criteria cùng tester thay vì tự viết một mình"
     ],
     "optionsEn": [
-      "Still trying to specify the entire product before sprint 1, wasting effort since most of it will change",
-      "Recording too little and leaving the team short of information",
-      "Attending too many meetings",
-      "Not using a backlog tool"
+      "Still specifying the whole product before sprint 1, though most of it will change",
+      "Writing too little, leaving a remote team short of information to build",
+      "Attending every Scrum event and so having no time left for end users",
+      "Writing acceptance criteria together with testers instead of alone"
     ],
     "answer": 0,
     "explanation": "Chiều ngược lại cũng có sai lầm riêng: BA từ Scrum sang Waterfall thường ghi quá ít, khiến đội ở xa không đủ thông tin để xây.",
@@ -45,15 +45,15 @@
     "questionEn": "In waterfall, which phase is heaviest for the BA and how does it end?",
     "options": [
       "Giai đoạn phân tích yêu cầu, kết thúc bằng review, phê duyệt và baseline tài liệu",
-      "Giai đoạn triển khai, kết thúc bằng đào tạo người dùng",
-      "Giai đoạn thiết kế, kết thúc bằng bản vẽ kiến trúc",
-      "Giai đoạn kiểm thử, kết thúc bằng báo cáo bug"
+      "Giai đoạn triển khai, kết thúc bằng đào tạo người dùng và bàn giao hệ thống cho vận hành",
+      "Giai đoạn thiết kế, kết thúc bằng bản vẽ kiến trúc được khách hàng ký",
+      "Giai đoạn kiểm thử, kết thúc bằng UAT và báo cáo lỗi tổng hợp"
     ],
     "optionsEn": [
       "Requirements analysis, ending with review, approval, and a baselined document",
-      "Deployment, ending with user training",
-      "Design, ending with architecture drawings",
-      "Testing, ending with a defect report"
+      "Deployment, ending with user training and handing the system over to operations",
+      "Design, ending with architecture drawings signed by the client",
+      "Testing, ending with UAT and a consolidated defect report"
     ],
     "answer": 0,
     "explanation": "Baseline không có nghĩa là đóng băng vĩnh viễn mà là mọi thay đổi từ đó phải đi qua một quy trình có ý thức.",
@@ -64,16 +64,16 @@
     "question": "Rủi ro lớn nhất của BA trong Waterfall là gì và cách giảm nhẹ?",
     "questionEn": "What is the BA's biggest risk in waterfall and how is it mitigated?",
     "options": [
-      "Cố chốt mọi thứ quá sớm khi yêu cầu còn bất định; giảm nhẹ bằng prototype và bàn giao tăng dần",
-      "Viết tài liệu quá ngắn; giảm nhẹ bằng cách thêm trang",
-      "Họp quá nhiều; giảm nhẹ bằng cách giảm số cuộc họp",
-      "Dùng sai công cụ; giảm nhẹ bằng cách đổi công cụ"
+      "Chốt mọi thứ quá sớm khi yêu cầu còn bất định; giảm bằng prototype",
+      "Tài liệu quá ngắn so với quy mô; giảm bằng cách dùng template SRS đầy đủ mục",
+      "Họp quá nhiều với khách hàng; giảm bằng cách gom câu hỏi gửi qua email",
+      "Thay đổi yêu cầu liên tục; giảm bằng cách cấm mọi thay đổi sau khi ký"
     ],
     "optionsEn": [
-      "Locking everything down too early while requirements are uncertain; mitigate with prototypes and incremental delivery",
-      "Writing documents that are too short; mitigate by adding pages",
-      "Too many meetings; mitigate by cutting them",
-      "Using the wrong tool; mitigate by switching tools"
+      "Locking everything too early amid uncertainty; mitigate with prototypes",
+      "Documents too thin for the scope; mitigate with a fully sectioned SRS template",
+      "Too many client meetings; mitigate by batching questions into email",
+      "Constant changes; mitigate by banning all changes after sign-off"
     ],
     "answer": 0,
     "explanation": "Viết một SRS 200 trang dựa trên phỏng đoán tạo cảm giác an tâm giả tạo và tốn kém hơn nhiều so với việc học sớm bằng prototype.",
@@ -84,16 +84,16 @@
     "question": "Scrum có định nghĩa vai trò Business Analyst không?",
     "questionEn": "Does Scrum define a Business Analyst role?",
     "options": [
-      "Không, nhưng công việc BA vẫn tồn tại và ai đó phải làm — thường là BA với tư cách thành viên đội hoặc người hỗ trợ PO",
-      "Có, BA là vai trò thứ tư trong Scrum",
-      "Có, BA thay thế cho Scrum Master",
-      "Không, và công việc BA cũng không cần thiết trong Scrum"
+      "Không, nhưng công việc BA vẫn tồn tại và ai đó trong đội phải làm",
+      "Có, BA là vai trò thứ tư bên cạnh PO, Scrum Master và Developers",
+      "Có, trong Scrum BA được đổi tên thành Product Owner với cùng trách nhiệm",
+      "Không, vì PO và dev tự trao đổi trực tiếp nên không còn việc phân tích"
     ],
     "optionsEn": [
-      "No, but the BA work still exists and somebody must do it — usually the BA as a team member or supporting the PO",
-      "Yes, BA is the fourth Scrum role",
-      "Yes, the BA replaces the Scrum Master",
-      "No, and BA work is unnecessary in Scrum"
+      "No, but the BA work still exists and someone on the team must do it",
+      "Yes, BA is a fourth role alongside PO, Scrum Master and Developers",
+      "Yes, in Scrum the BA is renamed Product Owner with the same duties",
+      "No, because the PO and devs talk directly, so no analysis work remains"
     ],
     "answer": 0,
     "explanation": "Scrum chỉ định nghĩa ba vai trò là Product Owner, Scrum Master và Development Team. Công việc phân tích nằm trong đội.",
@@ -104,16 +104,16 @@
     "question": "Sự kiện Scrum nào quan trọng nhất với BA và vì sao?",
     "questionEn": "Which Scrum event matters most to a BA and why?",
     "options": [
-      "Backlog refinement, vì đó là nơi chia epic, làm rõ story mơ hồ, bổ sung acceptance criteria và chỉ ra công việc ẩn",
-      "Daily scrum, vì đó là nơi báo cáo tiến độ",
-      "Sprint review, vì đó là nơi trình bày với lãnh đạo",
-      "Retrospective, vì đó là nơi đánh giá thành viên"
+      "Backlog refinement, nơi chia epic, làm rõ story và bổ sung AC",
+      "Daily scrum, nơi BA nắm tiến độ từng story để báo lại cho khách hàng",
+      "Sprint review, nơi BA thay đội trình bày kết quả sprint cho lãnh đạo",
+      "Retrospective, nơi BA góp ý chất lượng code của từng thành viên"
     ],
     "optionsEn": [
-      "Backlog refinement, where epics are split, vague stories clarified, acceptance criteria added, and hidden work surfaced",
-      "The daily scrum, where progress is reported",
-      "The sprint review, where you present to management",
-      "The retrospective, where members are evaluated"
+      "Backlog refinement, where epics are split, stories clarified and AC added",
+      "The daily scrum, where the BA tracks each story's progress to report to the client",
+      "The sprint review, where the BA presents sprint results to management",
+      "The retrospective, where the BA critiques each member's code quality"
     ],
     "answer": 0,
     "explanation": "Công việc ẩn mà BA hay chỉ ra trong grooming gồm trạng thái rỗng, trạng thái lỗi, phân quyền và di trú dữ liệu.",
@@ -125,15 +125,15 @@
     "questionEn": "What is the golden rule for how far ahead a BA should prepare the backlog in Scrum?",
     "options": [
       "Luôn giữ khoảng hai tới ba sprint tiếp theo ở trạng thái sẵn sàng",
-      "Chuẩn bị sẵn toàn bộ backlog tới cuối dự án",
-      "Chỉ chuẩn bị đúng sprint đang chạy",
-      "Chuẩn bị sẵn sáu tháng công việc"
+      "Chuẩn bị sẵn toàn bộ backlog tới cuối dự án để đội không bao giờ bị chặn",
+      "Chỉ chuẩn bị đúng sprint đang chạy để không lãng phí công sức",
+      "Chuẩn bị trước sáu tháng công việc theo từng quý của roadmap"
     ],
     "optionsEn": [
       "Always keep about two to three sprints of work in a ready state",
-      "Prepare the entire backlog to project end",
-      "Prepare only the current sprint",
-      "Prepare six months of work in advance"
+      "Prepare the entire backlog to project end so the team is never blocked",
+      "Prepare only the current sprint to avoid wasted effort",
+      "Prepare six months of work ahead, quarter by quarter on the roadmap"
     ],
     "answer": 0,
     "explanation": "Ít hơn thì đội có nguy cơ bị chặn ở đầu sprint; nhiều hơn thì bạn đang lãng phí công sức vào những thứ sẽ thay đổi trước khi đến lượt.",
@@ -145,15 +145,15 @@
     "questionEn": "Which task belongs to the Product Owner rather than the BA?",
     "options": [
       "Quyết định thứ tự backlog và chấp nhận hoặc từ chối công việc đã hoàn thành",
-      "Khai thác chi tiết yêu cầu từ người dùng",
-      "Mô hình hoá quy trình và vẽ sơ đồ",
-      "Trả lời câu hỏi chi tiết của đội trong sprint"
+      "Khai thác chi tiết yêu cầu từ người dùng cuối và từ các phòng ban liên quan khác",
+      "Mô hình hoá quy trình nghiệp vụ và vẽ sơ đồ luồng dữ liệu cho đội",
+      "Trả lời câu hỏi chi tiết của đội khi gặp điểm mơ hồ trong sprint"
     ],
     "optionsEn": [
       "Deciding backlog order and accepting or rejecting completed work",
-      "Eliciting requirement detail from users",
-      "Modeling processes and drawing diagrams",
-      "Answering the team's detailed questions during the sprint"
+      "Eliciting detailed requirements from end users and related departments",
+      "Modeling business processes and drawing data-flow diagrams for the team",
+      "Answering the team's detailed questions on ambiguities during the sprint"
     ],
     "answer": 0,
     "explanation": "PO quyết định giá trị và thứ tự; BA lo chi tiết và mô hình hoá. Viết acceptance criteria thường là việc chung của BA và tester.",
@@ -165,15 +165,15 @@
     "questionEn": "Which BA-PO split works best for a complex product?",
     "options": [
       "BA hỗ trợ PO: PO lo giá trị và thứ tự, BA lo chi tiết và mô hình hoá",
-      "PO kiêm luôn BA để giảm số người",
-      "BA làm proxy PO và tự quyết định mọi thứ",
-      "Không cần PO, chỉ cần BA"
+      "PO kiêm luôn BA để giảm số người và đầu mối giao tiếp với đội",
+      "BA làm proxy PO, tự quyết thứ tự backlog khi PO vắng mặt dài ngày",
+      "Bỏ vai trò PO, BA nhận luôn quyền chấp nhận sản phẩm thay mặt khách hàng"
     ],
     "optionsEn": [
       "The BA supports the PO: the PO owns value and order, the BA owns detail and modeling",
-      "The PO also acts as BA to reduce headcount",
-      "The BA acts as proxy PO and decides everything",
-      "No PO is needed, only a BA"
+      "The PO doubles as BA, cutting headcount and points of contact",
+      "The BA acts as proxy PO, ordering the backlog while the PO is away",
+      "Drop the PO role; the BA takes over acceptance on the client's behalf"
     ],
     "answer": 0,
     "explanation": "PO kiêm BA phù hợp với sản phẩm đơn giản nhưng dễ quá tải. BA làm proxy PO có rủi ro nếu BA không có thẩm quyền quyết định.",
@@ -184,16 +184,16 @@
     "question": "Điều gì quan trọng hơn chức danh khi phân chia trách nhiệm giữa BA và PO?",
     "questionEn": "What matters more than job titles when dividing BA and PO responsibilities?",
     "options": [
-      "Phải có MỘT người quyết định được thứ tự và giá trị, và người đó phải sẵn sàng khi đội cần",
-      "Phải có ít nhất hai người cùng ra quyết định",
-      "Phải có một uỷ ban duyệt mọi thay đổi backlog",
-      "Phải có quản lý dự án phê duyệt cuối cùng"
+      "Phải có MỘT người quyết định thứ tự và giá trị, và luôn sẵn sàng khi đội cần",
+      "Phải có ít nhất hai người cùng quyết định để tránh thiên lệch cá nhân",
+      "Phải có một uỷ ban gồm các trưởng phòng duyệt mọi thay đổi backlog",
+      "Phải có quản lý dự án phê duyệt cuối cùng trước khi đội bắt đầu mỗi sprint"
     ],
     "optionsEn": [
-      "ONE person must be able to decide order and value, and be available when the team needs them",
-      "At least two people must decide together",
-      "A committee must approve every backlog change",
-      "The project manager must give final approval"
+      "ONE person decides order and value and is available when the team needs them",
+      "At least two people must decide together to avoid personal bias",
+      "A committee of department heads must approve every backlog change",
+      "The project manager must give final approval before each sprint starts"
     ],
     "answer": 0,
     "explanation": "Product owner vắng mặt hoặc không có thẩm quyền là nguyên nhân thất bại số một của các dự án Scrum.",
@@ -204,16 +204,16 @@
     "question": "Tuyên ngôn Agile thực sự nói gì về tài liệu?",
     "questionEn": "What does the agile manifesto actually say about documentation?",
     "options": [
-      "Phần mềm chạy được HƠN tài liệu toàn diện — không phải thay vì tài liệu",
-      "Không cần tài liệu trong dự án agile",
-      "Tài liệu chỉ cần thiết cho dự án được quản lý chặt",
-      "Tài liệu phải được thay bằng bình luận trong mã nguồn"
+      "Phần mềm chạy được HƠN tài liệu toàn diện, chứ không thay thế tài liệu",
+      "Không cần tài liệu, vì phần mềm chạy được chính là tài liệu tốt nhất",
+      "Tài liệu chỉ cần cho dự án bị quản lý chặt như ngân hàng, y tế",
+      "Tài liệu nên được thay bằng bình luận trong mã nguồn để luôn cập nhật"
     ],
     "optionsEn": [
-      "Working software OVER comprehensive documentation — not instead of documentation",
-      "No documentation is needed in agile projects",
-      "Documentation is only needed in regulated projects",
-      "Documentation must be replaced by code comments"
+      "Working software OVER comprehensive docs — not instead of docs",
+      "No documentation needed; working software is the best documentation",
+      "Documentation is only needed in regulated projects like banking or health",
+      "Documentation should be replaced by code comments so it stays current"
     ],
     "answer": 0,
     "explanation": "Chính tuyên ngôn ghi rõ rằng trong khi các mục bên phải có giá trị, họ coi trọng các mục bên trái hơn.",
@@ -224,16 +224,16 @@
     "question": "Rủi ro thật khi đội agile giảm tài liệu là gì?",
     "questionEn": "What is the real risk when an agile team reduces documentation?",
     "options": [
-      "Nhầm lẫn ít tài liệu với ít suy nghĩ; đội khoẻ mạnh vẫn dành nhiều công sức hiểu vấn đề, chỉ không đóng gói thành 200 trang",
-      "Không vượt qua được kiểm toán ISO",
-      "Khách hàng sẽ không ký hợp đồng",
-      "Lập trình viên phải viết nhiều bình luận hơn"
+      "Nhầm ít tài liệu với ít suy nghĩ — đội vẫn phải đầu tư hiểu vấn đề",
+      "Không vượt qua được kiểm toán ISO vì thiếu hồ sơ quy trình đầy đủ",
+      "Khách hàng từ chối ký hợp đồng vì không có SRS để làm căn cứ nghiệm thu",
+      "Lập trình viên phải viết nhiều bình luận hơn để bù cho tài liệu thiếu"
     ],
     "optionsEn": [
-      "Confusing less documentation with less thinking; healthy teams still invest heavily in understanding, they just do not package it into 200 pages",
-      "Failing an ISO audit",
-      "Customers refusing to sign contracts",
-      "Developers having to write more comments"
+      "Confusing less documentation with less thinking about the problem",
+      "Failing an ISO audit for lack of complete process records",
+      "Clients refusing to sign without an SRS as the basis for acceptance",
+      "Developers must write more comments to make up for missing docs"
     ],
     "answer": 0,
     "explanation": "Đội agile không khoẻ mạnh bỏ qua cả hai: không tài liệu và không suy nghĩ. Kết quả là xây sai thứ, nhanh hơn.",
@@ -244,16 +244,16 @@
     "question": "Thứ nào hầu như luôn đáng ghi lại kể cả trong dự án Scrum?",
     "questionEn": "What is almost always worth recording even on a Scrum project?",
     "options": [
-      "Tầm nhìn sản phẩm, business rule, định nghĩa dữ liệu, quyết định kiến trúc kèm lý do và acceptance test tự động",
-      "Biên bản mọi cuộc họp hằng ngày",
-      "Toàn bộ lịch sử chat của đội",
-      "Ước tính chi tiết cho mọi mục backlog tới cuối dự án"
+      "Tầm nhìn sản phẩm, business rule, định nghĩa dữ liệu và quyết định kiến trúc",
+      "Biên bản chi tiết của mọi cuộc daily standup để truy vết ai nói gì",
+      "Toàn bộ lịch sử chat của đội, xuất ra tài liệu sau mỗi sprint",
+      "Ước tính chi tiết cho mọi mục backlog tới cuối dự án để chốt ngân sách"
     ],
     "optionsEn": [
-      "Product vision, business rules, data definitions, architectural decisions with rationale, and automated acceptance tests",
-      "Minutes of every daily standup",
-      "The team's entire chat history",
-      "Detailed estimates for every backlog item to project end"
+      "Product vision, business rules, data definitions and architecture decisions",
+      "Detailed minutes of every daily standup to trace who said what",
+      "The team's full chat history, exported to a document each sprint",
+      "Detailed estimates for every backlog item to project end, to fix the budget"
     ],
     "answer": 0,
     "explanation": "Acceptance test tự động là tài liệu duy nhất không bao giờ lỗi thời, vì chúng chạy và sẽ báo lỗi khi hành vi hệ thống đổi.",
@@ -264,16 +264,16 @@
     "question": "Khi chuyển từ Waterfall sang Agile, việc nào BA nên GIỮ LẠI?",
     "questionEn": "Moving from waterfall to Agile, what should a BA KEEP?",
     "options": [
-      "Mô hình hoá quy trình khi nó làm rõ điều văn bản không làm rõ nổi, và khai thác yêu cầu phi chức năng sớm",
-      "Chờ tài liệu được ký duyệt xong mới cho đội bắt đầu",
-      "Viết đặc tả đầy đủ cho cả sản phẩm trước khi bắt đầu",
-      "Coi mọi thay đổi yêu cầu là thất bại của giai đoạn phân tích"
+      "Mô hình hoá quy trình khi văn bản không đủ rõ, và khai thác NFR sớm",
+      "Chờ tài liệu được ký duyệt đầy đủ rồi mới cho đội bắt đầu sprint đầu tiên",
+      "Viết đặc tả đầy đủ cho cả sản phẩm trước khi bắt đầu, như một bản đồ",
+      "Coi mọi thay đổi yêu cầu là dấu hiệu giai đoạn phân tích đã thất bại"
     ],
     "optionsEn": [
-      "Modeling processes when it clarifies what prose cannot, and eliciting nonfunctional requirements early",
-      "Waiting for a signed-off document before letting the team start",
-      "Specifying the whole product before anything begins",
-      "Treating every requirement change as an analysis failure"
+      "Process modeling where prose falls short, and eliciting NFRs early",
+      "Waiting for full document sign-off before letting the team start sprint one",
+      "Specifying the whole product up front as a map",
+      "Treating every requirement change as a sign analysis failed"
     ],
     "answer": 0,
     "explanation": "Yêu cầu phi chức năng chi phối kiến trúc, nên phát hiện muộn có thể buộc phải làm lại phần lớn công việc đã hoàn thành.",
@@ -284,16 +284,16 @@
     "question": "Mô hình lai hybrid phổ biến ở Việt Nam hoạt động thế nào?",
     "questionEn": "How does the hybrid model common in Vietnam work?",
     "options": [
-      "Hợp đồng và phạm vi tổng thể theo Waterfall để khách hàng ký, còn thực thi bên trong theo Scrum",
-      "Nửa đội làm Waterfall, nửa đội làm Scrum",
-      "Waterfall cho dự án nhỏ, Scrum cho dự án lớn",
-      "Luân phiên Waterfall và Scrum theo từng quý"
+      "Hợp đồng và phạm vi tổng thể theo Waterfall, thực thi bên trong theo Scrum",
+      "Nửa đội làm Waterfall cho backend, nửa đội làm Scrum cho frontend",
+      "Dự án nhỏ dùng Waterfall, dự án lớn dùng Scrum, quyết định theo ngân sách",
+      "Luân phiên Waterfall và Scrum theo từng quý để so sánh hiệu quả"
     ],
     "optionsEn": [
-      "The contract and overall scope run waterfall for the customer to sign, while delivery inside runs Scrum",
-      "Half the team does waterfall and half does Scrum",
-      "Waterfall for small projects and Scrum for large ones",
-      "Alternating waterfall and Scrum each quarter"
+      "Contract and overall scope run waterfall; delivery inside runs Scrum",
+      "Half the team runs waterfall for backend, half runs Scrum for frontend",
+      "Small projects use waterfall, large ones Scrum, decided by budget",
+      "Alternating waterfall and Scrum each quarter to compare results"
     ],
     "answer": 0,
     "explanation": "BA trong mô hình này phải làm cả hai: duy trì tài liệu cấp cao cho hợp đồng và backlog chi tiết cho đội phát triển.",
@@ -304,16 +304,16 @@
     "question": "Trong Scrum, phần công việc nào của BA chiếm nhiều thời gian nhất mà ít ai nói tới?",
     "questionEn": "In Scrum, which part of the BA's work takes the most time yet is rarely discussed?",
     "options": [
-      "Trả lời câu hỏi liên tục trong sprint, làm rõ khi tester phát hiện điểm mơ hồ và chuẩn bị story cho sprint sau",
-      "Viết biên bản cho sprint review",
-      "Cập nhật biểu đồ burndown",
-      "Đánh giá hiệu suất của từng thành viên"
+      "Trả lời câu hỏi liên tục trong sprint và chuẩn bị story cho sprint sau",
+      "Viết biên bản sprint review và gửi tổng kết cho khách hàng sau mỗi sprint",
+      "Cập nhật biểu đồ burndown hằng ngày để Scrum Master theo dõi tiến độ",
+      "Đánh giá hiệu suất từng thành viên để báo cáo lên quản lý dự án"
     ],
     "optionsEn": [
-      "Continuously answering questions during the sprint, clarifying when testers find ambiguity, and preparing next sprint's stories",
-      "Writing sprint review minutes",
-      "Updating the burndown chart",
-      "Evaluating each member's performance"
+      "Answering questions all sprint and preparing next sprint's stories",
+      "Writing sprint review minutes and sending the client a summary each sprint",
+      "Updating the burndown chart daily for the Scrum Master to track",
+      "Evaluating each member's performance for the project manager"
     ],
     "answer": 0,
     "explanation": "Đây là lý do BA cần có mặt và sẵn sàng trong suốt sprint chứ không chỉ xuất hiện ở các sự kiện chính thức.",

@@ -4,16 +4,16 @@
     "question": "Vì sao app không giữ danh sách to-do trong một mảng JavaScript trong bộ nhớ của server?",
     "questionEn": "Why doesn't the app keep the to-do list in a JavaScript array in the server's memory?",
     "options": [
-      "Mảng JavaScript không chứa được quá vài trăm phần tử",
-      "Dữ liệu mất sạch mỗi lần server restart, mà `npm run dev` restart mỗi khi lưu file",
-      "Trình duyệt không đọc được một mảng khi nó được gửi dưới dạng JSON",
-      "Express cấm dùng biến toàn cục bên trong các file route"
+      "Mảng JavaScript không chứa được quá vài trăm phần tử một lúc",
+      "Dữ liệu mất sạch mỗi lần server restart, mà khi dev thì restart liên tục",
+      "Trình duyệt không đọc được một mảng khi nó được gửi về dưới dạng JSON",
+      "Express cấm dùng biến toàn cục bên trong các file route của nó"
     ],
     "optionsEn": [
-      "A JavaScript array cannot hold more than a few hundred items",
-      "The data vanishes on every restart, and `npm run dev` restarts whenever you save a file",
-      "The browser cannot read an array when it is sent as JSON",
-      "Express forbids global variables inside route files"
+      "A JavaScript array cannot hold more than a few hundred items at once",
+      "The data vanishes on every restart, and dev mode restarts constantly",
+      "The browser cannot read an array when it arrives as a JSON response",
+      "Express forbids global variables inside any of its route files"
     ],
     "answer": 1,
     "explanation": "Bộ nhớ của process bị xóa khi process dừng. Với `node --watch`, việc đó xảy ra mỗi lần lưu file, nên dữ liệu phải nằm trong database (`todo.db`) để sống sót qua restart.",
@@ -38,14 +38,14 @@
     "options": [
       "`localStorage` quá chậm để lưu những đoạn text ngắn như title",
       "`localStorage` chỉ đọc được khi trang chạy qua HTTPS",
-      "`localStorage` không lưu được chuỗi có dấu cách hoặc ký tự tiếng Việt",
-      "Dữ liệu chỉ nằm trong một trình duyệt trên một thiết bị, và người dùng có thể sửa hoặc xóa nó"
+      "`localStorage` không lưu được các chuỗi có dấu cách hoặc có ký tự tiếng Việt",
+      "Dữ liệu chỉ nằm trong một trình duyệt, và người dùng có thể sửa hoặc xóa nó"
     ],
     "optionsEn": [
       "`localStorage` is too slow for short pieces of text such as titles",
       "`localStorage` can only be read when the page is served over HTTPS",
       "`localStorage` cannot store strings with spaces or Vietnamese characters",
-      "The data stays in one browser on one device, and the user can edit or wipe it"
+      "The data lives in one browser only, and the user can edit or wipe it"
     ],
     "answer": 3,
     "explanation": "`localStorage` gắn với một trình duyệt trên một máy, nên điện thoại không thấy dữ liệu trên laptop, và server không kiểm soát được nó. App chỉ để tùy chọn giao diện vô hại ở đó (`todo:lastEmail`, `todo:filter`).",
@@ -68,13 +68,13 @@
     "question": "Vì sao khóa học dùng SQLite, trong khi app production thường dùng PostgreSQL hoặc MySQL?",
     "questionEn": "Why does the course use SQLite while production apps usually use PostgreSQL or MySQL?",
     "options": [
-      "SQLite không cần cài đặt (một thư viện + một file) nhưng mỗi lúc chỉ một người ghi; Postgres/MySQL là server riêng mà nhiều app server dùng chung và ghi đồng thời",
+      "SQLite không cần cài đặt nhưng mỗi lúc chỉ một người ghi; Postgres/MySQL ghi đồng thời tốt",
       "SQLite không hỗ trợ `JOIN` và `GROUP BY`, nên chỉ hợp với bài tập đơn giản nhất",
-      "SQLite phải trả phí khi dùng cho mục đích thương mại, còn Postgres và MySQL thì không",
+      "SQLite phải trả phí bản quyền khi dùng cho mục đích thương mại, còn Postgres và MySQL thì không",
       "Postgres và MySQL không cần user hay mật khẩu, nên dễ triển khai lên cloud hơn"
     ],
     "optionsEn": [
-      "SQLite has zero setup (a library + one file) but one writer at a time; Postgres/MySQL are separate servers many app servers share and write to concurrently",
+      "SQLite needs no setup but has one writer at a time; Postgres/MySQL handle many writers",
       "SQLite does not support `JOIN` and `GROUP BY`, so it only suits the simplest exercises",
       "SQLite must be paid for in commercial use, while Postgres and MySQL are free",
       "Postgres and MySQL need no user or password, so they are easier to deploy to the cloud"
@@ -109,7 +109,7 @@
       "Deleting a to-do also deletes the user who owns it",
       "It blocks deleting a user who still has to-dos",
       "Deleting a user automatically deletes all of that user's to-dos",
-      "Deleting a user sets the `user_id` of their to-dos to NULL"
+      "Deleting a user sets the `user_id` of all of their to-dos to NULL"
     ],
     "answer": 2,
     "explanation": "Cascade đi từ bảng cha (`users`) xuống bảng con (`todos`). Trong lần chạy thử, xóa Minh làm số to-do giảm từ 5 xuống 3.",
@@ -141,7 +141,7 @@
       "Because SQLite ignores FOREIGN KEY rules unless they are switched on",
       "Because it creates the `todos` table if the table does not exist",
       "Because it makes the `email` column unique",
-      "Because it creates an index that speeds up queries by `user_id`"
+      "Because it creates an index that makes queries by `user_id` run faster"
     ],
     "answer": 0,
     "explanation": "Đúng như comment trong `db.js`: SQLite không kiểm tra khóa ngoại (và không cascade) nếu chưa bật `foreign_keys`. Bảng được tạo bởi `schema.sql`, UNIQUE và index cũng nằm ở đó.",
@@ -166,14 +166,14 @@
     "options": [
       "DB Browser chỉ hiển thị boolean dạng số khi mở ở chế độ Read Only",
       "Frontend React đổi `1` thành `true` trước khi request được gửi đi",
-      "Route PATCH có bug và lưu sai giá trị vào database",
-      "SQLite không có kiểu boolean thật nên lưu 0/1, và `toJson` đổi lại bằng `row.done === 1`"
+      "Route PATCH có bug nên đã lưu sai giá trị của cột `done` vào trong database",
+      "SQLite không có kiểu boolean thật nên lưu 0/1, server đổi lại khi trả JSON"
     ],
     "optionsEn": [
       "DB Browser only shows booleans as numbers when opened in Read Only mode",
       "The React frontend turns `1` into `true` before the request is sent",
       "The PATCH route has a bug and saves the wrong value in the database",
-      "SQLite has no real boolean type, so it stores 0/1, and `toJson` converts it with `row.done === 1`"
+      "SQLite has no real boolean type, so it stores 0/1 and the server converts it"
     ],
     "answer": 3,
     "explanation": "Cột `done` là `INTEGER NOT NULL DEFAULT 0`. Hàm `toJson` trong `routes/todos.js` biến nó thành boolean thật cho JSON. Hai giá trị khớp nhau, không có bug.",
@@ -196,30 +196,30 @@
     "question": "Khi frontend gọi `GET /api/todos`, server chạy câu SQL nào?",
     "questionEn": "When the frontend calls `GET /api/todos`, which SQL does the server run?",
     "options": [
-      "`SELECT * FROM todos ORDER BY created_at DESC`",
+      "`SELECT * FROM todos ORDER BY user_id, created_at DESC, id DESC`",
       "`SELECT * FROM todos WHERE user_id = ? ORDER BY created_at DESC, id DESC`",
-      "`SELECT * FROM todos WHERE id = ? AND user_id = ?`",
-      "`SELECT * FROM todos t JOIN users u ON u.id = t.user_id`"
+      "`SELECT * FROM todos WHERE id = ? AND user_id = ? ORDER BY created_at DESC`",
+      "`SELECT * FROM todos t JOIN users u ON u.id = t.user_id ORDER BY t.created_at DESC`"
     ],
     "optionsEn": [
-      "`SELECT * FROM todos ORDER BY created_at DESC`",
+      "`SELECT * FROM todos ORDER BY user_id, created_at DESC, id DESC`",
       "`SELECT * FROM todos WHERE user_id = ? ORDER BY created_at DESC, id DESC`",
-      "`SELECT * FROM todos WHERE id = ? AND user_id = ?`",
-      "`SELECT * FROM todos t JOIN users u ON u.id = t.user_id`"
+      "`SELECT * FROM todos WHERE id = ? AND user_id = ? ORDER BY created_at DESC`",
+      "`SELECT * FROM todos t JOIN users u ON u.id = t.user_id ORDER BY t.created_at DESC`"
     ],
     "answer": 1,
     "explanation": "Danh sách chỉ gồm to-do của user đang đăng nhập (`user_id = ?`, lấy từ cookie), mới nhất lên đầu; `id DESC` phân định các to-do tạo trong cùng một giây.",
     "explanationEn": "The list holds only the logged-in user's to-dos (`user_id = ?`, taken from the cookie), newest first; `id DESC` breaks ties between to-dos created in the same second.",
     "optionExplanations": [
-      "Sai: thiếu bộ lọc `user_id`, câu này sẽ trả về to-do của mọi người.",
+      "Sai: không lọc theo user đang đăng nhập; sắp xếp theo `user_id` vẫn trả về to-do của mọi người.",
       "Đúng: đây là câu trong `router.get('/')` của `routes/todos.js`.",
-      "Sai: đây là `findOwnTodo`, dùng để lấy một to-do cho PATCH, không phải cả danh sách.",
+      "Sai: lọc theo `id` nên chỉ lấy một to-do (giống `findOwnTodo` cho PATCH), không phải cả danh sách.",
       "Sai: route danh sách không JOIN bảng users, và câu này không lọc theo user."
     ],
     "optionExplanationsEn": [
-      "Wrong: with no `user_id` filter it would return everyone's to-dos.",
+      "Wrong: it does not filter by the logged-in user; sorting by `user_id` still returns everyone's to-dos.",
       "Correct: this is the query in `router.get('/')` in `routes/todos.js`.",
-      "Wrong: that is `findOwnTodo`, which loads one to-do for PATCH, not the list.",
+      "Wrong: filtering by `id` loads a single to-do (like `findOwnTodo` for PATCH), not the list.",
       "Wrong: the list route does not JOIN users, and this query filters by no user."
     ]
   },
@@ -228,13 +228,13 @@
     "question": "Minh đang đăng nhập và gửi `DELETE /api/todos/1`, nhưng to-do 1 thuộc về Lan. Chuyện gì xảy ra?",
     "questionEn": "Minh is logged in and sends `DELETE /api/todos/1`, but to-do 1 belongs to Lan. What happens?",
     "options": [
-      "403 Forbidden, vì server nhận ra to-do đó thuộc về người khác",
+      "403 Forbidden, vì server nhận ra rằng to-do đó đang thuộc về một người khác",
       "204, và to-do của Lan bị xóa vì id đúng",
       "404 `To-do not found.`, vì `WHERE id = ? AND user_id = ?` khớp 0 dòng",
       "401, vì cookie của Minh không hợp lệ với to-do của Lan"
     ],
     "optionsEn": [
-      "403 Forbidden, because the server sees that the to-do belongs to someone else",
+      "403 Forbidden, because the server notices that the to-do belongs to someone else",
       "204, and Lan's to-do is deleted because the id is correct",
       "404 `To-do not found.`, because `WHERE id = ? AND user_id = ?` matches zero rows",
       "401, because Minh's cookie is not valid for Lan's to-do"
@@ -260,14 +260,14 @@
     "question": "Vì sao app mẫu an toàn trước SQL injection?",
     "questionEn": "Why is the sample app safe from SQL injection?",
     "options": [
-      "Mọi câu truy vấn dùng placeholder `?`, nên giá trị được gửi riêng và không bao giờ trở thành SQL",
-      "bcrypt băm email trước khi đưa vào câu truy vấn",
-      "Form React chặn các ký tự dấu nháy trước khi gửi request",
-      "Body JSON của request không thể chứa ký tự dấu nháy đơn"
+      "Mọi câu truy vấn dùng placeholder `?`, nên giá trị không bao giờ thành SQL",
+      "bcrypt băm email và mật khẩu trước khi đưa vào câu truy vấn",
+      "Form React tự động chặn mọi ký tự dấu nháy trước khi gửi request lên server",
+      "Body JSON của request không thể chứa ký tự dấu nháy đơn nào"
     ],
     "optionsEn": [
-      "Every query uses `?` placeholders, so values are sent separately and never become SQL",
-      "bcrypt hashes the email before it goes into the query",
+      "Every query uses `?` placeholders, so values never become SQL",
+      "bcrypt hashes the email and password before they go into the query",
       "The React form blocks quote characters before sending the request",
       "A JSON request body cannot contain single-quote characters"
     ],
@@ -324,7 +324,7 @@
     "question": "Bạn mở `todo.db` và thấy cột `password_hash` chứa giá trị kiểu `$2b$10$cMOO8.fgOW…`. Điều đó cho biết gì?",
     "questionEn": "You open `todo.db` and the `password_hash` column holds values like `$2b$10$cMOO8.fgOW…`. What does that tell you?",
     "options": [
-      "Đó là mật khẩu được mã hóa bằng `JWT_SECRET` và có thể giải mã lại",
+      "Đó là mật khẩu được mã hóa bằng `JWT_SECRET` và có thể giải mã lại được",
       "Đó là mật khẩu viết dưới dạng base64, đổi ngược lại được dễ dàng",
       "Đó là hash bcrypt với cost 10; mật khẩu gốc không được lưu ở đâu cả",
       "Đó là giá trị tạm, sẽ được thay khi user xác minh email"
@@ -359,13 +359,13 @@
       "`SELECT u.name, COUNT(t.id) FROM users u JOIN todos t ON t.user_id = u.id GROUP BY u.id`",
       "`SELECT u.name, COUNT(t.id) FROM users u LEFT JOIN todos t ON t.user_id = u.id GROUP BY u.id`",
       "`SELECT user_id, COUNT(*) FROM todos GROUP BY user_id`",
-      "`SELECT name, COUNT(*) FROM users GROUP BY name`"
+      "`SELECT u.name, COUNT(t.id) FROM users u RIGHT JOIN todos t ON t.user_id = u.id GROUP BY u.id`"
     ],
     "optionsEn": [
       "`SELECT u.name, COUNT(t.id) FROM users u JOIN todos t ON t.user_id = u.id GROUP BY u.id`",
       "`SELECT u.name, COUNT(t.id) FROM users u LEFT JOIN todos t ON t.user_id = u.id GROUP BY u.id`",
       "`SELECT user_id, COUNT(*) FROM todos GROUP BY user_id`",
-      "`SELECT name, COUNT(*) FROM users GROUP BY name`"
+      "`SELECT u.name, COUNT(t.id) FROM users u RIGHT JOIN todos t ON t.user_id = u.id GROUP BY u.id`"
     ],
     "answer": 1,
     "explanation": "`LEFT JOIN` giữ mọi user, kể cả user không có dòng nào trong `todos`; `COUNT(t.id)` khi đó bằng 0. Trong lần chạy thử, Hoa hiện ra với 0 to-do.",
@@ -374,13 +374,13 @@
       "Sai: `JOIN` thường chỉ giữ các dòng khớp ở cả hai bảng, nên Hoa bị mất.",
       "Đúng: LEFT JOIN + GROUP BY đếm cả những user có 0 to-do.",
       "Sai: chỉ đọc bảng todos nên không bao giờ thấy user chưa có to-do.",
-      "Sai: câu này đếm số user trùng tên, không đếm to-do."
+      "Sai: RIGHT JOIN giữ mọi to-do chứ không giữ mọi user, nên Hoa (chưa có to-do) vẫn bị mất."
     ],
     "optionExplanationsEn": [
       "Wrong: a plain `JOIN` keeps only rows that match in both tables, so Hoa disappears.",
       "Correct: LEFT JOIN + GROUP BY counts users with 0 to-dos too.",
       "Wrong: it reads only todos, so it never sees a user without to-dos.",
-      "Wrong: it counts users sharing a name, not to-dos."
+      "Wrong: a RIGHT JOIN keeps every to-do, not every user, so Hoa (no to-dos) is still missing."
     ]
   },
   {
@@ -391,13 +391,13 @@
       "Không đổi gì: placeholder `?` và `.get()`/`.all()` chạy y hệt với mọi database",
       "Route phải bỏ SQL và bắt buộc chuyển sang dùng Prisma",
       "Phải bỏ bảng users và lưu tài khoản vào một file JSON",
-      "Placeholder đổi thành `$1`, `$2`… và handler thành `async`/`await`, vì database là server riêng qua mạng"
+      "Placeholder đổi thành `$1`, `$2`… và handler thành `async`/`await`"
     ],
     "optionsEn": [
       "Nothing changes: `?` placeholders and `.get()`/`.all()` work the same with every database",
       "The routes must drop SQL and switch to Prisma",
       "The users table must go and accounts must be stored in a JSON file",
-      "Placeholders become `$1`, `$2`… and handlers become `async`/`await`, because the database is a separate server over the network"
+      "Placeholders become `$1`, `$2`… and handlers become `async`/`await`"
     ],
     "answer": 3,
     "explanation": "`pg` dùng placeholder đánh số và trả về Promise, vì mỗi truy vấn là một lượt đi về qua mạng. Logic của route (lọc theo `user_id`, 404…) giữ nguyên.",
@@ -420,15 +420,15 @@
     "question": "Trên một bản copy của `todo.db`, bạn mở dòng lệnh `sqlite3` và chạy `DELETE FROM users WHERE id = 2;`. User bị xóa nhưng to-do của user đó vẫn còn. Nguyên nhân khả dĩ nhất?",
     "questionEn": "On a copy of `todo.db` you open the `sqlite3` command line and run `DELETE FROM users WHERE id = 2;`. The user is gone but their to-dos remain. What is the most likely cause?",
     "options": [
-      "CASCADE chỉ hoạt động khi xóa thông qua API của app",
-      "Phiên `sqlite3` đó chưa bật khóa ngoại; cần chạy `PRAGMA foreign_keys = ON;` trước",
-      "Index `idx_todos_user_id` chặn việc xóa dây chuyền",
+      "CASCADE chỉ hoạt động khi xóa thông qua API của app, không qua CLI",
+      "Phiên `sqlite3` đó chưa bật khóa ngoại (`PRAGMA foreign_keys`)",
+      "Index `idx_todos_user_id` chặn việc xóa dây chuyền sang bảng todos",
       "Cần restart server Express thì to-do mới bị xóa theo"
     ],
     "optionsEn": [
       "CASCADE only works when you delete through the app's API",
-      "That `sqlite3` session has foreign keys off; run `PRAGMA foreign_keys = ON;` first",
-      "The `idx_todos_user_id` index blocks the cascade",
+      "That `sqlite3` session has foreign keys off (`PRAGMA foreign_keys`)",
+      "The `idx_todos_user_id` index blocks the cascade to the todos table",
       "The Express server must be restarted before the to-dos are deleted"
     ],
     "answer": 1,
@@ -452,13 +452,13 @@
     "question": "Khi dịch `schema.sql` sang MySQL, lựa chọn nào đúng?",
     "questionEn": "When translating `schema.sql` to MySQL, which choice is correct?",
     "options": [
-      "Dùng `INT AUTO_INCREMENT PRIMARY KEY` cho id và viết một dòng riêng `FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE`",
+      "Dùng `INT AUTO_INCREMENT PRIMARY KEY` cho id và một dòng `FOREIGN KEY` riêng",
       "Giữ nguyên `INTEGER PRIMARY KEY AUTOINCREMENT`, vì MySQL đọc được cú pháp của SQLite",
       "Giữ `email TEXT UNIQUE` y như cũ, vì MySQL đặt UNIQUE trên TEXT không giới hạn",
       "Đổi `done` thành TEXT chứa `'true'`/`'false'`, vì MySQL không có kiểu BOOLEAN"
     ],
     "optionsEn": [
-      "Use `INT AUTO_INCREMENT PRIMARY KEY` for id and write a separate `FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE` line",
+      "Use `INT AUTO_INCREMENT PRIMARY KEY` for id plus a separate `FOREIGN KEY` line",
       "Keep `INTEGER PRIMARY KEY AUTOINCREMENT`, because MySQL reads SQLite syntax",
       "Keep `email TEXT UNIQUE` as it is, because MySQL puts UNIQUE on unlimited TEXT",
       "Change `done` to TEXT holding `'true'`/`'false'`, because MySQL has no BOOLEAN type"
@@ -486,13 +486,13 @@
     "options": [
       "SQLite không hỗ trợ thêm cột vào một bảng đã tồn tại",
       "Cần chạy `npm run db:reset` thì cột mới mới xuất hiện",
-      "`IF NOT EXISTS` bỏ qua bảng đã có, nên cần một migration (ví dụ `ALTER TABLE todos ADD COLUMN due_date TEXT`)",
-      "Server chỉ đọc `schema.sql` khi cài package bằng `npm install`"
+      "Câu CREATE bị bỏ qua vì bảng đã có; cần một migration `ALTER TABLE`",
+      "Server chỉ đọc file `schema.sql` khi cài package bằng lệnh `npm install`"
     ],
     "optionsEn": [
       "SQLite cannot add a column to a table that already exists",
       "You must run `npm run db:reset` for the new column to appear",
-      "`IF NOT EXISTS` skips the existing table, so a migration is needed (e.g. `ALTER TABLE todos ADD COLUMN due_date TEXT`)",
+      "The CREATE is skipped since the table exists; it needs an `ALTER TABLE` migration",
       "The server only reads `schema.sql` when packages are installed with `npm install`"
     ],
     "answer": 2,
@@ -516,16 +516,16 @@
     "question": "Developer nói: \"Team mình dùng Prisma nên không viết SQL tay.\" Prisma là gì?",
     "questionEn": "A developer says: \"Our team uses Prisma, so we don't write SQL by hand.\" What is Prisma?",
     "options": [
-      "Một database mới thay thế cho PostgreSQL và MySQL",
-      "Một công cụ giao diện để xem file SQLite, giống DB Browser",
-      "Một thư viện chỉ dùng để băm mật khẩu trước khi lưu",
-      "Một ORM: developer viết code như `prisma.todo.findMany(...)` và thư viện tự sinh câu SQL"
+      "Một database mới ra đời để thay thế cho PostgreSQL và MySQL",
+      "Một công cụ có giao diện đồ họa để mở và xem file SQLite, giống DB Browser",
+      "Một thư viện chỉ dùng để băm mật khẩu trước khi lưu vào bảng",
+      "Một ORM: developer viết code JavaScript và thư viện tự sinh câu truy vấn"
     ],
     "optionsEn": [
-      "A new database that replaces PostgreSQL and MySQL",
-      "A GUI tool for viewing SQLite files, like DB Browser",
-      "A library used only to hash passwords before saving them",
-      "An ORM: developers write code such as `prisma.todo.findMany(...)` and it generates the SQL"
+      "A newer database engine built to replace PostgreSQL and MySQL",
+      "A GUI tool for opening and browsing SQLite files, like DB Browser",
+      "A library used only to hash passwords before saving them to a table",
+      "An ORM: developers write JavaScript code and the library generates the queries"
     ],
     "answer": 3,
     "explanation": "ORM (Object-Relational Mapper) như Prisma hay Sequelize nằm giữa code và database; bên dưới vẫn là SQL với placeholder. Knex và Drizzle là query builder, gần SQL hơn.",
@@ -548,14 +548,14 @@
     "question": "PO hỏi: \"Nếu sau này thêm tính năng xóa tài khoản, to-do của user sẽ ra sao?\" Câu trả lời tốt nhất của BA là gì?",
     "questionEn": "The PO asks: \"If we add account deletion later, what happens to the user's to-dos?\" What is the BA's best answer?",
     "options": [
-      "To-do vẫn còn trong database nhưng không có chủ, và admin sẽ dọn sau",
-      "Với schema hiện tại, `ON DELETE CASCADE` xóa chúng; đó là business rule cần xác nhận (lưu trữ, quyền riêng tư) và viết thành acceptance criteria",
-      "Database sẽ từ chối xóa user cho tới khi user tự xóa hết to-do",
+      "To-do vẫn còn nằm trong database nhưng không có chủ, và admin sẽ tự dọn dẹp chúng sau",
+      "Schema hiện tại xóa chúng theo (`ON DELETE CASCADE`); cần xác nhận đây là business rule",
+      "Database sẽ từ chối xóa user cho tới khi user tự xóa hết to-do của mình",
       "To-do tự động được chuyển sang tài khoản admin để lưu trữ"
     ],
     "optionsEn": [
-      "The to-dos stay in the database without an owner, and an admin cleans them up later",
-      "With the current schema, `ON DELETE CASCADE` deletes them; that is a business rule to confirm (retention, privacy) and write as acceptance criteria",
+      "The to-dos stay in the database without an owner, and an admin cleans them up later on",
+      "The current schema deletes them (`ON DELETE CASCADE`); confirm it as a business rule",
       "The database refuses to delete the user until they delete all their to-dos",
       "The to-dos are automatically moved to an admin account for archiving"
     ],

@@ -24,16 +24,16 @@
     "question": "SQL Injection tấn công bằng cách nào?",
     "questionEn": "How does a SQL Injection attack work?",
     "options": [
-      "Gửi quá nhiều request làm quá tải server",
-      "Nhúng code SQL vào input để can thiệp vào câu lệnh SQL của server",
-      "Giả mạo địa chỉ IP người dùng",
-      "Đánh cắp cookie của session"
+      "Gửi thật nhiều request cùng một lúc để làm sập server",
+      "Chèn code SQL vào ô nhập để sửa câu lệnh của server",
+      "Giả mạo địa chỉ IP để đóng vai người dùng khác",
+      "Đánh cắp cookie session để chiếm phiên đăng nhập"
     ],
     "optionsEn": [
-      "Sending too many requests to overload the server",
-      "Injecting SQL code into input to tamper with the server's SQL statements",
-      "Spoofing the user's IP address",
-      "Stealing the session cookie"
+      "Sending a flood of requests at once to crash the server",
+      "Slipping SQL code into input to alter the server's query",
+      "Faking an IP address to pose as another user",
+      "Stealing the session cookie to hijack a login"
     ],
     "answer": 1,
     "explanation": "SQL Injection: nhập SQL code vào form (username, search...). Nếu server ghép thẳng vào query mà không sanitize → attacker kiểm soát database query.",
@@ -45,13 +45,13 @@
     "questionEn": "How does HTTPS protect data?",
     "options": [
       "Ngăn người dùng truy cập trang web độc hại",
-      "Mã hóa dữ liệu truyền tải giữa browser và server",
+      "Mã hóa dữ liệu giữa browser và server",
       "Xác thực mật khẩu người dùng",
       "Chặn SQL Injection tự động"
     ],
     "optionsEn": [
       "Prevents users from visiting malicious websites",
-      "Encrypts data transmitted between the browser and the server",
+      "Encrypts data between the browser and the server",
       "Verifies the user's password",
       "Automatically blocks SQL Injection"
     ],
@@ -64,14 +64,14 @@
     "question": "2FA (Two-Factor Authentication) hoạt động như thế nào?",
     "questionEn": "How does 2FA (Two-Factor Authentication) work?",
     "options": [
-      "Yêu cầu nhập mật khẩu hai lần",
-      "Yêu cầu hai bằng chứng khác nhau: mật khẩu + OTP/token",
+      "Yêu cầu nhập mật khẩu hai lần liên tiếp để chắc chắn",
+      "Yêu cầu hai loại bằng chứng: mật khẩu + mã OTP",
       "Gửi email xác nhận mỗi lần đăng nhập",
       "Tự động reset mật khẩu sau 30 ngày"
     ],
     "optionsEn": [
-      "Requires entering the password twice",
-      "Requires two different pieces of evidence: password + OTP/token",
+      "Requires typing the password twice to be sure",
+      "Requires two kinds of proof: password + OTP code",
       "Sends a confirmation email on every login",
       "Automatically resets the password after 30 days"
     ],
@@ -84,16 +84,16 @@
     "question": "Nguyên tắc Least Privilege có nghĩa là gì?",
     "questionEn": "What does the Principle of Least Privilege mean?",
     "options": [
-      "Admin được quyền làm mọi thứ",
-      "Chỉ cấp quyền tối thiểu cần thiết để thực hiện công việc",
-      "User không cần đăng nhập",
-      "Mọi người đều có quyền như nhau"
+      "Admin được toàn quyền làm mọi thứ",
+      "Chỉ cấp đúng quyền cần cho công việc",
+      "Người dùng mới được cấp quyền admin trước, thu hồi sau",
+      "Mọi người trong nhóm có quyền như nhau"
     ],
     "optionsEn": [
       "Admins get permission to do everything",
-      "Grant only the minimum privileges necessary to do the job",
-      "Users don't need to log in",
-      "Everyone has the same permissions"
+      "Grant only the access a job needs",
+      "New users get admin rights first, removed later",
+      "Everyone on the team has the same permissions"
     ],
     "answer": 1,
     "explanation": "Least Privilege giảm thiểu rủi ro: nếu tài khoản bị compromise, kẻ tấn công chỉ có quyền hạn chế. Developer không cần quyền production DB, marketing không cần quyền xóa user...",
@@ -105,15 +105,15 @@
     "questionEn": "What is XSS (Cross-Site Scripting)?",
     "options": [
       "Tấn công bằng cách thêm code SQL vào input",
-      "Nhúng JavaScript độc hại vào trang web chạy trong browser nạn nhân",
-      "Tấn công từ chối dịch vụ bằng nhiều request",
-      "Giả mạo email từ domain hợp lệ"
+      "Chèn JavaScript độc chạy trong browser nạn nhân",
+      "Tấn công từ chối dịch vụ bằng thật nhiều request",
+      "Giả mạo email gửi từ một domain hợp lệ"
     ],
     "optionsEn": [
-      "An attack that adds SQL code into input",
-      "Injecting malicious JavaScript into a web page that runs in the victim's browser",
+      "An attack that slips SQL code into form input",
+      "Injecting harmful JavaScript into a victim's browser",
       "A denial-of-service attack using many requests",
-      "Spoofing email from a legitimate domain"
+      "Spoofing emails so they seem to come from a real domain"
     ],
     "answer": 1,
     "explanation": "XSS: attacker inject JavaScript vào trang (qua comment, input...). Khi nạn nhân xem trang, JS chạy trong browser của họ — có thể đánh cắp cookie, token, redirect...",
@@ -125,14 +125,14 @@
     "questionEn": "How should passwords be stored in the database?",
     "options": [
       "Plain text để dễ so sánh",
-      "Mã hóa base64",
-      "Hash một chiều bằng thuật toán như bcrypt",
+      "Mã hóa base64 trước khi lưu",
+      "Hash một chiều (ví dụ bcrypt)",
       "Mã hóa AES có thể giải mã được"
     ],
     "optionsEn": [
       "Plain text for easy comparison",
-      "base64 encoding",
-      "One-way hashing with an algorithm such as bcrypt",
+      "base64-encoded before saving",
+      "One-way hash (e.g. bcrypt)",
       "Reversible AES encryption"
     ],
     "answer": 2,
@@ -144,16 +144,16 @@
     "question": "Phishing tấn công người dùng bằng cách nào?",
     "questionEn": "How does phishing attack users?",
     "options": [
-      "Khai thác lỗ hổng trong code",
-      "Giả mạo website/email hợp lệ để lừa người dùng nhập thông tin nhạy cảm",
-      "Gửi quá nhiều request đến server",
-      "Chèn code vào JavaScript của trang web"
+      "Khai thác lỗ hổng trong code của website",
+      "Giả mạo website hoặc email thật để lừa lấy thông tin",
+      "Gửi quá nhiều request khiến server quá tải và ngừng chạy",
+      "Chèn code độc vào JavaScript của trang web"
     ],
     "optionsEn": [
-      "Exploiting a vulnerability in the code",
-      "Impersonating a legitimate website/email to trick users into entering sensitive information",
-      "Sending too many requests to the server",
-      "Injecting code into the page's JavaScript"
+      "Exploiting a bug in the website's code",
+      "Faking a real website or email to steal details",
+      "Flooding the server with requests until it stops",
+      "Injecting malicious code into the page's JavaScript"
     ],
     "answer": 1,
     "explanation": "Phishing tấn công vào con người, không phải hệ thống. Email giả làm ngân hàng, website clone giống hệt — lừa user nhập mật khẩu, OTP vào tay hacker.",
@@ -164,15 +164,15 @@
     "question": "Khi viết yêu cầu cho tính năng xem đơn hàng, BA cần xét vấn đề gì về bảo mật?",
     "questionEn": "When writing requirements for an order-viewing feature, what security issue should a BA consider?",
     "options": [
-      "Màu sắc giao diện có phù hợp không",
-      "Chỉ user được xem đơn hàng của chính họ, không xem của người khác (authorization)",
-      "Tốc độ load trang",
+      "Màu sắc giao diện có phù hợp thương hiệu không",
+      "Mỗi người chỉ xem được đơn hàng của chính mình",
+      "Tốc độ tải trang danh sách đơn hàng",
       "Số lượng đơn hàng hiển thị mỗi trang"
     ],
     "optionsEn": [
-      "Whether the interface colors are appropriate",
-      "That users can only view their own orders, not others' (authorization)",
-      "Page load speed",
+      "Whether the interface colours match the brand",
+      "Each user can only see their own orders",
+      "How fast the order list page loads",
       "The number of orders displayed per page"
     ],
     "answer": 1,
@@ -184,16 +184,16 @@
     "question": "CSRF (Cross-Site Request Forgery) là gì?",
     "questionEn": "What is CSRF (Cross-Site Request Forgery)?",
     "options": [
-      "Tấn công bằng SQL trong form input",
-      "Trick người dùng thực hiện hành động không mong muốn trên website họ đang đăng nhập",
-      "Đánh cắp mật khẩu bằng keylogger",
-      "Tấn công vào DNS server"
+      "Chèn câu lệnh SQL vào form để đọc dữ liệu",
+      "Lừa người dùng đã đăng nhập thực hiện hành động ngoài ý muốn",
+      "Đánh cắp mật khẩu bằng phần mềm ghi phím (keylogger)",
+      "Tấn công DNS server để chuyển hướng người dùng"
     ],
     "optionsEn": [
-      "An attack using SQL in form input",
-      "Tricking a user into performing an unwanted action on a website where they are logged in",
-      "Stealing passwords with a keylogger",
-      "An attack on a DNS server"
+      "Putting SQL into a form to read the database",
+      "Tricking a logged-in user into an unwanted action",
+      "Stealing passwords with keylogging software",
+      "Attacking a DNS server to redirect users"
     ],
     "answer": 1,
     "explanation": "CSRF: user đang đăng nhập Shopee, click link bẫy → trang bẫy gửi request đến Shopee với cookie của user → Shopee thực hiện hành động (mua hàng, đổi email...) mà user không hay biết.",
@@ -204,16 +204,16 @@
     "question": "PII (Personally Identifiable Information) bao gồm những loại dữ liệu nào?",
     "questionEn": "What types of data does PII (Personally Identifiable Information) include?",
     "options": [
-      "Chỉ mật khẩu",
-      "Tên, email, số điện thoại, CCCD, địa chỉ — thông tin có thể định danh cá nhân",
-      "Chỉ thông tin thẻ tín dụng",
-      "ID người dùng trong database"
+      "Cấu hình máy chủ và phiên bản phần mềm",
+      "Tên, email, số điện thoại, CCCD, địa chỉ",
+      "Số lượt truy cập và thời gian tải của trang",
+      "ID tự tăng của bản ghi trong database"
     ],
     "optionsEn": [
-      "Only passwords",
-      "Name, email, phone number, national ID, address — information that can identify a person",
-      "Only credit card information",
-      "The user's ID in the database"
+      "Server settings and software versions",
+      "Name, email, phone, national ID, address",
+      "Page view counts and page load times",
+      "The auto-increment record ID in the database"
     ],
     "answer": 1,
     "explanation": "PII là thông tin có thể dùng để định danh một người. Cần được bảo vệ đặc biệt — mã hóa, hạn chế truy cập, không log ra file plain text.",
@@ -224,16 +224,16 @@
     "question": "Tại sao developer không nên có quyền truy cập database production?",
     "questionEn": "Why shouldn't developers have access to the production database?",
     "options": [
-      "Developer không đủ kỹ năng dùng database",
-      "Giảm rủi ro: nếu tài khoản developer bị compromise, attacker không thể truy cập dữ liệu thật của người dùng",
+      "Developer không đủ kỹ năng dùng database production",
+      "Giảm rủi ro: nếu tài khoản dev bị lộ, dữ liệu thật vẫn an toàn",
       "Database production quá tải nếu nhiều người truy cập",
-      "Developer cần dùng database riêng để test"
+      "Developer cần database riêng để test cho nhanh"
     ],
     "optionsEn": [
-      "Developers don't have the skills to use the database",
-      "To reduce risk: if a developer's account is compromised, the attacker cannot access real user data",
+      "Developers lack the skills to use a production database",
+      "Less risk: if a dev account is hacked, real data stays safe",
       "The production database gets overloaded if too many people access it",
-      "Developers need their own database for testing"
+      "Developers need their own database to test faster"
     ],
     "answer": 1,
     "explanation": "Principle of Least Privilege. Developer dùng database staging/dev. Production chỉ application server và DBA có quyền. Nếu máy developer bị hack, thiệt hại được giới hạn.",
@@ -244,16 +244,16 @@
     "question": "Audit log trong hệ thống phần mềm ghi lại gì?",
     "questionEn": "What does an audit log record in a software system?",
     "options": [
-      "Hiệu năng server mỗi giây",
-      "Ai làm gì, trên dữ liệu nào, vào lúc mấy giờ",
-      "Số lượng request mỗi ngày",
-      "Lỗi JavaScript trong browser"
+      "Hiệu năng CPU, RAM của server mỗi giây",
+      "Ai làm gì, trên dữ liệu nào, lúc nào",
+      "Tổng số request mà hệ thống nhận mỗi ngày",
+      "Lỗi JavaScript xảy ra trong trình duyệt"
     ],
     "optionsEn": [
-      "Server performance every second",
-      "Who did what, on which data, and at what time",
-      "The number of requests per day",
-      "JavaScript errors in the browser"
+      "Server CPU and RAM usage every second",
+      "Who did what, to which data, and when",
+      "How many requests the system gets per day",
+      "JavaScript errors that occur in the browser"
     ],
     "answer": 1,
     "explanation": "Audit log = lịch sử hành động. Quan trọng cho compliance, điều tra sự cố, và phát hiện hành vi bất thường. Ví dụ: 'User A đã xóa đơn hàng #123 lúc 14:32 ngày 8/4'.",
@@ -264,16 +264,16 @@
     "question": "Prepared Statements giúp phòng chống loại tấn công nào?",
     "questionEn": "Which type of attack do Prepared Statements help prevent?",
     "options": [
-      "XSS",
-      "CSRF",
+      "XSS (Cross-Site Scripting)",
+      "CSRF (giả mạo request)",
       "SQL Injection",
-      "Phishing"
+      "Phishing (lừa đảo)"
     ],
     "optionsEn": [
-      "XSS",
-      "CSRF",
+      "XSS (Cross-Site Scripting)",
+      "CSRF (request forgery)",
       "SQL Injection",
-      "Phishing"
+      "Phishing (fake emails)"
     ],
     "answer": 2,
     "explanation": "Prepared Statements tách biệt code SQL và dữ liệu người dùng — database xử lý chúng riêng. User input không bao giờ được interpret là SQL code → không thể inject.",
@@ -284,16 +284,16 @@
     "question": "Khi BA viết yêu cầu cho tính năng 'reset mật khẩu qua email', yêu cầu bảo mật nào là quan trọng nhất?",
     "questionEn": "When a BA writes requirements for a 'reset password via email' feature, which security requirement is most important?",
     "options": [
-      "Email reset trông đẹp và professional",
-      "Link reset phải có thời hạn ngắn (ví dụ 15-30 phút) và chỉ dùng được một lần",
-      "Email gửi trong vòng 1 giây",
-      "Người dùng có thể dùng cùng mật khẩu cũ"
+      "Email reset có thiết kế đẹp và chuyên nghiệp",
+      "Link reset hết hạn nhanh và chỉ dùng được một lần",
+      "Email reset được gửi đến trong vòng 1 giây",
+      "Người dùng được phép đặt lại đúng mật khẩu cũ như trước"
     ],
     "optionsEn": [
-      "The reset email looks nice and professional",
-      "The reset link must have a short expiry (e.g. 15-30 minutes) and be usable only once",
-      "The email is sent within 1 second",
-      "The user can reuse their old password"
+      "The reset email has a nice, professional design",
+      "The reset link expires quickly and works only once",
+      "The reset email arrives within 1 second",
+      "The user is allowed to set the same old password"
     ],
     "answer": 1,
     "explanation": "Link reset mật khẩu phải: có TTL ngắn (không để hacker dùng link cũ), single-use (dùng 1 lần rồi vô hiệu), và token đủ ngẫu nhiên. Đây là yêu cầu bảo mật cơ bản không được bỏ qua.",
@@ -303,15 +303,15 @@
     "question": "Người dùng đăng nhập thành công nhưng vẫn không mở được trang báo cáo tài chính. Đây là vấn đề gì?",
     "questionEn": "A user logs in successfully but still cannot open the finance report page. What is the issue?",
     "options": [
-      "Authorization — họ đã được xác thực nhưng không có quyền truy cập tài nguyên đó",
-      "Authentication — mật khẩu sai",
-      "Mã hoá HTTPS bị lỗi",
+      "Authorization (phân quyền)",
+      "Authentication (xác thực danh tính)",
+      "Chứng chỉ HTTPS bị lỗi",
       "Firewall chặn cổng 443"
     ],
     "optionsEn": [
-      "Authorization — they are authenticated but lack permission for that resource",
-      "Authentication — wrong password",
-      "Broken HTTPS encryption",
+      "Authorization (permissions)",
+      "Authentication (identity check)",
+      "A broken HTTPS certificate",
       "The firewall blocks port 443"
     ],
     "answer": 0,
@@ -323,16 +323,16 @@
     "question": "Ô tìm kiếm cho phép nhập tự do và truy vấn thẳng vào cơ sở dữ liệu. Nguy cơ lớn nhất là gì?",
     "questionEn": "A free-text search box queries the database directly. What is the biggest risk?",
     "options": [
-      "SQL Injection — kẻ tấn công chèn câu lệnh SQL vào ô nhập để đọc hoặc phá dữ liệu",
-      "Trang tải chậm hơn bình thường",
+      "SQL Injection qua ô nhập",
+      "Trang tải chậm khi có nhiều kết quả",
       "Giao diện hiển thị sai phông chữ",
-      "Người dùng gõ sai chính tả"
+      "Người dùng gõ sai chính tả từ khóa"
     ],
     "optionsEn": [
-      "SQL injection — an attacker injects SQL through the input to read or destroy data",
-      "Slower page loads",
-      "Wrong font rendering",
-      "Users making typos"
+      "SQL injection through the input",
+      "Slow pages when there are many results",
+      "Fonts rendering incorrectly",
+      "Users misspelling their search words"
     ],
     "answer": 0,
     "explanation": "Mọi đầu vào từ người dùng phải được coi là không đáng tin. Giải pháp chuẩn là truy vấn tham số hoá và kiểm tra tính hợp lệ đầu vào.",
@@ -363,16 +363,16 @@
     "question": "Vì sao 2FA làm giảm mạnh rủi ro dù mật khẩu bị lộ?",
     "questionEn": "Why does 2FA sharply reduce risk even when a password leaks?",
     "options": [
-      "Vì kẻ tấn công còn cần yếu tố thứ hai mà chúng không có, ví dụ mã trên điện thoại người dùng",
-      "Vì 2FA tự động đổi mật khẩu mỗi ngày",
-      "Vì 2FA mã hoá cơ sở dữ liệu",
-      "Vì 2FA chặn mọi truy cập từ nước ngoài"
+      "Vì kẻ gian còn thiếu yếu tố thứ hai, như mã OTP",
+      "Vì 2FA tự động đổi mật khẩu của bạn mỗi ngày",
+      "Vì 2FA mã hóa toàn bộ cơ sở dữ liệu người dùng",
+      "Vì 2FA chặn các lần đăng nhập từ nước ngoài"
     ],
     "optionsEn": [
-      "Because the attacker still needs a second factor they do not have, such as a code on the user's phone",
-      "Because 2FA rotates the password daily",
-      "Because 2FA encrypts the database",
-      "Because 2FA blocks all foreign access"
+      "Because the attacker still lacks the second factor, like an OTP",
+      "Because 2FA automatically changes your password every day",
+      "Because 2FA encrypts the entire user database",
+      "Because 2FA blocks sign-ins from other countries"
     ],
     "answer": 0,
     "explanation": "2FA kết hợp thứ bạn biết (mật khẩu) với thứ bạn có (điện thoại, khoá cứng). Lộ một yếu tố vẫn chưa đủ để đăng nhập.",
@@ -383,16 +383,16 @@
     "question": "BA nên đưa yêu cầu bảo mật vào tài liệu ở thời điểm nào?",
     "questionEn": "When should a BA put security requirements into the documentation?",
     "options": [
-      "Ngay từ giai đoạn phân tích yêu cầu, vì bảo mật ảnh hưởng tới kiến trúc và trang bị thêm về sau rất tốn kém",
-      "Sau khi kiểm thử xong, để không làm chậm phát triển",
-      "Chỉ khi khách hàng chủ động yêu cầu",
-      "Trong giai đoạn bảo trì"
+      "Ngay từ giai đoạn phân tích",
+      "Sau khi kiểm thử xong, để không làm chậm dev",
+      "Khi khách hàng chủ động nêu ra",
+      "Trong giai đoạn bảo trì sau phát hành"
     ],
     "optionsEn": [
-      "During requirements analysis, because security shapes the architecture and retrofitting is expensive",
+      "Right from the analysis stage",
       "After testing, so development is not slowed",
-      "Only when the customer explicitly asks",
-      "During maintenance"
+      "When the customer brings it up themselves",
+      "During maintenance after the release"
     ],
     "answer": 0,
     "explanation": "Phân quyền, mã hoá, nhật ký kiểm toán đều là quyết định kiến trúc. Thêm sau khi hệ thống đã xây thường phải sửa lại phần lớn.",
@@ -406,13 +406,13 @@
     "options": [
       "Bấm link ngay để tránh bị khóa tài khoản",
       "Trả lời tin nhắn để hỏi thêm thông tin",
-      "Không bấm link; mở app chính thức hoặc gọi số in trên thẻ ngân hàng để kiểm tra",
+      "Không bấm link; tự mở app ngân hàng để kiểm tra",
       "Chuyển tiếp tin nhắn cho bạn bè để họ kiểm tra giúp"
     ],
     "optionsEn": [
       "Click the link right away to avoid the account being locked",
       "Reply to the message to ask for more details",
-      "Don't click; open the official app or call the number printed on your bank card to check",
+      "Do not click; check in the official bank app yourself",
       "Forward the message to friends so they can check it for you"
     ],
     "answer": 2,
@@ -437,13 +437,13 @@
     "questionEn": "What does the padlock (HTTPS) next to the address bar guarantee?",
     "options": [
       "Website này chắc chắn trung thực và không phải lừa đảo",
-      "Kết nối giữa trình duyệt và địa chỉ đó được mã hóa — nhưng không nói trang đó đáng tin",
+      "Kết nối giữa bạn và trang đó được mã hóa",
       "Máy tính của bạn không có virus",
       "Mật khẩu của bạn được lưu bằng hash"
     ],
     "optionsEn": [
       "The website is definitely honest and not a scam",
-      "The connection between your browser and that address is encrypted — but it says nothing about whether the site is trustworthy",
+      "Your connection to that site is encrypted",
       "Your computer has no viruses",
       "Your password is stored as a hash"
     ],
@@ -468,15 +468,15 @@
     "question": "Lợi ích chính của password manager (trình quản lý mật khẩu) là gì?",
     "questionEn": "What is the main benefit of a password manager?",
     "options": [
-      "Giúp bạn dùng một mật khẩu mạnh, khác nhau cho từng tài khoản mà chỉ cần nhớ một mật khẩu chính",
+      "Mật khẩu mạnh, khác nhau cho từng tài khoản mà chỉ nhớ một",
       "Cho phép dùng chung một mật khẩu ngắn cho mọi tài khoản",
-      "Thay thế hoàn toàn việc cần 2FA",
+      "Không cần bật 2FA nữa vì mật khẩu đã được mã hóa",
       "Gửi mật khẩu của bạn cho bộ phận IT để lưu giữ"
     ],
     "optionsEn": [
-      "It lets you use a strong, different password for every account while remembering only one master password",
+      "Strong, unique passwords everywhere, with one to remember",
       "It lets you use one short password for every account",
-      "It completely removes the need for 2FA",
+      "You no longer need 2FA because passwords are encrypted",
       "It sends your passwords to the IT department for safekeeping"
     ],
     "answer": 0,
@@ -500,16 +500,16 @@
     "question": "Vì sao nên cài bản cập nhật hệ điều hành và ứng dụng càng sớm càng tốt?",
     "questionEn": "Why should you install operating-system and app updates as soon as possible?",
     "options": [
-      "Vì cập nhật luôn làm máy chạy nhanh gấp đôi",
+      "Vì cập nhật làm máy chạy nhanh gấp đôi",
       "Vì không cập nhật thì máy sẽ mất bảo hành",
       "Vì cập nhật xóa các file cũ để giải phóng bộ nhớ",
-      "Vì bản cập nhật vá các lỗ hổng đã bị công khai mà kẻ tấn công đang chủ động khai thác"
+      "Vì bản cập nhật vá các lỗ hổng bảo mật đã bị lộ"
     ],
     "optionsEn": [
-      "Because updates always make the device twice as fast",
+      "Because updates make the device run twice as fast",
       "Because without updates the device loses its warranty",
       "Because updates delete old files to free up storage",
-      "Because updates fix publicly known security holes that attackers are actively exploiting"
+      "Because updates patch known security holes"
     ],
     "answer": 3,
     "explanation": "Khi một lỗ hổng được công bố, kẻ tấn công dò tìm những thiết bị chưa vá. Cập nhật sớm đóng cánh cửa đó lại.",
@@ -533,14 +533,14 @@
     "questionEn": "A caller claiming to be from your bank asks you to read out the OTP you just received \"to cancel a suspicious transaction\". What is true?",
     "options": [
       "Nên đọc mã vì nhân viên ngân hàng cần nó để bảo vệ bạn",
-      "Chỉ đọc 3 số đầu của mã là an toàn",
-      "Đây là lừa đảo: OTP chỉ để bạn tự gõ vào trang thật, ngân hàng không bao giờ hỏi mã này",
+      "Chỉ đọc 3 số đầu của mã thì vẫn an toàn",
+      "Đây là lừa đảo; ngân hàng không hỏi mã OTP của bạn",
       "Đọc mã cũng không sao nếu bạn đã bật 2FA"
     ],
     "optionsEn": [
       "Read it out, because bank staff need it to protect you",
-      "Reading only the first 3 digits is safe",
-      "It is a scam: an OTP is only for you to type into the real site, and banks never ask for it",
+      "Reading only the first 3 digits keeps you safe",
+      "It is a scam; banks do not ask for your OTP",
       "Reading it out is fine if you have 2FA enabled"
     ],
     "answer": 2,

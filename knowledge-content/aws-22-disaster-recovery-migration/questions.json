@@ -4,16 +4,16 @@
     "question": "RPO (Recovery Point Objective) đo lường điều gì?",
     "questionEn": "What does RPO (Recovery Point Objective) measure?",
     "options": [
-      "Thời gian tối đa hệ thống được phép ngừng hoạt động",
-      "Lượng dữ liệu tối đa có thể bị mất, tính bằng thời gian lùi về quá khứ",
-      "Chi phí tối đa cho hạ tầng dự phòng",
-      "Số lượng Region tối thiểu cần dùng"
+      "Thời gian tối đa hệ thống được phép ngừng trước khi khôi phục",
+      "Lượng dữ liệu tối đa có thể mất, tính bằng thời gian trước sự cố",
+      "Ngân sách tối đa được phép chi cho hạ tầng dự phòng",
+      "Tần suất phải kiểm thử kế hoạch DR, tính theo ngày"
     ],
     "optionsEn": [
-      "The maximum time the system is allowed to be down",
-      "The maximum data that can be lost, measured as how far back in time",
-      "The maximum cost for standby infrastructure",
-      "The minimum number of Regions required"
+      "The maximum time the system may be down before restoration",
+      "The maximum data loss, measured as time before the failure",
+      "The maximum budget allowed for standby infrastructure",
+      "How often the DR plan must be tested, in days"
     ],
     "answer": 1,
     "explanation": "RPO = mức mất mát dữ liệu tối đa chấp nhận được, đo bằng khoảng thời gian lùi về quá khứ. RTO mới là chỉ số đo downtime. Đề thi hay đảo hai định nghĩa này để đánh lừa.",
@@ -64,16 +64,16 @@
     "question": "Công ty cần di trú database Oracle on-premises sang Amazon Aurora PostgreSQL. Vì engine thay đổi, họ cần chuyển đổi schema và stored procedure trước. Cần dùng công cụ nào cùng với AWS DMS?",
     "questionEn": "A company needs to migrate an on-premises Oracle database to Amazon Aurora PostgreSQL. Because the engine changes, they must convert the schema and stored procedures first. Which tool should be used alongside AWS DMS?",
     "options": [
-      "AWS DataSync",
+      "AWS Application Migration Service",
       "AWS Schema Conversion Tool (SCT)",
-      "AWS Snowball",
-      "AWS Storage Gateway"
+      "AWS DMS Fleet Advisor",
+      "AWS Migration Hub"
     ],
     "optionsEn": [
-      "AWS DataSync",
+      "AWS Application Migration Service",
       "AWS Schema Conversion Tool (SCT)",
-      "AWS Snowball",
-      "AWS Storage Gateway"
+      "AWS DMS Fleet Advisor",
+      "AWS Migration Hub"
     ],
     "answer": 1,
     "explanation": "Di trú heterogeneous (đổi engine, Oracle → Aurora PostgreSQL) cần AWS SCT để chuyển đổi schema/code trước, sau đó DMS chuyển dữ liệu. DataSync/Snowball/Storage Gateway không xử lý chuyển đổi schema database.",
@@ -144,15 +144,15 @@
     "question": "Một hệ thống tài chính yêu cầu RTO và RPO gần bằng 0, ngân sách không phải rào cản. Kiến trúc DR nào đáp ứng?",
     "questionEn": "A financial system requires near-zero RTO and RPO, and budget is not a constraint. Which DR architecture meets this?",
     "options": [
-      "Backup & Restore với snapshot mỗi giờ",
-      "Pilot Light với database nhân bản",
-      "Warm Standby thu nhỏ",
+      "Backup & Restore với snapshot mỗi 5 phút",
+      "Pilot Light với database nhân bản đồng bộ",
+      "Warm Standby ở capacity tối thiểu tại Region thứ hai",
       "Multi-Site / Active-Active trên nhiều Region"
     ],
     "optionsEn": [
-      "Backup & Restore with hourly snapshots",
-      "Pilot Light with a replicated database",
-      "A scaled-down Warm Standby",
+      "Backup & Restore with snapshots every 5 minutes",
+      "Pilot Light with a synchronously replicated database",
+      "Warm Standby at minimum capacity in a second Region",
       "Multi-Site / Active-Active across multiple Regions"
     ],
     "answer": 3,
@@ -164,15 +164,15 @@
     "question": "Công ty có 500 TB dữ liệu cần chuyển lên S3 nhưng đường truyền internet chỉ vài chục Mbps, chuyển qua mạng sẽ mất nhiều tháng. Giải pháp nào tối ưu?",
     "questionEn": "A company has 500 TB of data to move to S3 but its internet link is only a few tens of Mbps, so transferring over the network would take months. What is the optimal solution?",
     "options": [
-      "AWS DataSync qua internet",
-      "AWS Snow Family (ví dụ Snowball) — di trú offline",
-      "AWS DMS",
+      "AWS DataSync qua internet có nén dữ liệu",
+      "Thiết bị AWS Snowball Edge (chuyển offline)",
+      "S3 Transfer Acceleration cho việc upload",
       "AWS Storage Gateway ở chế độ File Gateway"
     ],
     "optionsEn": [
-      "AWS DataSync over the internet",
-      "AWS Snow Family (e.g. Snowball) — offline migration",
-      "AWS DMS",
+      "AWS DataSync over the internet with compression",
+      "AWS Snowball Edge devices (offline transfer)",
+      "S3 Transfer Acceleration for the uploads",
       "AWS Storage Gateway in File Gateway mode"
     ],
     "answer": 1,
@@ -204,16 +204,16 @@
     "question": "Sự khác biệt chính giữa Warm Standby và Pilot Light là gì?",
     "questionEn": "What is the main difference between Warm Standby and Pilot Light?",
     "options": [
-      "Warm Standby rẻ hơn Pilot Light",
-      "Warm Standby chạy sẵn một bản đầy đủ thu nhỏ, còn Pilot Light chỉ giữ lõi (như database)",
-      "Pilot Light cho RTO thấp hơn Warm Standby",
-      "Warm Standby không cần Region dự phòng"
+      "Pilot Light chạy bản đầy đủ thu nhỏ; Warm Standby chỉ giữ phần lõi",
+      "Warm Standby chạy bản đầy đủ thu nhỏ; Pilot Light chỉ giữ phần lõi",
+      "Pilot Light cho RTO thấp hơn Warm Standby, với chi phí cao hơn",
+      "Warm Standby không cần Region thứ hai; Pilot Light cần hai Region"
     ],
     "optionsEn": [
-      "Warm Standby is cheaper than Pilot Light",
-      "Warm Standby runs a full scaled-down copy, while Pilot Light keeps only the core (such as a database)",
-      "Pilot Light gives a lower RTO than Warm Standby",
-      "Warm Standby does not need a standby Region"
+      "Pilot Light runs a scaled-down full copy; Warm Standby only the core",
+      "Warm Standby runs a scaled-down full copy; Pilot Light only the core",
+      "Pilot Light gives a lower RTO than Warm Standby, at a higher cost",
+      "Warm Standby needs no second Region; Pilot Light needs two"
     ],
     "answer": 1,
     "explanation": "Warm Standby luôn chạy đầy đủ mọi thành phần nhưng ở quy mô nhỏ; Pilot Light chỉ giữ lõi (thường là DB) chạy sẵn, phần còn lại khởi động khi thảm họa. Vì vậy Warm Standby đắt hơn và có RTO thấp hơn Pilot Light.",
@@ -224,16 +224,16 @@
     "question": "Trong khung 7 Rs, chiến lược 'Replatform' được hiểu đúng nhất là gì?",
     "questionEn": "In the 7 Rs framework, what best describes the 'Replatform' strategy?",
     "options": [
-      "Bê nguyên ứng dụng lên cloud không thay đổi gì (lift-and-shift)",
-      "Tối ưu nhẹ khi lên cloud, ví dụ chuyển DB tự quản sang RDS, không viết lại lõi",
-      "Viết lại hoàn toàn theo kiến trúc cloud-native",
-      "Loại bỏ ứng dụng không còn cần thiết"
+      "Chuyển nguyên ứng dụng lên EC2 (lift-and-shift)",
+      "Tối ưu nhẹ khi chuyển, ví dụ DB tự quản → RDS",
+      "Viết lại hoàn toàn theo cloud-native, ví dụ sang Lambda",
+      "Thay ứng dụng bằng sản phẩm SaaS, ví dụ Salesforce"
     ],
     "optionsEn": [
-      "Move the application to the cloud unchanged (lift-and-shift)",
-      "Light optimization when moving to the cloud, e.g. move a self-managed DB to RDS, without rewriting the core",
-      "Fully rewrite in a cloud-native architecture",
-      "Decommission an application that is no longer needed"
+      "Move the application unchanged onto EC2 (lift-and-shift)",
+      "Light tuning during the move, e.g. self-managed DB → RDS",
+      "Fully rewrite it as cloud-native, e.g. into Lambda",
+      "Swap the application for a SaaS product, e.g. Salesforce"
     ],
     "answer": 1,
     "explanation": "Replatform ('lift-tinker-and-shift') là tối ưu nhẹ khi di trú — ví dụ thay database tự quản bằng RDS — mà không viết lại lõi ứng dụng. Lift-and-shift là Rehost; viết lại hoàn toàn là Refactor; bỏ đi là Retire.",
@@ -284,16 +284,16 @@
     "question": "RTO (Recovery Time Objective) đo lường điều gì?",
     "questionEn": "What does RTO (Recovery Time Objective) measure?",
     "options": [
-      "Tần suất chạy job backup",
-      "Hệ thống được phép ngừng hoạt động bao lâu trước khi buộc phải khôi phục xong",
-      "Được phép mất bao nhiêu dữ liệu tính theo thời gian",
-      "Tổng chi phí của giải pháp DR"
+      "Mỗi ngày job backup cần chạy bao nhiêu lần",
+      "Hệ thống được phép ngừng bao lâu trước khi phải khôi phục",
+      "Doanh nghiệp được phép mất bao nhiêu dữ liệu tính theo thời gian",
+      "Tổng chi phí mỗi năm để vận hành giải pháp DR"
     ],
     "optionsEn": [
-      "How often backup jobs run",
-      "How long the system may be down before it must be restored",
-      "How much data, measured in time, may be lost",
-      "The total cost of the DR solution"
+      "How often backup jobs need to run each day",
+      "How long the system may be down before it is restored",
+      "How much data, measured in time, the business may lose",
+      "The total yearly cost of running the DR solution"
     ],
     "answer": 1,
     "explanation": "RTO = thời gian DOWNTIME chấp nhận được. RPO = lượng DỮ LIỆU chấp nhận mất. Nhớ mẹo: RTO nhìn về phía trước (bao giờ chạy lại), RPO nhìn về phía sau (mất tới mốc nào).",
@@ -304,15 +304,15 @@
     "question": "Một doanh nghiệp đặt RPO = 15 phút. Điều đó hàm ý gì về backup/replication?",
     "questionEn": "A business sets RPO = 15 minutes. What does that imply about backups/replication?",
     "options": [
-      "Backup chạy mỗi ngày một lần là đủ",
+      "Backup mỗi ngày một lần là đủ nếu được kiểm tra",
       "RPO không nói gì về tần suất backup",
-      "Dữ liệu phải được ghi lại ít nhất mỗi 15 phút, vì tối đa chỉ được mất 15 phút dữ liệu",
+      "Dữ liệu phải được ghi lại ít nhất mỗi 15 phút",
       "Việc khôi phục phải hoàn tất trong vòng 15 phút"
     ],
     "optionsEn": [
-      "A once-daily backup is sufficient",
+      "A once-daily backup is enough if it is verified",
       "RPO says nothing about backup frequency",
-      "Data must be captured at least every 15 minutes, since at most 15 minutes of data may be lost",
+      "Data must be captured at least every 15 minutes",
       "Recovery must complete within 15 minutes"
     ],
     "answer": 2,
@@ -325,15 +325,15 @@
     "questionEn": "In the 7 Rs framework, what does \"Rehost\" mean?",
     "options": [
       "Viết lại ứng dụng từ đầu theo kiến trúc cloud-native",
-      "Thay ứng dụng bằng một sản phẩm SaaS",
-      "Ngừng sử dụng và loại bỏ ứng dụng",
-      "Lift-and-shift: chuyển ứng dụng lên AWS gần như nguyên trạng, không sửa code"
+      "Thay ứng dụng bằng một sản phẩm SaaS khác",
+      "Chuyển kèm tối ưu nhẹ, ví dụ đổi sang RDS",
+      "Lift-and-shift ứng dụng lên AWS mà không sửa code"
     ],
     "optionsEn": [
       "Rewrite the application from scratch as cloud-native",
-      "Replace the application with a SaaS product",
-      "Decommission and drop the application",
-      "Lift-and-shift: move the application to AWS essentially unchanged, with no code rewrite"
+      "Replace the application with a SaaS product instead",
+      "Move it with light tweaks, such as switching to RDS",
+      "Lift-and-shift the application to AWS without code changes"
     ],
     "answer": 3,
     "explanation": "Rehost là đường nhanh nhất, ít rủi ro nhất (thường dùng AWS Application Migration Service). Replatform là chỉnh nhẹ (ví dụ chuyển DB sang RDS), Refactor mới là viết lại.",
@@ -344,16 +344,16 @@
     "question": "Trong khung 7 Rs, \"Retire\" nghĩa là gì?",
     "questionEn": "In the 7 Rs framework, what does \"Retire\" mean?",
     "options": [
-      "Loại bỏ ứng dụng không còn cần thiết thay vì tốn công migrate nó",
+      "Loại bỏ ứng dụng không còn cần thiết",
       "Tạm giữ ứng dụng ở on-premises và xét lại sau",
       "Xây dựng lại ứng dụng bằng dịch vụ AWS",
       "Thay ứng dụng bằng sản phẩm thương mại"
     ],
     "optionsEn": [
-      "Decommission an application that is no longer needed instead of spending effort migrating it",
-      "Keep the application on-premises and revisit later",
-      "Rebuild the application using AWS services",
-      "Replace the application with a commercial product"
+      "Decommission an app that is no longer needed",
+      "Keep the app on-premises and revisit later",
+      "Rebuild the app using AWS-native services",
+      "Replace the app with a commercial product"
     ],
     "answer": 0,
     "explanation": "Khảo sát trước khi migrate thường phát hiện một phần đáng kể ứng dụng đã chết. Retire = bỏ hẳn (rẻ nhất); Retain = giữ nguyên tại chỗ, xét lại sau.",

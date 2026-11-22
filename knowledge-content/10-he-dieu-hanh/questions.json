@@ -4,16 +4,16 @@
     "question": "Hệ điều hành (OS) có vai trò cơ bản nhất là gì?",
     "questionEn": "What is the most fundamental role of an operating system (OS)?",
     "options": [
-      "Chỉ để chạy trình duyệt web",
-      "Quản lý tài nguyên phần cứng và cung cấp môi trường cho phần mềm chạy",
-      "Lưu trữ file của người dùng",
-      "Kết nối Internet"
+      "Chạy trình duyệt web và các ứng dụng văn phòng",
+      "Quản lý phần cứng và cung cấp môi trường cho phần mềm",
+      "Lưu trữ lâu dài các file của người dùng",
+      "Kết nối máy tính với mạng Internet qua WiFi"
     ],
     "optionsEn": [
-      "Just to run a web browser",
-      "To manage hardware resources and provide an environment for software to run",
-      "To store the user's files",
-      "To connect to the Internet"
+      "Running the web browser and office applications",
+      "Managing hardware and hosting software",
+      "Storing the user's files for the long term",
+      "Connecting the computer to the Internet over WiFi"
     ],
     "answer": 1,
     "explanation": "OS là cầu nối giữa phần cứng và phần mềm. Không có OS, ứng dụng không thể chạy vì không có cách nào giao tiếp với CPU, RAM, ổ cứng một cách có tổ chức.",
@@ -25,15 +25,15 @@
     "questionEn": "What is a process?",
     "options": [
       "File đang được lưu trữ",
-      "Một chương trình đang được thực thi",
-      "Một file cấu hình hệ thống",
-      "Kết nối mạng đang hoạt động"
+      "Chương trình đang chạy",
+      "File cấu hình hệ thống",
+      "Kết nối mạng đang mở"
     ],
     "optionsEn": [
       "A file being stored",
-      "A program that is being executed",
-      "A system configuration file",
-      "An active network connection"
+      "A running program",
+      "A system config file",
+      "An open network link"
     ],
     "answer": 1,
     "explanation": "Process = chương trình đang chạy trong RAM. Khi bạn mở Chrome, OS tạo một process Chrome. Đóng Chrome = kết thúc process, giải phóng RAM.",
@@ -44,15 +44,15 @@
     "question": "Virtual Memory là gì?",
     "questionEn": "What is virtual memory?",
     "options": [
-      "RAM được chia sẻ qua mạng",
-      "Dùng ổ cứng làm bộ nhớ tạm khi RAM thật đầy",
-      "RAM được ảo hóa bằng phần mềm",
+      "RAM được chia sẻ qua mạng giữa các máy",
+      "Dùng ổ cứng làm RAM tạm khi RAM đầy",
+      "RAM được phần mềm ảo hóa để nhân đôi",
       "Bộ nhớ chỉ dùng cho máy ảo (VM)"
     ],
     "optionsEn": [
-      "RAM shared over the network",
-      "Using the disk as temporary memory when real RAM is full",
-      "RAM virtualized by software",
+      "RAM shared between machines over the network",
+      "Using disk as extra RAM when RAM is full",
+      "RAM doubled in size by software virtualization",
       "Memory used only by virtual machines (VMs)"
     ],
     "answer": 1,
@@ -64,16 +64,16 @@
     "question": "Tại sao server thường dùng CLI thay vì GUI?",
     "questionEn": "Why do servers often use a CLI instead of a GUI?",
     "options": [
-      "CLI đẹp hơn GUI",
-      "CLI không cần cài đặt",
-      "GUI không hoạt động được trên server",
-      "CLI tiêu tốn ít tài nguyên hơn và phù hợp tự động hóa bằng script"
+      "CLI có giao diện trực quan hơn GUI",
+      "CLI không cần cài đặt hay cập nhật",
+      "GUI hoàn toàn không thể chạy được trên server",
+      "CLI nhẹ hơn và dễ tự động hóa bằng script"
     ],
     "optionsEn": [
-      "The CLI looks nicer than a GUI",
-      "The CLI requires no installation",
-      "A GUI cannot work on a server",
-      "The CLI uses fewer resources and is well suited to automation via scripts"
+      "The CLI is more visual than a GUI",
+      "The CLI needs no install or updates",
+      "A GUI cannot run on a server at all",
+      "The CLI is lighter and easy to script"
     ],
     "answer": 3,
     "explanation": "GUI ngốn RAM và CPU. Server cần tài nguyên cho ứng dụng, không phải giao diện. CLI cũng dễ tự động hóa (shell script, CI/CD) và remote access qua SSH.",
@@ -84,16 +84,16 @@
     "question": "Driver thiết bị có chức năng gì?",
     "questionEn": "What is the function of a device driver?",
     "options": [
-      "Tăng tốc CPU",
-      "Phần mềm cho phép OS giao tiếp với phần cứng cụ thể",
-      "Lưu trữ mật khẩu người dùng",
-      "Quản lý kết nối mạng"
+      "Tăng xung nhịp để CPU chạy nhanh hơn hẳn",
+      "Giúp OS giao tiếp với phần cứng cụ thể",
+      "Lưu trữ mật khẩu người dùng an toàn",
+      "Quản lý các kết nối mạng của máy"
     ],
     "optionsEn": [
-      "To speed up the CPU",
-      "Software that lets the OS communicate with specific hardware",
-      "To store user passwords",
-      "To manage network connections"
+      "Raising the clock so the CPU runs faster",
+      "Letting the OS talk to specific hardware",
+      "Storing user passwords securely",
+      "Managing the machine's network connections"
     ],
     "answer": 1,
     "explanation": "Driver là lớp phần mềm trung gian. Khi cắm chuột mới, Windows tải driver tương ứng để OS biết cách 'nói chuyện' với chuột đó. Không có driver → phần cứng không dùng được.",
@@ -104,16 +104,16 @@
     "question": "Kernel là gì?",
     "questionEn": "What is the kernel?",
     "options": [
-      "Phần mềm diệt virus",
-      "Lõi của OS, chạy với đặc quyền cao nhất, trực tiếp tương tác với phần cứng",
-      "Giao diện đồ họa của OS",
-      "Trình quản lý file"
+      "Phần mềm diệt virus tích hợp trong OS",
+      "Lõi của OS, làm việc trực tiếp với phần cứng",
+      "Giao diện đồ họa người dùng nhìn thấy",
+      "Trình quản lý file và thư mục của OS"
     ],
     "optionsEn": [
-      "Antivirus software",
-      "The core of the OS, running with the highest privilege and interacting directly with hardware",
-      "The OS's graphical interface",
-      "A file manager"
+      "The antivirus software built into the OS",
+      "The OS core, which drives the hardware",
+      "The graphical interface that users see",
+      "The OS's file and folder manager"
     ],
     "answer": 1,
     "explanation": "Kernel là lõi của OS — phần duy nhất có quyền trực tiếp điều khiển CPU, RAM, I/O. Ứng dụng giao tiếp với kernel qua system calls (không được phép trực tiếp truy cập phần cứng).",
@@ -144,16 +144,16 @@
     "question": "Thread khác Process ở điểm gì?",
     "questionEn": "How does a thread differ from a process?",
     "options": [
-      "Thread lớn hơn process",
-      "Thread là đơn vị thực thi nhỏ hơn trong một process, chia sẻ bộ nhớ với nhau",
-      "Process không có bộ nhớ riêng",
-      "Thread chỉ dùng trên Windows"
+      "Thread lớn hơn và chứa nhiều process bên trong",
+      "Thread nằm trong process và chia sẻ bộ nhớ của nó",
+      "Process không có bộ nhớ riêng, chỉ có thread mới có",
+      "Thread chỉ dùng được trên hệ điều hành Windows"
     ],
     "optionsEn": [
-      "A thread is larger than a process",
-      "A thread is a smaller unit of execution within a process, sharing memory with other threads",
-      "A process has no memory of its own",
-      "Threads are only used on Windows"
+      "A thread is larger and contains several processes",
+      "A thread lives inside a process and shares its memory",
+      "Processes have no memory of their own; only threads do",
+      "Threads only work on the Windows operating system"
     ],
     "answer": 1,
     "explanation": "Process có bộ nhớ riêng, cách ly với process khác. Thread là 'luồng thực thi' trong process — nhẹ hơn, chia sẻ RAM của process cha. App Chrome dùng nhiều thread để xử lý song song.",
@@ -166,13 +166,13 @@
     "options": [
       "C:\\",
       "My Computer",
-      "/ (root directory)",
+      "/",
       "~/home"
     ],
     "optionsEn": [
       "C:\\",
       "My Computer",
-      "/ (root directory)",
+      "/",
       "~/home"
     ],
     "answer": 2,
@@ -184,15 +184,15 @@
     "question": "Multi-tasking của OS hoạt động như thế nào?",
     "questionEn": "How does the OS's multi-tasking work?",
     "options": [
-      "Có nhiều CPU cho mỗi ứng dụng",
-      "CPU chuyển đổi cực nhanh giữa các process tạo cảm giác chạy đồng thời",
-      "OS dừng tất cả process trừ một process đang cần CPU",
-      "Mỗi RAM stick chạy một ứng dụng"
+      "Mỗi ứng dụng được cấp một CPU riêng",
+      "CPU chuyển rất nhanh giữa các process",
+      "OS dừng mọi process, trừ một cái cần CPU",
+      "Mỗi thanh RAM chạy một ứng dụng"
     ],
     "optionsEn": [
-      "There is a separate CPU for each application",
-      "The CPU switches extremely quickly between processes, creating the feeling of running simultaneously",
-      "The OS stops all processes except the one that currently needs the CPU",
+      "Each application gets its own separate CPU",
+      "The CPU switches rapidly between processes",
+      "The OS pauses all but the one needing the CPU",
       "Each RAM stick runs one application"
     ],
     "answer": 1,
@@ -205,13 +205,13 @@
     "questionEn": "When you type 'mkdir project' in the CLI, what happens?",
     "options": [
       "Xóa thư mục 'project'",
-      "Tạo thư mục mới tên 'project' tại vị trí hiện tại",
+      "Tạo thư mục mới tên 'project'",
       "Liệt kê nội dung thư mục 'project'",
       "Di chuyển vào thư mục 'project'"
     ],
     "optionsEn": [
       "Deletes the 'project' directory",
-      "Creates a new directory named 'project' in the current location",
+      "Creates a new 'project' directory",
       "Lists the contents of the 'project' directory",
       "Moves into the 'project' directory"
     ],
@@ -224,16 +224,16 @@
     "question": "Tại sao cần 'process isolation' trong OS?",
     "questionEn": "Why is 'process isolation' needed in an OS?",
     "options": [
-      "Tăng tốc độ CPU",
-      "Tiết kiệm RAM",
-      "Ngăn process này can thiệp hoặc đọc bộ nhớ của process khác — bảo mật và ổn định",
-      "Cho phép nhiều người dùng cùng lúc"
+      "Để CPU xử lý nhiều process nhanh hơn",
+      "Để tiết kiệm RAM bằng cách cho các process dùng chung bộ nhớ",
+      "Để process này không đọc, phá bộ nhớ process khác",
+      "Cho phép nhiều người dùng đăng nhập cùng lúc"
     ],
     "optionsEn": [
-      "To speed up the CPU",
-      "To save RAM",
-      "To prevent one process from interfering with or reading another process's memory — for security and stability",
-      "To allow multiple users at the same time"
+      "So the CPU can run many processes faster",
+      "To save RAM by having processes share memory",
+      "So one process cannot touch another's memory",
+      "To let several users log in at the same time"
     ],
     "answer": 2,
     "explanation": "Process isolation: nếu Chrome bị hack, attacker chỉ có thể truy cập bộ nhớ của Chrome process, không đọc được dữ liệu của process ngân hàng đang mở. Cũng ngăn bug của app A crash app B.",
@@ -244,15 +244,15 @@
     "question": "Linux được dùng phổ biến trên server vì lý do gì?",
     "questionEn": "Why is Linux widely used on servers?",
     "options": [
-      "Linux có giao diện đẹp nhất",
-      "Linux miễn phí, ổn định, bảo mật cao, hiệu năng tốt và có thể tùy chỉnh sâu",
-      "Linux dễ sử dụng hơn Windows",
+      "Linux có giao diện đồ họa đẹp nhất",
+      "Miễn phí, ổn định, bảo mật và tùy chỉnh được",
+      "Linux dễ dùng hơn Windows với người mới",
       "Linux hỗ trợ tốt hơn các phần mềm doanh nghiệp"
     ],
     "optionsEn": [
-      "Linux has the nicest interface",
-      "Linux is free, stable, highly secure, performant, and deeply customizable",
-      "Linux is easier to use than Windows",
+      "Linux has the most beautiful graphical interface",
+      "It is free, stable, secure and customizable",
+      "Linux is easier than Windows for beginners",
       "Linux has better support for enterprise software"
     ],
     "answer": 1,
@@ -264,16 +264,16 @@
     "question": "Sự khác biệt giữa Windows File System và Linux File System?",
     "questionEn": "What is the difference between the Windows file system and the Linux file system?",
     "options": [
-      "Windows không có file system",
-      "Windows dùng ổ đĩa (C:\\, D:\\) làm gốc, Linux dùng cây thư mục đơn bắt đầu từ /",
-      "Linux không hỗ trợ nhiều ổ đĩa",
-      "Chúng hoàn toàn giống nhau"
+      "Windows không có file system, chỉ có thư mục",
+      "Windows có nhiều gốc (C:\\, D:\\), Linux có một gốc /",
+      "Linux không cho phép gắn nhiều hơn một ổ đĩa cùng một lúc",
+      "Linux dùng ổ C:\\ làm gốc, Windows dùng /"
     ],
     "optionsEn": [
-      "Windows has no file system",
-      "Windows uses drives (C:\\, D:\\) as roots, while Linux uses a single directory tree starting from /",
-      "Linux does not support multiple drives",
-      "They are completely identical"
+      "Windows has no file system, only folders",
+      "Windows has several roots (C:\\, D:\\); Linux has one root, /",
+      "Linux cannot mount more than one drive at a time",
+      "Linux uses C:\\ as its root, while Windows uses /"
     ],
     "answer": 1,
     "explanation": "Windows: mỗi ổ đĩa là gốc riêng (C:\\, D:\\). Linux: một cây duy nhất từ /, các ổ đĩa được 'mount' vào thư mục (ví dụ /mnt/disk2). Cách tiếp cận thống nhất hơn.",
@@ -284,16 +284,16 @@
     "question": "System call trong OS là gì?",
     "questionEn": "What is a system call in an OS?",
     "options": [
-      "Cuộc gọi điện thoại qua VoIP",
-      "Cơ chế ứng dụng yêu cầu dịch vụ từ kernel (như đọc file, tạo process)",
-      "Lệnh CLI đặc biệt của hệ thống",
-      "Cổng mạng dành riêng cho OS"
+      "Một cuộc gọi thoại qua Internet (VoIP) của hệ thống",
+      "Cách ứng dụng nhờ kernel làm việc như đọc file",
+      "Lệnh CLI đặc biệt chỉ admin mới chạy được",
+      "Cổng mạng dành riêng cho hệ điều hành"
     ],
     "optionsEn": [
-      "A phone call over VoIP",
-      "The mechanism by which an application requests a service from the kernel (such as reading a file or creating a process)",
-      "A special system CLI command",
-      "A network port reserved for the OS"
+      "A voice call the system makes over the Internet (VoIP)",
+      "How an app asks the kernel to do work, like reading a file",
+      "A special CLI command only admins can run",
+      "A network port reserved for the operating system"
     ],
     "answer": 1,
     "explanation": "Ứng dụng không được trực tiếp truy cập phần cứng. Khi cần (đọc file, dùng mạng, cấp RAM), app gọi system call → kernel thực hiện với đặc quyền cao → trả kết quả về app. Bảo mật và ổn định hơn.",
@@ -303,16 +303,16 @@
     "question": "Vì sao đội vận hành thường thao tác máy chủ qua CLI thay vì giao diện đồ hoạ?",
     "questionEn": "Why do operations teams usually manage servers through the CLI rather than a GUI?",
     "options": [
-      "Vì lệnh có thể ghi thành kịch bản, lặp lại chính xác và chạy từ xa trên hàng trăm máy",
-      "Vì CLI đẹp hơn GUI",
-      "Vì máy chủ không hỗ trợ chuột",
-      "Vì GUI không mã hoá dữ liệu"
+      "Vì lệnh viết được thành script, chạy lại trên nhiều máy",
+      "Vì CLI hiển thị thông tin trực quan, dễ nhìn hơn GUI",
+      "Vì máy chủ không hỗ trợ chuột và màn hình",
+      "Vì GUI không mã hóa dữ liệu khi truyền đi"
     ],
     "optionsEn": [
-      "Because commands can be scripted, repeated exactly, and run remotely across hundreds of machines",
-      "Because the CLI looks better",
-      "Because servers do not support a mouse",
-      "Because GUIs do not encrypt data"
+      "Because commands can be scripted and rerun",
+      "Because the CLI shows information more visually than a GUI",
+      "Because servers do not support a mouse or monitor",
+      "Because GUIs do not encrypt the data they send"
     ],
     "answer": 0,
     "explanation": "Khả năng tự động hoá là lý do chính. Một kịch bản chạy giống hệt nhau mọi lần, còn thao tác tay trên GUI dễ sai và không tái lập được.",
@@ -323,16 +323,16 @@
     "question": "Process và thread khác nhau ở điểm cốt lõi nào?",
     "questionEn": "What is the core difference between a process and a thread?",
     "options": [
-      "Process có vùng nhớ riêng; các thread trong cùng process chia sẻ vùng nhớ đó",
-      "Thread chạy nhanh hơn vì được ưu tiên CPU tuyệt đối",
-      "Process chỉ tồn tại trên Linux",
-      "Thread không cần CPU để chạy"
+      "Process có bộ nhớ riêng; thread trong nó dùng chung bộ nhớ",
+      "Thread được CPU ưu tiên cao hơn nên chạy nhanh hơn",
+      "Process chỉ tồn tại trên hệ điều hành Linux",
+      "Thread chạy mà không cần dùng tới CPU"
     ],
     "optionsEn": [
-      "A process has its own memory space; threads inside one process share that memory",
-      "Threads run faster because they get absolute CPU priority",
-      "Processes only exist on Linux",
-      "Threads do not need CPU to run"
+      "A process has its own memory; its threads share it",
+      "Threads get higher CPU priority, so they run faster",
+      "Processes only exist on the Linux operating system",
+      "Threads run without needing the CPU at all"
     ],
     "answer": 0,
     "explanation": "Chia sẻ bộ nhớ khiến thread nhẹ và giao tiếp nhanh, nhưng cũng sinh ra lỗi tranh chấp dữ liệu — nguyên nhân của nhiều bug khó tái hiện.",
@@ -343,16 +343,16 @@
     "question": "Ứng dụng chạy tốt trên máy lập trình viên nhưng lỗi trên máy chủ. Khác biệt nào về OS hay gây ra điều này nhất?",
     "questionEn": "An app runs fine on the developer machine but fails on the server. Which OS difference most often causes this?",
     "options": [
-      "Hệ thống tệp phân biệt hoa thường trên Linux nhưng không trên Windows, làm sai đường dẫn tệp",
-      "Máy chủ không có màn hình",
-      "Máy chủ dùng bàn phím khác",
-      "Linux không chạy được ứng dụng web"
+      "Linux phân biệt chữ hoa/thường trong tên file, Windows thì không",
+      "Máy chủ không có màn hình để hiển thị lỗi",
+      "Máy chủ dùng bố cục bàn phím khác máy lập trình viên",
+      "Linux không chạy được ứng dụng web viết bằng Java"
     ],
     "optionsEn": [
-      "Linux file systems are case-sensitive while Windows is not, breaking file paths",
-      "The server has no monitor",
-      "The server uses a different keyboard",
-      "Linux cannot run web applications"
+      "Linux treats file names as case-sensitive; Windows does not",
+      "The server has no monitor to display errors",
+      "The server uses a different keyboard layout",
+      "Linux cannot run web applications written in Java"
     ],
     "answer": 0,
     "explanation": "Đây là lỗi kinh điển: tệp Logo.png và logo.png là hai tệp khác nhau trên Linux nhưng là một trên Windows.",
@@ -363,16 +363,16 @@
     "question": "Kernel đóng vai trò gì trong hệ điều hành?",
     "questionEn": "What role does the kernel play in an operating system?",
     "options": [
-      "Là lõi trung gian quản lý CPU, bộ nhớ và thiết bị, cấp phát tài nguyên cho các tiến trình",
-      "Là giao diện đồ hoạ mà người dùng nhìn thấy",
-      "Là trình duyệt tích hợp sẵn",
-      "Là nơi lưu trữ tệp của người dùng"
+      "Lõi quản lý CPU, bộ nhớ, thiết bị cho các tiến trình",
+      "Là giao diện đồ họa mà người dùng nhìn thấy trên màn hình",
+      "Là trình duyệt web tích hợp sẵn trong máy",
+      "Là thư mục lưu trữ tệp của người dùng"
     ],
     "optionsEn": [
-      "The core layer managing CPU, memory, and devices, allocating resources to processes",
-      "The graphical interface the user sees",
-      "The built-in browser",
-      "The place where user files are stored"
+      "The core managing CPU, memory and devices",
+      "The graphical interface that the user sees",
+      "The web browser built into the system",
+      "The folder where user files are stored"
     ],
     "answer": 0,
     "explanation": "Kernel đứng giữa phần cứng và phần mềm ứng dụng. Ứng dụng không chạm trực tiếp vào phần cứng mà phải đi qua kernel.",
@@ -383,16 +383,16 @@
     "question": "Yêu cầu nói ứng dụng phải chạy trên máy trạm hiện tại của công ty. BA cần làm rõ gì?",
     "questionEn": "A requirement says the app must run on existing company workstations. What must the BA clarify?",
     "options": [
-      "Phiên bản hệ điều hành cụ thể, cấu hình tối thiểu và quyền cài đặt của người dùng",
-      "Màu vỏ máy tính",
-      "Nhà cung cấp bàn phím",
-      "Số lượng cổng USB"
+      "Phiên bản OS, cấu hình tối thiểu và quyền cài đặt",
+      "Màu sắc và kiểu dáng vỏ máy tính",
+      "Hãng sản xuất bàn phím và chuột mà mọi người đang dùng",
+      "Số lượng cổng USB và cổng sạc trên máy"
     ],
     "optionsEn": [
-      "The specific OS version, minimum specs, and whether users have install permission",
-      "The colour of the machine casing",
-      "The keyboard vendor",
-      "The number of USB ports"
+      "OS version, minimum specs and install rights",
+      "The colour and style of the machine casing",
+      "The brand of keyboard and mouse in use",
+      "How many USB and charging ports each has"
     ],
     "answer": 0,
     "explanation": "Đây là ràng buộc môi trường vận hành. Thiếu phiên bản OS và quyền cài đặt, đội phát triển không biết mình bị giới hạn tới đâu.",
@@ -405,15 +405,15 @@
     "questionEn": "When you press the power button, which boot order is correct?",
     "options": [
       "Màn hình đăng nhập → kernel → firmware → bootloader",
-      "Kernel → firmware → driver → bootloader",
+      "Kernel → firmware → bootloader → driver → màn hình đăng nhập",
       "Bootloader → màn hình đăng nhập → firmware → kernel",
-      "Firmware (BIOS/UEFI) → bootloader → kernel → driver và service → màn hình đăng nhập"
+      "Firmware → bootloader → kernel → driver → màn hình đăng nhập"
     ],
     "optionsEn": [
       "Login screen → kernel → firmware → bootloader",
-      "Kernel → firmware → drivers → bootloader",
+      "Kernel → firmware → bootloader → drivers → login screen",
       "Bootloader → login screen → firmware → kernel",
-      "Firmware (BIOS/UEFI) → bootloader → kernel → drivers and services → login screen"
+      "Firmware → bootloader → kernel → drivers → login screen"
     ],
     "answer": 3,
     "explanation": "Firmware trên bo mạch chủ kiểm tra phần cứng, tìm bootloader; bootloader nạp kernel; kernel nạp driver và service; cuối cùng là màn hình đăng nhập.",
@@ -436,14 +436,14 @@
     "question": "Một nhân viên cố cài phần mềm trên laptop công ty và nhận thông báo \"Access is denied\". Nguyên nhân khả năng cao nhất là gì?",
     "questionEn": "An employee tries to install software on a company laptop and gets \"Access is denied\". What is the most likely cause?",
     "options": [
-      "Tài khoản của họ không có quyền quản trị (admin) để cài phần mềm",
-      "Máy hết RAM",
+      "Tài khoản không có quyền admin",
+      "Máy đã hết RAM trống",
       "Driver máy in bị lỗi",
       "CPU quá chậm để chạy trình cài đặt"
     ],
     "optionsEn": [
-      "Their account does not have administrator (admin) rights to install software",
-      "The machine is out of RAM",
+      "The account lacks admin rights",
+      "The machine has run out of RAM",
       "The printer driver is broken",
       "The CPU is too slow to run the installer"
     ],
@@ -500,15 +500,15 @@
     "question": "Vì sao một driver lỗi có thể gây màn hình xanh (sập cả máy), còn một ứng dụng lỗi thường chỉ tự tắt?",
     "questionEn": "Why can a faulty driver cause a blue screen (crashing the whole machine), while a faulty app usually only closes itself?",
     "options": [
-      "Vì driver luôn lớn hơn ứng dụng",
-      "Vì ứng dụng không bao giờ có lỗi",
-      "Vì driver chạy ở kernel mode với toàn quyền, còn ứng dụng chạy ở user mode bị giới hạn",
+      "Vì driver có dung lượng lớn hơn ứng dụng",
+      "Vì ứng dụng được viết bằng ngôn ngữ an toàn hơn",
+      "Vì driver chạy ở kernel mode với toàn quyền",
       "Vì driver được lưu trong RAM còn ứng dụng thì không"
     ],
     "optionsEn": [
-      "Because drivers are always bigger than apps",
-      "Because apps never have bugs",
-      "Because drivers run in kernel mode with full rights, while apps run in restricted user mode",
+      "Because drivers are larger in size than apps",
+      "Because apps are written in safer programming languages",
+      "Because drivers run in kernel mode with full rights",
       "Because drivers are stored in RAM and apps are not"
     ],
     "answer": 2,
@@ -516,13 +516,13 @@
     "explanationEn": "The CPU has two levels: user mode (apps, restricted) and kernel mode (the kernel and drivers, full rights). A fault in kernel mode can bring down the whole system.",
     "optionExplanations": [
       "Sai: kích thước không quyết định mức độ ảnh hưởng của lỗi.",
-      "Sai: ứng dụng vẫn có lỗi, nhưng lỗi bị giới hạn trong process của nó.",
+      "Sai: ngôn ngữ lập trình không quyết định phạm vi ảnh hưởng; lỗi của ứng dụng bị giới hạn trong process của nó nhờ user mode.",
       "Đúng: driver có quyền kernel nên lỗi của nó ảnh hưởng cả hệ thống.",
       "Sai: cả driver và ứng dụng khi chạy đều nằm trong RAM; điểm khác là cấp đặc quyền."
     ],
     "optionExplanationsEn": [
       "Wrong: size does not decide how far a bug's damage reaches.",
-      "Wrong: apps do have bugs, but the damage stays inside their own process.",
+      "Wrong: the language does not decide how far the damage reaches; an app's faults stay inside its own process thanks to user mode.",
       "Correct: a driver has kernel rights, so its faults affect the whole system.",
       "Wrong: both drivers and apps sit in RAM while running; the difference is the privilege level."
     ]

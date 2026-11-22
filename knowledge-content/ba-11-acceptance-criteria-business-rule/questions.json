@@ -45,15 +45,15 @@
     "questionEn": "Which three things does the Given-When-Then format force you to state?",
     "options": [
       "Trạng thái ban đầu, hành động xảy ra, và kết quả mong đợi",
-      "Người dùng, hệ thống, và dữ liệu",
-      "Chi phí, thời gian, và rủi ro",
-      "Ai, ở đâu, và khi nào"
+      "Người dùng thực hiện, hệ thống liên quan, và dữ liệu bị thay đổi",
+      "Mục tiêu nghiệp vụ, độ ưu tiên, và công sức ước tính",
+      "Vai trò, mục tiêu, và lợi ích nghiệp vụ của story"
     ],
     "optionsEn": [
       "The starting state, the action, and the expected result",
-      "The user, the system, and the data",
-      "Cost, time, and risk",
-      "Who, where, and when"
+      "The acting user, the system involved, and the data it changes",
+      "The business goal, the priority, and the estimated effort",
+      "The role, the goal, and the business benefit of the story"
     ],
     "answer": 0,
     "explanation": "Đây chính là ba thứ mà một yêu cầu thiếu thông tin thường bỏ sót, đặc biệt là trạng thái ban đầu.",
@@ -64,13 +64,13 @@
     "question": "Phần nào của acceptance criteria bị bỏ sót nhiều nhất?",
     "questionEn": "Which part of acceptance criteria is most frequently omitted?",
     "options": [
-      "Điều kiện ngoại lệ và trường hợp lỗi, chứ không phải đường đi thuận lợi",
+      "Các trường hợp ngoại lệ và lỗi",
       "Tên của user class thực hiện hành động",
       "Thời điểm hành động xảy ra",
       "Định dạng hiển thị của kết quả"
     ],
     "optionsEn": [
-      "Exception conditions and failure cases, not the happy path",
+      "Exception and failure cases",
       "The name of the acting user class",
       "When the action occurs",
       "The display format of the result"
@@ -84,13 +84,13 @@
     "question": "Một story vừa chỉ có 1 tới 2 acceptance criteria. Điều đó thường có nghĩa gì?",
     "questionEn": "A medium story has only one or two acceptance criteria. What does that usually mean?",
     "options": [
-      "Nhiều khả năng bạn chỉ mô tả đường đi thuận lợi và còn thiếu các trường hợp ngoại lệ",
+      "Nhiều khả năng còn thiếu các trường hợp ngoại lệ",
       "Story đã được đặc tả rất hiệu quả và súc tích",
-      "Story quá lớn và cần được chia nhỏ",
-      "Đội đã hiểu rõ nên không cần viết thêm"
+      "Story quá lớn và cần được chia nhỏ thêm",
+      "Đội đã hiểu rõ nên không cần viết thêm AC"
     ],
     "optionsEn": [
-      "You probably described only the happy path and are missing exception cases",
+      "Exception cases are probably missing",
       "The story is efficiently and concisely specified",
       "The story is too large and needs splitting",
       "The team understands it well enough already"
@@ -124,16 +124,16 @@
     "question": "Business rule khác functional requirement ở điểm cốt lõi nào?",
     "questionEn": "What is the core difference between a business rule and a functional requirement?",
     "options": [
-      "Business rule tồn tại độc lập với phần mềm và được thực thi ngay cả khi chưa có hệ thống nào",
-      "Business rule chi tiết hơn functional requirement",
-      "Business rule do lập trình viên viết",
-      "Business rule chỉ áp dụng cho hệ thống tài chính"
+      "Business rule tồn tại độc lập với phần mềm, đã được áp dụng cả khi chưa có hệ thống",
+      "Business rule là phiên bản chi tiết hơn, ở mức thấp hơn của một functional requirement",
+      "Business rule do lập trình viên viết trong giai đoạn thiết kế, còn yêu cầu do BA viết",
+      "Business rule chỉ áp dụng cho các phép tính trong hệ thống tài chính, kế toán"
     ],
     "optionsEn": [
-      "A business rule exists independently of software and was enforced before any system existed",
-      "A business rule is more detailed than a functional requirement",
-      "Business rules are written by developers",
-      "Business rules only apply to financial systems"
+      "A business rule exists independently of software and applied before any system existed",
+      "A business rule is a more detailed, lower-level version of a functional requirement",
+      "Business rules are written by developers during design, while requirements come from the BA",
+      "Business rules only apply to calculations in financial and accounting systems"
     ],
     "answer": 0,
     "explanation": "Trước khi có hệ thống, quy tắc đơn trên 50 triệu phải được phê duyệt vẫn được thực thi bằng giấy tờ và con người.",
@@ -144,16 +144,16 @@
     "question": "Vì sao một business rule có thể sinh ra nhiều yêu cầu chức năng?",
     "questionEn": "Why can one business rule generate several functional requirements?",
     "options": [
-      "Vì nó áp dụng ở nhiều nơi trong hệ thống: màn hình tạo đơn, màn hình duyệt, báo cáo và API",
-      "Vì lập trình viên hiểu quy tắc theo nhiều cách khác nhau",
-      "Vì mỗi sprint cần một yêu cầu riêng",
-      "Vì mỗi user class cần một yêu cầu riêng"
+      "Vì nó áp dụng ở nhiều nơi: màn hình tạo đơn, màn hình duyệt, báo cáo và API",
+      "Vì mỗi lập trình viên hiểu quy tắc theo cách riêng và hiện thực một phiên bản của mình",
+      "Vì mỗi sprint phải viết lại quy tắc thành một yêu cầu mới để giữ nó trong phạm vi",
+      "Vì mỗi user class cần một bản sao riêng của quy tắc, viết thành yêu cầu riêng"
     ],
     "optionsEn": [
-      "Because it applies in many places: the order screen, the approval screen, reporting, and the API",
-      "Because developers interpret it in different ways",
-      "Because each sprint needs its own requirement",
-      "Because each user class needs its own requirement"
+      "Because it applies in many places, such as order entry, approval, reporting and the API",
+      "Because each developer interprets the rule differently and implements their own version",
+      "Because every sprint must restate the rule as a new requirement to keep it in scope",
+      "Because each user class needs its own copy of the rule written as a separate requirement"
     ],
     "answer": 0,
     "explanation": "Đây chính là lý do phải tách business rule ra riêng: nếu viết nó vào ba story khác nhau, khi quy tắc đổi bạn sẽ quên sửa một chỗ.",
@@ -164,16 +164,16 @@
     "question": "Trường nào là quan trọng nhất khi ghi lại một business rule?",
     "questionEn": "Which field matters most when recording a business rule?",
     "options": [
-      "Nguồn gốc, vì nó cho biết quy tắc có thể thương lượng hay không và ai phải được hỏi khi cần thay đổi",
-      "Mã định danh",
-      "Ngày tạo",
-      "Số lượng yêu cầu chức năng liên quan"
+      "Nguồn gốc, vì nó cho biết quy tắc có thương lượng được không",
+      "Mã định danh, vì mọi AC đều phải tham chiếu tới nó qua mã",
+      "Ngày tạo, vì nó cho biết phiên bản nào đang có hiệu lực",
+      "Số lượng yêu cầu chức năng được sinh ra từ quy tắc đó"
     ],
     "optionsEn": [
-      "Origin, because it reveals whether the rule is negotiable and whom to consult for a change",
-      "The identifier",
-      "The creation date",
-      "The number of related functional requirements"
+      "Its origin, since that shows whether it is negotiable",
+      "Its identifier, since every AC must reference it by ID",
+      "Its creation date, since that shows which version is current",
+      "The count of functional requirements derived from it"
     ],
     "answer": 0,
     "explanation": "Quy tắc bắt nguồn từ quy định pháp luật thường không thể thương lượng, còn quy tắc từ chính sách nội bộ thì có thể xem lại.",
@@ -184,16 +184,16 @@
     "question": "Quy tắc khách hàng có tổng chi tiêu năm trên 500 triệu được xếp hạng Vàng thuộc loại business rule nào?",
     "questionEn": "Which kind of business rule is a customer with annual spend above 500 million is Gold tier?",
     "options": [
-      "Suy luận (inference) — từ sự thật này suy ra sự thật khác",
-      "Ràng buộc (constraint)",
-      "Điều kiện kích hoạt (action enabler)",
-      "Tính toán (computation)"
+      "Quy tắc suy luận (inference)",
+      "Quy tắc ràng buộc (constraint)",
+      "Quy tắc kích hoạt (action enabler)",
+      "Quy tắc tính toán (computation)"
     ],
     "optionsEn": [
-      "An inference — deriving one fact from another",
-      "A constraint",
+      "An inference rule",
+      "A constraint rule",
       "An action enabler",
-      "A computation"
+      "A computation rule"
     ],
     "answer": 0,
     "explanation": "Loại suy luận bị bỏ sót nhiều nhất vì nó ngầm định trong đầu người làm nghiệp vụ, cho tới khi hệ thống xếp hạng sai một khách hàng quan trọng.",
@@ -204,16 +204,16 @@
     "question": "Quy tắc khi tồn kho xuống dưới mức tối thiểu, hệ thống phải tạo yêu cầu nhập hàng thuộc loại nào?",
     "questionEn": "Which kind is when stock falls below the minimum, the system must raise a replenishment request?",
     "options": [
-      "Điều kiện kích hoạt (action enabler)",
-      "Ràng buộc (constraint)",
-      "Suy luận (inference)",
-      "Tính toán (computation)"
+      "Quy tắc kích hoạt (action enabler)",
+      "Quy tắc ràng buộc (constraint)",
+      "Quy tắc suy luận (inference)",
+      "Quy tắc tính toán (computation)"
     ],
     "optionsEn": [
       "An action enabler",
-      "A constraint",
-      "An inference",
-      "A computation"
+      "A constraint rule",
+      "An inference rule",
+      "A computation rule"
     ],
     "answer": 0,
     "explanation": "Ràng buộc nêu điều gì bắt buộc hoặc bị cấm; tính toán nêu công thức tính một giá trị; suy luận rút ra sự thật mới từ sự thật cũ.",
@@ -224,16 +224,16 @@
     "question": "Cách liên kết đúng giữa acceptance criteria và business rule là gì?",
     "questionEn": "What is the right way to link acceptance criteria and business rules?",
     "options": [
-      "AC tham chiếu tới mã của business rule chứ không lặp lại nội dung, để khi quy tắc đổi chỉ phải sửa một chỗ",
-      "Chép nguyên nội dung business rule vào mọi AC liên quan",
-      "Bỏ business rule và chỉ giữ AC",
-      "Ghi business rule vào phần mô tả của story"
+      "AC tham chiếu tới mã của business rule thay vì lặp lại nội dung",
+      "Chép nguyên nội dung quy tắc vào mọi AC liên quan để mỗi AC tự đủ nghĩa",
+      "Bỏ quy tắc riêng và chỉ giữ logic của nó bên trong AC",
+      "Ghi quy tắc vào phần mô tả story để đội thấy nó đầu tiên"
     ],
     "optionsEn": [
-      "AC reference the rule's ID rather than repeating its content, so a rule change means one edit",
-      "Copy the rule's full text into every related AC",
-      "Drop the rule and keep only the AC",
-      "Write the rule into the story description"
+      "AC reference the rule by its ID instead of repeating its content",
+      "Copy the rule's full text into every related AC so each is self-contained",
+      "Drop the separate rule and keep its logic only inside the AC",
+      "Write the rule into the story description so the team sees it first"
     ],
     "answer": 0,
     "explanation": "Khi ngưỡng đổi từ 50 triệu sang 100 triệu, bạn chỉ sửa BR-012 và mọi AC tham chiếu tới nó tự động vẫn đúng.",
@@ -244,16 +244,16 @@
     "question": "Vì sao business rule nên nằm ở nơi thay đổi được mà không cần lập trình lại?",
     "questionEn": "Why should business rules live where they can change without reprogramming?",
     "options": [
-      "Vì business rule thay đổi thường xuyên hơn quy trình, và quy trình thay đổi thường xuyên hơn kiến trúc",
-      "Vì lập trình viên không muốn sửa mã",
-      "Vì cấu hình chạy nhanh hơn mã cứng",
-      "Vì tiêu chuẩn ngành yêu cầu như vậy"
+      "Vì chúng thay đổi thường xuyên hơn cả quy trình lẫn kiến trúc",
+      "Vì lập trình viên không muốn sửa phần mã đã kiểm thử sau khi phát hành",
+      "Vì logic điều khiển bằng cấu hình chạy nhanh hơn logic viết cứng",
+      "Vì các tiêu chuẩn ngành như BABOK bắt buộc quy tắc phải cấu hình được"
     ],
     "optionsEn": [
-      "Because business rules change more often than processes, and processes more often than architecture",
-      "Because developers dislike editing code",
-      "Because configuration runs faster than hard-coded logic",
-      "Because industry standards require it"
+      "Because they change more often than processes or architecture",
+      "Because developers would rather not touch tested code once it is released",
+      "Because configuration-driven logic runs faster than hard-coded logic",
+      "Because industry standards such as BABOK require rules to be configurable"
     ],
     "answer": 0,
     "explanation": "Đây là lý do BA nên ghi lại mức độ ổn định của mỗi quy tắc: quy tắc đổi hằng quý phải đưa vào cấu hình, quy tắc 20 năm chưa đổi có thể mã hoá cứng.",
@@ -264,16 +264,16 @@
     "question": "Câu hỏi nào về business rule hay bị bỏ sót nhất và gây nhiều sự cố nghiêm trọng nhất?",
     "questionEn": "Which business rule question is most often omitted and causes the most serious incidents?",
     "options": [
-      "Khi quy tắc đổi, có cần áp dụng ngược cho dữ liệu cũ không — ví dụ các đơn đang chờ duyệt xử lý theo quy tắc cũ hay mới",
-      "Ai là người viết ra quy tắc đầu tiên",
-      "Quy tắc được lưu ở tệp nào",
-      "Quy tắc dài bao nhiêu từ"
+      "Khi quy tắc đổi, có áp dụng cho dữ liệu đang xử lý dở hay không",
+      "Ai viết ra quy tắc ban đầu và người đó còn làm ở công ty không",
+      "Logic của quy tắc hiện đang được lưu trong hệ thống hay tệp nào",
+      "Câu chữ của quy tắc có khớp với bảng thuật ngữ của công ty không"
     ],
     "optionsEn": [
-      "Whether a changed rule applies retroactively — for example, are pending orders processed under the old or new rule",
-      "Who originally wrote the rule",
-      "Which file the rule is stored in",
-      "How many words the rule contains"
+      "Whether a changed rule applies to records already in progress",
+      "Who originally wrote the rule and whether they still work there",
+      "Which system or file the rule's logic is currently stored in",
+      "Whether the rule's wording matches the company glossary"
     ],
     "answer": 0,
     "explanation": "Các câu hỏi khác cần đặt gồm ai có thẩm quyền thay đổi, có ngoại lệ nào, ai được phép ghi đè và việc ghi đè có được ghi nhật ký không.",
@@ -284,16 +284,16 @@
     "question": "Vì sao business rule được coi là tài sản của tổ chức chứ không phải của dự án?",
     "questionEn": "Why is a business rule an organizational asset rather than a project asset?",
     "options": [
-      "Vì hệ thống bị thay thế nhưng quy tắc vẫn còn đó, và nó thuộc quyền sở hữu của bộ phận nghiệp vụ",
+      "Vì nó tồn tại lâu hơn các hệ thống hiện thực nó",
       "Vì nó được lưu trong hệ thống quản lý tài liệu của công ty",
-      "Vì nó được kiểm toán hằng năm",
-      "Vì nó có mã định danh riêng"
+      "Vì nó được kiểm toán nội bộ rà soát hằng năm",
+      "Vì nó mang một mã định danh duy nhất trên mọi dự án"
     ],
     "optionsEn": [
-      "Because systems get replaced while the rule remains, and it is owned by the business function",
+      "Because it outlives the systems that implement it",
       "Because it is stored in the corporate document system",
-      "Because it is audited annually",
-      "Because it has its own identifier"
+      "Because it is reviewed by internal audit every year",
+      "Because it carries an ID that is unique across projects"
     ],
     "answer": 0,
     "explanation": "Đây cũng là lý do business rule nên được lưu ở kho cấp doanh nghiệp chứ không chôn trong tài liệu yêu cầu của từng dự án.",
@@ -304,16 +304,16 @@
     "question": "Bài kiểm tra thực dụng nào cho biết acceptance criteria đã đủ hay chưa?",
     "questionEn": "Which pragmatic test tells you whether acceptance criteria are sufficient?",
     "options": [
-      "Tester có viết được test case từ AC đó không; nếu không thì AC chưa đủ",
-      "AC có dài hơn mô tả story không",
-      "AC có được khách hàng ký duyệt không",
-      "AC có dùng đúng định dạng Given-When-Then không"
+      "Tester có viết được test case từ AC đó không",
+      "AC có dài hơn phần mô tả của story không",
+      "Khách hàng đã ký duyệt chính thức AC chưa",
+      "Mọi AC có theo đúng định dạng Given-When-Then không"
     ],
     "optionsEn": [
-      "Can a tester write test cases from it; if not, the AC is insufficient",
-      "Is the AC longer than the story description",
-      "Has the customer signed off the AC",
-      "Does the AC use the exact Given-When-Then format"
+      "Whether a tester can write test cases from it",
+      "Whether the AC is longer than the story description",
+      "Whether the customer has formally signed off the AC",
+      "Whether every AC follows the exact Given-When-Then format"
     ],
     "answer": 0,
     "explanation": "Định dạng chỉ là công cụ; điều quan trọng là AC phải cụ thể, kiểm chứng được và phủ cả trường hợp lỗi.",

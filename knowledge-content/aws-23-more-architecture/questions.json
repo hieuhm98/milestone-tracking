@@ -5,15 +5,15 @@
     "questionEn": "A security team needs to completely block a specific malicious IP address for an entire subnet. Which tool is most appropriate?",
     "options": [
       "Security Group với một rule deny cho IP đó",
-      "Network ACL (NACL) với một rule deny cho IP đó",
-      "IAM policy chặn IP",
-      "Route table loại bỏ IP đó"
+      "Network ACL với một rule deny cho IP đó",
+      "IAM policy với điều kiện deny cho IP đó",
+      "Route table trỏ IP đó vào blackhole"
     ],
     "optionsEn": [
       "A Security Group with a deny rule for that IP",
-      "A Network ACL (NACL) with a deny rule for that IP",
-      "An IAM policy that blocks the IP",
-      "A route table that removes that IP"
+      "A Network ACL with a deny rule for that IP",
+      "An IAM policy with a deny condition on that IP",
+      "A route table entry that blackholes that IP"
     ],
     "answer": 1,
     "explanation": "Security Group chỉ có rule ALLOW, không thể deny. NACL hoạt động ở tầng subnet và có cả rule allow lẫn DENY, nên đây là công cụ duy nhất trong danh sách chặn được một IP cụ thể.",
@@ -44,15 +44,15 @@
     "question": "Một workload HPC cần giao tiếp node-to-node với độ trễ thấp nhất và băng thông cao nhất cho các job MPI. Kết hợp nào phù hợp nhất?",
     "questionEn": "An HPC workload needs the lowest-latency, highest-bandwidth node-to-node communication for MPI jobs. Which combination fits best?",
     "options": [
-      "Spread Placement Group + NAT Gateway",
+      "Spread Placement Group + Enhanced Networking (ENA)",
       "Cluster Placement Group + Elastic Fabric Adapter (EFA)",
-      "Partition Placement Group + Internet Gateway",
+      "Partition Placement Group + Elastic Fabric Adapter",
       "Auto Scaling Group trải trên nhiều Region"
     ],
     "optionsEn": [
-      "Spread Placement Group + NAT Gateway",
+      "Spread Placement Group + Enhanced Networking (ENA)",
       "Cluster Placement Group + Elastic Fabric Adapter (EFA)",
-      "Partition Placement Group + Internet Gateway",
+      "Partition Placement Group + Elastic Fabric Adapter",
       "Auto Scaling Group spread across multiple Regions"
     ],
     "answer": 1,
@@ -67,13 +67,13 @@
       "Amazon EFS Standard",
       "Amazon S3 Glacier",
       "Amazon FSx for Lustre",
-      "Amazon EBS gp2"
+      "Amazon EBS io2 Block Express"
     ],
     "optionsEn": [
       "Amazon EFS Standard",
       "Amazon S3 Glacier",
       "Amazon FSx for Lustre",
-      "Amazon EBS gp2"
+      "Amazon EBS io2 Block Express"
     ],
     "answer": 2,
     "explanation": "FSx for Lustre là file system song song hiệu năng cao, được thiết kế cho HPC, machine learning và các workload cần throughput lớn với dữ liệu khổng lồ.",
@@ -106,13 +106,13 @@
     "options": [
       "Đặt một SQS queue trước backend làm buffer",
       "Tăng gấp đôi kích thước instance vĩnh viễn",
-      "Bỏ qua các request thừa",
+      "Trả HTTP 429 cho các request thừa để client tự thử lại",
       "Chuyển toàn bộ sang xử lý đồng bộ"
     ],
     "optionsEn": [
       "Put an SQS queue in front of the backend as a buffer",
       "Permanently double the instance size",
-      "Drop the excess requests",
+      "Return HTTP 429 for excess requests so clients retry",
       "Switch everything to synchronous processing"
     ],
     "answer": 0,
@@ -144,16 +144,16 @@
     "question": "Công ty muốn giảm tải cho database quan hệ bằng cách lưu session và kết quả query hay dùng vào một cache in-memory. Dịch vụ nào?",
     "questionEn": "A company wants to offload its relational database by storing sessions and frequently used query results in an in-memory cache. Which service?",
     "options": [
-      "Amazon ElastiCache (Redis/Memcached)",
+      "Amazon ElastiCache",
       "Amazon S3",
-      "AWS Glue",
-      "Amazon Athena"
+      "Amazon Redshift",
+      "Amazon RDS Proxy"
     ],
     "optionsEn": [
-      "Amazon ElastiCache (Redis/Memcached)",
+      "Amazon ElastiCache",
       "Amazon S3",
-      "AWS Glue",
-      "Amazon Athena"
+      "Amazon Redshift",
+      "Amazon RDS Proxy"
     ],
     "answer": 0,
     "explanation": "ElastiCache (Redis hoặc Memcached) là cache in-memory dùng để lưu session và cache kết quả query database, giảm tải đáng kể cho database quan hệ như RDS.",
@@ -165,13 +165,13 @@
     "questionEn": "A team wants to define all infrastructure as declarative templates, manage them as stacks, detect drift, and deploy across multiple accounts/regions. Which service?",
     "options": [
       "AWS Elastic Beanstalk",
-      "AWS CloudFormation (với StackSets)",
+      "AWS CloudFormation",
       "AWS CodeDeploy",
       "AWS OpsWorks"
     ],
     "optionsEn": [
       "AWS Elastic Beanstalk",
-      "AWS CloudFormation (with StackSets)",
+      "AWS CloudFormation",
       "AWS CodeDeploy",
       "AWS OpsWorks"
     ],
@@ -184,16 +184,16 @@
     "question": "Một developer muốn deploy nhanh một ứng dụng web mà không phải tự cấu hình EC2, load balancer hay Auto Scaling — muốn AWS quản lý platform bên dưới. Dịch vụ nào?",
     "questionEn": "A developer wants to quickly deploy a web app without manually configuring EC2, load balancers, or Auto Scaling — letting AWS manage the underlying platform. Which service?",
     "options": [
-      "AWS CloudFormation",
+      "AWS CloudFormation StackSets",
       "AWS Elastic Beanstalk",
       "Amazon EC2 thuần",
-      "AWS Batch"
+      "AWS CodeDeploy"
     ],
     "optionsEn": [
-      "AWS CloudFormation",
+      "AWS CloudFormation StackSets",
       "AWS Elastic Beanstalk",
       "Plain Amazon EC2",
-      "AWS Batch"
+      "AWS CodeDeploy"
     ],
     "answer": 1,
     "explanation": "Elastic Beanstalk là PaaS: chỉ cần đẩy code lên, AWS tự lo EC2, ELB, Auto Scaling và platform bên dưới. Nó hướng đến developer muốn deploy nhanh mà không quản lý hạ tầng thủ công.",
@@ -265,15 +265,15 @@
     "questionEn": "A dev team wants an automated CI/CD pipeline: store code, build and test, then deploy to ECS. Which set of services maps best?",
     "options": [
       "CodeCommit (code) → CodeBuild (build/test) → CodeDeploy (deploy) → CodePipeline (điều phối)",
-      "S3 (code) → Lambda (build) → EC2 (deploy) → SNS (điều phối)",
-      "CloudFormation (code) → SES (build) → SQS (deploy) → EventBridge (điều phối)",
-      "CodeArtifact (code) → CodeGuru (build) → Beanstalk (deploy) → SWF (điều phối)"
+      "CodeBuild (code) → CodeCommit (build/test) → CodePipeline (deploy) → CodeDeploy (điều phối)",
+      "CodeArtifact (code) → CodeBuild (build/test) → CodeDeploy (deploy) → CodePipeline (điều phối)",
+      "CodeCommit (code) → CodeDeploy (build/test) → CodeBuild (deploy) → CodePipeline (điều phối)"
     ],
     "optionsEn": [
       "CodeCommit (code) → CodeBuild (build/test) → CodeDeploy (deploy) → CodePipeline (orchestrate)",
-      "S3 (code) → Lambda (build) → EC2 (deploy) → SNS (orchestrate)",
-      "CloudFormation (code) → SES (build) → SQS (deploy) → EventBridge (orchestrate)",
-      "CodeArtifact (code) → CodeGuru (build) → Beanstalk (deploy) → SWF (orchestrate)"
+      "CodeBuild (code) → CodeCommit (build/test) → CodePipeline (deploy) → CodeDeploy (orchestrate)",
+      "CodeArtifact (code) → CodeBuild (build/test) → CodeDeploy (deploy) → CodePipeline (orchestrate)",
+      "CodeCommit (code) → CodeDeploy (build/test) → CodeBuild (deploy) → CodePipeline (orchestrate)"
     ],
     "answer": 0,
     "explanation": "Bộ Code* chuẩn: CodeCommit chứa Git repo, CodeBuild build/test, CodeDeploy deploy lên EC2/Lambda/ECS, và CodePipeline điều phối toàn bộ pipeline CI/CD tự động.",
@@ -304,16 +304,16 @@
     "question": "Lợi ích cốt lõi của kiến trúc hướng sự kiện (event-driven) là gì?",
     "questionEn": "What is the core benefit of an event-driven architecture?",
     "options": [
-      "Đảm bảo tính nhất quán mạnh giữa các thành phần",
-      "Producer và consumer được tách rời — mở rộng và hỏng hóc độc lập với nhau",
-      "Luôn cho độ trễ thấp hơn kiến trúc đồng bộ",
-      "Cần ít dịch vụ AWS hơn"
+      "Các thành phần dùng chung trạng thái nên luôn nhất quán mạnh",
+      "Producer và consumer tách rời, mở rộng độc lập với nhau",
+      "Mọi request đều hoàn tất nhanh hơn kiến trúc đồng bộ",
+      "Cần ít dịch vụ AWS hơn nên tổng thể ít thứ phải vận hành hơn"
     ],
     "optionsEn": [
-      "It guarantees strong consistency between components",
-      "Producers and consumers are decoupled — they scale and fail independently",
-      "It always gives lower latency than a synchronous design",
-      "It requires fewer AWS services"
+      "Components share state, so strong consistency is guaranteed",
+      "Producers and consumers are decoupled and scale independently",
+      "Every request completes faster than in a synchronous design",
+      "Fewer AWS services are needed overall, so there is less to operate"
     ],
     "answer": 1,
     "explanation": "Tách rời là mục đích chính: producer không cần biết ai tiêu thụ, consumer chậm không kéo sập producer. Đánh đổi là tính nhất quán trở thành eventual và việc debug khó hơn.",
@@ -344,16 +344,16 @@
     "question": "Phát biểu nào mô tả ĐÚNG phạm vi áp dụng của từng biện pháp chặn?",
     "questionEn": "Which statement correctly describes where each blocking control applies?",
     "options": [
-      "Security Group ở mức subnet còn NACL ở mức instance",
-      "WAF hoạt động ở tầng 4 còn NACL ở tầng 7",
-      "Shield chỉ bảo vệ ở tầng 7 còn WAF ở tầng 3/4",
-      "Security Group ở mức instance/ENI (stateful, chỉ allow); NACL ở mức subnet (stateless, allow + deny); WAF ở tầng 7 trên ALB/CloudFront/API Gateway"
+      "SG: subnet, stateless; NACL: instance/ENI, stateful; WAF: tầng 7",
+      "SG: instance/ENI, stateful; NACL: subnet, stateless; WAF: tầng 4",
+      "SG: instance/ENI, stateless; NACL: subnet, stateful; WAF: tầng 3/4",
+      "SG: instance/ENI, stateful; NACL: subnet, stateless; WAF: tầng 7"
     ],
     "optionsEn": [
-      "Security Groups at the subnet level and NACLs at the instance level",
-      "WAF operates at layer 4 and NACLs at layer 7",
-      "Shield protects only at layer 7 and WAF at layers 3/4",
-      "Security Group at the instance/ENI level (stateful, allow-only); NACL at the subnet level (stateless, allow + deny); WAF at layer 7 on ALB/CloudFront/API Gateway"
+      "SG: subnet, stateless; NACL: instance/ENI, stateful; WAF: layer 7",
+      "SG: instance/ENI, stateful; NACL: subnet, stateless; WAF: layer 4",
+      "SG: instance/ENI, stateless; NACL: subnet, stateful; WAF: layer 3/4",
+      "SG: instance/ENI, stateful; NACL: subnet, stateless; WAF: layer 7"
     ],
     "answer": 3,
     "explanation": "Vì Security Group KHÔNG có luật deny, muốn chặn một IP cụ thể ở mức subnet thì phải dùng NACL. Muốn chặn theo nội dung request (SQLi, XSS) hay rate-limit thì dùng WAF.",

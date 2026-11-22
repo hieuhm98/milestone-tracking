@@ -4,13 +4,13 @@
     "question": "Một ứng dụng xử lý giao dịch thanh toán yêu cầu message phải được xử lý ĐÚNG THỨ TỰ và KHÔNG bị trùng lặp. Loại hàng đợi SQS nào phù hợp NHẤT?",
     "questionEn": "A payment processing application requires messages to be processed in strict ORDER and WITHOUT duplicates. Which SQS queue type is MOST suitable?",
     "options": [
-      "SQS Standard queue vì throughput cao",
+      "SQS Standard queue với content-based deduplication",
       "SQS FIFO queue với tên kết thúc `.fifo`",
       "SNS Standard topic",
       "Kinesis Data Firehose"
     ],
     "optionsEn": [
-      "SQS Standard queue for high throughput",
+      "SQS Standard queue with content-based deduplication",
       "SQS FIFO queue with a name ending in `.fifo`",
       "SNS Standard topic",
       "Kinesis Data Firehose"
@@ -24,16 +24,16 @@
     "question": "Consumer đọc message từ SQS nhưng mất hơn 30 giây để xử lý và chưa kịp gọi DeleteMessage. Điều gì xảy ra với message đó?",
     "questionEn": "A consumer reads a message from SQS but takes more than 30 seconds to process it and hasn't called DeleteMessage yet. What happens to that message?",
     "options": [
-      "Message bị xóa vĩnh viễn khỏi queue",
-      "Message được chuyển thẳng vào DLQ",
-      "Message hiện lại sau khi hết `visibility timeout` và có thể bị xử lý lần hai",
-      "Message được mã hóa và giữ nguyên trạng thái"
+      "Message tự động bị xóa ngay khi consumer đã nhận được",
+      "Message chuyển thẳng vào DLQ ngay khi quá hạn xử lý",
+      "Message hiện lại sau `visibility timeout` và có thể bị xử lý lại",
+      "Message bị khóa cho consumer đó tới khi gọi DeleteMessage"
     ],
     "optionsEn": [
-      "The message is permanently deleted from the queue",
-      "The message goes straight to the DLQ",
-      "The message reappears after the `visibility timeout` expires and may be processed a second time",
-      "The message is encrypted and its state is preserved"
+      "It is deleted automatically once the consumer has received it",
+      "It moves straight to the DLQ as soon as processing runs over",
+      "It reappears after the `visibility timeout` and may be reprocessed",
+      "It stays locked to that consumer until DeleteMessage is called"
     ],
     "answer": 2,
     "explanation": "Khi hết `visibility timeout` (mặc định 30s) mà message chưa bị xóa, nó hiện lại cho consumer khác và có thể bị xử lý trùng. Cần tăng timeout đủ dài để tránh double processing.",
@@ -44,16 +44,16 @@
     "question": "Một số message trong SQS liên tục xử lý thất bại và làm nghẽn hàng đợi chính (poison messages). Giải pháp phù hợp NHẤT để cô lập chúng là gì?",
     "questionEn": "Some messages in SQS keep failing to process and are clogging the main queue (poison messages). What is the MOST suitable solution to isolate them?",
     "options": [
-      "Cấu hình một Dead Letter Queue (`DLQ`) với `maxReceiveCount`",
-      "Bật long polling trên queue chính",
-      "Tăng message retention lên 14 ngày",
-      "Chuyển sang SNS topic"
+      "Một Dead Letter Queue (`DLQ`) với `maxReceiveCount`",
+      "Long polling trên queue chính với thời gian chờ 20 giây",
+      "Retention 14 ngày để có thời gian thử lại các lỗi",
+      "Delay queue trì hoãn mọi message thêm 15 phút"
     ],
     "optionsEn": [
-      "Configure a Dead Letter Queue (`DLQ`) with `maxReceiveCount`",
-      "Enable long polling on the main queue",
-      "Increase message retention to 14 days",
-      "Switch to an SNS topic"
+      "A Dead Letter Queue (`DLQ`) with `maxReceiveCount`",
+      "Long polling on the main queue, 20-second wait",
+      "A 14-day retention period so failures can be retried",
+      "A delay queue that postpones every message by 15 minutes"
     ],
     "answer": 0,
     "explanation": "DLQ nhận message vượt quá `maxReceiveCount` lần nhận, giúp cô lập poison message khỏi queue chính để phân tích; sau khi sửa lỗi có thể dùng redrive để đẩy lại.",
@@ -64,16 +64,16 @@
     "question": "Consumer SQS đang tạo quá nhiều lời gọi ReceiveMessage rỗng, làm tăng chi phí API. Cách hiệu quả NHẤT về chi phí để giảm là gì?",
     "questionEn": "An SQS consumer is generating too many empty ReceiveMessage calls, increasing API cost. What is the MOST cost-effective way to reduce this?",
     "options": [
-      "Chuyển sang FIFO queue",
-      "Bật `long polling` bằng cách đặt `ReceiveMessageWaitTimeSeconds` lên tới 20 giây",
-      "Giảm `visibility timeout` xuống 0",
-      "Tạo thêm nhiều consumer"
+      "Chuyển sang FIFO queue để gộp các lần nhận rỗng",
+      "Bật `long polling` với thời gian chờ tối đa 20 giây",
+      "Đặt `visibility timeout` về 0 để message quay lại nhanh hơn",
+      "Thêm consumer để mỗi lần poll dễ gặp message hơn"
     ],
     "optionsEn": [
-      "Switch to a FIFO queue",
-      "Enable `long polling` by setting `ReceiveMessageWaitTimeSeconds` up to 20 seconds",
-      "Reduce the `visibility timeout` to 0",
-      "Create more consumers"
+      "Switch to a FIFO queue, which batches empty receives",
+      "Enable `long polling` with a wait time of up to 20 seconds",
+      "Set the `visibility timeout` to 0 so messages return sooner",
+      "Add more consumers so each poll is likelier to find work"
     ],
     "answer": 1,
     "explanation": "Long polling chờ đến khi có message hoặc hết tối đa 20s trước khi trả lời, giảm mạnh empty response và số lời gọi API so với short polling, từ đó tiết kiệm chi phí.",
@@ -84,16 +84,16 @@
     "question": "Khi một ảnh được upload lên S3, ba hệ thống độc lập (tạo thumbnail, đánh index, ghi log) đều cần nhận sự kiện đó, mỗi hệ thống một bản sao. Kiến trúc nào phù hợp NHẤT?",
     "questionEn": "When an image is uploaded to S3, three independent systems (thumbnailing, indexing, logging) each need to receive that event, each with its own copy. Which architecture is MOST suitable?",
     "options": [
-      "Một SQS queue duy nhất cho cả ba hệ thống cùng đọc",
-      "Fan-out: S3 event → SNS topic → ba SQS queue, mỗi queue nhận một bản sao",
-      "Kinesis Data Firehose ghi vào S3",
-      "Amazon MQ với giao thức MQTT"
+      "Một SQS queue duy nhất để cả ba hệ thống cùng poll song song",
+      "Fan-out: S3 event → SNS topic → mỗi hệ thống một SQS queue",
+      "S3 event → Kinesis Data Firehose → ba prefix trên S3",
+      "S3 event → một SQS FIFO queue với ba message group"
     ],
     "optionsEn": [
-      "A single SQS queue that all three systems read from",
-      "Fan-out: S3 event → SNS topic → three SQS queues, each queue receives a copy",
-      "Kinesis Data Firehose writing to S3",
-      "Amazon MQ with the MQTT protocol"
+      "One SQS queue that all three systems poll in parallel",
+      "Fan-out: S3 event → SNS topic → one SQS queue per system",
+      "S3 event → Kinesis Data Firehose → three S3 prefixes",
+      "S3 event → a single SQS FIFO queue with three message groups"
     ],
     "answer": 1,
     "explanation": "Fan-out dùng SNS đẩy một bản sao message tới nhiều SQS queue subscribe cùng lúc; mỗi hệ thống có queue riêng, xử lý độc lập. Một SQS queue chung thì mỗi message chỉ tới một consumer.",
@@ -105,15 +105,15 @@
     "questionEn": "An SNS topic sends order notifications, but one subscriber should ONLY receive orders in region us-east-1. Which SNS feature achieves this?",
     "options": [
       "SNS message filtering với filter policy",
-      "SQS visibility timeout",
-      "Kinesis partition key",
-      "Dead Letter Queue"
+      "SNS FIFO topic với message group ID theo region",
+      "SNS message attribute với raw message delivery được bật",
+      "Kinesis partition key theo region cho mỗi subscriber"
     ],
     "optionsEn": [
       "SNS message filtering with a filter policy",
-      "SQS visibility timeout",
-      "Kinesis partition key",
-      "Dead Letter Queue"
+      "SNS FIFO topic with a message group ID per region",
+      "SNS message attributes with raw message delivery enabled",
+      "A Kinesis partition key per region for each subscriber"
     ],
     "answer": 0,
     "explanation": "Filter policy (JSON) gán cho subscription giúp subscriber chỉ nhận message có thuộc tính khớp, cho phép phân luồng mà không cần tạo nhiều topic.",
@@ -124,16 +124,16 @@
     "question": "Một web tier tạo nhiều job xử lý nặng gửi tới worker tier. Kiến trúc nào để DECOUPLE hai tầng và cho worker mở rộng độc lập theo tải?",
     "questionEn": "A web tier creates many heavy processing jobs sent to a worker tier. Which architecture DECOUPLES the two tiers and lets workers scale independently with load?",
     "options": [
-      "Web tier gọi trực tiếp worker qua HTTP đồng bộ",
-      "Web tier đẩy job vào SQS queue, worker tier trong Auto Scaling Group đọc và xử lý",
-      "Dùng chung một EC2 instance cho cả hai tầng",
-      "Ghi job vào file trên EBS và worker đọc file"
+      "Web tier gọi trực tiếp các worker qua HTTP đồng bộ, chờ kết quả",
+      "Web tier gửi job vào SQS; worker trong ASG poll và xử lý",
+      "Hai tầng dùng chung một EC2 instance lớn theo tải đỉnh",
+      "Web tier ghi job vào file trên EBS để worker đọc"
     ],
     "optionsEn": [
-      "The web tier calls the worker directly over synchronous HTTP",
-      "The web tier pushes jobs into an SQS queue, and the worker tier in an Auto Scaling Group reads and processes them",
-      "Use a single shared EC2 instance for both tiers",
-      "Write jobs to a file on EBS and have workers read the file"
+      "Web tier calls the workers directly over synchronous HTTP and waits",
+      "Web tier sends jobs to SQS; workers in an ASG poll and process them",
+      "Both tiers share one large EC2 instance sized for peak load",
+      "Web tier writes jobs to a file on EBS that workers read"
     ],
     "answer": 1,
     "explanation": "SQS làm lớp đệm giữa hai tầng: web tier không phụ thuộc trạng thái worker, worker tier scale độc lập. Nếu worker chết, job vẫn nằm trong queue chờ xử lý.",
@@ -144,20 +144,20 @@
     "question": "Bạn muốn Auto Scaling Group của worker tự tăng/giảm số instance dựa trên lượng công việc tồn đọng trong SQS. Metric CloudWatch nào nên dùng?",
     "questionEn": "You want the workers' Auto Scaling Group to scale in/out based on the backlog of work in SQS. Which CloudWatch metric should you use?",
     "options": [
-      "CPUUtilization của instance",
-      "NetworkIn",
-      "`ApproximateNumberOfMessagesVisible` (độ sâu hàng đợi)",
-      "NumberOfObjects của S3"
+      "`CPUUtilization` của instance",
+      "`ApproximateNumberOfMessagesNotVisible`",
+      "`ApproximateNumberOfMessagesVisible`",
+      "`NumberOfMessagesDeleted`"
     ],
     "optionsEn": [
-      "Instance CPUUtilization",
-      "NetworkIn",
-      "`ApproximateNumberOfMessagesVisible` (queue depth)",
-      "S3 NumberOfObjects"
+      "`CPUUtilization` of the instances",
+      "`ApproximateNumberOfMessagesNotVisible`",
+      "`ApproximateNumberOfMessagesVisible`",
+      "`NumberOfMessagesDeleted`"
     ],
     "answer": 2,
-    "explanation": "`ApproximateNumberOfMessagesVisible` phản ánh số message đang chờ (độ sâu hàng đợi); scale out khi tồn đọng tăng và scale in khi hàng đợi vơi là pattern chuẩn cho SQS + Auto Scaling.",
-    "explanationEn": "`ApproximateNumberOfMessagesVisible` reflects the number of waiting messages (queue depth); scaling out as the backlog grows and in as it drains is the standard pattern for SQS + Auto Scaling."
+    "explanation": "`ApproximateNumberOfMessagesVisible` phản ánh số message đang chờ (độ sâu hàng đợi); scale out khi tồn đọng tăng và scale in khi hàng đợi vơi là pattern chuẩn cho SQS + Auto Scaling. `ApproximateNumberOfMessagesNotVisible` chỉ đếm message đang được xử lý (in-flight), không phải phần tồn đọng.",
+    "explanationEn": "`ApproximateNumberOfMessagesVisible` reflects the number of waiting messages (queue depth); scaling out as the backlog grows and in as it drains is the standard pattern for SQS + Auto Scaling. `ApproximateNumberOfMessagesNotVisible` only counts in-flight messages being processed, not the backlog."
   },
   {
     "id": "q9",
@@ -167,17 +167,17 @@
       "Amazon SQS Standard queue",
       "Kinesis Data Streams",
       "Kinesis Data Firehose",
-      "Amazon MQ"
+      "Amazon SNS Standard topic"
     ],
     "optionsEn": [
       "Amazon SQS Standard queue",
       "Kinesis Data Streams",
       "Kinesis Data Firehose",
-      "Amazon MQ"
+      "Amazon SNS Standard topic"
     ],
     "answer": 1,
-    "explanation": "Kinesis Data Streams cho phép nhiều consumer đọc cùng dữ liệu độc lập và replay trong khoảng retention (đến 365 ngày). SQS thì mỗi message chỉ một consumer tiêu thụ; Firehose không hỗ trợ replay.",
-    "explanationEn": "Kinesis Data Streams lets multiple consumers read the same data independently and replay within the retention window (up to 365 days). With SQS each message is consumed by one consumer; Firehose has no replay."
+    "explanation": "Kinesis Data Streams cho phép nhiều consumer đọc cùng dữ liệu độc lập và replay trong khoảng retention (đến 365 ngày). SQS thì mỗi message chỉ một consumer tiêu thụ; SNS đẩy bản sao tới nhiều subscriber nhưng không lưu lại để replay; Firehose không hỗ trợ replay.",
+    "explanationEn": "Kinesis Data Streams lets multiple consumers read the same data independently and replay within the retention window (up to 365 days). With SQS each message is consumed by one consumer; SNS pushes copies to many subscribers but keeps nothing to replay; Firehose has no replay."
   },
   {
     "id": "q10",
@@ -186,13 +186,13 @@
     "options": [
       "Kinesis Data Streams",
       "Kinesis Data Firehose",
-      "Amazon SQS FIFO",
+      "Amazon SQS + Lambda consumer",
       "Amazon MQ"
     ],
     "optionsEn": [
       "Kinesis Data Streams",
       "Kinesis Data Firehose",
-      "Amazon SQS FIFO",
+      "Amazon SQS + Lambda consumer",
       "Amazon MQ"
     ],
     "answer": 1,
@@ -204,16 +204,16 @@
     "question": "Đâu là điểm khác biệt cốt lõi giữa Amazon SQS và Kinesis Data Streams?",
     "questionEn": "What is the core difference between Amazon SQS and Kinesis Data Streams?",
     "options": [
-      "SQS: mỗi message được một consumer xử lý rồi xóa; Kinesis: nhiều consumer đọc cùng data và có thể replay",
-      "SQS hỗ trợ replay còn Kinesis thì không",
-      "Cả hai đều là pub/sub fan-out giống hệt nhau",
-      "Kinesis chỉ dùng cho email và SMS"
+      "SQS xóa message sau khi xử lý; Kinesis cho nhiều consumer đọc và replay",
+      "SQS cho replay tới 14 ngày, còn Kinesis xóa bản ghi ngay khi đọc",
+      "Cả hai đều fan-out bản ghi tới nhiều consumer và hỗ trợ replay",
+      "Kinesis đảm bảo giao đúng một lần; SQS giao nhiều nhất một lần"
     ],
     "optionsEn": [
-      "SQS: each message is processed by one consumer then deleted; Kinesis: multiple consumers read the same data and can replay",
-      "SQS supports replay while Kinesis does not",
-      "Both are identical pub/sub fan-out services",
-      "Kinesis is only for email and SMS"
+      "SQS deletes each message once consumed; Kinesis lets many readers replay",
+      "SQS supports replay for up to 14 days, while Kinesis deletes on read",
+      "Both fan out each record to many readers and support replay",
+      "Kinesis guarantees exactly-once delivery; SQS is at-most-once"
     ],
     "answer": 0,
     "explanation": "SQS là hàng đợi, message bị tiêu thụ (xóa) sau khi xử lý — không replay, một consumer/message. Kinesis là streaming, giữ dữ liệu theo retention cho nhiều consumer đọc lại (replay).",
@@ -226,13 +226,13 @@
     "options": [
       "Amazon SQS",
       "Amazon SNS",
-      "Amazon MQ (ActiveMQ/RabbitMQ được quản lý)",
+      "Amazon MQ",
       "Kinesis Data Streams"
     ],
     "optionsEn": [
       "Amazon SQS",
       "Amazon SNS",
-      "Amazon MQ (managed ActiveMQ/RabbitMQ)",
+      "Amazon MQ",
       "Kinesis Data Streams"
     ],
     "answer": 2,
@@ -244,16 +244,16 @@
     "question": "Ứng dụng cần gửi message có kích thước 2MB qua SQS, vượt giới hạn 256KB. Cách xử lý phù hợp NHẤT là gì?",
     "questionEn": "An application needs to send a 2MB message through SQS, exceeding the 256KB limit. What is the MOST suitable approach?",
     "options": [
-      "Nén message xuống dưới 256KB bằng mọi giá",
-      "Lưu payload trên S3 và dùng SQS Extended Client Library, chỉ để tham chiếu trong message",
-      "Chia message thành nhiều message nhỏ và tự ghép lại",
-      "Chuyển toàn bộ sang Amazon MQ vì SQS không thể xử lý"
+      "Tăng maximum message size của queue lên 2 MB trong cấu hình",
+      "Lưu payload trên S3, message chỉ chứa con trỏ tới object",
+      "Chia thành nhiều phần 256KB và tự ghép lại ở consumer",
+      "Chuyển sang Amazon MQ vì SQS không chở được payload lớn"
     ],
     "optionsEn": [
-      "Compress the message below 256KB at all costs",
-      "Store the payload in S3 and use the SQS Extended Client Library, keeping only a reference in the message",
-      "Split the message into smaller messages and reassemble them yourself",
-      "Move everything to Amazon MQ because SQS cannot handle it"
+      "Raise the queue's maximum message size to 2 MB in its settings",
+      "Store the payload in S3 and put just a pointer in the queue",
+      "Split it into 256KB chunks and reassemble them in the consumer",
+      "Move to Amazon MQ, since SQS cannot carry large payloads"
     ],
     "answer": 1,
     "explanation": "SQS giới hạn message 256KB; với payload lớn hơn, dùng SQS Extended Client lưu nội dung trên S3 và chỉ gửi tham chiếu trong message — cách chính thức và đơn giản nhất.",
@@ -266,13 +266,13 @@
     "options": [
       "SNS Standard topic với SQS Standard queue",
       "SNS FIFO topic với SQS FIFO queue",
-      "Kinesis Data Firehose với S3",
+      "Kinesis Data Firehose giao vào S3 bucket",
       "SNS Standard topic với Kinesis Data Streams"
     ],
     "optionsEn": [
       "SNS Standard topic with SQS Standard queues",
       "SNS FIFO topic with SQS FIFO queues",
-      "Kinesis Data Firehose with S3",
+      "Kinesis Data Firehose delivering to S3 buckets",
       "SNS Standard topic with Kinesis Data Streams"
     ],
     "answer": 1,
@@ -284,16 +284,16 @@
     "question": "Đặc điểm về thông lượng và đảm bảo của SQS Standard queue là gì?",
     "questionEn": "What are the throughput and delivery characteristics of an SQS Standard queue?",
     "options": [
-      "Tối đa 300 message/giây, thứ tự nghiêm ngặt",
-      "Thứ tự nghiêm ngặt và giao đúng một lần",
-      "Thông lượng không giới hạn và giao đúng một lần",
-      "Thông lượng gần như không giới hạn, nhưng giao ít nhất một lần (at-least-once) và thứ tự chỉ ở mức best-effort"
+      "Tối đa 300 message/giây, exactly-once, thứ tự nghiêm ngặt",
+      "Tối đa 3.000 message/giây khi batch, thứ tự nghiêm ngặt",
+      "Thông lượng gần như vô hạn, exactly-once, thứ tự best-effort",
+      "Thông lượng gần như vô hạn, at-least-once, thứ tự best-effort"
     ],
     "optionsEn": [
-      "Up to 300 messages/second with strict ordering",
-      "Strict ordering with exactly-once delivery",
-      "Unlimited throughput with exactly-once delivery",
-      "Effectively unlimited throughput, but at-least-once delivery and best-effort ordering"
+      "Up to 300 messages/second, exactly-once, strict ordering",
+      "Up to 3,000 messages/second with batching, strict ordering",
+      "Near-unlimited throughput, exactly-once, best-effort ordering",
+      "Near-unlimited throughput, at-least-once, best-effort ordering"
     ],
     "answer": 3,
     "explanation": "Standard đánh đổi thứ tự lấy quy mô: có thể có bản sao và message đến không đúng thứ tự, nên consumer phải idempotent. FIFO mới đảm bảo thứ tự + không trùng, nhưng thông lượng bị giới hạn.",
@@ -324,16 +324,16 @@
     "question": "Vì sao chọn Amazon MQ thay vì SQS/SNS?",
     "questionEn": "Why would you choose Amazon MQ over SQS/SNS?",
     "options": [
-      "Vì MQ rẻ hơn ở mọi quy mô",
-      "Vì cần các giao thức messaging tiêu chuẩn (AMQP, MQTT, STOMP, JMS) để migrate ứng dụng cũ mà không viết lại code",
-      "Vì cần thông lượng cao hơn SQS",
-      "Vì MQ là dịch vụ serverless còn SQS thì không"
+      "Vì MQ rẻ hơn SQS ở mọi quy mô lưu lượng",
+      "Để giữ AMQP/MQTT/JMS, migrate ứng dụng cũ mà không viết lại code",
+      "Để có thông lượng cao hơn và co giãn linh hoạt hơn SQS",
+      "Vì MQ là serverless, còn SQS phải chọn kích thước broker instance"
     ],
     "optionsEn": [
-      "Because MQ is cheaper at every scale",
-      "Because you need standard messaging protocols (AMQP, MQTT, STOMP, JMS) to migrate a legacy app without rewriting it",
-      "Because you need higher throughput than SQS",
-      "Because MQ is serverless and SQS is not"
+      "Because MQ is cheaper than SQS at every scale of traffic",
+      "To keep AMQP/MQTT/JMS so a legacy app migrates without a rewrite",
+      "To get higher throughput and more elastic scaling than SQS",
+      "Because MQ is serverless, while SQS needs a broker instance size chosen"
     ],
     "answer": 1,
     "explanation": "SQS/SNS dùng API riêng của AWS. Amazon MQ chạy broker ActiveMQ/RabbitMQ được quản lý, nói đúng giao thức chuẩn — đây là lựa chọn lift-and-shift.",
@@ -344,16 +344,16 @@
     "question": "Phát biểu nào ĐÚNG về Amazon MQ?",
     "questionEn": "Which statement about Amazon MQ is CORRECT?",
     "options": [
-      "MQ có thông lượng không giới hạn giống SQS Standard",
-      "MQ là lựa chọn mặc định được khuyến nghị cho ứng dụng mới trên AWS",
-      "Broker chạy trên instance trong VPC của bạn và không co giãn linh hoạt như SQS",
+      "MQ có thông lượng không giới hạn, giống hệt SQS Standard queue",
+      "MQ là lựa chọn mặc định AWS khuyến nghị cho mọi ứng dụng mới",
+      "Broker chạy trên instance trong VPC và co giãn kém linh hoạt hơn SQS",
       "MQ hoàn toàn serverless, không cần chọn kích thước broker"
     ],
     "optionsEn": [
-      "MQ offers unlimited throughput just like SQS Standard",
-      "MQ is the recommended default for new applications on AWS",
-      "Its brokers run on instances inside your VPC and it does not scale as elastically as SQS",
-      "MQ is fully serverless with no broker sizing to choose"
+      "MQ offers unlimited throughput, just like an SQS Standard queue",
+      "MQ is the default AWS recommends for all new applications",
+      "Brokers run on instances in your VPC and scale less elastically than SQS",
+      "MQ is fully serverless, with no broker instance size to choose"
     ],
     "answer": 2,
     "explanation": "MQ là broker được quản lý nhưng vẫn có kích thước instance và nằm trong VPC — bạn phải tự chọn size và cấu hình HA (active/standby). Ứng dụng MỚI trên AWS nên dùng SQS/SNS.",

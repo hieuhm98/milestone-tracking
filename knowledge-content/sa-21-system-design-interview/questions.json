@@ -5,13 +5,13 @@
     "questionEn": "You are asked to \"Design Instagram\" in 45 minutes. What should you do first?",
     "options": [
       "Vẽ ngay sơ đồ microservices với Kafka và Kubernetes để thể hiện kinh nghiệm",
-      "Hỏi làm rõ tính năng cốt lõi, quy mô và yêu cầu phi chức năng, rồi chốt phạm vi",
+      "Hỏi rõ tính năng cốt lõi, quy mô và yêu cầu phi chức năng, rồi chốt phạm vi",
       "Thiết kế schema database đầy đủ cho mọi bảng trước khi làm gì khác",
       "Chọn ngay loại database vì đó là quyết định khó thay đổi nhất"
     ],
     "optionsEn": [
       "Immediately draw a microservices diagram with Kafka and Kubernetes to show experience",
-      "Ask clarifying questions on core features, scale and non-functional needs, then fix the scope",
+      "Clarify core features, scale and non-functional needs, then fix the scope",
       "Design the complete database schema for every table before anything else",
       "Pick the database right away because it is the hardest decision to change"
     ],
@@ -24,15 +24,15 @@
     "question": "Trong các yêu cầu sau cho một ứng dụng mạng xã hội, đâu là yêu cầu phi chức năng?",
     "questionEn": "Which of these requirements for a social app is non-functional?",
     "options": [
-      "Người dùng có thể theo dõi người dùng khác",
-      "Người dùng có thể đăng ảnh kèm chú thích",
-      "Người dùng có thể thả tim một bài viết",
+      "Người dùng có thể theo dõi người dùng khác và xem bài của họ",
+      "Người dùng có thể đăng ảnh kèm chú thích và gắn thẻ bạn bè",
+      "Người dùng có thể thả tim và bình luận vào một bài viết",
       "Feed phải tải xong dưới 300 ms ở p99 với 200 M DAU"
     ],
     "optionsEn": [
-      "Users can follow other users",
-      "Users can upload a photo with a caption",
-      "Users can like a post",
+      "Users can follow other users and see their posts in a feed",
+      "Users can upload a photo with a caption and tag their friends",
+      "Users can like and comment on a post from anyone they follow",
       "The feed must load in under 300 ms at p99 for 200 M DAU"
     ],
     "answer": 3,
@@ -44,16 +44,16 @@
     "question": "Bạn hỏi \"hệ thống có bao nhiêu người dùng?\" và người phỏng vấn đáp \"bạn tự quyết\". Cách xử lý tốt nhất là gì?",
     "questionEn": "You ask \"how many users will this have?\" and the interviewer replies \"you decide\". What is the best move?",
     "options": [
-      "Nêu một giả định cụ thể (ví dụ 50 M DAU, đọc:ghi 10:1), ghi lên bảng rồi thiết kế theo nó",
-      "Thiết kế cho quy mô lớn nhất có thể để không bao giờ sai",
-      "Bỏ qua phần ước lượng vì không có số liệu thật",
-      "Tiếp tục hỏi cho tới khi người phỏng vấn đưa ra con số"
+      "Nêu giả định cụ thể (vd 50 M DAU, đọc:ghi 10:1), ghi lên bảng rồi thiết kế theo",
+      "Thiết kế cho quy mô lớn nhất có thể (ví dụ 1 tỷ DAU) để không bao giờ sai",
+      "Bỏ qua phần ước lượng vì không có số liệu thật, chuyển thẳng sang vẽ kiến trúc",
+      "Tiếp tục hỏi cho tới khi người phỏng vấn đưa ra con số cụ thể để thiết kế"
     ],
     "optionsEn": [
-      "State a concrete assumption (e.g. 50 M DAU, 10:1 read/write), write it down and design to it",
-      "Design for the largest scale imaginable so you can never be wrong",
-      "Skip the estimation step because there are no real figures",
-      "Keep asking until the interviewer gives you a number"
+      "State a concrete assumption (e.g. 50 M DAU, 10:1 reads), write it down, design to it",
+      "Design for the largest scale imaginable (say 1 B DAU) so you can never be wrong",
+      "Skip the estimation step since there are no real figures and go straight to the diagram",
+      "Keep asking until the interviewer gives you a concrete number to design against"
     ],
     "answer": 0,
     "explanation": "Người phỏng vấn đang xem bạn có dám ra quyết định hợp lý không. Một giả định được nói rõ cho phép tính QPS, dung lượng, và có thể điều chỉnh sau. Thiết kế cho quy mô vô hạn là over-engineering; bỏ ước lượng thì mất căn cứ cho mọi lựa chọn.",
@@ -104,16 +104,16 @@
     "question": "API feed dùng `GET /feed?offset=40&limit=20`. Người dùng phàn nàn rằng khi lướt xuống, họ thấy lại bài đã xem. Thiết kế nào khắc phục đúng gốc rễ?",
     "questionEn": "A feed API uses `GET /feed?offset=40&limit=20`. Users complain they see posts again as they scroll down. Which design fixes the root cause?",
     "options": [
-      "Phân trang bằng cursor: trả về `nextCursor` là vị trí (score/ID) của mục cuối đã xem",
+      "Phân trang bằng cursor: trả `nextCursor` chứa score/ID của mục cuối đã xem",
       "Tăng `limit` lên 200 để người dùng ít phải tải trang tiếp theo",
-      "Cache mỗi trang offset trong Redis với TTL 1 giờ",
-      "Chuyển feed sang GraphQL để client tự chọn trường"
+      "Cache mỗi trang offset trong Redis với TTL 1 giờ để kết quả ổn định khi lướt",
+      "Chuyển feed sang GraphQL để client tự chọn trường và tự phân trang"
     ],
     "optionsEn": [
-      "Cursor pagination: return a `nextCursor` holding the position (score/ID) of the last item seen",
-      "Raise `limit` to 200 so users rarely need to load the next page",
-      "Cache each offset page in Redis with a one-hour TTL",
-      "Move the feed to GraphQL so the client picks its fields"
+      "Cursor pagination: return a `nextCursor` with the score/ID of the last item seen",
+      "Raise `limit` to 200 so users rarely need to load a next page at all",
+      "Cache each offset page in Redis for an hour so results stay stable while scrolling",
+      "Move the feed to GraphQL so the client picks its fields and paginates itself"
     ],
     "answer": 0,
     "explanation": "Khi có bài mới chen lên đầu, mọi phần tử bị đẩy xuống, nên offset 40 giờ trỏ vào những bài đã thấy. Cursor neo theo mục cuối cùng đã xem (\"lấy những bài cũ hơn X\"), nên không bị ảnh hưởng bởi dữ liệu mới. Tăng limit hay cache chỉ che triệu chứng.",
@@ -124,16 +124,16 @@
     "question": "Sau khi bạn vẽ xong thiết kế tổng quan, người phỏng vấn hỏi: \"Nếu traffic tăng gấp 10 thì cái gì gãy trước?\" Câu trả lời nào tốt nhất?",
     "questionEn": "After you finish the high-level design, the interviewer asks: \"If traffic grows 10×, what breaks first?\" Which response is best?",
     "options": [
-      "\"Chuyển toàn bộ sang multi-region active-active là giải quyết được mọi thứ.\"",
-      "\"Thiết kế dùng dịch vụ cloud nên sẽ tự mở rộng, không có gì gãy.\"",
-      "\"Thêm server ứng dụng là đủ vì chúng không có trạng thái.\"",
-      "\"Dùng ước lượng: ghi lên DB primary tăng từ ~1.200 lên ~12.000/s, vượt sức một node — cần shard theo user ID, đổi lại truy vấn liên user thành scatter-gather.\""
+      "\"Chuyển toàn bộ sang multi-region active-active là giải quyết được mọi thứ, kể cả khi traffic tăng gấp 10.\"",
+      "\"Thiết kế dùng dịch vụ cloud managed nên sẽ tự mở rộng theo tải, không có thành phần nào gãy cả.\"",
+      "\"Thêm server ứng dụng sau load balancer là đủ, vì chúng không có trạng thái và scale ngang dễ dàng.\"",
+      "\"Theo ước lượng, ghi vào DB primary tăng từ ~1.200 lên ~12.000/s, quá sức một node — shard theo user ID.\""
     ],
     "optionsEn": [
-      "\"Moving everything to active-active multi-region solves all of it.\"",
-      "\"The design uses cloud services, so it scales automatically and nothing breaks.\"",
-      "\"Adding app servers is enough because they are stateless.\"",
-      "\"Using the estimates: writes to the DB primary go from ~1,200 to ~12,000/s, beyond one node — shard by user ID, at the cost of scatter-gather for cross-user queries.\""
+      "\"Moving everything to active-active multi-region solves all of it, even at ten times the traffic.\"",
+      "\"The design uses managed cloud services, so it scales automatically with load and nothing breaks.\"",
+      "\"Adding app servers behind the load balancer is enough, because they are stateless and scale out easily.\"",
+      "\"Per the estimates, primary DB writes go from ~1,200 to ~12,000/s, past one node — shard by user ID.\""
     ],
     "answer": 3,
     "explanation": "Câu trả lời tốt dùng lại con số đã ước lượng để chỉ ra thành phần cụ thể bị nghẽn, đưa ra cách khắc phục và nói rõ cái giá. Service không trạng thái dễ nhân bản; điểm nghẽn thường là tầng có trạng thái (database). Multi-region hay \"cloud tự lo\" là né câu hỏi.",
@@ -171,7 +171,7 @@
     ],
     "optionsEn": [
       "`301 Moved Permanently`, since browsers cache it and server load drops",
-      "`302 Found`, since every click comes back through the server and gets counted",
+      "`302 Found`, since every click returns to the server and gets counted",
       "`200 OK` with an HTML page that redirects after 5 seconds",
       "`304 Not Modified`, so the browser uses its stored copy"
     ],
@@ -184,16 +184,16 @@
     "question": "URL shortener sinh mã bằng bộ đếm tăng dần rồi mã hoá base62 trực tiếp (…aZ3k, aZ3l, aZ3m…). Bảo mật báo rằng có người đã tải về hàng loạt link riêng tư. Nguyên nhân và cách sửa phù hợp nhất?",
     "questionEn": "A URL shortener generates codes from an incrementing counter encoded straight to base62 (…aZ3k, aZ3l, aZ3m…). Security reports that someone scraped many private links. Most likely cause and best fix?",
     "options": [
-      "Mã tuần tự nên dò lần lượt được; áp một phép xáo trộn đảo ngược được lên số trước khi mã hoá base62",
-      "Base62 là mã hoá yếu; chuyển sang base64 để mã khó đọc hơn",
-      "Bộ đếm là điểm lỗi đơn; chuyển sang hash MD5 của URL dài",
-      "Mã quá ngắn; tăng lên 11 ký tự bằng Snowflake ID"
+      "Mã tuần tự nên dò lần lượt được; xáo trộn đảo ngược được số trước khi mã hoá base62",
+      "Base62 là mã hoá yếu nên dễ giải; chuyển sang base64 để mã khó đọc hơn",
+      "Bộ đếm là điểm lỗi đơn bị lộ; chuyển sang hash MD5 của URL dài làm mã",
+      "Mã quá ngắn nên dễ đoán; tăng lên 11 ký tự bằng Snowflake ID tăng dần"
     ],
     "optionsEn": [
-      "Sequential codes are enumerable; apply a reversible scramble to the number before base62 encoding",
-      "Base62 is weak encryption; switch to base64 so codes are harder to read",
-      "The counter is a single point of failure; switch to an MD5 hash of the long URL",
-      "The codes are too short; lengthen them to 11 characters with Snowflake IDs"
+      "Sequential codes are enumerable; reversibly scramble the number before base62 encoding",
+      "Base62 is weak encryption that is easy to break; switch to base64 so codes are harder to read",
+      "The counter is a leaky single point of failure; switch to an MD5 hash of the long URL",
+      "The codes are too short to be safe; lengthen them to 11 characters with Snowflake IDs"
     ],
     "answer": 0,
     "explanation": "Base62 chỉ là cách viết số, không phải mã hoá bảo mật. Với mã tuần tự, biết một mã là đoán được mã kế tiếp. Xáo trộn số (ví dụ một hoán vị/cipher đảo ngược được) giữ nguyên tính không trùng của bộ đếm nhưng làm mã trông ngẫu nhiên. Snowflake ID vẫn có thứ tự theo thời gian.",
@@ -224,16 +224,16 @@
     "question": "Rate limiter được viết như dưới đây. Sau một đợt deploy có nhiều tiến trình bị kill, vài user bị trả 429 vĩnh viễn. Nguyên nhân khả dĩ nhất?\n`const n = await redis.incr(key);\n\nif (n === 1) {\n  await redis.expire(key, 60);\n}\n\nreturn n <= 100;`",
     "questionEn": "A rate limiter is written as below. After a deploy that killed many processes, some users get 429 forever. Most likely cause?\n`const n = await redis.incr(key);\n\nif (n === 1) {\n  await redis.expire(key, 60);\n}\n\nreturn n <= 100;`",
     "options": [
-      "`INCR` không nguyên tử nên nhiều tiến trình đếm trùng nhau",
-      "`EXPIRE` đặt lại bộ đếm về 0 mỗi lần được gọi",
-      "Tiến trình chết giữa `INCR` và `EXPIRE` nên key không có TTL và không bao giờ reset",
-      "Redis tự xoá key không có TTL khi thiếu bộ nhớ"
+      "`INCR` không nguyên tử nên nhiều tiến trình cùng đếm trùng và vượt ngưỡng sớm",
+      "`EXPIRE` đặt lại bộ đếm về 0 mỗi lần được gọi nên cửa sổ không bao giờ kết thúc",
+      "Tiến trình chết giữa `INCR` và `EXPIRE` nên key không TTL, không bao giờ reset",
+      "Redis tự xoá key không có TTL khi thiếu bộ nhớ nên bộ đếm bị sai lệch"
     ],
     "optionsEn": [
-      "`INCR` is not atomic, so several processes double-count",
-      "`EXPIRE` resets the counter to zero every time it runs",
+      "`INCR` is not atomic, so several processes double-count and trip the limit early",
+      "`EXPIRE` resets the counter to zero every time it runs, so the window never ends",
       "A process died between `INCR` and `EXPIRE`, so the key has no TTL and never resets",
-      "Redis deletes keys without a TTL whenever memory runs low"
+      "Redis deletes keys without a TTL whenever memory runs low, so counters drift"
     ],
     "answer": 2,
     "explanation": "Từng lệnh Redis là nguyên tử, nhưng hai lệnh gọi riêng thì không. Nếu tiến trình chết sau `INCR` đầu tiên, key tồn tại mãi không TTL và tiếp tục tăng. Sửa bằng một Lua script (hoặc MULTI/EXEC) chạy cả hai thao tác cùng lúc. `EXPIRE` chỉ đặt TTL, không đổi giá trị.",
@@ -284,16 +284,16 @@
     "question": "Người dùng ứng dụng chat trên mạng di động chập chờn thấy cùng một tin nhắn xuất hiện hai lần ở phía người nhận. Client tự gửi lại khi không nhận được ack trong 3 giây. Cách sửa đúng nhất?",
     "questionEn": "Chat users on flaky mobile networks see the same message appear twice for the recipient. The client resends if it gets no ack within 3 seconds. What is the right fix?",
     "options": [
-      "Tắt cơ chế gửi lại để đảm bảo mỗi tin chỉ gửi đúng một lần",
-      "Tăng thời gian chờ ack lên 30 giây",
-      "Chuyển message store sang database có transaction ACID",
-      "Client gắn `clientMsgId` duy nhất cho mỗi tin; server khử trùng theo ID đó trước khi lưu và phát"
+      "Tắt cơ chế gửi lại để đảm bảo mỗi tin nhắn chỉ được gửi đúng một lần",
+      "Tăng thời gian chờ ack lên 30 giây để client ít khi phải gửi lại tin",
+      "Chuyển message store sang database có transaction ACID để chặn bản ghi trùng",
+      "Client gắn `clientMsgId` duy nhất cho mỗi tin; server khử trùng theo ID đó trước khi lưu"
     ],
     "optionsEn": [
-      "Disable resends so each message is sent exactly once",
-      "Raise the ack timeout to 30 seconds",
-      "Move the message store to a database with ACID transactions",
-      "The client tags each message with a unique `clientMsgId`; the server dedupes on it before storing and fanning out"
+      "Disable resends so that each message is guaranteed to be sent exactly once",
+      "Raise the ack timeout to 30 seconds so the client rarely needs to resend",
+      "Move the message store to a database with ACID transactions to block duplicates",
+      "The client tags each message with a unique `clientMsgId`; the server dedupes on it"
     ],
     "answer": 3,
     "explanation": "Tin đã được lưu nhưng ack bị mất, nên client gửi lại. Gửi lại là cần thiết để không mất tin (at-least-once); điều còn thiếu là tính idempotent. Khử trùng theo ID do client sinh biến at-least-once thành \"hiệu quả đúng một lần\". Tắt gửi lại sẽ làm mất tin; tăng timeout chỉ giảm tần suất.",
@@ -304,16 +304,16 @@
     "question": "Bảng tin nhắn trong Cassandra có khoá như dưới đây. Vì sao thêm cột `bucket` (số ngày kể từ epoch) vào partition key?\n`PRIMARY KEY ((conversation_id, bucket), message_id)`",
     "questionEn": "A Cassandra messages table has the key below. Why add the `bucket` column (days since epoch) to the partition key?\n`PRIMARY KEY ((conversation_id, bucket), message_id)`",
     "options": [
-      "Để Cassandra hỗ trợ transaction giữa nhiều hội thoại",
-      "Để tin nhắn tự động bị xoá sau một ngày",
-      "Để giới hạn kích thước mỗi partition, tránh một nhóm sôi nổi tạo partition nóng phình to mãi",
-      "Để có thể truy vấn tin nhắn theo nội dung"
+      "Để Cassandra hỗ trợ transaction giữa nhiều hội thoại trong cùng một ngày",
+      "Để tin nhắn tự động bị xoá sau một ngày khi bucket cũ hết hạn",
+      "Để giới hạn cỡ mỗi partition, tránh nhóm chat sôi nổi tạo partition nóng phình mãi",
+      "Để có thể truy vấn tin nhắn theo nội dung và theo ngày gửi"
     ],
     "optionsEn": [
-      "So Cassandra can run transactions across conversations",
-      "So messages are deleted automatically after one day",
-      "To bound each partition's size so one busy group cannot grow an ever-larger hot partition",
-      "So messages can be queried by their content"
+      "So Cassandra can run transactions across conversations within the same day",
+      "So messages are deleted automatically after one day when the old bucket expires",
+      "To bound partition size so one busy group cannot grow an ever-larger hot partition",
+      "So messages can be queried by their content and by the day they were sent"
     ],
     "answer": 2,
     "explanation": "Nếu chỉ partition theo `conversation_id`, mọi tin của một nhóm nằm trong một partition tăng mãi, gây chậm đọc, compaction nặng và phân bố tải lệch. Bucket theo thời gian chia nó thành các partition có giới hạn; đọc lịch sử chỉ cần đi lùi qua các bucket. Xoá tự động là việc của TTL, không phải bucket.",
@@ -324,16 +324,16 @@
     "question": "News feed dùng fan-out khi ghi. Một ca sĩ có 50 M follower đăng bài và worker chèn được 10.000 feed/giây; follower của cô ấy phải chờ gần 1,5 giờ mới thấy bài. Thiết kế nào là câu trả lời chuẩn?",
     "questionEn": "A news feed uses fan-out on write. A singer with 50 M followers posts, and workers insert 10,000 feeds per second; followers wait almost 1.5 hours to see it. Which design is the standard answer?",
     "options": [
-      "Chuyển toàn bộ hệ thống sang fan-out khi đọc cho mọi người dùng",
-      "Hybrid: push cho tài khoản thường, pull bài của tài khoản vượt ngưỡng follower rồi trộn lúc đọc",
-      "Tăng số worker lên 1.000 lần để fan-out xong trong vài giây",
-      "Giới hạn mỗi tài khoản tối đa 5.000 follower"
+      "Chuyển toàn bộ hệ thống sang fan-out khi đọc cho mọi người dùng, kể cả tài khoản nhỏ",
+      "Hybrid: push cho tài khoản thường, pull bài tài khoản nhiều follower, trộn lúc đọc",
+      "Tăng số worker lên 1.000 lần để fan-out xong trong vài giây cho mọi bài đăng",
+      "Giới hạn mỗi tài khoản tối đa 5.000 follower như cách một số mạng xã hội đã làm"
     ],
     "optionsEn": [
-      "Switch the whole system to fan-out on read for every user",
-      "Hybrid: push for normal accounts, pull posts from accounts above a follower threshold and merge at read time",
-      "Scale workers 1,000× so the fan-out finishes in seconds",
-      "Cap every account at 5,000 followers"
+      "Switch the whole system to fan-out on read for every user, small accounts included",
+      "Hybrid: push for normal accounts, pull from big accounts and merge at read time",
+      "Scale the workers up 1,000× so that the fan-out for every post finishes within seconds",
+      "Cap every account at 5,000 followers, the way some social networks have chosen to"
     ],
     "answer": 1,
     "explanation": "50.000.000 / 10.000 = 5.000 s ≈ 83 phút. Pull cho mọi người làm đọc chậm với phần lớn người dùng; nhân worker 1.000 lần rất tốn và vẫn dồn tải lên cache. Hybrid giữ đọc nhanh cho số đông và chỉ trộn bài của vài người nổi tiếng lúc đọc. Giới hạn follower là thay đổi sản phẩm, không phải thiết kế.",
@@ -364,16 +364,16 @@
     "question": "Đề bài: công cụ nội bộ cho 2.000 nhân viên, khoảng 50 QPS lúc cao điểm, dữ liệu dưới 100 GB. Ứng viên đề xuất 12 microservice, Kafka, Kubernetes đa cụm và shard database. Người phỏng vấn nhận xét gì nhiều khả năng nhất?",
     "questionEn": "Prompt: an internal tool for 2,000 employees, about 50 QPS at peak, under 100 GB of data. The candidate proposes 12 microservices, Kafka, multi-cluster Kubernetes and a sharded database. What is the interviewer's most likely feedback?",
     "options": [
-      "Thiết kế tốt vì đã sẵn sàng cho mọi quy mô trong tương lai",
-      "Thiếu một service mesh để quản lý 12 microservice",
-      "Over-engineering: thiết kế không khớp với ước lượng; một ứng dụng đơn giản với PostgreSQL có replica là đủ, kèm ngưỡng khi nào cần mở rộng",
-      "Nên thay Kafka bằng RabbitMQ để giảm độ trễ"
+      "Thiết kế tốt vì đã sẵn sàng cho mọi quy mô trong tương lai, tránh phải làm lại",
+      "Thiếu một service mesh để quản lý mTLS và retry giữa 12 microservice",
+      "Over-engineering: không khớp với ước lượng; một app đơn giản với PostgreSQL có replica là đủ",
+      "Nên thay Kafka bằng RabbitMQ để giảm cả độ trễ lẫn chi phí vận hành"
     ],
     "optionsEn": [
-      "A good design because it is ready for any future scale",
-      "It lacks a service mesh to manage the 12 microservices",
-      "Over-engineering: the design ignores the estimates; a simple app on PostgreSQL with a replica is enough, plus the thresholds that would trigger scaling",
-      "Kafka should be replaced by RabbitMQ to reduce latency"
+      "A good design because it is ready for any future scale and avoids a later rewrite",
+      "It lacks a service mesh to manage mTLS and retries between the 12 microservices",
+      "Over-engineering: it ignores the estimates; a simple app on PostgreSQL with a replica is enough",
+      "Kafka should be swapped for RabbitMQ to cut both latency and the operating cost"
     ],
     "answer": 2,
     "explanation": "50 QPS và 100 GB vừa thoải mái trên một database và vài instance ứng dụng. Mỗi thành phần thêm vào là thêm chi phí vận hành và điểm lỗi. Người phỏng vấn muốn thấy thiết kế tỉ lệ với con số và biết khi nào mới cần bước tiếp theo — chứ không phải danh sách công nghệ.",

@@ -8,6 +8,7 @@ import { useLang } from "@/context/lang";
 import QuestionText from "@/components/knowledge/QuestionText";
 import { localizeQuestion, type Question } from "@/components/knowledge/QuizBlock";
 import { splitArticle } from "@/lib/lessons";
+import { useOptionOrder } from "@/lib/useOptionOrder";
 import { cn } from "@/lib/utils";
 
 type PdfLang = "vi" | "en" | "both";
@@ -219,6 +220,8 @@ function LessonPrintDocument({
   const viSections = splitArticle(content).sections;
   const enSections = splitArticle(contentEn ?? "").sections;
   const qs = withQuestions ? questions.map((q) => localizeQuestion(q, en ? "en" : "vi")) : [];
+  // Each printed sheet gets its own option order; the answer key follows it.
+  const orderFor = useOptionOrder();
   const source = typeof window === "undefined" ? "" : window.location.href.split("?")[0];
 
   return (
@@ -269,10 +272,10 @@ function LessonPrintDocument({
                     {i + 1}. <QuestionText text={q.question} />
                   </p>
                   <ul className="mt-1.5 space-y-1 pl-5">
-                    {q.options.map((option, j) => (
+                    {orderFor(q.id, q.options.length).map((j, pos) => (
                       <li key={j}>
-                        <span className="font-semibold mr-1.5">{LETTERS[j]}.</span>
-                        <QuestionText text={option} />
+                        <span className="font-semibold mr-1.5">{LETTERS[pos]}.</span>
+                        <QuestionText text={q.options[j]} />
                       </li>
                     ))}
                   </ul>
@@ -287,7 +290,7 @@ function LessonPrintDocument({
               {qs.map((q, i) => (
                 <li key={q.id} className="print-avoid-break">
                   <span className="font-semibold">
-                    {i + 1}. {LETTERS[q.answer]}
+                    {i + 1}. {LETTERS[orderFor(q.id, q.options.length).indexOf(q.answer)]}
                   </span>
                   {q.explanation && (
                     <>

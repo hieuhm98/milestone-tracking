@@ -4,16 +4,16 @@
     "question": "Vì sao quality attribute thường bị bỏ sót trong quá trình khai thác yêu cầu?",
     "questionEn": "Why are quality attributes so often overlooked during elicitation?",
     "options": [
-      "Vì chúng không quan trọng bằng yêu cầu chức năng",
-      "Vì stakeholder rất quan tâm tới chúng nhưng hiếm khi nói ra: họ giả định hệ thống sẽ đáng tin cậy, nhanh và dễ dùng thay vì yêu cầu tường minh",
-      "Vì chúng luôn được xử lý ở giai đoạn kiểm thử",
-      "Vì chúng chỉ áp dụng cho hệ thống nhúng"
+      "Vì chúng kém quan trọng hơn yêu cầu chức năng, nên được hoãn tới khi các tính năng cốt lõi đã thống nhất",
+      "Stakeholder rất quan tâm nhưng hiếm khi nói ra, vì mặc định hệ thống sẽ đáng tin cậy, nhanh, dễ dùng",
+      "Vì chúng thường được xử lý ở giai đoạn kiểm thử, khi hiệu năng và usability mới đo được thực tế",
+      "Vì chúng chủ yếu liên quan tới hệ thống nhúng và thời gian thực, nên stakeholder nghiệp vụ ít khi có"
     ],
     "optionsEn": [
-      "Because they matter less than functional requirements",
-      "Because stakeholders care deeply about them yet rarely state them: they assume the system will be reliable, fast, and easy to use instead of asking explicitly",
-      "Because they are always handled during testing",
-      "Because they only apply to embedded systems"
+      "They matter less than functional requirements, so they are deferred until the core features are agreed",
+      "Stakeholders care but rarely say so, simply assuming the system will be reliable, fast, and usable",
+      "They are normally addressed during testing, when performance and usability can actually be measured",
+      "They concern mainly embedded and real-time systems, so business stakeholders seldom have any"
     ],
     "answer": 1,
     "explanation": "Chúng còn khó diễn đạt, khó đo lường và xung đột với nhau. Nếu bạn không đặc tả và không thiết kế cho chất lượng đó, khả năng cao bạn sẽ không đạt được nó.",
@@ -24,16 +24,16 @@
     "question": "Vì sao việc phát hiện muộn một quality attribute lại nguy hiểm?",
     "questionEn": "Why is discovering a quality attribute late so dangerous?",
     "options": [
-      "Vì tài liệu yêu cầu đã được ký duyệt",
-      "Vì quality attribute có ảnh hưởng rất lớn tới kiến trúc; biết muộn rằng hệ thống phải phục vụ 10.000 người dùng đồng thời thay vì 100 có thể buộc phải viết lại phần lớn hệ thống",
-      "Vì khách hàng sẽ không trả thêm tiền",
-      "Vì tester sẽ phải viết lại toàn bộ test case"
+      "Vì yêu cầu đã được ký duyệt, nên thêm quality attribute đòi hỏi đàm phán lại hợp đồng chính thức",
+      "Chúng định hình kiến trúc; biết muộn cần 10.000 thay vì 100 người dùng có thể buộc viết lại",
+      "Vì khách hàng sẽ không trả tiền cho phần bổ sung muộn, nên đội phải tự gánh chi phí phát sinh",
+      "Vì tester phải viết lại mọi test case hiện có để thêm các phép đo chất lượng mới"
     ],
     "optionsEn": [
-      "Because the requirements document was already signed off",
-      "Because quality attributes have an enormous architectural impact; learning late that the system must serve 10,000 concurrent users instead of 100 can force a rewrite of much of the system",
-      "Because the customer will not pay extra",
-      "Because testers would have to rewrite every test case"
+      "The requirements were already signed off, so adding a quality attribute needs formal contract renegotiation",
+      "They shape the architecture; learning late that 10,000 users, not 100, must be served can force a rewrite",
+      "The customer will refuse to pay for late additions, so the team must absorb the extra cost itself",
+      "Testers would have to rewrite every existing test case to include the new quality measurements"
     ],
     "answer": 1,
     "explanation": "Thêm những đặc tính này vào sau khi đã xây xong thường tốn kém hơn nhiều so với thiết kế chúng từ đầu. Đây cũng là rủi ro lớn nhất khi làm agile.",
@@ -44,37 +44,36 @@
     "question": "Quality attribute khác constraint như thế nào?",
     "questionEn": "How does a quality attribute differ from a constraint?",
     "options": [
-      "Quality attribute do khách hàng đặt ra, constraint do lập trình viên đặt ra",
-      "Quality attribute mô tả mức độ chất lượng mong muốn và có thể đạt ở nhiều mức khác nhau; constraint giới hạn lựa chọn của người thiết kế và là điều phải tuân theo",
-      "Constraint luôn là yêu cầu phi chức năng còn quality attribute là chức năng",
-      "Chúng là hai tên gọi của cùng một khái niệm"
+      "Quality attribute do khách hàng đặt ra, còn constraint do lập trình viên áp đặt để hạn chế rủi ro kỹ thuật",
+      "Quality attribute đạt được ở nhiều mức khác nhau; constraint giới hạn lựa chọn thiết kế và buộc tuân theo",
+      "Constraint là phi chức năng, còn quality attribute là khía cạnh đo được của functional requirement",
+      "Là cùng một khái niệm: constraint chỉ là quality attribute có giá trị mục tiêu bắt buộc"
     ],
     "optionsEn": [
-      "Quality attributes come from customers and constraints from developers",
-      "A quality attribute describes a desired quality level achievable at various levels; a constraint limits designer choices and must simply be obeyed",
-      "Constraints are always nonfunctional and quality attributes are functional",
-      "They are two names for the same concept"
+      "Quality attributes are set by customers, while constraints are imposed by developers to limit technical risk",
+      "A quality attribute can be met to varying degrees; a constraint limits design choices and must be obeyed",
+      "Constraints are nonfunctional, while quality attributes are measurable aspects of functional requirements",
+      "They are the same concept: a constraint is simply a quality attribute with a mandatory target value"
     ],
     "answer": 1,
     "explanation": "Phản hồi truy vấn trong 2 giây là quality attribute; phải viết bằng Java 8 là constraint. Bốn nguồn constraint: thiết kế, hiện thực, môi trường vận hành và bên ngoài.",
     "explanationEn": "Responding within 2 seconds is a quality attribute; must be written in Java 8 is a constraint. The four sources are design, implementation, operating environment, and external."
-  }
-  ,
+  },
   {
     "id": "q4",
     "question": "Availability 99% nghe rất tốt, nhưng thực tế nghĩa là gì?",
     "questionEn": "99 percent availability sounds excellent, but what does it actually mean?",
     "options": [
-      "Chỉ khoảng 1 giờ ngừng hoạt động mỗi năm",
-      "Khoảng 3,65 ngày ngừng hoạt động mỗi năm; mỗi chữ số 9 thêm vào làm chi phí tăng vọt nên phải hỏi thiệt hại thực tế của mỗi giờ ngừng hoạt động",
-      "Hệ thống chỉ hỏng một lần mỗi năm",
-      "Một phần trăm giao dịch bị thất bại"
+      "Khoảng một giờ ngừng hoạt động mỗi năm, mức chấp nhận được với hầu hết hệ thống trừ loại tối quan trọng",
+      "Khoảng 3,65 ngày ngừng mỗi năm; mỗi số 9 thêm vào đắt hơn hẳn, nên hãy hỏi giá của thời gian ngừng",
+      "Hệ thống chỉ được hỏng một lần mỗi năm, miễn là mỗi sự cố được khắc phục trong một ngày làm việc",
+      "Một phần trăm giao dịch được phép thất bại, miễn là người dùng thử lại được mà không mất dữ liệu"
     ],
     "optionsEn": [
-      "Only about 1 hour of downtime a year",
-      "About 3.65 days of downtime a year; each additional nine makes cost soar, so ask about the real cost of each hour of downtime",
-      "The system fails only once a year",
-      "One percent of transactions fail"
+      "About one hour of downtime a year, which is acceptable for all but the most critical systems",
+      "About 3.65 days of downtime a year; each extra nine costs far more, so ask what downtime costs",
+      "The system may fail only once a year, as long as each outage is repaired within one working day",
+      "One percent of transactions may fail, provided users can retry them without losing data"
     ],
     "answer": 1,
     "explanation": "99,9% là khoảng 8,8 giờ và 99,99% là chưa tới 1 giờ. Cũng cần làm rõ downtime theo kế hoạch có tính vào không.",
@@ -85,16 +84,16 @@
     "question": "Integrity khác security ở điểm nào?",
     "questionEn": "How does integrity differ from security?",
     "options": [
-      "Integrity áp dụng cho dữ liệu còn security áp dụng cho mã nguồn",
-      "Security tập trung vào ngăn truy cập trái phép; integrity tập trung vào bảo đảm dữ liệu không bị hỏng, mất hoặc sai lệch, kể cả do lỗi phần mềm, lỗi phần cứng hay thao tác sai của người dùng hợp lệ",
-      "Integrity chỉ liên quan tới sao lưu dữ liệu",
-      "Security là yêu cầu chức năng còn integrity là phi chức năng"
+      "Integrity bảo vệ dữ liệu lưu trữ khỏi kẻ tấn công bên ngoài, còn security bảo vệ mã nguồn và máy chủ",
+      "Security ngăn truy cập trái phép; integrity giữ cho dữ liệu không bị hỏng hay mất, bất kể nguyên nhân là gì",
+      "Integrity là sao lưu và khôi phục sau thảm hoạ, còn security bao trùm mọi hình thức bảo vệ dữ liệu khác",
+      "Security được đặc tả bằng functional requirement, còn integrity là tính chất thiết kế để lập trình viên tự lo"
     ],
     "optionsEn": [
-      "Integrity applies to data and security applies to source code",
-      "Security focuses on preventing unauthorized access; integrity focuses on ensuring data is not corrupted, lost, or distorted, whether by a software defect, hardware failure, or a legitimate user mistake",
-      "Integrity is only about data backups",
-      "Security is a functional requirement and integrity a nonfunctional one"
+      "Integrity protects stored data from outside attackers, while security protects source code and servers",
+      "Security stops unauthorized access; integrity keeps data from being corrupted or lost, whatever the cause",
+      "Integrity is about backups and disaster recovery, while security covers every other kind of data protection",
+      "Security is specified as functional requirements, while integrity is a design property left to developers"
     ],
     "answer": 1,
     "explanation": "Cơ chế liên quan tới integrity gồm checksum, transaction rollback, sao lưu phục hồi, audit trail và kiểm tra tính hợp lệ dữ liệu đầu vào.",
@@ -105,37 +104,36 @@
     "question": "Vì sao yêu cầu Hệ thống phải nhanh là vô dụng?",
     "questionEn": "Why is the requirement The system must be fast useless?",
     "options": [
-      "Vì nó thiếu nhãn định danh",
-      "Vì nó không kiểm chứng được: yêu cầu performance phải nêu rõ đo cái gì, dưới điều kiện tải nào, và ngưỡng chấp nhận là bao nhiêu",
-      "Vì performance không phải quality attribute",
-      "Vì nó dùng thể bị động"
+      "Vì nó thiếu định danh và độ ưu tiên, nên không truy vết hay lên lịch cho release nào được",
+      "Nó không kiểm chứng được: phải nêu đo gì, dưới mức tải nào, và ngưỡng chấp nhận là bao nhiêu",
+      "Vì tốc độ là quyết định thiết kế chứ không phải yêu cầu, nên nên để kiến trúc sư quyết định",
+      "Vì nó nêu mục tiêu thay vì chức năng, nên cần viết lại thành user story có lợi ích rõ ràng"
     ],
     "optionsEn": [
-      "Because it lacks an identifier",
-      "Because it is not verifiable: a performance requirement must state what is measured, under what load conditions, and what threshold is acceptable",
-      "Because performance is not a quality attribute",
-      "Because it uses the passive voice"
+      "It lacks a unique identifier and a priority, so it cannot be traced or scheduled for any release",
+      "It is unverifiable: say what is measured, under what load, and what threshold is acceptable",
+      "Speed is a design decision rather than a requirement, so it should be left to the architects",
+      "It states a goal instead of a function, so it should be rewritten as a user story with a benefit"
     ],
     "answer": 1,
     "explanation": "Ví dụ tốt: 95% truy vấn tìm kiếm phải trả kết quả trong 2 giây khi có tối đa 500 người dùng đồng thời. Đừng hỏi cần nhanh tới mức nào vì câu trả lời luôn là nhanh nhất có thể.",
     "explanationEn": "A good example: 95 percent of search queries return within 2 seconds with up to 500 concurrent users. Do not ask how fast it must be, since the answer is always as fast as possible."
-  }
-  ,
+  },
   {
     "id": "q7",
     "question": "Safety requirement thường được viết dưới dạng nào?",
     "questionEn": "How are safety requirements typically written?",
     "options": [
-      "Dưới dạng user story với vai trò và lợi ích",
-      "Dưới dạng những gì hệ thống KHÔNG được để xảy ra, kèm theo cơ chế bảo vệ cụ thể",
-      "Dưới dạng biểu đồ trạng thái",
-      "Dưới dạng ràng buộc hiện thực về ngôn ngữ lập trình"
+      "Dưới dạng user story mô tả sự bảo vệ mà mỗi vai trò cần, kèm acceptance criteria cho từng story",
+      "Dưới dạng những gì hệ thống không được để xảy ra, kèm theo cơ chế bảo vệ cụ thể",
+      "Dưới dạng biểu đồ trạng thái thể hiện mọi trạng thái nguy hiểm hệ thống có thể rơi vào và cách tới đó",
+      "Dưới dạng ràng buộc hiện thực nêu tên các ngôn ngữ và công cụ đã được chứng nhận phải dùng"
     ],
     "optionsEn": [
-      "As user stories with a role and a benefit",
-      "As what the system must NOT allow to happen, together with specific protective mechanisms",
-      "As state diagrams",
-      "As implementation constraints on the programming language"
+      "As user stories describing the protection each role needs, with acceptance criteria for each",
+      "As what the system must not allow to happen, together with specific protective mechanisms",
+      "As state diagrams showing every hazardous state the system can reach and how it gets there",
+      "As implementation constraints naming certified languages and tools that must be used"
     ],
     "answer": 1,
     "explanation": "Ví dụ: nếu nhiệt độ vượt 90 độ C, hệ thống phải ngắt nguồn gia nhiệt trong 500 mili-giây. Với hệ thống safety-critical, truy vết yêu cầu là bắt buộc chứ không phải tuỳ chọn.",
@@ -146,16 +144,16 @@
     "question": "Vì sao câu Hệ thống phải thân thiện với người dùng không phải là một yêu cầu?",
     "questionEn": "Why is The system shall be user-friendly not a requirement?",
     "options": [
-      "Vì usability không thuộc phạm vi của BA",
-      "Vì đó chỉ là một mong ước, không đo lường và không kiểm chứng được; nó phải được dịch thành đặc tính sản phẩm quan sát và đo lường được",
-      "Vì nó thiếu tên user class",
-      "Vì nó thuộc về tài liệu thiết kế chứ không phải SRS"
+      "Vì usability thuộc về UX designer, nên BA nên chuyển giao thay vì đặc tả nó trong SRS",
+      "Đó chỉ là mong ước, không kiểm chứng được cho tới khi dịch thành đặc tính đo lường được",
+      "Vì đó là business objective chứ không phải yêu cầu, nên thuộc về vision and scope document",
+      "Vì đó là hướng dẫn thiết kế, nên thuộc về UI style guide thay vì SRS"
     ],
     "optionsEn": [
-      "Because usability is outside the BA scope",
-      "Because it is merely a wish: unmeasurable and unverifiable; it must be translated into observable, measurable product characteristics",
-      "Because it omits the user class name",
-      "Because it belongs in the design document, not the SRS"
+      "Usability belongs to UX designers, so the BA should hand it over rather than specify it in the SRS",
+      "It is only a wish, unverifiable until translated into observable, measurable characteristics",
+      "It is a business objective, not a requirement, so it belongs in the vision and scope document",
+      "It is a design guideline, so it belongs in the UI style guide rather than in the SRS"
     ],
     "answer": 1,
     "explanation": "Ví dụ đo được: người dùng mới chưa đào tạo phải hoàn thành việc đặt một yêu cầu trong 15 phút, hoặc ứng dụng phải tuân thủ WCAG 2.1 mức AA.",
@@ -166,16 +164,16 @@
     "question": "Vì sao ease of learning và efficiency of use thường mâu thuẫn?",
     "questionEn": "Why do ease of learning and efficiency of use usually conflict?",
     "options": [
-      "Vì chúng được đo bằng cùng một thang điểm",
-      "Vì giao diện nhiều wizard dẫn dắt từng bước rất dễ học nhưng làm chậm người thành thạo, còn giao diện nhiều phím tắt thì rất hiệu quả nhưng khó học",
-      "Vì cả hai đều phụ thuộc vào tốc độ mạng",
-      "Vì chúng thuộc hai user class không bao giờ dùng chung hệ thống"
+      "Vì cả hai đo bằng cùng chỉ số thời gian tác vụ, nên tăng điểm cái này sẽ hạ điểm cái kia",
+      "Wizard dễ học nhưng làm chậm người thành thạo; phím tắt nhanh nhưng khó học",
+      "Vì cả hai phụ thuộc thời gian phản hồi, nên màn hình nhanh cho người học lại chậm cho chuyên gia",
+      "Vì chúng thuộc hai user class không bao giờ dùng chung hệ thống, nên phải bỏ một trong hai"
     ],
     "optionsEn": [
-      "Because they are measured on the same scale",
-      "Because a wizard-heavy interface is easy to learn but slows experts, while a shortcut-heavy interface is efficient but hard to learn",
-      "Because both depend on network speed",
-      "Because they belong to two user classes that never share a system"
+      "Both are measured with the same task-time metric, so improving one score lowers the other",
+      "Wizards are easy to learn but slow experts; shortcuts are fast but hard to learn",
+      "Both depend on response time, so faster screens for learners mean slower ones for experts",
+      "They belong to two user classes that never use the same system, so one must be dropped"
     ],
     "answer": 1,
     "explanation": "Đây là lý do bạn phải biết user class nào quan trọng hơn. Người dùng hằng ngày ưu tiên hiệu quả; người dùng thỉnh thoảng ưu tiên dễ học.",
@@ -186,37 +184,36 @@
     "question": "Performance và efficiency khác nhau như thế nào?",
     "questionEn": "How do performance and efficiency differ?",
     "options": [
-      "Chúng là hai tên gọi của cùng một thuộc tính",
-      "Performance là hệ thống phản hồi nhanh tới mức nào; efficiency là nó tiêu tốn bao nhiêu tài nguyên để làm điều đó",
-      "Performance đo bằng giây còn efficiency đo bằng phần trăm",
-      "Performance quan trọng với lập trình viên còn efficiency quan trọng với người dùng"
+      "Là hai tên gọi của một thuộc tính, mô tả hệ thống hoàn thành tác vụ nhanh tới mức nào",
+      "Performance là hệ thống phản hồi nhanh tới đâu; efficiency là nó dùng bao nhiêu tài nguyên để làm vậy",
+      "Performance đo bằng thời gian phản hồi; efficiency đo bằng tỷ lệ tác vụ hoàn thành thành công",
+      "Performance quan trọng với lập trình viên tối ưu code; efficiency quan trọng với người dùng làm việc nhanh"
     ],
     "optionsEn": [
-      "They are two names for the same attribute",
-      "Performance is how fast the system responds; efficiency is how much resource it consumes to do so",
-      "Performance is measured in seconds and efficiency in percentages",
-      "Performance matters to developers and efficiency to users"
+      "They are two names for one attribute, describing how quickly the system completes a task",
+      "Performance is how fast the system responds; efficiency is how much resource it uses doing so",
+      "Performance is measured in response time; efficiency as the share of tasks completed successfully",
+      "Performance matters to developers tuning code; efficiency matters to users completing work quickly"
     ],
     "answer": 1,
     "explanation": "Một hệ thống có thể nhanh nhưng ngốn tài nguyên, hoặc tiết kiệm nhưng chậm. Efficiency đặc biệt quan trọng với hệ thống nhúng nơi tài nguyên bị giới hạn nghiêm ngặt.",
     "explanationEn": "A system can be fast but resource-hungry, or frugal but slow. Efficiency matters especially in embedded systems where resources are tightly bounded."
-  }
-  ,
+  },
   {
     "id": "q11",
     "question": "Vì sao portability phải được biết SỚM?",
     "questionEn": "Why must portability be known EARLY?",
     "options": [
-      "Vì nó ảnh hưởng tới ngân sách tiếp thị",
-      "Vì nó chi phối kiến trúc: biết sớm cho phép tách biệt mã phụ thuộc nền tảng ngay từ đầu, còn chuyển đổi một hệ thống chưa từng được thiết kế cho việc đó có thể tốn kém tương đương viết lại",
-      "Vì nhà cung cấp hệ điều hành cần được thông báo trước",
-      "Vì tester cần chuẩn bị nhiều máy hơn"
+      "Vì nó ảnh hưởng ngân sách bản quyền, do mỗi nền tảng đích cần công cụ phát triển và phí riêng",
+      "Nó định hình kiến trúc: biết sớm thì cô lập được mã nền tảng, muộn thì chuyển đổi tốn như viết lại",
+      "Vì nhà cung cấp nền tảng phải chứng nhận sản phẩm trước khi phát hành, cần báo trước nhiều tháng",
+      "Vì tester cần thời gian chuẩn bị thiết bị cho mọi nền tảng trước khi iteration đầu tiên bắt đầu"
     ],
     "optionsEn": [
-      "Because it affects the marketing budget",
-      "Because it drives architecture: knowing early lets you isolate platform-dependent code from the outset, while porting a system never designed for it can cost as much as a rewrite",
-      "Because the OS vendor must be notified in advance",
-      "Because testers need to prepare more machines"
+      "It affects licensing budgets, since each target platform needs its own development tools and fees",
+      "It shapes architecture: platform code can be isolated early, but porting later may cost a rewrite",
+      "Platform vendors must certify the product before release, which takes months of advance notice",
+      "Testers need time to set up devices for every platform before the first iteration can begin"
     ],
     "answer": 1,
     "explanation": "Cách đặc tả: không quá 5% mã nguồn được phép phụ thuộc vào hệ điều hành cụ thể. Tương tự, xây thành phần tái sử dụng được tốn gấp hai tới ba lần nên chỉ làm khi thực sự có kế hoạch dùng lại.",
@@ -227,16 +224,16 @@
     "question": "Cách xử lý đúng khi hai quality attribute mâu thuẫn trực tiếp là gì?",
     "questionEn": "What is the right way to handle two directly conflicting quality attributes?",
     "options": [
-      "Để lập trình viên tự quyết định vì họ hiểu kỹ thuật nhất",
-      "Nêu ưu tiên tương đối một cách tường minh trong SRS và đưa đánh đổi ra thảo luận với stakeholder, vì người chịu hậu quả phải là người quyết định",
-      "Chọn thuộc tính nào rẻ hơn để hiện thực",
-      "Trì hoãn quyết định tới giai đoạn kiểm thử"
+      "Để lập trình viên quyết định, vì họ hiểu giải pháp kỹ thuật nào cân bằng tốt nhất hai thuộc tính",
+      "Nêu ưu tiên tương đối trong SRS và đưa đánh đổi ra cho stakeholder, những người chịu hậu quả",
+      "Chọn thuộc tính nào rẻ hơn để hiện thực, rồi xem lại thuộc tính kia ở release sau",
+      "Hoãn quyết định tới giai đoạn kiểm thử, khi số đo thực tế cho thấy thuộc tính nào quan trọng hơn"
     ],
     "optionsEn": [
-      "Let developers decide since they understand the technology best",
-      "State relative priorities explicitly in the SRS and take the trade-off to stakeholders, because whoever bears the consequences should decide",
-      "Pick whichever attribute is cheaper to implement",
-      "Defer the decision until testing"
+      "Let developers decide, since they understand which technical solution balances both attributes best",
+      "State relative priorities in the SRS and take the trade-off to stakeholders, who bear the consequences",
+      "Pick whichever attribute is cheaper to implement, then revisit the other in a later release",
+      "Defer the decision until testing, when real measurements show which attribute matters more"
     ],
     "answer": 1,
     "explanation": "Ví dụ hệ thống ngân hàng đăng xuất sau 3 phút vì bảo mật nhưng nhân viên bị đăng xuất giữa cuộc gọi. Giải pháp cuối cùng là 15 phút cho khu vực an toàn và 3 phút cho truy cập từ xa.",
@@ -247,37 +244,36 @@
     "question": "Trong Planguage, hai từ khoá Scale và Meter dùng để làm gì?",
     "questionEn": "In Planguage, what are the keywords Scale and Meter for?",
     "options": [
-      "Scale là mức tối thiểu bắt buộc, Meter là mức mục tiêu",
-      "Scale là đơn vị đo lường dùng để lượng hoá thuộc tính, Meter là phương pháp hoặc công cụ dùng để lấy giá trị theo Scale đó",
-      "Scale là quy mô dự án, Meter là chi phí ước tính",
-      "Scale là độ ưu tiên, Meter là người chịu trách nhiệm"
+      "Scale là mức tối thiểu chấp nhận được của thuộc tính, Meter là mức mục tiêu cần hướng tới",
+      "Scale là đơn vị để lượng hoá thuộc tính; Meter là cách lấy được giá trị trên Scale đó",
+      "Scale là quy mô của hệ thống được đo, Meter là chi phí ước tính cho việc đo",
+      "Scale là độ ưu tiên của thuộc tính, Meter là tên người chịu trách nhiệm đo nó"
     ],
     "optionsEn": [
-      "Scale is the minimum required level and Meter the target level",
-      "Scale is the unit of measurement used to quantify the attribute, and Meter is the method or instrument used to obtain a value on that Scale",
-      "Scale is the project size and Meter the estimated cost",
-      "Scale is the priority and Meter the responsible owner"
+      "Scale is the minimum acceptable level of the attribute, and Meter is the target level to aim for",
+      "Scale is the unit used to quantify the attribute; Meter is how a value on that Scale is obtained",
+      "Scale is the size of the system being measured, and Meter is the estimated cost of measuring it",
+      "Scale is the attribute's priority, and Meter names the person responsible for measuring it"
     ],
     "answer": 1,
     "explanation": "Chúng loại bỏ nhập nhằng về việc đo cái gì và đo thế nào. Ba mức Must, Plan và Wish làm rõ đâu là bắt buộc, đâu là mục tiêu và đâu là lý tưởng.",
     "explanationEn": "They remove ambiguity about what is measured and how. The three levels Must, Plan, and Wish clarify what is mandatory, what is the target, and what is aspirational."
-  }
-  ,
+  },
   {
     "id": "q14",
     "question": "Trong Planguage, ba từ khoá Must, Plan và Wish khác nhau như thế nào?",
     "questionEn": "In Planguage, how do Must, Plan, and Wish differ?",
     "options": [
-      "Chúng lần lượt là ưu tiên cao, trung bình và thấp",
-      "Must là mức tối thiểu bắt buộc phải đạt, Plan là mức mục tiêu đội hướng tới, và Wish là mức lý tưởng trong thế giới hoàn hảo mà không có cam kết",
-      "Chúng là ba giai đoạn của dự án",
-      "Must dành cho khách hàng, Plan cho quản lý dự án, Wish cho lập trình viên"
+      "Chúng là ưu tiên cao, trung bình, thấp, dùng để quyết định thuộc tính nào làm trước",
+      "Must là mức tối thiểu bắt buộc, Plan là mục tiêu, Wish là mức lý tưởng không có cam kết",
+      "Chúng là ba giai đoạn dự án: chốt ngay bây giờ, lên kế hoạch sau, và mong muốn một ngày nào đó",
+      "Must do khách hàng đặt, Plan do quản lý dự án đặt, Wish do lập trình viên đề xuất"
     ],
     "optionsEn": [
-      "They mean high, medium, and low priority respectively",
-      "Must is the minimum required level, Plan is the target the team aims for, and Wish is the ideal in a perfect world with no commitment",
-      "They are three project phases",
-      "Must is for customers, Plan for project managers, Wish for developers"
+      "They are high, medium, and low priority, used to decide which attributes are built first",
+      "Must is the minimum required, Plan is the target, and Wish is the ideal with no commitment",
+      "They are three project phases: fixed now, planned later, and wished for someday",
+      "Must is set by customers, Plan by project managers, and Wish by developers proposing ideas"
     ],
     "answer": 1,
     "explanation": "Từ khoá Past cho bối cảnh: biết hệ thống kế thừa đạt 12 giây giúp đánh giá mức mục tiêu 2 giây có thực tế không.",
@@ -288,16 +284,16 @@
     "question": "Trong dự án agile, quality attribute áp dụng cho MỌI user story nên được đặt ở đâu?",
     "questionEn": "On an agile project, where do quality attributes that apply to EVERY user story belong?",
     "options": [
-      "Trong acceptance criteria của story đầu tiên",
-      "Trong definition of done chung của đội, chẳng hạn mọi trang phải tải trong 2 giây hoặc mọi mã mới phải đạt độ phủ kiểm thử 80%",
-      "Trong tài liệu SRS riêng biệt",
-      "Trong ghi chú riêng của product owner"
+      "Trong acceptance criteria của story đầu tiên, để các story sau tham chiếu tới",
+      "Trong definition of done chung của đội, chẳng hạn mọi trang phải tải trong 2 giây",
+      "Trong một tài liệu SRS riêng do BA duy trì song song với backlog",
+      "Trong ghi chú của product owner, để áp dụng khi review nghiệm thu từng story"
     ],
     "optionsEn": [
-      "In the acceptance criteria of the first story",
-      "In the team shared definition of done, such as every page loads in 2 seconds or all new code reaches 80 percent test coverage",
-      "In a separate SRS document",
-      "In the product owner private notes"
+      "In the acceptance criteria of the first story, which later stories then reference",
+      "In the team's shared definition of done, such as every page loading within 2 seconds",
+      "In a separate SRS document maintained alongside the backlog by the business analyst",
+      "In the product owner's notes, to be applied when each story is reviewed for acceptance"
     ],
     "answer": 1,
     "explanation": "Ba cách còn lại: viết thành constraint trên thẻ áp dụng cho toàn sản phẩm, đưa vào acceptance criteria của story liên quan, hoặc tạo story kỹ thuật riêng cho công việc kiến trúc.",
@@ -308,16 +304,16 @@
     "question": "Quy tắc vàng khi đặc tả một constraint là gì?",
     "questionEn": "What is the golden rule when specifying a constraint?",
     "options": [
-      "Luôn đánh số theo phân cấp",
-      "Mỗi constraint phải đi kèm lý do; nếu không ai nêu được lý do thì có lẽ đó không phải constraint mà chỉ là sở thích cá nhân",
-      "Luôn viết constraint ở thể bị động",
-      "Đặt mọi constraint vào một phụ lục riêng"
+      "Đánh số constraint theo phân cấp dưới yêu cầu mà nó giới hạn, để mỗi constraint truy vết được",
+      "Mỗi constraint phải có lý do; không ai nêu được thì có lẽ đó chỉ là sở thích",
+      "Viết constraint ở thể bị động, vì chúng mô tả điều kiện chứ không phải hành động của hệ thống",
+      "Đặt mọi constraint vào phụ lục riêng để chúng không làm rối phần functional requirement"
     ],
     "optionsEn": [
-      "Always number them hierarchically",
-      "Every constraint must come with a rationale; if nobody can supply one it probably is not a constraint but a personal preference",
-      "Always write constraints in the passive voice",
-      "Put all constraints in a separate appendix"
+      "Number constraints hierarchically under the requirement they restrict, so each is traceable",
+      "Give every constraint a rationale; if nobody can, it is likely a preference, not a constraint",
+      "Write constraints in the passive voice, since they describe conditions rather than system actions",
+      "Place all constraints in a separate appendix, so they do not clutter the functional requirements"
     ],
     "answer": 1,
     "explanation": "Lý do cho biết constraint có còn hiệu lực khi hoàn cảnh thay đổi hay không, và ngăn những ràng buộc ma mà cả đội tuân theo hàng năm trời mà không ai nhớ vì sao.",

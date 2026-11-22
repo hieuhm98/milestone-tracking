@@ -5,13 +5,13 @@
     "questionEn": "How should a use case name be written?",
     "options": [
       "Danh từ mô tả đối tượng nghiệp vụ, ví dụ Material Safety Data Sheet",
-      "Động từ cộng tân ngữ nêu rõ mục tiêu người dùng, ví dụ Request a Chemical",
+      "Động từ cộng tân ngữ nêu mục tiêu người dùng, như Request a Chemical",
       "Tên màn hình mà người dùng sẽ thấy",
       "Mã định danh kỹ thuật của module"
     ],
     "optionsEn": [
       "A noun describing a business object, such as Material Safety Data Sheet",
-      "A verb followed by an object that states the user goal, such as Request a Chemical",
+      "A verb plus an object stating the user goal, such as Request a Chemical",
       "The name of the screen the user will see",
       "The technical identifier of the module"
     ],
@@ -24,16 +24,16 @@
     "question": "Lợi thế của user story so với việc chỉ có một cái tên use case là gì?",
     "questionEn": "What advantage does a user story have over a bare use case name?",
     "options": [
-      "Nó luôn ngắn hơn nên dễ đọc hơn",
+      "Nó đủ ngắn để ước lượng mà không cần trao đổi thêm",
       "Nó nêu rõ user class và lý do đằng sau yêu cầu",
-      "Nó không cần acceptance test",
-      "Nó tự động sinh ra functional requirement"
+      "Nó thay thế acceptance test, vì bản thân story đã nói rõ thế nào là xong",
+      "Nó ánh xạ một-một với functional requirement nên không cần phân tích thêm"
     ],
     "optionsEn": [
-      "It is always shorter and therefore easier to read",
+      "It is short enough to estimate without any further conversation",
       "It identifies the user class and the rationale behind the request",
-      "It removes the need for acceptance tests",
-      "It automatically generates functional requirements"
+      "It replaces acceptance tests, because the story itself states what done means",
+      "It maps one-to-one to functional requirements, so no further analysis is needed"
     ],
     "answer": 1,
     "explanation": "User class trong user story tương ứng với primary actor của use case, còn phần so that nêu lý do — hai thông tin có giá trị mà một cái tên use case không truyền tải.",
@@ -44,16 +44,16 @@
     "question": "Loại hệ thống nào mà use case và user story KHÔNG đủ để đặc tả?",
     "questionEn": "For which kind of system are use cases and user stories NOT adequate?",
     "options": [
-      "Ứng dụng nghiệp vụ và website",
-      "Kiosk và hệ thống điều khiển thiết bị đơn giản",
+      "Ứng dụng nghiệp vụ và website, nơi nhiều user class tương tác với nhiều màn hình",
+      "Kiosk và hệ thống điều khiển thiết bị đơn giản, vốn có quá ít tương tác để mô hình hoá",
       "Tiến trình batch, hệ thống tính toán nặng, business analytics và data warehousing",
-      "Ứng dụng di động"
+      "Ứng dụng di động và phần mềm tiêu dùng, nơi cách dùng quá đa dạng để ghi thành kịch bản"
     ],
     "optionsEn": [
-      "Business applications and websites",
-      "Kiosks and simple device-control systems",
-      "Batch processes, computationally intensive systems, business analytics, and data warehousing",
-      "Mobile applications"
+      "Business applications and websites, where many user classes interact with many screens",
+      "Kiosks and simple device-control systems, which have too few interactions to model",
+      "Batch processes, computation-heavy systems, business analytics, and data warehousing",
+      "Mobile apps and other consumer software, where usage is too varied to capture in scenarios"
     ],
     "answer": 2,
     "explanation": "Với những hệ thống này, độ phức tạp nằm ở tính toán, dữ liệu tìm được hoặc báo cáo sinh ra, không nằm ở tương tác người dùng. Ví dụ máy rửa xe tự động chỉ có một use case nhưng vô số hành vi bên trong.",
@@ -64,16 +64,16 @@
     "question": "Trong Chemical Tracking System, cả chemist lẫn nhân viên kho đều có thể đóng vai Requester. Điều này minh hoạ nguyên tắc nào?",
     "questionEn": "In the Chemical Tracking System both chemists and stockroom staff can act as Requester. Which principle does this illustrate?",
     "options": [
-      "Một user class chỉ được ánh xạ tới một actor duy nhất",
+      "Mỗi user class ánh xạ tới đúng một actor, nên chemist và nhân viên kho hợp thành một class chung",
       "User là con người thật, còn actor là sự trừu tượng hoá; một người có thể đội nhiều chiếc mũ actor",
-      "Actor luôn phải là một hệ thống phần mềm",
-      "Primary actor và secondary actor là hai tên gọi của cùng một khái niệm"
+      "Actor đại diện cho một chức danh, nên Requester phải được thêm vào mô tả công việc của cả hai nhóm",
+      "Primary actor và secondary actor có thể hoán đổi, nên nhóm nào cũng có thể khởi động use case"
     ],
     "optionsEn": [
-      "A user class maps to exactly one actor",
+      "Each user class maps to exactly one actor, so chemists and stockroom staff form one combined class",
       "Users are actual people while actors are abstractions; one person can wear several actor hats",
-      "An actor must always be a software system",
-      "Primary and secondary actor are two names for the same thing"
+      "An actor stands for a job title, so Requester must be added to both groups' job descriptions",
+      "Primary and secondary actors are interchangeable, so either group may start the use case"
     ],
     "answer": 1,
     "explanation": "Không có user class nào tên Requester. Khi một chemist muốn yêu cầu hoá chất, anh ta đội chiếc mũ Requester và hệ thống nhìn nhận anh ta là actor đó.",
@@ -84,16 +84,16 @@
     "question": "Phát biểu nào ĐÚNG về trigger event và precondition?",
     "questionEn": "Which statement about trigger events and preconditions is CORRECT?",
     "options": [
-      "Trigger event là một trong các precondition của use case",
-      "Hệ thống phát hiện trigger event trước, RỒI mới kiểm tra các precondition để quyết định có bắt đầu được hay không",
-      "Precondition chỉ được kiểm tra sau khi use case kết thúc",
-      "Precondition mô tả ý định của người dùng"
+      "Trigger event chính là một precondition, nên cả hai được kiểm tra cùng một thời điểm",
+      "Hệ thống phát hiện trigger event trước, rồi kiểm tra precondition xem có bắt đầu được không",
+      "Precondition được kiểm tra sau khi use case kết thúc, để xác nhận hệ thống ở trạng thái hợp lệ",
+      "Precondition mô tả điều người dùng định làm, còn trigger xác nhận hệ thống có thể phản hồi"
     ],
     "optionsEn": [
-      "The trigger event is one of the use case preconditions",
-      "The system detects the trigger event FIRST, then checks the preconditions to decide whether it can begin",
-      "Preconditions are only checked after the use case finishes",
-      "Preconditions describe the user intent"
+      "The trigger event is itself one of the preconditions, so both are checked at the same moment",
+      "The system detects the trigger event first, then checks preconditions to decide whether it can begin",
+      "Preconditions are verified after the use case ends, to confirm the system reached a valid state",
+      "Preconditions describe what the user intends to do, and the trigger confirms the system can respond"
     ],
     "answer": 1,
     "explanation": "Kiểm tra precondition giúp ngăn lỗi. Nếu ATM hết tiền, nó không nên cho phép người dùng bắt đầu giao dịch rút tiền. Precondition mô tả trạng thái hệ thống, không mô tả ý định người dùng.",
@@ -104,16 +104,16 @@
     "question": "Điều gì xảy ra nếu bạn KHÔNG đặc tả cách xử lý ngoại lệ trong use case?",
     "questionEn": "What happens if you do NOT specify exception handling in a use case?",
     "options": [
-      "Không có gì, vì lập trình viên luôn xử lý ngoại lệ theo chuẩn chung",
-      "Mỗi lập trình viên tự đoán cách xử lý dẫn tới hành vi không nhất quán, hoặc hệ thống sập khi gặp điều kiện lỗi",
-      "Tester sẽ tự bổ sung ngoại lệ trong quá trình kiểm thử",
-      "Use case sẽ tự động bị từ chối khi review"
+      "Không đáng kể, vì lập trình viên xử lý ngoại lệ theo chuẩn framework chung áp dụng cho mọi use case",
+      "Mỗi lập trình viên tự đoán cách xử lý, nên hành vi không nhất quán hoặc hệ thống sập khi lỗi",
+      "Tester sẽ bổ sung ngoại lệ còn thiếu trong system testing, nên chúng được phủ trước khi phát hành",
+      "Use case tự động trượt review, vì template quy định mục exception là bắt buộc"
     ],
     "optionsEn": [
-      "Nothing, because developers always handle exceptions to a common standard",
-      "Each developer guesses at handling, producing inconsistent behaviour, or the system crashes when the error condition occurs",
-      "Testers will add the exceptions during testing",
-      "The use case is automatically rejected at review"
+      "Little, because developers handle exceptions to a common framework standard that covers every use case",
+      "Each developer guesses at handling, so behaviour is inconsistent or the system crashes on the error",
+      "Testers add the missing exceptions during system testing, so they are covered before the release ships",
+      "The use case fails review automatically, because templates make the exceptions section mandatory"
     ],
     "answer": 1,
     "explanation": "Có thể chắc chắn rằng hệ thống sập không nằm trong danh sách yêu cầu của người dùng. Ngoại lệ bị bỏ sót là nguồn phổ biến của yêu cầu thiếu.",
@@ -124,16 +124,16 @@
     "question": "Bạn quyết định hoãn một số alternative flow sang release sau. Điều gì bạn VẪN PHẢI hiện thực ngay?",
     "questionEn": "You decide to defer some alternative flows to a later release. What must you STILL implement now?",
     "options": [
-      "Toàn bộ alternative flow, không được hoãn bất kỳ cái nào",
+      "Giao diện của mọi alternative flow, để các flow bị hoãn có thể thêm sau mà không phải thiết kế lại",
       "Các exception có thể ngăn những flow bạn ĐÃ chọn hiện thực thành công",
-      "Chỉ cần normal flow là đủ",
-      "Mọi business rule liên quan tới toàn bộ use case"
+      "Chỉ normal flow, vì exception đi kèm với các alternative flow mà bạn đang hoãn",
+      "Mọi business rule liên quan tới toàn bộ use case, kể cả rule của các flow bị hoãn"
     ],
     "optionsEn": [
-      "Every alternative flow; none may be deferred",
+      "Every alternative flow's user interface, so deferred flows can be added later without redesign",
       "The exceptions that can prevent the flows you DID choose to implement from succeeding",
-      "Only the normal flow is needed",
-      "Every business rule related to the whole use case"
+      "Only the normal flow, since exceptions belong with the alternative flows you are deferring",
+      "Every business rule related to the whole use case, including those for deferred flows"
     ],
     "answer": 1,
     "explanation": "Lập trình viên có kinh nghiệm đều biết xử lý ngoại lệ chiếm phần lớn công sức viết mã. Bỏ qua exception của flow đang làm là con đường chắc chắn dẫn tới lỗi khi vận hành.",
@@ -144,16 +144,16 @@
     "question": "Trong phần mềm kế toán, hai use case Pay a Bill và Reconcile Credit Card đều cần các bước viết séc. Nên dùng quan hệ nào?",
     "questionEn": "In accounting software, both Pay a Bill and Reconcile Credit Card need the steps for writing a check. Which relationship should be used?",
     "options": [
-      "Extend, vì viết séc là một biến thể của hai use case kia",
-      "Include, vì các bước chung được tách thành use case riêng mà hai use case kia gọi tới",
-      "Không dùng quan hệ nào, chỉ lặp lại các bước trong cả hai",
-      "Generalization giữa hai use case"
+      "Extend, vì viết séc là một biến thể tuỳ chọn được chèn vào luồng của hai use case kia",
+      "Include, vì các bước chung được tách thành use case riêng mà cả hai cùng gọi tới",
+      "Không dùng quan hệ nào: lặp lại các bước trong cả hai để mỗi use case đầy đủ và tự đọc được",
+      "Generalization, với hai use case là chuyên biệt hoá của use case cha Write a Check"
     ],
     "optionsEn": [
-      "Extend, since writing a check is a variation of the other two",
-      "Include, since the shared steps are factored into a separate use case the other two invoke",
-      "No relationship; just repeat the steps in both",
-      "Generalization between the two use cases"
+      "Extend, since writing a check is an optional variation inserted into the flow of the other two",
+      "Include, since the shared steps are factored into a separate use case that both invoke",
+      "None: repeat the steps in both use cases, so each stays complete and readable on its own",
+      "Generalization, with the two use cases as specialisations of a parent Write a Check use case"
     ],
     "answer": 1,
     "explanation": "Cơ chế include tương tự việc gọi một subroutine dùng chung. Write a Check vẫn là use case độc lập, vì đó cũng là một tác vụ người ta có thể thực hiện trực tiếp.",
@@ -164,16 +164,16 @@
     "question": "Business rule ảnh hưởng tới use case nên được ghi lại như thế nào trong use case specification?",
     "questionEn": "How should business rules affecting a use case be recorded in the use case specification?",
     "options": [
-      "Chép toàn văn nội dung rule vào phần mô tả use case",
-      "Ghi định danh của các rule liên quan và chỉ rõ chúng ảnh hưởng phần nào của use case",
-      "Không ghi gì, vì business rule không liên quan tới use case",
-      "Chuyển rule thành functional requirement rồi xoá rule gốc"
+      "Chép toàn văn rule vào use case để người đọc có mọi thứ ở một chỗ, không phải tra cứu",
+      "Ghi định danh của các rule liên quan và chỉ rõ mỗi rule tác động tới bước nào",
+      "Không ghi gì, vì rule đã nằm trong SRS còn use case chỉ mô tả tương tác người dùng",
+      "Chuyển mỗi rule thành functional requirement trong use case, rồi bỏ rule gốc đi"
     ],
     "optionsEn": [
-      "Copy the full rule text into the use case description",
+      "Copy the full rule text into the use case, so readers have everything in one place without lookups",
       "Record the identifiers of the relevant rules and indicate which part of the use case each affects",
-      "Record nothing, since business rules are unrelated to use cases",
-      "Convert the rule into a functional requirement and delete the original rule"
+      "Record nothing, since rules are captured in the SRS and use cases describe user interaction only",
+      "Convert each rule into a functional requirement in the use case, then retire the original rule"
     ],
     "answer": 1,
     "explanation": "Cách này giúp use case không bị lỗi thời khi rule thay đổi. Business rule là tài sản cấp doanh nghiệp, nên được lưu tách riêng.",
@@ -184,16 +184,16 @@
     "question": "Người dùng đề xuất use case Scan Bar Code. BA nên phản ứng thế nào?",
     "questionEn": "A user proposes the use case Scan Bar Code. How should the BA respond?",
     "options": [
-      "Chấp nhận vì tên đã bắt đầu bằng động từ",
-      "Hỏi khi quét mã vạch anh đang cố đạt được điều gì, vì đây có thể chỉ là MỘT BƯỚC chứ không phải mục tiêu",
-      "Từ chối vì use case phải do BA đặt tên",
-      "Chuyển thành business rule"
+      "Chấp nhận, vì tên có động từ cộng tân ngữ và mô tả việc người dùng thực sự làm",
+      "Hỏi quét mã vạch để đạt điều gì, vì đó có thể chỉ là một bước, không phải mục tiêu",
+      "Từ chối, vì tên use case phải do BA đặt để giữ cách đặt tên nhất quán trong mô hình",
+      "Chuyển thành business rule, vì quét mã vạch là chính sách nhận diện vật chứa hoá chất"
     ],
     "optionsEn": [
-      "Accept it, since the name already starts with a verb",
-      "Ask what they are trying to accomplish by scanning, since this may be just ONE STEP rather than a goal",
-      "Reject it, since only the BA may name use cases",
-      "Convert it into a business rule"
+      "Accept it, since it has a verb and an object and describes something the user actually does",
+      "Ask what they are trying to accomplish by scanning, since it may be just one step, not a goal",
+      "Reject it, since use case names must come from the BA to keep naming consistent across the model",
+      "Turn it into a business rule, since scanning bar codes is a policy for identifying containers"
     ],
     "answer": 1,
     "explanation": "Câu trả lời có thể là ghi nhận hoá chất vào phòng thí nghiệm. Use case thật là Log Chemical into Lab, còn quét mã vạch chỉ là một bước trong tương tác.",
@@ -204,16 +204,16 @@
     "question": "Vì sao đội Chemical Tracking System học được rằng cần ít nhất MỘT NGÀY giữa các workshop liên tiếp?",
     "questionEn": "Why did the Chemical Tracking System team learn to allow at least ONE DAY between successive workshops?",
     "options": [
-      "Để BA có thời gian nhập liệu vào công cụ",
-      "Vì sự thư giãn tinh thần cho phép nhìn lại công việc cũ với góc nhìn tươi mới; nếu thông tin còn quá mới, người review đọc thuộc lòng cuộc thảo luận và không thấy lỗi",
-      "Vì quy định công ty giới hạn số buổi họp mỗi tuần",
-      "Để người dùng có thời gian xin phê duyệt của quản lý"
+      "Để BA có thời gian nhập kết quả workshop vào công cụ và gửi một phiên bản gọn gàng cho mọi người",
+      "Giãn cách giúp nhìn lại với góc nhìn mới; khi còn quá mới, người ta nhớ thảo luận và bỏ sót lỗi",
+      "Vì quy định công ty giới hạn số buổi họp mỗi tuần mà người dùng có thể được mời tham dự",
+      "Để người dùng có thời gian xin quản lý phê duyệt các quyết định đưa ra ở workshop trước"
     ],
     "optionsEn": [
-      "So the BA has time to enter data into a tool",
-      "Because mental relaxation lets people examine earlier work with fresh eyes; when information is too fresh, reviewers mentally recite the discussion and do not see errors",
-      "Because company policy limits meetings per week",
-      "So users have time to obtain management approval"
+      "So the BA has time to enter the workshop output into the tool and send everyone a tidy version",
+      "A gap lets people review with fresh eyes; too soon, they recall the talk and miss the errors",
+      "Because company policy limits the number of meetings per week that users can be asked to attend",
+      "So users have time to get management approval for the decisions made in the previous workshop"
     ],
     "answer": 1,
     "explanation": "Một BA tổ chức workshop hằng ngày phát hiện người tham gia khó tìm ra lỗi vì thông tin còn quá mới trong đầu họ.",
@@ -244,16 +244,16 @@
     "question": "Vì sao KHÔNG nên đơn giản chuyển use case cho lập trình viên để hiện thực?",
     "questionEn": "Why should you NOT simply hand use cases to developers for implementation?",
     "options": [
-      "Vì lập trình viên không được phép đọc tài liệu yêu cầu",
-      "Vì use case mô tả góc nhìn người dùng và hành vi quan sát được từ bên ngoài, nên không chứa mọi thông tin lập trình viên cần",
-      "Vì use case luôn quá dài để đọc",
-      "Vì use case chỉ dùng cho việc kiểm thử"
+      "Vì lập trình viên cần use case được chuyển thành design model trước khi bắt đầu code",
+      "Use case thể hiện góc nhìn người dùng, hành vi bên ngoài, nên thiếu nhiều thứ lập trình viên cần",
+      "Vì use case quá dài và mang tính tường thuật, lập trình viên cần user story ngắn gọn thay thế",
+      "Vì use case phục vụ tester, còn lập trình viên làm việc từ business rules catalog riêng"
     ],
     "optionsEn": [
-      "Because developers are not allowed to read requirements documents",
-      "Because use cases describe the user perspective and externally visible behaviour, so they do not contain everything a developer needs",
-      "Because use cases are always too long to read",
-      "Because use cases are only for testing"
+      "Because developers need use cases converted into a design model before they can begin coding",
+      "Because use cases show the user's view and external behaviour, so they lack much of what developers need",
+      "Because use cases are too long and narrative for developers, who need short user stories instead",
+      "Because use cases serve testers, while developers work from the separate business rules catalog"
     ],
     "answer": 1,
     "explanation": "Người dùng ATM không biết về xử lý ở hậu trường như giao tiếp với máy tính ngân hàng. Use case cũng thường không nói hệ thống phải làm gì khi một precondition KHÔNG được thoả mãn.",
@@ -264,16 +264,16 @@
     "question": "Vì sao KHÔNG nên nhúng định nghĩa dữ liệu vào use case specification?",
     "questionEn": "Why should data definitions NOT be embedded in use case specifications?",
     "options": [
-      "Vì lập trình viên không cần định nghĩa dữ liệu",
-      "Vì khó tìm thông tin và dễ tạo bản sao bị lệch nhau khi một bản được sửa còn bản khác thì không",
-      "Vì định nghĩa dữ liệu thuộc về tài liệu thiết kế",
-      "Vì use case không được vượt quá một trang"
+      "Vì lập trình viên lấy định nghĩa dữ liệu từ database schema, nên use case không cần chứa chúng",
+      "Vì khó tìm thông tin, và các bản sao bị lệch nhau khi chỉ một bản được sửa",
+      "Vì định nghĩa dữ liệu thuộc về tài liệu thiết kế, do chúng mô tả cách dữ liệu được lưu trữ",
+      "Vì một use case nên vừa một trang, và định nghĩa dữ liệu sẽ khiến nó dài vượt xa mức đó"
     ],
     "optionsEn": [
-      "Because developers do not need data definitions",
-      "Because information becomes hard to find and duplicates drift out of sync when one instance is changed and others are not",
-      "Because data definitions belong in the design document",
-      "Because a use case must not exceed one page"
+      "Because developers take data definitions from the database schema, so the use case need not hold them",
+      "Because information becomes hard to find, and copies drift out of sync when only one is changed",
+      "Because data definitions belong in the design document, since they describe how data is stored",
+      "Because a use case should fit on one page, and data definitions would push it well beyond that"
     ],
     "answer": 1,
     "explanation": "Hãy lưu định nghĩa dữ liệu trong data dictionary và data model dùng chung toàn dự án, để mỗi định nghĩa chỉ tồn tại một bản duy nhất.",
@@ -284,16 +284,16 @@
     "question": "Nếu bạn chỉ tạo MỘT biểu diễn duy nhất của yêu cầu, hệ quả là gì?",
     "questionEn": "What is the consequence of creating only ONE representation of the requirements?",
     "options": [
-      "Tài liệu sẽ gọn gàng và dễ bảo trì hơn",
-      "Bạn buộc phải tin nó là đúng, vì không có gì để đối chiếu nhằm tìm lỗi, khoảng trống và cách hiểu khác nhau",
-      "Việc truy vết yêu cầu trở nên dễ dàng hơn",
-      "Không có hệ quả gì đáng kể"
+      "Tài liệu gọn gàng và dễ bảo trì hơn, vì chỉ có một nơi duy nhất cần cập nhật",
+      "Bạn buộc phải tin nó, vì chẳng có gì để đối chiếu nhằm tìm lỗi và khoảng trống",
+      "Truy vết đơn giản hơn, vì mỗi yêu cầu chỉ có một biểu diễn để liên kết với test",
+      "Không có hệ quả đáng kể, miễn là biểu diễn duy nhất đó được review cẩn thận"
     ],
     "optionsEn": [
-      "The documentation is tidier and easier to maintain",
-      "You must trust it, because you have nothing to compare it against to find errors, gaps, and differing interpretations",
-      "Requirements tracing becomes easier",
-      "There is no significant consequence"
+      "The documentation stays tidier and easier to maintain, since there is only one place to update",
+      "You must trust it, having nothing to compare it with to expose errors, gaps, and misreadings",
+      "Tracing becomes simpler, because each requirement has only one representation to link to tests",
+      "No significant consequence, as long as that single representation is reviewed carefully"
     ],
     "answer": 1,
     "explanation": "Đội agile chỉ tạo acceptance test và đội truyền thống chỉ tạo functional requirement đều rơi vào bẫy này. Kết quả tốt nhất đến từ kết hợp yêu cầu viết ra, test, model và prototype.",
@@ -304,16 +304,16 @@
     "question": "Orphan functionality nghĩa là gì và cách tiếp cận usage-centric giúp tránh nó ra sao?",
     "questionEn": "What is orphan functionality, and how does the usage-centric approach avoid it?",
     "options": [
-      "Chức năng bị lỗi khi chạy; usage-centric giúp phát hiện qua kiểm thử",
-      "Chức năng có vẻ là ý tưởng hay nhưng không ai dùng vì không liên hệ trực tiếp với mục tiêu người dùng; usage-centric bắt đầu từ mục tiêu nên chỉ tạo ra chức năng phục vụ tác vụ thật",
-      "Chức năng thuộc về hệ thống cũ đã ngừng hoạt động",
-      "Chức năng chưa được gán cho lập trình viên nào"
+      "Chức năng lỗi khi chạy vì không có gì gọi tới; usage-centric kiểm thử mọi nhánh để phát hiện chúng",
+      "Chức năng tưởng hay nhưng không ai dùng vì không phục vụ mục tiêu nào; bắt đầu từ mục tiêu sẽ tránh được",
+      "Chức năng thừa hưởng từ hệ thống cũ đã ngừng; usage-centric loại bỏ chúng khi chuyển đổi dữ liệu",
+      "Chức năng chưa được gán cho lập trình viên; usage-centric gắn mỗi chức năng với người phụ trách qua use case"
     ],
     "optionsEn": [
-      "Functionality that fails at runtime; usage-centric finds it through testing",
-      "Functionality that seemed like a good idea but nobody uses because it does not relate directly to user goals; usage-centric starts from goals so it only produces functionality serving real tasks",
-      "Functionality belonging to a decommissioned legacy system",
-      "Functionality not yet assigned to any developer"
+      "Functions that fail at run time because nothing calls them; usage-centric tests every path to expose them",
+      "Features that seemed a good idea but go unused, serving no user goal; starting from goals avoids them",
+      "Functions inherited from a retired legacy system; usage-centric removes them during data migration",
+      "Functions not yet assigned to a developer; usage-centric links each one to an owner through use cases"
     ],
     "answer": 1,
     "explanation": "Đặc tả quá mức từ đầu và cố nhồi mọi chức năng có thể nghĩ ra sẽ dẫn tới hiện thực những yêu cầu không cần thiết. Cách tiếp cận usage-centric cũng hỗ trợ ưu tiên hoá.",

@@ -4,16 +4,16 @@
     "question": "Một công ty phân phối file tĩnh từ S3 qua CloudFront và muốn đảm bảo người dùng KHÔNG thể truy cập trực tiếp vào S3 bucket, chỉ qua CloudFront. Giải pháp phù hợp nhất là gì?",
     "questionEn": "A company serves static files from S3 via CloudFront and wants to ensure users CANNOT access the S3 bucket directly, only through CloudFront. What is the MOST suitable solution?",
     "options": [
-      "Bật Origin Access Control (OAC) và cấu hình bucket policy chỉ cho phép CloudFront",
-      "Đặt bucket ở chế độ public-read",
-      "Bật S3 Cross-Region Replication",
-      "Dùng Global Accelerator trước S3 bucket"
+      "Dùng OAC kèm bucket policy chỉ cấp quyền cho distribution",
+      "Giữ bucket public-read nhưng bật signed URL của CloudFront",
+      "Chỉ bật S3 Block Public Access, không cần bucket policy",
+      "Đặt Global Accelerator phía trước S3 bucket"
     ],
     "optionsEn": [
-      "Enable Origin Access Control (OAC) and configure a bucket policy allowing only CloudFront",
-      "Set the bucket to public-read",
-      "Enable S3 Cross-Region Replication",
-      "Use Global Accelerator in front of the S3 bucket"
+      "Use OAC plus a bucket policy scoped to the distribution",
+      "Keep the bucket public-read but use CloudFront signed URLs",
+      "Turn on S3 Block Public Access alone, with no bucket policy",
+      "Put Global Accelerator in front of the S3 bucket"
     ],
     "answer": 0,
     "explanation": "OAC (thay thế OAI legacy) cho phép CloudFront truy cập S3 và bucket policy chặn mọi truy cập trực tiếp, đảm bảo nội dung chỉ đến qua CloudFront.",
@@ -84,16 +84,16 @@
     "question": "Đội ngũ deploy phiên bản mới của trang web nhưng người dùng vẫn thấy nội dung cũ do CloudFront cache. Cách MOST cost-effective để tránh vấn đề này trong tương lai là gì?",
     "questionEn": "A team deploys a new version of a website but users still see old content because of CloudFront cache. What is the MOST cost-effective way to avoid this issue in the future?",
     "options": [
-      "Dùng versioned filenames (ví dụ app.v2.js) để bust cache",
+      "Dùng tên file có version (ví dụ app.v2.js)",
       "Chạy invalidation /* sau mỗi lần deploy",
-      "Đặt TTL = 0 cho toàn bộ nội dung",
-      "Tắt caching hoàn toàn"
+      "Đặt mọi TTL = 0 để edge luôn kiểm tra lại origin",
+      "Tắt caching và phục vụ mọi thứ từ origin"
     ],
     "optionsEn": [
-      "Use versioned filenames (e.g., app.v2.js) to bust cache",
-      "Run an invalidation /* after every deploy",
-      "Set TTL = 0 for all content",
-      "Disable caching entirely"
+      "Use versioned filenames (e.g., app.v2.js)",
+      "Run a /* invalidation after every deploy",
+      "Set every TTL to 0 so edges always revalidate",
+      "Disable caching and serve everything from origin"
     ],
     "answer": 0,
     "explanation": "Versioned filenames buộc trình duyệt/CloudFront tải object mới mà không tốn phí invalidation, còn TTL=0 hay tắt cache làm mất lợi ích CDN.",
@@ -144,16 +144,16 @@
     "question": "Một công ty cấu hình CloudFront với custom domain và HTTPS. Họ tạo chứng chỉ ACM ở region eu-west-1 (nơi origin ALB đặt) nhưng CloudFront không nhận. Nguyên nhân là gì?",
     "questionEn": "A company configures CloudFront with a custom domain and HTTPS. They created the ACM certificate in eu-west-1 (where the origin ALB lives) but CloudFront won't accept it. What is the cause?",
     "options": [
-      "Chứng chỉ ACM cho CloudFront phải nằm ở us-east-1",
-      "ACM không hỗ trợ CloudFront",
-      "Cần dùng chứng chỉ self-signed",
+      "Chứng chỉ phải được tạo ở us-east-1",
+      "Chứng chỉ ACM không dùng được với CloudFront",
+      "Phải dùng chứng chỉ self-signed thay thế",
       "Phải bật OAC trước khi gắn chứng chỉ"
     ],
     "optionsEn": [
-      "The ACM certificate for CloudFront must be in us-east-1",
-      "ACM does not support CloudFront",
-      "A self-signed certificate is required",
-      "OAC must be enabled before attaching the certificate"
+      "It must be issued in us-east-1 instead",
+      "ACM certificates cannot be used with CloudFront",
+      "It must be a self-signed certificate instead",
+      "OAC must be enabled before attaching it"
     ],
     "answer": 0,
     "explanation": "CloudFront yêu cầu chứng chỉ ACM ở region us-east-1 (N. Virginia), bất kể origin nằm ở region nào.",
@@ -184,16 +184,16 @@
     "question": "Một tổ chức cần dữ liệu S3 LUÔN cập nhật (near real-time) và độ trễ thấp cho người dùng ở đúng hai region cụ thể, đồng thời phục vụ mục đích tuân thủ lưu trú dữ liệu. Nên dùng gì?",
     "questionEn": "An organization needs S3 data that is ALWAYS current (near real-time) with low latency for users in exactly two specific regions, also serving a data-residency compliance purpose. What should it use?",
     "options": [
-      "CloudFront với TTL dài",
-      "Global Accelerator",
+      "CloudFront với default TTL dài",
+      "Global Accelerator với hai endpoint",
       "S3 Cross-Region Replication (CRR)",
-      "CloudFront Signed Cookies"
+      "CloudFront với Origin Shield"
     ],
     "optionsEn": [
-      "CloudFront with a long TTL",
-      "Global Accelerator",
+      "CloudFront with a long default TTL",
+      "Global Accelerator with two endpoints",
       "S3 Cross-Region Replication (CRR)",
-      "CloudFront Signed Cookies"
+      "CloudFront with Origin Shield"
     ],
     "answer": 2,
     "explanation": "CRR sao chép object sang các region cụ thể và luôn cập nhật, phù hợp cho độ trễ thấp ở vài region và yêu cầu tuân thủ; CloudFront có thể phục vụ dữ liệu cũ tới hết TTL.",
@@ -224,16 +224,16 @@
     "question": "Một trang web muốn BẮT BUỘC mọi viewer phải dùng HTTPS, tự động chuyển hướng các request HTTP. Cấu hình CloudFront nào đạt được điều này?",
     "questionEn": "A website wants to FORCE every viewer to use HTTPS, automatically redirecting HTTP requests. Which CloudFront configuration achieves this?",
     "options": [
-      "Origin protocol policy = HTTP Only",
-      "Viewer protocol policy = Redirect HTTP to HTTPS (hoặc HTTPS Only)",
-      "Bật Geo Restriction",
-      "Đặt min TTL = 0"
+      "Origin protocol policy = HTTPS Only",
+      "Viewer protocol policy = Redirect HTTP to HTTPS",
+      "Origin protocol policy = Match Viewer",
+      "Viewer protocol policy = HTTP and HTTPS"
     ],
     "optionsEn": [
-      "Origin protocol policy = HTTP Only",
-      "Viewer protocol policy = Redirect HTTP to HTTPS (or HTTPS Only)",
-      "Enable Geo Restriction",
-      "Set min TTL = 0"
+      "Origin protocol policy = HTTPS Only",
+      "Viewer protocol policy = Redirect HTTP to HTTPS",
+      "Origin protocol policy = Match Viewer",
+      "Viewer protocol policy = HTTP and HTTPS"
     ],
     "answer": 1,
     "explanation": "Viewer protocol policy đặt Redirect HTTP to HTTPS (hoặc HTTPS Only) bắt buộc mã hóa giữa viewer và CloudFront; origin protocol policy chỉ áp dụng cho chặng CloudFront–origin.",
@@ -264,16 +264,16 @@
     "question": "Trong CloudFront, \"origin\" là gì?",
     "questionEn": "In CloudFront, what is an \"origin\"?",
     "options": [
-      "Edge location gần người dùng nhất",
-      "Địa chỉ IP của người xem",
+      "Edge location nằm gần người xem nhất",
+      "Regional edge cache nằm phía trước các edge",
       "Bản ghi DNS trỏ tới distribution",
-      "Nguồn mà CloudFront lấy nội dung về khi cache miss (S3 bucket, ALB, web server...)"
+      "Nơi CloudFront lấy nội dung về khi cache miss"
     ],
     "optionsEn": [
-      "The edge location nearest the viewer",
-      "The viewer's IP address",
-      "The DNS record pointing at the distribution",
-      "The source CloudFront fetches content from on a cache miss (an S3 bucket, ALB, web server…)"
+      "The edge location that is nearest to the viewer",
+      "The regional edge cache that sits in front of edges",
+      "The DNS record that points at the distribution",
+      "Where CloudFront fetches content on a cache miss"
     ],
     "answer": 3,
     "explanation": "Origin là nguồn sự thật. Edge location cache bản sao; khi miss hoặc hết TTL, CloudFront về origin lấy lại qua mạng backbone của AWS.",
@@ -284,16 +284,16 @@
     "question": "Cấu hình nào quyết định mặc định một object được cache bao lâu ở edge location?",
     "questionEn": "Which setting determines how long an object stays cached at an edge location by default?",
     "options": [
-      "Default TTL trong cache policy (hoặc header `Cache-Control` do origin trả về)",
-      "Cấu hình Geo Restriction",
+      "Default TTL trong cache policy",
+      "Danh sách cho phép của Geo Restriction",
       "Price class của distribution",
-      "Origin protocol policy"
+      "Origin keep-alive timeout"
     ],
     "optionsEn": [
-      "The Default TTL in the cache policy (or the `Cache-Control` header returned by the origin)",
-      "The Geo Restriction configuration",
+      "The Default TTL in the cache policy",
+      "The Geo Restriction allow list",
       "The distribution's price class",
-      "The origin protocol policy"
+      "The origin keep-alive timeout"
     ],
     "answer": 0,
     "explanation": "TTL quyết định thời gian sống của bản cache. Origin có thể tự điều khiển bằng header `Cache-Control`/`Expires`; cache policy đặt giá trị Min/Default/Max TTL bao quanh.",
@@ -304,16 +304,16 @@
     "question": "Một cache policy được cấu hình đưa query string vào cache key. Hệ quả là gì?",
     "questionEn": "A cache policy is configured to include the query string in the cache key. What is the effect?",
     "options": [
-      "Mọi request dùng chung một bản cache duy nhất",
-      "Mỗi giá trị query string khác nhau được cache thành một object riêng",
-      "Query string bị loại bỏ trước khi chuyển tới origin",
-      "Caching bị tắt hoàn toàn"
+      "Mọi request vẫn dùng chung một bản cache cho mỗi URL path",
+      "Mỗi query string khác nhau được cache thành object riêng",
+      "Query string bị loại bỏ trước khi request tới origin",
+      "Caching bị tắt cho mọi URL có query string"
     ],
     "optionsEn": [
-      "All requests share one single cached object",
-      "Each distinct query-string value is cached as a separate object",
-      "The query string is stripped before the request reaches the origin",
-      "Caching is disabled entirely"
+      "All requests still share one cached copy per URL path",
+      "Each distinct query string is cached as a separate object",
+      "The query string is stripped before reaching the origin",
+      "Caching is disabled for any URL with a query string"
     ],
     "answer": 1,
     "explanation": "Cache key quyết định thứ gì tạo ra một bản cache riêng. Đưa query string vào giúp phân biệt `?size=small` với `?size=large`, nhưng làm giảm cache hit ratio nếu query string có quá nhiều giá trị.",

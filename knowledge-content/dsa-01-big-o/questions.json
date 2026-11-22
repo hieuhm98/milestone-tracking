@@ -25,15 +25,15 @@
     "questionEn": "A function performs about `5n + 2` simple operations. If `n` doubles, what happens to the number of operations?",
     "options": [
       "Xấp xỉ tăng gấp đôi",
-      "Tăng gấp bốn",
-      "Không đổi",
-      "Chỉ tăng thêm 2"
+      "Tăng gấp bốn lần",
+      "Gần như không đổi",
+      "Chỉ tăng thêm đúng 2"
     ],
     "optionsEn": [
       "It roughly doubles",
-      "It quadruples",
-      "It stays the same",
-      "It only grows by 2"
+      "It roughly quadruples",
+      "It stays about the same",
+      "It only grows by exactly 2"
     ],
     "answer": 0,
     "explanation": "5(2n) + 2 = 10n + 2, xấp xỉ gấp đôi 5n + 2 khi n lớn. Đó chính là ý nghĩa của tăng trưởng tuyến tính O(n): số phép toán tăng tỉ lệ thuận với n.",
@@ -104,13 +104,13 @@
     "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function f(arrA, arrB) {\n  for (const a of arrA) console.log(a);\n  for (const b of arrB) console.log(b);\n}`",
     "questionEn": "What is the time complexity of this function?\n`function f(arrA, arrB) {\n  for (const a of arrA) console.log(a);\n  for (const b of arrB) console.log(b);\n}`",
     "options": [
-      "O(a + b), với a và b là độ dài hai mảng",
+      "O(a + b)",
       "O(n)",
       "O(a · b)",
       "O(2n)"
     ],
     "optionsEn": [
-      "O(a + b), where a and b are the two array lengths",
+      "O(a + b)",
       "O(n)",
       "O(a · b)",
       "O(2n)"
@@ -205,15 +205,15 @@
     "questionEn": "As a rule of thumb, what does log₂(n) measure?",
     "options": [
       "Số chữ số của n khi viết ở hệ thập phân",
-      "Số lần có thể chia n cho 2 cho đến khi được giá trị ≤ 1",
-      "Một nửa của n",
-      "Số lần nhân n với chính nó"
+      "Số lần chia n cho 2 cho đến khi còn ≤ 1",
+      "Giá trị của n sau khi chia đôi một lần",
+      "Số lần nhân n với chính nó để vượt quá n²"
     ],
     "optionsEn": [
-      "The number of decimal digits in n",
-      "How many times you can divide n by 2 before reaching a value ≤ 1",
-      "Half of n",
-      "How many times n is multiplied by itself"
+      "The number of decimal digits needed to write n",
+      "How many times you can halve n until it is ≤ 1",
+      "The value of n after it has been halved once",
+      "How many times n is multiplied by itself to pass n²"
     ],
     "answer": 1,
     "explanation": "log₂(8) = 3 vì 8 → 4 → 2 → 1 là ba lần chia đôi (và 2³ = 8). Vì thế thuật toán nào chia đôi phần việc còn lại sau mỗi bước sẽ là O(log n).",
@@ -284,16 +284,16 @@
     "question": "Khi nói \"auxiliary space complexity\" (không gian phụ trợ), ta đang đo gì?",
     "questionEn": "What does \"auxiliary space complexity\" measure?",
     "options": [
-      "Tổng bộ nhớ của chương trình, bao gồm cả input",
-      "Dung lượng file mã nguồn của thuật toán",
-      "Bộ nhớ thuật toán cấp phát thêm khi chạy, không tính chính input",
-      "Bộ nhớ đệm (cache) của CPU mà thuật toán dùng"
+      "Tổng bộ nhớ của chương trình, tính cả input được truyền vào",
+      "Dung lượng file mã nguồn của thuật toán sau khi build",
+      "Bộ nhớ thuật toán cấp phát thêm, không tính input",
+      "Bộ nhớ đệm (cache) của CPU mà thuật toán chiếm khi chạy"
     ],
     "optionsEn": [
-      "The program's total memory, including the input",
-      "The size of the algorithm's source file",
-      "The extra memory the algorithm allocates while running, not counting the input",
-      "The CPU cache the algorithm uses"
+      "The program's total memory, including the input passed in",
+      "The size of the algorithm's source file after it is built",
+      "Extra memory the algorithm allocates, excluding the input",
+      "The CPU cache lines the algorithm occupies while running"
     ],
     "answer": 2,
     "explanation": "Auxiliary space loại trừ phần bộ nhớ của input. Nếu tính cả input thì mọi hàm nhận vào một mảng đều tối thiểu O(n), khiến việc so sánh vô nghĩa. Khi nói \"space complexity\" mà không nói gì thêm, người ta thường ngầm hiểu là auxiliary space.",
@@ -324,16 +324,16 @@
     "question": "Một bạn khẳng định hàm sau có space O(1) vì \"không tạo mảng nào\". Nhận định đúng là gì?\n`function sumTo(n) {\n  if (n === 0) return 0;\n  return n + sumTo(n - 1);\n}`",
     "questionEn": "A colleague claims this function uses O(1) space because \"it creates no arrays\". What is the correct assessment?\n`function sumTo(n) {\n  if (n === 0) return 0;\n  return n + sumTo(n - 1);\n}`",
     "options": [
-      "Sai — n lời gọi đệ quy cùng nằm chờ trên call stack nên space là O(n)",
-      "Đúng — chỉ có biến number nên space là O(1)",
-      "Sai — space là O(n²) vì mỗi lời gọi lại gọi tiếp",
-      "Sai — space là O(log n) vì đệ quy luôn tốn log n"
+      "Sai — n lời gọi cùng chờ trên call stack nên space là O(n)",
+      "Đúng — chỉ có các biến kiểu number nên space vẫn là O(1)",
+      "Sai — space là O(n²) vì mỗi lời gọi lại sinh thêm một lời gọi",
+      "Sai — space là O(log n) vì đệ quy luôn tốn log n stack frame"
     ],
     "optionsEn": [
-      "Wrong — n recursive calls wait on the call stack at once, so space is O(n)",
-      "Right — there are only number variables, so space is O(1)",
-      "Wrong — space is O(n²) because each call makes another call",
-      "Wrong — space is O(log n) because recursion always costs log n"
+      "Wrong — n calls wait on the call stack at once, so space is O(n)",
+      "Right — there are only number variables, so space stays O(1)",
+      "Wrong — space is O(n²) because each call spawns another call",
+      "Wrong — space is O(log n) because recursion always uses log n frames"
     ],
     "answer": 0,
     "explanation": "Mỗi lời gọi chưa trả về giữ một stack frame. Ở điểm sâu nhất có sumTo(n), sumTo(n-1), …, sumTo(0) cùng nằm trên stack: O(n) bộ nhớ. Đệ quy chỉ tốn O(log n) khi nó chia đôi input mỗi lần, như binary search đệ quy.",
@@ -344,16 +344,16 @@
     "question": "Độ phức tạp thời gian của hàm sau là gì?\n`function hasDuplicate(arr) {\n  for (let i = 0; i < arr.length; i++) {\n    if (arr.slice(i + 1).includes(arr[i])) return true;\n  }\n  return false;\n}`",
     "questionEn": "What is the time complexity of this function?\n`function hasDuplicate(arr) {\n  for (let i = 0; i < arr.length; i++) {\n    if (arr.slice(i + 1).includes(arr[i])) return true;\n  }\n  return false;\n}`",
     "options": [
-      "O(n), vì chỉ có một vòng lặp",
-      "O(n²), vì `slice` và `includes` đều là O(n) bên trong vòng lặp O(n)",
-      "O(n log n), vì mảng con ngắn dần",
-      "O(1), vì hàm có thể trả về sớm"
+      "O(n), vì chỉ có một vòng lặp `for` duy nhất trong hàm",
+      "O(n²), vì `slice` và `includes` đều là O(n) trong vòng lặp",
+      "O(n log n), vì mảng con được cắt ra ngắn dần sau mỗi vòng",
+      "O(1), vì hàm có thể trả về `true` ngay ở phần tử đầu"
     ],
     "optionsEn": [
-      "O(n), because there is only one loop",
-      "O(n²), because `slice` and `includes` are each O(n) inside an O(n) loop",
-      "O(n log n), because the sub-array keeps shrinking",
-      "O(1), because the function can return early"
+      "O(n), because the function contains only a single `for` loop",
+      "O(n²), because `slice` and `includes` are O(n) inside the loop",
+      "O(n log n), because the sliced sub-array shrinks on every pass",
+      "O(1), because the function can return `true` at the first element"
     ],
     "answer": 1,
     "explanation": "`slice` sao chép và `includes` quét tuyến tính — cả hai là vòng lặp ẩn. Tổng (n-1) + (n-2) + … ≈ n²/2 = O(n²). Mảng con ngắn dần chỉ đổi hằng số, và trả về sớm chỉ giúp best case, không đổi worst case. Dùng `Set` sẽ đưa về O(n).",

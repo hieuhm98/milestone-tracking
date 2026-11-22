@@ -4,16 +4,16 @@
     "question": "Khi nghe requirement 'quản lý đơn hàng', framework NOUN-VERB-STATE giúp làm gì?",
     "questionEn": "When you hear the requirement 'manage orders', what does the NOUN-VERB-STATE framework help you do?",
     "options": [
-      "Ước lượng thời gian development",
-      "Xác định entities (dữ liệu), tính năng cần build và lifecycle của đối tượng",
-      "Chọn ngôn ngữ lập trình phù hợp",
-      "Vẽ wireframe ngay lập tức"
+      "Chia requirement thành task nhỏ để ước lượng thời gian development",
+      "Tìm ra entities, tính năng cần build và vòng đời của đối tượng",
+      "Chọn ngôn ngữ và framework phù hợp với loại dữ liệu cần lưu",
+      "Phác wireframe ngay từ danh từ, động từ có trong câu yêu cầu"
     ],
     "optionsEn": [
-      "Estimate development time",
-      "Identify entities (data), the features to build, and the object's lifecycle",
-      "Choose the right programming language",
-      "Draw a wireframe immediately"
+      "Break the requirement into small tasks to estimate development time",
+      "Find the entities, the features to build and the object's lifecycle",
+      "Choose a language and framework suited to the data to be stored",
+      "Sketch a wireframe straight from the nouns and verbs in the requirement"
     ],
     "answer": 1,
     "explanation": "NOUN → entities cần lưu trong database (đơn hàng, khách hàng, sản phẩm). VERB → tính năng / API cần xây dựng (tạo, xem, hủy, giao). STATE → lifecycle của đối tượng (pending → confirmed → shipping → delivered). Ba chiều này cho cái nhìn toàn diện về hệ thống.",
@@ -24,16 +24,16 @@
     "question": "Requirement: 'Nhân viên được assign vào nhiều dự án, một dự án có nhiều nhân viên.' Đây là quan hệ gì trong database?",
     "questionEn": "Requirement: 'An employee is assigned to many projects, and a project has many employees.' What kind of relationship is this in the database?",
     "options": [
-      "Quan hệ 1-N: một nhân viên có nhiều dự án",
-      "Quan hệ 1-1: mỗi nhân viên chỉ có một dự án",
+      "Quan hệ 1-N: lưu danh sách project_id vào một cột của bảng nhân viên",
+      "Quan hệ 1-1: mỗi lần assign tạo thêm một bản ghi nhân viên mới",
       "Quan hệ N-N: cần bảng trung gian (project_members)",
-      "Không cần quan hệ, lưu riêng từng bảng"
+      "Không cần quan hệ, chỉ lưu tên dự án dạng text trong bảng nhân viên"
     ],
     "optionsEn": [
-      "A 1-N relationship: one employee has many projects",
-      "A 1-1 relationship: each employee has only one project",
+      "A 1-N relationship: store a list of project_ids in one employee column",
+      "A 1-1 relationship: each assignment creates a new employee record",
       "An N-N relationship: it needs a junction table (project_members)",
-      "No relationship is needed; store each table separately"
+      "No relationship; just store project names as text in the employee table"
     ],
     "answer": 2,
     "explanation": "Nhiều-Nhiều (N-N) cần bảng trung gian: project_members(project_id, user_id, role). Không thể lưu 'nhiều project_id' vào 1 cột user, cũng không thể lưu 'nhiều user_id' vào 1 cột project. Bảng trung gian giải quyết vấn đề này và cho phép thêm thông tin về mối quan hệ (ví dụ role trong dự án).",
@@ -44,16 +44,16 @@
     "question": "Khi vẽ luồng màn hình (screen flow) cho một feature, bạn phát hiện ra điều gì hữu ích nhất?",
     "questionEn": "When you draw a screen flow for a feature, what is the most useful thing you discover?",
     "options": [
-      "Màu sắc phù hợp cho từng màn hình",
-      "Màn hình bị thiếu, entry/exit points và màn hình cần authentication",
-      "Số lượng component cần code",
-      "Performance của từng màn hình"
+      "Bảng màu và typography thống nhất để áp dụng cho từng màn hình",
+      "Màn hình bị thiếu, điểm vào/ra và màn hình cần đăng nhập",
+      "Số component cần code và component nào tái sử dụng được",
+      "Thời gian load của từng màn hình trên mạng 4G"
     ],
     "optionsEn": [
-      "The right colors for each screen",
-      "Missing screens, entry/exit points, and which screens need authentication",
-      "The number of components to code",
-      "The performance of each screen"
+      "A consistent colour palette and typography to apply on each screen",
+      "Missing screens, entry/exit points and screens needing login",
+      "How many components to code and which can be reused",
+      "Each screen's load time on a 4G network"
     ],
     "answer": 1,
     "explanation": "Screen flow diagram giúp: phát hiện màn hình bị bỏ sót (ví dụ quên trang 'Xác nhận đơn hàng thành công'), xác định đâu cần login (unauthorized user bị redirect), và xác định entry point nào user có thể vào hệ thống từ đó.",
@@ -64,16 +64,16 @@
     "question": "Requirement: 'Admin thay đổi giá sản phẩm.' Câu hỏi nào QUAN TRỌNG nhất BA cần hỏi thêm?",
     "questionEn": "Requirement: 'An admin changes a product's price.' Which is the MOST IMPORTANT follow-up question a BA should ask?",
     "options": [
-      "Giao diện form thay đổi giá trông như thế nào?",
-      "Lịch sử thay đổi giá có cần lưu không? Đơn hàng cũ dùng giá cũ hay giá mới?",
-      "Dùng input type number hay text cho trường giá?",
-      "Nút Save đặt ở trên hay dưới form?"
+      "Form đổi giá nên là popup hay một trang riêng để admin dễ thao tác?",
+      "Có lưu lịch sử giá không, đơn cũ giữ giá cũ hay theo giá mới?",
+      "Trường giá dùng input type number hay text, có format dấu phẩy không?",
+      "Nút Save đặt ở trên hay dưới form, có cần nút Cancel không?"
     ],
     "optionsEn": [
-      "What does the price-change form UI look like?",
-      "Does the price change history need to be stored? Do old orders use the old price or the new one?",
-      "Should the price field use an input of type number or text?",
-      "Should the Save button be at the top or the bottom of the form?"
+      "Should the price form be a popup or a separate page for admins?",
+      "Is price history kept, and do old orders keep the old price?",
+      "Should the price input be number or text, with comma formatting?",
+      "Should Save be at the top or bottom, and is a Cancel button needed?"
     ],
     "answer": 1,
     "explanation": "Đây là câu hỏi về audit trail và business rule quan trọng: đơn hàng đã đặt với giá cũ có bị ảnh hưởng không? Có cần log ai thay đổi, lúc nào, từ giá nào sang giá nào? Thiếu yêu cầu này có thể gây vấn đề pháp lý và tranh chấp với khách hàng.",
@@ -84,16 +84,16 @@
     "question": "State machine của 'Đơn hàng' hữu ích để làm gì?",
     "questionEn": "What is the 'Order' state machine useful for?",
     "options": [
-      "Thiết kế màu sắc hiển thị trạng thái",
-      "Xác định ai được phép chuyển trạng thái nào, điều kiện gì và hệ thống làm gì khi chuyển",
-      "Tính số lượng API cần xây dựng",
-      "Đặt tên bảng database"
+      "Chọn màu và icon hiển thị cho từng trạng thái trên giao diện",
+      "Xác định ai được chuyển trạng thái nào, với điều kiện gì và hệ thống làm gì",
+      "Đếm số API cần build, vì mỗi trạng thái tương ứng với đúng một endpoint riêng",
+      "Đặt tên bảng và cột status theo đúng quy ước database"
     ],
     "optionsEn": [
-      "Designing the colors used to display each status",
-      "Determining who is allowed to make each transition, under what conditions, and what the system does on transition",
-      "Counting how many APIs need to be built",
-      "Naming the database tables"
+      "Choosing the colour and icon each status shows in the UI",
+      "Defining who may make each transition, under what conditions, and what follows",
+      "Counting the APIs to build, since every status maps to exactly one endpoint of its own",
+      "Naming the tables and status column by database convention"
     ],
     "answer": 1,
     "explanation": "State machine xác định: CÁC TRẠNG THÁI (pending, confirmed, shipping...), CHUYỂN TIẾP HỢP LỆ (không thể từ delivered về pending), AI được trigger (user hủy, admin xác nhận, shipper cập nhật), và HỆ THỐNG LÀM GÌ khi chuyển (gửi email, trừ tồn kho, tạo transaction).",
@@ -104,16 +104,16 @@
     "question": "Khi phân tích một màn hình, câu hỏi 'Xem gì? Làm gì? Đến đâu?' giúp xác định điều gì?",
     "questionEn": "When analyzing a screen, what do the questions 'View what? Do what? Go where?' help you determine?",
     "options": [
-      "Chỉ xác định màu sắc và layout",
+      "Bố cục, màu sắc và khoảng cách giữa các thành phần hiển thị trên màn hình",
       "Dữ liệu cần hiển thị, actions có thể thực hiện và navigation links",
-      "Số lượng API cần gọi",
-      "Kích thước màn hình responsive"
+      "Số API cần gọi và thứ tự gọi khi màn hình mở ra",
+      "Các breakpoint responsive cho mobile, tablet và desktop"
     ],
     "optionsEn": [
-      "Only the colors and layout",
-      "The data to display, the actions that can be performed, and the navigation links",
-      "The number of APIs to call",
-      "The responsive screen dimensions"
+      "The layout, colours and spacing between elements on the screen",
+      "The data shown, the actions available, and the navigation links",
+      "How many APIs to call and in what order when the screen opens",
+      "The responsive breakpoints for mobile, tablet and desktop"
     ],
     "answer": 1,
     "explanation": "'Xem gì?' → data model cần (columns trong DB). 'Làm gì?' → tính năng và API cần (nút bấm, form, dropdown). 'Đến đâu?' → navigation flow (links và routing). Ba câu hỏi này đủ để define scope của một màn hình.",
@@ -124,16 +124,16 @@
     "question": "Scenario: 2 user cùng lúc đặt mua sản phẩm chỉ còn 1 cái trong kho. BA cần xác định gì?",
     "questionEn": "Scenario: 2 users simultaneously try to buy a product with only 1 left in stock. What does the BA need to determine?",
     "options": [
-      "Không cần lo — đây là vấn đề kỹ thuật của developer",
-      "Cần define business rule: ai đặt trước được mua, hệ thống xử lý tồn kho concurrent như thế nào",
-      "Chỉ cần hiển thị 'Hết hàng' khi tồn kho = 0",
-      "Tăng số lượng sản phẩm trong kho"
+      "Không cần — chuyện đồng thời là vấn đề kỹ thuật để developer tự xử lý",
+      "Business rule: ai được mua, có giữ hàng khi đang checkout không",
+      "Chỉ cần hiển thị 'Hết hàng' cho người thứ hai khi tồn kho về 0",
+      "Khóa sản phẩm, không cho ai mua cho tới khi admin kiểm tra kho"
     ],
     "optionsEn": [
-      "No need to worry — this is a technical problem for the developer",
-      "You need to define the business rule: who ordered first gets to buy, and how the system handles concurrent inventory",
-      "Just display 'Out of stock' when inventory = 0",
-      "Increase the product's stock quantity"
+      "Nothing — concurrency is a technical matter for developers to handle alone",
+      "The business rule: who gets it, and whether stock is held during checkout",
+      "Only showing 'Out of stock' to the second user once stock hits 0",
+      "Lock the product so nobody can buy until an admin checks stock"
     ],
     "answer": 1,
     "explanation": "Concurrency là business problem, không chỉ là kỹ thuật. BA cần define: first-come-first-served hay lottery? Khi user B checkout thì hiển thị gì? Có hold tồn kho khi user đang checkout không (bao nhiêu phút)? Thiếu rule này → BE không biết implement gì.",
@@ -144,16 +144,16 @@
     "question": "Mỗi khi xác định một happy path, BA cần bổ sung thêm điều gì?",
     "questionEn": "Every time you define a happy path, what does a BA need to add?",
     "options": [
-      "Màu sắc của success message",
-      "Animation transition giữa các bước",
+      "Nội dung và màu sắc của thông báo thành công",
+      "Animation chuyển tiếp giữa các bước của luồng",
       "Empty state, error state, loading state và edge cases",
-      "Tên biến trong code"
+      "Tên biến và tên hàm dev sẽ dùng trong code"
     ],
     "optionsEn": [
-      "The color of the success message",
-      "The animation transitions between steps",
+      "The wording and colour of the success message",
+      "Transition animations between the flow's steps",
       "Empty state, error state, loading state, and edge cases",
-      "The variable names in the code"
+      "The variable and function names devs will use"
     ],
     "answer": 2,
     "explanation": "Happy path chỉ là 20% công việc. 80% còn lại: Loading state (đang gọi API), Empty state (không có dữ liệu), Error state (API fail, timeout), Edge cases (user nhập giá trị biên, concurrent actions, network slow). Thiếu những trạng thái này → UX xấu hoặc bugs.",
@@ -164,16 +164,16 @@
     "question": "Requirement: 'Hệ thống gửi thông báo nhắc nhở'. Câu hỏi 'WHEN' cần làm rõ điều gì?",
     "questionEn": "Requirement: 'The system sends reminder notifications.' What does the 'WHEN' question need to clarify?",
     "options": [
-      "Màu nền của notification",
-      "Thông báo trigger lúc nào, tần suất, múi giờ, và có tắt được không",
-      "Kích thước font chữ thông báo",
-      "Số lượng notification tối đa"
+      "Màu nền và icon của notification thay đổi theo từng loại nhắc nhở",
+      "Trigger lúc nào, lặp bao lâu, theo múi giờ nào, có tắt được không",
+      "Nội dung và độ dài tối đa của tin nhắn nhắc nhở",
+      "Số notification tối đa hiển thị cùng lúc trên màn hình"
     ],
     "optionsEn": [
-      "The background color of the notification",
-      "When the notification triggers, how often, which time zone, and whether it can be turned off",
-      "The font size of the notification",
-      "The maximum number of notifications"
+      "The background colour and the icon that change with each type of reminder",
+      "When it triggers, how often, in which time zone, and if it can be muted",
+      "The content and maximum length of the reminder message",
+      "The maximum number of notifications shown at once"
     ],
     "answer": 1,
     "explanation": "WHEN xác định: trigger khi nào (X ngày trước deadline? lúc 8 giờ sáng?), tần suất (một lần hay lặp lại?), múi giờ của user (UTC+7?), và điều kiện dừng (đã hoàn thành task thì không nhắc nữa?). Thiếu thông tin này → BE không biết schedule cron job như thế nào.",
@@ -184,16 +184,16 @@
     "question": "Khi nhận requirement, thứ tự tư duy nào ĐÚNG nhất?",
     "questionEn": "When receiving a requirement, which order of thinking is the MOST correct?",
     "options": [
-      "Thiết kế UI đẹp → nghĩ đến data → xác định API",
-      "Xác định entities và quan hệ → xác định luồng/màn hình → xác định API → đặt câu hỏi edge cases",
-      "Viết user story ngay → estimate → code",
-      "Hỏi dev xem cần bao lâu → trình bày với stakeholder"
+      "Thiết kế UI → suy ra dữ liệu từ màn hình → xác định API",
+      "Entities và quan hệ → luồng/màn hình → API → edge case",
+      "Viết user story ngay → estimate → chuyển dev code",
+      "Hỏi dev cần bao lâu → chốt deadline với stakeholder → viết spec"
     ],
     "optionsEn": [
-      "Design a beautiful UI → think about the data → define the APIs",
-      "Identify entities and relationships → define the flow/screens → define the APIs → ask about edge cases",
-      "Write the user story right away → estimate → code",
-      "Ask the dev how long it takes → present to the stakeholder"
+      "Design the UI → infer the data from the screens → define APIs",
+      "Entities and relationships → flow/screens → APIs → edge cases",
+      "Write the user story at once → estimate → hand to devs",
+      "Ask devs how long → lock a deadline with stakeholders → write the spec"
     ],
     "answer": 1,
     "explanation": "Thứ tự đúng: (1) Identify NOUN → entities và quan hệ (data model), (2) Identify VERB → tính năng và luồng, (3) Identify STATE → lifecycle, (4) Define screens và navigation, (5) Define API, (6) Edge cases và open questions. Bắt đầu từ UI trước dễ bỏ sót data requirements.",
@@ -204,16 +204,16 @@
     "question": "Một bảng database tốt thường cần những trường nào ngoài business data?",
     "questionEn": "Beyond business data, what fields does a good database table usually need?",
     "options": [
-      "Chỉ cần các trường business, không cần gì thêm",
-      "id, created_at, updated_at — và thường thêm created_by, deleted_at (soft delete)",
-      "Chỉ cần id là đủ",
-      "Cần thêm các trường CSS cho UI"
+      "Chỉ các trường business; thời gian tạo/sửa database tự ghi lại sẵn",
+      "id, created_at, updated_at, thường thêm created_by, deleted_at",
+      "Chỉ cần id, các thông tin còn lại tra trong log server khi cần",
+      "Thêm các trường hiển thị như màu, thứ tự sắp xếp cho UI dùng"
     ],
     "optionsEn": [
-      "Only business fields are needed; nothing more",
-      "id, created_at, updated_at — and often created_by, deleted_at (soft delete) as well",
-      "Just id is enough",
-      "You need to add CSS fields for the UI"
+      "Only business fields; the database records create/update times by itself",
+      "id, created_at, updated_at, often also created_by and deleted_at",
+      "Just id; anything else can be looked up in server logs when needed",
+      "Display fields like colour and sort order for the UI to use"
     ],
     "answer": 1,
     "explanation": "Trường metadata thường gặp: id (primary key, định danh), created_at (audit), updated_at (audit), created_by/updated_by (ai thay đổi), deleted_at (soft delete — ẩn thay vì xóa thật). Những trường này không phải yêu cầu nghiệp vụ rõ ràng nhưng gần như luôn cần cho tracking và debugging.",
@@ -224,16 +224,16 @@
     "question": "Tại sao BA cần nghĩ đến phân quyền (authorization) ngay khi nhận requirement?",
     "questionEn": "Why should a BA think about authorization right when receiving a requirement?",
     "options": [
-      "Chỉ cần nghĩ đến khi có yêu cầu cụ thể về bảo mật",
+      "Chỉ cần nghĩ tới khi khách hàng nêu rõ yêu cầu bảo mật cụ thể",
       "Vì phân quyền ảnh hưởng đến data model, API design và UI — khó thêm sau này",
-      "Để tăng độ phức tạp của hệ thống",
-      "Chỉ cần ẩn button ở FE là đủ"
+      "Vì phân quyền chỉ là việc ẩn/hiện nút trên FE nên cần chốt sớm với designer",
+      "Để giao phần bảo mật cho đội security xử lý độc lập ngay từ đầu"
     ],
     "optionsEn": [
-      "You only need to think about it when there's a specific security requirement",
-      "Because authorization affects the data model, API design, and UI — it's hard to add later",
-      "To increase the complexity of the system",
-      "Just hiding the button on the FE is enough"
+      "Only when the client states an explicit security requirement",
+      "Because authorization shapes the data model, API and UI — hard to add later",
+      "Because authorization is just showing/hiding buttons on FE, so lock it early with design",
+      "To hand security to the security team to handle independently from day one"
     ],
     "answer": 1,
     "explanation": "Phân quyền ảnh hưởng sâu: data model cần thêm role/permission tables, API cần middleware kiểm tra role, UI cần conditional rendering, queries cần filter theo user context (user A không thấy data của user B). Thiết kế phân quyền sau khi build xong rất tốn kém.",
@@ -264,16 +264,16 @@
     "question": "Trong ví dụ app quản lý chi tiêu, câu hỏi 'Thu nhập có cần ghi lại không?' quan trọng vì sao?",
     "questionEn": "In the expense management app example, why is the question 'Does income need to be recorded?' important?",
     "options": [
-      "Không quan trọng — có thể thêm sau",
-      "Ảnh hưởng đến data model, UI và tính năng báo cáo — thêm sau tốn kém hơn nhiều",
-      "Chỉ để BA hiểu rõ hơn, không ảnh hưởng đến dev",
-      "Chỉ ảnh hưởng đến màu sắc biểu đồ"
+      "Không quan trọng, vì có thể thêm sau như một tính năng độc lập",
+      "Nó thay đổi data model, UI và báo cáo — thêm sau rất tốn kém",
+      "Chỉ giúp BA hiểu bối cảnh người dùng, dev không bị ảnh hưởng gì",
+      "Chỉ quyết định biểu đồ có thêm một màu cho cột thu nhập hay không"
     ],
     "optionsEn": [
-      "It's not important — it can be added later",
-      "It affects the data model, UI, and reporting features — adding it later is far more expensive",
-      "It's just so the BA understands better; it doesn't affect the dev",
-      "It only affects the chart colors"
+      "Not important — it can be added later as a standalone feature",
+      "It changes the data model, UI and reports — adding it later is costly",
+      "It only helps the BA understand the user; devs are unaffected",
+      "It only decides whether charts get an extra colour for income"
     ],
     "answer": 1,
     "explanation": "Quyết định này ảnh hưởng lớn: có thu nhập → cần bảng transactions với type (income/expense), báo cáo thêm cột 'thu', 'chi', 'còn lại', logic tính balance thay đổi, UI cần thêm form nhập thu nhập. Nếu hỏi sau khi đã build: cần thêm cột, sửa nhiều API và UI.",
@@ -284,16 +284,16 @@
     "question": "Thói quen tư duy nào giúp BA phát triển tư duy IT tốt nhất?",
     "questionEn": "Which thinking habit best helps a BA develop IT thinking?",
     "options": [
-      "Học thuộc lòng tất cả SQL queries",
-      "Khi dùng bất kỳ app nào, tự hỏi: data gì được lưu, màn hình nào có, trạng thái chuyển như thế nào",
-      "Đọc code của developer",
-      "Học lập trình đầy đủ một ngôn ngữ"
+      "Học thuộc cú pháp SQL để tự viết mọi câu truy vấn mà không cần dev",
+      "Khi dùng app bất kỳ, tự hỏi nó lưu dữ liệu gì, có màn hình nào, trạng thái ra sao",
+      "Đọc code của developer mỗi ngày để hiểu hệ thống thực sự chạy bên trong ra sao",
+      "Học trọn một ngôn ngữ lập trình trước khi nhận dự án đầu tiên"
     ],
     "optionsEn": [
-      "Memorizing all SQL queries by heart",
-      "When using any app, asking yourself: what data is stored, what screens exist, how the states transition",
-      "Reading the developer's code",
-      "Fully learning a programming language"
+      "Memorising SQL syntax so you can write every query without devs",
+      "When using any app, asking what data it stores, what screens it has, how states change",
+      "Reading the developers' code every day to understand how the system really works inside",
+      "Fully learning a programming language before taking a first project"
     ],
     "answer": 1,
     "explanation": "Tư duy IT là skill, không phải kiến thức — cần luyện tập hằng ngày. Mỗi lần dùng Grab, Shopee, Jira, hãy tự hỏi: entities là gì, tính năng build từ đâu, state machine của order/ticket trông ra sao. Sau vài tháng, tư duy này trở thành phản xạ tự nhiên.",
@@ -303,16 +303,16 @@
     "question": "Framework NOUN-VERB-STATE giúp BA làm gì khi đọc một requirement?",
     "questionEn": "What does the NOUN-VERB-STATE framework help a BA do when reading a requirement?",
     "options": [
-      "Rút ra thực thể dữ liệu từ danh từ, chức năng từ động từ và vòng đời trạng thái từ tính từ mô tả tình trạng",
-      "Ước tính công sức chính xác hơn",
-      "Chọn công nghệ phù hợp",
-      "Viết mã nhanh hơn"
+      "Danh từ → thực thể dữ liệu, động từ → chức năng, trạng thái → vòng đời",
+      "Danh từ → tên màn hình, động từ → nút bấm, trạng thái → màu hiển thị",
+      "Đếm danh từ và động từ để ước tính công sức chính xác hơn",
+      "Chọn công nghệ: nhiều danh từ thì dùng SQL, nhiều động từ thì dùng NoSQL"
     ],
     "optionsEn": [
-      "Extract data entities from nouns, functionality from verbs, and state life cycles from status words",
-      "Estimate effort more accurately",
-      "Choose the right technology",
-      "Write code faster"
+      "Nouns → data entities, verbs → functions, states → life cycles",
+      "Nouns → screen names, verbs → buttons, states → display colours",
+      "Count nouns and verbs to estimate effort more accurately",
+      "Pick tech: many nouns means SQL, many verbs means NoSQL"
     ],
     "answer": 0,
     "explanation": "Danh từ dẫn tới bảng dữ liệu, động từ dẫn tới use case và API, còn trạng thái dẫn tới sơ đồ chuyển trạng thái — ba mô hình bổ trợ nhau.",
@@ -323,16 +323,16 @@
     "question": "Khi requirement nói người quản lý duyệt đơn nghỉ phép, BA nên nghĩ tới trạng thái nào?",
     "questionEn": "When a requirement says a manager approves a leave request, which states should the BA consider?",
     "options": [
-      "Nháp, chờ duyệt, đã duyệt, bị từ chối, đã huỷ — và mọi chuyển tiếp hợp lệ giữa chúng",
-      "Chỉ cần hai trạng thái đúng và sai",
-      "Không cần trạng thái vì đây là hành động đơn giản",
-      "Chỉ cần trạng thái đã duyệt"
+      "Nháp, chờ duyệt, đã duyệt, từ chối, đã huỷ và các chuyển tiếp hợp lệ",
+      "Chỉ cần cờ is_approved đúng/sai, còn lại suy ra từ ngày nghỉ",
+      "Không cần trạng thái, chỉ cần gửi email cho quản lý là đủ",
+      "Chỉ cần đã duyệt và chưa duyệt, vì người dùng chỉ quan tâm tới kết quả"
     ],
     "optionsEn": [
-      "Draft, pending, approved, rejected, cancelled — and every valid transition between them",
-      "Just two states, true and false",
-      "No states needed since it is a simple action",
-      "Only the approved state"
+      "Draft, pending, approved, rejected, cancelled and valid transitions",
+      "Just an is_approved true/false flag; the rest follows from the dates",
+      "No states; emailing the manager is enough",
+      "Only approved and not approved, since users only care about the result"
     ],
     "answer": 0,
     "explanation": "Mô tả tập chuyển trạng thái phức tạp bằng văn bản rất dễ bỏ sót. Bảng trạng thái buộc BA phân tích từng ô của ma trận.",
@@ -343,16 +343,16 @@
     "question": "Bẫy tư duy nào phổ biến nhất khi BA nhận một requirement?",
     "questionEn": "Which thinking trap is most common when a BA receives a requirement?",
     "options": [
-      "Nhận nguyên giải pháp mà người dùng đề xuất thay vì tìm nhu cầu thật đằng sau",
-      "Vẽ quá nhiều sơ đồ",
-      "Hỏi quá nhiều câu hỏi",
-      "Viết acceptance criteria quá chi tiết"
+      "Nhận luôn giải pháp người dùng đề xuất mà không tìm nhu cầu thật",
+      "Vẽ quá nhiều sơ đồ khiến tài liệu nặng nề, dev không còn muốn đọc",
+      "Hỏi quá nhiều câu hỏi làm stakeholder mất kiên nhẫn",
+      "Viết acceptance criteria chi tiết tới mức trói tay developer"
     ],
     "optionsEn": [
-      "Accepting the solution the user proposed instead of finding the real need behind it",
-      "Drawing too many diagrams",
-      "Asking too many questions",
-      "Writing overly detailed acceptance criteria"
+      "Taking the user's proposed solution without finding the real need",
+      "Drawing so many diagrams that devs won't read the heavy documents",
+      "Asking so many questions that stakeholders lose patience",
+      "Writing acceptance criteria so detailed they tie developers' hands"
     ],
     "answer": 0,
     "explanation": "Người dùng mô tả cái họ biết chứ không mô tả vấn đề. Hỏi vì sao vài lần thường dẫn tới cách đáp ứng tốt hơn và rẻ hơn nhiều.",
@@ -363,16 +363,16 @@
     "question": "Áp dụng 5W1H vào một requirement giúp phát hiện điều gì?",
     "questionEn": "What does applying 5W1H to a requirement uncover?",
     "options": [
-      "Những khoảng trống về ai dùng, khi nào chạy, ở đâu, tại sao cần và xử lý ra sao trong trường hợp bất thường",
-      "Ngôn ngữ lập trình phù hợp nhất",
-      "Ngân sách cần thiết",
-      "Số lượng thành viên đội"
+      "Khoảng trống về ai dùng, khi nào, ở đâu, vì sao và xử lý ngoại lệ ra sao",
+      "Ngôn ngữ lập trình và framework phù hợp nhất với từng loại yêu cầu",
+      "Ngân sách và số sprint cần thiết để hoàn thành trọn vẹn requirement",
+      "Số thành viên và vai trò cần có trong đội phát triển"
     ],
     "optionsEn": [
-      "Gaps about who uses it, when it runs, where, why it is needed, and how abnormal cases are handled",
-      "The most suitable programming language",
-      "The required budget",
-      "The team size"
+      "Gaps about who, when, where, why, and how exceptions are handled",
+      "The programming language and framework best suited to each kind of requirement",
+      "The budget and number of sprints needed to fully deliver the requirement",
+      "The headcount and roles needed in the development team"
     ],
     "answer": 0,
     "explanation": "5W1H là checklist chống bỏ sót. Câu hỏi khi nào và trong trường hợp nào thường lộ ra các yêu cầu ngoại lệ chưa ai nghĩ tới.",
@@ -383,16 +383,16 @@
     "question": "Từ requirement quản lý danh sách khách hàng, BA hình dung cơ sở dữ liệu nên hỏi gì trước tiên?",
     "questionEn": "From a manage customer list requirement, what should the BA ask first when picturing the database?",
     "options": [
-      "Một khách hàng gồm những thuộc tính nào, thuộc tính nào bắt buộc, và khách hàng liên hệ với thực thể nào khác",
-      "Cơ sở dữ liệu nào rẻ nhất",
-      "Bảng sẽ được đặt tên là gì",
-      "Ai sẽ viết câu truy vấn"
+      "Khách hàng có thuộc tính gì, cái nào bắt buộc, liên quan thực thể nào",
+      "Nên dùng hệ quản trị cơ sở dữ liệu nào rẻ và phổ biến nhất",
+      "Bảng và cột nên đặt tên bằng tiếng Anh hay tiếng Việt cho dễ đọc hơn",
+      "Ai trong đội sẽ viết câu truy vấn và tối ưu index cho bảng"
     ],
     "optionsEn": [
-      "Which attributes a customer has, which are mandatory, and which other entities a customer relates to",
-      "Which database is cheapest",
-      "What the table will be named",
-      "Who will write the queries"
+      "What attributes a customer has, which are mandatory, what it relates to",
+      "Which database system is the cheapest and most popular",
+      "Whether tables and columns should be named in English or Vietnamese",
+      "Who on the team writes the queries and tunes the table's indexes"
     ],
     "answer": 0,
     "explanation": "Thuộc tính và quan hệ là hai thứ quyết định mô hình dữ liệu. Quan hệ giữa các thực thể thường bộc lộ luôn chức năng còn thiếu.",

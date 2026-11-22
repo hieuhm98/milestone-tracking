@@ -68,13 +68,13 @@
     "question": "Sau một chiến dịch, approval rate tăng từ 51% lên 57%. CEO hỏi: \"Vậy là danh mục khỏe hơn rồi đúng không?\" Câu trả lời tốt nhất là gì?",
     "questionEn": "After a campaign, the approval rate rose from 51% to 57%. The CEO asks: \"So the portfolio is healthier, right?\" What is the best answer?",
     "options": [
-      "Chưa biết được: approval rate chỉ cho biết duyệt nhiều hơn; chất lượng phải xem qua dữ liệu trả nợ của các khoản này trong vài tháng tới",
-      "Đúng vậy: approval rate tăng chứng tỏ khách hàng mới kéo đến có hồ sơ tốt hơn trước",
+      "Chưa biết được: chất lượng chỉ lộ ra qua dữ liệu trả nợ của các khoản này sau vài tháng",
+      "Đúng vậy: approval rate tăng chứng tỏ khách hàng mới kéo đến có hồ sơ tốt hơn hẳn trước đây",
       "Đúng vậy: duyệt nhiều hơn nghĩa là công ty có thể giảm bớt dự phòng rủi ro tín dụng",
       "Không: approval rate tăng luôn làm take-up rate giảm, nên giải ngân sẽ đi xuống"
     ],
     "optionsEn": [
-      "We can't tell yet: the approval rate only says we approve more; quality shows up in these loans' repayments over the next months",
+      "Can't tell yet: quality only shows in these loans' repayments over the coming months",
       "Yes: a higher approval rate proves the new customers have better profiles than before",
       "Yes: approving more means the company can reduce its credit-risk provisions",
       "No: a higher approval rate always lowers the take-up rate, so disbursements will fall"
@@ -101,7 +101,7 @@
     "questionEn": "When computing PAR30 or an NPL ratio, which number should the \"book\" denominator be?",
     "options": [
       "Tổng số tiền đã giải ngân từ trước đến nay",
-      "Tổng các kỳ trả góp chưa trả, gồm cả lãi tương lai",
+      "Tổng các kỳ trả góp chưa trả, tính gộp cả phần lãi tương lai",
       "Tổng dư nợ gốc còn lại của các khoản vay chưa tất toán",
       "Tổng số khoản vay từng được giải ngân"
     ],
@@ -164,13 +164,13 @@
     "question": "Trong lịch trả nợ của một khoản vay annuity (trả đều hàng tháng), cấu trúc mỗi kỳ thay đổi thế nào theo thời gian?",
     "questionEn": "In the schedule of an annuity loan (equal monthly payments), how does each payment's make-up change over time?",
     "options": [
-      "Tổng tiền trả giữ nguyên; phần lãi giảm dần và phần gốc tăng dần",
-      "Phần lãi và phần gốc giữ nguyên bằng nhau ở mọi kỳ",
-      "Tổng tiền trả giảm dần vì dư nợ giảm dần",
-      "Phần gốc giảm dần và phần lãi tăng dần đến kỳ cuối"
+      "Tổng tiền giữ nguyên; phần lãi giảm dần, phần gốc tăng dần",
+      "Phần lãi và phần gốc giữ nguyên, bằng nhau ở mọi kỳ trả nợ",
+      "Tổng tiền trả giảm dần theo từng tháng vì dư nợ giảm dần",
+      "Phần gốc giảm dần còn phần lãi tăng dần cho đến kỳ cuối"
     ],
     "optionsEn": [
-      "The total stays the same; the interest part shrinks and the principal part grows",
+      "The total stays fixed; interest shrinks and principal grows",
       "The interest and principal parts stay equal in every payment",
       "The total payment falls each month as the balance falls",
       "The principal part shrinks and the interest part grows until the end"
@@ -229,15 +229,15 @@
     "questionEn": "An analyst builds the DPD buckets with `FROM loans l JOIN repayment_schedule r ON r.loan_id = l.loan_id AND r.due_date < '2026-06-30' AND r.paid_date IS NULL`, then `GROUP BY l.loan_id`. How will the result be wrong?",
     "options": [
       "Mỗi khoản vay bị đếm nhiều lần, một lần cho mỗi kỳ trả",
-      "DPD của mọi khoản vay bị âm vì so với ngày tương lai",
+      "DPD của mọi khoản vay đều bị âm vì được so với một ngày trong tương lai",
       "Các khoản vay trong hạn biến mất, nên bucket \"0 current\" gần như rỗng",
-      "Khoản vay 90+ bị xếp nhầm vào bucket 61–90"
+      "Khoản vay 90+ bị xếp nhầm vào bucket 61–90 ngày quá hạn"
     ],
     "optionsEn": [
       "Each loan is counted several times, once per installment",
       "Every loan's DPD becomes negative because it is compared to a future date",
       "Current loans vanish, so the \"0 current\" bucket is nearly empty",
-      "90+ loans are wrongly placed in the 61–90 bucket"
+      "90+ loans get wrongly placed in the 61–90 days-past-due bucket"
     ],
     "answer": 2,
     "explanation": "Khoản vay không có kỳ quá hạn nào không khớp dòng nào, nên JOIN thường loại nó đi. Cần `LEFT JOIN` rồi `COALESCE(..., 0)` để giữ khoản vay trong hạn với DPD = 0.",
@@ -293,13 +293,13 @@
     "questionEn": "Which statement about Vietnam's five debt groups is the most accurate?",
     "options": [
       "Nhóm 1 là nhóm xấu nhất, nhóm 5 là các khoản vay đang trả đúng hạn",
-      "Phân loại chủ yếu theo số ngày quá hạn, nhóm 3–5 là nợ xấu, và quy tắc cụ thể phải kiểm tra theo thông tư NHNN hiện hành",
-      "Nhóm nợ được quyết định chỉ dựa trên điểm tín dụng của khách lúc nộp hồ sơ",
+      "Phân loại chủ yếu theo số ngày quá hạn, nhóm 3–5 là nợ xấu, chi tiết theo thông tư NHNN",
+      "Nhóm nợ được quyết định chỉ dựa trên điểm tín dụng của khách tại thời điểm nộp hồ sơ vay",
       "Mỗi công ty tự đặt ra số nhóm và tên nhóm, nên không có chuẩn chung nào cả"
     ],
     "optionsEn": [
       "Group 1 is the worst and group 5 is loans being repaid on time",
-      "Loans are classified mainly by days overdue, groups 3–5 are bad debt, and the exact rules come from the current SBV circular",
+      "Mainly classified by days overdue, groups 3–5 are bad debt, details per the SBV circular",
       "The debt group is set only by the customer's credit score at application",
       "Every company sets its own number and names of groups, so there is no common standard"
     ],
@@ -327,13 +327,13 @@
       "Đồng ý: 0% nghĩa là chính sách duyệt tháng 5 và 6 đã khắc phục được vấn đề",
       "Đồng ý một phần: tháng 5 và 6 tốt hơn, nhưng tháng 4 cũng đã cải thiện rõ so với tháng 3",
       "Không đồng ý: phải chia cho dư nợ chứ không chia cho số khoản vay thì mới đúng",
-      "Chưa kết luận được: khoản vay tháng 5 và 6 chưa đủ tuổi để thành 30+; chỉ so các vintage ở MOB mà tất cả đã đi tới"
+      "Chưa kết luận được: khoản vay tháng 5 và 6 còn quá non để thành 30+"
     ],
     "optionsEn": [
       "Agree: 0% means the May and June approval policy fixed the problem",
       "Partly agree: May and June are better, and April has clearly improved on March too",
       "Disagree: it should divide by outstanding balance, not by the number of loans",
-      "Too early to say: May and June loans are too young to be 30+; only compare vintages at a MOB they have all reached"
+      "Too early to say: May and June loans are too young to reach 30+ yet"
     ],
     "answer": 3,
     "explanation": "Đây là right-censoring: vintage non trẻ chưa có thời gian để xấu đi. Tháng 4 cũng có ít hơn tháng 3 một tháng. So ở cùng MOB (ví dụ MOB 2) thì tháng 4 (4,1%) còn cao hơn tháng 3 (3,2%).",
@@ -357,7 +357,7 @@
     "questionEn": "Part of a vintage table (ever 30+, %):\n`vintage | mob2 | mob3\n2025-11 | 2.0  | 3.4\n2025-12 | 1.2  | 1.8\n2026-02 | 2.8  | 4.1\n2026-03 | 3.2  | 7.4`\nWhich reading is correct?",
     "options": [
       "Hôm nay có 1,8% khoản vay của vintage 2025-12 đang quá hạn hơn 30 ngày",
-      "Vintage 2026-03 xấu đi từ MOB 2 sang MOB 3 vì đội thu hồi nợ làm việc kém hơn",
+      "Vintage 2026-03 xấu đi từ MOB 2 sang MOB 3 vì đội thu hồi nợ làm việc kém hơn tháng trước",
       "Ở cùng tuổi MOB 3, vintage 2026-03 có tỷ lệ từng quá hạn 30+ cao nhất trong bảng",
       "Vintage 2026-02 xấu hơn 2025-11 chỉ vì nó trẻ hơn"
     ],
@@ -423,7 +423,7 @@
       "Không tính, vì hôm nay khoản vay đang trong hạn",
       "Có tính, vì nó đã từng quá hạn hơn 30 ngày; việc trả bù là một lần cure",
       "Tính một nửa, vì nó đã trả bù trước MOB 6",
-      "Không tính, vì chỉ khoản vay bị xóa nợ mới vào bảng vintage"
+      "Không tính, vì chỉ những khoản vay đã bị xóa nợ mới được đưa vào bảng vintage"
     ],
     "optionsEn": [
       "Not counted, because the loan is current today",
@@ -453,15 +453,15 @@
     "questionEn": "A cut-off simulation on 2025 loans (bad = ever 30+ by MOB 6):\n`cutoff | pct_kept | bad_kept | bad_rate\n560    | 100.0    | 59       | 3.6\n600    | 82.1     | 28       | 2.1\n640    | 57.1     | 7        | 0.7\n680    | 33.7     | 5        | 0.9`\nWhich conclusion does the table support?",
     "options": [
       "Hạ ngưỡng xuống 520 sẽ thêm khoản vay với tỷ lệ xấu khoảng 3,6%",
-      "Ngưỡng 680 là tốt nhất vì khối lượng nhỏ thì rủi ro cũng nhỏ",
-      "Nâng ngưỡng lên 600 sẽ giữ khoảng 82% số khoản vay và loại hơn một nửa số khoản xấu",
-      "Ngưỡng điểm gần như không ảnh hưởng đến tỷ lệ xấu"
+      "Ngưỡng 680 là tốt nhất, vì khối lượng cho vay nhỏ thì rủi ro cũng nhỏ theo",
+      "Nâng ngưỡng lên 600 giữ khoảng 82% khoản vay và loại hơn nửa số khoản xấu",
+      "Ngưỡng điểm gần như không ảnh hưởng đến tỷ lệ khoản vay xấu"
     ],
     "optionsEn": [
       "Lowering the cut-off to 520 would add loans with a bad rate of about 3.6%",
       "680 is the best cut-off because smaller volume means smaller risk",
-      "Raising the cut-off to 600 would keep about 82% of loans and remove more than half the bad ones",
-      "The cut-off barely affects the bad rate"
+      "Raising it to 600 keeps about 82% of loans and drops over half the bad ones",
+      "The cut-off barely makes any difference to the bad rate"
     ],
     "answer": 2,
     "explanation": "Từ 560 lên 600: giữ 82,1% khoản vay, số khoản xấu từ 59 còn 28. Bảng không nói được gì về điểm dưới 560, vì những người đó đã bị từ chối (reject inference).",
@@ -487,13 +487,13 @@
       "Vì cột credit_score của nhóm đó bị NULL do lỗi dữ liệu",
       "Vì các khoản vay 2025 chưa đủ tuổi để quan sát tới MOB 6",
       "Vì nhóm điểm đó quá nhỏ, chỉ vài khoản vay nên không đủ ý nghĩa thống kê",
-      "Vì những khách đó bị từ chối nên không có khoản vay hay dữ liệu trả nợ nào (reject inference)"
+      "Vì những khách đó đã bị từ chối nên không có dữ liệu trả nợ nào"
     ],
     "optionsEn": [
       "Because their credit_score column is NULL due to a data error",
       "Because 2025 loans are too young to be observed at MOB 6",
       "Because that score band is tiny, only a few loans, so it is not statistically meaningful",
-      "Because those customers were rejected, so there are no loans or repayments to observe (reject inference)"
+      "Because those customers were rejected, so no repayments exist to observe"
     ],
     "answer": 3,
     "explanation": "Dữ liệu trả nợ chỉ tồn tại cho người được duyệt. Năm 2025, điểm thấp nhất được duyệt là 560, nên nhóm dưới đó không có khoản vay nào. Cách trung thực là thử nghiệm nhỏ có kiểm soát.",
@@ -548,7 +548,7 @@
     "question": "Một sinh viên mới đi làm, chưa từng vay ở đâu, nộp hồ sơ và mô hình trả về `credit_score` NULL. Mô tả nào đúng nhất?",
     "questionEn": "A recent graduate who has never borrowed applies, and the model returns `credit_score` NULL. Which description fits best?",
     "options": [
-      "Đây là lỗi hệ thống, nên điền điểm trung bình để hồ sơ được xét như bình thường",
+      "Đây là lỗi hệ thống, nên điền điểm trung bình vào để hồ sơ được xét như bình thường",
       "Đây là khách thin-file; công ty có thể dùng tín hiệu khác và một hạn mức nhỏ ban đầu",
       "Đây là khách rủi ro cao nhất, nên chính sách đúng luôn là từ chối hẳn",
       "NULL nghĩa là điểm 0, nên coi như khách thấp hơn mọi ngưỡng duyệt"

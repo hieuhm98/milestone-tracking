@@ -4,16 +4,16 @@
     "question": "Điểm quan trọng nhất khi chọn bộ tài liệu cho một dự án là gì?",
     "questionEn": "What matters most when choosing a project's document set?",
     "options": [
-      "Không dự án nào cần tất cả các loại tài liệu — hãy chọn theo bối cảnh chứ không theo danh sách",
-      "Càng nhiều tài liệu càng chuyên nghiệp",
-      "Luôn dùng đúng bộ tài liệu của dự án trước",
-      "Phải có đủ mọi tài liệu mà BABOK liệt kê"
+      "Chọn theo bối cảnh dự án, không theo danh sách cố định",
+      "Càng nhiều tài liệu dự án càng trông chuyên nghiệp",
+      "Dùng lại bộ tài liệu của dự án trước cho đỡ mất công chuẩn bị",
+      "Làm đủ mọi tài liệu BABOK liệt kê cho chắc chắn"
     ],
     "optionsEn": [
-      "No project needs every document type — choose by context, not by list",
-      "More documents look more professional",
-      "Always reuse the previous project's set",
-      "You must produce every document BABOK lists"
+      "Choose by project context, not from a fixed list",
+      "More documents make the project look more professional",
+      "Reuse the previous project's set to save setup time",
+      "Produce every document BABOK lists, to be safe"
     ],
     "answer": 0,
     "explanation": "Bộ tài liệu đúng là bộ nhỏ nhất mà vẫn trả lời được câu hỏi của những người thực sự cần.",
@@ -24,16 +24,16 @@
     "question": "BRD và SRS khác nhau ở góc nhìn nào?",
     "questionEn": "In what perspective do a BRD and an SRS differ?",
     "options": [
-      "BRD nhìn từ góc độ nghiệp vụ và trả lời chúng ta cần đạt gì và vì sao; SRS nhìn từ góc độ hệ thống và trả lời hệ thống phải làm gì",
-      "BRD chi tiết hơn SRS",
-      "BRD do lập trình viên viết còn SRS do BA viết",
-      "BRD dành cho dự án agile còn SRS cho waterfall"
+      "BRD: góc nghiệp vụ, cần đạt gì và vì sao; SRS: hệ thống phải làm gì",
+      "BRD: đặc tả kỹ thuật chi tiết; SRS: bản tóm tắt cấp cao cho nhà tài trợ",
+      "BRD: do lập trình viên viết; SRS: do BA viết cho khách hàng",
+      "BRD: dùng cho dự án agile; SRS: chỉ dùng cho dự án waterfall"
     ],
     "optionsEn": [
-      "The BRD takes a business view answering what we must achieve and why; the SRS takes a system view answering what the system must do",
-      "The BRD is more detailed than the SRS",
-      "Developers write the BRD and BAs write the SRS",
-      "The BRD is for agile and the SRS for waterfall"
+      "BRD: business view of what and why; SRS: what the system must do",
+      "BRD: detailed technical spec; SRS: high-level summary for sponsors",
+      "BRD: written by developers; SRS: written by BAs for the customer",
+      "BRD: used on agile projects; SRS: used only on waterfall projects"
     ],
     "answer": 0,
     "explanation": "BRD dùng ngôn ngữ nghiệp vụ không thuật ngữ kỹ thuật, còn SRS phải chính xác, có cấu trúc và kiểm chứng được.",
@@ -44,15 +44,15 @@
     "question": "Khi nhận việc ở một tổ chức mới, BA nên làm gì với các thuật ngữ tài liệu?",
     "questionEn": "Joining a new organization, what should a BA do about document terminology?",
     "options": [
-      "Hỏi thẳng tài liệu này ở đây gồm những gì và ai là người đọc chính, vì các tổ chức dùng thuật ngữ rất khác nhau",
-      "Giả định theo tên gọi tiêu chuẩn quốc tế",
-      "Dùng định nghĩa của BABOK làm chuẩn",
-      "Đề xuất đổi tên tài liệu cho đúng chuẩn"
+      "Hỏi rõ tài liệu đó ở đây gồm gì và ai là người đọc",
+      "Giả định theo nghĩa tiêu chuẩn quốc tế của từng tên gọi",
+      "Áp dụng định nghĩa của BABOK làm chuẩn tham chiếu chung",
+      "Đề xuất đổi tên các tài liệu cho khớp với chuẩn"
     ],
     "optionsEn": [
-      "Ask directly what the document contains here and who reads it, since organizations use terms very differently",
-      "Assume the international standard meaning",
-      "Use the BABOK definition as the standard",
+      "Ask what each document contains here and who reads it",
+      "Assume the international standard meaning of each name",
+      "Apply the BABOK definitions as the shared reference",
       "Propose renaming the documents to match the standard"
     ],
     "answer": 0,
@@ -65,15 +65,15 @@
     "questionEn": "On agile projects, what does SRS content usually decompose into?",
     "options": [
       "Backlog, acceptance criteria, business rules catalog và data dictionary",
-      "Chỉ còn backlog và không cần gì khác",
-      "Biên bản họp hằng ngày",
-      "Mã nguồn và bình luận trong mã"
+      "Một backlog ưu tiên duy nhất, còn mọi tài liệu yêu cầu khác đều bị bỏ đi",
+      "Báo cáo sprint, biên bản họp hằng ngày và biểu đồ burndown của đội",
+      "Mã nguồn, chú thích trong mã nguồn và các script kiểm thử tự động"
     ],
     "optionsEn": [
-      "The backlog, acceptance criteria, a business rules catalog, and a data dictionary",
-      "Only the backlog and nothing else",
-      "Daily meeting minutes",
-      "Source code and its comments"
+      "Backlog, acceptance criteria, a rules catalog, and a data dictionary",
+      "A single prioritized backlog, with every other requirements artifact retired",
+      "Sprint reports, daily meeting minutes, and the burndown chart",
+      "Source code, code comments, and automated test scripts"
     ],
     "answer": 0,
     "explanation": "Vision và scope vẫn giữ nguyên vai trò định hướng, vì không có nó thì đội mất phương hướng dù backlog có chi tiết tới đâu.",
@@ -84,16 +84,16 @@
     "question": "Vì sao tài liệu lỗi thời gây hại hơn không có tài liệu?",
     "questionEn": "Why does a stale document do more harm than no document?",
     "options": [
-      "Vì nó tạo tự tin sai lầm: người đọc ra quyết định dựa trên thông tin sai mà không biết là sai",
-      "Vì nó chiếm dung lượng lưu trữ",
-      "Vì nó làm chậm công cụ tìm kiếm",
-      "Vì nó vi phạm quy trình quản lý chất lượng"
+      "Nó tạo niềm tin sai vào thông tin đã sai",
+      "Nó chiếm dung lượng và làm rối thư mục dùng chung",
+      "Nó làm chậm công cụ tìm kiếm trong kho tài liệu",
+      "Nó vi phạm quy định của quy trình quản lý chất lượng"
     ],
     "optionsEn": [
-      "Because it manufactures false confidence: readers decide on wrong information without knowing it is wrong",
-      "Because it consumes storage",
-      "Because it slows search tools",
-      "Because it violates quality process"
+      "It creates false confidence in wrong information",
+      "It consumes storage and clutters the shared drive",
+      "It slows down search tools across the repository",
+      "It breaks the organization's quality process rules"
     ],
     "answer": 0,
     "explanation": "Đây cũng là lý do chi phí duy trì một tài liệu không ai đọc rất lớn — không chỉ về thời gian mà cả về niềm tin của đội vào tài liệu nói chung.",
@@ -104,16 +104,16 @@
     "question": "Biên bản họp nên được tổ chức thành bốn phần nào?",
     "questionEn": "Which four parts should meeting minutes be organised into?",
     "options": [
-      "Quyết định đã chốt; việc cần làm kèm người chịu trách nhiệm và thời hạn; câu hỏi còn mở; giả định cần kiểm chứng",
-      "Thời gian, địa điểm, người tham dự, nội dung",
-      "Mở đầu, thân bài, kết luận, phụ lục",
-      "Vấn đề, nguyên nhân, giải pháp, chi phí"
+      "Quyết định; việc cần làm có người phụ trách và hạn; câu hỏi mở; giả định",
+      "Thời gian và địa điểm; người tham dự; nội dung thảo luận; lịch họp sau",
+      "Mở đầu; nội dung thảo luận chính; kết luận; phụ lục tài liệu đính kèm",
+      "Vấn đề nêu ra; nguyên nhân gốc; giải pháp đã thống nhất; chi phí ước tính"
     ],
     "optionsEn": [
-      "Decisions made; actions with owner and deadline; open questions; assumptions to verify",
-      "Time, place, attendees, content",
-      "Introduction, body, conclusion, appendix",
-      "Problem, cause, solution, cost"
+      "Decisions; actions with owner and deadline; open questions; assumptions",
+      "Time and place; attendees; discussion content; next meeting date",
+      "Introduction; main discussion; conclusion; appendix of attachments",
+      "Problem raised; root cause; agreed solution; estimated cost"
     ],
     "answer": 0,
     "explanation": "Tách riêng bốn phần này biến biên bản từ một bản ghi thụ động thành công cụ làm việc, vì những gì chưa xong không bị chìm trong đoạn văn dài.",
@@ -124,16 +124,16 @@
     "question": "Vì sao biên bản họp phải được gửi cả cho người vắng mặt?",
     "questionEn": "Why must meeting minutes go to absentees as well?",
     "options": [
-      "Vì họ là nhóm cần biên bản nhất — họ không nghe được gì trong buổi họp",
-      "Vì quy định công ty yêu cầu",
-      "Vì để họ biết mình đã bỏ lỡ điều gì quan trọng",
-      "Vì cần đủ số người xác nhận biên bản"
+      "Vì họ cần biên bản nhất, do không nghe được gì",
+      "Vì quy định công ty yêu cầu gửi mọi người được mời",
+      "Vì người vắng mặt phải chính thức duyệt mọi quyết định",
+      "Vì cần đủ số người xác nhận thì biên bản mới hiệu lực"
     ],
     "optionsEn": [
-      "Because they need them most — they heard nothing in the meeting",
-      "Because company policy requires it",
-      "So they know what important thing they missed",
-      "Because enough people must confirm the minutes"
+      "Because they need them most, having heard nothing",
+      "Because company policy requires it for every invitee",
+      "Because absentees must formally approve every decision",
+      "Because a quorum of people must confirm the minutes"
     ],
     "answer": 0,
     "explanation": "Cũng nên gửi trong vòng 24 giờ, khi trí nhớ mọi người còn tươi và những chỗ ghi sai còn sửa được.",
@@ -144,16 +144,16 @@
     "question": "Trong biên bản họp, nên ghi lại điều gì về một cuộc tranh luận dài?",
     "questionEn": "In minutes, what should you record about a long debate?",
     "options": [
-      "Ghi quyết định cuối cùng chứ không ghi diễn biến, trừ khi lý do đằng sau quyết định quan trọng cho tương lai",
-      "Ghi đầy đủ mọi ý kiến của từng người theo thứ tự",
-      "Không ghi gì vì tranh luận là chuyện riêng của đội",
-      "Chỉ ghi tên người thắng cuộc tranh luận"
+      "Quyết định cuối cùng, kèm lý do nếu sau này cần đến",
+      "Mọi ý kiến của từng người, theo thứ tự được nêu ra",
+      "Không ghi gì, vì tranh luận là chuyện nội bộ của đội",
+      "Ai thắng cuộc tranh luận và ai đã nhượng bộ"
     ],
     "optionsEn": [
-      "Record the final decision rather than the debate, unless the reasoning matters for the future",
-      "Record every person's view in order",
-      "Record nothing, since debate is internal",
-      "Record only who won the argument"
+      "The final decision, plus its reasoning if that will matter later",
+      "Every participant's view, in the order each was raised",
+      "Nothing, since the debate is internal to the team",
+      "Who won the argument and who conceded the point"
     ],
     "answer": 0,
     "explanation": "Lý do đằng sau quyết định thường quan trọng, vì sáu tháng sau sẽ có người hỏi vì sao lại chọn phương án này.",
@@ -164,16 +164,16 @@
     "question": "Ba nguyên tắc không thể thương lượng về quản lý tài liệu yêu cầu là gì?",
     "questionEn": "What are the three non-negotiable principles of requirements document management?",
     "options": [
-      "Một nguồn sự thật duy nhất; định danh phiên bản rõ ràng; lịch sử sửa đổi ghi rõ cái gì, ai, khi nào và vì sao",
-      "Đánh số trang; có mục lục; có trang bìa",
+      "Một nguồn sự thật duy nhất; định danh phiên bản rõ; lịch sử sửa đổi",
+      "Đánh số trang; có mục lục; có trang bìa kèm logo công ty",
       "Lưu trên máy chủ công ty; sao lưu hằng ngày; mã hoá tệp",
-      "Có chữ ký duyệt; có dấu công ty; có ngày hiệu lực"
+      "Có chữ ký phê duyệt; có đóng dấu công ty; có ngày hiệu lực ghi rõ ràng"
     ],
     "optionsEn": [
-      "One single source of truth; clear version identification; a revision history stating what, who, when, and why",
-      "Page numbers; a table of contents; a cover page",
-      "Stored on the company server; backed up daily; encrypted",
-      "A signature; a company stamp; an effective date"
+      "A single source of truth; clear version IDs; a revision history",
+      "Numbered pages; a table of contents; a cover page with the logo",
+      "Stored on the company server; backed up daily; files encrypted",
+      "An approval signature; a company stamp; an effective date"
     ],
     "answer": 0,
     "explanation": "Nếu cùng một yêu cầu tồn tại ở ba nơi, chúng sẽ mâu thuẫn nhau trong vòng một tháng và không ai biết bản nào đúng.",
@@ -184,15 +184,15 @@
     "question": "Trường nào trong lịch sử sửa đổi là quan trọng nhất và bị bỏ trống nhiều nhất?",
     "questionEn": "Which revision history field is the most important and most often left blank?",
     "options": [
-      "Lý do vì sao thay đổi — vì nó cho biết yêu cầu có thể thương lượng hay không",
+      "Lý do thay đổi",
       "Số phiên bản mới",
       "Ngày thay đổi",
-      "Tên người thực hiện thay đổi"
+      "Người thực hiện thay đổi"
     ],
     "optionsEn": [
-      "The reason for the change — because it reveals whether the requirement is negotiable",
+      "The reason for the change",
       "The new version number",
-      "The change date",
+      "The date of the change",
       "Who made the change"
     ],
     "answer": 0,
@@ -204,16 +204,16 @@
     "question": "Tên tệp SRS_final_v2_REALLY_final_MinhEdit.docx là dấu hiệu của điều gì?",
     "questionEn": "What does the file name SRS_final_v2_REALLY_final_MinhEdit.docx signal?",
     "options": [
-      "Một quy trình quản lý phiên bản đã hỏng, khi tên tệp bị dùng làm cơ chế phiên bản",
-      "Tài liệu đã được review kỹ nhiều lần",
-      "Đội đang làm việc rất tích cực",
-      "Anh Minh là người sở hữu tài liệu"
+      "Quy trình quản lý phiên bản đã hỏng và bị thay bằng quy ước tự phát",
+      "Tài liệu đã trải qua nhiều vòng review và ký duyệt cẩn thận của các bên",
+      "Đội đang lặp nhanh và phản hồi rất tốt với các góp ý nhận được",
+      "Minh là người sở hữu tài liệu và có quyền duyệt cuối"
     ],
     "optionsEn": [
-      "A broken version control process, where file names substitute for versioning",
-      "The document was carefully reviewed many times",
-      "The team is working hard",
-      "Minh owns the document"
+      "Version control has broken down and an ad-hoc convention replaced it",
+      "The document went through several careful rounds of review and sign-off",
+      "The team is iterating quickly and responding to feedback",
+      "Minh is the document owner and holds final approval"
     ],
     "answer": 0,
     "explanation": "Dấu hiệu khác gồm yêu cầu tồn tại đồng thời trong Word, bảng tính và công cụ quản lý mà không ai biết bản nào đúng.",
@@ -224,16 +224,16 @@
     "question": "Vì sao lặp lại một yêu cầu ở nhiều nơi trong tài liệu là vấn đề?",
     "questionEn": "Why is repeating a requirement in several places a problem?",
     "options": [
-      "Nó làm tài liệu dễ đọc hơn nhưng khó bảo trì hơn nhiều, vì mọi bản sao phải được sửa cùng lúc để tránh mâu thuẫn",
-      "Nó làm tài liệu dài hơn và tốn giấy in",
-      "Nó vi phạm quy ước đánh nhãn yêu cầu",
-      "Nó khiến tester phải viết test case trùng lặp"
+      "Mọi bản sao phải sửa cùng lúc, nếu không chúng sẽ mâu thuẫn",
+      "Nó làm tài liệu dài hơn và khiến người đọc khó theo dõi",
+      "Nó phá vỡ quy ước mỗi yêu cầu chỉ có một nhãn duy nhất",
+      "Nó buộc tester phải viết test case trùng lặp cho từng bản sao"
     ],
     "optionsEn": [
-      "It makes the document easier to read but far harder to maintain, since every copy must change at once to avoid contradiction",
-      "It makes documents longer and wastes paper",
-      "It violates requirement labelling conventions",
-      "It forces testers to write duplicate test cases"
+      "Every copy must change together, or they start to contradict",
+      "It makes the document longer and harder for readers to follow",
+      "It breaks the convention of one unique label per requirement",
+      "It forces testers to write duplicate test cases for each copy"
     ],
     "answer": 0,
     "explanation": "Giải pháp là dùng tham chiếu chéo thay vì chép nội dung, hoặc lưu mỗi yêu cầu một lần duy nhất trong công cụ quản lý yêu cầu.",
@@ -244,16 +244,16 @@
     "question": "Khi viết cho lãnh đạo, cách trình bày nào phù hợp nhất?",
     "questionEn": "When writing for executives, which presentation fits best?",
     "options": [
-      "Ngắn, dẫn bằng kết luận, có số liệu về giá trị, chi phí và rủi ro, kèm một trang tóm tắt ở đầu",
-      "Chi tiết từng yêu cầu chức năng theo thứ tự",
-      "Trình bày theo trình tự thời gian của dự án",
-      "Đưa toàn bộ sơ đồ phân tích để họ tự đọc"
+      "Ngắn, kết luận trước, có số liệu giá trị, chi phí, rủi ro",
+      "Từng yêu cầu chức năng theo thứ tự để không bỏ sót gì",
+      "Kể theo trình tự thời gian diễn biến của dự án",
+      "Toàn bộ sơ đồ phân tích để họ tự đánh giá"
     ],
     "optionsEn": [
-      "Short, leading with the conclusion, with numbers on value, cost, and risk, plus a one-page summary up front",
-      "Every functional requirement in order",
-      "A chronological account of the project",
-      "All the analysis diagrams for them to read"
+      "Short, conclusion first, with value, cost and risk figures",
+      "Every functional requirement in order, so nothing is missed",
+      "A chronological account of how the project has unfolded",
+      "All the analysis diagrams, so they can judge for themselves"
     ],
     "answer": 0,
     "explanation": "Người dùng nghiệp vụ cần ngôn ngữ nghiệp vụ và ví dụ cụ thể; lập trình viên cần chi tiết và ví dụ dữ liệu; tester cần tiêu chí kiểm chứng.",
@@ -264,16 +264,16 @@
     "question": "Khi một mục trong mẫu tài liệu không áp dụng cho dự án, nên làm gì?",
     "questionEn": "When a template section does not apply to your project, what should you do?",
     "options": [
-      "Ghi thông điệp tường minh như không xác định được rủi ro pháp lý nào, thay vì để trống hoặc xoá hẳn",
+      "Ghi rõ một câu như không xác định được rủi ro pháp lý nào",
       "Để trống để người đọc tự hiểu là không áp dụng",
-      "Xoá hẳn mục đó khỏi tài liệu",
-      "Điền nội dung chung chung cho đủ mẫu"
+      "Xoá hẳn mục đó để tài liệu tập trung hơn",
+      "Điền nội dung chung chung cho đủ các mục của mẫu"
     ],
     "optionsEn": [
-      "Write an explicit message such as no legal risks have been identified, rather than leaving it blank or deleting it",
+      "Write an explicit note such as no legal risks identified",
       "Leave it blank so readers infer it does not apply",
-      "Delete the section entirely",
-      "Fill it with generic text to complete the template"
+      "Delete the section so the document stays focused",
+      "Fill it with generic text so the template is complete"
     ],
     "answer": 0,
     "explanation": "Để trống và xoá hẳn đều khiến người đọc băn khoăn liệu bạn đã xem xét mục đó chưa hay chỉ đơn giản là quên.",
@@ -284,16 +284,16 @@
     "question": "Năm câu hỏi quyết định có nên viết một tài liệu hay không gồm những gì?",
     "questionEn": "What are the five questions deciding whether to write a document?",
     "options": [
-      "Ai đọc và dùng làm gì; có cần sống lâu hơn trí nhớ đội không; có yêu cầu tuân thủ không; đội có phân tán không; chi phí ghi so với chi phí khám phá lại",
-      "Ai viết; viết bao lâu; dài bao nhiêu trang; định dạng gì; lưu ở đâu",
+      "Ai đọc và để làm gì; có cần tồn tại lâu hơn trí nhớ; tuân thủ; đội phân tán; chi phí khám phá lại",
+      "Ai viết; viết mất bao lâu; dự kiến bao nhiêu trang; định dạng tệp gì; lưu trữ ở đâu",
       "Khách hàng có yêu cầu không; hợp đồng có nêu không; ngân sách có đủ không; đội có thời gian không; công cụ có hỗ trợ không",
       "Có mẫu sẵn không; có ví dụ không; có người review không; có ai duyệt không; có hạn nộp không"
     ],
     "optionsEn": [
-      "Who reads it and why; must it outlive team memory; is there a compliance need; is the team distributed; recording versus rediscovery cost",
-      "Who writes it; how long it takes; page count; format; storage location",
+      "Who reads it and why; must it outlast memory; compliance; distributed team; cost to rediscover",
+      "Who writes it; how long writing takes; expected page count; file format; storage location",
       "Does the customer ask; is it in the contract; is there budget; does the team have time; does the tool support it",
-      "Is there a template; an example; a reviewer; an approver; a deadline"
+      "Is there a ready template; a past example; a named reviewer; an approver; a firm deadline"
     ],
     "answer": 0,
     "explanation": "Chi phí ghi lại tri thức là nhỏ so với chi phí thu thập hoặc tái tạo nó, nhưng phải cân với chi phí duy trì tài liệu về sau.",
@@ -304,16 +304,16 @@
     "question": "Bộ tài liệu nào hợp lý cho một dự án outsourcing có hợp đồng?",
     "questionEn": "Which document set fits an outsourced project under contract?",
     "options": [
-      "Đầy đủ BRD, SRS, ma trận truy vết và biên bản họp chính thức, vì tài liệu là cơ sở hợp đồng",
-      "Chỉ cần backlog và acceptance criteria",
-      "Chỉ cần biên bản họp hằng ngày",
-      "Không cần tài liệu vì đã có hợp đồng"
+      "Đầy đủ BRD, SRS, ma trận truy vết và biên bản họp chính thức",
+      "Chỉ backlog và acceptance criteria, tinh chỉnh mỗi sprint",
+      "Biên bản họp hằng ngày cùng email báo cáo tuần ngắn gọn",
+      "Tài liệu tối thiểu, vì hợp đồng đã xác định phạm vi"
     ],
     "optionsEn": [
-      "Full BRD, SRS, traceability matrix, and formal minutes, since documentation underpins the contract",
-      "Only a backlog and acceptance criteria",
-      "Only daily meeting minutes",
-      "No documentation, since there is a contract"
+      "Full BRD, SRS, traceability matrix, and formal minutes",
+      "Only a backlog and acceptance criteria, refined each sprint",
+      "Daily meeting minutes plus a short weekly status email",
+      "Minimal documentation, since the contract already sets scope"
     ],
     "answer": 0,
     "explanation": "Khoảng cách càng lớn về tổ chức, địa lý và ngôn ngữ thì yêu cầu càng phải rõ ràng và đầy đủ, vì không thể dựa vào trò chuyện hằng ngày.",

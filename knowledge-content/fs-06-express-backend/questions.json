@@ -4,7 +4,7 @@
     "question": "Form React đã kiểm tra title rỗng rồi. Vì sao route `POST /api/todos` vẫn kiểm tra lại?",
     "questionEn": "The React form already checks for an empty title. Why does the `POST /api/todos` route check it again?",
     "options": [
-      "Vì React không thể kiểm tra chuỗi rỗng một cách chính xác",
+      "Vì React không thể kiểm tra một chuỗi rỗng một cách chính xác trên mọi trình duyệt",
       "Vì ai cũng có thể bỏ qua form và gọi thẳng API bằng curl hay DevTools",
       "Vì Express bắt buộc mọi route phải có ít nhất một câu if",
       "Vì database SQLite sẽ tự xóa các to-do có title rỗng"
@@ -36,7 +36,7 @@
     "question": "Bạn chạy `npm run dev` trong `server/` trong khi một bản khác của server vẫn đang chạy. Điều gì xảy ra nhiều khả năng nhất?",
     "questionEn": "You run `npm run dev` in `server/` while another copy of the server is still running. What most likely happens?",
     "options": [
-      "Hai server chia nhau xử lý request trên cùng port 4000",
+      "Hai server chia nhau xử lý các request trên cùng port 4000",
       "Server mới tự động chuyển sang port 5173",
       "Server cũ tự tắt và nhường port cho server mới",
       "Server mới báo lỗi `EADDRINUSE` vì port 4000 đã bị chiếm"
@@ -164,30 +164,30 @@
     "question": "`routes/todos.js` định nghĩa `router.get('/', ...)` và `index.js` có `app.use('/api/todos', todoRoutes)`. URL đầy đủ nào tới được route đó?",
     "questionEn": "`routes/todos.js` defines `router.get('/', ...)` and `index.js` has `app.use('/api/todos', todoRoutes)`. Which full URL reaches that route?",
     "options": [
-      "`GET /`",
+      "`GET /todos/api`",
       "`GET /todos`",
-      "`GET /api`",
+      "`GET /api/routes/todos`",
       "`GET /api/todos`"
     ],
     "optionsEn": [
-      "`GET /`",
+      "`GET /todos/api`",
       "`GET /todos`",
-      "`GET /api`",
+      "`GET /api/routes/todos`",
       "`GET /api/todos`"
     ],
     "answer": 3,
     "explanation": "URL đầy đủ = tiền tố lúc mount + path của route: `/api/todos` + `/` = `/api/todos`. Nhờ vậy file route chỉ cần path ngắn, và đổi tiền tố chỉ cần sửa một dòng trong `index.js`.",
     "explanationEn": "Full URL = mount prefix + route path: `/api/todos` + `/` = `/api/todos`. That keeps paths short inside the route file, and changing the prefix is one line in `index.js`.",
     "optionExplanations": [
-      "Sai: bỏ mất tiền tố lúc mount.",
+      "Sai: tiền tố bị viết ngược thứ tự.",
       "Sai: thiếu phần `/api` của tiền tố.",
-      "Sai: `GET /api` rơi vào 404 catch-all.",
+      "Sai: tên thư mục `routes/` trong code không phải là một phần của URL.",
       "Đúng: tiền tố cộng với `/`."
     ],
     "optionExplanationsEn": [
-      "Wrong: it drops the mount prefix.",
+      "Wrong: the prefix is written in the wrong order.",
       "Wrong: it is missing the `/api` part of the prefix.",
-      "Wrong: `GET /api` falls through to the 404 catch-all.",
+      "Wrong: the `routes/` folder name in the code is not part of the URL.",
       "Correct: the prefix plus `/`."
     ]
   },
@@ -260,15 +260,15 @@
     "question": "Tester gửi request có body JSON bị hỏng, nhận `400`, nhưng terminal của server không in dòng log nào cho request đó. Vì sao?",
     "questionEn": "A tester sends a request with a broken JSON body and gets `400`, but the server terminal prints no log line for it. Why?",
     "options": [
-      "`express.json()` đứng trước logger và báo lỗi trước, nên logger không bao giờ chạy",
-      "Logger cố ý bỏ qua mọi response có status 400",
-      "Server đã bị crash và tự khởi động lại",
-      "Request bị Vite chặn nên không tới được server"
+      "`express.json()` đứng trước logger và báo lỗi trước khi logger chạy",
+      "Logger được cấu hình để cố ý bỏ qua mọi response có status 400 trả về",
+      "Server đã bị crash vì JSON hỏng và tự khởi động lại",
+      "Request bị Vite chặn lại nên không bao giờ tới được server"
     ],
     "optionsEn": [
-      "`express.json()` sits before the logger and fails first, so the logger never runs",
+      "`express.json()` runs before the logger and fails first",
       "The logger deliberately skips every response with status 400",
-      "The server crashed and restarted itself",
+      "The server crashed on the bad JSON and restarted itself",
       "Vite blocked the request, so it never reached the server"
     ],
     "answer": 0,
@@ -324,16 +324,16 @@
     "question": "Tick vào checkbox gửi `PATCH /api/todos/3` với body `{ \"done\": true }`. Vì sao dùng PATCH mà không dùng PUT?",
     "questionEn": "Ticking a checkbox sends `PATCH /api/todos/3` with the body `{ \"done\": true }`. Why PATCH rather than PUT?",
     "options": [
-      "Vì PUT chỉ dùng được với dữ liệu kiểu số",
-      "Vì PATCH chỉ đổi field được gửi, còn PUT nghĩa là thay toàn bộ resource",
-      "Vì PATCH nhanh hơn PUT ở tầng mạng",
-      "Vì trình duyệt không cho phép gửi PUT kèm cookie"
+      "Vì PUT chỉ dùng được với dữ liệu kiểu số, không dùng cho true/false",
+      "Vì PATCH chỉ đổi field được gửi, còn PUT thay toàn bộ resource",
+      "Vì PATCH gửi ít byte hơn nên nhanh hơn PUT ở tầng mạng",
+      "Vì trình duyệt không cho phép gửi request PUT kèm theo cookie"
     ],
     "optionsEn": [
-      "Because PUT only works with numeric data",
-      "Because PATCH changes only the fields sent, while PUT means replace the whole resource",
-      "Because PATCH is faster than PUT on the network",
-      "Because browsers do not allow PUT with cookies"
+      "Because PUT only works with numeric data, not true/false values",
+      "Because PATCH changes only the sent fields; PUT replaces the whole thing",
+      "Because PATCH sends fewer bytes, so it is faster than PUT on the network",
+      "Because browsers refuse to send a PUT request along with cookies"
     ],
     "answer": 1,
     "explanation": "PATCH = cập nhật một phần: handler giữ giá trị cũ cho field không được gửi (ở đây title không đổi). PUT = thay thế toàn bộ, client phải gửi đủ mọi field. App này không có route PUT nào, nên `PUT /api/todos/3` nhận 404 từ catch-all.",
@@ -388,14 +388,14 @@
     "question": "Bình đang đăng nhập và gửi `DELETE /api/todos/1`, một to-do thuộc về An. Bình nhận được gì?",
     "questionEn": "Binh is logged in and sends `DELETE /api/todos/1`, a to-do that belongs to An. What does Binh get?",
     "options": [
-      "`404` với `{\"error\":\"To-do not found.\"}`, và to-do của An vẫn còn",
-      "`204`, và to-do của An bị xóa",
+      "`404` với `{\"error\":\"To-do not found.\"}`",
+      "`204`, và to-do của An bị xóa khỏi database",
       "`403` với thông báo rằng to-do thuộc về người khác",
       "`401` với `{\"error\":\"Please log in first.\"}`"
     ],
     "optionsEn": [
-      "`404` with `{\"error\":\"To-do not found.\"}`, and An's to-do is untouched",
-      "`204`, and An's to-do is deleted",
+      "`404` with `{\"error\":\"To-do not found.\"}`",
+      "`204`, and An's to-do is deleted from the database",
       "`403` with a message saying the to-do belongs to someone else",
       "`401` with `{\"error\":\"Please log in first.\"}`"
     ],
@@ -420,16 +420,16 @@
     "question": "Vì sao API trả 404 thay vì 403 khi một user đụng tới to-do của người khác?",
     "questionEn": "Why does the API return 404 rather than 403 when a user touches someone else's to-do?",
     "options": [
-      "Vì Express không hỗ trợ status 403",
+      "Vì Express không hỗ trợ trả về status 403 cho một route",
       "Vì 404 được trình duyệt lưu cache nên nhanh hơn",
-      "Vì 403 chỉ dành cho lỗi của database",
-      "Vì 403 sẽ xác nhận id đó có tồn tại, làm lộ thông tin cho người đoán id"
+      "Vì 403 chỉ dành riêng cho các lỗi đến từ database",
+      "Vì 403 sẽ xác nhận id đó có tồn tại, làm lộ thông tin"
     ],
     "optionsEn": [
-      "Because Express does not support status 403",
-      "Because browsers cache 404s, so it is faster",
-      "Because 403 is reserved for database errors",
-      "Because 403 would confirm the id exists, leaking information to someone guessing ids"
+      "Because Express cannot send status 403 from a route handler",
+      "Because browsers cache 404 responses, so the app feels faster",
+      "Because 403 is reserved only for errors that come from the database",
+      "Because 403 would confirm that the id exists, leaking information"
     ],
     "answer": 3,
     "explanation": "403 nói \"có thứ này, nhưng không phải của bạn\". Trả 404 làm \"của người khác\" và \"không tồn tại\" giống hệt nhau, nên không ai dò được id nào có thật. 403 phù hợp khi người dùng được phép biết thứ đó tồn tại.",
@@ -452,16 +452,16 @@
     "question": "Trong `curl ... -c cookies.txt` (khi đăng ký) rồi `curl ... -b cookies.txt` (khi tạo to-do), hai cờ `-c` và `-b` làm gì?",
     "questionEn": "In `curl ... -c cookies.txt` (at sign-up) and then `curl ... -b cookies.txt` (when creating a to-do), what do `-c` and `-b` do?",
     "options": [
-      "`-c` mã hóa cookie, `-b` giải mã cookie",
-      "`-c` tạo tài khoản, `-b` tạo to-do",
-      "`-c` lưu cookie server gửi về vào file, `-b` gửi cookie trong file lên server",
-      "`-c` xóa cookie cũ, `-b` in cookie ra màn hình"
+      "`-c` mã hóa cookie trước khi lưu vào file, `-b` giải mã cookie khi đọc",
+      "`-c` tạo tài khoản mới, `-b` tạo to-do mới trên server",
+      "`-c` lưu cookie server gửi vào file, `-b` gửi cookie trong file lên",
+      "`-c` xóa cookie cũ đi, `-b` in toàn bộ cookie ra màn hình"
     ],
     "optionsEn": [
-      "`-c` encrypts the cookie, `-b` decrypts it",
-      "`-c` creates the account, `-b` creates the to-do",
-      "`-c` saves the cookies the server sends into the file, `-b` sends the file's cookies to the server",
-      "`-c` deletes old cookies, `-b` prints cookies on screen"
+      "`-c` encrypts the cookie before saving, `-b` decrypts it on reading",
+      "`-c` creates the new account, `-b` creates the new to-do on the server",
+      "`-c` saves the server's cookies to the file, `-b` sends them back",
+      "`-c` deletes old cookies, `-b` prints all cookies on the screen"
     ],
     "answer": 2,
     "explanation": "curl không tự nhớ cookie như trình duyệt. `-c` (cookie jar) ghi header `Set-Cookie` vào file; `-b` đọc file đó và gửi header `Cookie`. Thiếu `-b`, request tới `/api/todos` nhận 401.",
@@ -484,16 +484,16 @@
     "question": "Bạn gọi `curl -i http://localhost:4000/api/todos` và nhận `401 {\"error\":\"Please log in first.\"}`, dù vừa đăng ký thành công. Nguyên nhân nhiều khả năng nhất?",
     "questionEn": "You call `curl -i http://localhost:4000/api/todos` and get `401 {\"error\":\"Please log in first.\"}`, although you just signed up successfully. What is the most likely cause?",
     "options": [
-      "Database chưa có bảng `todos`",
-      "Lệnh không gửi cookie (thiếu `-b cookies.txt`), nên `requireAuth` chặn request",
-      "Token đã hết hạn sau 7 ngày",
-      "Route `GET /api/todos` chưa được mount"
+      "Database chưa có bảng `todos` để đọc dữ liệu",
+      "Lệnh không gửi kèm cookie, nên `requireAuth` chặn request",
+      "Token đã hết hạn sau 7 ngày kể từ lúc tạo",
+      "Route `GET /api/todos` vẫn chưa được mount trong `index.js`"
     ],
     "optionsEn": [
-      "The database has no `todos` table yet",
-      "The command sent no cookie (no `-b cookies.txt`), so `requireAuth` stopped it",
-      "The token expired after 7 days",
-      "The `GET /api/todos` route is not mounted"
+      "The database has no `todos` table to read from yet",
+      "The command sent no cookie, so `requireAuth` stopped it",
+      "The token already expired 7 days after it was made",
+      "The `GET /api/todos` route is not mounted in `index.js`"
     ],
     "answer": 1,
     "explanation": "\"Please log in first.\" là thông báo khi không có cookie `token`. Một token sai hay hết hạn sẽ cho thông báo khác: \"Your session has expired. Please log in again.\". Route chưa mount sẽ cho 404, còn thiếu bảng sẽ cho 500.",
@@ -517,7 +517,7 @@
     "questionEn": "The server log shows `POST /api/auth/signup → 201 (89 ms)`, while other lines take 1–9 ms. What is the best explanation?",
     "options": [
       "Băm mật khẩu bằng bcrypt được thiết kế để tốn thời gian",
-      "Request đăng ký bị lỗi và server phải thử lại",
+      "Request đăng ký bị lỗi giữa chừng và server phải tự thử lại",
       "Logger chậm hơn với các request POST",
       "Mạng giữa trình duyệt và server bị nghẽn"
     ],
@@ -548,16 +548,16 @@
     "question": "Điều nào nên được chốt như một quyết định về yêu cầu trong API spec, trước khi developer viết route?",
     "questionEn": "Which of these should be decided as a requirement in the API spec, before a developer writes the route?",
     "options": [
-      "Tên biến JavaScript bên trong handler",
-      "Việc dùng `const` hay `let` trong file route",
-      "Thứ tự import ở đầu file `auth.js`",
-      "Status code và đúng câu thông báo trả về khi email bị trùng"
+      "Tên các biến JavaScript được dùng bên trong handler",
+      "Việc dùng `const` hay `let` khi khai báo trong file route",
+      "Thứ tự các dòng import ở đầu file `auth.js`",
+      "Status code và câu thông báo trả về khi email bị trùng"
     ],
     "optionsEn": [
-      "The JavaScript variable names inside the handler",
-      "Whether the route file uses `const` or `let`",
-      "The order of imports at the top of `auth.js`",
-      "The status code and exact message returned for a duplicate email"
+      "The JavaScript variable names used inside the handler",
+      "Whether the route file uses `const` or `let` for its declarations",
+      "The order of the import lines at the top of `auth.js`",
+      "The status code and exact message for a duplicate email"
     ],
     "answer": 3,
     "explanation": "Status code và thông báo là thứ người dùng, frontend và tester đều thấy: chúng quyết định màn hình hiển thị gì và test kiểm tra gì. Tên biến hay thứ tự import là chi tiết nội bộ của developer.",

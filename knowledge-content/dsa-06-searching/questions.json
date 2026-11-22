@@ -4,16 +4,16 @@
     "question": "Phát biểu nào về các method `indexOf`, `includes`, `find` và `findIndex` của mảng JavaScript là ĐÚNG?",
     "questionEn": "Which statement about the JavaScript array methods `indexOf`, `includes`, `find` and `findIndex` is TRUE?",
     "options": [
-      "`includes` tự động dùng binary search nếu mảng đã được sắp xếp",
-      "`find` là O(1) vì nó nhận một callback thay vì một giá trị",
-      "Cả bốn đều duyệt từ đầu mảng, nên worst case là O(n) kể cả với mảng đã sắp xếp",
-      "`indexOf` là O(log n) vì engine lập chỉ mục sẵn cho mảng"
+      "`includes` tự động chuyển sang binary search nếu mảng đã được sắp xếp",
+      "`find` là O(1) vì nó nhận một callback thay vì một giá trị cụ thể",
+      "Cả bốn đều duyệt từ đầu mảng nên worst case là O(n), kể cả mảng đã sắp xếp",
+      "`indexOf` là O(log n) vì engine đã lập chỉ mục sẵn cho mọi mảng"
     ],
     "optionsEn": [
-      "`includes` automatically uses binary search when the array is sorted",
-      "`find` is O(1) because it takes a callback instead of a value",
-      "All four scan from the start, so they are O(n) worst case even on a sorted array",
-      "`indexOf` is O(log n) because the engine pre-indexes arrays"
+      "`includes` automatically switches to binary search when the array is sorted",
+      "`find` is O(1) because it takes a callback instead of a specific value",
+      "All four scan from the start, so they are O(n) worst case even when sorted",
+      "`indexOf` is O(log n) because the engine keeps an index for every array"
     ],
     "answer": 2,
     "explanation": "Các method này không biết gì về thứ tự dữ liệu: chúng kiểm tra lần lượt từng phần tử và dừng ở lần khớp đầu tiên. Worst case (không tìm thấy hoặc nằm cuối) là O(n). Muốn O(log n) trên mảng đã sắp xếp, bạn phải tự viết binary search.",
@@ -124,15 +124,15 @@
     "question": "Lời gọi `search([7], 7)` trả về gì?\n`function search(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  while (left < right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}`",
     "questionEn": "What does `search([7], 7)` return?\n`function search(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  while (left < right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}`",
     "options": [
-      "`0`",
-      "Lặp vô hạn",
-      "`undefined`",
+      "`0`, vì mid = 0 và `arr[0] === 7`",
+      "Lặp vô hạn, vì `left` và `right` không đổi",
+      "`undefined`, vì không nhánh `return` nào khớp",
       "`-1`, vì thân vòng lặp không chạy lần nào"
     ],
     "optionsEn": [
-      "`0`",
-      "An infinite loop",
-      "`undefined`",
+      "`0`, because mid = 0 and `arr[0] === 7`",
+      "An infinite loop, since `left` and `right` never move",
+      "`undefined`, since no `return` branch matches",
       "`-1`, because the loop body never runs"
     ],
     "answer": 3,
@@ -144,16 +144,16 @@
     "question": "Lời gọi `search([5], 3)` với hàm sau sẽ thế nào?\n`function search(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid;\n  }\n  return -1;\n}`",
     "questionEn": "What happens when this function is called as `search([5], 3)`?\n`function search(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid;\n  }\n  return -1;\n}`",
     "options": [
-      "Trả về `-1` sau một vòng lặp",
+      "Trả về `-1` sau đúng một vòng lặp vì 5 > 3",
       "Lặp vô hạn, vì `right = mid` không làm khoảng co lại",
-      "Trả về `0`",
-      "Ném lỗi truy cập ngoài mảng"
+      "Trả về `0` vì `mid` dừng ở phần tử duy nhất",
+      "Ném lỗi truy cập ngoài mảng khi `right` âm"
     ],
     "optionsEn": [
-      "It returns `-1` after one iteration",
-      "It loops forever, because `right = mid` does not shrink the range",
-      "It returns `0`",
-      "It throws an out-of-bounds error"
+      "It returns `-1` after exactly one iteration since 5 > 3",
+      "It loops forever, because `right = mid` never shrinks the range",
+      "It returns `0` because `mid` stops on the only element",
+      "It throws an out-of-bounds error once `right` goes negative"
     ],
     "answer": 1,
     "explanation": "left = right = mid = 0, arr[0] = 5 > 3 nên right = mid = 0 — không có gì thay đổi, `left <= right` vẫn đúng mãi. Template khoảng đóng phải dùng `right = mid - 1`; `right = mid` chỉ đi với template nửa mở `left < right`.",
@@ -164,16 +164,16 @@
     "question": "Binary search viết đệ quy (truyền `left`, `right` làm tham số, không slice mảng) có độ phức tạp KHÔNG GIAN phụ trợ là gì?",
     "questionEn": "What is the auxiliary SPACE complexity of recursive binary search (passing `left` and `right` as arguments, no slicing)?",
     "options": [
-      "O(1), vì không tạo mảng mới",
-      "O(log n), vì có tối đa khoảng log n lời gọi cùng nằm trên call stack",
-      "O(n), vì mỗi lời gọi giữ một bản sao của mảng",
-      "O(n log n)"
+      "O(1), vì không tạo mảng mới nào trong quá trình tìm",
+      "O(log n), vì có tối đa khoảng log n lời gọi trên call stack",
+      "O(n), vì mỗi lời gọi đệ quy giữ một bản sao của mảng",
+      "O(n log n), vì mỗi tầng đệ quy cấp phát O(n) bộ nhớ"
     ],
     "optionsEn": [
-      "O(1), because no new array is created",
-      "O(log n), because up to about log n calls wait on the call stack",
-      "O(n), because every call holds a copy of the array",
-      "O(n log n)"
+      "O(1), because no new array is created during the search",
+      "O(log n), because about log n calls wait on the call stack",
+      "O(n), because every recursive call holds a copy of the array",
+      "O(n log n), because each recursion level allocates O(n) memory"
     ],
     "answer": 1,
     "explanation": "Mỗi lời gọi chia đôi khoảng tìm kiếm nên độ sâu đệ quy khoảng log n, và mỗi frame chưa trả về chiếm bộ nhớ trên call stack: O(log n). Bản vòng lặp chỉ cần O(1). Mảng không bị sao chép vì chỉ truyền tham chiếu và index.",
@@ -244,16 +244,16 @@
     "question": "Trước khi duyệt text, KMP tính trước điều gì từ pattern?",
     "questionEn": "Before scanning the text, what does KMP precompute from the pattern?",
     "options": [
-      "Bảng tần suất xuất hiện của từng ký tự trong pattern",
-      "Với mỗi tiền tố của pattern, độ dài tiền tố thực sự dài nhất đồng thời là hậu tố của nó",
-      "Mã băm (hash) của mọi chuỗi con dài m trong text",
-      "Bản sắp xếp của pattern để có thể binary search"
+      "Bảng tần suất của từng ký tự trong pattern, để biết nên nhảy bao xa",
+      "Với mỗi tiền tố, độ dài tiền tố thực sự dài nhất cũng là hậu tố của nó",
+      "Mã băm (hash) của mọi chuỗi con dài m trong text để so sánh nhanh",
+      "Một bản sắp xếp của pattern để có thể binary search từng ký tự"
     ],
     "optionsEn": [
-      "A frequency table of every character in the pattern",
-      "For each prefix of the pattern, the length of its longest proper prefix that is also a suffix",
-      "A hash of every length-m substring of the text",
-      "A sorted copy of the pattern so it can be binary searched"
+      "A frequency table of every pattern character, to decide how far to jump",
+      "For each prefix, the length of its longest proper prefix that is also a suffix",
+      "A hash of every length-m substring of the text for fast comparison",
+      "A sorted copy of the pattern so each character can be binary searched"
     ],
     "answer": 1,
     "explanation": "Đó là bảng LPS (prefix function / failure function). Khi gặp ký tự không khớp sau khi đã khớp j ký tự, KMP biết pattern có thể tiếp tục từ index `lps[j - 1]` mà không cần lùi con trỏ trên text. Hash các chuỗi con là ý tưởng của Rabin–Karp.",

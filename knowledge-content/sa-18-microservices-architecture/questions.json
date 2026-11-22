@@ -4,13 +4,13 @@
     "question": "Thuộc tính nào định nghĩa rõ nhất một kiến trúc microservices?",
     "questionEn": "Which property most clearly defines a microservices architecture?",
     "options": [
-      "Mỗi service được viết bằng một ngôn ngữ lập trình khác nhau",
+      "Mỗi service được viết bằng một ngôn ngữ lập trình và framework khác nhau",
       "Mỗi service triển khai độc lập được và sở hữu dữ liệu của riêng nó",
       "Mỗi service có ít hơn một nghìn dòng code",
       "Các service chỉ được giao tiếp với nhau qua message queue"
     ],
     "optionsEn": [
-      "Each service is written in a different programming language",
+      "Each service is written in a different programming language and framework",
       "Each service is independently deployable and owns its own data",
       "Each service has fewer than a thousand lines of code",
       "Services may only talk to each other through a message queue"
@@ -44,13 +44,13 @@
     "question": "Một startup có 6 kỹ sư đang xây MVP cho một domain hoàn toàn mới, yêu cầu còn thay đổi hằng tuần. Kiến trúc nào hợp lý nhất?",
     "questionEn": "A startup with 6 engineers is building an MVP for a brand-new domain whose requirements change weekly. Which architecture makes the most sense?",
     "options": [
-      "Modular monolith với ranh giới module rõ ràng, tách service sau khi cần",
+      "Modular monolith, ranh giới module rõ ràng, tách service khi cần",
       "Microservices, mỗi thực thể dữ liệu là một service",
       "Microservices tách theo tầng: UI service, logic service, data service",
       "Event sourcing và CQRS cho toàn bộ hệ thống ngay từ đầu"
     ],
     "optionsEn": [
-      "A modular monolith with clear module boundaries, splitting services later when needed",
+      "A modular monolith with clear boundaries, splitting out services later",
       "Microservices with one service per data entity",
       "Microservices split by layer: UI service, logic service, data service",
       "Event sourcing and CQRS across the whole system from day one"
@@ -64,16 +64,16 @@
     "question": "Khi tách một hệ thống thương mại điện tử, cách phân rã nào tốt nhất?",
     "questionEn": "When decomposing an e-commerce system, which decomposition is best?",
     "options": [
-      "Một database service chung mà mọi service khác gọi vào để đọc ghi",
-      "Tách theo tầng kỹ thuật: presentation, business logic, data access",
-      "Tách theo năng lực nghiệp vụ như catalog, ordering, shipping, mỗi cái sở hữu dữ liệu riêng",
-      "Mỗi bảng trong database hiện tại trở thành một service"
+      "Một database service chung mà mọi service khác gọi vào để đọc và ghi dữ liệu",
+      "Tách theo tầng kỹ thuật: presentation, business logic, data access, mỗi tầng một team",
+      "Tách theo năng lực nghiệp vụ như catalog, ordering, shipping; mỗi cái sở hữu dữ liệu",
+      "Mỗi bảng trong database hiện tại trở thành một service có API CRUD riêng"
     ],
     "optionsEn": [
       "One shared database service that every other service calls to read and write",
-      "Split by technical layer: presentation, business logic, data access",
-      "Split by business capability such as catalog, ordering and shipping, each owning its data",
-      "Turn every table in the current database into its own service"
+      "Split by technical layer: presentation, business logic and data access, one team each",
+      "Split by business capability (catalog, ordering, shipping), each owning its own data",
+      "Turn every table in the current database into its own service with a CRUD API"
     ],
     "answer": 2,
     "explanation": "Bounded context theo năng lực nghiệp vụ cho gắn kết cao bên trong và lỏng lẻo bên ngoài. Tách theo tầng khiến mọi tính năng phải sửa nhiều service; một service mỗi bảng tạo ra nanoservice gọi qua lại liên tục; database service chung giữ nguyên sự ràng buộc về schema.",
@@ -84,13 +84,13 @@
     "question": "Trong Kubernetes, service `orders` gọi `http://payments` (cùng namespace). Cơ chế nào đưa request tới đúng Pod?",
     "questionEn": "In Kubernetes, the `orders` service calls `http://payments` (same namespace). What mechanism gets the request to a Pod?",
     "options": [
-      "Tên DNS của Service phân giải ra ClusterIP, kube-proxy chuyển kết nối tới các Pod đang ready",
+      "Tên DNS của Service ra ClusterIP; kube-proxy chuyển tới các Pod ready",
       "Mỗi Pod đọc danh sách IP của Pod khác từ biến môi trường cố định lúc build",
       "Ứng dụng tự truy vấn etcd để lấy IP của các Pod",
-      "Ingress controller định tuyến mọi lưu lượng nội bộ giữa các service"
+      "Ingress controller định tuyến mọi lưu lượng nội bộ giữa các service tới Pod"
     ],
     "optionsEn": [
-      "The Service's DNS name resolves to a ClusterIP and kube-proxy forwards connections to ready Pods",
+      "The Service's DNS name resolves to a ClusterIP; kube-proxy forwards to ready Pods",
       "Each Pod reads other Pods' IPs from environment variables fixed at build time",
       "The application queries etcd directly for the Pod IPs",
       "The ingress controller routes all internal traffic between services"
@@ -104,16 +104,16 @@
     "question": "Một gRPC service chạy 3 replica sau một ClusterIP Service. Một Pod dùng 90% CPU trong khi hai Pod còn lại gần như rảnh. Nguyên nhân khả dĩ nhất?",
     "questionEn": "A gRPC service runs 3 replicas behind a ClusterIP Service. One Pod sits at 90% CPU while the other two are almost idle. Most likely cause?",
     "options": [
-      "Readiness probe của hai Pod kia đang thất bại liên tục",
-      "HorizontalPodAutoscaler đặt ngưỡng CPU quá cao",
-      "Kết nối HTTP/2 sống lâu được cân bằng theo kết nối, không theo từng request",
-      "TTL của bản ghi DNS trong CoreDNS được đặt quá thấp"
+      "Hai Pod kia nằm ở zone khác nên kube-proxy không gửi traffic sang chúng",
+      "HorizontalPodAutoscaler đặt ngưỡng CPU quá cao nên tải không được chia ra",
+      "HTTP/2 sống lâu được cân bằng theo kết nối, không theo từng request",
+      "TTL của bản ghi DNS trong CoreDNS quá thấp nên client luôn trỏ về một Pod"
     ],
     "optionsEn": [
-      "The other two Pods' readiness probes keep failing",
-      "The HorizontalPodAutoscaler CPU threshold is set too high",
+      "The other two Pods sit in another zone, so kube-proxy never sends them traffic",
+      "The HorizontalPodAutoscaler CPU threshold is too high, so load never spreads out",
       "Long-lived HTTP/2 connections are balanced per connection, not per request",
-      "The CoreDNS record TTL is set too low"
+      "The CoreDNS record TTL is too low, so clients keep resolving to one Pod"
     ],
     "answer": 2,
     "explanation": "kube-proxy cân bằng ở tầng kết nối L4. gRPC ghép mọi request lên một kết nối HTTP/2 sống lâu, nên client dính vào một Pod. Cách sửa là cân bằng tải gRPC phía client hoặc một proxy L7 như service mesh. Nếu readiness thất bại, Pod sẽ bị loại hẳn chứ không chỉ rảnh.",
@@ -124,16 +124,16 @@
     "question": "Checkout gọi đồng bộ lần lượt email, loyalty và analytics sau khi tạo đơn. Mỗi khi loyalty service sập, khách không đặt được hàng. Thiết kế lại thế nào là tốt nhất?",
     "questionEn": "After creating an order, checkout synchronously calls email, loyalty and analytics in turn. Whenever the loyalty service is down, customers cannot place orders. What is the best redesign?",
     "options": [
-      "Thêm retry năm lần cho lời gọi tới loyalty service",
-      "Checkout phát event OrderPlaced; email, loyalty và analytics tiêu thụ bất đồng bộ",
-      "Tăng timeout của lời gọi loyalty lên 30 giây",
-      "Gộp code của loyalty service vào trong checkout"
+      "Thêm retry năm lần có exponential backoff cho lời gọi tới loyalty service",
+      "Checkout phát event OrderPlaced; email, loyalty, analytics tiêu thụ async",
+      "Tăng timeout của lời gọi loyalty lên 30 giây và thêm health check",
+      "Gộp code của loyalty service vào trong checkout để bỏ lời gọi mạng"
     ],
     "optionsEn": [
-      "Add five retries to the loyalty service call",
-      "Checkout publishes an OrderPlaced event that email, loyalty and analytics consume asynchronously",
-      "Raise the loyalty call timeout to 30 seconds",
-      "Merge the loyalty service code into checkout"
+      "Add five retries with exponential backoff to the loyalty service call",
+      "Checkout emits OrderPlaced; email, loyalty and analytics consume it async",
+      "Raise the loyalty call timeout to 30 seconds and add a health check to it",
+      "Merge the loyalty service code into checkout to remove the network call"
     ],
     "answer": 1,
     "explanation": "Đây là các tác dụng phụ, không phải thứ người dùng cần chờ. Event loại bỏ ràng buộc thời gian: loyalty sập thì event chờ trong broker và được xử lý khi nó hồi phục. Retry và timeout dài chỉ làm checkout chậm hơn mà vẫn hỏng.",
@@ -144,16 +144,16 @@
     "question": "Đoạn code gọi payment service dưới đây có vấn đề nghiêm trọng nhất là gì?\n`for (let i = 0; i < 5; i++) {\n  try {\n    return await chargeCard(order);\n  } catch (err) {\n    await sleep(1000);\n  }\n}`",
     "questionEn": "What is the most serious problem with this code that calls the payment service?\n`for (let i = 0; i < 5; i++) {\n  try {\n    return await chargeCard(order);\n  } catch (err) {\n    await sleep(1000);\n  }\n}`",
     "options": [
-      "Thời gian chờ 1 giây quá ngắn so với payment service",
-      "Nên dùng vòng lặp while thay cho for",
-      "Năm lần thử là quá ít cho một dịch vụ quan trọng",
-      "Retry mọi lỗi của thao tác trừ tiền không idempotent, với độ trễ cố định không có jitter"
+      "Thời gian chờ 1 giây quá ngắn để payment service kịp phục hồi giữa các lần thử",
+      "Nên dùng vòng lặp while với điều kiện dừng rõ ràng thay cho for",
+      "Năm lần thử là quá ít cho một dịch vụ quan trọng như thanh toán",
+      "Retry mọi lỗi của thao tác trừ tiền không idempotent, delay cố định, không jitter"
     ],
     "optionsEn": [
-      "The 1-second wait is too short for a payment service",
-      "It should use a while loop instead of a for loop",
-      "Five attempts are too few for a critical service",
-      "It retries every error on a non-idempotent charge, with a fixed delay and no jitter"
+      "The 1-second wait is too short for the payment service to recover between attempts",
+      "It should use a while loop with an explicit stop condition instead of a for",
+      "Five attempts are too few for a business-critical service like payments",
+      "It retries every error on a non-idempotent charge, with fixed delay and no jitter"
     ],
     "answer": 3,
     "explanation": "Nếu request đầu tiên thực ra đã trừ tiền nhưng phản hồi bị timeout, retry sẽ trừ tiền lần nữa — cần idempotency key. Nó cũng retry cả lỗi 400 vĩnh viễn, và độ trễ cố định khiến mọi client retry cùng nhịp. Kiểu vòng lặp không quan trọng.",
@@ -184,16 +184,16 @@
     "question": "Service gợi ý sản phẩm (không quan trọng) bắt đầu phản hồi sau 10 giây. Mọi thread của trang sản phẩm bị treo chờ nó và toàn bộ website ngừng phản hồi. Kết hợp nào ngăn được sự cố này?",
     "questionEn": "The (non-critical) recommendations service starts taking 10 seconds to respond. Every product-page thread blocks waiting on it and the whole website stops responding. Which combination prevents this?",
     "options": [
-      "Timeout ngắn, circuit breaker, bulkhead riêng cho lời gọi gợi ý và fallback về gợi ý mặc định",
-      "Thêm nhiều replica cho service trang sản phẩm",
-      "Retry lời gọi gợi ý nhiều lần hơn với độ trễ ngắn hơn",
-      "Tăng thread pool của trang sản phẩm lên 1000 thread"
+      "Timeout ngắn, circuit breaker, bulkhead riêng và fallback về gợi ý mặc định",
+      "Thêm nhiều replica cho service trang sản phẩm và bật autoscaling theo CPU",
+      "Retry lời gọi gợi ý nhiều lần hơn với độ trễ ngắn hơn để lấy được kết quả",
+      "Tăng thread pool của trang sản phẩm lên 1000 thread để luôn còn thread rảnh"
     ],
     "optionsEn": [
-      "A short timeout, a circuit breaker, a dedicated bulkhead for recommendation calls and a fallback to default recommendations",
-      "Add more replicas of the product-page service",
-      "Retry recommendation calls more often with shorter delays",
-      "Raise the product-page thread pool to 1000 threads"
+      "Short timeout, circuit breaker, dedicated bulkhead and a default fallback",
+      "Add more replicas of the product-page service and enable CPU-based autoscaling",
+      "Retry recommendation calls more often with shorter delays until one succeeds",
+      "Raise the product-page thread pool to 1000 threads so some are always free"
     ],
     "answer": 0,
     "explanation": "Đây là lỗi dây chuyền do dependency chậm. Timeout giải phóng thread, circuit breaker thất bại nhanh, bulkhead giới hạn tài nguyên mà dependency đó chiếm được, fallback giữ trang vẫn dùng được. Thêm replica hay thread chỉ cho thêm chỗ để bị treo; retry còn làm tệ hơn.",
@@ -206,7 +206,7 @@
     "options": [
       "Nó quay về CLOSED ngay và cho toàn bộ lưu lượng đi qua",
       "Nó giữ OPEN cho tới khi có người reset thủ công",
-      "Nó chuyển sang HALF-OPEN và cho một số ít lời gọi thử đi qua",
+      "Nó sang HALF-OPEN và cho vài lời gọi thử đi qua",
       "Nó bị vô hiệu hoá và mọi lời gọi bỏ qua cơ chế bảo vệ"
     ],
     "optionsEn": [
@@ -224,16 +224,16 @@
     "question": "Vì sao microservices thường dùng saga thay cho two-phase commit (2PC) cho các thao tác trải trên nhiều service?",
     "questionEn": "Why do microservices usually use sagas instead of two-phase commit (2PC) for operations spanning several services?",
     "options": [
-      "2PC chỉ hỗ trợ tối đa hai service tham gia",
-      "Saga cung cấp isolation mạnh hơn 2PC",
-      "2PC chỉ chạy được trên cơ sở dữ liệu NoSQL",
-      "2PC giữ lock xuyên service, bị treo khi coordinator hỏng, và nhiều broker hay NoSQL không hỗ trợ"
+      "2PC chỉ hỗ trợ tối đa hai service tham gia, đúng như chữ 'hai' trong tên gọi của nó",
+      "Saga cung cấp isolation mạnh hơn 2PC nhờ khoá từng bước một cách tuần tự",
+      "2PC chỉ chạy được trên cơ sở dữ liệu NoSQL, không hỗ trợ database quan hệ",
+      "2PC giữ lock xuyên service, treo khi coordinator hỏng, nhiều store không hỗ trợ"
     ],
     "optionsEn": [
-      "2PC supports at most two participating services",
-      "Sagas provide stronger isolation than 2PC",
-      "2PC only works on NoSQL databases",
-      "2PC holds locks across services, blocks when the coordinator fails, and many brokers and NoSQL stores do not support it"
+      "2PC supports at most two participants, which is exactly what the 'two' in its name refers to",
+      "Sagas provide stronger isolation than 2PC by locking each step in sequence",
+      "2PC only works on NoSQL databases and is not supported by relational ones",
+      "2PC holds cross-service locks, blocks if the coordinator fails, and many stores lack support"
     ],
     "answer": 3,
     "explanation": "Chữ two trong 2PC là hai pha (prepare, commit), không phải hai bên tham gia. Saga đổi lấy availability bằng cách hy sinh isolation — trạng thái trung gian nhìn thấy được — nên nó yếu hơn, không mạnh hơn.",
@@ -244,16 +244,16 @@
     "question": "Một saga đặt tour du lịch: đặt vé máy bay thành công, giữ phòng khách sạn thành công, thuê xe thất bại vĩnh viễn. Saga nên làm gì?",
     "questionEn": "A trip-booking saga: the flight booking succeeds, the hotel reservation succeeds, the car rental fails permanently. What should the saga do?",
     "options": [
-      "Rollback một database transaction bao trùm cả ba service",
-      "Chạy các giao dịch bù theo thứ tự ngược: huỷ khách sạn rồi huỷ vé máy bay",
-      "Retry thuê xe vô hạn cho tới khi thành công",
+      "Rollback một database transaction phân tán bao trùm cả ba service",
+      "Chạy giao dịch bù theo thứ tự ngược: huỷ khách sạn rồi vé máy bay",
+      "Retry thuê xe vô hạn với backoff cho tới khi thành công",
       "Giữ nguyên vé máy bay và khách sạn, chỉ đánh dấu đơn là thất bại"
     ],
     "optionsEn": [
-      "Roll back one database transaction that spans all three services",
-      "Run compensating transactions in reverse order: cancel the hotel, then cancel the flight",
-      "Retry the car rental forever until it succeeds",
-      "Keep the flight and hotel and just mark the order as failed"
+      "Roll back one distributed database transaction spanning all three services",
+      "Run compensations in reverse order: cancel the hotel, then the flight",
+      "Retry the car rental forever with backoff until it eventually succeeds",
+      "Keep the flight and the hotel booked and just mark the order as failed"
     ],
     "answer": 1,
     "explanation": "Mỗi bước đã commit cục bộ nên không có transaction chung để rollback. Saga hoàn tác bằng các hành động nghiệp vụ bù, theo thứ tự ngược. Retry vô hạn một lỗi vĩnh viễn không bao giờ kết thúc, còn bỏ mặc thì để lại dữ liệu không nhất quán.",
@@ -304,15 +304,15 @@
     "question": "Đâu là một chi phí thực sự của event sourcing?",
     "questionEn": "Which is a genuine cost of event sourcing?",
     "options": [
-      "Không thể audit lại lịch sử thay đổi",
-      "Không thể dựng lại read model khi cần",
-      "Bắt buộc phải dùng two-phase commit",
-      "Schema của event phải được quản lý phiên bản mãi mãi và stream dài cần snapshot"
+      "Không thể audit lại lịch sử thay đổi vì event bị ghi đè khi cập nhật",
+      "Không thể dựng lại read model vì event cũ bị xoá sau khi xử lý",
+      "Bắt buộc phải dùng two-phase commit giữa event store và mọi read model",
+      "Schema event phải quản lý phiên bản mãi mãi và stream dài cần snapshot"
     ],
     "optionsEn": [
-      "The change history cannot be audited",
-      "Read models cannot be rebuilt when needed",
-      "It requires two-phase commit",
+      "The change history cannot be audited because events are overwritten on update",
+      "Read models cannot be rebuilt because old events are deleted once processed",
+      "It requires two-phase commit between the event store and every read model",
       "Event schemas must be versioned forever and long streams need snapshots"
     ],
     "answer": 3,
@@ -325,15 +325,15 @@
     "questionEn": "What does this Istio configuration do?\n`kind: DestinationRule\nspec:\n  host: payments.shop.svc.cluster.local\n  trafficPolicy:\n    outlierDetection:\n      consecutive5xxErrors: 5\n      interval: 10s\n      baseEjectionTime: 30s`",
     "options": [
       "Tạm loại một instance payments khỏi cân bằng tải khi nó trả 5 lỗi 5xx liên tiếp",
-      "Retry mỗi request tới payments tối đa 5 lần, cách nhau 10 giây",
-      "Giới hạn payments ở 5 request mỗi 10 giây cho mỗi client",
-      "Khởi động lại Pod payments sau 5 lần health check thất bại"
+      "Retry mỗi request tới payments tối đa 5 lần, mỗi lần cách nhau 10 giây",
+      "Giới hạn payments ở 5 request mỗi 10 giây cho mỗi client kết nối tới",
+      "Khởi động lại Pod payments sau 5 lần health check thất bại liên tiếp"
     ],
     "optionsEn": [
-      "Temporarily ejects a payments instance from load balancing after it returns 5 consecutive 5xx errors",
-      "Retries each request to payments up to 5 times, 10 seconds apart",
-      "Rate-limits payments to 5 requests every 10 seconds per client",
-      "Restarts the payments Pod after 5 failed health checks"
+      "Temporarily ejects a payments instance from the pool after 5 consecutive 5xx errors",
+      "Retries each request to payments up to 5 times, waiting 10 seconds between tries",
+      "Rate-limits payments to 5 requests every 10 seconds for each connecting client",
+      "Restarts the payments Pod after 5 consecutive failed health checks within 30 seconds"
     ],
     "answer": 0,
     "explanation": "Outlier detection là dạng circuit breaking theo từng instance: proxy đẩy host lỗi ra khỏi pool, bắt đầu với 30 giây. Retry được cấu hình trong VirtualService, còn khởi động lại Pod là việc của liveness probe trong Kubernetes.",

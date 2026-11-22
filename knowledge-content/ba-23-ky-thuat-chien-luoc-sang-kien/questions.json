@@ -164,16 +164,16 @@
     "question": "Planning workshop ở tầm chiến lược tập trung vào điều gì?",
     "questionEn": "What do planning workshops at the strategy horizon focus on?",
     "options": [
-      "Lập kế hoạch thứ tự các feature và kế hoạch release",
-      "Lập kế hoạch chi tiết cho iteration",
-      "Tinh chỉnh user story",
-      "Mục tiêu tổ chức, các chỉ số để đạt mục tiêu đó, và những sáng kiến có thể tạo giá trị hướng tới chúng"
+      "Lập kế hoạch thứ tự các feature và kế hoạch release cho chúng",
+      "Lập kế hoạch công việc và chi tiết cho iteration tiếp theo",
+      "Tinh chỉnh user story và acceptance criteria của chúng",
+      "Mục tiêu tổ chức, chỉ số đo chúng, và các sáng kiến phục vụ chúng"
     ],
     "optionsEn": [
-      "Planning the order of features and release plans",
-      "Planning iteration details",
-      "Refining user stories",
-      "Organisational goals, metrics to achieve those goals, and initiatives that can deliver value toward them"
+      "Planning the order of features and the release plans for them",
+      "Planning the tasks and details of the next iteration",
+      "Refining user stories and their acceptance criteria",
+      "Organisational goals, their metrics, and initiatives that serve them"
     ],
     "answer": 3,
     "explanation": "Cùng một tên kỹ thuật ở ba tầm. Đơn vị công việc trong phương án cho biết tầm: mục tiêu → chiến lược, feature → sáng kiến, task → bàn giao.",
@@ -199,7 +199,7 @@
       "Portfolio Kanban",
       "Value modeling",
       "Impact mapping",
-      "Phân tích Kano (Kano analysis)"
+      "Kano analysis"
     ],
     "optionsEn": [
       "Portfolio Kanban",
@@ -325,15 +325,15 @@
     "questionEn": "In practical terms, what does relative estimating entail?",
     "options": [
       "Dùng một công thức phức tạp để ước lượng và đi tới con số khả dĩ nhất",
-      "Dùng bậc độ lớn và so sánh hạng mục với những hạng mục đã làm trước đó để phán đoán hạng mục này sẽ mất bao lâu",
+      "So sánh bậc độ lớn với những hạng mục đã làm trước đó",
       "Dùng dữ liệu lịch sử áp vào một công thức để xác định ước lượng khả dĩ nhất",
       "Dùng phán đoán tốt nhất của đội dựa trên kinh nghiệm của họ"
     ],
     "optionsEn": [
       "Use a complex formula to estimate and arrive at the most likely number",
-      "Use order of magnitude and comparison to previously delivered items to judge how long an item will likely take",
+      "Compare items by order of magnitude against previously delivered work",
       "Use historical data applied to a formula to determine the most likely estimate",
-      "Use the team's best guess based on their experience"
+      "Use the team's best guess based on their own experience"
     ],
     "answer": 1,
     "explanation": "Phương án \"phán đoán tốt nhất của đội\" là bẫy tinh vi nhất: đúng về vai trò nhưng thiếu toàn bộ cơ chế của kỹ thuật.",
@@ -452,16 +452,16 @@
     "question": "Làm sao một BA Agile biết một phần đã triển khai của value stream map mới là hiệu quả?",
     "questionEn": "How does an agile BA know if an implemented increment of a new value stream map is effective?",
     "options": [
-      "Bằng cách đếm số feature đã bàn giao",
-      "Bằng cách đo xem từng phần đã thay đổi đang cải thiện value stream tổng thể ra sao",
-      "Bằng cách hỏi khách hàng nghĩ gì",
-      "Bằng cách báo cáo các cột mốc đã đạt"
+      "Bằng cách đếm số lượng feature đã được bàn giao tới nay",
+      "Bằng cách đo xem mỗi thay đổi có cải thiện toàn bộ dòng chảy không",
+      "Bằng cách khảo sát xem khách hàng cảm thấy hài lòng ra sao",
+      "Bằng cách báo cáo các cột mốc đã đạt so với kế hoạch"
     ],
     "optionsEn": [
-      "By counting the number of features delivered",
-      "By measuring how each changed piece is improving the value stream overall",
-      "By asking customers what they think",
-      "By reporting on the milestones met"
+      "By counting how many features have been delivered so far",
+      "By measuring whether each change improves end-to-end flow",
+      "By surveying customers on how satisfied they feel",
+      "By reporting the milestones met against the plan"
     ],
     "answer": 1,
     "explanation": "Ba phương án sai đều đo ĐẦU RA hoặc ý kiến. Chỉ một phương án đo GIÁ TRỊ thực sự chảy qua value stream.",
@@ -484,14 +484,14 @@
     "question": "Vì sao \"business value map\" là phương án nên loại ngay khi gặp?",
     "questionEn": "Why should \"business value map\" be eliminated on sight?",
     "options": [
-      "Vì nó chỉ dùng ở tầm bàn giao",
-      "Vì nó không phải một kỹ thuật trong Agile Extension to the BABOK",
+      "Vì nó chỉ được dùng ở tầm bàn giao",
+      "Vì nó không phải kỹ thuật của Agile Extension",
       "Vì nó đã được đổi tên thành value stream map",
       "Vì nó chỉ áp dụng cho sản phẩm thương mại"
     ],
     "optionsEn": [
       "Because it is only used at the delivery horizon",
-      "Because it is not a technique in the Agile Extension to the BABOK",
+      "Because it is not an Agile Extension technique",
       "Because it was renamed to value stream map",
       "Because it applies only to commercial products"
     ],
@@ -516,13 +516,13 @@
     "question": "Purpose alignment model và product roadmap khác nhau ở điểm nào?",
     "questionEn": "How do the purpose alignment model and the product roadmap differ?",
     "options": [
-      "Purpose alignment model nói về cơ cấu nguồn lực giữa các sáng kiến; product roadmap nói về hướng đi tương lai dự kiến của sản phẩm",
+      "Purpose alignment: cơ cấu nguồn lực giữa các sáng kiến; roadmap: hướng đi sản phẩm",
       "Purpose alignment model dùng ở tầm sáng kiến; product roadmap dùng ở tầm chiến lược",
       "Purpose alignment model là hình trực quan; product roadmap là bảng tính",
       "Purpose alignment model dành cho lãnh đạo; product roadmap dành cho đội phát triển"
     ],
     "optionsEn": [
-      "The purpose alignment model is about the resourcing mix across initiatives; the product roadmap is about the expected future direction of the product",
+      "Purpose alignment: resourcing mix across initiatives; roadmap: product direction",
       "The purpose alignment model is used at the initiative horizon; the product roadmap at the strategy horizon",
       "The purpose alignment model is a visual; the product roadmap is a spreadsheet",
       "The purpose alignment model is for executives; the product roadmap is for development teams"
@@ -580,28 +580,28 @@
     "question": "Vì sao dữ liệu lịch sử không phải thành phần chính của ước lượng tương đối?",
     "questionEn": "Why is historical data not the main component of relative estimating?",
     "options": [
-      "Vì dữ liệu lịch sử luôn không chính xác",
-      "Vì giá trị của kỹ thuật nằm ở cuộc đối thoại của đội về kiến thức, kinh nghiệm và giả định, chứ không ở số liệu",
-      "Vì đội Agile không lưu dữ liệu lịch sử",
-      "Vì dữ liệu lịch sử chỉ dùng được ở tầm chiến lược"
+      "Vì dữ liệu lịch sử thường quá thiếu chính xác để dựa vào",
+      "Vì giá trị của nó nằm ở cuộc đối thoại của đội, không ở số liệu",
+      "Vì đội Agile hiếm khi lưu giữ dữ liệu lịch sử đáng tin cậy",
+      "Vì dữ liệu lịch sử chỉ dùng được ở tầm chiến lược, không ở tầm khác"
     ],
     "optionsEn": [
-      "Because historical data is always inaccurate",
-      "Because the technique's value is in the team's dialogue about knowledge, experience and assumptions, not in the numbers",
-      "Because agile teams do not keep historical data",
+      "Because historical data is usually too inaccurate to rely on",
+      "Because its value lies in the team's dialogue, not in the numbers",
+      "Because agile teams rarely keep reliable historical data",
       "Because historical data can only be used at the strategy horizon"
     ],
     "answer": 1,
     "explanation": "Ước lượng tương đối là một cuộc trò chuyện có cấu trúc. Số liệu tham gia cuộc trò chuyện đó chứ không thay thế nó.",
     "explanationEn": "Relative estimating is a structured conversation. Numbers join that conversation; they do not replace it.",
     "optionExplanations": [
-      "Tuyệt đối hoá và không phải lập luận của tài liệu nguồn; dữ liệu lịch sử vẫn được coi là đầu vào hợp lệ.",
+      "Không phải lập luận của tài liệu nguồn; dữ liệu lịch sử vẫn được coi là đầu vào hợp lệ.",
       "Đúng. Dữ liệu lịch sử CÓ THỂ được cân nhắc, nhưng nó chỉ là một đầu vào cho cuộc đối thoại, không thay thế được cuộc đối thoại.",
       "Đội Agile hoàn toàn có lưu dữ liệu — velocity và các hạng mục đã bàn giao chính là dữ liệu lịch sử.",
       "Không có giới hạn theo tầm; dữ liệu lịch sử được dùng ở mọi mức, kể cả trong chính buổi ước lượng của đội."
     ],
     "optionExplanationsEn": [
-      "An absolute, and not the source material's argument; historical data is still treated as a legitimate input.",
+      "Not the source material's argument; historical data is still treated as a legitimate input.",
       "Correct. Historical data MAY be considered, but it is one input to the dialogue, not a substitute for it.",
       "Agile teams do keep data — velocity and previously delivered items are exactly historical data.",
       "There is no horizon restriction; historical data is used at every level, including in the team's own estimation session."
@@ -612,13 +612,13 @@
     "question": "Một câu hỏi mô tả kỹ thuật dùng để \"hiểu việc tạo ra giá trị xuyên suốt toàn bộ trải nghiệm khách hàng, nhằm sắp ưu tiên, lập kế hoạch và tích hợp việc tạo giá trị cùng giảm lãng phí giữa các sáng kiến\". Đây là kỹ thuật nào?",
     "questionEn": "A question describes the technique used to \"understand the creation of value across the whole customer experience, in order to prioritise, plan and integrate value creation and waste reduction between initiatives\". Which technique is it?",
     "options": [
-      "Impact mapping",
+      "Purpose alignment model",
       "Value stream mapping",
       "Product roadmap",
-      "Phân tích Kano (Kano analysis)"
+      "Kano analysis"
     ],
     "optionsEn": [
-      "Impact mapping",
+      "Purpose alignment model",
       "Value stream mapping",
       "Product roadmap",
       "Kano analysis"
@@ -627,13 +627,13 @@
     "explanation": "Bốn kỹ thuật chiến lược dễ lẫn nhất được phân biệt bằng bốn cụm từ. Cụm ở đây là \"toàn bộ trải nghiệm khách hàng\".",
     "explanationEn": "The four most confusable strategy techniques are separated by four phrases. The phrase here is \"the whole customer experience\".",
     "optionExplanations": [
-      "Impact map đi từ mục tiêu tổ chức xuống sản phẩm bàn giao; nó không lấy toàn bộ trải nghiệm khách hàng làm trục.",
+      "Purpose alignment model nói về cơ cấu nguồn lực và trọng tâm của các sáng kiến trên toàn tổ chức; nó không lấy trải nghiệm khách hàng làm trục.",
       "\"Toàn bộ trải nghiệm khách hàng\" cộng \"giảm lãng phí giữa các sáng kiến\" là cụm từ đặc trưng của value stream mapping.",
       "Đây là định nghĩa của Product roadmap: truyền đạt hướng đi tương lai dự kiến của sản phẩm và cải thiện cộng tác giữa các đội.",
       "Kano phân loại đặc tính sản phẩm theo mức tác động lên sự hài lòng; nó không lập bản đồ dòng chảy giá trị."
     ],
     "optionExplanationsEn": [
-      "An impact map runs from organisational goals down to deliverables; it is not organised around the whole customer experience.",
+      "The purpose alignment model is about the resourcing mix and focus of initiatives across the organisation; it is not organised around the customer experience.",
       "\"Whole customer experience\" plus \"waste reduction between initiatives\" is the distinctive value stream mapping phrase.",
       "This is the Product roadmap definition: communicating the expected future direction of the product and improving collaboration among teams.",
       "Kano classifies product characteristics by their effect on satisfaction; it does not map a flow of value."

@@ -4,16 +4,16 @@
     "question": "Port (cổng) trong mạng máy tính dùng để làm gì?",
     "questionEn": "What is a port used for in computer networking?",
     "options": [
-      "Xác định máy tính nào trong mạng",
-      "Phân biệt ứng dụng nào nhận dữ liệu trên cùng một máy",
-      "Đo tốc độ kết nối mạng",
-      "Mã hóa dữ liệu truyền tải"
+      "Xác định máy tính nào trong mạng nhận dữ liệu",
+      "Xác định ứng dụng nào trên máy nhận dữ liệu",
+      "Đo tốc độ kết nối giữa hai máy tính",
+      "Mã hóa dữ liệu trước khi gửi qua mạng"
     ],
     "optionsEn": [
-      "To identify which computer is on the network",
-      "To distinguish which application receives data on the same machine",
-      "To measure network connection speed",
-      "To encrypt transmitted data"
+      "Identifying which computer on the network gets the data",
+      "Identifying which app on a machine gets the data",
+      "Measuring the connection speed between two machines",
+      "Encrypting data before it is sent over the network"
     ],
     "answer": 1,
     "explanation": "IP xác định máy tính. Port phân biệt ứng dụng. Một máy có thể chạy web server (port 80), SSH (port 22), database (port 5432) cùng lúc — port giúp phân luồng đúng.",
@@ -24,13 +24,13 @@
     "question": "Dịch vụ nào chạy trên port 443?",
     "questionEn": "Which service runs on port 443?",
     "options": [
-      "FTP",
+      "MySQL",
       "SSH",
       "HTTP",
       "HTTPS"
     ],
     "optionsEn": [
-      "FTP",
+      "MySQL",
       "SSH",
       "HTTP",
       "HTTPS"
@@ -104,16 +104,16 @@
     "question": "Firewall kiểm soát traffic mạng bằng cách nào?",
     "questionEn": "How does a firewall control network traffic?",
     "options": [
-      "Mã hóa tất cả dữ liệu",
+      "Mã hóa toàn bộ dữ liệu đi qua",
       "Mở hoặc chặn các port cụ thể",
-      "Tăng tốc độ kết nối",
-      "Phân giải tên miền"
+      "Tăng tốc độ kết nối cho ứng dụng",
+      "Phân giải tên miền thành địa chỉ IP"
     ],
     "optionsEn": [
-      "By encrypting all data",
+      "By encrypting all data passing through",
       "By opening or blocking specific ports",
-      "By increasing connection speed",
-      "By resolving domain names"
+      "By speeding up connections for apps",
+      "By resolving domain names to IPs"
     ],
     "answer": 1,
     "explanation": "Firewall lọc traffic dựa trên rules: cho phép hoặc chặn dựa trên IP, port, protocol. Mở port 80/443 → cho phép web traffic; chặn port 22 → ngăn SSH.",
@@ -124,16 +124,16 @@
     "question": "Socket trong mạng máy tính là gì?",
     "questionEn": "What is a socket in computer networking?",
     "options": [
-      "Cổng USB vật lý",
-      "Tổ hợp IP + Port + Protocol tạo thành điểm kết nối",
-      "Loại cáp mạng đặc biệt",
-      "Phần mềm quản lý mạng"
+      "Cổng USB vật lý để cắm thiết bị mạng",
+      "Điểm kết nối gồm IP + Port + Protocol",
+      "Một loại cáp mạng đặc biệt có đầu cắm riêng",
+      "Phần mềm giám sát lưu lượng mạng"
     ],
     "optionsEn": [
-      "A physical USB port",
-      "The combination of IP + Port + Protocol that forms a connection endpoint",
-      "A special type of network cable",
-      "Network management software"
+      "A physical USB port for plugging in network gear",
+      "An endpoint made of IP + Port + Protocol",
+      "A special network cable with its own connector",
+      "Software that monitors network traffic"
     ],
     "answer": 1,
     "explanation": "Socket = IP Address + Port + Protocol. Ví dụ: (192.168.1.1, 80, TCP). Socket là endpoint của một kết nối — mỗi kết nối TCP có 2 socket (client và server).",
@@ -144,16 +144,16 @@
     "question": "WebSocket khác HTTP ở điểm gì cơ bản nhất?",
     "questionEn": "What is the most fundamental difference between WebSocket and HTTP?",
     "options": [
-      "WebSocket nhanh hơn HTTP",
-      "WebSocket cho phép kết nối hai chiều liên tục, HTTP chỉ request-response một chiều",
-      "WebSocket mã hóa tốt hơn HTTP",
-      "WebSocket chỉ dùng cho mobile"
+      "WebSocket nhanh hơn HTTP vì dùng UDP thay cho TCP",
+      "WebSocket giữ kết nối hai chiều liên tục, HTTP là request-response",
+      "WebSocket tự mã hóa dữ liệu, còn HTTP cần thêm TLS",
+      "WebSocket dành cho app mobile, HTTP dành cho trình duyệt web"
     ],
     "optionsEn": [
-      "WebSocket is faster than HTTP",
-      "WebSocket allows a persistent two-way connection, while HTTP is only one-way request-response",
-      "WebSocket encrypts better than HTTP",
-      "WebSocket is only used for mobile"
+      "WebSocket is faster than HTTP because it uses UDP instead of TCP",
+      "WebSocket keeps a two-way connection open; HTTP is request-response",
+      "WebSocket encrypts data by itself, while HTTP needs TLS added",
+      "WebSocket is for mobile apps, while HTTP is for web browsers"
     ],
     "answer": 1,
     "explanation": "HTTP: client gửi request → server trả response → kết thúc. WebSocket: kết nối được duy trì, cả hai bên có thể gửi dữ liệu bất cứ lúc nào — cần thiết cho chat, notification real-time.",
@@ -164,16 +164,16 @@
     "question": "Khi deploy ứng dụng web trên AWS, bạn cần làm gì để người dùng truy cập được?",
     "questionEn": "When deploying a web application on AWS, what do you need to do so users can access it?",
     "options": [
-      "Không cần làm gì thêm",
-      "Mở port 80 và 443 trong Security Group/Firewall rules",
-      "Cài đặt DNS server riêng",
-      "Mua thêm địa chỉ IP tĩnh"
+      "Không cần làm gì, AWS tự mở mọi port",
+      "Mở port 80 và 443 trong Security Group",
+      "Cài đặt một DNS server riêng trên máy chủ",
+      "Mua thêm địa chỉ IP tĩnh cho từng người dùng"
     ],
     "optionsEn": [
-      "Nothing extra is needed",
-      "Open ports 80 and 443 in the Security Group/Firewall rules",
-      "Install a dedicated DNS server",
-      "Buy an additional static IP address"
+      "Nothing — AWS opens every port automatically",
+      "Open ports 80 and 443 in the Security Group",
+      "Install a dedicated DNS server on the instance",
+      "Buy an extra static IP address for each user"
     ],
     "answer": 1,
     "explanation": "Cloud providers mặc định chặn tất cả port. Bạn phải cấu hình Security Group (AWS) hoặc Firewall rules để mở port 80 (HTTP) và 443 (HTTPS) thì người dùng mới vào được.",
@@ -204,16 +204,16 @@
     "question": "Ứng dụng nào phù hợp nhất để dùng WebSocket?",
     "questionEn": "Which application is the best fit for using WebSocket?",
     "options": [
-      "Trang web tin tức tĩnh",
-      "Hệ thống chat real-time và live notification",
-      "Form đăng ký tài khoản",
-      "Trang hiển thị catalog sản phẩm"
+      "Trang tin tức tĩnh cập nhật mỗi ngày",
+      "Ứng dụng chat và thông báo real-time",
+      "Form đăng ký tài khoản người dùng mới",
+      "Trang catalog sản phẩm có bộ lọc tìm kiếm"
     ],
     "optionsEn": [
-      "A static news website",
-      "A real-time chat system and live notifications",
-      "An account registration form",
-      "A product catalog display page"
+      "A static news site updated once a day",
+      "Real-time chat and live notifications",
+      "A sign-up form for new user accounts",
+      "A product catalog page with search filters"
     ],
     "answer": 1,
     "explanation": "WebSocket lý tưởng khi cần đẩy dữ liệu từ server xuống client ngay khi có cập nhật (push) — chat, game, live stock ticker, thông báo real-time.",
@@ -224,16 +224,16 @@
     "question": "Port 8080 thường dùng để làm gì?",
     "questionEn": "What is port 8080 typically used for?",
     "options": [
-      "Thay thế HTTPS",
-      "Alternative cho port 80 trong môi trường phát triển",
-      "Kết nối database PostgreSQL",
-      "SSH với mã hóa cao hơn"
+      "Port mặc định thay thế cho HTTPS",
+      "Port HTTP thay thế khi phát triển",
+      "Kết nối tới database PostgreSQL",
+      "Kết nối SSH với mức mã hóa cao hơn"
     ],
     "optionsEn": [
-      "A replacement for HTTPS",
-      "An alternative to port 80 in development environments",
+      "The default replacement port for HTTPS",
+      "An alternative HTTP port for development",
       "Connecting to a PostgreSQL database",
-      "SSH with stronger encryption"
+      "SSH connections with stronger encryption"
     ],
     "answer": 1,
     "explanation": "Port 8080 thường dùng làm alternative cho port 80 (HTTP) khi dev hoặc khi port 80 bị chiếm. Không cần quyền root để mở port > 1024.",
@@ -244,16 +244,16 @@
     "question": "Dải port 0-1023 có đặc điểm gì?",
     "questionEn": "What is characteristic of the port range 0-1023?",
     "options": [
-      "Dành cho client sử dụng tạm thời",
-      "Well-known ports - dành riêng cho các dịch vụ chuẩn như HTTP, SSH, FTP",
-      "Chỉ dùng được trên Windows",
-      "Dành cho database server"
+      "Dành cho client dùng tạm thời khi kết nối",
+      "Well-known ports — dành cho dịch vụ chuẩn",
+      "Chỉ dùng được trên hệ điều hành Windows",
+      "Dành riêng cho các database server"
     ],
     "optionsEn": [
-      "Reserved for temporary client use",
-      "Well-known ports — reserved for standard services such as HTTP, SSH, FTP",
-      "Usable only on Windows",
-      "Reserved for database servers"
+      "Reserved for temporary client connections",
+      "Well-known ports for standard services",
+      "Usable only on the Windows operating system",
+      "Reserved for database servers only"
     ],
     "answer": 1,
     "explanation": "Ports 0-1023 là well-known ports, được IANA gán cho các giao thức/dịch vụ chuẩn. Cần quyền root/admin để mở các port này trên Linux/Mac.",
@@ -264,14 +264,14 @@
     "question": "http://localhost:3000 — con số 3000 có ý nghĩa gì?",
     "questionEn": "http://localhost:3000 — what does the number 3000 mean?",
     "options": [
-      "Số phiên bản phần mềm",
-      "Cổng (port) mà ứng dụng đang lắng nghe trên máy tính cá nhân",
-      "Số lượng kết nối tối đa",
-      "Tốc độ kết nối Mbps"
+      "Số phiên bản của ứng dụng đang chạy",
+      "Cổng (port) mà ứng dụng đang lắng nghe",
+      "Số lượng kết nối tối đa cho phép",
+      "Tốc độ kết nối tính bằng Mbps"
     ],
     "optionsEn": [
-      "The software version number",
-      "The port the application is listening on locally",
+      "The version number of the running app",
+      "The port the app is listening on",
       "The maximum number of connections",
       "The connection speed in Mbps"
     ],
@@ -303,16 +303,16 @@
     "question": "Ứng dụng chạy tốt trong mạng nội bộ nhưng người dùng ngoài công ty không kết nối được cổng 8080. Nguyên nhân phổ biến nhất?",
     "questionEn": "An app works on the internal network but external users cannot reach port 8080. Most common cause?",
     "options": [
-      "Firewall chưa mở cổng 8080 cho lưu lượng từ bên ngoài",
-      "Cổng 8080 không tồn tại",
+      "Firewall chưa mở cổng 8080 cho bên ngoài",
+      "Cổng 8080 chỉ dùng được trong mạng nội bộ",
       "Trình duyệt không hỗ trợ cổng bốn chữ số",
-      "Máy chủ chưa cài đặt DNS"
+      "Máy chủ chưa cài đặt DNS server riêng"
     ],
     "optionsEn": [
-      "The firewall has not opened port 8080 to external traffic",
-      "Port 8080 does not exist",
+      "The firewall has not opened port 8080 externally",
+      "Port 8080 only works inside a local network",
       "Browsers do not support four-digit ports",
-      "The server has no DNS installed"
+      "The server has no DNS server of its own installed"
     ],
     "answer": 0,
     "explanation": "Firewall lọc theo cổng. Cổng không chuẩn như 8080 thường bị chặn mặc định cho lưu lượng vào từ internet.",
@@ -326,33 +326,33 @@
       "HTTP",
       "HTTPS",
       "SSH",
-      "SMTP"
+      "SMTPS"
     ],
     "optionsEn": [
       "HTTP",
       "HTTPS",
       "SSH",
-      "SMTP"
+      "SMTPS"
     ],
     "answer": 1,
-    "explanation": "80 là HTTP, 443 là HTTPS, 22 là SSH, 25 là SMTP. Biết các cổng chuẩn giúp BA đọc log và trao đổi với đội hạ tầng.",
-    "explanationEn": "80 is HTTP, 443 is HTTPS, 22 is SSH, 25 is SMTP. Knowing the standard ports helps a BA read logs and talk to the infrastructure team.",
+    "explanation": "80 là HTTP, 443 là HTTPS, 22 là SSH, 465 là SMTPS (gửi email có mã hóa). Biết các cổng chuẩn giúp BA đọc log và trao đổi với đội hạ tầng.",
+    "explanationEn": "80 is HTTP, 443 is HTTPS, 22 is SSH, 465 is SMTPS (encrypted mail sending). Knowing the standard ports helps a BA read logs and talk to the infrastructure team.",
     "id": "q17"
   },
   {
     "question": "Tính năng thông báo thời gian thực cần đẩy dữ liệu từ server xuống trình duyệt ngay khi có sự kiện. Công nghệ nào phù hợp?",
     "questionEn": "A real-time notification feature must push data from server to browser the moment an event happens. Which fits?",
     "options": [
-      "WebSocket, vì nó giữ kết nối hai chiều mở liên tục",
-      "FTP, vì truyền được tệp lớn",
-      "SMTP, vì gửi được thông báo",
-      "Gọi HTTP thông thường mỗi 10 phút"
+      "WebSocket, vì giữ kết nối hai chiều luôn mở",
+      "FTP, vì truyền được tệp lớn rất nhanh",
+      "SMTP, vì được thiết kế để gửi thông báo",
+      "Gọi HTTP thông thường mỗi 10 phút một lần"
     ],
     "optionsEn": [
-      "WebSocket, because it keeps a persistent two-way connection open",
-      "FTP, because it can transfer large files",
-      "SMTP, because it can send notifications",
-      "A normal HTTP call every 10 minutes"
+      "WebSocket, as it keeps a two-way link open",
+      "FTP, because it moves large files quickly",
+      "SMTP, because it was built to send notifications",
+      "A normal HTTP request once every 10 minutes"
     ],
     "answer": 0,
     "explanation": "HTTP thông thường là một chiều: client hỏi, server đáp. WebSocket giữ kết nối mở nên server chủ động đẩy dữ liệu xuống được.",
@@ -363,16 +363,16 @@
     "question": "Socket được định nghĩa chính xác nhất là gì?",
     "questionEn": "What is the most accurate definition of a socket?",
     "options": [
-      "Điểm cuối của một kết nối, xác định bằng cặp địa chỉ IP và số cổng",
-      "Một loại cáp mạng",
-      "Một tệp cấu hình của firewall",
-      "Tên miền rút gọn của máy chủ"
+      "Điểm cuối kết nối, xác định bằng IP và số cổng",
+      "Một loại cáp mạng có đầu cắm đặc biệt",
+      "Tệp cấu hình quy định cổng nào được mở",
+      "Tên miền rút gọn trỏ tới IP máy chủ"
     ],
     "optionsEn": [
-      "An endpoint of a connection, identified by an IP address and port number pair",
-      "A type of network cable",
-      "A firewall configuration file",
-      "A shortened server domain name"
+      "A connection endpoint, identified by IP and port",
+      "A type of network cable with a special plug",
+      "A config file listing which ports are open",
+      "A short domain name pointing to a server IP"
     ],
     "answer": 0,
     "explanation": "Socket = IP + port. Nó cho phép một máy chủ phục vụ nhiều dịch vụ khác nhau đồng thời trên cùng một địa chỉ IP.",
@@ -383,15 +383,15 @@
     "question": "Vì sao URL công khai thường KHÔNG hiện số cổng?",
     "questionEn": "Why do public URLs usually NOT show a port number?",
     "options": [
-      "Vì trình duyệt tự hiểu cổng mặc định 80 cho HTTP và 443 cho HTTPS",
-      "Vì cổng bị ẩn để bảo mật tuyệt đối",
-      "Vì website công khai không dùng cổng",
+      "Vì trình duyệt tự dùng cổng mặc định 80/443",
+      "Vì số cổng bị ẩn đi để hacker không thấy",
+      "Vì website công khai không dùng tới cổng",
       "Vì DNS đã thay thế vai trò của cổng"
     ],
     "optionsEn": [
-      "Because browsers assume the default port 80 for HTTP and 443 for HTTPS",
-      "Because ports are hidden for absolute security",
-      "Because public sites do not use ports",
+      "Because browsers assume the default 80/443",
+      "Because the port is hidden so hackers cannot see it",
+      "Because public websites do not use ports at all",
       "Because DNS has replaced the role of ports"
     ],
     "answer": 0,
@@ -404,16 +404,16 @@
     "question": "Lập trình viên khởi động app ở port 3000 và nhận lỗi \"EADDRINUSE: address already in use\". Điều này có nghĩa gì?",
     "questionEn": "A developer starts an app on port 3000 and gets \"EADDRINUSE: address already in use\". What does this mean?",
     "options": [
-      "Firewall đang chặn port 3000",
-      "Một chương trình khác đang lắng nghe ở port 3000",
-      "Port 3000 vượt quá giới hạn 65535",
-      "Máy tính chưa có địa chỉ IP"
+      "Firewall đang chặn kết nối tới port 3000",
+      "Chương trình khác đang nghe ở port 3000",
+      "Port 3000 vượt quá giới hạn tối đa 65535",
+      "Máy tính chưa được cấp địa chỉ IP nào"
     ],
     "optionsEn": [
-      "A firewall is blocking port 3000",
-      "Another program is already listening on port 3000",
-      "Port 3000 is above the 65535 limit",
-      "The computer has no IP address"
+      "A firewall is blocking connections to port 3000",
+      "Another program is listening on port 3000",
+      "Port 3000 is above the maximum of 65535",
+      "The computer has not been given any IP address"
     ],
     "answer": 1,
     "explanation": "Tại một thời điểm chỉ một chương trình được lắng nghe trên một port. Lỗi này báo port đã bị chương trình khác chiếm; dùng netstat hoặc lsof để tìm chương trình đó.",
@@ -436,16 +436,16 @@
     "question": "Bạn thử kết nối tới server-x:5432 và nhận \"Connection timed out\" (không có phản hồi nào). Nguyên nhân thường gặp nhất là gì?",
     "questionEn": "You try to connect to server-x:5432 and get \"Connection timed out\" (no answer at all). What is the most common cause?",
     "options": [
-      "Firewall đang âm thầm bỏ traffic tới port đó (hoặc sai IP)",
+      "Firewall âm thầm bỏ traffic tới port đó",
       "Database đã trả lời rằng mật khẩu sai",
-      "Kết nối thành công nhưng chậm",
-      "Port 5432 là port của HTTPS"
+      "Kết nối đã thành công nhưng mạng chậm",
+      "Port 5432 là port dành cho HTTPS"
     ],
     "optionsEn": [
-      "A firewall is silently dropping traffic to that port (or the IP is wrong)",
+      "A firewall is silently dropping that traffic",
       "The database replied that the password is wrong",
-      "The connection succeeded but is slow",
-      "Port 5432 is the HTTPS port"
+      "The connection succeeded but the network is slow",
+      "Port 5432 is reserved for HTTPS"
     ],
     "answer": 0,
     "explanation": "Timeout nghĩa là không có phản hồi nào — thường do firewall bỏ gói tin hoặc sai địa chỉ. Nếu máy trả lời nhưng không ai lắng nghe, bạn sẽ nhận \"connection refused\".",
@@ -469,14 +469,14 @@
     "questionEn": "Thousands of people connect to port 443 on one web server at once. How does the server tell the connections apart?",
     "options": [
       "Mỗi người được cấp một port 443 riêng trên server",
-      "Server chỉ phục vụ một người một lúc",
-      "Mỗi kết nối được nhận diện bằng cả hai đầu: IP và port của client cùng IP và port của server",
+      "Server chỉ phục vụ lần lượt từng người một",
+      "Bằng cả hai đầu: IP và port của client lẫn server",
       "Trình duyệt gửi tên người dùng trong mỗi gói tin TCP"
     ],
     "optionsEn": [
       "Each person gets their own copy of port 443 on the server",
-      "The server serves only one person at a time",
-      "Each connection is identified by both ends: the client's IP and port plus the server's IP and port",
+      "The server serves only one person at a time, in turn",
+      "By both ends: the client's IP and port plus the server's",
       "The browser puts the user's name in every TCP packet"
     ],
     "answer": 2,

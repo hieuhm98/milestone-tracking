@@ -5,15 +5,15 @@
     "questionEn": "When a user reports this feature does not work, what should the BA ask first?",
     "options": [
       "Anh chị đang ở môi trường nào — Test, Staging hay Production?",
-      "Anh chị dùng trình duyệt gì?",
-      "Anh chị đã thử tải lại trang chưa?",
-      "Ai là người phát triển tính năng này?"
+      "Anh chị dùng trình duyệt và phiên bản nào, đã xóa cache chưa?",
+      "Anh chị đã thử đăng xuất rồi đăng nhập lại chưa?",
+      "Ai trong đội đã phát triển tính năng này để em hỏi lại?"
     ],
     "optionsEn": [
       "Which environment are you in — test, staging, or production?",
-      "Which browser are you using?",
-      "Have you tried reloading the page?",
-      "Who developed this feature?"
+      "Which browser and version are you on, and have you cleared the cache?",
+      "Have you tried logging out and back in?",
+      "Who on the team built this feature, so I can ask them?"
     ],
     "answer": 0,
     "explanation": "Rất nhiều báo lỗi hoá ra là do người dùng vào nhầm môi trường, hoặc do dữ liệu ở môi trường đó khác dữ liệu thật.",
@@ -24,16 +24,16 @@
     "question": "Vì sao việc sao chép dữ liệu thật xuống Staging cần được đặc tả cẩn thận?",
     "questionEn": "Why must copying real data to staging be carefully specified?",
     "options": [
-      "Vì nếu không che số điện thoại, email và số thẻ thì đó là vi phạm quyền riêng tư",
-      "Vì sao chép dữ liệu tốn nhiều dung lượng",
-      "Vì dữ liệu thật làm hệ thống chạy chậm",
-      "Vì tester không được phép xem dữ liệu"
+      "Vì không che số điện thoại, email, số thẻ là vi phạm quyền riêng tư",
+      "Vì sao chép cả cơ sở dữ liệu thật tốn dung lượng và chi phí lưu trữ lớn",
+      "Vì dữ liệu thật quá lớn làm Staging chạy chậm, khó kiểm thử hiệu năng",
+      "Vì theo quy trình, tester chỉ được xem dữ liệu do chính họ tạo ra"
     ],
     "optionsEn": [
       "Because failing to mask phone numbers, emails, and card numbers is a privacy breach",
-      "Because copying data consumes storage",
-      "Because real data slows the system",
-      "Because testers may not view data"
+      "Because copying the full real database costs a lot of storage",
+      "Because real data is so big that staging slows down and performance testing suffers",
+      "Because by process, testers may only view data they created themselves"
     ],
     "answer": 0,
     "explanation": "Đây là yêu cầu mà thường không ai nghĩ tới cho tới khi có sự cố. Nó thuộc nhóm yêu cầu bảo mật và quyền riêng tư.",
@@ -44,16 +44,16 @@
     "question": "Vì sao kiểm thử với 10 bản ghi ở Staging là không đủ?",
     "questionEn": "Why is testing with 10 records in staging insufficient?",
     "options": [
-      "Vì nó không phát hiện được vấn đề hiệu năng chỉ xuất hiện khi có hàng triệu bản ghi",
-      "Vì tester sẽ chán khi dữ liệu ít",
-      "Vì hệ thống không chạy được với ít dữ liệu",
-      "Vì khách hàng yêu cầu dữ liệu đầy đủ"
+      "Vì nó không lộ ra vấn đề hiệu năng chỉ xuất hiện với hàng triệu bản ghi",
+      "Vì 10 bản ghi không đủ để tester viết đủ số test case theo kế hoạch",
+      "Vì hệ thống cần tối thiểu vài nghìn bản ghi mới khởi động được các job nền",
+      "Vì khách hàng yêu cầu Staging phải giống Production ở mọi chi tiết"
     ],
     "optionsEn": [
-      "Because it cannot reveal performance problems that only appear at millions of records",
-      "Because testers get bored with little data",
-      "Because the system will not run with little data",
-      "Because the customer demands complete data"
+      "Because it can't expose performance issues that appear only at millions of rows",
+      "Because 10 records aren't enough for testers to write the planned test cases",
+      "Because the system needs a few thousand records before background jobs can start",
+      "Because the client demands staging match production in every detail"
     ],
     "answer": 0,
     "explanation": "Độ giống thật của dữ liệu Staging là một yêu cầu cần đặc tả rõ, không phải chi tiết kỹ thuật để đội tự quyết.",
@@ -64,16 +64,16 @@
     "question": "Khi báo cáo tiến độ, cách nào chính xác hơn phần trăm hoàn thành?",
     "questionEn": "When reporting progress, what is more accurate than a completion percentage?",
     "options": [
-      "Nói rõ tính năng đang ở môi trường nào, vì hoàn thành trên Test không có nghĩa người dùng đã dùng được",
-      "Số dòng mã đã viết",
-      "Số giờ đội đã làm việc",
-      "Số cuộc họp đã tổ chức"
+      "Nêu tính năng đang ở môi trường nào, vì xong ở Test chưa tới tay người dùng",
+      "Số dòng mã và số commit đã đẩy lên nhánh chính trong tuần",
+      "Số giờ đội đã làm so với tổng số giờ ước tính ban đầu",
+      "Số task con đã đóng trên Jira chia cho tổng số task con của cả tính năng đó"
     ],
     "optionsEn": [
-      "Stating which environment the feature is in, since finished in test does not mean users can use it",
-      "Lines of code written",
-      "Hours the team has worked",
-      "Meetings held"
+      "Stating which environment its in, since done in test isnt usable by users yet",
+      "Lines of code and commits pushed to main this week",
+      "Hours the team has logged so far against the original total estimate",
+      "Closed Jira subtasks divided by the feature's total subtasks"
     ],
     "answer": 0,
     "explanation": "Vòng đời một thay đổi đi qua Dev, review mã, merge, Test, Staging rồi mới tới Production. Mỗi bước có thể mất thời gian đáng kể.",
@@ -84,16 +84,16 @@
     "question": "Câu hỏi nào BA nên hỏi trước mỗi lần phát hành lớn lên Production?",
     "questionEn": "What should a BA ask before every major production release?",
     "options": [
-      "Kế hoạch quay lui là gì nếu triển khai thất bại giữa chừng mà không mất giao dịch",
-      "Ai sẽ nhấn nút triển khai",
-      "Bao nhiêu dòng mã đã thay đổi",
-      "Đội đã làm thêm bao nhiêu giờ"
+      "Kế hoạch quay lui nếu triển khai lỗi giữa chừng mà không mất giao dịch",
+      "Ai sẽ nhấn nút triển khai và gửi email thông báo cho khách hàng",
+      "Bao nhiêu dòng mã đã thay đổi so với lần phát hành trước đó",
+      "Đội đã làm thêm bao nhiêu giờ để kịp ngày phát hành đã hứa với khách hàng"
     ],
     "optionsEn": [
       "What the rollback plan is if deployment fails partway without losing transactions",
-      "Who will press the deploy button",
-      "How many lines of code changed",
-      "How much overtime the team worked"
+      "Who presses deploy and emails the announcement to customers",
+      "How many lines of code changed since the previous release",
+      "How much overtime the team put in to hit the release date promised to the client"
     ],
     "answer": 0,
     "explanation": "Kế hoạch quay lui là yêu cầu vận hành thường bị bỏ sót, và chỉ được nhớ tới khi sự cố đã xảy ra.",
@@ -104,16 +104,16 @@
     "question": "Thách thức lớn nhất của dự án thay thế hệ thống cũ là gì?",
     "questionEn": "What is the biggest challenge on a legacy replacement project?",
     "options": [
-      "Yêu cầu hiện có thường không được ghi lại ở đâu cả, và việc di trú dữ liệu bị đánh giá thấp nghiêm trọng",
-      "Công nghệ mới quá khó học",
-      "Người dùng không muốn dùng hệ thống mới",
-      "Chi phí giấy phép phần mềm quá cao"
+      "Yêu cầu cũ không được ghi lại ở đâu, và di trú dữ liệu bị đánh giá thấp",
+      "Công nghệ mới quá khó học nên đội cần đào tạo lại toàn bộ trước khi làm",
+      "Người dùng từ chối hệ thống mới vì đã quen giao diện cũ hơn mười năm",
+      "Chi phí giấy phép phần mềm mới cao hơn nhiều so với hệ thống cũ đã khấu hao hết"
     ],
     "optionsEn": [
-      "Existing requirements are documented nowhere, and data migration is seriously underestimated",
-      "The new technology is too hard to learn",
-      "Users do not want the new system",
-      "Software licence costs are too high"
+      "Old requirements are written down nowhere, and data migration is underestimated",
+      "The new technology is so hard the team must be fully retrained first",
+      "Users reject the new system after a decade of the old interface",
+      "New licence costs far exceed those of the fully depreciated old system"
     ],
     "answer": 0,
     "explanation": "Nguồn duy nhất còn lại thường là mã nguồn, dữ liệu và trí nhớ của những người dùng lâu năm.",
@@ -124,16 +124,16 @@
     "question": "Thách thức chính của dự án triển khai gói giải pháp COTS là gì?",
     "questionEn": "What is the main challenge on a COTS package project?",
     "options": [
-      "Phân tích khoảng cách giữa gói và nhu cầu, rồi thuyết phục tổ chức đổi quy trình thay vì tuỳ biến mã nguồn",
-      "Viết toàn bộ mã nguồn từ đầu",
-      "Thiết kế kiến trúc hệ thống mới",
-      "Tuyển thêm lập trình viên"
+      "Phân tích khoảng cách và thuyết phục tổ chức đổi quy trình thay vì sửa mã gói",
+      "Viết lại các module lõi của gói cho khớp hoàn toàn với quy trình nghiệp vụ hiện tại",
+      "Thiết kế kiến trúc hệ thống mới quanh gói trước khi mua giấy phép",
+      "Tuyển thêm lập trình viên am hiểu ngôn ngữ mà nhà cung cấp gói sử dụng"
     ],
     "optionsEn": [
-      "Gap analysis between the package and the need, then persuading the organization to change process rather than customize code",
-      "Writing all the code from scratch",
-      "Designing a new system architecture",
-      "Hiring more developers"
+      "Gap analysis, then persuading the business to change process rather than customize",
+      "Rewriting the package's core modules so they exactly match today's business processes",
+      "Designing a new system architecture around the package before licensing",
+      "Hiring developers who know the language the package vendor uses"
     ],
     "answer": 0,
     "explanation": "Tuỳ biến mã nguồn của gói khiến mỗi lần nâng cấp phải làm lại, dẫn tới việc dần không dám nâng cấp và bị kẹt ở phiên bản cũ.",
@@ -144,16 +144,16 @@
     "question": "Câu hỏi đầu tiên khi nhận một dự án mới nên là gì?",
     "questionEn": "What should the first question be when taking on a new project?",
     "options": [
-      "Đây là loại dự án nào — xây mới, nâng cấp, thay thế, tích hợp, COTS, tự động hoá hay dữ liệu?",
-      "Ngân sách là bao nhiêu?",
-      "Đội có bao nhiêu người?",
-      "Deadline là khi nào?"
+      "Đây là loại dự án nào: xây mới, thay thế, tích hợp hay triển khai gói?",
+      "Ngân sách là bao nhiêu và đã được phê duyệt chính thức hay chưa?",
+      "Đội có bao nhiêu người và mỗi người đảm nhận vai trò gì?",
+      "Deadline là khi nào và có thể lùi lại nếu cần không?"
     ],
     "optionsEn": [
-      "Which type is this — greenfield, enhancement, replacement, integration, COTS, automation, or data?",
-      "What is the budget?",
-      "How many people are on the team?",
-      "When is the deadline?"
+      "What type of project is it: greenfield, replacement, integration or package?",
+      "What is the budget, and has it been formally approved yet?",
+      "How many people are on the team and what role does each play?",
+      "When is the deadline, and can it slip if needed?"
     ],
     "answer": 0,
     "explanation": "Câu trả lời quyết định bạn dành công sức vào đâu: khai thác từ đầu, khai thác từ hệ thống cũ, hay phân tích khoảng cách với một gói phần mềm.",
@@ -164,16 +164,16 @@
     "question": "Khác biệt cốt lõi giữa làm BA ở product company và ở outsourcing là gì?",
     "questionEn": "What is the core difference between BA work at a product company and at an outsourcing firm?",
     "options": [
-      "Product cho domain knowledge sâu và ảnh hưởng tới hướng sản phẩm; outsourcing cho trải nghiệm rộng và tài liệu chặt chẽ hơn vì là cơ sở hợp đồng",
-      "Product trả lương cao hơn còn outsourcing thì không",
-      "Product không cần tài liệu còn outsourcing thì cần",
-      "Product dùng Agile còn outsourcing dùng Waterfall"
+      "Product cho domain sâu và ảnh hưởng hướng sản phẩm; outsourcing cho trải nghiệm rộng",
+      "Product trả lương cao hơn hẳn, còn outsourcing có lộ trình thăng tiến nhanh hơn",
+      "Product gần như không cần tài liệu, còn outsourcing phải viết SRS cho từng tính năng một",
+      "Product luôn dùng Agile, còn outsourcing luôn dùng Waterfall theo hợp đồng"
     ],
     "optionsEn": [
-      "Product gives deep domain knowledge and influence over direction; outsourcing gives breadth and stricter documentation since it underpins the contract",
-      "Product pays more and outsourcing does not",
-      "Product needs no documentation while outsourcing does",
-      "Product uses Agile while outsourcing uses waterfall"
+      "Product gives domain depth and product influence; outsourcing gives breadth",
+      "Product pays far more, while outsourcing offers faster promotion",
+      "Product needs almost no documentation, while outsourcing writes an SRS for every feature",
+      "Product always runs Agile, while outsourcing always runs contract waterfall"
     ],
     "answer": 0,
     "explanation": "Với người mới, outsourcing thường là nơi học nhanh hơn vì bạn đi qua nhiều dự án trong thời gian ngắn.",
@@ -184,16 +184,16 @@
     "question": "BA nên hỏi Frontend Developer về điều gì?",
     "questionEn": "What should a BA ask a frontend developer about?",
     "options": [
-      "Khả thi của tương tác, các trạng thái hiển thị và hành vi trên các kích thước màn hình khác nhau",
-      "Quy tắc nghiệp vụ được hiện thực ra sao",
-      "Chiến lược sao lưu dữ liệu",
-      "Phạm vi kiểm thử hồi quy"
+      "Tính khả thi của tương tác, trạng thái hiển thị và hành vi trên từng cỡ màn hình",
+      "Quy tắc nghiệp vụ tính giá và chiết khấu được hiện thực ở đâu trong hệ thống",
+      "Chiến lược sao lưu dữ liệu và thời gian khôi phục khi máy chủ gặp sự cố",
+      "Phạm vi kiểm thử hồi quy cần chạy lại trước mỗi lần phát hành"
     ],
     "optionsEn": [
       "Interaction feasibility, display states, and behaviour across screen sizes",
-      "How business rules are implemented",
-      "The data backup strategy",
-      "Regression test scope"
+      "Where the pricing and discount business rules are implemented in the system",
+      "The data backup strategy and recovery time when servers fail",
+      "The regression test scope to rerun before each release"
     ],
     "answer": 0,
     "explanation": "Quy tắc nghiệp vụ hỏi Backend, sao lưu hỏi DevOps, phạm vi kiểm thử hỏi QA. Hỏi sai người sẽ nhận câu trả lời không đáng tin.",
@@ -204,16 +204,16 @@
     "question": "Tech Lead trong đội phát triển có vai trò gì?",
     "questionEn": "What role does a tech lead play on a delivery team?",
     "options": [
-      "Có tiếng nói cuối cùng về quyết định kỹ thuật, review mã và định hướng kiến trúc — nhưng thường không quản lý con người",
-      "Quản lý nhân sự và đánh giá hiệu suất của đội",
-      "Lập kế hoạch dự án và phân bổ ngân sách",
-      "Thiết kế giao diện người dùng"
+      "Quyết định cuối về kỹ thuật, review mã, kiến trúc — thường không quản lý con người",
+      "Quản lý nhân sự kỹ thuật, đánh giá hiệu suất và quyết định việc tăng lương cho cả đội",
+      "Lập kế hoạch dự án, phân bổ ngân sách và báo cáo tiến độ cho khách hàng",
+      "Thiết kế giao diện người dùng và duyệt các bản mockup trước khi code"
     ],
     "optionsEn": [
-      "Final say on technical decisions, code review, and architectural direction — but usually not people management",
-      "Managing staff and evaluating team performance",
-      "Project planning and budget allocation",
-      "Designing the user interface"
+      "Final say on technical choices, code review and architecture — usually not managing people",
+      "Managing the technical staff, running performance reviews and deciding raises for the team",
+      "Planning the project, allocating budget and reporting progress to the client",
+      "Designing the UI and approving mockups before coding"
     ],
     "answer": 0,
     "explanation": "BA nên hỏi Tech Lead khi cần đánh giá tác động kiến trúc của một thay đổi hoặc hiểu vì sao đội nói việc này phức tạp.",
@@ -225,15 +225,15 @@
     "questionEn": "What does a DevOps engineer actually do?",
     "options": [
       "Xây dựng và vận hành hạ tầng, quy trình triển khai tự động và hệ thống giám sát",
-      "Cài đặt phần mềm lên máy tính của nhân viên",
-      "Viết mã cho phần backend của sản phẩm",
-      "Kiểm thử tính năng trước khi phát hành"
+      "Cài đặt phần mềm, sửa máy tính, máy in và mạng nội bộ cho toàn bộ nhân viên công ty",
+      "Viết mã backend và tối ưu truy vấn cơ sở dữ liệu cho sản phẩm",
+      "Kiểm thử tính năng trên Staging và quyết định có cho phát hành hay không"
     ],
     "optionsEn": [
       "Builds and runs infrastructure, automated deployment pipelines, and monitoring",
-      "Installs software on staff computers",
-      "Writes the product's backend code",
-      "Tests features before release"
+      "Installs software and fixes staff laptops, printers and the internal office network",
+      "Writes backend code and tunes database queries for the product",
+      "Tests features on staging and decides whether they can be released"
     ],
     "answer": 0,
     "explanation": "Yêu cầu phi chức năng thường phải kiểm chứng với DevOps vì họ biết hạ tầng hiện tại chịu được bao nhiêu tải và có nhật ký nào để điều tra sự cố.",
@@ -244,16 +244,16 @@
     "question": "QA và QC khác nhau như thế nào?",
     "questionEn": "How do QA and QC differ?",
     "options": [
-      "QC tập trung tìm lỗi trong sản phẩm; QA tập trung cải thiện quy trình để lỗi ít xuất hiện hơn",
-      "QA làm việc thủ công còn QC làm tự động",
-      "QC dành cho dự án nhỏ còn QA cho dự án lớn",
-      "Hai từ này hoàn toàn đồng nghĩa"
+      "QC tìm lỗi trong sản phẩm; QA cải thiện quy trình để ít lỗi hơn",
+      "QA kiểm thử thủ công theo test case; QC viết script kiểm thử tự động",
+      "QC kiểm tra trước khi phát hành; QA theo dõi lỗi người dùng báo sau khi phát hành",
+      "Hai từ đồng nghĩa, chỉ khác nhau theo cách gọi của từng công ty"
     ],
     "optionsEn": [
-      "QC focuses on finding defects in the product; QA focuses on improving the process so fewer appear",
-      "QA works manually while QC automates",
-      "QC is for small projects and QA for large ones",
-      "The terms are exact synonyms"
+      "QC finds defects in the product; QA improves the process so fewer occur",
+      "QA tests manually from test cases; QC writes automated test scripts",
+      "QC checks before release; QA tracks the defects users report after release",
+      "Synonyms that differ only in what each company calls them"
     ],
     "answer": 0,
     "explanation": "Nhiều công ty dùng lẫn lộn hai từ này, nên khi nhận việc hãy hỏi rõ trách nhiệm cụ thể thay vì suy đoán từ chức danh.",
@@ -284,16 +284,16 @@
     "question": "Trong môi trường Test, việc hệ thống thanh toán là bản giả lập hay sandbox thật ảnh hưởng thế nào?",
     "questionEn": "In the test environment, does it matter whether the payment system is a stub or a real sandbox?",
     "options": [
-      "Có, vì sự khác biệt này quyết định bạn kiểm thử được tới đâu, đặc biệt với các luồng lỗi và thời gian phản hồi",
-      "Không, vì kết quả kiểm thử luôn giống nhau",
-      "Không, vì tester chỉ kiểm thử giao diện",
-      "Có, nhưng chỉ ảnh hưởng tới tốc độ kiểm thử"
+      "Có, vì nó quyết định bạn kiểm thử được tới đâu, nhất là luồng lỗi",
+      "Không, vì cả hai đều trả về cùng định dạng dữ liệu nên kết quả kiểm thử như nhau",
+      "Không, vì ở môi trường Test tester chỉ cần kiểm tra phần giao diện thanh toán",
+      "Có, nhưng chỉ ảnh hưởng tới tốc độ chạy bộ kiểm thử tự động"
     ],
     "optionsEn": [
-      "Yes, because it determines how far you can actually test, especially error flows and response times",
-      "No, because test results are identical either way",
-      "No, because testers only test the interface",
-      "Yes, but it only affects test speed"
+      "Yes — it determines how far you can test, especially error flows",
+      "No — both return the same data format, so test results are identical",
+      "No — in test, testers only need to check the payment UI",
+      "Yes, but only the speed of the automated test suite"
     ],
     "answer": 0,
     "explanation": "Bản giả lập thường luôn trả về thành công, nên các luồng xử lý lỗi không bao giờ được kiểm thử thật cho tới khi lên Production.",
@@ -304,16 +304,16 @@
     "question": "Sai lầm phổ biến của BA mới khi làm việc với đội phát triển là gì?",
     "questionEn": "What is a common beginner BA mistake when working with a delivery team?",
     "options": [
-      "Hỏi mọi câu hỏi cho một người duy nhất thay vì hỏi đúng vai trò phù hợp với từng loại câu hỏi",
-      "Hỏi quá nhiều câu hỏi trong sprint",
-      "Tham gia daily standup của đội",
-      "Viết acceptance criteria cùng tester"
+      "Hỏi mọi câu cho một người thay vì hỏi đúng vai trò cho từng loại câu hỏi",
+      "Hỏi quá nhiều câu trong sprint khiến lập trình viên mất tập trung",
+      "Dự daily standup của đội dù không phải thành viên phát triển",
+      "Viết acceptance criteria cùng tester thay vì tự viết rồi gửi duyệt"
     ],
     "optionsEn": [
-      "Directing every question at one person rather than the role suited to each kind of question",
-      "Asking too many questions during the sprint",
-      "Attending the team's daily standup",
-      "Writing acceptance criteria with testers"
+      "Asking one person everything instead of the right role for each question",
+      "Asking so many questions mid-sprint that developers lose focus",
+      "Attending the team's daily standup despite not being a developer",
+      "Writing acceptance criteria with testers instead of drafting alone for review"
     ],
     "answer": 0,
     "explanation": "Hỏi Tech Lead về khả năng sử dụng hoặc hỏi Designer về tác động kiến trúc sẽ nhận được câu trả lời không đáng tin.",

@@ -4,16 +4,16 @@
     "question": "Một volume EBS có thể được gắn vào instance ở Availability Zone nào?",
     "questionEn": "Into which Availability Zone can an EBS volume be attached?",
     "options": [
-      "Bất kỳ AZ nào trong cùng region",
-      "Chỉ trong cùng AZ nơi volume được tạo",
-      "Bất kỳ AZ nào trên toàn cầu",
-      "Chỉ trong AZ mặc định của account"
+      "Bất kỳ AZ nào trong cùng region, qua mạng EBS",
+      "Chỉ instance ở cùng AZ nơi volume được tạo ra",
+      "Mọi AZ trên thế giới, nếu bật cross-region attach",
+      "Chỉ AZ mặc định của account trong region đó"
     ],
     "optionsEn": [
-      "Any AZ within the same region",
-      "Only within the same AZ where the volume was created",
-      "Any AZ worldwide",
-      "Only the account's default AZ"
+      "Any AZ in the same region, over the EBS network",
+      "Only instances in the same AZ where the volume was created",
+      "Any AZ worldwide, once cross-region attach is enabled",
+      "Only the account's default AZ in that region"
     ],
     "answer": 1,
     "explanation": "EBS bị khóa trong một AZ duy nhất. Muốn dùng volume ở AZ khác, bạn phải tạo snapshot rồi khôi phục snapshot đó vào AZ mới.",
@@ -24,15 +24,15 @@
     "question": "Nhiều instance EC2 nằm ở các AZ khác nhau cần cùng đọc/ghi trên một tập file dùng chung (Linux). Nên chọn dịch vụ lưu trữ nào?",
     "questionEn": "Multiple EC2 instances across different AZs must read/write the same shared set of files (Linux). Which storage service should you choose?",
     "options": [
-      "EBS với Multi-Attach",
+      "EBS Multi-Attach",
       "EC2 Instance Store",
-      "Amazon EFS",
+      "Amazon EFS Standard",
       "Một volume gp3 duy nhất"
     ],
     "optionsEn": [
-      "EBS with Multi-Attach",
+      "EBS Multi-Attach",
       "EC2 Instance Store",
-      "Amazon EFS",
+      "Amazon EFS Standard",
       "A single gp3 volume"
     ],
     "answer": 2,
@@ -84,13 +84,13 @@
     "question": "Đặc điểm nào ĐÚNG về EBS Snapshots?",
     "questionEn": "Which statement is TRUE about EBS Snapshots?",
     "options": [
-      "Được lưu trong S3 và mang tính incremental (gia tăng)",
+      "Được lưu trong S3 và mang tính incremental",
       "Chỉ khôi phục được trong đúng AZ của volume gốc",
-      "Không thể copy sang region khác",
+      "Không thể copy snapshot sang một region khác",
       "Lưu toàn bộ volume mỗi lần chụp"
     ],
     "optionsEn": [
-      "Stored in S3 and are incremental",
+      "Stored in S3, and each one after the first is incremental",
       "Can only be restored in the exact AZ of the source volume",
       "Cannot be copied to another region",
       "Store the entire volume on every snapshot"
@@ -124,16 +124,16 @@
     "question": "EBS Multi-Attach có giới hạn nào sau đây?",
     "questionEn": "Which of the following is a limitation of EBS Multi-Attach?",
     "options": [
-      "Hỗ trợ mọi loại volume và mọi AZ",
-      "Chỉ dùng io1/io2, tối đa 16 instance, và tất cả phải trong cùng một AZ",
-      "Không giới hạn số instance nhưng phải khác AZ",
-      "Chỉ dùng được với gp3 trong cùng region"
+      "Hỗ trợ mọi loại volume, trên mọi AZ trong region",
+      "Chỉ io1/io2, tối đa 16 instance, tất cả trong cùng một AZ",
+      "Không giới hạn số instance, nhưng phải ở các AZ khác nhau",
+      "Chỉ volume gp3, tối đa 4 instance trong cùng region"
     ],
     "optionsEn": [
-      "Supports all volume types and all AZs",
-      "Only io1/io2, up to 16 instances, all in the same AZ",
-      "No limit on instances but they must be in different AZs",
-      "Only works with gp3 within the same region"
+      "Supports every volume type, across all AZs in the region",
+      "Only io1/io2, up to 16 instances, all within a single AZ",
+      "No instance limit, but instances must be in different AZs",
+      "Only gp3 volumes, up to 4 instances in the same region"
     ],
     "answer": 1,
     "explanation": "Multi-Attach chỉ hỗ trợ io1/io2, tối đa 16 instance cùng gắn, và tất cả phải nằm trong cùng một AZ. Nó chỉ dùng cho ứng dụng cluster-aware.",
@@ -144,16 +144,16 @@
     "question": "Bạn tạo một snapshot từ một volume EBS đã được mã hóa. Snapshot đó và các volume tạo ra từ nó sẽ như thế nào?",
     "questionEn": "You create a snapshot from an already-encrypted EBS volume. What happens to that snapshot and any volumes created from it?",
     "options": [
-      "Snapshot không mã hóa, nhưng volume mới thì có",
-      "Cả snapshot và mọi volume tạo từ nó đều được mã hóa",
-      "Chỉ volume gốc được mã hóa, snapshot thì không",
-      "Cần bật mã hóa thủ công cho từng volume mới"
+      "Snapshot là plaintext, nhưng volume mới được mã hóa lại",
+      "Cả hai đều được mã hóa, tự động kế thừa từ volume gốc ban đầu",
+      "Chỉ volume gốc còn mã hóa; snapshot thì không",
+      "Phải bật lại mã hóa thủ công trên từng volume mới"
     ],
     "optionsEn": [
-      "The snapshot is unencrypted, but new volumes are encrypted",
-      "Both the snapshot and any volume created from it are encrypted",
-      "Only the source volume is encrypted, not the snapshot",
-      "You must manually enable encryption for each new volume"
+      "The snapshot is plaintext, but new volumes get re-encrypted",
+      "Both are encrypted, inherited automatically from the source volume",
+      "Only the source stays encrypted; the snapshot does not",
+      "Encryption must be re-enabled manually on each new volume"
     ],
     "answer": 1,
     "explanation": "Khi volume được mã hóa (qua KMS), mọi snapshot tạo từ nó đều được mã hóa, và mọi volume khôi phục từ snapshot đó cũng tự động được mã hóa.",
@@ -164,16 +164,16 @@
     "question": "Bạn muốn instance mới khởi động nhanh với phần mềm và cấu hình cài sẵn. Cách tiếp cận nào phù hợp?",
     "questionEn": "You want new instances to boot quickly with pre-installed software and configuration. Which approach fits?",
     "options": [
-      "Tạo một AMI tùy chỉnh (pre-baked) từ một instance đã cấu hình",
-      "Dùng EFS để lưu hệ điều hành",
-      "Bật Multi-Attach cho boot volume",
-      "Lưu OS trên Instance Store"
+      "Tạo AMI tùy chỉnh từ một instance đã cấu hình sẵn",
+      "Đặt OS trên một EFS share để mọi instance cùng mount",
+      "Multi-Attach một boot volume io2 cho mọi instance mới",
+      "Nạp sẵn phần mềm lên một Instance Store volume"
     ],
     "optionsEn": [
-      "Create a custom (pre-baked) AMI from a configured instance",
-      "Use EFS to store the operating system",
-      "Enable Multi-Attach for the boot volume",
-      "Store the OS on Instance Store"
+      "Bake a custom AMI from an already configured instance",
+      "Keep the OS on an EFS share that all instances mount",
+      "Multi-Attach one io2 boot volume to all new instances",
+      "Pre-load the software onto an Instance Store volume"
     ],
     "answer": 0,
     "explanation": "AMI tùy chỉnh chứa OS, phần mềm và cấu hình cài sẵn, giúp instance mới khởi động nhanh hơn (pre-baking) thay vì cài đặt mỗi lần launch.",
@@ -185,15 +185,15 @@
     "questionEn": "An AMI is created in region us-east-1. How can you use it in region eu-west-1?",
     "options": [
       "AMI tự động khả dụng ở mọi region",
-      "Copy AMI sang region eu-west-1",
+      "Copy AMI sang region eu-west-1 trước khi dùng",
       "Không thể dùng AMI ở region khác",
-      "Chuyển AMI thành snapshot EFS"
+      "Chia sẻ AMI cho region eu-west-1 qua launch permission"
     ],
     "optionsEn": [
       "The AMI is automatically available in all regions",
-      "Copy the AMI to region eu-west-1",
+      "Copy the AMI into the eu-west-1 region first",
       "You cannot use an AMI in another region",
-      "Convert the AMI into an EFS snapshot"
+      "Share the AMI with eu-west-1 via launch permissions"
     ],
     "answer": 1,
     "explanation": "AMI là region-scoped (gắn với một region). Muốn dùng ở region khác, bạn phải copy AMI sang region đó.",
@@ -227,13 +227,13 @@
       "Dữ liệu tự động sao lưu vào S3",
       "Dữ liệu bị mất (ephemeral)",
       "Dữ liệu được giữ lại như EBS",
-      "Dữ liệu chuyển sang EFS"
+      "Dữ liệu tự động chuyển sang EFS"
     ],
     "optionsEn": [
       "Data is automatically backed up to S3",
       "Data is lost (ephemeral)",
       "Data is retained like EBS",
-      "Data moves to EFS"
+      "Data is moved to EFS automatically"
     ],
     "answer": 1,
     "explanation": "Instance Store là ephemeral: dữ liệu mất khi instance stop hoặc terminate (hoặc khi phần cứng host lỗi). Không dùng cho dữ liệu quan trọng cần lưu lâu dài.",
@@ -244,16 +244,16 @@
     "question": "Nhận định nào ĐÚNG khi so sánh EFS và EBS?",
     "questionEn": "Which statement is TRUE when comparing EFS and EBS?",
     "options": [
-      "EFS chỉ dùng cho Windows, EBS chỉ cho Linux",
-      "EFS là đa AZ và dùng cho Linux (NFS); EBS khóa trong một AZ",
-      "EBS đa AZ, EFS chỉ một AZ",
-      "Cả hai đều là ephemeral"
+      "EFS phục vụ Windows qua SMB; EBS chỉ cho Linux",
+      "EFS trải trên nhiều AZ qua NFS; EBS gắn với một AZ",
+      "EBS tự trải trên nhiều AZ; EFS chỉ nằm trong một AZ",
+      "Cả hai đều ephemeral, mất dữ liệu khi instance dừng"
     ],
     "optionsEn": [
-      "EFS is Windows-only, EBS is Linux-only",
-      "EFS is multi-AZ and used with Linux (NFS); EBS is locked to one AZ",
-      "EBS is multi-AZ, EFS is single-AZ",
-      "Both are ephemeral"
+      "EFS serves Windows over SMB; EBS is for Linux only",
+      "EFS spans AZs over NFS; EBS stays within a single AZ",
+      "EBS spans AZs automatically; EFS lives in a single AZ",
+      "Both are ephemeral and lose data when instances stop"
     ],
     "answer": 1,
     "explanation": "EFS là file system NFS đa AZ, chỉ dùng cho Linux (POSIX), cho nhiều instance dùng chung. EBS là ổ block khóa trong một AZ, mặc định gắn một instance.",
@@ -264,56 +264,56 @@
     "question": "Ứng dụng chạy trên Windows cần một file share dùng chung hỗ trợ giao thức SMB và Active Directory. Dịch vụ nào phù hợp?",
     "questionEn": "A Windows application needs a shared file share supporting the SMB protocol and Active Directory. Which service fits?",
     "options": [
-      "Amazon EFS",
-      "FSx for Windows File Server",
-      "FSx for Lustre",
-      "EC2 Instance Store"
+      "Amazon EFS mount từ các Windows instance",
+      "Amazon FSx for Windows File Server",
+      "Amazon FSx for Lustre liên kết với bucket S3",
+      "Amazon FSx for OpenZFS với NFS export"
     ],
     "optionsEn": [
-      "Amazon EFS",
-      "FSx for Windows File Server",
-      "FSx for Lustre",
-      "EC2 Instance Store"
+      "Amazon EFS mounted from Windows instances",
+      "Amazon FSx for Windows File Server",
+      "Amazon FSx for Lustre linked to an S3 bucket",
+      "Amazon FSx for OpenZFS with NFS exports"
     ],
     "answer": 1,
-    "explanation": "FSx for Windows File Server cung cấp file share cho Windows với SMB và Active Directory. EFS chỉ hỗ trợ Linux (NFS), còn FSx for Lustre dành cho HPC.",
-    "explanationEn": "FSx for Windows File Server provides a Windows file share with SMB and Active Directory. EFS supports only Linux (NFS), while FSx for Lustre is for HPC."
+    "explanation": "FSx for Windows File Server cung cấp file share cho Windows với SMB và Active Directory. EFS chỉ hỗ trợ Linux (NFS) nên không mount được từ Windows; FSx for Lustre dành cho HPC, còn FSx for OpenZFS phục vụ qua NFS.",
+    "explanationEn": "FSx for Windows File Server provides a Windows file share with SMB and Active Directory. EFS supports only Linux (NFS), so Windows instances cannot mount it; FSx for Lustre is for HPC, and FSx for OpenZFS serves files over NFS."
   },
   {
     "id": "q15",
     "question": "Mặc định, điều gì xảy ra với EBS root volume khi instance bị terminate?",
     "questionEn": "By default, what happens to the EBS root volume when its instance is terminated?",
     "options": [
-      "Được tự động snapshot rồi xóa",
-      "Được tự động gắn sang instance khác",
-      "Bị xóa — thuộc tính DeleteOnTermination mặc định là true cho root volume",
+      "Được tự động snapshot rồi mới xóa",
+      "Được chuyển vào Recycle Bin trong 7 ngày",
+      "Bị xóa cùng với instance",
       "Được giữ lại và chuyển sang trạng thái available"
     ],
     "optionsEn": [
       "It is snapshotted automatically, then deleted",
-      "It is automatically attached to another instance",
-      "It is deleted — DeleteOnTermination defaults to true for the root volume",
+      "It is moved to the Recycle Bin for 7 days",
+      "It is deleted together with the instance",
       "It is kept and moves to the available state"
     ],
     "answer": 2,
-    "explanation": "Root volume mặc định bị xóa cùng instance; các volume gắn thêm mặc định được giữ lại. Bạn có thể đổi cờ DeleteOnTermination khi launch.",
-    "explanationEn": "The root volume is deleted with the instance by default; additional attached volumes are kept by default. You can change the DeleteOnTermination flag at launch time."
+    "explanation": "Root volume mặc định bị xóa cùng instance; các volume gắn thêm mặc định được giữ lại. Bạn có thể đổi cờ DeleteOnTermination khi launch. Không có snapshot tự động, và Recycle Bin chỉ áp dụng cho snapshot/AMI đã xóa, không cho volume.",
+    "explanationEn": "The root volume is deleted with the instance by default; additional attached volumes are kept by default. You can change the DeleteOnTermination flag at launch time. No automatic snapshot is taken, and the Recycle Bin covers deleted snapshots/AMIs, not volumes."
   },
   {
     "id": "q16",
     "question": "Bạn cần tăng dung lượng một EBS volume đang được sử dụng. Điều gì là đúng?",
     "questionEn": "You need to increase the size of an EBS volume that is currently in use. What is true?",
     "options": [
-      "Phải tạo volume mới rồi copy dữ liệu sang",
-      "Chỉ tăng được sau khi detach volume",
-      "Không thể tăng dung lượng của một EBS volume",
-      "Có thể tăng dung lượng ngay khi đang chạy, sau đó mở rộng file system trong OS"
+      "Phải tạo volume mới từ snapshot thay thế",
+      "Chỉ tăng được sau khi stop instance và detach volume",
+      "Dung lượng cố định khi tạo và chỉ có thể giảm về sau",
+      "Tăng ngay khi đang gắn, rồi mở rộng file system trong OS"
     ],
     "optionsEn": [
-      "You must create a new volume and copy the data across",
-      "You can only grow it after detaching the volume",
-      "An EBS volume's size can never be increased",
-      "You can grow it in place while in use, then extend the file system inside the OS"
+      "You must restore a new volume from a snapshot instead",
+      "Only after stopping the instance and detaching the volume",
+      "Size is fixed at creation and can only be reduced later",
+      "Grow it in place while attached, then extend the file system"
     ],
     "answer": 3,
     "explanation": "EBS Elastic Volumes cho phép tăng size (và đổi type/IOPS) khi volume đang gắn và đang chạy — nhưng bạn vẫn phải chạy lệnh mở rộng file system trong OS. Không thể giảm size.",
@@ -324,16 +324,16 @@
     "question": "Dữ liệu lạnh, ít truy cập, thiên về throughput tuần tự và cần chi phí thấp nhất. Loại EBS volume nào phù hợp nhất?",
     "questionEn": "For cold, infrequently accessed data with sequential throughput needs and the lowest cost, which EBS volume type fits best?",
     "options": [
-      "sc1 (Cold HDD)",
-      "st1 (Throughput Optimized HDD)",
-      "gp3 (General Purpose SSD)",
-      "io2 (Provisioned IOPS SSD)"
+      "sc1",
+      "st1",
+      "gp3",
+      "io2"
     ],
     "optionsEn": [
-      "sc1 (Cold HDD)",
-      "st1 (Throughput Optimized HDD)",
-      "gp3 (General Purpose SSD)",
-      "io2 (Provisioned IOPS SSD)"
+      "sc1",
+      "st1",
+      "gp3",
+      "io2"
     ],
     "answer": 0,
     "explanation": "sc1 là loại HDD rẻ nhất, dành cho dữ liệu ít truy cập. st1 đắt hơn nhưng throughput cao hơn (big data, log processing). Cả hai đều KHÔNG dùng làm boot volume.",

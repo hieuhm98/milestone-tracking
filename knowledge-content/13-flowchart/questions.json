@@ -24,16 +24,16 @@
     "question": "Hình oval trong flowchart biểu thị gì?",
     "questionEn": "What does an oval represent in a flowchart?",
     "options": [
-      "Bước xử lý quan trọng",
-      "Điểm quyết định",
-      "Terminal - điểm bắt đầu hoặc kết thúc của quy trình",
-      "Tài liệu đầu ra"
+      "Process — một bước xử lý công việc quan trọng",
+      "Decision — điểm rẽ nhánh quyết định",
+      "Terminal — điểm bắt đầu hoặc kết thúc",
+      "Document — tài liệu đầu ra của bước"
     ],
     "optionsEn": [
-      "An important processing step",
-      "A decision point",
-      "A Terminal — the start or end point of the process",
-      "An output document"
+      "A Process — an important processing step",
+      "A Decision — a branching decision point",
+      "A Terminal — the start or end point",
+      "A Document — the step's output document"
     ],
     "answer": 2,
     "explanation": "Hình oval (hoặc rounded rectangle) là Terminal — dùng cho Start và End. Mỗi flowchart phải bắt đầu và kết thúc bằng hình oval.",
@@ -44,16 +44,16 @@
     "question": "Swimlane flowchart được dùng khi nào?",
     "questionEn": "When is a swimlane flowchart used?",
     "options": [
-      "Khi quy trình rất đơn giản",
-      "Khi cần phân chia rõ trách nhiệm của nhiều người/bộ phận trong cùng quy trình",
-      "Khi không có decision node",
-      "Khi vẽ sơ đồ cơ sở dữ liệu"
+      "Khi quy trình rất đơn giản, chỉ vài bước",
+      "Khi cần thấy rõ bộ phận nào làm bước nào",
+      "Khi quy trình không có điểm quyết định",
+      "Khi vẽ sơ đồ cấu trúc cơ sở dữ liệu"
     ],
     "optionsEn": [
-      "When the process is very simple",
-      "When you need to clearly divide the responsibilities of multiple people/departments within the same process",
-      "When there is no decision node",
-      "When drawing a database diagram"
+      "When the process is very simple, just a few steps",
+      "When you must show which team does each step",
+      "When the process has no decision points",
+      "When drawing a database structure diagram"
     ],
     "answer": 1,
     "explanation": "Swimlane chia luồng thành các 'làn' theo vai trò/bộ phận. Giúp thấy rõ ai làm gì, bàn giao công việc ở đâu, tránh tranh cãi về trách nhiệm.",
@@ -64,16 +64,16 @@
     "question": "Flowchart có ích gì cho BA khi làm việc với developer?",
     "questionEn": "How is a flowchart useful for a BA when working with developers?",
     "options": [
-      "Thay thế hoàn toàn cho tài liệu yêu cầu",
-      "Mô tả logic và luồng xử lý trực quan, giảm hiểu nhầm khi implement",
-      "Tự động tạo code từ diagram",
-      "Thay thế cho thiết kế database"
+      "Thay thế hoàn toàn tài liệu đặc tả yêu cầu",
+      "Thể hiện logic trực quan, giảm hiểu nhầm khi code",
+      "Tự động sinh code chạy được từ sơ đồ đã vẽ",
+      "Thay thế cho bước thiết kế database"
     ],
     "optionsEn": [
-      "It fully replaces the requirements document",
-      "It describes logic and processing flow visually, reducing misunderstandings during implementation",
-      "It automatically generates code from the diagram",
-      "It replaces database design"
+      "It fully replaces the written requirements document",
+      "It shows logic visually, so less is misread",
+      "It generates code automatically from the diagram",
+      "It replaces the database design step"
     ],
     "answer": 1,
     "explanation": "Flowchart là ngôn ngữ trung gian giữa business và tech. BA mô tả nghiệp vụ bằng flowchart → developer hiểu cần code gì → ít họp, ít hiểu sai, ít làm lại.",
@@ -84,14 +84,14 @@
     "question": "Hình bình hành trong flowchart biểu thị gì?",
     "questionEn": "What does a parallelogram represent in a flowchart?",
     "options": [
-      "Decision/quyết định",
-      "Bước xử lý",
+      "Decision (quyết định)",
+      "Một bước xử lý thông thường",
       "Input hoặc Output dữ liệu",
-      "Bắt đầu quy trình"
+      "Điểm bắt đầu quy trình"
     ],
     "optionsEn": [
-      "A decision",
-      "A processing step",
+      "A decision point",
+      "A regular processing step",
       "Data input or output",
       "The start of the process"
     ],
@@ -104,16 +104,16 @@
     "question": "Quy tắc nào QUAN TRỌNG nhất khi vẽ flowchart?",
     "questionEn": "Which rule is the MOST important when drawing a flowchart?",
     "options": [
-      "Phải dùng màu sắc sặc sỡ",
-      "Mỗi decision node phải có ít nhất 2 nhánh ra, và mọi nhánh phải dẫn đến kết thúc",
-      "Flowchart không được có vòng lặp",
-      "Chỉ dùng hình chữ nhật"
+      "Phải dùng màu sắc riêng biệt cho từng loại bước",
+      "Mọi nhánh quyết định đều phải dẫn tới kết thúc",
+      "Flowchart không được chứa vòng lặp nào",
+      "Chỉ dùng hình chữ nhật cho mọi bước"
     ],
     "optionsEn": [
-      "It must use vivid colors",
-      "Each decision node must have at least 2 outgoing branches, and every branch must lead to an end",
-      "A flowchart must not contain loops",
-      "Only rectangles may be used"
+      "Each kind of step must have its own colour",
+      "Every decision branch must lead to an end",
+      "A flowchart must not contain any loops",
+      "Only rectangles may be used for every step"
     ],
     "answer": 1,
     "explanation": "Decision node phải đầy đủ nhánh — không được để nhánh nào 'treo lơ lửng'. Mọi luồng phải dẫn đến Terminal (End). Vòng lặp được phép nhưng phải có điều kiện thoát.",
@@ -125,13 +125,13 @@
     "questionEn": "Which of the following tools is FREE and works directly in the browser for drawing flowcharts?",
     "options": [
       "Microsoft Visio",
-      "draw.io / diagrams.net",
+      "draw.io",
       "Adobe Illustrator",
       "AutoCAD"
     ],
     "optionsEn": [
       "Microsoft Visio",
-      "draw.io / diagrams.net",
+      "draw.io",
       "Adobe Illustrator",
       "AutoCAD"
     ],
@@ -164,16 +164,16 @@
     "question": "BPMN khác Flowchart thông thường ở điểm gì?",
     "questionEn": "How does BPMN differ from a regular flowchart?",
     "options": [
-      "BPMN không dùng ký hiệu đặc biệt",
-      "BPMN phức tạp hơn, chi tiết hơn, theo chuẩn OMG riêng cho business process",
-      "Flowchart không thể có swimlane",
-      "BPMN chỉ dùng cho IT, flowchart cho business"
+      "BPMN chỉ dùng hình chữ nhật và mũi tên, không có ký hiệu riêng",
+      "BPMN là chuẩn ký hiệu chi tiết hơn cho quy trình nghiệp vụ",
+      "Flowchart thường không thể vẽ swimlane, BPMN thì có",
+      "BPMN chỉ dùng cho IT, còn flowchart chỉ dùng cho business"
     ],
     "optionsEn": [
-      "BPMN uses no special symbols",
-      "BPMN is more complex and detailed, following the OMG standard specific to business processes",
-      "Flowcharts cannot have swimlanes",
-      "BPMN is only for IT and flowcharts are only for business"
+      "BPMN uses only boxes and arrows, with no symbols of its own",
+      "BPMN is a more detailed standard notation for business processes",
+      "Plain flowcharts cannot have swimlanes, but BPMN can",
+      "BPMN is only for IT, and flowcharts are only for business"
     ],
     "answer": 1,
     "explanation": "BPMN (Business Process Model and Notation) là chuẩn chuyên biệt cho business process: có nhiều loại event, gateway, task phức tạp hơn. Flowchart đơn giản, universal hơn.",
@@ -184,16 +184,16 @@
     "question": "Khi flowchart có nhiều nhánh từ decision node, cần đảm bảo điều gì?",
     "questionEn": "When a flowchart has multiple branches from a decision node, what must be ensured?",
     "options": [
-      "Số nhánh phải chẵn",
-      "Tất cả các nhánh đều phải dẫn đến End terminal",
-      "Chỉ có nhánh Yes mới cần kết thúc",
-      "Nhánh No luôn dẫn về bước đầu"
+      "Số nhánh ra phải là số chẵn, ví dụ 2 hoặc 4",
+      "Mọi nhánh đều phải dẫn tới End terminal",
+      "Chỉ nhánh Yes mới cần dẫn tới kết thúc",
+      "Nhánh No phải quay về bước đầu tiên"
     ],
     "optionsEn": [
-      "The number of branches must be even",
+      "The number of branches must be even, e.g. 2 or 4",
       "Every branch must lead to an End terminal",
-      "Only the Yes branch needs to end",
-      "The No branch always leads back to the first step"
+      "Only the Yes branch needs to reach an end",
+      "The No branch must go back to the first step"
     ],
     "answer": 1,
     "explanation": "Mọi nhánh đều phải kết thúc — không được có 'dead end' (đường cụt). Một số nhánh có thể kết thúc sớm hơn (ví dụ: lỗi → kết thúc), nhưng phải có Terminal.",
@@ -224,16 +224,16 @@
     "question": "Connector (hình tròn nhỏ) trong flowchart dùng khi nào?",
     "questionEn": "When is a connector (small circle) used in a flowchart?",
     "options": [
-      "Khi cần quyết định",
-      "Khi flowchart quá lớn phải chia thành nhiều trang, dùng connector để nối",
-      "Để biểu thị bước xử lý",
-      "Để vẽ vòng lặp"
+      "Khi cần thể hiện một điểm quyết định có/không",
+      "Khi sơ đồ quá lớn, chia sang nhiều trang",
+      "Để biểu thị một bước xử lý dữ liệu",
+      "Để vẽ điểm bắt đầu của một vòng lặp"
     ],
     "optionsEn": [
-      "When a decision is needed",
-      "When a flowchart is too large and must be split across multiple pages, a connector is used to link them",
-      "To represent a processing step",
-      "To draw a loop"
+      "When a yes/no decision point needs to be shown",
+      "When the chart spans several pages",
+      "To represent a data processing step",
+      "To mark the starting point of a loop"
     ],
     "answer": 1,
     "explanation": "Connector giúp kết nối flowchart khi không thể vẽ mũi tên trực tiếp — thường dùng khi diagram chia nhiều trang hoặc tránh đường chéo nhau phức tạp.",
@@ -244,15 +244,15 @@
     "question": "BA nên vẽ flowchart ở mức chi tiết nào khi bàn giao cho developer?",
     "questionEn": "At what level of detail should a BA draw a flowchart when handing it off to developers?",
     "options": [
-      "Thật đơn giản, chỉ big picture",
-      "Đủ chi tiết để developer hiểu rõ logic và điều kiện, không cần đoán mò",
-      "Thật chi tiết đến từng dòng code",
+      "Thật đơn giản, chỉ cần bức tranh tổng thể",
+      "Đủ để developer hiểu logic và điều kiện",
+      "Chi tiết tới từng dòng code sẽ được viết",
       "Chỉ cần tên các bước, không cần chi tiết"
     ],
     "optionsEn": [
-      "Very simple, only the big picture",
-      "Detailed enough for developers to clearly understand the logic and conditions without guessing",
-      "Extremely detailed, down to each line of code",
+      "Very simple, showing only the big picture",
+      "Enough for developers to grasp every condition",
+      "So detailed it covers every line of code to write",
       "Only the names of the steps, no details needed"
     ],
     "answer": 1,
@@ -264,16 +264,16 @@
     "question": "Vòng lặp trong flowchart được biểu thị như thế nào?",
     "questionEn": "How is a loop represented in a flowchart?",
     "options": [
-      "Không thể có vòng lặp trong flowchart",
-      "Mũi tên từ decision node dẫn ngược về bước trước đó",
-      "Dùng ký hiệu đặc biệt cho loop",
-      "Dùng hình tròn đặc biệt"
+      "Flowchart không thể có vòng lặp",
+      "Mũi tên quay ngược về bước trước",
+      "Dùng một ký hiệu riêng cho vòng lặp",
+      "Dùng hình tròn đặc biệt ở đầu vòng"
     ],
     "optionsEn": [
       "A flowchart cannot contain a loop",
-      "An arrow from a decision node leads back to an earlier step",
-      "A special loop symbol is used",
-      "A special circle is used"
+      "An arrow pointing back to an earlier step",
+      "A dedicated symbol is used for loops",
+      "A special circle at the start of the loop"
     ],
     "answer": 1,
     "explanation": "Vòng lặp: mũi tên từ nhánh 'No' hoặc 'Retry' của decision node trỏ ngược lên bước cần lặp lại. Quan trọng: phải có điều kiện thoát vòng lặp, nếu không là infinite loop.",
@@ -284,16 +284,16 @@
     "question": "Khi nào nên dùng Swimlane thay vì flowchart thường?",
     "questionEn": "When should a swimlane be used instead of a regular flowchart?",
     "options": [
-      "Luôn luôn, swimlane tốt hơn",
-      "Khi quy trình có nhiều vai trò/bộ phận tham gia và cần rõ ai chịu trách nhiệm bước nào",
-      "Khi diagram quá đơn giản",
-      "Khi diagram chỉ có 1 decision node"
+      "Khi quy trình cần thể hiện thời gian chạy của từng bước",
+      "Khi nhiều vai trò cùng tham gia và cần rõ ai làm bước nào",
+      "Khi sơ đồ quá đơn giản và cần thêm chi tiết",
+      "Khi sơ đồ chỉ có đúng một điểm quyết định"
     ],
     "optionsEn": [
-      "Always, a swimlane is better",
-      "When the process involves multiple roles/departments and it must be clear who is responsible for each step",
-      "When the diagram is too simple",
-      "When the diagram has only 1 decision node"
+      "When the process must show how long each step takes",
+      "When several roles each own some steps",
+      "When the diagram is too simple and needs more detail",
+      "When the diagram has exactly one decision point"
     ],
     "answer": 1,
     "explanation": "Swimlane hiệu quả khi: có handoff giữa nhiều người/team, cần audit trách nhiệm, quy trình cross-functional. Ví dụ: approval workflow qua nhiều cấp, quy trình bán hàng qua sale-kho-kế toán.",
@@ -303,15 +303,15 @@
     "question": "Trong flowchart, hình thoi biểu diễn điều gì?",
     "questionEn": "In a flowchart, what does a diamond represent?",
     "options": [
-      "Điểm quyết định với các nhánh rẽ",
-      "Bước xử lý",
-      "Điểm bắt đầu",
+      "Điểm quyết định",
+      "Một bước xử lý",
+      "Điểm bắt đầu/kết thúc",
       "Kho dữ liệu"
     ],
     "optionsEn": [
-      "A decision point with branches",
+      "A decision point",
       "A process step",
-      "The start point",
+      "A start or end point",
       "A data store"
     ],
     "answer": 0,
@@ -323,16 +323,16 @@
     "question": "Lỗi phổ biến nhất khiến flowchart trở nên vô dụng khi review là gì?",
     "questionEn": "What most commonly makes a flowchart useless during review?",
     "options": [
-      "Nhánh quyết định không có đủ đường ra cho mọi kết quả có thể, nên người đọc không biết điều gì xảy ra ở trường hợp còn lại",
-      "Dùng quá ít màu sắc",
-      "Vẽ theo chiều dọc thay vì ngang",
-      "Đặt tiêu đề quá ngắn"
+      "Điểm quyết định thiếu nhánh cho một kết quả",
+      "Dùng quá ít màu sắc khác nhau để phân biệt các bước",
+      "Vẽ theo chiều dọc thay vì chiều ngang",
+      "Đặt tiêu đề sơ đồ quá ngắn, khó hiểu"
     ],
     "optionsEn": [
-      "A decision has no outgoing path for every possible outcome, so readers cannot tell what happens in the remaining case",
-      "Using too few colours",
-      "Drawing vertically instead of horizontally",
-      "A title that is too short"
+      "A decision lacks a branch for some outcome",
+      "Using too few colours to tell steps apart",
+      "Drawing it vertically instead of horizontally",
+      "Giving the chart a title that is too short"
     ],
     "answer": 0,
     "explanation": "Mỗi hình thoi phải có đủ nhánh cho mọi kết quả. Nhánh thiếu chính là yêu cầu ngoại lệ bị bỏ sót — đúng chỗ mà bug hay sinh ra.",
@@ -343,16 +343,16 @@
     "question": "Khi nào nên dùng swimlane flowchart thay vì flowchart thường?",
     "questionEn": "When should you use a swimlane flowchart instead of a plain one?",
     "options": [
-      "Khi cần thể hiện rõ ai hoặc bộ phận nào chịu trách nhiệm cho từng bước và quy trình đi qua nhiều vai trò",
-      "Khi quy trình chỉ có một người thực hiện",
-      "Khi cần vẽ nhanh trên giấy",
-      "Khi quy trình không có điểm quyết định"
+      "Khi nhiều vai trò tham gia và cần rõ ai làm gì",
+      "Khi cả quy trình chỉ có duy nhất một người thực hiện",
+      "Khi cần vẽ nhanh bằng tay trên giấy",
+      "Khi quy trình không có điểm quyết định nào"
     ],
     "optionsEn": [
-      "When you need to show who or which department owns each step and the process crosses several roles",
+      "When several roles share the process and own steps",
       "When one person performs the whole process",
-      "When you need a quick paper sketch",
-      "When the process has no decision points"
+      "When you need a quick hand sketch on paper",
+      "When the process has no decision points at all"
     ],
     "answer": 0,
     "explanation": "Lane làm lộ ra các lần chuyển giao giữa vai trò — nơi hay xảy ra chậm trễ và mất thông tin nhất trong quy trình nghiệp vụ.",
@@ -363,16 +363,16 @@
     "question": "Flowchart khác BPMN chủ yếu ở điểm nào?",
     "questionEn": "How does a flowchart mainly differ from BPMN?",
     "options": [
-      "BPMN có bộ ký hiệu chuẩn hoá phong phú hơn cho sự kiện, thông điệp và quy trình con, phù hợp mô hình hoá nghiệp vụ phức tạp",
-      "Flowchart không thể hiện được quyết định",
-      "BPMN chỉ dùng cho lập trình viên",
-      "Flowchart chỉ vẽ được trên giấy"
+      "BPMN có nhiều ký hiệu chuẩn hơn cho sự kiện, thông điệp",
+      "Flowchart không thể hiện được điểm quyết định",
+      "BPMN chỉ dành cho lập trình viên đọc code",
+      "Flowchart chỉ vẽ được trên giấy, không có công cụ"
     ],
     "optionsEn": [
-      "BPMN has a richer standardized notation for events, messages, and subprocesses, suiting complex business modeling",
-      "Flowcharts cannot show decisions",
-      "BPMN is only for developers",
-      "Flowcharts can only be drawn on paper"
+      "BPMN has richer standard symbols for events and messages",
+      "Flowcharts have no way to show decisions",
+      "BPMN is only meant for developers reading code",
+      "Flowcharts can only be drawn on paper, not in tools"
     ],
     "answer": 0,
     "explanation": "Flowchart đơn giản và ai cũng đọc được. BPMN chính xác hơn và là chuẩn quốc tế, nhưng cần người đọc được đào tạo về ký hiệu.",
@@ -383,16 +383,16 @@
     "question": "BA vẽ flowchart quy trình duyệt đơn nghỉ phép. Giá trị lớn nhất của bản vẽ này là gì?",
     "questionEn": "A BA charts the leave-approval process. What is the chart's greatest value?",
     "options": [
-      "Nó tạo hiểu biết chung và làm lộ ra các bước thiếu, vòng lặp thừa và trường hợp ngoại lệ chưa ai nghĩ tới",
-      "Nó thay thế hoàn toàn tài liệu yêu cầu",
-      "Nó tự động sinh mã nguồn",
-      "Nó chứng minh dự án đúng tiến độ"
+      "Tạo hiểu biết chung và lộ ra bước thiếu, ngoại lệ",
+      "Nó thay thế được hoàn toàn bộ tài liệu đặc tả yêu cầu",
+      "Nó tự động sinh mã nguồn cho hệ thống",
+      "Nó chứng minh dự án đang đúng tiến độ"
     ],
     "optionsEn": [
-      "It builds shared understanding and exposes missing steps, redundant loops, and exception cases nobody had considered",
+      "Shared understanding, and it exposes gaps and exceptions",
       "It fully replaces the requirements document",
-      "It generates source code automatically",
-      "It proves the project is on schedule"
+      "It generates the system's source code automatically",
+      "It proves to managers the project is on schedule"
     ],
     "answer": 0,
     "explanation": "Mô hình trực quan bổ sung chứ không thay thế đặc tả. Giá trị chính là phát hiện lỗi sớm khi mọi người cùng nhìn vào một bức tranh.",
@@ -404,15 +404,15 @@
     "question": "Trong flowchart rút tiền ATM, bước \"Nhập mã PIN\" nên được vẽ bằng ký hiệu nào?",
     "questionEn": "In an ATM cash-withdrawal flowchart, which symbol should the \"Enter PIN\" step use?",
     "options": [
-      "Hình oval (Terminal)",
-      "Hình thoi (Decision)",
-      "Hình trụ (Database)",
+      "Hình oval (Terminal — Start/End)",
+      "Hình thoi (Decision — Yes/No)",
+      "Hình trụ (Database — lưu trữ)",
       "Hình bình hành (Input/Output)"
     ],
     "optionsEn": [
-      "An oval (Terminal)",
-      "A diamond (Decision)",
-      "A cylinder (Database)",
+      "An oval (Terminal — Start/End)",
+      "A diamond (Decision — Yes/No)",
+      "A cylinder (Database — storage)",
       "A parallelogram (Input/Output)"
     ],
     "answer": 3,
@@ -437,15 +437,15 @@
     "questionEn": "In a login flowchart that allows at most 3 failed attempts, what happens after the third wrong password?",
     "options": [
       "Người dùng được quay lại nhập mật khẩu thêm lần nữa",
-      "Điều kiện \"số lần sai < 3\" là Không, nên tài khoản bị khóa và luồng đi tới Kết thúc",
+      "Điều kiện là Không, tài khoản bị khóa và luồng tới Kết thúc",
       "Bộ đếm được đặt lại về 0 và vòng lặp bắt đầu lại",
-      "Hệ thống tự động mở trang chủ"
+      "Hệ thống tự động mở trang chủ cho người dùng"
     ],
     "optionsEn": [
       "The user is sent back to enter the password once more",
-      "The condition \"attempts < 3\" is No, so the account is locked and the flow reaches an End",
+      "The condition is No, the account locks and the flow ends",
       "The counter is reset to 0 and the loop starts again",
-      "The system opens the home page automatically"
+      "The system automatically opens the home page for the user"
     ],
     "answer": 1,
     "explanation": "Sau lần sai thứ ba, bộ đếm bằng 3, nên \"số lần sai < 3?\" trả lời Không. Luồng rời khỏi vòng lặp: khóa tài khoản, báo cho người dùng, rồi Kết thúc.",
@@ -470,13 +470,13 @@
     "options": [
       "Một vòng lặp được vẽ bằng ký hiệu tròn đặc biệt",
       "Một sơ đồ có nhiều hơn một điểm Kết thúc",
-      "Một vòng lặp không có đường thoát, nên các bước lặp lại mãi không dừng",
+      "Vòng lặp không có đường thoát, lặp lại mãi mãi",
       "Một vòng lặp chạy đúng 3 lần"
     ],
     "optionsEn": [
       "A loop drawn with a special circular symbol",
       "A chart with more than one End point",
-      "A loop with no way out, so its steps repeat forever",
+      "A loop with no exit that repeats forever",
       "A loop that runs exactly 3 times"
     ],
     "answer": 2,
@@ -500,16 +500,16 @@
     "question": "Trong swimlane flowchart, mỗi khi một mũi tên vượt qua vạch chia giữa hai làn thì điều đó cho thấy gì?",
     "questionEn": "In a swimlane flowchart, what does it mean when an arrow crosses the line between two lanes?",
     "options": [
-      "Sơ đồ đã bị vẽ sai và cần sửa",
-      "Quy trình kết thúc tại đó",
+      "Sơ đồ đã bị vẽ sai quy tắc và cần phải sửa lại",
+      "Quy trình kết thúc ngay tại điểm đó",
       "Bước đó cần lưu dữ liệu vào database",
-      "Công việc được bàn giao từ người/bộ phận này sang người/bộ phận khác"
+      "Việc được bàn giao sang người/bộ phận khác"
     ],
     "optionsEn": [
       "The chart is drawn incorrectly and must be fixed",
-      "The process ends there",
+      "The process ends right at that point",
       "That step must save data to a database",
-      "Work is handed off from one person/department to another"
+      "Work is handed off to another person or team"
     ],
     "answer": 3,
     "explanation": "Mỗi làn thuộc về một vai trò. Mũi tên vượt làn là một điểm bàn giao — nơi hay xảy ra chậm trễ và nhầm lẫn trách nhiệm, nên rất đáng chú ý.",

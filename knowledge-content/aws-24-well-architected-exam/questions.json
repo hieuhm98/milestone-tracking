@@ -125,15 +125,15 @@
     "questionEn": "You want to REVIEW a workload against each pillar and get a list of risks with recommendations. Which tool do you use?",
     "options": [
       "AWS Well-Architected Tool",
-      "Amazon CloudWatch",
-      "AWS Config",
-      "AWS CloudFormation"
+      "AWS Trusted Advisor",
+      "AWS Security Hub",
+      "AWS Compute Optimizer"
     ],
     "optionsEn": [
       "AWS Well-Architected Tool",
-      "Amazon CloudWatch",
-      "AWS Config",
-      "AWS CloudFormation"
+      "AWS Trusted Advisor",
+      "AWS Security Hub",
+      "AWS Compute Optimizer"
     ],
     "answer": 0,
     "explanation": "AWS Well-Architected Tool (miễn phí) hướng dẫn bạn trả lời câu hỏi theo trụ cột và xuất ra danh sách rủi ro high/medium kèm khuyến nghị cải thiện.",
@@ -164,16 +164,16 @@
     "question": "Đề bài: cần gửi cùng một thông điệp tới NHIỀU đích cùng lúc (fan-out). Kiến trúc nào phù hợp nhất?",
     "questionEn": "Prompt: you must deliver the same message to MANY targets simultaneously (fan-out). Which architecture fits best?",
     "options": [
-      "Một hàng đợi SQS duy nhất cho tất cả consumer",
-      "SNS topic gửi tới nhiều hàng đợi SQS đăng ký (fan-out)",
-      "Ghi trực tiếp vào một bảng DynamoDB",
-      "Dùng một EC2 làm broker tự viết"
+      "Một hàng đợi SQS duy nhất dùng chung cho mọi consumer",
+      "SNS topic đẩy ra nhiều hàng đợi SQS đã subscribe",
+      "Một Kinesis stream với một ứng dụng consumer duy nhất",
+      "Một SQS FIFO queue, mỗi target một message group"
     ],
     "optionsEn": [
-      "A single SQS queue for all consumers",
-      "An SNS topic fanning out to multiple subscribed SQS queues",
-      "Write directly to one DynamoDB table",
-      "Use a self-built EC2 broker"
+      "A single SQS queue shared by all of the consumers",
+      "An SNS topic feeding multiple subscribed SQS queues",
+      "One Kinesis stream with a single consumer application",
+      "An SQS FIFO queue with one message group per target"
     ],
     "answer": 1,
     "explanation": "'Fan-out' là mẫu SNS phát tới nhiều SQS đăng ký, mỗi consumer xử lý độc lập từ hàng đợi riêng.",
@@ -224,16 +224,16 @@
     "question": "Ứng dụng đọc cùng một dữ liệu từ RDS rất nhiều lần khiến CSDL quá tải. Cách tối ưu HIỆU NĂNG đọc?",
     "questionEn": "An app reads the same data from RDS very frequently, overloading the database. How do you optimize read PERFORMANCE?",
     "options": [
-      "Tăng gấp đôi kích thước instance RDS mãi mãi",
-      "Đặt Amazon ElastiCache trước RDS để cache truy vấn đọc",
-      "Chuyển sang lưu dữ liệu trong S3",
-      "Bật RDS Multi-AZ để tăng tốc độ đọc"
+      "Tăng gấp đôi kích thước instance RDS vĩnh viễn để dự phòng",
+      "Đặt ElastiCache trước RDS để cache truy vấn đọc",
+      "Xuất bảng sang S3 rồi truy vấn bằng Athena",
+      "Bật RDS Multi-AZ để standby phục vụ truy vấn đọc"
     ],
     "optionsEn": [
-      "Permanently double the RDS instance size",
-      "Put Amazon ElastiCache in front of RDS to cache read queries",
-      "Move the data to S3",
-      "Enable RDS Multi-AZ to speed up reads"
+      "Permanently double the RDS instance size for headroom",
+      "Put ElastiCache in front of RDS to cache read queries",
+      "Export the tables to S3 and query them with Athena",
+      "Enable RDS Multi-AZ so the standby serves the reads"
     ],
     "answer": 1,
     "explanation": "ElastiCache (Redis/Memcached) cache dữ liệu truy vấn nhiều, giảm tải RDS và độ trễ. Lưu ý Multi-AZ dùng cho HA/failover, không phải tăng tốc độ đọc.",
@@ -244,16 +244,16 @@
     "question": "Cần di chuyển một cơ sở dữ liệu Oracle on-premises sang Amazon Aurora PostgreSQL (khác engine). Bộ công cụ nào?",
     "questionEn": "You need to migrate an on-premises Oracle database to Amazon Aurora PostgreSQL (a different engine). Which toolset?",
     "options": [
-      "Chỉ dùng AWS Backup",
-      "AWS DMS kết hợp Schema Conversion Tool (SCT)",
+      "AWS Backup với cross-Region copy",
+      "AWS DMS kèm Schema Conversion Tool",
       "Amazon S3 Transfer Acceleration",
-      "AWS Snowball"
+      "Chỉ AWS DMS với full load + CDC"
     ],
     "optionsEn": [
-      "AWS Backup only",
-      "AWS DMS combined with the Schema Conversion Tool (SCT)",
+      "AWS Backup with cross-Region copy",
+      "AWS DMS plus the Schema Conversion Tool",
       "Amazon S3 Transfer Acceleration",
-      "AWS Snowball"
+      "AWS DMS alone with full load + CDC"
     ],
     "answer": 1,
     "explanation": "Khi đổi engine (heterogeneous migration), SCT chuyển đổi schema/thủ tục còn DMS di chuyển dữ liệu, hỗ trợ cả replication liên tục.",
@@ -285,14 +285,14 @@
     "questionEn": "Among four answers to a 'least operational overhead' question, which is a typical 'distractor' pattern to eliminate?",
     "options": [
       "Dùng dịch vụ managed/serverless đúng nhu cầu",
-      "Tự dựng và tự vá một cụm EC2 với Classic Load Balancer (CLB)",
-      "Dùng Lambda cho tác vụ chạy theo sự kiện ngắn",
+      "Tự dựng, tự vá một cụm EC2 phía sau CLB",
+      "Dùng Lambda cho tác vụ xử lý ngắn, chạy theo sự kiện",
       "Dùng DynamoDB thay vì tự quản lý CSDL trên EC2"
     ],
     "optionsEn": [
       "Use the right managed/serverless service for the need",
-      "Self-build and self-patch an EC2 cluster with a Classic Load Balancer (CLB)",
-      "Use Lambda for short event-driven tasks",
+      "Self-build and self-patch an EC2 cluster behind a CLB",
+      "Use Lambda for short, event-driven processing tasks",
       "Use DynamoDB instead of self-managing a database on EC2"
     ],
     "answer": 1,
@@ -304,16 +304,16 @@
     "question": "Đề bài hỏi phương án \"TIẾT KIỆM CHI PHÍ NHẤT\" nhưng có hai đáp án đều khả thi về mặt kỹ thuật. Nên xử lý thế nào?",
     "questionEn": "A question asks for the \"MOST cost-effective\" option but two answers both work technically. How should you decide?",
     "options": [
-      "Loại phương án có chi phí thường trực cao hơn (ví dụ server chạy 24/7 so với serverless/on-demand), miễn là vẫn thỏa MỌI yêu cầu đã nêu",
-      "Chọn dịch vụ mới nhất của AWS",
-      "Chọn đáp án ngắn nhất",
-      "Luôn chọn phương án dùng dịch vụ được quản lý"
+      "Chọn phương án chi phí thường trực thấp hơn, miễn là thỏa mọi yêu cầu",
+      "Chọn phương án dùng dịch vụ AWS mới nhất, vì thường rẻ hơn",
+      "Chọn phương án ít dịch vụ nhất, vì mỗi dịch vụ đều tốn thêm tiền",
+      "Luôn chọn phương án dùng managed service, bất kể chi phí vận hành"
     ],
     "optionsEn": [
-      "Eliminate the one with higher steady-state cost (e.g. always-on servers vs serverless/on-demand), provided it still meets EVERY stated requirement",
-      "Pick the newest AWS service",
-      "Pick the shortest answer",
-      "Always pick the option using a managed service"
+      "Pick the lower steady-state cost, as long as it meets every requirement",
+      "Pick the one using the newest AWS service, since it is usually cheaper",
+      "Pick the one with the fewest services, since each service adds cost",
+      "Always pick the managed-service option, whatever its running cost"
     ],
     "answer": 0,
     "explanation": "Quy trình hai bước: loại hết phương án KHÔNG thỏa yêu cầu bắt buộc, rồi trong số còn lại mới so chi phí. Đừng chọn phương án rẻ hơn nhưng vi phạm một ràng buộc đã nêu.",

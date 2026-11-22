@@ -4,16 +4,16 @@
     "question": "Cạm bẫy trung tâm của dự án tự động hoá quy trình nghiệp vụ là gì?",
     "questionEn": "What is the central trap of business process automation projects?",
     "options": [
-      "Chọn sai công nghệ nền tảng",
+      "Chọn nền tảng workflow không mở rộng được theo doanh nghiệp khi khối lượng tăng",
       "Nếu bạn tự động hoá một quy trình tồi, bạn sẽ có một quy trình tồi chạy nhanh hơn",
-      "Đội phát triển không hiểu nghiệp vụ",
-      "Chi phí giấy phép phần mềm quá cao"
+      "Lập trình viên không hiểu nghiệp vụ nên hiểu sai các bước của quy trình",
+      "Chi phí giấy phép tăng theo từng người dùng và lặng lẽ xoá sạch khoản tiết kiệm kỳ vọng"
     ],
     "optionsEn": [
-      "Choosing the wrong technology platform",
+      "Choosing a workflow platform that cannot scale with the business as volumes grow",
       "If you automate a bad process, you get a bad process running faster",
-      "The development team does not understand the business",
-      "Software licence costs are too high"
+      "Developers who do not understand the business and so misread the process steps",
+      "Licence costs that grow with every user and quietly erase the expected savings"
     ],
     "answer": 1,
     "explanation": "Câu hỏi sai là làm sao viết phần mềm để làm những gì nhân viên đang làm bằng tay. Câu hỏi đúng là kết quả nghiệp vụ nào chúng ta cần đạt được và cách tốt nhất để đạt nó là gì.",
@@ -24,16 +24,16 @@
     "question": "Với mỗi bước trong quy trình hiện tại, câu hỏi quan trọng nhất cần đặt là gì?",
     "questionEn": "For each step in the current process, what is the most important question to ask?",
     "options": [
-      "Bước này mất bao nhiêu thời gian?",
-      "Bước này tồn tại vì nhu cầu nghiệp vụ, hay vì hạn chế của cách làm cũ? Nếu là lý do thứ hai thì đừng tự động hoá nó mà hãy loại bỏ nó",
-      "Ai chịu trách nhiệm cho bước này?",
-      "Bước này có thể được thuê ngoài không?"
+      "Bước này mất bao lâu? Bước chậm nhất nên được tự động hoá trước để thu lợi lớn nhất",
+      "Bước này phục vụ nhu cầu nghiệp vụ hay hạn chế của cách cũ? Nếu là hạn chế, hãy loại bỏ thay vì tự động hoá",
+      "Ai chịu trách nhiệm cho bước này? Mỗi bước tự động cần một người duyệt kết quả đầu ra",
+      "Bước này có thuê ngoài được không? Bước do đối tác làm có thể để ngoài phạm vi tự động hoá"
     ],
     "optionsEn": [
-      "How long does this step take?",
-      "Does this step exist for a business need or for a limitation of the old way? If the latter, do not automate it, eliminate it",
-      "Who is responsible for this step?",
-      "Can this step be outsourced?"
+      "How long does this step take? The slowest steps should be automated first for the biggest gain",
+      "Does it serve a business need or a limit of the old way? If the latter, eliminate it rather than automate it",
+      "Who is responsible for this step? Each automated step needs one owner to approve its outputs",
+      "Can this step be outsourced? Steps handled by partners can be left out of the automation scope"
     ],
     "answer": 1,
     "explanation": "Bước phê duyệt thường tồn tại vì không có cách nào khác để kiểm soát; bước sao chép dữ liệu vì các hệ thống không nói chuyện với nhau; trình tự tuần tự vì giấy tờ chỉ ở một chỗ một lúc.",
@@ -44,37 +44,36 @@
     "question": "Nếu 95% cycle time của một quy trình là thời gian chờ đợi, điều đó có ý nghĩa gì?",
     "questionEn": "If 95 percent of a process cycle time is waiting, what does that imply?",
     "options": [
-      "Cần thuê thêm nhân sự để xử lý nhanh hơn",
-      "Việc làm cho từng bước nhanh hơn 20% gần như không cải thiện gì; loại bỏ việc chờ mới là chỗ có giá trị",
-      "Quy trình cần thêm bước kiểm soát chất lượng",
-      "Nên chuyển quy trình sang chế độ xử lý theo lô"
+      "Cần thêm nhân sự xử lý hàng đợi, vì thời gian chờ nghĩa là nhu cầu vượt quá năng lực hiện có",
+      "Làm mỗi bước nhanh hơn 20% gần như không giúp gì; loại bỏ việc chờ mới là chỗ có giá trị",
+      "Cần thêm bước kiểm soát chất lượng, vì chờ lâu thường do phải làm lại sau khi có lỗi",
+      "Nên chuyển sang xử lý theo lô, để các mục trong hàng đợi được xử lý cùng nhau qua đêm"
     ],
     "optionsEn": [
-      "Hire more staff to process faster",
-      "Making each step 20 percent faster improves almost nothing; eliminating the waiting is where the value is",
-      "The process needs more quality control steps",
-      "The process should move to batch processing"
+      "More staff are needed to work the queues, since waiting means demand exceeds current capacity",
+      "Making each step 20 percent faster barely helps; removing the waiting is where the value lies",
+      "More quality checks are needed, since long waits usually come from rework after errors",
+      "The process should move to batch processing, so queued items are handled together overnight"
     ],
     "answer": 1,
     "explanation": "Đây là lý do đo lường trước khi thiết kế là thiết yếu. Cũng nên tách luồng chính khỏi luồng ngoại lệ, vì nhiều quy trình chậm cho mọi người do được thiết kế quanh 5% trường hợp hiếm.",
     "explanationEn": "This is why measuring before designing is essential. Also separate the main flow from exceptions, since many processes are slow for everyone because they were designed around 5 percent of rare cases."
-  }
-  ,
+  },
   {
     "id": "q4",
     "question": "Khi tự động hoá, bạn phát hiện quy tắc thực tế khác quy tắc chính thức. Ai quyết định tự động hoá cái nào?",
     "questionEn": "When automating, you find the actual rules differ from the official rules. Who decides which to automate?",
     "options": [
-      "BA, vì họ đã phân tích cả hai",
-      "Lãnh đạo, vì đây là quyết định kinh doanh về việc chính sách nào thực sự áp dụng chứ không phải quyết định kỹ thuật",
-      "Lập trình viên, vì họ hiểu chi phí hiện thực",
-      "Người dùng thực hiện quy trình hằng ngày"
+      "BA, vì họ đã phân tích cả hai phiên bản và đánh giá được người dùng thực sự làm theo cái nào",
+      "Lãnh đạo, vì chọn chính sách nào thực sự áp dụng là quyết định kinh doanh, không phải kỹ thuật",
+      "Lập trình viên, vì họ biết phiên bản nào rẻ hơn để hiện thực và bảo trì lâu dài",
+      "Người dùng vận hành quy trình hằng ngày, vì quy tắc thực tế phản ánh cách công việc thật sự diễn ra"
     ],
     "optionsEn": [
-      "The BA, since they analysed both",
-      "Executives, because it is a business decision about which policy really applies, not a technical one",
-      "Developers, since they understand implementation cost",
-      "The users who perform the process daily"
+      "The BA, since they analysed both versions and can judge which one users actually follow",
+      "Executives, since which policy really applies is a business decision, not a technical one",
+      "Developers, since they know which version is cheaper to implement and maintain over time",
+      "The users who run the process daily, since the actual rules reflect how work really gets done"
     ],
     "answer": 1,
     "explanation": "Khi tự động hoá bạn cũng sẽ phát hiện các quy tắc mâu thuẫn nhau giữa các phòng ban, và các quy tắc không ai biết nguồn gốc mà chỉ nói chúng tôi luôn làm thế.",
@@ -85,16 +84,16 @@
     "question": "Yêu cầu nào thường bị bỏ sót trong dự án tự động hoá, và hậu quả là gì?",
     "questionEn": "Which requirement is frequently missed in automation projects, and what is the consequence?",
     "options": [
-      "Yêu cầu về giao diện đẹp; hậu quả là người dùng không thích hệ thống",
-      "Khả năng xử lý ngoại lệ và audit trail cho can thiệp thủ công; thiếu chúng, quy trình bế tắc ở trường hợp đầu tiên nó không lường trước và người dùng quay lại làm thủ công bên ngoài hệ thống",
-      "Yêu cầu về sao lưu dữ liệu; hậu quả là mất dữ liệu",
-      "Yêu cầu về đa ngôn ngữ; hậu quả là không mở rộng được ra quốc tế"
+      "Yêu cầu giao diện đẹp; thiếu chúng người dùng thấy hệ thống lỗi thời và lặng lẽ tránh dùng hẳn",
+      "Xử lý ngoại lệ và audit trail cho bước thủ công, nếu không quy trình bế tắc và người dùng lách",
+      "Yêu cầu sao lưu và khôi phục; thiếu chúng một sự cố máy chủ làm mất mọi hồ sơ đang xử lý",
+      "Yêu cầu đa ngôn ngữ; thiếu chúng quy trình không triển khai được cho chi nhánh nước ngoài"
     ],
     "optionsEn": [
-      "Attractive UI requirements; the consequence is users dislike the system",
-      "Exception handling and audit trails for manual intervention; without them the process deadlocks on the first unanticipated case and users go back to working outside the system",
-      "Backup requirements; the consequence is data loss",
-      "Multilingual requirements; the consequence is no international expansion"
+      "Attractive UI requirements; without them users find the system dated and quietly avoid it altogether",
+      "Exception handling and audit trails for manual steps, or the process stalls and users bypass it",
+      "Backup and restore requirements; without them a server failure loses every case in progress",
+      "Multilingual requirements; without them the process cannot be rolled out to overseas branches"
     ],
     "answer": 1,
     "explanation": "Ba câu hỏi thiết kế cần trả lời là trường hợp nào hệ thống tự xử lý được, trường hợp nào cần con người quyết định, và con người có được ghi đè quyết định của hệ thống không.",
@@ -105,37 +104,36 @@
     "question": "Vì sao yêu cầu cho dự án business analytics khó hơn cho hệ thống giao dịch?",
     "questionEn": "Why are requirements for business analytics harder than for transactional systems?",
     "options": [
-      "Vì dữ liệu phân tích lớn hơn nhiều",
-      "Vì bản chất công việc phân tích là khám phá: người dùng thường không biết họ sẽ hỏi câu hỏi gì cho tới khi nhìn thấy dữ liệu, nên bạn không thể đặc tả trước toàn bộ tập truy vấn",
-      "Vì công cụ phân tích phức tạp hơn",
-      "Vì người dùng phân tích có trình độ kỹ thuật cao hơn"
+      "Vì dữ liệu phân tích lớn hơn nhiều, nên yêu cầu hiệu năng lấn át mọi yêu cầu khác",
+      "Phân tích mang tính khám phá: người dùng hiếm khi biết sẽ hỏi gì cho tới khi thấy dữ liệu",
+      "Vì công cụ phân tích phức tạp hơn, nên yêu cầu phải viết xoay quanh tính năng của công cụ",
+      "Vì người dùng phân tích giỏi kỹ thuật hơn, nên họ muốn tự viết đặc tả truy vấn chính xác"
     ],
     "optionsEn": [
-      "Because analytical data volumes are much larger",
-      "Because analytical work is exploratory: users usually do not know what they will ask until they see the data, so you cannot specify the full query set in advance",
-      "Because analytics tools are more complex",
-      "Because analytical users are more technical"
+      "Analytical data volumes are far larger, so performance needs dominate every other requirement",
+      "Analytical work is exploratory: users rarely know what they will ask until they see the data",
+      "Analytics tools are more complex, so requirements must be written around the tool's features",
+      "Analytics users are more technical, so they expect to write precise query specifications themselves"
     ],
     "answer": 1,
     "explanation": "Hệ quả là tập trung vào quyết định chứ không vào báo cáo, đặc tả dữ liệu sẵn có và khả năng truy vấn, và ưu tiên khả năng tự phục vụ.",
     "explanationEn": "The consequences are focusing on decisions rather than reports, specifying available data and query capability, and prioritizing self-service."
-  }
-  ,
+  },
   {
     "id": "q7",
     "question": "Câu hỏi khai thác mạnh nhất trong dự án business analytics là gì?",
     "questionEn": "What is the most powerful elicitation question on a business analytics project?",
     "options": [
-      "Bạn cần báo cáo gì và với tần suất nào?",
-      "Nếu bạn biết được điều X, bạn sẽ LÀM gì khác đi? Nếu câu trả lời là cũng không làm gì khác thì thông tin đó có lẽ không đáng đầu tư để thu thập",
-      "Bạn muốn dashboard trông như thế nào?",
-      "Dữ liệu của bạn nằm ở hệ thống nào?"
+      "Bạn cần báo cáo gì, tần suất nào, và ai nhận từng báo cáo? Điều đó xác định phạm vi bàn giao",
+      "Nếu biết được X, bạn sẽ làm gì khác đi? Nếu không có gì, dữ liệu đó có lẽ không đáng thu thập",
+      "Dashboard nên trông như thế nào? Một bản mock-up ghi lại bố cục, biểu đồ và bộ lọc cùng lúc",
+      "Dữ liệu nằm ở hệ thống nào? Lập bản đồ nguồn trước cho thấy phân tích nào khả thi"
     ],
     "optionsEn": [
-      "What reports do you need and how often?",
-      "If you knew X, what would you DO differently? If the answer is nothing really, that information is probably not worth collecting",
-      "What should the dashboard look like?",
-      "Which system holds your data?"
+      "What reports do you need, how often, and who receives each one? That defines the delivery scope",
+      "If you knew X, what would you do differently? If nothing, that data is probably not worth collecting",
+      "What should the dashboard look like? A mock-up captures layout, charts, and filters in one go",
+      "Which systems hold your data? Mapping sources first shows what analytics are possible at all"
     ],
     "answer": 1,
     "explanation": "Đây là bộ lọc mạnh nhất chống lại việc xây dựng dashboard đẹp mà không ai dùng, dù thông tin đó nghe rất thú vị.",
@@ -146,16 +144,16 @@
     "question": "Vì sao việc thống nhất định nghĩa chỉ số lại quan trọng tới vậy trong dự án analytics?",
     "questionEn": "Why is reconciling metric definitions so important on analytics projects?",
     "options": [
-      "Vì công cụ BI yêu cầu định nghĩa chuẩn hoá",
-      "Vì ba phòng ban đều báo cáo doanh thu và cho ba con số khác nhau do mỗi bên định nghĩa khác: có tính hàng trả lại không, có tính thuế không, ghi nhận khi đặt hay khi giao",
-      "Vì kiểm toán viên yêu cầu tài liệu định nghĩa",
-      "Vì nó giúp giảm dung lượng lưu trữ"
+      "Vì công cụ BI không nạp chỉ số cho tới khi mỗi chỉ số có định nghĩa chuẩn trong semantic layer",
+      "Ba phòng ban báo cáo doanh thu với ba con số khác nhau, vì mỗi bên định nghĩa một kiểu",
+      "Vì kiểm toán viên đòi định nghĩa bằng văn bản cho mọi chỉ số trước khi báo cáo được công bố",
+      "Vì định nghĩa chung giảm dung lượng lưu trữ, do mỗi chỉ số chỉ được tính và lưu một lần"
     ],
     "optionsEn": [
-      "Because BI tools require standardised definitions",
-      "Because three departments all report revenue and give three different numbers, since each defines it differently: returns included, tax included, recognised at order or at delivery",
-      "Because auditors require definition documentation",
-      "Because it reduces storage volume"
+      "BI tools refuse to load metrics until each has a standard definition in the semantic layer",
+      "Three departments report three revenue figures, because each defines revenue differently",
+      "Auditors require documented definitions for every metric before reports can be published",
+      "Shared definitions reduce storage, since each metric is then calculated and stored only once"
     ],
     "answer": 1,
     "explanation": "Đây là công việc phân tích nghiệp vụ thuần tuý và thường là phần giá trị nhất mà BA mang lại cho dự án analytics.",
@@ -166,37 +164,36 @@
     "question": "Cách hỏi đúng về yêu cầu dữ liệu thời gian thực trong dự án analytics là gì?",
     "questionEn": "What is the right way to ask about real-time data requirements on an analytics project?",
     "options": [
-      "Bạn có cần dữ liệu thời gian thực không?",
-      "Nếu dữ liệu cũ 24 giờ, bạn sẽ ra quyết định sai như thế nào? Vì người dùng theo bản năng sẽ nói thời gian thực nhưng chuyển từ hằng đêm sang thời gian thực có thể nhân chi phí kiến trúc lên nhiều lần",
-      "Ngân sách của bạn cho hạ tầng là bao nhiêu?",
-      "Hệ thống nguồn có hỗ trợ streaming không?"
+      "Hỏi họ có cần dữ liệu thời gian thực không, rồi xây luôn, vì dữ liệu càng mới càng có giá trị",
+      "Hỏi dữ liệu cũ một ngày khiến họ quyết định sai ra sao, vì thời gian thực nhân chi phí kiến trúc",
+      "Hỏi ngân sách hạ tầng trước, rồi đề xuất mức dữ liệu mới nhất mà ngân sách đó cho phép",
+      "Hỏi hệ thống nguồn có hỗ trợ streaming không, vì điều đó quyết định độ mới khả thi"
     ],
     "optionsEn": [
-      "Do you need real-time data?",
-      "If the data were 24 hours old, how would you decide wrongly? Users instinctively say real-time, but moving from nightly to real-time can multiply architectural cost several times",
-      "What is your infrastructure budget?",
-      "Do the source systems support streaming?"
+      "Ask whether they need real-time data, then build it in, since freshness always adds analytic value",
+      "Ask how day-old data would cause a wrong decision, since real-time can multiply architecture cost",
+      "Ask for the infrastructure budget first, then offer the freshest data that budget can support",
+      "Ask whether source systems support streaming, since that decides what freshness is possible"
     ],
     "answer": 1,
     "explanation": "Câu trả lời thường tiết lộ rằng cập nhật hằng đêm là hoàn toàn đủ. Độ tươi dữ liệu là một trong những đòn bẩy chi phí lớn nhất trong dự án analytics.",
     "explanationEn": "The answer usually reveals nightly refresh is entirely sufficient. Data freshness is one of the biggest cost levers on analytics projects."
-  }
-  ,
+  },
   {
     "id": "q10",
     "question": "Vì sao vấn đề chất lượng dữ liệu thường chỉ lộ ra khi làm analytics?",
     "questionEn": "Why do data quality problems usually only surface when doing analytics?",
     "options": [
-      "Vì công cụ analytics kiểm tra dữ liệu nghiêm ngặt hơn",
-      "Vì hệ thống giao dịch vận hành ổn với dữ liệu không nhất quán do mỗi giao dịch được xử lý riêng lẻ; chỉ khi tổng hợp hàng triệu bản ghi thì sự không nhất quán mới gây ra con số sai",
-      "Vì dữ liệu bị hỏng trong quá trình sao chép sang data warehouse",
-      "Vì người dùng analytics khắt khe hơn người dùng vận hành"
+      "Vì công cụ analytics kiểm tra dữ liệu nghiêm ngặt hơn hệ thống giao dịch nên loại bản ghi xấu",
+      "Giao dịch được xử lý từng cái một, nên sự không nhất quán chỉ sinh con số sai khi được tổng hợp",
+      "Vì dữ liệu thường bị hỏng khi sao chép sang warehouse, từ đó sinh ra sự không nhất quán",
+      "Vì người dùng analytics khắt khe hơn người dùng vận hành, nên nhận ra lỗi nhỏ mà người khác bỏ qua"
     ],
     "optionsEn": [
-      "Because analytics tools validate data more strictly",
-      "Because transactional systems run fine on inconsistent data since each transaction is processed individually; only aggregating millions of records makes the inconsistency produce wrong numbers",
-      "Because data is corrupted while copying to the warehouse",
-      "Because analytics users are more demanding than operational users"
+      "Analytics tools validate data more strictly than transactional systems, so they reject bad records",
+      "Transactions are processed one at a time, so inconsistencies only give wrong numbers once aggregated",
+      "Data is often corrupted while being copied to the warehouse, which creates the inconsistencies",
+      "Analytics users are more demanding than operational users, so they notice small errors others ignore"
     ],
     "answer": 1,
     "explanation": "Một yêu cầu thiết yếu thường bị bỏ sót là hệ thống phải cho biết dữ liệu nào KHÔNG đáng tin. Báo cáo không tiết lộ điều đó thì tệ hơn không có báo cáo vì nó tạo tự tin sai lầm.",
@@ -207,16 +204,16 @@
     "question": "Hard real-time và soft real-time khác nhau như thế nào?",
     "questionEn": "How do hard real-time and soft real-time differ?",
     "options": [
-      "Hard real-time nhanh hơn soft real-time",
-      "Hard real-time nghĩa là trễ hạn là thất bại hệ thống, như túi khí bung sau 200 mili-giây thay vì 20; soft real-time nghĩa là trễ hạn làm suy giảm chất lượng nhưng vẫn chấp nhận được, như video giật một khung hình",
-      "Hard real-time dùng cho phần cứng còn soft real-time dùng cho phần mềm",
-      "Hard real-time cần chứng nhận còn soft real-time thì không"
+      "Hard real-time phản hồi trong micro-giây còn soft real-time trong vài giây, nên khác biệt là tốc độ",
+      "Hard: trễ hạn là thất bại, như túi khí bung muộn; soft: chất lượng giảm ở mức chấp nhận được, như rớt một khung hình",
+      "Hard real-time áp dụng cho định thời phần cứng, soft real-time cho lập lịch phần mềm trên thiết bị",
+      "Hard real-time cần chứng nhận an toàn, còn soft real-time có thể phát hành mà không cần review"
     ],
     "optionsEn": [
-      "Hard real-time is faster than soft real-time",
-      "Hard real-time means a missed deadline is system failure, like an airbag deploying at 200 milliseconds instead of 20; soft real-time means degraded but acceptable quality, like a dropped video frame",
-      "Hard real-time applies to hardware and soft real-time to software",
-      "Hard real-time needs certification and soft real-time does not"
+      "Hard real-time responds in microseconds and soft real-time in seconds, so the difference is speed",
+      "Hard: a missed deadline is failure, like a late airbag; soft: quality degrades acceptably, like a dropped frame",
+      "Hard real-time applies to hardware timing and soft real-time to software scheduling on the device",
+      "Hard real-time requires safety certification, while soft real-time can ship without any review"
     ],
     "answer": 1,
     "explanation": "Bạn phải xác định rõ mỗi ràng buộc thời gian thuộc loại nào vì chúng dẫn tới kiến trúc hoàn toàn khác nhau.",
@@ -227,37 +224,36 @@
     "question": "Vì sao chi phí của một lỗi yêu cầu trong hệ thống nhúng cao hơn nhiều bậc so với phần mềm doanh nghiệp?",
     "questionEn": "Why is a requirements defect in an embedded system orders of magnitude more expensive than in enterprise software?",
     "options": [
-      "Vì lập trình viên nhúng có mức lương cao hơn",
-      "Vì với thiết bị đã bán ra thị trường, việc cập nhật có thể cực kỳ tốn kém, chậm chạp hoặc bất khả thi, khác với phần mềm web nơi bạn sửa và triển khai trong ngày",
-      "Vì hệ thống nhúng có nhiều dòng mã hơn",
-      "Vì công cụ phát triển nhúng đắt hơn"
+      "Vì lập trình viên nhúng khan hiếm và lương cao hơn, nên mỗi giờ làm lại tốn hơn nhiều",
+      "Thiết bị đã bán có thể tốn kém, chậm hoặc không thể cập nhật, khác với web sửa trong ngày",
+      "Vì hệ thống nhúng có nhiều mã hơn cho mỗi tính năng, nên mỗi lỗi ảnh hưởng nhiều module hơn",
+      "Vì công cụ nhúng và trình giả lập phần cứng đắt hơn, nên mỗi lần chạy lại bộ test đều tốn kém"
     ],
     "optionsEn": [
-      "Because embedded developers are paid more",
-      "Because for a shipped device, updating can be extremely expensive, slow, or impossible, unlike web software where you fix and deploy the same day",
-      "Because embedded systems have more lines of code",
-      "Because embedded development tools cost more"
+      "Embedded developers are scarcer and paid more, so every hour of rework costs much more",
+      "Shipped devices can be costly, slow, or impossible to update, unlike same-day web fixes",
+      "Embedded systems contain more code per feature, so each defect touches many more modules",
+      "Embedded tools and hardware simulators cost more, so every rerun of the test suite is expensive"
     ],
     "answer": 1,
     "explanation": "Điều này biện minh cho mức đầu tư lớn hơn nhiều vào kỹ thuật yêu cầu: đặc tả kỹ hơn, review chặt hơn và mô hình hoá nhiều hơn.",
     "explanationEn": "This justifies far greater investment in requirements engineering: deeper specification, stricter review, and more modeling."
-  }
-  ,
+  },
   {
     "id": "q13",
     "question": "Vì sao use case thường không đủ cho hệ thống nhúng, và kỹ thuật nào phù hợp hơn?",
     "questionEn": "Why are use cases often insufficient for embedded systems, and which techniques fit better?",
     "options": [
-      "Vì use case quá dài; nên dùng user story thay thế",
-      "Vì người dùng chính không phải con người mà là thiết bị và tín hiệu khác; hãy dùng event-response table, state-transition diagram, decision table và biểu đồ thời gian",
-      "Vì use case không thể hiện được giao diện; nên dùng wireframe",
-      "Vì use case chỉ dùng cho phương pháp hướng đối tượng"
+      "Vì use case quá dài với đội nhỏ; user story ngắn gọn kèm acceptance criteria phù hợp hơn nhiều",
+      "Người dùng chủ yếu là thiết bị và tín hiệu; dùng event-response table, sơ đồ trạng thái, thời gian",
+      "Vì use case không thể hiện được giao diện thiết bị; wireframe của bảng điều khiển mô tả tốt hơn",
+      "Vì use case chỉ hợp với thiết kế hướng đối tượng; mã nhúng cần flowchart cho từng hàm riêng"
     ],
     "optionsEn": [
-      "Because use cases are too long; use user stories instead",
-      "Because the primary users are not humans but other devices and signals; use event-response tables, state-transition diagrams, decision tables, and timing diagrams",
-      "Because use cases cannot show interfaces; use wireframes",
-      "Because use cases only suit object-oriented methods"
+      "Use cases are too long for small teams; short user stories with acceptance criteria fit better",
+      "Their users are mostly devices and signals; use event-response tables, state and timing diagrams",
+      "Use cases cannot show device interfaces; wireframes of the control panel describe them better",
+      "Use cases only suit object-oriented designs; embedded code needs flowcharts of each function"
     ],
     "answer": 1,
     "explanation": "Một bộ điều khiển động cơ phản ứng với cảm biến, tín hiệu điều khiển và điều kiện môi trường hàng nghìn lần mỗi giây, không có use case theo nghĩa thông thường.",
@@ -268,16 +264,16 @@
     "question": "Yêu cầu về xử lý lỗi trong hệ thống nhúng khác phần mềm doanh nghiệp ở điểm nào?",
     "questionEn": "How do error handling requirements in embedded systems differ from enterprise software?",
     "options": [
-      "Hệ thống nhúng cần thông báo lỗi chi tiết hơn",
-      "Trong ứng dụng doanh nghiệp bạn có thể hiện thông báo lỗi và để người dùng thử lại; trong hệ thống nhúng có thể không có ai để thông báo nên hệ thống phải TỰ quyết định phải làm gì",
-      "Hệ thống nhúng ghi nhật ký lỗi nhiều hơn",
-      "Hệ thống nhúng cần khởi động lại khi có lỗi"
+      "Hệ thống nhúng cần thông báo lỗi chi tiết hơn nhiều, vì kỹ thuật viên đọc chúng tại hiện trường",
+      "Ứng dụng doanh nghiệp có thể báo lỗi để người dùng thử lại; hệ thống nhúng thường phải tự quyết",
+      "Hệ thống nhúng phải ghi mọi lỗi tại chỗ, còn ứng dụng doanh nghiệp gửi nhật ký về máy chủ",
+      "Hệ thống nhúng nên khởi động lại khi có bất kỳ lỗi nào, vì khởi động sạch an toàn hơn logic phục hồi"
     ],
     "optionsEn": [
-      "Embedded systems need more detailed error messages",
-      "In an enterprise application you can show an error and let the user retry; in an embedded system there may be nobody to tell, so the system must decide FOR ITSELF what to do",
-      "Embedded systems log more errors",
-      "Embedded systems must reboot on error"
+      "Embedded systems need far more detailed error messages, since technicians read them in the field",
+      "Enterprise apps can show an error and let users retry; embedded systems often must decide alone",
+      "Embedded systems must log every error locally, while enterprise apps send their logs to servers",
+      "Embedded systems should reboot on any error, since a clean restart is safer than recovery logic"
     ],
     "answer": 1,
     "explanation": "Câu hỏi phải trả lời cho mọi thành phần: điều gì xảy ra khi cảm biến này hỏng, khi giá trị nằm ngoài dải, khi mất nguồn giữa chừng, khi bộ nhớ bị lỗi.",
@@ -288,16 +284,16 @@
     "question": "Loại yêu cầu nào bị bỏ sót thường xuyên nhất trong dự án hệ thống nhúng?",
     "questionEn": "Which requirement type is most frequently omitted on embedded system projects?",
     "options": [
-      "Yêu cầu về giao diện người dùng",
-      "Yêu cầu về khả năng kiểm tra trong sản xuất; không có chế độ tự kiểm tra hoặc giao diện kiểm tra thì mỗi thiết bị trên dây chuyền không thể được xác minh",
-      "Yêu cầu về tài liệu người dùng",
-      "Yêu cầu về khả năng tái sử dụng mã nguồn"
+      "Yêu cầu giao diện người dùng, vì màn hình và nút bấm nhỏ để lại rất ít chỗ cho usability",
+      "Khả năng kiểm tra khi sản xuất: thiếu chế độ tự kiểm tra thì không xác minh được từng thiết bị",
+      "Yêu cầu tài liệu người dùng, vì thiết bị đi kèm sách hướng dẫn phải luôn khớp với firmware",
+      "Yêu cầu tái sử dụng mã, vì firmware hiếm khi được thiết kế để dùng lại cho các mẫu thiết bị mới"
     ],
     "optionsEn": [
-      "User interface requirements",
-      "Manufacturing testability requirements; without a self-test mode or test interface, each unit on the production line cannot be verified",
-      "User documentation requirements",
-      "Code reusability requirements"
+      "User interface requirements, since small displays and buttons leave little room for usability",
+      "Manufacturing testability: without a self-test mode, units cannot be checked on the line",
+      "User documentation requirements, since devices ship with manuals that must match the firmware",
+      "Code reusability requirements, since firmware is rarely designed to carry over to new models"
     ],
     "answer": 1,
     "explanation": "Phát hiện điều này sau khi thiết kế đã hoàn tất là cực kỳ tốn kém. Danh sách stakeholder trong dự án nhúng gồm cả kỹ sư sản xuất, kỹ thuật viên bảo trì và chuyên gia chứng nhận.",
@@ -308,16 +304,16 @@
     "question": "Nguyên tắc bao trùm về mức độ nghiêm ngặt của công việc yêu cầu là gì?",
     "questionEn": "What is the overarching principle about how rigorous requirements work should be?",
     "options": [
-      "Luôn áp dụng mức nghiêm ngặt cao nhất để an toàn",
-      "Điều chỉnh mức nghiêm ngặt theo HẬU QUẢ CỦA VIỆC SAI, chứ không theo sở thích cá nhân hay quy định cứng nhắc của tổ chức",
-      "Áp dụng cùng một mức cho mọi dự án để nhất quán",
-      "Để đội phát triển tự quyết định mức phù hợp"
+      "Luôn áp dụng mức nghiêm ngặt cao nhất, vì mọi lỗi yêu cầu đều tốn kém hơn nhiều khi đã phát hành",
+      "Điều chỉnh mức nghiêm ngặt theo hậu quả của việc sai, không theo sở thích hay quy định cứng nhắc",
+      "Áp dụng cùng một mức cho mọi dự án, để các đội theo một chuẩn tổ chức nhất quán",
+      "Để đội phát triển quyết định, vì họ thấy rõ nhất rủi ro kỹ thuật của từng yêu cầu"
     ],
     "optionsEn": [
-      "Always apply maximum rigour to be safe",
-      "Calibrate rigour to the CONSEQUENCES OF BEING WRONG, not to personal preference or rigid organizational mandate",
-      "Apply the same level everywhere for consistency",
-      "Let the development team decide the appropriate level"
+      "Always apply maximum rigour, since any requirements defect costs far more to fix once shipped",
+      "Calibrate rigour to the consequences of being wrong, not to preference or rigid mandates",
+      "Apply the same level on every project, so teams follow one consistent organizational standard",
+      "Let the development team decide, since they see the technical risk of each requirement best"
     ],
     "answer": 1,
     "explanation": "Một lỗi yêu cầu trong dashboard nội bộ có thể sửa trong một tuần; cùng lỗi đó trong thiết bị y tế đã bán ra có thể nghĩa là thu hồi sản phẩm, phạt và tổn hại tới con người.",

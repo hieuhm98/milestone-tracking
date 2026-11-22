@@ -26,13 +26,13 @@
     "options": [
       "\"class\"",
       "\"function\"",
-      "\"object\"",
+      "\"undefined\"",
       "\"Student\""
     ],
     "optionsEn": [
       "\"class\"",
       "\"function\"",
-      "\"object\"",
+      "\"undefined\"",
       "\"Student\""
     ],
     "answer": 1,
@@ -44,16 +44,16 @@
     "question": "Chuyện gì xảy ra khi chạy đoạn code sau?\n`class Point {\n  constructor(x, y) {\n    this.x = x;\n    this.y = y;\n  }\n}\nconst p = Point(1, 2);`",
     "questionEn": "What happens when this code runs?\n`class Point {\n  constructor(x, y) {\n    this.x = x;\n    this.y = y;\n  }\n}\nconst p = Point(1, 2);`",
     "options": [
-      "`p` là một object `{ x: 1, y: 2 }` như bình thường",
-      "`p` là `undefined` và `x`, `y` bị gán lên global object",
-      "`SyntaxError` ngay khi parse file",
-      "`TypeError` vì class constructor không thể gọi mà thiếu `new`"
+      "`p` là một object `{ x: 1, y: 2 }` như khi gọi bằng `new`",
+      "`p` là `undefined` và constructor gán `x`, `y` lên global object",
+      "`SyntaxError` khi parse file vì class bị gọi như hàm thường",
+      "`TypeError` vì class constructor không gọi được nếu thiếu `new`"
     ],
     "optionsEn": [
-      "`p` is an ordinary `{ x: 1, y: 2 }` object",
-      "`p` is `undefined` and `x`, `y` land on the global object",
-      "A `SyntaxError` as soon as the file is parsed",
-      "A `TypeError` because a class constructor cannot be invoked without `new`"
+      "`p` is an ordinary `{ x: 1, y: 2 }` object, as if `new` were used",
+      "`p` is `undefined` and the constructor puts `x`, `y` on the global object",
+      "A `SyntaxError` at parse time, since a class is called like a plain function",
+      "A `TypeError` because a class constructor needs `new` to be called"
     ],
     "answer": 3,
     "explanation": "Khác với constructor function kiểu cũ, class ném `TypeError: Class constructor Point cannot be invoked without 'new'` khi bị gọi như hàm thường. Code vẫn hợp lệ về cú pháp nên lỗi chỉ xuất hiện lúc chạy. Việc gán nhầm lên global object chỉ xảy ra với function cũ ở sloppy mode.",
@@ -64,16 +64,16 @@
     "question": "Đoạn code sau in ra gì?\n`class Student {\n  constructor(name) {\n    this.name = name;\n  }\n  greet() {\n    return \"Hi \" + this.name;\n  }\n}\nconst a = new Student(\"Ada\");\nconst b = new Student(\"Alan\");\nconsole.log(a.greet === b.greet);`",
     "questionEn": "What does this code print?\n`class Student {\n  constructor(name) {\n    this.name = name;\n  }\n  greet() {\n    return \"Hi \" + this.name;\n  }\n}\nconst a = new Student(\"Ada\");\nconst b = new Student(\"Alan\");\nconsole.log(a.greet === b.greet);`",
     "options": [
-      "`true`, vì `greet` nằm một lần trên `Student.prototype` và được dùng chung",
+      "`true`, vì `greet` nằm một lần trên `Student.prototype`",
       "`false`, vì mỗi instance có một bản sao `greet` riêng",
       "`false`, vì `this.name` của hai instance khác nhau",
-      "`TypeError`, vì không thể so sánh hai method"
+      "`TypeError`, vì không thể so sánh hai method bằng `===`"
     ],
     "optionsEn": [
-      "`true`, because `greet` lives once on `Student.prototype` and is shared",
+      "`true`, because `greet` lives once on `Student.prototype`",
       "`false`, because each instance gets its own copy of `greet`",
       "`false`, because the two instances have different `this.name`",
-      "A `TypeError`, because methods cannot be compared"
+      "A `TypeError`, because two methods cannot be compared with `===`"
     ],
     "answer": 0,
     "explanation": "Method khai báo trong thân class được đặt trên `Student.prototype`; mọi instance tra cứu nó qua prototype chain nên đó là cùng một function. Dữ liệu (`name`) mới là riêng của từng instance. `this` chỉ được xác định lúc gọi, không tạo ra bản sao method.",
@@ -87,13 +87,13 @@
       "Chạy bình thường, vì class được hoisting giống function declaration",
       "`s` là `undefined`",
       "`ReferenceError`, vì class còn nằm trong temporal dead zone",
-      "`TypeError: Stack is not a constructor`"
+      "`TypeError: Stack is not a constructor` ở dòng `new`"
     ],
     "optionsEn": [
       "It runs fine, because classes are hoisted like function declarations",
       "`s` is `undefined`",
       "A `ReferenceError`, because the class is still in the temporal dead zone",
-      "`TypeError: Stack is not a constructor`"
+      "A `TypeError: Stack is not a constructor` at the `new` line"
     ],
     "answer": 2,
     "explanation": "Khai báo class được hoisting giống `let`: tên đã tồn tại trong scope nhưng chưa được khởi tạo, nên dùng trước dòng khai báo sẽ ném `ReferenceError: Cannot access 'Stack' before initialization`. Chỉ function declaration mới dùng được trước khi khai báo.",
@@ -124,15 +124,15 @@
     "question": "Chuyện gì xảy ra ở dòng cuối?\n`class MathUtil {\n  static square(x) {\n    return x * x;\n  }\n}\nconst m = new MathUtil();\nm.square(3);`",
     "questionEn": "What happens on the last line?\n`class MathUtil {\n  static square(x) {\n    return x * x;\n  }\n}\nconst m = new MathUtil();\nm.square(3);`",
     "options": [
-      "`TypeError: m.square is not a function`, vì static method thuộc về class chứ không thuộc instance",
-      "Trả về 9, vì instance kế thừa mọi method của class",
-      "Trả về `NaN`, vì `this` không có giá trị",
+      "`TypeError: m.square is not a function`, vì static method thuộc về class",
+      "Trả về 9, vì instance kế thừa mọi method khai báo trong thân class",
+      "Trả về `NaN`, vì `this` bên trong static method không có giá trị",
       "`SyntaxError`, vì class chỉ có static method thì không được tạo instance"
     ],
     "optionsEn": [
-      "`TypeError: m.square is not a function`, because static methods belong to the class, not instances",
-      "It returns 9, because instances inherit every method of the class",
-      "It returns `NaN`, because `this` has no value",
+      "`TypeError: m.square is not a function`, because static methods belong to the class",
+      "It returns 9, because instances inherit every method declared in the class body too",
+      "It returns `NaN`, because `this` inside a static method has no value",
       "A `SyntaxError`, because a class with only static methods cannot be instantiated"
     ],
     "answer": 0,
@@ -164,16 +164,16 @@
     "question": "Chuyện gì xảy ra khi chạy đoạn code sau?\n`class Counter {\n  constructor() {\n    this.count = 0;\n  }\n  increment() {\n    this.count++;\n  }\n}\nconst c = new Counter();\nconst inc = c.increment;\ninc();`",
     "questionEn": "What happens when this code runs?\n`class Counter {\n  constructor() {\n    this.count = 0;\n  }\n  increment() {\n    this.count++;\n  }\n}\nconst c = new Counter();\nconst inc = c.increment;\ninc();`",
     "options": [
-      "`c.count` thành 1",
+      "`c.count` thành 1, vì `inc` vẫn nhớ object `c` đã tạo ra nó",
       "Tạo biến global `count` có giá trị `NaN`",
-      "`TypeError`, vì `this` là `undefined` khi method bị tách khỏi object",
-      "Không có gì xảy ra, lời gọi bị bỏ qua"
+      "`TypeError`, vì `this` là `undefined` khi tách method",
+      "Không có gì xảy ra, lời gọi bị bỏ qua im lặng"
     ],
     "optionsEn": [
-      "`c.count` becomes 1",
-      "A global `count` variable is created with the value `NaN`",
-      "A `TypeError`, because `this` is `undefined` once the method is detached from its object",
-      "Nothing happens; the call is ignored"
+      "`c.count` becomes 1, because `inc` still remembers the object `c`",
+      "A global `count` variable is created with value `NaN`",
+      "A `TypeError`, because `this` is `undefined` once detached",
+      "Nothing happens; the call is silently ignored"
     ],
     "answer": 2,
     "explanation": "`this` được quyết định bởi cách gọi. `inc()` không có object đứng trước dấu chấm, và thân class chạy strict mode, nên `this` là `undefined`; đọc `this.count` ném `TypeError: Cannot read properties of undefined`. Biến global chỉ bị tạo ra ở sloppy mode với function thường.",
@@ -187,17 +187,17 @@
       "`setTimeout(timer.tick, 1000)`",
       "`setTimeout(() => timer.tick(), 1000)`",
       "`setTimeout(timer.tick(), 1000)`",
-      "`setTimeout(Timer.tick, 1000)`"
+      "`setTimeout(Timer.prototype.tick, 1000)`"
     ],
     "optionsEn": [
       "`setTimeout(timer.tick, 1000)`",
       "`setTimeout(() => timer.tick(), 1000)`",
       "`setTimeout(timer.tick(), 1000)`",
-      "`setTimeout(Timer.tick, 1000)`"
+      "`setTimeout(Timer.prototype.tick, 1000)`"
     ],
     "answer": 1,
-    "explanation": "Arrow wrapper gọi `timer.tick()` với `timer` đứng trước dấu chấm nên `this` đúng (`timer.tick.bind(timer)` cũng được). Truyền `timer.tick` trực tiếp làm mất `this`; `timer.tick()` chạy ngay lập tức và truyền kết quả thay vì hàm; còn `Timer.tick` tìm static method không tồn tại.",
-    "explanationEn": "The arrow wrapper calls `timer.tick()` with `timer` before the dot, so `this` is right (`timer.tick.bind(timer)` works too). Passing `timer.tick` directly loses `this`; `timer.tick()` runs immediately and passes its result instead of a function; and `Timer.tick` looks for a static method that does not exist."
+    "explanation": "Arrow wrapper gọi `timer.tick()` với `timer` đứng trước dấu chấm nên `this` đúng (`timer.tick.bind(timer)` cũng được). Truyền `timer.tick` trực tiếp làm mất `this`; `timer.tick()` chạy ngay lập tức và truyền kết quả thay vì hàm; còn `Timer.prototype.tick` đúng là method đó nhưng khi được gọi thì `this` không phải `timer`.",
+    "explanationEn": "The arrow wrapper calls `timer.tick()` with `timer` before the dot, so `this` is right (`timer.tick.bind(timer)` works too). Passing `timer.tick` directly loses `this`; `timer.tick()` runs immediately and passes its result instead of a function; and `Timer.prototype.tick` is the same method, but when it is called `this` is not `timer`."
   },
   {
     "id": "q11",
@@ -206,13 +206,13 @@
     "options": [
       "`SyntaxError`: không thể truy cập private field `#balance` từ bên ngoài class",
       "Gán thành công, số dư thành 1000000",
-      "Tạo ra một thuộc tính public mới tên `#balance`, private field vẫn là 0",
+      "Tạo ra một thuộc tính public mới tên `#balance`, còn private field vẫn giữ là 0",
       "Lệnh gán bị bỏ qua trong im lặng"
     ],
     "optionsEn": [
       "A `SyntaxError`: the private field `#balance` cannot be accessed outside the class",
       "The assignment works and the balance becomes 1000000",
-      "It creates a new public property called `#balance`; the private field stays 0",
+      "It creates a new public property called `#balance`, while the private field stays at 0",
       "The assignment is silently ignored"
     ],
     "answer": 0,
@@ -226,7 +226,7 @@
     "options": [
       "Kế thừa (inheritance)",
       "Đa hình (polymorphism)",
-      "Static method",
+      "Phương thức tĩnh (static method)",
       "Trừu tượng hoá (abstraction)"
     ],
     "optionsEn": [
@@ -244,15 +244,15 @@
     "question": "Một linked list có 1 triệu node. Class `Node` định nghĩa `toString = () => String(this.val);` dưới dạng class field. So với khai báo `toString()` là method thường, chi phí bộ nhớ thay đổi thế nào?",
     "questionEn": "A linked list has 1 million nodes. The `Node` class defines `toString = () => String(this.val);` as a class field. Compared with a normal `toString()` method, how does the memory cost change?",
     "options": [
-      "Không đổi, vì engine luôn chia sẻ mọi function trên prototype",
-      "Giảm, vì arrow function nhỏ hơn method thường",
-      "Tăng thêm O(n): mỗi node có một function object riêng, còn method thường chỉ có một bản trên prototype",
+      "Không đổi, vì engine luôn tự chia sẻ mọi function lên prototype",
+      "Giảm, vì arrow function nhỏ hơn method thường và không có `this` riêng",
+      "Tăng thêm O(n): mỗi node có một function object riêng",
       "Tăng thêm O(n²), vì mỗi function giữ tham chiếu tới mọi node khác"
     ],
     "optionsEn": [
-      "Unchanged, because the engine always shares every function on the prototype",
-      "Lower, because arrow functions are smaller than normal methods",
-      "An extra O(n): every node gets its own function object, while a normal method exists once on the prototype",
+      "Unchanged, because the engine always moves shared functions to the prototype",
+      "Lower, because arrow functions are smaller than methods and have no own `this`",
+      "An extra O(n): every node gets its own function object",
       "An extra O(n²), because each function keeps a reference to every other node"
     ],
     "answer": 2,
@@ -267,13 +267,13 @@
       "Tạo object `{ kind: \"max\", values: [] }` bình thường",
       "`ReferenceError`, vì class con dùng `this` trước khi gọi `super()`",
       "`kind` bị `super()` ghi đè thành `undefined`",
-      "`SyntaxError`, vì `super()` phải là dòng đầu tiên trong file"
+      "`SyntaxError`, vì lời gọi `super()` phải nằm ở dòng đầu tiên của file"
     ],
     "optionsEn": [
       "It builds a normal `{ kind: \"max\", values: [] }` object",
       "A `ReferenceError`, because the subclass uses `this` before calling `super()`",
       "`kind` is reset to `undefined` by `super()`",
-      "A `SyntaxError`, because `super()` must be the first line of the file"
+      "A `SyntaxError`, because the `super()` call must be the very first line of the file"
     ],
     "answer": 1,
     "explanation": "Trong class con, `this` chỉ tồn tại sau khi `super()` chạy xong (constructor cha mới là nơi tạo object). Gán `this.kind` trước đó ném `ReferenceError: Must call super constructor in derived class before accessing 'this'`. Đổi thứ tự hai dòng là sửa được.",
@@ -304,16 +304,16 @@
     "question": "Lỗi nào xảy ra khi gọi `new List().push(5)`?\n`class List {\n  constructor() {\n    this.head = null;\n    this.length = 0;\n  }\n  push(val) {\n    const node = new Node(val);\n    if (!head) head = node;\n    this.length++;\n  }\n}`",
     "questionEn": "Which error occurs when calling `new List().push(5)`?\n`class List {\n  constructor() {\n    this.head = null;\n    this.length = 0;\n  }\n  push(val) {\n    const node = new Node(val);\n    if (!head) head = node;\n    this.length++;\n  }\n}`",
     "options": [
-      "Không có lỗi, `head` tự hiểu là `this.head`",
-      "`SyntaxError` ngay khi định nghĩa class",
+      "Không có lỗi, `head` tự được hiểu là `this.head` trong method",
+      "`SyntaxError` ngay khi định nghĩa class vì thiếu `this.`",
       "Không có lỗi, nhưng `head` được gán lên global object",
-      "`ReferenceError: head is not defined`, vì thiếu `this.` và thân class chạy strict mode"
+      "`ReferenceError: head is not defined`, vì thiếu `this.`"
     ],
     "optionsEn": [
-      "No error, `head` is understood as `this.head`",
-      "A `SyntaxError` as soon as the class is defined",
-      "No error, but `head` is set on the global object",
-      "`ReferenceError: head is not defined`, because `this.` is missing and class bodies are strict mode"
+      "No error, `head` is automatically read as `this.head` in a method",
+      "A `SyntaxError` as soon as the class is defined, since `this.` is missing",
+      "No error, but `head` is created on the global object",
+      "`ReferenceError: head is not defined`, because `this.` is missing"
     ],
     "answer": 3,
     "explanation": "JavaScript không tự thêm `this.` như một số ngôn ngữ khác. `head` là một biến chưa khai báo; đọc nó ném `ReferenceError`. Ngay cả việc gán cho biến chưa khai báo cũng lỗi trong strict mode, nên không có biến global nào được tạo. Phải viết `this.head`.",
@@ -324,16 +324,16 @@
     "question": "Method `size()` của một linked list đang duyệt từ `head` tới cuối để đếm node. Thay đổi nào đưa việc lấy kích thước về O(1)?",
     "questionEn": "A linked list's `size()` method walks from `head` to the end counting nodes. Which change makes getting the size O(1)?",
     "options": [
-      "Đổi `size()` thành static method",
-      "Thêm field `length` trong constructor và cập nhật nó trong mọi method thêm/xoá node",
-      "Đổi `size()` thành arrow function field",
-      "Viết lại `size()` bằng đệ quy"
+      "Đổi `size()` thành static method để không cần duyệt từng instance",
+      "Thêm field `length` và cập nhật nó trong mọi method thêm/xoá node",
+      "Đổi `size()` thành arrow function field để engine cache kết quả",
+      "Viết lại `size()` bằng đệ quy để mỗi lời gọi chỉ đếm một node"
     ],
     "optionsEn": [
-      "Make `size()` a static method",
-      "Add a `length` field in the constructor and update it in every method that adds or removes nodes",
-      "Make `size()` an arrow-function field",
-      "Rewrite `size()` recursively"
+      "Make `size()` a static method so that no single instance ever needs walking",
+      "Add a `length` field and update it in every method that adds or removes nodes",
+      "Make `size()` an arrow-function field so the engine caches the result",
+      "Rewrite `size()` recursively so each call only counts one node"
     ],
     "answer": 1,
     "explanation": "Lưu sẵn `length` và giữ nó đúng trong mỗi thao tác thêm/xoá (một bất biến của class) biến việc đọc kích thước thành O(1). Static hay arrow function không đổi được phần việc bên trong; đệ quy vẫn phải thăm n node nên vẫn O(n) thời gian, lại tốn thêm O(n) call stack.",

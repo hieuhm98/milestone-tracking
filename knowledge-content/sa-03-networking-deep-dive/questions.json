@@ -25,15 +25,15 @@
     "questionEn": "After a site-to-site VPN goes live, users report that connections to an API open and small requests work, but large downloads hang forever. The firewalls at both ends block all ICMP. Most likely cause?",
     "options": [
       "Path MTU Discovery bị hỏng vì gói ICMP 'fragmentation needed' bị chặn",
-      "TCP handshake không hoàn tất vì thiếu gói SYN+ACK",
-      "DNS trả về bản ghi đã hết hạn vì TTL quá cao",
-      "Chứng chỉ TLS của API thiếu intermediate"
+      "TCP handshake không hoàn tất vì firewall chặn gói SYN+ACK ở chiều về",
+      "DNS trả về bản ghi đã hết hạn vì TTL quá cao nên trỏ nhầm endpoint cũ",
+      "Chứng chỉ TLS của API thiếu intermediate nên client từ chối phản hồi lớn"
     ],
     "optionsEn": [
-      "Path MTU Discovery is broken because ICMP 'fragmentation needed' messages are blocked",
-      "The TCP handshake never completes because the SYN+ACK is missing",
-      "DNS returns a stale record because the TTL is too high",
-      "The API's TLS certificate is missing its intermediate"
+      "Path MTU Discovery is broken because ICMP 'fragmentation needed' is blocked",
+      "The TCP handshake never completes because the firewall drops the returning SYN+ACK",
+      "DNS returns a stale record because the TTL is too high, pointing at an old endpoint",
+      "The API's TLS certificate lacks its intermediate, so clients reject large responses"
     ],
     "answer": 0,
     "explanation": "Handshake và request nhỏ đều dùng gói nhỏ nên đi qua được. Gói lớn vượt MTU của tunnel (VPN thêm header) cần ICMP để báo bên gửi giảm kích thước; chặn ICMP tạo ra 'hố đen'. Cách sửa: cho phép ICMP cần thiết hoặc clamp MSS trên tunnel.",
@@ -104,15 +104,15 @@
     "question": "Một worker gọi một API nội bộ (một IP, một port) khoảng 800 lần/giây, mỗi lần tạo HTTP client mới và đóng kết nối sau request. Sau khoảng một phút, log báo `EADDRNOTAVAIL`. Cách sửa tốt nhất là gì?",
     "questionEn": "A worker calls one internal API (one IP, one port) about 800 times per second, creating a new HTTP client each time and closing the connection after the request. After about a minute the logs show `EADDRNOTAVAIL`. What is the best fix?",
     "options": [
-      "Dùng một HTTP client chung với keep-alive để tái sử dụng kết nối",
-      "Bật net.ipv4.tcp_tw_recycle để dọn TIME_WAIT nhanh hơn",
-      "Tăng ulimit số file descriptor của tiến trình",
+      "Dùng một client chung có keep-alive để tái sử dụng connection",
+      "Bật net.ipv4.tcp_tw_recycle để kernel dọn kết nối TIME_WAIT nhanh hơn",
+      "Tăng ulimit số file descriptor để tiến trình mở thêm được kết nối",
       "Chuyển API sang UDP để không còn trạng thái TIME_WAIT"
     ],
     "optionsEn": [
       "Use one shared HTTP client with keep-alive so connections are reused",
-      "Enable net.ipv4.tcp_tw_recycle to clear TIME_WAIT faster",
-      "Raise the process's file descriptor ulimit",
+      "Enable net.ipv4.tcp_tw_recycle so the kernel clears TIME_WAIT connections faster",
+      "Raise the process's file descriptor ulimit so it can open more connections",
       "Move the API to UDP so there is no TIME_WAIT state"
     ],
     "answer": 0,
@@ -124,16 +124,16 @@
     "question": "Một đội xây ứng dụng gọi video thời gian thực. Với họ, một frame đến trễ 400 ms còn tệ hơn là mất hẳn frame đó. Giao thức transport nào hợp lý nhất cho luồng media?",
     "questionEn": "A team is building real-time video calling. For them a frame arriving 400 ms late is worse than losing it entirely. Which transport best suits the media stream?",
     "options": [
-      "TCP, vì nó đảm bảo mọi frame đến đầy đủ",
-      "TCP với Nagle bật để gộp các frame nhỏ",
+      "TCP, vì nó đảm bảo mọi frame đến đầy đủ và đúng thứ tự",
+      "TCP bật thuật toán Nagle để gộp các frame nhỏ thành gói lớn",
       "UDP, vì không có retransmission và head-of-line blocking",
-      "HTTP/1.1 long polling qua TCP"
+      "HTTP/1.1 long polling qua TCP để server đẩy frame khi sẵn sàng"
     ],
     "optionsEn": [
-      "TCP, because it guarantees every frame arrives",
-      "TCP with Nagle enabled to batch small frames",
-      "UDP, because it has no retransmission or head-of-line blocking",
-      "HTTP/1.1 long polling over TCP"
+      "TCP, because it guarantees every frame arrives complete and in order",
+      "TCP with Nagle's algorithm enabled to batch small frames into bigger packets",
+      "UDP, since it has no retransmission or head-of-line blocking",
+      "HTTP/1.1 long polling over TCP so the server pushes frames when ready"
     ],
     "answer": 2,
     "explanation": "Khi dữ liệu trễ là vô giá trị, cơ chế gửi lại và giao theo thứ tự của TCP trở thành gánh nặng: một gói mất làm đứng mọi frame phía sau. UDP cho phép bỏ qua frame mất; WebRTC chạy media trên UDP vì lý do này. Nagle còn tăng thêm độ trễ.",
@@ -165,15 +165,15 @@
     "questionEn": "A company acquires a startup. Both the company's VPC and the startup's VPC use `10.0.0.0/16`, and the two systems must call each other directly. Which statement is correct?",
     "options": [
       "VPC peering hoạt động bình thường vì hai VPC thuộc hai tài khoản khác nhau",
-      "Chỉ cần thêm route cụ thể hơn (/24) ở mỗi bên là peering chạy được",
-      "Đổi security group sang cho phép 10.0.0.0/16 là đủ",
-      "Không thể peering trực tiếp các CIDR chồng lấn; cần re-IP, NAT hoặc expose qua PrivateLink/load balancer"
+      "Chỉ cần thêm route cụ thể hơn (/24) ở mỗi bên là peering sẽ chạy được",
+      "Đổi security group hai bên sang cho phép 10.0.0.0/16 là đủ để gọi nhau",
+      "CIDR chồng lấn thì không peering được; cần re-IP, NAT hoặc PrivateLink"
     ],
     "optionsEn": [
       "VPC peering works normally because the VPCs are in different accounts",
-      "Adding more specific /24 routes on each side makes peering work",
-      "Changing security groups to allow 10.0.0.0/16 is enough",
-      "Overlapping CIDRs cannot be peered directly; you need re-IP, NAT, or exposure via PrivateLink/a load balancer"
+      "Adding more specific /24 routes on each side is enough to make peering work",
+      "Changing both sides' security groups to allow 10.0.0.0/16 is enough to connect",
+      "Overlapping CIDRs cannot be peered directly; re-IP, NAT or use PrivateLink"
     ],
     "answer": 3,
     "explanation": "Router không thể phân biệt 10.0.1.5 'bên này' với 10.0.1.5 'bên kia', nên AWS từ chối peering CIDR chồng lấn. Lối ra là đánh lại địa chỉ, NAT giữa hai mạng, hoặc chỉ expose service qua PrivateLink. Đây là lý do cần quy hoạch IP toàn công ty từ đầu.",
@@ -204,16 +204,16 @@
     "question": "Bản ghi sau đang trỏ tới load balancer cũ. Thứ Bảy này bạn sẽ chuyển sang load balancer mới và muốn người dùng theo kịp trong vòng một phút. Kế hoạch hợp lý nhất?\n`$ dig app.example.com A +noall +answer\napp.example.com. 86400 IN A 198.51.100.7`",
     "questionEn": "The record below points at the old load balancer. This Saturday you will switch to a new load balancer and want users to follow within about a minute. Best plan?\n`$ dig app.example.com A +noall +answer\napp.example.com. 86400 IN A 198.51.100.7`",
     "options": [
-      "Đổi bản ghi vào thứ Bảy rồi hạ TTL xuống 60 giây ngay sau đó",
-      "Giữ TTL 86400 vì resolver sẽ tự phát hiện IP mới",
-      "Hạ TTL xuống 60 giây từ ít nhất một ngày trước thứ Bảy, chuyển, rồi nâng TTL lại",
-      "Xoá bản ghi trong 10 phút để buộc mọi resolver xoá cache"
+      "Đổi bản ghi vào thứ Bảy rồi hạ TTL xuống 60 giây ngay sau khi đổi xong",
+      "Giữ TTL 86400 vì resolver sẽ tự phát hiện IP mới khi IP cũ ngừng trả lời",
+      "Hạ TTL xuống 60 giây từ ít nhất một ngày trước, chuyển, rồi nâng TTL lại",
+      "Xoá bản ghi trong 10 phút vào thứ Bảy để buộc mọi resolver xoá cache"
     ],
     "optionsEn": [
-      "Change the record on Saturday and lower the TTL to 60 seconds right after",
-      "Keep TTL 86400, because resolvers will detect the new IP by themselves",
-      "Lower the TTL to 60 seconds at least a day before Saturday, switch, then raise it again",
-      "Delete the record for 10 minutes to force every resolver to flush its cache"
+      "Change the record on Saturday, then lower the TTL to 60 seconds right after switching",
+      "Keep TTL 86400, because resolvers will detect the new IP once the old one stops answering",
+      "Lower the TTL to 60 seconds at least a day ahead, switch, then raise it again",
+      "Delete the record for 10 minutes on Saturday to force every resolver to flush its cache"
     ],
     "answer": 2,
     "explanation": "Resolver đã cache bản ghi với TTL 86400 (một ngày) sẽ giữ IP cũ tới hết thời hạn đó. Phải hạ TTL trước ít nhất một khoảng bằng TTL cũ để mọi cache hết hạn và nhận TTL mới. Xoá bản ghi còn tệ hơn: NXDOMAIN cũng bị cache (negative caching).",
@@ -244,16 +244,16 @@
     "question": "Sau khi thay chứng chỉ mới, website vẫn mở tốt trên Chrome, nhưng các service Java và app Android báo lỗi 'unable to find valid certification path'. Nguyên nhân khả dĩ nhất?",
     "questionEn": "After installing a new certificate, the website still opens fine in Chrome, but Java services and the Android app fail with 'unable to find valid certification path'. Most likely cause?",
     "options": [
-      "Chứng chỉ đã hết hạn",
-      "Server không hỗ trợ TLS 1.3",
-      "Tên trong SAN không khớp với hostname",
-      "Server chỉ gửi chứng chỉ lá mà không kèm chứng chỉ intermediate"
+      "Chứng chỉ mới đã hết hạn nhưng Chrome vẫn cache bản cũ",
+      "Server không hỗ trợ TLS 1.3 nên client Java và Android từ chối",
+      "Tên trong SAN không khớp với hostname mà client Java đang gọi",
+      "Server chỉ gửi chứng chỉ lá, không kèm chứng chỉ intermediate"
     ],
     "optionsEn": [
-      "The certificate has expired",
-      "The server does not support TLS 1.3",
-      "The name in the SAN does not match the hostname",
-      "The server sends only the leaf certificate without the intermediate"
+      "The new certificate has expired, but Chrome still caches the old one",
+      "The server does not support TLS 1.3, so Java and Android clients refuse it",
+      "The name in the SAN does not match the hostname the Java clients call",
+      "The server sends only the leaf certificate, not the intermediate"
     ],
     "answer": 3,
     "explanation": "Trình duyệt thường cache hoặc tự tải intermediate nên che giấu lỗi cấu hình; nhiều client khác không làm vậy và không dựng được chuỗi tới root CA. Hết hạn hay sai tên sẽ làm cả Chrome báo lỗi. Kiểm tra bằng `openssl s_client -showcerts`.",
@@ -264,16 +264,16 @@
     "question": "Một đội muốn bật TLS 1.3 0-RTT trên API thanh toán để giảm độ trễ cho client quay lại. Rủi ro chính cần xử lý là gì?",
     "questionEn": "A team wants to enable TLS 1.3 0-RTT on a payments API to cut latency for returning clients. What is the main risk to address?",
     "options": [
-      "Dữ liệu early data có thể bị phát lại, nên chỉ cho phép với request idempotent",
-      "0-RTT tắt forward secrecy cho toàn bộ phiên",
-      "0-RTT buộc server gửi chứng chỉ ở dạng không mã hoá",
-      "0-RTT chỉ chạy với trao đổi khoá RSA tĩnh"
+      "Early data có thể bị replay, nên chỉ cho request idempotent dùng",
+      "0-RTT tắt forward secrecy cho toàn bộ phiên, kể cả sau handshake",
+      "0-RTT buộc server gửi chứng chỉ ở dạng không mã hoá như TLS 1.2",
+      "0-RTT đòi hỏi trao đổi khoá RSA tĩnh nên phải tắt ECDHE"
     ],
     "optionsEn": [
-      "Early data can be replayed, so it should be allowed only for idempotent requests",
-      "0-RTT disables forward secrecy for the whole session",
-      "0-RTT forces the server to send its certificate unencrypted",
-      "0-RTT only works with static RSA key exchange"
+      "Early data can be replayed, so allow it only for idempotent requests",
+      "0-RTT disables forward secrecy for the whole session, even after the handshake",
+      "0-RTT forces the server to send its certificate unencrypted, as in TLS 1.2",
+      "0-RTT requires static RSA key exchange, so ECDHE must be turned off"
     ],
     "answer": 0,
     "explanation": "Kẻ tấn công có thể bắt và gửi lại lượt dữ liệu 0-RTT, và server không phân biệt được bản gốc. Một POST tạo giao dịch bị phát lại là thảm hoạ; vì vậy chỉ cho early data với request an toàn/idempotent (hoặc dùng idempotency key). TLS 1.3 đã bỏ hẳn RSA tĩnh.",
@@ -284,16 +284,16 @@
     "question": "Một app mobile tải trang chủ gồm 40 request song song qua HTTP/2. Trên mạng 4G hay mất gói, toàn bộ request thỉnh thoảng cùng đứng lại. Đâu là giải thích và hướng cải thiện đúng?",
     "questionEn": "A mobile app loads its home screen with 40 parallel requests over HTTP/2. On a lossy 4G network all requests occasionally stall together. What is the right explanation and improvement?",
     "options": [
-      "HTTP/2 giới hạn 6 stream mỗi kết nối; hãy mở thêm kết nối",
-      "Head-of-line blocking ở tầng TCP làm đứng mọi stream khi mất một gói; bật HTTP/3 (QUIC) ở edge",
-      "HPACK nén header quá chậm trên thiết bị di động; tắt nén header",
-      "Server push làm nghẽn đường truyền; bật server push cho mọi asset"
+      "HTTP/2 giới hạn 6 stream mỗi kết nối; hãy mở thêm kết nối song song tới server",
+      "Head-of-line blocking ở tầng TCP: mất một gói làm đứng mọi stream; dùng HTTP/3 (QUIC)",
+      "HPACK nén header quá chậm khi mạng mất gói; nên tắt nén header",
+      "Server push làm nghẽn đường truyền 4G; tắt server push và thêm kết nối dự phòng"
     ],
     "optionsEn": [
-      "HTTP/2 limits a connection to 6 streams; open more connections",
-      "TCP-level head-of-line blocking stalls every stream when one packet is lost; enable HTTP/3 (QUIC) at the edge",
+      "HTTP/2 caps each connection at 6 streams; open more parallel connections to the server",
+      "TCP head-of-line blocking: one lost packet stalls every stream; use HTTP/3 (QUIC)",
       "HPACK header compression is too slow on mobile devices; disable header compression",
-      "Server push congests the link; enable server push for every asset"
+      "Server push congests the 4G link; disable server push and add standby connections"
     ],
     "answer": 1,
     "explanation": "HTTP/2 ghép mọi stream lên một kết nối TCP, và TCP giao byte theo thứ tự nên một gói mất chặn tất cả. QUIC quản lý stream độc lập, nên mất gói chỉ ảnh hưởng stream liên quan. Giới hạn ~6 kết nối là của HTTP/1.1 trên trình duyệt.",
@@ -304,16 +304,16 @@
     "question": "Mười pod gRPC nằm sau một Network Load Balancer (L4). Dashboard cho thấy vài pod chạy 90% CPU trong khi các pod khác gần như rảnh, dù số client lớn. Nguyên nhân khả dĩ nhất?",
     "questionEn": "Ten gRPC pods sit behind a Network Load Balancer (L4). Dashboards show a few pods at 90% CPU while the rest are nearly idle, despite many clients. Most likely cause?",
     "options": [
-      "NLB không hỗ trợ traffic TCP trên port 443",
-      "Health check của NLB đang đánh dấu nhầm các pod rảnh là không khoẻ",
-      "L4 cân bằng theo kết nối, còn mỗi client gRPC dồn mọi lời gọi lên một kết nối HTTP/2 sống lâu",
-      "gRPC dùng UDP nên NLB không chia tải được"
+      "NLB không cân bằng được traffic TCP mã hoá trên port 443 nên dồn về vài target",
+      "Health check của NLB đang đánh dấu nhầm các pod rảnh là không khoẻ nên bỏ qua chúng",
+      "L4 cân bằng theo kết nối, còn client gRPC dồn mọi lời gọi lên một kết nối HTTP/2",
+      "gRPC dùng UDP nên NLB không chia đều gói tin giữa các pod được"
     ],
     "optionsEn": [
-      "An NLB does not support TCP traffic on port 443",
-      "The NLB health checks are wrongly marking the idle pods unhealthy",
-      "L4 balances per connection, and each gRPC client puts all its calls on one long-lived HTTP/2 connection",
-      "gRPC uses UDP, so the NLB cannot spread the load"
+      "An NLB cannot balance encrypted TCP traffic on port 443, so it pins a few targets",
+      "The NLB health checks wrongly mark the idle pods unhealthy, so traffic skips them",
+      "L4 balances per connection, and each gRPC client sends all calls over one HTTP/2 connection",
+      "gRPC runs over UDP, so the NLB cannot spread its packets across pods evenly"
     ],
     "answer": 2,
     "explanation": "Load balancer L4 chỉ chọn backend lúc mở kết nối. gRPC giữ một kết nối HTTP/2 lâu dài và multiplex mọi request lên đó, nên mỗi client dính vào một pod. Cách sửa: load balancer L7 hiểu HTTP/2 (cân bằng theo request), cân bằng phía client, hoặc service mesh.",
@@ -364,16 +364,16 @@
     "question": "Trang chi tiết đơn hàng của một web app ở Singapore gọi tuần tự 25 API tới một backend đặt ở region Tokyo (RTT ~70 ms). Trang tải mất gần 2 giây dù mỗi API chỉ xử lý 5 ms. Cải thiện nào hiệu quả nhất?",
     "questionEn": "An order-details page of a web app in Singapore makes 25 sequential API calls to a backend in the Tokyo region (RTT ~70 ms). The page takes almost 2 seconds even though each API processes in 5 ms. Which improvement is most effective?",
     "options": [
-      "Tối ưu query database để mỗi API xử lý còn 1 ms",
-      "Tăng kích thước instance backend ở Tokyo",
-      "Gộp thành một endpoint tổng hợp chạy cạnh dữ liệu (hoặc đưa backend về cùng region)",
-      "Hạ TTL DNS của API xuống 30 giây"
+      "Tối ưu query database và thêm index để mỗi API chỉ còn xử lý 1 ms",
+      "Tăng kích thước instance backend ở Tokyo và bật thêm auto scaling",
+      "Gộp thành một endpoint tổng hợp chạy cạnh dữ liệu, hoặc đưa backend về Singapore",
+      "Hạ TTL DNS của API xuống 30 giây để client luôn có IP mới nhất"
     ],
     "optionsEn": [
-      "Tune database queries so each API processes in 1 ms",
-      "Upsize the backend instances in Tokyo",
-      "Merge into one aggregate endpoint running next to the data (or move the backend into the same region)",
-      "Lower the API's DNS TTL to 30 seconds"
+      "Tune database queries and add indexes so each API processes in just 1 ms",
+      "Upsize the backend instances in Tokyo and add more auto scaling capacity",
+      "Merge them into one aggregate call near the data, or move the backend to Singapore",
+      "Lower the API's DNS TTL to 30 seconds so clients always get the freshest IP"
     ],
     "answer": 2,
     "explanation": "25 × 70 ms ≈ 1,75 giây là thời gian mạng; xử lý chỉ chiếm 125 ms. Tối ưu code hay tăng cấu hình chỉ cắt phần nhỏ. Giảm số round trip (gộp, điều phối phía server) hoặc giảm khoảng cách mới xử lý đúng gốc rễ.",

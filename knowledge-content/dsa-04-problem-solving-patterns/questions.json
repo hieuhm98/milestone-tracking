@@ -4,15 +4,15 @@
     "question": "Ý tưởng cốt lõi của mẫu frequency counter là gì?",
     "questionEn": "What is the core idea of the frequency counter pattern?",
     "options": [
-      "Sắp xếp cả hai mảng rồi so sánh từng phần tử theo cùng chỉ số",
-      "Gom giá trị và số lần xuất hiện vào object / Map để tra cứu O(1) thay vì lồng vòng lặp",
-      "Dùng hai chỉ số tiến dần về phía nhau từ hai đầu mảng",
-      "Chia mảng làm đôi và chỉ tiếp tục với nửa có thể chứa đáp án"
+      "Sắp xếp cả hai mảng rồi so sánh từng cặp phần tử theo cùng chỉ số",
+      "Gom giá trị và số lần xuất hiện vào object / Map để tra cứu O(1)",
+      "Dùng hai chỉ số tiến dần về phía nhau từ hai đầu của mảng đã sắp xếp",
+      "Chia mảng làm đôi và chỉ đi tiếp với nửa có thể chứa đáp án"
     ],
     "optionsEn": [
-      "Sort both arrays, then compare the elements at the same indices",
-      "Collect values and their counts in an object / Map so lookups are O(1) instead of nested loops",
-      "Use two indices that move toward each other from both ends of the array",
+      "Sort both arrays, then compare each pair of elements at the same index",
+      "Collect values and their counts in an object / Map for O(1) lookups",
+      "Move two indices toward each other from both ends of a sorted array",
       "Split the array in half and continue only with the half that can hold the answer"
     ],
     "answer": 1,
@@ -144,16 +144,16 @@
     "question": "Trong `sumZero` hai con trỏ trên mảng đã sắp xếp, vì sao khi `arr[left] + arr[right] > 0` ta được phép giảm `right`?",
     "questionEn": "In the two-pointer `sumZero` on a sorted array, why is it safe to decrement `right` when `arr[left] + arr[right] > 0`?",
     "options": [
-      "Vì phần tử bên phải luôn là số dương",
-      "Vì giảm `right` luôn làm tổng bằng 0 ở bước tiếp theo",
-      "Vì `left` đã duyệt qua mọi phần tử bên phải",
-      "Vì ngay cả với giá trị nhỏ nhất còn lại, `arr[right]` vẫn quá lớn nên không thể thuộc đáp án nào"
+      "Vì sau khi sắp xếp, phần tử bên phải luôn là số dương nên phải bỏ",
+      "Vì giảm `right` luôn làm tổng ở bước tiếp theo bằng đúng 0",
+      "Vì `left` đã được ghép với mọi phần tử bên phải trước đó rồi",
+      "Vì kể cả ghép với giá trị nhỏ nhất còn lại, `arr[right]` vẫn quá lớn"
     ],
     "optionsEn": [
-      "Because the element on the right is always positive",
-      "Because decrementing `right` always makes the next sum zero",
-      "Because `left` has already visited every element on the right",
-      "Because even with the smallest remaining value, `arr[right]` is too big, so it cannot be part of any answer"
+      "Because after sorting, the element on the right is always positive and must go",
+      "Because decrementing `right` always makes the next sum exactly zero",
+      "Because `left` has already been paired with every element to its right",
+      "Because even paired with the smallest remaining value, `arr[right]` is too big"
     ],
     "answer": 3,
     "explanation": "`arr[left]` là giá trị nhỏ nhất trong khoảng còn lại. Nếu ghép với nó mà tổng vẫn dương thì ghép với bất kỳ giá trị nào khác cũng dương, nên `arr[right]` bị loại vĩnh viễn. Mỗi bước loại đúng một ứng viên, đó là lý do thuật toán O(n) mà vẫn đúng.",
@@ -285,19 +285,19 @@
     "questionEn": "An algorithm splits its input into two equal halves, solves each half recursively, then combines the results in linear time. What is its time complexity?",
     "options": [
       "O(log n)",
-      "O(n)",
+      "O(n log² n)",
       "O(n²)",
       "O(n log n)"
     ],
     "optionsEn": [
       "O(log n)",
-      "O(n)",
+      "O(n log² n)",
       "O(n²)",
       "O(n log n)"
     ],
     "answer": 3,
-    "explanation": "T(n) = 2T(n/2) + O(n). Cây đệ quy có log n tầng, và tổng công việc gộp ở mỗi tầng là O(n), nên tổng là O(n log n) — đây chính là merge sort. O(log n) là khi chỉ đi vào MỘT nửa và làm O(1) việc, như binary search.",
-    "explanationEn": "T(n) = 2T(n/2) + O(n). The recursion tree has log n levels and the combine work across each level totals O(n), so the whole thing is O(n log n) — this is merge sort. O(log n) is when you descend into only ONE half doing O(1) work, like binary search."
+    "explanation": "T(n) = 2T(n/2) + O(n). Cây đệ quy có log n tầng và công việc gộp trên mỗi tầng tổng cộng là O(n), nên toàn bộ là O(n log n) — đây chính là merge sort. O(log n) là khi chỉ đi vào MỘT nửa và làm O(1) việc, như binary search; O(n log² n) chỉ xuất hiện khi bước gộp tốn O(n log n).",
+    "explanationEn": "T(n) = 2T(n/2) + O(n). The recursion tree has log n levels and the combine work across each level totals O(n), so the whole thing is O(n log n) — this is merge sort. O(log n) is when you descend into only ONE half doing O(1) work, like binary search; O(n log² n) would need an O(n log n) combine step."
   },
   {
     "id": "q16",
@@ -367,13 +367,13 @@
       "1",
       "-1",
       "0",
-      "4"
+      "`undefined`"
     ],
     "optionsEn": [
       "1",
       "-1",
       "0",
-      "4"
+      "`undefined`"
     ],
     "answer": 1,
     "explanation": "middle=2, arr[2]=4 > 1 → max=1; middle=0, arr[0]=5 > 1 → max=-1; vòng lặp dừng, trả về -1 dù số 1 nằm ở chỉ số 1. Binary search chỉ đúng khi mảng đã sắp xếp, vì việc loại bỏ một nửa dựa vào thứ tự.",

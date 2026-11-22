@@ -4,13 +4,13 @@
     "question": "Trong buổi review kiến trúc, một kiến trúc sư nói: 'Hãy thiết kế theo nguyên tắc assume breach'. Câu hỏi nào thể hiện đúng nhất tinh thần đó?",
     "questionEn": "In an architecture review, an architect says: 'Design with an assume-breach mindset.' Which question best reflects that idea?",
     "options": [
-      "Làm sao để vành đai mạng mạnh tới mức không ai lọt vào được?",
+      "Làm sao để vành đai mạng mạnh tới mức không kẻ tấn công nào lọt vào được?",
       "Công cụ quét nào tìm được toàn bộ lỗ hổng trước khi release?",
       "Nếu service này đã bị chiếm, kẻ tấn công với tới được những gì từ đây?",
       "Làm sao để người dùng trong mạng nội bộ không cần đăng nhập lại?"
     ],
     "optionsEn": [
-      "How do we make the network perimeter so strong that nobody gets in?",
+      "How do we make the network perimeter so strong that no attacker can ever get inside?",
       "Which scanner will find every vulnerability before release?",
       "If this service were already compromised, what could the attacker reach from here?",
       "How do we let users on the internal network skip logging in again?"
@@ -24,13 +24,13 @@
     "question": "Một team vừa bật WAF với bộ luật managed chống SQL injection và đề xuất bỏ việc chuyển sang parameterised query để kịp deadline. Phản hồi tốt nhất của kiến trúc sư là gì?",
     "questionEn": "A team has just enabled a WAF with managed SQL injection rules and proposes skipping the migration to parameterised queries to hit a deadline. What is the architect's best response?",
     "options": [
-      "Giữ parameterised query: WAF và code an toàn là hai lớp độc lập, và signature của WAF có thể bị vượt qua",
+      "Giữ parameterised query: WAF và code an toàn là hai lớp riêng, WAF có thể bị vượt",
       "Đồng ý, vì WAF chặn SQL injection ở tầng 7 trước khi request tới được ứng dụng",
       "Đồng ý, nhưng thêm một luật firewall thứ hai trong cùng file cấu hình để đủ hai lớp",
-      "Bỏ WAF đi, vì parameterised query đã đủ và WAF chỉ làm tăng độ trễ"
+      "Bỏ WAF đi, vì parameterised query đã đủ an toàn và WAF chỉ làm tăng độ trễ"
     ],
     "optionsEn": [
-      "Keep parameterised queries: the WAF and safe code are independent layers, and WAF signatures can be bypassed",
+      "Keep parameterised queries: WAF and safe code are separate layers, and WAFs get bypassed",
       "Agree, because the WAF blocks SQL injection at layer 7 before requests reach the application",
       "Agree, but add a second firewall rule in the same config file so there are two layers",
       "Remove the WAF, because parameterised queries are enough and the WAF only adds latency"
@@ -47,7 +47,7 @@
       "Giữ VPN nhưng thêm allow-list IP văn phòng, vì IP nội bộ là bằng chứng danh tính đủ tin cậy",
       "Mở công cụ ra internet với một mật khẩu dùng chung đủ dài và đổi mỗi quý",
       "Đặt công cụ trong subnet private và cho mọi máy trong VPC truy cập không cần đăng nhập",
-      "Đặt identity-aware proxy phía trước, yêu cầu SSO + MFA và kiểm tra thiết bị cho từng request"
+      "Đặt identity-aware proxy phía trước, yêu cầu SSO + MFA, kiểm tra thiết bị mỗi request"
     ],
     "optionsEn": [
       "Keep the VPN but add an office IP allow-list, because an internal IP is reliable enough proof of identity",
@@ -64,16 +64,16 @@
     "question": "Một người dùng đã đăng nhập đổi URL từ `/api/orders/1042` sang `/api/orders/1043` và thấy đơn hàng của khách khác. Nguyên nhân gốc nhiều khả năng nhất là gì?",
     "questionEn": "A logged-in user changes the URL from `/api/orders/1042` to `/api/orders/1043` and sees another customer's order. What is the most likely root cause?",
     "options": [
-      "Token của người dùng không được mã hoá bằng TLS 1.3",
-      "Server chỉ kiểm tra người dùng đã xác thực, không kiểm tra họ có sở hữu object đó không",
-      "Order ID là số tuần tự nên cần đổi sang UUID là đủ khắc phục",
-      "WAF chưa bật bộ luật managed cho các tấn công phổ biến"
+      "Token của người dùng không được mã hoá bằng TLS 1.3 nên bị kẻ khác dùng lại",
+      "Server chỉ kiểm tra người dùng đã xác thực, không kiểm tra họ có sở hữu object đó",
+      "Order ID là số tuần tự nên chỉ cần đổi sang UUID ngẫu nhiên là khắc phục hoàn toàn",
+      "WAF chưa bật bộ luật managed cho các tấn công phổ biến như IDOR và injection"
     ],
     "optionsEn": [
-      "The user's token was not encrypted with TLS 1.3",
-      "The server only checks that the user is authenticated, not that they own that object",
-      "The order IDs are sequential, so switching to UUIDs fully fixes it",
-      "The WAF has not enabled its managed rules for common attacks"
+      "The user's token was not encrypted with TLS 1.3, so someone else replayed it",
+      "The server only checks that the user is logged in, not that they own that object",
+      "The order IDs are sequential, so switching to random UUIDs alone fully fixes it",
+      "The WAF has not enabled its managed rules for common attacks such as IDOR"
     ],
     "answer": 1,
     "explanation": "Đây là broken access control (còn gọi là IDOR): authN có nhưng authZ theo từng object bị thiếu. UUID chỉ làm ID khó đoán hơn chứ không thay được việc kiểm tra quyền sở hữu ở server; TLS và WAF không biết đơn hàng thuộc về ai.",
@@ -84,16 +84,16 @@
     "question": "Các pod trên cluster Kubernetes (EKS) cần đọc một S3 bucket. Team đề xuất vài cách cấp credential. Cách nào đúng với nguyên tắc quyền tối thiểu?",
     "questionEn": "Pods on a Kubernetes (EKS) cluster need to read one S3 bucket. The team proposes several ways to provide credentials. Which one follows least privilege?",
     "options": [
-      "Tạo một IAM user, đưa access key vào ConfigMap để mọi pod dùng chung",
-      "Gắn một role có quyền S3 đầy đủ vào node để mọi pod trên node dùng được",
-      "Build access key vào image lúc CI để không phải cấu hình lúc deploy",
-      "Gắn một IAM role chỉ có quyền đọc bucket đó vào service account của pod để nhận credential ngắn hạn"
+      "Tạo một IAM user, đưa access key vào ConfigMap để mọi pod trong cluster dùng chung",
+      "Gắn một role có quyền S3 đầy đủ vào node để mọi pod chạy trên node đều dùng được",
+      "Build access key vào image lúc CI để không phải cấu hình gì thêm lúc deploy",
+      "Gắn IAM role chỉ có s3:GetObject trên bucket đó vào service account của pod"
     ],
     "optionsEn": [
       "Create an IAM user and put its access keys in a ConfigMap shared by every pod",
       "Attach a role with full S3 access to the node so every pod on it can use it",
-      "Bake the access keys into the image in CI so nothing needs configuring at deploy",
-      "Bind an IAM role that can only read that bucket to the pod's service account for short-lived credentials"
+      "Bake the access keys into the image in CI so nothing needs configuring at deploy time",
+      "Bind a role allowing only s3:GetObject on that bucket to the pod's service account"
     ],
     "answer": 3,
     "explanation": "Workload identity gắn quyền hẹp vào đúng workload cần nó và cấp credential tạm thời tự hết hạn. Role trên node cấp quyền cho mọi pod chung node; access key trong ConfigMap hay trong image là credential dài hạn nằm ở chỗ ai cũng đọc được.",
@@ -104,16 +104,16 @@
     "question": "Vault đã được cấu hình secrets engine database. Lệnh sau trả về gì?\n`vault read database/creds/payments-readonly`",
     "questionEn": "Vault has the database secrets engine configured. What does this command return?\n`vault read database/creds/payments-readonly`",
     "options": [
-      "Một username và password DB vừa được tạo riêng, kèm lease sẽ tự thu hồi khi hết hạn",
-      "Mật khẩu DB dùng chung đã lưu sẵn trong KV engine từ lúc cài đặt",
-      "Master key của KMS dùng để mã hoá cột dữ liệu trong database",
-      "Danh sách mọi người dùng đã từng đọc secret này trong 90 ngày"
+      "Username và password DB vừa được tạo riêng, kèm lease tự thu hồi khi hết hạn",
+      "Mật khẩu DB dùng chung đã lưu sẵn trong KV engine từ lúc cài đặt, kèm version",
+      "Master key của KMS dùng để mã hoá cột dữ liệu nhạy cảm trong database",
+      "Danh sách mọi người dùng đã đọc secret này trong 90 ngày qua, lấy từ audit log"
     ],
     "optionsEn": [
-      "A freshly created database username and password, with a lease that is revoked when it expires",
-      "The shared database password stored in the KV engine at install time",
-      "The KMS master key used to encrypt columns in the database",
-      "A list of everyone who has read this secret in the last 90 days"
+      "A freshly created database username and password, with a lease that auto-revokes",
+      "The shared database password stored in the KV engine at install time, with its version",
+      "The KMS master key used to encrypt sensitive columns in the payments database",
+      "A list of everyone who has read this secret in the last 90 days, from the audit log"
     ],
     "answer": 0,
     "explanation": "Đó là dynamic secret: Vault tạo một DB user duy nhất theo role `payments-readonly`, trả về kèm lease và xoá user khi lease hết hạn. Credential bị lộ vì thế chỉ dùng được trong thời gian ngắn và truy vết được về đúng người yêu cầu.",
@@ -125,15 +125,15 @@
     "questionEn": "A developer wants to commit a Kubernetes Secret manifest to Git, saying: 'The values are already encoded, so it is safe.' What is the correct assessment?",
     "options": [
       "An toàn, vì Kubernetes mã hoá giá trị Secret bằng AES trước khi ghi vào manifest",
-      "An toàn nếu repo là private và chỉ team backend có quyền đọc",
-      "Không an toàn: base64 chỉ là encoding, ai có file đều giải được; nên dùng kho secret hoặc giá trị đã mã hoá",
-      "Không an toàn, nhưng chỉ cần đổi sang ConfigMap là giải quyết được vấn đề"
+      "An toàn nếu repo là private, bật 2FA và chỉ team backend có quyền đọc",
+      "Không an toàn: base64 chỉ là encoding, ai có file đều giải được; hãy dùng kho secret hoặc mã hoá",
+      "Không an toàn, nhưng chỉ cần chuyển sang ConfigMap với RBAC chặt là giải quyết được"
     ],
     "optionsEn": [
       "Safe, because Kubernetes encrypts Secret values with AES before writing them into the manifest",
-      "Safe as long as the repository is private and only the backend team can read it",
-      "Not safe: base64 is only encoding, anyone with the file can decode it; use a secret store or encrypted values",
-      "Not safe, but switching to a ConfigMap solves the problem"
+      "Safe as long as the repository is private, has 2FA on and only the backend team can read it",
+      "Not safe: base64 is only encoding anyone can decode; use a secret store or encrypted values",
+      "Not safe, but moving the values to a ConfigMap with strict RBAC solves the problem"
     ],
     "answer": 2,
     "explanation": "Giá trị trong Secret chỉ là base64, không phải mã hoá. Lịch sử Git tồn tại vĩnh viễn và repo private vẫn bị clone, fork, lộ token. Cách đúng là đồng bộ từ kho secret bên ngoài hoặc commit giá trị đã được mã hoá; ConfigMap còn kém hơn Secret.",
@@ -145,15 +145,15 @@
     "questionEn": "A system uses envelope encryption: each object is encrypted with its own data key, and the data key is encrypted by a master key in the KMS. Why does rotating the master key NOT require re-encrypting all the data?",
     "options": [
       "Vì dữ liệu thực chất được mã hoá trực tiếp trong KMS, nên KMS tự xử lý khi xoay vòng",
-      "Vì master key chỉ bọc các data key nhỏ; dữ liệu lớn vẫn được mã hoá bằng data key không đổi",
-      "Vì AES-256-GCM cho phép đổi khoá mà không cần giải mã dữ liệu",
-      "Vì sau khi xoay vòng, dữ liệu cũ không cần giải mã được nữa"
+      "Vì master key chỉ bọc các data key nhỏ; dữ liệu lớn vẫn dùng data key cũ",
+      "Vì AES-256-GCM cho phép đổi khoá ngay trên ciphertext mà không cần giải mã dữ liệu",
+      "Vì sau khi xoay vòng, dữ liệu cũ không cần giải mã được nữa và có thể lưu trữ lạnh"
     ],
     "optionsEn": [
       "Because the data is actually encrypted inside the KMS, which handles rotation itself",
-      "Because the master key only wraps small data keys; the bulk data stays encrypted under unchanged data keys",
-      "Because AES-256-GCM lets you change keys without decrypting the data",
-      "Because after rotation, old data no longer needs to be decryptable"
+      "Because the master key only wraps small data keys; the bulk data keeps its data keys",
+      "Because AES-256-GCM lets you swap keys on the ciphertext without decrypting the data",
+      "Because after rotation old data no longer needs to be decryptable and can go to cold storage"
     ],
     "answer": 1,
     "explanation": "Master key chỉ mã hoá các data key. Dữ liệu lớn không bao giờ đi tới KMS và vẫn được bảo vệ bởi data key của nó; KMS giữ các phiên bản master key cũ để giải mã được data key cũ. Đó là lý do envelope encryption rẻ và mở rộng tốt.",
@@ -164,15 +164,15 @@
     "question": "Database đã được mã hoá at rest bằng khoá KMS. Một kẻ tấn công khai thác lỗi SQL injection trong ứng dụng và đọc bảng khách hàng. Mã hoá at rest có ngăn được điều này không?",
     "questionEn": "The database is encrypted at rest with a KMS key. An attacker exploits a SQL injection bug in the application and reads the customers table. Does encryption at rest stop this?",
     "options": [
-      "Không: truy vấn chạy qua kết nối hợp lệ của ứng dụng nên database trả về dữ liệu đã giải mã",
-      "Có: dữ liệu trả về vẫn là ciphertext vì chưa có quyền gọi KMS",
-      "Có, nhưng chỉ khi master key được xoay vòng tự động hằng năm",
-      "Không, nhưng chỉ vì database chưa bật TLS cho kết nối từ ứng dụng"
+      "Không: truy vấn đi qua kết nối hợp lệ của ứng dụng nên database trả dữ liệu đã giải mã",
+      "Có: dữ liệu trả về vẫn là ciphertext vì kẻ tấn công không có quyền gọi KMS",
+      "Có, nhưng chỉ khi master key được xoay vòng tự động hằng năm trong KMS",
+      "Không, nhưng chỉ vì database chưa bật TLS cho kết nối từ phía ứng dụng"
     ],
     "optionsEn": [
-      "No: the query runs through the application's legitimate connection, so the database returns decrypted data",
+      "No: the query uses the app's legitimate connection, so the DB returns decrypted rows",
       "Yes: the returned data is still ciphertext because the attacker has no KMS permission",
-      "Yes, but only if the master key is rotated automatically every year",
+      "Yes, but only if the master key is rotated automatically every year in the KMS",
       "No, but only because the database has not enabled TLS for the application's connection"
     ],
     "answer": 0,
@@ -187,13 +187,13 @@
       "Mã hoá dữ liệu at rest của mọi pod trong namespace `payments` bằng khoá của mesh",
       "Chỉ cho service `checkout` gọi vào `payments`, còn lại bị chặn toàn bộ",
       "Bật TLS một chiều cho ingress public; traffic nội bộ vẫn được phép dạng plaintext",
-      "Workload trong `payments` chỉ nhận traffic mTLS; nhưng muốn giới hạn service nào được gọi thì vẫn cần authorization policy"
+      "Pod trong `payments` chỉ nhận mTLS; muốn chặn bên gọi vẫn cần AuthorizationPolicy"
     ],
     "optionsEn": [
-      "It encrypts data at rest for every pod in the `payments` namespace with the mesh key",
-      "It lets only the `checkout` service call `payments` and blocks everything else",
+      "It encrypts data at rest for every pod in the `payments` namespace with the mesh's root key",
+      "It lets only the `checkout` service call `payments` and blocks every other caller in the mesh",
       "It enables one-way TLS on the public ingress; internal traffic may still be plaintext",
-      "Workloads in `payments` accept only mTLS traffic; restricting which services may call still needs an authorization policy"
+      "Pods in `payments` accept only mTLS; restricting callers still needs an AuthorizationPolicy"
     ],
     "answer": 3,
     "explanation": "PeerAuthentication STRICT buộc kết nối tới workload trong namespace phải là mTLS, từ chối plaintext. mTLS trả lời 'ai đang gọi' nhưng không tự quyết 'ai được phép gọi' — việc đó thuộc AuthorizationPolicy. Nó cũng không liên quan tới mã hoá at rest.",
@@ -205,15 +205,15 @@
     "questionEn": "A product adds an 'import avatar from URL' feature: the server downloads an image from a user-supplied URL. What is the biggest architectural concern in the security review?",
     "options": [
       "Cross-site scripting vì tên file ảnh có thể chứa ký tự đặc biệt",
-      "Ảnh lớn làm đầy ổ đĩa nên cần bật mã hoá at rest cho bucket",
-      "SSRF: server có thể bị lừa gọi endpoint nội bộ như `169.254.169.254`; cần lọc egress và cô lập service tải URL",
-      "Brute-force đăng nhập vì tính năng này không yêu cầu MFA"
+      "Ảnh lớn làm đầy ổ đĩa nên cần bật mã hoá at rest và lifecycle cho bucket",
+      "SSRF: server có thể bị lừa gọi endpoint nội bộ như `169.254.169.254`",
+      "Brute-force đăng nhập vì tính năng này không yêu cầu MFA trước khi tải ảnh"
     ],
     "optionsEn": [
-      "Cross-site scripting because the image filename may contain special characters",
-      "Large images filling the disk, so the bucket needs encryption at rest",
-      "SSRF: the server can be tricked into calling internal endpoints such as `169.254.169.254`; filter egress and isolate the fetcher",
-      "Login brute-forcing because this feature does not require MFA"
+      "Cross-site scripting, because the image filename may contain special characters and script",
+      "Large images filling the disk, so the bucket needs encryption at rest and lifecycle rules",
+      "SSRF: the server can be tricked into calling internal endpoints like `169.254.169.254`",
+      "Login brute-forcing, because this feature does not require MFA before fetching images"
     ],
     "answer": 2,
     "explanation": "Server tải URL do người dùng cung cấp là kịch bản SSRF kinh điển: kẻ tấn công trỏ tới metadata service hoặc API nội bộ để lấy credential. Lời giải kiến trúc là allow-list egress, service tải URL chạy trong subnet cô lập và dùng IMDSv2 trên AWS.",
@@ -244,16 +244,16 @@
     "question": "Một CVE nghiêm trọng vừa công bố trong thư viện parse request mà ứng dụng dùng. Bản vá cần hai tuần để test và release. Hành động ngay lập tức hợp lý nhất là gì?",
     "questionEn": "A critical CVE has just been disclosed in a request-parsing library the application uses. The fix needs two weeks to test and release. What is the most sensible immediate action?",
     "options": [
-      "Chờ bản vá, vì WAF không bao giờ chặn được lỗ hổng trong thư viện",
-      "Tắt toàn bộ ứng dụng cho tới khi bản vá được release",
-      "Bật luật WAF chặn mọi request có header, sau đó mới xem log",
-      "Thêm luật WAF 'vá ảo' cho mẫu khai thác, chạy count mode ngắn để kiểm tra rồi chuyển block, song song đẩy nhanh bản vá"
+      "Chờ bản vá, vì WAF không chặn được lỗ hổng nằm trong thư viện của ứng dụng",
+      "Tắt toàn bộ ứng dụng cho tới khi bản vá được test và release xong",
+      "Bật luật WAF chặn mọi request tới các endpoint dùng thư viện đó, rồi mới xem log",
+      "Luật WAF vá ảo cho mẫu khai thác (count rồi block), song song đẩy nhanh bản vá"
     ],
     "optionsEn": [
-      "Wait for the patch, because a WAF can never block a library vulnerability",
-      "Shut down the whole application until the patch is released",
-      "Enable a WAF rule blocking every request with headers, then look at the logs",
-      "Add a WAF virtual-patching rule for the exploit pattern, briefly in count mode to verify, then block, while fast-tracking the patch"
+      "Wait for the patch, because a WAF cannot block a vulnerability inside an app library",
+      "Shut down the whole application until the patch has been tested and released",
+      "Enable a WAF rule that blocks every request to endpoints using that library, then check logs",
+      "Add a WAF virtual-patch rule for the exploit (count, then block) and fast-track the fix"
     ],
     "answer": 3,
     "explanation": "Virtual patching là thế mạnh thật của WAF: mua thời gian trong khi sửa gốc. Chạy count mode trước tránh chặn nhầm người dùng thật. WAF không thay bản vá, nhưng chờ không làm gì hoặc tắt hẳn hệ thống đều là phản ứng quá tay hoặc quá hời hợt.",
@@ -264,16 +264,16 @@
     "question": "Team áp dụng một NetworkPolicy chỉ cho namespace `gateway` gọi vào pod `payments-api`. Kiểm thử cho thấy pod ở mọi namespace vẫn gọi được. Nguyên nhân khả dĩ nhất là gì?",
     "questionEn": "A team applies a NetworkPolicy allowing only the `gateway` namespace to reach the `payments-api` pods. Testing shows pods in every namespace can still connect. What is the most likely cause?",
     "options": [
-      "CNI plugin của cluster không thực thi NetworkPolicy, nên object được lưu nhưng không có tác dụng",
-      "NetworkPolicy chỉ có hiệu lực sau khi restart toàn bộ node",
+      "CNI plugin của cluster không thực thi NetworkPolicy nên object được lưu mà không có tác dụng",
+      "NetworkPolicy chỉ có hiệu lực sau khi restart toàn bộ node và các pod liên quan",
       "NetworkPolicy chỉ áp dụng cho traffic egress, không áp dụng cho ingress",
       "Phải tạo NetworkPolicy trong namespace `kube-system` thì mới có hiệu lực"
     ],
     "optionsEn": [
-      "The cluster's CNI plugin does not enforce NetworkPolicy, so the object is stored but has no effect",
-      "NetworkPolicy only takes effect after every node is restarted",
-      "NetworkPolicy only applies to egress traffic, not ingress",
-      "The NetworkPolicy must be created in the `kube-system` namespace to take effect"
+      "The cluster's CNI plugin does not enforce NetworkPolicy, so the object is stored but inert",
+      "NetworkPolicy only takes effect after every node and the affected pods are restarted",
+      "NetworkPolicy only applies to egress traffic and is ignored for ingress rules",
+      "The NetworkPolicy must be created in the `kube-system` namespace to take effect cluster-wide"
     ],
     "answer": 0,
     "explanation": "API server chấp nhận NetworkPolicy dù không có gì thực thi nó. Việc thực thi là của CNI plugin như Calico hay Cilium. NetworkPolicy hỗ trợ cả ingress lẫn egress, có hiệu lực ngay, và được tạo trong namespace của pod mà nó chọn.",
@@ -284,16 +284,16 @@
     "question": "Một CVE mới xuất hiện trong một thư viện logging phổ biến. CISO hỏi: 'Trong 300 service đang chạy, service nào bị ảnh hưởng? Cần câu trả lời trong một giờ.' Thực hành nào giúp trả lời được?",
     "questionEn": "A new CVE appears in a popular logging library. The CISO asks: 'Of our 300 running services, which are affected? I need the answer within an hour.' Which practice makes that possible?",
     "options": [
-      "Bật WAF với bộ luật managed cho mọi service",
-      "Sinh và lưu SBOM cho mỗi image trong CI để tra cứu dependency theo phiên bản",
-      "Chạy container với user non-root và root filesystem read-only",
-      "Ký mọi image bằng cosign trước khi đẩy lên registry"
+      "Bật WAF với bộ luật managed cho mọi service để chặn khai thác CVE",
+      "Sinh và lưu SBOM cho mỗi image trong CI để tra dependency theo phiên bản",
+      "Chạy container với user non-root và root filesystem read-only trên mọi node",
+      "Ký mọi image bằng cosign trước khi đẩy lên registry và kiểm tra lúc deploy"
     ],
     "optionsEn": [
-      "Enable a WAF with managed rules for every service",
-      "Generate and store an SBOM for every image in CI so dependencies can be queried by version",
-      "Run containers as a non-root user with a read-only root filesystem",
-      "Sign every image with cosign before pushing it to the registry"
+      "Enable a WAF with managed rules for every service to block CVE exploits",
+      "Generate and store an SBOM for every image in CI, queryable by dependency version",
+      "Run containers as a non-root user with a read-only root filesystem everywhere",
+      "Sign every image with cosign before pushing it and verify signatures at deploy"
     ],
     "answer": 1,
     "explanation": "SBOM là danh sách thành phần của từng artifact, nên câu hỏi 'ai dùng thư viện X phiên bản Y' trở thành một truy vấn. Ký image chứng minh nguồn gốc, non-root giảm tác động khi bị khai thác, WAF chặn traffic — nhưng không cái nào cho biết image chứa gì.",
@@ -304,16 +304,16 @@
     "question": "Vì sao pipeline nên deploy image bằng digest (`app@sha256:...`) thay vì tag như `app:1.4` hay `app:latest`?",
     "questionEn": "Why should a pipeline deploy images by digest (`app@sha256:...`) rather than by a tag such as `app:1.4` or `app:latest`?",
     "options": [
-      "Vì digest giúp image nhỏ hơn và kéo về nhanh hơn",
+      "Vì digest giúp image nhỏ hơn và kéo về nhanh hơn nhờ bỏ qua metadata",
       "Vì registry xoá tag sau 30 ngày còn digest được giữ vĩnh viễn",
-      "Vì digest bất biến: nó trỏ đúng nội dung đã được quét và ký, trong khi tag có thể bị đẩy đè sang image khác",
-      "Vì Kubernetes không hỗ trợ kéo image theo tag từ registry private"
+      "Digest bất biến, trỏ đúng nội dung đã quét và ký; tag có thể bị đẩy đè",
+      "Vì Kubernetes không hỗ trợ kéo image theo tag từ registry private như ECR"
     ],
     "optionsEn": [
-      "Because a digest makes the image smaller and faster to pull",
+      "Because a digest makes the image smaller and faster to pull by skipping metadata",
       "Because registries delete tags after 30 days but keep digests forever",
-      "Because a digest is immutable: it points at exactly the content that was scanned and signed, while a tag can be re-pushed to another image",
-      "Because Kubernetes cannot pull images by tag from a private registry"
+      "A digest is immutable, matching the scanned, signed content; tags can be re-pushed",
+      "Because Kubernetes cannot pull images by tag from a private registry such as ECR"
     ],
     "answer": 2,
     "explanation": "Tag là con trỏ có thể thay đổi; digest là hash của nội dung. Deploy theo digest đảm bảo thứ chạy trên production chính là thứ đã được quét và ký. Digest không ảnh hưởng kích thước image, và Kubernetes vẫn kéo được theo tag.",
@@ -324,16 +324,16 @@
     "question": "Một khách hàng khẳng định chưa từng thực hiện một giao dịch chuyển tiền, và hệ thống không có log nào chứng minh ngược lại. Theo STRIDE, đây là nhóm mối đe doạ nào và biện pháp chính là gì?",
     "questionEn": "A customer claims they never made a money transfer, and the system has no logs to prove otherwise. Under STRIDE, which threat category is this and what is the main mitigation?",
     "options": [
-      "Spoofing — bắt buộc MFA cho mọi lần đăng nhập",
-      "Tampering — ký số nội dung request chuyển tiền",
-      "Information disclosure — mã hoá bảng giao dịch at rest",
-      "Repudiation — audit log chống sửa đổi, ghi ai làm gì, lúc nào, lưu ở nơi riêng"
+      "Spoofing — bắt buộc MFA cho mọi lần đăng nhập và mọi lệnh chuyển tiền",
+      "Tampering — ký số nội dung request chuyển tiền và kiểm tra chữ ký ở server",
+      "Information disclosure — mã hoá bảng giao dịch at rest bằng khoá KMS riêng",
+      "Repudiation — audit log chống sửa, ghi ai làm gì, lúc nào, lưu ở nơi riêng"
     ],
     "optionsEn": [
-      "Spoofing — require MFA for every login",
-      "Tampering — digitally sign the transfer request body",
-      "Information disclosure — encrypt the transactions table at rest",
-      "Repudiation — tamper-evident audit logs recording who did what and when, stored separately"
+      "Spoofing — require MFA for every login and for every transfer request",
+      "Tampering — digitally sign the transfer request body and verify it server-side",
+      "Information disclosure — encrypt the transactions table at rest with its own KMS key",
+      "Repudiation — tamper-evident audit logs of who did what and when, kept separately"
     ],
     "answer": 3,
     "explanation": "Repudiation là việc chối bỏ một hành động mà hệ thống không chứng minh được. Biện pháp là audit log đáng tin cậy, khó bị sửa. MFA giảm giả mạo và chữ ký chống sửa đổi có thể hỗ trợ, nhưng không có log thì vẫn không chứng minh được ai đã làm.",
@@ -344,16 +344,16 @@
     "question": "Một startup bắt đầu nhận thanh toán bằng thẻ và muốn chi phí tuân thủ PCI DSS thấp nhất có thể. Quyết định kiến trúc nào hiệu quả nhất?",
     "questionEn": "A startup starts accepting card payments and wants the lowest possible PCI DSS compliance cost. Which architectural decision is most effective?",
     "options": [
-      "Dùng form hoặc SDK của nhà cung cấp thanh toán để tokenise thẻ, số thẻ không bao giờ đi qua hệ thống của mình",
-      "Lưu số thẻ trong database riêng có mã hoá at rest và giới hạn truy cập",
-      "Đặt toàn bộ hệ thống sau WAF để mọi service đều được coi là tuân thủ",
-      "Ghi số thẻ vào log ứng dụng để phục vụ đối soát khi có tranh chấp"
+      "Dùng form/SDK của nhà cung cấp thanh toán để tokenise thẻ, số thẻ không đi qua hệ thống mình",
+      "Lưu số thẻ trong database riêng có mã hoá at rest và giới hạn truy cập theo IAM",
+      "Đặt toàn bộ hệ thống sau WAF để mọi service đều được coi là tuân thủ PCI DSS",
+      "Ghi số thẻ vào log ứng dụng có mã hoá để phục vụ đối soát khi có tranh chấp"
     ],
     "optionsEn": [
-      "Use the payment provider's hosted form or SDK to tokenise cards so card numbers never pass through your systems",
-      "Store card numbers in a separate database encrypted at rest with restricted access",
-      "Put the whole system behind a WAF so every service is considered compliant",
-      "Write card numbers to application logs to support reconciliation during disputes"
+      "Tokenise cards with the payment provider's hosted form or SDK so card numbers never touch you",
+      "Store card numbers in a separate database encrypted at rest with IAM-restricted access",
+      "Put the whole system behind a WAF so every service is considered PCI DSS compliant",
+      "Write card numbers to encrypted application logs to support reconciliation in disputes"
     ],
     "answer": 0,
     "explanation": "Thu hẹp phạm vi là đòn bẩy lớn nhất: nếu số thẻ (PAN) không bao giờ chạm hệ thống của bạn thì vùng dữ liệu thẻ gần như biến mất. Tự lưu thẻ dù có mã hoá vẫn kéo cả hệ thống vào phạm vi audit; WAF không làm hệ thống tuân thủ; ghi số thẻ vào log là vi phạm.",

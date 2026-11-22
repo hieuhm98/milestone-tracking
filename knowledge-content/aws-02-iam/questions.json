@@ -4,16 +4,16 @@
     "question": "IAM là loại dịch vụ nào về mặt phạm vi?",
     "questionEn": "In terms of scope, what kind of service is IAM?",
     "options": [
-      "Dịch vụ theo region, phải tạo lại ở mỗi region",
-      "Dịch vụ global, dùng chung cho toàn tài khoản ở mọi region",
-      "Dịch vụ theo Availability Zone",
-      "Dịch vụ chỉ hoạt động ở region us-east-1"
+      "Dịch vụ theo region; phải tạo lại user ở mỗi region",
+      "Dịch vụ global, dùng chung cho mọi region trong tài khoản",
+      "Dịch vụ theo AZ, được sao chép sang AZ khác để dự phòng",
+      "Dịch vụ chỉ hoạt động được ở region us-east-1 (N. Virginia)"
     ],
     "optionsEn": [
-      "A regional service that must be recreated in each region",
-      "A global service, shared across the whole account in every region",
-      "An Availability Zone-scoped service",
-      "A service that only works in the us-east-1 region"
+      "A regional service; users must be recreated in each region",
+      "A global service shared across all regions in the account",
+      "An AZ-scoped service, replicated to other AZs for resilience",
+      "A service that works only in the us-east-1 region"
     ],
     "answer": 1,
     "explanation": "IAM là dịch vụ GLOBAL. User, group, role và policy dùng chung cho toàn bộ tài khoản, không gắn với region nào.",
@@ -24,16 +24,16 @@
     "question": "Một ứng dụng chạy trên EC2 cần đọc dữ liệu từ một bucket S3. Cách nào an toàn NHẤT?",
     "questionEn": "An application running on EC2 needs to read data from an S3 bucket. What is the MOST secure way?",
     "options": [
-      "Nhúng Access Key ID và Secret Access Key vào code",
-      "Lưu access key trong file cấu hình trên EC2",
-      "Tạo IAM Role với quyền cần thiết và gắn role vào EC2 instance",
-      "Dùng access key của tài khoản root"
+      "Nhúng Access Key ID và Secret Access Key trực tiếp vào code",
+      "Lưu access key của IAM user trong file cấu hình trên EC2",
+      "Gắn một IAM Role có quyền cần thiết vào EC2 instance",
+      "Đặt access key của tài khoản root trong biến môi trường"
     ],
     "optionsEn": [
-      "Embed the Access Key ID and Secret Access Key in the code",
-      "Store the access key in a config file on the EC2 instance",
-      "Create an IAM Role with the required permissions and attach it to the EC2 instance",
-      "Use the root account's access key"
+      "Embed an access key ID and secret key directly in the code",
+      "Store an IAM user's access key in a config file on the instance",
+      "Attach an IAM Role with the needed permissions to the instance",
+      "Put the root account's access key in an environment variable"
     ],
     "answer": 2,
     "explanation": "Gắn IAM Role vào EC2 (qua instance profile) là cách an toàn nhất: EC2 nhận credentials tạm thời từ STS, tự luân chuyển và tự hết hạn, không có secret cố định trên máy.",
@@ -45,15 +45,15 @@
     "questionEn": "A user has a policy with 'Allow s3:*' and another policy with 'Deny s3:DeleteObject'. What can the user do?",
     "options": [
       "Mọi thao tác S3 kể cả xoá object, vì Allow ghi đè Deny",
-      "Không làm được gì với S3 vì có xung đột",
+      "Không làm gì được với S3, vì các policy xung đột triệt tiêu nhau",
       "Mọi thao tác S3 TRỪ xoá object, vì explicit Deny luôn thắng",
-      "Chỉ xoá được object"
+      "Chỉ xoá object, vì statement cụ thể nhất được ưu tiên"
     ],
     "optionsEn": [
       "Every S3 action including deleting objects, because Allow overrides Deny",
-      "Nothing with S3 because of the conflict",
+      "Nothing with S3, because conflicting policies cancel each other out",
       "Every S3 action EXCEPT deleting objects, because an explicit Deny always wins",
-      "Can only delete objects"
+      "Only delete objects, because the most specific statement wins"
     ],
     "answer": 2,
     "explanation": "Explicit Deny luôn thắng mọi Allow. User làm được mọi thứ với S3 nhờ Allow s3:*, nhưng riêng DeleteObject bị chặn bởi Deny.",
@@ -65,14 +65,14 @@
     "questionEn": "If an action is neither explicitly allowed nor explicitly denied, how does IAM handle it?",
     "options": [
       "Cho phép mặc định",
-      "Từ chối mặc định (implicit deny)",
-      "Hỏi lại quản trị viên",
+      "Từ chối mặc định",
+      "Cho phép nhưng ghi log vào CloudTrail",
       "Cho phép nếu user thuộc một group bất kỳ"
     ],
     "optionsEn": [
       "Allowed by default",
-      "Denied by default (implicit deny)",
-      "Asks the administrator",
+      "Denied by default",
+      "Allowed, but logged to CloudTrail",
       "Allowed if the user belongs to any group"
     ],
     "answer": 1,
@@ -84,16 +84,16 @@
     "question": "Cách gán quyền cho nhiều user theo best practice của AWS là gì?",
     "questionEn": "According to AWS best practice, how should you assign permissions to many users?",
     "options": [
-      "Gắn policy trực tiếp vào từng user một",
+      "Gắn cùng các policy trực tiếp vào từng user một",
       "Gắn policy vào một IAM Group và thêm user vào group đó",
-      "Chia sẻ chung một IAM user cho cả team",
-      "Dùng tài khoản root cho tất cả"
+      "Chia sẻ một IAM user và mật khẩu cho cả team",
+      "Cho mọi người dùng tài khoản root có bật MFA"
     ],
     "optionsEn": [
-      "Attach policies directly to each individual user",
+      "Attach the same policies directly to each individual user",
       "Attach policies to an IAM Group and add users to that group",
-      "Share one IAM user across the whole team",
-      "Use the root account for everyone"
+      "Share one IAM user and its password with the whole team",
+      "Give everyone the root account, protected by MFA"
     ],
     "answer": 1,
     "explanation": "Best practice là gán quyền qua group: gắn policy vào group rồi thêm user vào. Dễ quản lý, nhất quán, và tránh gán trùng lặp cho từng user.",
@@ -106,13 +106,13 @@
     "options": [
       "Action",
       "Resource",
-      "Effect (Allow hoặc Deny)",
+      "Effect",
       "Version"
     ],
     "optionsEn": [
       "Action",
       "Resource",
-      "Effect (Allow or Deny)",
+      "Effect",
       "Version"
     ],
     "answer": 2,
@@ -124,16 +124,16 @@
     "question": "Tại sao IAM Role được coi là an toàn hơn access key cố định cho các AWS service?",
     "questionEn": "Why is an IAM Role considered safer than static access keys for AWS services?",
     "options": [
-      "Role không có quyền nên không thể bị lạm dụng",
-      "Role cấp credentials tạm thời qua STS, tự luân chuyển và tự hết hạn",
-      "Role được mã hóa còn access key thì không",
-      "Role chỉ dùng được trong region us-east-1"
+      "Role không mang quyền riêng nên không thể bị lạm dụng",
+      "Role cấp credentials tạm thời qua STS, tự hết hạn",
+      "Credentials của role được mã hóa khi lưu, còn access key thì không",
+      "Role chỉ dùng ở us-east-1, giúp thu hẹp bề mặt tấn công"
     ],
     "optionsEn": [
-      "Roles have no permissions so they cannot be abused",
-      "Roles grant temporary credentials via STS that auto-rotate and auto-expire",
-      "Roles are encrypted while access keys are not",
-      "Roles can only be used in the us-east-1 region"
+      "Roles carry no permissions of their own, so cannot be abused",
+      "They issue temporary STS credentials that expire automatically",
+      "Role credentials are encrypted at rest, but access keys are not",
+      "Roles are limited to us-east-1, shrinking the attack surface"
     ],
     "answer": 1,
     "explanation": "Role được assume qua STS (sts:AssumeRole) và cấp credentials tạm thời tự hết hạn, không cần lưu secret cố định — giảm rủi ro lộ key.",
@@ -164,16 +164,16 @@
     "question": "Access Advisor (Last Accessed) giúp gì cho việc thực thi least privilege?",
     "questionEn": "How does Access Advisor (Last Accessed) help enforce least privilege?",
     "options": [
-      "Cho biết chi phí của từng service",
-      "Cho biết service nào user/role được cấp quyền và lần cuối truy cập, để thu hồi quyền không dùng",
-      "Tự động xoay vòng access key",
-      "Bật MFA cho tất cả user"
+      "Cho biết IAM user nào đã bật MFA và mật khẩu",
+      "Cho biết quyền theo service và lần cuối được truy cập",
+      "Tự động xoay vòng các access key lâu không được dùng",
+      "Tự động gỡ các quyền không dùng khỏi policy"
     ],
     "optionsEn": [
-      "Shows the cost of each service",
-      "Shows which services a user/role has access to and when each was last used, so unused permissions can be revoked",
-      "Automatically rotates access keys",
-      "Enables MFA for all users"
+      "Shows which IAM users have MFA and passwords enabled",
+      "Shows each service's permissions and when it was last accessed",
+      "Automatically rotates access keys that have gone unused",
+      "Automatically removes unused permissions from policies"
     ],
     "answer": 1,
     "explanation": "Access Advisor hiển thị các service được cấp quyền và lần cuối chúng được truy cập. Nếu một quyền chưa bao giờ dùng → có thể thu hồi để giữ least privilege.",
@@ -184,16 +184,16 @@
     "question": "Đâu là thực hành đúng để bảo vệ tài khoản root của AWS?",
     "questionEn": "Which is the correct practice for protecting the AWS root account?",
     "options": [
-      "Dùng root cho mọi thao tác hằng ngày để tiện lợi",
-      "Tạo nhiều access key cho root và chia sẻ trong team",
-      "Bật MFA cho root, không dùng root hằng ngày, và khoá/xoá access key của root",
-      "Tắt MFA để đăng nhập nhanh hơn"
+      "Dùng root cho việc quản trị hằng ngày, nhưng chỉ từ IP tin cậy",
+      "Tạo access key cho root và cất trong kho bí mật chung của team",
+      "Bật MFA, không dùng hằng ngày và xoá access key của root",
+      "Tắt MFA cho root để còn khôi phục được khi mất thiết bị"
     ],
     "optionsEn": [
-      "Use root for all daily operations for convenience",
-      "Create multiple access keys for root and share them across the team",
-      "Enable MFA on root, do not use root daily, and lock away/delete the root access keys",
-      "Disable MFA to sign in faster"
+      "Use root for daily admin work, but only from a trusted IP",
+      "Create root access keys and keep them in a shared team vault",
+      "Enable MFA, avoid daily use, and delete root access keys",
+      "Disable root MFA so you can recover if a device is lost"
     ],
     "answer": 2,
     "explanation": "Root có toàn quyền tuyệt đối. Phải bật MFA cho root, không dùng root cho việc hằng ngày (tạo IAM user admin riêng), và khoá lại access key của root.",
@@ -204,16 +204,16 @@
     "question": "Một nhà phát triển cần gọi AWS từ script Python trên máy cá nhân (không phải EC2). Họ cần gì?",
     "questionEn": "A developer needs to call AWS from a Python script on their own machine (not EC2). What do they need?",
     "options": [
-      "Access Key ID + Secret Access Key để dùng với AWS CLI/SDK",
+      "Access Key ID và Secret Access Key",
       "Chỉ cần username và password của console",
-      "Một EC2 instance profile",
-      "Địa chỉ IP tĩnh"
+      "Một EC2 instance profile cho IAM user",
+      "Một key pair (.pem) tạo trong EC2 console"
     ],
     "optionsEn": [
-      "An Access Key ID + Secret Access Key to use with the AWS CLI/SDK",
-      "Only a console username and password",
-      "An EC2 instance profile",
-      "A static IP address"
+      "An access key ID and secret access key",
+      "Only the console username and password",
+      "An EC2 instance profile for the IAM user",
+      "A key pair (.pem) created in the EC2 console"
     ],
     "answer": 0,
     "explanation": "Truy cập programmatic (CLI/SDK) dùng access key (Access Key ID + Secret Access Key). Username/password chỉ dùng để đăng nhập Console qua trình duyệt.",
@@ -224,16 +224,16 @@
     "question": "Trong policy JSON, phần tử 'Principal' thường xuất hiện ở đâu?",
     "questionEn": "In a policy JSON, where does the 'Principal' element typically appear?",
     "options": [
-      "Trong identity-based policy gắn vào một user",
-      "Trong resource-based policy (như bucket policy) và trust policy của role",
-      "Trong mọi policy, luôn bắt buộc",
-      "Chỉ trong password policy"
+      "Trong identity-based policy gắn vào user hoặc group",
+      "Trong resource-based policy và trust policy của role",
+      "Trong mọi statement của policy, luôn bắt buộc",
+      "Chỉ trong password policy của tài khoản và SCP"
     ],
     "optionsEn": [
-      "In an identity-based policy attached to a user",
-      "In a resource-based policy (like a bucket policy) and a role's trust policy",
-      "In every policy, always required",
-      "Only in the password policy"
+      "In identity-based policies attached to users or groups",
+      "In resource-based policies and a role's trust policy",
+      "In every policy statement, where it is always required",
+      "Only in the account password policy and in SCPs"
     ],
     "answer": 1,
     "explanation": "Principal xác định 'ai' được phép và chỉ xuất hiện trong resource-based policy và trust policy của role. Identity-based policy gắn vào user không cần Principal.",
@@ -244,16 +244,16 @@
     "question": "Một công ty muốn tăng bảo mật đăng nhập cho các IAM user. Biện pháp hiệu quả nhất là gì?",
     "questionEn": "A company wants to strengthen sign-in security for its IAM users. What is the most effective measure?",
     "options": [
-      "Cho phép mật khẩu ngắn để dễ nhớ",
+      "Đổi mật khẩu tài khoản root mỗi tuần",
       "Bật MFA và áp dụng password policy mạnh",
-      "Chia sẻ một tài khoản chung cho cả team",
-      "Tắt password policy"
+      "Chỉ cho đăng nhập console trong giờ hành chính",
+      "Tạo access key cho mọi IAM user"
     ],
     "optionsEn": [
-      "Allow short passwords so they are easy to remember",
+      "Rotate the root account password every week",
       "Enable MFA and enforce a strong password policy",
-      "Share one common account across the team",
-      "Disable the password policy"
+      "Allow console sign-in only during office hours",
+      "Create an access key for every IAM user"
     ],
     "answer": 1,
     "explanation": "MFA thêm một yếu tố thứ hai ngoài mật khẩu (kể cả khi mật khẩu bị lộ vẫn an toàn), và password policy ép quy tắc mật khẩu mạnh cho toàn tài khoản.",
@@ -264,16 +264,16 @@
     "question": "Điều nào sau đây đúng về IAM Group?",
     "questionEn": "Which of the following is true about an IAM Group?",
     "options": [
-      "Group có credentials riêng và có thể đăng nhập như một định danh",
-      "Group có thể chứa group khác (lồng nhau nhiều tầng)",
-      "Group chỉ chứa user, không lồng nhau, và một user có thể thuộc nhiều group",
-      "Mỗi user chỉ được thuộc đúng một group"
+      "Có credentials riêng và có thể đăng nhập như một định danh",
+      "Có thể chứa group khác, lồng nhau tối đa năm tầng",
+      "Chỉ chứa user, không lồng nhau, một user có thể thuộc nhiều group",
+      "Chứa cả user và role, nhưng mỗi user chỉ thuộc một group"
     ],
     "optionsEn": [
-      "A group has its own credentials and can sign in as an identity",
-      "A group can contain other groups (multi-level nesting)",
-      "A group only contains users, cannot be nested, and a user can belong to multiple groups",
-      "Each user can belong to exactly one group"
+      "It has its own credentials and can sign in as an identity",
+      "It can contain other groups, nested up to five levels deep",
+      "It holds only users, can't be nested, and users can join several",
+      "It holds users and roles, but a user can join only one group"
     ],
     "answer": 2,
     "explanation": "Group chỉ dùng để gán quyền: nó chỉ chứa user (không lồng group), không có credentials, và một user có thể thuộc nhiều group cùng lúc.",
@@ -304,15 +304,15 @@
     "question": "Một EC2 instance cần gọi API của AWS bằng IAM Role. Thứ gì được gắn vào instance để chuyển credentials tạm thời của role vào máy?",
     "questionEn": "An EC2 instance needs to call AWS APIs using an IAM Role. What is attached to the instance to deliver the role's temporary credentials?",
     "options": [
-      "Một bucket policy",
+      "Một trust policy",
       "Một security group",
-      "Một instance profile (chứa role)",
+      "Một instance profile",
       "Một access key đặt trong User Data"
     ],
     "optionsEn": [
-      "A bucket policy",
+      "A trust policy",
       "A security group",
-      "An instance profile (which wraps the role)",
+      "An instance profile",
       "An access key placed in User Data"
     ],
     "answer": 2,

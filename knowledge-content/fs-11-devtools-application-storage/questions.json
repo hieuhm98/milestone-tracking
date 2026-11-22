@@ -38,14 +38,14 @@
     "options": [
       "Đăng nhập đã thất bại, không có cookie nào được đặt",
       "Cookie chỉ lưu ở server nên trình duyệt không có",
-      "Console đang chạy ở origin localhost:4000",
-      "Cookie `token` có cờ HttpOnly nên JavaScript của trang không đọc được"
+      "Console đang chạy ở origin localhost:4000 thay vì ở localhost:5173",
+      "Cookie `token` có cờ HttpOnly nên JavaScript không đọc được"
     ],
     "optionsEn": [
-      "The login failed and no cookie was set",
+      "The login failed, so no cookie of any kind was set",
       "Cookies live only on the server, so the browser has none",
-      "The Console is running on the localhost:4000 origin",
-      "The `token` cookie is HttpOnly, so page JavaScript cannot read it"
+      "The Console is running on the localhost:4000 origin instead of 5173",
+      "The `token` cookie is HttpOnly, so page scripts cannot read it"
     ],
     "answer": 3,
     "explanation": "`COOKIE_OPTIONS` đặt `httpOnly: true`. Trình duyệt vẫn giữ và gửi cookie, nhưng giấu nó khỏi `document.cookie`, nên một script XSS cũng không lấy được token. Panel Application vẫn hiện nó vì DevTools có đặc quyền.",
@@ -68,16 +68,16 @@
     "question": "Vì sao cookie `token` hiện dưới `http://localhost:5173` trong panel Application chứ không phải dưới `localhost:4000`?",
     "questionEn": "Why does the `token` cookie appear under `http://localhost:5173` in the Application panel rather than under `localhost:4000`?",
     "options": [
-      "Trình duyệt chỉ nói chuyện với 5173; proxy của Vite chuyển /api sang Express phía sau",
+      "Trình duyệt chỉ nói chuyện với 5173; proxy của Vite chuyển /api đi",
       "Express được cấu hình đặt Domain của cookie là localhost:5173",
-      "React sao chép cookie từ port 4000 sang port 5173 khi khởi động",
-      "Port 4000 bị chặn cookie vì không phải HTTPS"
+      "React tự sao chép cookie từ port 4000 sang port 5173 khi app khởi động",
+      "Port 4000 bị chặn cookie vì nó không chạy qua HTTPS"
     ],
     "optionsEn": [
-      "The browser only talks to 5173; Vite's proxy forwards /api to Express behind the scenes",
+      "The browser only talks to 5173; Vite's proxy forwards /api onward",
       "Express is configured to set the cookie's Domain to localhost:5173",
       "React copies the cookie from port 4000 to port 5173 at start-up",
-      "Port 4000 blocks cookies because it is not HTTPS"
+      "Port 4000 blocks cookies because it is not served over HTTPS"
     ],
     "answer": 0,
     "explanation": "Response đăng nhập về từ `localhost:5173`, nơi Vite đã proxy request sang port 4000. Với Chrome, cả app là một site, nên cookie gắn với trang 5173. Thực ra cookie bỏ qua port, nên nó cũng sẽ được gửi nếu bạn mở trực tiếp localhost:4000.",
@@ -100,16 +100,16 @@
     "question": "Trong cột SameSite của cookie `token`, bạn thấy `Lax`. Cài đặt này bảo vệ điều gì?",
     "questionEn": "In the SameSite column of the `token` cookie you see `Lax`. What does this setting protect against?",
     "options": [
-      "Nó mã hóa giá trị cookie để không ai đọc được",
-      "Nó làm cookie hết hạn khi đóng trình duyệt",
-      "Cookie không được gửi kèm các POST từ site khác, một lớp chống CSRF cơ bản",
-      "Nó chỉ cho phép gửi cookie qua HTTPS"
+      "Nó mã hóa giá trị cookie để không ai đọc được nội dung bên trong",
+      "Nó làm cookie tự hết hạn ngay khi đóng trình duyệt",
+      "Cookie không được gửi kèm POST từ site khác (chống CSRF)",
+      "Nó chỉ cho phép gửi cookie qua kết nối HTTPS an toàn"
     ],
     "optionsEn": [
       "It encrypts the cookie value so nobody can read it",
       "It makes the cookie expire when the browser closes",
-      "The cookie is not sent on cross-site POSTs, basic CSRF protection",
-      "It only allows the cookie to be sent over HTTPS"
+      "The cookie is not sent on cross-site POSTs (CSRF defence)",
+      "It only allows the cookie to be sent over secure HTTPS"
     ],
     "answer": 2,
     "explanation": "Comment trong `auth-token.js` ghi rõ: `sameSite: 'lax'` nghĩa là không gửi cookie khi một site khác POST tới app, chặn kiểu tấn công CSRF cơ bản. Chỉ gửi qua HTTPS là việc của cờ Secure; thời hạn là việc của Max-Age.",
@@ -164,13 +164,13 @@
     "question": "Bạn sửa giá trị cookie `token` thành `garbage` rồi tick một to-do. Kết quả là gì?",
     "questionEn": "You edit the `token` cookie's value to `garbage` and tick a to-do. What is the result?",
     "options": [
-      "401 \"Your session has expired. Please log in again.\" và app quay về màn hình đăng nhập",
+      "401, và app quay về màn hình đăng nhập",
       "404 \"To-do not found.\" vì token không khớp người dùng nào",
       "200, vì chỉ tên cookie được kiểm tra chứ không phải giá trị",
       "500 \"Something went wrong on the server.\""
     ],
     "optionsEn": [
-      "401 \"Your session has expired. Please log in again.\" and the app returns to the login screen",
+      "401, and the app returns to the login screen",
       "404 \"To-do not found.\" because the token matches no user",
       "200, because only the cookie's name is checked, not its value",
       "500 \"Something went wrong on the server.\""
@@ -199,13 +199,13 @@
       "`POST /api/auth/login` được gửi lại tự động với mật khẩu đã lưu",
       "`GET /api/todos` đọc tên người dùng từ localStorage",
       "Không có request nào: React giữ state qua lần refresh",
-      "`GET /api/auth/me` trả về 200 kèm thông tin user nhờ cookie còn hiệu lực"
+      "`GET /api/auth/me` trả 200 nhờ cookie còn hiệu lực"
     ],
     "optionsEn": [
       "`POST /api/auth/login` is resent automatically with a saved password",
       "`GET /api/todos` reads the user's name from localStorage",
       "No request: React keeps its state across the refresh",
-      "`GET /api/auth/me` returns 200 with the user thanks to the still-valid cookie"
+      "`GET /api/auth/me` returns 200 thanks to the valid cookie"
     ],
     "answer": 3,
     "explanation": "Refresh xóa sạch state của React. `App.jsx` gọi `GET /api/auth/me` khi tải trang; cookie còn hạn nên server trả `{user}` và app hiện lại danh sách. Ở dev bạn có thể thấy request này hai lần do StrictMode.",
@@ -228,16 +228,16 @@
     "question": "Bạn bấm Log out rồi xem Response Headers của `POST /api/auth/logout`. Header nào khiến cookie biến mất?",
     "questionEn": "You click Log out and look at the Response Headers of `POST /api/auth/logout`. Which header makes the cookie disappear?",
     "options": [
-      "`Cache-Control: no-store`",
-      "`Set-Cookie: token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; ...`",
-      "`Content-Type: application/json`",
-      "`Clear-Site-Data: \"storage\"`"
+      "`Cache-Control: no-store, max-age=0`",
+      "`Set-Cookie: token=; Expires=Thu, 01 Jan 1970 ...`",
+      "`Content-Type: application/json; charset=utf-8`",
+      "`Clear-Site-Data: \"storage\", \"cache\"`"
     ],
     "optionsEn": [
-      "`Cache-Control: no-store`",
-      "`Set-Cookie: token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; ...`",
-      "`Content-Type: application/json`",
-      "`Clear-Site-Data: \"storage\"`"
+      "`Cache-Control: no-store, max-age=0`",
+      "`Set-Cookie: token=; Expires=Thu, 01 Jan 1970 ...`",
+      "`Content-Type: application/json; charset=utf-8`",
+      "`Clear-Site-Data: \"storage\", \"cache\"`"
     ],
     "answer": 1,
     "explanation": "`res.clearCookie` gửi lại cookie cùng tên với giá trị rỗng và ngày hết hạn trong quá khứ (1970). Trình duyệt hiểu đó là lệnh xóa. localStorage không bị đụng tới, nên `todo:lastEmail` vẫn còn.",
@@ -260,16 +260,16 @@
     "question": "Trong Local storage, bạn sửa `todo:filter` thành `urgent` rồi refresh. App hiển thị bộ lọc nào?",
     "questionEn": "In Local storage you change `todo:filter` to `urgent` and refresh. Which filter does the app show?",
     "options": [
-      "`urgent`, một bộ lọc mới được tạo tự động",
+      "`urgent`, một bộ lọc mới được app tạo ra tự động",
       "Không bộ lọc nào; app báo lỗi và dừng",
-      "`done`, giá trị hợp lệ gần nhất",
-      "`all`, vì `readFilter` chỉ chấp nhận `all`, `active` hoặc `done`"
+      "`done`, giá trị hợp lệ gần giống nhất",
+      "`all`, vì `urgent` không phải bộ lọc hợp lệ"
     ],
     "optionsEn": [
       "`urgent`, a new filter created automatically",
       "No filter; the app shows an error and stops",
-      "`done`, the closest valid value",
-      "`all`, because `readFilter` only accepts `all`, `active` or `done`"
+      "`done`, the closest-looking valid value",
+      "`all`, because `urgent` is not a valid filter"
     ],
     "answer": 3,
     "explanation": "`readFilter` kiểm tra `FILTERS.includes(saved)`; giá trị lạ thì trả về `'all'`. Bộ nhớ trình duyệt ai cũng sửa được, nên code không tin nó mù quáng. `urgent` vẫn nằm trong storage cho đến khi bạn bấm một nút lọc.",
@@ -326,13 +326,13 @@
     "options": [
       "localStorage quá nhỏ để chứa một JWT",
       "localStorage bị xóa mỗi khi đóng tab, nên người dùng phải đăng nhập liên tục",
-      "Bất kỳ script nào chạy trên trang, kể cả script chèn qua lỗi XSS, đều đọc và gửi token đi được",
+      "Mọi script chạy trên trang, kể cả script chèn qua XSS, đều lấy được token",
       "Server không đọc được localStorage nên không thể xác thực"
     ],
     "optionsEn": [
       "localStorage is too small to hold a JWT",
       "localStorage is wiped whenever the tab closes, so users must log in constantly",
-      "Any script running on the page, including one injected through XSS, can read and send the token away",
+      "Any script on the page, even one injected via XSS, can grab the token",
       "The server cannot read localStorage, so it cannot authenticate"
     ],
     "answer": 2,
@@ -358,7 +358,7 @@
     "options": [
       "Key `todo:lastEmail` trong localStorage không bị xóa khi đăng xuất",
       "Cookie `token` vẫn còn sau khi đăng xuất",
-      "Server trả email của người đăng nhập cuối qua `GET /api/auth/me`",
+      "Server trả về email của người đăng nhập gần nhất qua `GET /api/auth/me`",
       "sessionStorage giữ email cho đến khi đóng trình duyệt"
     ],
     "optionsEn": [
@@ -388,16 +388,16 @@
     "question": "Vì sao nên dùng cửa sổ Incognito (hoặc một Chrome profile khác) để kiểm thử người dùng B trong khi A vẫn đăng nhập ở cửa sổ thường?",
     "questionEn": "Why use an Incognito window (or another Chrome profile) to test user B while A stays logged in in the normal window?",
     "options": [
-      "Incognito có hộp cookie và localStorage riêng, nên hai phiên đăng nhập không đè lên nhau",
-      "Incognito tắt JavaScript nên kiểm thử an toàn hơn",
-      "Incognito tự động dùng HTTPS nên cookie Secure hoạt động",
-      "Incognito kết nối thẳng tới port 4000, bỏ qua proxy"
+      "Incognito có cookie và localStorage riêng, nên hai phiên không đè nhau",
+      "Incognito tắt JavaScript đi nên việc kiểm thử an toàn hơn",
+      "Incognito tự động dùng HTTPS nên các cookie có cờ Secure mới hoạt động được",
+      "Incognito kết nối thẳng tới port 4000, bỏ qua proxy của Vite"
     ],
     "optionsEn": [
-      "Incognito has its own cookie jar and localStorage, so the two logins do not overwrite each other",
-      "Incognito turns off JavaScript, so testing is safer",
+      "Incognito has its own cookies and localStorage, so sessions don't clash",
+      "Incognito turns off JavaScript, so testing there is much safer",
       "Incognito uses HTTPS automatically, so Secure cookies work",
-      "Incognito connects straight to port 4000, skipping the proxy"
+      "Incognito connects straight to port 4000, skipping Vite's proxy entirely"
     ],
     "answer": 0,
     "explanation": "Cùng một cửa sổ chỉ có một cookie `token` cho localhost; đăng nhập B sẽ thay thế A. Incognito có bộ nhớ riêng nên A và B cùng đăng nhập song song. Lưu ý: các cửa sổ Incognito dùng chung một hộp cookie với nhau.",
@@ -420,16 +420,16 @@
     "question": "Người dùng B gọi `fetch('/api/todos/1', { method: 'DELETE' })` trong Console, với 1 là id to-do của người dùng A. Server trả về gì, và vì sao?",
     "questionEn": "User B calls `fetch('/api/todos/1', { method: 'DELETE' })` in the Console, where 1 is the id of user A's to-do. What does the server return, and why?",
     "options": [
-      "204, vì B đã đăng nhập hợp lệ",
+      "204, vì B đã đăng nhập hợp lệ với cookie đúng",
       "403 \"Forbidden\", vì to-do thuộc về người khác",
-      "404 \"To-do not found.\", vì câu DELETE lọc theo cả `id` và `user_id` của B",
-      "401, vì Console không gửi cookie"
+      "404 \"To-do not found.\", vì câu DELETE lọc theo chủ sở hữu",
+      "401, vì lời gọi từ Console không gửi kèm cookie đăng nhập"
     ],
     "optionsEn": [
-      "204, because B is validly logged in",
+      "204, because B is validly logged in with a good cookie",
       "403 \"Forbidden\", because the to-do belongs to someone else",
-      "404 \"To-do not found.\", because the DELETE filters by both `id` and B's `user_id`",
-      "401, because the Console does not send cookies"
+      "404 \"To-do not found.\", because the DELETE filters by owner",
+      "401, because the Console never sends the login cookie"
     ],
     "answer": 2,
     "explanation": "`DELETE FROM todos WHERE id = ? AND user_id = ?` không xóa dòng nào (`changes === 0`) nên server trả 404. Với B, to-do của A không tồn tại, và server không xác nhận id đó có thật. Đây là phép thử chống IDOR.",
@@ -452,7 +452,7 @@
     "question": "Trong ca E2E \"Mật khẩu ngắn\" (đăng ký với mật khẩu 7 ký tự), bằng chứng Network đúng là gì?",
     "questionEn": "In the E2E case \"Short password\" (sign up with a 7-character password), what is the correct Network evidence?",
     "options": [
-      "`POST /api/auth/signup` 400 \"Password must be at least 8 characters.\"",
+      "`POST /api/auth/signup` trả về 400 \"Password must be at least 8 characters.\"",
       "Không có request nào: form trên trình duyệt chặn lại trước khi gọi API",
       "`POST /api/auth/signup` 409",
       "`POST /api/auth/signup` 201, vì server chấp nhận mọi mật khẩu"
@@ -485,15 +485,15 @@
     "questionEn": "`lan@mail.com` already exists. A tester signs up with `LAN@Mail.com` and the app creates a second account. Which E2E case catches this bug, and what should the correct result be?",
     "options": [
       "E2E-05 \"Email sai định dạng\"; kết quả đúng là 400 \"Email is not valid.\"",
-      "E2E-09 \"Email không tồn tại\"; kết quả đúng là 401",
-      "E2E-01 \"Đăng ký hợp lệ\"; kết quả đúng là 201",
-      "E2E-03 \"Trùng email, khác chữ hoa/thường\"; kết quả đúng là 409 \"This email is already registered.\""
+      "E2E-09 \"Email không tồn tại\"; kết quả đúng là 401 Unauthorized",
+      "E2E-01 \"Đăng ký hợp lệ\"; kết quả đúng là 201 Created",
+      "E2E-03 \"Trùng email, khác chữ hoa/thường\"; kết quả đúng là 409"
     ],
     "optionsEn": [
       "E2E-05 \"Invalid email\"; the correct result is 400 \"Email is not valid.\"",
-      "E2E-09 \"Unknown email\"; the correct result is 401",
-      "E2E-01 \"Sign up, valid\"; the correct result is 201",
-      "E2E-03 \"Duplicate, other letter case\"; the correct result is 409 \"This email is already registered.\""
+      "E2E-09 \"Unknown email\"; the correct result is 401 Unauthorized",
+      "E2E-01 \"Sign up, valid\"; the correct result is 201 Created",
+      "E2E-03 \"Duplicate, other letter case\"; the correct result is 409"
     ],
     "answer": 3,
     "explanation": "Server chuyển email về chữ thường trước khi kiểm tra trùng, nên `LAN@Mail.com` phải bị từ chối với 409. Nếu một phiên bản code quên `toLowerCase()`, case E2E-03 là case bắt được lỗi này. Đó là lý do kịch bản có một case riêng cho chữ hoa/thường.",

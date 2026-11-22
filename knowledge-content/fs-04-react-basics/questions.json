@@ -7,13 +7,13 @@
       "React chạy trên server, còn JavaScript thuần chạy trong trình duyệt",
       "React không cần HTML nên trang web tải nhanh hơn nhiều",
       "Với React, bạn mô tả màn hình cho dữ liệu hiện tại và React tự cập nhật DOM",
-      "Với React, bạn phải tự tìm và sửa từng phần tử mỗi khi dữ liệu đổi"
+      "Với React, bạn phải tự tìm và sửa từng phần tử trên trang mỗi khi dữ liệu đổi"
     ],
     "optionsEn": [
       "React runs on the server, while plain JavaScript runs in the browser",
       "React needs no HTML at all, so pages load much faster",
       "With React you describe the screen for the current data and React updates the DOM",
-      "With React you must find and patch each element whenever the data changes"
+      "With React you must find and patch each element on the page yourself whenever data changes"
     ],
     "answer": 2,
     "explanation": "React theo mô hình UI = f(data): bạn mô tả màn hình nên trông thế nào với dữ liệu hiện tại, React tính phần nào của DOM cần đổi. Tự tìm và sửa từng phần tử là cách làm của JavaScript thuần.",
@@ -38,13 +38,13 @@
     "options": [
       "Giao `<div id=\"root\">` trong index.html cho React và vẽ component App vào đó",
       "Tạo một trang HTML mới tên root.html và chuyển trình duyệt sang trang đó",
-      "Gửi request `GET /api/auth/me` để kiểm tra người dùng đã đăng nhập chưa",
+      "Gửi request `GET /api/auth/me` lên server để kiểm tra người dùng đã đăng nhập chưa",
       "Build toàn bộ project vào thư mục `dist/` để chuẩn bị deploy"
     ],
     "optionsEn": [
       "Hands the `<div id=\"root\">` in index.html to React and draws the App component in it",
       "Creates a new HTML page called root.html and sends the browser there",
-      "Sends a `GET /api/auth/me` request to check whether the user is logged in",
+      "Sends a `GET /api/auth/me` request to the server to check whether the user is logged in",
       "Builds the whole project into the `dist/` folder, ready to deploy"
     ],
     "answer": 0,
@@ -69,13 +69,13 @@
     "questionEn": "What does running `npm run build` in the `client/` folder produce?",
     "options": [
       "Một dev server ở cổng 5173 có hot reload",
-      "File database `todo.db` với các bảng users và todos",
+      "File database `todo.db` với hai bảng users và todos đã được tạo sẵn",
       "Thư mục `node_modules/` chứa React và Vite",
       "Thư mục `dist/` gồm HTML, CSS, JS thuần để host trên web server"
     ],
     "optionsEn": [
       "A dev server on port 5173 with hot reload",
-      "The `todo.db` database file with the users and todos tables",
+      "The `todo.db` database file with the users and todos tables already created",
       "The `node_modules/` folder containing React and Vite",
       "A `dist/` folder of plain HTML, CSS and JS to host on a web server"
     ],
@@ -100,13 +100,13 @@
     "question": "Khi chạy app ở chế độ dev, bạn thấy `GET /api/auth/me` xuất hiện hai lần trong terminal của server mỗi khi tải trang. Nguyên nhân khả dĩ nhất là gì?",
     "questionEn": "Running the app in dev mode, you see `GET /api/auth/me` twice in the server terminal on every page load. What is the most likely cause?",
     "options": [
-      "Cookie `token` đã hết hạn nên trình duyệt gửi lại request",
-      "`StrictMode` trong `main.jsx` chạy thêm kiểm tra khi dev; đây là bình thường",
-      "Vite proxy gửi mỗi request tới cả cổng 5173 và 4000",
+      "Cookie `token` đã hết hạn nên trình duyệt tự gửi lại request đó",
+      "`StrictMode` trong `main.jsx` chạy thêm kiểm tra khi dev; bình thường",
+      "Vite proxy gửi mỗi request tới cả hai cổng 5173 và 4000 cùng một lúc",
       "Có hai người dùng khác nhau đang đăng nhập cùng lúc"
     ],
     "optionsEn": [
-      "The `token` cookie has expired, so the browser resends the request",
+      "The `token` cookie expired, so the browser resends the request",
       "`StrictMode` in `main.jsx` runs extra checks in dev; this is normal",
       "The Vite proxy sends every request to both port 5173 and 4000",
       "Two different users are logged in at the same time"
@@ -197,7 +197,7 @@
     "questionEn": "A user clicks \"Log out\" in `TodoPage`. Which code actually sends `POST /api/auth/logout` and switches the screen?",
     "options": [
       "Chính `TodoPage`, vì nút Log out nằm trong component đó",
-      "`AuthForm`, vì nó quản lý mọi thứ liên quan đến đăng nhập",
+      "`AuthForm`, vì component này quản lý mọi thứ liên quan đến việc đăng nhập",
       "`main.jsx`, vì nó tạo root và render lại toàn bộ app",
       "Hàm `handleLogout` trong `App`, được truyền xuống qua prop `onLogout`"
     ],
@@ -228,15 +228,15 @@
     "question": "`const [count, setCount] = useState(0);` trả về gì?",
     "questionEn": "What does `const [count, setCount] = useState(0);` return?",
     "options": [
-      "Một con số duy nhất tự tăng mỗi giây",
-      "Một object chứa toàn bộ props của component",
-      "Một cặp: giá trị hiện tại và hàm setter để đổi giá trị đó",
-      "Một request tới server để lấy giá trị ban đầu"
+      "Một con số duy nhất tự động tăng lên sau mỗi giây",
+      "Một object chứa toàn bộ props được truyền vào component",
+      "Một cặp: giá trị hiện tại và hàm setter",
+      "Một request gửi tới server để lấy giá trị ban đầu về"
     ],
     "optionsEn": [
-      "A single number that increases by itself every second",
+      "A single number that increases by itself every second, like a timer",
       "An object holding all of the component's props",
-      "A pair: the current value and a setter function to change it",
+      "A pair: the current value and its setter",
       "A request to the server to fetch the initial value"
     ],
     "answer": 2,
@@ -260,16 +260,16 @@
     "question": "Một dev viết `onClick={() => { count = count + 1; }}` cho bộ đếm tạo bằng `useState`. Bấm nút, con số trên màn hình không đổi. Vì sao?",
     "questionEn": "A developer writes `onClick={() => { count = count + 1; }}` for a counter made with `useState`. Clicking the button does not change the number on screen. Why?",
     "options": [
-      "Gán trực tiếp không báo cho React; phải gọi `setCount(count + 1)` để có re-render",
+      "Gán trực tiếp không báo cho React; phải gọi `setCount(count + 1)`",
       "Nút thiếu `type=\"submit\"` nên sự kiện click không chạy",
       "React chỉ cập nhật màn hình khi người dùng tải lại trang",
-      "Biến `count` phải được lưu vào `localStorage` trước khi hiển thị"
+      "Biến `count` phải được lưu vào `localStorage` trước khi có thể hiển thị"
     ],
     "optionsEn": [
-      "Assigning directly does not tell React; calling `setCount(count + 1)` triggers a re-render",
+      "Direct assignment doesn't tell React; call `setCount(count + 1)` instead",
       "The button lacks `type=\"submit\"`, so the click event never runs",
       "React only updates the screen when the user reloads the page",
-      "The `count` variable must be saved to `localStorage` before it can show"
+      "The `count` variable must be saved to `localStorage` before it can show up"
     ],
     "answer": 0,
     "explanation": "State chỉ đổi qua setter. Setter báo cho React, React gọi lại component (re-render) và cập nhật DOM. Gán trực tiếp thì React không hề biết.",
@@ -293,15 +293,15 @@
     "questionEn": "In the simplified `TodoPage`, a developer changes the add code to `todos.push(todo); setTodos(todos);`. The list sometimes does not update. What is the cause?",
     "options": [
       "`push` thêm to-do vào cuối thay vì đầu danh sách",
-      "`setTodos` chỉ nhận chuỗi, không nhận mảng",
-      "Thiếu `key` trên thẻ `<ul>` bọc danh sách",
-      "Mảng cũ bị sửa tại chỗ nên React thấy cùng một mảng và có thể bỏ qua re-render"
+      "`setTodos` chỉ nhận chuỗi văn bản, không nhận được mảng",
+      "Thiếu `key` trên thẻ `<ul>` bọc bên ngoài danh sách",
+      "Mảng bị sửa tại chỗ, React thấy như cũ"
     ],
     "optionsEn": [
       "`push` adds the to-do at the end instead of the start of the list",
-      "`setTodos` only accepts strings, not arrays",
-      "The `<ul>` wrapping the list is missing a `key`",
-      "The old array is changed in place, so React sees the same array and may skip the re-render"
+      "`setTodos` only accepts text strings, it cannot take an array",
+      "The `<ul>` wrapping the whole list is missing its `key`",
+      "The array is mutated in place, so React sees no change"
     ],
     "answer": 3,
     "explanation": "React so sánh giá trị cũ và mới. Sửa mảng tại chỗ rồi đưa lại chính mảng đó thì React thấy \"không có gì đổi\". Cách đúng là tạo mảng mới: `setTodos([todo, ...todos])`.",
@@ -327,7 +327,7 @@
       "`onChange` trên ô nhập",
       "`onSubmit={addTodo}` trên thẻ `<form>`",
       "`onClick` trên chip lọc",
-      "`onClick={onLogout}` trên nút Log out"
+      "`onClick={onLogout}` trên nút Log out ở góc"
     ],
     "optionsEn": [
       "`onChange` on the input",
@@ -356,16 +356,16 @@
     "question": "Vì sao danh sách dùng `key={todo.id}` thay vì vị trí trong mảng (0, 1, 2…)?",
     "questionEn": "Why does the list use `key={todo.id}` instead of the position in the array (0, 1, 2…)?",
     "options": [
-      "Vì id giúp server sắp xếp to-do theo ngày tạo",
-      "Vì React yêu cầu key phải là số lớn hơn 0",
-      "Vì id ổn định và duy nhất, nên React ghép đúng dòng cũ với dòng mới khi xóa hoặc lọc",
-      "Vì key được hiển thị bên cạnh tiêu đề để người dùng thấy"
+      "Vì id giúp server sắp xếp danh sách to-do theo ngày tạo",
+      "Vì React yêu cầu key phải là một số nguyên lớn hơn 0",
+      "Vì id ổn định và duy nhất, nên React ghép đúng dòng khi xóa hoặc lọc",
+      "Vì key được hiển thị ngay cạnh tiêu đề để người dùng nhìn thấy được"
     ],
     "optionsEn": [
-      "Because the id helps the server sort to-dos by creation date",
-      "Because React requires keys to be numbers greater than 0",
-      "Because the id is stable and unique, so React matches old and new rows correctly after a delete or filter",
-      "Because the key is displayed next to the title for the user to see"
+      "Because the id helps the server sort the to-do list by creation date",
+      "Because React requires every key to be a whole number greater than 0",
+      "Because ids stay stable and unique, so rows match up after a delete or filter",
+      "Because the key is shown right next to each title so users can see it"
     ],
     "answer": 2,
     "explanation": "React ghép phần tử cũ và mới theo key. Vị trí thay đổi khi xóa hoặc lọc, nên \"dòng 1\" có thể trỏ tới to-do khác và React dùng lại nhầm dòng. Id từ database thì không đổi.",
@@ -388,15 +388,15 @@
     "question": "Với `{error && <p className=\"error\" role=\"alert\">{error}</p>}`, điều gì xảy ra khi `error` là chuỗi rỗng `''`?",
     "questionEn": "With `{error && <p className=\"error\" role=\"alert\">{error}</p>}`, what happens when `error` is the empty string `''`?",
     "options": [
-      "Không hiện gì: chuỗi rỗng là falsy nên khung lỗi không được render",
-      "Hiện một khung đỏ trống không có chữ",
-      "Hiện chữ \"undefined\" trong khung đỏ",
+      "Không hiện gì, vì giá trị đó là falsy",
+      "Hiện một khung đỏ trống, không có dòng chữ nào",
+      "Hiện chữ \"undefined\" bên trong một khung đỏ",
       "React báo lỗi vì `&&` không dùng được trong JSX"
     ],
     "optionsEn": [
-      "Nothing shows: an empty string is falsy, so the error box is not rendered",
-      "An empty red box with no text appears",
-      "The word \"undefined\" appears in a red box",
+      "Nothing shows, because that value is falsy",
+      "An empty red box with no text in it appears",
+      "The word \"undefined\" appears inside a red box",
       "React throws an error because `&&` cannot be used in JSX"
     ],
     "answer": 0,
@@ -455,13 +455,13 @@
       "Đồng ý, vì mọi con số trên màn hình đều phải nằm trong state",
       "Đồng ý, nhưng lưu `remaining` vào `localStorage` để giữ khi tải lại trang",
       "Chuyển việc đếm sang server để trình duyệt không phải tính",
-      "Không cần: `remaining` tính được từ `todos` ở mỗi lần render, nên không bao giờ lệch với danh sách"
+      "Không cần: `remaining` tính được từ `todos` mỗi lần render nên không lệch"
     ],
     "optionsEn": [
       "Agree, because every number on screen must live in state",
       "Agree, but save `remaining` in `localStorage` so it survives a reload",
       "Move the counting to the server so the browser does not compute it",
-      "Not needed: `remaining` can be computed from `todos` on each render, so it can never disagree with the list"
+      "Not needed: `remaining` can be computed from `todos` on every render"
     ],
     "answer": 3,
     "explanation": "Đừng lưu thứ bạn tính được. Một state riêng cho `remaining` buộc mọi thao tác phải nhớ cập nhật nó, dễ dẫn tới lỗi \"bộ đếm ghi 3, danh sách có 2\". Giá trị suy ra luôn khớp với nguồn sự thật `todos`.",
@@ -485,15 +485,15 @@
     "questionEn": "You change the background in the `.chip.active` rule to `#1a7f37` and save. What happens in the browser?",
     "options": [
       "Không có gì cho tới khi bạn chạy `npm run build`",
-      "Chip lọc đang chọn chuyển xanh lá qua hot reload; nút Add vẫn xanh dương",
+      "Chip lọc đang chọn chuyển xanh lá qua hot reload; nút Add vẫn xanh",
       "Mọi nút trong app, kể cả Add và Log out, đều chuyển xanh lá",
-      "Trang báo lỗi vì CSS không được phép sửa khi dev server đang chạy"
+      "Trang báo lỗi vì CSS không được phép sửa trong lúc dev server đang chạy"
     ],
     "optionsEn": [
       "Nothing, until you run `npm run build`",
-      "The selected filter chip turns green through hot reload; the Add button stays blue",
+      "The selected filter chip turns green via hot reload; the Add button stays blue",
       "Every button in the app, including Add and Log out, turns green",
-      "The page shows an error because CSS cannot be edited while the dev server runs"
+      "The page shows an error because CSS cannot be edited while the dev server is running"
     ],
     "answer": 1,
     "explanation": "Vite hot reload áp dụng CSS mới ngay khi lưu. Rule `.chip.active` chỉ áp dụng cho chip đang chọn; nút Add dùng rule `button` riêng.",
@@ -516,16 +516,16 @@
     "question": "Một báo cáo lỗi ghi \"bộ đếm N left bị sai\". Trong tab Components của React DevTools, bạn có thể kiểm tra gì?",
     "questionEn": "A bug report says \"the N left counter is wrong\". In the React DevTools Components tab, what can you check?",
     "options": [
-      "Props và các giá trị State của `TodoPage`, ví dụ mảng `todos` và trường `done` của từng to-do",
-      "Mã hash mật khẩu của người dùng trong bảng `users`",
+      "Props và State của `TodoPage`, ví dụ mảng `todos` và trường `done`",
+      "Mã hash mật khẩu của người dùng hiện đang được lưu trong bảng `users`",
       "Thời gian phản hồi của từng request trong tab Network",
-      "Nội dung cookie `token` HttpOnly"
+      "Nội dung của cookie `token` HttpOnly mà server đã gửi"
     ],
     "optionsEn": [
-      "`TodoPage`'s props and State values, such as the `todos` array and each to-do's `done` field",
-      "The user's password hash in the `users` table",
-      "The response time of each request in the Network tab",
-      "The contents of the HttpOnly `token` cookie"
+      "`TodoPage`'s props and State, such as the `todos` array and `done` fields",
+      "The user's password hash as stored in the `users` table",
+      "The response time of each request, exactly as it is shown in the Network tab",
+      "The contents of the HttpOnly `token` cookie set by the server"
     ],
     "answer": 0,
     "explanation": "Tab Components hiện cây component; chọn `TodoPage` sẽ thấy props (`user`, `onLogout`, `onSessionExpired`) và các hook State theo thứ tự. So `todos` với con số trên màn hình để biết lỗi nằm ở dữ liệu hay ở phép tính.",
@@ -548,13 +548,13 @@
     "question": "Bạn viết user story cho màn hình \"Danh sách đơn hàng\" có tải dữ liệu từ API. Bộ trạng thái nào nên có trong acceptance criteria và mockup?",
     "questionEn": "You are writing a user story for an \"Order list\" screen that loads data from an API. Which set of states belongs in the acceptance criteria and mockups?",
     "options": [
-      "Chỉ trạng thái thành công, vì dev sẽ tự lo các trường hợp còn lại",
+      "Chỉ trạng thái thành công, vì dev sẽ tự lo các trường hợp còn lại theo cách của họ",
       "Chỉ trạng thái lỗi, vì thành công là mặc định",
       "Trạng thái thành công và màn hình 404 khi sai URL",
       "Loading, empty, error và success, mỗi trạng thái có câu chữ và vị trí hiển thị"
     ],
     "optionsEn": [
-      "Only the success state, since developers will handle the rest",
+      "Only the success state, since developers will handle the rest as they see fit",
       "Only the error state, since success is the default",
       "The success state and a 404 page for a wrong URL",
       "Loading, empty, error and success, each with its wording and placement"

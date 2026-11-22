@@ -84,16 +84,16 @@
     "question": "Đội DevOps muốn thiết lập replication cross-region (CRR) cho một bucket. Điều kiện tiên quyết bắt buộc là gì?",
     "questionEn": "A DevOps team wants to set up cross-region replication (CRR) for a bucket. What is the mandatory prerequisite?",
     "options": [
-      "Bật Transfer Acceleration trên cả hai bucket",
-      "Bật versioning trên CẢ bucket nguồn và bucket đích",
-      "Hai bucket phải cùng một Region",
-      "Bật static website hosting"
+      "Bật Transfer Acceleration trên cả bucket nguồn và đích",
+      "Bật versioning trên cả bucket nguồn và bucket đích",
+      "Hai bucket phải cùng Region và cùng tài khoản",
+      "Bật Object Lock trên bucket đích"
     ],
     "optionsEn": [
-      "Enable Transfer Acceleration on both buckets",
-      "Enable versioning on BOTH the source and destination buckets",
-      "Both buckets must be in the same Region",
-      "Enable static website hosting"
+      "Transfer Acceleration enabled on both source and destination",
+      "Versioning enabled on both source and destination buckets",
+      "Both buckets placed in the same Region and the same account",
+      "Object Lock enabled on the destination bucket"
     ],
     "answer": 1,
     "explanation": "S3 Replication (cả CRR và SRR) YÊU CẦU versioning được bật trên cả bucket nguồn VÀ bucket đích. CRR còn yêu cầu hai bucket ở Region KHÁC nhau (nên đáp án 'cùng Region' sai). Replication là async.",
@@ -125,13 +125,13 @@
     "questionEn": "An architecture has bucket A → bucket B (replication) and bucket B → bucket C (replication). Where will a new object written to bucket A appear?",
     "options": [
       "Ở cả bucket B và bucket C",
-      "Chỉ ở bucket B, KHÔNG tự động tới bucket C",
+      "Chỉ ở bucket B",
       "Chỉ ở bucket C",
       "Không ở đâu cho tới khi chạy Batch Operations"
     ],
     "optionsEn": [
       "In both bucket B and bucket C",
-      "Only in bucket B, NOT automatically in bucket C",
+      "Only in bucket B",
       "Only in bucket C",
       "Nowhere until Batch Operations runs"
     ],
@@ -145,13 +145,13 @@
     "questionEn": "An application needs to upload an 8 GB file to S3. Which statement is TRUE about this upload?",
     "options": [
       "Không thể upload vì vượt giới hạn object 5 GB",
-      "Multipart upload là BẮT BUỘC vì object lớn hơn 5 GB",
+      "Bắt buộc dùng multipart upload vì object lớn hơn 5 GB",
       "Phải nén file xuống dưới 5 GB trước",
       "Chỉ upload được qua Transfer Acceleration"
     ],
     "optionsEn": [
       "It cannot be uploaded because it exceeds the 5 GB object limit",
-      "Multipart upload is REQUIRED because the object is larger than 5 GB",
+      "Multipart upload is required, since it is larger than 5 GB",
       "The file must be compressed below 5 GB first",
       "It can only be uploaded via Transfer Acceleration"
     ],
@@ -166,14 +166,14 @@
     "options": [
       "S3 Transfer Acceleration",
       "S3 Byte-Range Fetch",
-      "S3 Requester Pays",
-      "S3 Inventory"
+      "S3 Cross-Region Replication",
+      "S3 Intelligent-Tiering"
     ],
     "optionsEn": [
       "S3 Transfer Acceleration",
       "S3 Byte-Range Fetch",
-      "S3 Requester Pays",
-      "S3 Inventory"
+      "S3 Cross-Region Replication",
+      "S3 Intelligent-Tiering"
     ],
     "answer": 0,
     "explanation": "S3 Transfer Acceleration tăng tốc upload/download bằng cách định tuyến qua CloudFront edge locations gần user, rồi truyền nội bộ qua mạng lưới AWS tới Region đích. Rất hữu ích cho upload xuyên lục địa. Byte-range fetch là để tải một phần object.",
@@ -184,16 +184,16 @@
     "question": "Đội muốn tự động chuyển object sang Standard-IA sau 30 ngày, sang Glacier sau 90 ngày, và XÓA object sau 365 ngày. Nên dùng gì?",
     "questionEn": "A team wants to automatically move objects to Standard-IA after 30 days, to Glacier after 90 days, and DELETE objects after 365 days. What should they use?",
     "options": [
-      "S3 Replication",
-      "Lifecycle rules với transition và expiration actions",
-      "S3 Batch Operations thủ công mỗi ngày",
-      "Versioning"
+      "Same-Region Replication sang bucket IA",
+      "Lifecycle rules (transition + expiration)",
+      "Job S3 Batch Operations chạy theo lịch",
+      "Intelligent-Tiering với các archive tier"
     ],
     "optionsEn": [
-      "S3 Replication",
-      "Lifecycle rules with transition and expiration actions",
-      "Manual S3 Batch Operations every day",
-      "Versioning"
+      "Same-Region Replication to an IA bucket",
+      "Lifecycle rules (transition + expiration)",
+      "Scheduled S3 Batch Operations jobs",
+      "Intelligent-Tiering with archive tiers"
     ],
     "answer": 1,
     "explanation": "Lifecycle rules tự động hóa vòng đời object: transition actions chuyển sang lớp rẻ hơn theo thời gian, và expiration actions xóa object sau N ngày. Đây chính xác là kịch bản chuyển tier rồi xóa mà không cần thao tác thủ công.",
@@ -204,16 +204,16 @@
     "question": "Sau khi bật versioning, người dùng vô tình 'xóa' một object quan trọng. Điều gì thực sự xảy ra và làm sao khôi phục?",
     "questionEn": "After versioning is enabled, a user accidentally 'deletes' an important object. What actually happens and how can it be recovered?",
     "options": [
-      "Object bị xóa vĩnh viễn, không khôi phục được",
-      "S3 thêm một delete marker; xóa delete marker đó để khôi phục",
-      "Phải khôi phục từ backup bên ngoài",
-      "Object tự động chuyển sang Glacier"
+      "Object bị xóa vĩnh viễn cùng mọi version của nó",
+      "S3 thêm delete marker; xóa marker đó để khôi phục",
+      "Phải khôi phục từ một bản backup bên ngoài",
+      "Object chuyển sang Glacier và phải restore từ đó"
     ],
     "optionsEn": [
-      "The object is permanently deleted and cannot be recovered",
-      "S3 adds a delete marker; remove that delete marker to recover it",
-      "It must be restored from an external backup",
-      "The object automatically moves to Glacier"
+      "It is permanently deleted, along with all of its versions",
+      "A delete marker is added; remove it to restore the object",
+      "It must be restored from an external backup copy",
+      "It moves to Glacier and must be restored from there"
     ],
     "answer": 1,
     "explanation": "Với versioning bật, một lệnh xóa thông thường KHÔNG xóa dữ liệu mà chỉ thêm một delete marker lên trên. Object cũ vẫn còn dưới dạng version trước đó; xóa delete marker sẽ khôi phục lại object. Đây là lý do versioning bảo vệ khỏi xóa nhầm.",
@@ -245,15 +245,15 @@
     "questionEn": "Which statement is TRUE about the durability and availability of S3 storage classes?",
     "options": [
       "Mỗi lớp có durability khác nhau, One Zone-IA thấp nhất",
-      "Tất cả lớp có 11 số 9 durability; availability và số AZ mới khác nhau",
-      "Standard có durability cao hơn Glacier",
-      "Availability của mọi lớp đều là 99.99%"
+      "Mọi lớp đều có 11 số 9 durability; availability và số AZ khác nhau",
+      "Standard có durability và availability cao hơn Glacier",
+      "Mọi lớp đều có availability 99.99% trên ít nhất 3 AZ"
     ],
     "optionsEn": [
-      "Each class has different durability, with One Zone-IA the lowest",
-      "All classes have 11 nines durability; only availability and AZ count differ",
-      "Standard has higher durability than Glacier",
-      "Every class has 99.99% availability"
+      "Each class has different durability, One Zone-IA the lowest",
+      "All share 11 nines durability; availability and AZ count differ",
+      "Standard has higher durability and availability than Glacier",
+      "Every class offers 99.99% availability across at least 3 AZs"
     ],
     "answer": 1,
     "explanation": "Mọi S3 storage class đều có cùng độ bền 11 số 9 (99.999999999%). Cái khác nhau là AVAILABILITY và số AZ: ví dụ Standard 99.99%, Standard-IA 99.9%, One Zone-IA 99.5% (chỉ 1 AZ). Durability không thay đổi giữa các lớp.",
@@ -324,16 +324,16 @@
     "question": "Quy tắc đặt tên bucket S3 là gì?",
     "questionEn": "What is the rule for S3 bucket names?",
     "options": [
-      "Phải là duy nhất TOÀN CẦU, trên tất cả tài khoản AWS",
-      "Duy nhất trong tài khoản của bạn",
-      "Duy nhất trong mỗi Region",
-      "Duy nhất trong mỗi VPC"
+      "Duy nhất toàn cầu, trên mọi tài khoản AWS",
+      "Duy nhất trong tài khoản AWS của bạn",
+      "Duy nhất theo từng Region, trên mọi tài khoản",
+      "Duy nhất theo từng tài khoản và Region"
     ],
     "optionsEn": [
-      "They must be GLOBALLY unique across every AWS account",
-      "Unique within your own account",
-      "Unique within each Region",
-      "Unique within each VPC"
+      "Globally unique across all AWS accounts",
+      "Unique within your own AWS account",
+      "Unique per Region, across all accounts",
+      "Unique per account and per Region"
     ],
     "answer": 0,
     "explanation": "Tên bucket nằm trong một không gian tên toàn cầu — nếu tài khoản khác đã lấy tên đó, bạn không dùng được. Bản thân bucket vẫn nằm trong một Region cụ thể.",

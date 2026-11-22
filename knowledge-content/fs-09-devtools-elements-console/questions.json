@@ -5,13 +5,13 @@
     "questionEn": "While testing the to-do app you see the server returned the correct list of to-dos, but the screen shows them in the wrong order. Where is the bug most likely?",
     "options": [
       "Ở database, vì dữ liệu được lưu sai thứ tự",
-      "Ở frontend, vì dữ liệu đúng nhưng cách hiển thị sai",
+      "Ở frontend, trong code sắp xếp và vẽ ra danh sách",
       "Ở backend, vì mọi lỗi hiển thị đều bắt nguồn từ API",
       "Ở trình duyệt Chrome, cần đổi sang trình duyệt khác"
     ],
     "optionsEn": [
       "In the database, because the data is stored in the wrong order",
-      "In the frontend, because the data is right but the display is wrong",
+      "In the frontend code that sorts and renders the list",
       "In the backend, because every display problem starts in the API",
       "In Chrome itself, so you should switch to another browser"
     ],
@@ -101,7 +101,7 @@
     "questionEn": "In Elements the filter chip says `all`, but the screen shows \"All\" with a capital letter. Why?",
     "options": [
       "React tự viết hoa chữ cái đầu của mọi nút khi render",
-      "Elements hiện bản HTML cũ, chưa cập nhật theo màn hình",
+      "Elements đang hiện bản HTML cũ, chưa được cập nhật theo màn hình hiện tại",
       "Rule CSS `.chip { text-transform: capitalize; }` đổi cách hiển thị",
       "Trình duyệt tự viết hoa chữ trong mọi thẻ button"
     ],
@@ -134,7 +134,7 @@
     "options": [
       "Nó đã bị một rule mạnh hơn ghi đè nên không có hiệu lực",
       "Nó có lỗi cú pháp và trình duyệt không đọc được",
-      "Nó sẽ bị xóa khỏi file styles.css ở lần refresh tới",
+      "Nó sẽ bị xóa hẳn khỏi file styles.css ở lần refresh trang tiếp theo",
       "Nó chỉ áp dụng khi phần tử đang ở trạng thái :hover"
     ],
     "optionsEn": [
@@ -230,14 +230,14 @@
     "options": [
       "Thu nhỏ trang bằng Ctrl + dấu trừ cho tới khi trông vừa",
       "Chạy Lighthouse ở chế độ Mobile và đọc điểm Performance",
-      "Bật Device Toolbar (Ctrl+Shift+M), chọn Responsive và gõ chiều rộng 320",
-      "Mở Console và gõ `window.innerWidth = 320`"
+      "Bật Device Toolbar (Ctrl+Shift+M), chọn Responsive, gõ rộng 320",
+      "Mở Console và gõ `window.innerWidth = 320` để co cả trang lại cho vừa"
     ],
     "optionsEn": [
-      "Zoom the page out with Ctrl + minus until it looks right",
-      "Run Lighthouse in Mobile mode and read the Performance score",
-      "Turn on the Device Toolbar (Ctrl+Shift+M), choose Responsive and type a width of 320",
-      "Open the Console and type `window.innerWidth = 320`"
+      "Zoom the page out with Ctrl + minus until it looks about right",
+      "Run Lighthouse in Mobile mode and read its Performance score",
+      "Turn on the Device Toolbar (Ctrl+Shift+M) and set Responsive width to 320",
+      "Open the Console and type `window.innerWidth = 320` to shrink the whole page"
     ],
     "answer": 2,
     "explanation": "Device Toolbar vẽ trang trong một viewport có kích thước bạn chọn; gõ 320 ở chế độ Responsive là bài kiểm tra 320 px trong bài. Zoom trình duyệt không cho viewport 320 px thật, Lighthouse không kiểm tra bố cục, và gán innerWidth không đổi kích thước trang.",
@@ -262,13 +262,13 @@
     "options": [
       "Bug nghiêm trọng: server từ chối mọi request nên cần báo ngay",
       "Bug frontend: app gọi API hai lần nên làm server quá tải",
-      "Bình thường: app hỏi \"có ai đăng nhập không?\" và nhận \"không\"; hai lần là do StrictMode ở dev",
-      "Cookie `token` bị hỏng và cần xóa cache trình duyệt"
+      "Bình thường: app hỏi đã đăng nhập chưa và nhận câu trả lời \"chưa\"",
+      "Cookie `token` đã bị hỏng và cần xóa cache trình duyệt rồi thử lại"
     ],
     "optionsEn": [
       "A serious bug: the server rejects every request, so report it at once",
       "A frontend bug: the app calls the API twice and overloads the server",
-      "Expected: the app asks \"is anyone logged in?\" and hears \"no\"; twice because of StrictMode in dev",
+      "Expected: the app asks if anyone is logged in and the answer is no",
       "The `token` cookie is corrupted and the browser cache must be cleared"
     ],
     "answer": 2,
@@ -292,13 +292,13 @@
     "question": "Trong Console của bản dev, bạn thấy dòng đỏ `Each child in a list should have a unique \"key\" prop.` nhưng danh sách vẫn hiển thị bình thường. Nên hiểu thế nào?",
     "questionEn": "In the dev build's Console you see a red line `Each child in a list should have a unique \"key\" prop.` but the list still displays fine. How should you read it?",
     "options": [
-      "React ghi cảnh báo này bằng console.error; thiếu key có thể làm sai dòng giữ sai trạng thái, nên vẫn cần báo",
-      "Đây là lỗi của server khi trả về danh sách to-do bị trùng id",
-      "Vì trang vẫn chạy, đây chắc chắn là lỗi giả và nên bỏ qua",
-      "Người dùng production cũng sẽ thấy dòng này và bị crash trang"
+      "Đây là cảnh báo thật của React; thiếu key có thể làm sai dòng, nên vẫn cần báo",
+      "Đây là lỗi của server khi trả về danh sách to-do có id bị trùng nhau",
+      "Vì trang vẫn chạy bình thường, đây chắc chắn là một lỗi giả và nên bỏ qua nó",
+      "Người dùng production cũng sẽ thấy dòng này và trang của họ bị crash"
     ],
     "optionsEn": [
-      "React logs this with console.error; missing keys can leave the wrong row with the wrong state, so report it",
+      "It is a real React warning; missing keys can mix up rows, so report it",
       "It is a server error caused by the to-do list containing duplicate ids",
       "Since the page still works, it is certainly a false alarm to ignore",
       "Production users will see this line too and their page will crash"
@@ -326,14 +326,14 @@
     "options": [
       "Bug: số phần tử trên màn hình phải luôn bằng nhãn \"N left\"",
       "Bug: querySelectorAll đếm sai vì React chưa render xong",
-      "Bug backend: server trả thiếu một to-do",
-      "Không phải bug: \"N left\" đếm việc chưa xong; so sánh ở bộ lọc active mới phải bằng nhau"
+      "Bug backend: server đã trả về thiếu mất một to-do trong danh sách",
+      "Không phải bug: một số đếm mọi việc, số kia chỉ đếm việc chưa xong"
     ],
     "optionsEn": [
       "A bug: the number of items on screen must always equal the \"N left\" label",
       "A bug: querySelectorAll miscounts because React has not finished rendering",
       "A backend bug: the server returned one to-do too few",
-      "Not a bug: \"N left\" counts unfinished items; the numbers must match only under the active filter"
+      "Not a bug: one counts every item, the other only unfinished ones"
     ],
     "answer": 3,
     "explanation": "Danh sách hiện các việc khớp bộ lọc (ở all là cả 4), còn \"N left\" đếm mọi việc chưa xong (3). Chỉ khi chọn bộ lọc active hai con số mới phải bằng nhau.",
@@ -356,16 +356,16 @@
     "question": "Bạn cần tái hiện một bug xảy ra ngay lúc đăng nhập, nhưng mỗi lần trang tải lại thì các thông báo trong Console biến mất. Nên làm gì?",
     "questionEn": "You need to reproduce a bug that happens right at login, but every time the page reloads the Console messages disappear. What should you do?",
     "options": [
-      "Chụp màn hình Console thật nhanh trước khi trang tải lại",
-      "Mở cài đặt Console (bánh răng) và tick Preserve log trước khi tái hiện",
+      "Chụp màn hình Console thật nhanh ngay trước khi trang tải lại",
+      "Bật Preserve log trong cài đặt Console trước khi tái hiện",
       "Chuyển Default levels sang Verbose để hiện mọi thông báo",
       "Gõ `$0` trong Console để khôi phục các thông báo cũ"
     ],
     "optionsEn": [
       "Screenshot the Console quickly before the page reloads",
-      "Open the Console settings (gear) and tick Preserve log before reproducing",
+      "Turn on Preserve log in the Console settings before reproducing",
       "Switch Default levels to Verbose to show every message",
-      "Type `$0` in the Console to bring the old messages back"
+      "Type `$0` in the Console to bring every one of the old messages back"
     ],
     "answer": 1,
     "explanation": "Console bị xóa khi trang tải lại hoặc chuyển trang. Preserve log giữ lại thông báo qua các lần tải lại, rất cần cho bug liên quan tới refresh hay đăng nhập.",
@@ -420,13 +420,13 @@
     "question": "Bạn chạy Lighthouse trên app to-do ở dev server (localhost:5173) và điểm Performance thấp. Cách hiểu nào hợp lý nhất?",
     "questionEn": "You run Lighthouse on the to-do app on the dev server (localhost:5173) and the Performance score is low. What is the most sensible reading?",
     "options": [
-      "Bản dev cố ý không tối ưu nên đừng tin điểm Performance; tập trung vào Accessibility và chạy trong Incognito",
+      "Bản dev cố ý không tối ưu, nên đừng tin điểm Performance ở đây",
       "App chắc chắn sẽ chậm trên production nên cần báo bug Performance ngay",
       "Lighthouse chỉ chạy đúng trên điện thoại thật, không chạy được trên laptop",
       "Điểm thấp nghĩa là app có lỗi bảo mật trong cookie đăng nhập"
     ],
     "optionsEn": [
-      "The dev build is deliberately unoptimised, so ignore Performance; focus on Accessibility and run in Incognito",
+      "The dev build is deliberately unoptimised, so ignore Performance here",
       "The app will certainly be slow in production, so file a Performance bug at once",
       "Lighthouse only works properly on a real phone, not on a laptop",
       "A low score means the app has a security flaw in its login cookie"
@@ -485,7 +485,7 @@
     "questionEn": "Which test data is most likely to reveal an overflow bug in the to-do list at a width of 320 px?",
     "options": [
       "Một tiêu đề ngắn như `Buy milk`",
-      "Một câu dài 150 ký tự có dấu cách giữa các từ",
+      "Một câu dài 150 ký tự, có dấu cách bình thường giữa các từ",
       "Một chuỗi 60 ký tự liền không có dấu cách, ví dụ một URL",
       "Một tiêu đề rỗng, để xem thông báo lỗi"
     ],
@@ -516,16 +516,16 @@
     "question": "Bạn chỉ muốn chụp riêng danh sách `ul.todos` (không lấy header hay bộ lọc) để đính kèm bug report. Cách nhanh nhất là gì?",
     "questionEn": "You want a screenshot of just the `ul.todos` list (no header, no filters) for a bug report. What is the quickest way?",
     "options": [
-      "Chọn `ul.todos` trong Elements, rồi chạy Capture node screenshot từ Command Menu",
+      "Chọn `ul.todos` trong Elements rồi chạy Capture node screenshot",
       "Chạy Capture full size screenshot rồi cắt ảnh bằng Paint",
-      "Bật Device Toolbar và chọn Show device frame",
-      "Gõ `copy($0)` trong Console để sao chép hình ảnh danh sách"
+      "Bật Device Toolbar rồi chọn Show device frame để chụp",
+      "Gõ `copy($0)` trong Console để sao chép hình ảnh của cả danh sách"
     ],
     "optionsEn": [
-      "Select `ul.todos` in Elements, then run Capture node screenshot from the Command Menu",
+      "Select `ul.todos` in Elements, then run Capture node screenshot",
       "Run Capture full size screenshot, then crop it in Paint",
       "Turn on the Device Toolbar and choose Show device frame",
-      "Type `copy($0)` in the Console to copy an image of the list"
+      "Type `copy($0)` in the Console to copy an image of the whole list"
     ],
     "answer": 0,
     "explanation": "Capture node screenshot chụp đúng phần tử đang chọn trong Elements. Ảnh được lưu thành PNG trong thư mục Downloads.",
@@ -548,16 +548,16 @@
     "question": "Phần Expected/Actual nào trong bug report giao diện là tốt nhất?",
     "questionEn": "Which Expected/Actual pair is the best for a UI bug report?",
     "options": [
-      "Expected: trông đẹp. Actual: trông sai sai.",
-      "Expected: như thiết kế. Actual: không như thiết kế.",
-      "Expected: không có lỗi. Actual: có lỗi trong Console.",
-      "Expected: tiêu đề xuống dòng trong card, không có thanh cuộn ngang. Actual: tiêu đề tràn qua mép phải, trang cuộn ngang."
+      "Expected: trông đẹp và gọn gàng như mọi khi. Actual: trông sai sai, có gì đó không ổn lắm.",
+      "Expected: giống như bản thiết kế. Actual: không giống như bản thiết kế đã duyệt.",
+      "Expected: không có lỗi nào. Actual: có lỗi màu đỏ hiện ra trong tab Console.",
+      "Expected: tiêu đề xuống dòng trong card. Actual: tiêu đề tràn mép phải, trang cuộn ngang."
     ],
     "optionsEn": [
-      "Expected: looks nice. Actual: looks a bit wrong.",
-      "Expected: as designed. Actual: not as designed.",
-      "Expected: no errors. Actual: there is an error in the Console.",
-      "Expected: the title wraps inside the card, no horizontal scrollbar. Actual: the title runs past the right edge; the page scrolls sideways."
+      "Expected: looks nice and tidy as it usually does. Actual: looks a bit wrong and not quite right.",
+      "Expected: matches the design. Actual: does not match the approved design at all.",
+      "Expected: no errors at all. Actual: there is a red error showing in the Console tab.",
+      "Expected: title wraps in the card. Actual: it overflows right and the page scrolls sideways."
     ],
     "answer": 3,
     "explanation": "Expected và actual phải mô tả cụ thể, trích đúng chữ hoặc giá trị, để developer hiểu ngay mà không cần hỏi lại. Các câu mơ hồ như \"trông sai\" hay \"có lỗi\" buộc developer phải đoán.",

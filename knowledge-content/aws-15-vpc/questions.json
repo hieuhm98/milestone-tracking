@@ -24,16 +24,16 @@
     "question": "Điều gì quyết định một subnet là public hay private?",
     "questionEn": "What determines whether a subnet is public or private?",
     "options": [
-      "Kích thước CIDR block của subnet",
-      "Một thuộc tính 'public' bật/tắt trên subnet",
-      "Route table của subnet có tuyến 0.0.0.0/0 trỏ tới Internet Gateway hay không",
-      "Subnet nằm ở AZ số chẵn hay lẻ"
+      "Route table có route 0.0.0.0/0 tới NAT Gateway hay không",
+      "Thiết lập 'auto-assign public IPv4' có được bật hay không",
+      "Route table có route 0.0.0.0/0 tới Internet Gateway hay không",
+      "NACL của subnet có cho inbound từ 0.0.0.0/0 hay không"
     ],
     "optionsEn": [
-      "The size of the subnet's CIDR block",
-      "A 'public' on/off attribute on the subnet",
-      "Whether the subnet's route table has a 0.0.0.0/0 route to an Internet Gateway",
-      "Whether the subnet is in an even- or odd-numbered AZ"
+      "Whether its route table sends 0.0.0.0/0 to a NAT Gateway",
+      "Whether the 'auto-assign public IPv4' setting is turned on",
+      "Whether its route table has 0.0.0.0/0 to an Internet Gateway",
+      "Whether its NACL allows inbound traffic from 0.0.0.0/0"
     ],
     "answer": 2,
     "explanation": "Subnet là public khi route table của nó có tuyến mặc định trỏ tới IGW. Bản thân subnet không có thuộc tính public/private cố hữu.",
@@ -44,16 +44,16 @@
     "question": "Sự khác biệt cốt lõi giữa Security Group và NACL là gì?",
     "questionEn": "What is the core difference between a Security Group and a NACL?",
     "options": [
-      "Security Group là stateless; NACL là stateful",
-      "Security Group là stateful (cấp instance); NACL là stateless (cấp subnet)",
-      "Cả hai đều stateful nhưng khác cấp áp dụng",
-      "Security Group có luật Deny; NACL chỉ có luật Allow"
+      "SG: stateless, cấp instance; NACL: stateful, cấp subnet",
+      "SG: stateful, cấp instance; NACL: stateless, cấp subnet",
+      "SG: stateful, cấp subnet; NACL: stateless, cấp instance",
+      "SG: hỗ trợ luật Deny; NACL: chỉ có luật Allow"
     ],
     "optionsEn": [
-      "A Security Group is stateless; a NACL is stateful",
-      "A Security Group is stateful (instance level); a NACL is stateless (subnet level)",
-      "Both are stateful but apply at different levels",
-      "A Security Group has Deny rules; a NACL has Allow rules only"
+      "SG: stateless, instance level; NACL: stateful, subnet level",
+      "SG: stateful, instance level; NACL: stateless, subnet level",
+      "SG: stateful, subnet level; NACL: stateless, instance level",
+      "SG: supports Deny rules; NACL: supports Allow rules only"
     ],
     "answer": 1,
     "explanation": "SG là stateful (tự cho phép lưu lượng phản hồi) và áp dụng ở cấp instance. NACL là stateless (phải mở cả 2 chiều) và áp dụng ở cấp subnet.",
@@ -85,14 +85,14 @@
     "questionEn": "Instances in a private subnet need to reach the Internet to download updates but must NOT accept inbound connections from the Internet. What is the MOST suitable solution?",
     "options": [
       "Gắn Internet Gateway trực tiếp vào private subnet",
-      "Gán Public IP cho từng instance",
-      "Định tuyến lưu lượng ra qua NAT Gateway đặt ở public subnet",
+      "Gán Public IP cho từng instance và siết Security Group",
+      "Định tuyến ra ngoài qua NAT Gateway đặt ở public subnet",
       "Tạo VPC Peering tới một VPC khác có Internet"
     ],
     "optionsEn": [
       "Attach an Internet Gateway directly to the private subnet",
-      "Assign a Public IP to each instance",
-      "Route outbound traffic through a NAT Gateway placed in a public subnet",
+      "Assign a public IP to each instance and restrict the SG",
+      "Route outbound traffic via a NAT Gateway in a public subnet",
       "Create VPC Peering to another VPC that has Internet access"
     ],
     "answer": 2,
@@ -104,16 +104,16 @@
     "question": "Ưu điểm chính của NAT Gateway so với NAT Instance là gì?",
     "questionEn": "What is the main advantage of a NAT Gateway over a NAT Instance?",
     "options": [
-      "NAT Gateway cho phép gắn Security Group",
-      "NAT Gateway rẻ hơn trong mọi trường hợp",
-      "NAT Gateway được AWS quản lý hoàn toàn, tự scale và có độ sẵn sàng cao",
-      "NAT Gateway có thể dùng làm bastion host"
+      "Hỗ trợ gắn Security Group nên lọc traffic được tại đó",
+      "Rẻ hơn trong mọi trường hợp và không tính phí theo GB",
+      "Được AWS quản lý, tự scale và có độ sẵn sàng cao trong một AZ",
+      "Có thể kiêm luôn bastion host để SSH vào các private subnet"
     ],
     "optionsEn": [
-      "A NAT Gateway lets you attach a Security Group",
-      "A NAT Gateway is always cheaper",
-      "A NAT Gateway is fully AWS-managed, auto-scales, and is highly available",
-      "A NAT Gateway can be used as a bastion host"
+      "It supports Security Groups, so traffic can be filtered there",
+      "It is cheaper in every case and has no per-GB charge",
+      "Managed by AWS, auto-scaling, and highly available within an AZ",
+      "It can double as a bastion host for SSH into the private subnets"
     ],
     "answer": 2,
     "explanation": "NAT Gateway được AWS quản lý, tự động scale băng thông và HA trong AZ — bạn không phải tự vá lỗi hay lo scale như NAT Instance.",
@@ -164,16 +164,16 @@
     "question": "VPC A peer với VPC B, và VPC B peer với VPC C. VPC A có tự động giao tiếp được với VPC C không?",
     "questionEn": "VPC A is peered with VPC B, and VPC B is peered with VPC C. Can VPC A automatically communicate with VPC C?",
     "options": [
-      "Có, peering là bắc cầu (transitive)",
-      "Không, VPC Peering không bắc cầu — cần tạo peering A–C riêng",
-      "Có, nếu cả ba dùng chung route table",
-      "Chỉ khi ba VPC nằm cùng một AZ"
+      "Có; peering bắc cầu khi cả hai kết nối đã active",
+      "Không; peering không bắc cầu, cần tạo peering A–C riêng",
+      "Có, miễn là cả ba VPC dùng chung một route table",
+      "Chỉ khi cả ba VPC nằm cùng Region và cùng một tài khoản"
     ],
     "optionsEn": [
-      "Yes, peering is transitive",
-      "No, VPC Peering is non-transitive — a separate A–C peering is required",
-      "Yes, if all three share a route table",
-      "Only if the three VPCs are in the same AZ"
+      "Yes; peering is transitive once both links are active",
+      "No; peering is non-transitive, so A–C needs its own peering",
+      "Yes, as long as all three VPCs share one route table",
+      "Only if all three VPCs sit in the same Region and the same account"
     ],
     "answer": 1,
     "explanation": "VPC Peering không mang tính bắc cầu. A không nói chuyện được với C qua B; phải tạo peering A–C trực tiếp. Ở quy mô lớn nên dùng Transit Gateway.",
@@ -207,13 +207,13 @@
       "Site-to-Site VPN",
       "AWS Direct Connect",
       "VPC Peering",
-      "Internet Gateway"
+      "Accelerated Site-to-Site VPN"
     ],
     "optionsEn": [
       "Site-to-Site VPN",
       "AWS Direct Connect",
       "VPC Peering",
-      "Internet Gateway"
+      "Accelerated Site-to-Site VPN"
     ],
     "answer": 1,
     "explanation": "Direct Connect là đường vật lý riêng, băng thông ổn định, độ trễ thấp, không qua Internet công cộng. VPN đi qua Internet nên băng thông/độ trễ biến động.",
@@ -225,13 +225,13 @@
     "questionEn": "You need an on-premises-to-AWS connection set up VERY QUICKLY and cheaply, accepting an encrypted path over the Internet. What should you choose?",
     "options": [
       "AWS Direct Connect",
-      "Site-to-Site VPN (IPsec)",
+      "Site-to-Site VPN",
       "Transit Gateway peering",
       "Interface Endpoint"
     ],
     "optionsEn": [
       "AWS Direct Connect",
-      "Site-to-Site VPN (IPsec)",
+      "Site-to-Site VPN",
       "Transit Gateway peering",
       "An Interface Endpoint"
     ],
@@ -285,15 +285,15 @@
     "questionEn": "For a NACL (stateless), what is required so that response traffic from the instance back to the client works correctly?",
     "options": [
       "Không cần gì thêm; NACL tự cho phép lưu lượng phản hồi",
-      "Phải mở tường minh dải cổng ephemeral ở luật outbound (và inbound tương ứng)",
-      "Phải gắn Security Group vào NACL",
-      "Phải bật stateful mode trên NACL"
+      "Luật tường minh cho dải cổng ephemeral ở cả hai chiều",
+      "Gắn Security Group vào NACL để theo dõi kết nối",
+      "Bật connection tracking (stateful mode) cho NACL"
     ],
     "optionsEn": [
-      "Nothing extra; the NACL auto-allows response traffic",
-      "You must explicitly open the ephemeral port range in outbound rules (and the corresponding inbound)",
-      "You must attach a Security Group to the NACL",
-      "You must enable stateful mode on the NACL"
+      "Nothing extra; the NACL automatically allows return traffic",
+      "Explicit rules for the ephemeral port range in both directions",
+      "A Security Group attached to the NACL to track connections",
+      "Turning on connection tracking (stateful mode) for the NACL"
     ],
     "answer": 1,
     "explanation": "NACL là stateless nên không nhớ kết nối; lưu lượng phản hồi dùng cổng ephemeral phải được mở tường minh. Đây là khác biệt then chốt so với Security Group stateful.",
@@ -345,15 +345,15 @@
     "questionEn": "In a typical 3-tier VPC architecture, where does the database tier sit?",
     "options": [
       "Trong private subnet, không có route ra Internet Gateway",
-      "Trong public subnet để dễ quản trị",
-      "Trên chính bastion host",
-      "Cùng subnet với Application Load Balancer"
+      "Trong public subnet để quản trị viên dễ truy cập hơn",
+      "Trên chính bastion host, cùng với công cụ SSH",
+      "Cùng public subnet với Application Load Balancer"
     ],
     "optionsEn": [
       "In private subnets with no route to an Internet Gateway",
-      "In public subnets for easier administration",
-      "On the bastion host itself",
-      "In the same subnet as the Application Load Balancer"
+      "In public subnets so admins can reach it more easily",
+      "On the bastion host, alongside the SSH tooling",
+      "In the same public subnets as the Application Load Balancer"
     ],
     "answer": 0,
     "explanation": "3 tầng: ALB ở public subnet, app server ở private subnet, database ở private subnet (thường tách riêng, chỉ nhận traffic từ security group của tầng app).",

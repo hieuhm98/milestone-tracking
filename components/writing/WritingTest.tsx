@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AlertTriangle, Clock, Loader2, RotateCcw, Send } from "lucide-react";
+import { AlertTriangle, ChevronDown, Clock, Loader2, RotateCcw, Send } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { useAuth } from "@/context/auth";
 import { PROMPTS, TASK_RULES, type WritingPrompt, type WritingTaskKind } from "@/lib/writing/prompts";
@@ -183,17 +183,20 @@ export default function WritingTest() {
         <div className="flex flex-wrap items-center gap-2 justify-between">
           <label className="text-sm text-zinc-600 dark:text-zinc-400 flex items-center gap-2">
             {pick("Đề bài", "Prompt")}
-            <select
-              value={promptId}
-              onChange={(e) => reset(e.target.value)}
-              className="rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1 text-sm"
-            >
-              {prompts.map((p) => (
-                <option key={p.id} value={p.id} className="text-zinc-900">
-                  {p.title} — {p.type}
-                </option>
-              ))}
-            </select>
+            <span className="relative inline-block">
+              <select
+                value={promptId}
+                onChange={(e) => reset(e.target.value)}
+                className="appearance-none rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent py-1 pl-2 pr-9 text-sm"
+              >
+                {prompts.map((p) => (
+                  <option key={p.id} value={p.id} className="text-zinc-900">
+                    {p.title} — {p.type}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" aria-hidden="true" />
+            </span>
           </label>
         </div>
 

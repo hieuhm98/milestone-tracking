@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import SearchField from "@/components/SearchField";
 import GroupIcon from "@/components/GroupIcon";
 import { PageError, PageLoading } from "@/components/learn/PageState";
+import { DailyPuzzlesStrip } from "@/components/games/GamesHub";
 
 export default function CoursePage() {
   const { group: groupId } = useParams<{ group: string }>();
@@ -183,6 +184,8 @@ export default function CoursePage() {
           </div>
         </div>
       </section>
+
+      <DailyPuzzlesStrip group={group.id} />
 
       {/* Curriculum */}
       <section className="space-y-3">

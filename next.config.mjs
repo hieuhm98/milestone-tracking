@@ -9,6 +9,14 @@ const nextConfig = {
     // deployed. (public/progress.json is the always-available fallback.)
     outputFileTracingIncludes: {
       "/api/progress": ["./data/progress.json"],
+      // Daily puzzles read the articles and drills, and ask the dictionary which
+      // words are everyday ones (not worth a Wordle square).
+      "/api/games": [
+        "./knowledge-content/**/article*.md",
+        "./knowledge-content/**/drills.json",
+        "./knowledge-content/**/meta.json",
+        "./data/dictionary/*.db",
+      ],
       // The dictionary index reads every vocab.json plus the word bank through
       // runtime path joins, which file tracing can't follow on its own.
       "/api/english/dictionary": [

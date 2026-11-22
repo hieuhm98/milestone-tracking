@@ -15,6 +15,7 @@ import {
   Database,
   Dumbbell,
   GraduationCap,
+  Puzzle,
   House,
   Languages,
   Laptop,
@@ -72,6 +73,7 @@ const SECTION_NAV: Record<SectionId, NavGroup[]> = {
       heading: "nav.sectionKnowledge",
       items: [
         { href: "/learn", label: "nav.learn", icon: GraduationCap },
+        { href: "/learn/games", label: "nav.games", icon: Puzzle },
         { href: "/knowledge", label: "nav.knowledge", icon: BookOpen },
         { href: "/knowledge-review", label: "nav.review", icon: RotateCcw },
         { href: "/exam", label: "nav.exam", icon: ClipboardCheck },

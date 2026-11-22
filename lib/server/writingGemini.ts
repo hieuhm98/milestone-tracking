@@ -19,7 +19,18 @@ export interface AiAssessment {
 // Tried in order. A model that is out of quota (429), unavailable, or rejects the
 // request falls through to the next, because each model has its own free quota.
 // GEMINI_MODEL (or a comma list in GEMINI_MODELS) overrides the chain.
-const DEFAULT_CHAIN = ["gemini-4-hydrogen", "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"];
+// Reliable models lead: in Nov 2026 tests gemini-4-hydrogen and gemini-3.8-flash
+// were often overloaded (503 or stalled), which pushed requests past the time limit.
+const DEFAULT_CHAIN = ["gemini-3.6-flash", "gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-4-hydrogen"];
+
+// The route has 60 s in all. Stop trying new models after 50 s so the fallback
+// scoring still has time to answer instead of the function being killed.
+const TOTAL_BUDGET_MS = 50_000;
+// One attempt may take this long: a full scoring answer takes ~15 s, so this
+// leaves headroom without letting one stalled model eat the whole budget.
+const ATTEMPT_MS = 25_000;
+// Not worth starting an attempt with less time than this left.
+const MIN_ATTEMPT_MS = 8_000;
 
 function modelChain(): string[] {
   const configured = (process.env.GEMINI_MODELS || process.env.GEMINI_MODEL || "")
@@ -125,15 +136,22 @@ export async function assessWithGemini(args: {
   const failures: string[] = [];
   let data: Record<string, any> | null = null;
   let usedModel = "";
+  const deadline = Date.now() + TOTAL_BUDGET_MS;
 
   for (const model of modelChain()) {
+    const remaining = deadline - Date.now();
+
+    if (remaining < MIN_ATTEMPT_MS) {
+      failures.push(`${model}:skipped_no_time`);
+      continue;
+    }
+
     try {
       const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: "POST",
         headers: { "content-type": "application/json", "x-goog-api-key": key },
         body,
-        // Leave room in the 60 s function budget for a second and third try.
-        signal: AbortSignal.timeout(18_000),
+        signal: AbortSignal.timeout(Math.min(ATTEMPT_MS, remaining)),
       });
 
       // A bad key fails every model alike: stop rather than burn through the chain.

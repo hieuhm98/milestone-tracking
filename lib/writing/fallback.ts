@@ -18,6 +18,8 @@ export interface FallbackEstimate {
   taskResponse: number;
   coherence: number;
   notes: { en: string; vi: string }[];
+  /** What each rule-based band was measured from. */
+  summary: { taskResponse: { en: string; vi: string }; coherence: { en: string; vi: string } };
 }
 
 const clamp = (n: number) => Math.min(CAP, Math.max(3, roundBand(n)));
@@ -75,5 +77,17 @@ export function estimateWithoutAi(prompt: WritingPrompt, text: string, m: EssayM
 
   if (ratio < 1) task -= ratio >= 0.8 ? 0.5 : 1.5;
 
-  return { taskResponse: clamp(task), coherence: clamp(coherence), notes: notes.slice(0, 3) };
+  const percent = Math.round(coverage * 100);
+  const summary = {
+    taskResponse: {
+      en: `Rule-based: your answer uses ${percent}% of the question's key words and has ${m.words} of at least ${minWords} words. Ideas and accuracy were not read.`,
+      vi: `Chấm theo quy tắc: bài dùng ${percent}% từ khoá của đề và có ${m.words} từ (yêu cầu ít nhất ${minWords}). Chưa đánh giá nội dung và độ chính xác của ý.`,
+    },
+    coherence: {
+      en: `Rule-based: ${m.paragraphs} paragraph(s), ${m.connectors.length} different linking device(s), ${m.avgSentenceLength} words per sentence on average. The logic between ideas was not read.`,
+      vi: `Chấm theo quy tắc: ${m.paragraphs} đoạn, ${m.connectors.length} từ nối khác nhau, trung bình ${m.avgSentenceLength} từ mỗi câu. Chưa đánh giá mạch logic giữa các ý.`,
+    },
+  };
+
+  return { taskResponse: clamp(task), coherence: clamp(coherence), notes: notes.slice(0, 3), summary };
 }

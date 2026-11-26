@@ -6,6 +6,7 @@ import { useLang } from "@/context/lang";
 import { useAuth } from "@/context/auth";
 import { PROMPTS, TASK_RULES, type WritingPrompt, type WritingTaskKind } from "@/lib/writing/prompts";
 import { countWords } from "@/lib/writing/metrics";
+import { lintInVietnamese } from "@/lib/writing/lintVi";
 import { cn } from "@/lib/utils";
 
 interface Lint {
@@ -17,10 +18,13 @@ interface Lint {
   text: string;
 }
 
-interface Criterion {
-  band: number;
+interface Bilingual {
   en: string;
   vi: string;
+}
+
+interface Criterion extends Bilingual {
+  band: number;
 }
 
 interface Result {
@@ -46,7 +50,10 @@ interface Result {
     improvements: { en: string; vi: string }[];
   } | null;
   aiError: string | null;
-  fallback: { notes: { en: string; vi: string }[] } | null;
+  fallback: {
+    notes: { en: string; vi: string }[];
+    summary: { taskResponse: Bilingual; coherence: Bilingual };
+  } | null;
 }
 
 const fmt = (n: number | null) => (n === null ? "—" : n.toFixed(1));
@@ -58,6 +65,28 @@ function bandColor(b: number | null) {
   if (b >= 5) return "text-amber-600 dark:text-amber-400";
 
   return "text-rose-600 dark:text-rose-400";
+}
+
+/**
+ * Feedback in the interface language, or in both when side-by-side mode is on.
+ * Says so when the Vietnamese is missing rather than silently showing English.
+ */
+function Feedback({ text }: { text: Bilingual }) {
+  const { lang, dual } = useLang();
+  const vi = text.vi || (text.en ? "(Chưa có bản tiếng Việt cho nhận xét này.)" : "");
+
+  if (dual) {
+    return (
+      <>
+        <span className="block">{text.en}</span>
+        <span className="block mt-1 italic">{vi}</span>
+      </>
+    );
+  }
+
+  if (lang === "en") return <>{text.en || text.vi}</>;
+
+  return <>{text.vi || `${vi} ${text.en}`}</>;
 }
 
 function formatTime(sec: number) {
@@ -294,17 +323,27 @@ export default function WritingTest() {
 }
 
 function Results({ result, essay, task }: { result: Result; essay: string; task: WritingTaskKind }) {
-  const { pick, lang } = useLang();
+  const { pick } = useLang();
   const { bands, ai, metrics } = result;
-  const fb = (c?: Criterion) => (c ? (lang === "vi" ? c.vi || c.en : c.en || c.vi) : "");
-  const criteria = [
-    { label: task === "task1" ? "Task Achievement" : "Task Response", band: bands.taskResponse, text: fb(ai?.taskResponse) },
-    { label: "Coherence & Cohesion", band: bands.coherence, text: fb(ai?.coherence) },
-    { label: "Lexical Resource", band: bands.lexical, text: fb(ai?.lexical) || pick(`Chính tả: ${result.harper.spelling} lỗi. Độ đa dạng từ: ${metrics.lexicalVariety}.`, `Spelling slips: ${result.harper.spelling}. Word variety: ${metrics.lexicalVariety}.`) },
+  const summary = result.fallback?.summary;
+  const criteria: { label: string; band: number | null; text?: Bilingual }[] = [
+    { label: task === "task1" ? "Task Achievement" : "Task Response", band: bands.taskResponse, text: ai?.taskResponse ?? summary?.taskResponse },
+    { label: "Coherence & Cohesion", band: bands.coherence, text: ai?.coherence ?? summary?.coherence },
+    {
+      label: "Lexical Resource",
+      band: bands.lexical,
+      text: ai?.lexical ?? {
+        en: `Spelling slips: ${result.harper.spelling}. Word variety: ${metrics.lexicalVariety}.`,
+        vi: `Lỗi chính tả: ${result.harper.spelling}. Độ đa dạng từ: ${metrics.lexicalVariety}.`,
+      },
+    },
     {
       label: "Grammatical Range & Accuracy",
       band: bands.grammar,
-      text: fb(ai?.grammar) || pick(`Harper tìm thấy ${result.lints.length} lỗi (${result.harper.errorsPer100}/100 từ).`, `Harper found ${result.lints.length} issues (${result.harper.errorsPer100} per 100 words).`),
+      text: ai?.grammar ?? {
+        en: `Harper found ${result.lints.length} issues (${result.harper.errorsPer100} per 100 words).`,
+        vi: `Harper tìm thấy ${result.lints.length} lỗi (${result.harper.errorsPer100} lỗi trên 100 từ).`,
+      },
     },
   ];
 
@@ -346,7 +385,9 @@ function Results({ result, essay, task }: { result: Result; essay: string; task:
           {result.fallback && result.fallback.notes.length > 0 && (
             <ul className="list-disc pl-5">
               {result.fallback.notes.map((n, i) => (
-                <li key={i}>{lang === "vi" ? n.vi : n.en}</li>
+                <li key={i}>
+                  <Feedback text={n} />
+                </li>
               ))}
             </ul>
           )}
@@ -360,7 +401,11 @@ function Results({ result, essay, task }: { result: Result; essay: string; task:
               <h3 className="text-sm font-semibold">{c.label}</h3>
               <span className={cn("text-2xl font-bold tabular-nums", bandColor(c.band))}>{fmt(c.band)}</span>
             </div>
-            {c.text && <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-snug">{c.text}</p>}
+            {c.text && (
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-snug">
+                <Feedback text={c.text} />
+              </p>
+            )}
           </div>
         ))}
       </div>
@@ -370,7 +415,9 @@ function Results({ result, essay, task }: { result: Result; essay: string; task:
           <h3 className="text-sm font-semibold mb-2">{pick("Nên cải thiện trước", "Fix these first")}</h3>
           <ol className="list-decimal pl-5 space-y-1.5 text-sm">
             {ai.improvements.map((i, n) => (
-              <li key={n}>{lang === "vi" ? i.vi || i.en : i.en || i.vi}</li>
+              <li key={n}>
+                <Feedback text={i} />
+              </li>
             ))}
           </ol>
         </div>
@@ -389,7 +436,7 @@ function Results({ result, essay, task }: { result: Result; essay: string; task:
 }
 
 function Marked({ essay, lints }: { essay: string; lints: Lint[] }) {
-  const { pick } = useLang();
+  const { pick, lang, dual } = useLang();
   const [active, setActive] = useState<number | null>(null);
   const parts: React.ReactNode[] = [];
   let cursor = 0;
@@ -416,6 +463,8 @@ function Marked({ essay, lints }: { essay: string; lints: Lint[] }) {
   parts.push(essay.slice(cursor));
 
   const sel = active !== null ? lints[active] : null;
+  const selVi = sel ? lintInVietnamese(sel.kind) : null;
+  const showVi = dual || lang === "vi";
 
   return (
     <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 space-y-3">
@@ -426,9 +475,11 @@ function Marked({ essay, lints }: { essay: string; lints: Lint[] }) {
       {sel && (
         <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 p-3 text-sm">
           <p className="font-medium">
-            <span className="text-xs uppercase text-zinc-500 mr-2">{sel.kind}</span>
-            {sel.message}
+            <span className="text-xs uppercase text-zinc-500 mr-2">{lang === "vi" ? selVi?.name : sel.kind}</span>
+            {showVi ? selVi?.explanation : sel.message}
           </p>
+          {/* Harper's own message carries the detail, so it stays visible under the Vietnamese. */}
+          {showVi && <p className="mt-1 text-zinc-600 dark:text-zinc-400">{sel.message}</p>}
           {sel.suggestions.length > 0 && (
             <p className="mt-1">
               {pick("Gợi ý: ", "Try: ")}

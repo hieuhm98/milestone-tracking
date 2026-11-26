@@ -134,6 +134,6 @@ export async function POST(request: Request) {
     ai,
     aiError,
     // True when the AI judge was unavailable and Task/Coherence are rule-based estimates.
-    fallback: fallback ? { notes: fallback.notes } : null,
+    fallback: fallback ? { notes: fallback.notes, summary: fallback.summary } : null,
   });
 }

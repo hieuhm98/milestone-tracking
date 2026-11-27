@@ -4,17 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2 } from "lucide-react";
 import { useLang } from "@/context/lang";
 import { type Lang } from "@/lib/i18n";
+import { type LessonAudioData, type LessonAudioTrack } from "@/lib/lessonAudio";
+import { getSupabase } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
-
-interface Track {
-  section: number;
-  src: string;
-  seconds: number;
-}
-
-interface Manifest {
-  sections: Record<string, { file: string; seconds: number }>;
-}
 
 interface LessonAudioProps {
   slug: string;
@@ -41,7 +33,7 @@ const headings = (markdown: string) =>
 export default function LessonAudio({ slug, sections, content, contentEn }: LessonAudioProps) {
   const { pick, lang } = useLang();
   const [voice, setVoice] = useState<Lang>(lang);
-  const [tracks, setTracks] = useState<Record<Lang, Track[]>>({ vi: [], en: [] });
+  const [tracks, setTracks] = useState<LessonAudioData>({ vi: [], en: [] });
   const [index, setIndex] = useState(0);
   const audio = useRef<HTMLAudioElement>(null);
   const continuing = useRef(false);
@@ -51,25 +43,24 @@ export default function LessonAudio({ slug, sections, content, contentEn }: Less
   useEffect(() => {
     let cancelled = false;
 
-    async function load(language: Lang): Promise<Track[]> {
-      const response = await fetch(`/lesson-audio/${slug}/${language}.json`).catch(() => null);
+    async function load() {
+      const session = (await getSupabase()?.auth.getSession())?.data.session;
+      const response = await fetch(`/api/lesson-audio/${slug}`, {
+        headers: session ? { Authorization: `Bearer ${session.access_token}` } : {},
+      }).catch(() => null);
+      const data = response?.ok ? ((await response.json()) as LessonAudioData) : null;
 
-      if (!response?.ok) return [];
+      if (cancelled) return;
 
-      const manifest = (await response.json()) as Manifest;
+      const inLesson = (list: LessonAudioTrack[] = []) =>
+        sections.flatMap((section) => list.filter((track) => track.section === section));
 
-      return sections.flatMap((section) => {
-        const entry = manifest.sections[String(section)];
-
-        return entry
-          ? [{ section, src: `/lesson-audio/${slug}/${entry.file}`, seconds: entry.seconds }]
-          : [];
-      });
+      setTracks({ vi: inLesson(data?.vi), en: inLesson(data?.en) });
     }
 
-    void Promise.all([load("vi"), load("en")]).then(([vi, en]) => {
-      if (!cancelled) setTracks({ vi, en });
-    });
+    // Drop the previous topic's parts while this one loads.
+    setTracks({ vi: [], en: [] });
+    void load();
 
     return () => {
       cancelled = true;
@@ -152,7 +143,7 @@ export default function LessonAudio({ slug, sections, content, contentEn }: Less
       {list.length > 1 && (
         <ol className="space-y-0.5">
           {list.map((track, position) => (
-            <li key={track.src}>
+            <li key={track.section}>
               <button
                 type="button"
                 aria-current={position === index ? "true" : undefined}

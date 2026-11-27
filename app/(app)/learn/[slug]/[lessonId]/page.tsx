@@ -10,6 +10,7 @@ import ArticleRenderer from "@/components/knowledge/ArticleRenderer";
 import BilingualArticle from "@/components/knowledge/BilingualArticle";
 import LessonTest, { type TestQuestion } from "@/components/learn/LessonTest";
 import LessonPdfExport from "@/components/learn/LessonPdfExport";
+import LessonAudio from "@/components/learn/LessonAudio";
 import { PageError, PageLoading } from "@/components/learn/PageState";
 import { type Question } from "@/components/knowledge/QuizBlock";
 import {
@@ -446,6 +447,13 @@ export default function LessonPlayerPage() {
               {pick("Khởi động", "Warm-up")}: {warmupPct}%
             </div>
           )}
+
+          <LessonAudio
+            slug={slug}
+            sections={lesson.sections}
+            content={topicData!.content}
+            contentEn={topicData!.contentEn}
+          />
 
           {bilingual ? (
             <BilingualArticle
